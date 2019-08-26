@@ -136,7 +136,17 @@ class MainViewController2: UIViewController,
     /// Initialize the game view and game UI.
     func InitializeGameUI()
     {
+        //Initialize buttons.
         MainUIButton2.imageView?.contentMode = .scaleAspectFit
+        MoveLeftButton2.imageView?.contentMode = .scaleAspectFit
+        MoveDownButton2.imageView?.contentMode = .scaleAspectFit
+        MoveUpButton2.imageView?.contentMode = .scaleAspectFit
+        RotateLeftButton2.imageView?.contentMode = .scaleAspectFit
+        MoveRightButton2.imageView?.contentMode = .scaleAspectFit
+        RotateRightButton2.imageView?.contentMode = .scaleAspectFit
+        DropDownButton2.imageView?.contentMode = .scaleAspectFit
+        UpAndAwayButton2.imageView?.contentMode = .scaleAspectFit
+        
         InitializeOptionTable(MainSlideInOptionTable2)
         print("Initializing game with \(CurrentBaseGameType)")
         Game = GameLogic(BaseGame: CurrentBaseGameType, EnableAI: false)
@@ -1016,75 +1026,73 @@ class MainViewController2: UIViewController,
     
     // MARK: Game-control related functions.
     
-    /*
-     /// Handle the move left button pressed.
-     ///
-     /// - Parameter sender: Not used.
-     @IBAction func HandleMoveLeftPressed(_ sender: Any)
-     {
-     MoveLeft()
-     }
-     
-     /// Handle the move right button pressed.
-     ///
-     /// - Parameter sender: Not used.
-     @IBAction func HandleMoveRightPressed(_ sender: Any)
-     {
-     MoveRight()
-     }
-     
-     /// Handle the move up button pressed.
-     ///
-     /// - Parameter sender: Not used.
-     @IBAction func HandleMoveUpPressed(_ sender: Any)
-     {
-     MoveUp()
-     }
-     
-     /// Handle the move up and away button pressed.
-     ///
-     /// - Parameter sender: Not used.
-     @IBAction func HandleUpAndAwayPressed(_ sender: Any)
-     {
-     MoveUpAndAway()
-     }
-     
-     /// Handle the move down button pressed.
-     ///
-     /// - Parameter sender: Not used.
-     @IBAction func HandleMoveDownPressed(_ sender: Any)
-     {
-     MoveDown()
-     }
-     
-     /// Handle the drop down button pressed.
-     ///
-     /// - Parameter sender: Not used.
-     @IBAction func HandleDropDownPressed(_ sender: Any)
-     {
-     DropDown()
-     }
-     
-     /// Handle the rotate left button pressed.
-     ///
-     /// - Parameter sender: Not used.
-     @IBAction func HandleRotateLeftPressed(_ sender: Any)
-     {
-     //Even though the function is titled "HandleRotateLeftPressed", we will rotate the piece to the right due to
-     //how the piece implemented rotations.
-     RotateRight()
-     }
-     
-     /// Handle the rotate right button pressed.
-     ///
-     /// - Parameter sender: Not used.
-     @IBAction func HandleRotateRightPressed(_ sender: Any)
-     {
-     //Even though the function is titled "HandleRotateRightPressed", we will rotate the piece to the left due to
-     //how the piece implemented rotations.
-     RotateLeft()
-     }
-     */
+    /// Handle the move left button pressed.
+    ///
+    /// - Parameter sender: Not used.
+    @IBAction func HandleMoveLeftPressed(_ sender: Any)
+    {
+        MoveLeft()
+    }
+    
+    /// Handle the move right button pressed.
+    ///
+    /// - Parameter sender: Not used.
+    @IBAction func HandleMoveRightPressed(_ sender: Any)
+    {
+        MoveRight()
+    }
+    
+    /// Handle the move up button pressed.
+    ///
+    /// - Parameter sender: Not used.
+    @IBAction func HandleMoveUpPressed(_ sender: Any)
+    {
+        MoveUp()
+    }
+    
+    /// Handle the move up and away button pressed.
+    ///
+    /// - Parameter sender: Not used.
+    @IBAction func HandleUpAndAwayPressed(_ sender: Any)
+    {
+        MoveUpAndAway()
+    }
+    
+    /// Handle the move down button pressed.
+    ///
+    /// - Parameter sender: Not used.
+    @IBAction func HandleMoveDownPressed(_ sender: Any)
+    {
+        MoveDown()
+    }
+    
+    /// Handle the drop down button pressed.
+    ///
+    /// - Parameter sender: Not used.
+    @IBAction func HandleDropDownPressed(_ sender: Any)
+    {
+        DropDown()
+    }
+    
+    /// Handle the rotate left button pressed.
+    ///
+    /// - Parameter sender: Not used.
+    @IBAction func HandleRotateLeftPressed(_ sender: Any)
+    {
+        //Even though the function is titled "HandleRotateLeftPressed", we will rotate the piece to the right due to
+        //how the piece implemented rotations.
+        RotateRight()
+    }
+    
+    /// Handle the rotate right button pressed.
+    ///
+    /// - Parameter sender: Not used.
+    @IBAction func HandleRotateRightPressed(_ sender: Any)
+    {
+        //Even though the function is titled "HandleRotateRightPressed", we will rotate the piece to the left due to
+        //how the piece implemented rotations.
+        RotateLeft()
+    }
     
     /// Handle the play button pressed.
     ///
@@ -1139,49 +1147,57 @@ class MainViewController2: UIViewController,
     /// AI is moving a piece upwards.
     func AI_MoveUp()
     {
-        //        MoveUpButton.Highlight(WithImage: "UpArrowHighlighted", ForSeconds: 0.15, OriginalName: "UpArrow")
+        MoveUpButton2.Highlight(WithImage: "UpArrowHighlighted48", ForSeconds: 0.15,
+                                OriginalName: "UpArrow48")
     }
     
     /// AI is throwing a piece away.
     func AI_MoveUpAndAway()
     {
-        //        UpAndAwayButton.Highlight(WithImage: "UpAwayArrowHighlighted", ForSeconds: 0.15, OriginalName: "UpAwayArrow")
+        UpAndAwayButton2.Highlight(WithImage: "FlyAwayArrowHighlighted48", ForSeconds: 0.15,
+                                   OriginalName: "FlyAwayArrow48")
     }
     
     /// AI is moving a piece downwards.
     func AI_MoveDown()
     {
-        //        MoveDownButton.Highlight(WithImage: "DownArrowHighlighted", ForSeconds: 0.15, OriginalName: "DownArrow")
+        MoveDownButton2.Highlight(WithImage: "DownArrowHighlighted48", ForSeconds: 0.15,
+                                  OriginalName: "DownArrow48")
     }
     
     /// AI is dropping a piece downwards.
     func AI_DropDown()
     {
-        //        DropDownButton.Highlight(WithImage: "DropDownArrowHighlighted", ForSeconds: 0.15, OriginalName: "DropDownArrow")
+        DropDownButton2.Highlight(WithImage: "DropDownArrowHighlighted48", ForSeconds: 0.15,
+                                  OriginalName: "DropDownArrow48")
     }
     
     /// AI is moving a piece to the left.
     func AI_MoveLeft()
     {
-        //        MoveLeftButton.Highlight(WithImage: "LeftArrowHighlighted", ForSeconds: 0.15, OriginalName: "LeftArrow")
+        MoveLeftButton2.Highlight(WithImage: "LeftArrowHighlighted48", ForSeconds: 0.15,
+                                  OriginalName: "LeftArrow48")
     }
     
     /// AI is moving a piece to the right.
     func AI_MoveRight()
     {
-        //       MoveRightButton.Highlight(WithImage: "RightArrowHighlighted", ForSeconds: 0.15, OriginalName: "RightArrow")
+        MoveRightButton2.Highlight(WithImage: "RightArrowHighlighted48", ForSeconds: 0.15,
+                                   OriginalName: "RightArrow48")
     }
     
     /// AI is rotating a piece clockwise.
     func AI_RotateRight()
     {
-        //        RotateRightButton.Highlight(WithImage: "RotateRightArrowHighlighted", ForSeconds: 0.15, OriginalName: "RotateRightArrow")
+        RotateRightButton2.Highlight(WithImage: "RotateRightHighlighted48", ForSeconds: 0.15,
+                                     OriginalName: "RotateRight48_2")
     }
     
     /// AI is rotating a piece counter-clockwise.
     func AI_RotateLeft()
     {
-        //       RotateLeftButton.Highlight(WithImage: "RotateLeftArrowHighlighted", ForSeconds: 0.15, OriginalName: "RotateLeftArrow")
+        RotateLeftButton2.Highlight(WithImage: "RotateLeftHighlighted48", ForSeconds: 0.15,
+                                    OriginalName: "RotateLeft48_2")
     }
     
     // MARK: Game view request functions.
@@ -1553,7 +1569,6 @@ class MainViewController2: UIViewController,
     @IBOutlet weak var SlideInCloseButton2: UIButton!
     @IBOutlet weak var TopOverlapView: UIView!
     
-    
     // MARK: Enum mappings.
     
     let BaseGameToInt: [BaseGameTypes: Int] =
@@ -1571,15 +1586,15 @@ class MainViewController2: UIViewController,
     ]
 }
 /*
-/// Defines the base games available. Each base game may have one or more variants. For example, a .Standard game may
-/// have various bucket sizes or obstructions.
-/// - **Standard**: Standard Tetris game.
-/// - **Rotating4**: Rotating square with falling pieces.
-/// - **Cubic**: Three dimensional falling piece game.
-enum BaseGameTypes: String, CaseIterable
-{
-    case Standard = "Standard"
-    case Rotating4 = "Rotating4"
-    case Cubic = "Cubic"
-}
-*/
+ /// Defines the base games available. Each base game may have one or more variants. For example, a .Standard game may
+ /// have various bucket sizes or obstructions.
+ /// - **Standard**: Standard Tetris game.
+ /// - **Rotating4**: Rotating square with falling pieces.
+ /// - **Cubic**: Three dimensional falling piece game.
+ enum BaseGameTypes: String, CaseIterable
+ {
+ case Standard = "Standard"
+ case Rotating4 = "Rotating4"
+ case Cubic = "Cubic"
+ }
+ */
