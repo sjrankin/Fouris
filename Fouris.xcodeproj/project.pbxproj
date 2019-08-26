@@ -14,6 +14,7 @@
 		1713735722EAE67700C9F9A7 /* SCNDodecahedron.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1713735622EAE67700C9F9A7 /* SCNDodecahedron.swift */; };
 		1713735A22EAE6D500C9F9A7 /* SCNTetrahedron.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1713735922EAE6D500C9F9A7 /* SCNTetrahedron.swift */; };
 		171BDEC422B8CE00005C3509 /* SmoothMotionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BDEC322B8CE00005C3509 /* SmoothMotionProtocol.swift */; };
+		171D5D472313FC5300043856 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 171D5D462313FC5200043856 /* MainStoryboard.storyboard */; };
 		171ED0FB22F567EA00CE2CDF /* AIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171ED0FA22F567EA00CE2CDF /* AIProtocol.swift */; };
 		171ED0FD22F5689200CE2CDF /* MainAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171ED0FC22F5689200CE2CDF /* MainAI.swift */; };
 		171ED0FF22F56B3300CE2CDF /* StandardGameAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171ED0FE22F56B3300CE2CDF /* StandardGameAI.swift */; };
@@ -85,7 +86,6 @@
 		17A45B632271DA98002E705D /* AITestDataUpdatedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A45B612271DA8C002E705D /* AITestDataUpdatedProtocol.swift */; };
 		17AB99D22297DC66003C4674 /* ImageServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AB99D12297DC66003C4674 /* ImageServer.swift */; };
 		17AD3621230EC00000DC8886 /* +MainSlideInUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD3620230EC00000DC8886 /* +MainSlideInUI.swift */; };
-		17AF231D2313863000921E6C /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17AF231C2313863000921E6C /* MainStoryboard.storyboard */; };
 		17AF231F2313981C00921E6C /* MainViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AF231E2313981C00921E6C /* MainViewController2.swift */; };
 		17AF23212313992B00921E6C /* +MainSlideInUI2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AF23202313992B00921E6C /* +MainSlideInUI2.swift */; };
 		17AF2323231399CC00921E6C /* MainSlideInView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AF2322231399CC00921E6C /* MainSlideInView2.swift */; };
@@ -153,6 +153,7 @@
 		1713735922EAE6D500C9F9A7 /* SCNTetrahedron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNTetrahedron.swift; sourceTree = "<group>"; };
 		1717BA6B2275CC2C008747D1 /* ControlProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlProtocol.swift; sourceTree = "<group>"; };
 		171BDEC322B8CE00005C3509 /* SmoothMotionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmoothMotionProtocol.swift; sourceTree = "<group>"; };
+		171D5D462313FC5200043856 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		171ED0FA22F567EA00CE2CDF /* AIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIProtocol.swift; sourceTree = "<group>"; };
 		171ED0FC22F5689200CE2CDF /* MainAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAI.swift; sourceTree = "<group>"; };
 		171ED0FE22F56B3300CE2CDF /* StandardGameAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardGameAI.swift; sourceTree = "<group>"; };
@@ -229,7 +230,6 @@
 		17A45B612271DA8C002E705D /* AITestDataUpdatedProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AITestDataUpdatedProtocol.swift; sourceTree = "<group>"; };
 		17AB99D12297DC66003C4674 /* ImageServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageServer.swift; sourceTree = "<group>"; };
 		17AD3620230EC00000DC8886 /* +MainSlideInUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+MainSlideInUI.swift"; sourceTree = "<group>"; };
-		17AF231C2313863000921E6C /* MainStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		17AF231E2313981C00921E6C /* MainViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController2.swift; sourceTree = "<group>"; };
 		17AF23202313992B00921E6C /* +MainSlideInUI2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+MainSlideInUI2.swift"; sourceTree = "<group>"; };
 		17AF2322231399CC00921E6C /* MainSlideInView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSlideInView2.swift; sourceTree = "<group>"; };
@@ -693,10 +693,10 @@
 				17660BE622892B0400082E23 /* ControlExtensions */,
 				17F0B49F225CBE740071514E /* Info.plist */,
 				17F0B493225CBE730071514E /* AppDelegate.swift */,
+				171D5D462313FC5200043856 /* MainStoryboard.storyboard */,
 				1761AA56230FE3F400E2A6DE /* iOS_Storyboard.storyboard */,
 				17D5D90222996CBD004897DD /* MainViewController.swift */,
 				17AF231E2313981C00921E6C /* MainViewController2.swift */,
-				17AF231C2313863000921E6C /* MainStoryboard.storyboard */,
 				17CE269C225F127C0056818E /* Versioning.swift */,
 				17F0B49C225CBE740071514E /* LaunchScreen.storyboard */,
 			);
@@ -847,7 +847,7 @@
 				1785ED6222FD8C0A000B31C2 /* BoardDescriptions.xml in Resources */,
 				17B4D2CC22A4D64900987BC5 /* PieceDescriptions.xml in Resources */,
 				1763492D2312667A000BDF24 /* Default-568h@2x.png in Resources */,
-				17AF231D2313863000921E6C /* MainStoryboard.storyboard in Resources */,
+				171D5D472313FC5300043856 /* MainStoryboard.storyboard in Resources */,
 				17715CB922C757D0009FD441 /* StandardBoard.scn in Resources */,
 				1761AA57230FE3F400E2A6DE /* iOS_Storyboard.storyboard in Resources */,
 			);
