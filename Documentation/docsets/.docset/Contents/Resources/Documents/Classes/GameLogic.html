@@ -1,0 +1,3076 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>GameLogic Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/GameLogic" class="dashAnchor"></a>
+    <a title="GameLogic Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a> (55% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        GameLogic Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/AITestNode.html">AITestNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/AITestTable.html">AITestTable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:11WackyTetris12ActionButtonC">ActionButton</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/AppDelegate.html">AppDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Block.html">Block</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Board.html">Board</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Coin.html">Coin</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ColorServer.html">ColorServer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Environment.html">Environment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FileIO.html">FileIO</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GameAI.html">GameAI</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GameAI/MotionCommandBlock.html">– MotionCommandBlock</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GameAI2.html">GameAI2</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GameAI2/FitResults.html">– FitResults</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GameLevelDescription.html">GameLevelDescription</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GameLogic.html">GameLogic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LevelData.html">LevelData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LevelManager.html">LevelManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MapType.html">MapType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Piece.html">Piece</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PieceAttributes.html">PieceAttributes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PieceFactory.html">PieceFactory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PieceIDMap.html">PieceIDMap</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Queue.html">Queue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Score.html">Score</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Settings.html">Settings</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Stack.html">Stack</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TOC.html">TOC</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TOC/TOCStruct.html">– TOCStruct</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/UserData.html">UserData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Versioning.html">Versioning</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/View2D.html">View2D</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ViewController.html">ViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/VisualBlocks.html">VisualBlocks</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/AIScoringMethods.html">AIScoringMethods</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ActionButtonTypes.html">ActionButtonTypes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/AttributeTypes.html">AttributeTypes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/BadButtonTypes.html">BadButtonTypes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/BigPieces.html">BigPieces</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/CoinFaces.html">CoinFaces</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ColorNames.html">ColorNames</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Directions.html">Directions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/EnableButtons.html">EnableButtons</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ExecutingDevice.html">ExecutingDevice</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/GameStates.html">GameStates</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/GoodButtonTypes.html">GoodButtonTypes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/LevelTypes.html">LevelTypes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MaliciousPieces.html">MaliciousPieces</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MetaDistractions.html">MetaDistractions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MetaPieces.html">MetaPieces</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ModeTypes.html">ModeTypes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/NonStandardPieces.html">NonStandardPieces</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PhoneTypes.html">PhoneTypes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PieceSelectionMethods.html">PieceSelectionMethods</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PieceShapes.html">PieceShapes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PieceTypes.html">PieceTypes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PiecesWithGaps.html">PiecesWithGaps</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PlayModes.html">PlayModes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RandomFrequencies.html">RandomFrequencies</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RandomPieces.html">RandomPieces</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ReachableStates.html">ReachableStates</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RotationTypes.html">RotationTypes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ScoringAdders.html">ScoringAdders</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ScoringMasks.html">ScoringMasks</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/StandardPieces.html">StandardPieces</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/TestPieces.html">TestPieces</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/UserTypes.html">UserTypes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ValueTypes.html">ValueTypes</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/CGPoint.html">CGPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UIButton.html">UIButton</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UUID.html">UUID</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/AITestDataUpdatedProtocol.html">AITestDataUpdatedProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ControlProtocol.html">ControlProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ControlUIProtocol.html">ControlUIProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/DebugDelegate.html">DebugDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/GameAINotificationProtocol.html">GameAINotificationProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/GameUINotificationProtocol.html">GameUINotificationProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/GameViewProtocol.html">GameViewProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/GameViewRequestProtocol.html">GameViewRequestProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MainDelegate.html">MainDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TwoDProtocol.html">TwoDProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/MeanResults.html">MeanResults</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>GameLogic</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">GameLogic</span></code></pre>
+
+                </div>
+              </div>
+            <p>Implements the high-level logic and infrastructure for the game. This class is the highest level class that doesn&rsquo;t
+care about the UI (very much). This is the class that controls the board. The board controls the map (and the map
+controls the scoring) and pieces in the map. This class also runs the AI in attract mode. When a UI event needs to
+take place, the piece or board (or AI or whatever) calls upwards to this class, which then passes the need for a UI
+event to the actual UI to take place.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC10UIDelegateAA0C22UINotificationProtocol_pSgvp"></a>
+                    <a name="//apple_ref/swift/Property/UIDelegate" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC10UIDelegateAA0C22UINotificationProtocol_pSgvp">UIDelegate</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delegate to the game UI. Used to let the UI know of game state changes.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">weak</span> <span class="k">var</span> <span class="nv">UIDelegate</span><span class="p">:</span> <span class="kt"><a href="../Protocols/GameUINotificationProtocol.html">GameUINotificationProtocol</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC10AIDelegateAA0C22AINotificationProtocol_pSgvp"></a>
+                    <a name="//apple_ref/swift/Property/AIDelegate" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC10AIDelegateAA0C22AINotificationProtocol_pSgvp">AIDelegate</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delegate to the game AI. Used to let the UI know of AI actions.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">weak</span> <span class="k">var</span> <span class="nv">AIDelegate</span><span class="p">:</span> <span class="kt"><a href="../Protocols/GameAINotificationProtocol.html">GameAINotificationProtocol</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC01_C5BoardAA0E0CSgvp"></a>
+                    <a name="//apple_ref/swift/Property/_GameBoard" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC01_C5BoardAA0E0CSgvp">_GameBoard</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Reference to the game board.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">_GameBoard</span><span class="p">:</span> <span class="kt"><a href="../Classes/Board.html">Board</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC2AIAA0cE0CSgvp"></a>
+                    <a name="//apple_ref/swift/Property/AI" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC2AIAA0cE0CSgvp">AI</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The <q>AI</q> to run in attract mode (or perhaps in <q>play against the computer</q> mode).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">AI</span><span class="p">:</span> <span class="kt"><a href="../Classes/GameAI.html">GameAI</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC04WithC5Count8EnableAIACSiSg_Sbtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(WithGameCount:EnableAI:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC04WithC5Count8EnableAIACSiSg_Sbtcfc">init(WithGameCount:EnableAI:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializer. The game board is created here.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="kt">WithGameCount</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="kt"><a href="../Classes/GameLogic.html#/s:11WackyTetris9GameLogicC8EnableAISbvp">EnableAI</a></span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicCfd"></a>
+                    <a name="//apple_ref/swift/Method/deinit" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicCfd">deinit</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Deinitializer. Shut down the master timer.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">deinit</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC15AIScoringMethodAA0E7MethodsOvp"></a>
+                    <a name="//apple_ref/swift/Property/AIScoringMethod" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC15AIScoringMethodAA0E7MethodsOvp">AIScoringMethod</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get or set the AI scoring method.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">AIScoringMethod</span><span class="p">:</span> <span class="kt"><a href="../Enums/AIScoringMethods.html">AIScoringMethods</a></span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC9_EnableAI33_A903DCDB067D58E9AC5DCE8FCBABFE8DLLSbvp"></a>
+                    <a name="//apple_ref/swift/Property/_EnableAI" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC9_EnableAI33_A903DCDB067D58E9AC5DCE8FCBABFE8DLLSbvp">_EnableAI</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Holds the enable AI value.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">_EnableAI</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC8EnableAISbvp"></a>
+                    <a name="//apple_ref/swift/Property/EnableAI" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC8EnableAISbvp">EnableAI</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Enable or disable AI activities.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">EnableAI</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC01_C5Count33_A903DCDB067D58E9AC5DCE8FCBABFE8DLLSivp"></a>
+                    <a name="//apple_ref/swift/Property/_GameCount" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC01_C5Count33_A903DCDB067D58E9AC5DCE8FCBABFE8DLLSivp">_GameCount</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Holds the current game count.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">_GameCount</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC0C5CountSivp"></a>
+                    <a name="//apple_ref/swift/Property/GameCount" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC0C5CountSivp">GameCount</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get or set the game count.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">GameCount</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC11MasterTimerSo7NSTimerCSgvp"></a>
+                    <a name="//apple_ref/swift/Property/MasterTimer" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC11MasterTimerSo7NSTimerCSgvp">MasterTimer</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Master timer. Should be accessed only from within <code>OperationQueue.main.addOperation</code> blocks.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">MasterTimer</span><span class="p">:</span> <span class="kt">Timer</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC17HandleMasterTimeryyF"></a>
+                    <a name="//apple_ref/swift/Method/HandleMasterTimer()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC17HandleMasterTimeryyF">HandleMasterTimer()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Handle master timer ticks.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">func</span> <span class="kt">HandleMasterTimer</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC16StartMasterTimeryyF"></a>
+                    <a name="//apple_ref/swift/Method/StartMasterTimer()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC16StartMasterTimeryyF">StartMasterTimer()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Start the master tick timer.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">StartMasterTimer</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC15StopMasterTimeryyF"></a>
+                    <a name="//apple_ref/swift/Method/StopMasterTimer()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC15StopMasterTimeryyF">StopMasterTimer()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Stop the master tick timer.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">StopMasterTimer</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC01_C5State33_A903DCDB067D58E9AC5DCE8FCBABFE8DLLAA0C6StatesOvp"></a>
+                    <a name="//apple_ref/swift/Property/_GameState" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC01_C5State33_A903DCDB067D58E9AC5DCE8FCBABFE8DLLAA0C6StatesOvp">_GameState</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Holds the current game state.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">_GameState</span><span class="p">:</span> <span class="kt"><a href="../Enums/GameStates.html">GameStates</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC0C5StateAA0C6StatesOvp"></a>
+                    <a name="//apple_ref/swift/Property/GameState" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC0C5StateAA0C6StatesOvp">GameState</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get the current game state.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">GameState</span><span class="p">:</span> <span class="kt"><a href="../Enums/GameStates.html">GameStates</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC05StartC08EnableAI15PieceCategoriesySb_SayAA10MetaPiecesOGtF"></a>
+                    <a name="//apple_ref/swift/Method/StartGame(EnableAI:PieceCategories:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC05StartC08EnableAI15PieceCategoriesySb_SayAA10MetaPiecesOGtF">StartGame(EnableAI:PieceCategories:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Start the game. The game board is created in the initializer.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">StartGame</span><span class="p">(</span><span class="kt"><a href="../Classes/GameLogic.html#/s:11WackyTetris9GameLogicC8EnableAISbvp">EnableAI</a></span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="kt">PieceCategories</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Enums/MetaPieces.html">MetaPieces</a></span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kt"><a href="../Enums/MetaPieces.html">MetaPieces</a></span><span class="o">.</span><span class="kt">Standard</span><span class="p">])</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>EnableAI</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Enable AI flag. Set to true to run the game in attract mode.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>PieceCategories</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Valid pieces for the game. Cannot change once the game starts until a new game starts.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC0C9StartTimeSdvp"></a>
+                    <a name="//apple_ref/swift/Property/GameStartTime" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC0C9StartTimeSdvp">GameStartTime</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Game start time.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">GameStartTime</span><span class="p">:</span> <span class="kt">Double</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC0C7EndTimeSdSgvp"></a>
+                    <a name="//apple_ref/swift/Property/GameEndTime" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC0C7EndTimeSdSgvp">GameEndTime</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Game end time. If nil, the game hasn&rsquo;t ended yet.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">GameEndTime</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC0C8DurationSdyF"></a>
+                    <a name="//apple_ref/swift/Method/GameDuration()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC0C8DurationSdyF">GameDuration()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the duration of the game.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>If the game is ongoing, the duration returned is from the start of the game to the call time. If the game hasn&rsquo;t
+    started, 0.0 is returned.</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">GameDuration</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Double</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The duration of the game.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC04StepC012MakeNewBoardySb_tF"></a>
+                    <a name="//apple_ref/swift/Method/StepGame(MakeNewBoard:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC04StepC012MakeNewBoardySb_tF">StepGame(MakeNewBoard:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Start a game in stepping mode.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">StepGame</span><span class="p">(</span><span class="kt">MakeNewBoard</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>MakeNewBoard</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If true a new game board will be created. If false, the current board will be used.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC07ExecuteC4StepyyF"></a>
+                    <a name="//apple_ref/swift/Method/ExecuteGameStep()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC07ExecuteC4StepyyF">ExecuteGameStep()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Execute one step in the game. Not currently implemented.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">ExecuteGameStep</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC04StopC0yyF"></a>
+                    <a name="//apple_ref/swift/Method/StopGame()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC04StopC0yyF">StopGame()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Stop the game.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">StopGame</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC20SetValidBlockMotionsyySayAA10DirectionsOGF"></a>
+                    <a name="//apple_ref/swift/Method/SetValidBlockMotions(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC20SetValidBlockMotionsyySayAA10DirectionsOGF">SetValidBlockMotions(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets a list of valid motions for the piece.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>Will be superceded by Level management.</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">SetValidBlockMotions</span><span class="p">(</span><span class="n">_</span> <span class="kt">Valid</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Enums/Directions.html">Directions</a></span><span class="p">])</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Valid</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>List of valid motions.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC14_SpawnNewPiece33_A903DCDB067D58E9AC5DCE8FCBABFE8DLLSbvp"></a>
+                    <a name="//apple_ref/swift/Property/_SpawnNewPiece" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC14_SpawnNewPiece33_A903DCDB067D58E9AC5DCE8FCBABFE8DLLSbvp">_SpawnNewPiece</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Holds the spawn new piece flag.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">_SpawnNewPiece</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC13SpawnNewPieceSbvp"></a>
+                    <a name="//apple_ref/swift/Property/SpawnNewPiece" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC13SpawnNewPieceSbvp">SpawnNewPiece</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get or set the spawn new piece flag. Used for stepping during debugging.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">SpawnNewPiece</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC05PauseC0yyF"></a>
+                    <a name="//apple_ref/swift/Method/PauseGame()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC05PauseC0yyF">PauseGame()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Pause the game.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">PauseGame</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC06ResumeC0yyF"></a>
+                    <a name="//apple_ref/swift/Method/ResumeGame()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC06ResumeC0yyF">ResumeGame()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Resume the game from where it was paused.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">ResumeGame</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC9HaveBoardSbvp"></a>
+                    <a name="//apple_ref/swift/Property/HaveBoard" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC9HaveBoardSbvp">HaveBoard</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns true if a board is in place, false if not.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">HaveBoard</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC11RemoveBoardyyF"></a>
+                    <a name="//apple_ref/swift/Method/RemoveBoard()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC11RemoveBoardyyF">RemoveBoard()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Remove the board.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">RemoveBoard</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC10ResetBoardyyF"></a>
+                    <a name="//apple_ref/swift/Method/ResetBoard()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC10ResetBoardyyF">ResetBoard()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Resets the board and removes all pieces. Sets game state to stopped.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">ResetBoard</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC9MakeBoard_5LevelySayAA10MetaPiecesOG_AA0cG11DescriptionCSgtF"></a>
+                    <a name="//apple_ref/swift/Method/MakeBoard(_:Level:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC9MakeBoard_5LevelySayAA10MetaPiecesOG_AA0cG11DescriptionCSgtF">MakeBoard(_:Level:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a game board.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">MakeBoard</span><span class="p">(</span><span class="n">_</span> <span class="kt">Categories</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Enums/MetaPieces.html">MetaPieces</a></span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kt"><a href="../Enums/MetaPieces.html">MetaPieces</a></span><span class="o">.</span><span class="kt">Standard</span><span class="p">],</span> <span class="kt">Level</span><span class="p">:</span> <span class="kt"><a href="../Classes/GameLevelDescription.html">GameLevelDescription</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Categories</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Valid piece categories.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Level</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Describes the level to use.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC0C5BoardAA0E0CSgvp"></a>
+                    <a name="//apple_ref/swift/Property/GameBoard" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC0C5BoardAA0E0CSgvp">GameBoard</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get or set the game board.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">GameBoard</span><span class="p">:</span> <span class="kt"><a href="../Classes/Board.html">Board</a></span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC12PieceUpdated2IDy10Foundation4UUIDV_tF"></a>
+                    <a name="//apple_ref/swift/Method/PieceUpdated(ID:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC12PieceUpdated2IDy10Foundation4UUIDV_tF">PieceUpdated(ID:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called when a game piece is frozen.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">PieceUpdated</span><span class="p">(</span><span class="kt">ID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the frozen piece.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Game%20logic%20protocol%20implementations"></a>
+                <a name="//apple_ref/swift/Section/Game logic protocol implementations" class="dashAnchor"></a>
+                <a href="#/Game%20logic%20protocol%20implementations">
+                  <h3 class="section-name">Game logic protocol implementations</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC13DropFinalizedyyAA5PieceCF"></a>
+                    <a name="//apple_ref/swift/Method/DropFinalized(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC13DropFinalizedyyAA5PieceCF">DropFinalized(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called when a piece has frozen into place. Start dropping a new piece.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">DropFinalized</span><span class="p">(</span><span class="n">_</span> <span class="kt">ThePiece</span><span class="p">:</span> <span class="kt"><a href="../Classes/Piece.html">Piece</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the frozen piece.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC12DiscardPieceyyAA0F0CF"></a>
+                    <a name="//apple_ref/swift/Method/DiscardPiece(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC12DiscardPieceyyAA0F0CF">DiscardPiece(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called to discard a piece.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">DiscardPiece</span><span class="p">(</span><span class="n">_</span> <span class="kt">ThePiece</span><span class="p">:</span> <span class="kt"><a href="../Classes/Piece.html">Piece</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC15SetPieceOpacity2To2IDySd_10Foundation4UUIDVtF"></a>
+                    <a name="//apple_ref/swift/Method/SetPieceOpacity(To:ID:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC15SetPieceOpacity2To2IDySd_10Foundation4UUIDVtF">SetPieceOpacity(To:ID:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <pre class="highlight swift"><code><span class="kt">Not</span> <span class="n">currently</span> <span class="n">implemented</span><span class="o">.</span>
+</code></pre>
+
+<p>Called by child classes to set the opacity level of the current piece.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>This is probably better changed to something higher-level, such as
+    <q>VisuallyRemovePiece</q> or the like.</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">SetPieceOpacity</span><span class="p">(</span><span class="kt">To</span><span class="p">:</span> <span class="kt">Double</span><span class="p">,</span> <span class="kt">ID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>To</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>New opacity level.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the piece whose opacity will be changed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC16CompletedDiscard7OfPiecey10Foundation4UUIDV_tF"></a>
+                    <a name="//apple_ref/swift/Method/CompletedDiscard(OfPiece:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC16CompletedDiscard7OfPiecey10Foundation4UUIDV_tF">CompletedDiscard(OfPiece:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Event for after a piece has been discarded and is no longer available.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">CompletedDiscard</span><span class="p">(</span><span class="kt">OfPiece</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>OfPiece</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the piece that was discarded.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC14ScoreWithPiece2ID0E0y10Foundation4UUIDV_SitF"></a>
+                    <a name="//apple_ref/swift/Method/ScoreWithPiece(ID:Score:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC14ScoreWithPiece2ID0E0y10Foundation4UUIDV_SitF">ScoreWithPiece(ID:Score:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called when a new score is available after a piece is finalized.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">ScoreWithPiece</span><span class="p">(</span><span class="kt">ID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">,</span> <span class="kt"><a href="../Classes/Score.html">Score</a></span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the finalized piece.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Score</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>New game score.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC09_PiecesInC033_A903DCDB067D58E9AC5DCE8FCBABFE8DLLSivp"></a>
+                    <a name="//apple_ref/swift/Property/_PiecesInGame" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC09_PiecesInC033_A903DCDB067D58E9AC5DCE8FCBABFE8DLLSivp">_PiecesInGame</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Holds the number of pieces used in the game so far.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">_PiecesInGame</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC08PiecesInC0Sivp"></a>
+                    <a name="//apple_ref/swift/Property/PiecesInGame" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC08PiecesInC0Sivp">PiecesInGame</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get the number of pieces used in the game.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">PiecesInGame</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC18StoppedOutOfBounds2IDy10Foundation4UUIDV_tF"></a>
+                    <a name="//apple_ref/swift/Method/StoppedOutOfBounds(ID:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC18StoppedOutOfBounds2IDy10Foundation4UUIDV_tF">StoppedOutOfBounds(ID:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called when a piece is frozen with at least part of it out of bounds. Indicates a game over
+condition.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">StoppedOutOfBounds</span><span class="p">(</span><span class="kt">ID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the frozen piece.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC15StartedFreezingyy10Foundation4UUIDVF"></a>
+                    <a name="//apple_ref/swift/Method/StartedFreezing(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC15StartedFreezingyy10Foundation4UUIDVF">StartedFreezing(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called when a piece has started freezing (but not yet frozen).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">StartedFreezing</span><span class="p">(</span><span class="n">_</span> <span class="kt">ID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the piece that started freezing.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC08_CurrentC5Score33_A903DCDB067D58E9AC5DCE8FCBABFE8DLLSivp"></a>
+                    <a name="//apple_ref/swift/Property/_CurrentGameScore" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC08_CurrentC5Score33_A903DCDB067D58E9AC5DCE8FCBABFE8DLLSivp">_CurrentGameScore</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Holds the current game score. When set, sends a message to the UI with the new score. Updates the
+highs score every time the current score is set (provided the current score is greater than the
+highs score).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">_CurrentGameScore</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC07CurrentC5ScoreSivp"></a>
+                    <a name="//apple_ref/swift/Property/CurrentGameScore" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC07CurrentC5ScoreSivp">CurrentGameScore</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get the current game score.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">CurrentGameScore</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC10_HighScore33_A903DCDB067D58E9AC5DCE8FCBABFE8DLLSivp"></a>
+                    <a name="//apple_ref/swift/Property/_HighScore" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC10_HighScore33_A903DCDB067D58E9AC5DCE8FCBABFE8DLLSivp">_HighScore</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Holds the highs core value. When set, sends a message to the UI.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">_HighScore</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC9HighScoreSivp"></a>
+                    <a name="//apple_ref/swift/Property/HighScore" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC9HighScoreSivp">HighScore</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get or set the high score value.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">HighScore</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC12HaveNewPieceyyAA0G0CF"></a>
+                    <a name="//apple_ref/swift/Method/HaveNewPiece(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC12HaveNewPieceyyAA0G0CF">HaveNewPiece(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The board notified us we have a new piece. Notify the UI.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>If we&rsquo;re in AI mode, find the best fit and start the AI motion timer (which retrieves motions from the AI for
+    the new piece periodically.</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">HaveNewPiece</span><span class="p">(</span><span class="n">_</span> <span class="kt">NewPiece</span><span class="p">:</span> <span class="kt"><a href="../Classes/Piece.html">Piece</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>NewPiece</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The new piece to drop.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC18StartAIMotionTimeryyF"></a>
+                    <a name="//apple_ref/swift/Method/StartAIMotionTimer()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC18StartAIMotionTimeryyF">StartAIMotionTimer()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Starts the AI motion timer.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">StartAIMotionTimer</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC17StopAIMotionTimeryyF"></a>
+                    <a name="//apple_ref/swift/Method/StopAIMotionTimer()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC17StopAIMotionTimeryyF">StopAIMotionTimer()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Stops the AI motion timer.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">StopAIMotionTimer</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC15AIScoreForPieceSdvp"></a>
+                    <a name="//apple_ref/swift/Property/AIScoreForPiece" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC15AIScoreForPieceSdvp">AIScoreForPiece</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The score for the piece as per the AI.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">AIScoreForPiece</span><span class="p">:</span> <span class="kt">Double</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC11GetAIMotionyyF"></a>
+                    <a name="//apple_ref/swift/Method/GetAIMotion()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC11GetAIMotionyyF">GetAIMotion()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get an AI motion to execute. Motions are in the AI motion queue.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">func</span> <span class="kt">GetAIMotion</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC7AITimerSo7NSTimerCSgvp"></a>
+                    <a name="//apple_ref/swift/Property/AITimer" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC7AITimerSo7NSTimerCSgvp">AITimer</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Timer that controls how often to retrieve a motion from the AI when the game is under the control of the AI.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">AITimer</span><span class="p">:</span> <span class="kt">Timer</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC14SetGravitationyySbF"></a>
+                    <a name="//apple_ref/swift/Method/SetGravitation(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC14SetGravitationyySbF">SetGravitation(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Turns on or off gravity. Mainly used for debugging but can also be used for special game effects. Control flows
+from the UI to the game (here), board, then piece (which is where gravity actually takes place).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">SetGravitation</span><span class="p">(</span><span class="n">_</span> <span class="kt">Enabled</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Enabled</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Determines if the gravity is on or off.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC15PieceCannotMove2IDy10Foundation4UUIDV_tF"></a>
+                    <a name="//apple_ref/swift/Method/PieceCannotMove(ID:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC15PieceCannotMove2IDy10Foundation4UUIDV_tF">PieceCannotMove(ID:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called when a piece is blocked (either in motion or rotation). Pass the notification to the UI.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">PieceCannotMove</span><span class="p">(</span><span class="kt">ID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the piece that cannot move.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC12PieceRotated2ID9Directiony10Foundation4UUIDV_AA10DirectionsOtF"></a>
+                    <a name="//apple_ref/swift/Method/PieceRotated(ID:Direction:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC12PieceRotated2ID9Directiony10Foundation4UUIDV_AA10DirectionsOtF">PieceRotated(ID:Direction:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called when a piece was successfully rotated. Pass the notification to the UI.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">PieceRotated</span><span class="p">(</span><span class="kt">ID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">,</span> <span class="kt">Direction</span><span class="p">:</span> <span class="kt"><a href="../Enums/Directions.html">Directions</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the rotated piece.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Direction</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The direction the piece rotated.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC15RotationFailure2ID9Directiony10Foundation4UUIDV_AA10DirectionsOtF"></a>
+                    <a name="//apple_ref/swift/Method/RotationFailure(ID:Direction:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC15RotationFailure2ID9Directiony10Foundation4UUIDV_AA10DirectionsOtF">RotationFailure(ID:Direction:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called when a piece tried to rotate but failed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">RotationFailure</span><span class="p">(</span><span class="kt">ID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">,</span> <span class="kt">Direction</span><span class="p">:</span> <span class="kt"><a href="../Enums/Directions.html">Directions</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the piece that failed rotation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Direction</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The rotational direction that was attempted.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC14HandleInputFor2ID0F0y10Foundation4UUIDV_AA10DirectionsOtF"></a>
+                    <a name="//apple_ref/swift/Method/HandleInputFor(ID:Input:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC14HandleInputFor2ID0F0y10Foundation4UUIDV_AA10DirectionsOtF">HandleInputFor(ID:Input:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Pass input from the UI to the game board.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>If AI is enabled, input from the UI is ignored.</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">HandleInputFor</span><span class="p">(</span><span class="kt">ID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">,</span> <span class="kt">Input</span><span class="p">:</span> <span class="kt"><a href="../Enums/Directions.html">Directions</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the piece the input is intended for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Input</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Type of input.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC13_CurrentPiece33_A903DCDB067D58E9AC5DCE8FCBABFE8DLL10Foundation4UUIDVSgvp"></a>
+                    <a name="//apple_ref/swift/Property/_CurrentPiece" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC13_CurrentPiece33_A903DCDB067D58E9AC5DCE8FCBABFE8DLL10Foundation4UUIDVSgvp">_CurrentPiece</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Holds the ID of the current piece.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">_CurrentPiece</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC12CurrentPiece10Foundation4UUIDVSgvp"></a>
+                    <a name="//apple_ref/swift/Property/CurrentPiece" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC12CurrentPiece10Foundation4UUIDVSgvp">CurrentPiece</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get or set the ID of the current piece.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">CurrentPiece</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC10RowDeletedyySiF"></a>
+                    <a name="//apple_ref/swift/Method/RowDeleted(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC10RowDeletedyySiF">RowDeleted(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called when a row was deleted by the board. Pass the notification to the UI.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">RowDeleted</span><span class="p">(</span><span class="n">_</span> <span class="kt">Row</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Row</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Index of the row that was deleted.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC16RowDeletionCountSivp"></a>
+                    <a name="//apple_ref/swift/Property/RowDeletionCount" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC16RowDeletionCountSivp">RowDeletionCount</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">RowDeletionCount</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC13ColumnDropped0E0ySi_tF"></a>
+                    <a name="//apple_ref/swift/Method/ColumnDropped(Column:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC13ColumnDropped0E0ySi_tF">ColumnDropped(Column:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Received column dropped message. Pass to UI.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>This message is sent for each column dropped.</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">ColumnDropped</span><span class="p">(</span><span class="kt">Column</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Column</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The index of the column that was dropped.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC20BoardDoneCompressing11DidCompressySb_tF"></a>
+                    <a name="//apple_ref/swift/Method/BoardDoneCompressing(DidCompress:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC20BoardDoneCompressing11DidCompressySb_tF">BoardDoneCompressing(DidCompress:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Received board done compressing message. Pass to UI.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">BoardDoneCompressing</span><span class="p">(</span><span class="kt">DidCompress</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>DidCompress</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If true, the board actually compressed (meaning there were blocks removed). If
+                     false, the board&rsquo;s contents are the same (other than for game pieces in play).</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC10DropColumn0F04From8ToTargetySi_S2itF"></a>
+                    <a name="//apple_ref/swift/Method/DropColumn(Column:From:ToTarget:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC10DropColumn0F04From8ToTargetySi_S2itF">DropColumn(Column:From:ToTarget:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Received column will drop message. Pass to UI.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">DropColumn</span><span class="p">(</span><span class="kt">Column</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">From</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">ToTarget</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Column</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The column index.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>From</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>From row&hellip;</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ToTarget</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>&hellip;to row.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC8AutoPlayyyF"></a>
+                    <a name="//apple_ref/swift/Method/AutoPlay()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC8AutoPlayyyF">AutoPlay()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Play the game by ourself using little or no intelligence and lots of randomness.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">AutoPlay</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC10InAutoPlaySbvp"></a>
+                    <a name="//apple_ref/swift/Property/InAutoPlay" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC10InAutoPlaySbvp">InAutoPlay</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Holds the in auto play flag.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">InAutoPlay</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC20PieceIntersectedItem2ID0G02Aty10Foundation4UUIDV_AA0E5TypesOSo7CGPointVtF"></a>
+                    <a name="//apple_ref/swift/Method/PieceIntersectedItem(ID:Item:At:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC20PieceIntersectedItem2ID0G02Aty10Foundation4UUIDV_AA0E5TypesOSo7CGPointVtF">PieceIntersectedItem(ID:Item:At:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Pass along the piece-ran-over-a-special-button event to the UI.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">PieceIntersectedItem</span><span class="p">(</span><span class="kt">ID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">,</span> <span class="kt">Item</span><span class="p">:</span> <span class="kt"><a href="../Enums/PieceTypes.html">PieceTypes</a></span><span class="p">,</span> <span class="kt">At</span><span class="p">:</span> <span class="kt">CGPoint</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the item that ran over the speical button.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Item</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Description of the special item.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>At</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Location of the special item.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC21PieceIntersectedItemX2ID0G02Aty10Foundation4UUIDV_AJSo7CGPointVtF"></a>
+                    <a name="//apple_ref/swift/Method/PieceIntersectedItemX(ID:Item:At:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC21PieceIntersectedItemX2ID0G02Aty10Foundation4UUIDV_AJSo7CGPointVtF">PieceIntersectedItemX(ID:Item:At:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Pass along the piece-ran-over-a-special-button event to the UI.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">PieceIntersectedItemX</span><span class="p">(</span><span class="kt">ID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">,</span> <span class="kt">Item</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">,</span> <span class="kt">At</span><span class="p">:</span> <span class="kt">CGPoint</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the item that ran over the speical button.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Item</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the special item.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>At</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Location of the special item.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC20BoardContentsChangedyyF"></a>
+                    <a name="//apple_ref/swift/Method/BoardContentsChanged()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC20BoardContentsChangedyyF">BoardContentsChanged()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Pass general board contents changed event to the UI.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">BoardContentsChanged</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC7DumpMap10WithPiecesSSSb_tF"></a>
+                    <a name="//apple_ref/swift/Method/DumpMap(WithPieces:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC7DumpMap10WithPiecesSSSb_tF">DumpMap(WithPieces:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Return the current value of the game map as a string.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">DumpMap</span><span class="p">(</span><span class="kt">WithPieces</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>WithPieces</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If true, all pieces (falling or otherwise) are included in the returned map.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>String representation of the game map. Column and row headers are included.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC16UpdatePieceScore03ForF0yAA0F0C_tF"></a>
+                    <a name="//apple_ref/swift/Method/UpdatePieceScore(ForPiece:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC16UpdatePieceScore03ForF0yAA0F0C_tF">UpdatePieceScore(ForPiece:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called when a piece moves or is rotated. Used to indicate potentially different scores of the piece.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">UpdatePieceScore</span><span class="p">(</span><span class="kt">ForPiece</span><span class="p">:</span> <span class="kt"><a href="../Classes/Piece.html">Piece</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ForPiece</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The piece to update the score for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC9NextPieceyyAA0F0CF"></a>
+                    <a name="//apple_ref/swift/Method/NextPiece(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC9NextPieceyyAA0F0CF">NextPiece(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Pass the name of the next piece to the UI.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">NextPiece</span><span class="p">(</span><span class="n">_</span> <span class="kt">Next</span><span class="p">:</span> <span class="kt"><a href="../Classes/Piece.html">Piece</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Next</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Name of the next piece after the current piece.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris9GameLogicC9GetScorerAA5ScoreCyF"></a>
+                    <a name="//apple_ref/swift/Method/GetScorer()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris9GameLogicC9GetScorerAA5ScoreCyF">GetScorer()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the current board game scorer class.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">GetScorer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Score.html">Score</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Current board game scorer class.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-05-23)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

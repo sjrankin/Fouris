@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>PieceIDMap Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/PieceIDMap" class="dashAnchor"></a>
+    <a title="PieceIDMap Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a> (55% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        PieceIDMap Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/AITestNode.html">AITestNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/AITestTable.html">AITestTable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:11WackyTetris12ActionButtonC">ActionButton</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/AppDelegate.html">AppDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Block.html">Block</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Board.html">Board</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Coin.html">Coin</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ColorServer.html">ColorServer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Environment.html">Environment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FileIO.html">FileIO</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GameAI.html">GameAI</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GameAI/MotionCommandBlock.html">– MotionCommandBlock</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GameAI2.html">GameAI2</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GameAI2/FitResults.html">– FitResults</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GameLevelDescription.html">GameLevelDescription</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GameLogic.html">GameLogic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LevelData.html">LevelData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LevelManager.html">LevelManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MapType.html">MapType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Piece.html">Piece</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PieceAttributes.html">PieceAttributes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PieceFactory.html">PieceFactory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PieceIDMap.html">PieceIDMap</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Queue.html">Queue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Score.html">Score</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Settings.html">Settings</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Stack.html">Stack</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TOC.html">TOC</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TOC/TOCStruct.html">– TOCStruct</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/UserData.html">UserData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Versioning.html">Versioning</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/View2D.html">View2D</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ViewController.html">ViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/VisualBlocks.html">VisualBlocks</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/AIScoringMethods.html">AIScoringMethods</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ActionButtonTypes.html">ActionButtonTypes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/AttributeTypes.html">AttributeTypes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/BadButtonTypes.html">BadButtonTypes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/BigPieces.html">BigPieces</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/CoinFaces.html">CoinFaces</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ColorNames.html">ColorNames</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Directions.html">Directions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/EnableButtons.html">EnableButtons</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ExecutingDevice.html">ExecutingDevice</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/GameStates.html">GameStates</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/GoodButtonTypes.html">GoodButtonTypes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/LevelTypes.html">LevelTypes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MaliciousPieces.html">MaliciousPieces</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MetaDistractions.html">MetaDistractions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MetaPieces.html">MetaPieces</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ModeTypes.html">ModeTypes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/NonStandardPieces.html">NonStandardPieces</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PhoneTypes.html">PhoneTypes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PieceSelectionMethods.html">PieceSelectionMethods</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PieceShapes.html">PieceShapes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PieceTypes.html">PieceTypes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PiecesWithGaps.html">PiecesWithGaps</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PlayModes.html">PlayModes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RandomFrequencies.html">RandomFrequencies</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RandomPieces.html">RandomPieces</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ReachableStates.html">ReachableStates</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RotationTypes.html">RotationTypes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ScoringAdders.html">ScoringAdders</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ScoringMasks.html">ScoringMasks</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/StandardPieces.html">StandardPieces</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/TestPieces.html">TestPieces</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/UserTypes.html">UserTypes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ValueTypes.html">ValueTypes</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/CGPoint.html">CGPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UIButton.html">UIButton</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UUID.html">UUID</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/AITestDataUpdatedProtocol.html">AITestDataUpdatedProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ControlProtocol.html">ControlProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ControlUIProtocol.html">ControlUIProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/DebugDelegate.html">DebugDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/GameAINotificationProtocol.html">GameAINotificationProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/GameUINotificationProtocol.html">GameUINotificationProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/GameViewProtocol.html">GameViewProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/GameViewRequestProtocol.html">GameViewRequestProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MainDelegate.html">MainDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TwoDProtocol.html">TwoDProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/MeanResults.html">MeanResults</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>PieceIDMap</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">PieceIDMap</span></code></pre>
+
+                </div>
+              </div>
+            <p>Maintains a map of IDs for each piece in the game map.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris10PieceIDMapCACycfc"></a>
+                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris10PieceIDMapCACycfc">init()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initialize the piece map.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris10PieceIDMapC04IDtoC0yAA0C5TypesOSg10Foundation4UUIDVF"></a>
+                    <a name="//apple_ref/swift/Method/IDtoPiece(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris10PieceIDMapC04IDtoC0yAA0C5TypesOSg10Foundation4UUIDVF">IDtoPiece(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Return the piece type given an ID of the piece.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">IDtoPiece</span><span class="p">(</span><span class="n">_</span> <span class="kt">ID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Enums/PieceTypes.html">PieceTypes</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the piece whose type will be returned.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The piece type associated with the ID. Nil if not found.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris10PieceIDMapC5AddID_03ForC0y10Foundation4UUIDV_AA0C5TypesOtF"></a>
+                    <a name="//apple_ref/swift/Method/AddID(_:ForPiece:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris10PieceIDMapC5AddID_03ForC0y10Foundation4UUIDV_AA0C5TypesOtF">AddID(_:ForPiece:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Add a piece&rsquo;s ID to the piece ID map.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">AddID</span><span class="p">(</span><span class="n">_</span> <span class="kt">ID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">,</span> <span class="kt">ForPiece</span><span class="p">:</span> <span class="kt"><a href="../Enums/PieceTypes.html">PieceTypes</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID to add.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ForPiece</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Piece type associated with the ID.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris10PieceIDMapC10ChangeType3For02ToF0y10Foundation4UUIDV_AA0C5TypesOtF"></a>
+                    <a name="//apple_ref/swift/Method/ChangeType(For:ToType:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris10PieceIDMapC10ChangeType3For02ToF0y10Foundation4UUIDV_AA0C5TypesOtF">ChangeType(For:ToType:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Changes the type of the piece an ID points to.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">ChangeType</span><span class="p">(</span><span class="kt">For</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">,</span> <span class="kt">ToType</span><span class="p">:</span> <span class="kt"><a href="../Enums/PieceTypes.html">PieceTypes</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>For</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID whose type will change.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ToType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The new piece type for the ID.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris10PieceIDMapC05ClearC3MapyyF"></a>
+                    <a name="//apple_ref/swift/Method/ClearPieceMap()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris10PieceIDMapC05ClearC3MapyyF">ClearPieceMap()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Clear the piece ID map. Reload with the invariant pieces.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">ClearPieceMap</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris10PieceIDMapC0C3MapSDy10Foundation4UUIDVAA0C5TypesOGvp"></a>
+                    <a name="//apple_ref/swift/Property/PieceMap" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris10PieceIDMapC0C3MapSDy10Foundation4UUIDVAA0C5TypesOGvp">PieceMap</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Holds the ID to piece type map.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">PieceMap</span><span class="p">:</span> <span class="p">[</span><span class="kt">UUID</span> <span class="p">:</span> <span class="kt"><a href="../Enums/PieceTypes.html">PieceTypes</a></span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris10PieceIDMapC8RemoveIDyy10Foundation4UUIDVF"></a>
+                    <a name="//apple_ref/swift/Method/RemoveID(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris10PieceIDMapC8RemoveIDyy10Foundation4UUIDVF">RemoveID(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Remove the specified ID from the piece ID map.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">RemoveID</span><span class="p">(</span><span class="n">_</span> <span class="kt">ID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID to remove. If the ID is not in the map, no action is taken.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris10PieceIDMapC11IsEmptyTypeySb10Foundation4UUIDVF"></a>
+                    <a name="//apple_ref/swift/Method/IsEmptyType(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris10PieceIDMapC11IsEmptyTypeySb10Foundation4UUIDVF">IsEmptyType(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Determines if the piece type pointed to by ID is <q>empty</q> in the context of moving the user&rsquo;s piece (eg,
+can the user move a piece into the location?).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">IsEmptyType</span><span class="p">(</span><span class="n">_</span> <span class="kt">ID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the piece to check.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>True if the piece represents a location that is <q>empty</q>, false if not.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris10PieceIDMapC14IsOccupiedTypeySb10Foundation4UUIDVF"></a>
+                    <a name="//apple_ref/swift/Method/IsOccupiedType(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris10PieceIDMapC14IsOccupiedTypeySb10Foundation4UUIDVF">IsOccupiedType(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Determines if the piece type pointed to by ID is <q>occupied</q> in the context of moving the user&rsquo;s piece (eg, the location
+is blocked so the user cannot move there).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">IsOccupiedType</span><span class="p">(</span><span class="n">_</span> <span class="kt">ID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the piece to check.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>True if the piece represents a location that is <q>occupied</q>, false if not.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris10PieceIDMapC19IsValidNeighborTypeySb10Foundation4UUIDVF"></a>
+                    <a name="//apple_ref/swift/Method/IsValidNeighborType(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris10PieceIDMapC19IsValidNeighborTypeySb10Foundation4UUIDVF">IsValidNeighborType(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Determines if the piece type pointed to by ID is a valid neighbor. Used by the AI.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">IsValidNeighborType</span><span class="p">(</span><span class="n">_</span> <span class="kt">ID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the piece to check.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>True if the piece represents a location that is a valid neighbor (in terms of the AI), false if not.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris10PieceIDMapC13IsSpecialTypeySb10Foundation4UUIDVF"></a>
+                    <a name="//apple_ref/swift/Method/IsSpecialType(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris10PieceIDMapC13IsSpecialTypeySb10Foundation4UUIDVF">IsSpecialType(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Determines if the piece type pointed to by ID is a special type (eg, action or danger button).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">IsSpecialType</span><span class="p">(</span><span class="n">_</span> <span class="kt">ID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the piece to check.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>True if the piece represents a location that is a special type, false if not.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris10PieceIDMapC8StaticID3For10Foundation4UUIDVAA0C5TypesO_tF"></a>
+                    <a name="//apple_ref/swift/Method/StaticID(For:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris10PieceIDMapC8StaticID3For10Foundation4UUIDVAA0C5TypesO_tF">StaticID(For:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a <q>static</q> ID for the given piece type. Not all piece types have associated <q>static</q> IDs. (<q>Static</q> means unchanging
+for the duration of the instance.)</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>Note:</p>
+
+<ul>
+<li>Piece types with static IDs are: <code>.Visible</code>, <code>.Background</code>, <code>.Bucket</code>, <code>.InvisibleBucket</code>.</li>
+<li><strong>If a piece type is passed that does not have a static ID, a fatal error is generated.</strong></li>
+</ul>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">StaticID</span><span class="p">(</span><span class="kt">For</span><span class="p">:</span> <span class="kt"><a href="../Enums/PieceTypes.html">PieceTypes</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UUID</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>For</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The Piece type whose ID will be returned.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>ID for the piece type. This ID will not change for the instance of the program.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris10PieceIDMapC9StaticIDs33_31CDDFEA5F8C914BE77D05D2EC978C92LLSDyAA0C5TypesO10Foundation4UUIDVGvp"></a>
+                    <a name="//apple_ref/swift/Property/StaticIDs" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris10PieceIDMapC9StaticIDs33_31CDDFEA5F8C914BE77D05D2EC978C92LLSDyAA0C5TypesO10Foundation4UUIDVGvp">StaticIDs</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Map between piece types and IDs for static IDs.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">let</span> <span class="nv">StaticIDs</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Enums/PieceTypes.html">PieceTypes</a></span> <span class="p">:</span> <span class="kt">UUID</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris10PieceIDMapC9UniqueIDs8BoardMapShy10Foundation4UUIDVGSaySayAHGG_tF"></a>
+                    <a name="//apple_ref/swift/Method/UniqueIDs(BoardMap:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris10PieceIDMapC9UniqueIDs8BoardMapShy10Foundation4UUIDVGSaySayAHGG_tF">UniqueIDs(BoardMap:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a set of unique IDs found in the board.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">UniqueIDs</span><span class="p">(</span><span class="kt">BoardMap</span><span class="p">:</span> <span class="kt"><a href="../Classes/MapType.html">MapType</a></span><span class="o">.</span><span class="kt">ContentsType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Set</span><span class="o">&lt;</span><span class="kt">UUID</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>BoardMap</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The board used as source for unique IDs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Set of unique IDs in the board.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris10PieceIDMapC13UniqueIDCount8BoardMapSiSaySay10Foundation4UUIDVGG_tF"></a>
+                    <a name="//apple_ref/swift/Method/UniqueIDCount(BoardMap:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris10PieceIDMapC13UniqueIDCount8BoardMapSiSaySay10Foundation4UUIDVGG_tF">UniqueIDCount(BoardMap:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the number of unique IDs in the passed board.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>This is merely a thin wrapper around <code>UniqueIDs</code>.</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">UniqueIDCount</span><span class="p">(</span><span class="kt">BoardMap</span><span class="p">:</span> <span class="kt"><a href="../Classes/MapType.html">MapType</a></span><span class="o">.</span><span class="kt">ContentsType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>BoardMap</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The board used as source for unique IDs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Number of unique IDs in the board.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris10PieceIDMapC15RemoveUnusedIDs8BoardMap11ButNotTheseySaySay10Foundation4UUIDVGG_AJtF"></a>
+                    <a name="//apple_ref/swift/Method/RemoveUnusedIDs(BoardMap:ButNotThese:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris10PieceIDMapC15RemoveUnusedIDs8BoardMap11ButNotTheseySaySay10Foundation4UUIDVGG_AJtF">RemoveUnusedIDs(BoardMap:ButNotThese:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Remove IDs from the piece ID map that are no longer in the passed board.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">RemoveUnusedIDs</span><span class="p">(</span><span class="kt">BoardMap</span><span class="p">:</span> <span class="kt"><a href="../Classes/MapType.html">MapType</a></span><span class="o">.</span><span class="kt">ContentsType</span><span class="p">,</span> <span class="kt">ButNotThese</span><span class="p">:</span> <span class="p">[</span><span class="kt">UUID</span><span class="p">])</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>BoardMap</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The board used to determine which IDs in the piece ID map are no longer present and can be
+                  removed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ButNotThese</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>List of IDs to not remove even if they are not in the UniqueID list.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris10PieceIDMapC03AddC10Attributesyy10Foundation4UUIDV_AA0cF0CtF"></a>
+                    <a name="//apple_ref/swift/Method/AddPieceAttributes(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris10PieceIDMapC03AddC10Attributesyy10Foundation4UUIDV_AA0cF0CtF">AddPieceAttributes(_:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Add attributes from a piece.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">AddPieceAttributes</span><span class="p">(</span><span class="n">_</span> <span class="kt">PieceID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">,</span> <span class="n">_</span> <span class="kt">Attrs</span><span class="p">:</span> <span class="kt"><a href="../Classes/PieceAttributes.html">PieceAttributes</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>PieceID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the piece whose attributes are being added.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Attrs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The attributes of the piece.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris10PieceIDMapC13GetAttributes3ForAA0cF0CSg10Foundation4UUIDV_tF"></a>
+                    <a name="//apple_ref/swift/Method/GetAttributes(For:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris10PieceIDMapC13GetAttributes3ForAA0cF0CSg10Foundation4UUIDV_tF">GetAttributes(For:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get attributes for the piece whose ID is passed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">GetAttributes</span><span class="p">(</span><span class="kt">For</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/PieceAttributes.html">PieceAttributes</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>For</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the piece whose attributes will be returned.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Attributes of the piece on success, nil if not found.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris10PieceIDMapC16RemoveAttributes3Fory10Foundation4UUIDV_tF"></a>
+                    <a name="//apple_ref/swift/Method/RemoveAttributes(For:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris10PieceIDMapC16RemoveAttributes3Fory10Foundation4UUIDV_tF">RemoveAttributes(For:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Remove the attributes (because the piece no longer exists) for the piece with the passed ID.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">RemoveAttributes</span><span class="p">(</span><span class="kt">For</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>For</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the piece whose attributes will be removed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris10PieceIDMapC12AttributeMap33_31CDDFEA5F8C914BE77D05D2EC978C92LLSDy10Foundation4UUIDVAA0C10AttributesCGvp"></a>
+                    <a name="//apple_ref/swift/Property/AttributeMap" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris10PieceIDMapC12AttributeMap33_31CDDFEA5F8C914BE77D05D2EC978C92LLSDy10Foundation4UUIDVAA0C10AttributesCGvp">AttributeMap</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Attribute map - contains attributes for pieces keyed by piece IDs.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">AttributeMap</span><span class="p">:</span> <span class="p">[</span><span class="kt">UUID</span> <span class="p">:</span> <span class="kt"><a href="../Classes/PieceAttributes.html">PieceAttributes</a></span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11WackyTetris10PieceIDMapC5CloneACyF"></a>
+                    <a name="//apple_ref/swift/Method/Clone()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11WackyTetris10PieceIDMapC5CloneACyF">Clone()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a clone of the instance piece ID map.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">Clone</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">PieceIDMap</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Clone of the instance piece ID map this was called against.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-05-23)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

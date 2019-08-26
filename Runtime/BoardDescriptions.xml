@@ -1,0 +1,908 @@
+<Board>
+    <Property Name="_Name" Value="Standard"/>
+    <Property Name="_ID" Value="b22f3ac9-ef14-46e7-aa8d-b480d948b303"/>
+    <Property Name="_BaseDefault" Value="true"/>
+    <Property Name="_BaseGame" Value="Standard"/>
+    <Property Name="_BoardSize" Value="12,30"/>
+    <Property Name="_BucketUL" Value="0,10"/>
+    <Property Name="_BucketLR" Value="11,29"/>
+    <Property Name="_CanRotate" Value="false"/>
+    <Property Name="_BucketBlockCount" Value="52"/>
+    <Array Name="_BucketBlockList">
+        <Item Index="0">
+            <Property Name="_Location" Value="0,9"/>
+        </Item>
+        <Item Index="1">
+            <Property Name="_Location" Value="0,10"/>
+        </Item>
+        <Item Index="2">
+            <Property Name="_Location" Value="0,11"/>
+        </Item>
+        <Item Index="3">
+            <Property Name="_Location" Value="0,12"/>
+        </Item>
+        <Item Index="4">
+            <Property Name="_Location" Value="0,13"/>
+        </Item>
+        <Item Index="5">
+            <Property Name="_Location" Value="0,14"/>
+        </Item>
+        <Item Index="6">
+            <Property Name="_Location" Value="0,15"/>
+        </Item>
+        <Item Index="7">
+            <Property Name="_Location" Value="0,16"/>
+        </Item>
+        <Item Index="8">
+            <Property Name="_Location" Value="0,17"/>
+        </Item>
+        <Item Index="9">
+            <Property Name="_Location" Value="0,18"/>
+        </Item>
+        <Item Index="10">
+            <Property Name="_Location" Value="0,19"/>
+        </Item>
+        <Item Index="11">
+            <Property Name="_Location" Value="0,20"/>
+        </Item>
+        <Item Index="12">
+            <Property Name="_Location" Value="0,21"/>
+        </Item>
+        <Item Index="13">
+            <Property Name="_Location" Value="0,22"/>
+        </Item>
+        <Item Index="14">
+            <Property Name="_Location" Value="0,23"/>
+        </Item>
+        <Item Index="15">
+            <Property Name="_Location" Value="0,24"/>
+        </Item>
+        <Item Index="16">
+            <Property Name="_Location" Value="0,25"/>
+        </Item>
+        <Item Index="17">
+            <Property Name="_Location" Value="0,26"/>
+        </Item>
+        <Item Index="18">
+            <Property Name="_Location" Value="0,27"/>
+        </Item>
+        <Item Index="19">
+            <Property Name="_Location" Value="0,28"/>
+        </Item>
+        <Item Index="20">
+            <Property Name="_Location", Value="0,29"/>
+        </Item>
+        <Item Index="21">
+            <Property Name="_Location", Value="1,29"/>
+        </Item>
+        <Item Index="22">
+            <Property Name="_Location", Value="2,29"/>
+        </Item>
+        <Item Index="23">
+            <Property Name="_Location", Value="3,29"/>
+        </Item>
+        <Item Index="24">
+            <Property Name="_Location", Value="4,29"/>
+        </Item>
+        <Item Index="25">
+            <Property Name="_Location", Value="5,29"/>
+        </Item>
+        <Item Index="26">
+            <Property Name="_Location", Value="6,29"/>
+        </Item>
+        <Item Index="27">
+            <Property Name="_Location", Value="7,29"/>
+        </Item>
+        <Item Index="28">
+            <Property Name="_Location", Value="8,29"/>
+        </Item>
+        <Item Index="29">
+            <Property Name="_Location", Value="9,29"/>
+        </Item>
+        <Item Index="30">
+            <Property Name="_Location", Value="10,29"/>
+        </Item>
+        <Item Index="31">
+            <Property Name="_Location", Value="11,29"/>
+        </Item>
+        <Item Index="32">
+            <Property Name="_Location" Value="11,9"/>
+        </Item>
+        <Item Index="33">
+            <Property Name="_Location" Value="11,10"/>
+        </Item>
+        <Item Index="34">
+            <Property Name="_Location" Value="11,11"/>
+        </Item>
+        <Item Index="35">
+            <Property Name="_Location" Value="11,12"/>
+        </Item>
+        <Item Index="36">
+            <Property Name="_Location" Value="11,13"/>
+        </Item>
+        <Item Index="37">
+            <Property Name="_Location" Value="11,14"/>
+        </Item>
+        <Item Index="38">
+            <Property Name="_Location" Value="11,15"/>
+        </Item>
+        <Item Index="39">
+            <Property Name="_Location" Value="11,16"/>
+        </Item>
+        <Item Index="40">
+            <Property Name="_Location" Value="11,17"/>
+        </Item>
+        <Item Index="41">
+            <Property Name="_Location" Value="11,18"/>
+        </Item>
+        <Item Index="42">
+            <Property Name="_Location" Value="11,19"/>
+        </Item>
+        <Item Index="43">
+            <Property Name="_Location" Value="11,20"/>
+        </Item>
+        <Item Index="44">
+            <Property Name="_Location" Value="11,21"/>
+        </Item>
+        <Item Index="45">
+            <Property Name="_Location" Value="11,22"/>
+        </Item>
+        <Item Index="46">
+            <Property Name="_Location" Value="11,23"/>
+        </Item>
+        <Item Index="47">
+            <Property Name="_Location" Value="11,24"/>
+        </Item>
+        <Item Index="48">
+            <Property Name="_Location" Value="11,25"/>
+        </Item>
+        <Item Index="49">
+            <Property Name="_Location" Value="11,26"/>
+        </Item>
+        <Item Index="50">
+            <Property Name="_Location" Value="11,27"/>
+        </Item>
+        <Item Index="51">
+            <Property Name="_Location" Value="11,28"/>
+        </Item>
+    </Array>
+</Board>
+<Board>
+    <Property Name="_Name" Value="Standard Wide"/>
+    <Property Name="_ID" Value="78ce8846-abf5-4796-bc79-69cda8d7508e"/>
+    <Property Name="_BaseDefault" Value="true"/>
+    <Property Name="_BaseGame" Value="Standard"/>
+    <Property Name="_BoardSize" Value="16,30"/>
+    <Property Name="_BucketUL" Value="0,10"/>
+    <Property Name="_BucketLR" Value="15,29"/>
+    <Property Name="_CanRotate" Value="false"/>
+    <Property Name="_BucketBlockCount" Value="54"/>
+    <Array Name="_BucketBlockList">
+        <Item Index="0">
+            <Property Name="_Location" Value="0,9"/>
+        </Item>
+        <Item Index="1">
+            <Property Name="_Location" Value="0,10"/>
+        </Item>
+        <Item Index="2">
+            <Property Name="_Location" Value="0,11"/>
+        </Item>
+        <Item Index="3">
+            <Property Name="_Location" Value="0,12"/>
+        </Item>
+        <Item Index="4">
+            <Property Name="_Location" Value="0,13"/>
+        </Item>
+        <Item Index="5">
+            <Property Name="_Location" Value="0,14"/>
+        </Item>
+        <Item Index="6">
+            <Property Name="_Location" Value="0,15"/>
+        </Item>
+        <Item Index="7">
+            <Property Name="_Location" Value="0,16"/>
+        </Item>
+        <Item Index="8">
+            <Property Name="_Location" Value="0,17"/>
+        </Item>
+        <Item Index="9">
+            <Property Name="_Location" Value="0,18"/>
+        </Item>
+        <Item Index="10">
+            <Property Name="_Location" Value="0,19"/>
+        </Item>
+        <Item Index="11">
+            <Property Name="_Location" Value="0,20"/>
+        </Item>
+        <Item Index="12">
+            <Property Name="_Location" Value="0,21"/>
+        </Item>
+        <Item Index="13">
+            <Property Name="_Location" Value="0,22"/>
+        </Item>
+        <Item Index="14">
+            <Property Name="_Location" Value="0,23"/>
+        </Item>
+        <Item Index="15">
+            <Property Name="_Location" Value="0,24"/>
+        </Item>
+        <Item Index="16">
+            <Property Name="_Location" Value="0,25"/>
+        </Item>
+        <Item Index="17">
+            <Property Name="_Location" Value="0,26"/>
+        </Item>
+        <Item Index="18">
+            <Property Name="_Location" Value="0,27"/>
+        </Item>
+        <Item Index="19">
+            <Property Name="_Location" Value="0,28"/>
+        </Item>
+        <Item Index="20">
+            <Property Name="_Location", Value="0,29"/>
+        </Item>
+        <Item Index="20">
+            <Property Name="_Location" Value="15,9"/>
+        </Item>
+        <Item Index="21">
+            <Property Name="_Location" Value="15,10"/>
+        </Item>
+        <Item Index="22">
+            <Property Name="_Location" Value="15,11"/>
+        </Item>
+        <Item Index="23">
+            <Property Name="_Location" Value="15,12"/>
+        </Item>
+        <Item Index="24">
+            <Property Name="_Location" Value="15,13"/>
+        </Item>
+        <Item Index="25">
+            <Property Name="_Location" Value="15,14"/>
+        </Item>
+        <Item Index="26">
+            <Property Name="_Location" Value="15,15"/>
+        </Item>
+        <Item Index="27">
+            <Property Name="_Location" Value="15,16"/>
+        </Item>
+        <Item Index="28">
+            <Property Name="_Location" Value="15,17"/>
+        </Item>
+        <Item Index="29">
+            <Property Name="_Location" Value="15,18"/>
+        </Item>
+        <Item Index="30">
+            <Property Name="_Location" Value="15,19"/>
+        </Item>
+        <Item Index="31">
+            <Property Name="_Location" Value="15,20"/>
+        </Item>
+        <Item Index="32">
+            <Property Name="_Location" Value="15,21"/>
+        </Item>
+        <Item Index="33">
+            <Property Name="_Location" Value="15,22"/>
+        </Item>
+        <Item Index="34">
+            <Property Name="_Location" Value="15,23"/>
+        </Item>
+        <Item Index="35">
+            <Property Name="_Location" Value="15,24"/>
+        </Item>
+        <Item Index="36">
+            <Property Name="_Location" Value="15,25"/>
+        </Item>
+        <Item Index="37">
+            <Property Name="_Location" Value="15,26"/>
+        </Item>
+        <Item Index="38">
+            <Property Name="_Location" Value="15,27"/>
+        </Item>
+        <Item Index="39">
+            <Property Name="_Location" Value="15,28"/>
+        </Item>
+        <Item Index="40">
+            <Property Name="_Location", Value="1,29"/>
+        </Item>
+        <Item Index="41">
+            <Property Name="_Location", Value="2,29"/>
+        </Item>
+        <Item Index="42">
+            <Property Name="_Location", Value="3,29"/>
+        </Item>
+        <Item Index="43">
+            <Property Name="_Location", Value="4,29"/>
+        </Item>
+        <Item Index="44">
+            <Property Name="_Location", Value="5,29"/>
+        </Item>
+        <Item Index="45">
+            <Property Name="_Location", Value="6,29"/>
+        </Item>
+        <Item Index="46">
+            <Property Name="_Location", Value="7,29"/>
+        </Item>
+        <Item Index="47">
+            <Property Name="_Location", Value="8,29"/>
+        </Item>
+        <Item Index="48">
+            <Property Name="_Location", Value="9,29"/>
+        </Item>
+        <Item Index="49">
+            <Property Name="_Location", Value="10,29"/>
+        </Item>
+        <Item Index="50">
+            <Property Name="_Location", Value="11,29"/>
+        </Item>
+        <Item Index="51">
+            <Property Name="_Location", Value="12,29"/>
+        </Item>
+        <Item Index="52">
+            <Property Name="_Location", Value="13,29"/>
+        </Item>
+        <Item Index="53">
+            <Property Name="_Location", Value="14,29"/>
+        </Item>
+        <Item Index="53">
+            <Property Name="_Location", Value="15,29"/>
+        </Item>
+    </Array>
+</Board>
+<Board>
+    <Property Name="_Name" Value="Rotating Corner Blocks"/>
+    <Property Name="_ID" Value="d713d088-b334-4862-be74-3fd73ebb0743"/>
+    <Property Name="_BaseDefault" Value="false"/>
+    <Property Name="_BaseGame" Value="Rotating4"/>
+    <Property Name="_BoardSize" Value="36,36"/>
+    <Property Name="_BucketUL" Value="8,8"/>
+    <Property Name="_BucketLR" Value="27,27"/>
+    <Property Name="_CanRotate" Value="true"/>
+    <Property Name="_BucketBlockCount" Value="36"/>
+    <Array Name="_BucketBlockList">
+        <Item Index="0">
+            <Property Name="_Location" Value="8,8"/>
+        </Item>
+        <Item Index="1">
+            <Property Name="_Location" Value="9,8"/>
+        </Item>
+        <Item Index="2">
+            <Property Name="_Location" Value="10,8"/>
+        </Item>
+        <Item Index="3">
+            <Property Name="_Location" Value="8,9"/>
+        </Item>
+        <Item Index="4">
+            <Property Name="_Location" Value="9,9"/>
+        </Item>
+        <Item Index="5">
+            <Property Name="_Location" Value="10,9"/>
+        </Item>
+        <Item Index="6">
+            <Property Name="_Location" Value="8,10"/>
+        </Item>
+        <Item Index="7">
+            <Property Name="_Location" Value="9,10"/>
+        </Item>
+        <Item Index="8">
+            <Property Name="_Location" Value="10,10"/>
+        </Item>
+        <Item Index="9">
+            <Property Name="_Location" Value="25,8"/>
+        </Item>
+        <Item Index="10">
+            <Property Name="_Location" Value="26,8"/>
+        </Item>
+        <Item Index="11">
+            <Property Name="_Location" Value="27,8"/>
+        </Item>
+        <Item Index="12">
+            <Property Name="_Location" Value="25,9"/>
+        </Item>
+        <Item Index="13">
+            <Property Name="_Location" Value="26,9"/>
+        </Item>
+        <Item Index="14">
+            <Property Name="_Location" Value="27,9"/>
+        </Item>
+        <Item Index="15">
+            <Property Name="_Location" Value="25,10"/>
+        </Item>
+        <Item Index="16">
+            <Property Name="_Location" Value="26,10"/>
+        </Item>
+        <Item Index="17">
+            <Property Name="_Location" Value="27,10"/>
+        </Item>
+        <Item Index="18">
+            <Property Name="_Location" Value="8,25"/>
+        </Item>
+        <Item Index="19">
+            <Property Name="_Location" Value="9,25"/>
+        </Item>
+        <Item Index="20">
+            <Property Name="_Location" Value="10,25"/>
+        </Item>
+        <Item Index="21">
+            <Property Name="_Location" Value="8,26"/>
+        </Item>
+        <Item Index="22">
+            <Property Name="_Location" Value="9,26"/>
+        </Item>
+        <Item Index="23">
+            <Property Name="_Location" Value="10,26"/>
+        </Item>
+        <Item Index="24">
+            <Property Name="_Location" Value="8,27"/>
+        </Item>
+        <Item Index="25">
+            <Property Name="_Location" Value="9,27"/>
+        </Item>
+        <Item Index="26">
+            <Property Name="_Location" Value="10,27"/>
+        </Item>
+        <Item Index="27">
+            <Property Name="_Location" Value="25,25"/>
+        </Item>
+        <Item Index="28">
+            <Property Name="_Location" Value="26,25"/>
+        </Item>
+        <Item Index="29">
+            <Property Name="_Location" Value="27,25"/>
+        </Item>
+        <Item Index="30">
+            <Property Name="_Location" Value="25,26"/>
+        </Item>
+        <Item Index="31">
+            <Property Name="_Location" Value="26,26"/>
+        </Item>
+        <Item Index="32">
+            <Property Name="_Location" Value="27,26"/>
+        </Item>
+        <Item Index="33">
+            <Property Name="_Location" Value="25,27"/>
+        </Item>
+        <Item Index="34">
+            <Property Name="_Location" Value="26,27"/>
+        </Item>
+        <Item Index="35">
+            <Property Name="_Location" Value="27,27"/>
+        </Item>
+    </Array>
+</Board>
+<Board>
+    <Property Name="_Name" Value="Rotating Corners"/>
+    <Property Name="_ID" Value="d0eabc21-eb7b-4834-bc72-eca54395e257"/>
+    <Property Name="_BaseDefault" Value="false"/>
+    <Property Name="_BaseGame" Value="Rotating4"/>
+    <Property Name="_BoardSize" Value="36,36"/>
+    <Property Name="_BucketUL" Value="8,8"/>
+    <Property Name="_BucketLR" Value="27,27"/>
+    <Property Name="_CanRotate" Value="true"/>
+    <Property Name="_BucketBlockCount" Value="20"/>
+    <Array Name="_BucketBlockList">
+        <Item Index="0">
+            <Property Name="_Location" Value="8,8"/>
+        </Item>
+        <Item Index="1">
+            <Property Name="_Location" Value="9,8"/>
+        </Item>
+        <Item Index="2">
+            <Property Name="_Location" Value="10,8"/>
+        </Item>
+        <Item Index="3">
+            <Property Name="_Location" Value="8,9"/>
+        </Item>
+        <Item Index="4">
+            <Property Name="_Location" Value="8,10"/>
+        </Item>
+        <Item Index="5">
+            <Property Name="_Location" Value="25,8"/>
+        </Item>
+        <Item Index="6">
+            <Property Name="_Location" Value="26,8"/>
+        </Item>
+        <Item Index="7">
+            <Property Name="_Location" Value="27,8"/>
+        </Item>
+        <Item Index="8">
+            <Property Name="_Location" Value="27,9"/>
+        </Item>
+        <Item Index="9">
+            <Property Name="_Location" Value="27,10"/>
+        </Item>
+        <Item Index="10">
+            <Property Name="_Location" Value="8,25"/>
+        </Item>
+        <Item Index="11">
+            <Property Name="_Location" Value="8,26"/>
+        </Item>
+        <Item Index="12">
+            <Property Name="_Location" Value="8,27"/>
+        </Item>
+        <Item Index="13">
+            <Property Name="_Location" Value="9,27"/>
+        </Item>
+        <Item Index="14">
+            <Property Name="_Location" Value="10,27"/>
+        </Item>
+        <Item Index="15">
+            <Property Name="_Location" Value="27,25"/>
+        </Item>
+        <Item Index="16">
+            <Property Name="_Location" Value="27,26"/>
+        </Item>
+        <Item Index="17">
+            <Property Name="_Location" Value="27,27"/>
+        </Item>
+        <Item Index="18">
+            <Property Name="_Location" Value="26,27"/>
+        </Item>
+        <Item Index="19">
+            <Property Name="_Location" Value="25,27"/>
+        </Item>
+    </Array>
+</Board>
+<Board>
+    <Property Name="_Name" Value="Rotating Centered"/>
+    <Property Name="_ID" Value="0197d51b-db34-4171-85fa-d6a9e116fc75"/>
+    <Property Name="_BaseDefault" Value="true"/>
+    <Property Name="_BaseGame" Value="Rotating4"/>
+    <Property Name="_BoardSize" Value="36,36"/>
+    <Property Name="_BucketUL" Value="8,8"/>
+    <Property Name="_BucketLR" Value="27,27"/>
+    <Property Name="_CanRotate" Value="true"/>
+    <Property Name="_BucketBlockCount" Value="16"/>
+    <Array Name="_BucketBlockList">
+        <Item Index="0">
+            <Property Name="_Location" Value="16,16"/>
+        </Item>
+        <Item Index="1">
+            <Property Name="_Location" Value="17,16"/>
+        </Item>
+        <Item Index="2">
+            <Property Name="_Location" Value="18,16"/>
+        </Item>
+        <Item Index="3">
+            <Property Name="_Location" Value="19,16"/>
+        </Item>
+        <Item Index="4">
+            <Property Name="_Location" Value="16,17"/>
+        </Item>
+        <Item Index="5">
+            <Property Name="_Location" Value="17,17"/>
+        </Item>
+        <Item Index="6">
+            <Property Name="_Location" Value="18,17"/>
+        </Item>
+        <Item Index="7">
+            <Property Name="_Location" Value="19,17"/>
+        </Item>
+        <Item Index="8">
+            <Property Name="_Location" Value="16,18"/>
+        </Item>
+        <Item Index="9">
+            <Property Name="_Location" Value="17,18"/>
+        </Item>
+        <Item Index="10">
+            <Property Name="_Location" Value="18,18"/>
+        </Item>
+        <Item Index="11">
+            <Property Name="_Location" Value="19,18"/>
+        </Item>
+        <Item Index="12">
+            <Property Name="_Location" Value="16,19"/>
+        </Item>
+        <Item Index="13">
+            <Property Name="_Location" Value="17,19"/>
+        </Item>
+        <Item Index="14">
+            <Property Name="_Location" Value="18,19"/>
+        </Item>
+        <Item Index="15">
+            <Property Name="_Location" Value="19,19"/>
+        </Item>
+    </Array>
+</Board>
+<Board>
+    <Property Name="_Name" Value="Broken Plus"/>
+    <Property Name="_ID" Value="c2ce48dd-dad5-4461-a4de-1ab7f526ce78"/>
+    <Property Name="_BaseDefault" Value="false"/>
+    <Property Name="_BaseGame" Value="Rotating4"/>
+    <Property Name="_BoardSize" Value="36,36"/>
+    <Property Name="_BucketUL" Value="8,8"/>
+    <Property Name="_BucketLR" Value="27,27"/>
+    <Property Name="_CanRotate" Value="true"/>
+    <Property Name="_BucketBlockCount" Value="52"/>
+    <Array Name="_BucketBlockList">
+        <Item Index="0">
+            <Property Name="_Location" Value="0,17"/>
+        </Item>
+        <Item Index="1">
+            <Property Name="_Location" Value="1,17"/>
+        </Item>
+        <Item Index="2">
+            <Property Name="_Location" Value="2,17"/>
+        </Item>
+        <Item Index="3">
+            <Property Name="_Location" Value="0,18"/>
+        </Item>
+        <Item Index="4">
+            <Property Name="_Location" Value="1,18"/>
+        </Item>
+        <Item Index="5">
+            <Property Name="_Location" Value="2,18"/>
+        </Item>
+        <Item Index="6">
+            <Property Name="_Location" Value="25,17"/>
+        </Item>
+        <Item Index="7">
+            <Property Name="_Location" Value="26,17"/>
+        </Item>
+        <Item Index="8">
+            <Property Name="_Location" Value="27,17"/>
+        </Item>
+        <Item Index="9">
+            <Property Name="_Location" Value="25,18"/>
+        </Item>
+        <Item Index="10">
+            <Property Name="_Location" Value="26,18"/>
+        </Item>
+        <Item Index="11">
+            <Property Name="_Location" Value="27,18"/>
+        </Item>
+        <Item Index="12">
+            <Property Name="_Location" Value="17,0"/>
+        </Item>
+        <Item Index="13">
+            <Property Name="_Location" Value="18,0"/>
+        </Item>
+        <Item Index="14">
+            <Property Name="_Location" Value="17,1"/>
+        </Item>
+        <Item Index="15">
+            <Property Name="_Location" Value="18,1"/>
+        </Item>
+        <Item Index="16">
+            <Property Name="_Location" Value="17,2"/>
+        </Item>
+        <Item Index="17">
+            <Property Name="_Location" Value="18,2"/>
+        </Item>
+        <Item Index="18">
+            <Property Name="_Location" Value="17,25"/>
+        </Item>
+        <Item Index="19">
+            <Property Name="_Location" Value="18,25"/>
+        </Item>
+        <Item Index="20">
+            <Property Name="_Location" Value="17,26"/>
+        </Item>
+        <Item Index="21">
+            <Property Name="_Location" Value="18,26"/>
+        </Item>
+        <Item Index="22">
+            <Property Name="_Location" Value="17,27"/>
+        </Item>
+        <Item Index="23">
+            <Property Name="_Location" Value="18,27"/>
+        </Item>
+        <Item Index="24">
+            <Property Name="_Location" Value="14,17"/>
+        </Item>
+        <Item Index="25">
+            <Property Name="_Location" Value="14,18"/>
+        </Item>
+        <Item Index="26">
+            <Property Name="_Location" Value="15,17"/>
+        </Item>
+        <Item Index="27">
+            <Property Name="_Location" Value="15,18"/>
+        </Item>
+        <Item Index="28">
+            <Property Name="_Location" Value="16,17"/>
+        </Item>
+        <Item Index="29">
+            <Property Name="_Location" Value="16,18"/>
+        </Item>
+        <Item Index="30">
+            <Property Name="_Location" Value="17,17"/>
+        </Item>
+        <Item Index="31">
+            <Property Name="_Location" Value="17,18"/>
+        </Item>
+        <Item Index="32">
+            <Property Name="_Location" Value="18,17"/>
+        </Item>
+        <Item Index="33">
+            <Property Name="_Location" Value="18,18"/>
+        </Item>
+        <Item Index="34">
+            <Property Name="_Location" Value="19,17"/>
+        </Item>
+        <Item Index="35">
+            <Property Name="_Location" Value="19,18"/>
+        </Item>
+        <Item Index="36">
+            <Property Name="_Location" Value="20,17"/>
+        </Item>
+        <Item Index="37">
+            <Property Name="_Location" Value="20,18"/>
+        </Item>
+        <Item Index="38">
+            <Property Name="_Location" Value="21,17"/>
+        </Item>
+        <Item Index="39">
+            <Property Name="_Location" Value="21,18"/>
+        </Item>
+        <Item Index="40">
+            <Property Name="_Location" Value="17,14"/>
+        </Item>
+        <Item Index="41">
+            <Property Name="_Location" Value="18,14"/>
+        </Item>
+        <Item Index="42">
+            <Property Name="_Location" Value="17,15"/>
+        </Item>
+        <Item Index="43">
+            <Property Name="_Location" Value="18,15"/>
+        </Item>
+        <Item Index="44">
+            <Property Name="_Location" Value="17,16"/>
+        </Item>
+        <Item Index="45">
+            <Property Name="_Location" Value="18,16"/>
+        </Item>
+        <Item Index="46">
+            <Property Name="_Location" Value="17,19"/>
+        </Item>
+        <Item Index="47">
+            <Property Name="_Location" Value="18,19"/>
+        </Item>
+        <Item Index="48">
+            <Property Name="_Location" Value="17,20"/>
+        </Item>
+        <Item Index="49">
+            <Property Name="_Location" Value="18,20"/>
+        </Item>
+        <Item Index="50">
+            <Property Name="_Location" Value="17,21"/>
+        </Item>
+        <Item Index="51">
+            <Property Name="_Location" Value="18,21"/>
+        </Item>
+    </Array>
+</Board>
+<Board>
+    <Property Name="_Name" Value="Quadrant Centers"/>
+    <Property Name="_ID" Value="73999134-a1eb-4098-8cfe-848b61772c4a"/>
+    <Property Name="_BaseDefault" Value="false"/>
+    <Property Name="_BaseGame" Value="Rotating4"/>
+    <Property Name="_BoardSize" Value="36,36"/>
+    <Property Name="_BucketUL" Value="8,8"/>
+    <Property Name="_BucketLR" Value="27,27"/>
+    <Property Name="_CanRotate" Value="true"/>
+    <Property Name="_BucketBlockCount" Value="16"/>
+    <Array Name="_BucketBlockList">
+        <Item Index="0">
+            <Property Name="_Location" Value="12,12"/>
+        </Item>
+        <Item Index="1">
+            <Property Name="_Location" Value="13,12"/>
+        </Item>
+        <Item Index="2">
+            <Property Name="_Location" Value="12,13"/>
+        </Item>
+        <Item Index="3">
+            <Property Name="_Location" Value="13,13"/>
+        </Item>
+        <Item Index="4">
+            <Property Name="_Location" Value="22,12"/>
+        </Item>
+        <Item Index="5">
+            <Property Name="_Location" Value="23,12"/>
+        </Item>
+        <Item Index="6">
+            <Property Name="_Location" Value="22,13"/>
+        </Item>
+        <Item Index="7">
+            <Property Name="_Location" Value="23,13"/>
+        </Item>
+        <Item Index="8">
+            <Property Name="_Location" Value="12,22"/>
+        </Item>
+        <Item Index="9">
+            <Property Name="_Location" Value="13,22"/>
+        </Item>
+        <Item Index="10">
+            <Property Name="_Location" Value="12,23"/>
+        </Item>
+        <Item Index="11">
+            <Property Name="_Location" Value="13,23"/>
+        </Item>
+        <Item Index="12">
+            <Property Name="_Location" Value="22,22"/>
+        </Item>
+        <Item Index="13">
+            <Property Name="_Location" Value="23,22"/>
+        </Item>
+        <Item Index="14">
+            <Property Name="_Location" Value="22,23"/>
+        </Item>
+        <Item Index="15">
+            <Property Name="_Location" Value="23,23"/>
+        </Item>
+    </Array>
+</Board>
+<Board>
+    <Property Name="_Name" Value="Diagonals"/>
+    <Property Name="_ID" Value="bf6883b3-56d7-4ff1-91ea-c667a5797b06"/>
+    <Property Name="_BaseDefault" Value="false"/>
+    <Property Name="_BaseGame" Value="Rotating4"/>
+    <Property Name="_BoardSize" Value="36,36"/>
+    <Property Name="_BucketUL" Value="8,8"/>
+    <Property Name="_BucketLR" Value="27,27"/>
+    <Property Name="_CanRotate" Value="true"/>
+    <Property Name="_BucketBlockCount" Value="20"/>
+    <Array Name="_BucketBlockList">
+        <Item Index="0">
+            <Property Name="_Location" Value="13,13"/>
+        </Item>
+        <Item Index="1">
+            <Property Name="_Location" Value="14,14"/>
+        </Item>
+        <Item Index="2">
+            <Property Name="_Location" Value="15,15"/>
+        </Item>
+        <Item Index="3">
+            <Property Name="_Location" Value="16,16"/>
+        </Item>
+        <Item Index="4">
+            <Property Name="_Location" Value="17,17"/>
+        </Item>
+        <Item Index="5">
+            <Property Name="_Location" Value="18,18"/>
+        </Item>
+        <Item Index="6">
+            <Property Name="_Location" Value="19,19"/>
+        </Item>
+        <Item Index="7">
+            <Property Name="_Location" Value="20,20"/>
+        </Item>
+        <Item Index="8">
+            <Property Name="_Location" Value="21,21"/>
+        </Item>
+        <Item Index="9">
+            <Property Name="_Location" Value="22,22"/>
+        </Item>
+        <Item Index="10">
+            <Property Name="_Location" Value="13,22"/>
+        </Item>
+        <Item Index="11">
+            <Property Name="_Location" Value="14,21"/>
+        </Item>
+        <Item Index="12">
+            <Property Name="_Location" Value="15,20"/>
+        </Item>
+        <Item Index="13">
+            <Property Name="_Location" Value="16,19"/>
+        </Item>
+        <Item Index="14">
+            <Property Name="_Location" Value="17,18"/>
+        </Item>
+        <Item Index="15">
+            <Property Name="_Location" Value="18,17"/>
+        </Item>
+        <Item Index="16">
+            <Property Name="_Location" Value="19,16"/>
+        </Item>
+        <Item Index="17">
+            <Property Name="_Location" Value="20,15"/>
+        </Item>
+        <Item Index="18">
+            <Property Name="_Location" Value="21,14"/>
+        </Item>
+        <Item Index="19">
+            <Property Name="_Location" Value="22,13"/>
+        </Item>
+    </Array>
+</Board>

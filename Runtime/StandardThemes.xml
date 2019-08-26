@@ -1,0 +1,2049 @@
+<Theme Name="Colorful">
+    <Property Name="_ThemeName" Value="Colorful"/>
+    <Property Name="_ViewType" Value="TwoD"/>
+    <Property Name="_UserTheme" Value="false"/>
+    <Property Name="_ID" Value="5b45b6ea-84f3-11e9-a159-526af7764f64"/>
+    <Property Name="_Title" Value="Colorful, glassy Theme"/>
+    <Property Name="_BucketType" Value="Image"/>
+    <Property Name="_BucketColor" Value="Yellow"/>
+    <Property Name="_BucketImageName" Value="FullBucket10"/>
+    <Property Name="_BucketBlockName" Value="Bucket18"/>
+    <Property Name="_BackgroundColor" Value="AtomicTangerine"/>
+    <Property Name="_NextColor" Value="Black"/>
+    <Property Name="_GameScoreColor" Value="Black"/>
+    <Property Name="_HighScoreColor" Value="Black"/>
+    <Property Name="_IsDefaultTheme" Value="true"/>
+    <Array Name="_TileList">
+        <Item Index="0">
+            <Property Name="_PieceShapeID" Value="f4510cca-262a-4018-bf29-04d703702d65"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="Tile61"/>
+            <Property Name="_RetiredImageName" Value="Tile61Retired"/>
+            <Property Name="_BackgroundColor" Value="Akabeni"/>
+            <Property Name="_RetiredBackgroundColor" Value="Akabeni"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="1">
+            <Property Name="_PieceShapeID" Value="b5bb59a5-b006-487b-a7b1-e0daf4a48810"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="Tile31"/>
+            <Property Name="_RetiredImageName" Value="Tile31Retired"/>
+            <Property Name="_BackgroundColor" Value="DarkPastelGreen"/>
+            <Property Name="_RetiredBackgroundColor" Value="DarkPastelGreen"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="2">
+            <Property Name="_PieceShapeID" Value="05463ade-1996-49e0-aae9-55cad6f8f605"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="Tile48"/>
+            <Property Name="_RetiredImageName" Value="Tile48Retired"/>
+            <Property Name="_BackgroundColor" Value="TamagoIro"/>
+            <Property Name="_RetiredBackgroundColor" Value="TamagoIro"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="3">
+            <Property Name="_PieceShapeID" Value="0f2709f0-b5ed-4ed9-b8c5-d65a1e1d69e8"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="Tile42"/>
+            <Property Name="_RetiredImageName" Value="Tile42Retired"/>
+            <Property Name="_BackgroundColor" Value="FujiIro"/>
+            <Property Name="_RetiredBackgroundColor" Value="FujiIro"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="4">
+            <Property Name="_PieceShapeID" Value="26e5dee4-0cc5-492f-ab31-b5b810863bf4"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="Tile62"/>
+            <Property Name="_RetiredImageName" Value="Tile62Retired"/>
+            <Property Name="_BackgroundColor" Value="青24号"/>
+            <Property Name="_RetiredBackgroundColor" Value="青24号"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="5">
+            <Property Name="_PieceShapeID" Value="69cc6259-93f2-438d-8a9f-e0e65ad6c841"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="Tile28"/>
+            <Property Name="_RetiredImageName" Value="Tile28Retired"/>
+            <Property Name="_BackgroundColor" Value="AotakeIro"/>
+            <Property Name="_RetiredBackgroundColor" Value="AotakeIro"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="6">
+            <Property Name="_PieceShapeID" Value="7c73c10c-86b3-406d-964e-f12abbf914cc"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="Tile14"/>
+            <Property Name="_RetiredImageName" Value="Tile14Retired"/>
+            <Property Name="_BackgroundColor" Value="Blue"/>
+            <Property Name="_RetiredBackgroundColor" Value="Blue"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+    </Array>
+</Theme>
+
+<Theme Name="Attract">
+    <Property Name="_ThemeName" Value="Attract"/>
+    <Property Name="_ViewType" Value="TwoD"/>
+    <Property Name="_UserTheme" Value="false"/>
+    <Property Name="_ID" Value="83c630ee-81d4-11e9-bc42-526af7764f64"/>
+    <Property Name="_Title" Value="Attract Mode Theme"/>
+    <Property Name="_BucketType" Value="Image"/>
+    <Property Name="_BucketColor" Value="Yellow"/>
+    <Property Name="_BucketImageName" Value="FullBucket10"/>
+    <Property Name="_BucketBlockName" Value="Bucket18"/>
+    <Property Name="_BackgroundColor" Value="ReallyDarkGray"/>
+    <Array Name="_TileList">
+        <Item Index="0">
+            <Property Name="_PieceShapeID" Value="f4510cca-262a-4018-bf29-04d703702d65"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="AI1"/>
+            <Property Name="_RetiredImageName" Value="AI1Retired"/>
+            <Property Name="_BackgroundColor" Value="Akabeni"/>
+            <Property Name="_RetiredBackgroundColor" Value="Akabeni"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="1">
+            <Property Name="_PieceShapeID" Value="b5bb59a5-b006-487b-a7b1-e0daf4a48810"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="AI2"/>
+            <Property Name="_RetiredImageName" Value="AI2Retired"/>
+            <Property Name="_BackgroundColor" Value="DarkPastelGreen"/>
+            <Property Name="_RetiredBackgroundColor" Value="DarkPastelGreen"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="2">
+            <Property Name="_PieceShapeID" Value="05463ade-1996-49e0-aae9-55cad6f8f605"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="AI3"/>
+            <Property Name="_RetiredImageName" Value="AI3Retired"/>
+            <Property Name="_BackgroundColor" Value="TamagoIro"/>
+            <Property Name="_RetiredBackgroundColor" Value="TamagoIro"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="3">
+            <Property Name="_PieceShapeID" Value="0f2709f0-b5ed-4ed9-b8c5-d65a1e1d69e8"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="AI4"/>
+            <Property Name="_RetiredImageName" Value="AI4Retired"/>
+            <Property Name="_BackgroundColor" Value="FujiIro"/>
+            <Property Name="_RetiredBackgroundColor" Value="FujiIro"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="4">
+            <Property Name="_PieceShapeID" Value="26e5dee4-0cc5-492f-ab31-b5b810863bf4"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="AI6"/>
+            <Property Name="_RetiredImageName" Value="AI6Retired"/>
+            <Property Name="_BackgroundColor" Value="青24号"/>
+            <Property Name="_RetiredBackgroundColor" Value="青24号"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="5">
+            <Property Name="_PieceShapeID" Value="69cc6259-93f2-438d-8a9f-e0e65ad6c841"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="AI7"/>
+            <Property Name="_RetiredImageName" Value="AI7Retired"/>
+            <Property Name="_BackgroundColor" Value="AotakeIro"/>
+            <Property Name="_RetiredBackgroundColor" Value="AotakeIro"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="6">
+            <Property Name="_PieceShapeID" Value="7c73c10c-86b3-406d-964e-f12abbf914cc"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="AI8"/>
+            <Property Name="_RetiredImageName" Value="AI8Retired"/>
+            <Property Name="_BackgroundColor" Value="Blue"/>
+            <Property Name="_RetiredBackgroundColor" Value="Blue"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+    </Array>
+</Theme>
+
+<Theme Name="Metallic">
+    <Property Name="_ThemeName" Value="Metallic"/>
+    <Property Name="_ViewType" Value="TwoD"/>
+    <Property Name="_UserTheme" Value="false"/>
+    <Property Name="_ID" Value="f58ba9b4-4da9-4f4b-a893-efdcc8b7a81a"/>
+    <Property Name="_Title" Value="Metallic Theme"/>
+    <Property Name="_BucketType" Value="Image"/>
+    <Property Name="_BucketColor" Value="Yellow"/>
+    <Property Name="_BucketImageName" Value="FullBucket5"/>
+    <Property Name="_BucketBlockName" Value="Bucket18"/>
+    <Property Name="_BackgroundColor" Value="ReallyDarkGray"/>
+    <Array Name="_TileList">
+        <Item Index="0">
+            <Property Name="_PieceShapeID" Value="f4510cca-262a-4018-bf29-04d703702d65"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="Tile1"/>
+            <Property Name="_RetiredImageName" Value="Tile1Retired"/>
+            <Property Name="_BackgroundColor" Value="Akabeni"/>
+            <Property Name="_RetiredBackgroundColor" Value="Akabeni"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="1">
+            <Property Name="_PieceShapeID" Value="b5bb59a5-b006-487b-a7b1-e0daf4a48810"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="Tile2"/>
+            <Property Name="_RetiredImageName" Value="Tile2Retired"/>
+            <Property Name="_BackgroundColor" Value="DarkPastelGreen"/>
+            <Property Name="_RetiredBackgroundColor" Value="DarkPastelGreen"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="2">
+            <Property Name="_PieceShapeID" Value="05463ade-1996-49e0-aae9-55cad6f8f605"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="Tile3"/>
+            <Property Name="_RetiredImageName" Value="Tile3Retired"/>
+            <Property Name="_BackgroundColor" Value="TamagoIro"/>
+            <Property Name="_RetiredBackgroundColor" Value="TamagoIro"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="3">
+            <Property Name="_PieceShapeID" Value="0f2709f0-b5ed-4ed9-b8c5-d65a1e1d69e8"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="Tile4"/>
+            <Property Name="_RetiredImageName" Value="Tile4Retired"/>
+            <Property Name="_BackgroundColor" Value="FujiIro"/>
+            <Property Name="_RetiredBackgroundColor" Value="FujiIro"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="4">
+            <Property Name="_PieceShapeID" Value="26e5dee4-0cc5-492f-ab31-b5b810863bf4"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="Tile5"/>
+            <Property Name="_RetiredImageName" Value="Tile5Retired"/>
+            <Property Name="_BackgroundColor" Value="青24号"/>
+            <Property Name="_RetiredBackgroundColor" Value="青24号"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="5">
+            <Property Name="_PieceShapeID" Value="69cc6259-93f2-438d-8a9f-e0e65ad6c841"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="Tile6"/>
+            <Property Name="_RetiredImageName" Value="Tile5Retired"/>
+            <Property Name="_BackgroundColor" Value="AotakeIro"/>
+            <Property Name="_RetiredBackgroundColor" Value="AotakeIro"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="6">
+            <Property Name="_PieceShapeID" Value="7c73c10c-86b3-406d-964e-f12abbf914cc"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="Tile7"/>
+            <Property Name="_RetiredImageName" Value="Tile7Retired"/>
+            <Property Name="_BackgroundColor" Value="Blue"/>
+            <Property Name="_RetiredBackgroundColor" Value="Blue"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+    </Array>
+</Theme>
+
+<Theme Name="Silly Emoji">
+    <Property Name="_ThemeName" Value="Silly Emoji"/>
+    <Property Name="_ViewType" Value="TwoD"/>
+    <Property Name="_UserTheme" Value="false"/>
+    <Property Name="_ID" Value="513bdac6-820a-11e9-bc42-526af7764f64"/>
+    <Property Name="_Title" Value="Silly Emoji Theme"/>
+    <Property Name="_BucketType" Value="Image"/>
+    <Property Name="_BucketColor" Value="Yellow"/>
+    <Property Name="_BucketImageName" Value="FullBucket5"/>
+    <Property Name="_BucketBlockName" Value="Bucket18"/>
+    <Property Name="_BackgroundColor" Value="ReallyDarkGray"/>
+    <Array Name="_TileList">
+        <Item Index="0">
+            <Property Name="_PieceShapeID" Value="f4510cca-262a-4018-bf29-04d703702d65"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="SillyEmoji1"/>
+            <Property Name="_RetiredImageName" Value="RetiredSillyEmoji1"/>
+            <Property Name="_BackgroundColor" Value="Akabeni"/>
+            <Property Name="_RetiredBackgroundColor" Value="Akabeni"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="1">
+            <Property Name="_PieceShapeID" Value="b5bb59a5-b006-487b-a7b1-e0daf4a48810"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="SillyEmoji3"/>
+            <Property Name="_RetiredImageName" Value="RetiredSillyEmoji3"/>
+            <Property Name="_BackgroundColor" Value="DarkPastelGreen"/>
+            <Property Name="_RetiredBackgroundColor" Value="DarkPastelGreen"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="2">
+            <Property Name="_PieceShapeID" Value="05463ade-1996-49e0-aae9-55cad6f8f605"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="SillyEmoji4"/>
+            <Property Name="_RetiredImageName" Value="RetiredSillyEmoji4"/>
+            <Property Name="_BackgroundColor" Value="TamagoIro"/>
+            <Property Name="_RetiredBackgroundColor" Value="TamagoIro"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="3">
+            <Property Name="_PieceShapeID" Value="0f2709f0-b5ed-4ed9-b8c5-d65a1e1d69e8"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="SillyEmoji7"/>
+            <Property Name="_RetiredImageName" Value="RetiredSillyEmoji7"/>
+            <Property Name="_BackgroundColor" Value="FujiIro"/>
+            <Property Name="_RetiredBackgroundColor" Value="FujiIro"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="4">
+            <Property Name="_PieceShapeID" Value="26e5dee4-0cc5-492f-ab31-b5b810863bf4"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="SillyEmoji6"/>
+            <Property Name="_RetiredImageName" Value="RetiredSillyEmoji6"/>
+            <Property Name="_BackgroundColor" Value="青24号"/>
+            <Property Name="_RetiredBackgroundColor" Value="青24号"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="5">
+            <Property Name="_PieceShapeID" Value="69cc6259-93f2-438d-8a9f-e0e65ad6c841"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="SillyEmoji9"/>
+            <Property Name="_RetiredImageName" Value="RetiredSillyEmoji9"/>
+            <Property Name="_BackgroundColor" Value="AotakeIro"/>
+            <Property Name="_RetiredBackgroundColor" Value="AotakeIro"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="6">
+            <Property Name="_PieceShapeID" Value="7c73c10c-86b3-406d-964e-f12abbf914cc"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="SillyEmoji8"/>
+            <Property Name="_RetiredImageName" Value="RetiredSillyEmoji8"/>
+            <Property Name="_BackgroundColor" Value="Blue"/>
+            <Property Name="_RetiredBackgroundColor" Value="Blue"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+    </Array>
+</Theme>
+
+<Theme Name="Sweet Emoji">
+    <Property Name="_ThemeName" Value="Sweet Emoji"/>
+    <Property Name="_ViewType" Value="TwoD"/>
+    <Property Name="_UserTheme" Value="false"/>
+    <Property Name="_ID" Value="cb9964e0-85da-11e9-a159-526af7764f64"/>
+    <Property Name="_Title" Value="Sweet Emoji Theme"/>
+    <Property Name="_BucketType" Value="Image"/>
+    <Property Name="_BucketImageName" Value="FullBucket15"/>
+    <Property Name="_BackgroundColor" Value="CottonCandy"/>
+    <Property Name="_NextColor" Value="Black"/>
+    <Property Name="_GameScoreColor" Value="Black"/>
+    <Property Name="_HighScoreColor" Value="Black"/>
+    <Array Name="_TileList">
+        <Item Index="0">
+            <Property Name="_PieceShapeID" Value="f4510cca-262a-4018-bf29-04d703702d65"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="SweetEmoji1"/>
+            <Property Name="_RetiredImageName" Value="RetiredSweetEmoji1"/>
+            <Property Name="_BackgroundColor" Value="Akabeni"/>
+            <Property Name="_RetiredBackgroundColor" Value="Akabeni"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="1">
+            <Property Name="_PieceShapeID" Value="b5bb59a5-b006-487b-a7b1-e0daf4a48810"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="SweetEmoji3"/>
+            <Property Name="_RetiredImageName" Value="RetiredSweetEmoji3"/>
+            <Property Name="_BackgroundColor" Value="DarkPastelGreen"/>
+            <Property Name="_RetiredBackgroundColor" Value="DarkPastelGreen"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="2">
+            <Property Name="_PieceShapeID" Value="05463ade-1996-49e0-aae9-55cad6f8f605"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="SweetEmoji6"/>
+            <Property Name="_RetiredImageName" Value="RetiredSweetEmoji6"/>
+            <Property Name="_BackgroundColor" Value="TamagoIro"/>
+            <Property Name="_RetiredBackgroundColor" Value="TamagoIro"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="3">
+            <Property Name="_PieceShapeID" Value="0f2709f0-b5ed-4ed9-b8c5-d65a1e1d69e8"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="SweetEmoji7"/>
+            <Property Name="_RetiredImageName" Value="RetiredSweetEmoji7"/>
+            <Property Name="_BackgroundColor" Value="FujiIro"/>
+            <Property Name="_RetiredBackgroundColor" Value="FujiIro"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="4">
+            <Property Name="_PieceShapeID" Value="26e5dee4-0cc5-492f-ab31-b5b810863bf4"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="SweetEmoji9"/>
+            <Property Name="_RetiredImageName" Value="RetiredSweetEmoji9"/>
+            <Property Name="_BackgroundColor" Value="青24号"/>
+            <Property Name="_RetiredBackgroundColor" Value="青24号"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="5">
+            <Property Name="_PieceShapeID" Value="69cc6259-93f2-438d-8a9f-e0e65ad6c841"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="SweetEmoji10"/>
+            <Property Name="_RetiredImageName" Value="RetiredSweetEmoji10"/>
+            <Property Name="_BackgroundColor" Value="AotakeIro"/>
+            <Property Name="_RetiredBackgroundColor" Value="AotakeIro"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="6">
+            <Property Name="_PieceShapeID" Value="7c73c10c-86b3-406d-964e-f12abbf914cc"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="SweetEmoji5"/>
+            <Property Name="_RetiredImageName" Value="RetiredSweetEmoji5"/>
+            <Property Name="_BackgroundColor" Value="Blue"/>
+            <Property Name="_RetiredBackgroundColor" Value="Blue"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+    </Array>
+</Theme>
+
+<Theme Name="Fruit Emoji">
+    <Property Name="_ThemeName" Value="Fruit Emoji"/>
+    <Property Name="_ViewType" Value="TwoD"/>
+    <Property Name="_UserTheme" Value="false"/>
+    <Property Name="_ID" Value="9e094710-8680-11e9-bc42-526af7764f64"/>
+    <Property Name="_Title" Value="Fruit Emoji Theme"/>
+    <Property Name="_BucketType" Value="Image"/>
+    <Property Name="_BucketImageName" Value="FullBucket2"/>
+    <Property Name="_BackgroundColor" Value="ReallyDarkGray"/>
+    <Array Name="_TileList">
+        <Item Index="0">
+            <Property Name="_PieceShapeID" Value="f4510cca-262a-4018-bf29-04d703702d65"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="EmojiFruit1"/>
+            <Property Name="_RetiredImageName" Value="RetiredEmojiFruit1"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="1">
+            <Property Name="_PieceShapeID" Value="b5bb59a5-b006-487b-a7b1-e0daf4a48810"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="EmojiFruit4"/>
+            <Property Name="_RetiredImageName" Value="RetiredEmojiFruit4"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="2">
+            <Property Name="_PieceShapeID" Value="05463ade-1996-49e0-aae9-55cad6f8f605"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="EmojiFruit6"/>
+            <Property Name="_RetiredImageName" Value="RetiredEmojiFruit6"/>
+            <Property Name="_BackgroundColor" Value="TamagoIro"/>
+            <Property Name="_RetiredBackgroundColor" Value="TamagoIro"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="3">
+            <Property Name="_PieceShapeID" Value="0f2709f0-b5ed-4ed9-b8c5-d65a1e1d69e8"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="EmojiFruit7"/>
+            <Property Name="_RetiredImageName" Value="RetiredEmojiFruit7"/>
+            <Property Name="_BackgroundColor" Value="FujiIro"/>
+            <Property Name="_RetiredBackgroundColor" Value="FujiIro"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="4">
+            <Property Name="_PieceShapeID" Value="26e5dee4-0cc5-492f-ab31-b5b810863bf4"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="EmojiFruit9"/>
+            <Property Name="_RetiredImageName" Value="RetiredEmojiFruit9"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="5">
+            <Property Name="_PieceShapeID" Value="69cc6259-93f2-438d-8a9f-e0e65ad6c841"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="EmojiFruit10"/>
+            <Property Name="_RetiredImageName" Value="RetiredEmojiFruit10"/>
+            <Property Name="_BackgroundColor" Value="AotakeIro"/>
+            <Property Name="_RetiredBackgroundColor" Value="AotakeIro"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="6">
+            <Property Name="_PieceShapeID" Value="7c73c10c-86b3-406d-964e-f12abbf914cc"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="EmojiFruit12"/>
+            <Property Name="_RetiredImageName" Value="RetiredEmojiFruit12"/>
+            <Property Name="_BackgroundColor" Value="Blue"/>
+            <Property Name="_RetiredBackgroundColor" Value="Blue"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+    </Array>
+</Theme>
+
+<Theme Name="Vegetable Emoji">
+    <Property Name="_ThemeName" Value="Vegetable Emoji"/>
+    <Property Name="_ViewType" Value="TwoD"/>
+    <Property Name="_UserTheme" Value="false"/>
+    <Property Name="_ID" Value="d997bce0-867f-11e9-bc42-526af7764f64"/>
+    <Property Name="_Title" Value="Vegetable Emoji Theme"/>
+    <Property Name="_BucketType" Value="Image"/>
+    <Property Name="_BucketImageName" Value="FullBucket9"/>
+    <Property Name="_BackgroundColor" Value="ReallyDarkGray"/>
+    <Array Name="_TileList">
+        <Item Index="0">
+            <Property Name="_PieceShapeID" Value="f4510cca-262a-4018-bf29-04d703702d65"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="EmojiVegetable3"/>
+            <Property Name="_RetiredImageName" Value="RetiredEmojiVegetable3"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="1">
+            <Property Name="_PieceShapeID" Value="b5bb59a5-b006-487b-a7b1-e0daf4a48810"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="EmojiVegetable4"/>
+            <Property Name="_RetiredImageName" Value="RetiredEmojiVegetable4"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="2">
+            <Property Name="_PieceShapeID" Value="05463ade-1996-49e0-aae9-55cad6f8f605"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="EmojiVegetable2"/>
+            <Property Name="_RetiredImageName" Value="RetiredEmojiVegetable2"/>
+            <Property Name="_BackgroundColor" Value="TamagoIro"/>
+            <Property Name="_RetiredBackgroundColor" Value="TamagoIro"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="3">
+            <Property Name="_PieceShapeID" Value="0f2709f0-b5ed-4ed9-b8c5-d65a1e1d69e8"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="EmojiVegetable5"/>
+            <Property Name="_RetiredImageName" Value="RetiredEmojiVegetable5"/>
+            <Property Name="_BackgroundColor" Value="FujiIro"/>
+            <Property Name="_RetiredBackgroundColor" Value="FujiIro"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="4">
+            <Property Name="_PieceShapeID" Value="26e5dee4-0cc5-492f-ab31-b5b810863bf4"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="EmojiVegetable6"/>
+            <Property Name="_RetiredImageName" Value="RetiredEmojiVegetable6"/>
+            <Property Name="_BackgroundColor" Value="青24号"/>
+            <Property Name="_RetiredBackgroundColor" Value="青24号"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="5">
+            <Property Name="_PieceShapeID" Value="69cc6259-93f2-438d-8a9f-e0e65ad6c841"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="EmojiVegetable8"/>
+            <Property Name="_RetiredImageName" Value="RetiredEmojiVegetable8"/>
+            <Property Name="_BackgroundColor" Value="AotakeIro"/>
+            <Property Name="_RetiredBackgroundColor" Value="AotakeIro"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="6">
+            <Property Name="_PieceShapeID" Value="7c73c10c-86b3-406d-964e-f12abbf914cc"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="EmojiVegetable1"/>
+            <Property Name="_RetiredImageName" Value="RetiredEmojiVegetable1"/>
+            <Property Name="_BackgroundColor" Value="Blue"/>
+            <Property Name="_RetiredBackgroundColor" Value="Blue"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+    </Array>
+</Theme>
+
+<Theme Name="Flower Emoji">
+    <Property Name="_ThemeName" Value="Flower Emoji"/>
+    <Property Name="_ViewType" Value="TwoD"/>
+    <Property Name="_UserTheme" Value="false"/>
+    <Property Name="_ID" Value="d4823e2e-85da-11e9-bc42-526af7764f64"/>
+    <Property Name="_Title" Value="Flower Emoji Theme"/>
+    <Property Name="_BucketType" Value="Image"/>
+    <Property Name="_BucketImageName" Value="FullBucket9"/>
+    <Property Name="_BackgroundColor" Value="PastelPurple"/>
+    <Property Name="_HighScoreColor" Value="Black"/>
+    <Array Name="_TileList">
+        <Item Index="0">
+            <Property Name="_PieceShapeID" Value="f4510cca-262a-4018-bf29-04d703702d65"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="EmojiFlower1"/>
+            <Property Name="_RetiredImageName" Value="RetiredEmojiFlower1"/>
+            <Property Name="_BackgroundColor" Value="Akabeni"/>
+            <Property Name="_RetiredBackgroundColor" Value="Akabeni"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="1">
+            <Property Name="_PieceShapeID" Value="b5bb59a5-b006-487b-a7b1-e0daf4a48810"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="EmojiFlower2"/>
+            <Property Name="_RetiredImageName" Value="RetiredEmojiFlower2"/>
+            <Property Name="_BackgroundColor" Value="DarkPastelGreen"/>
+            <Property Name="_RetiredBackgroundColor" Value="DarkPastelGreen"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="2">
+            <Property Name="_PieceShapeID" Value="05463ade-1996-49e0-aae9-55cad6f8f605"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="EmojiFlower3"/>
+            <Property Name="_RetiredImageName" Value="RetiredEmojiFlower3"/>
+            <Property Name="_BackgroundColor" Value="TamagoIro"/>
+            <Property Name="_RetiredBackgroundColor" Value="TamagoIro"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="3">
+            <Property Name="_PieceShapeID" Value="0f2709f0-b5ed-4ed9-b8c5-d65a1e1d69e8"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="EmojiFlower4"/>
+            <Property Name="_RetiredImageName" Value="RetiredEmojiFlower4"/>
+            <Property Name="_BackgroundColor" Value="FujiIro"/>
+            <Property Name="_RetiredBackgroundColor" Value="FujiIro"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="4">
+            <Property Name="_PieceShapeID" Value="26e5dee4-0cc5-492f-ab31-b5b810863bf4"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="EmojiFlower5"/>
+            <Property Name="_RetiredImageName" Value="RetiredEmojiFlower5"/>
+            <Property Name="_BackgroundColor" Value="青24号"/>
+            <Property Name="_RetiredBackgroundColor" Value="青24号"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="5">
+            <Property Name="_PieceShapeID" Value="69cc6259-93f2-438d-8a9f-e0e65ad6c841"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="EmojiFlower6"/>
+            <Property Name="_RetiredImageName" Value="RetiredEmojiFlower6"/>
+            <Property Name="_BackgroundColor" Value="AotakeIro"/>
+            <Property Name="_RetiredBackgroundColor" Value="AotakeIro"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="6">
+            <Property Name="_PieceShapeID" Value="7c73c10c-86b3-406d-964e-f12abbf914cc"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="EmojiFlower7"/>
+            <Property Name="_RetiredImageName" Value="RetiredEmojiFlower7"/>
+            <Property Name="_BackgroundColor" Value="Blue"/>
+            <Property Name="_RetiredBackgroundColor" Value="Blue"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+    </Array>
+</Theme>
+
+<Theme Name="Drawn Colors">
+    <Property Name="_ThemeName" Value="Colorful"/>
+    <Property Name="_ViewType" Value="TwoD"/>
+    <Property Name="_UserTheme" Value="false"/>
+    <Property Name="_ID" Value="a7518cfc-81d4-11e9-bc42-526af7764f64"/>
+    <Property Name="_Title" Value="Colorful Drawn Theme"/>
+    <Property Name="_BucketType" Value="Drawn"/>
+    <Property Name="_BucketColor" Value="Yellow"/>
+    <Property Name="_BackgroundColor" Value="PinkPastel"/>
+    <Property Name="_NextColor" Value="Black"/>
+    <Property Name="_GameScoreColor" Value="Black"/>
+    <Property Name="_HighScoreColor" Value="Black"/>
+    <Array Name="_TileList">
+        <Item Index="0">
+            <Property Name="_PieceShapeID" Value="f4510cca-262a-4018-bf29-04d703702d65"/>
+            <Property Name="_VisualType" Value="Draw"/>
+            <Property Name="_ShowShadow" Value="false"/>
+            <Property Name="_BackgroundColor" Value="Akabeni"/>
+            <Property Name="_RetiredBackgroundColor" Value="Akabeni"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="1">
+            <Property Name="_PieceShapeID" Value="b5bb59a5-b006-487b-a7b1-e0daf4a48810"/>
+            <Property Name="_VisualType" Value="Draw"/>
+            <Property Name="_ShowShadow" Value="false"/>
+            <Property Name="_BackgroundColor" Value="DarkPastelGreen"/>
+            <Property Name="_RetiredBackgroundColor" Value="DarkPastelGreen"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="2">
+            <Property Name="_PieceShapeID" Value="05463ade-1996-49e0-aae9-55cad6f8f605"/>
+            <Property Name="_VisualType" Value="Draw"/>
+            <Property Name="_ShowShadow" Value="false"/>
+            <Property Name="_BackgroundColor" Value="TamagoIro"/>
+            <Property Name="_RetiredBackgroundColor" Value="TamagoIro"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="3">
+            <Property Name="_PieceShapeID" Value="0f2709f0-b5ed-4ed9-b8c5-d65a1e1d69e8"/>
+            <Property Name="_VisualType" Value="Draw"/>
+            <Property Name="_ShowShadow" Value="false"/>
+            <Property Name="_BackgroundColor" Value="FujiIro"/>
+            <Property Name="_RetiredBackgroundColor" Value="FujiIro"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="4">
+            <Property Name="_PieceShapeID" Value="26e5dee4-0cc5-492f-ab31-b5b810863bf4"/>
+            <Property Name="_VisualType" Value="Draw"/>
+            <Property Name="_ShowShadow" Value="false"/>
+            <Property Name="_BackgroundColor" Value="青24号"/>
+            <Property Name="_RetiredBackgroundColor" Value="青24号"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="5">
+            <Property Name="_PieceShapeID" Value="69cc6259-93f2-438d-8a9f-e0e65ad6c841"/>
+            <Property Name="_VisualType" Value="Draw"/>
+            <Property Name="_ShowShadow" Value="false"/>
+            <Property Name="_BackgroundColor" Value="AotakeIro"/>
+            <Property Name="_RetiredBackgroundColor" Value="AotakeIro"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="6">
+            <Property Name="_PieceShapeID" Value="7c73c10c-86b3-406d-964e-f12abbf914cc"/>
+            <Property Name="_VisualType" Value="Draw"/>
+            <Property Name="_ShowShadow" Value="false"/>
+            <Property Name="_BackgroundColor" Value="Blue"/>
+            <Property Name="_RetiredBackgroundColor" Value="Blue"/>
+            <Property Name="_BorderColor" Value="White"/>
+            <Property Name="_RetiredBorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="RoundedRect"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+    </Array>
+</Theme>
+
+<Theme Name="Dull Colors">
+    <Property Name="_ThemeName" Value="Colorful"/>
+    <Property Name="_ViewType" Value="TwoD"/>
+    <Property Name="_UserTheme" Value="false"/>
+    <Property Name="_ID" Value="c3f8a794-87ee-11e9-bc42-526af7764f64"/>
+    <Property Name="_Title" Value="Dull Drawn Color Theme"/>
+    <Property Name="_BucketType" Value="Drawn"/>
+    <Property Name="_BucketColor" Value="ReallyDarkGray"/>
+    <Property Name="_BackgroundColor" Value="DullBrown1"/>
+    <Array Name="_TileList">
+        <Item Index="0">
+            <Property Name="_PieceShapeID" Value="f4510cca-262a-4018-bf29-04d703702d65"/>
+            <Property Name="_VisualType" Value="Draw"/>
+            <Property Name="_BackgroundColor" Value="DullRed"/>
+            <Property Name="_RetiredBackgroundColor" Value="DullRed"/>
+            <Property Name="_BorderColor" Value="Gray"/>
+            <Property Name="_RetiredBorderColor" Value="DarkGray"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="RoundedRect"/>
+            <Property Name="_RetiredShape" Value="Circular"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="1">
+            <Property Name="_PieceShapeID" Value="b5bb59a5-b006-487b-a7b1-e0daf4a48810"/>
+            <Property Name="_VisualType" Value="Draw"/>
+            <Property Name="_BackgroundColor" Value="DullGreen"/>
+            <Property Name="_RetiredBackgroundColor" Value="DullGreen"/>
+            <Property Name="_BorderColor" Value="Gray"/>
+            <Property Name="_RetiredBorderColor" Value="DarkGray"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="RoundedRect"/>
+            <Property Name="_RetiredShape" Value="Circular"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="2">
+            <Property Name="_PieceShapeID" Value="05463ade-1996-49e0-aae9-55cad6f8f605"/>
+            <Property Name="_VisualType" Value="Draw"/>
+            <Property Name="_BackgroundColor" Value="DullCyan"/>
+            <Property Name="_RetiredBackgroundColor" Value="DullCyan"/>
+            <Property Name="_BorderColor" Value="Gray"/>
+            <Property Name="_RetiredBorderColor" Value="DarkGray"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="RoundedRect"/>
+            <Property Name="_RetiredShape" Value="Circular"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="3">
+            <Property Name="_PieceShapeID" Value="0f2709f0-b5ed-4ed9-b8c5-d65a1e1d69e8"/>
+            <Property Name="_VisualType" Value="Draw"/>
+            <Property Name="_BackgroundColor" Value="DullMagenta"/>
+            <Property Name="_RetiredBackgroundColor" Value="DullMagenta"/>
+            <Property Name="_BorderColor" Value="Gray"/>
+            <Property Name="_RetiredBorderColor" Value="DarkGray"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="RoundedRect"/>
+            <Property Name="_RetiredShape" Value="Circular"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="4">
+            <Property Name="_PieceShapeID" Value="26e5dee4-0cc5-492f-ab31-b5b810863bf4"/>
+            <Property Name="_VisualType" Value="Draw"/>
+            <Property Name="_BackgroundColor" Value="DullGray"/>
+            <Property Name="_RetiredBackgroundColor" Value="DullGray"/>
+            <Property Name="_BorderColor" Value="Gray"/>
+            <Property Name="_RetiredBorderColor" Value="DarkGray"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="RoundedRect"/>
+            <Property Name="_RetiredShape" Value="Circular"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="5">
+            <Property Name="_PieceShapeID" Value="69cc6259-93f2-438d-8a9f-e0e65ad6c841"/>
+            <Property Name="_VisualType" Value="Draw"/>
+            <Property Name="_BackgroundColor" Value="DullYellow"/>
+            <Property Name="_RetiredBackgroundColor" Value="DullYellow"/>
+            <Property Name="_BorderColor" Value="Gray"/>
+            <Property Name="_RetiredBorderColor" Value="DarkGray"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="RoundedRect"/>
+            <Property Name="_RetiredShape" Value="Circular"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+        <Item Index="6">
+            <Property Name="_PieceShapeID" Value="7c73c10c-86b3-406d-964e-f12abbf914cc"/>
+            <Property Name="_VisualType" Value="Draw"/>
+            <Property Name="_BackgroundColor" Value="DullPink"/>
+            <Property Name="_RetiredBackgroundColor" Value="DullPink"/>
+            <Property Name="_BorderColor" Value="Gray"/>
+            <Property Name="_RetiredBorderColor" Value="DarkGray"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_RetiredBorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="true"/>
+            <Property Name="_TileShape" Value="RoundedRect"/>
+            <Property Name="_RetiredShape" Value="Circular"/>
+            <Property Name="_DesaturateRetiredColor" Value="true"/>
+            <Property Name="_DarkenRetiredColor" Value="true"/>
+        </Item>
+    </Array>
+</Theme>
+
+<Theme Name="Corporate">
+    <Property Name="_ThemeName" Value="Colorful"/>
+    <Property Name="_ViewType" Value="TwoD"/>
+    <Property Name="_UserTheme" Value="false"/>
+    <Property Name="_ID" Value="2190e1d8-8906-11e9-bc42-526af7764f64"/>
+    <Property Name="_Title" Value="Drab Corporate Theme"/>
+    <Property Name="_BucketType" Value="Drawn"/>
+    <Property Name="_BucketColor" Value="ReallyDarkGray"/>
+    <Property Name="_BackgroundColor" Value="DullGray"/>
+    <Array Name="_TileList">
+        <Item Index="0">
+            <Property Name="_PieceShapeID" Value="f4510cca-262a-4018-bf29-04d703702d65"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="Corporate1"/>
+            <Property Name="_RetiredImageName" Value="Corporate1Retired"/>
+        </Item>
+        <Item Index="1">
+            <Property Name="_PieceShapeID" Value="b5bb59a5-b006-487b-a7b1-e0daf4a48810"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="Corporate5"/>
+            <Property Name="_RetiredImageName" Value="Corporate5Retired"/>
+        </Item>
+        <Item Index="2">
+            <Property Name="_PieceShapeID" Value="05463ade-1996-49e0-aae9-55cad6f8f605"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="Corporate6"/>
+            <Property Name="_RetiredImageName" Value="Corporate6Retired"/>
+        </Item>
+        <Item Index="3">
+            <Property Name="_PieceShapeID" Value="0f2709f0-b5ed-4ed9-b8c5-d65a1e1d69e8"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="Corporate7"/>
+            <Property Name="_RetiredImageName" Value="Corporate7Retired"/>
+        </Item>
+        <Item Index="4">
+            <Property Name="_PieceShapeID" Value="26e5dee4-0cc5-492f-ab31-b5b810863bf4"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="Corporate4"/>
+            <Property Name="_RetiredImageName" Value="Corporate4Retired"/>
+        </Item>
+        <Item Index="5">
+            <Property Name="_PieceShapeID" Value="69cc6259-93f2-438d-8a9f-e0e65ad6c841"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="Corporate3"/>
+            <Property Name="_RetiredImageName" Value="Corporate3Retired"/>
+        </Item>
+        <Item Index="6">
+            <Property Name="_PieceShapeID" Value="7c73c10c-86b3-406d-964e-f12abbf914cc"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="Corporate8"/>
+            <Property Name="_RetiredImageName" Value="Corporate8Retired"/>
+        </Item>
+    </Array>
+</Theme>
+
+<Theme Name="Black and White">
+    <Property Name="_ThemeName" Value="Colorful"/>
+    <Property Name="_ViewType" Value="TwoD"/>
+    <Property Name="_UserTheme" Value="false"/>
+    <Property Name="_ID" Value="1633289a-89a2-11e9-bc42-526af7764f64"/>
+    <Property Name="_Title" Value="Black and White Theme"/>
+    <Property Name="_BucketType" Value="Image"/>
+    <Property Name="_BucketImageName" Value="FullBucket25"/>
+    <Property Name="_BackgroundColor" Value="Black"/>
+    <Property Name="_HighScoreColor" Value="White"/>
+    <Property Name="_NextColor" Value="White"/>
+    <Property Name="_GameScoreColor" Value="White"/>
+    <Property Name="_GameOverImage" Value="GameOverImage18"/>
+    <Property Name="_PauseImage" Value="PausedText16"/>
+    <Property Name="_PressPlayImage" Value="PressPlayText16"/>
+    <Array Name="_TileList">
+        <Item Index="0">
+            <Property Name="_PieceShapeID" Value="f4510cca-262a-4018-bf29-04d703702d65"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="BW6"/>
+            <Property Name="_RetiredImageName" Value="BW6Retired"/>
+        </Item>
+        <Item Index="1">
+            <Property Name="_PieceShapeID" Value="b5bb59a5-b006-487b-a7b1-e0daf4a48810"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="BW2"/>
+            <Property Name="_RetiredImageName" Value="BW2Retired"/>
+        </Item>
+        <Item Index="2">
+            <Property Name="_PieceShapeID" Value="05463ade-1996-49e0-aae9-55cad6f8f605"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="BW3"/>
+            <Property Name="_RetiredImageName" Value="BW3Retired"/>
+        </Item>
+        <Item Index="3">
+            <Property Name="_PieceShapeID" Value="0f2709f0-b5ed-4ed9-b8c5-d65a1e1d69e8"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="BW4"/>
+            <Property Name="_RetiredImageName" Value="BW4Retired"/>
+        </Item>
+        <Item Index="4">
+            <Property Name="_PieceShapeID" Value="26e5dee4-0cc5-492f-ab31-b5b810863bf4"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="BW8"/>
+            <Property Name="_RetiredImageName" Value="BW8Retired"/>
+        </Item>
+        <Item Index="5">
+            <Property Name="_PieceShapeID" Value="69cc6259-93f2-438d-8a9f-e0e65ad6c841"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="BW5"/>
+            <Property Name="_RetiredImageName" Value="BW5Retired"/>
+        </Item>
+        <Item Index="6">
+            <Property Name="_PieceShapeID" Value="7c73c10c-86b3-406d-964e-f12abbf914cc"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_ActiveImageName" Value="BW9"/>
+            <Property Name="_RetiredImageName" Value="BW9Retired"/>
+        </Item>
+    </Array>
+</Theme>
+
+<Theme Name="Same Blocks">
+    <Property Name="_ThemeName" Value="Same Blocks"/>
+    <Property Name="_ViewType" Value="TwoD"/>
+    <Property Name="_UserTheme" Value="false"/>
+    <Property Name="_ID" Value="bd38e650-8a71-11e9-8104-526af7764f64"/>
+    <Property Name="_Title" Value="Same Retired Blocks Theme"/>
+    <Property Name="_BucketType" Value="Drawn"/>
+    <Property Name="_BucketColor" Value="ReallyDarkGray"/>
+    <Property Name="_BackgroundColor" Value="BlizzardBlue"/>
+    <Property Name="_HighScoreColor" Value="Black"/>
+    <Property Name="_NextColor" Value="Black"/>
+    <Property Name="_GameScoreColor" Value="Black"/>
+    <Array Name="_TileList">
+        <Item Index="0">
+            <Property Name="_PieceShapeID" Value="f4510cca-262a-4018-bf29-04d703702d65"/>
+            <Property Name="_VisualType" Value="Draw"/>
+            <Property Name="_BackgroundColor" Value="Red"/>
+            <Property Name="_RetiredBackgroundColor" Value="Gray"/>
+            <Property Name="_BorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="false"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="Square"/>
+        </Item>
+        <Item Index="1">
+            <Property Name="_PieceShapeID" Value="b5bb59a5-b006-487b-a7b1-e0daf4a48810"/>
+            <Property Name="_VisualType" Value="Draw"/>
+            <Property Name="_BackgroundColor" Value="Green"/>
+            <Property Name="_RetiredBackgroundColor" Value="Gray"/>
+            <Property Name="_BorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="false"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="Square"/>
+        </Item>
+        <Item Index="2">
+            <Property Name="_PieceShapeID" Value="05463ade-1996-49e0-aae9-55cad6f8f605"/>
+            <Property Name="_VisualType" Value="Draw"/>
+            <Property Name="_BackgroundColor" Value="Blue"/>
+            <Property Name="_RetiredBackgroundColor" Value="Gray"/>
+            <Property Name="_BorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="false"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="Square"/>
+        </Item>
+        <Item Index="3">
+            <Property Name="_PieceShapeID" Value="0f2709f0-b5ed-4ed9-b8c5-d65a1e1d69e8"/>
+            <Property Name="_VisualType" Value="Draw"/>
+            <Property Name="_BackgroundColor" Value="Cyan"/>
+            <Property Name="_RetiredBackgroundColor" Value="Gray"/>
+            <Property Name="_BorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="false"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="Square"/>
+        </Item>
+        <Item Index="4">
+            <Property Name="_PieceShapeID" Value="26e5dee4-0cc5-492f-ab31-b5b810863bf4"/>
+            <Property Name="_VisualType" Value="Draw"/>
+            <Property Name="_BackgroundColor" Value="Magenta"/>
+            <Property Name="_RetiredBackgroundColor" Value="Gray"/>
+            <Property Name="_BorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="false"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="Square"/>
+        </Item>
+        <Item Index="5">
+            <Property Name="_PieceShapeID" Value="69cc6259-93f2-438d-8a9f-e0e65ad6c841"/>
+            <Property Name="_VisualType" Value="Draw"/>
+            <Property Name="_BackgroundColor" Value="Yellow"/>
+            <Property Name="_RetiredBackgroundColor" Value="Gray"/>
+            <Property Name="_BorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="false"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="Square"/>
+        </Item>
+        <Item Index="6">
+            <Property Name="_PieceShapeID" Value="7c73c10c-86b3-406d-964e-f12abbf914cc"/>
+            <Property Name="_VisualType" Value="Draw"/>
+            <Property Name="_BackgroundColor" Value="Pink"/>
+            <Property Name="_RetiredBackgroundColor" Value="Gray"/>
+            <Property Name="_BorderColor" Value="Black"/>
+            <Property Name="_ShowBorder" Value="true"/>
+            <Property Name="_BorderThickness" Value="1.0"/>
+            <Property Name="_ShowRetiredBorder" Value="false"/>
+            <Property Name="_TileShape" Value="Square"/>
+            <Property Name="_RetiredShape" Value="Square"/>
+        </Item>
+    </Array>
+</Theme>
+
+<Theme Name="Simple 3D Blocks">
+    <Property Name="_ThemeName" Value="Simple 3D"/>
+    <Property Name="_ViewType" Value="ThreeD"/>
+    <Property Name="_UserTheme" Value="false"/>
+    <Property Name="_ID" Value="c7290900-9d87-11e9-a2a3-2a2ae2dbcce4"/>
+    <Property Name="_Title" Value="Simple 3D Theme"/>
+    <Property Name="_BucketType" Value="Rendered"/>
+    <Property Name="_BucketColor3D" Value="Gold"/>
+    <Property Name="_BackgroundType3D" Value="Color"/>
+    <Property Name="_BackgroundIdentifier3D" Value="Cayenne"/>
+    <Property Name="_HighScoreColor" Value="White"/>
+    <Property Name="_NextColor" Value="White"/>
+    <Property Name="_GameScoreColor" Value="White"/>
+    <Property Name="_Default3DTheme" Value="true"/>
+    <Property Name="_CameraFieldOfView" Value="92.0"/>
+    <Property Name="_CameraPosition" Value="-0.5,2.0,15.0"/>
+    <Property Name="_CameraOrientation" Value="0.0,0.0,0.0,0.0"/>
+    <Property Name="_AntialiasingMode" Value="MultiSampling4X"/>
+    <Property Name="_UseDefaultLighting" Value="false"/>
+    <Property Name="_LightColor" Value="White"/>
+    <Property Name="_LightType" Value="omni"/>
+    <Property Name="_LightPosition" Value="-5.0,15.0,40.0"/>
+    <Property Name="_CanControlCamera" Value="false"/>
+    <Property Name="_ShowStatistics" Value="false"/>
+    <Property Name="_ShowGrid" Value="false"/>
+    <Property Name="_ShowBucketGrid" Value="true"/>
+    <Array Name="_TileList">
+        <Item Index="0">
+            <Property Name="_PieceShapeID" Value="f4510cca-262a-4018-bf29-04d703702d65"/>
+            <Property Name="_VisualType" Value="Render"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Red"/>
+            <Property Name="_RetiredTextureName" Value="MacMaroon"/>
+            <Property Name="_ActiveDiffuseColor" Value="Red"/>
+            <Property Name="_ActiveSpecularColor" Value="White"/>
+            <Property Name="_RetiredDiffuseColor" Value="MacMaroon"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="1">
+            <Property Name="_PieceShapeID" Value="b5bb59a5-b006-487b-a7b1-e0daf4a48810"/>
+            <Property Name="_VisualType" Value="Render"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Green"/>
+            <Property Name="_RetiredTextureName" Value="Asparagus"/>
+            <Property Name="_ActiveDiffuseColor" Value="Green"/>
+            <Property Name="_ActiveSpecularColor" Value="White"/>
+            <Property Name="_RetiredDiffuseColor" Value="Asparagus"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="2">
+            <Property Name="_PieceShapeID" Value="05463ade-1996-49e0-aae9-55cad6f8f605"/>
+            <Property Name="_VisualType" Value="Render"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Blue"/>
+            <Property Name="_RetiredTextureName" Value="PrussianBlue"/>
+            <Property Name="_ActiveDiffuseColor" Value="Blue"/>
+            <Property Name="_ActiveSpecularColor" Value="White"/>
+            <Property Name="_RetiredDiffuseColor" Value="PrussianBlue"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="3">
+            <Property Name="_PieceShapeID" Value="0f2709f0-b5ed-4ed9-b8c5-d65a1e1d69e8"/>
+            <Property Name="_VisualType" Value="Render"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Cyan"/>
+            <Property Name="_RetiredTextureName" Value="Cerulean"/>
+            <Property Name="_ActiveDiffuseColor" Value="Cyan"/>
+            <Property Name="_ActiveSpecularColor" Value="White"/>
+            <Property Name="_RetiredDiffuseColor" Value="Cerulean"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="4">
+            <Property Name="_PieceShapeID" Value="26e5dee4-0cc5-492f-ab31-b5b810863bf4"/>
+            <Property Name="_VisualType" Value="Render"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Magenta"/>
+            <Property Name="_RetiredTextureName" Value="MagentaHaze"/>
+            <Property Name="_ActiveDiffuseColor" Value="Magenta"/>
+            <Property Name="_ActiveSpecularColor" Value="White"/>
+            <Property Name="_RetiredDiffuseColor" Value="MagentaHaze"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="5">
+            <Property Name="_PieceShapeID" Value="69cc6259-93f2-438d-8a9f-e0e65ad6c841"/>
+            <Property Name="_VisualType" Value="Render"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Yellow"/>
+            <Property Name="_RetiredTextureName" Value="YellowMunsell"/>
+            <Property Name="_ActiveDiffuseColor" Value="Yellow"/>
+            <Property Name="_ActiveSpecularColor" Value="White"/>
+            <Property Name="_RetiredDiffuseColor" Value="YellowMunsell"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="6">
+            <Property Name="_PieceShapeID" Value="7c73c10c-86b3-406d-964e-f12abbf914cc"/>
+            <Property Name="_VisualType" Value="Render"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Orange"/>
+            <Property Name="_RetiredTextureName" Value="CarrotOrange"/>
+            <Property Name="_ActiveDiffuseColor" Value="Red"/>
+            <Property Name="_ActiveSpecularColor" Value="Orange"/>
+            <Property Name="_RetiredDiffuseColor" Value="CarrotOrange"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+    </Array>
+</Theme>
+
+
+<Theme Name="Basic 3D Blocks">
+    <Property Name="_ThemeName" Value="Basic 3D"/>
+    <Property Name="_ViewType" Value="ThreeD"/>
+    <Property Name="_UserTheme" Value="false"/>
+    <Property Name="_ID" Value="d317cf0b-7af5-4676-b71e-6d6a1ee78211"/>
+    <Property Name="_Title" Value="Basic 3D Theme"/>
+    <Property Name="_BucketType" Value="Rendered"/>
+    <Property Name="_BucketColor3D" Value="Gold"/>
+    <Property Name="_BackgroundType3D" Value="Color"/>
+    <Property Name="_BackgroundIdentifier3D" Value="Cayenne"/>
+    <Property Name="_HighScoreColor" Value="White"/>
+    <Property Name="_NextColor" Value="White"/>
+    <Property Name="_GameScoreColor" Value="White"/>
+    <Property Name="_Default3DTheme" Value="false"/>
+    <Property Name="_CameraFieldOfView" Value="92.0"/>
+    <Property Name="_CameraPosition" Value="5.0,1.0,15.0"/>
+    <Property Name="_CameraOrientation" Value="0.0,0.0,0.0,0.0"/>
+    <Property Name="_AntialiasingMode" Value="MultiSampling4X"/>
+    <Property Name="_UseDefaultLighting" Value="false"/>
+    <Property Name="_LightColor" Value="White"/>
+    <Property Name="_LightType" Value="omni"/>
+    <Property Name="_LightPosition" Value="-5.0,15.0,40.0"/>
+    <Property Name="_CanControlCamera" Value="true"/>
+    <Property Name="_ShowStatistics" Value="true"/>
+    <Property Name="_ShowGrid" Value="false"/>
+    <Array Name="_TileList">
+        <Item Index="0">
+            <Property Name="_PieceShapeID" Value="f4510cca-262a-4018-bf29-04d703702d65"/>
+            <Property Name="_VisualType" Value="Render"/>
+            <Property Name="_Active3DBlockShape" Value="RoundedCube"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Red"/>
+            <Property Name="_RetiredTextureName" Value="MacMaroon"/>
+            <Property Name="_ActiveDiffuseColor" Value="Red"/>
+            <Property Name="_ActiveSpecularColor" Value="White"/>
+            <Property Name="_RetiredDiffuseColor" Value="MacMaroon"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="1">
+            <Property Name="_PieceShapeID" Value="b5bb59a5-b006-487b-a7b1-e0daf4a48810"/>
+            <Property Name="_VisualType" Value="Render"/>
+            <Property Name="_Active3DBlockShape" Value="RoundedCube"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Green"/>
+            <Property Name="_RetiredTextureName" Value="Asparagus"/>
+            <Property Name="_ActiveDiffuseColor" Value="Green"/>
+            <Property Name="_ActiveSpecularColor" Value="White"/>
+            <Property Name="_RetiredDiffuseColor" Value="Asparagus"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="2">
+            <Property Name="_PieceShapeID" Value="05463ade-1996-49e0-aae9-55cad6f8f605"/>
+            <Property Name="_VisualType" Value="Render"/>
+            <Property Name="_Active3DBlockShape" Value="RoundedCube"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Blue"/>
+            <Property Name="_RetiredTextureName" Value="PrussianBlue"/>
+            <Property Name="_ActiveDiffuseColor" Value="Blue"/>
+            <Property Name="_ActiveSpecularColor" Value="White"/>
+            <Property Name="_RetiredDiffuseColor" Value="PrussianBlue"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="3">
+            <Property Name="_PieceShapeID" Value="0f2709f0-b5ed-4ed9-b8c5-d65a1e1d69e8"/>
+            <Property Name="_VisualType" Value="Render"/>
+            <Property Name="_Active3DBlockShape" Value="RoundedCube"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Cyan"/>
+            <Property Name="_RetiredTextureName" Value="Cerulean"/>
+            <Property Name="_ActiveDiffuseColor" Value="Cyan"/>
+            <Property Name="_ActiveSpecularColor" Value="White"/>
+            <Property Name="_RetiredDiffuseColor" Value="Cerulean"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="4">
+            <Property Name="_PieceShapeID" Value="26e5dee4-0cc5-492f-ab31-b5b810863bf4"/>
+            <Property Name="_VisualType" Value="Render"/>
+            <Property Name="_Active3DBlockShape" Value="RoundedCube"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Magenta"/>
+            <Property Name="_RetiredTextureName" Value="MagentaHaze"/>
+            <Property Name="_ActiveDiffuseColor" Value="Magenta"/>
+            <Property Name="_ActiveSpecularColor" Value="White"/>
+            <Property Name="_RetiredDiffuseColor" Value="MagentaHaze"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="5">
+            <Property Name="_PieceShapeID" Value="69cc6259-93f2-438d-8a9f-e0e65ad6c841"/>
+            <Property Name="_VisualType" Value="Render"/>
+            <Property Name="_Active3DBlockShape" Value="RoundedCube"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Yellow"/>
+            <Property Name="_RetiredTextureName" Value="YellowMunsell"/>
+            <Property Name="_ActiveDiffuseColor" Value="Yellow"/>
+            <Property Name="_ActiveSpecularColor" Value="White"/>
+            <Property Name="_RetiredDiffuseColor" Value="YellowMunsell"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="6">
+            <Property Name="_PieceShapeID" Value="7c73c10c-86b3-406d-964e-f12abbf914cc"/>
+            <Property Name="_VisualType" Value="Render"/>
+            <Property Name="_Active3DBlockShape" Value="RoundedCube"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Orange"/>
+            <Property Name="_RetiredTextureName" Value="CarrotOrange"/>
+            <Property Name="_ActiveDiffuseColor" Value="Red"/>
+            <Property Name="_ActiveSpecularColor" Value="Orange"/>
+            <Property Name="_RetiredDiffuseColor" Value="CarrotOrange"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+    </Array>
+</Theme>
+
+<Theme Name="Textured 3D Blocks">
+    <Property Name="_ThemeName" Value="Textured 3D"/>
+    <Property Name="_ViewType" Value="ThreeD"/>
+    <Property Name="_UserTheme" Value="false"/>
+    <Property Name="_ID" Value="3f0d9fee-0b77-465b-a0ac-f1663da23cc9"/>
+    <Property Name="_Title" Value="Textured 3D Theme"/>
+    <Property Name="_BucketType" Value="Rendered"/>
+    <Property Name="_BucketColor3D" Value="Gold"/>
+    <Property Name="_BackgroundType3D" Value="Color"/>
+    <Property Name="_BackgroundIdentifier3D" Value="Cayenne"/>
+    <Property Name="_HighScoreColor" Value="White"/>
+    <Property Name="_NextColor" Value="White"/>
+    <Property Name="_GameScoreColor" Value="White"/>
+    <Property Name="_Default3DTheme" Value="false"/>
+    <Property Name="_CameraFieldOfView" Value="92.0"/>
+    <Property Name="_CameraPosition" Value="5.0,1.0,15.0"/>
+    <Property Name="_CameraOrientation" Value="0.0,0.0,0.0,0.0"/>
+    <Property Name="_AntialiasingMode" Value="MultiSampling4X"/>
+    <Property Name="_UseDefaultLighting" Value="false"/>
+    <Property Name="_LightColor" Value="White"/>
+    <Property Name="_LightType" Value="omni"/>
+    <Property Name="_LightPosition" Value="-5.0,15.0,40.0"/>
+    <Property Name="_CanControlCamera" Value="true"/>
+    <Property Name="_ShowStatistics" Value="true"/>
+    <Property Name="_ShowGrid" Value="false"/>
+    <Array Name="_TileList">
+        <Item Index="0">
+            <Property Name="_PieceShapeID" Value="f4510cca-262a-4018-bf29-04d703702d65"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_Active3DBlockShape" Value="RoundedCube"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Image"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Image"/>
+            <Property Name="_ActiveTextureName" Value="GoldFoil4"/>
+            <Property Name="_RetiredTextureName" Value="GoldFoil4"/>
+        </Item>
+        <Item Index="1">
+            <Property Name="_PieceShapeID" Value="b5bb59a5-b006-487b-a7b1-e0daf4a48810"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_Active3DBlockShape" Value="RoundedCube"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Image"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Image"/>
+            <Property Name="_ActiveTextureName" Value="Copper2"/>
+            <Property Name="_RetiredTextureName" Value="Copper2"/>
+        </Item>
+        <Item Index="2">
+            <Property Name="_PieceShapeID" Value="05463ade-1996-49e0-aae9-55cad6f8f605"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_Active3DBlockShape" Value="RoundedCube"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Image"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Image"/>
+            <Property Name="_ActiveTextureName" Value="GoldenPattern3"/>
+            <Property Name="_RetiredTextureName" Value="GoldenPattern3"/>
+        </Item>
+        <Item Index="3">
+            <Property Name="_PieceShapeID" Value="0f2709f0-b5ed-4ed9-b8c5-d65a1e1d69e8"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_Active3DBlockShape" Value="RoundedCube"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Image"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Image"/>
+            <Property Name="_ActiveTextureName" Value="MetalPattern1"/>
+            <Property Name="_RetiredTextureName" Value="MetalPattern1"/>
+        </Item>
+        <Item Index="4">
+            <Property Name="_PieceShapeID" Value="26e5dee4-0cc5-492f-ab31-b5b810863bf4"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_Active3DBlockShape" Value="RoundedCube"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Image"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Image"/>
+            <Property Name="_ActiveTextureName" Value="Gold1"/>
+            <Property Name="_RetiredTextureName" Value="Gold1"/>
+        </Item>
+        <Item Index="5">
+            <Property Name="_PieceShapeID" Value="69cc6259-93f2-438d-8a9f-e0e65ad6c841"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_Active3DBlockShape" Value="RoundedCube"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Image"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Image"/>
+            <Property Name="_ActiveTextureName" Value="GoldFoil3"/>
+            <Property Name="_RetiredTextureName" Value="GoldFoil3"/>
+        </Item>
+        <Item Index="6">
+            <Property Name="_PieceShapeID" Value="7c73c10c-86b3-406d-964e-f12abbf914cc"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_Active3DBlockShape" Value="RoundedCube"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Image"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Image"/>
+            <Property Name="_ActiveTextureName" Value="AluminumFoil1"/>
+            <Property Name="_RetiredTextureName" Value="AluminumFoil1"/>
+        </Item>
+    </Array>
+</Theme>
+
+<Theme Name="3D Textured Blocks">
+    <Property Name="_ThemeName" Value="Textured 3D 2"/>
+    <Property Name="_ViewType" Value="ThreeD"/>
+    <Property Name="_UserTheme" Value="false"/>
+    <Property Name="_ID" Value="96dea905-52df-48fd-87c8-af73e65c9411"/>
+    <Property Name="_Title" Value="3D Textured Blocks"/>
+    <Property Name="_BucketType" Value="Rendered"/>
+    <Property Name="_BucketColor3D" Value="Gold"/>
+    <Property Name="_BackgroundType3D" Value="Color"/>
+    <Property Name="_BackgroundIdentifier3D" Value="Cayenne"/>
+    <Property Name="_HighScoreColor" Value="White"/>
+    <Property Name="_NextColor" Value="White"/>
+    <Property Name="_GameScoreColor" Value="White"/>
+    <Property Name="_Default3DTheme" Value="false"/>
+    <Property Name="_CameraFieldOfView" Value="92.0"/>
+    <Property Name="_CameraPosition" Value="5.0,1.0,15.0"/>
+    <Property Name="_CameraOrientation" Value="0.0,0.0,0.0,0.0"/>
+    <Property Name="_AntialiasingMode" Value="MultiSampling4X"/>
+    <Property Name="_UseDefaultLighting" Value="false"/>
+    <Property Name="_LightColor" Value="White"/>
+    <Property Name="_LightType" Value="omni"/>
+    <Property Name="_LightPosition" Value="-5.0,15.0,40.0"/>
+    <Property Name="_CanControlCamera" Value="true"/>
+    <Property Name="_ShowStatistics" Value="true"/>
+    <Property Name="_ShowGrid" Value="false"/>
+    <Property Name="_IsOrthographic" Value="true"/>
+    <Property Name="_OrthographicScale" Value="15.0"/>
+    <Array Name="_TileList">
+        <Item Index="0">
+            <Property Name="_PieceShapeID" Value="f4510cca-262a-4018-bf29-04d703702d65"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_Active3DBlockShape" Value="RoundedCube"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Image"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Image"/>
+            <Property Name="_ActiveTextureName" Value="AI10"/>
+            <Property Name="_RetiredTextureName" Value="AI10Retired"/>
+        </Item>
+        <Item Index="1">
+            <Property Name="_PieceShapeID" Value="b5bb59a5-b006-487b-a7b1-e0daf4a48810"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_Active3DBlockShape" Value="RoundedCube"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Image"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Image"/>
+            <Property Name="_ActiveTextureName" Value="AI8"/>
+            <Property Name="_RetiredTextureName" Value="AI8Retired"/>
+        </Item>
+        <Item Index="2">
+            <Property Name="_PieceShapeID" Value="05463ade-1996-49e0-aae9-55cad6f8f605"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_Active3DBlockShape" Value="RoundedCube"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Image"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Image"/>
+            <Property Name="_ActiveTextureName" Value="AI7"/>
+            <Property Name="_RetiredTextureName" Value="AI7Retired"/>
+        </Item>
+        <Item Index="3">
+            <Property Name="_PieceShapeID" Value="0f2709f0-b5ed-4ed9-b8c5-d65a1e1d69e8"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_Active3DBlockShape" Value="RoundedCube"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Image"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Image"/>
+            <Property Name="_ActiveTextureName" Value="AI4"/>
+            <Property Name="_RetiredTextureName" Value="AI4Retired"/>
+        </Item>
+        <Item Index="4">
+            <Property Name="_PieceShapeID" Value="26e5dee4-0cc5-492f-ab31-b5b810863bf4"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_Active3DBlockShape" Value="RoundedCube"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Image"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Image"/>
+            <Property Name="_ActiveTextureName" Value="AI1"/>
+            <Property Name="_RetiredTextureName" Value="AI1Retired"/>
+        </Item>
+        <Item Index="5">
+            <Property Name="_PieceShapeID" Value="69cc6259-93f2-438d-8a9f-e0e65ad6c841"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_Active3DBlockShape" Value="RoundedCube"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Image"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Image"/>
+            <Property Name="_ActiveTextureName" Value="AI6"/>
+            <Property Name="_RetiredTextureName" Value="AI6Retired"/>
+        </Item>
+        <Item Index="6">
+            <Property Name="_PieceShapeID" Value="7c73c10c-86b3-406d-964e-f12abbf914cc"/>
+            <Property Name="_VisualType" Value="Image"/>
+            <Property Name="_Active3DBlockShape" Value="RoundedCube"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Image"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Image"/>
+            <Property Name="_ActiveTextureName" Value="AI3"/>
+            <Property Name="_RetiredTextureName" Value="AI3Retired"/>
+        </Item>
+    </Array>
+</Theme>
