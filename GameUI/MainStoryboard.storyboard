@@ -175,102 +175,132 @@
                                     <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eVc-5x-EsU">
                                         <rect key="frame" x="0.0" y="896" width="768" height="128"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1S2-i2-ges">
-                                                <rect key="frame" x="20" y="28" width="145" height="72"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="UdM-I0-SzI">
+                                                <rect key="frame" x="647" y="13.5" width="101" height="101"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Gq7-qJ-D0T">
-                                                        <rect key="frame" x="0.0" y="0.0" width="145" height="36"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="aw6-zV-1lz">
+                                                        <rect key="frame" x="0.0" y="0.0" width="101" height="48"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RMZ-7G-6K8">
-                                                                <rect key="frame" x="0.0" y="0.0" width="77" height="36"/>
-                                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                                                <state key="normal" title="Left">
-                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                </state>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U6j-gc-7Uj">
+                                                                <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="48" id="7LW-fy-AdT"/>
+                                                                    <constraint firstAttribute="width" constant="48" id="Fwl-nZ-dgF"/>
+                                                                </constraints>
+                                                                <state key="normal" image="DropDownArrow48"/>
+                                                                <connections>
+                                                                    <action selector="HandleDropDownPressed:" destination="anR-7Y-bzH" eventType="primaryActionTriggered" id="FpY-yr-CDL"/>
+                                                                </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQt-g9-HKF">
-                                                                <rect key="frame" x="93" y="0.0" width="52" height="36"/>
-                                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                                                <state key="normal" title="Down">
-                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                </state>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HzM-pF-mYR">
+                                                                <rect key="frame" x="53" y="0.0" width="48" height="48"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="48" id="Mha-xp-anu"/>
+                                                                    <constraint firstAttribute="width" constant="48" id="sa1-QW-NaS"/>
+                                                                </constraints>
+                                                                <state key="normal" image="RightArrow48"/>
+                                                                <connections>
+                                                                    <action selector="HandleMoveRightPressed:" destination="anR-7Y-bzH" eventType="primaryActionTriggered" id="Dpc-UU-inN"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="XgV-nf-Xr6">
-                                                        <rect key="frame" x="0.0" y="36" width="145" height="36"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="bf8-Tk-Rsy">
+                                                        <rect key="frame" x="0.0" y="53" width="101" height="48"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Spp-jj-ca0">
-                                                                <rect key="frame" x="0.0" y="0.0" width="99" height="36"/>
-                                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                                                <state key="normal" title="Rotate Left">
-                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                </state>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kJM-qU-FEs">
+                                                                <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="48" id="mFo-jo-ygV"/>
+                                                                    <constraint firstAttribute="width" constant="48" id="wpR-Cr-lbz"/>
+                                                                </constraints>
+                                                                <state key="normal" image="FlyAwayArrow48"/>
+                                                                <connections>
+                                                                    <action selector="HandleUpAndAwayPressed:" destination="anR-7Y-bzH" eventType="primaryActionTriggered" id="epM-08-EeX"/>
+                                                                </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ey0-NI-JQe">
-                                                                <rect key="frame" x="115" y="0.0" width="30" height="36"/>
-                                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                                                <state key="normal" title="Up">
-                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                </state>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T3M-my-mow">
+                                                                <rect key="frame" x="53" y="0.0" width="48" height="48"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="48" id="bo5-lk-vUe"/>
+                                                                    <constraint firstAttribute="width" constant="48" id="hfL-59-ayL"/>
+                                                                </constraints>
+                                                                <state key="normal" image="RotateRight48_2"/>
+                                                                <connections>
+                                                                    <action selector="HandleRotateRightPressed:" destination="anR-7Y-bzH" eventType="primaryActionTriggered" id="z60-Od-mCw"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
-                                                <viewLayoutGuide key="safeArea" id="Kzt-ox-fOd"/>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ybd-ej-Rse">
-                                                <rect key="frame" x="541" y="28" width="207" height="72"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="nmc-0N-Ehg">
+                                                <rect key="frame" x="20" y="13.5" width="101" height="101"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="F2U-Yh-bXg">
-                                                        <rect key="frame" x="0.0" y="0.0" width="207" height="36"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="V96-af-bdA">
+                                                        <rect key="frame" x="0.0" y="0.0" width="101" height="48"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l6i-LC-Fsm">
-                                                                <rect key="frame" x="0.0" y="0.0" width="143" height="36"/>
-                                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                                                <state key="normal" title="Drop Down">
-                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                </state>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PFJ-gd-j0a">
+                                                                <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="48" id="HEs-Xe-PNi"/>
+                                                                    <constraint firstAttribute="width" constant="48" id="qFP-56-3es"/>
+                                                                </constraints>
+                                                                <state key="normal" image="LeftArrow48"/>
+                                                                <connections>
+                                                                    <action selector="HandleMoveLeftPressed:" destination="anR-7Y-bzH" eventType="primaryActionTriggered" id="9HV-is-cKT"/>
+                                                                </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DcY-kp-B5E">
-                                                                <rect key="frame" x="159" y="0.0" width="48" height="36"/>
-                                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                                                <state key="normal" title="Right">
-                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                </state>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nVG-Tl-Zxa">
+                                                                <rect key="frame" x="53" y="0.0" width="48" height="48"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="48" id="Cbo-Ie-qGG"/>
+                                                                    <constraint firstAttribute="width" constant="48" id="Gbq-Fg-7pd"/>
+                                                                </constraints>
+                                                                <state key="normal" image="DownArrow48"/>
+                                                                <connections>
+                                                                    <action selector="HandleMoveDownPressed:" destination="anR-7Y-bzH" eventType="primaryActionTriggered" id="lfU-zb-uph"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="qGG-uS-4HM">
-                                                        <rect key="frame" x="0.0" y="36" width="207" height="36"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="sF3-fv-oiJ">
+                                                        <rect key="frame" x="0.0" y="53" width="101" height="48"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LOO-F4-luk">
-                                                                <rect key="frame" x="0.0" y="0.0" width="80" height="36"/>
-                                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                                                <state key="normal" title="Fly Away">
-                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                </state>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ppp-ez-m7Z">
+                                                                <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="48" id="pfK-YE-w1E"/>
+                                                                    <constraint firstAttribute="height" constant="48" id="qrQ-VD-M7b"/>
+                                                                </constraints>
+                                                                <state key="normal" image="RotateLeft48_2"/>
+                                                                <connections>
+                                                                    <action selector="HandleRotateLeftPressed:" destination="anR-7Y-bzH" eventType="primaryActionTriggered" id="ZAK-BA-JpD"/>
+                                                                </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="csP-nb-90C">
-                                                                <rect key="frame" x="96" y="0.0" width="111" height="36"/>
-                                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                                                <state key="normal" title="Rotate Right">
-                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                </state>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JPJ-A9-fbu">
+                                                                <rect key="frame" x="53" y="0.0" width="48" height="48"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="48" id="VHo-FS-r4F"/>
+                                                                    <constraint firstAttribute="width" constant="48" id="vlw-xr-nsD"/>
+                                                                </constraints>
+                                                                <state key="normal" image="UpArrow48"/>
+                                                                <connections>
+                                                                    <action selector="HandleMoveUpPressed:" destination="anR-7Y-bzH" eventType="primaryActionTriggered" id="oQ8-2Z-1Vq"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
-                                                <viewLayoutGuide key="safeArea" id="cni-0N-NqK"/>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="ybd-ej-Rse" firstAttribute="trailing" secondItem="eVc-5x-EsU" secondAttribute="trailingMargin" id="ALY-gW-vvy"/>
-                                            <constraint firstItem="1S2-i2-ges" firstAttribute="leading" secondItem="eVc-5x-EsU" secondAttribute="leadingMargin" id="VF4-nt-XQb"/>
+                                            <constraint firstItem="UdM-I0-SzI" firstAttribute="trailing" secondItem="eVc-5x-EsU" secondAttribute="trailingMargin" id="BJF-zc-WiP"/>
+                                            <constraint firstItem="nmc-0N-Ehg" firstAttribute="bottom" secondItem="UdM-I0-SzI" secondAttribute="bottom" id="Csw-MR-fhc"/>
                                             <constraint firstAttribute="height" constant="128" id="d1D-6O-hNd"/>
-                                            <constraint firstItem="ybd-ej-Rse" firstAttribute="centerY" secondItem="eVc-5x-EsU" secondAttribute="centerY" id="dco-0s-LwN"/>
-                                            <constraint firstItem="ybd-ej-Rse" firstAttribute="top" secondItem="1S2-i2-ges" secondAttribute="top" id="v4d-vy-J1L"/>
+                                            <constraint firstItem="nmc-0N-Ehg" firstAttribute="leading" secondItem="eVc-5x-EsU" secondAttribute="leadingMargin" id="syw-of-nhG"/>
+                                            <constraint firstItem="nmc-0N-Ehg" firstAttribute="centerY" secondItem="eVc-5x-EsU" secondAttribute="centerY" id="whf-9S-PqN"/>
                                         </constraints>
                                         <viewLayoutGuide key="safeArea" id="FVB-o4-zHY"/>
                                     </view>
@@ -338,7 +368,7 @@
                     </view>
                     <connections>
                         <outlet property="CurrentScoreLabelView2" destination="dht-P4-rIC" id="0T0-Vf-V9v"/>
-                        <outlet property="DropDownButton2" destination="l6i-LC-Fsm" id="XTC-IA-iKm"/>
+                        <outlet property="DropDownButton2" destination="U6j-gc-7Uj" id="Su8-aO-085"/>
                         <outlet property="GameControlView2" destination="mwG-lI-7bz" id="zAR-O3-7sI"/>
                         <outlet property="GameOverLabelView2" destination="fG3-c2-56a" id="myF-XF-REC"/>
                         <outlet property="GameUISurface3D2" destination="vct-Mh-0Vi" id="Naq-c6-d6M"/>
@@ -348,24 +378,24 @@
                         <outlet property="MainSlideInOptionTable2" destination="eTh-2j-qXB" id="Ohp-b9-YrY"/>
                         <outlet property="MainUIButton2" destination="Qep-yn-tJG" id="bLt-gL-ZPx"/>
                         <outlet property="MotionControlView2" destination="eVc-5x-EsU" id="BJS-fE-kcf"/>
-                        <outlet property="MoveDownButton2" destination="dQt-g9-HKF" id="hO3-Ab-pHF"/>
-                        <outlet property="MoveLeftButton2" destination="RMZ-7G-6K8" id="mqS-AE-DHW"/>
-                        <outlet property="MoveRightButton2" destination="DcY-kp-B5E" id="hIZ-lF-GdG"/>
-                        <outlet property="MoveUpButton2" destination="Ey0-NI-JQe" id="KQn-6p-JiP"/>
+                        <outlet property="MoveDownButton2" destination="nVG-Tl-Zxa" id="OwI-hD-txY"/>
+                        <outlet property="MoveLeftButton2" destination="PFJ-gd-j0a" id="Li2-J8-Ddb"/>
+                        <outlet property="MoveRightButton2" destination="HzM-pF-mYR" id="KeD-oA-yWu"/>
+                        <outlet property="MoveUpButton2" destination="JPJ-A9-fbu" id="77y-Ze-w0T"/>
                         <outlet property="NextPieceLabelView2" destination="wuk-RO-4f2" id="bTV-r3-EfJ"/>
                         <outlet property="NextPieceView2" destination="HLT-X8-fph" id="aEg-ti-SFU"/>
                         <outlet property="PauseLabelView2" destination="ZLG-3V-NE0" id="AlK-Mq-0le"/>
                         <outlet property="PauseResumeButton2" destination="KXp-V6-UPf" id="baA-tz-yB3"/>
                         <outlet property="PlayStopButton2" destination="tYf-lX-OiH" id="exd-Kz-yox"/>
                         <outlet property="PressPlayLabelView2" destination="cDM-w8-UEc" id="Nhr-wc-yUq"/>
-                        <outlet property="RotateLeftButton2" destination="Spp-jj-ca0" id="agD-Ej-Yah"/>
-                        <outlet property="RotateRightButton2" destination="csP-nb-90C" id="69Q-St-UPU"/>
+                        <outlet property="RotateLeftButton2" destination="ppp-ez-m7Z" id="exk-IM-wDd"/>
+                        <outlet property="RotateRightButton2" destination="T3M-my-mow" id="u6W-51-jOR"/>
                         <outlet property="ScoreLabelView2" destination="Wd8-a3-tR0" id="5Pz-wg-nXf"/>
                         <outlet property="SlideInAttractButton2" destination="WNk-dt-fE4" id="J2N-dd-RH6"/>
                         <outlet property="SlideInCloseButton2" destination="YHH-Jn-x5g" id="kXV-z4-803"/>
                         <outlet property="TextLayerView2" destination="IgA-6X-lkh" id="nAc-g9-w7P"/>
                         <outlet property="TopOverlapView" destination="Uae-4l-8NP" id="hBD-3o-pRa"/>
-                        <outlet property="UpAndAwayButton2" destination="LOO-F4-luk" id="hU7-nm-Nol"/>
+                        <outlet property="UpAndAwayButton2" destination="kJM-qU-FEs" id="2T1-1d-l93"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0RK-7Z-fvW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -375,5 +405,13 @@
     </scenes>
     <resources>
         <image name="ClosedCube" width="48" height="48"/>
+        <image name="DownArrow48" width="48" height="48"/>
+        <image name="DropDownArrow48" width="48" height="48"/>
+        <image name="FlyAwayArrow48" width="48" height="48"/>
+        <image name="LeftArrow48" width="48" height="48"/>
+        <image name="RightArrow48" width="48" height="48"/>
+        <image name="RotateLeft48_2" width="48" height="48"/>
+        <image name="RotateRight48_2" width="48" height="48"/>
+        <image name="UpArrow48" width="48" height="48"/>
     </resources>
 </document>
