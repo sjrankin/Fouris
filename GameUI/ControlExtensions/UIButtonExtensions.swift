@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-/*
 /// Extensions for UIButton.
 extension UIButton
 {
@@ -47,4 +46,3 @@ extension UIButton
     }
 }
 
-*/
