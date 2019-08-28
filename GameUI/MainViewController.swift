@@ -1588,6 +1588,7 @@ class MainViewController: UIViewController,
     ]
 }
 
+/*
 /// Defines the base games available. Each base game may have one or more variants. For example, a .Standard game may
 /// have various bucket sizes or obstructions.
 /// - **Standard**: Standard Tetris game.
@@ -1599,3 +1600,4 @@ enum BaseGameTypes: String, CaseIterable
     case Rotating4 = "Rotating4"
     case Cubic = "Cubic"
 }
+*/
