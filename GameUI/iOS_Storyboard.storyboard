@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14865.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SYS-p8-A9Y">
     <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14819.2"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -364,7 +363,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="CubeButton" width="24" height="24"/>
+        <image name="CubeButton" width="32" height="32"/>
         <image name="DownArrow" width="32" height="32"/>
         <image name="DownArrowHighlighted" width="32" height="32"/>
         <image name="DropDownArrow" width="32" height="32"/>
