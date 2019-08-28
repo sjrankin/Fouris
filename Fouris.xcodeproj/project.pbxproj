@@ -39,6 +39,10 @@
 		1756715C2302695800D0824D /* StepperHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756715B2302695800D0824D /* StepperHelper.swift */; };
 		175671692302852C00D0824D /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175671682302852C00D0824D /* TimerManager.swift */; };
 		1759F6B522AB7F5D00574A01 /* TColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1759F6B422AB7F5C00574A01 /* TColor.swift */; };
+		17616AC623163A3400DFFEFE /* SlideInItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17616AC523163A3400DFFEFE /* SlideInItem.swift */; };
+		17616AC92316497300DFFEFE /* AboutDialogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17616AC82316497300DFFEFE /* AboutDialogController.swift */; };
+		17616ACB23166CB000DFFEFE /* SelectGameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17616ACA23166CB000DFFEFE /* SelectGameController.swift */; };
+		17616ACD23166DF700DFFEFE /* GameStyleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17616ACC23166DF700DFFEFE /* GameStyleTableViewCell.swift */; };
 		1761AA57230FE3F400E2A6DE /* iOS_Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1761AA56230FE3F400E2A6DE /* iOS_Storyboard.storyboard */; };
 		1762FC19229CCFF6000099F2 /* RawParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762FC18229CCFF6000099F2 /* RawParser.swift */; };
 		1762FC1D229D2898000099F2 /* StandardThemes.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1762FC1C229D2898000099F2 /* StandardThemes.xml */; };
@@ -180,6 +184,10 @@
 		1756715B2302695800D0824D /* StepperHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperHelper.swift; sourceTree = "<group>"; };
 		175671682302852C00D0824D /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		1759F6B422AB7F5C00574A01 /* TColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TColor.swift; sourceTree = "<group>"; };
+		17616AC523163A3400DFFEFE /* SlideInItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideInItem.swift; sourceTree = "<group>"; };
+		17616AC82316497300DFFEFE /* AboutDialogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutDialogController.swift; sourceTree = "<group>"; };
+		17616ACA23166CB000DFFEFE /* SelectGameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGameController.swift; sourceTree = "<group>"; };
+		17616ACC23166DF700DFFEFE /* GameStyleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStyleTableViewCell.swift; sourceTree = "<group>"; };
 		1761AA56230FE3F400E2A6DE /* iOS_Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = iOS_Storyboard.storyboard; sourceTree = "<group>"; };
 		1762FC18229CCFF6000099F2 /* RawParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawParser.swift; sourceTree = "<group>"; };
 		1762FC1C229D2898000099F2 /* StandardThemes.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = StandardThemes.xml; path = Runtime/StandardThemes.xml; sourceTree = SOURCE_ROOT; };
@@ -276,7 +284,6 @@
 		17F0B493225CBE730071514E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17F0B49A225CBE740071514E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		17F0B49D225CBE740071514E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		17F0B49F225CBE740071514E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17F0B4B0225CC22A0071514E /* Piece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Piece.swift; sourceTree = "<group>"; };
 		17F0B4B9225CCEE00071514E /* GameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
 		17F9A30722A7BF2F00581594 /* NSImage+ResizeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+ResizeImage.swift"; sourceTree = "<group>"; };
@@ -361,6 +368,16 @@
 				17DCFD33230291B100A00600 /* ManagedTimer.swift */,
 			);
 			path = TimerManager;
+			sourceTree = "<group>";
+		};
+		17616AC72316496300DFFEFE /* Dialogs */ = {
+			isa = PBXGroup;
+			children = (
+				17616AC82316497300DFFEFE /* AboutDialogController.swift */,
+				17616ACA23166CB000DFFEFE /* SelectGameController.swift */,
+				17616ACC23166DF700DFFEFE /* GameStyleTableViewCell.swift */,
+			);
+			path = Dialogs;
 			sourceTree = "<group>";
 		};
 		1762FC1B229D2874000099F2 /* Runtime */ = {
@@ -463,6 +480,7 @@
 				17E74BEF230E7C9B00A62274 /* MainSlideInView.swift */,
 				17AD3620230EC00000DC8886 /* +MainSlideInUI.swift */,
 				17AF23202313992B00921E6C /* +MainSlideInUI2.swift */,
+				17616AC523163A3400DFFEFE /* SlideInItem.swift */,
 				17AF2322231399CC00921E6C /* MainSlideInView2.swift */,
 			);
 			path = SlideInView;
@@ -691,7 +709,7 @@
 				17E71A8522AD23EF0081991E /* TDebug Extensions */,
 				179A61B5230FA71A00A202BA /* SlideInView */,
 				17660BE622892B0400082E23 /* ControlExtensions */,
-				17F0B49F225CBE740071514E /* Info.plist */,
+				17616AC72316496300DFFEFE /* Dialogs */,
 				17F0B493225CBE730071514E /* AppDelegate.swift */,
 				171D5D462313FC5200043856 /* MainStoryboard.storyboard */,
 				1761AA56230FE3F400E2A6DE /* iOS_Storyboard.storyboard */,
@@ -963,6 +981,7 @@
 				1762FC19229CCFF6000099F2 /* RawParser.swift in Sources */,
 				17E71A7A22AD217B0081991E /* MultiPeer.swift in Sources */,
 				1797523C22C38A4D00BF539A /* +StatusCommands.swift in Sources */,
+				17616AC623163A3400DFFEFE /* SlideInItem.swift in Sources */,
 				1737635A230AC6AD0050EB22 /* MiscellaneousExtensions.swift in Sources */,
 				17AB99D22297DC66003C4674 /* ImageServer.swift in Sources */,
 				1797523A22C38A4D00BF539A /* MessageHelper.swift in Sources */,
@@ -994,10 +1013,13 @@
 				1797523E22C38A4D00BF539A /* +TextMessages.swift in Sources */,
 				1797524022C38A4D00BF539A /* +EchoCommands.swift in Sources */,
 				17E71A7122AD211E0081991E /* OSColorExtensions.swift in Sources */,
+				17616ACB23166CB000DFFEFE /* SelectGameController.swift in Sources */,
 				177F4FCD229BD42500FE72CD /* Serializer.swift in Sources */,
 				17C898C322CDF60F004EA348 /* ArrayStatistics.swift in Sources */,
 				17F0B494225CBE730071514E /* AppDelegate.swift in Sources */,
+				17616ACD23166DF700DFFEFE /* GameStyleTableViewCell.swift in Sources */,
 				176F1B72227B0A0600681CDE /* Settings.swift in Sources */,
+				17616AC92316497300DFFEFE /* AboutDialogController.swift in Sources */,
 				17A45B632271DA98002E705D /* AITestDataUpdatedProtocol.swift in Sources */,
 				1797523622C38A4D00BF539A /* +Handshake.swift in Sources */,
 				17DCD7EE23096E340072B306 /* +MapType_BucketCreation.swift in Sources */,
