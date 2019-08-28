@@ -226,7 +226,8 @@ class MultiPeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
     }
     
     /// Handles the found-a-peer event.
-    ///
+    /// - Note: **iPadOS 13 beta something or another has a bad version of Multipeer Connectivity. Until it is
+    ///         known to work, do not run TDDebug on your Mac or the iPadOS app will crash.**
     /// - Parameters:
     ///   - browser: The nearby service browser.
     ///   - peerID: The ID of the peer that was found.
@@ -236,6 +237,7 @@ class MultiPeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
     {
         print("Found peer \(peerID.displayName) - inviting to session.")
         browser.invitePeer(peerID, to: Session, withContext: nil, timeout: 10)
+        print("Peer invited - waiting for 10 seconds.")
     }
     
     /// Handle the lost a peer (probably because the app was shut down on the remote side) event.
