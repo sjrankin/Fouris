@@ -359,6 +359,7 @@ class MainViewController2: UIViewController,
         Game.StartGame(EnableAI: true, PieceCategories: [.Standard], UseFastAI: UseFastAI)
         DumpGameBoard(Game.GameBoard!)
         PlayStopButton2.setTitle("Stop", for: .normal)
+        ForceResume()
         
         DebugClient.SetIdiotLight(IdiotLights.B2, Title: "Playing", FGColor: ColorNames.WhiteSmoke, BGColor: ColorNames.PineGreen)
         DebugClient.SetIdiotLight(IdiotLights.A2, Title: "Attract Mode", FGColor: ColorNames.Blue, BGColor: ColorNames.WhiteSmoke)
@@ -918,6 +919,15 @@ class MainViewController2: UIViewController,
         Pause()
     }
     
+    /// Make sure the game is not paused. Takes no action if the game is not paused.
+    public func ForceResume()
+    {
+        if IsPaused
+        {
+            Pause()
+        }
+    }
+    
     /// Pause the game.
     func Pause()
     {
@@ -959,6 +969,7 @@ class MainViewController2: UIViewController,
     /// Play the game, eg, start in normal user mode.
     func Play()
     {
+        ForceResume()
         DebugClient.SetIdiotLight(IdiotLights.B2, Title: "Playing", FGColor: ColorNames.WhiteSmoke, BGColor: ColorNames.PineGreen)
         let GameCountMsg = MessageHelper.MakeKVPMessage(ID: GameCountID, Key: "Game Count", Value: "\(GameCount)")
         DebugClient.SendPreformattedCommand(GameCountMsg)
@@ -1301,8 +1312,7 @@ class MainViewController2: UIViewController,
     
     // MARK: General-UI interactions.
     
-    /// The first time the slider came into view flag. Used in **+MainSliderUI.swift**.
-    var FirstSlideIn: Bool = true
+    
     
     var ProposedNewGameType: BaseGameTypes = .Standard
     var CurrentBaseGameType: BaseGameTypes = .Standard
@@ -1381,6 +1391,55 @@ class MainViewController2: UIViewController,
         InAttractMode = true
         Stop()
         ClearAndPlay()
+    }
+    
+    /// Handle slide-in commands here. Before executing a command, the slide-in UI is closed and the main button is reset.
+    /// - Parameter CommandID: The command to process.
+    func HandleSlideInCommand(_ CommandID: UUID)
+    {
+        MainSlideIn2?.HideMainSlideIn()
+        UpdateMainButton(false)
+        
+        var SlideInCommand = SlideInCommands.NoCommand
+        for (Command, ID) in CommandIDs
+        {
+            if ID == CommandID
+            {
+                SlideInCommand = Command
+                break
+            }
+        }
+        switch SlideInCommand
+        {
+            case .AboutCommand:
+                ForcePause()
+                let Storyboard = UIStoryboard(name: "MainStoryboard", bundle: nil)
+                if let Controller = Storyboard.instantiateViewController(withIdentifier: "AboutDialog") as? AboutDialogController
+                {
+                self.present(Controller, animated: true, completion: nil)
+                }
+            
+            case .SelectGameCommand:
+                print("Encountered select game command")
+                ForcePause()
+                let Storyboard = UIStoryboard(name: "MainStoryboard", bundle: nil)
+                if let Controller = Storyboard.instantiateViewController(withIdentifier: "GameSelection") as? SelectGameController
+                {
+                    self.present(Controller, animated: true, completion: nil)
+                }
+            
+            case .SettingsCommand:
+                print("Encountered settings command")
+                break
+            
+            case .ThemeCommand:
+                print("Encountered theme command")
+                break
+            
+            case .NoCommand:
+                print("Encountered no command")
+                break
+        }
     }
     
     // MARK: Debug delegate functions and other debug code.
@@ -1528,6 +1587,23 @@ class MainViewController2: UIViewController,
         }
     }
     
+    // MARK: Variables used by +MainSlideInUI from within extensions.
+    
+    /// Stores the command list for the slide in menu/UI.
+    var CommandList = [SlideInItem]()
+    
+    /// The first time the slider came into view flag. Used in **+MainSliderUI.swift**.
+    var FirstSlideIn: Bool = true
+    
+    let CommandIDs: [SlideInCommands: UUID] =
+        [
+            .NoCommand: UUID.Empty,
+            .AboutCommand: UUID(uuidString: "c1f857db-38cd-4aed-a50b-7392cb7453b5")!,
+            .SelectGameCommand: UUID(uuidString: "a1ec3bc6-1541-47fb-91b3-03ab49f4bbaa")!,
+            .SettingsCommand: UUID(uuidString: "e056c81c-1ca2-4249-b025-aed6ccafc81d")!,
+            .ThemeCommand: UUID(uuidString: "1b145c9d-d6b7-4576-96cb-6b4f5508b2ab")!
+    ]
+    
     // MARK: Variables used by TDebug from within extensions.
     
     var EchoTimer: Timer!
@@ -1585,7 +1661,7 @@ class MainViewController2: UIViewController,
             2: .Cubic
     ]
 }
-/*
+
  /// Defines the base games available. Each base game may have one or more variants. For example, a .Standard game may
  /// have various bucket sizes or obstructions.
  /// - **Standard**: Standard Tetris game.
@@ -1597,4 +1673,4 @@ class MainViewController2: UIViewController,
  case Rotating4 = "Rotating4"
  case Cubic = "Cubic"
  }
- */
+
