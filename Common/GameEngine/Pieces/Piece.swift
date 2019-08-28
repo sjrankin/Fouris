@@ -1254,6 +1254,10 @@ class Piece
     /// Determines if each block in the piece is fully in the bucket (eg, under the top of the bucket).
     func PieceFullyInBounds() -> Bool
     {
+        if GameBoard == nil
+        {
+            fatalError("GameBoard is nil in PieceFullyInBounds.")
+        }
         if !(GameBoard?.PieceInBounds(self))!
         {
             return false
