@@ -11,8 +11,6 @@ import UIKit
 
 class SelectGameController: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
-    
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
