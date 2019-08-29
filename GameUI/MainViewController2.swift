@@ -1366,6 +1366,13 @@ class MainViewController2: UIViewController,
         MainUIButton2.setImage(UIImage(named: ImageName), for: UIControl.State.normal)
     }
     
+    /// Handle the restart game button in the slide in view.
+    @IBAction func HandleSlideInRestartGamePressed(_ sender: Any)
+    {
+        MainSlideIn2?.HideMainSlideIn()
+        UpdateMainButton(false)
+    }
+    
     /// Handle the close button in the slide in view pressed by the user by closing the slide in view.
     /// - Parameter sender: Not used.
     @IBAction func HandleSlideInCloseButtonPressed(_ sender: Any)
@@ -1420,7 +1427,6 @@ class MainViewController2: UIViewController,
                 }
             
             case .SelectGameCommand:
-                print("Encountered select game command")
                 ForcePause()
                 let Storyboard = UIStoryboard(name: "MainStoryboard", bundle: nil)
                 if let Controller = Storyboard.instantiateViewController(withIdentifier: "GameSelection") as? SelectGameController
@@ -1433,8 +1439,12 @@ class MainViewController2: UIViewController,
                 break
             
             case .ThemeCommand:
-                print("Encountered theme command")
-                break
+                ForcePause()
+                let Storyboard = UIStoryboard(name: "Theming", bundle: nil)
+                if let Controller = Storyboard.instantiateViewController(withIdentifier: "ThemingHome") as? ThemingController
+                {
+                    self.present(Controller, animated: true, completion: nil)
+            }
             
             case .NoCommand:
                 print("Encountered no command")
