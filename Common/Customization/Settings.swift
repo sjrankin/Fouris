@@ -61,8 +61,40 @@ class Settings
         _Settings.set(true, forKey: "StartWithAI")
         _Settings.set(true, forKey: "UseTDebug")
         _Settings.set(60.0, forKey: "AutoStartDuration")
+        _Settings.set(0, forKey: "ColorPickerColorSpace")
         _Settings.set("83c630ee-81d4-11e9-bc42-526af7764f64", forKey: "CurrentTheme")
         _Settings.set("3f0d9fee-0b77-465b-a0ac-f1663da23cc9", forKey: "Current3DTheme")
+    }
+    
+    /// Gets the color picker color space indicator.
+    /// - Note:
+    ///  - 0: RGB
+    ///  - 1: HSB
+    ///  - 2: YUV
+    /// - Returns: Value indicating which color space to use for the color picker.
+    public static func GetColorPickerColorSpace() -> Int
+    {
+        return _Settings.integer(forKey: "ColorPickerColorSpace")
+    }
+    
+    /// Set the color picker color space indicator.
+    /// - Note:
+    ///  - 0: RGB
+    ///  - 1: HSB
+    ///  - 2: YUV
+    /// - Parameter NewValue: New color space indicator value. Invalid values cause control to be returned
+    ///                       and no changes made.
+    public static func SetColorPickerColorSpace(NewValue: Int)
+    {
+        if NewValue < 0
+        {
+            return
+        }
+        if NewValue > 2
+        {
+            return
+        }
+        _Settings.set(NewValue, forKey: "ColorPickerColorSpace")
     }
     
     /// Get the auto start duration (the amount of time (in seconds) between when the start finishes
