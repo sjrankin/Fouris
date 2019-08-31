@@ -113,8 +113,8 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol
         if let Controller = Storyboard.instantiateViewController(withIdentifier: "ColorPicker") as? ColorPickerCode
         {
             Controller.ColorDelegate = self
-            self.present(Controller, animated: true, completion: nil)
             Controller.ColorToEdit(UIColor.black, Tag: "BGEditor")
+            self.present(Controller, animated: true, completion: nil)
         }
     }
     
