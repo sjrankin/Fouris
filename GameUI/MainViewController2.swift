@@ -1401,6 +1401,7 @@ class MainViewController2: UIViewController,
     }
     
     /// Handle slide-in commands here. Before executing a command, the slide-in UI is closed and the main button is reset.
+    /// - Note: Most commands executed here will force the game to pause.
     /// - Parameter CommandID: The command to process.
     func HandleSlideInCommand(_ CommandID: UUID)
     {
