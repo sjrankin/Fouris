@@ -9,8 +9,10 @@
 import Foundation
 import UIKit
 
-class GameBackgroundDialog: UIViewController
+class GameBackgroundDialog: UIViewController, ColorPickerProtocol
 {
+    weak var ColorDelegate: ColorPickerProtocol? = nil
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -34,7 +36,7 @@ class GameBackgroundDialog: UIViewController
     @IBAction func HandleBackgroundTypeChanged(_ sender: Any)
     {
         let BGType = BackgroundTypeSegment.selectedSegmentIndex
-HandleBGChange(ToIndex: BGType)
+        HandleBGChange(ToIndex: BGType)
     }
     
     func HandleBGChange(ToIndex: Int)
@@ -98,12 +100,32 @@ HandleBGChange(ToIndex: BGType)
                 LiveViewBox.backgroundColor = ColorServer.ColorFrom(ColorNames.White)
             
             default:
-            fatalError("Encountered unexpected segment index \(ToIndex) in HandleBGChange.")
+                fatalError("Encountered unexpected segment index \(ToIndex) in HandleBGChange.")
         }
     }
     
     @IBOutlet weak var LiveViewCameraSegment: UISegmentedControl!
     @IBOutlet weak var BackgroundTypeSegment: UISegmentedControl!
+    
+    @IBAction func HandleSelectColorPressed(_ sender: Any)
+    {
+        let Storyboard = UIStoryboard(name: "Theming", bundle: nil)
+        if let Controller = Storyboard.instantiateViewController(withIdentifier: "ColorPicker") as? ColorPickerCode
+        {
+            Controller.ColorDelegate = self
+            self.present(Controller, animated: true, completion: nil)
+            Controller.ColorToEdit(UIColor.black, Tag: "BGEditor")
+        }
+    }
+    
+    func ColorToEdit(_ Color: UIColor, Tag: Any?)
+    {
+        //Should not be called.
+    }
+    
+    func EditedColor(_ Edited: UIColor?, Tag: Any?)
+    {
+    }
     
     @IBAction func HandleOKPressed(_ sender: Any)
     {
