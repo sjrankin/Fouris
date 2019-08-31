@@ -71,6 +71,9 @@
 		177F4FD3229C0F1C00FE72CD /* SerializerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177F4FD2229C0F1C00FE72CD /* SerializerNode.swift */; };
 		177F4FD6229C11A100FE72CD /* SerializerTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177F4FD5229C11A100FE72CD /* SerializerTree.swift */; };
 		177F4FD9229C1A7600FE72CD /* SerializerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177F4FD8229C1A7600FE72CD /* SerializerExtension.swift */; };
+		177FC1D42318E0F7005727B6 /* ColorPickerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177FC1D32318E0F7005727B6 /* ColorPickerProtocol.swift */; };
+		177FC1DA2318E6AC005727B6 /* GSliderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177FC1D92318E6AC005727B6 /* GSliderProtocol.swift */; };
+		177FC1DC2318E6C7005727B6 /* GSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177FC1DB2318E6C7005727B6 /* GSlider.swift */; };
 		1782C0F122FE8CA5006CD9D5 /* GeneralAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1782C0F022FE8CA4006CD9D5 /* GeneralAI.swift */; };
 		1785ED6222FD8C0A000B31C2 /* BoardDescriptions.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1785ED6122FD8C09000B31C2 /* BoardDescriptions.xml */; };
 		1785ED6522FD9BB2000B31C2 /* BoardDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1785ED6422FD9BB2000B31C2 /* BoardDescriptor.swift */; };
@@ -109,6 +112,13 @@
 		17BC04D8229127E1002A6F90 /* PieceIDMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BC04D7229127E1002A6F90 /* PieceIDMap.swift */; };
 		17C0E6F722AF9C87003FAFA8 /* IdiotLightMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0E6F622AF9C87003FAFA8 /* IdiotLightMessage.swift */; };
 		17C14E1F23066E1600D9CF64 /* TextLayerDisplayProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C14E1E23066E1600D9CF64 /* TextLayerDisplayProtocol.swift */; };
+		17C1E90B23190F5E004040B6 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C1E90A23190F5E004040B6 /* UIColorExtensions.swift */; };
+		17C1E90D23190FBE004040B6 /* OtherExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C1E90C23190FBE004040B6 /* OtherExtensions.swift */; };
+		17C1E90F23193E8A004040B6 /* GradientManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C1E90E23193E8A004040B6 /* GradientManager.swift */; };
+		17C2F3A9231A10DD001EF200 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C2F3A8231A10DD001EF200 /* Utility.swift */; };
+		17C2F3AB231A1395001EF200 /* ColorPickerCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C2F3AA231A1395001EF200 /* ColorPickerCode.swift */; };
+		17C2F3AD231A146C001EF200 /* ColorChipSelectorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C2F3AC231A146C001EF200 /* ColorChipSelectorCode.swift */; };
+		17C2F3AF231A14F2001EF200 /* ColorNamePickerCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C2F3AE231A14F2001EF200 /* ColorNamePickerCode.swift */; };
 		17C898C322CDF60F004EA348 /* ArrayStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C898C222CDF60F004EA348 /* ArrayStatistics.swift */; };
 		17CA147E22BC9E9600D099C1 /* TDebugProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CA147D22BC9E9600D099C1 /* TDebugProtocol.swift */; };
 		17CE269D225F127C0056818E /* Versioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CE269C225F127C0056818E /* Versioning.swift */; };
@@ -220,6 +230,9 @@
 		177F4FD2229C0F1C00FE72CD /* SerializerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerializerNode.swift; sourceTree = "<group>"; };
 		177F4FD5229C11A100FE72CD /* SerializerTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerializerTree.swift; sourceTree = "<group>"; };
 		177F4FD8229C1A7600FE72CD /* SerializerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerializerExtension.swift; sourceTree = "<group>"; };
+		177FC1D32318E0F7005727B6 /* ColorPickerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerProtocol.swift; sourceTree = "<group>"; };
+		177FC1D92318E6AC005727B6 /* GSliderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSliderProtocol.swift; sourceTree = "<group>"; };
+		177FC1DB2318E6C7005727B6 /* GSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSlider.swift; sourceTree = "<group>"; };
 		1782C0F022FE8CA4006CD9D5 /* GeneralAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralAI.swift; sourceTree = "<group>"; };
 		1785ED6122FD8C09000B31C2 /* BoardDescriptions.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = BoardDescriptions.xml; sourceTree = "<group>"; };
 		1785ED6422FD9BB2000B31C2 /* BoardDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDescriptor.swift; sourceTree = "<group>"; };
@@ -262,6 +275,13 @@
 		17BC04D7229127E1002A6F90 /* PieceIDMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceIDMap.swift; sourceTree = "<group>"; };
 		17C0E6F622AF9C87003FAFA8 /* IdiotLightMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdiotLightMessage.swift; sourceTree = "<group>"; };
 		17C14E1E23066E1600D9CF64 /* TextLayerDisplayProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextLayerDisplayProtocol.swift; sourceTree = "<group>"; };
+		17C1E90A23190F5E004040B6 /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		17C1E90C23190FBE004040B6 /* OtherExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherExtensions.swift; sourceTree = "<group>"; };
+		17C1E90E23193E8A004040B6 /* GradientManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientManager.swift; sourceTree = "<group>"; };
+		17C2F3A8231A10DD001EF200 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		17C2F3AA231A1395001EF200 /* ColorPickerCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerCode.swift; sourceTree = "<group>"; };
+		17C2F3AC231A146C001EF200 /* ColorChipSelectorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorChipSelectorCode.swift; sourceTree = "<group>"; };
+		17C2F3AE231A14F2001EF200 /* ColorNamePickerCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorNamePickerCode.swift; sourceTree = "<group>"; };
 		17C898C222CDF60F004EA348 /* ArrayStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayStatistics.swift; sourceTree = "<group>"; };
 		17CA147D22BC9E9600D099C1 /* TDebugProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDebugProtocol.swift; sourceTree = "<group>"; };
 		17CE269C225F127C0056818E /* Versioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Versioning.swift; sourceTree = "<group>"; };
@@ -356,6 +376,7 @@
 		1749B6DF22BB2687003DC65D /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				17C2F3A8231A10DD001EF200 /* Utility.swift */,
 				1749B6E022BB26A0003DC65D /* Conversions.swift */,
 				17C898C222CDF60F004EA348 /* ArrayStatistics.swift */,
 			);
@@ -383,6 +404,8 @@
 		17616AC72316496300DFFEFE /* Dialogs */ = {
 			isa = PBXGroup;
 			children = (
+				177FC1D72318E685005727B6 /* CustomControls */,
+				177FC1D22318E0E1005727B6 /* ColorPicker */,
 				17616AC82316497300DFFEFE /* AboutDialogController.swift */,
 				17616ACA23166CB000DFFEFE /* SelectGameController.swift */,
 				17616ACC23166DF700DFFEFE /* GameStyleTableViewCell.swift */,
@@ -390,6 +413,7 @@
 				17477A722317891100AAEB14 /* ThemeEditorController.swift */,
 				17477A742317F1C200AAEB14 /* GameBackgroundDialog.swift */,
 				17477A762317F7E800AAEB14 /* PieceSelectorDialog.swift */,
+				17C1E90C23190FBE004040B6 /* OtherExtensions.swift */,
 			);
 			path = Dialogs;
 			sourceTree = "<group>";
@@ -452,6 +476,35 @@
 				177F4FCF229BD4CC00FE72CD /* Serializable.swift */,
 			);
 			path = Serialization;
+			sourceTree = "<group>";
+		};
+		177FC1D22318E0E1005727B6 /* ColorPicker */ = {
+			isa = PBXGroup;
+			children = (
+				177FC1D32318E0F7005727B6 /* ColorPickerProtocol.swift */,
+				17C1E90E23193E8A004040B6 /* GradientManager.swift */,
+				17C2F3AA231A1395001EF200 /* ColorPickerCode.swift */,
+				17C2F3AC231A146C001EF200 /* ColorChipSelectorCode.swift */,
+				17C2F3AE231A14F2001EF200 /* ColorNamePickerCode.swift */,
+			);
+			path = ColorPicker;
+			sourceTree = "<group>";
+		};
+		177FC1D72318E685005727B6 /* CustomControls */ = {
+			isa = PBXGroup;
+			children = (
+				177FC1D82318E690005727B6 /* GSlider */,
+			);
+			path = CustomControls;
+			sourceTree = "<group>";
+		};
+		177FC1D82318E690005727B6 /* GSlider */ = {
+			isa = PBXGroup;
+			children = (
+				177FC1D92318E6AC005727B6 /* GSliderProtocol.swift */,
+				177FC1DB2318E6C7005727B6 /* GSlider.swift */,
+			);
+			path = GSlider;
 			sourceTree = "<group>";
 		};
 		1797522122C388D300BF539A /* MessageHelper */ = {
@@ -690,6 +743,7 @@
 				17ED240A22716273002B92E1 /* ColorServer.swift */,
 				17ED240E22716610002B92E1 /* ColorTable.swift */,
 				1759F6B422AB7F5C00574A01 /* TColor.swift */,
+				17C1E90A23190F5E004040B6 /* UIColorExtensions.swift */,
 			);
 			path = Colors;
 			sourceTree = "<group>";
@@ -914,7 +968,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17C2F3A9231A10DD001EF200 /* Utility.swift in Sources */,
 				1753ABF0225E262D00FC7089 /* GameUINotificationProtocol.swift in Sources */,
+				17C1E90F23193E8A004040B6 /* GradientManager.swift in Sources */,
+				17C2F3AB231A1395001EF200 /* ColorPickerCode.swift in Sources */,
 				1705ADEC225D911B00628268 /* Block.swift in Sources */,
 				17DCD7EA2309436F0072B306 /* +CentralShapes.swift in Sources */,
 				17F6ECEE2286E1C7000F8E11 /* MainDelegate.swift in Sources */,
@@ -947,7 +1004,10 @@
 				17376354230A87EE0050EB22 /* CATextLayer2.swift in Sources */,
 				1713735722EAE67700C9F9A7 /* SCNDodecahedron.swift in Sources */,
 				17E71A6E22AD20F40081991E /* StateProtocol.swift in Sources */,
+				17C2F3AD231A146C001EF200 /* ColorChipSelectorCode.swift in Sources */,
 				17CE26A3225F63660056818E /* Queue.swift in Sources */,
+				177FC1DC2318E6C7005727B6 /* GSlider.swift in Sources */,
+				177FC1DA2318E6AC005727B6 /* GSliderProtocol.swift in Sources */,
 				171BDEC422B8CE00005C3509 /* SmoothMotionProtocol.swift in Sources */,
 				17E71A8722AD240E0081991E /* +TDebugProtocols.swift in Sources */,
 				17CA147E22BC9E9600D099C1 /* TDebugProtocol.swift in Sources */,
@@ -967,6 +1027,7 @@
 				1721BA7C2260BECF00DC7AFC /* Coin.swift in Sources */,
 				1797524E22C38A4D00BF539A /* +IdiotLights.swift in Sources */,
 				17660BE822892B1E00082E23 /* UIButtonExtensions.swift in Sources */,
+				177FC1D42318E0F7005727B6 /* ColorPickerProtocol.swift in Sources */,
 				17F6ECF22286E322000F8E11 /* ControlUIProtocol.swift in Sources */,
 				17376357230A9C9C0050EB22 /* +BucketCleaner.swift in Sources */,
 				17AF23212313992B00921E6C /* +MainSlideInUI2.swift in Sources */,
@@ -994,6 +1055,7 @@
 				173762522310E7400075E1DD /* UITouchImageDelegate.swift in Sources */,
 				17E6E8C6227C35C0006D8817 /* ActionButton.swift in Sources */,
 				1797524422C38A4D00BF539A /* +Heartbeat.swift in Sources */,
+				17C1E90B23190F5E004040B6 /* UIColorExtensions.swift in Sources */,
 				1767D28622AF4959005EE191 /* DebugClient.swift in Sources */,
 				17F0B4B1225CC22A0071514E /* Piece.swift in Sources */,
 				1797524222C38A4D00BF539A /* +VersionInfo.swift in Sources */,
@@ -1025,12 +1087,14 @@
 				177F4FC2229BC01600FE72CD /* TileDescriptor.swift in Sources */,
 				17E71A7722AD21620081991E /* MessageHandlerDelegate.swift in Sources */,
 				17F6ECEC2286E0F0000F8E11 /* GameViewProtocol.swift in Sources */,
+				17C1E90D23190FBE004040B6 /* OtherExtensions.swift in Sources */,
 				1797525022C38A4D00BF539A /* +SpecialAndOtherCommands.swift in Sources */,
 				1749B6E122BB26A0003DC65D /* Conversions.swift in Sources */,
 				17F6ECEA2286E0C9000F8E11 /* UserData.swift in Sources */,
 				177F4FD6229C11A100FE72CD /* SerializerTree.swift in Sources */,
 				1797523E22C38A4D00BF539A /* +TextMessages.swift in Sources */,
 				1797524022C38A4D00BF539A /* +EchoCommands.swift in Sources */,
+				17C2F3AF231A14F2001EF200 /* ColorNamePickerCode.swift in Sources */,
 				17E71A7122AD211E0081991E /* OSColorExtensions.swift in Sources */,
 				17616ACB23166CB000DFFEFE /* SelectGameController.swift in Sources */,
 				177F4FCD229BD42500FE72CD /* Serializer.swift in Sources */,
