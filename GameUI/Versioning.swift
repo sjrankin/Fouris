@@ -62,19 +62,19 @@ public class Versioning
     }
     
     /// Build number.
-    public static let Build: Int = 724
+    public static let Build: Int = 756
     
     /// Build increment.
     private static let BuildIncrement = 1
     
     /// Build ID.
-    public static let BuildID: String = "A487225B-44F0-4CF8-9336-CB42D28FC5E4"
+    public static let BuildID: String = "26BE3B81-0D04-451D-AFDA-2CF03ABEE975"
     
     /// Build date.
     public static let BuildDate: String = "31 August 2019"
     
     /// Build Time.
-    public static let BuildTime: String = "17:33"
+    public static let BuildTime: String = "22:36"
     
     /// Return a standard build string.
     ///
@@ -88,7 +88,7 @@ public class Versioning
     }
     
     /// Copyright years.
-    public static let CopyrightYears = [2019]
+    public static let CopyrightYears = [2018, 2019]
     
     /// Legal holder of the copyright.
     public static let CopyrightHolder = "Stuart Rankin"
