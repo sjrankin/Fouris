@@ -1,6 +1,7 @@
 //
 //  GSlider.swift
 //  Fouris
+//  Adapted from BumpCamera.
 //
 //  Created by Stuart Rankin on 3/2/19. Adapted for use in Fouris on 8/30/2019.
 //  Copyright © 2019 Stuart Rankin. All rights reserved.
@@ -38,6 +39,7 @@ import UIKit
     func LocalInit()
     {
         clipsToBounds = true
+        self.isUserInteractionEnabled = true
         UpdateGradient()
         DrawIndicator()
         UpdateBorder()
@@ -260,8 +262,10 @@ import UIKit
         let Validated = ValidateLocation(ToWhere)
         let Percent = PercentFromLocation(Location: Validated)
         let Range = MaxValue - MinValue
+        print("**** HandleMoved")
+        print("Value=(Range[\(Range)] * Percent[\(Percent)]) + MinValue[\(MinValue)]")
         Value = (Range * Percent) + MinValue
-        DrawIndicator()
+        //DrawIndicator()
         ParentDelegate?.NewSliderValue(Name: Name, NewValue: Value)
     }
     
@@ -284,6 +288,7 @@ import UIKit
     {
         let Where = TapGesture.location(in: self)
         let Percent = PercentFromLocation(Location: Where)
+        print("Tapped in \(Name) at \(Where), Percent=\(Percent)")
         let Range = MaxValue - MinValue
         Value = (Range * Percent) + MinValue
         DrawIndicator()
@@ -717,15 +722,9 @@ import UIKit
         }
     }
     
-    /// Holds the current value of the control. Updates the indicator when set.
+    /// Holds the current value of the control.
     private var _Value: Double = 0.0
-    {
-        didSet
-        {
-            DrawIndicator()
-        }
-    }
-    /// Get or set the value of th control. Setting this property causes an immediate visual update.
+    /// Get or set the value of the control. Setting this property causes an immediate visual update.
     @IBInspectable var Value: Double
         {
         get
@@ -736,7 +735,14 @@ import UIKit
         {
             if InRange(newValue)
             {
-                _Value = newValue.Clamp(0.0, 1.0)
+                let ClampedValue = newValue.Clamp(0.0, 1.0)
+                if ClampedValue == _Value
+                {
+                    print("Ignoring same value set \(ClampedValue) for \(Name)")
+                    return
+                }
+                _Value = ClampedValue
+                DrawIndicator()
             }
         }
     }
@@ -832,6 +838,11 @@ import UIKit
     /// Draw the indicator showing the value in the control using previously set properties.
     func DrawIndicator()
     {
+        print("At DrawIndicator for \(Name), Value=\(Value)")
+        if Name == "Red"
+        {
+            print(Thread.callStackSymbols.filter({$0.contains("Fouris")}).forEach{print($0)})
+        }
         if IndicatorLevel == nil
         {
             IndicatorLevel = CAShapeLayer()
@@ -854,7 +865,12 @@ import UIKit
             let Range = MaxValue - MinValue
             let Percent = (Value + MinValue) / Range
             let XPoint = self.frame.width * CGFloat(Percent)
-            //print("DrawHIndicator(\(Name)) = \(Percent.Round(To: 3))")
+            if Name == "Red"
+            {
+            print("Range[\(Range)]=MaxValue[\(MaxValue)]-MinValue[\(MinValue)]")
+            print("Percent[\(Percent)]=Value[\(Value)]/Range[\(Range)]")
+            print("DrawHIndicator(\(Name)) = \(Percent.Round(To: 3))")
+            }
             Indicator.move(to: CGPoint(x: XPoint, y: self.frame.height / 2.0))
             Indicator.addLine(to: CGPoint(x: XPoint - 8, y: self.frame.height - 2))
             Indicator.addLine(to: CGPoint(x: XPoint + 8, y: self.frame.height - 2))
@@ -865,7 +881,12 @@ import UIKit
             let Range = MaxValue - MinValue
             let Percent = (Value + MinValue) / Range
             let YPoint = self.frame.height * CGFloat(Percent)
-            //print("DrawYIndicator(\(Name)) = \(Percent.Round(To: 3))")
+            if Name == "Red"
+            {
+            print("Range[\(Range)]=MaxValue[\(MaxValue)]-MinValue[\(MinValue)]")
+            print("Percent[\(Percent)]=Value[\(Value)]/Range[\(Range)]")
+            print("DrawYIndicator(\(Name)) = \(Percent.Round(To: 3))")
+            }
             Indicator.move(to: CGPoint(x: self.frame.width / 2.0, y: YPoint))
             Indicator.addLine(to: CGPoint(x: 2, y: YPoint - 8))
             Indicator.addLine(to: CGPoint(x: 2, y: YPoint + 8))
