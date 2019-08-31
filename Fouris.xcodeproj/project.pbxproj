@@ -27,6 +27,10 @@
 		17376354230A87EE0050EB22 /* CATextLayer2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17376353230A87EE0050EB22 /* CATextLayer2.swift */; };
 		17376357230A9C9C0050EB22 /* +BucketCleaner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17376356230A9C9C0050EB22 /* +BucketCleaner.swift */; };
 		1737635A230AC6AD0050EB22 /* MiscellaneousExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17376359230AC6AD0050EB22 /* MiscellaneousExtensions.swift */; };
+		173AA38E231A8E9E00802289 /* PredefinedColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173AA38D231A8E9E00802289 /* PredefinedColor.swift */; };
+		173AA390231A8EC600802289 /* PredefinedColorGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173AA38F231A8EC600802289 /* PredefinedColorGroup.swift */; };
+		173AA392231A8EEE00802289 /* PredefinedColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173AA391231A8EEE00802289 /* PredefinedColors.swift */; };
+		173AA394231A8F6B00802289 /* PredefinedColorTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173AA393231A8F6B00802289 /* PredefinedColorTable.swift */; };
 		17477A6F231783C300AAEB14 /* Theming.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17477A6E231783C300AAEB14 /* Theming.storyboard */; };
 		17477A712317853C00AAEB14 /* ThemingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17477A702317853C00AAEB14 /* ThemingController.swift */; };
 		17477A732317891100AAEB14 /* ThemeEditorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17477A722317891100AAEB14 /* ThemeEditorController.swift */; };
@@ -187,6 +191,10 @@
 		17376353230A87EE0050EB22 /* CATextLayer2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CATextLayer2.swift; sourceTree = "<group>"; };
 		17376356230A9C9C0050EB22 /* +BucketCleaner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+BucketCleaner.swift"; sourceTree = "<group>"; };
 		17376359230AC6AD0050EB22 /* MiscellaneousExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscellaneousExtensions.swift; sourceTree = "<group>"; };
+		173AA38D231A8E9E00802289 /* PredefinedColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredefinedColor.swift; sourceTree = "<group>"; };
+		173AA38F231A8EC600802289 /* PredefinedColorGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredefinedColorGroup.swift; sourceTree = "<group>"; };
+		173AA391231A8EEE00802289 /* PredefinedColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredefinedColors.swift; sourceTree = "<group>"; };
+		173AA393231A8F6B00802289 /* PredefinedColorTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredefinedColorTable.swift; sourceTree = "<group>"; };
 		17477A6E231783C300AAEB14 /* Theming.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Theming.storyboard; sourceTree = "<group>"; };
 		17477A702317853C00AAEB14 /* ThemingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemingController.swift; sourceTree = "<group>"; };
 		17477A722317891100AAEB14 /* ThemeEditorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeEditorController.swift; sourceTree = "<group>"; };
@@ -373,6 +381,17 @@
 			path = BaseGameAIs;
 			sourceTree = "<group>";
 		};
+		173AA38C231A8E8300802289 /* Predefined */ = {
+			isa = PBXGroup;
+			children = (
+				173AA38D231A8E9E00802289 /* PredefinedColor.swift */,
+				173AA38F231A8EC600802289 /* PredefinedColorGroup.swift */,
+				173AA391231A8EEE00802289 /* PredefinedColors.swift */,
+				173AA393231A8F6B00802289 /* PredefinedColorTable.swift */,
+			);
+			path = Predefined;
+			sourceTree = "<group>";
+		};
 		1749B6DF22BB2687003DC65D /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -414,6 +433,7 @@
 				17477A742317F1C200AAEB14 /* GameBackgroundDialog.swift */,
 				17477A762317F7E800AAEB14 /* PieceSelectorDialog.swift */,
 				17C1E90C23190FBE004040B6 /* OtherExtensions.swift */,
+				17477A6E231783C300AAEB14 /* Theming.storyboard */,
 			);
 			path = Dialogs;
 			sourceTree = "<group>";
@@ -740,6 +760,7 @@
 		17ED240D227165FF002B92E1 /* Colors */ = {
 			isa = PBXGroup;
 			children = (
+				173AA38C231A8E8300802289 /* Predefined */,
 				17ED240A22716273002B92E1 /* ColorServer.swift */,
 				17ED240E22716610002B92E1 /* ColorTable.swift */,
 				1759F6B422AB7F5C00574A01 /* TColor.swift */,
@@ -780,7 +801,6 @@
 				17616AC72316496300DFFEFE /* Dialogs */,
 				17F0B493225CBE730071514E /* AppDelegate.swift */,
 				171D5D462313FC5200043856 /* MainStoryboard.storyboard */,
-				17477A6E231783C300AAEB14 /* Theming.storyboard */,
 				1761AA56230FE3F400E2A6DE /* iOS_Storyboard.storyboard */,
 				17D5D90222996CBD004897DD /* MainViewController.swift */,
 				17AF231E2313981C00921E6C /* MainViewController2.swift */,
@@ -989,6 +1009,7 @@
 				17D48A8422B2111D00DD7C94 /* ThreeDProtocol.swift in Sources */,
 				17C0E6F722AF9C87003FAFA8 /* IdiotLightMessage.swift in Sources */,
 				177F4FBC229BBB1F00FE72CD /* ThemeManager.swift in Sources */,
+				173AA392231A8EEE00802289 /* PredefinedColors.swift in Sources */,
 				171ED10422F56B9F00CE2CDF /* Rotating4GameAI.swift in Sources */,
 				17B4D2C922A4D49D00987BC5 /* MasterPieceList.swift in Sources */,
 				1782C0F122FE8CA5006CD9D5 /* GeneralAI.swift in Sources */,
@@ -1027,6 +1048,7 @@
 				1721BA7C2260BECF00DC7AFC /* Coin.swift in Sources */,
 				1797524E22C38A4D00BF539A /* +IdiotLights.swift in Sources */,
 				17660BE822892B1E00082E23 /* UIButtonExtensions.swift in Sources */,
+				173AA390231A8EC600802289 /* PredefinedColorGroup.swift in Sources */,
 				177FC1D42318E0F7005727B6 /* ColorPickerProtocol.swift in Sources */,
 				17F6ECF22286E322000F8E11 /* ControlUIProtocol.swift in Sources */,
 				17376357230A9C9C0050EB22 /* +BucketCleaner.swift in Sources */,
@@ -1087,6 +1109,7 @@
 				177F4FC2229BC01600FE72CD /* TileDescriptor.swift in Sources */,
 				17E71A7722AD21620081991E /* MessageHandlerDelegate.swift in Sources */,
 				17F6ECEC2286E0F0000F8E11 /* GameViewProtocol.swift in Sources */,
+				173AA394231A8F6B00802289 /* PredefinedColorTable.swift in Sources */,
 				17C1E90D23190FBE004040B6 /* OtherExtensions.swift in Sources */,
 				1797525022C38A4D00BF539A /* +SpecialAndOtherCommands.swift in Sources */,
 				1749B6E122BB26A0003DC65D /* Conversions.swift in Sources */,
@@ -1101,6 +1124,7 @@
 				17C898C322CDF60F004EA348 /* ArrayStatistics.swift in Sources */,
 				17F0B494225CBE730071514E /* AppDelegate.swift in Sources */,
 				17616ACD23166DF700DFFEFE /* GameStyleTableViewCell.swift in Sources */,
+				173AA38E231A8E9E00802289 /* PredefinedColor.swift in Sources */,
 				176F1B72227B0A0600681CDE /* Settings.swift in Sources */,
 				17477A732317891100AAEB14 /* ThemeEditorController.swift in Sources */,
 				17616AC92316497300DFFEFE /* AboutDialogController.swift in Sources */,
