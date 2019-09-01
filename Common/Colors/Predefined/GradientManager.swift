@@ -62,7 +62,8 @@ class GradientManager
             "daffodil": UIColor(Hex: 0xffff31),
             "mistyrose": UIColor(Hex: 0xffe4e1),
             "greenpastel": UIColor(Hex: 0xbaed91),
-            "pastelpink": UIColor(Hex: 0xffd1dc)
+            "pastelpink": UIColor(Hex: 0xffd1dc),
+            "clear": UIColor(Hex: 0x00ffffff)
     ]
     
     /// Given a color value, return the color's name if known, hex value if not known.
@@ -932,6 +933,17 @@ class GradientManager
             (.Stripes4, Gradients.Stripes4.rawValue, "(White)@(0.0),(White)@(0.2),(Red)@(0.25),(White)@(0.3),(White)@(0.45),(Green)@(0.5),(White)@(0.55),(White)@(0.70),(Blue)@(0.75),(White)@(0.8),(White)@(0.80),(White)@(1.0)"),
             (.Stripes5, Gradients.Stripes5.rawValue, "(White)@(0.0),(White)@(0.2),(Red)@(0.21),(White)@(0.22),(White)@(0.40),(Green)@(0.41),(White)@(0.42),(White)@(0.60),(Blue)@(0.61),(White)@(0.62),(White)@(0.80),(Daffodil)@(0.81),(White)@(0.82),(White)@(1.0)"),
             (.Blueprint, Gradients.Blueprint.rawValue, "(#000060)@(0.0),(#000060)@(0.22),(Cyan)@(0.25),(#000060)@(0.28),(#000060)@(0.47),(Cyan)@(0.5),(#000060)@(0.53),(#000060)@(0.72),(Cyan)@(0.75),(#000060)@(0.78),(#000060)@(1.0)"),
+            (.BlackRed, Gradients.BlackRed.rawValue, "(Black)@(0.0),(Red)@(1.0)"),
+            (.BlackGreen, Gradients.BlackRed.rawValue, "(Black)@(0.0),(Green)@(1.0)"),
+            (.BlackBlue, Gradients.BlackRed.rawValue, "(Black)@(0.0),(Blue)@(1.0)"),
+            (.BlackWhite, Gradients.BlackWhite.rawValue, "(Black)@(0.0),(White)@(1.0"),
+            (.BlackYellow, Gradients.BlackYellow.rawValue, "(Black)@(0.0),(Yellow)@(1.0"),
+            (.BlackCyan, Gradients.BlackCyan.rawValue, "(Black)@(0.0),(Cyan)@(1.0"),
+            (.BlackMagenta, Gradients.BlackMagenta.rawValue, "(Black)@(0.0),(Magenta)@(1.0"),
+            (.ClearWhite, Gradients.ClearWhite.rawValue, "(Clear)@(0.0),(White)@(1.0)"),
+            (.ClearBlack, Gradients.ClearBlack.rawValue, "(Clear)@(0.0),(Black)@(1.0)"),
+            (.WhiteClear, Gradients.WhiteClear.rawValue, "(White)@(0.0),(Clear)@(1.0)"),
+            (.BlackClear, Gradients.BlackClear.rawValue, "(Black)@(0.0),(Clear)@(1.0)"),
     ]
 }
 
@@ -972,5 +984,16 @@ enum Gradients: String
     case Stripes4 = "Stripes 4"
     case Stripes5 = "Stripes 5"
     case Blueprint = "Blueprint"
+    case BlackRed = "Black-Red"
+    case BlackGreen = "Black-Green"
+    case BlackBlue = "Black-Blue"
+    case BlackWhite = "Black-White"
+    case BlackYellow = "Black-Yellow"
+    case BlackCyan = "Black-Cyan"
+    case BlackMagenta = "Black-Magenta"
+    case ClearWhite = "Clear-White"
+    case ClearBlack = "Clear-Black"
+    case WhiteClear = "White-Clear"
+    case BlackClear = "Black-Clear"
     case User = "User"
 }
