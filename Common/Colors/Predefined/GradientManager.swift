@@ -492,6 +492,9 @@ class GradientManager
         return Parts[At]
     }
     
+    /// Default gradient layer name.
+    public static let DefaultGradientName = "Gradient"
+    
     /// Creates and returns a CAGradientLayer with the gradient defined by the passed string
     /// (which uses this class' gradient definition).
     ///
@@ -500,9 +503,10 @@ class GradientManager
     ///   - WithFrame: The frame of the layer.
     ///   - IsVertical: Determines if the gradient is drawn vertically or horizontally.
     ///   - ReverseColors: Determines if the colors in the gradient are reversed.
+    ///   - LayerName: Name of the layer. Defaults to "Gradient".
     /// - Returns: Gradient layer with the colors defined by `From`.
     public static func CreateGradientLayer(From: String, WithFrame: CGRect, IsVertical: Bool = true,
-                                           ReverseColors: Bool = false) -> CAGradientLayer
+                                           ReverseColors: Bool = false, LayerName: String? = nil) -> CAGradientLayer
     {
         var GradientStops = ParseGradient(From)
         GradientStops.sort{$0.1 < $1.1}
@@ -519,6 +523,17 @@ class GradientManager
             GradientStops = Scratch
         }
         let Layer = CAGradientLayer()
+        if LayerName == nil
+        {
+            Layer.name = GradientManager.DefaultGradientName
+        }
+        else
+        {
+            if let CallerLayerName = LayerName
+            {
+                Layer.name = CallerLayerName
+            }
+        }
         Layer.frame = WithFrame
         if IsVertical
         {
@@ -534,7 +549,20 @@ class GradientManager
         var Locations = [NSNumber]()
         for (Color, Location) in GradientStops
         {
-            Stops.append(Color.cgColor as Any)
+            var FinalColor = Color
+            if FinalColor.Alpha() < 1.0
+            {
+                FinalColor = FinalColor.withAlphaComponent(FinalColor.Alpha())
+            }
+            if FinalColor == UIColor.white
+            {
+                FinalColor = UIColor(red: 0.9999, green: 1.0, blue: 1.0, alpha: 1.0)
+            }
+            if FinalColor == UIColor.black
+            {
+                FinalColor = UIColor(red: 0.00001, green: 0.0, blue: 0.0, alpha: 1.0)
+            }
+            Stops.append(FinalColor.cgColor as Any)
             let TheLocation = NSNumber(value: Float(Location))
             Locations.append(TheLocation)
         }
@@ -944,11 +972,12 @@ class GradientManager
             (.ClearBlack, Gradients.ClearBlack.rawValue, "(Clear)@(0.0),(Black)@(1.0)"),
             (.WhiteClear, Gradients.WhiteClear.rawValue, "(White)@(0.0),(Clear)@(1.0)"),
             (.BlackClear, Gradients.BlackClear.rawValue, "(Black)@(0.0),(Clear)@(1.0)"),
+            (.BlackGray, Gradients.BlackGray.rawValue, "(Black)@(0.0),(Gray)@(1.0)"),
     ]
 }
 
 /// Predefined gradient types.
-enum Gradients: String
+enum Gradients: String, CaseIterable
 {
     case WhiteRed = "White-Red"
     case WhiteGreen = "White-Green"
@@ -995,5 +1024,6 @@ enum Gradients: String
     case ClearBlack = "Clear-Black"
     case WhiteClear = "White-Clear"
     case BlackClear = "Black-Clear"
+    case BlackGray = "Black-Gray"
     case User = "User"
 }
