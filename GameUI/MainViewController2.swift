@@ -112,6 +112,7 @@ class MainViewController2: UIViewController,
         MasterPieceList.Initialize()
         LevelManager.Initialize()
         ThemeManager.Initialize()
+        RecentlyUsedColors.Initialize(WithLimit: Settings.GetMostRecentlyUsedColorListCapacity())
         InitializeUI()
         AIData = AITestTable()
         
