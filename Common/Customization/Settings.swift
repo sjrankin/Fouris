@@ -62,8 +62,79 @@ class Settings
         _Settings.set(true, forKey: "UseTDebug")
         _Settings.set(60.0, forKey: "AutoStartDuration")
         _Settings.set(0, forKey: "ColorPickerColorSpace")
+        _Settings.set(false, forKey: "ShowAlphaInColorPicker")
+        _Settings.set(20, forKey: "MostRecentlyUsedColorCapacity")
+        _Settings.set("", forKey: "MostRecentlyUsedColorList")
         _Settings.set("83c630ee-81d4-11e9-bc42-526af7764f64", forKey: "CurrentTheme")
         _Settings.set("3f0d9fee-0b77-465b-a0ac-f1663da23cc9", forKey: "Current3DTheme")
+    }
+    
+    /// Returns the contents of the most recently used colors.
+    /// - Note:
+    ///   - The number of items in the color list is limited by the value returned by **GetMostRecentlyUsedColorListCapacity**
+    ///     when the list was last written.
+    ///   - The format of the returned string is **Hex Value**,**Hex Value**, where **Hex Value** is a hex color value. The
+    ///     delimiter between values is a comma ("**,**").
+    /// - Returns: The contents of the most recently used color list. If the user has not set any colors or on first execution
+    ///            after installation, an empty string will be returned.
+    public static func GetMostRecentlyUsedColorList() -> String
+    {
+        if let Value = _Settings.string(forKey: "MostRecentlyUsedColorList")
+        {
+            return Value
+        }
+        else
+        {
+            return ""
+        }
+    }
+    
+    /// Set the contents of the most recently used colors list to the user defaults.
+    /// - Note:
+    ///   - The number of items should not exceed more than the value returned by **GetMostRecentlyUsedColorListCapacity**. However,
+    ///     this function does not enforce that limit.
+    ///   - The format of the passed string is **Hex Value**,**Hex Value**, where **Hex Value** is a hex color value. The
+    ///     delimiter between values is a comma ("**,**").
+    /// - Parameter NewValue: The new recently used color list.
+    public static func SetMostRecentlyUsedColorList(NewValue: String)
+    {
+        _Settings.set(NewValue, forKey: "MostRecentlyUsedColorList")
+    }
+    
+    /// Get the maximum size of the most recently used color list.
+    /// - Note: If run after initial installation, iOS will return 0. For that reason, if the value in the user
+    ///         settings is 0, 20 is assumed and set to the user settings file.
+    /// - Returns: The maximum capacity of the most recently used color list.
+    public static func GetMostRecentlyUsedColorListCapacity() -> Int
+    {
+        var Capacity = _Settings.integer(forKey: "MostRecentlyUsedColorCapacity")
+        if Capacity == 0
+        {
+            Capacity = 20
+            SetMostRecentlyUsedColorListCapacity(NewValue: Capacity)
+        }
+        return Capacity
+    }
+    
+    /// Sets the maximum size of the most recently used color list.
+    /// - Parameter NewValue: The new maximum size of the most recently used color list.
+    public static func SetMostRecentlyUsedColorListCapacity(NewValue: Int)
+    {
+        _Settings.set(NewValue, forKey: "MostRecentlyUsedColorCapacity")
+    }
+    
+    /// Gets the show/enable alpha for RGB in the color picker.
+    /// - Returns: Show alpha flag.
+    public static func GetShowAlpha() -> Bool
+    {
+        return _Settings.bool(forKey: "ShowAlphaInColorPicker")
+    }
+    
+    /// Set the show/enable alpha for RGB in the color picker.
+    /// - Parameter NewValue: New show alpha flag.
+    public static func SetShowAlpha(NewValue: Bool)
+    {
+        _Settings.set(NewValue, forKey: "ShowAlphaInColorPicker")
     }
     
     /// Gets the color picker color space indicator.
@@ -71,6 +142,7 @@ class Settings
     ///  - 0: RGB
     ///  - 1: HSB
     ///  - 2: YUV
+    ///  - 3: CMYK
     /// - Returns: Value indicating which color space to use for the color picker.
     public static func GetColorPickerColorSpace() -> Int
     {
@@ -82,6 +154,7 @@ class Settings
     ///  - 0: RGB
     ///  - 1: HSB
     ///  - 2: YUV
+    ///  - 3: CMYK
     /// - Parameter NewValue: New color space indicator value. Invalid values cause control to be returned
     ///                       and no changes made.
     public static func SetColorPickerColorSpace(NewValue: Int)
@@ -90,7 +163,7 @@ class Settings
         {
             return
         }
-        if NewValue > 2
+        if NewValue > 3
         {
             return
         }
