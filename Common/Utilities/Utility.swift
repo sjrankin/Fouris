@@ -12,6 +12,12 @@ import UIKit
 
 class Utility
 {
+    public static func NormalizeRGB(_ Color: UIColor) -> (Double, Double, Double, Double)
+    {
+        let (A, R, G, B) = GetARGB(SourceColor: Color)
+        return (Double(A), Double(R), Double(G), Double(B))
+    }
+    
     /// Force the test value to conform to the passed range.
     ///
     /// - Parameters:
