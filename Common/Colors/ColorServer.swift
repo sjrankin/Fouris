@@ -364,6 +364,47 @@ class ColorServer
         return Final
     }
     
+    /// Given a color, return a hex string in the requested format.
+    /// - Parameter From: The color whose values will be returned as a hex string.
+    /// - Parameter Format: Determines the format of the returned string.
+    /// - Parameter Prefix: The prefix string for the result. Defaults to "**#**".
+    /// - Returns: String hex value of the passed color in the specified format.
+    public static func MakeHexString(From: UIColor, Format: ChannelFormats, Prefix: String = "#") -> String
+    {
+        var Red: CGFloat = 0.0
+        var Green: CGFloat = 0.0
+        var Blue: CGFloat = 0.0
+        var Alpha: CGFloat = 0.0
+        From.getRed(&Red, green: &Green, blue: &Blue, alpha: &Alpha)
+        let IRed = Int(Red * 255.0)
+        let SRed = String(format: "%02x", IRed)
+        let IGreen = Int(Green * 255.0)
+        let SGreen = String(format: "%02x", IGreen)
+        let IBlue = Int(Blue * 255.0)
+        let SBlue = String(format: "%02x", IBlue)
+        let IAlpha = Int(Alpha * 255.0)
+        let SAlpha = String(format: "%02x", IAlpha)
+        var Final = Prefix
+        switch Format
+        {
+            case .RGB:
+            Final = Final + SRed + SGreen + SBlue
+            
+            case .BGR:
+            Final = Final + SBlue + SGreen + SRed
+            
+            case .ARGB:
+            Final = Final + SAlpha + SRed + SGreen + SBlue
+            
+            case .RGBA:
+            Final = Final + SRed + SGreen + SBlue + SAlpha
+            
+            case .BGRA:
+            Final = Final + SBlue + SGreen + SRed + SAlpha
+        }
+        return Final
+    }
+    
     /// Given a color name enumeration, return the string hex value of the color.
     /// - Parameter From: The color name enumeration.
     /// - Returns: String hex value of the passed color.
@@ -371,4 +412,19 @@ class ColorServer
     {
         return MakeHexString(From: ColorFrom(From))
     }
+}
+
+/// Channel formats used to determine the format of color to hex values.
+/// - **RGB**: Color returned in red, green, blue order.
+/// - **BGR**: Color returned in blue, green, red order.
+/// - **ARGB**: Color returned in alpha, red, green, blue order.
+/// - **BGRA**: Color returned in blue, green, red, alpha order.
+/// - **RGBA**: Color returned in red, green, blue, alpha order.
+enum ChannelFormats: String, CaseIterable
+{
+    case RGB = "RGB"
+    case BGR = "BGR"
+    case ARGB = "ARGB"
+    case BGRA = "BGRA"
+    case RGBA = "RGBA"
 }
