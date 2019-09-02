@@ -43,6 +43,7 @@
 		1749B6E422BB3F68003DC65D /* TextLayerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1749B6E322BB3F68003DC65D /* TextLayerProtocol.swift */; };
 		174BEFDD2287B4DF003A43E5 /* ViewEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BEFDC2287B4DF003A43E5 /* ViewEnvironment.swift */; };
 		174BEFDF22881941003A43E5 /* GameAINotificationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BEFDE22881941003A43E5 /* GameAINotificationProtocol.swift */; };
+		174CAAD6231CFA2B003823E2 /* ColorSpaceConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174CAAD5231CFA2B003823E2 /* ColorSpaceConverter.swift */; };
 		175098B122902E2800A411DE /* GameAI2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175098B022902E2800A411DE /* GameAI2.swift */; };
 		175098B32290338400A411DE /* MapType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175098B22290338400A411DE /* MapType.swift */; };
 		1753ABED225E213200FC7089 /* PieceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1753ABEC225E213200FC7089 /* PieceFactory.swift */; };
@@ -210,6 +211,7 @@
 		1749B6E322BB3F68003DC65D /* TextLayerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextLayerProtocol.swift; sourceTree = "<group>"; };
 		174BEFDC2287B4DF003A43E5 /* ViewEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewEnvironment.swift; sourceTree = "<group>"; };
 		174BEFDE22881941003A43E5 /* GameAINotificationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAINotificationProtocol.swift; sourceTree = "<group>"; };
+		174CAAD5231CFA2B003823E2 /* ColorSpaceConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSpaceConverter.swift; sourceTree = "<group>"; };
 		175098B022902E2800A411DE /* GameAI2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAI2.swift; sourceTree = "<group>"; };
 		175098B22290338400A411DE /* MapType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapType.swift; sourceTree = "<group>"; };
 		1753ABEC225E213200FC7089 /* PieceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceFactory.swift; sourceTree = "<group>"; };
@@ -774,6 +776,7 @@
 				1759F6B422AB7F5C00574A01 /* TColor.swift */,
 				17C1E90A23190F5E004040B6 /* UIColorExtensions.swift */,
 				173B4B18231BA165007B22F6 /* RecentlyUsedColors.swift */,
+				174CAAD5231CFA2B003823E2 /* ColorSpaceConverter.swift */,
 			);
 			path = Colors;
 			sourceTree = "<group>";
@@ -1071,6 +1074,7 @@
 				1713735A22EAE6D500C9F9A7 /* SCNTetrahedron.swift in Sources */,
 				17D1FB6C2268A09400EDA707 /* GameAI.swift in Sources */,
 				177F4FD9229C1A7600FE72CD /* SerializerExtension.swift in Sources */,
+				174CAAD6231CFA2B003823E2 /* ColorSpaceConverter.swift in Sources */,
 				1797523422C38A4D00BF539A /* +ClientCommands.swift in Sources */,
 				17E74BF0230E7C9B00A62274 /* MainSlideInView.swift in Sources */,
 				1749B6E422BB3F68003DC65D /* TextLayerProtocol.swift in Sources */,
