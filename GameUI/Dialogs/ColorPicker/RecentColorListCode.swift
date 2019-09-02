@@ -9,8 +9,10 @@
 import Foundation
 import UIKit
 
-class RecentColorListCode: UIViewController, UITableViewDelegate, UITableViewDataSource
+class RecentColorListCode: UIViewController, UITableViewDelegate, UITableViewDataSource, ColorPickerProtocol
 {
+    public weak var ColorDelegate: ColorPickerProtocol? = nil
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -65,6 +67,14 @@ class RecentColorListCode: UIViewController, UITableViewDelegate, UITableViewDat
         let (Color, ColorName, ColorValue) = ColorList[indexPath.row]
         Cell.LoadData(Color: Color, Name: ColorName, Value: ColorValue, Width: Width)
         return Cell
+    }
+    
+    func ColorToEdit(_ Color: UIColor, Tag: Any?)
+    {
+    }
+    
+    func EditedColor(_ Edited: UIColor?, Tag: Any?)
+    {
     }
     
     @IBOutlet weak var RecentTable: UITableView!
