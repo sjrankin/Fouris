@@ -40,11 +40,6 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         SampleColorLayer.backgroundColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0).cgColor
         SampleColorView.layer.addSublayer(SampleColorLayer)
         
-        ChannelALabel.text = "Red"
-        ChannelBLabel.text = "Blue"
-        ChannelCLabel.text = "Green"
-        ChannelDLabel.text = "Alpha"
-        
         ButtonView.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0)
         ButtonView.layer.borderColor = UIColor.black.cgColor
         ColorspaceView.backgroundColor = UIColor.clear
@@ -58,52 +53,9 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         TitleBarLayer.zPosition = -100
         TitleBar.layer.addSublayer(TitleBarLayer)
         
-        ChannelASlider.minimumTrackTintColor = UIColor.red
-        ChannelASlider.tintColor = UIColor.black
-        ChannelBSlider.minimumTrackTintColor = UIColor.green
-        ChannelBSlider.tintColor = UIColor.black
-        ChannelCSlider.minimumTrackTintColor = UIColor.blue
-        ChannelCSlider.tintColor = UIColor.black
-        ChannelDSlider.minimumTrackTintColor = UIColor.darkGray
-        ChannelDSlider.tintColor = UIColor.black
-        
         InitializeWithColor()
         InitializeSliders()
-        
-        switch WorkingColorspace
-        {
-            case .RGB:
-                ChannelDTextBox.isHidden = !EnableAlpha
-                ChannelDTextBox.isUserInteractionEnabled = EnableAlpha
-                ChannelDLabel.isHidden = !EnableAlpha
-                ChannelDContainer.isHidden = !EnableAlpha
-                ChannelDContainer.isUserInteractionEnabled = EnableAlpha
-                ChannelDSlider.isUserInteractionEnabled = EnableAlpha
-            
-            case .HSB:
-                ChannelDTextBox.isHidden = true
-                ChannelDTextBox.isUserInteractionEnabled = false
-                ChannelDLabel.isHidden = true
-                ChannelDContainer.isHidden = true
-                ChannelDContainer.isUserInteractionEnabled = false
-                ChannelDSlider.isUserInteractionEnabled = false
-            
-            case .YUV:
-                ChannelDTextBox.isHidden = true
-                ChannelDTextBox.isUserInteractionEnabled = false
-                ChannelDLabel.isHidden = true
-                ChannelDContainer.isHidden = true
-                ChannelDContainer.isUserInteractionEnabled = false
-                ChannelDSlider.isUserInteractionEnabled = false
-            
-            case .CMYK:
-                ChannelDTextBox.isHidden = false
-                ChannelDTextBox.isUserInteractionEnabled = true
-                ChannelDLabel.isHidden = false
-                ChannelDContainer.isHidden = false
-                ChannelDContainer.isUserInteractionEnabled = true
-                ChannelDSlider.isUserInteractionEnabled = true
-        }
+        UpdateColorspace()
     }
     
     func InitializeSliders()
@@ -170,17 +122,25 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         UpdateColorspace()
     }
     
+    /// Handle the cancel button press. Tell the color delegate nothing of interest happened.
+    /// - Parameter sender: Not used.
     @IBAction func HandleCancelPressed(_ sender: Any)
     {
         ColorDelegate?.EditedColor(nil, Tag: DelegateTag)
         self.dismiss(animated: true, completion: nil)
     }
     
+    /// Handle the OK button press. Tell the color delegate the newly selected (or old if nothing changed) color.
+    /// - Parameter sender: Not used.
     @IBAction func HandleOKPressed(_ sender: Any)
     {
+        ColorDelegate?.EditedColor(CurrentColor, Tag: DelegateTag)
         self.dismiss(animated: true, completion: nil)
     }
     
+    /// Called by the color delegate implementing class to tell use what color to edit.
+    /// - Parameter Color: The color to edit.
+    /// - Parameter Tag: The tag to return to the caller. Unchanged by the color picker.
     func ColorToEdit(_ Color: UIColor, Tag: Any?)
     {
         DelegateTag = Tag
@@ -193,11 +153,34 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
     
     private var DelegateTag: Any? = nil
     
+    /// The user used another way to select a color and that particular view is letting us know the user is done.
+    /// - Note:
+    ///   - If **Color** is nil, no action is taken.
+    ///   - If **Tag** is nil or not a string or not equal to one of the tag values sent by us, no action is taken.
+    /// - Parameter Color: If non-nil, the color the user selected. If nil, the user canceled selection.
+    /// - Parameter Tag: The tag sent to the other view controller and returned to us (with the expectation that no
+    ///                  changes were made to it).
     func EditedColor(_ Color: UIColor?, Tag: Any?)
     {
-        //Should not be called.
+        if let SomeColor = Color
+        {
+            if let SomeTag = Tag
+            {
+                if let SomeTagValue = SomeTag as? String
+                {
+                    if ["ColorFromNamePicker", "ColorFromColorChipSelector", "ColorFromRecentColors"].contains(SomeTagValue)
+                    {
+                        CurrentColor = SomeColor
+                        UpdateColor(WithColor: CurrentColor!)
+                        UpdateChannelsUI(WithColor: CurrentColor!, From: "EditedColor")
+                        SetSliderPositions(WithColor: CurrentColor!)
+                    }
+                }
+            }
+        }
     }
     
+    /// Update the UI for the current working colorspace (set elsewhere by the user).
     func UpdateColorspace()
     {
         switch WorkingColorspace
@@ -216,6 +199,7 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         }
     }
     
+    /// Set the UI for RGB (and possibly A). Channel values are all between 0 and 255.
     func SetRGB()
     {
         if ChannelALayer != nil
@@ -240,28 +224,34 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         }
         
         let ChannelAGradient = GradientManager.GetGradient(.BlackRed)
-         ChannelALayer = GradientManager.CreateGradientLayer(From: ChannelAGradient!, WithFrame: ChannelAContainer.bounds, IsVertical: false)
+        ChannelALayer = GradientManager.CreateGradientLayer(From: ChannelAGradient!, WithFrame: ChannelAContainer.bounds, IsVertical: false)
         ChannelALayer.zPosition = -100
         ChannelAContainer.layer.addSublayer(ChannelALayer)
+        ChannelASlider.minimumTrackTintColor = UIColor.red
         
         ChannelBContainer.clipsToBounds = true
         let ChannelBGradient = GradientManager.GetGradient(.BlackGreen)
-         ChannelBLayer = GradientManager.CreateGradientLayer(From: ChannelBGradient!, WithFrame: ChannelBContainer.bounds, IsVertical: false)
+        ChannelBLayer = GradientManager.CreateGradientLayer(From: ChannelBGradient!, WithFrame: ChannelBContainer.bounds, IsVertical: false)
         ChannelBLayer.zPosition = -100
         ChannelBContainer.layer.addSublayer(ChannelBLayer)
+        ChannelBSlider.minimumTrackTintColor = UIColor.green
         
         ChannelCContainer.clipsToBounds = true
         let ChannelCGradient = GradientManager.GetGradient(.BlackBlue)
-         ChannelCLayer = GradientManager.CreateGradientLayer(From: ChannelCGradient!, WithFrame: ChannelCContainer.bounds, IsVertical: false)
+        ChannelCLayer = GradientManager.CreateGradientLayer(From: ChannelCGradient!, WithFrame: ChannelCContainer.bounds, IsVertical: false)
         ChannelCLayer.zPosition = -100
         ChannelCContainer.layer.addSublayer(ChannelCLayer)
+        ChannelCSlider.minimumTrackTintColor = UIColor.blue
+        
+        ShowChannelD(EnableAlpha, Fast: true)
         
         let ChannelDGradient = GradientManager.GetGradient(.ClearWhite)
-         ChannelDLayer = GradientManager.CreateGradientLayer(From: ChannelDGradient!, WithFrame: ChannelDContainer.bounds,
-                                                                IsVertical: false)
+        ChannelDLayer = GradientManager.CreateGradientLayer(From: ChannelDGradient!, WithFrame: ChannelDContainer.bounds,
+                                                            IsVertical: false)
         ChannelDLayer.isOpaque = false
         ChannelDLayer.zPosition = -100
         ChannelDContainer.layer.addSublayer(ChannelDLayer)
+        ChannelDSlider.minimumTrackTintColor = UIColor.darkGray
         
         let Red = CurrentColor?.r
         let Green = CurrentColor?.g
@@ -283,6 +273,7 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         EnableRGBAlphaSwitch.isEnabled = true
     }
     
+    /// Set the UI for HSB. H channel values vary between 0 and 360 and S and B between 0.0 and 1.0.
     func SetHSB()
     {
         if ChannelALayer != nil
@@ -307,38 +298,45 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         }
         
         let ChannelAGradient = GradientManager.GetGradient(.Rainbow)
-         ChannelALayer = GradientManager.CreateGradientLayer(From: ChannelAGradient!, WithFrame: ChannelAContainer.bounds, IsVertical: false)
+        ChannelALayer = GradientManager.CreateGradientLayer(From: ChannelAGradient!, WithFrame: ChannelAContainer.bounds, IsVertical: false)
         ChannelALayer.zPosition = -100
         ChannelAContainer.layer.addSublayer(ChannelALayer)
+        ChannelASlider.minimumTrackTintColor = UIColor.black
         
         ChannelBContainer.clipsToBounds = true
         let ChannelBGradient = GradientManager.GetGradient(.BlackGray)
-         ChannelBLayer = GradientManager.CreateGradientLayer(From: ChannelBGradient!, WithFrame: ChannelBContainer.bounds, IsVertical: false)
+        ChannelBLayer = GradientManager.CreateGradientLayer(From: ChannelBGradient!, WithFrame: ChannelBContainer.bounds, IsVertical: false)
         ChannelBLayer.zPosition = -100
         ChannelBContainer.layer.addSublayer(ChannelBLayer)
+        ChannelBSlider.minimumTrackTintColor = UIColor.darkGray
         
         ChannelCContainer.clipsToBounds = true
         let ChannelCGradient = GradientManager.GetGradient(.BlackWhite)
-         ChannelCLayer = GradientManager.CreateGradientLayer(From: ChannelCGradient!, WithFrame: ChannelCContainer.bounds, IsVertical: false)
+        ChannelCLayer = GradientManager.CreateGradientLayer(From: ChannelCGradient!, WithFrame: ChannelCContainer.bounds, IsVertical: false)
         ChannelCLayer.zPosition = -100
         ChannelCContainer.layer.addSublayer(ChannelCLayer)
+        ChannelCSlider.minimumTrackTintColor = UIColor.white
         
         let Hue = (CurrentColor?.Hue)!
         let Saturation = (CurrentColor?.Saturation)!
         let Brightness = (CurrentColor?.Brightness)!
-        ChannelALabel.text = "Saturation"
-        ChannelASlider.value = Float(1.0 - Double(Saturation))
         
-        ChannelBLabel.text = "Hue"
-        ChannelBSlider.value = Float(Hue)
+        ChannelALabel.text = "Hue"
+        ChannelASlider.value = Float(Hue)
+        
+        ChannelBLabel.text = "Saturation"
+        ChannelBSlider.value = Float(Saturation)
         
         ChannelCLabel.text = "Brightness"
-        ChannelCSlider.value = Float(1.0 - Double(Brightness))
+        ChannelCSlider.value = Float(Brightness)
+        
+        ShowChannelD(false, Fast: true)
         
         EnableAlphaText.isEnabled = false
         EnableRGBAlphaSwitch.isEnabled = false
     }
     
+        /// Set the UI for YUV. All channel values vary between 0.0 and 1.0.
     func SetYUV()
     {
         if ChannelALayer != nil
@@ -363,21 +361,26 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         }
         
         let ChannelAGradient = GradientManager.GetGradient(.BlackGray)
-         ChannelALayer = GradientManager.CreateGradientLayer(From: ChannelAGradient!, WithFrame: ChannelAContainer.bounds, IsVertical: false)
+        ChannelALayer = GradientManager.CreateGradientLayer(From: ChannelAGradient!, WithFrame: ChannelAContainer.bounds, IsVertical: false)
         ChannelALayer.zPosition = -100
         ChannelAContainer.layer.addSublayer(ChannelALayer)
+        ChannelASlider.minimumTrackTintColor = UIColor.gray
         
         ChannelBContainer.clipsToBounds = true
         let ChannelBGradient = GradientManager.GetGradient(.BlackGray)
-         ChannelBLayer = GradientManager.CreateGradientLayer(From: ChannelBGradient!, WithFrame: ChannelBContainer.bounds, IsVertical: false)
+        ChannelBLayer = GradientManager.CreateGradientLayer(From: ChannelBGradient!, WithFrame: ChannelBContainer.bounds, IsVertical: false)
         ChannelBLayer.zPosition = -100
         ChannelBContainer.layer.addSublayer(ChannelBLayer)
+        ChannelBSlider.minimumTrackTintColor = UIColor.gray
         
         ChannelCContainer.clipsToBounds = true
         let ChannelCGradient = GradientManager.GetGradient(.BlackGray)
-         ChannelCLayer = GradientManager.CreateGradientLayer(From: ChannelCGradient!, WithFrame: ChannelCContainer.bounds, IsVertical: false)
+        ChannelCLayer = GradientManager.CreateGradientLayer(From: ChannelCGradient!, WithFrame: ChannelCContainer.bounds, IsVertical: false)
         ChannelCLayer.zPosition = -100
         ChannelCContainer.layer.addSublayer(ChannelCLayer)
+        ChannelCSlider.minimumTrackTintColor = UIColor.gray
+        
+        ShowChannelD(false, Fast: true)
         
         ChannelALabel.text = "Y"
         ChannelBLabel.text = "U"
@@ -387,52 +390,58 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         EnableRGBAlphaSwitch.isEnabled = false
     }
     
+    /// Set the UI for CMYK. All channel values vary between 0.0 and 1.0.
     func SetCMYK()
     {
         if ChannelALayer != nil
         {
-        ChannelALayer.removeFromSuperlayer()
-        ChannelALayer = nil
+            ChannelALayer.removeFromSuperlayer()
+            ChannelALayer = nil
         }
         if ChannelBLayer != nil
         {
-        ChannelBLayer.removeFromSuperlayer()
-        ChannelBLayer = nil
+            ChannelBLayer.removeFromSuperlayer()
+            ChannelBLayer = nil
         }
         if ChannelCLayer != nil
         {
-        ChannelCLayer.removeFromSuperlayer()
-        ChannelCLayer = nil
+            ChannelCLayer.removeFromSuperlayer()
+            ChannelCLayer = nil
         }
         if ChannelDLayer != nil
         {
-        ChannelDLayer.removeFromSuperlayer()
-        ChannelDLayer = nil
+            ChannelDLayer.removeFromSuperlayer()
+            ChannelDLayer = nil
         }
         
         let ChannelAGradient = GradientManager.GetGradient(.BlackCyan)
-         ChannelALayer = GradientManager.CreateGradientLayer(From: ChannelAGradient!, WithFrame: ChannelAContainer.bounds, IsVertical: false)
+        ChannelALayer = GradientManager.CreateGradientLayer(From: ChannelAGradient!, WithFrame: ChannelAContainer.bounds, IsVertical: false)
         ChannelALayer.zPosition = -100
         ChannelAContainer.layer.addSublayer(ChannelALayer)
+        ChannelASlider.minimumTrackTintColor = UIColor.cyan
         
         ChannelBContainer.clipsToBounds = true
         let ChannelBGradient = GradientManager.GetGradient(.BlackMagenta)
-         ChannelBLayer = GradientManager.CreateGradientLayer(From: ChannelBGradient!, WithFrame: ChannelBContainer.bounds, IsVertical: false)
+        ChannelBLayer = GradientManager.CreateGradientLayer(From: ChannelBGradient!, WithFrame: ChannelBContainer.bounds, IsVertical: false)
         ChannelBLayer.zPosition = -100
         ChannelBContainer.layer.addSublayer(ChannelBLayer)
+        ChannelBSlider.minimumTrackTintColor = UIColor.magenta
         
         ChannelCContainer.clipsToBounds = true
         let ChannelCGradient = GradientManager.GetGradient(.BlackYellow)
-         ChannelCLayer = GradientManager.CreateGradientLayer(From: ChannelCGradient!, WithFrame: ChannelCContainer.bounds, IsVertical: false)
+        ChannelCLayer = GradientManager.CreateGradientLayer(From: ChannelCGradient!, WithFrame: ChannelCContainer.bounds, IsVertical: false)
         ChannelCLayer.zPosition = -100
         ChannelCContainer.layer.addSublayer(ChannelCLayer)
+        ChannelCSlider.minimumTrackTintColor = UIColor.yellow
         
+        ShowChannelD(true, Fast: true)
         let ChannelDGradient = GradientManager.GetGradient(.WhiteBlack)
-         ChannelDLayer = GradientManager.CreateGradientLayer(From: ChannelDGradient!, WithFrame: ChannelDContainer.bounds,
-                                                                IsVertical: false)
+        ChannelDLayer = GradientManager.CreateGradientLayer(From: ChannelDGradient!, WithFrame: ChannelDContainer.bounds,
+                                                            IsVertical: false)
         ChannelDLayer.isOpaque = true
         ChannelDLayer.zPosition = -100
         ChannelDContainer.layer.addSublayer(ChannelDLayer)
+        ChannelDSlider.minimumTrackTintColor = UIColor.black
         
         ChannelALabel.text = "Cyan"
         ChannelBLabel.text = "Magenta"
@@ -445,32 +454,37 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
     
     func NewSliderValue(Name: String, NewValue: Double)
     {
-        //print("New slider value \(NewValue) from \(Name).")
-        let rvalue: CGFloat = CGFloat(ChannelASlider.value)//CGFloat(1.0 - ChannelASlider.value)
-        let gvalue: CGFloat = CGFloat(ChannelBSlider.value)//CGFloat(1.0 - ChannelBSlider.value)
-        let bvalue: CGFloat = CGFloat(ChannelCSlider.value)//CGFloat(1.0 - ChannelCSlider.value)
+        let rvalue: CGFloat = CGFloat(ChannelASlider.value)
+        let gvalue: CGFloat = CGFloat(ChannelBSlider.value)
+        let bvalue: CGFloat = CGFloat(ChannelCSlider.value)
         var avalue: CGFloat = 1.0
-        if WorkingColorspace == .RGB
+        switch WorkingColorspace
         {
-            avalue = EnableAlpha ? /*CGFloat(1.0 - ChannelDSlider.value)*/ CGFloat(ChannelDSlider.value) : 1.0
-        }
-        else
-        {
-            avalue = 1.0
+            case .RGB:
+                avalue = EnableAlpha ? CGFloat(ChannelDSlider.value) : 1.0
+            
+            case .CMYK:
+                avalue = CGFloat(ChannelDSlider.value)
+            
+            default:
+            break
         }
         var SampleColor = UIColor.red
         switch WorkingColorspace
         {
             case .RGB:
-                //RGB
                 SampleColor = UIColor(red: rvalue, green: gvalue, blue: bvalue, alpha: avalue)
             
             case .HSB:
-                //HSB
-                SampleColor = UIColor(hue: 1.0 - gvalue, saturation: rvalue, brightness: bvalue, alpha: 1.0)
+                SampleColor = UIColor(hue: rvalue, saturation: gvalue, brightness: bvalue, alpha: 1.0)
             
-            default:
-                break
+            case .YUV:
+                let Converted = ColorSpaceConverter.ToRGB(YUV: (Double(rvalue), Double(gvalue), Double(bvalue)))
+                SampleColor = Converted
+            
+            case .CMYK:
+                let Converted = ColorSpaceConverter.ToRGB(CMYK: (Double(rvalue), Double(gvalue), Double(bvalue), Double(avalue)))
+                SampleColor = Converted
         }
         
         UpdateColor(WithColor: SampleColor)
@@ -488,12 +502,23 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
     {
         CurrentColor = WithColor
         SampleColorView.backgroundColor = WithColor
-        let ColorValue = "#" + String(format: "%02x", Int(WithColor.r * 255.0)) +
-            String(format: "%02x", Int(WithColor.g * 255.0)) +
-            String(format: "%02x", Int(WithColor.b * 255.0))
+        var ColorFormat = ChannelFormats.RGB
+        if EnableAlpha
+        {
+            ColorFormat = .ARGB
+        }
+        let ColorValue = ColorServer.MakeHexString(From: WithColor, Format: ColorFormat, Prefix: "#")
         ColorValueLabel.text = ColorValue
-        var ColorNames = PredefinedColors.NamesFrom(FindColor: WithColor)
+        let ColorNames = PredefinedColors.NamesFrom(FindColor: WithColor)
         let ColorName: String? = ColorNames.count > 0 ? ColorNames[0] : nil
+        if let FinalColorName = ColorName
+        {
+            ColorNameLabel.text = FinalColorName
+        }
+        else
+        {
+            ColorNameLabel.text = ""
+        }
         switch WorkingColorspace
         {
             case .RGB:
@@ -545,52 +570,148 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
     
     func UpdateChannelsUI(WithColor: UIColor, From: String)
     {
-        if let ClosestColorName = PredefinedColors.NameFrom(Color: WithColor)
+        switch WorkingColorspace
         {
-            ColorNameLabel.text = ClosestColorName
+            case .RGB:
+                let AValue = Int(255.0 * Utility.Round(WithColor.r, ToPlaces: 3))
+                let BValue = Int(255.0 * Utility.Round(WithColor.g, ToPlaces: 3))
+                let CValue = Int(255.0 * Utility.Round(WithColor.b, ToPlaces: 3))
+                let DValue = Int(255.0 * Utility.Round(WithColor.a, ToPlaces: 3))
+                ChannelATextBox.text = "\(AValue)"
+                ChannelBTextBox.text = "\(BValue)"
+                ChannelCTextBox.text = "\(CValue)"
+                ChannelDTextBox.text = "\(DValue)"
+            
+            case .HSB:
+                let (H, S, B) = ColorSpaceConverter.ToHSB(RGB: WithColor)
+                let AValue = Int(360.0 * Utility.Round(H, ToPlaces: 3))
+                let BValue = Utility.Round(S, ToPlaces: 3)
+                let CValue = Utility.Round(B, ToPlaces: 3)
+                ChannelATextBox.text = "\(AValue)"
+                ChannelBTextBox.text = "\(BValue)"
+                ChannelCTextBox.text = "\(CValue)"
+
+            case .YUV:
+                let (Y, U, V) = ColorSpaceConverter.ToYUV(RGB: WithColor)
+                let AValue = Utility.Round(Y, ToPlaces: 3)
+                let BValue = Utility.Round(U, ToPlaces: 3)
+                let CValue = Utility.Round(V, ToPlaces: 3)
+                ChannelATextBox.text = "\(AValue)"
+                ChannelBTextBox.text = "\(BValue)"
+                ChannelCTextBox.text = "\(CValue)"
+            
+            case .CMYK:
+                let (C, M, Y, K) = ColorSpaceConverter.ToCMYK(RGB: WithColor)
+                let AValue = Utility.Round(C, ToPlaces: 3)
+                let BValue = Utility.Round(M, ToPlaces: 3)
+                let CValue = Utility.Round(Y, ToPlaces: 3)
+                let DValue = Utility.Round(K, ToPlaces: 3)
+                ChannelATextBox.text = "\(AValue)"
+                ChannelBTextBox.text = "\(BValue)"
+                ChannelCTextBox.text = "\(CValue)"
+                ChannelDTextBox.text = "\(DValue)"
         }
-        ColorValueLabel.text = ColorServer.MakeHexString(From: WithColor, Format: .ARGB, Prefix: "#")
-        let AValue = Int(255.0 * Utility.Round(WithColor.r, ToPlaces: 3))
-        let BValue = Int(255.0 * Utility.Round(WithColor.g, ToPlaces: 3))
-        let CValue = Int(255.0 * Utility.Round(WithColor.b, ToPlaces: 3))
-        let DValue = Int(255.0 * Utility.Round(WithColor.a, ToPlaces: 3))
-        ChannelATextBox.text = "\(AValue)"
-        ChannelBTextBox.text = "\(BValue)"
-        ChannelCTextBox.text = "\(CValue)"
-        ChannelDTextBox.text = "\(DValue)"
+
         SampleColorLayer.backgroundColor = WithColor.cgColor
     }
     
     @IBAction func HandleChannelASliderChanged(_ sender: Any)
     {
-        let SliderValue: CGFloat = CGFloat(ChannelASlider.value)
-        let (A, _, G, B) = Utility.GetARGB(SourceColor: CurrentColor!)
-        CurrentColor = UIColor(red: SliderValue, green: G, blue: B, alpha: A)
+        let SliderValue: Double = Double(ChannelASlider.value)
+        switch WorkingColorspace
+        {
+            case .RGB:
+                let (A, _, G, B) = Utility.GetARGB(SourceColor: CurrentColor!)
+                CurrentColor = UIColor(red: CGFloat(SliderValue), green: G, blue: B, alpha: A)
+            
+            case .HSB:
+                let (_, S, B) = ColorSpaceConverter.ToHSB(RGB: CurrentColor!)
+                CurrentColor = ColorSpaceConverter.ToRGB(HSB: (SliderValue, S, B))
+            
+            case .YUV:
+                let (_, U, V) = ColorSpaceConverter.ToYUV(RGB: CurrentColor!)
+                CurrentColor = ColorSpaceConverter.ToRGB(YUV: (SliderValue, U, V))
+            
+            case .CMYK:
+                let (_, M, Y, K) = ColorSpaceConverter.ToCMYK(RGB: CurrentColor!)
+                CurrentColor = ColorSpaceConverter.ToRGB(CMYK: (SliderValue, M, Y, K))
+        }
+
         UpdateChannelsUI(WithColor: CurrentColor!, From: "HandleChannelASliderChanged")
+        UpdateColor(WithColor: CurrentColor!)
     }
     
     @IBAction func HandleChannelBSliderChanged(_ sender: Any)
     {
-        let SliderValue: CGFloat = CGFloat(ChannelBSlider.value)
-        let (A, R, _, B) = Utility.GetARGB(SourceColor: CurrentColor!)
-        CurrentColor = UIColor(red: R, green: SliderValue, blue: B, alpha: A)
+        let SliderValue: Double = Double(ChannelBSlider.value)
+        switch WorkingColorspace
+        {
+            case .RGB:
+                let (A, R, _, B) = Utility.GetARGB(SourceColor: CurrentColor!)
+                CurrentColor = UIColor(red: R, green: CGFloat(SliderValue), blue: B, alpha: A)
+            
+            case .HSB:
+                let (H, _, B) = ColorSpaceConverter.ToHSB(RGB: CurrentColor!)
+                CurrentColor = ColorSpaceConverter.ToRGB(HSB: (H, SliderValue, B))
+            
+            case .YUV:
+                let (Y, _, V) = ColorSpaceConverter.ToYUV(RGB: CurrentColor!)
+                CurrentColor = ColorSpaceConverter.ToRGB(YUV: (Y, SliderValue, V))
+            
+            case .CMYK:
+                let (C, _, Y, K) = ColorSpaceConverter.ToCMYK(RGB: CurrentColor!)
+                CurrentColor = ColorSpaceConverter.ToRGB(CMYK: (C, SliderValue, Y, K))
+        }
+        
         UpdateChannelsUI(WithColor: CurrentColor!, From: "HandleChannelBSliderChanged")
+        UpdateColor(WithColor: CurrentColor!)
     }
     
     @IBAction func HandleChannelCSliderChanged(_ sender: Any)
     {
-        let SliderValue: CGFloat = CGFloat(ChannelCSlider.value)
-        let (A, R, G, _) = Utility.GetARGB(SourceColor: CurrentColor!)
-        CurrentColor = UIColor(red: R, green: G, blue: SliderValue, alpha: A)
+        let SliderValue: Double = Double(ChannelCSlider.value)
+        switch WorkingColorspace
+        {
+            case .RGB:
+                let (A, R, G, _) = Utility.GetARGB(SourceColor: CurrentColor!)
+                CurrentColor = UIColor(red: R, green: G, blue: CGFloat(SliderValue), alpha: A)
+            
+            case .HSB:
+                let (H, S, _) = ColorSpaceConverter.ToHSB(RGB: CurrentColor!)
+                CurrentColor = ColorSpaceConverter.ToRGB(HSB: (H, S, SliderValue))
+            
+            case .YUV:
+                let (Y, U, _) = ColorSpaceConverter.ToYUV(RGB: CurrentColor!)
+                CurrentColor = ColorSpaceConverter.ToRGB(YUV: (Y, U, SliderValue))
+            
+            case .CMYK:
+                let (C, M, _, K) = ColorSpaceConverter.ToCMYK(RGB: CurrentColor!)
+                CurrentColor = ColorSpaceConverter.ToRGB(CMYK: (C, M, SliderValue, K))
+        }
+        
         UpdateChannelsUI(WithColor: CurrentColor!, From: "HandleChannelCSliderChanged")
+        UpdateColor(WithColor: CurrentColor!)
     }
     
     @IBAction func HandleChannelDSliderChanged(_ sender: Any)
     {
-        let SliderValue: CGFloat = CGFloat(ChannelDSlider.value)
-        let (_, R, G, B) = Utility.GetARGB(SourceColor: CurrentColor!)
-        CurrentColor = UIColor(red: R, green: G, blue: B, alpha: SliderValue)
+        let SliderValue: Double = Double(ChannelDSlider.value)
+        switch WorkingColorspace
+        {
+            case .RGB:
+                let (_, R, G, B) = Utility.GetARGB(SourceColor: CurrentColor!)
+                CurrentColor = UIColor(red: R, green: G, blue: B, alpha: CGFloat(SliderValue))
+            
+            case .CMYK:
+                let (C, M, Y, _) = ColorSpaceConverter.ToCMYK(RGB: CurrentColor!)
+                CurrentColor = ColorSpaceConverter.ToRGB(CMYK: (C, M, Y, SliderValue))
+            
+            default:
+            return
+        }
+        
         UpdateChannelsUI(WithColor: CurrentColor!, From: "HandleChannelDSliderChanged")
+        UpdateColor(WithColor: CurrentColor!)
     }
     
     /// Validate input from the user for a channel value.
@@ -640,6 +761,7 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         CurrentColor = UIColor(red: NewRValue, green: G, blue: B, alpha: A)
         UpdateChannelsUI(WithColor: CurrentColor!, From: "HandleChannelATextChanged")
         ChannelASlider.value = Float(NewRValue)
+        UpdateColor(WithColor: CurrentColor!)
     }
     
     @IBAction func HandleChannelBTextChanged(_ sender: Any)
@@ -654,6 +776,7 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         CurrentColor = UIColor(red: R, green: NewGValue, blue: B, alpha: A)
         UpdateChannelsUI(WithColor: CurrentColor!, From: "HandleChannelBTextChanged")
         ChannelBSlider.value = Float(NewGValue)
+        UpdateColor(WithColor: CurrentColor!)
     }
     
     @IBAction func HandleChannelCTextChanged(_ sender: Any)
@@ -668,6 +791,7 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         CurrentColor = UIColor(red: R, green: G, blue: NewBValue, alpha: A)
         UpdateChannelsUI(WithColor: CurrentColor!, From: "HandleChannelCTextChanged")
         ChannelCSlider.value = Float(NewBValue)
+        UpdateColor(WithColor: CurrentColor!)
     }
     
     @IBAction func HandleChannelDTextChanged(_ sender: Any)
@@ -682,6 +806,28 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         CurrentColor = UIColor(red: R, green: G, blue: B, alpha: NewAValue)
         UpdateChannelsUI(WithColor: CurrentColor!, From: "HandleChannelDTextChanged")
         ChannelDSlider.value = Float(NewAValue)
+        UpdateColor(WithColor: CurrentColor!)
+    }
+    
+    func ShowChannelD(_ DoShow: Bool, Fast: Bool)
+    {
+        let Duration = Fast ? 0.0 : 0.25
+        UIView.animate(withDuration: Duration, animations:
+            {
+                self.ChannelDLabel.alpha = DoShow ? 1.0 : 0.0
+                self.ChannelDContainer.alpha = DoShow ? 1.0 : 0.0
+                self.ChannelDTextBox.alpha = DoShow ? 1.0 : 0.0
+        },
+                       completion:
+            {
+                _ in
+                self.ChannelDLabel.isHidden = !DoShow
+                self.ChannelDContainer.isHidden = !DoShow
+                self.ChannelDContainer.isUserInteractionEnabled = DoShow
+                self.ChannelDSlider.isUserInteractionEnabled = DoShow
+                self.ChannelDTextBox.isHidden = !DoShow
+                self.ChannelDTextBox.isUserInteractionEnabled = DoShow
+        })
     }
     
     /// Handle changes to the Enable RGB switch.
@@ -692,26 +838,35 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         if WorkingColorspace == .RGB
         {
             EnableAlpha = EnableRGBAlphaSwitch.isOn
-            UIView.animate(withDuration: 0.25, animations:
-                {
-                    self.ChannelDLabel.alpha = self.EnableAlpha ? 1.0 : 0.0
-                    self.ChannelDContainer.alpha = self.EnableAlpha ? 1.0 : 0.0
-                    self.ChannelDTextBox.alpha = self.EnableAlpha ? 1.0 : 0.0
-            },
-                           completion:
-                {
-                    _ in
-                    self.ChannelDLabel.isHidden = !self.EnableAlpha
-                    self.ChannelDContainer.isHidden = !self.EnableAlpha
-                    self.ChannelDContainer.isUserInteractionEnabled = self.EnableAlpha
-                    self.ChannelDSlider.isUserInteractionEnabled = self.EnableAlpha
-                    self.ChannelDTextBox.isHidden = !self.EnableAlpha
-                    self.ChannelDTextBox.isUserInteractionEnabled = self.EnableAlpha
-            })
+            ShowChannelD(EnableAlpha, Fast: false)
         }
     }
     
     private var EnableAlpha = false
+    
+    @IBSegueAction func ColorNamePickerSegue(_ coder: NSCoder) -> ColorNamePickerCode?
+    {
+        let Picker = ColorNamePickerCode(coder: coder)
+        Picker?.ColorDelegate = self
+        Picker?.ColorToEdit(CurrentColor!, Tag: "ColorFromNamePicker")
+        return Picker
+    }
+    
+    @IBSegueAction func ColorChipSelectorSegue(_ coder: NSCoder) -> ColorChipSelectorCode?
+    {
+        let Selector = ColorChipSelectorCode(coder: coder)
+        Selector?.ColorDelegate = self
+        Selector?.ColorToEdit(CurrentColor!, Tag: "ColorFromColorChipSelector")
+        return Selector
+    }
+    
+    @IBSegueAction func RecentColorsSegue(_ coder: NSCoder) -> RecentColorListCode?
+    {
+        let RecentColor = RecentColorListCode(coder: coder)
+        RecentColor?.ColorDelegate = self
+        RecentColor?.ColorToEdit(CurrentColor!, Tag: "ColorFromRecentColors")
+        return RecentColor
+    }
     
     @IBOutlet weak var TitleBar: UIView!
     @IBOutlet weak var ChannelALabel: UILabel!
@@ -743,6 +898,11 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
     @IBOutlet weak var ColorspaceSegment: UISegmentedControl!
 }
 
+/// Color space definitions for the color picker.
+/// - **RGB**: Standard RGB colorspace.
+/// - **HSB**: Standard (for Apple) HSB colorspace.
+/// - **YUV**: YUV colorspace.
+/// - **CMYK**: CMYK colorspace.
 enum WorkingColorspaces: Int, CaseIterable
 {
     case RGB = 0
