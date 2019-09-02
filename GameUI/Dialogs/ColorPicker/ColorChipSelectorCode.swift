@@ -9,8 +9,10 @@
 import Foundation
 import UIKit
 
-class ColorChipSelectorCode: UIViewController
+class ColorChipSelectorCode: UIViewController, ColorPickerProtocol
 {
+    public weak var ColorDelegate: ColorPickerProtocol? = nil
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -27,6 +29,14 @@ class ColorChipSelectorCode: UIViewController
     }
     
     @IBAction func HandleSortPressed(_ sender: Any)
+    {
+    }
+    
+    func ColorToEdit(_ Color: UIColor, Tag: Any?)
+    {
+    }
+    
+    func EditedColor(_ Edited: UIColor?, Tag: Any?)
     {
     }
 }
