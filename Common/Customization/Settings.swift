@@ -65,8 +65,23 @@ class Settings
         _Settings.set(false, forKey: "ShowAlphaInColorPicker")
         _Settings.set(20, forKey: "MostRecentlyUsedColorCapacity")
         _Settings.set("", forKey: "MostRecentlyUsedColorList")
+        _Settings.set(true, forKey: "ShowClosestColor")
         _Settings.set("83c630ee-81d4-11e9-bc42-526af7764f64", forKey: "CurrentTheme")
         _Settings.set("3f0d9fee-0b77-465b-a0ac-f1663da23cc9", forKey: "Current3DTheme")
+    }
+    
+    /// Returns the show closest color flag for the color name picker.
+    /// - Returns: Boolean flag for the show closest color in the color name picker.
+    public static func GetShowClosestColor() -> Bool
+    {
+        return _Settings.bool(forKey: "ShowClosestColor")
+    }
+    
+    /// Set the show closest color flag for the color name picker.
+    /// - Parameter NewValue: New show closest color flag value.
+    public static func SetShowClosestColor(NewValue: Bool)
+    {
+        _Settings.set(NewValue, forKey: "ShowClosestColor")
     }
     
     /// Returns the contents of the most recently used colors.
