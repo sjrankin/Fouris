@@ -11,6 +11,10 @@
 		1705ADEC225D911B00628268 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1705ADEB225D911B00628268 /* Block.swift */; };
 		170F854122B5D3E5005405B6 /* VisualBlocks3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170F854022B5D3E5005405B6 /* VisualBlocks3D.swift */; };
 		171020F0227D8A91002FAB63 /* PieceAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171020EF227D8A91002FAB63 /* PieceAttributes.swift */; };
+		1710BF7E231E4C9800F566B3 /* GradientStopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1710BF7D231E4C9800F566B3 /* GradientStopCell.swift */; };
+		1710BF80231E5A3400F566B3 /* GradientExportCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1710BF7F231E5A3400F566B3 /* GradientExportCode.swift */; };
+		1710BF82231E829800F566B3 /* PresetGradientListCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1710BF81231E829800F566B3 /* PresetGradientListCode.swift */; };
+		1710BF84231E841500F566B3 /* PresetGradientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1710BF83231E841500F566B3 /* PresetGradientCell.swift */; };
 		1713735722EAE67700C9F9A7 /* SCNDodecahedron.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1713735622EAE67700C9F9A7 /* SCNDodecahedron.swift */; };
 		1713735A22EAE6D500C9F9A7 /* SCNTetrahedron.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1713735922EAE6D500C9F9A7 /* SCNTetrahedron.swift */; };
 		171BDEC422B8CE00005C3509 /* SmoothMotionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BDEC322B8CE00005C3509 /* SmoothMotionProtocol.swift */; };
@@ -129,6 +133,8 @@
 		17C2F3AF231A14F2001EF200 /* ColorNamePickerCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C2F3AE231A14F2001EF200 /* ColorNamePickerCode.swift */; };
 		17C898C322CDF60F004EA348 /* ArrayStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C898C222CDF60F004EA348 /* ArrayStatistics.swift */; };
 		17CA147E22BC9E9600D099C1 /* TDebugProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CA147D22BC9E9600D099C1 /* TDebugProtocol.swift */; };
+		17CD4EB5231E370B0055E541 /* GradientEditorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD4EB4231E370B0055E541 /* GradientEditorCode.swift */; };
+		17CD4EB8231E492D0055E541 /* GradientPickerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD4EB7231E492D0055E541 /* GradientPickerProtocol.swift */; };
 		17CE269D225F127C0056818E /* Versioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CE269C225F127C0056818E /* Versioning.swift */; };
 		17CE26A0225F5EE00056818E /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CE269F225F5EE00056818E /* Stack.swift */; };
 		17CE26A3225F63660056818E /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CE26A2225F63660056818E /* Queue.swift */; };
@@ -176,6 +182,10 @@
 		170F854022B5D3E5005405B6 /* VisualBlocks3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualBlocks3D.swift; sourceTree = "<group>"; };
 		171020ED227D68A2002FAB63 /* GameViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewProtocol.swift; sourceTree = "<group>"; };
 		171020EF227D8A91002FAB63 /* PieceAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceAttributes.swift; sourceTree = "<group>"; };
+		1710BF7D231E4C9800F566B3 /* GradientStopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientStopCell.swift; sourceTree = "<group>"; };
+		1710BF7F231E5A3400F566B3 /* GradientExportCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientExportCode.swift; sourceTree = "<group>"; };
+		1710BF81231E829800F566B3 /* PresetGradientListCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetGradientListCode.swift; sourceTree = "<group>"; };
+		1710BF83231E841500F566B3 /* PresetGradientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetGradientCell.swift; sourceTree = "<group>"; };
 		1713735622EAE67700C9F9A7 /* SCNDodecahedron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNDodecahedron.swift; sourceTree = "<group>"; };
 		1713735922EAE6D500C9F9A7 /* SCNTetrahedron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNTetrahedron.swift; sourceTree = "<group>"; };
 		1717BA6B2275CC2C008747D1 /* ControlProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlProtocol.swift; sourceTree = "<group>"; };
@@ -300,6 +310,8 @@
 		17C2F3AE231A14F2001EF200 /* ColorNamePickerCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorNamePickerCode.swift; sourceTree = "<group>"; };
 		17C898C222CDF60F004EA348 /* ArrayStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayStatistics.swift; sourceTree = "<group>"; };
 		17CA147D22BC9E9600D099C1 /* TDebugProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDebugProtocol.swift; sourceTree = "<group>"; };
+		17CD4EB4231E370B0055E541 /* GradientEditorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientEditorCode.swift; sourceTree = "<group>"; };
+		17CD4EB7231E492D0055E541 /* GradientPickerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientPickerProtocol.swift; sourceTree = "<group>"; };
 		17CE269C225F127C0056818E /* Versioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Versioning.swift; sourceTree = "<group>"; };
 		17CE269F225F5EE00056818E /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		17CE26A2225F63660056818E /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
@@ -434,6 +446,7 @@
 			children = (
 				177FC1D72318E685005727B6 /* CustomControls */,
 				177FC1D22318E0E1005727B6 /* ColorPicker */,
+				17CD4EB6231E490D0055E541 /* GradientPicker */,
 				17616AC82316497300DFFEFE /* AboutDialogController.swift */,
 				17616ACA23166CB000DFFEFE /* SelectGameController.swift */,
 				17616ACC23166DF700DFFEFE /* GameStyleTableViewCell.swift */,
@@ -657,6 +670,19 @@
 				17376353230A87EE0050EB22 /* CATextLayer2.swift */,
 			);
 			path = TextLayer;
+			sourceTree = "<group>";
+		};
+		17CD4EB6231E490D0055E541 /* GradientPicker */ = {
+			isa = PBXGroup;
+			children = (
+				17CD4EB4231E370B0055E541 /* GradientEditorCode.swift */,
+				17CD4EB7231E492D0055E541 /* GradientPickerProtocol.swift */,
+				1710BF7D231E4C9800F566B3 /* GradientStopCell.swift */,
+				1710BF7F231E5A3400F566B3 /* GradientExportCode.swift */,
+				1710BF81231E829800F566B3 /* PresetGradientListCode.swift */,
+				1710BF83231E841500F566B3 /* PresetGradientCell.swift */,
+			);
+			path = GradientPicker;
 			sourceTree = "<group>";
 		};
 		17CE269E225F5ECF0056818E /* DataStructures */ = {
@@ -1000,6 +1026,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1710BF80231E5A3400F566B3 /* GradientExportCode.swift in Sources */,
 				17C2F3A9231A10DD001EF200 /* Utility.swift in Sources */,
 				1753ABF0225E262D00FC7089 /* GameUINotificationProtocol.swift in Sources */,
 				17C1E90F23193E8A004040B6 /* GradientManager.swift in Sources */,
@@ -1007,6 +1034,7 @@
 				1705ADEC225D911B00628268 /* Block.swift in Sources */,
 				17DCD7EA2309436F0072B306 /* +CentralShapes.swift in Sources */,
 				17F6ECEE2286E1C7000F8E11 /* MainDelegate.swift in Sources */,
+				1710BF7E231E4C9800F566B3 /* GradientStopCell.swift in Sources */,
 				17F0B4BA225CCEE00071514E /* GameLogic.swift in Sources */,
 				17715CB622C74D8E009FD441 /* +Tables.swift in Sources */,
 				17477A772317F7E800AAEB14 /* PieceSelectorDialog.swift in Sources */,
@@ -1052,6 +1080,7 @@
 				17A45B5B2271A5CC002E705D /* AITestNode.swift in Sources */,
 				1705ADE9225D804400628268 /* Extensions.swift in Sources */,
 				1767D28B22AF5832005EE191 /* PeerType.swift in Sources */,
+				1710BF84231E841500F566B3 /* PresetGradientCell.swift in Sources */,
 				171ED10722F56D3300CE2CDF /* CubicGameAI.swift in Sources */,
 				17CE269D225F127C0056818E /* Versioning.swift in Sources */,
 				17E71A8A22AD2A3A0081991E /* +TDebugRecievedCommandHandling.swift in Sources */,
@@ -1062,12 +1091,14 @@
 				1721BA7C2260BECF00DC7AFC /* Coin.swift in Sources */,
 				1797524E22C38A4D00BF539A /* +IdiotLights.swift in Sources */,
 				17660BE822892B1E00082E23 /* UIButtonExtensions.swift in Sources */,
+				17CD4EB8231E492D0055E541 /* GradientPickerProtocol.swift in Sources */,
 				173AA390231A8EC600802289 /* PredefinedColorGroup.swift in Sources */,
 				177FC1D42318E0F7005727B6 /* ColorPickerProtocol.swift in Sources */,
 				17F6ECF22286E322000F8E11 /* ControlUIProtocol.swift in Sources */,
 				17376357230A9C9C0050EB22 /* +BucketCleaner.swift in Sources */,
 				17AF23212313992B00921E6C /* +MainSlideInUI2.swift in Sources */,
 				17ED240B22716273002B92E1 /* ColorServer.swift in Sources */,
+				1710BF82231E829800F566B3 /* PresetGradientListCode.swift in Sources */,
 				170F854122B5D3E5005405B6 /* VisualBlocks3D.swift in Sources */,
 				173B4B15231B9136007B22F6 /* RecentColorListCode.swift in Sources */,
 				17F6ECF02286E1F2000F8E11 /* ControlProtocol.swift in Sources */,
@@ -1139,6 +1170,7 @@
 				177F4FCD229BD42500FE72CD /* Serializer.swift in Sources */,
 				17C898C322CDF60F004EA348 /* ArrayStatistics.swift in Sources */,
 				17F0B494225CBE730071514E /* AppDelegate.swift in Sources */,
+				17CD4EB5231E370B0055E541 /* GradientEditorCode.swift in Sources */,
 				17616ACD23166DF700DFFEFE /* GameStyleTableViewCell.swift in Sources */,
 				173AA38E231A8E9E00802289 /* PredefinedColor.swift in Sources */,
 				176F1B72227B0A0600681CDE /* Settings.swift in Sources */,
