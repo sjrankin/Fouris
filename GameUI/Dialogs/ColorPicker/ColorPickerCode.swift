@@ -245,6 +245,14 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         
         ShowChannelD(EnableAlpha, Fast: true)
         
+        let CheckerLayer = CALayer()
+        CheckerLayer.name = "CheckerBoard"
+        let CheckerImage = UIImage(named: "Checkerboard1024")?.cgImage
+        CheckerLayer.frame = ChannelDContainer.bounds
+        CheckerLayer.contents = CheckerImage
+        CheckerLayer.zPosition = -200
+        CheckerLayer.contentsGravity = CALayerContentsGravity.topLeft
+        ChannelDContainer.layer.addSublayer(CheckerLayer)
         let ChannelDGradient = GradientManager.GetGradient(.ClearWhite)
         ChannelDLayer = GradientManager.CreateGradientLayer(From: ChannelDGradient!, WithFrame: ChannelDContainer.bounds,
                                                             IsVertical: false)
@@ -297,7 +305,7 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
             ChannelDLayer = nil
         }
         
-        let ChannelAGradient = GradientManager.GetGradient(.Rainbow)
+        let ChannelAGradient = GradientManager.GetGradient(.HueRange)
         ChannelALayer = GradientManager.CreateGradientLayer(From: ChannelAGradient!, WithFrame: ChannelAContainer.bounds, IsVertical: false)
         ChannelALayer.zPosition = -100
         ChannelAContainer.layer.addSublayer(ChannelALayer)
@@ -317,18 +325,19 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         ChannelCContainer.layer.addSublayer(ChannelCLayer)
         ChannelCSlider.minimumTrackTintColor = UIColor.white
         
-        let Hue = (CurrentColor?.Hue)!
-        let Saturation = (CurrentColor?.Saturation)!
-        let Brightness = (CurrentColor?.Brightness)!
+        let (Hue, Saturation, Brightness) = ColorSpaceConverter.ToHSB(RGB: CurrentColor!)
         
         ChannelALabel.text = "Hue"
         ChannelASlider.value = Float(Hue)
+        ChannelATextBox.text = "\(Int(Hue * 360.0))"
         
         ChannelBLabel.text = "Saturation"
         ChannelBSlider.value = Float(Saturation)
+        ChannelBTextBox.text = "\(Utility.Round(Saturation, ToPlaces: 3))"
         
         ChannelCLabel.text = "Brightness"
         ChannelCSlider.value = Float(Brightness)
+        ChannelCTextBox.text = "\(Utility.Round(Brightness, ToPlaces: 3))"
         
         ShowChannelD(false, Fast: true)
         
@@ -382,9 +391,19 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         
         ShowChannelD(false, Fast: true)
         
+        let (Y, U, V) = ColorSpaceConverter.ToYUV(RGB: CurrentColor!)
+        
         ChannelALabel.text = "Y"
+        ChannelASlider.value = Float(Y)
+        ChannelATextBox.text = "\(Utility.Round(Y, ToPlaces: 3))"
+        
         ChannelBLabel.text = "U"
+        ChannelBSlider.value = Float(U)
+        ChannelBTextBox.text = "\(Utility.Round(U, ToPlaces: 3))"
+        
         ChannelCLabel.text = "V"
+        ChannelCSlider.value = Float(V)
+        ChannelCTextBox.text = "\(Utility.Round(V, ToPlaces: 3))"
         
         EnableAlphaText.isEnabled = false
         EnableRGBAlphaSwitch.isEnabled = false
@@ -443,10 +462,23 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         ChannelDContainer.layer.addSublayer(ChannelDLayer)
         ChannelDSlider.minimumTrackTintColor = UIColor.black
         
+        let (C, M, Y, K) = ColorSpaceConverter.ToCMYK(RGB: CurrentColor!)
+        
         ChannelALabel.text = "Cyan"
+        ChannelASlider.value = Float(C)
+        ChannelATextBox.text = "\(Utility.Round(C, ToPlaces: 3))"
+        
         ChannelBLabel.text = "Magenta"
+        ChannelBSlider.value = Float(M)
+        ChannelBTextBox.text = "\(Utility.Round(M, ToPlaces: 3))"
+
         ChannelCLabel.text = "Yellow"
+        ChannelCSlider.value = Float(Y)
+        ChannelCTextBox.text = "\(Utility.Round(Y, ToPlaces: 3))"
+        
         ChannelDLabel.text = "Black"
+        ChannelDSlider.value = Float(K)
+        ChannelDTextBox.text = "\(Utility.Round(K, ToPlaces: 3))"
         
         EnableAlphaText.isEnabled = false
         EnableRGBAlphaSwitch.isEnabled = false
@@ -716,9 +748,10 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
     
     /// Validate input from the user for a channel value.
     /// - Parameter Raw: Raw string (which may be nullable) from a text box.
+    /// - Parameter Max: Maximum integer allowed.
     /// - Returns: Tuple in the form (converted integer value, forced string for errors). On error, the converted integer value
     ///            is set to the same as the force string value.
-    func ValidateTextInput(_ Raw: String?) -> (Int, String?)
+    func ValidateTextInput(_ Raw: String?, Max: Int = 255) -> (Int, String?)
     {
         if let TestValue = Raw
         {
@@ -732,15 +765,15 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
                 {
                     return (0, "0")
                 }
-                if IValue > 255
+                if IValue > Max
                 {
-                    return (255, "255")
+                    return (Max, "\(Max)")
                 }
                 return (IValue, nil)
             }
             else
             {
-                return (255, "255")
+                return (Max, "\(Max)")
             }
         }
         else
@@ -749,64 +782,249 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         }
     }
     
+    /// Validate input from the user for a channel value. The value is assumed to be a normal value (eg, 0.0 to 1.0).
+    /// - Parameter Raw: Raw string (which may be nullable) from a text box.
+    /// - Returns: Tuple in the form (converted double value, forced string for errors). On error, the converted double value
+    ///            is set to the same as the force string value.
+    func ValidateNormalTextInput(_ Raw: String?) -> (Double, String?)
+    {
+        if let TestValue = Raw
+        {
+            if TestValue.isEmpty
+            {
+                return (0, "0")
+            }
+            if let DValue = Double(TestValue)
+            {
+                if DValue < 0
+                {
+                    return (0.0, "0.0")
+                }
+                if DValue > 1.0
+                {
+                    return (1.0, "1.0")
+                }
+                return (DValue, nil)
+            }
+            else
+            {
+                return (1.0, "1.0")
+            }
+        }
+        else
+        {
+            return (0.0, "0.0")
+        }
+    }
+    
     @IBAction func HandleChannelATextChanged(_ sender: Any)
     {
-        let (Value, ErrorValue) = ValidateTextInput(ChannelATextBox.text)
-        if let ErrorValueText = ErrorValue
+        switch WorkingColorspace
         {
-            ChannelATextBox.text = ErrorValueText
+            case .RGB:
+                let (Value, ErrorValue) = ValidateTextInput(ChannelATextBox.text)
+                if let ErrorValueText = ErrorValue
+                {
+                    ChannelATextBox.text = ErrorValueText
+                }
+                let NewRValue = CGFloat(Value / 255)
+                let (A, _, G, B) = Utility.GetARGB(SourceColor: CurrentColor!)
+                CurrentColor = UIColor(red: NewRValue, green: G, blue: B, alpha: A)
+                UpdateChannelsUI(WithColor: CurrentColor!, From: "HandleChannelATextChanged")
+                ChannelASlider.value = Float(NewRValue)
+                UpdateColor(WithColor: CurrentColor!)
+            
+            case .HSB:
+                let (Value, ErrorValue) = ValidateTextInput(ChannelATextBox.text, Max: 360)
+                if let ErrorValueText = ErrorValue
+                {
+                    ChannelATextBox.text = ErrorValueText
+                }
+                let NewChannelAValue = CGFloat(Value / 360)
+                let (_, S, B) = ColorSpaceConverter.ToHSB(RGB: CurrentColor!)
+                CurrentColor = ColorSpaceConverter.ToRGB(HSB: (Double(NewChannelAValue), S, B))
+                UpdateChannelsUI(WithColor: CurrentColor!, From: "HandleChannelATextChanged")
+                ChannelASlider.value = Float(NewChannelAValue)
+                UpdateColor(WithColor: CurrentColor!)
+            
+            case .YUV:
+                let (Value, ErrorValue) = ValidateNormalTextInput(ChannelATextBox.text)
+            if let ErrorValueText = ErrorValue
+            {
+                ChannelATextBox.text = ErrorValueText
+            }
+            let NewChannelAValue = Value
+                let (_, U, V) = ColorSpaceConverter.ToYUV(RGB: CurrentColor!)
+                CurrentColor = ColorSpaceConverter.ToRGB(YUV: (Double(NewChannelAValue), U, V))
+                UpdateChannelsUI(WithColor: CurrentColor!, From: "HandleChannelATextChanged")
+                ChannelASlider.value = Float(NewChannelAValue)
+                UpdateColor(WithColor: CurrentColor!)
+            
+            case .CMYK:
+                let (Value, ErrorValue) = ValidateNormalTextInput(ChannelATextBox.text)
+                if let ErrorValueText = ErrorValue
+                {
+                    ChannelATextBox.text = ErrorValueText
+                }
+                let NewChannelAValue = Value
+                let (_, M, Y, K) = ColorSpaceConverter.ToCMYK(RGB: CurrentColor!)
+                CurrentColor = ColorSpaceConverter.ToRGB(CMYK: (Double(NewChannelAValue), M, Y, K))
+                UpdateChannelsUI(WithColor: CurrentColor!, From: "HandleChannelATextChanged")
+                ChannelASlider.value = Float(NewChannelAValue)
+                UpdateColor(WithColor: CurrentColor!)
         }
-        let NewRValue = CGFloat(Value / 255)
-        let (A, _, G, B) = Utility.GetARGB(SourceColor: CurrentColor!)
-        CurrentColor = UIColor(red: NewRValue, green: G, blue: B, alpha: A)
-        UpdateChannelsUI(WithColor: CurrentColor!, From: "HandleChannelATextChanged")
-        ChannelASlider.value = Float(NewRValue)
-        UpdateColor(WithColor: CurrentColor!)
+
     }
     
     @IBAction func HandleChannelBTextChanged(_ sender: Any)
     {
-        let (Value, ErrorValue) = ValidateTextInput(ChannelBTextBox.text)
-        if let ErrorValueText = ErrorValue
+        switch WorkingColorspace
         {
-            ChannelBTextBox.text = ErrorValueText
+            case .RGB:
+                let (Value, ErrorValue) = ValidateTextInput(ChannelBTextBox.text)
+                if let ErrorValueText = ErrorValue
+                {
+                    ChannelBTextBox.text = ErrorValueText
+                }
+                let NewGValue = CGFloat(Value / 255)
+                let (A, R, _, B) = Utility.GetARGB(SourceColor: CurrentColor!)
+                CurrentColor = UIColor(red: R, green: NewGValue, blue: B, alpha: A)
+                UpdateChannelsUI(WithColor: CurrentColor!, From: "HandleChannelBTextChanged")
+                ChannelBSlider.value = Float(NewGValue)
+                UpdateColor(WithColor: CurrentColor!)
+            
+            case .HSB:
+                let (Value, ErrorValue) = ValidateNormalTextInput(ChannelBTextBox.text)
+                if let ErrorValueText = ErrorValue
+                {
+                    ChannelBTextBox.text = ErrorValueText
+                }
+                let NewChannelBValue = Value
+                let (H, _, B) = ColorSpaceConverter.ToHSB(RGB: CurrentColor!)
+                CurrentColor = ColorSpaceConverter.ToRGB(HSB: (H, Double(NewChannelBValue), B))
+                UpdateChannelsUI(WithColor: CurrentColor!, From: "HandleChannelBTextChanged")
+                ChannelBSlider.value = Float(NewChannelBValue)
+                UpdateColor(WithColor: CurrentColor!)
+            
+            case .YUV:
+                let (Value, ErrorValue) = ValidateNormalTextInput(ChannelBTextBox.text)
+                if let ErrorValueText = ErrorValue
+                {
+                    ChannelBTextBox.text = ErrorValueText
+                }
+                let NewChannelBValue = Value
+                let (Y, _, V) = ColorSpaceConverter.ToYUV(RGB: CurrentColor!)
+                CurrentColor = ColorSpaceConverter.ToRGB(YUV: (Y, Double(NewChannelBValue), V))
+                UpdateChannelsUI(WithColor: CurrentColor!, From: "HandleChannelBTextChanged")
+                ChannelBSlider.value = Float(NewChannelBValue)
+                UpdateColor(WithColor: CurrentColor!)
+            
+            case .CMYK:
+                let (Value, ErrorValue) = ValidateNormalTextInput(ChannelBTextBox.text)
+                if let ErrorValueText = ErrorValue
+                {
+                    ChannelBTextBox.text = ErrorValueText
+                }
+                let NewChannelBValue = Value
+                let (C, _, Y, K) = ColorSpaceConverter.ToCMYK(RGB: CurrentColor!)
+                CurrentColor = ColorSpaceConverter.ToRGB(CMYK: (C, Double(NewChannelBValue), Y, K))
+                UpdateChannelsUI(WithColor: CurrentColor!, From: "HandleChannelBTextChanged")
+                ChannelBSlider.value = Float(NewChannelBValue)
+                UpdateColor(WithColor: CurrentColor!)
         }
-        let NewGValue = CGFloat(Value / 255)
-        let (A, R, _, B) = Utility.GetARGB(SourceColor: CurrentColor!)
-        CurrentColor = UIColor(red: R, green: NewGValue, blue: B, alpha: A)
-        UpdateChannelsUI(WithColor: CurrentColor!, From: "HandleChannelBTextChanged")
-        ChannelBSlider.value = Float(NewGValue)
-        UpdateColor(WithColor: CurrentColor!)
     }
     
     @IBAction func HandleChannelCTextChanged(_ sender: Any)
     {
-        let (Value, ErrorValue) = ValidateTextInput(ChannelCTextBox.text)
-        if let ErrorValueText = ErrorValue
+        switch WorkingColorspace
         {
-            ChannelCTextBox.text = ErrorValueText
+            case .RGB:
+                let (Value, ErrorValue) = ValidateTextInput(ChannelCTextBox.text)
+                if let ErrorValueText = ErrorValue
+                {
+                    ChannelCTextBox.text = ErrorValueText
+                }
+                let NewBValue = CGFloat(Value / 255)
+                let (A, R, G, _) = Utility.GetARGB(SourceColor: CurrentColor!)
+                CurrentColor = UIColor(red: R, green: G, blue: NewBValue, alpha: A)
+                UpdateChannelsUI(WithColor: CurrentColor!, From: "HandleChannelCTextChanged")
+                ChannelCSlider.value = Float(NewBValue)
+                UpdateColor(WithColor: CurrentColor!)
+            
+            case .HSB:
+                let (Value, ErrorValue) = ValidateNormalTextInput(ChannelCTextBox.text)
+                if let ErrorValueText = ErrorValue
+                {
+                    ChannelCTextBox.text = ErrorValueText
+                }
+                let NewChannelCValue = Value
+                let (H, S, _) = ColorSpaceConverter.ToHSB(RGB: CurrentColor!)
+                CurrentColor = ColorSpaceConverter.ToRGB(HSB: (H, S, Double(NewChannelCValue)))
+                UpdateChannelsUI(WithColor: CurrentColor!, From: "HandleChannelCTextChanged")
+                ChannelCSlider.value = Float(NewChannelCValue)
+                UpdateColor(WithColor: CurrentColor!)
+            
+            case .YUV:
+                let (Value, ErrorValue) = ValidateNormalTextInput(ChannelCTextBox.text)
+                if let ErrorValueText = ErrorValue
+                {
+                    ChannelCTextBox.text = ErrorValueText
+                }
+                let NewChannelCValue = Value
+                let (Y, U, _) = ColorSpaceConverter.ToYUV(RGB: CurrentColor!)
+                CurrentColor = ColorSpaceConverter.ToRGB(YUV: (Y, U, Double(NewChannelCValue)))
+                UpdateChannelsUI(WithColor: CurrentColor!, From: "HandleChannelCTextChanged")
+                ChannelCSlider.value = Float(NewChannelCValue)
+                UpdateColor(WithColor: CurrentColor!)
+            
+            case .CMYK:
+                let (Value, ErrorValue) = ValidateNormalTextInput(ChannelCTextBox.text)
+                if let ErrorValueText = ErrorValue
+                {
+                    ChannelCTextBox.text = ErrorValueText
+                }
+                let NewChannelCValue = Value
+                let (C, M, _, K) = ColorSpaceConverter.ToCMYK(RGB: CurrentColor!)
+                CurrentColor = ColorSpaceConverter.ToRGB(CMYK: (C, M, Double(NewChannelCValue), K))
+                UpdateChannelsUI(WithColor: CurrentColor!, From: "HandleChannelCTextChanged")
+                ChannelCSlider.value = Float(NewChannelCValue)
+                UpdateColor(WithColor: CurrentColor!)
         }
-        let NewBValue = CGFloat(Value / 255)
-        let (A, R, G, _) = Utility.GetARGB(SourceColor: CurrentColor!)
-        CurrentColor = UIColor(red: R, green: G, blue: NewBValue, alpha: A)
-        UpdateChannelsUI(WithColor: CurrentColor!, From: "HandleChannelCTextChanged")
-        ChannelCSlider.value = Float(NewBValue)
-        UpdateColor(WithColor: CurrentColor!)
     }
     
     @IBAction func HandleChannelDTextChanged(_ sender: Any)
     {
-        let (Value, ErrorValue) = ValidateTextInput(ChannelDTextBox.text)
-        if let ErrorValueText = ErrorValue
+        switch WorkingColorspace
         {
-            ChannelDTextBox.text = ErrorValueText
+            case .RGB:
+                let (Value, ErrorValue) = ValidateTextInput(ChannelDTextBox.text)
+                if let ErrorValueText = ErrorValue
+                {
+                    ChannelDTextBox.text = ErrorValueText
+                }
+                let NewAValue = CGFloat(Value / 255)
+                let (_, R, G, B) = Utility.GetARGB(SourceColor: CurrentColor!)
+                CurrentColor = UIColor(red: R, green: G, blue: B, alpha: NewAValue)
+                UpdateChannelsUI(WithColor: CurrentColor!, From: "HandleChannelDTextChanged")
+                ChannelDSlider.value = Float(NewAValue)
+                UpdateColor(WithColor: CurrentColor!)
+            
+            case .CMYK:
+                let (Value, ErrorValue) = ValidateNormalTextInput(ChannelDTextBox.text)
+                if let ErrorValueText = ErrorValue
+                {
+                    ChannelDTextBox.text = ErrorValueText
+                }
+                let NewChannelDValue = Value
+                let (C, M, Y, _) = ColorSpaceConverter.ToCMYK(RGB: CurrentColor!)
+                CurrentColor = ColorSpaceConverter.ToRGB(CMYK: (C, M, Y, Double(NewChannelDValue)))
+                UpdateChannelsUI(WithColor: CurrentColor!, From: "HandleChannelDTextChanged")
+                ChannelCSlider.value = Float(NewChannelDValue)
+                UpdateColor(WithColor: CurrentColor!)
+            
+            default:
+            break
         }
-        let NewAValue = CGFloat(Value / 255)
-        let (_, R, G, B) = Utility.GetARGB(SourceColor: CurrentColor!)
-        CurrentColor = UIColor(red: R, green: G, blue: B, alpha: NewAValue)
-        UpdateChannelsUI(WithColor: CurrentColor!, From: "HandleChannelDTextChanged")
-        ChannelDSlider.value = Float(NewAValue)
-        UpdateColor(WithColor: CurrentColor!)
     }
     
     func ShowChannelD(_ DoShow: Bool, Fast: Bool)
