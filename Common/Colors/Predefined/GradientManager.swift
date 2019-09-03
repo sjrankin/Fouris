@@ -63,7 +63,7 @@ class GradientManager
             "mistyrose": UIColor(Hex: 0xffe4e1),
             "greenpastel": UIColor(Hex: 0xbaed91),
             "pastelpink": UIColor(Hex: 0xffd1dc),
-            "clear": UIColor(Hex: 0x00ffffff)
+            "clear": UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.001),
     ]
     
     /// Given a color value, return the color's name if known, hex value if not known.
@@ -972,7 +972,17 @@ class GradientManager
             (.ClearBlack, Gradients.ClearBlack.rawValue, "(Clear)@(0.0),(Black)@(1.0)"),
             (.WhiteClear, Gradients.WhiteClear.rawValue, "(White)@(0.0),(Clear)@(1.0)"),
             (.BlackClear, Gradients.BlackClear.rawValue, "(Black)@(0.0),(Clear)@(1.0)"),
+            (.RedClear, Gradients.RedClear.rawValue, "(Red)@(0.0),(Clear)@(1.0)"),
+            (.GreenClear, Gradients.GreenClear.rawValue, "(Green)@(0.0),(Clear)@(1.0)"),
+            (.BlueClear, Gradients.BlueClear.rawValue, "(Blue)@(0.0),(Clear)@(1.0)"),
+            (.CyanClear, Gradients.CyanClear.rawValue, "(Cyan)@(0.0),(Clear)@(1.0)"),
+            (.MagentaClear, Gradients.MagentaClear.rawValue, "(Magenta)@(0.0),(Clear)@(1.0)"),
+            (.YellowClear, Gradients.YellowClear.rawValue, "(Yellow)@(0.0),(Clear)@(1.0)"),
+            (.BlackClearBlack, Gradients.BlackClearBlack.rawValue, "(Black)@(0.0),(Clear)@(0.5),(Black)@(1.0)"),
+            (.WhiteClearWhite, Gradients.WhiteClearWhite.rawValue, "(Black)@(0.0),(Clear)@(0.5),(White)@(1.0)"),
+            (.BlackClearWhite, Gradients.BlackClearWhite.rawValue, "(Black)@(0.0),(Clear)@(0.5),(White)@(1.0)"),
             (.BlackGray, Gradients.BlackGray.rawValue, "(Black)@(0.0),(Gray)@(1.0)"),
+            (.HueRange, Gradients.HueRange.rawValue, "(Red)@(0.0),(Orange)@(0.0834),(Yellow)@(0.167),(Green)@(0.25),(Cyan)@(0.5),(Blue)@(0.667),(Magenta)@(0.834),(Red)@(1.0)"),
     ]
 }
 
@@ -1024,6 +1034,16 @@ enum Gradients: String, CaseIterable
     case ClearBlack = "Clear-Black"
     case WhiteClear = "White-Clear"
     case BlackClear = "Black-Clear"
+    case RedClear = "Red-Clear"
+    case GreenClear = "Green-Clear"
+    case BlueClear = "Blue-Clear"
+    case CyanClear = "Cyan-Clear"
+    case MagentaClear = "Magenta-Clear"
+    case YellowClear = "Yellow-Clear"
+    case BlackClearBlack = "Black-Clear-Black"
+    case WhiteClearWhite = "White-Clear-White"
+    case BlackClearWhite = "Black-Clear-White"
     case BlackGray = "Black-Gray"
+    case HueRange = "Hue-Range"
     case User = "User"
 }
