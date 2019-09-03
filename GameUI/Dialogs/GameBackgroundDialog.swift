@@ -30,20 +30,36 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol
         GradientSample.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
         ImageSample.layer.borderColor = ColorServer.CGColorFrom(ColorNames.Black)
         ImageSample.backgroundColor = ColorServer.ColorFrom(ColorNames.Black)
-        HandleBGChange(ToIndex: 0)
+        BackgroundType = GameBackgroundTypes(rawValue: Settings.GetGameBackgroundType())!
+        
+        if UserDefaults.standard.bool(forKey: "RunningOnSimulator")
+        {
+            if BackgroundType == .LiveView
+            {
+                BackgroundType = .SolidColor
+            }
+            BackgroundTypeSegment.setEnabled(false, forSegmentAt: 3)
+            LiveViewCameraSegment.isEnabled = false
+        }
+        
+        HandleBGChange(ToType: BackgroundType)
     }
     
     @IBAction func HandleBackgroundTypeChanged(_ sender: Any)
     {
         let BGType = BackgroundTypeSegment.selectedSegmentIndex
-        HandleBGChange(ToIndex: BGType)
+        BackgroundType = GameBackgroundTypes(rawValue: BGType)!
+        Settings.SetGameBackgroundType(NewValue: BGType)
+        HandleBGChange(ToType: BackgroundType)
     }
     
-    func HandleBGChange(ToIndex: Int)
+    var BackgroundType: GameBackgroundTypes = .SolidColor
+    
+    func HandleBGChange(ToType: GameBackgroundTypes)
     {
-        switch ToIndex
+        switch ToType
         {
-            case 0:
+            case .SolidColor:
                 SolidColorTitle.textColor = ColorServer.ColorFrom(ColorNames.Black)
                 GradientColorTitle.textColor = ColorServer.ColorFrom(ColorNames.DarkGray)
                 ImageTitle.textColor = ColorServer.ColorFrom(ColorNames.DarkGray)
@@ -57,7 +73,7 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol
                 ImageBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
                 LiveViewBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
             
-            case 1:
+            case .GradientColor:
                 SolidColorTitle.textColor = ColorServer.ColorFrom(ColorNames.DarkGray)
                 GradientColorTitle.textColor = ColorServer.ColorFrom(ColorNames.Black)
                 ImageTitle.textColor = ColorServer.ColorFrom(ColorNames.DarkGray)
@@ -71,7 +87,7 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol
                 ImageBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
                 LiveViewBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
             
-            case 2:
+            case .Image:
                 SolidColorTitle.textColor = ColorServer.ColorFrom(ColorNames.DarkGray)
                 GradientColorTitle.textColor = ColorServer.ColorFrom(ColorNames.DarkGray)
                 ImageTitle.textColor = ColorServer.ColorFrom(ColorNames.Black)
@@ -85,7 +101,7 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol
                 ImageBox.backgroundColor = ColorServer.ColorFrom(ColorNames.White)
                 LiveViewBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
             
-            case 3:
+            case .LiveView:
                 SolidColorTitle.textColor = ColorServer.ColorFrom(ColorNames.DarkGray)
                 GradientColorTitle.textColor = ColorServer.ColorFrom(ColorNames.DarkGray)
                 ImageTitle.textColor = ColorServer.ColorFrom(ColorNames.DarkGray)
@@ -98,9 +114,6 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol
                 GradientColorBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
                 ImageBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
                 LiveViewBox.backgroundColor = ColorServer.ColorFrom(ColorNames.White)
-            
-            default:
-                fatalError("Encountered unexpected segment index \(ToIndex) in HandleBGChange.")
         }
     }
     
@@ -116,6 +129,20 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol
             Controller.ColorToEdit(UIColor.black, Tag: "BGEditor")
             self.present(Controller, animated: true, completion: nil)
         }
+    }
+    
+    @IBSegueAction func InstantiateColorPicker(_ coder: NSCoder) -> ColorPickerCode?
+    {
+        let ColorPicker = ColorPickerCode(coder: coder)
+        ColorPicker?.ColorDelegate = self
+        ColorPicker?.ColorToEdit(UIColor.green, Tag: "SolidColorPicker")
+        return ColorPicker
+    }
+    
+    @IBSegueAction func InstantiateGradientEditor(_ coder: NSCoder) -> GradientEditorCode?
+    {
+        let GradientEditor = GradientEditorCode(coder: coder)
+        return GradientEditor
     }
     
     func ColorToEdit(_ Color: UIColor, Tag: Any?)
@@ -151,4 +178,17 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol
     @IBOutlet weak var LiveViewBox: UIView!
     @IBOutlet weak var GradientColorBox: UIView!
     @IBOutlet weak var SolidColorBox: UIView!
+}
+
+/// Background types for games.
+/// - **SolidColor**: Solid color values.
+/// - **GradientColor**: Gradent colors.
+/// - **Image**: Images from the user.
+/// - **LiveView**: Live view from the camera. If camera not available, this option is invalid.
+enum GameBackgroundTypes: Int, CaseIterable
+{
+    case SolidColor = 0
+    case GradientColor = 1
+    case Image = 2
+    case LiveView = 3
 }
