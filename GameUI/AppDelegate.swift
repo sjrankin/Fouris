@@ -15,7 +15,16 @@ import UIKit
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     {
         // Override point for customization after application launch.
+        #if targetEnvironment(simulator)
+        UserDefaults.standard.set(true, forKey: "RunningOnSimulator")
+        #else
+        UserDefaults.standard.set(false, forKey: "RunningOnSimulator")
+        #endif
         print("Fouris launched: \(MessageHelper.MakeTimeStamp(FromDate: Date()))")
+        if UserDefaults.standard.bool(forKey: "RunningOnSimulator")
+        {
+            print("Running on simulator.")
+        }
         UIApplication.shared.isIdleTimerDisabled = true
         return true
     }
