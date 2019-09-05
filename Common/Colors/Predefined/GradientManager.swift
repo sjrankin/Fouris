@@ -11,15 +11,23 @@ import UIKit
 
 /// Provides functions to parse gradient descriptions as well as to create gradient descriptions, as well as
 /// other functions to help with gradients in general.
-///
 /// - Note:
 ///      - Gradient descriptions are a series of comma-delimited color stops. Each color stop is in the format
 ///        `(color value)@(point)` where `color value` is either a hex value that describes a color, or a color
 ///        name in the KnownColors list. `point` is the relative location of the gradient stop to the other color
 ///        stops in the list. Orientation is not implied in color stop locations.
-///      - Additionally, HSB colors may be specified with `[]` syntax - for example, `[0.45,0.12,0.86]@(0.5)`.
+///      - HSB colors may be specified with `[]` syntax - for example, `[0.45,0.12,0.86]@(0.5)`.
 ///        The square brackets are required to specify HSB values. The caller can specify only a hue, a hue and
 ///        saturation, or hue, saturation and brightness. Hue and brightness only is invalid.
+///      - Gradients can animate using the `$` separator after the color value. Units are in seconds and are of
+///        type `Double`. Default value is `0.0` meaning no color animation. The animation consists of changing
+///        the hue of the enabled colors through the entire range over the period of the duration.
+///        - The syntax is: `(color value$duration)@(point)` or `[hsb color value$duration]@(point)`. For example.
+///          `(Cyan$10.0)@(0.0),(Blue)@(1.0)` will animate the first gradient stop (starting with Cyan) through
+///          all 360° of hue over the course of `10.0` seconds while not changing the second gradient stop.
+///        - Another example is: `(Gold$5.0)@(0.0),(Yellow$15.0)@(0.5),(Orange$10.0)@(1.0)` will animate the first gradient
+///          stop (`Gold`) over the course of 5.0 seconds, the second gradient stop (`Yellow`) for a period of
+///          15.0 seconds, and the third gradient stop (`Orange`) over 10.0 seconds.
 class GradientManager
 {
     /// Dictionary of known colors (known as in the color name is known) and their associated color values.
@@ -927,6 +935,7 @@ class GradientManager
     /// List of predefined gradients.
     public static let GradientList: [(Gradients, String, String)] =
         [
+            (.DefaultGradient, Gradients.DefaultGradient.rawValue, "(White)@(0.15),(Red)@(0.45),(Black)@(0.85)"),
             (.WhiteRed, Gradients.WhiteRed.rawValue, "(White)@(0.0),(Red)@(1.0)"),
             (.WhiteGreen, Gradients.WhiteGreen.rawValue, "(White)@(0.0),(Green)@(1.0)"),
             (.WhiteBlue, Gradients.WhiteBlue.rawValue, "(White)@(0.0),(Blue)@(1.0)"),
@@ -989,6 +998,7 @@ class GradientManager
 /// Predefined gradient types.
 enum Gradients: String, CaseIterable
 {
+    case DefaultGradient = "Default-Gradient"
     case WhiteRed = "White-Red"
     case WhiteGreen = "White-Green"
     case WhiteBlue = "White-Blue"
