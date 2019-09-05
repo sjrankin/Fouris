@@ -80,10 +80,18 @@ class GradientEditorCode: UIViewController, GradientPickerProtocol,
         {
             if let CallerTag = Tag as? String
             {
-                if CallerTag == "FromColorStopEditor"
+                switch CallerTag
                 {
+                    case "FromColorStopEditor":
+                        CurrentGradient = NewGradient
+                        ShowSample(WithGradient: CurrentGradient)
+                    
+                    case "FromPresetList":
                     CurrentGradient = NewGradient
                     ShowSample(WithGradient: CurrentGradient)
+                    
+                    default:
+                    break
                 }
             }
         }
@@ -137,8 +145,12 @@ class GradientEditorCode: UIViewController, GradientPickerProtocol,
         ClearButton.isEnabled = !GradientStopTable.isEditing
     }
     
-    @IBAction func HandlePresetsButton(_ sender: Any)
+    @IBSegueAction func InstantiatePresetsDialog(_ coder: NSCoder) -> PresetGradientListCode?
     {
+        let Presets = PresetGradientListCode(coder: coder)
+        Presets?.GradientDelegate = self
+        Presets?.GradientToEdit("", Tag: "FromPresetList")
+        return Presets
     }
     
     @IBAction func HandleAddButton(_ sender: Any)
@@ -198,8 +210,26 @@ class GradientEditorCode: UIViewController, GradientPickerProtocol,
             SelectedIndex = indexPath.row
             ColorToEdit = Color
             LocationToEdit = Location
+
             performSegue(withIdentifier: "ToGradientStopEditor", sender: self)
         }
+    }
+    
+    @IBSegueAction func HandleInstantiateGradientStopEditor(_ coder: NSCoder) -> GradientStopEditorCode?
+    {
+        let GSEditor = GradientStopEditorCode(coder: coder)
+        GSEditor?.GradientDelegate = self
+        GSEditor?.SetStop(StopColorIndex: SelectedIndex)
+        GSEditor?.GradientToEdit(CurrentGradient, Tag: "FromColorStopEditor")
+        return GSEditor
+    }
+    
+    @IBSegueAction func HandleExportGradientInstantiation(_ coder: NSCoder) -> GradientExportCode?
+    {
+        let GExport = GradientExportCode(coder: coder)
+        GExport?.GradientDelegate = self
+        GExport?.GradientToEdit(CurrentGradient, Tag: "")
+        return GExport
     }
     
     var ColorToEdit: UIColor = UIColor.black
