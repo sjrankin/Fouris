@@ -12,11 +12,14 @@ import UIKit
 
 class GradientExportCode: UIViewController, UIActivityItemSource, GradientPickerProtocol
 {
+    weak var GradientDelegate: GradientPickerProtocol? = nil
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         ControlView.layer.borderColor = UIColor.black.cgColor
         SampleView.layer.borderColor = UIColor.black.cgColor
+        
         if !GradientToExport.isEmpty
         {
             ExportButton.isEnabled = true
@@ -26,7 +29,7 @@ class GradientExportCode: UIViewController, UIActivityItemSource, GradientPicker
     
     var GradientToExport: String = ""
     var SaveMe: UIImage? = nil
-    
+
     func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any
     {
         return UIImage()
@@ -93,7 +96,6 @@ class GradientExportCode: UIViewController, UIActivityItemSource, GradientPicker
         if let TheGradient = Edited
         {
             GradientToExport = TheGradient
-            DrawSample()
         }
     }
     
@@ -129,12 +131,20 @@ class GradientExportCode: UIViewController, UIActivityItemSource, GradientPicker
                                                      IsVertical: IsVertical)
         let Items: [Any] = [self]
         let ACV = UIActivityViewController(activityItems: Items, applicationActivities: nil)
-        present(ACV, animated: true)
+        ACV.popoverPresentationController?.sourceView = self.view
+        ACV.popoverPresentationController?.sourceRect = self.view.frame
+        self.present(ACV, animated: true, completion: nil)
+
     }
     
     @IBAction func HandleClosePressed(_ sender: Any)
     {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool)
+    {
+        super.viewWillDisappear(animated)
     }
     
     @IBOutlet weak var ControlView: UIView!
