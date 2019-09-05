@@ -9,8 +9,9 @@
 import Foundation
 import UIKit
 
-class GameBackgroundDialog: UIViewController, ColorPickerProtocol
+class GameBackgroundDialog: UIViewController, ColorPickerProtocol, ThemeEditingProtocol
 {
+    weak var ThemeDelegate: ThemeEditingProtocol? = nil
     weak var ColorDelegate: ColorPickerProtocol? = nil
     
     override func viewDidLoad()
@@ -30,6 +31,7 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol
         GradientSample.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
         ImageSample.layer.borderColor = ColorServer.CGColorFrom(ColorNames.Black)
         ImageSample.backgroundColor = ColorServer.ColorFrom(ColorNames.Black)
+        ImageViewer.image = UIImage(named: "DefaultImage")
         BackgroundType = GameBackgroundTypes(rawValue: Settings.GetGameBackgroundType())!
         
         if UserDefaults.standard.bool(forKey: "RunningOnSimulator")
@@ -40,9 +42,41 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol
             }
             BackgroundTypeSegment.setEnabled(false, forSegmentAt: 3)
             LiveViewCameraSegment.isEnabled = false
+            CameraText.isEnabled = false
+            NotAvailableText.isHidden = false
+        }
+        else
+        {
+            NotAvailableText.isHidden = true
         }
         
         HandleBGChange(ToType: BackgroundType)
+        switch BackgroundType
+        {
+            case .SolidColor:
+                BackgroundTypeSegment.selectedSegmentIndex = 0
+            
+            case .GradientColor:
+                BackgroundTypeSegment.selectedSegmentIndex = 1
+            
+            case .Image:
+                BackgroundTypeSegment.selectedSegmentIndex = 2
+            
+            case .LiveView:
+                BackgroundTypeSegment.selectedSegmentIndex = 3
+        }
+    }
+    
+    func EditTheme(ID: UUID)
+    {
+        ThemeID = ID
+    }
+    
+    var ThemeID: UUID = UUID.Empty
+    
+    func EditResults(_ Edited: Bool, ThemeID: UUID)
+    {
+        //Do something...
     }
     
     @IBAction func HandleBackgroundTypeChanged(_ sender: Any)
@@ -131,6 +165,14 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol
         }
     }
     
+    @IBSegueAction func InstantiateImagePicker(_ coder: NSCoder) -> SelectBackgroundImageCode?
+    {
+        let Picker = SelectBackgroundImageCode(coder: coder)
+        Picker?.ThemeDelegate = self
+        Picker?.EditTheme(ID: ThemeID)
+        return Picker
+    }
+    
     @IBSegueAction func InstantiateColorPicker(_ coder: NSCoder) -> ColorPickerCode?
     {
         let ColorPicker = ColorPickerCode(coder: coder)
@@ -156,14 +198,19 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol
     
     @IBAction func HandleOKPressed(_ sender: Any)
     {
+        ThemeDelegate?.EditResults(true, ThemeID: ThemeID)
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func HandleCancelPressed(_ sender: Any)
     {
+        ThemeDelegate?.EditResults(false, ThemeID: ThemeID)
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBOutlet weak var NotAvailableText: UILabel!
+    @IBOutlet weak var CameraText: UILabel!
+    @IBOutlet weak var ImageViewer: UIImageView!
     @IBOutlet weak var LiveViewTitle: UILabel!
     @IBOutlet weak var ImageTitle: UILabel!
     @IBOutlet weak var GradientColorTitle: UILabel!
