@@ -387,7 +387,7 @@ class TextOverlay: TextLayerDisplayProtocol
         OperationQueue.main.addOperation
             {
                 self.NextPieceContainer!.alpha = 1.0
-                let VisualPiece = PieceFactory.GetGenericView(ForPiece: NextPiece, WithShadow: true)
+                let VisualPiece: CAShapeLayer = PieceFactory.GetGenericView(ForPiece: NextPiece, WithShadow: true)
                 self.NextPieceContainer?.layer.sublayers?.removeAll()
                 let FinalDuration = Duration == nil ? 0.1 : Duration!
                 VisualPiece.name = ContainerTypes.NextPiece.rawValue
