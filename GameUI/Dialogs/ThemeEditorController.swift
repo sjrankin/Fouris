@@ -9,8 +9,10 @@
 import Foundation
 import UIKit
 
-class ThemeEditorController: UIViewController
+class ThemeEditorController: UIViewController, ThemeEditingProtocol
 {
+    weak var ThemeDelegate: ThemeEditingProtocol? = nil
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -25,13 +27,43 @@ class ThemeEditorController: UIViewController
         PiecesView.layer.backgroundColor = ColorServer.CGColorFrom(ColorNames.WhiteSmoke)
     }
     
+    func EditTheme(ID: UUID)
+    {
+        ThemeID = ID
+    }
+    
+    var ThemeID: UUID = UUID.Empty
+    
+    func EditResults(_ Edited: Bool, ThemeID: UUID)
+    {
+        //do something here
+    }
+    
+    @IBSegueAction func InstantiateGameBackground(_ coder: NSCoder) -> GameBackgroundDialog?
+    {
+        let GBack = GameBackgroundDialog(coder: coder)
+        GBack?.ThemeDelegate = self
+        GBack?.EditTheme(ID: ThemeID)
+        return GBack
+    }
+    
+    @IBSegueAction func InstantiatePieceSelection(_ coder: NSCoder) -> PieceSelectorDialog?
+    {
+        let PieceSelect = PieceSelectorDialog(coder: coder)
+        PieceSelect?.ThemeDelegate = self
+        PieceSelect?.EditTheme(ID: ThemeID) 
+        return PieceSelect
+    }
+    
     @IBAction func HandleSaveButtonPressed(_ sender: Any)
     {
+        ThemeDelegate?.EditResults(true, ThemeID: ThemeID)
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func HandleCancelButtonPressed(_ sender: Any)
     {
+        ThemeDelegate?.EditResults(false, ThemeID: ThemeID)
         self.dismiss(animated: true, completion: nil)
     }
     
