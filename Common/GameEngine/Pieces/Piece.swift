@@ -19,8 +19,10 @@ class Piece
     /// Reference to the board where the piece will be played.
     weak var GameBoard: Board? = nil
     
+    /// If true, the piece is not intended to be used in a game.
+    public var IsEphemeral: Bool = true
+    
     /// Initializer.
-    ///
     /// - Parameters:
     ///   - TheType: The piece type. Almost always .GamePiece
     ///   - PieceID: The ID of the piece.
@@ -30,6 +32,7 @@ class Piece
     init(_ TheType: PieceTypes, PieceID: UUID, _ TheBoard: Board, _ RotationallySymmetric: Bool = false,
          BaseGameType: BaseGameTypes)
     {
+        IsEphemeral = false
         _BaseGameType = BaseGameType
         GameBoard = TheBoard
         BoardGameCount = GameBoard!.GameCount
@@ -39,6 +42,22 @@ class Piece
         Components = [Block]()
         GameBoardID = (GameBoard?.ID)!
         Attributes = PieceAttributes(ID: PieceID)
+    }
+    
+    /// Initializer.
+    /// - Note:
+    ///    - This initializer is intended for use *only* for assisting in the creation of generic views of pieces.
+    ///    - **Do not use this for normal game piece creation.**
+    ///    - It is intended that the piece instance created with this initializer be disposed of almost immediately after
+    ///      creation.
+    /// - Parameter PieceTypes: The piece type.
+    init(_ TheType: PieceTypes)
+    {
+        IsEphemeral = true
+        _BaseGameType = .Standard
+        _PieceType = TheType
+        Locations = Array(repeating: Block(), count: 4)
+        Components = [Block]()
     }
     
     /// Holds the base game type.
@@ -531,11 +550,11 @@ class Piece
     /// The board's game count.
     var BoardGameCount: Int = 0
     
-    /// Deinitialize the piece. If `Terminate` has not been called prior to deleting/deallocating the instance, a fatal error
-    /// will be generated.
+    /// Deinitialize the piece. If **Terminate** has not been called prior to deleting/deallocating the instance and this is *not* an
+    /// ephermal piece, a fatal error will be generated.
     deinit
     {
-        if !WasTerminated
+        if !WasTerminated && !IsEphemeral
         {
             fatalError("Piece: deinit attempted but Terminate not called ahead of time.")
         }
