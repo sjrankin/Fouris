@@ -485,7 +485,7 @@
     </Array>
 </Piece>
 <Piece>
-    <Property Name="_Name" Value="O"/>
+    <Property Name="_Name" Value="EmptyDiamond"/>
     <Property Name="_ID" Value="99d6c473-36b5-4504-b6e4-faece29fbe28"/>
     <Property Name="_PieceClass" Value="WithGaps"/>
     <Property Name="_RotationallySymmetric" Value="true"/>
@@ -716,11 +716,11 @@
             <Property Name="_IsOrigin" Value="false"/>
         </Item>
         <Item Index="8">
-            <Property Name="_Location" Value="0,-2"/>
+            <Property Name="_Location" Value="-2,0"/>
             <Property Name="_IsOrigin" Value="false"/>
         </Item>
         <Item Index="9">
-            <Property Name="_Location" Value="0,-1"/>
+            <Property Name="_Location" Value="-1,0"/>
             <Property Name="_IsOrigin" Value="false"/>
         </Item>
         <Item Index="10">
@@ -728,19 +728,19 @@
             <Property Name="_IsOrigin" Value="true"/>
         </Item>
         <Item Index="11">
-            <Property Name="_Location" Value="0,1"/>
+            <Property Name="_Location" Value="1,0"/>
             <Property Name="_IsOrigin" Value="false"/>
         </Item>
         <Item Index="12">
-            <Property Name="_Location" Value="1,-2"/>
+            <Property Name="_Location" Value="-2,1"/>
             <Property Name="_IsOrigin" Value="false"/>
         </Item>
         <Item Index="13">
-            <Property Name="_Location" Value="1,-1"/>
+            <Property Name="_Location" Value="-1,1"/>
             <Property Name="_IsOrigin" Value="true"/>
         </Item>
         <Item Index="14">
-            <Property Name="_Location" Value="1,0"/>
+            <Property Name="_Location" Value="0,1"/>
             <Property Name="_IsOrigin" Value="false"/>
         </Item>
         <Item Index="15">
@@ -821,6 +821,55 @@
             <Property Name="_Location" Value="0,1"/>
             <Property Name="_IsOrigin" Value="false"/>
         </Item>
+    </Array>
+</Piece>
+<Piece>
+    <Property Name="_Name" Value="CapitalO"/>
+    <Property Name="_ID" Value="0e7135e2-6bf7-457d-add4-63a0f1b57560"/>
+    <Property Name="_PieceClass" Value="BigPieces"/>
+    <Property Name="_ThinOrientation" Value="0"/>
+    <Property Name="_WideOrientation" Value="1"/>
+    <Array Name="_LogicalLocations">
+        <Item Index="0">
+            <Property Name="_Location" Value="0,2"/>
+            <Property Name="_IsOrigin" Value="false"/>
+        </Item>
+        <Item Index="1">
+            <Property Name="_Location" Value="1,2"/>
+            <Property Name="_IsOrigin" Value="false"/>
+        </Item>
+        <Item Index="2">
+            <Property Name="_Location" Value="-1,1"/>
+            <Property Name="_IsOrigin" Value="true"/>
+        </Item>
+        <Item Index="3">
+            <Property Name="_Location" Value="-1,0"/>
+            <Property Name="_IsOrigin" Value="false"/>
+        </Item>
+        <Item Index="4">
+            <Property Name="_Location" Value="-1,-1"/>
+            <Property Name="_IsOrigin" Value="false"/>
+        </Item>
+        <Item Index="5">
+            <Property Name="_Location" Value="2,1"/>
+            <Property Name="_IsOrigin" Value="false"/>
+        </Item>
+        <Item Index="6">
+            <Property Name="_Location" Value="2,0"/>
+            <Property Name="_IsOrigin" Value="false"/>
+        </Item>
+        <Item Index="7">
+            <Property Name="_Location" Value="2,-1"/>
+            <Property Name="_IsOrigin" Value="false"/>
+        </Item>
+        <Item Index="8">
+            <Property Name="_Location" Value="0,-2"/>
+            <Property Name="_IsOrigin" Value="false"/>
+        </Item>
+        <Item Index="9">
+            <Property Name="_Location" Value="1,-2"/>
+            <Property Name="_IsOrigin" Value="false"/>
+            </Item>
     </Array>
 </Piece>
 <Piece>
