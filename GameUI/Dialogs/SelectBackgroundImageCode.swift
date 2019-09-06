@@ -33,9 +33,14 @@ class SelectBackgroundImageCode: UIViewController, UIImagePickerControllerDelega
         ThemeID = ID
     }
     
+    func EditTheme(ID: UUID, Piece: UUID)
+    {
+        ThemeID = ID
+    }
+    
     var ThemeID: UUID = UUID.Empty
     
-    func EditResults(_ Edited: Bool, ThemeID: UUID)
+    func EditResults(_ Edited: Bool, ThemeID: UUID, PieceID: UUID?)
     {
         //Not used in this class.
     }
@@ -44,13 +49,13 @@ class SelectBackgroundImageCode: UIViewController, UIImagePickerControllerDelega
     
     @IBAction func HandleOKPressed(_ sender: Any)
     {
-        ThemeDelegate?.EditResults(true, ThemeID: ThemeID)
+        ThemeDelegate?.EditResults(true, ThemeID: ThemeID, PieceID: nil)
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func HandleCancelPressed(_ sender: Any)
     {
-        ThemeDelegate?.EditResults(false, ThemeID: ThemeID)
+        ThemeDelegate?.EditResults(false, ThemeID: ThemeID, PieceID: nil)
         self.dismiss(animated: true, completion: nil)
     }
     
