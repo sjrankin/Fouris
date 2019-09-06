@@ -1,0 +1,440 @@
+<PieceVisuals>
+    <Property Name="_ID" Value="cd0585e3-7e0c-4279-952d-04d40ba1f9dc"/>
+    <Property Name="_UserVisual" Value="false"/>
+    <Array Name="_VisualsList">
+        <Item Index="0">
+            <Property Name="_PieceShapeID" Value="f4510cca-262a-4018-bf29-04d703702d65"/>
+            <Property Name="_PieceName" Value="Bar"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Red"/>
+            <Property Name="_RetiredTextureName" Value="MacMaroon"/>
+            <Property Name="_ActiveDiffuseColor" Value="Red"/>
+            <Property Name="_ActiveSpecularColor" Value="White"/>
+            <Property Name="_RetiredDiffuseColor" Value="MacMaroon"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="1">
+            <Property Name="_PieceShapeID" Value="b5bb59a5-b006-487b-a7b1-e0daf4a48810"/>
+            <Property Name="_PieceName" Value="Square"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Green"/>
+            <Property Name="_RetiredTextureName" Value="Asparagus"/>
+            <Property Name="_ActiveDiffuseColor" Value="Green"/>
+            <Property Name="_ActiveSpecularColor" Value="White"/>
+            <Property Name="_RetiredDiffuseColor" Value="Asparagus"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="2">
+            <Property Name="_PieceShapeID" Value="05463ade-1996-49e0-aae9-55cad6f8f605"/>
+            <Property Name="_PieceName" Value="S"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Blue"/>
+            <Property Name="_RetiredTextureName" Value="PrussianBlue"/>
+            <Property Name="_ActiveDiffuseColor" Value="Blue"/>
+            <Property Name="_ActiveSpecularColor" Value="White"/>
+            <Property Name="_RetiredDiffuseColor" Value="PrussianBlue"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="3">
+            <Property Name="_PieceShapeID" Value="0f2709f0-b5ed-4ed9-b8c5-d65a1e1d69e8"/>
+            <Property Name="_PieceName" Value="Z"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Cyan"/>
+            <Property Name="_RetiredTextureName" Value="Cerulean"/>
+            <Property Name="_ActiveDiffuseColor" Value="Cyan"/>
+            <Property Name="_ActiveSpecularColor" Value="White"/>
+            <Property Name="_RetiredDiffuseColor" Value="Cerulean"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="4">
+            <Property Name="_PieceShapeID" Value="26e5dee4-0cc5-492f-ab31-b5b810863bf4"/>
+            <Property Name="_PieceName" Value="T"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Magenta"/>
+            <Property Name="_RetiredTextureName" Value="MagentaHaze"/>
+            <Property Name="_ActiveDiffuseColor" Value="Magenta"/>
+            <Property Name="_ActiveSpecularColor" Value="White"/>
+            <Property Name="_RetiredDiffuseColor" Value="MagentaHaze"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="5">
+            <Property Name="_PieceShapeID" Value="69cc6259-93f2-438d-8a9f-e0e65ad6c841"/>
+            <Property Name="_PieceName" Value="L"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Yellow"/>
+            <Property Name="_RetiredTextureName" Value="YellowMunsell"/>
+            <Property Name="_ActiveDiffuseColor" Value="Yellow"/>
+            <Property Name="_ActiveSpecularColor" Value="White"/>
+            <Property Name="_RetiredDiffuseColor" Value="YellowMunsell"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="6">
+            <Property Name="_PieceShapeID" Value="7c73c10c-86b3-406d-964e-f12abbf914cc"/>
+            <Property Name="_PieceName" Value="BackL"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Orange"/>
+            <Property Name="_RetiredTextureName" Value="CarrotOrange"/>
+            <Property Name="_ActiveDiffuseColor" Value="Red"/>
+            <Property Name="_ActiveSpecularColor" Value="Orange"/>
+            <Property Name="_RetiredDiffuseColor" Value="CarrotOrange"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="7">
+            <Property Name="_PieceShapeID" Value="70b8f7ab-cd14-4f1a-a709-91bcfe24f3ab"/>
+            <Property Name="_PieceName" Value="Zig"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Orange"/>
+            <Property Name="_RetiredTextureName" Value="CarrotOrange"/>
+            <Property Name="_ActiveDiffuseColor" Value="Red"/>
+            <Property Name="_ActiveSpecularColor" Value="Orange"/>
+            <Property Name="_RetiredDiffuseColor" Value="CarrotOrange"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="8">
+            <Property Name="_PieceShapeID" Value="85041a61-7d17-4434-a990-a033f38f34e0"/>
+            <Property Name="_PieceName" Value="Zag"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Orange"/>
+            <Property Name="_RetiredTextureName" Value="CarrotOrange"/>
+            <Property Name="_ActiveDiffuseColor" Value="Red"/>
+            <Property Name="_ActiveSpecularColor" Value="Orange"/>
+            <Property Name="_RetiredDiffuseColor" Value="CarrotOrange"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="9">
+            <Property Name="_PieceShapeID" Value="3ff7a6e9-21b4-4afc-b5ee-0ed4e6a63f1e"/>
+            <Property Name="_PieceName" Value="ShortL"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Orange"/>
+            <Property Name="_RetiredTextureName" Value="CarrotOrange"/>
+            <Property Name="_ActiveDiffuseColor" Value="Red"/>
+            <Property Name="_ActiveSpecularColor" Value="Orange"/>
+            <Property Name="_RetiredDiffuseColor" Value="CarrotOrange"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="10">
+            <Property Name="_PieceShapeID" Value="35d6b1f9-b921-4d7f-8448-66b179b2ab7f"/>
+            <Property Name="_PieceName" Value="ShortBackL"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Orange"/>
+            <Property Name="_RetiredTextureName" Value="CarrotOrange"/>
+            <Property Name="_ActiveDiffuseColor" Value="Red"/>
+            <Property Name="_ActiveSpecularColor" Value="Orange"/>
+            <Property Name="_RetiredDiffuseColor" Value="CarrotOrange"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="11">
+            <Property Name="_PieceShapeID" Value="49bf8a5b-6570-4456-90c8-2924811a6e59"/>
+            <Property Name="_PieceName" Value="C"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Orange"/>
+            <Property Name="_RetiredTextureName" Value="CarrotOrange"/>
+            <Property Name="_ActiveDiffuseColor" Value="Red"/>
+            <Property Name="_ActiveSpecularColor" Value="Orange"/>
+            <Property Name="_RetiredDiffuseColor" Value="CarrotOrange"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="12">
+            <Property Name="_PieceShapeID" Value="dec6e2c4-ff38-454a-ac56-dbe789267060"/>
+            <Property Name="_PieceName" Value="Plus"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Orange"/>
+            <Property Name="_RetiredTextureName" Value="CarrotOrange"/>
+            <Property Name="_ActiveDiffuseColor" Value="Red"/>
+            <Property Name="_ActiveSpecularColor" Value="Orange"/>
+            <Property Name="_RetiredDiffuseColor" Value="CarrotOrange"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="13">
+            <Property Name="_PieceShapeID" Value="09cbb902-d875-4337-8756-3e58bf408491"/>
+            <Property Name="_PieceName" Value="Corner"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Orange"/>
+            <Property Name="_RetiredTextureName" Value="CarrotOrange"/>
+            <Property Name="_ActiveDiffuseColor" Value="Red"/>
+            <Property Name="_ActiveSpecularColor" Value="Orange"/>
+            <Property Name="_RetiredDiffuseColor" Value="CarrotOrange"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="14">
+            <Property Name="_PieceShapeID" Value="2284f6ce-34c3-49de-b187-ba1220a0ac6f"/>
+            <Property Name="_PieceName" Value="Joined Squares"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Orange"/>
+            <Property Name="_RetiredTextureName" Value="CarrotOrange"/>
+            <Property Name="_ActiveDiffuseColor" Value="Red"/>
+            <Property Name="_ActiveSpecularColor" Value="Orange"/>
+            <Property Name="_RetiredDiffuseColor" Value="CarrotOrange"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="15">
+            <Property Name="_PieceShapeID" Value="88312d0c-73c1-4220-b91c-4d77e05236b1"/>
+            <Property Name="_PieceName" Value="Empty Box"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Orange"/>
+            <Property Name="_RetiredTextureName" Value="CarrotOrange"/>
+            <Property Name="_ActiveDiffuseColor" Value="Red"/>
+            <Property Name="_ActiveSpecularColor" Value="Orange"/>
+            <Property Name="_RetiredDiffuseColor" Value="CarrotOrange"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="16">
+            <Property Name="_PieceShapeID" Value="b69d3279-2e29-4eb1-924a-2e09187c21f9"/>
+            <Property Name="_PieceName" Value="Lower i"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Orange"/>
+            <Property Name="_RetiredTextureName" Value="CarrotOrange"/>
+            <Property Name="_ActiveDiffuseColor" Value="Red"/>
+            <Property Name="_ActiveSpecularColor" Value="Orange"/>
+            <Property Name="_RetiredDiffuseColor" Value="CarrotOrange"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="17">
+            <Property Name="_PieceShapeID" Value="99d6c473-36b5-4504-b6e4-faece29fbe28"/>
+            <Property Name="_PieceName" Value="Empty Diamond"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Orange"/>
+            <Property Name="_RetiredTextureName" Value="CarrotOrange"/>
+            <Property Name="_ActiveDiffuseColor" Value="Red"/>
+            <Property Name="_ActiveSpecularColor" Value="Orange"/>
+            <Property Name="_RetiredDiffuseColor" Value="CarrotOrange"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="18">
+            <Property Name="_PieceShapeID" Value="1b9fe0f0-9157-46da-b462-5222643bb1f7"/>
+            <Property Name="_PieceName" Value="Parallel Lines"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Orange"/>
+            <Property Name="_RetiredTextureName" Value="CarrotOrange"/>
+            <Property Name="_ActiveDiffuseColor" Value="Red"/>
+            <Property Name="_ActiveSpecularColor" Value="Orange"/>
+            <Property Name="_RetiredDiffuseColor" Value="CarrotOrange"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="19">
+            <Property Name="_PieceShapeID" Value="97b5a353-acfa-43dc-9deb-7c8aa0f32000"/>
+            <Property Name="_PieceName" Value="Sweeper"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Orange"/>
+            <Property Name="_RetiredTextureName" Value="CarrotOrange"/>
+            <Property Name="_ActiveDiffuseColor" Value="Red"/>
+            <Property Name="_ActiveSpecularColor" Value="Orange"/>
+            <Property Name="_RetiredDiffuseColor" Value="CarrotOrange"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="20">
+            <Property Name="_PieceShapeID" Value="c540885c-1b60-4577-af7b-f5d309e73d84"/>
+            <Property Name="_PieceName" Value="Capital I"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Orange"/>
+            <Property Name="_RetiredTextureName" Value="CarrotOrange"/>
+            <Property Name="_ActiveDiffuseColor" Value="Red"/>
+            <Property Name="_ActiveSpecularColor" Value="Orange"/>
+            <Property Name="_RetiredDiffuseColor" Value="CarrotOrange"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="21">
+            <Property Name="_PieceShapeID" Value="0e7135e2-6bf7-457d-add4-63a0f1b57560"/>
+            <Property Name="_PieceName" Value="Capital O"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Orange"/>
+            <Property Name="_RetiredTextureName" Value="CarrotOrange"/>
+            <Property Name="_ActiveDiffuseColor" Value="Red"/>
+            <Property Name="_ActiveSpecularColor" Value="Orange"/>
+            <Property Name="_RetiredDiffuseColor" Value="CarrotOrange"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="22">
+            <Property Name="_PieceShapeID" Value="936170f5-1300-4553-ada8-141bdfb4d85f"/>
+            <Property Name="_PieceName" Value="3x3 Block"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Orange"/>
+            <Property Name="_RetiredTextureName" Value="CarrotOrange"/>
+            <Property Name="_ActiveDiffuseColor" Value="Red"/>
+            <Property Name="_ActiveSpecularColor" Value="Orange"/>
+            <Property Name="_RetiredDiffuseColor" Value="CarrotOrange"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="23">
+            <Property Name="_PieceShapeID" Value="494c7a96-060d-4c81-8f9a-609ae0e71a5e"/>
+            <Property Name="_PieceName" Value="4x4 Block"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Orange"/>
+            <Property Name="_RetiredTextureName" Value="CarrotOrange"/>
+            <Property Name="_ActiveDiffuseColor" Value="Red"/>
+            <Property Name="_ActiveSpecularColor" Value="Orange"/>
+            <Property Name="_RetiredDiffuseColor" Value="CarrotOrange"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="24">
+            <Property Name="_PieceShapeID" Value="63285186-a589-4185-acd6-1e6e8c1368ed"/>
+            <Property Name="_PieceName" Value="Diagonal"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Orange"/>
+            <Property Name="_RetiredTextureName" Value="CarrotOrange"/>
+            <Property Name="_ActiveDiffuseColor" Value="Red"/>
+            <Property Name="_ActiveSpecularColor" Value="Orange"/>
+            <Property Name="_RetiredDiffuseColor" Value="CarrotOrange"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="25">
+            <Property Name="_PieceShapeID" Value="8ef520af-17e0-4011-8579-a92a9d520c5a"/>
+            <Property Name="_PieceName" Value="X"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Orange"/>
+            <Property Name="_RetiredTextureName" Value="CarrotOrange"/>
+            <Property Name="_ActiveDiffuseColor" Value="Red"/>
+            <Property Name="_ActiveSpecularColor" Value="Orange"/>
+            <Property Name="_RetiredDiffuseColor" Value="CarrotOrange"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="26">
+            <Property Name="_PieceShapeID" Value="007c0348-e287-43cc-8901-bfce604f796b"/>
+            <Property Name="_PieceName" Value="Big Gap"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Orange"/>
+            <Property Name="_RetiredTextureName" Value="CarrotOrange"/>
+            <Property Name="_ActiveDiffuseColor" Value="Red"/>
+            <Property Name="_ActiveSpecularColor" Value="Orange"/>
+            <Property Name="_RetiredDiffuseColor" Value="CarrotOrange"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="27">
+            <Property Name="_PieceShapeID" Value="742b73be-56ad-4f36-903c-dbd160428d96"/>
+            <Property Name="_PieceName" Value="Long Gap"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Orange"/>
+            <Property Name="_RetiredTextureName" Value="CarrotOrange"/>
+            <Property Name="_ActiveDiffuseColor" Value="Red"/>
+            <Property Name="_ActiveSpecularColor" Value="Orange"/>
+            <Property Name="_RetiredDiffuseColor" Value="CarrotOrange"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="28">
+            <Property Name="_PieceShapeID" Value="5d87accc-3edf-4c7f-b226-d83254d499ad"/>
+            <Property Name="_PieceName" Value="Long Diagonal"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Orange"/>
+            <Property Name="_RetiredTextureName" Value="CarrotOrange"/>
+            <Property Name="_ActiveDiffuseColor" Value="Red"/>
+            <Property Name="_ActiveSpecularColor" Value="Orange"/>
+            <Property Name="_RetiredDiffuseColor" Value="CarrotOrange"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="29">
+            <Property Name="_PieceShapeID" Value="4dbea417-4654-459b-9aaf-9bcde56720be"/>
+            <Property Name="_PieceName" Value="V"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Orange"/>
+            <Property Name="_RetiredTextureName" Value="CarrotOrange"/>
+            <Property Name="_ActiveDiffuseColor" Value="Red"/>
+            <Property Name="_ActiveSpecularColor" Value="Orange"/>
+            <Property Name="_RetiredDiffuseColor" Value="CarrotOrange"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+        <Item Index="30">
+            <Property Name="_PieceShapeID" Value="6a2b5de2-4336-4927-affa-980a89c061a6"/>
+            <Property Name="_PieceName" Value="Far Apart"/>
+            <Property Name="_Active3DBlockShape" Value="Cubic"/>
+            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
+            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
+            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
+            <Property Name="_ActiveTextureName" Value="Orange"/>
+            <Property Name="_RetiredTextureName" Value="CarrotOrange"/>
+            <Property Name="_ActiveDiffuseColor" Value="Red"/>
+            <Property Name="_ActiveSpecularColor" Value="Orange"/>
+            <Property Name="_RetiredDiffuseColor" Value="CarrotOrange"/>
+            <Property Name="_RetiredSpecularColor" Value="White"/>
+        </Item>
+    </Array>
+</PieceVisuals>
