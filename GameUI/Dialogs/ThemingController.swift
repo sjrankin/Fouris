@@ -56,7 +56,11 @@ class ThemingController: UIViewController, UITableViewDataSource, UITableViewDel
         //Right now, no one should call this as this is the originator of theme edits.
     }
     
-    func EditResults(_ Edited: Bool, ThemeID: UUID)
+    func EditTheme(ID: UUID, Piece: UUID)
+    {
+    }
+    
+    func EditResults(_ Edited: Bool, ThemeID: UUID, PieceID: UUID?)
     {
         //Do something.
     }
