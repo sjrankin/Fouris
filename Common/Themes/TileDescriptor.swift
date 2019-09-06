@@ -1399,7 +1399,7 @@ enum TileShapes: String, CaseIterable
     case RoundedRect = "RoundedRect"
     case Circular = "Circular"
 }
-
+/*
 /// Block shapes for 3D rendered tiles.
 ///
 /// - **Cubic**: Block is a cube.
@@ -1435,3 +1435,4 @@ enum RenderedTextureTypes: String, CaseIterable
     case Color = "Color"
     case Image = "Image"
 }
+*/
