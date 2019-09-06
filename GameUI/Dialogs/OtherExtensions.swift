@@ -40,3 +40,20 @@ extension Double
         return MemoryLayout.size(ofValue: Double(0.0))
     }
 }
+
+extension UIImage
+{
+    public convenience init?(Color: UIColor, Size: CGSize = CGSize(width: 1, height: 1))
+    {
+        let Rect = CGRect(origin: .zero, size: Size)
+        UIGraphicsBeginImageContextWithOptions(Rect.size, false, UIScreen.main.scale)
+        Color.setFill()
+        UIRectFill(Rect)
+        let Image = UIGraphicsGetImageFromCurrentImageContext()
+        guard let CGimage = Image?.cgImage else
+        {
+            return nil
+        }
+        self.init(cgImage: CGimage)
+    }
+}
