@@ -1,0 +1,54 @@
+<Theme Name="Default">
+    <Property Name="_ID" Value="49de21df-e1ce-448d-9a87-8db26b07e7ab"/>
+    <Property Name="_ThemeName" Value="User Theme"/>
+    <Property Name="_Title" Value="User Game Theme"/>
+    <Property Name="_Created" Value="2019-09-05"/>
+    <Property Name="_UserTheme" Value="true"/>
+    <Property Name="_IsDefaultTheme" Value="false"/>
+    <Property Name="_CameraFieldOfView" Value="92.0"/>
+    <Property Name="_CameraPosition" Value="-0.5,2.0,15.0"/>
+    <Property Name="_CameraOrientation" Value="0.0,0.0,0.0,0.0"/>
+    <Property Name="_AntialiasingMode" Value="MultiSampling4X"/>
+    <Property Name="_UseDefaultLighting" Value="false"/>
+    <Property Name="_LightColor" Value="White"/>
+    <Property Name="_LightType" Value="Omni"/>
+    <Property Name="_LightPosition" Value="-5.0,15.0,40.0"/>
+    <Property Name="_CanControlCamera" Value="false"/>
+    <Property Name="_ShowStatistics" Value="false"/>
+    <Property Name="_ShowBackgroundGrid" Value="false"/>
+    <Property Name="_ShowBucketGrid" Value="true"/>
+    <Property Name="_ShowBucketGridOutline" Value="true"/>
+    <Property Name="_BucketGridColor" Value="Gray"/>
+    <Property Name="_BuketGridOutlineColor" Value="Red"/>
+    <Property Name="_BackgroundType" Value="SolidColor"/>
+    <Property Name="_BackgroundSolidColor" Value="Maroon"/>
+    <Property Name="_BackgroundSolidColorCycleTime" Value="0"/>
+    <Property Name="_BackgroundGradientColor" Value="(Red)@(0.0),(Blue)@(1.0)"/>
+    <Property Name="_BackgroundGradientColorOrientation" Value="Vertical"/>
+    <Property Name="_BackgroundImageName" Value="SampleImage.jpg"/>
+    <Property Name="_RotatingBucketDirection" Value="Right"/>
+    <Property Name="_BackgroundLiveImageCamera" Value="Rear"/>
+    <Array Name="_TileList">
+        <Item Index="0">
+            <Property Name="_PieceShapeID" Value="f4510cca-262a-4018-bf29-04d703702d65"/>
+        </Item>
+        <Item Index="1">
+            <Property Name="_PieceShapeID" Value="b5bb59a5-b006-487b-a7b1-e0daf4a48810"/>
+        </Item>
+        <Item Index="2">
+            <Property Name="_PieceShapeID" Value="05463ade-1996-49e0-aae9-55cad6f8f605"/>
+        </Item>
+        <Item Index="3">
+            <Property Name="_PieceShapeID" Value="0f2709f0-b5ed-4ed9-b8c5-d65a1e1d69e8"/>
+        </Item>
+        <Item Index="4">
+            <Property Name="_PieceShapeID" Value="26e5dee4-0cc5-492f-ab31-b5b810863bf4"/>
+        </Item>
+        <Item Index="5">
+            <Property Name="_PieceShapeID" Value="69cc6259-93f2-438d-8a9f-e0e65ad6c841"/>
+        </Item>
+        <Item Index="6">
+            <Property Name="_PieceShapeID" Value="7c73c10c-86b3-406d-964e-f12abbf914cc"/>
+        </Item>
+    </Array>
+</Theme>
