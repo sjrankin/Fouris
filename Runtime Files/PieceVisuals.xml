@@ -1,4 +1,4 @@
-<PieceVisuals>
+<PieceVisuals Name="StandardPieceTheme">
     <Property Name="_ID" Value="cd0585e3-7e0c-4279-952d-04d40ba1f9dc"/>
     <Property Name="_UserVisual" Value="false"/>
     <Array Name="_VisualsList">
