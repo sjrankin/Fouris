@@ -72,9 +72,14 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, ThemeEditingP
         ThemeID = ID
     }
     
+    func EditTheme(ID: UUID, Piece: UUID)
+    {
+        ThemeID = ID
+    }
+    
     var ThemeID: UUID = UUID.Empty
     
-    func EditResults(_ Edited: Bool, ThemeID: UUID)
+    func EditResults(_ Edited: Bool, ThemeID: UUID, PieceID: UUID?)  
     {
         //Do something...
     }
@@ -198,13 +203,13 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, ThemeEditingP
     
     @IBAction func HandleOKPressed(_ sender: Any)
     {
-        ThemeDelegate?.EditResults(true, ThemeID: ThemeID)
+        ThemeDelegate?.EditResults(true, ThemeID: ThemeID, PieceID: nil)
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func HandleCancelPressed(_ sender: Any)
     {
-        ThemeDelegate?.EditResults(false, ThemeID: ThemeID)
+        ThemeDelegate?.EditResults(false, ThemeID: ThemeID, PieceID: nil)
         self.dismiss(animated: true, completion: nil)
     }
     
