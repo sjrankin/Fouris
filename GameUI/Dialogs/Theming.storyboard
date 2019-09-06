@@ -299,9 +299,12 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zKG-A0-6zK">
-                                        <rect key="frame" x="558" y="40" width="106" height="36"/>
+                                        <rect key="frame" x="538" y="40" width="126" height="36"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                        <state key="normal" title="Set Visuals"/>
+                                        <state key="normal" title="Piece Visuals"/>
+                                        <connections>
+                                            <segue destination="Kw6-EG-hJw" kind="show" destinationCreationSelector="InstantiatePieceVisualizer:" id="Io2-m1-onq"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1734,6 +1737,711 @@
             </objects>
             <point key="canvasLocation" x="4259" y="81"/>
         </scene>
+        <!--Piece Visualizer Code-->
+        <scene sceneID="snv-dd-svd">
+            <objects>
+                <viewController id="Kw6-EG-hJw" customClass="PieceVisualizerCode" customModule="Fouris" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Beg-PC-Xw9">
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="984"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N6X-kO-sIK">
+                                <rect key="frame" x="0.0" y="-14" width="712" height="87"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" text="Game Pieces" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LXh-m5-Ka7">
+                                        <rect key="frame" x="14" y="29" width="216" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <viewLayoutGuide key="safeArea" id="Mdj-99-0Dn"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="36"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="87" id="MYr-Oe-JAr"/>
+                                </constraints>
+                                <viewLayoutGuide key="safeArea" id="Df5-1h-pYk"/>
+                            </view>
+                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ttS-rW-zdU">
+                                <rect key="frame" x="0.0" y="914" width="712" height="70"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CF5-UZ-aE9">
+                                        <rect key="frame" x="20" y="14" width="44" height="48"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                        <state key="normal" title="OK"/>
+                                        <connections>
+                                            <action selector="HandleOKPressed:" destination="Kw6-EG-hJw" eventType="primaryActionTriggered" id="1Z6-4w-PYg"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EQS-F6-Gxi">
+                                        <rect key="frame" x="594" y="14" width="98" height="48"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                        <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="HandleCancelPressed:" destination="Kw6-EG-hJw" eventType="primaryActionTriggered" id="bDS-tR-CYM"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="EQS-F6-Gxi" firstAttribute="trailing" secondItem="ttS-rW-zdU" secondAttribute="trailingMargin" id="EcV-HC-Nmj"/>
+                                    <constraint firstItem="CF5-UZ-aE9" firstAttribute="leading" secondItem="ttS-rW-zdU" secondAttribute="leadingMargin" id="Njv-Hj-8Qe"/>
+                                    <constraint firstAttribute="height" constant="70" id="Pl5-41-qqx"/>
+                                    <constraint firstItem="CF5-UZ-aE9" firstAttribute="baseline" secondItem="EQS-F6-Gxi" secondAttribute="baseline" id="YwB-MA-HZM"/>
+                                    <constraint firstItem="CF5-UZ-aE9" firstAttribute="bottom" secondItem="ttS-rW-zdU" secondAttribute="bottomMargin" id="uuO-r1-Vbt"/>
+                                </constraints>
+                                <viewLayoutGuide key="safeArea" id="p6p-lM-Pwx"/>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Pk8-HW-tev">
+                                <rect key="frame" x="20" y="129" width="672" height="761"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pieces in Theme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rYa-75-P9W">
+                                <rect key="frame" x="20" y="91" width="126" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Pk8-HW-tev" firstAttribute="centerX" secondItem="ttS-rW-zdU" secondAttribute="centerX" id="1UI-4U-XII"/>
+                            <constraint firstItem="ttS-rW-zdU" firstAttribute="trailing" secondItem="N6X-kO-sIK" secondAttribute="trailing" id="2dE-vC-kEd"/>
+                            <constraint firstItem="rYa-75-P9W" firstAttribute="leading" secondItem="Pk8-HW-tev" secondAttribute="leading" id="2j5-ZG-Aql"/>
+                            <constraint firstItem="Pk8-HW-tev" firstAttribute="top" secondItem="rYa-75-P9W" secondAttribute="bottom" constant="17" id="8IE-4V-HIK"/>
+                            <constraint firstItem="ttS-rW-zdU" firstAttribute="leading" secondItem="N6X-kO-sIK" secondAttribute="leading" id="KJA-K9-zva"/>
+                            <constraint firstItem="rYa-75-P9W" firstAttribute="leading" secondItem="Beg-PC-Xw9" secondAttribute="leadingMargin" id="YIi-tQ-BQE"/>
+                            <constraint firstItem="ttS-rW-zdU" firstAttribute="top" secondItem="Pk8-HW-tev" secondAttribute="bottom" constant="24" id="Yo7-CT-5tu"/>
+                            <constraint firstItem="ttS-rW-zdU" firstAttribute="leading" secondItem="TdS-dd-Nfp" secondAttribute="leading" id="cNa-VR-gxg"/>
+                            <constraint firstItem="rYa-75-P9W" firstAttribute="top" secondItem="N6X-kO-sIK" secondAttribute="bottom" constant="18" id="jt8-Gr-lmZ"/>
+                            <constraint firstItem="ttS-rW-zdU" firstAttribute="bottom" secondItem="TdS-dd-Nfp" secondAttribute="bottom" id="o2P-s7-JmP"/>
+                            <constraint firstItem="ttS-rW-zdU" firstAttribute="centerX" secondItem="Beg-PC-Xw9" secondAttribute="centerX" id="pHK-cj-fxE"/>
+                            <constraint firstItem="N6X-kO-sIK" firstAttribute="top" secondItem="Beg-PC-Xw9" secondAttribute="topMargin" constant="-14" id="wec-T0-2Qo"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="TdS-dd-Nfp"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="acx-RM-Ccn"/>
+                    <connections>
+                        <segue destination="a67-7f-6jS" kind="show" id="Igf-Yb-hqc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LpO-mA-9Ql" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5103.90625" y="83.7890625"/>
+        </scene>
+        <!--Piece Editor Code-->
+        <scene sceneID="lwc-aL-H7O">
+            <objects>
+                <viewController restorationIdentifier="PieceEditorUI" id="a67-7f-6jS" customClass="PieceEditorCode" customModule="Fouris" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4Zj-QU-DuP">
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="984"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fEJ-Lz-6fO">
+                                <rect key="frame" x="0.0" y="-14" width="712" height="87"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" text="Piece Editor: &lt;piece name&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r1y-El-jqT">
+                                        <rect key="frame" x="14" y="29" width="678" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <viewLayoutGuide key="safeArea" id="Tb7-HE-xdI"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="36"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="87" id="Clt-cy-wvA"/>
+                                </constraints>
+                                <viewLayoutGuide key="safeArea" id="lzh-Vc-pE6"/>
+                            </view>
+                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eol-uS-2FA">
+                                <rect key="frame" x="0.0" y="914" width="712" height="70"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7a6-9L-t2U">
+                                        <rect key="frame" x="20" y="14" width="44" height="48"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                        <state key="normal" title="OK"/>
+                                        <connections>
+                                            <action selector="HandleOKPressed:" destination="a67-7f-6jS" eventType="primaryActionTriggered" id="yza-4u-ZXN"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rotate Pieces" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QIe-BI-sRd">
+                                        <rect key="frame" x="175" y="25" width="105" height="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qgX-Ey-IJb">
+                                        <rect key="frame" x="594" y="14" width="98" height="48"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                        <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="HandleCancelPressed:" destination="a67-7f-6jS" eventType="primaryActionTriggered" id="8Zf-UI-KSQ"/>
+                                        </connections>
+                                    </button>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="lWF-Bo-xAX">
+                                        <rect key="frame" x="291" y="20" width="179" height="31"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="179" id="rXC-Eb-JXr"/>
+                                        </constraints>
+                                        <segments>
+                                            <segment title="Off"/>
+                                            <segment title="1D"/>
+                                            <segment title="2D"/>
+                                            <segment title="3D"/>
+                                        </segments>
+                                    </segmentedControl>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="QIe-BI-sRd" firstAttribute="centerY" secondItem="lWF-Bo-xAX" secondAttribute="centerY" id="6Rr-7o-ir8"/>
+                                    <constraint firstItem="lWF-Bo-xAX" firstAttribute="leading" secondItem="QIe-BI-sRd" secondAttribute="trailing" constant="11" id="9fq-fd-S6N"/>
+                                    <constraint firstItem="QIe-BI-sRd" firstAttribute="leading" secondItem="Eol-uS-2FA" secondAttribute="leading" constant="175" id="Cm0-Ec-g29"/>
+                                    <constraint firstItem="qgX-Ey-IJb" firstAttribute="trailing" secondItem="Eol-uS-2FA" secondAttribute="trailingMargin" id="Eok-6q-E7b"/>
+                                    <constraint firstItem="QIe-BI-sRd" firstAttribute="top" secondItem="nrK-Mc-mdf" secondAttribute="top" constant="25" id="Hmz-Lc-oBU"/>
+                                    <constraint firstItem="lWF-Bo-xAX" firstAttribute="top" secondItem="nrK-Mc-mdf" secondAttribute="top" constant="20" id="MMu-4r-3Jl"/>
+                                    <constraint firstItem="7a6-9L-t2U" firstAttribute="leading" secondItem="Eol-uS-2FA" secondAttribute="leadingMargin" id="U2A-nT-CKd"/>
+                                    <constraint firstItem="7a6-9L-t2U" firstAttribute="bottom" secondItem="Eol-uS-2FA" secondAttribute="bottomMargin" id="XpA-1C-JfO"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="70" id="fWp-qf-GBv"/>
+                                    <constraint firstItem="QIe-BI-sRd" firstAttribute="centerY" secondItem="Eol-uS-2FA" secondAttribute="centerY" id="lW9-qw-fDE"/>
+                                    <constraint firstItem="7a6-9L-t2U" firstAttribute="baseline" secondItem="qgX-Ey-IJb" secondAttribute="baseline" id="obm-ru-846"/>
+                                    <constraint firstAttribute="height" constant="70" id="ojn-7s-fng"/>
+                                </constraints>
+                                <viewLayoutGuide key="safeArea" id="nrK-Mc-mdf"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PBx-xc-UOR">
+                                <rect key="frame" x="20" y="117" width="300" height="300"/>
+                                <subviews>
+                                    <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZVR-MO-0NS">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                                    </sceneKitView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="ZVR-MO-0NS" firstAttribute="leading" secondItem="PBx-xc-UOR" secondAttribute="leading" id="JO5-vw-YWU"/>
+                                    <constraint firstItem="ZVR-MO-0NS" firstAttribute="top" secondItem="PBx-xc-UOR" secondAttribute="top" id="aXS-4A-iGv"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZVR-MO-0NS" secondAttribute="trailing" id="fo7-SJ-sLq"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZVR-MO-0NS" secondAttribute="bottom" id="r5u-WK-mqH"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <real key="value" value="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1gT-qF-cfH">
+                                <rect key="frame" x="392" y="117" width="300" height="300"/>
+                                <subviews>
+                                    <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vof-FR-QCz">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                                    </sceneKitView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="vof-FR-QCz" firstAttribute="leading" secondItem="1gT-qF-cfH" secondAttribute="leading" id="2gF-W2-ozE"/>
+                                    <constraint firstAttribute="trailing" secondItem="vof-FR-QCz" secondAttribute="trailing" id="7hD-gr-ii8"/>
+                                    <constraint firstAttribute="bottom" secondItem="vof-FR-QCz" secondAttribute="bottom" id="93X-Vi-B8f"/>
+                                    <constraint firstItem="vof-FR-QCz" firstAttribute="top" secondItem="1gT-qF-cfH" secondAttribute="top" id="N97-i2-fr8"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <real key="value" value="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dropping" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BWZ-R4-0SA">
+                                <rect key="frame" x="20" y="88.5" width="71" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Frozen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cl4-W4-5GZ">
+                                <rect key="frame" x="392" y="88.5" width="52" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7dL-zg-dZW" customClass="ColorButton" customModule="Fouris" customModuleProvider="target">
+                                <rect key="frame" x="181" y="633" width="30" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="ButtonColor">
+                                        <color key="value" red="0.99953407049999998" green="0.98835557699999999" blue="0.47265523669999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="N96-YO-0Bg">
+                                <rect key="frame" x="20" y="459" width="266" height="286"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="MLh-rf-IyW">
+                                        <rect key="frame" x="0.0" y="0.0" width="266" height="31"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" text="Surface Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ns6-Xj-I4r">
+                                                <rect key="frame" x="0.0" y="0.0" width="101.5" height="31"/>
+                                                <viewLayoutGuide key="safeArea" id="9sF-WL-QDs"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="o2e-wP-Mrw">
+                                                <rect key="frame" x="121.5" y="0.0" width="144.5" height="32"/>
+                                                <segments>
+                                                    <segment title="Color"/>
+                                                    <segment title="Image"/>
+                                                </segments>
+                                                <connections>
+                                                    <action selector="HandleActiveSurfaceTypeChanged:" destination="a67-7f-6jS" eventType="primaryActionTriggered" id="NQQ-kF-Jfl"/>
+                                                </connections>
+                                            </segmentedControl>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0g5-vJ-LWl">
+                                        <rect key="frame" x="0.0" y="51" width="266" height="39.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4CO-yq-x0E">
+                                                <rect key="frame" x="0.0" y="0.0" width="123" height="39.5"/>
+                                                <viewLayoutGuide key="safeArea" id="1GW-zd-9Jg"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Diffuse color">
+                                                        <attributes>
+                                                            <font key="NSFont" size="19" name=".AppleSystemUIFont"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment>
+                                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                                        <attributes>
+                                                            <font key="NSFont" metaFont="system" size="17"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content="Tap to update">
+                                                        <attributes>
+                                                            <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tlq-PY-GRd" customClass="ColorButton" customModule="Fouris" customModuleProvider="target">
+                                                <rect key="frame" x="143" y="0.0" width="123" height="39.5"/>
+                                                <color key="backgroundColor" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="Diffuse Color"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="ButtonColor">
+                                                        <color key="value" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <segue destination="ybs-PM-bLp" kind="show" destinationCreationSelector="InstantiateColorPickerForActiveDiffuseColor:" id="YWX-ts-4jy"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="1yn-B0-0Oo">
+                                        <rect key="frame" x="0.0" y="110.5" width="266" height="39.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1PD-vQ-11R">
+                                                <rect key="frame" x="0.0" y="0.0" width="123" height="39.5"/>
+                                                <viewLayoutGuide key="safeArea" id="5Ps-8j-T28"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Specular color">
+                                                        <attributes>
+                                                            <font key="NSFont" size="19" name=".AppleSystemUIFont"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment>
+                                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                                        <attributes>
+                                                            <font key="NSFont" metaFont="system" size="17"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content="Tap to update">
+                                                        <attributes>
+                                                            <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xwt-w6-Ocx" customClass="ColorButton" customModule="Fouris" customModuleProvider="target">
+                                                <rect key="frame" x="143" y="0.0" width="123" height="39.5"/>
+                                                <color key="backgroundColor" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="Specular Color"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="ButtonColor">
+                                                        <color key="value" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <segue destination="ybs-PM-bLp" kind="show" destinationCreationSelector="InstantiateColorPickerForActiveSpecularColor:" id="LmF-Ss-L9y"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="FHe-ct-nh0">
+                                        <rect key="frame" x="0.0" y="170" width="266" height="48"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pd-By-bnL">
+                                                <rect key="frame" x="0.0" y="0.0" width="123" height="48"/>
+                                                <viewLayoutGuide key="safeArea" id="4U2-Wn-D3S"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Texture">
+                                                        <attributes>
+                                                            <font key="NSFont" size="19" name=".AppleSystemUIFont"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment>
+                                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                                        <attributes>
+                                                            <font key="NSFont" metaFont="system" size="17"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content="Tap to update">
+                                                        <attributes>
+                                                            <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1QO-Du-MRy">
+                                                <rect key="frame" x="143" y="0.0" width="123" height="48"/>
+                                                <state key="normal" title="Button" image="OpenedCube"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                        <real key="value" value="0.5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="HandleActiveTextureButtonPressed:" destination="a67-7f-6jS" eventType="primaryActionTriggered" id="X9D-Xq-ynt"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Rw1-K7-yxX">
+                                        <rect key="frame" x="0.0" y="238" width="266" height="48"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QjF-6P-0jr">
+                                                <rect key="frame" x="0.0" y="0.0" width="123" height="48"/>
+                                                <viewLayoutGuide key="safeArea" id="bTJ-SX-dEs"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Block shape">
+                                                        <attributes>
+                                                            <font key="NSFont" size="19" name=".AppleSystemUIFont"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment>
+                                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                                        <attributes>
+                                                            <font key="NSFont" metaFont="system" size="17"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content="Tap to update">
+                                                        <attributes>
+                                                            <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="98n-LM-5Rz">
+                                                <rect key="frame" x="143" y="0.0" width="123" height="48"/>
+                                                <state key="normal" title="Button" image="OpenedCube"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                        <real key="value" value="0.5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="HandleActiveShapeButtonPressed:" destination="a67-7f-6jS" eventType="primaryActionTriggered" id="VyN-F5-Lvg"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="6Xa-yG-vDU">
+                                <rect key="frame" x="392" y="459" width="266" height="286"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="063-SL-bcX">
+                                        <rect key="frame" x="0.0" y="0.0" width="266" height="31"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" text="Surface Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uNl-6D-zBl">
+                                                <rect key="frame" x="0.0" y="0.0" width="101.5" height="31"/>
+                                                <viewLayoutGuide key="safeArea" id="Pch-Ef-2Gr"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Fpd-ua-GBg">
+                                                <rect key="frame" x="121.5" y="0.0" width="144.5" height="32"/>
+                                                <segments>
+                                                    <segment title="Color"/>
+                                                    <segment title="Image"/>
+                                                </segments>
+                                                <connections>
+                                                    <action selector="HandleRetiredSurfaceTypeChanged:" destination="a67-7f-6jS" eventType="primaryActionTriggered" id="Ibi-wU-p34"/>
+                                                </connections>
+                                            </segmentedControl>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="kQi-LX-iVT">
+                                        <rect key="frame" x="0.0" y="51" width="266" height="39.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbN-4E-7Ow">
+                                                <rect key="frame" x="0.0" y="0.0" width="123" height="39.5"/>
+                                                <viewLayoutGuide key="safeArea" id="55N-nF-VMn"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Diffuse color">
+                                                        <attributes>
+                                                            <font key="NSFont" size="19" name=".AppleSystemUIFont"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment>
+                                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                                        <attributes>
+                                                            <font key="NSFont" metaFont="system" size="17"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content="Tap to update">
+                                                        <attributes>
+                                                            <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PFq-jO-CpZ" customClass="ColorButton" customModule="Fouris" customModuleProvider="target">
+                                                <rect key="frame" x="143" y="0.0" width="123" height="39.5"/>
+                                                <color key="backgroundColor" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="Diffuse Color"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="ButtonColor">
+                                                        <color key="value" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <segue destination="ybs-PM-bLp" kind="show" destinationCreationSelector="InstantiateColorPickerForRetiredDiffuseColor:" id="1DY-e7-Gpo"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0Ea-uS-FOd">
+                                        <rect key="frame" x="0.0" y="110.5" width="266" height="39.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L6m-A1-0Jz">
+                                                <rect key="frame" x="0.0" y="0.0" width="123" height="39.5"/>
+                                                <viewLayoutGuide key="safeArea" id="uMN-rj-1Bn"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Specular color">
+                                                        <attributes>
+                                                            <font key="NSFont" size="19" name=".AppleSystemUIFont"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment>
+                                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                                        <attributes>
+                                                            <font key="NSFont" metaFont="system" size="17"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content="Tap to update">
+                                                        <attributes>
+                                                            <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DMF-Ox-c5u" customClass="ColorButton" customModule="Fouris" customModuleProvider="target">
+                                                <rect key="frame" x="143" y="0.0" width="123" height="39.5"/>
+                                                <color key="backgroundColor" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="Specular Color"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="ButtonColor">
+                                                        <color key="value" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <segue destination="ybs-PM-bLp" kind="show" destinationCreationSelector="InstantiateColorPickerForRetiredSpecularColor:" id="wf9-w8-Kgg"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ZiS-fW-rpy">
+                                        <rect key="frame" x="0.0" y="170" width="266" height="48"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G8C-O5-ZJQ">
+                                                <rect key="frame" x="0.0" y="0.0" width="123" height="48"/>
+                                                <viewLayoutGuide key="safeArea" id="90F-6G-L6Y"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Texture">
+                                                        <attributes>
+                                                            <font key="NSFont" size="19" name=".AppleSystemUIFont"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment>
+                                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                                        <attributes>
+                                                            <font key="NSFont" metaFont="system" size="17"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content="Tap to update">
+                                                        <attributes>
+                                                            <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jQj-aw-PtH">
+                                                <rect key="frame" x="143" y="0.0" width="123" height="48"/>
+                                                <state key="normal" title="Button" image="OpenedCube"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                        <real key="value" value="0.5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="HandleRetiredTextureButtonPressed:" destination="a67-7f-6jS" eventType="primaryActionTriggered" id="esI-DL-6wv"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="vF0-U4-UgL">
+                                        <rect key="frame" x="0.0" y="238" width="266" height="48"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sYU-Ro-P6M">
+                                                <rect key="frame" x="0.0" y="0.0" width="123" height="48"/>
+                                                <viewLayoutGuide key="safeArea" id="hr7-Ok-wkq"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Block shape">
+                                                        <attributes>
+                                                            <font key="NSFont" size="19" name=".AppleSystemUIFont"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment>
+                                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                                        <attributes>
+                                                            <font key="NSFont" metaFont="system" size="17"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content="Tap to update">
+                                                        <attributes>
+                                                            <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DZp-6v-Pn6">
+                                                <rect key="frame" x="143" y="0.0" width="123" height="48"/>
+                                                <state key="normal" title="Button" image="OpenedCube"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                        <real key="value" value="0.5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="HandleRetiredShapeButtonPressed:" destination="a67-7f-6jS" eventType="primaryActionTriggered" id="gen-MM-T1b"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="1gT-qF-cfH" firstAttribute="trailing" secondItem="4Zj-QU-DuP" secondAttribute="trailingMargin" id="0lp-cD-HdW"/>
+                            <constraint firstItem="N96-YO-0Bg" firstAttribute="leading" secondItem="BWZ-R4-0SA" secondAttribute="leading" id="8Wl-s1-29C"/>
+                            <constraint firstItem="fEJ-Lz-6fO" firstAttribute="leading" secondItem="Eol-uS-2FA" secondAttribute="leading" id="9Mr-wt-r4g"/>
+                            <constraint firstItem="PBx-xc-UOR" firstAttribute="top" secondItem="1gT-qF-cfH" secondAttribute="top" id="BbF-o4-qA7"/>
+                            <constraint firstItem="Eol-uS-2FA" firstAttribute="leading" secondItem="4Zj-QU-DuP" secondAttribute="leading" id="Chw-Lq-1w8"/>
+                            <constraint firstItem="N96-YO-0Bg" firstAttribute="top" secondItem="PBx-xc-UOR" secondAttribute="bottom" constant="42" id="DmB-3l-fmk"/>
+                            <constraint firstItem="N96-YO-0Bg" firstAttribute="leading" secondItem="PBx-xc-UOR" secondAttribute="leading" id="F9U-bu-B0J"/>
+                            <constraint firstItem="1gT-qF-cfH" firstAttribute="leading" secondItem="4Zj-QU-DuP" secondAttribute="leading" constant="392" id="FeZ-O7-Ear"/>
+                            <constraint firstItem="PBx-xc-UOR" firstAttribute="top" secondItem="BWZ-R4-0SA" secondAttribute="bottom" constant="8" id="GFe-sr-cMP"/>
+                            <constraint firstItem="BWZ-R4-0SA" firstAttribute="baseline" secondItem="cl4-W4-5GZ" secondAttribute="baseline" id="IC0-5l-PLo"/>
+                            <constraint firstAttribute="trailing" secondItem="Eol-uS-2FA" secondAttribute="trailing" id="IHu-xV-A1Z"/>
+                            <constraint firstItem="1gT-qF-cfH" firstAttribute="leading" secondItem="PBx-xc-UOR" secondAttribute="trailing" constant="72" id="LxI-hq-e9A"/>
+                            <constraint firstAttribute="bottom" secondItem="Eol-uS-2FA" secondAttribute="bottom" id="Msy-FS-EIl"/>
+                            <constraint firstItem="6Xa-yG-vDU" firstAttribute="leading" secondItem="cl4-W4-5GZ" secondAttribute="leading" id="MxX-WD-Jqd"/>
+                            <constraint firstItem="PBx-xc-UOR" firstAttribute="leading" secondItem="4Zj-QU-DuP" secondAttribute="leadingMargin" id="Yk1-DY-dbI"/>
+                            <constraint firstItem="fEJ-Lz-6fO" firstAttribute="top" secondItem="4Zj-QU-DuP" secondAttribute="topMargin" constant="-14" id="Zvd-tb-iDm"/>
+                            <constraint firstItem="PBx-xc-UOR" firstAttribute="top" secondItem="fEJ-Lz-6fO" secondAttribute="bottom" constant="44" id="aGk-rh-tEy"/>
+                            <constraint firstItem="6Xa-yG-vDU" firstAttribute="leading" secondItem="1gT-qF-cfH" secondAttribute="leading" id="daR-IG-PmA"/>
+                            <constraint firstItem="fEJ-Lz-6fO" firstAttribute="trailing" secondItem="Eol-uS-2FA" secondAttribute="trailing" id="slF-uR-y0g"/>
+                            <constraint firstItem="N96-YO-0Bg" firstAttribute="top" secondItem="6Xa-yG-vDU" secondAttribute="top" id="tat-Wq-uFx"/>
+                            <constraint firstAttribute="bottom" secondItem="PBx-xc-UOR" secondAttribute="bottom" constant="567" id="x5w-1d-ney"/>
+                            <constraint firstItem="PBx-xc-UOR" firstAttribute="bottom" secondItem="1gT-qF-cfH" secondAttribute="bottom" id="ztK-f7-8FT"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="5y9-Hz-Guv"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="qjn-iV-jff"/>
+                    <connections>
+                        <outlet property="AcitveSpecularColorButton" destination="Xwt-w6-Ocx" id="zUe-jX-vrP"/>
+                        <outlet property="ActiveDiffuseColorButton" destination="tlq-PY-GRd" id="VQt-6U-7fi"/>
+                        <outlet property="ActiveShapeButton" destination="98n-LM-5Rz" id="8vf-X3-YsE"/>
+                        <outlet property="ActiveSurfaceTypeSegment" destination="o2e-wP-Mrw" id="0us-cM-bre"/>
+                        <outlet property="ActiveTextureButton" destination="1QO-Du-MRy" id="Wq3-fI-XtY"/>
+                        <outlet property="RetiredDiffuseColorButton" destination="PFq-jO-CpZ" id="dtS-WT-Jqs"/>
+                        <outlet property="RetiredShapeButton" destination="DZp-6v-Pn6" id="LfI-Hw-vgC"/>
+                        <outlet property="RetiredSpecularColorButton" destination="DMF-Ox-c5u" id="pyZ-XQ-QSa"/>
+                        <outlet property="RetiredSurfaceTypeSegment" destination="Fpd-ua-GBg" id="dqP-f5-uAb"/>
+                        <outlet property="RetiredTextureButton" destination="jQj-aw-PtH" id="xEm-Q3-P6I"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mFX-ft-V8n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5859.375" y="86.71875"/>
+        </scene>
         <!--Recent Color List Code-->
         <scene sceneID="P9n-bh-bHW">
             <objects>
@@ -2824,6 +3532,7 @@
     </scenes>
     <resources>
         <image name="DefaultImage" width="2048" height="2048"/>
+        <image name="OpenedCube" width="48" height="48"/>
         <image name="arrow.left.circle" catalog="system" width="64" height="62"/>
         <image name="arrow.right.circle" catalog="system" width="64" height="62"/>
         <image name="arrow.up.arrow.down.circle" catalog="system" width="64" height="62"/>
@@ -2834,7 +3543,7 @@
         <image name="xmark.circle" catalog="system" width="64" height="62"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nYu-Jh-yU9"/>
+        <segue reference="1DY-e7-Gpo"/>
         <segue reference="RCe-8N-Bj8"/>
     </inferredMetricsTieBreakers>
 </document>
