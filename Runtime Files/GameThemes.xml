@@ -25,106 +25,30 @@
     <Property Name="_BackgroundSolidColorCycleTime" Value="0"/>
     <Property Name="_BackgroundGradientColor" Value="(Red)@(0.0),(Blue)@(1.0)"/>
     <Property Name="_BackgroundGradientColorOrientation" Value="Vertical"/>
-    <Property Name="_BackgroundImageName" Value="DefaultImage.png"/>
+    <Property Name="_BackgroundImageName" Value="SampleImage.jpg"/>
+    <Property Name="_RotatingBucketDirection" Value="Right"/>
     <Property Name="_BackgroundLiveImageCamera" Value="Rear"/>
     <Array Name="_TileList">
         <Item Index="0">
             <Property Name="_PieceShapeID" Value="f4510cca-262a-4018-bf29-04d703702d65"/>
-            <Property Name="_VisualType" Value="Render"/>
-            <Property Name="_Active3DBlockShape" Value="Cubic"/>
-            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
-            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
-            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
-            <Property Name="_ActiveTextureName" Value="Red"/>
-            <Property Name="_RetiredTextureName" Value="MacMaroon"/>
-            <Property Name="_ActiveDiffuseColor" Value="Red"/>
-            <Property Name="_ActiveSpecularColor" Value="White"/>
-            <Property Name="_RetiredDiffuseColor" Value="MacMaroon"/>
-            <Property Name="_RetiredSpecularColor" Value="White"/>
-        </Item>
+            </Item>
         <Item Index="1">
             <Property Name="_PieceShapeID" Value="b5bb59a5-b006-487b-a7b1-e0daf4a48810"/>
-            <Property Name="_VisualType" Value="Render"/>
-            <Property Name="_Active3DBlockShape" Value="Cubic"/>
-            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
-            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
-            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
-            <Property Name="_ActiveTextureName" Value="Green"/>
-            <Property Name="_RetiredTextureName" Value="Asparagus"/>
-            <Property Name="_ActiveDiffuseColor" Value="Green"/>
-            <Property Name="_ActiveSpecularColor" Value="White"/>
-            <Property Name="_RetiredDiffuseColor" Value="Asparagus"/>
-            <Property Name="_RetiredSpecularColor" Value="White"/>
         </Item>
         <Item Index="2">
             <Property Name="_PieceShapeID" Value="05463ade-1996-49e0-aae9-55cad6f8f605"/>
-            <Property Name="_VisualType" Value="Render"/>
-            <Property Name="_Active3DBlockShape" Value="Cubic"/>
-            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
-            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
-            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
-            <Property Name="_ActiveTextureName" Value="Blue"/>
-            <Property Name="_RetiredTextureName" Value="PrussianBlue"/>
-            <Property Name="_ActiveDiffuseColor" Value="Blue"/>
-            <Property Name="_ActiveSpecularColor" Value="White"/>
-            <Property Name="_RetiredDiffuseColor" Value="PrussianBlue"/>
-            <Property Name="_RetiredSpecularColor" Value="White"/>
         </Item>
         <Item Index="3">
             <Property Name="_PieceShapeID" Value="0f2709f0-b5ed-4ed9-b8c5-d65a1e1d69e8"/>
-            <Property Name="_VisualType" Value="Render"/>
-            <Property Name="_Active3DBlockShape" Value="Cubic"/>
-            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
-            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
-            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
-            <Property Name="_ActiveTextureName" Value="Cyan"/>
-            <Property Name="_RetiredTextureName" Value="Cerulean"/>
-            <Property Name="_ActiveDiffuseColor" Value="Cyan"/>
-            <Property Name="_ActiveSpecularColor" Value="White"/>
-            <Property Name="_RetiredDiffuseColor" Value="Cerulean"/>
-            <Property Name="_RetiredSpecularColor" Value="White"/>
         </Item>
         <Item Index="4">
             <Property Name="_PieceShapeID" Value="26e5dee4-0cc5-492f-ab31-b5b810863bf4"/>
-            <Property Name="_VisualType" Value="Render"/>
-            <Property Name="_Active3DBlockShape" Value="Cubic"/>
-            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
-            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
-            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
-            <Property Name="_ActiveTextureName" Value="Magenta"/>
-            <Property Name="_RetiredTextureName" Value="MagentaHaze"/>
-            <Property Name="_ActiveDiffuseColor" Value="Magenta"/>
-            <Property Name="_ActiveSpecularColor" Value="White"/>
-            <Property Name="_RetiredDiffuseColor" Value="MagentaHaze"/>
-            <Property Name="_RetiredSpecularColor" Value="White"/>
         </Item>
         <Item Index="5">
             <Property Name="_PieceShapeID" Value="69cc6259-93f2-438d-8a9f-e0e65ad6c841"/>
-            <Property Name="_VisualType" Value="Render"/>
-            <Property Name="_Active3DBlockShape" Value="Cubic"/>
-            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
-            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
-            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
-            <Property Name="_ActiveTextureName" Value="Yellow"/>
-            <Property Name="_RetiredTextureName" Value="YellowMunsell"/>
-            <Property Name="_ActiveDiffuseColor" Value="Yellow"/>
-            <Property Name="_ActiveSpecularColor" Value="White"/>
-            <Property Name="_RetiredDiffuseColor" Value="YellowMunsell"/>
-            <Property Name="_RetiredSpecularColor" Value="White"/>
         </Item>
         <Item Index="6">
             <Property Name="_PieceShapeID" Value="7c73c10c-86b3-406d-964e-f12abbf914cc"/>
-            <Property Name="_VisualType" Value="Render"/>
-            <Property Name="_Active3DBlockShape" Value="Cubic"/>
-            <Property Name="_Retired3DBlockShape" Value="Cubic"/>
-            <Property Name="_Active3DSurfaceTexture" Value="Color"/>
-            <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
-            <Property Name="_ActiveTextureName" Value="Orange"/>
-            <Property Name="_RetiredTextureName" Value="CarrotOrange"/>
-            <Property Name="_ActiveDiffuseColor" Value="Red"/>
-            <Property Name="_ActiveSpecularColor" Value="Orange"/>
-            <Property Name="_RetiredDiffuseColor" Value="CarrotOrange"/>
-            <Property Name="_RetiredSpecularColor" Value="White"/>
         </Item>
     </Array>
 </Theme>
