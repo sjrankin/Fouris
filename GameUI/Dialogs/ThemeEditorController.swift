@@ -32,11 +32,24 @@ class ThemeEditorController: UIViewController, ThemeEditingProtocol
         ThemeID = ID
     }
     
+    func EditTheme(ID: UUID, Piece: UUID)
+    {
+        ThemeID = ID
+    }
+    
     var ThemeID: UUID = UUID.Empty
     
-    func EditResults(_ Edited: Bool, ThemeID: UUID)
+    func EditResults(_ Edited: Bool, ThemeID: UUID, PieceID: UUID?)
     {
         //do something here
+    }
+    
+    @IBSegueAction func InstantiatePieceVisualizer(_ coder: NSCoder) -> PieceVisualizerCode?
+    {
+        let Visualizer = PieceVisualizerCode(coder: coder)
+        Visualizer?.ThemeDelegate = self
+        Visualizer?.EditTheme(ID: ThemeID)
+        return Visualizer
     }
     
     @IBSegueAction func InstantiateGameBackground(_ coder: NSCoder) -> GameBackgroundDialog?
@@ -57,13 +70,13 @@ class ThemeEditorController: UIViewController, ThemeEditingProtocol
     
     @IBAction func HandleSaveButtonPressed(_ sender: Any)
     {
-        ThemeDelegate?.EditResults(true, ThemeID: ThemeID)
+        ThemeDelegate?.EditResults(true, ThemeID: ThemeID, PieceID: nil)
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func HandleCancelButtonPressed(_ sender: Any)
     {
-        ThemeDelegate?.EditResults(false, ThemeID: ThemeID)
+        ThemeDelegate?.EditResults(false, ThemeID: ThemeID, PieceID: nil)
         self.dismiss(animated: true, completion: nil)
     }
     
