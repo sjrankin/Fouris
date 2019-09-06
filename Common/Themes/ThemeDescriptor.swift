@@ -1433,7 +1433,7 @@ class ThemeDescriptor: Serializable
         return nil
     }
 }
-
+/*
 /// Types of game views. Used to indiate what game view are valid for a given theme.
 ///
 /// - **TwoD**: Two-dimensional game view.
@@ -1499,3 +1499,4 @@ enum AntialiasingModes: String, CaseIterable
     case Multisampling8X = "MultiSampling8X"
     case Multisampling16X = "Multisampling16X"
 }
+*/
