@@ -15,6 +15,9 @@ protocol ThemeEditingProtocol: class
     /// Used to send to an editor the ID of the theme to edit.
     func EditTheme(ID: UUID)
     
+    // Used to edit a piece in a theme.
+    func EditTheme(ID: UUID, Piece: UUID)
+    
     /// Used to send to a caller the results of editing a theme.
-    func EditResults(_ Edited: Bool, ThemeID: UUID)
+    func EditResults(_ Edited: Bool, ThemeID: UUID, PieceID: UUID?)
 }
