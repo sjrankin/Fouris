@@ -119,7 +119,6 @@
 		179C5E2C23224C660003845B /* UserGameThemes.xml in Resources */ = {isa = PBXBuildFile; fileRef = 179C5E2B23224C660003845B /* UserGameThemes.xml */; };
 		179C5E2E23224D570003845B /* ThemeDescriptor2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179C5E2D23224D570003845B /* ThemeDescriptor2.swift */; };
 		179C5E3023224E350003845B /* TileDescriptor2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179C5E2F23224E350003845B /* TileDescriptor2.swift */; };
-		179C5E32232250260003845B /* PieceVisualizerCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179C5E31232250260003845B /* PieceVisualizerCode.swift */; };
 		179C5E342322533F0003845B /* PieceEditorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179C5E332322533F0003845B /* PieceEditorCode.swift */; };
 		179C5E36232273130003845B /* ColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179C5E35232273130003845B /* ColorButton.swift */; };
 		17A45B582271A59F002E705D /* AITestTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A45B572271A59F002E705D /* AITestTable.swift */; };
@@ -138,6 +137,7 @@
 		17B4D2CC22A4D64900987BC5 /* PieceDescriptions.xml in Resources */ = {isa = PBXBuildFile; fileRef = 17B4D2CB22A4D64900987BC5 /* PieceDescriptions.xml */; };
 		17B4E5732294EA2F0050CDE5 /* MapFloodFill.metal in Sources */ = {isa = PBXBuildFile; fileRef = 17B4E5722294EA2F0050CDE5 /* MapFloodFill.metal */; };
 		17B72E14230ACD7D00B1E5CD /* TextLayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B72E13230ACD7D00B1E5CD /* TextLayerManager.swift */; };
+		17B8757523236C9A00BD8BBD /* BlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B8757423236C9A00BD8BBD /* BlockView.swift */; };
 		17BC04D8229127E1002A6F90 /* PieceIDMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BC04D7229127E1002A6F90 /* PieceIDMap.swift */; };
 		17C0E6F722AF9C87003FAFA8 /* IdiotLightMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0E6F622AF9C87003FAFA8 /* IdiotLightMessage.swift */; };
 		17C14E1F23066E1600D9CF64 /* TextLayerDisplayProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C14E1E23066E1600D9CF64 /* TextLayerDisplayProtocol.swift */; };
@@ -312,7 +312,6 @@
 		179C5E2B23224C660003845B /* UserGameThemes.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = UserGameThemes.xml; sourceTree = "<group>"; };
 		179C5E2D23224D570003845B /* ThemeDescriptor2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDescriptor2.swift; sourceTree = "<group>"; };
 		179C5E2F23224E350003845B /* TileDescriptor2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileDescriptor2.swift; sourceTree = "<group>"; };
-		179C5E31232250260003845B /* PieceVisualizerCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceVisualizerCode.swift; sourceTree = "<group>"; };
 		179C5E332322533F0003845B /* PieceEditorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceEditorCode.swift; sourceTree = "<group>"; };
 		179C5E35232273130003845B /* ColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorButton.swift; sourceTree = "<group>"; };
 		17A45B572271A59F002E705D /* AITestTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AITestTable.swift; sourceTree = "<group>"; };
@@ -332,6 +331,7 @@
 		17B4D2CB22A4D64900987BC5 /* PieceDescriptions.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PieceDescriptions.xml; sourceTree = "<group>"; };
 		17B4E5722294EA2F0050CDE5 /* MapFloodFill.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = MapFloodFill.metal; sourceTree = "<group>"; };
 		17B72E13230ACD7D00B1E5CD /* TextLayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextLayerManager.swift; sourceTree = "<group>"; };
+		17B8757423236C9A00BD8BBD /* BlockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockView.swift; sourceTree = "<group>"; };
 		17BC04D7229127E1002A6F90 /* PieceIDMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceIDMap.swift; sourceTree = "<group>"; };
 		17C0E6F622AF9C87003FAFA8 /* IdiotLightMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdiotLightMessage.swift; sourceTree = "<group>"; };
 		17C14E1E23066E1600D9CF64 /* TextLayerDisplayProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextLayerDisplayProtocol.swift; sourceTree = "<group>"; };
@@ -401,6 +401,7 @@
 				17DCD7EC230945390072B306 /* 3DViewExtensions */,
 				17D48A7A22B202B000DD7C94 /* 3DView.swift */,
 				170F854022B5D3E5005405B6 /* VisualBlocks3D.swift */,
+				17B8757423236C9A00BD8BBD /* BlockView.swift */,
 				17D48A8322B2111D00DD7C94 /* ThreeDProtocol.swift */,
 			);
 			path = 3DView;
@@ -484,14 +485,12 @@
 				177FC1D22318E0E1005727B6 /* ColorPicker */,
 				17CD4EB6231E490D0055E541 /* GradientPicker */,
 				179C5E3723227DDA0003845B /* PieceEditing */,
-				17616AC82316497300DFFEFE /* AboutDialogController.swift */,
+				17B875772323D01B00BD8BBD /* Background */,
+				17B875762323CFCC00BD8BBD /* About */,
 				17616ACA23166CB000DFFEFE /* SelectGameController.swift */,
 				17616ACC23166DF700DFFEFE /* GameStyleTableViewCell.swift */,
 				17477A702317853C00AAEB14 /* ThemingController.swift */,
 				17477A722317891100AAEB14 /* ThemeEditorController.swift */,
-				1704E2FF2321301E00D7C158 /* SelectBackgroundImageCode.swift */,
-				17477A742317F1C200AAEB14 /* GameBackgroundDialog.swift */,
-				17912254231FAAFB00C3330A /* GamePieceCell.swift */,
 				17C1E90C23190FBE004040B6 /* OtherExtensions.swift */,
 				17477A6E231783C300AAEB14 /* Theming.storyboard */,
 				1704E301232130E900D7C158 /* ThemeEditingProtocol.swift */,
@@ -653,9 +652,9 @@
 		179C5E3723227DDA0003845B /* PieceEditing */ = {
 			isa = PBXGroup;
 			children = (
+				17912254231FAAFB00C3330A /* GamePieceCell.swift */,
 				179C5E332322533F0003845B /* PieceEditorCode.swift */,
 				17477A762317F7E800AAEB14 /* PieceSelectorDialog.swift */,
-				179C5E31232250260003845B /* PieceVisualizerCode.swift */,
 			);
 			path = PieceEditing;
 			sourceTree = "<group>";
@@ -721,6 +720,23 @@
 				17B4E5722294EA2F0050CDE5 /* MapFloodFill.metal */,
 			);
 			path = Metal;
+			sourceTree = "<group>";
+		};
+		17B875762323CFCC00BD8BBD /* About */ = {
+			isa = PBXGroup;
+			children = (
+				17616AC82316497300DFFEFE /* AboutDialogController.swift */,
+			);
+			path = About;
+			sourceTree = "<group>";
+		};
+		17B875772323D01B00BD8BBD /* Background */ = {
+			isa = PBXGroup;
+			children = (
+				1704E2FF2321301E00D7C158 /* SelectBackgroundImageCode.swift */,
+				17477A742317F1C200AAEB14 /* GameBackgroundDialog.swift */,
+			);
+			path = Background;
 			sourceTree = "<group>";
 		};
 		17C14E1D23066E0100D9CF64 /* TextLayer */ = {
@@ -1157,7 +1173,6 @@
 				171ED10722F56D3300CE2CDF /* CubicGameAI.swift in Sources */,
 				1704E3002321301E00D7C158 /* SelectBackgroundImageCode.swift in Sources */,
 				17CE269D225F127C0056818E /* Versioning.swift in Sources */,
-				179C5E32232250260003845B /* PieceVisualizerCode.swift in Sources */,
 				17E71A8A22AD2A3A0081991E /* +TDebugRecievedCommandHandling.swift in Sources */,
 				17AF232523139B6600921E6C /* +TDebugProtocols2.swift in Sources */,
 				173762502310E5F10075E1DD /* UITouchImage.swift in Sources */,
@@ -1234,6 +1249,7 @@
 				17E71A7D22AD21920081991E /* MultiPeerDelegate.swift in Sources */,
 				175098B32290338400A411DE /* MapType.swift in Sources */,
 				171020F0227D8A91002FAB63 /* PieceAttributes.swift in Sources */,
+				17B8757523236C9A00BD8BBD /* BlockView.swift in Sources */,
 				177F4FC2229BC01600FE72CD /* TileDescriptor.swift in Sources */,
 				1704E302232130E900D7C158 /* ThemeEditingProtocol.swift in Sources */,
 				17E71A7722AD21620081991E /* MessageHandlerDelegate.swift in Sources */,
