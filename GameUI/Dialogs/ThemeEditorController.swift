@@ -44,14 +44,6 @@ class ThemeEditorController: UIViewController, ThemeEditingProtocol
         //do something here
     }
     
-    @IBSegueAction func InstantiatePieceVisualizer(_ coder: NSCoder) -> PieceVisualizerCode?
-    {
-        let Visualizer = PieceVisualizerCode(coder: coder)
-        Visualizer?.ThemeDelegate = self
-        Visualizer?.EditTheme(ID: ThemeID)
-        return Visualizer
-    }
-    
     @IBSegueAction func InstantiateGameBackground(_ coder: NSCoder) -> GameBackgroundDialog?
     {
         let GBack = GameBackgroundDialog(coder: coder)
