@@ -11,14 +11,36 @@ import UIKit
 
 class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtocol
 {
-    
-    
     weak var ThemeDelegate: ThemeEditingProtocol? = nil
     weak var ColorDelegate: ColorPickerProtocol? = nil
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        StyleVisuals()
+    }
+    
+    func StyleVisuals()
+    {
+        ActiveDiffuseColorButton.layer.cornerRadius = 5.0
+        ActiveDiffuseColorButton.layer.borderColor = UIColor.black.cgColor
+        ActiveDiffuseColorButton.layer.borderWidth = 0.5
+        ActiveDiffuseColorButton.clipsToBounds = true
+        ActiveSpecularColorButton.layer.cornerRadius = 5.0
+        ActiveSpecularColorButton.layer.borderColor = UIColor.black.cgColor
+        ActiveSpecularColorButton.layer.borderWidth = 0.5
+        ActiveSpecularColorButton.clipsToBounds = true
+        RetiredDiffuseColorButton.layer.cornerRadius = 5.0
+        RetiredDiffuseColorButton.layer.borderColor = UIColor.black.cgColor
+        RetiredDiffuseColorButton.layer.borderWidth = 0.5
+        RetiredDiffuseColorButton.clipsToBounds = true
+        RetiredSpecularColorButton.layer.cornerRadius = 5.0
+        RetiredSpecularColorButton.layer.borderColor = UIColor.black.cgColor
+        RetiredSpecularColorButton.layer.borderWidth = 0.5
+        RetiredSpecularColorButton.clipsToBounds = true
+        
+        HandleActiveSurfaceTypeChanged(self)
+        HandleRetiredSurfaceTypeChanged(self)
     }
     
     func EditTheme(ID: UUID)
@@ -48,16 +70,38 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
     
     func EditedColor(_ Edited: UIColor?, Tag: Any?)
     {
-        
+        if let EditedColor = Edited
+        {
+            if let TagValue = Tag as? String
+            {
+                switch TagValue
+                {
+                    case "ActiveDiffuseColor":
+                        ActiveDiffuseColorButton.ButtonColor = EditedColor
+                    
+                    case "ActiveSpecularColor":
+                        ActiveSpecularColorButton.ButtonColor = EditedColor
+                    
+                    case "RetiredDiffuseColor":
+                        RetiredDiffuseColorButton.ButtonColor = EditedColor
+                    
+                    case "RetiredSpecularColor":
+                        RetiredSpecularColorButton.ButtonColor = EditedColor
+                    
+                    default:
+                    break
+                }
+            }
+        }
     }
     
     // MARK: Visual editing buttons.
     
     @IBAction func HandleActiveShapeButtonPressed(_ sender: Any)
     {
-        let Alert = UIAlertController(title: "Select Block Shape",
+        let Alert = UIAlertController(title: "Select Dropping Block Shape",
                                       message: "Select the shape for all blocks in the dropping piece.",
-                                      preferredStyle: .actionSheet)
+                                      preferredStyle: .alert)
         Alert.addAction(UIAlertAction(title: "Cube", style: UIAlertAction.Style.default, handler: HandleActiveBlockShapeSelection))
         Alert.addAction(UIAlertAction(title: "Rounded Cube", style: UIAlertAction.Style.default, handler: HandleActiveBlockShapeSelection))
         Alert.addAction(UIAlertAction(title: "Sphere", style: UIAlertAction.Style.default, handler: HandleActiveBlockShapeSelection))
@@ -69,10 +113,13 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
         Alert.addAction(UIAlertAction(title: "Torus", style: UIAlertAction.Style.default, handler: HandleActiveBlockShapeSelection))
         Alert.addAction(UIAlertAction(title: "Tetrahedron", style: UIAlertAction.Style.default, handler: HandleActiveBlockShapeSelection))
         Alert.addAction(UIAlertAction(title: "Dodecahedron", style: UIAlertAction.Style.default, handler: HandleActiveBlockShapeSelection))
+        Alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
         if let PopOver = Alert.popoverPresentationController
         {
             //https://medium.com/@nickmeehan/actionsheet-popover-on-ipad-in-swift-5768dfa82094
-            PopOver.barButtonItem = sender as? UIBarButtonItem
+            PopOver.sourceView = self.view
+            PopOver.permittedArrowDirections = []
+            PopOver.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
         }
         self.present(Alert, animated: true, completion: nil)
     }
@@ -88,9 +135,9 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
     
     @IBAction func HandleRetiredShapeButtonPressed(_ sender: Any)
     {
-        let Alert = UIAlertController(title: "Select Block Shape",
+        let Alert = UIAlertController(title: "Select Retired Block Shape",
                                       message: "Select the shape for all blocks in the frozen piece.",
-                                      preferredStyle: .actionSheet)
+                                      preferredStyle: .alert)
         Alert.addAction(UIAlertAction(title: "Cube", style: UIAlertAction.Style.default, handler: HandleRetiredBlockShapeSelection))
         Alert.addAction(UIAlertAction(title: "Rounded Cube", style: UIAlertAction.Style.default, handler: HandleRetiredBlockShapeSelection))
         Alert.addAction(UIAlertAction(title: "Sphere", style: UIAlertAction.Style.default, handler: HandleRetiredBlockShapeSelection))
@@ -102,10 +149,13 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
         Alert.addAction(UIAlertAction(title: "Torus", style: UIAlertAction.Style.default, handler: HandleRetiredBlockShapeSelection))
         Alert.addAction(UIAlertAction(title: "Tetrahedron", style: UIAlertAction.Style.default, handler: HandleRetiredBlockShapeSelection))
         Alert.addAction(UIAlertAction(title: "Dodecahedron", style: UIAlertAction.Style.default, handler: HandleRetiredBlockShapeSelection))
+        Alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
         if let PopOver = Alert.popoverPresentationController
         {
             //https://medium.com/@nickmeehan/actionsheet-popover-on-ipad-in-swift-5768dfa82094
-            PopOver.barButtonItem = sender as? UIBarButtonItem
+            PopOver.sourceView = self.view
+            PopOver.permittedArrowDirections = []
+            PopOver.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
         }
         self.present(Alert, animated: true, completion: nil)
     }
@@ -121,10 +171,26 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
     
     @IBAction func HandleActiveSurfaceTypeChanged(_ sender: Any)
     {
+        let Index = ActiveSurfaceTypeSegment.selectedSegmentIndex
+        let IsColor = Index == 0
+        ActiveDiffuseColorButton.isEnabled = IsColor
+        ActiveSpecularColorButton.isEnabled = IsColor
+        ActiveDiffuseColorText.isEnabled = IsColor
+        ActiveSpecularColorText.isEnabled = IsColor
+        ActiveTextureButton.isEnabled = !IsColor
+        ActiveTextureText.isEnabled = !IsColor
     }
     
     @IBAction func HandleRetiredSurfaceTypeChanged(_ sender: Any)
     {
+        let Index = RetiredSurfaceTypeSegment.selectedSegmentIndex
+        let IsColor = Index == 0
+        RetiredDiffuseColorButton.isEnabled = IsColor
+        RetiredSpecularColorButton.isEnabled = IsColor
+        RetiredDiffuseColorText.isEnabled = IsColor
+        RetiredSpecularColorText.isEnabled = IsColor
+        RetiredTextureButton.isEnabled = !IsColor
+        RetiredTextureText.isEnabled = !IsColor
     }
     
     // MARK: Flow control button handling.
@@ -179,12 +245,19 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
     
     @IBOutlet weak var ActiveSurfaceTypeSegment: UISegmentedControl!
     @IBOutlet weak var ActiveTextureButton: UIButton!
-    @IBOutlet weak var AcitveSpecularColorButton: ColorButton!
+    @IBOutlet weak var ActiveSpecularColorButton: ColorButton!
     @IBOutlet weak var ActiveDiffuseColorButton: ColorButton!
     @IBOutlet weak var ActiveShapeButton: UIButton!
+    @IBOutlet weak var ActiveDiffuseColorText: UILabel!
+    @IBOutlet weak var ActiveSpecularColorText: UILabel!
+    @IBOutlet weak var ActiveTextureText: UILabel!
+    
     @IBOutlet weak var RetiredSurfaceTypeSegment: UISegmentedControl!
     @IBOutlet weak var RetiredTextureButton: UIButton!
     @IBOutlet weak var RetiredSpecularColorButton: ColorButton!
     @IBOutlet weak var RetiredDiffuseColorButton: ColorButton!
     @IBOutlet weak var RetiredShapeButton: UIButton!
+    @IBOutlet weak var RetiredDiffuseColorText: UILabel!
+    @IBOutlet weak var RetiredSpecularColorText: UILabel!
+    @IBOutlet weak var RetiredTextureText: UILabel!
 }
