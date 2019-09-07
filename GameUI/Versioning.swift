@@ -62,19 +62,19 @@ public class Versioning
     }
     
     /// Build number.
-    public static let Build: Int = 945
+    public static let Build: Int = 981
     
     /// Build increment.
     private static let BuildIncrement = 1
     
     /// Build ID.
-    public static let BuildID: String = "00500B65-15A1-41FE-B424-6D32FE31BB7B"
+    public static let BuildID: String = "627D83DE-53AC-4438-858E-89B3E5316B22"
     
     /// Build date.
-    public static let BuildDate: String = "6 September 2019"
+    public static let BuildDate: String = "7 September 2019"
     
     /// Build Time.
-    public static let BuildTime: String = "20:15"
+    public static let BuildTime: String = "20:53"
     
     /// Return a standard build string.
     ///
@@ -96,7 +96,7 @@ public class Versioning
     /// Returns copyright text.
     ///
     /// - Returns: Program copyright text.
-    public static func CopyrightText() -> String
+    public static func CopyrightText(ExcludeCopyrightString: Bool = false) -> String
     {
         var Years = Versioning.CopyrightYears
         var CopyrightYears = ""
@@ -111,7 +111,15 @@ public class Versioning
         {
             CopyrightYears = String(describing: Years[0])
         }
-        let CopyrightTextString = "Copyright © \(CopyrightYears) \(CopyrightHolder)"
+        var CopyrightTextString = ""
+        if ExcludeCopyrightString
+        {
+            CopyrightTextString = "\(CopyrightYears) \(CopyrightHolder)"
+        }
+        else
+        {
+            CopyrightTextString = "Copyright © \(CopyrightYears) \(CopyrightHolder)"
+        }
         return CopyrightTextString
     }
     
@@ -119,6 +127,21 @@ public class Versioning
     public static func ProgramIDAsUUID() -> UUID
     {
         return UUID(uuidString: ProgramID)!
+    }
+    
+    /// Returns a list of parts that make up a version block.
+    /// - Returns: List of tuples that make up a version block. The first item in the tuple is the header (if
+    ///            desired) and the second item is the actual data for the version block.
+    public static func MakeVersionParts() -> [(String, String)]
+    {
+        var Parts = [(String, String)]()
+        Parts.append(("Name", ApplicationName))
+        Parts.append(("Version", MakeVersionString(IncludeVersionSuffix: true, IncludeVersionPrefix: true)))
+        Parts.append(("Build", MakeBuildString()))
+        Parts.append(("Build ID", BuildID))
+        Parts.append(("Copyright", CopyrightText()))
+        Parts.append(("Program ID", ProgramID))
+        return Parts
     }
     
     /// Returns a block of text with most of the versioning information.
@@ -137,6 +160,112 @@ public class Versioning
         Block = Block + Prefix + CopyrightText() + "\n"
         Block = Block + Prefix + "Program ID " + ProgramID
         return Block
+    }
+    
+    /// Returns the version block as an attributed string with colors and formats as sepcified in the parameters.
+    /// - Parameter TextColor: Color of the normal (eg, payload) text.
+    /// - Parameter HeaderColor: Header color for those lines with headers.
+    /// - Parameter FontName: Name of the font.
+    /// - Parameter FontSize: Size of the font.
+    /// - Returns: Attributed string with the version block.
+    public static func MakeAttributedVersionBlockEx(TextColor: UIColor = UIColor.blue, HeaderColor: UIColor = UIColor.black,
+                                                    FontName: String = "Avenir", HeaderFontName: String = "Avenir-Heavy",
+                                                    FontSize: Double = 24.0) -> NSAttributedString
+    {
+        let Parts = MakeVersionParts()
+        let HeaderFont = UIFont(name: HeaderFontName, size: CGFloat(FontSize))
+        let StandardFont = UIFont(name: FontName, size: CGFloat(FontSize))
+        
+        let HeaderAttributes: [NSAttributedString.Key: Any] =
+            [
+                .font: HeaderFont as Any,
+                .foregroundColor: HeaderColor as Any
+        ]
+        let Line1Attributes: [NSAttributedString.Key: Any] =
+            [
+                .font: UIFont(name: HeaderFontName, size: CGFloat(FontSize + 4)) as Any,
+                .foregroundColor: TextColor as Any
+        ]
+        let StandardLineAttributes: [NSAttributedString.Key: Any] =
+            [
+                .font: StandardFont as Any,
+                .foregroundColor: TextColor as Any
+        ]
+        
+        let Line1 = NSMutableAttributedString(string: Parts[0].1 + "\n", attributes: Line1Attributes)
+        let Line2H = NSMutableAttributedString(string: "Version ", attributes: HeaderAttributes)
+        let Line2T = NSMutableAttributedString(string: MakeVersionString(IncludeVersionSuffix: true, IncludeVersionPrefix: false) + "\n", attributes: StandardLineAttributes)
+        let Line3H = NSMutableAttributedString(string: "Build ", attributes: HeaderAttributes)
+        let Line3T = NSMutableAttributedString(string: MakeBuildString(IncludeBuildPrefix: true) + "\n", attributes: StandardLineAttributes)
+        let Line4H = NSMutableAttributedString(string: Parts[3].0 + " ", attributes: HeaderAttributes)
+        let Line4T = NSMutableAttributedString(string: Parts[3].1 + "\n", attributes: StandardLineAttributes)
+        let Line5H = NSMutableAttributedString(string: "Copyright © ", attributes: HeaderAttributes)
+        let Line5T = NSMutableAttributedString(string: CopyrightText(ExcludeCopyrightString: true) + "\n", attributes: StandardLineAttributes)
+        let Line6H = NSMutableAttributedString(string: Parts[5].0 + " ", attributes: HeaderAttributes)
+        let Line6T = NSMutableAttributedString(string: Parts[5].1, attributes: StandardLineAttributes)
+        let Working = NSMutableAttributedString()
+        Working.append(Line1)
+        Working.append(Line2H)
+        Working.append(Line2T)
+        Working.append(Line3H)
+        Working.append(Line3T)
+        Working.append(Line4H)
+        Working.append(Line4T)
+        Working.append(Line5H)
+        Working.append(Line5T)
+        Working.append(Line6H)
+        Working.append(Line6T)
+        return Working
+    }
+    
+    /// Returns the version block as an attributed string with colors and formats as sepcified in the parameters.
+    /// - Parameter TextColor: Color of the normal (eg, payload) text.
+    /// - Parameter HeaderColor: Header color for those lines with headers.
+    /// - Parameter FontName: Name of the font.
+    /// - Parameter FontSize: Size of the font.
+    /// - Returns: Attributed string with the version block.
+    public static func MakeAttributedVersionBlock(TextColor: UIColor = UIColor.blue, HeaderColor: UIColor = UIColor.black,
+                                                  FontName: String = "Avenir", HeaderFontName: String = "Avenir-Heavy",
+                                                  FontSize: Double = 24.0) -> NSAttributedString
+    {
+        let Parts = MakeVersionParts()
+        let HeaderFont = UIFont(name: HeaderFontName, size: CGFloat(FontSize))
+        let StandardFont = UIFont(name: FontName, size: CGFloat(FontSize))
+        
+        let HeaderAttributes: [NSAttributedString.Key: Any] =
+            [
+                .font: HeaderFont as Any,
+                .foregroundColor: HeaderColor as Any
+        ]
+        let Line1Attributes: [NSAttributedString.Key: Any] =
+            [
+                .font: UIFont(name: HeaderFontName, size: CGFloat(FontSize + 4)) as Any,
+                .foregroundColor: TextColor as Any
+        ]
+        let StandardLineAttributes: [NSAttributedString.Key: Any] =
+            [
+                .font: StandardFont as Any,
+                .foregroundColor: TextColor as Any
+        ]
+        
+        let Line1 = NSMutableAttributedString(string: Parts[0].1 + "\n", attributes: Line1Attributes)
+        let Line2 = NSMutableAttributedString(string: Parts[1].1 + "\n", attributes: StandardLineAttributes)
+        let Line3 = NSMutableAttributedString(string: Parts[2].1 + "\n", attributes: StandardLineAttributes)
+        let Line4H = NSMutableAttributedString(string: Parts[3].0 + " ", attributes: HeaderAttributes)
+        let Line4T = NSMutableAttributedString(string: Parts[3].1 + "\n", attributes: StandardLineAttributes)
+        let Line5 = NSMutableAttributedString(string: Parts[4].1 + "\n", attributes: StandardLineAttributes)
+        let Line6H = NSMutableAttributedString(string: Parts[5].0 + " ", attributes: HeaderAttributes)
+        let Line6T = NSMutableAttributedString(string: Parts[5].1, attributes: StandardLineAttributes)
+        let Working = NSMutableAttributedString()
+        Working.append(Line1)
+        Working.append(Line2)
+        Working.append(Line3)
+        Working.append(Line4H)
+        Working.append(Line4T)
+        Working.append(Line5)
+        Working.append(Line6H)
+        Working.append(Line6T)
+        return Working
     }
     
     /// Return an XML-formatted key-value pair string.
