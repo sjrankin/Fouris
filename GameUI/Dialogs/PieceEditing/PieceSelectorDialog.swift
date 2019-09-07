@@ -28,6 +28,7 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
         OKButton.isEnabled = true
         PieceCountWarning.isHidden = true
         LoadAllPieces()
+        UpdateWarning(WithCount: 0)
     }
     
     func LoadAllPieces()
@@ -141,7 +142,7 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
             case AvailableTable:
                 let SectionType = AllSections[section]
                 let Count = AllPieces[SectionType]!.count
-            return Count
+                return Count
             
             default:
                 return 0
@@ -171,6 +172,50 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
             MetaPieces.PiecesWithGaps: UIColor.magenta
     ]
     
+    var LastSelectedShape: UUID = UUID.Empty
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        switch tableView.tag
+        {
+            case CurrentTable:
+                if CurrentPieceTable.indexPathForSelectedRow != nil
+                {
+                    CurrentEditVisualsButton.isEnabled = true
+                    if let Cell = CurrentPieceTable.cellForRow(at: indexPath) as? GamePieceCell
+                    {
+                        LastSelectedShape = Cell.PieceID
+                    }
+                }
+                else
+                {
+                    CurrentEditVisualsButton.isEnabled = false
+                }
+            
+            default:
+                break
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath)
+    {
+        switch tableView.tag
+        {
+            case CurrentTable:
+                if CurrentPieceTable.indexPathForSelectedRow != nil
+                {
+                    CurrentEditVisualsButton.isEnabled = true
+                }
+                else
+                {
+                    CurrentEditVisualsButton.isEnabled = false
+                }
+            
+            default:
+                break
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let Cell = GamePieceCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "GamePieceCell")
@@ -182,24 +227,49 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
         {
             case CurrentTable:
                 ID = CurrentPieces[indexPath.row]
-            Shape = PieceFactory.GetShapeForPiece(ID: ID)!
+                Shape = PieceFactory.GetShapeForPiece(ID: ID)!
                 SectionType = PieceFactory.GetMetaPieceFromShape(Shape)!
             
             case AvailableTable:
                 SectionType = SectionMap[indexPath.section]!
                 ID = AllPieces[SectionType]![indexPath.row]
-            Shape = PieceFactory.GetShapeForPiece(ID: ID)!
+                Shape = PieceFactory.GetShapeForPiece(ID: ID)!
             
             default:
                 return UITableViewCell()
         }
-
+        
         let Name = PieceFactory.PieceNameMap[Shape]
         let ScratchPiece = PieceFactory.CreateEphermeralPiece(Shape)
         let FillColor = FillMap[SectionType]
         let ShapeImage: UIImage? = PieceFactory.GetGenericView(ForPiece: ScratchPiece, UnitSize: 32.0, WithShadow: false, FillColor: FillColor!)
         Cell.LoadData(PieceImage: ShapeImage!, Name: Name!, ID: ID)
+        if LastSelectedShape != UUID.Empty
+        {
+            if tableView.tag == CurrentTable
+            {
+            if ID == LastSelectedShape
+            {
+                tableView.selectRow(at: indexPath, animated: true, scrollPosition: UITableView.ScrollPosition.middle)
+                UpdateWarning(WithCount: CurrentPieces.count)
+            }
+            }
+        }
         return Cell
+    }
+    
+    func UpdateWarning(WithCount: Int)
+    {
+        if WithCount < 4
+        {
+            OKButton.isEnabled = false
+            PieceCountWarning.isHidden = false
+        }
+        else
+        {
+            OKButton.isEnabled = true
+            PieceCountWarning.isHidden = true
+        }
     }
     
     @IBAction func HandleMoveToCurrent(_ sender: Any)
@@ -210,10 +280,12 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
             {
                 if !CurrentPieces.contains(Cell.PieceID)
                 {
+                    CurrentEditVisualsButton.isEnabled = false
                     CurrentPieces.append(Cell.PieceID)
                     CurrentPieceTable.reloadData()
                     LoadAllPieces()
                     PieceSourceTable.reloadData()
+                    UpdateWarning(WithCount: CurrentPieces.count)
                 }
             }
         }
@@ -225,14 +297,13 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
         {
             if let Cell = CurrentPieceTable.cellForRow(at: SelectedRow) as? GamePieceCell
             {
+                CurrentEditVisualsButton.isEnabled = false
                 let RemoveMe = Cell.PieceID
                 CurrentPieces.removeAll(where: {$0 == RemoveMe})
                 CurrentPieceTable.reloadData()
                 LoadAllPieces()
                 PieceSourceTable.reloadData()
-                let SufficientPieces = CurrentPieces.count > 3
-                    OKButton.isEnabled = SufficientPieces
-                PieceCountWarning.isHidden = SufficientPieces
+                UpdateWarning(WithCount: CurrentPieces.count)
             }
         }
     }
@@ -243,8 +314,21 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
         CurrentPieceTable.reloadData()
         LoadAllPieces()
         PieceSourceTable.reloadData()
-        OKButton.isEnabled = false
-        PieceCountWarning.isHidden = true
+        UpdateWarning(WithCount: 0)
+    }
+    
+    @IBSegueAction func InstanstiateVisualEditor(_ coder: NSCoder) -> PieceEditorCode?
+    {
+        let Editor = PieceEditorCode(coder: coder)
+        Editor?.ThemeDelegate = self
+        if let SelectedRow = CurrentPieceTable.indexPathForSelectedRow
+        {
+            if let Cell = CurrentPieceTable.cellForRow(at: SelectedRow) as? GamePieceCell
+            {
+                Editor?.EditTheme(ID: ThemeID, Piece: Cell.PieceID)
+            }
+        }
+        return Editor
     }
     
     @IBAction func HandleOKPressed(_ sender: Any)
@@ -259,6 +343,8 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBOutlet weak var ClearCurrentTableButton: UIButton!
+    @IBOutlet weak var CurrentEditVisualsButton: UIButton!
     @IBOutlet weak var OKButton: UIButton!
     @IBOutlet weak var PieceCountWarning: UILabel!
     @IBOutlet weak var PieceSourceTable: UITableView!
