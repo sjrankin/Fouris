@@ -96,6 +96,7 @@ class MainViewController2: UIViewController,
         )
         #endif
         
+        #if false
         State.Initialize(WithDelegate: self)
         TDebugPrefix = UUID()
         MPMgr = MultiPeerManager()
@@ -107,6 +108,7 @@ class MainViewController2: UIViewController,
         LocalCommands = ClientCommands()
         MessageHelper.Initialize(TDebugPrefix)
         DebugClient.SendPreformattedCommand(MessageHelper.MakeResetTDebugUICommand())
+        #endif
         
         Settings.Initialize()
         MasterPieceList.Initialize()
