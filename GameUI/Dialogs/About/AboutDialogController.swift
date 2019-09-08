@@ -38,6 +38,14 @@ class AboutDialogController: UIViewController
         {
             ShowingDisplay = !ShowingDisplay
             PieceDisplay.isHidden = !ShowingDisplay
+            if ShowingDisplay
+            {
+                PieceDisplay.Play(PieceCount: 100)
+            }
+            else
+            {
+                PieceDisplay.Stop()
+            }
         }
     }
     
@@ -52,5 +60,5 @@ class AboutDialogController: UIViewController
     }
     
     @IBOutlet weak var TitleLabel: UILabel!
-    @IBOutlet weak var PieceDisplay: SCNView!
+    @IBOutlet weak var PieceDisplay: FlyingPieces!
 }
