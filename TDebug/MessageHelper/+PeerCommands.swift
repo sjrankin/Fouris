@@ -19,7 +19,7 @@ extension MessageHelper
     /// - Returns: Command string for retrieving the peer's information.
     public static func MakeGetPeerInformation() -> String
     {
-        let P1 = "From=\((PrefixCode)!)"
+        let P1 = "From=\((PrefixCode))"
         let Final = GenerateCommand(Command: .GetPeerType, Prefix: PrefixCode, Parts: [P1])
         return Final
     }
