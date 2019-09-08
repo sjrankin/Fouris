@@ -22,7 +22,7 @@ class MessageHelper
     }
     
     /// Holds the prefix code.
-    public static var PrefixCode: UUID!
+    public static var PrefixCode: UUID = UUID.Empty
     
     // MARK: High-level parsing code.
     
