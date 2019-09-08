@@ -39,6 +39,20 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
         RetiredSpecularColorButton.layer.borderWidth = 0.5
         RetiredSpecularColorButton.clipsToBounds = true
         
+        let ActiveShapeTap = UITapGestureRecognizer(target: self, action: #selector(HandleActiveShapeTap))
+        ActiveShapeView.addGestureRecognizer(ActiveShapeTap)
+        let RetiredShapeTap = UITapGestureRecognizer(target: self, action: #selector(HandleRetiredShapeTap))
+        RetiredShapeView.addGestureRecognizer(RetiredShapeTap)
+        
+        ActiveShapeView.Initialize()
+        ActiveShapeView.SetBlockSizes(X: 20.0, Y: 20.0, Z: 20.0)
+        ActiveShapeView.StartRotations()
+        ActiveShapeView.ViewBackgroundColor = ColorServer.ColorFrom(ColorNames.AzukiIro)
+        RetiredShapeView.Initialize()
+        RetiredShapeView.SetBlockSizes(X: 20.0, Y: 20.0, Z: 20.0)
+        RetiredShapeView.StartRotations()
+        RetiredShapeView.ViewBackgroundColor = ColorServer.ColorFrom(ColorNames.AzukiIro)
+        
         HandleActiveSurfaceTypeChanged(self)
         HandleRetiredSurfaceTypeChanged(self)
     }
@@ -78,15 +92,19 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
                 {
                     case "ActiveDiffuseColor":
                         ActiveDiffuseColorButton.ButtonColor = EditedColor
+                        ActiveShapeView.DiffuseColor = EditedColor
                     
                     case "ActiveSpecularColor":
                         ActiveSpecularColorButton.ButtonColor = EditedColor
+                        ActiveShapeView.SpecularColor = EditedColor
                     
                     case "RetiredDiffuseColor":
                         RetiredDiffuseColorButton.ButtonColor = EditedColor
+                        RetiredShapeView.DiffuseColor = EditedColor
                     
                     case "RetiredSpecularColor":
                         RetiredSpecularColorButton.ButtonColor = EditedColor
+                        RetiredShapeView.SpecularColor = EditedColor
                     
                     default:
                     break
@@ -97,8 +115,12 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
     
     // MARK: Visual editing buttons.
     
-    @IBAction func HandleActiveShapeButtonPressed(_ sender: Any)
+    @objc func HandleActiveShapeTap(Recognizer: UIGestureRecognizer)
     {
+        if Recognizer.state != .ended
+        {
+            return
+        }
         let Alert = UIAlertController(title: "Select Dropping Block Shape",
                                       message: "Select the shape for all blocks in the dropping piece.",
                                       preferredStyle: .alert)
@@ -112,7 +134,6 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
         Alert.addAction(UIAlertAction(title: "Capsule", style: UIAlertAction.Style.default, handler: HandleActiveBlockShapeSelection))
         Alert.addAction(UIAlertAction(title: "Torus", style: UIAlertAction.Style.default, handler: HandleActiveBlockShapeSelection))
         Alert.addAction(UIAlertAction(title: "Tetrahedron", style: UIAlertAction.Style.default, handler: HandleActiveBlockShapeSelection))
-        Alert.addAction(UIAlertAction(title: "Dodecahedron", style: UIAlertAction.Style.default, handler: HandleActiveBlockShapeSelection))
         Alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
         if let PopOver = Alert.popoverPresentationController
         {
@@ -126,15 +147,54 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
     
     @objc func HandleActiveBlockShapeSelection(Action: UIAlertAction)
     {
-        
+        switch Action.title
+        {
+            case "Cube":
+                ActiveShapeView.Shape = .Cubic
+            
+            case "Rounded Cube":
+                ActiveShapeView.Shape = .RoundedCube
+            
+            case "Sphere":
+                ActiveShapeView.Shape = .Spherical
+            
+            case "Cone":
+                ActiveShapeView.Shape = .Cone
+            
+            case "Pyramid":
+                ActiveShapeView.Shape = .Pyramid
+            
+            case "Cylinder":
+                ActiveShapeView.Shape = .Cylinder
+            
+            case "Tube":
+                ActiveShapeView.Shape = .Tube
+            
+            case "Capsule":
+                ActiveShapeView.Shape = .Capsule
+            
+            case "Torus":
+                ActiveShapeView.Shape = .Torus
+            
+            case "Tetrahedron":
+                ActiveShapeView.Shape = .Tetrahedron
+            
+            default:
+            return
+        }
+        ActiveShapeView.StartRotations()
     }
     
     @IBAction func HandleActiveTextureButtonPressed(_ sender: Any)
     {
     }
     
-    @IBAction func HandleRetiredShapeButtonPressed(_ sender: Any)
+    @objc func HandleRetiredShapeTap(Recognizer: UIGestureRecognizer)
     {
+        if Recognizer.state != .ended
+        {
+            return
+        }
         let Alert = UIAlertController(title: "Select Retired Block Shape",
                                       message: "Select the shape for all blocks in the frozen piece.",
                                       preferredStyle: .alert)
@@ -148,7 +208,6 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
         Alert.addAction(UIAlertAction(title: "Capsule", style: UIAlertAction.Style.default, handler: HandleRetiredBlockShapeSelection))
         Alert.addAction(UIAlertAction(title: "Torus", style: UIAlertAction.Style.default, handler: HandleRetiredBlockShapeSelection))
         Alert.addAction(UIAlertAction(title: "Tetrahedron", style: UIAlertAction.Style.default, handler: HandleRetiredBlockShapeSelection))
-        Alert.addAction(UIAlertAction(title: "Dodecahedron", style: UIAlertAction.Style.default, handler: HandleRetiredBlockShapeSelection))
         Alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
         if let PopOver = Alert.popoverPresentationController
         {
@@ -162,7 +221,42 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
     
     @objc func HandleRetiredBlockShapeSelection(Action: UIAlertAction)
     {
-        
+        switch Action.title
+        {
+            case "Cube":
+                RetiredShapeView.Shape = .Cubic
+            
+            case "Rounded Cube":
+                RetiredShapeView.Shape = .RoundedCube
+            
+            case "Sphere":
+                RetiredShapeView.Shape = .Spherical
+            
+            case "Cone":
+                RetiredShapeView.Shape = .Cone
+            
+            case "Pyramid":
+                RetiredShapeView.Shape = .Pyramid
+            
+            case "Cylinder":
+                RetiredShapeView.Shape = .Cylinder
+            
+            case "Tube":
+                RetiredShapeView.Shape = .Tube
+            
+            case "Capsule":
+                RetiredShapeView.Shape = .Capsule
+            
+            case "Torus":
+                RetiredShapeView.Shape = .Torus
+            
+            case "Tetrahedron":
+                RetiredShapeView.Shape = .Tetrahedron
+            
+            default:
+                return
+        }
+        RetiredShapeView.StartRotations()
     }
     
     @IBAction func HandleRetiredTextureButtonPressed(_ sender: Any)
@@ -247,17 +341,17 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
     @IBOutlet weak var ActiveTextureButton: UIButton!
     @IBOutlet weak var ActiveSpecularColorButton: ColorButton!
     @IBOutlet weak var ActiveDiffuseColorButton: ColorButton!
-    @IBOutlet weak var ActiveShapeButton: UIButton!
     @IBOutlet weak var ActiveDiffuseColorText: UILabel!
     @IBOutlet weak var ActiveSpecularColorText: UILabel!
     @IBOutlet weak var ActiveTextureText: UILabel!
+    @IBOutlet weak var ActiveShapeView: BlockView!
     
     @IBOutlet weak var RetiredSurfaceTypeSegment: UISegmentedControl!
     @IBOutlet weak var RetiredTextureButton: UIButton!
     @IBOutlet weak var RetiredSpecularColorButton: ColorButton!
     @IBOutlet weak var RetiredDiffuseColorButton: ColorButton!
-    @IBOutlet weak var RetiredShapeButton: UIButton!
     @IBOutlet weak var RetiredDiffuseColorText: UILabel!
     @IBOutlet weak var RetiredSpecularColorText: UILabel!
     @IBOutlet weak var RetiredTextureText: UILabel!
+    @IBOutlet weak var RetiredShapeView: BlockView!
 }
