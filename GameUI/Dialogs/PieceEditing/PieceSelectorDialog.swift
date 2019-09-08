@@ -331,6 +331,21 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
         return Editor
     }
     
+    @IBSegueAction func InstantiateVisualEditorForAvailable(_ coder: NSCoder) -> PieceEditorCode?
+    {
+        let Editor = PieceEditorCode(coder: coder)
+        Editor?.ThemeDelegate = self
+        if let SelectedRow = PieceSourceTable.indexPathForSelectedRow
+        {
+            if let Cell = PieceSourceTable.cellForRow(at: SelectedRow) as? GamePieceCell
+            {
+                Editor?.EditTheme(ID: ThemeID, Piece: Cell.PieceID)
+            }
+        }
+        return Editor
+    }
+    
+    
     @IBAction func HandleOKPressed(_ sender: Any)
     {
         ThemeDelegate?.EditResults(true, ThemeID: ThemeID, PieceID: nil)
@@ -343,6 +358,7 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBOutlet weak var AvailableEditVisualsButton: UIButton!
     @IBOutlet weak var ClearCurrentTableButton: UIButton!
     @IBOutlet weak var CurrentEditVisualsButton: UIButton!
     @IBOutlet weak var OKButton: UIButton!
