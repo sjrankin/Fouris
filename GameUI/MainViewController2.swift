@@ -11,7 +11,7 @@ import SceneKit
 import MultipeerConnectivity
 import UIKit
 
-class MainViewController2: UIViewController,
+class MainViewController2: UIViewController, 
     GameUINotificationProtocol,                         //Protocol for communicating from the game engine (and everything below it) to the UI.
     GameAINotificationProtocol,                         //Protocol for communication from the game AI engine to the UI.
     MainDelegate,                                       //Protocol for exporting some functionality defined in this class.
@@ -150,6 +150,7 @@ class MainViewController2: UIViewController,
         RotateRightButton2.imageView?.contentMode = .scaleAspectFit
         DropDownButton2.imageView?.contentMode = .scaleAspectFit
         UpAndAwayButton2.imageView?.contentMode = .scaleAspectFit
+        EnableFreezeInPlaceButton(false)
         
         InitializeOptionTable(MainSlideInOptionTable2)
         print("Initializing game with \(CurrentBaseGameType)")
@@ -179,6 +180,7 @@ class MainViewController2: UIViewController,
                                      PressPlayLabel: PressPlayLabelView2,
                                      PauseLabel: PauseLabelView2)
         GameTextOverlay?.ShowPressPlay(Duration: 0.7)
+        GameTextOverlay?.HideNextLabel()
         
         //Initialize view backgrounds.
         GameControlView2.layer.backgroundColor = ColorServer.CGColorFrom(ColorNames.ReallyDarkGray)
@@ -188,6 +190,12 @@ class MainViewController2: UIViewController,
         let _ = Timer.scheduledTimer(timeInterval: AutoStartDuration, target: self,
                                      selector: #selector(AutoStartInAttractMode),
                                      userInfo: nil, repeats: false)
+    }
+    
+    func EnableFreezeInPlaceButton(_ DoEnable: Bool)
+    {
+        FreezeInPlaceButton.isUserInteractionEnabled = DoEnable
+        FreezeInPlaceButton.isHidden = !DoEnable
     }
     
     var GameTextOverlay: TextOverlay? = nil
@@ -841,6 +849,14 @@ class MainViewController2: UIViewController,
     
     // MARK: Control protocol functions.
     
+    func FreezeInPlace()
+    {
+        if let PieceID = Game.CurrentPiece
+        {
+            Game.HandleInputFor(ID: PieceID, Input: .FreezeInPlace)
+        }
+    }
+    
     /// Move the piece left.
     func MoveLeft()
     {
@@ -1109,6 +1125,14 @@ class MainViewController2: UIViewController,
         RotateLeft()
     }
     
+    /// Handle the freeze in place button pressed.
+    /// - Note: This button is valid only in certain games.
+    /// - Parameter sender: Not used.
+    @IBAction func HandleFreezeInPlacePressed(_ sender: Any)
+    {
+        FreezeInPlace()
+    }
+    
     /// Handle the play button pressed.
     ///
     /// - Note: The button's visuals will change depending on whether the game is in play or stopped.
@@ -1213,6 +1237,12 @@ class MainViewController2: UIViewController,
     {
         RotateLeftButton2.Highlight(WithImage: "RotateLeftHighlighted48", ForSeconds: 0.15,
                                     OriginalName: "RotateLeft48_2")
+    }
+    
+    /// AI is freezing a piece into place.
+    func AI_FreezeInPlace()
+    {
+        
     }
     
     // MARK: Game view request functions.
@@ -1366,8 +1396,9 @@ class MainViewController2: UIViewController,
     /// - Parameter Opened: Determines the icon to show.
     private func UpdateMainButton(_ Opened: Bool)
     {
-        let ImageName = Opened ? "OpenedCube" : "ClosedCube" //"InvertedCubeButton" : "CubeButton"
-        MainUIButton2.setImage(UIImage(named: ImageName), for: UIControl.State.normal)
+        let ImageName = Opened ? "cube" : "cube.fill"
+        let ButtonImage = UIImage(systemName: ImageName)
+        MainUIButton2.setImage(ButtonImage, for: UIControl.State.normal)
     }
     
     /// Handle the restart game button in the slide in view.
@@ -1659,6 +1690,7 @@ class MainViewController2: UIViewController,
     @IBOutlet weak var SlideInAttractButton2: UIButton!
     @IBOutlet weak var SlideInCloseButton2: UIButton!
     @IBOutlet weak var TopOverlapView: UIView!
+    @IBOutlet weak var FreezeInPlaceButton: UIButton!
     
     // MARK: Enum mappings.
     
