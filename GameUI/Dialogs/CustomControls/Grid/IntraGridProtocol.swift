@@ -15,16 +15,22 @@ protocol IntraGridProtocol: class
     // MARK: User interactions.
     
     /// Notification from a grid cell to the `Grid` that a grid cell was tapped.
-    /// - Parameter Column: The column address of the tapped grid.
-    /// - Parameter Row: The row address of the tapped grid.
+    /// - Parameter Column: The column address of the tapped grid cell.
+    /// - Parameter Row: The row address of the tapped grid cell.
     /// - Parameter TapCount: The number of times the user tapped the cell.
     func GridCellTapped(Column: Int, Row: Int, TapCount: Int)
     
     /// Notification from a grid cell to the `Grid` that a cell changed selection state due to the actions of the user.
-    /// - Parameter Column: The column address of the tapped grid.
-    /// - Parameter Row: The row address of the tapped grid.
+    /// - Parameter Column: The column address of the tapped grid cell.
+    /// - Parameter Row: The row address of the tapped grid cell.
     /// - Parameter IsInSelectedState: New selection state.
     func GridCellSelected(Column: Int, Row: Int, IsInSelectedState: Bool)
+    
+    /// Notification from a grid cell that the pivot state changes in response to user actions.
+    /// - Parameter Column: The column address of the changed cell.
+    /// - Parameter Row: The row address of the changed cell.
+    /// - Parameter PivotState: The new pivot state.
+    func GridCellPivotChanged(Column: Int, Row: Int, PivotState: Bool)
     
     // MARK: Cell customization.
 
