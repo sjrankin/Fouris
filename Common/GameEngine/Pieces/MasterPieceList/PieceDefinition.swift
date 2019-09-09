@@ -65,6 +65,10 @@ class PieceDefinition: Serializable
                 //Int
                 _WideOrientation = Int(Sanitized)!
             
+            case "_IsUserPiece":
+            //Bool
+            _IsUserPiece = Bool(Sanitized)!
+            
             default:
                 break
         }
@@ -82,6 +86,22 @@ class PieceDefinition: Serializable
         set
         {
             _ID = newValue
+        }
+    }
+    
+    /// Holds the user-piece flag.
+    private var _IsUserPiece: Bool = false
+    /// Get or set the is-user-piece flag. If false, the piece is built-in. If true, the piece was created
+    /// by the user.
+    public var IsUserPiece: Bool
+    {
+        get
+        {
+            return _IsUserPiece
+        }
+        set
+        {
+            _IsUserPiece = newValue
         }
     }
     
