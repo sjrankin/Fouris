@@ -92,7 +92,6 @@ import SceneKit
         LightNode.position = SCNVector3(-10.0, 10.0, 30.0)
         self.scene?.rootNode.addChildNode(LightNode)
         
-        
         _Camera = SCNCamera()
         _Camera.fieldOfView = 92.5
         let CameraNode = SCNNode()
