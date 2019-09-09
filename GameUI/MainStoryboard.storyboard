@@ -15,21 +15,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XWq-tv-MbH">
+                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XWq-tv-MbH">
                                 <rect key="frame" x="0.0" y="-77" width="768" height="128"/>
                                 <color key="backgroundColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <viewLayoutGuide key="safeArea" id="5eM-op-aec"/>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tQ9-Ul-CQv">
-                                <rect key="frame" x="0.0" y="89" width="768" height="806"/>
+                            <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tQ9-Ul-CQv">
+                                <rect key="frame" x="0.0" y="89" width="768" height="807"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vct-Mh-0Vi" customClass="View3D" customModule="Fouris" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="768" height="754"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="768" height="807"/>
                                         <color key="backgroundColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <viewLayoutGuide key="safeArea" id="pVp-87-9bV"/>
                                     </view>
                                     <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IgA-6X-lkh" customClass="TextLayerManager" customModule="Fouris" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="768" height="754"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="768" height="807"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HLT-X8-fph">
                                                 <rect key="frame" x="20" y="60" width="150" height="151"/>
@@ -48,19 +48,19 @@
                                                 <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cDM-w8-UEc">
-                                                <rect key="frame" x="20" y="97" width="728" height="503"/>
+                                                <rect key="frame" x="20" y="97" width="728" height="556"/>
                                                 <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fG3-c2-56a">
-                                                <rect key="frame" x="20" y="250" width="728" height="148"/>
+                                                <rect key="frame" x="20" y="250" width="728" height="201"/>
                                                 <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZLG-3V-NE0">
-                                                <rect key="frame" x="20" y="250" width="728" height="148"/>
+                                                <rect key="frame" x="20" y="250" width="728" height="201"/>
                                                 <color key="backgroundColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yrA-tS-iWf">
-                                                <rect key="frame" x="630" y="64" width="118" height="0.0"/>
+                                                <rect key="frame" x="630" y="64" width="118" height="53"/>
                                                 <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </view>
                                         </subviews>
@@ -114,24 +114,24 @@
                                     <constraint firstItem="vct-Mh-0Vi" firstAttribute="centerX" secondItem="tQ9-Ul-CQv" secondAttribute="centerX" id="v6D-ms-bA7"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eVc-5x-EsU">
-                                <rect key="frame" x="0.0" y="895" width="768" height="129"/>
+                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eVc-5x-EsU">
+                                <rect key="frame" x="0.0" y="896" width="768" height="128"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" preservesSuperviewLayoutMargins="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="yTe-N8-uXh">
-                                        <rect key="frame" x="10" y="14" width="197" height="153"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="yTe-N8-uXh">
+                                        <rect key="frame" x="10" y="14" width="101" height="100"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="YfT-Na-k4S">
-                                                <rect key="frame" x="0.0" y="0.0" width="197" height="52"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="101" height="48"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PFJ-gd-j0a">
-                                                        <rect key="frame" x="0.0" y="0.0" width="96" height="52"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
                                                         <state key="normal" image="LeftArrow48"/>
                                                         <connections>
                                                             <action selector="HandleMoveLeftPressed:" destination="anR-7Y-bzH" eventType="primaryActionTriggered" id="9HV-is-cKT"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nVG-Tl-Zxa">
-                                                        <rect key="frame" x="101" y="0.0" width="96" height="52"/>
+                                                        <rect key="frame" x="53" y="0.0" width="48" height="48"/>
                                                         <state key="normal" image="DownArrow48"/>
                                                         <connections>
                                                             <action selector="HandleMoveDownPressed:" destination="anR-7Y-bzH" eventType="primaryActionTriggered" id="lfU-zb-uph"/>
@@ -140,17 +140,17 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="WYQ-dF-gHf">
-                                                <rect key="frame" x="0.0" y="57" width="197" height="96"/>
+                                                <rect key="frame" x="0.0" y="53" width="101" height="47"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ppp-ez-m7Z">
-                                                        <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="48" height="47"/>
                                                         <state key="normal" image="RotateLeft48_2"/>
                                                         <connections>
                                                             <action selector="HandleRotateLeftPressed:" destination="anR-7Y-bzH" eventType="primaryActionTriggered" id="ZAK-BA-JpD"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JPJ-A9-fbu">
-                                                        <rect key="frame" x="101" y="0.0" width="96" height="96"/>
+                                                        <rect key="frame" x="53" y="0.0" width="48" height="47"/>
                                                         <state key="normal" image="UpArrow48"/>
                                                         <connections>
                                                             <action selector="HandleMoveUpPressed:" destination="anR-7Y-bzH" eventType="primaryActionTriggered" id="oQ8-2Z-1Vq"/>
@@ -162,20 +162,20 @@
                                         <viewLayoutGuide key="safeArea" id="sgH-pK-cF1"/>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="UdM-I0-SzI">
-                                        <rect key="frame" x="561" y="14" width="197" height="197"/>
+                                        <rect key="frame" x="657" y="14" width="101" height="100"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="aw6-zV-1lz">
-                                                <rect key="frame" x="0.0" y="0.0" width="197" height="96"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="aw6-zV-1lz">
+                                                <rect key="frame" x="0.0" y="0.0" width="101" height="47"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U6j-gc-7Uj">
-                                                        <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U6j-gc-7Uj">
+                                                        <rect key="frame" x="0.0" y="0.0" width="48" height="47"/>
                                                         <state key="normal" image="DropDownArrow48"/>
                                                         <connections>
                                                             <action selector="HandleDropDownPressed:" destination="anR-7Y-bzH" eventType="primaryActionTriggered" id="FpY-yr-CDL"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HzM-pF-mYR">
-                                                        <rect key="frame" x="101" y="0.0" width="96" height="96"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HzM-pF-mYR">
+                                                        <rect key="frame" x="53" y="0.0" width="48" height="47"/>
                                                         <state key="normal" image="RightArrow48"/>
                                                         <connections>
                                                             <action selector="HandleMoveRightPressed:" destination="anR-7Y-bzH" eventType="primaryActionTriggered" id="Dpc-UU-inN"/>
@@ -183,18 +183,18 @@
                                                     </button>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="bf8-Tk-Rsy">
-                                                <rect key="frame" x="0.0" y="101" width="197" height="96"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="bf8-Tk-Rsy">
+                                                <rect key="frame" x="0.0" y="52" width="101" height="48"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kJM-qU-FEs">
-                                                        <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kJM-qU-FEs">
+                                                        <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
                                                         <state key="normal" image="FlyAwayArrow48"/>
                                                         <connections>
                                                             <action selector="HandleUpAndAwayPressed:" destination="anR-7Y-bzH" eventType="primaryActionTriggered" id="epM-08-EeX"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T3M-my-mow">
-                                                        <rect key="frame" x="101" y="0.0" width="96" height="96"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T3M-my-mow">
+                                                        <rect key="frame" x="53" y="0.0" width="48" height="48"/>
                                                         <state key="normal" image="RotateRight48_2"/>
                                                         <connections>
                                                             <action selector="HandleRotateRightPressed:" destination="anR-7Y-bzH" eventType="primaryActionTriggered" id="z60-Od-mCw"/>
@@ -205,32 +205,53 @@
                                         </subviews>
                                         <viewLayoutGuide key="safeArea" id="eTV-tG-YR4"/>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lCp-Yu-s9Q">
+                                        <rect key="frame" x="353.5" y="31" width="61.5" height="66"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="66" id="0Ne-SX-p4b"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" image="snow" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="50" scale="large" weight="heavy"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="HandleFreezeInPlacePressed:" destination="anR-7Y-bzH" eventType="primaryActionTriggered" id="SRe-N8-goM"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="lCp-Yu-s9Q" firstAttribute="centerY" secondItem="UdM-I0-SzI" secondAttribute="centerY" id="2pu-7y-8Lq"/>
                                     <constraint firstItem="FVB-o4-zHY" firstAttribute="trailing" secondItem="UdM-I0-SzI" secondAttribute="trailing" constant="10" id="7Cd-4j-5bl"/>
                                     <constraint firstItem="yTe-N8-uXh" firstAttribute="top" secondItem="FVB-o4-zHY" secondAttribute="top" constant="14" id="FeD-OX-GB8"/>
+                                    <constraint firstItem="lCp-Yu-s9Q" firstAttribute="centerY" secondItem="yTe-N8-uXh" secondAttribute="centerY" id="Lzc-Lc-2XG"/>
                                     <constraint firstItem="yTe-N8-uXh" firstAttribute="top" secondItem="UdM-I0-SzI" secondAttribute="top" id="Mm3-4E-nKo"/>
                                     <constraint firstItem="yTe-N8-uXh" firstAttribute="centerY" secondItem="eVc-5x-EsU" secondAttribute="centerY" id="Nhm-ZT-Aqq"/>
                                     <constraint firstItem="yTe-N8-uXh" firstAttribute="leading" secondItem="FVB-o4-zHY" secondAttribute="leading" constant="10" id="ZOH-2y-v6M"/>
+                                    <constraint firstItem="lCp-Yu-s9Q" firstAttribute="centerX" secondItem="eVc-5x-EsU" secondAttribute="centerX" id="cRK-qx-9lO"/>
+                                    <constraint firstItem="lCp-Yu-s9Q" firstAttribute="top" secondItem="FVB-o4-zHY" secondAttribute="top" constant="31" id="iSb-2h-Zjs"/>
                                 </constraints>
                                 <viewLayoutGuide key="safeArea" id="FVB-o4-zHY"/>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mwG-lI-7bz">
+                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mwG-lI-7bz">
                                 <rect key="frame" x="0.0" y="25" width="768" height="64"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qep-yn-tJG">
-                                        <rect key="frame" x="20" y="6" width="96" height="96"/>
+                                        <rect key="frame" x="20" y="6" width="54.5" height="53.5"/>
                                         <viewLayoutGuide key="safeArea" id="bdc-cZ-nLh"/>
-                                        <state key="normal" image="ClosedCube"/>
+                                        <color key="tintColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" image="cube.fill" catalog="system">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="35" scale="large" weight="bold"/>
+                                        </state>
                                         <connections>
                                             <action selector="HandleMainButtonPressed:" destination="anR-7Y-bzH" eventType="primaryActionTriggered" id="sp0-Yd-tqW"/>
                                         </connections>
                                     </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" preservesSuperviewLayoutMargins="YES" spacing="63" translatesAutoresizingMaskIntoConstraints="NO" id="nZE-aM-3FJ">
+                                    <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" spacing="63" translatesAutoresizingMaskIntoConstraints="NO" id="nZE-aM-3FJ">
                                         <rect key="frame" x="549" y="9" width="199" height="46"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tYf-lX-OiH">
+                                            <button opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tYf-lX-OiH">
                                                 <rect key="frame" x="0.0" y="0.0" width="56" height="46"/>
                                                 <viewLayoutGuide key="safeArea" id="RT3-pw-BbW"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
@@ -241,7 +262,7 @@
                                                     <action selector="HandlePlayStopPressed:" destination="anR-7Y-bzH" eventType="primaryActionTriggered" id="o8x-iD-sEk"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KXp-V6-UPf">
+                                            <button opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KXp-V6-UPf">
                                                 <rect key="frame" x="119" y="0.0" width="80" height="46"/>
                                                 <viewLayoutGuide key="safeArea" id="3ID-Mx-x4p"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
@@ -344,6 +365,7 @@
                     <connections>
                         <outlet property="CurrentScoreLabelView2" destination="dht-P4-rIC" id="0T0-Vf-V9v"/>
                         <outlet property="DropDownButton2" destination="U6j-gc-7Uj" id="Su8-aO-085"/>
+                        <outlet property="FreezeInPlaceButton" destination="lCp-Yu-s9Q" id="UgN-Eh-ers"/>
                         <outlet property="GameControlView2" destination="mwG-lI-7bz" id="zAR-O3-7sI"/>
                         <outlet property="GameOverLabelView2" destination="fG3-c2-56a" id="myF-XF-REC"/>
                         <outlet property="GameUISurface3D2" destination="vct-Mh-0Vi" id="Naq-c6-d6M"/>
@@ -537,7 +559,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ClosedCube" width="48" height="48"/>
         <image name="DownArrow48" width="48" height="48"/>
         <image name="DropDownArrow48" width="48" height="48"/>
         <image name="FlyAwayArrow48" width="48" height="48"/>
@@ -546,5 +567,7 @@
         <image name="RotateLeft48_2" width="48" height="48"/>
         <image name="RotateRight48_2" width="48" height="48"/>
         <image name="UpArrow48" width="48" height="48"/>
+        <image name="cube.fill" catalog="system" width="64" height="60"/>
+        <image name="snow" catalog="system" width="60" height="64"/>
     </resources>
 </document>
