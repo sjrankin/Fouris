@@ -204,6 +204,57 @@ import UIKit
         GridDelegate?.CellSelectionStateChanged(Column: Column, Row: Row, IsSelected: IsInSelectedState)
     }
     
+    /// Counts and returns the number of pivot cells in the grid.
+    /// -  Returns: Number of pivot cells in the grid.
+    func PivotCellCount() -> Int
+    {
+        var Count = 0
+        for Cell in GridCells
+        {
+            Count = Count + Int(Cell.IsPivot ? 1 : 0)
+        }
+        return Count
+    }
+    
+    /// Returns a list of all pivot cells in the grid.
+    /// - Returns: List of tuples. The first element of each tuple is the column and the second element is the row.
+    func PivotCellCoordinates() -> [(Int, Int)]
+    {
+        var Locations = [(Int, Int)]()
+        for Cell in GridCells
+        {
+            if Cell.IsPivot
+            {
+                Locations.append((Cell.Column, Cell.Row))
+            }
+        }
+        return Locations
+    }
+    
+    /// Called when a grid cell's pivot state is changed due to user interaction.
+    /// - Note: We only care about **PivotState** in the true state.
+    /// - Parameter Column: The column address of the grid cell whose pivot state changed.
+    /// - Parameter Row: The row address of the grid cell whose pivot state changed.
+    /// - Parameter PivotState: New pivot state.
+    func GridCellPivotChanged(Column: Int, Row: Int, PivotState: Bool)
+    {
+        if PivotState
+        {
+            if PivotCellCount() > MaximumPivotCells
+            {
+                for Cell in GridCells
+                {
+                    if Cell.Column == Column && Cell.Row == Row
+                    {
+                        continue
+                    }
+                    Cell.IsPivot = false
+                }
+            }
+            print("Pivot cell at \(Column),\(Row)")
+        }
+    }
+    
     /// Holds the base, unselected background color for grid cells.
     private var _BaseBackground: UIColor = UIColor.white
     {
@@ -342,5 +393,27 @@ import UIKit
     func GetBorderWidth() -> CGFloat
     {
         return _BorderWidth
+    }
+    
+    /// Holds the maximum number of pivot cells.
+    private var _MaximumPivotCells: Int = 1
+    /// Get or set the maximum number of pivot cells.
+    @IBInspectable public var MaximumPivotCells: Int
+        {
+        get
+        {
+            return _MaximumPivotCells
+        }
+        set
+        {
+            if newValue < 1
+            {
+                _MaximumPivotCells = 1
+            }
+            else
+            {
+                _MaximumPivotCells = newValue
+            }
+        }
     }
 }
