@@ -774,6 +774,7 @@ class Board
 /// - **DropDownNoFreeze**: Drop the piece but don't freeze immediately. For use by the AI only. (The main purpose of this motion is
 ///                     to allow a piece to drop quickly to the bottom but then move around to more snugly fit under overhanging
 ///                     pieces.)
+/// - **FreezeInPlace**: Freeze the piece where it is.
 /// - **NoDirection**: No specific direction. Used to indicate nothing to do or invalid direction, depending on the context.
 enum Directions: Int, CaseIterable
 {
@@ -786,7 +787,8 @@ enum Directions: Int, CaseIterable
     case RotateRight = 6
     case UpAndAway = 7
     case DropDownNoFreeze = 8
-    case NoDirection = 9
+    case FreezeInPlace = 9
+    case NoDirection = 10
 }
 
 /// Types of board pieces.
