@@ -34,7 +34,7 @@ protocol ControlProtocol: class
     /// Rotate the block left (counter-clockwise).
     func RotateLeft()
     
-    /// rotate the block right (clockwise).
+    /// Rotate the block right (clockwise).
     func RotateRight()
     
     /// Pause the game.
@@ -48,6 +48,9 @@ protocol ControlProtocol: class
     
     /// Stop a current game.
     func Stop()
+    
+    // Freeze the piece where it is.
+    func FreezeInPlace()
     
     /// Get or set the controller that implements the Control UI protocol.
     var Controller: ControlUIProtocol? {get set}
