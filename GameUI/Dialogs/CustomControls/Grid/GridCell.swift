@@ -9,34 +9,45 @@
 import Foundation
 import UIKit
 
+/// Contains a single cell for the `Grid` control.
 class GridCell: UIView, IntraGridProtocol
 {
+    /// Used for communicating with the `Grid` parent control.
     weak var CellParentDelegate: IntraGridProtocol? = nil
     
+    /// Initializer.
+    /// - Parameter frame: Frame of the cell.
     override init(frame: CGRect)
     {
         super.init(frame: frame)
         Initialize()
     }
     
+    /// Initializer.
+    /// - Parameter coder: See Apple documentation.
     required init?(coder: NSCoder)
     {
         super.init(coder: coder)
         Initialize()
     }
     
+    /// Initialize the grid cell.
     func Initialize()
     {
+        Tag = nil
         let SingleTap = UITapGestureRecognizer(target: self, action: #selector(SingleTapHandler))
         SingleTap.numberOfTapsRequired = 1
         self.addGestureRecognizer(SingleTap)
     }
     
+    /// Start "execution" of the grid cell. Should be called after initialization.
     func Start()
     {
         DrawCell()
     }
     
+    /// Handle single taps. Two notifications are sent to the parent - one for the tap and one for the selection station.
+    /// - Parameter Recognizer: The gesture recognizer.
     @objc func SingleTapHandler(Recognizer: UIGestureRecognizer)
     {
         if Recognizer.state == .ended
@@ -47,6 +58,7 @@ class GridCell: UIView, IntraGridProtocol
         }
     }
     
+    /// Holds the selected flag.
     private var _IsSelected: Bool = false
     {
         didSet
@@ -54,6 +66,7 @@ class GridCell: UIView, IntraGridProtocol
             DrawCell()
         }
     }
+    /// Get or set the selected flag.
     public var IsSelected: Bool
     {
         get
@@ -66,6 +79,7 @@ class GridCell: UIView, IntraGridProtocol
         }
     }
     
+    /// Holds the pivot flag.
     private var _IsPivot: Bool = false
     {
         didSet
@@ -73,6 +87,7 @@ class GridCell: UIView, IntraGridProtocol
             DrawCell()
         }
     }
+    /// Get or set the pivot flag.
     public var IsPivot: Bool
     {
         get
@@ -85,6 +100,7 @@ class GridCell: UIView, IntraGridProtocol
         }
     }
     
+    /// Draw the grid cell.
     func DrawCell()
     {
         var BGColor = UIColor.white
@@ -108,12 +124,35 @@ class GridCell: UIView, IntraGridProtocol
         self.layer.borderColor = (CellParentDelegate?.GetBaseBorderColor())!.cgColor
     }
     
+    /// Redraw the grid cell. Can be called by the parent `Grid`.
     func Redraw()
     {
         DrawCell()
     }
     
+    /// Holds the tag value.
+    private var _Tag: Any? = nil
+    /// Get or set the tag value.
+    /// - Note:
+    ///   - This is a true tag in the sense that it can contain anything (and not just an integer).
+    ///   - This value is not used in any way by the `GridCell` class.
+    public var Tag: Any?
+    {
+        get
+        {
+            return _Tag
+        }
+        set
+        {
+            _Tag = newValue
+        }
+    }
+    
+    /// Holds the column value.
     private var _Column: Int = -1
+    /// Get or set the column value. This is the column in the parent grid where the instance of the cell lives.
+    /// - Note: While changeable, the design of the `Grid` uses cell coordinates to report events, so changing this value
+    ///         is ill-advised.
     public var Column: Int
     {
         get
@@ -126,7 +165,11 @@ class GridCell: UIView, IntraGridProtocol
         }
     }
     
+    /// Holds the row value.
     private var _Row: Int = -1
+    /// Get or set the row value. This is the row in the parent grid where the instance of the cell lives.
+    /// - Note: While changeable, the design of the `Grid` uses cell coordinates to report events, so changing this value
+    ///         is ill-advised.
     public var Row: Int
     {
         get
@@ -139,36 +182,43 @@ class GridCell: UIView, IntraGridProtocol
         }
     }
     
+    /// Not used in this class.
     func GridCellTapped(Column: Int, Row: Int, TapCount: Int)
     {
         //Not used in this class.
     }
     
+    /// Not used in this class.
     func GridCellSelected(Column: Int, Row: Int, IsInSelectedState: Bool)
     {
         //Not used in this class.
     }
     
+    /// Not intended to be called. Returns `UIColor.clear`.
     func GetBaseBackgroundColor() -> UIColor
     {
         return UIColor.clear
     }
     
+    /// Not intended to be called. Returns `UIColor.clear`.
     func GetSelectedBackgroundColor() -> UIColor
     {
         return UIColor.clear
     }
     
+    /// Not intended to be called. Returns `UIColor.clear`.
     func GetPivotBackgroundColor() -> UIColor
     {
         return UIColor.clear
     }
     
+    /// Not intended to be called. Returns `UIColor.clear`.
     func GetBaseBorderColor() -> UIColor
     {
         return UIColor.clear
     }
     
+    /// Not intended to be called. Returns `0.0`.
     func GetBorderWidth() -> CGFloat
     {
         return 0.0
