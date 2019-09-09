@@ -12,6 +12,8 @@ import UIKit
 /// Contains a single cell for the `Grid` control.
 class GridCell: UIView, IntraGridProtocol
 {
+
+    
     /// Used for communicating with the `Grid` parent control.
     weak var CellParentDelegate: IntraGridProtocol? = nil
     
@@ -32,12 +34,17 @@ class GridCell: UIView, IntraGridProtocol
     }
     
     /// Initialize the grid cell.
+    /// - Note: See [UITapGestureRecognizer Single Tap and Double Tap](https://stackoverflow.com/questions/8876202/uitapgesturerecognizer-single-tap-and-double-tap)
     func Initialize()
     {
         Tag = nil
         let SingleTap = UITapGestureRecognizer(target: self, action: #selector(SingleTapHandler))
         SingleTap.numberOfTapsRequired = 1
         self.addGestureRecognizer(SingleTap)
+        
+        let Press = UILongPressGestureRecognizer(target: self, action: #selector(HandlePress))
+        Press.minimumPressDuration = 0.5
+        self.addGestureRecognizer(Press)
     }
     
     /// Start "execution" of the grid cell. Should be called after initialization.
@@ -50,11 +57,49 @@ class GridCell: UIView, IntraGridProtocol
     /// - Parameter Recognizer: The gesture recognizer.
     @objc func SingleTapHandler(Recognizer: UIGestureRecognizer)
     {
+        if !_AllowsInteraction
+        {
+            return
+        }
         if Recognizer.state == .ended
         {
             CellParentDelegate?.GridCellTapped(Column: Column, Row: Row, TapCount: 1)
             _IsSelected = !_IsSelected
             CellParentDelegate?.GridCellSelected(Column: Column, Row: Row, IsInSelectedState: _IsSelected)
+        }
+    }
+
+    @objc func HandlePress(Recognizer: UILongPressGestureRecognizer)
+    {
+        if !_AllowsInteraction
+        {
+            return
+        }
+        if Recognizer.state == .began
+        {
+            IsPivot = !IsPivot
+            CellParentDelegate?.GridCellPivotChanged(Column: Column, Row: Row, PivotState: IsPivot)
+        }
+    }
+    
+    /// Holds the allows user interaction flag
+    private var _AllowsInteraction: Bool = true
+    {
+        didSet
+        {
+            self.isUserInteractionEnabled = _AllowsInteraction
+        }
+    }
+    /// Get or set the allows user interaction flag.
+    public var AllowsInteraction: Bool
+    {
+        get
+        {
+            return _AllowsInteraction
+        }
+        set
+        {
+            _AllowsInteraction = newValue
         }
     }
     
@@ -190,6 +235,12 @@ class GridCell: UIView, IntraGridProtocol
     
     /// Not used in this class.
     func GridCellSelected(Column: Int, Row: Int, IsInSelectedState: Bool)
+    {
+        //Not used in this class.
+    }
+    
+    /// Not used in this class.
+    func GridCellPivotChanged(Column: Int, Row: Int, PivotState: Bool)
     {
         //Not used in this class.
     }
