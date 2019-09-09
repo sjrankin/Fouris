@@ -34,4 +34,7 @@ protocol GameAINotificationProtocol: class
     
     /// AI is rotating a piece counter-clockwise.
     func AI_RotateLeft()
+    
+    /// AI froze a piece into place.
+    func AI_FreezeInPlace()
 }
