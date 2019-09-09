@@ -21,7 +21,17 @@ class PieceCreator: UIViewController, ThemeEditingProtocol, GridProtocol
         PieceGrid.layer.borderColor = UIColor.black.cgColor
         PieceGrid.backgroundColor = UIColor.black
         PieceGrid.GridDelegate = self
+        SampleView.layer.borderColor = UIColor.black.cgColor
+        SampleView.backgroundColor = ColorServer.ColorFrom(ColorNames.AzukiIro)
+        SampleView.layer.cornerRadius = 5.0
+        RotateXSwitch.isOn = false
+        RotateYSwitch.isOn = false
+        RotateZSwitch.isOn = false
     }
+    
+    var RotateX: Bool = false
+    var RotateY: Bool = false
+    var RotateZ: Bool = false
     
     func EditTheme(ID: UUID)
     {
@@ -64,6 +74,21 @@ class PieceCreator: UIViewController, ThemeEditingProtocol, GridProtocol
         PieceGrid.ResetAllCells(ToSelection: false)
     }
     
+    @IBAction func HandleRotateXChanged(_ sender: Any)
+    {
+        RotateX = !RotateX
+    }
+    
+    @IBAction func HandleRotateYChanged(_ sender: Any)
+    {
+        RotateY = !RotateY
+    }
+    
+    @IBAction func HandleRotateZChanged(_ sender: Any)
+    {
+        RotateZ = !RotateZ
+    }
+    
     // MARK: Grid protocol function implementations.
     
     func CellSelectionStateChanged(Column: Int, Row: Int, IsSelected: Bool)
@@ -73,7 +98,7 @@ class PieceCreator: UIViewController, ThemeEditingProtocol, GridProtocol
     
     func CellTapped(Column: Int, Row: Int, TapCount: Int)
     {
-                print("Cell at \(Column),\(Row) was tapped \(TapCount) times")
+        print("Cell at \(Column),\(Row) was tapped \(TapCount) times")
     }
     
     func CellCountChanged(ColumnCount: Int, RowCount: Int)
@@ -81,6 +106,15 @@ class PieceCreator: UIViewController, ThemeEditingProtocol, GridProtocol
         print("New cell count: \(ColumnCount) columns, \(RowCount) rows.")
     }
     
-    @IBOutlet weak var SampleView: SCNView!
+    /// Not used in this class. Returns emtpy array.
+    func PivotCellCoordinates() -> [(Int, Int)]
+    {
+        return [(Int, Int)]()
+    }
+    
+    @IBOutlet weak var RotateZSwitch: UISwitch!
+    @IBOutlet weak var RotateYSwitch: UISwitch!
+    @IBOutlet weak var RotateXSwitch: UISwitch!
+    @IBOutlet weak var SampleView: PieceViewer!
     @IBOutlet weak var PieceGrid: Grid!
 }
