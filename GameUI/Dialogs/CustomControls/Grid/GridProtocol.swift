@@ -32,4 +32,8 @@ protocol GridProtocol: class
     /// Call to the `Grid` instance that resets the selection state for all grid cells.
     /// - Parameter ToSelection: New selection state to be set for all grid cells.
     func ResetAllCells(ToSelection: Bool)
+    
+    /// Returns a list of all pivot cells in the grid.
+    /// - Returns: List of tuples. The first element of each tuple is the column and the second element is the row.
+    func PivotCellCoordinates() -> [(Int, Int)]
 }
