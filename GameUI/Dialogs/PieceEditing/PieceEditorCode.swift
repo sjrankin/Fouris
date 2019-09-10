@@ -337,6 +337,7 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
     
     // MARK: Interface builder links.
     
+    @IBOutlet weak var ActiveSamplePiece: PieceViewer!
     @IBOutlet weak var ActiveSurfaceTypeSegment: UISegmentedControl!
     @IBOutlet weak var ActiveTextureButton: UIButton!
     @IBOutlet weak var ActiveSpecularColorButton: ColorButton!
@@ -346,6 +347,7 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
     @IBOutlet weak var ActiveTextureText: UILabel!
     @IBOutlet weak var ActiveShapeView: BlockView!
     
+    @IBOutlet weak var RetiredSamplePiece: PieceViewer!
     @IBOutlet weak var RetiredSurfaceTypeSegment: UISegmentedControl!
     @IBOutlet weak var RetiredTextureButton: UIButton!
     @IBOutlet weak var RetiredSpecularColorButton: ColorButton!
