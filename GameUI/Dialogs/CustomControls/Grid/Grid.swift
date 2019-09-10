@@ -73,12 +73,31 @@ import UIKit
                                                   width: CellWidth, height: CellHeight))
                 Cell.Column = Column
                 Cell.Row = Row
+                Cell.XPlot = Column - 3
+                Cell.YPlot = Row - 3
                 Cell.CellParentDelegate = self
                 Cell.Start()
                 GridCells.append(Cell)
                 self.addSubview(Cell)
             }
         }
+    }
+    
+    /// Returns the plot coordinates for the specified cell.
+    /// - Parameter ForX: The X coordinate of the cell.
+    /// - Parameter ForY: The Y coordinate of the cell.
+    /// - Returns: Tuple of the plot coordinates for the cell. Nil is returned
+    ///            if the specified coordinates are invalid.
+    func GetPlotCoordinates(ForX: Int, ForY: Int) -> (Int, Int)?
+    {
+        for Cell in GridCells
+        {
+            if Cell.Column == ForX && Cell.Row == ForY
+            {
+                return (Cell.XPlot, Cell.YPlot)
+            }
+        }
+        return nil
     }
     
     /// Remove all grid cells from the grid.
@@ -231,6 +250,15 @@ import UIKit
         return Locations
     }
     
+    /// Clears all pivot points.
+    func ResetAllPivotPoints()
+    {
+        for Cell in GridCells
+        {
+            Cell.IsPivot = false
+        }
+    }
+    
     /// Called when a grid cell's pivot state is changed due to user interaction.
     /// - Note: We only care about **PivotState** in the true state.
     /// - Parameter Column: The column address of the grid cell whose pivot state changed.
@@ -251,7 +279,7 @@ import UIKit
                     Cell.IsPivot = false
                 }
             }
-            print("Pivot cell at \(Column),\(Row)")
+            //print("Pivot cell at \(Column),\(Row)")
         }
     }
     
