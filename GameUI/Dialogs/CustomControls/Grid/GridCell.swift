@@ -69,6 +69,14 @@ class GridCell: UIView, IntraGridProtocol
         }
     }
 
+    /// Handle long press gestures.
+    /// - Note:
+    ///   - We act once the `Recognizer`'s state is `.begin` because that means the
+    ///     long press's duration has expired (eg, the user pressed long enough) and
+    ///     there is no need to wait until the user lifts his finger.
+    ///   - If the cell is not selected, the pivot point is not set - only selected cells
+    ///     may be pivot points.
+    /// - Parameter Recognizer: The long press gesture recognizer.
     @objc func HandlePress(Recognizer: UILongPressGestureRecognizer)
     {
         if !_AllowsInteraction
@@ -77,6 +85,10 @@ class GridCell: UIView, IntraGridProtocol
         }
         if Recognizer.state == .began
         {
+            if !_IsSelected
+            {
+                return
+            }
             IsPivot = !IsPivot
             CellParentDelegate?.GridCellPivotChanged(Column: Column, Row: Row, PivotState: IsPivot)
         }
@@ -224,6 +236,36 @@ class GridCell: UIView, IntraGridProtocol
         set
         {
             _Row = newValue
+        }
+    }
+    
+    /// Holds the X plotting coordinate.
+    private var _XPlot: Int = 0
+    /// Get or set the X plotting coordinate.
+    public var XPlot: Int
+    {
+        get
+        {
+            return _XPlot
+        }
+        set
+        {
+            _XPlot = newValue
+        }
+    }
+    
+    /// Holds the Y plotting coordinate.
+    private var _YPlot: Int = 0
+    /// Get or set the Y plotting coordinate.
+    public var YPlot: Int
+    {
+        get
+        {
+            return _YPlot
+        }
+        set
+        {
+            _YPlot = newValue
         }
     }
     
