@@ -39,6 +39,7 @@ import SceneKit
         self.clipsToBounds = true
         self.antialiasingMode = .multisampling2X
         self.debugOptions = [SCNDebugOptions.showSkeletons]
+        self.allowsCameraControl = true
         AddCameraAndLight()
     }
     
@@ -90,6 +91,34 @@ import SceneKit
         }
     }
     
+    func GetExtents() -> (Int, Int)
+    {
+        var MinX: Int = 10000
+        var MaxX: Int = -10000
+        var MinY: Int = 10000
+        var MaxY: Int = -10000
+        for (X, Y) in BlockList
+        {
+            if X < MinX
+            {
+                MinX = X
+            }
+            if X > MaxX
+            {
+                MaxX = X
+            }
+            if Y < MinY
+            {
+                MinY = Y
+            }
+            if Y > MaxY
+            {
+                MaxY = Y
+            }
+        }
+        return ((abs(MaxX - MinX) + 1), (abs(MaxY - MinY) + 1))
+    }
+    
     /// Draw the piece in the view using current properties.
     public func DrawPiece()
     {
@@ -99,18 +128,36 @@ import SceneKit
         }
         else
         {
-        for Child in PieceNode!.childNodes
-        {
-            Child.removeFromParentNode()
+            for Child in PieceNode!.childNodes
+            {
+                Child.removeFromParentNode()
+            }
+            PieceNode?.removeFromParentNode()
         }
-        PieceNode?.removeFromParentNode()
+        var UnitSize = _BlockSize
+        if _AutoAdjustBlockSize
+        {
+            let (ExX, ExY) = GetExtents()
+            let SmallestViewDimension = min(self.bounds.size.width, self.bounds.size.height)
+            let GreatestExtent = max(ExX, ExY)
+            if GreatestExtent == 0
+            {
+                UnitSize = _BlockSize
+            }
+            else
+            {
+            UnitSize = SmallestViewDimension / CGFloat(GreatestExtent) * 0.9
+            }
         }
         for (X, Y) in BlockList
         {
-        let NodeShape = SCNBox(width: _BlockSize, height: _BlockSize, length: _BlockSize, chamferRadius: 0.0)
-        NodeShape.materials.first?.diffuse.contents = _DiffuseColor
-        NodeShape.materials.first?.specular.contents = _SpecularColor
+            let NodeShape = SCNBox(width: UnitSize, height: UnitSize, length: UnitSize, chamferRadius: 0.0)
+            NodeShape.materials.first?.diffuse.contents = _DiffuseColor
+            NodeShape.materials.first?.specular.contents = _SpecularColor
             let Node = SCNNode(geometry: NodeShape)
+            let XPos: CGFloat = CGFloat(X) * UnitSize
+            let YPos: CGFloat = CGFloat(Y) * UnitSize
+            Node.position = SCNVector3(XPos, YPos, 0.0)
             PieceNode?.addChildNode(Node)
         }
         self.scene?.rootNode.addChildNode(PieceNode!)
@@ -118,7 +165,20 @@ import SceneKit
     
     public func RotatePiece(OnX: Bool, OnY: Bool, OnZ: Bool)
     {
-        
+        PieceNode?.removeAllActions()
+        let RotatePiece = SCNAction.rotateBy(x: OnX ? 1.0 : 0.0,
+                                             y: OnY ? 1.0 : 0.0,
+                                             z: OnZ ? 1.0 : 0.0,
+                                             duration: 1.0)
+        let RotateForever = SCNAction.repeatForever(RotatePiece)
+        PieceNode?.runAction(RotateForever)
+    }
+    
+    public func ResetRotations()
+    {
+        PieceNode?.removeAllActions()
+        let RotatePiece = SCNAction.rotateTo(x: 0.0, y: 0.0, z: 0.0, duration: 0.001)
+        PieceNode?.runAction(RotatePiece)
     }
     
     public func StopRotation()
@@ -127,6 +187,25 @@ import SceneKit
     }
     
     // MARK: Interface builder-related functions.
+    
+    private var _AutoAdjustBlockSize: Bool = true
+    {
+        didSet
+        {
+            DrawPiece()
+        }
+    }
+    @IBInspectable public var AutoAdjustBlockSize: Bool
+    {
+        get
+        {
+            return _AutoAdjustBlockSize
+        }
+        set
+        {
+            _AutoAdjustBlockSize = newValue
+        }
+    }
     
     private var _BlockSize: CGFloat = 20.0
     {
@@ -258,6 +337,7 @@ import SceneKit
             }
         }
         BlockList.append((X, Y))
+        DrawPiece()
     }
     
     func DoRemoveBlock(_ X: Int, _ Y: Int)
@@ -273,6 +353,11 @@ import SceneKit
     func AddBlockAt(_ Location: LogicalLocation)
     {
         DoAddBlock(Location.X, Location.Y)
+    }
+    
+    func AddBlockAt(_ X: Int, _ Y: Int)
+    {
+        DoAddBlock(X, Y)
     }
     
     func RemoveBlockAt(_ Location: BlockCoordinates<Int>)
