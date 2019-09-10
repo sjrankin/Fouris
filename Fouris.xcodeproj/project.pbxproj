@@ -128,6 +128,7 @@
 		17A45B582271A59F002E705D /* AITestTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A45B572271A59F002E705D /* AITestTable.swift */; };
 		17A45B5B2271A5CC002E705D /* AITestNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A45B5A2271A5CC002E705D /* AITestNode.swift */; };
 		17A45B632271DA98002E705D /* AITestDataUpdatedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A45B612271DA8C002E705D /* AITestDataUpdatedProtocol.swift */; };
+		17A48E422327BC6900510EE6 /* GameSelectorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A48E412327BC6900510EE6 /* GameSelectorProtocol.swift */; };
 		17AB99D22297DC66003C4674 /* ImageServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AB99D12297DC66003C4674 /* ImageServer.swift */; };
 		17AC98222324AB6B0020FB05 /* FlyingPieces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AC98212324AB6B0020FB05 /* FlyingPieces.swift */; };
 		17AF231F2313981C00921E6C /* MainViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AF231E2313981C00921E6C /* MainViewController2.swift */; };
@@ -325,6 +326,7 @@
 		17A45B5A2271A5CC002E705D /* AITestNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AITestNode.swift; sourceTree = "<group>"; };
 		17A45B5F2271D8CA002E705D /* MainDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDelegate.swift; sourceTree = "<group>"; };
 		17A45B612271DA8C002E705D /* AITestDataUpdatedProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AITestDataUpdatedProtocol.swift; sourceTree = "<group>"; };
+		17A48E412327BC6900510EE6 /* GameSelectorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSelectorProtocol.swift; sourceTree = "<group>"; };
 		17AB99D12297DC66003C4674 /* ImageServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageServer.swift; sourceTree = "<group>"; };
 		17AC98212324AB6B0020FB05 /* FlyingPieces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlyingPieces.swift; sourceTree = "<group>"; };
 		17AF231E2313981C00921E6C /* MainViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController2.swift; sourceTree = "<group>"; };
@@ -515,6 +517,7 @@
 				17B875772323D01B00BD8BBD /* Background */,
 				17B875762323CFCC00BD8BBD /* About */,
 				17616ACA23166CB000DFFEFE /* SelectGameController.swift */,
+				17A48E412327BC6900510EE6 /* GameSelectorProtocol.swift */,
 				17616ACC23166DF700DFFEFE /* GameStyleTableViewCell.swift */,
 				17477A702317853C00AAEB14 /* ThemingController.swift */,
 				17477A722317891100AAEB14 /* ThemeEditorController.swift */,
@@ -1220,6 +1223,7 @@
 				17F6ECF02286E1F2000F8E11 /* ControlProtocol.swift in Sources */,
 				179C5E342322533F0003845B /* PieceEditorCode.swift in Sources */,
 				1713735A22EAE6D500C9F9A7 /* SCNTetrahedron.swift in Sources */,
+				17A48E422327BC6900510EE6 /* GameSelectorProtocol.swift in Sources */,
 				179C5E1F23222B510003845B /* VisualDescriptor.swift in Sources */,
 				17D1FB6C2268A09400EDA707 /* GameAI.swift in Sources */,
 				177F4FD9229C1A7600FE72CD /* SerializerExtension.swift in Sources */,
