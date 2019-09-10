@@ -21,6 +21,7 @@ class MainViewController2: UIViewController,
     SmoothMotionProtocol,                               //Protocol for handling smooth motions.
     TDebugProtocol,                                     //Protocol for the debug client to talk to this class.
     StepperHelper,                                      //Protocol for the stepper to display data for the user.
+    GameSelectorProtocol,                               //Protocol for selecting games.
     UITouchImageDelegate                                //Protocol for touch image presses.
 {
     // MARK: Globals.
@@ -152,7 +153,7 @@ class MainViewController2: UIViewController,
         UpAndAwayButton2.imageView?.contentMode = .scaleAspectFit
         EnableFreezeInPlaceButton(false)
         
-        InitializeOptionTable(MainSlideInOptionTable2)
+        InitializeSlideIn()
         print("Initializing game with \(CurrentBaseGameType)")
         Game = GameLogic(BaseGame: CurrentBaseGameType, EnableAI: false)
         Game.UIDelegate = self
@@ -1435,57 +1436,92 @@ class MainViewController2: UIViewController,
         ClearAndPlay()
     }
     
-    /// Handle slide-in commands here. Before executing a command, the slide-in UI is closed and the main button is reset.
-    /// - Note: Most commands executed here will force the game to pause.
-    /// - Parameter CommandID: The command to process.
-    func HandleSlideInCommand(_ CommandID: UUID)
+    @IBAction func HandleThemesSlideInButtonPressed(_ sender: Any)
     {
-        MainSlideIn2?.HideMainSlideIn()
+        ForcePause()
+        MainSlideIn2.HideMainSlideIn()
         UpdateMainButton(false)
-        
-        var SlideInCommand = SlideInCommands.NoCommand
-        for (Command, ID) in CommandIDs
+        let Storyboard = UIStoryboard(name: "Theming", bundle: nil)
+        if let Controller = Storyboard.instantiateViewController(withIdentifier: "ThemingHome") as? ThemingController
         {
-            if ID == CommandID
+            self.present(Controller, animated: true, completion: nil)
+        }
+    }
+    
+    @IBSegueAction func InstantiateAboutDialog(_ coder: NSCoder) -> AboutDialogController?
+    {
+        ForcePause()
+        MainSlideIn2.HideMainSlideIn()
+        UpdateMainButton(false)
+        let About = AboutDialogController(coder: coder)
+        return About
+    }
+    
+    @IBSegueAction func InstantiateGameSelector(_ coder: NSCoder) -> SelectGameController?
+    {
+        ForcePause()
+        MainSlideIn2.HideMainSlideIn()
+        UpdateMainButton(false)
+        let Selector = SelectGameController(coder: coder)
+        Selector?.SelectorDelegate = self
+        return Selector
+    }
+    
+    /// Called when the game selector dialog closes.
+    /// - Parameter DidChange: If true, the game type or sub type or both changed.
+    /// - Parameter NewBaseType: The new base type (or old one if only the `GameSubType` changed). If `DidChange` is false,
+    ///                          this value will be nil.
+    /// - Parameter GameSubType: The new sub type game (or old one if only the `NewBaseType` changed). If `DidChange` is false,
+    ///                          this value will be nil.
+    func GameTypeChanged(DidChange: Bool, NewBaseType: BaseGameTypes?, GameSubType: BaseGameSubTypes?)
+    {
+        print("At GameTypeChanged")
+        if let NewGameType = NewBaseType
+        {
+            print("NewGameType is \(NewGameType)")
+            if NewGameType == CurrentBaseGameType
             {
-                SlideInCommand = Command
-                break
+                return
+            }
+            if !IsPaused
+            {
+                Pause()
+                let ChangeAlert = UIAlertController(title: "Really Change Game Type?",
+                                                    message: "If you change the game type, you will lose your progress in the current game.",
+                                                    preferredStyle: .alert)
+                ChangeAlert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:
+                    {
+                        _ in
+                        if self.IsPaused
+                        {
+                            self.SwitchGameType(BaseType: NewGameType, SubType: .Big)
+                        }
+                }
+                )
+                )
+                ChangeAlert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler:
+                    {
+                _ in
+                        if self.IsPaused
+                        {
+                            self.Pause()
+                        }
+                }
+                )
+                )
             }
         }
-        switch SlideInCommand
-        {
-            case .AboutCommand:
-                ForcePause()
-                let Storyboard = UIStoryboard(name: "MainStoryboard", bundle: nil)
-                if let Controller = Storyboard.instantiateViewController(withIdentifier: "AboutDialog") as? AboutDialogController
-                {
-                self.present(Controller, animated: true, completion: nil)
-                }
-            
-            case .SelectGameCommand:
-                ForcePause()
-                let Storyboard = UIStoryboard(name: "MainStoryboard", bundle: nil)
-                if let Controller = Storyboard.instantiateViewController(withIdentifier: "GameSelection") as? SelectGameController
-                {
-                    self.present(Controller, animated: true, completion: nil)
-                }
-            
-            case .SettingsCommand:
-                print("Encountered settings command")
-                break
-            
-            case .ThemeCommand:
-                ForcePause()
-                let Storyboard = UIStoryboard(name: "Theming", bundle: nil)
-                if let Controller = Storyboard.instantiateViewController(withIdentifier: "ThemingHome") as? ThemingController
-                {
-                    self.present(Controller, animated: true, completion: nil)
-            }
-            
-            case .NoCommand:
-                print("Encountered no command")
-                break
-        }
+    }
+    
+    /// Switch the game type here. The current game will be stopped and the UI reinitialized.
+    /// - Parameter BaseType: The game base type to use.
+    /// - Parameter SubType: The game sub type to use.
+    func SwitchGameType(BaseType: BaseGameTypes, SubType: BaseGameSubTypes)
+    {
+        CurrentBaseGameType = BaseType
+        Settings.SetGameType(CurrentBaseGameType)
+        Stop()
+        InitializeGameUI()
     }
     
     // MARK: Debug delegate functions and other debug code.
@@ -1686,11 +1722,11 @@ class MainViewController2: UIViewController,
     @IBOutlet weak var GameOverLabelView2: UIView!
     @IBOutlet weak var PauseLabelView2: UIView!
     @IBOutlet weak var MainSlideIn2: MainSlideInView2!
-    @IBOutlet weak var MainSlideInOptionTable2: UITableView!
     @IBOutlet weak var SlideInAttractButton2: UIButton!
     @IBOutlet weak var SlideInCloseButton2: UIButton!
     @IBOutlet weak var TopOverlapView: UIView!
     @IBOutlet weak var FreezeInPlaceButton: UIButton!
+    @IBOutlet weak var SlideInSubView: UIView!
     
     // MARK: Enum mappings.
     
@@ -1709,15 +1745,37 @@ class MainViewController2: UIViewController,
     ]
 }
 
- /// Defines the base games available. Each base game may have one or more variants. For example, a .Standard game may
- /// have various bucket sizes or obstructions.
- /// - **Standard**: Standard Tetris game.
- /// - **Rotating4**: Rotating square with falling pieces.
- /// - **Cubic**: Three dimensional falling piece game.
- enum BaseGameTypes: String, CaseIterable
- {
- case Standard = "Standard"
- case Rotating4 = "Rotating4"
- case Cubic = "Cubic"
- }
+/// Defines the base games available. Each base game may have one or more variants. For example, a .Standard game may
+/// have various bucket sizes or obstructions.
+/// - **Standard**: Standard Tetris game.
+/// - **Rotating4**: Rotating square with falling pieces.
+/// - **Cubic**: Three dimensional falling piece game.
+enum BaseGameTypes: String, CaseIterable
+{
+    case Standard = "Standard"
+    case Rotating4 = "Rotating4"
+    case Cubic = "Cubic"
+}
+
+enum BaseGameSubTypes: String, CaseIterable
+{
+    //Standard games
+    case Classic = "Classic"
+    case TallThin = "TallThin"
+    case ShortWide = "ShortWide"
+    case Big = "Big"
+    case Small = "Small"
+    
+    //Rotating games
+    case SmallCentralBlock = "SmallCentralBlock"
+    case MediumCentralBlock = "MediumCentralBlock"
+    case LargeCentralBlock = "LargeCentralBlock"
+    case SmallCentralDiamond = "SmallCentralDiamond"
+    case MediumCentralDiamond = "MediumCentralDiamond"
+    case LargeCentralDiamond = "LargeCentralDiamond"
+    case Corners = "Corners"
+    case CentralBrackets4 = "4CentralBrackets"
+    case CentralBrackets2 = "2CentralBrackets"
+    case Empty = "Empty"
+}
 
