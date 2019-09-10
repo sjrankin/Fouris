@@ -57,6 +57,17 @@ class PieceCreator: UIViewController, ThemeEditingProtocol, GridProtocol
         //Not used in this class.
     }
     
+    func ResetAllPivotPoints()
+    {
+        //Not used in this class.
+    }
+    
+    //Not used in this class.
+    func GetPlotCoordinates(ForX: Int, ForY: Int) -> (Int, Int)?
+    {
+        return nil
+    }
+    
     @IBAction func HandleOKPressed(_ sender: Any)
     {
         ThemeDelegate?.EditResults(true, ThemeID: ThemeID, PieceID: NewTheme)
@@ -72,38 +83,99 @@ class PieceCreator: UIViewController, ThemeEditingProtocol, GridProtocol
     @IBAction func HandleResetGrid(_ sender: Any)
     {
         PieceGrid.ResetAllCells(ToSelection: false)
+        PieceGrid.ResetAllPivotPoints()
+        SelectedCells.removeAll()
+        UpdateSample()
+        HandleResetRotationsPressed(self)
     }
     
     @IBAction func HandleRotateXChanged(_ sender: Any)
     {
         RotateX = !RotateX
+        SampleView.RotatePiece(OnX: RotateX, OnY: RotateY, OnZ: RotateZ)
     }
     
     @IBAction func HandleRotateYChanged(_ sender: Any)
     {
         RotateY = !RotateY
+        SampleView.RotatePiece(OnX: RotateX, OnY: RotateY, OnZ: RotateZ)
     }
     
     @IBAction func HandleRotateZChanged(_ sender: Any)
     {
         RotateZ = !RotateZ
+        SampleView.RotatePiece(OnX: RotateX, OnY: RotateY, OnZ: RotateZ)
+    }
+    
+    @IBAction func HandleResetRotationsPressed(_ sender: Any)
+    {
+        RotateXSwitch.isOn = false
+        RotateYSwitch.isOn = false
+        RotateZSwitch.isOn = false
+        RotateX = false
+        RotateY = false
+        RotateZ = false
+        SampleView.RotatePiece(OnX: false, OnY: false, OnZ: false)
+        SampleView.ResetRotations()
+    }
+    
+    func UpdateSample()
+    {
+        SampleView.Clear()
+        for (X, Y) in SelectedCells
+        {
+            SampleView.AddBlockAt(X, Y)
+        }
     }
     
     // MARK: Grid protocol function implementations.
     
+    var SelectedCells = [(Int, Int)]()
+    
+    func IsSelectedAt(_ X: Int, _ Y: Int) -> Bool
+    {
+        for (AtX, AtY) in SelectedCells
+        {
+            if AtX == X && AtY == Y
+            {
+                return true
+            }
+        }
+        return false
+    }
+    
     func CellSelectionStateChanged(Column: Int, Row: Int, IsSelected: Bool)
     {
-        print("Cell at \(Column),\(Row) has selection state \(IsSelected)")
+        if let (PlotX, PlotY) = PieceGrid.GetPlotCoordinates(ForX: Column, ForY: Row)
+        {
+            if IsSelected
+            {
+                if IsSelectedAt(PlotX, -PlotY)
+                {
+                    return
+                }
+                SelectedCells.append((PlotX, -PlotY))
+            }
+            else
+            {
+                if !IsSelectedAt(PlotX, -PlotY)
+                {
+                    return
+                }
+                SelectedCells = SelectedCells.filter({!($0.0 == PlotX && $0.1 == -PlotY)})
+            }
+        }
+        UpdateSample()
     }
     
     func CellTapped(Column: Int, Row: Int, TapCount: Int)
     {
-        print("Cell at \(Column),\(Row) was tapped \(TapCount) times")
+        //print("Cell at \(Column),\(Row) was tapped \(TapCount) times")
     }
     
     func CellCountChanged(ColumnCount: Int, RowCount: Int)
     {
-        print("New cell count: \(ColumnCount) columns, \(RowCount) rows.")
+        //print("New cell count: \(ColumnCount) columns, \(RowCount) rows.")
     }
     
     /// Not used in this class. Returns emtpy array.
