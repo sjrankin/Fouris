@@ -36,4 +36,14 @@ protocol GridProtocol: class
     /// Returns a list of all pivot cells in the grid.
     /// - Returns: List of tuples. The first element of each tuple is the column and the second element is the row.
     func PivotCellCoordinates() -> [(Int, Int)]
+    
+    /// Removes all pivot points.
+    func ResetAllPivotPoints()
+    
+    /// Returns the plot coordinates for the specified cell.
+    /// - Parameter ForX: The X coordinate of the cell.
+    /// - Parameter ForY: The Y coordinate of the cell.
+    /// - Returns: Tuple of the plot coordinates for the cell. Nil is returned
+    ///            if the specified coordinates are invalid.
+    func GetPlotCoordinates(ForX: Int, ForY: Int) -> (Int, Int)?
 }
