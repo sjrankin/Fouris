@@ -11,6 +11,8 @@ import UIKit
 
 class SelectGameController: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
+    weak var SelectorDelegate: GameSelectorProtocol? = nil
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -117,11 +119,14 @@ class SelectGameController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBAction func HandleOKPressed(_ sender: Any)
     {
+        let BaseGame: BaseGameTypes = BaseGameSegment.selectedSegmentIndex == 0 ? .Standard : .Rotating4
+        SelectorDelegate?.GameTypeChanged(DidChange: true, NewBaseType: BaseGame, GameSubType: .MediumCentralBlock)
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func HandleCancelPressed(_ sender: Any)
     {
+        SelectorDelegate?.GameTypeChanged(DidChange: false, NewBaseType: nil, GameSubType: nil)
         self.dismiss(animated: true, completion: nil)
     }
     
