@@ -117,17 +117,17 @@ protocol GameViewProtocol: class
     /// - Parameter Right: If true, contents are rotated clockwise. Otherwise, counter-clockwise.
     /// - Parameter Duration: Number of seconds to take to rotate the contents.
     /// - Parameter Completed: Completion handler called at the end of the rotation.
-    func RotateContents(Right: Bool, Duration: Double, Completed: (() -> ())?)
+    func RotateContents(Right: Bool, Duration: Double, Completed: @escaping (() -> ()))
     
     /// Rotates the contents of the game (but not UI or falling piece) by 90° left (counter-clockwise).
     /// - Parameter Duration: Number of seconds to take to rotate the contents.
     /// - Parameter Completed: Completion handler called at the end of the rotation.
-    func RotateContentsLeft(Duration: Double, Completed: (() -> ())?)
+    func RotateContentsLeft(Duration: Double, Completed: @escaping (() -> ()))
     
     /// Rotates the contents of the game (but not UI or falling piece) by 90° right (clockwise).
     /// - Parameter Duration: Number of seconds to take to rotate the contents.
     /// - Parameter Completed: Completion handler called at the end of the rotation.
-    func RotateContentsRight(Duration: Double, Completed: (() -> ())?)
+    func RotateContentsRight(Duration: Double, Completed: @escaping (() -> ()))
     
     /// Set the theme of the game view
     /// - Parameter ThemeID: Theme ID to use.
