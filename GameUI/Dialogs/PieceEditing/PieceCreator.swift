@@ -42,7 +42,7 @@ class PieceCreator: UIViewController, ThemeEditingProtocol, GridProtocol
     
     var NewTheme = UUID.Empty
     
-    func EditTheme(ID: UUID, Piece: UUID)
+    func EditTheme(ID: UUID, PieceID: UUID)
     {
         //Not used in this class.
     }
