@@ -142,15 +142,6 @@ class MainViewController2: UIViewController,
     func InitializeGameUI()
     {
         //Initialize buttons.
-        MainUIButton2.imageView?.contentMode = .scaleAspectFit
-        MoveLeftButton2.imageView?.contentMode = .scaleAspectFit
-        MoveDownButton2.imageView?.contentMode = .scaleAspectFit
-        MoveUpButton2.imageView?.contentMode = .scaleAspectFit
-        RotateLeftButton2.imageView?.contentMode = .scaleAspectFit
-        MoveRightButton2.imageView?.contentMode = .scaleAspectFit
-        RotateRightButton2.imageView?.contentMode = .scaleAspectFit
-        DropDownButton2.imageView?.contentMode = .scaleAspectFit
-        UpAndAwayButton2.imageView?.contentMode = .scaleAspectFit
         EnableFreezeInPlaceButton(false)
         
         InitializeSlideIn()
@@ -480,19 +471,7 @@ class MainViewController2: UIViewController,
         Level?.Duration = Level!.Duration + GameDuration
         Level?.CumulativeScore = Level!.CumulativeScore + Game.CurrentGameScore
         Level?.CumulativePieces = Level!.CumulativePieces + Game.PiecesInGame
-        
-        /*
-         var BlockCount: Int = 0
-         var ReachableCount: Int = 0
-         let UnreachableCount = Game.GameBoard!.Map!.UnreachablePointCount(Reachable: &ReachableCount, Blocked: &BlockCount)
-         AIData?.AddTest(Game.AI!.CurrentScoringMethod, Duration: GameDuration,
-         Score: Double(Game!.CurrentGameScore),
-         Pieces: Game!.PiecesInGame,
-         BucketSize: Game.GameBoard!.Map!.BucketSize,
-         Unreachable: UnreachableCount, Reachable: ReachableCount)
-         */
-        
-        //        let Mean = Game!.GameDuration() / Double(Game!.PiecesInGame)
+
         CumulativeDuration = CumulativeDuration + Game!.GameDuration()
         CumulativePieces = CumulativePieces + Double(Game!.PiecesInGame)
         let Mean: Double = CumulativeDuration / CumulativePieces
@@ -639,6 +618,7 @@ class MainViewController2: UIViewController,
                 break
             
             case .Rotating4:
+                GameView3D?.MergePieceIntoBucket(ThePiece)
                 GameView3D?.DrawMap3D(FromBoard: Game!.GameBoard!, CalledFrom: "PieceFinalized")
                 Game!.GameBoard!.Map!.RotateMapRight()
                 if Settings.GetCanRotateBoard()
@@ -1187,63 +1167,168 @@ class MainViewController2: UIViewController,
     /// AI is moving a piece upwards.
     func AI_MoveUp()
     {
+        #if true
+        UIView.animate(withDuration: 0.15,
+                       animations:
+            {
+                self.MoveUpButton3.tintColor = UIColor.yellow
+        }, completion:
+            {
+                _ in
+                self.MoveUpButton3.tintColor = UIColor.white
+        })
+        #else
         MoveUpButton2.Highlight(WithImage: "UpArrowHighlighted48", ForSeconds: 0.15,
                                 OriginalName: "UpArrow48")
+        #endif
     }
     
     /// AI is throwing a piece away.
     func AI_MoveUpAndAway()
     {
+        #if true
+        UIView.animate(withDuration: 0.15,
+                       animations:
+            {
+                self.UpAndAwayButton3.tintColor = UIColor.yellow
+        }, completion:
+            {
+                _ in
+                self.UpAndAwayButton3.tintColor = UIColor.cyan
+        })
+        #else
         UpAndAwayButton2.Highlight(WithImage: "FlyAwayArrowHighlighted48", ForSeconds: 0.15,
                                    OriginalName: "FlyAwayArrow48")
+        #endif
     }
     
     /// AI is moving a piece downwards.
     func AI_MoveDown()
     {
+        #if true
+        UIView.animate(withDuration: 0.15,
+                       animations:
+            {
+                self.MoveDownButton3.tintColor = UIColor.yellow
+        }, completion:
+            {
+                _ in
+                self.MoveDownButton3.tintColor = UIColor.white
+        })
+        #else
         MoveDownButton2.Highlight(WithImage: "DownArrowHighlighted48", ForSeconds: 0.15,
                                   OriginalName: "DownArrow48")
+        #endif
     }
     
     /// AI is dropping a piece downwards.
     func AI_DropDown()
     {
+        #if true
+        UIView.animate(withDuration: 0.15,
+                       animations:
+            {
+                self.DropDownButton3.tintColor = UIColor.yellow
+        }, completion:
+            {
+                _ in
+                self.DropDownButton3.tintColor = UIColor.systemGreen
+        })
+        #else
         DropDownButton2.Highlight(WithImage: "DropDownArrowHighlighted48", ForSeconds: 0.15,
                                   OriginalName: "DropDownArrow48")
+        #endif
     }
     
     /// AI is moving a piece to the left.
     func AI_MoveLeft()
     {
+        #if true
+        UIView.animate(withDuration: 0.15,
+                       animations:
+            {
+                self.MoveLeftButton3.tintColor = UIColor.yellow
+        }, completion:
+            {
+                _ in
+                self.MoveLeftButton3.tintColor = UIColor.white
+        })
+        #else
         MoveLeftButton2.Highlight(WithImage: "LeftArrowHighlighted48", ForSeconds: 0.15,
                                   OriginalName: "LeftArrow48")
+        #endif
     }
     
     /// AI is moving a piece to the right.
     func AI_MoveRight()
     {
+        #if true
+        UIView.animate(withDuration: 0.15,
+                       animations:
+            {
+                self.MoveRightButton3.tintColor = UIColor.yellow
+        }, completion:
+            {
+                _ in
+                self.MoveRightButton3.tintColor = UIColor.white
+        }
+        )
+        #else
         MoveRightButton2.Highlight(WithImage: "RightArrowHighlighted48", ForSeconds: 0.15,
                                    OriginalName: "RightArrow48")
+        #endif
     }
     
     /// AI is rotating a piece clockwise.
     func AI_RotateRight()
     {
+        #if true
+        UIView.animate(withDuration: 0.15,
+                       animations:
+            {
+                self.RotateRightButton3.tintColor = UIColor.yellow
+        }, completion:
+            {
+                _ in
+                self.RotateRightButton3.tintColor = UIColor.white
+        })
+        #else
         RotateRightButton2.Highlight(WithImage: "RotateRightHighlighted48", ForSeconds: 0.15,
                                      OriginalName: "RotateRight48_2")
+        #endif
     }
     
     /// AI is rotating a piece counter-clockwise.
     func AI_RotateLeft()
     {
+        #if true
+        UIView.animate(withDuration: 0.15,
+                       animations:
+            {
+                self.RotateRightButton3.tintColor = UIColor.yellow
+        }, completion:
+            {
+                _ in
+                self.RotateRightButton3.tintColor = UIColor.white
+        })
+        #else
         RotateLeftButton2.Highlight(WithImage: "RotateLeftHighlighted48", ForSeconds: 0.15,
                                     OriginalName: "RotateLeft48_2")
+        #endif
     }
     
     /// AI is freezing a piece into place.
     func AI_FreezeInPlace()
     {
-        
+        UIView.animate(withDuration: 0.15,
+                       animations:
+            {
+                self.FreezeInPlaceButton.tintColor = UIColor.yellow
+        }, completion:
+            {
+                _ in
+                self.FreezeInPlaceButton.tintColor = UIColor.cyan
+        })
     }
     
     // MARK: Game view request functions.
@@ -1476,40 +1561,19 @@ class MainViewController2: UIViewController,
     func GameTypeChanged(DidChange: Bool, NewBaseType: BaseGameTypes?, GameSubType: BaseGameSubTypes?)
     {
         print("At GameTypeChanged")
+        if !DidChange
+        {
+            return
+        }
         if let NewGameType = NewBaseType
         {
             print("NewGameType is \(NewGameType)")
             if NewGameType == CurrentBaseGameType
             {
+                print("Game type is already set. No action taken.")
                 return
             }
-            if !IsPaused
-            {
-                Pause()
-                let ChangeAlert = UIAlertController(title: "Really Change Game Type?",
-                                                    message: "If you change the game type, you will lose your progress in the current game.",
-                                                    preferredStyle: .alert)
-                ChangeAlert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:
-                    {
-                        _ in
-                        if self.IsPaused
-                        {
-                            self.SwitchGameType(BaseType: NewGameType, SubType: .Big)
-                        }
-                }
-                )
-                )
-                ChangeAlert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler:
-                    {
-                _ in
-                        if self.IsPaused
-                        {
-                            self.Pause()
-                        }
-                }
-                )
-                )
-            }
+           SwitchGameType(BaseType: NewGameType, SubType: GameSubType!)
         }
     }
     
@@ -1518,6 +1582,7 @@ class MainViewController2: UIViewController,
     /// - Parameter SubType: The game sub type to use.
     func SwitchGameType(BaseType: BaseGameTypes, SubType: BaseGameSubTypes)
     {
+        print("Switching game type to \(BaseType)")
         CurrentBaseGameType = BaseType
         Settings.SetGameType(CurrentBaseGameType)
         Stop()
@@ -1700,14 +1765,6 @@ class MainViewController2: UIViewController,
     @IBOutlet weak var MainUIButton2: UIButton!
     @IBOutlet weak var PlayStopButton2: UIButton!
     @IBOutlet weak var PauseResumeButton2: UIButton!
-    @IBOutlet weak var MoveLeftButton2: UIButton!
-    @IBOutlet weak var MoveDownButton2: UIButton!
-    @IBOutlet weak var MoveUpButton2: UIButton!
-    @IBOutlet weak var RotateLeftButton2: UIButton!
-    @IBOutlet weak var DropDownButton2: UIButton!
-    @IBOutlet weak var MoveRightButton2: UIButton!
-    @IBOutlet weak var UpAndAwayButton2: UIButton!
-    @IBOutlet weak var RotateRightButton2: UIButton!
     @IBOutlet weak var GameUISurface3D2: View3D!
     @IBOutlet weak var GameControlView2: UIView!
     @IBOutlet weak var MotionControlView2: UIView!
@@ -1727,6 +1784,14 @@ class MainViewController2: UIViewController,
     @IBOutlet weak var TopOverlapView: UIView!
     @IBOutlet weak var FreezeInPlaceButton: UIButton!
     @IBOutlet weak var SlideInSubView: UIView!
+    @IBOutlet weak var MoveLeftButton3: UIButton!
+    @IBOutlet weak var MoveDownButton3: UIButton!
+    @IBOutlet weak var MoveUpButton3: UIButton!
+    @IBOutlet weak var RotateLeftButton3: UIButton!
+    @IBOutlet weak var MoveRightButton3: UIButton!
+    @IBOutlet weak var DropDownButton3: UIButton!
+    @IBOutlet weak var UpAndAwayButton3: UIButton!
+    @IBOutlet weak var RotateRightButton3: UIButton!
     
     // MARK: Enum mappings.
     
