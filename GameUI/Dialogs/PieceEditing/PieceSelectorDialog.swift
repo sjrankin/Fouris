@@ -69,7 +69,7 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
         ThemeID = ID
     }
     
-    func EditTheme(ID: UUID, Piece: UUID)
+    func EditTheme(ID: UUID, PieceID: UUID)
     {
         ThemeID = ID
     }
@@ -325,7 +325,7 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
         {
             if let Cell = CurrentPieceTable.cellForRow(at: SelectedRow) as? GamePieceCell
             {
-                Editor?.EditTheme(ID: ThemeID, Piece: Cell.PieceID)
+                Editor?.EditTheme(ID: ThemeID, PieceID: Cell.PieceID)
             }
         }
         return Editor
@@ -339,7 +339,7 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
         {
             if let Cell = PieceSourceTable.cellForRow(at: SelectedRow) as? GamePieceCell
             {
-                Editor?.EditTheme(ID: ThemeID, Piece: Cell.PieceID)
+                Editor?.EditTheme(ID: ThemeID, PieceID: Cell.PieceID)
             }
         }
         return Editor
