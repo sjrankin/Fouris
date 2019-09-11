@@ -648,7 +648,10 @@ class View3D: SCNView,                          //Our main super class.
     /// - Note:
     ///    - If the piece type ID cannot be retrieved, control is returned immediately.
     ///    - If `GamePiece` has an ID that is in `RetiredPieceIDs`, control will be returned immeidately to prevent spurious
-    ///      pieces from polluting the game board.
+    ///      pieces from polluting the game board. Sometimes, most likely due to timers that haven't shut down, the board logic
+    ///      will keep on trying to move the piece even after it is frozen into place. When that happens, the board will call
+    ///      this function, adding a new moving piece even after it is frozen. When that happens, the piece appears to be unfrozen
+    ///      when it should be frozen, and the piece doesn't move when the board is rotated.
     /// - Parameter InBoard: The current game board.
     /// - Parameter GamePiece: The piece to draw.
     func DrawPiece3D(InBoard: Board, GamePiece: Piece)
@@ -1122,9 +1125,17 @@ class View3D: SCNView,                          //Our main super class.
         let ZRotation = DirectionalSign * 90.0 * CGFloat.pi / 180.0
         let RotateAction = SCNAction.rotateBy(x: 0.0, y: 0.0, z: ZRotation, duration: Duration)
         RemoveMovingPiece()
+        #if false
+        let temp = SCNNode()
+        temp.addChildNode(BucketNode!)
+        temp.addChildNode(BucketGridNode!)
+        temp.addChildNode(MasterBlockNode!)
+        temp.runAction(RotateAction, completionHandler: {Completed()})
+        #else
         BucketNode?.runAction(RotateAction, completionHandler: {Completed()})
         BucketGridNode?.runAction(RotateAction)
         MasterBlockNode?.runAction(RotateAction)
+        #endif
     }
     
     /// Rotates the contents of the game (but not UI or falling piece) by 90° right (clockwise).
