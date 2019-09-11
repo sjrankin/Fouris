@@ -33,7 +33,7 @@ class SelectBackgroundImageCode: UIViewController, UIImagePickerControllerDelega
         ThemeID = ID
     }
     
-    func EditTheme(ID: UUID, Piece: UUID)
+    func EditTheme(ID: UUID, PieceID: UUID)
     {
         ThemeID = ID
     }
