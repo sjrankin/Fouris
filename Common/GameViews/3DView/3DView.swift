@@ -564,9 +564,12 @@ class View3D: SCNView,                          //Our main super class.
         let Radians = ByDegrees * CGFloat.pi / 180.0
     }
     
+    /// The moving piece is in its final location. Add its ID to the list of retired IDs and remove the moving blocks.
+    /// - Parameter Finalized: The piece that was finalized.
     func MergePieceIntoBucket(_ Finalized: Piece)
     {
-        
+        RetiredPieceIDs.append(Finalized.ID)
+        RemoveMovingPiece()
     }
     
     /// Create and add a block node for a piece.
@@ -603,6 +606,20 @@ class View3D: SCNView,                          //Our main super class.
         MasterBlockNode!.addChildNode(VBlock)
     }
     
+    /// Remove all moving piece blocks from the master block node.
+    func UpdateMasterBlockNode()
+    {
+        if MasterBlockNode != nil
+        {
+            MasterBlockNode?.childNodes.forEach({
+                if !($0 as! VisualBlocks3D).IsRetired
+            {
+                $0.removeFromParentNode()
+                }
+            })
+        }
+    }
+    
     var MasterBlockNode: SCNNode? = nil
     
     /// Determines if a block should be drawn in **DrawMap3D**. Valid block types depend on the type of base game.
@@ -623,18 +640,30 @@ class View3D: SCNView,                          //Our main super class.
         }
     }
     
+    /// Contains a list of IDs of blocks that have been retired. Used to keep the game from moving them when they are no longer
+    /// moveable.
+    var RetiredPieceIDs = [UUID]()
+    
     /// Draw the individual piece. Intended to be used for the **.Rotating4** base game type.
-    /// - Note: If the piece type ID cannot be retrieved, control is returned immediately.
+    /// - Note:
+    ///    - If the piece type ID cannot be retrieved, control is returned immediately.
+    ///    - If `GamePiece` has an ID that is in `RetiredPieceIDs`, control will be returned immeidately to prevent spurious
+    ///      pieces from polluting the game board.
     /// - Parameter InBoard: The current game board.
     /// - Parameter GamePiece: The piece to draw.
     func DrawPiece3D(InBoard: Board, GamePiece: Piece)
     {
+        if RetiredPieceIDs.contains(GamePiece.ID)
+        {
+            return
+        }
         if MovingPieceNode != nil
         {
             MovingPieceNode?.removeFromParentNode()
         }
         MovingPieceBlocks = [VisualBlocks3D]()
         MovingPieceNode = SCNNode()
+        MovingPieceNode?.name = "Moving Piece"
         let CurrentMap = InBoard.Map!
         let ItemID = GamePiece.ID
         for Block in GamePiece.Locations!
@@ -663,8 +692,10 @@ class View3D: SCNView,                          //Our main super class.
         {
             if MovingPieceNode != nil
             {
-                MovingPieceNode?.removeFromParentNode()
+                print("Removing node \((MovingPieceNode?.name)!)")
+                MovingPieceNode!.removeFromParentNode()
                 MovingPieceNode = nil
+                UpdateMasterBlockNode()
             }
         }
     }
@@ -675,6 +706,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Note:
     ///   - Should be called only after the game is over.
     ///   - This is for the **3D** game view only.
+    ///   - All retired piece IDs are removed.
     /// - Parameter FromBoard: The board that contains the map to draw. *Not currently used.*
     /// - Parameter CalledFrom: Name of the caller. Used for debugging purposes only.
     /// - Parameter DestroyBy: Determines how to empty the bucket.
@@ -688,6 +720,7 @@ class View3D: SCNView,                          //Our main super class.
         defer{ objc_sync_exit(RotateLock) }
         
         BucketCleaner(DestroyBy, Completion: Completion)
+        RetiredPieceIDs.removeAll()
     }
     
     /// Draw the 3D game view map. Includes moving pieces.
@@ -959,38 +992,22 @@ class View3D: SCNView,                          //Our main super class.
                 {
                     let TopStart = SCNVector3(0.0, 10.0, 0.0)
                     let TopEnd = SCNVector3(20.0, 10.0, 0.0)
-                    #if true
                     let TopLine = MakeLine(From: TopStart, To: TopEnd, Color: ColorNames.Red, LineWidth: 0.08)
-                    #else
-                    let TopLine = MakeLine(From: TopStart, To: TopEnd, Color: ColorNames.Cyan, LineWidth: 0.08)
-                    #endif
                     TopLine.name = "TopLine"
                     BucketGridNode?.addChildNode(TopLine)
                     let BottomStart = SCNVector3(0.0, -10.0, 0.0)
                     let BottomEnd = SCNVector3(20.0, -10.0, 0.0)
-                    #if true
                     let BottomLine = MakeLine(From: BottomStart, To: BottomEnd, Color: ColorNames.Red, LineWidth: 0.08)
-                    #else
-                    let BottomLine = MakeLine(From: BottomStart, To: BottomEnd, Color: ColorNames.Yellow, LineWidth: 0.08)
-                    #endif
                     BottomLine.name = "BottomLine"
                     BucketGridNode?.addChildNode(BottomLine)
                     let LeftStart = SCNVector3(-10.0, 0.0, 0.0)
                     let LeftEnd = SCNVector3(-10.0, 20.0, 0.0)
-                    #if true
                     let LeftLine = MakeLine(From: LeftStart, To: LeftEnd, Color: ColorNames.Red, LineWidth: 0.08)
-                    #else
-                    let LeftLine = MakeLine(From: LeftStart, To: LeftEnd, Color: ColorNames.Black, LineWidth: 0.08)
-                    #endif
                     LeftLine.name = "LeftLine"
                     BucketGridNode?.addChildNode(LeftLine)
                     let RightStart = SCNVector3(10.0, 0.0, 0.0)
                     let RightEnd = SCNVector3(10.0, 20.0, 0.0)
-                    #if true
                     let RightLine = MakeLine(From: RightStart, To: RightEnd, Color: ColorNames.Red, LineWidth: 0.08)
-                    #else
-                    let RightLine = MakeLine(From: RightStart, To: RightEnd, Color: ColorNames.Magenta, LineWidth: 0.08)
-                    #endif
                     RightLine.name = "RightLine"
                     BucketGridNode?.addChildNode(RightLine)
                 }
@@ -1091,52 +1108,29 @@ class View3D: SCNView,                          //Our main super class.
     
     var RotateLock = NSObject()
     
+    var RotateMe: SCNNode = SCNNode()
+    
     /// Rotates the contents of the game (but not UI or falling piece) by the specified number of degrees.
     /// - Parameter Right: If true, the contents are rotated clockwise. If false, counter-clockwise.
     /// - Parameter Duration: Duration in seconds the rotation should take.
     /// - Parameter Completed: Completion handler called at the end of the rotation.
-    func RotateContents(Right: Bool, Duration: Double = 0.33, Completed: (() -> Void)? = nil)
+    func RotateContents(Right: Bool, Duration: Double = 0.33, Completed: @escaping (() -> Void))
     {
         objc_sync_enter(RotateLock)
-        print("Entered RotateContents.")
-        defer{ print("Exited RotateContents.")
-            objc_sync_exit(RotateLock) }
+        defer{objc_sync_exit(RotateLock)}
         let DirectionalSign = CGFloat(Right ? -1.0 : 1.0)
-        let RotateAction = SCNAction.rotateBy(x: 0.0, y: 0.0, z: DirectionalSign * 90 * CGFloat.pi / 180.0, duration: Duration)
-        #if false
-        MovingPieceNode?.runAction(RotateAction)
-        BucketNode?.runAction(RotateAction, completionHandler: {Completed?()})
+        let ZRotation = DirectionalSign * 90.0 * CGFloat.pi / 180.0
+        let RotateAction = SCNAction.rotateBy(x: 0.0, y: 0.0, z: ZRotation, duration: Duration)
+        RemoveMovingPiece()
+        BucketNode?.runAction(RotateAction, completionHandler: {Completed()})
         BucketGridNode?.runAction(RotateAction)
         MasterBlockNode?.runAction(RotateAction)
-        #else
-        let RotateMe = SCNNode()
-        if MovingPieceNode != nil
-        {
-        RotateMe.addChildNode(MovingPieceNode!)
-        }
-        if BucketNode != nil
-        {
-            RotateMe.addChildNode(BucketNode!)
-        }
-        if BucketGridNode != nil
-        {
-            RotateMe.addChildNode(BucketGridNode!)
-        }
-        if MasterBlockNode != nil
-        {
-            RotateMe.addChildNode(MasterBlockNode!)
-        }
-        RotateMe.runAction(RotateAction, completionHandler:
-            {
-            Completed?()
-        })
-        #endif
     }
     
     /// Rotates the contents of the game (but not UI or falling piece) by 90° right (clockwise).
     /// - Parameter Duration: Duration in seconds the rotation should take.
     /// - Parameter Completed: Completion handler called at the end of the rotation.
-    func RotateContentsRight(Duration: Double = 0.33, Completed: (() -> Void)? = nil)
+    func RotateContentsRight(Duration: Double = 0.33, Completed: @escaping (() -> Void))
     {
         RotateContents(Right: true, Duration: Duration, Completed: Completed)
     }
@@ -1144,7 +1138,7 @@ class View3D: SCNView,                          //Our main super class.
     /// Rotates the contents of the game (but not UI or falling piece) by 90° left (counter-clockwise).
     /// - Parameter Duration: Duration in seconds the rotation should take.
     /// - Parameter Completed: Completion handler called at the end of the rotation.
-    func RotateContentsLeft(Duration: Double = 0.33, Completed: (() -> Void)? = nil)
+    func RotateContentsLeft(Duration: Double = 0.33, Completed: @escaping (() -> Void))
     {
         RotateContents(Right: false, Duration: Duration, Completed: Completed)
     }
