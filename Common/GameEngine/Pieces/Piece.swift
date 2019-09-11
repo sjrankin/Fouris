@@ -1256,7 +1256,14 @@ class Piece
         }
         if PieceFullyInBounds()
         {
+            #if true
+            OperationQueue.main.addOperation
+                {
+                    self.GameBoard?.PieceFroze(ID: self.ID)
+            }
+            #else
             GameBoard?.PieceFroze(ID: ID)
+            #endif
         }
         else
         {
