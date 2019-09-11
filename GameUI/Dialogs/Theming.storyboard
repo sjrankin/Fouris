@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14865.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14819.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -1786,6 +1786,9 @@
                                             <segment title="2D"/>
                                             <segment title="3D"/>
                                         </segments>
+                                        <connections>
+                                            <action selector="HandleRotatePieceSegmentChanged:" destination="a67-7f-6jS" eventType="primaryActionTriggered" id="1Db-oZ-2EJ"/>
+                                        </connections>
                                     </segmentedControl>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1810,6 +1813,7 @@
                                 <subviews>
                                     <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZVR-MO-0NS" customClass="PieceViewer" customModule="Fouris" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="BlockSize">
                                                 <real key="value" value="4"/>
@@ -1833,7 +1837,11 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="ZVR-MO-0NS" firstAttribute="leading" secondItem="PBx-xc-UOR" secondAttribute="leading" id="1G9-Sx-nGS"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZVR-MO-0NS" secondAttribute="bottom" id="2io-3j-yAV"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZVR-MO-0NS" secondAttribute="trailing" id="3rh-pO-Wtv"/>
                                     <constraint firstItem="ZVR-MO-0NS" firstAttribute="leading" secondItem="PBx-xc-UOR" secondAttribute="leading" id="JO5-vw-YWU"/>
+                                    <constraint firstItem="ZVR-MO-0NS" firstAttribute="top" secondItem="PBx-xc-UOR" secondAttribute="top" id="RDf-VH-Yjb"/>
                                     <constraint firstItem="ZVR-MO-0NS" firstAttribute="top" secondItem="PBx-xc-UOR" secondAttribute="top" id="aXS-4A-iGv"/>
                                     <constraint firstAttribute="trailing" secondItem="ZVR-MO-0NS" secondAttribute="trailing" id="fo7-SJ-sLq"/>
                                     <constraint firstAttribute="bottom" secondItem="ZVR-MO-0NS" secondAttribute="bottom" id="r5u-WK-mqH"/>
@@ -1852,6 +1860,7 @@
                                 <subviews>
                                     <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vof-FR-QCz" customClass="PieceViewer" customModule="Fouris" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="AutoAdjustBlockSize" value="NO"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="BlockSize">
@@ -1878,6 +1887,10 @@
                                     <constraint firstAttribute="trailing" secondItem="vof-FR-QCz" secondAttribute="trailing" id="7hD-gr-ii8"/>
                                     <constraint firstAttribute="bottom" secondItem="vof-FR-QCz" secondAttribute="bottom" id="93X-Vi-B8f"/>
                                     <constraint firstItem="vof-FR-QCz" firstAttribute="top" secondItem="1gT-qF-cfH" secondAttribute="top" id="N97-i2-fr8"/>
+                                    <constraint firstAttribute="trailing" secondItem="vof-FR-QCz" secondAttribute="trailing" id="QQH-ae-VYb"/>
+                                    <constraint firstItem="vof-FR-QCz" firstAttribute="leading" secondItem="1gT-qF-cfH" secondAttribute="leading" id="cuC-ca-qiQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="vof-FR-QCz" secondAttribute="bottom" id="eFy-uF-oNq"/>
+                                    <constraint firstItem="vof-FR-QCz" firstAttribute="top" secondItem="1gT-qF-cfH" secondAttribute="top" id="yXN-1M-5BF"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -2417,24 +2430,25 @@ Cg
                     </view>
                     <navigationItem key="navigationItem" id="qjn-iV-jff"/>
                     <connections>
+                        <outlet property="ActiveBlockView" destination="sb5-if-CcI" id="lmZ-jO-9it"/>
                         <outlet property="ActiveDiffuseColorButton" destination="tlq-PY-GRd" id="VQt-6U-7fi"/>
                         <outlet property="ActiveDiffuseColorText" destination="4CO-yq-x0E" id="UE3-Tk-nbF"/>
                         <outlet property="ActiveSamplePiece" destination="ZVR-MO-0NS" id="fuh-6C-vhp"/>
-                        <outlet property="ActiveShapeView" destination="sb5-if-CcI" id="lmZ-jO-9it"/>
                         <outlet property="ActiveSpecularColorButton" destination="Xwt-w6-Ocx" id="zUe-jX-vrP"/>
                         <outlet property="ActiveSpecularColorText" destination="1PD-vQ-11R" id="6zV-hY-N6E"/>
                         <outlet property="ActiveSurfaceTypeSegment" destination="o2e-wP-Mrw" id="0us-cM-bre"/>
                         <outlet property="ActiveTextureButton" destination="1QO-Du-MRy" id="Wq3-fI-XtY"/>
                         <outlet property="ActiveTextureText" destination="5pd-By-bnL" id="bTA-U1-KaS"/>
+                        <outlet property="RetiredBlockView" destination="XB6-4p-6tl" id="lDX-Mg-X0i"/>
                         <outlet property="RetiredDiffuseColorButton" destination="PFq-jO-CpZ" id="dtS-WT-Jqs"/>
                         <outlet property="RetiredDiffuseColorText" destination="mbN-4E-7Ow" id="hRp-a6-pEA"/>
                         <outlet property="RetiredSamplePiece" destination="vof-FR-QCz" id="7wX-22-Vdw"/>
-                        <outlet property="RetiredShapeView" destination="XB6-4p-6tl" id="lDX-Mg-X0i"/>
                         <outlet property="RetiredSpecularColorButton" destination="DMF-Ox-c5u" id="pyZ-XQ-QSa"/>
                         <outlet property="RetiredSpecularColorText" destination="L6m-A1-0Jz" id="I22-Jd-9r3"/>
                         <outlet property="RetiredSurfaceTypeSegment" destination="Fpd-ua-GBg" id="dqP-f5-uAb"/>
                         <outlet property="RetiredTextureButton" destination="jQj-aw-PtH" id="xEm-Q3-P6I"/>
                         <outlet property="RetiredTextureText" destination="G8C-O5-ZJQ" id="o4Q-BN-fig"/>
+                        <outlet property="RotationSegment" destination="lWF-Bo-xAX" id="wjV-FJ-Z14"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mFX-ft-V8n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
