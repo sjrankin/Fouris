@@ -22,6 +22,8 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
     
     func StyleVisuals()
     {
+        ActiveSamplePiece.layer.borderColor = UIColor.black.cgColor
+        ActiveSamplePiece.backgroundColor = ColorServer.ColorFrom(ColorNames.AzukiIro)
         ActiveDiffuseColorButton.layer.cornerRadius = 5.0
         ActiveDiffuseColorButton.layer.borderColor = UIColor.black.cgColor
         ActiveDiffuseColorButton.layer.borderWidth = 0.5
@@ -30,6 +32,9 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
         ActiveSpecularColorButton.layer.borderColor = UIColor.black.cgColor
         ActiveSpecularColorButton.layer.borderWidth = 0.5
         ActiveSpecularColorButton.clipsToBounds = true
+        
+        RetiredSamplePiece.layer.borderColor = UIColor.black.cgColor
+        RetiredSamplePiece.backgroundColor = ColorServer.ColorFrom(ColorNames.AzukiIro)
         RetiredDiffuseColorButton.layer.cornerRadius = 5.0
         RetiredDiffuseColorButton.layer.borderColor = UIColor.black.cgColor
         RetiredDiffuseColorButton.layer.borderWidth = 0.5
@@ -39,22 +44,35 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
         RetiredSpecularColorButton.layer.borderWidth = 0.5
         RetiredSpecularColorButton.clipsToBounds = true
         
-        let ActiveShapeTap = UITapGestureRecognizer(target: self, action: #selector(HandleActiveShapeTap))
-        ActiveShapeView.addGestureRecognizer(ActiveShapeTap)
-        let RetiredShapeTap = UITapGestureRecognizer(target: self, action: #selector(HandleRetiredShapeTap))
-        RetiredShapeView.addGestureRecognizer(RetiredShapeTap)
+        RotationSegment.selectedSegmentIndex = 0
         
-        ActiveShapeView.Initialize()
-        ActiveShapeView.SetBlockSizes(X: 20.0, Y: 20.0, Z: 20.0)
-        ActiveShapeView.StartRotations()
-        ActiveShapeView.ViewBackgroundColor = ColorServer.ColorFrom(ColorNames.AzukiIro)
-        RetiredShapeView.Initialize()
-        RetiredShapeView.SetBlockSizes(X: 20.0, Y: 20.0, Z: 20.0)
-        RetiredShapeView.StartRotations()
-        RetiredShapeView.ViewBackgroundColor = ColorServer.ColorFrom(ColorNames.AzukiIro)
+        let ActiveShapeTap = UITapGestureRecognizer(target: self, action: #selector(HandleActiveShapeTap))
+        ActiveBlockView.addGestureRecognizer(ActiveShapeTap)
+        let RetiredShapeTap = UITapGestureRecognizer(target: self, action: #selector(HandleRetiredShapeTap))
+        RetiredBlockView.addGestureRecognizer(RetiredShapeTap)
+        
+        //Sample block views for setting shapes of blocks in pieces - not to be confused with the piece sample views.
+        ActiveBlockView.Initialize()
+        ActiveBlockView.SetBlockSizes(X: 20.0, Y: 20.0, Z: 20.0)
+        ActiveBlockView.StartRotations()
+        ActiveBlockView.ViewBackgroundColor = ColorServer.ColorFrom(ColorNames.AzukiIro)
+        RetiredBlockView.Initialize()
+        RetiredBlockView.SetBlockSizes(X: 20.0, Y: 20.0, Z: 20.0)
+        RetiredBlockView.StartRotations()
+        RetiredBlockView.ViewBackgroundColor = ColorServer.ColorFrom(ColorNames.AzukiIro)
         
         HandleActiveSurfaceTypeChanged(self)
         HandleRetiredSurfaceTypeChanged(self)
+        
+        let PieceShape = PieceFactory.GetShapeForPiece(ID: PieceID)!
+        print("Piece shape is \(PieceShape)")
+        let ActualPiece = PieceFactory.CreateEphermeralPiece(PieceShape)
+        ActiveSamplePiece.Initialize()
+        ActiveSamplePiece.Start()
+        ActiveSamplePiece.AddPiece(ActualPiece)
+        RetiredSamplePiece.Initialize()
+        RetiredSamplePiece.Start()
+        RetiredSamplePiece.AddPiece(ActualPiece)
     }
     
     func EditTheme(ID: UUID)
@@ -62,10 +80,10 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
         fatalError("Caller needs to call EditTheme(UUID, UUID) instead.")
     }
     
-    func EditTheme(ID: UUID, Piece: UUID)
+    func EditTheme(ID: UUID, PieceID: UUID)
     {
         ThemeID = ID
-        PieceID = Piece
+        self.PieceID = PieceID
     }
     
     var ThemeID: UUID = UUID.Empty
@@ -92,22 +110,22 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
                 {
                     case "ActiveDiffuseColor":
                         ActiveDiffuseColorButton.ButtonColor = EditedColor
-                        ActiveShapeView.DiffuseColor = EditedColor
+                        ActiveBlockView.DiffuseColor = EditedColor
                     
                     case "ActiveSpecularColor":
                         ActiveSpecularColorButton.ButtonColor = EditedColor
-                        ActiveShapeView.SpecularColor = EditedColor
+                        ActiveBlockView.SpecularColor = EditedColor
                     
                     case "RetiredDiffuseColor":
                         RetiredDiffuseColorButton.ButtonColor = EditedColor
-                        RetiredShapeView.DiffuseColor = EditedColor
+                        RetiredBlockView.DiffuseColor = EditedColor
                     
                     case "RetiredSpecularColor":
                         RetiredSpecularColorButton.ButtonColor = EditedColor
-                        RetiredShapeView.SpecularColor = EditedColor
+                        RetiredBlockView.SpecularColor = EditedColor
                     
                     default:
-                    break
+                        break
                 }
             }
         }
@@ -124,16 +142,10 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
         let Alert = UIAlertController(title: "Select Dropping Block Shape",
                                       message: "Select the shape for all blocks in the dropping piece.",
                                       preferredStyle: .alert)
-        Alert.addAction(UIAlertAction(title: "Cube", style: UIAlertAction.Style.default, handler: HandleActiveBlockShapeSelection))
-        Alert.addAction(UIAlertAction(title: "Rounded Cube", style: UIAlertAction.Style.default, handler: HandleActiveBlockShapeSelection))
-        Alert.addAction(UIAlertAction(title: "Sphere", style: UIAlertAction.Style.default, handler: HandleActiveBlockShapeSelection))
-        Alert.addAction(UIAlertAction(title: "Cone", style: UIAlertAction.Style.default, handler: HandleActiveBlockShapeSelection))
-        Alert.addAction(UIAlertAction(title: "Pyramid", style: UIAlertAction.Style.default, handler: HandleActiveBlockShapeSelection))
-        Alert.addAction(UIAlertAction(title: "Cylinder", style: UIAlertAction.Style.default, handler: HandleActiveBlockShapeSelection))
-        Alert.addAction(UIAlertAction(title: "Tube", style: UIAlertAction.Style.default, handler: HandleActiveBlockShapeSelection))
-        Alert.addAction(UIAlertAction(title: "Capsule", style: UIAlertAction.Style.default, handler: HandleActiveBlockShapeSelection))
-        Alert.addAction(UIAlertAction(title: "Torus", style: UIAlertAction.Style.default, handler: HandleActiveBlockShapeSelection))
-        Alert.addAction(UIAlertAction(title: "Tetrahedron", style: UIAlertAction.Style.default, handler: HandleActiveBlockShapeSelection))
+        for (Title, _) in ShapeMap
+        {
+            Alert.addAction(UIAlertAction(title: Title, style: UIAlertAction.Style.default, handler: HandleActiveBlockShapeSelection))
+        }
         Alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
         if let PopOver = Alert.popoverPresentationController
         {
@@ -147,43 +159,27 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
     
     @objc func HandleActiveBlockShapeSelection(Action: UIAlertAction)
     {
-        switch Action.title
+        if let SelectedShape = ShapeMap[Action.title!]
         {
-            case "Cube":
-                ActiveShapeView.Shape = .Cubic
-            
-            case "Rounded Cube":
-                ActiveShapeView.Shape = .RoundedCube
-            
-            case "Sphere":
-                ActiveShapeView.Shape = .Spherical
-            
-            case "Cone":
-                ActiveShapeView.Shape = .Cone
-            
-            case "Pyramid":
-                ActiveShapeView.Shape = .Pyramid
-            
-            case "Cylinder":
-                ActiveShapeView.Shape = .Cylinder
-            
-            case "Tube":
-                ActiveShapeView.Shape = .Tube
-            
-            case "Capsule":
-                ActiveShapeView.Shape = .Capsule
-            
-            case "Torus":
-                ActiveShapeView.Shape = .Torus
-            
-            case "Tetrahedron":
-                ActiveShapeView.Shape = .Tetrahedron
-            
-            default:
-            return
+            ActiveBlockView.Shape = SelectedShape
+            ActiveBlockView.StartRotations()
         }
-        ActiveShapeView.StartRotations()
     }
+    
+    /// Map between tile shape ID type and its title.
+    let ShapeMap: [String: TileShapes3D] =
+        [
+            "Cube": .Cubic,
+            "Rounded Cube": .RoundedCube,
+            "Sphere": .Spherical,
+            "Cone": .Cone,
+            "Pyramid": .Pyramid,
+            "Cylinder": .Cylinder,
+            "Tube": .Tube,
+            "Capsule": .Capsule,
+            "Torus": .Torus,
+            "Tetrahedron": .Tetrahedron
+    ]
     
     @IBAction func HandleActiveTextureButtonPressed(_ sender: Any)
     {
@@ -198,16 +194,10 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
         let Alert = UIAlertController(title: "Select Retired Block Shape",
                                       message: "Select the shape for all blocks in the frozen piece.",
                                       preferredStyle: .alert)
-        Alert.addAction(UIAlertAction(title: "Cube", style: UIAlertAction.Style.default, handler: HandleRetiredBlockShapeSelection))
-        Alert.addAction(UIAlertAction(title: "Rounded Cube", style: UIAlertAction.Style.default, handler: HandleRetiredBlockShapeSelection))
-        Alert.addAction(UIAlertAction(title: "Sphere", style: UIAlertAction.Style.default, handler: HandleRetiredBlockShapeSelection))
-        Alert.addAction(UIAlertAction(title: "Cone", style: UIAlertAction.Style.default, handler: HandleRetiredBlockShapeSelection))
-        Alert.addAction(UIAlertAction(title: "Pyramid", style: UIAlertAction.Style.default, handler: HandleRetiredBlockShapeSelection))
-        Alert.addAction(UIAlertAction(title: "Cylinder", style: UIAlertAction.Style.default, handler: HandleRetiredBlockShapeSelection))
-        Alert.addAction(UIAlertAction(title: "Tube", style: UIAlertAction.Style.default, handler: HandleRetiredBlockShapeSelection))
-        Alert.addAction(UIAlertAction(title: "Capsule", style: UIAlertAction.Style.default, handler: HandleRetiredBlockShapeSelection))
-        Alert.addAction(UIAlertAction(title: "Torus", style: UIAlertAction.Style.default, handler: HandleRetiredBlockShapeSelection))
-        Alert.addAction(UIAlertAction(title: "Tetrahedron", style: UIAlertAction.Style.default, handler: HandleRetiredBlockShapeSelection))
+        for (Title, _) in ShapeMap
+        {
+            Alert.addAction(UIAlertAction(title: Title, style: UIAlertAction.Style.default, handler: HandleRetiredBlockShapeSelection))
+        }
         Alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
         if let PopOver = Alert.popoverPresentationController
         {
@@ -221,42 +211,11 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
     
     @objc func HandleRetiredBlockShapeSelection(Action: UIAlertAction)
     {
-        switch Action.title
+        if let SelectedShape = ShapeMap[Action.title!]
         {
-            case "Cube":
-                RetiredShapeView.Shape = .Cubic
-            
-            case "Rounded Cube":
-                RetiredShapeView.Shape = .RoundedCube
-            
-            case "Sphere":
-                RetiredShapeView.Shape = .Spherical
-            
-            case "Cone":
-                RetiredShapeView.Shape = .Cone
-            
-            case "Pyramid":
-                RetiredShapeView.Shape = .Pyramid
-            
-            case "Cylinder":
-                RetiredShapeView.Shape = .Cylinder
-            
-            case "Tube":
-                RetiredShapeView.Shape = .Tube
-            
-            case "Capsule":
-                RetiredShapeView.Shape = .Capsule
-            
-            case "Torus":
-                RetiredShapeView.Shape = .Torus
-            
-            case "Tetrahedron":
-                RetiredShapeView.Shape = .Tetrahedron
-            
-            default:
-                return
+            RetiredBlockView.Shape = SelectedShape
+            RetiredBlockView.StartRotations()
         }
-        RetiredShapeView.StartRotations()
     }
     
     @IBAction func HandleRetiredTextureButtonPressed(_ sender: Any)
@@ -287,7 +246,33 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
         RetiredTextureText.isEnabled = !IsColor
     }
     
-    // MARK: Flow control button handling.
+    // MARK: Flow control UI and button handling.
+    
+    @IBAction func HandleRotatePieceSegmentChanged(_ sender: Any)
+    {
+        let RotationIndex = RotationSegment.selectedSegmentIndex
+        switch RotationIndex
+        {
+            case 0:
+                ActiveSamplePiece.StopRotation()
+                RetiredSamplePiece.StopRotation()
+            
+            case 1:
+                ActiveSamplePiece.RotatePiece(OnX: false, OnY: false, OnZ: true)
+                RetiredSamplePiece.RotatePiece(OnX: false, OnY: false, OnZ: true)
+            
+            case 2:
+                ActiveSamplePiece.RotatePiece(OnX: true, OnY: false, OnZ: true)
+                RetiredSamplePiece.RotatePiece(OnX: true, OnY: false, OnZ: true)
+            
+            case 3:
+                ActiveSamplePiece.RotatePiece(OnX: true, OnY: true, OnZ: true)
+                RetiredSamplePiece.RotatePiece(OnX: true, OnY: true, OnZ: true)
+            
+            default:
+                break
+        }
+    }
     
     @IBAction func HandleOKPressed(_ sender: Any)
     {
@@ -337,6 +322,8 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
     
     // MARK: Interface builder links.
     
+    @IBOutlet weak var RotationSegment: UISegmentedControl!
+    
     @IBOutlet weak var ActiveSamplePiece: PieceViewer!
     @IBOutlet weak var ActiveSurfaceTypeSegment: UISegmentedControl!
     @IBOutlet weak var ActiveTextureButton: UIButton!
@@ -345,7 +332,7 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
     @IBOutlet weak var ActiveDiffuseColorText: UILabel!
     @IBOutlet weak var ActiveSpecularColorText: UILabel!
     @IBOutlet weak var ActiveTextureText: UILabel!
-    @IBOutlet weak var ActiveShapeView: BlockView!
+    @IBOutlet weak var ActiveBlockView: BlockView!
     
     @IBOutlet weak var RetiredSamplePiece: PieceViewer!
     @IBOutlet weak var RetiredSurfaceTypeSegment: UISegmentedControl!
@@ -355,5 +342,5 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
     @IBOutlet weak var RetiredDiffuseColorText: UILabel!
     @IBOutlet weak var RetiredSpecularColorText: UILabel!
     @IBOutlet weak var RetiredTextureText: UILabel!
-    @IBOutlet weak var RetiredShapeView: BlockView!
+    @IBOutlet weak var RetiredBlockView: BlockView!
 }
