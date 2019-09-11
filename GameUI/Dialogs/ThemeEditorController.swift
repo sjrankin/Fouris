@@ -32,7 +32,7 @@ class ThemeEditorController: UIViewController, ThemeEditingProtocol
         ThemeID = ID
     }
     
-    func EditTheme(ID: UUID, Piece: UUID)
+    func EditTheme(ID: UUID, PieceID: UUID)
     {
         ThemeID = ID
     }
