@@ -41,7 +41,7 @@ class View3D: SCNView,                          //Our main super class.
         SetBoard(With)
         //print("3D Theme: \(Theme.uuidString)")
         CurrentTheme = ThemeManager.ThemeFrom(ID: Theme)
-        self.showsStatistics = CurrentTheme!.ShowStatistics
+        self.showsStatistics = true//CurrentTheme!.ShowStatistics
         self.allowsCameraControl = false//CurrentTheme!.CanControlCamera
         OriginalCameraPosition = CurrentTheme!.CameraPosition
         OriginalCameraOrientation = CurrentTheme!.CameraOrientation
@@ -924,6 +924,9 @@ class View3D: SCNView,                          //Our main super class.
     /// The node that holds the set of bucket grid lines.
     var BucketGridNode: SCNNode? = nil
     
+    /// The node that holds the outline.
+    var OutlineNode: SCNNode? = nil
+    
     /// Function that does the actual "line" drawing of the bucket grid.
     /// - Note: The lines are really very thin boxes; SceneKit doesn't support lines as graphical objects.
     /// - Parameter ShowGrid: If true, the grid is drawn. If false, no grid is drawn, but see **DrawOutline**.
@@ -935,6 +938,7 @@ class View3D: SCNView,                          //Our main super class.
             BucketGridNode?.removeFromParentNode()
         }
         BucketGridNode = SCNNode()
+        OutlineNode = SCNNode()
         switch BaseGameType
         {
             case .Standard:
@@ -993,26 +997,53 @@ class View3D: SCNView,                          //Our main super class.
                 //Outline.
                 if DrawOutline
                 {
+                    #if true
+                    let TopLine = SCNGeometry.Line(From: SCNVector3(-10.0, 10.0, 0.0), To: SCNVector3(10.0, 10.0, 0.0))
+                    TopLine.materials.first?.specular.contents = UIColor.red
+                    TopLine.materials.first?.diffuse.contents = UIColor.red
+                    let TopNode = SCNNode(geometry: TopLine)
+                    TopNode.name = "TopLine"
+                    OutlineNode?.addChildNode(TopNode)
+                    let BottomLine = SCNGeometry.Line(From: SCNVector3(-10.0, -10.0, 0.0), To: SCNVector3(10.0, -10.0, 0.0))
+                    BottomLine.materials.first?.specular.contents = UIColor.red
+                    BottomLine.materials.first?.diffuse.contents = UIColor.red
+                    let BottomNode = SCNNode(geometry: BottomLine)
+                    BottomNode.name = "BottomLine"
+                    OutlineNode?.addChildNode(BottomNode)
+                    let LeftLine = SCNGeometry.Line(From: SCNVector3(-10.0, 10.0, 0.0), To: SCNVector3(-10.0, -10.0, 0.0))
+                    LeftLine.materials.first?.specular.contents = UIColor.red
+                    LeftLine.materials.first?.diffuse.contents = UIColor.red
+                    let LeftNode = SCNNode(geometry: LeftLine)
+                    LeftNode.name = "LeftLine"
+                    OutlineNode?.addChildNode(LeftNode)
+                    let RightLine = SCNGeometry.Line(From: SCNVector3(10.0, 10.0, 0.0), To: SCNVector3(10.0, -10.0, 0.0))
+                    RightLine.materials.first?.specular.contents = UIColor.red
+                    RightLine.materials.first?.diffuse.contents = UIColor.red
+                    let RightNode = SCNNode(geometry: RightLine)
+                    RightNode.name = "RightLine"
+                    OutlineNode?.addChildNode(RightNode)
+                    #else
                     let TopStart = SCNVector3(0.0, 10.0, 0.0)
                     let TopEnd = SCNVector3(20.0, 10.0, 0.0)
                     let TopLine = MakeLine(From: TopStart, To: TopEnd, Color: ColorNames.Red, LineWidth: 0.08)
                     TopLine.name = "TopLine"
-                    BucketGridNode?.addChildNode(TopLine)
+                    OutlineNode?.addChildNode(TopLine)
                     let BottomStart = SCNVector3(0.0, -10.0, 0.0)
                     let BottomEnd = SCNVector3(20.0, -10.0, 0.0)
                     let BottomLine = MakeLine(From: BottomStart, To: BottomEnd, Color: ColorNames.Red, LineWidth: 0.08)
                     BottomLine.name = "BottomLine"
-                    BucketGridNode?.addChildNode(BottomLine)
+                    OutlineNode?.addChildNode(BottomLine)
                     let LeftStart = SCNVector3(-10.0, 0.0, 0.0)
                     let LeftEnd = SCNVector3(-10.0, 20.0, 0.0)
                     let LeftLine = MakeLine(From: LeftStart, To: LeftEnd, Color: ColorNames.Red, LineWidth: 0.08)
                     LeftLine.name = "LeftLine"
-                    BucketGridNode?.addChildNode(LeftLine)
+                    OutlineNode?.addChildNode(LeftLine)
                     let RightStart = SCNVector3(10.0, 0.0, 0.0)
                     let RightEnd = SCNVector3(10.0, 20.0, 0.0)
                     let RightLine = MakeLine(From: RightStart, To: RightEnd, Color: ColorNames.Red, LineWidth: 0.08)
                     RightLine.name = "RightLine"
-                    BucketGridNode?.addChildNode(RightLine)
+                    OutlineNode?.addChildNode(RightLine)
+                    #endif
                 }
                 
                 #if false
@@ -1064,6 +1095,21 @@ class View3D: SCNView,                          //Our main super class.
                 break
         }
         self.scene?.rootNode.addChildNode(BucketGridNode!)
+        self.scene?.rootNode.addChildNode(OutlineNode!)
+    }
+    
+    /// Fades the bucket grid to an alpha of 0.0 then removes the lines from the scene.
+    /// - Parameter Duration: Number of seconds for the fade effect to take place. Default is 1.0 seconds.
+    func FadeBucketGrid(Duration: Double = 1.0)
+    {
+        let FadeAction = SCNAction.fadeOut(duration: Duration)
+        BucketGridNode?.runAction(FadeAction, completionHandler:
+            {
+                self.BucketGridNode?.removeAllActions()
+                self.BucketGridNode?.removeFromParentNode()
+                self.BucketGridNode = nil
+        }
+        )
     }
     
     /// Show or hide a buck grid. The bucket grid is unit sized (according to the block size) that fills the
@@ -1135,6 +1181,7 @@ class View3D: SCNView,                          //Our main super class.
         BucketNode?.runAction(RotateAction, completionHandler: {Completed()})
         BucketGridNode?.runAction(RotateAction)
         MasterBlockNode?.runAction(RotateAction)
+        OutlineNode?.runAction(RotateAction)
         #endif
     }
     
