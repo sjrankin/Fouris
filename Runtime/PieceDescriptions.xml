@@ -107,18 +107,18 @@
     <Array Name="_LogicalLocations">
         <Item Index="0">
             <Property Name="_Location" Value="0,0"/>
-            <Property Name="_IsOrigin" Value="false"/>
+            <Property Name="_IsOrigin" Value="true"/>
         </Item>
         <Item Index="1">
             <Property Name="_Location" Value="1,0"/>
-            <Property Name="_IsOrigin" Value="true"/>
+            <Property Name="_IsOrigin" Value="false"/>
         </Item>
         <Item Index="2">
-            <Property Name="_Location" Value="2,0"/>
+            <Property Name="_Location" Value="-1,0"/>
             <Property Name="_IsOrigin" Value="false"/>
         </Item>
         <Item Index="3">
-            <Property Name="_Location" Value="1,1"/>
+            <Property Name="_Location" Value="0,1"/>
             <Property Name="_IsOrigin" Value="false"/>
         </Item>
     </Array>
