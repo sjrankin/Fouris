@@ -56,6 +56,7 @@
 		174CAAD6231CFA2B003823E2 /* ColorSpaceConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174CAAD5231CFA2B003823E2 /* ColorSpaceConverter.swift */; };
 		175098B122902E2800A411DE /* GameAI2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175098B022902E2800A411DE /* GameAI2.swift */; };
 		175098B32290338400A411DE /* MapType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175098B22290338400A411DE /* MapType.swift */; };
+		1750A6FE232A69300006CF39 /* SCNGeometryExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1750A6FD232A69300006CF39 /* SCNGeometryExtensions.swift */; };
 		1753ABED225E213200FC7089 /* PieceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1753ABEC225E213200FC7089 /* PieceFactory.swift */; };
 		1753ABF0225E262D00FC7089 /* GameUINotificationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1753ABEF225E262D00FC7089 /* GameUINotificationProtocol.swift */; };
 		1754E79A2325285100820FDE /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1754E7992325285100820FDE /* Grid.swift */; };
@@ -251,6 +252,7 @@
 		174CAAD5231CFA2B003823E2 /* ColorSpaceConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSpaceConverter.swift; sourceTree = "<group>"; };
 		175098B022902E2800A411DE /* GameAI2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAI2.swift; sourceTree = "<group>"; };
 		175098B22290338400A411DE /* MapType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapType.swift; sourceTree = "<group>"; };
+		1750A6FD232A69300006CF39 /* SCNGeometryExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNGeometryExtensions.swift; sourceTree = "<group>"; };
 		1753ABEC225E213200FC7089 /* PieceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceFactory.swift; sourceTree = "<group>"; };
 		1753ABEF225E262D00FC7089 /* GameUINotificationProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameUINotificationProtocol.swift; sourceTree = "<group>"; };
 		1754E7992325285100820FDE /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
@@ -408,6 +410,7 @@
 				17F81ACC22B271D1007214C3 /* Scenes */,
 				17DCD7EC230945390072B306 /* 3DViewExtensions */,
 				17D48A7A22B202B000DD7C94 /* 3DView.swift */,
+				1750A6FD232A69300006CF39 /* SCNGeometryExtensions.swift */,
 				170F854022B5D3E5005405B6 /* VisualBlocks3D.swift */,
 				17FA044C232649F8004E5FC8 /* BlockCoordinates.swift */,
 				17D48A8322B2111D00DD7C94 /* ThreeDProtocol.swift */,
@@ -1258,6 +1261,7 @@
 				1737635A230AC6AD0050EB22 /* MiscellaneousExtensions.swift in Sources */,
 				17AB99D22297DC66003C4674 /* ImageServer.swift in Sources */,
 				1797523A22C38A4D00BF539A /* MessageHelper.swift in Sources */,
+				1750A6FE232A69300006CF39 /* SCNGeometryExtensions.swift in Sources */,
 				17AF232723139B8B00921E6C /* +TDebugReceivedCommandHandling2.swift in Sources */,
 				173EF49923252FF600343302 /* IntraGridProtocol.swift in Sources */,
 				177F4FD3229C0F1C00FE72CD /* SerializerNode.swift in Sources */,
