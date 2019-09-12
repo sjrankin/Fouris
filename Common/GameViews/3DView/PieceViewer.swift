@@ -91,6 +91,8 @@ import SceneKit
         }
     }
     
+    /// Returns the extent of the piece.
+    /// - Returns: Tuple with the first term as the horizontal extent, and the second term as the vertical extent.
     func GetExtents() -> (Int, Int)
     {
         var MinX: Int = 10000
@@ -151,9 +153,16 @@ import SceneKit
         }
         for (X, Y) in BlockList
         {
-            let NodeShape = SCNBox(width: UnitSize, height: UnitSize, length: UnitSize, chamferRadius: 0.0)
-            NodeShape.materials.first?.diffuse.contents = _DiffuseColor
-            NodeShape.materials.first?.specular.contents = _SpecularColor
+            let NodeShape = CreateGeometry(GeoShape: _Shape, Width: UnitSize, Height: UnitSize, Depth: UnitSize)
+            if _EnableTextures && _TextureName != nil
+            {
+                NodeShape.materials.first?.diffuse.contents = UIImage(named: _TextureName!)
+            }
+            else
+            {
+                NodeShape.materials.first?.diffuse.contents = _DiffuseColor
+                NodeShape.materials.first?.specular.contents = _SpecularColor
+            }
             let Node = SCNNode(geometry: NodeShape)
             let XPos: CGFloat = CGFloat(X) * UnitSize
             let YPos: CGFloat = CGFloat(Y) * UnitSize
@@ -163,6 +172,74 @@ import SceneKit
         self.scene?.rootNode.addChildNode(PieceNode!)
     }
     
+    /// Creates the geometric shape of the block. Relies on a previously set theme (set during initialization).
+    /// - Note:
+    ///   - Depending on the shape, not all parameters are used.
+    ///     - **.Capsule** uses **Width** (multiplied by 0.35) for the cap radius and **Height**.
+    ///     - **.Cone** uses **Width** (divided by 2) for the bottom radius and **Height**.
+    ///     - **.Cubic** uses **Width**, **Height**, and **Depth**.
+    ///     - **.Cylinder** uses **Width** (divided by 2) for the radius and **Height**.
+    ///     - **.Pyramid** uses **Width**, **Height**, and **Depth**.
+    ///     - **.RoundedCube** uses **Width**, **Height**, and **Depth** and **Width** * 0.1 for the chamfer radius.
+    ///     - **.Spherical** uses **Width** divided by 2.
+    ///     - **.Torus** uses **Width** divided by 2 for the outer radius and **Width** divided by 4 for the inner radius.
+    ///     - **.Tube** uses **Width** divided by 2 for the outer radius, **Width** divided by 4 for the inner radius, and **Height**.
+    ///     - **.Dodecahedron** uses **Width** divided by 2 for the radius of the points defining the solid.
+    ///     - **.Tetrahedron** uses **Width** as the base segment length and **Height** as the height of *each* central point. To
+    ///       have the overall height the same as the width, set **Height** to (***Width** * 0.5).
+    /// - Parameter GeoShape: The geometric shape.
+    /// - Parameter Width: Width of the block.
+    /// - Parameter Height: Height of the block.
+    /// - Parameter Depth: Depth of the block.
+    /// - Returns: An SCNGeometry instance with the appropriate shape.
+    private func CreateGeometry(GeoShape: TileShapes3D, Width: CGFloat, Height: CGFloat, Depth: CGFloat) -> SCNGeometry
+    {
+        var Geometry: SCNGeometry!
+        switch GeoShape
+        {
+            case .Capsule:
+                Geometry = SCNCapsule(capRadius: Width * 0.35, height: Height)
+            
+            case .Cone:
+                Geometry = SCNCone(topRadius: 0.0, bottomRadius: Width * 0.5, height: Height)
+            
+            case .Cubic:
+                Geometry = SCNBox(width: Width, height: Height, length: Depth, chamferRadius: 0.0)
+            
+            case .Cylinder:
+                Geometry = SCNCylinder(radius: Width * 0.5, height: Height)
+            
+            case .Pyramid:
+                Geometry = SCNPyramid(width: Width, height: Height, length: Depth)
+            
+            case .RoundedCube:
+                Geometry = SCNBox(width: Width, height: Height, length: Depth, chamferRadius: Width * 0.1)
+            
+            case .Spherical:
+                Geometry = SCNSphere(radius: Width * 0.5)
+            
+            case .Torus:
+                Geometry = SCNTorus(ringRadius: Width * 0.5, pipeRadius: Width * 0.25)
+            
+            case .Tube:
+                Geometry = SCNTube(innerRadius: Width * 0.25, outerRadius: Width * 0.5, height: Height)
+            
+            case .Dodecahedron:
+                Geometry = SCNDodecahedron.Geometry(Radius: Width * 0.5)
+            
+            case .Tetrahedron:
+                Geometry = SCNTetrahedron.Geometry(BaseLength: Width, Height: Height)
+        }
+        return Geometry!
+    }
+    
+    /// Rotate the game piece on the selected axes.
+    /// - Note: If the caller sets all axes to false after rotating the piece, the piece will be frozen in the
+    ///         position it was when the call with all `false`s is received. To stop and reset the piece to its
+    ///         original orientation, call `ResetRotations`.
+    /// - Parameter OnX: Determines if rotation occurs on the X axis.
+        /// - Parameter OnY: Determines if rotation occurs on the Y axis.
+        /// - Parameter OnZ: Determines if rotation occurs on the Z axis.
     public func RotatePiece(OnX: Bool, OnY: Bool, OnZ: Bool)
     {
         PieceNode?.removeAllActions()
@@ -174,6 +251,7 @@ import SceneKit
         PieceNode?.runAction(RotateForever)
     }
     
+    /// Stops all actions (rotations in our case) and resets the piece to its original orientation.
     public func ResetRotations()
     {
         PieceNode?.removeAllActions()
@@ -181,13 +259,15 @@ import SceneKit
         PieceNode?.runAction(RotatePiece)
     }
     
+    /// Stops all rotations. The piece is stopped in its current orientation, whatever that may be.
     public func StopRotation()
     {
-        
+        PieceNode?.removeAllActions()
     }
     
     // MARK: Interface builder-related functions.
     
+    /// Holds the auto adjust block size flag.
     private var _AutoAdjustBlockSize: Bool = true
     {
         didSet
@@ -195,6 +275,7 @@ import SceneKit
             DrawPiece()
         }
     }
+    /// Get or set the auto adjust block size flag.
     @IBInspectable public var AutoAdjustBlockSize: Bool
     {
         get
@@ -207,6 +288,7 @@ import SceneKit
         }
     }
     
+    /// Holds the block size.
     private var _BlockSize: CGFloat = 20.0
     {
         didSet
@@ -214,6 +296,7 @@ import SceneKit
             DrawPiece()
         }
     }
+    /// Get or set the block size.
     @IBInspectable public var BlockSize: CGFloat
     {
         get
@@ -226,6 +309,7 @@ import SceneKit
         }
     }
     
+    /// Holds the specular color.
     private var _SpecularColor: UIColor = UIColor.white
     {
         didSet
@@ -233,6 +317,7 @@ import SceneKit
             DrawPiece()
         }
     }
+    /// Get or set the specular color.
     @IBInspectable public var SpecularColor: UIColor
     {
         get
@@ -245,6 +330,7 @@ import SceneKit
         }
     }
     
+    /// Holds the diffuse color.
     private var _DiffuseColor: UIColor = ColorServer.ColorFrom(ColorNames.ReallyDarkGray)
     {
         didSet
@@ -252,6 +338,7 @@ import SceneKit
             DrawPiece()
         }
     }
+    /// Get or set the diffuse color.
     @IBInspectable public var DiffuseColor: UIColor
         {
         get
@@ -264,6 +351,7 @@ import SceneKit
         }
     }
     
+    /// Holds the shape of each block.
     private var _Shape: TileShapes3D = .Cubic
     {
         didSet
@@ -271,6 +359,7 @@ import SceneKit
             DrawPiece()
         }
     }
+    /// Get or set the shape for each block.
     public var Shape: TileShapes3D
     {
         get
@@ -291,6 +380,7 @@ import SceneKit
             if let NewShape = TileShapes3D(rawValue: _ShapeName)
             {
                 Shape = NewShape
+                DrawPiece()
             }
         }
     }
@@ -311,10 +401,68 @@ import SceneKit
         }
     }
     
+    /// Holds the name of the texture to use. If this value is nil, `_EnableTextures` is set to false.
+    private var _TextureName: String? = nil
+    {
+        didSet
+        {
+            if _EnableTextures
+            {
+                if _TextureName != nil
+                {
+            DrawPiece()
+                }
+                else
+                {
+                    _EnableTextures = false
+                }
+            }
+        }
+    }
+    /// Get or set the texture name. Setting this property won't change the piece unless `EnableTextures` is
+    /// also true.
+    @IBInspectable public var TextureName: String?
+    {
+        get
+        {
+            return _TextureName
+        }
+        set
+        {
+            _TextureName = newValue
+        }
+    }
+    
+    /// Holds the enable textures flag.
+    private var _EnableTextures: Bool = false
+    {
+        didSet
+        {
+            if _TextureName != nil
+            {
+            DrawPiece()
+            }
+        }
+    }
+    /// Get or set the enable textures flag.
+    @IBInspectable public var EnableTextures: Bool
+    {
+        get
+        {
+            return _EnableTextures
+        }
+        set
+        {
+            _EnableTextures = newValue
+        }
+    }
+    
     // MARK: Visual piece creation.
     
+    /// Node that holds the blocks that make up the piece.
     var PieceNode: SCNNode? = nil
     
+    /// Removes all blocks from the piece to view.
     func Clear()
     {
         for BlockNode in PieceNode!.childNodes
@@ -325,8 +473,12 @@ import SceneKit
         DrawPiece()
     }
     
+    /// Holds the positions of each block in the piece.
     private var BlockList = [(Int, Int)]()
     
+    /// Add a block at the specified coordinate. If a block is already in that coordinate, no action is taken.
+    /// - Parameter X: Horizontal coordinate.
+    /// - Parameter Y: Vertical coordinate.
     func DoAddBlock(_ X: Int, _ Y: Int)
     {
         for (AtX, AtY) in BlockList
@@ -340,46 +492,71 @@ import SceneKit
         DrawPiece()
     }
     
+    /// Remove the block from the piece at the specified coordinate. If there is no block at that location,
+    /// no action is taken.
+    /// - Parameter X: Horizontal coordinate.
+    /// - Parameter Y: Vertical coordinate.
     func DoRemoveBlock(_ X: Int, _ Y: Int)
     {
         BlockList = BlockList.filter({!($0.0 == X && $0.1 == Y)})
+        DrawPiece()
     }
     
+    /// Add a block at the specified coordinate.
+    /// - Parameter Location: Blook coordinate class.
     func AddBlockAt(_ Location: BlockCoordinates<Int>)
     {
         DoAddBlock(Location.X, Location.Y)
     }
     
+    /// Add a block at the specified coordinate.
+    /// - Parameter Location: Block logical location.
     func AddBlockAt(_ Location: LogicalLocation)
     {
         DoAddBlock(Location.X, Location.Y)
     }
     
+    /// Add a block at the specified coordinate.
+    /// - Parameter X: Horizontal coordinate.
+    /// - Parameter Y: Vertical coordinate.
     func AddBlockAt(_ X: Int, _ Y: Int)
     {
         DoAddBlock(X, Y)
     }
     
+    /// Remove a block from the specified coordinate.
+    /// - Parameter Location: The coordinate of the block to remove.
     func RemoveBlockAt(_ Location: BlockCoordinates<Int>)
     {
         DoRemoveBlock(Location.X, Location.Y)
     }
     
+    /// Remove a block from the specified coordinate.
+    /// - Parameter Location: The logical location of the block to remove.
     func RemoveBlockAt(_ Location: LogicalLocation)
     {
         DoRemoveBlock(Location.X, Location.Y)
     }
     
+    /// Add a piece to display in the view.
+    /// - Note: Existing blocks will be removed.
+    /// - Parameter ThePiece: A piece definition that will be displayed.
     func AddPiece(_ ThePiece: PieceDefinition)
     {
+        BlockList.removeAll()
         for Location in ThePiece.LogicalLocations
         {
             DoAddBlock(Location.X, Location.Y)
         }
     }
     
+    /// Add a piece to display in the view.
+    /// - Note: Existing blocks will be removed.
+    /// - Parameter ThePiece: A piece that will be displayed. This piece will most likely be an ephemeral piece,
+    ///                       not a piece in the game.
     func AddPiece(_ ThePiece: Piece)
     {
+        BlockList.removeAll()
         for SomeBlock in ThePiece.Components
         {
             DoAddBlock(SomeBlock.X, SomeBlock.Y)
