@@ -22,6 +22,11 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
     
     func StyleVisuals()
     {
+        ActiveDiffuseColorButton.ButtonColor = UIColor.orange
+        ActiveSpecularColorButton.ButtonColor = UIColor.yellow
+        RetiredDiffuseColorButton.ButtonColor = UIColor.brown
+        RetiredSpecularColorButton.ButtonColor = UIColor.red
+        
         ActiveSamplePiece.layer.borderColor = UIColor.black.cgColor
         ActiveSamplePiece.backgroundColor = ColorServer.ColorFrom(ColorNames.AzukiIro)
         ActiveDiffuseColorButton.layer.cornerRadius = 5.0
@@ -65,14 +70,20 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
         HandleRetiredSurfaceTypeChanged(self)
         
         let PieceShape = PieceFactory.GetShapeForPiece(ID: PieceID)!
-        print("Piece shape is \(PieceShape)")
         let ActualPiece = PieceFactory.CreateEphermeralPiece(PieceShape)
         ActiveSamplePiece.Initialize()
+        ActiveSamplePiece.BlockSize = 3.0
+        ActiveSamplePiece.SpecularColor = UIColor.yellow
+        ActiveSamplePiece.DiffuseColor = UIColor.orange
         ActiveSamplePiece.Start()
         ActiveSamplePiece.AddPiece(ActualPiece)
         RetiredSamplePiece.Initialize()
+        RetiredSamplePiece.SpecularColor = UIColor.red
+        RetiredSamplePiece.DiffuseColor = UIColor.brown
         RetiredSamplePiece.Start()
         RetiredSamplePiece.AddPiece(ActualPiece)
+        
+        TitleBarTitle.text = "Piece Editor: \(PieceShape)"
     }
     
     func EditTheme(ID: UUID)
@@ -100,6 +111,7 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
         //Not used in this class.
     }
     
+    /// Handle Color changes. Update both the piece sample and the block sample.
     func EditedColor(_ Edited: UIColor?, Tag: Any?)
     {
         if let EditedColor = Edited
@@ -111,18 +123,22 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
                     case "ActiveDiffuseColor":
                         ActiveDiffuseColorButton.ButtonColor = EditedColor
                         ActiveBlockView.DiffuseColor = EditedColor
+                        ActiveSamplePiece.DiffuseColor = EditedColor
                     
                     case "ActiveSpecularColor":
                         ActiveSpecularColorButton.ButtonColor = EditedColor
                         ActiveBlockView.SpecularColor = EditedColor
+                        ActiveSamplePiece.SpecularColor = EditedColor
                     
                     case "RetiredDiffuseColor":
                         RetiredDiffuseColorButton.ButtonColor = EditedColor
                         RetiredBlockView.DiffuseColor = EditedColor
+                        RetiredSamplePiece.DiffuseColor = EditedColor
                     
                     case "RetiredSpecularColor":
                         RetiredSpecularColorButton.ButtonColor = EditedColor
                         RetiredBlockView.SpecularColor = EditedColor
+                        RetiredSamplePiece.SpecularColor = EditedColor
                     
                     default:
                         break
@@ -254,8 +270,8 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
         switch RotationIndex
         {
             case 0:
-                ActiveSamplePiece.StopRotation()
-                RetiredSamplePiece.StopRotation()
+                ActiveSamplePiece.ResetRotations()
+                RetiredSamplePiece.ResetRotations()
             
             case 1:
                 ActiveSamplePiece.RotatePiece(OnX: false, OnY: false, OnZ: true)
@@ -322,6 +338,7 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
     
     // MARK: Interface builder links.
     
+    @IBOutlet weak var TitleBarTitle: UILabel!
     @IBOutlet weak var RotationSegment: UISegmentedControl!
     
     @IBOutlet weak var ActiveSamplePiece: PieceViewer!
