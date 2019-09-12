@@ -1816,14 +1816,14 @@
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="BlockSize">
-                                                <real key="value" value="4"/>
+                                                <real key="value" value="2"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="AutoAdjustBlockSize" value="NO"/>
                                             <userDefinedRuntimeAttribute type="color" keyPath="SpecularColor">
-                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="value" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="DiffuseColor">
-                                                <color key="value" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="string" keyPath="ShapeName" value="Cubic"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -1864,7 +1864,7 @@
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="AutoAdjustBlockSize" value="NO"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="BlockSize">
-                                                <real key="value" value="4"/>
+                                                <real key="value" value="2"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="SpecularColor">
                                                 <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2449,6 +2449,7 @@ Cg
                         <outlet property="RetiredTextureButton" destination="jQj-aw-PtH" id="xEm-Q3-P6I"/>
                         <outlet property="RetiredTextureText" destination="G8C-O5-ZJQ" id="o4Q-BN-fig"/>
                         <outlet property="RotationSegment" destination="lWF-Bo-xAX" id="wjV-FJ-Z14"/>
+                        <outlet property="TitleBarTitle" destination="r1y-El-jqT" id="4rp-eU-42e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mFX-ft-V8n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3865,7 +3866,7 @@ Cg
     <inferredMetricsTieBreakers>
         <segue reference="IMl-cG-HXe"/>
         <segue reference="r5W-NX-BXg"/>
-        <segue reference="wf9-w8-Kgg"/>
+        <segue reference="YWX-ts-4jy"/>
         <segue reference="RCe-8N-Bj8"/>
     </inferredMetricsTieBreakers>
 </document>
