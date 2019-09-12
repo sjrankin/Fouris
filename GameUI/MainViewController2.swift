@@ -985,6 +985,7 @@ class MainViewController2: UIViewController,
         Game.StartGame(EnableAI: InAttractMode, PieceCategories: GamePieces, UseFastAI: UseFastAI)
         
         GameView3D?.DrawMap3D(FromBoard: Game.GameBoard!, CalledFrom: "Play")
+        GameView3D?.FadeBucketGrid()
         GameTextOverlay?.ShowCurrentScore(NewScore: 0)
         CurrentlyPlaying = true
         PlayStopButton2?.setTitle("Stop", for: .normal)
