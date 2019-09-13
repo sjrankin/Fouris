@@ -386,6 +386,30 @@ class TextOverlay: TextLayerDisplayProtocol
     {
         OperationQueue.main.addOperation
             {
+                #if false
+                if self.NextPiece3D == nil
+                {
+                    self.NextPiece3D = PieceViewer(WithFrame: self.NextLabelContainer!.bounds)
+                    self.NextPiece3D?.backgroundColor = UIColor.clear
+                    self.NextLabelContainer?.addSubview(self.NextPiece3D!)
+                    self.NextPiece3D?.BlockSize = 4
+                    self.NextPiece3D?.SpecularColor = UIColor.black
+                    self.NextPiece3D?.DiffuseColor = UIColor.white
+                    self.NextPiece3D?.RotatePiece(OnX: false, OnY: false, OnZ: true)
+                }
+                self.NextPiece3D?.Clear()
+                self.NextPiece3D?.AddPiece(NextPiece)
+                let FinalDuration = Duration == nil ? 0.1 : Duration!
+                UIView.animate(withDuration: FinalDuration, animations:
+                    {
+                        self.NextLabelContainer!.alpha = 1.0
+                }, completion:
+                    {
+                        _ in
+                        self.NextLabelContainer!.alpha = 1.0
+                }
+                )
+                #else
                 self.NextPieceContainer!.alpha = 1.0
                 let VisualPiece: CAShapeLayer = PieceFactory.GetGenericView(ForPiece: NextPiece, WithShadow: true)
                 self.NextPieceContainer?.layer.sublayers?.removeAll()
@@ -403,6 +427,7 @@ class TextOverlay: TextLayerDisplayProtocol
                         self.NextLabelContainer!.alpha = 1.0
                 }
                 )
+                #endif
         }
     }
     
@@ -417,7 +442,6 @@ class TextOverlay: TextLayerDisplayProtocol
                 UIView.animate(withDuration: FinalDuration, animations:
                     {
                         VisualPiece?.opacity = 0.0
-                        //self.NextPieceContainer!.alpha = 0.0
                 }, completion:
                     {
                         _ in
@@ -426,6 +450,8 @@ class TextOverlay: TextLayerDisplayProtocol
                 )
         }
     }
+    
+    var NextPiece3D: PieceViewer? = nil
     
     /// Show the current score. Assumes the score label is visible.
     /// - Note: Score text layers are generated each time this function is called (because it doesn't make sense to cache
