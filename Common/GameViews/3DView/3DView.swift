@@ -41,12 +41,12 @@ class View3D: SCNView,                          //Our main super class.
         SetBoard(With)
         //print("3D Theme: \(Theme.uuidString)")
         CurrentTheme = ThemeManager.ThemeFrom(ID: Theme)
-        self.showsStatistics = true//CurrentTheme!.ShowStatistics
+        self.showsStatistics = CurrentTheme!.ShowStatistics
         self.allowsCameraControl = false//CurrentTheme!.CanControlCamera
         OriginalCameraPosition = CurrentTheme!.CameraPosition
         OriginalCameraOrientation = CurrentTheme!.CameraOrientation
         #if false
-        self.debugOptions = [.showBoundingBoxes]
+        self.debugOptions = [.showBoundingBoxes, .renderAsWireframe]
         #endif
         GameScene = SCNScene()
         self.delegate = self
@@ -947,19 +947,35 @@ class View3D: SCNView,                          //Our main super class.
                 //Horizontal bucket lines.
                 for Y in stride(from: 10.0, to: -10.5, by: -1.0)
                 {
+                    #if true
+                    let LineGeometry = SCNGeometry.Line(From: SCNVector3(-0.5, Y, 0.0), To: SCNVector3(10.0, Y, 0.0))
+                    LineGeometry.firstMaterial?.diffuse.contents = UIColor.gray
+                    LineGeometry.firstMaterial?.specular.contents = UIColor.gray
+                    let LineNode = SCNNode(geometry: LineGeometry)
+                    LineNode.name = "Horizontal,\(Int(Y))"
+                    #else
                     let Start = SCNVector3(-0.5, Y, 0.0)
                     let End = SCNVector3(10.0, Y, 0.0)
                     let LineNode = MakeLine(From: Start, To: End, Color: ColorNames.White, LineWidth: 0.03)
                     LineNode.name = "Horizontal,\(Int(Y))"
+                    #endif
                     BucketGridNode?.addChildNode(LineNode)
                 }
                 //Vertical bucket lines.
                 for X in stride(from: -4.5, to: 5.0, by: 1.0)
                 {
+                    #if true
+                    let LineGeometry = SCNGeometry.Line(From: SCNVector3(X, 0.0, 0.0), To: SCNVector3(X, 20.0, 0.0))
+                    LineGeometry.firstMaterial?.diffuse.contents = UIColor.gray
+                    LineGeometry.firstMaterial?.specular.contents = UIColor.gray
+                    let LineNode = SCNNode(geometry: LineGeometry)
+                    LineNode.name = "Vertical,\(Int(X))"
+                    #else
                     let Start = SCNVector3(X, 0.0, 0.0)
                     let End = SCNVector3(X, 20.0, 0.0)
                     let LineNode = MakeLine(From: Start, To: End, Color: ColorNames.White, LineWidth: 0.03)
                     LineNode.name = "Vertical,\(Int(X))"
+                    #endif
                     BucketGridNode?.addChildNode(LineNode)
             }
             }
@@ -980,8 +996,8 @@ class View3D: SCNView,                          //Our main super class.
                 {
                     #if true
                     let LineGeometry = SCNGeometry.Line(From: SCNVector3(-10.0, Y, 0.0), To: SCNVector3(10.0, Y, 0.0))
-                    LineGeometry.firstMaterial?.specular.contents = UIColor.white
-                    LineGeometry.firstMaterial?.diffuse.contents = UIColor.white
+                    LineGeometry.firstMaterial?.specular.contents = UIColor.gray
+                    LineGeometry.firstMaterial?.diffuse.contents = UIColor.gray
                     let LineNode = SCNNode(geometry: LineGeometry)
                     LineNode.name = "Horizontal,\(Int(Y))"
                     BucketGridNode?.addChildNode(LineNode)
@@ -998,8 +1014,8 @@ class View3D: SCNView,                          //Our main super class.
                 {
                     #if true
                     let LineGeometry = SCNGeometry.Line(From: SCNVector3(X, -10.0, 0.0), To: SCNVector3(X, 10.0, 0.0))
-                    LineGeometry.firstMaterial?.specular.contents = UIColor.white
-                    LineGeometry.firstMaterial?.diffuse.contents = UIColor.white
+                    LineGeometry.firstMaterial?.specular.contents = UIColor.gray
+                    LineGeometry.firstMaterial?.diffuse.contents = UIColor.gray
                     let LineNode = SCNNode(geometry: LineGeometry)
                     LineNode.name = "Vertical,\(Int(X))"
                     BucketGridNode?.addChildNode(LineNode)
@@ -1246,17 +1262,6 @@ class View3D: SCNView,                          //Our main super class.
         )
     }
     
-    func GetNodeCount() -> Int
-    {
-        var Count = 0
-        self.scene?.rootNode.enumerateChildNodes
-            {
-                _, _ in
-                Count = Count + 1
-        }
-        return Count
-    }
-    
     var SceneNodeID = UUID()
     var MaxSceneNodeID = UUID()
     var MaxSceneNodes: Int = 0
@@ -1347,20 +1352,6 @@ class View3D: SCNView,                          //Our main super class.
     
     /// The last calculated framerate.
     var LastFrameRate: Double = 0.0
-    
-    /// Calculate the frame rate here.
-    /// - Note: We do this using this method rather than getting an attribute from the scene
-    ///         because the attribute reports what the *target* framerate is, not the actual
-    ///         frame rate.
-    /// - Parameter renderer: Not used.
-    /// - Parameter time: The time interval between calls.
-    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval)
-    {
-        let DeltaTime = time - LastUpdateTime
-        let CurrentFPS = 1 / DeltaTime
-        LastUpdateTime = time
-        LastFrameRate = CurrentFPS
-    }
     
     func SetOpacity(OfID: UUID, To: Double)
     {
