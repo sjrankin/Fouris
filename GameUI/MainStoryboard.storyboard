@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Main View Controller2-->
+        <!--Main View Controller-->
         <scene sceneID="BZm-gA-3hF">
             <objects>
-                <viewController id="anR-7Y-bzH" customClass="MainViewController2" customModule="Fouris" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="anR-7Y-bzH" customClass="MainViewController" customModule="Fouris" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="B0c-tZ-5fb">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -64,7 +64,7 @@
                                                 <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="Wd8-a3-tR0" firstAttribute="leading" secondItem="IgA-6X-lkh" secondAttribute="leading" constant="506" id="01x-A8-UTH"/>
                                             <constraint firstItem="wuk-RO-4f2" firstAttribute="bottom" secondItem="Wd8-a3-tR0" secondAttribute="bottom" id="0jr-oF-P5X"/>
@@ -437,36 +437,36 @@
                         <viewLayoutGuide key="safeArea" id="OtM-y9-PH5"/>
                     </view>
                     <connections>
-                        <outlet property="CurrentScoreLabelView2" destination="dht-P4-rIC" id="0T0-Vf-V9v"/>
-                        <outlet property="DropDownButton3" destination="5s2-sY-YZn" id="VJ0-LA-lNb"/>
+                        <outlet property="CurrentScoreLabelView" destination="dht-P4-rIC" id="0T0-Vf-V9v"/>
+                        <outlet property="DropDownButton" destination="5s2-sY-YZn" id="VJ0-LA-lNb"/>
                         <outlet property="FreezeInPlaceButton" destination="lCp-Yu-s9Q" id="UgN-Eh-ers"/>
-                        <outlet property="GameControlView2" destination="mwG-lI-7bz" id="zAR-O3-7sI"/>
-                        <outlet property="GameOverLabelView2" destination="fG3-c2-56a" id="myF-XF-REC"/>
-                        <outlet property="GameUISurface3D2" destination="vct-Mh-0Vi" id="Naq-c6-d6M"/>
-                        <outlet property="GameView2" destination="tQ9-Ul-CQv" id="mbb-L8-9vo"/>
-                        <outlet property="HighScoreLabelView2" destination="yrA-tS-iWf" id="CSj-CV-On6"/>
-                        <outlet property="MainSlideIn2" destination="yU0-Pv-MTo" id="UFC-vm-UZe"/>
-                        <outlet property="MainUIButton2" destination="Qep-yn-tJG" id="bLt-gL-ZPx"/>
-                        <outlet property="MotionControlView2" destination="eVc-5x-EsU" id="BJS-fE-kcf"/>
-                        <outlet property="MoveDownButton3" destination="TeF-if-KBy" id="A31-2m-39d"/>
-                        <outlet property="MoveLeftButton3" destination="jgm-eh-H0I" id="0qh-VZ-Bt4"/>
-                        <outlet property="MoveRightButton3" destination="nbW-N2-AfT" id="ibl-Iw-5sC"/>
-                        <outlet property="MoveUpButton3" destination="St4-tn-Hrw" id="qLF-S8-fuZ"/>
-                        <outlet property="NextPieceLabelView2" destination="wuk-RO-4f2" id="bTV-r3-EfJ"/>
-                        <outlet property="NextPieceView2" destination="HLT-X8-fph" id="aEg-ti-SFU"/>
-                        <outlet property="PauseLabelView2" destination="ZLG-3V-NE0" id="AlK-Mq-0le"/>
-                        <outlet property="PauseResumeButton2" destination="KXp-V6-UPf" id="baA-tz-yB3"/>
-                        <outlet property="PlayStopButton2" destination="tYf-lX-OiH" id="exd-Kz-yox"/>
-                        <outlet property="PressPlayLabelView2" destination="cDM-w8-UEc" id="Nhr-wc-yUq"/>
-                        <outlet property="RotateLeftButton3" destination="l9L-U1-JZo" id="3Ey-yl-CBQ"/>
-                        <outlet property="RotateRightButton3" destination="yHH-b0-Ocr" id="GGI-2Z-9xt"/>
-                        <outlet property="ScoreLabelView2" destination="Wd8-a3-tR0" id="5Pz-wg-nXf"/>
-                        <outlet property="SlideInAttractButton2" destination="WNk-dt-fE4" id="J2N-dd-RH6"/>
-                        <outlet property="SlideInCloseButton2" destination="YHH-Jn-x5g" id="kXV-z4-803"/>
+                        <outlet property="GameControlView" destination="mwG-lI-7bz" id="zAR-O3-7sI"/>
+                        <outlet property="GameOverLabelView" destination="fG3-c2-56a" id="myF-XF-REC"/>
+                        <outlet property="GameUISurface3D" destination="vct-Mh-0Vi" id="Naq-c6-d6M"/>
+                        <outlet property="GameView" destination="tQ9-Ul-CQv" id="mbb-L8-9vo"/>
+                        <outlet property="HighScoreLabelView" destination="yrA-tS-iWf" id="CSj-CV-On6"/>
+                        <outlet property="MainSlideIn" destination="yU0-Pv-MTo" id="UFC-vm-UZe"/>
+                        <outlet property="MainUIButton" destination="Qep-yn-tJG" id="bLt-gL-ZPx"/>
+                        <outlet property="MotionControlView" destination="eVc-5x-EsU" id="BJS-fE-kcf"/>
+                        <outlet property="MoveDownButton" destination="TeF-if-KBy" id="A31-2m-39d"/>
+                        <outlet property="MoveLeftButton" destination="jgm-eh-H0I" id="0qh-VZ-Bt4"/>
+                        <outlet property="MoveRightButton" destination="nbW-N2-AfT" id="ibl-Iw-5sC"/>
+                        <outlet property="MoveUpButton" destination="St4-tn-Hrw" id="qLF-S8-fuZ"/>
+                        <outlet property="NextPieceLabelView" destination="wuk-RO-4f2" id="bTV-r3-EfJ"/>
+                        <outlet property="NextPieceView" destination="HLT-X8-fph" id="aEg-ti-SFU"/>
+                        <outlet property="PauseLabelView" destination="ZLG-3V-NE0" id="AlK-Mq-0le"/>
+                        <outlet property="PauseResumeButton" destination="KXp-V6-UPf" id="baA-tz-yB3"/>
+                        <outlet property="PlayStopButton" destination="tYf-lX-OiH" id="exd-Kz-yox"/>
+                        <outlet property="PressPlayLabelView" destination="cDM-w8-UEc" id="Nhr-wc-yUq"/>
+                        <outlet property="RotateLeftButton" destination="l9L-U1-JZo" id="3Ey-yl-CBQ"/>
+                        <outlet property="RotateRightButton" destination="yHH-b0-Ocr" id="GGI-2Z-9xt"/>
+                        <outlet property="ScoreLabelView" destination="Wd8-a3-tR0" id="5Pz-wg-nXf"/>
+                        <outlet property="SlideInAttractButton" destination="WNk-dt-fE4" id="J2N-dd-RH6"/>
+                        <outlet property="SlideInCloseButton" destination="YHH-Jn-x5g" id="kXV-z4-803"/>
                         <outlet property="SlideInSubView" destination="BEQ-CZ-rpW" id="g44-oS-ylc"/>
-                        <outlet property="TextLayerView2" destination="IgA-6X-lkh" id="nAc-g9-w7P"/>
+                        <outlet property="TextLayerView" destination="IgA-6X-lkh" id="nAc-g9-w7P"/>
                         <outlet property="TopOverlapView" destination="XWq-tv-MbH" id="GhK-N5-9uJ"/>
-                        <outlet property="UpAndAwayButton3" destination="PlE-VH-6Ap" id="6oR-eq-yVp"/>
+                        <outlet property="UpAndAwayButton" destination="PlE-VH-6Ap" id="6oR-eq-yVp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0RK-7Z-fvW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
