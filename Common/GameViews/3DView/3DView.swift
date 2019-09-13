@@ -978,20 +978,38 @@ class View3D: SCNView,                          //Our main super class.
                 //Horizontal bucket lines.
                 for Y in stride(from: 10.0, to: -10.5, by: -1.0)
                 {
+                    #if true
+                    let LineGeometry = SCNGeometry.Line(From: SCNVector3(-10.0, Y, 0.0), To: SCNVector3(10.0, Y, 0.0))
+                    LineGeometry.firstMaterial?.specular.contents = UIColor.white
+                    LineGeometry.firstMaterial?.diffuse.contents = UIColor.white
+                    let LineNode = SCNNode(geometry: LineGeometry)
+                    LineNode.name = "Horizontal,\(Int(Y))"
+                    BucketGridNode?.addChildNode(LineNode)
+                    #else
                     let Start = SCNVector3(0.0, Y, 0.0)
                     let End = SCNVector3(20.0, Y, 0.0)
                     let LineNode = MakeLine(From: Start, To: End, Color: ColorNames.White, LineWidth: 0.02)
                     LineNode.name = "Horizontal,\(Int(Y))"
                     BucketGridNode?.addChildNode(LineNode)
+                    #endif
                 }
                 //Vertical bucket lines.
                 for X in stride(from: -10.0, to: 10.5, by: 1.0)
                 {
+                    #if true
+                    let LineGeometry = SCNGeometry.Line(From: SCNVector3(X, -10.0, 0.0), To: SCNVector3(X, 10.0, 0.0))
+                    LineGeometry.firstMaterial?.specular.contents = UIColor.white
+                    LineGeometry.firstMaterial?.diffuse.contents = UIColor.white
+                    let LineNode = SCNNode(geometry: LineGeometry)
+                    LineNode.name = "Vertical,\(Int(X))"
+                    BucketGridNode?.addChildNode(LineNode)
+                    #else
                     let Start = SCNVector3(X, 0.0, 0.0)
                     let End = SCNVector3(X, 20.0, 0.0)
                     let LineNode = MakeLine(From: Start, To: End, Color: ColorNames.White, LineWidth: 0.02)
                     LineNode.name = "Vertical,\(Int(X))"
                     BucketGridNode?.addChildNode(LineNode)
+                    #endif
                 }
                 }
                 //Outline.
