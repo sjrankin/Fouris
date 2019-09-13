@@ -10,7 +10,7 @@ import Foundation
 import MultipeerConnectivity
 import UIKit
 
-extension MainViewController2
+extension MainViewController
 {
     func HandlePushedVersionInformation(_ RawData: String)
     {
