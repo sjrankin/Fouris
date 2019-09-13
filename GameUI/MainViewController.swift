@@ -1,5 +1,5 @@
 //
-//  MainViewController2.swift
+//  MainViewController.swift
 //  Fouris
 //
 //  Created by Stuart Rankin on 8/26/19.
@@ -11,7 +11,7 @@ import SceneKit
 import MultipeerConnectivity
 import UIKit
 
-class MainViewController2: UIViewController, 
+class MainViewController: UIViewController, 
     GameUINotificationProtocol,                         //Protocol for communicating from the game engine (and everything below it) to the UI.
     GameAINotificationProtocol,                         //Protocol for communication from the game AI engine to the UI.
     MainDelegate,                                       //Protocol for exporting some functionality defined in this class.
@@ -151,32 +151,32 @@ class MainViewController2: UIViewController,
         Game.AIDelegate = self
         
         //Initialize the 3D game viewer.
-        GameView3D = GameUISurface3D2
+        GameView3D = GameUISurface3D
         GameView3D?.Initialize(With: Game!.GameBoard!, Theme: ThemeManager.GetDefault3DThemeID()!,
                                BaseType: CurrentBaseGameType)
         GameView3D?.Owner = self
         GameView3D?.SmoothMotionDelegate = self
         Smooth3D = GameView3D
-        GameUISurface3D2.layer.borderColor = UIColor.black.cgColor
-        GameUISurface3D2.layer.borderWidth = 1.0
+        GameUISurface3D.layer.borderColor = UIColor.black.cgColor
+        GameUISurface3D.layer.borderWidth = 1.0
         
         //Initialize the game text layer.
-        TextLayerView2.Initialize(With: UUID.Empty, LayerFrame: TextLayerView2.frame)
+        TextLayerView.Initialize(With: UUID.Empty, LayerFrame: TextLayerView.frame)
         GameTextOverlay = TextOverlay(Device: UIDevice.current.userInterfaceIdiom)
-        GameTextOverlay?.SetControls(NextLabel: NextPieceLabelView2,
-                                     NextPieceView: NextPieceView2,
-                                     ScoreLabel: ScoreLabelView2,
-                                     CurrentScoreLabel: CurrentScoreLabelView2,
-                                     HighScoreLabel: HighScoreLabelView2,
-                                     GameOverLabel: GameOverLabelView2,
-                                     PressPlayLabel: PressPlayLabelView2,
-                                     PauseLabel: PauseLabelView2)
+        GameTextOverlay?.SetControls(NextLabel: NextPieceLabelView,
+                                     NextPieceView: NextPieceView,
+                                     ScoreLabel: ScoreLabelView,
+                                     CurrentScoreLabel: CurrentScoreLabelView,
+                                     HighScoreLabel: HighScoreLabelView,
+                                     GameOverLabel: GameOverLabelView,
+                                     PressPlayLabel: PressPlayLabelView,
+                                     PauseLabel: PauseLabelView)
         GameTextOverlay?.ShowPressPlay(Duration: 0.7)
         GameTextOverlay?.HideNextLabel()
         
         //Initialize view backgrounds.
-        GameControlView2.layer.backgroundColor = ColorServer.CGColorFrom(ColorNames.ReallyDarkGray)
-        MotionControlView2.layer.backgroundColor = ColorServer.CGColorFrom(ColorNames.ReallyDarkGray)
+        GameControlView.layer.backgroundColor = ColorServer.CGColorFrom(ColorNames.ReallyDarkGray)
+        MotionControlView.layer.backgroundColor = ColorServer.CGColorFrom(ColorNames.ReallyDarkGray)
         
         let AutoStartDuration = Settings.GetAutoStartDuration()
         let _ = Timer.scheduledTimer(timeInterval: AutoStartDuration, target: self,
@@ -201,19 +201,19 @@ class MainViewController2: UIViewController,
     func InitializeGestures()
     {
         let TapGesture = UITapGestureRecognizer(target: self, action: #selector(HandleTap))
-        GameUISurface3D2.addGestureRecognizer(TapGesture)
+        GameUISurface3D.addGestureRecognizer(TapGesture)
         let SwipeUpGesture = UISwipeGestureRecognizer(target: self, action: #selector(HandleSwipeUp))
         SwipeUpGesture.direction = .up
-        GameUISurface3D2.addGestureRecognizer(SwipeUpGesture)
+        GameUISurface3D.addGestureRecognizer(SwipeUpGesture)
         let SwipeDownGesture = UISwipeGestureRecognizer(target: self, action: #selector(HandleSwipeDown))
         SwipeDownGesture.direction = .down
-        GameUISurface3D2.addGestureRecognizer(SwipeDownGesture)
+        GameUISurface3D.addGestureRecognizer(SwipeDownGesture)
         let SwipeLeftGesture = UISwipeGestureRecognizer(target: self, action: #selector(HandleSwipeLeft))
         SwipeLeftGesture.direction = .left
-        GameUISurface3D2.addGestureRecognizer(SwipeLeftGesture)
+        GameUISurface3D.addGestureRecognizer(SwipeLeftGesture)
         let SwipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(HandleSwipeRight))
         SwipeRightGesture.direction = .right
-        GameUISurface3D2.addGestureRecognizer(SwipeRightGesture)
+        GameUISurface3D.addGestureRecognizer(SwipeRightGesture)
     }
     
     /// Handle taps in the game view. Depending on where the tap is, the piece will move in the given direction.
@@ -223,8 +223,8 @@ class MainViewController2: UIViewController,
     {
         if sender.state == .ended
         {
-            let Location = sender.location(in: GameUISurface3D2)
-            let TapMotion = TranslateTapToMotion(TapLocation: Location, SurfaceSize: GameUISurface3D2!.bounds.size)
+            let Location = sender.location(in: GameUISurface3D)
+            let TapMotion = TranslateTapToMotion(TapLocation: Location, SurfaceSize: GameUISurface3D!.bounds.size)
             switch TapMotion
             {
                 case .Down:
@@ -362,7 +362,7 @@ class MainViewController2: UIViewController,
         DebugClient.Send("Game \(GameCount) started in attract mode.")
         Game.StartGame(EnableAI: true, PieceCategories: [.Standard], UseFastAI: UseFastAI)
         DumpGameBoard(Game.GameBoard!)
-        PlayStopButton2.setTitle("Stop", for: .normal)
+        PlayStopButton.setTitle("Stop", for: .normal)
         ForceResume()
         
         DebugClient.SetIdiotLight(IdiotLights.B2, Title: "Playing", FGColor: ColorNames.WhiteSmoke, BGColor: ColorNames.PineGreen)
@@ -434,7 +434,7 @@ class MainViewController2: UIViewController,
     ///     the game will start in AI mode.
     func GameOver()
     {
-        PlayStopButton2?.setTitle("Play", for: .normal)
+        PlayStopButton?.setTitle("Play", for: .normal)
         var GameDuration = Game.GameDuration()
         GameDuration = round(GameDuration)
         
@@ -935,7 +935,7 @@ class MainViewController2: UIViewController,
         if IsPaused
         {
             IsPaused = false
-            PauseResumeButton2?.setTitle("Pause", for: .normal)
+            PauseResumeButton?.setTitle("Pause", for: .normal)
             GameTextOverlay?.HidePause(Duration: 0.1)
             Game.ResumeGame()
             DebugClient.Send("Game resumed.")
@@ -944,7 +944,7 @@ class MainViewController2: UIViewController,
         else
         {
             IsPaused = true
-            PauseResumeButton2?.setTitle("Resume", for: .normal)
+            PauseResumeButton?.setTitle("Resume", for: .normal)
             GameTextOverlay?.ShowPause(Duration: 0.1)
             Game.PauseGame()
             DebugClient.Send("Game paused.")
@@ -985,10 +985,10 @@ class MainViewController2: UIViewController,
         Game.StartGame(EnableAI: InAttractMode, PieceCategories: GamePieces, UseFastAI: UseFastAI)
         
         GameView3D?.DrawMap3D(FromBoard: Game.GameBoard!, CalledFrom: "Play")
-        GameView3D?.FadeBucketGrid()
+//        GameView3D?.FadeBucketGrid()
         GameTextOverlay?.ShowCurrentScore(NewScore: 0)
         CurrentlyPlaying = true
-        PlayStopButton2?.setTitle("Stop", for: .normal)
+        PlayStopButton?.setTitle("Stop", for: .normal)
         if !InAttractMode
         {
             DebugClient.SetIdiotLight(IdiotLights.A2, Title: "Normal Mode", FGColor: ColorNames.Black, BGColor: ColorNames.White)
@@ -1126,13 +1126,13 @@ class MainViewController2: UIViewController,
         {
             Stop()
             GameTextOverlay?.ShowPressPlay(Duration: 0.5)
-            PlayStopButton2?.setTitle("Play", for: .normal)
+            PlayStopButton?.setTitle("Play", for: .normal)
         }
         else
         {
             InAttractMode = false
             Play()
-            PlayStopButton2?.setTitle("Stop", for: .normal)
+            PlayStopButton?.setTitle("Stop", for: .normal)
         }
     }
     
@@ -1172,11 +1172,11 @@ class MainViewController2: UIViewController,
         UIView.animate(withDuration: 0.15,
                        animations:
             {
-                self.MoveUpButton3.tintColor = UIColor.yellow
+                self.MoveUpButton.tintColor = UIColor.yellow
         }, completion:
             {
                 _ in
-                self.MoveUpButton3.tintColor = UIColor.white
+                self.MoveUpButton.tintColor = UIColor.white
         })
         #else
         MoveUpButton2.Highlight(WithImage: "UpArrowHighlighted48", ForSeconds: 0.15,
@@ -1191,11 +1191,11 @@ class MainViewController2: UIViewController,
         UIView.animate(withDuration: 0.15,
                        animations:
             {
-                self.UpAndAwayButton3.tintColor = UIColor.yellow
+                self.UpAndAwayButton.tintColor = UIColor.yellow
         }, completion:
             {
                 _ in
-                self.UpAndAwayButton3.tintColor = UIColor.cyan
+                self.UpAndAwayButton.tintColor = UIColor.cyan
         })
         #else
         UpAndAwayButton2.Highlight(WithImage: "FlyAwayArrowHighlighted48", ForSeconds: 0.15,
@@ -1210,11 +1210,11 @@ class MainViewController2: UIViewController,
         UIView.animate(withDuration: 0.15,
                        animations:
             {
-                self.MoveDownButton3.tintColor = UIColor.yellow
+                self.MoveDownButton.tintColor = UIColor.yellow
         }, completion:
             {
                 _ in
-                self.MoveDownButton3.tintColor = UIColor.white
+                self.MoveDownButton.tintColor = UIColor.white
         })
         #else
         MoveDownButton2.Highlight(WithImage: "DownArrowHighlighted48", ForSeconds: 0.15,
@@ -1229,11 +1229,11 @@ class MainViewController2: UIViewController,
         UIView.animate(withDuration: 0.15,
                        animations:
             {
-                self.DropDownButton3.tintColor = UIColor.yellow
+                self.DropDownButton.tintColor = UIColor.yellow
         }, completion:
             {
                 _ in
-                self.DropDownButton3.tintColor = UIColor.systemGreen
+                self.DropDownButton.tintColor = UIColor.systemGreen
         })
         #else
         DropDownButton2.Highlight(WithImage: "DropDownArrowHighlighted48", ForSeconds: 0.15,
@@ -1248,11 +1248,11 @@ class MainViewController2: UIViewController,
         UIView.animate(withDuration: 0.15,
                        animations:
             {
-                self.MoveLeftButton3.tintColor = UIColor.yellow
+                self.MoveLeftButton.tintColor = UIColor.yellow
         }, completion:
             {
                 _ in
-                self.MoveLeftButton3.tintColor = UIColor.white
+                self.MoveLeftButton.tintColor = UIColor.white
         })
         #else
         MoveLeftButton2.Highlight(WithImage: "LeftArrowHighlighted48", ForSeconds: 0.15,
@@ -1267,11 +1267,11 @@ class MainViewController2: UIViewController,
         UIView.animate(withDuration: 0.15,
                        animations:
             {
-                self.MoveRightButton3.tintColor = UIColor.yellow
+                self.MoveRightButton.tintColor = UIColor.yellow
         }, completion:
             {
                 _ in
-                self.MoveRightButton3.tintColor = UIColor.white
+                self.MoveRightButton.tintColor = UIColor.white
         }
         )
         #else
@@ -1287,11 +1287,11 @@ class MainViewController2: UIViewController,
         UIView.animate(withDuration: 0.15,
                        animations:
             {
-                self.RotateRightButton3.tintColor = UIColor.yellow
+                self.RotateRightButton.tintColor = UIColor.yellow
         }, completion:
             {
                 _ in
-                self.RotateRightButton3.tintColor = UIColor.white
+                self.RotateRightButton.tintColor = UIColor.white
         })
         #else
         RotateRightButton2.Highlight(WithImage: "RotateRightHighlighted48", ForSeconds: 0.15,
@@ -1306,11 +1306,11 @@ class MainViewController2: UIViewController,
         UIView.animate(withDuration: 0.15,
                        animations:
             {
-                self.RotateRightButton3.tintColor = UIColor.yellow
+                self.RotateRightButton.tintColor = UIColor.yellow
         }, completion:
             {
                 _ in
-                self.RotateRightButton3.tintColor = UIColor.white
+                self.RotateRightButton.tintColor = UIColor.white
         })
         #else
         RotateLeftButton2.Highlight(WithImage: "RotateLeftHighlighted48", ForSeconds: 0.15,
@@ -1465,16 +1465,16 @@ class MainViewController2: UIViewController,
         if FirstSlideIn
         {
             FirstSlideIn = false
-            GameView2.bringSubviewToFront(MainSlideIn2)
+            GameView.bringSubviewToFront(MainSlideIn)
         }
-        if MainSlideIn2!.IsVisible
+        if MainSlideIn!.IsVisible
         {
-            MainSlideIn2?.HideMainSlideIn()
+            MainSlideIn?.HideMainSlideIn()
             UpdateMainButton(false)
         }
         else
         {
-            MainSlideIn2?.ShowMainSlideIn()
+            MainSlideIn?.ShowMainSlideIn()
             UpdateMainButton(true)
         }
     }
@@ -1485,13 +1485,13 @@ class MainViewController2: UIViewController,
     {
         let ImageName = Opened ? "cube" : "cube.fill"
         let ButtonImage = UIImage(systemName: ImageName)
-        MainUIButton2.setImage(ButtonImage, for: UIControl.State.normal)
+        MainUIButton.setImage(ButtonImage, for: UIControl.State.normal)
     }
     
     /// Handle the restart game button in the slide in view.
     @IBAction func HandleSlideInRestartGamePressed(_ sender: Any)
     {
-        MainSlideIn2?.HideMainSlideIn()
+        MainSlideIn?.HideMainSlideIn()
         UpdateMainButton(false)
     }
     
@@ -1499,7 +1499,7 @@ class MainViewController2: UIViewController,
     /// - Parameter sender: Not used.
     @IBAction func HandleSlideInCloseButtonPressed(_ sender: Any)
     {
-        MainSlideIn2?.HideMainSlideIn()
+        MainSlideIn?.HideMainSlideIn()
         UpdateMainButton(false)
     }
     
@@ -1507,7 +1507,7 @@ class MainViewController2: UIViewController,
     /// - Parameter sender: Not used.
     @IBAction func HandleSlideInAttractButtonPressed(_ sender: Any)
     {
-        MainSlideIn2?.HideMainSlideIn()
+        MainSlideIn?.HideMainSlideIn()
         UpdateMainButton(false)
         if AttractTimer != nil
         {
@@ -1525,7 +1525,7 @@ class MainViewController2: UIViewController,
     @IBAction func HandleThemesSlideInButtonPressed(_ sender: Any)
     {
         ForcePause()
-        MainSlideIn2.HideMainSlideIn()
+        MainSlideIn.HideMainSlideIn()
         UpdateMainButton(false)
         let Storyboard = UIStoryboard(name: "Theming", bundle: nil)
         if let Controller = Storyboard.instantiateViewController(withIdentifier: "ThemingHome") as? ThemingController
@@ -1537,7 +1537,7 @@ class MainViewController2: UIViewController,
     @IBSegueAction func InstantiateAboutDialog(_ coder: NSCoder) -> AboutDialogController?
     {
         ForcePause()
-        MainSlideIn2.HideMainSlideIn()
+        MainSlideIn.HideMainSlideIn()
         UpdateMainButton(false)
         let About = AboutDialogController(coder: coder)
         return About
@@ -1546,7 +1546,7 @@ class MainViewController2: UIViewController,
     @IBSegueAction func InstantiateGameSelector(_ coder: NSCoder) -> SelectGameController?
     {
         ForcePause()
-        MainSlideIn2.HideMainSlideIn()
+        MainSlideIn.HideMainSlideIn()
         UpdateMainButton(false)
         let Selector = SelectGameController(coder: coder)
         Selector?.SelectorDelegate = self
@@ -1763,36 +1763,36 @@ class MainViewController2: UIViewController,
     
     // MARK: Interface builder outlets.
     
-    @IBOutlet weak var MainUIButton2: UIButton!
-    @IBOutlet weak var PlayStopButton2: UIButton!
-    @IBOutlet weak var PauseResumeButton2: UIButton!
-    @IBOutlet weak var GameUISurface3D2: View3D!
-    @IBOutlet weak var GameControlView2: UIView!
-    @IBOutlet weak var MotionControlView2: UIView!
-    @IBOutlet weak var GameView2: UIView!
-    @IBOutlet weak var TextLayerView2: TextLayerManager!
-    @IBOutlet weak var NextPieceLabelView2: UIView!
-    @IBOutlet weak var NextPieceView2: UIView!
-    @IBOutlet weak var ScoreLabelView2: UIView!
-    @IBOutlet weak var CurrentScoreLabelView2: UIView!
-    @IBOutlet weak var HighScoreLabelView2: UIView!
-    @IBOutlet weak var PressPlayLabelView2: UIView!
-    @IBOutlet weak var GameOverLabelView2: UIView!
-    @IBOutlet weak var PauseLabelView2: UIView!
-    @IBOutlet weak var MainSlideIn2: MainSlideInView2!
-    @IBOutlet weak var SlideInAttractButton2: UIButton!
-    @IBOutlet weak var SlideInCloseButton2: UIButton!
+    @IBOutlet weak var MainUIButton: UIButton!
+    @IBOutlet weak var PlayStopButton: UIButton!
+    @IBOutlet weak var PauseResumeButton: UIButton!
+    @IBOutlet weak var GameUISurface3D: View3D!
+    @IBOutlet weak var GameControlView: UIView!
+    @IBOutlet weak var MotionControlView: UIView!
+    @IBOutlet weak var GameView: UIView!
+    @IBOutlet weak var TextLayerView: TextLayerManager!
+    @IBOutlet weak var NextPieceLabelView: UIView!
+    @IBOutlet weak var NextPieceView: UIView!
+    @IBOutlet weak var ScoreLabelView: UIView!
+    @IBOutlet weak var CurrentScoreLabelView: UIView!
+    @IBOutlet weak var HighScoreLabelView: UIView!
+    @IBOutlet weak var PressPlayLabelView: UIView!
+    @IBOutlet weak var GameOverLabelView: UIView!
+    @IBOutlet weak var PauseLabelView: UIView!
+    @IBOutlet weak var MainSlideIn: MainSlideInView2!
+    @IBOutlet weak var SlideInAttractButton: UIButton!
+    @IBOutlet weak var SlideInCloseButton: UIButton!
     @IBOutlet weak var TopOverlapView: UIView!
     @IBOutlet weak var FreezeInPlaceButton: UIButton!
     @IBOutlet weak var SlideInSubView: UIView!
-    @IBOutlet weak var MoveLeftButton3: UIButton!
-    @IBOutlet weak var MoveDownButton3: UIButton!
-    @IBOutlet weak var MoveUpButton3: UIButton!
-    @IBOutlet weak var RotateLeftButton3: UIButton!
-    @IBOutlet weak var MoveRightButton3: UIButton!
-    @IBOutlet weak var DropDownButton3: UIButton!
-    @IBOutlet weak var UpAndAwayButton3: UIButton!
-    @IBOutlet weak var RotateRightButton3: UIButton!
+    @IBOutlet weak var MoveLeftButton: UIButton!
+    @IBOutlet weak var MoveDownButton: UIButton!
+    @IBOutlet weak var MoveUpButton: UIButton!
+    @IBOutlet weak var RotateLeftButton: UIButton!
+    @IBOutlet weak var MoveRightButton: UIButton!
+    @IBOutlet weak var DropDownButton: UIButton!
+    @IBOutlet weak var UpAndAwayButton: UIButton!
+    @IBOutlet weak var RotateRightButton: UIButton!
     
     // MARK: Enum mappings.
     
