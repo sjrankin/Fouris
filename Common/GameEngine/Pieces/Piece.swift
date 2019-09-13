@@ -11,13 +11,34 @@ import UIKit
 
 /// Class that encapsulates a dropping piece. The shape of the piece is defined by the PieceFactory setting
 /// the component array.
-///
 /// - Note: It is critical that all references to timers, whether setting, reading, or invalidating, are enclosed
-///         in `OperationQueue.main.addOperation` blocks. This is to ensure all timers are used on the same thread.
+///         in `OperationQueue.main.addOperation` or `DispatchQueue.main.async` blocks. This is to ensure all timers
+///         are used on the same thread.
 class Piece
 {
     /// Reference to the board where the piece will be played.
-    weak var GameBoard: Board? = nil
+    weak var _GameBoard: Board? = nil
+    {
+        didSet
+        {
+            if _GameBoard == nil
+            {
+                print("GameBoard set to nil in piece \(ID)")
+            }
+        }
+    }
+    /// Get or set the game board where the piece will be/is being played.
+    weak var GameBoard: Board?
+    {
+        get
+        {
+            return _GameBoard
+        }
+        set
+        {
+            _GameBoard = newValue
+        }
+    }
     
     /// If true, the piece is not intended to be used in a game.
     public var IsEphemeral: Bool = true
@@ -569,10 +590,11 @@ class Piece
     ///         if it is not called, deinit will generated a fatal error.
     func Terminate()
     {
-        //print("Terminating piece \(ID.uuidString)")
+        print("Terminating piece \(ID.uuidString)")
         OperationQueue.main.addOperation
             {
-                self.GameBoard = nil
+                //Terminate all timers first to make sure they do not refer to something that does not exist due to being
+                //deleted in this block.
                 if self.GravitationalTimer != nil
                 {
                     self.GravitationalTimer?.invalidate()
@@ -593,6 +615,10 @@ class Piece
                     self.RandomRotationTimer?.invalidate()
                     self.RandomRotationTimer = nil
                 }
+                
+                print("Setting GameBoard to nil in Piece.Terminate")
+                self.GameBoard = nil
+                
                 self.Components.removeAll()
                 self.Locations.removeAll()
                 self.WasTerminated = true
@@ -1249,6 +1275,18 @@ class Piece
     /// - Note: Automatic game over determination is handled here.
     @objc func Frozen()
     {
+        if !Thread.isMainThread
+        {
+            print("Calling PieceFroze from thread \((OperationQueue.current?.underlyingQueue?.label)!)")
+            DispatchQueue.main.async
+                {
+                    [weak self] in
+                    self?.FreezeTimer?.invalidate()
+                    self?.FreezeTimer = nil
+                    self?.GameBoard?.PieceFroze(ID: self!.ID)
+            }
+            return
+        }
         OperationQueue.main.addOperation
             {
                 self.FreezeTimer?.invalidate()
@@ -1282,6 +1320,7 @@ class Piece
     {
         if GameBoard == nil
         {
+            Thread.callStackSymbols.forEach{print($0)}
             fatalError("GameBoard is nil in PieceFullyInBounds.")
         }
         if !(GameBoard?.PieceInBounds(self))!
