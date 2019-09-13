@@ -11,7 +11,7 @@ import MultipeerConnectivity
 import UIKit
 
 /// Extensions to CommonViewController for handling TDebug functionality.
-extension MainViewController2: MultiPeerDelegate, StateProtocol, MessageHandlerDelegate
+extension MainViewController: MultiPeerDelegate, StateProtocol, MessageHandlerDelegate
 {
     // MARK: Message handler delegate functions. (Not currently used.)
     
