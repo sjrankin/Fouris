@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// Extension to **CommonViewController** to handle events and user interactions related to the slide in view.
-extension MainViewController2
+extension MainViewController
 {
     public func InitializeSlideIn()
     {
