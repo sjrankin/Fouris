@@ -280,7 +280,7 @@ class GameLogic
     /// Remove the board.
     func RemoveBoard(_ CalledFrom: String)
     {
-        print("Setting GameBoard to nil in RemoveBoard - called from \(CalledFrom)")
+        //print("Setting GameBoard to nil in RemoveBoard - called from \(CalledFrom)")
         GameBoard = nil
     }
     
