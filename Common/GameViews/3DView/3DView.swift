@@ -344,7 +344,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Returns: Node with the specified line. The node has the name "GridNodes".
     func MakeLine(From: SCNVector3, To: SCNVector3, Color: ColorNames, LineWidth: CGFloat = 0.01) -> SCNNode
     {
-
+        
         var Width: Float = 0.01
         var Height: Float = 0.01
         let FinalLineWidth = Float(LineWidth)
@@ -613,8 +613,8 @@ class View3D: SCNView,                          //Our main super class.
         {
             MasterBlockNode?.childNodes.forEach({
                 if !($0 as! VisualBlocks3D).IsRetired
-            {
-                $0.removeFromParentNode()
+                {
+                    $0.removeFromParentNode()
                 }
             })
         }
@@ -944,94 +944,94 @@ class View3D: SCNView,                          //Our main super class.
             case .Standard:
                 if ShowGrid
                 {
-                //Horizontal bucket lines.
-                for Y in stride(from: 10.0, to: -10.5, by: -1.0)
-                {
-                    #if true
-                    let LineGeometry = SCNGeometry.Line(From: SCNVector3(-0.5, Y, 0.0), To: SCNVector3(10.0, Y, 0.0))
-                    LineGeometry.firstMaterial?.diffuse.contents = UIColor.gray
-                    LineGeometry.firstMaterial?.specular.contents = UIColor.gray
-                    let LineNode = SCNNode(geometry: LineGeometry)
-                    LineNode.name = "Horizontal,\(Int(Y))"
-                    #else
-                    let Start = SCNVector3(-0.5, Y, 0.0)
-                    let End = SCNVector3(10.0, Y, 0.0)
-                    let LineNode = MakeLine(From: Start, To: End, Color: ColorNames.White, LineWidth: 0.03)
-                    LineNode.name = "Horizontal,\(Int(Y))"
-                    #endif
-                    BucketGridNode?.addChildNode(LineNode)
+                    //Horizontal bucket lines.
+                    for Y in stride(from: 10.0, to: -10.5, by: -1.0)
+                    {
+                        #if true
+                        let LineGeometry = SCNGeometry.Line(From: SCNVector3(-0.5, Y, 0.0), To: SCNVector3(10.0, Y, 0.0))
+                        LineGeometry.firstMaterial?.diffuse.contents = UIColor.gray
+                        LineGeometry.firstMaterial?.specular.contents = UIColor.gray
+                        let LineNode = SCNNode(geometry: LineGeometry)
+                        LineNode.name = "Horizontal,\(Int(Y))"
+                        #else
+                        let Start = SCNVector3(-0.5, Y, 0.0)
+                        let End = SCNVector3(10.0, Y, 0.0)
+                        let LineNode = MakeLine(From: Start, To: End, Color: ColorNames.White, LineWidth: 0.03)
+                        LineNode.name = "Horizontal,\(Int(Y))"
+                        #endif
+                        BucketGridNode?.addChildNode(LineNode)
+                    }
+                    //Vertical bucket lines.
+                    for X in stride(from: -4.5, to: 5.0, by: 1.0)
+                    {
+                        #if true
+                        let LineGeometry = SCNGeometry.Line(From: SCNVector3(X, 0.0, 0.0), To: SCNVector3(X, 20.0, 0.0))
+                        LineGeometry.firstMaterial?.diffuse.contents = UIColor.gray
+                        LineGeometry.firstMaterial?.specular.contents = UIColor.gray
+                        let LineNode = SCNNode(geometry: LineGeometry)
+                        LineNode.name = "Vertical,\(Int(X))"
+                        #else
+                        let Start = SCNVector3(X, 0.0, 0.0)
+                        let End = SCNVector3(X, 20.0, 0.0)
+                        let LineNode = MakeLine(From: Start, To: End, Color: ColorNames.White, LineWidth: 0.03)
+                        LineNode.name = "Vertical,\(Int(X))"
+                        #endif
+                        BucketGridNode?.addChildNode(LineNode)
+                    }
                 }
-                //Vertical bucket lines.
-                for X in stride(from: -4.5, to: 5.0, by: 1.0)
+                if DrawOutline
                 {
-                    #if true
-                    let LineGeometry = SCNGeometry.Line(From: SCNVector3(X, 0.0, 0.0), To: SCNVector3(X, 20.0, 0.0))
-                    LineGeometry.firstMaterial?.diffuse.contents = UIColor.gray
-                    LineGeometry.firstMaterial?.specular.contents = UIColor.gray
-                    let LineNode = SCNNode(geometry: LineGeometry)
-                    LineNode.name = "Vertical,\(Int(X))"
-                    #else
-                    let Start = SCNVector3(X, 0.0, 0.0)
-                    let End = SCNVector3(X, 20.0, 0.0)
-                    let LineNode = MakeLine(From: Start, To: End, Color: ColorNames.White, LineWidth: 0.03)
-                    LineNode.name = "Vertical,\(Int(X))"
-                    #endif
-                    BucketGridNode?.addChildNode(LineNode)
-            }
-            }
-            if DrawOutline
-            {
-                let TopStart = SCNVector3(-0.5, 10.0, 0.0)
-                let TopEnd = SCNVector3(10.5, 10.0, 0.0)
-                let TopLine = MakeLine(From: TopStart, To: TopEnd, Color: ColorNames.Red, LineWidth: 0.08)
-                TopLine.name = "TopLine"
-                BucketGridNode?.addChildNode(TopLine)
+                    let TopStart = SCNVector3(-0.5, 10.0, 0.0)
+                    let TopEnd = SCNVector3(10.5, 10.0, 0.0)
+                    let TopLine = MakeLine(From: TopStart, To: TopEnd, Color: ColorNames.Red, LineWidth: 0.08)
+                    TopLine.name = "TopLine"
+                    BucketGridNode?.addChildNode(TopLine)
             }
             
             case .Rotating4:
                 if ShowGrid
                 {
-                //Horizontal bucket lines.
-                for Y in stride(from: 10.0, to: -10.5, by: -1.0)
-                {
-                    #if true
-                    let LineGeometry = SCNGeometry.Line(From: SCNVector3(-10.0, Y, 0.0), To: SCNVector3(10.0, Y, 0.0))
-                    LineGeometry.firstMaterial?.specular.contents = UIColor.gray
-                    LineGeometry.firstMaterial?.diffuse.contents = UIColor.gray
-                    let LineNode = SCNNode(geometry: LineGeometry)
-                    LineNode.name = "Horizontal,\(Int(Y))"
-                    BucketGridNode?.addChildNode(LineNode)
-                    #else
-                    let Start = SCNVector3(0.0, Y, 0.0)
-                    let End = SCNVector3(20.0, Y, 0.0)
-                    let LineNode = MakeLine(From: Start, To: End, Color: ColorNames.White, LineWidth: 0.02)
-                    LineNode.name = "Horizontal,\(Int(Y))"
-                    BucketGridNode?.addChildNode(LineNode)
-                    #endif
-                }
-                //Vertical bucket lines.
-                for X in stride(from: -10.0, to: 10.5, by: 1.0)
-                {
-                    #if true
-                    let LineGeometry = SCNGeometry.Line(From: SCNVector3(X, -10.0, 0.0), To: SCNVector3(X, 10.0, 0.0))
-                    LineGeometry.firstMaterial?.specular.contents = UIColor.gray
-                    LineGeometry.firstMaterial?.diffuse.contents = UIColor.gray
-                    let LineNode = SCNNode(geometry: LineGeometry)
-                    LineNode.name = "Vertical,\(Int(X))"
-                    BucketGridNode?.addChildNode(LineNode)
-                    #else
-                    let Start = SCNVector3(X, 0.0, 0.0)
-                    let End = SCNVector3(X, 20.0, 0.0)
-                    let LineNode = MakeLine(From: Start, To: End, Color: ColorNames.White, LineWidth: 0.02)
-                    LineNode.name = "Vertical,\(Int(X))"
-                    BucketGridNode?.addChildNode(LineNode)
-                    #endif
-                }
+                    //Horizontal bucket lines.
+                    for Y in stride(from: 10.0, to: -10.5, by: -1.0)
+                    {
+                        #if false
+                        let LineGeometry = SCNGeometry.Line(From: SCNVector3(-10.0, Y, 0.0), To: SCNVector3(10.0, Y, 0.0))
+                        LineGeometry.firstMaterial?.specular.contents = UIColor.gray
+                        LineGeometry.firstMaterial?.diffuse.contents = UIColor.gray
+                        let LineNode = SCNNode(geometry: LineGeometry)
+                        LineNode.name = "Horizontal,\(Int(Y))"
+                        BucketGridNode?.addChildNode(LineNode)
+                        #else
+                        let Start = SCNVector3(0.0, Y, 0.0)
+                        let End = SCNVector3(20.0, Y, 0.0)
+                        let LineNode = MakeLine(From: Start, To: End, Color: ColorNames.White, LineWidth: 0.02)
+                        LineNode.name = "Horizontal,\(Int(Y))"
+                        BucketGridNode?.addChildNode(LineNode)
+                        #endif
+                    }
+                    //Vertical bucket lines.
+                    for X in stride(from: -10.0, to: 10.5, by: 1.0)
+                    {
+                        #if false
+                        let LineGeometry = SCNGeometry.Line(From: SCNVector3(X, -10.0, 0.0), To: SCNVector3(X, 10.0, 0.0))
+                        LineGeometry.firstMaterial?.specular.contents = UIColor.gray
+                        LineGeometry.firstMaterial?.diffuse.contents = UIColor.gray
+                        let LineNode = SCNNode(geometry: LineGeometry)
+                        LineNode.name = "Vertical,\(Int(X))"
+                        BucketGridNode?.addChildNode(LineNode)
+                        #else
+                        let Start = SCNVector3(X, 0.0, 0.0)
+                        let End = SCNVector3(X, 20.0, 0.0)
+                        let LineNode = MakeLine(From: Start, To: End, Color: ColorNames.White, LineWidth: 0.02)
+                        LineNode.name = "Vertical,\(Int(X))"
+                        BucketGridNode?.addChildNode(LineNode)
+                        #endif
+                    }
                 }
                 //Outline.
                 if DrawOutline
                 {
-                    #if true
+                    #if false
                     let TopLine = SCNGeometry.Line(From: SCNVector3(-10.0, 10.0, 0.0), To: SCNVector3(10.0, 10.0, 0.0))
                     TopLine.materials.first?.specular.contents = UIColor.red
                     TopLine.materials.first?.diffuse.contents = UIColor.red
@@ -1192,6 +1192,32 @@ class View3D: SCNView,                          //Our main super class.
     var RotateLock = NSObject()
     
     var RotateMe: SCNNode = SCNNode()
+    
+    func RotateContentsTo(_ Angle: Angles, Duration: Double = 0.33, Completed: @escaping () -> Void)
+    {
+        objc_sync_enter(RotateLock)
+        defer{objc_sync_exit(RotateLock)}
+        let Radians = Angle.rawValue * CGFloat.pi / 180.0
+        let RotateAction = SCNAction.rotateTo(x: 0.0, y: 0.0, z: Radians, duration: Duration)
+        RemoveMovingPiece()
+        BucketNode?.runAction(RotateAction, completionHandler: {Completed()})
+        BucketGridNode?.runAction(RotateAction)
+        MasterBlockNode?.runAction(RotateAction)
+        OutlineNode?.runAction(RotateAction)
+    }
+    
+    func RotateContentsToAbsolute(_ Angle: CGFloat, Duration: Double = 0.33, Completed: @escaping () -> Void)
+    {
+        objc_sync_enter(RotateLock)
+        defer{objc_sync_exit(RotateLock)}
+        let Radians = Angle * CGFloat.pi / 180.0
+        let RotateAction = SCNAction.rotateTo(x: 0.0, y: 0.0, z: Radians, duration: Duration)
+        RemoveMovingPiece()
+        BucketNode?.runAction(RotateAction, completionHandler: {Completed()})
+        BucketGridNode?.runAction(RotateAction)
+        MasterBlockNode?.runAction(RotateAction)
+        OutlineNode?.runAction(RotateAction)
+    }
     
     /// Rotates the contents of the game (but not UI or falling piece) by the specified number of degrees.
     /// - Parameter Right: If true, the contents are rotated clockwise. If false, counter-clockwise.
@@ -1472,4 +1498,12 @@ enum CenterShapes: String, CaseIterable
     case BigDiamond = "BigDiamond"
     case Bracket2 = "Bracket2"
     case Bracket4 = "Bracket4"
+}
+
+enum Angles: CGFloat, CaseIterable
+{
+    case Angle0 = 0.0
+    case Angle90 = 90.0
+    case Angle180 = 180.0
+    case Angle270 = 270.0
 }
