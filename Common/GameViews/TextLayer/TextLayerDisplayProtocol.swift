@@ -21,6 +21,7 @@ protocol TextLayerDisplayProtocol: class
     /// - Parameter GameOverLabel: Container for the "Game Over" label.
     /// - Parameter PressPlayLabel: Container for the "Press Play" label.
     /// - Parameter PauseLabel: Container for the "Pause" label.
+    /// - Parameter PieceControl: Piece viewer control for the next piece.
     func SetControls(NextLabel: UIView?,
                      NextPieceView: UIView?,
                      ScoreLabel: UIView?,
@@ -28,7 +29,8 @@ protocol TextLayerDisplayProtocol: class
                      HighScoreLabel: UIView?,
                      GameOverLabel: UIView?,
                      PressPlayLabel: UIView?,
-                     PauseLabel: UIView?)
+                     PauseLabel: UIView?,
+                     PieceControl: PieceViewer?)
     
     /// Show the next label. This is the "Next" string over the view of the next piece.
     /// - Parameter Duration: The number of seconds to fade in the text.
