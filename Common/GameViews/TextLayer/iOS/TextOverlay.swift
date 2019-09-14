@@ -37,6 +37,7 @@ class TextOverlay: TextLayerDisplayProtocol
     /// - Parameter GameOverLabel: Container for the "Game Over" label.
     /// - Parameter PressPlayLabel: Container for the "Press Play" label.
     /// - Parameter PauseLabel: Container for the "Pause" label.
+    /// - Parameter PieceControl: The piece view control.
     func SetControls(NextLabel: UIView?,
                      NextPieceView: UIView?,
                      ScoreLabel: UIView?,
@@ -44,7 +45,8 @@ class TextOverlay: TextLayerDisplayProtocol
                      HighScoreLabel: UIView?,
                      GameOverLabel: UIView?,
                      PressPlayLabel: UIView?,
-                     PauseLabel: UIView?)
+                     PauseLabel: UIView?,
+                     PieceControl: PieceViewer?)
     {
         NextLabelContainer = NextLabel
         NextPieceContainer = NextPieceView
@@ -54,6 +56,7 @@ class TextOverlay: TextLayerDisplayProtocol
         GameOverContainer = GameOverLabel
         PressPlayContainer = PressPlayLabel
         PauseContainer = PauseLabel
+        PieceViewControl = PieceControl
         //The views all have background colors in the interface builder so set everything to transparent here.
         NextLabelContainer?.layer.backgroundColor = UIColor.clear.cgColor
         NextPieceContainer?.layer.backgroundColor = UIColor.clear.cgColor
@@ -71,6 +74,14 @@ class TextOverlay: TextLayerDisplayProtocol
         GameOverContainer?.layer.zPosition = 10000
         PressPlayContainer?.layer.zPosition = 10001
         PauseContainer?.layer.zPosition = 10000
+        
+        PieceViewControl?.backgroundColor = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.35)
+        PieceViewControl?.layer.borderColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.35).cgColor
+        PieceViewControl?.layer.cornerRadius = 5.0
+        PieceViewControl?.layer.borderWidth = 0.5
+        PieceViewControl?.BlockSize = 6
+        PieceViewControl?.alpha = 0.0
+        
         InitializeLabels()
     }
     
@@ -82,6 +93,7 @@ class TextOverlay: TextLayerDisplayProtocol
     var GameOverContainer: UIView? = nil
     var PressPlayContainer: UIView? = nil
     var PauseContainer: UIView? = nil
+    var PieceViewControl: PieceViewer? = nil
     
     private func InitializeLabels()
     {
@@ -386,27 +398,18 @@ class TextOverlay: TextLayerDisplayProtocol
     {
         OperationQueue.main.addOperation
             {
-                #if false
-                if self.NextPiece3D == nil
-                {
-                    self.NextPiece3D = PieceViewer(WithFrame: self.NextLabelContainer!.bounds)
-                    self.NextPiece3D?.backgroundColor = UIColor.clear
-                    self.NextLabelContainer?.addSubview(self.NextPiece3D!)
-                    self.NextPiece3D?.BlockSize = 4
-                    self.NextPiece3D?.SpecularColor = UIColor.black
-                    self.NextPiece3D?.DiffuseColor = UIColor.white
-                    self.NextPiece3D?.RotatePiece(OnX: false, OnY: false, OnZ: true)
-                }
-                self.NextPiece3D?.Clear()
-                self.NextPiece3D?.AddPiece(NextPiece)
+                #if true
+                self.PieceViewControl?.Clear()
+                self.PieceViewControl?.AddPiece(NextPiece)
+                self.PieceViewControl?.RotatePiece(OnX: false, OnY: false, OnZ: true)
                 let FinalDuration = Duration == nil ? 0.1 : Duration!
                 UIView.animate(withDuration: FinalDuration, animations:
                     {
-                        self.NextLabelContainer!.alpha = 1.0
+                        self.PieceViewControl!.alpha = 1.0
                 }, completion:
                     {
                         _ in
-                        self.NextLabelContainer!.alpha = 1.0
+                        self.PieceViewControl!.alpha = 1.0
                 }
                 )
                 #else
@@ -437,21 +440,19 @@ class TextOverlay: TextLayerDisplayProtocol
     {
         OperationQueue.main.addOperation
             {
-                let VisualPiece = self.GetContainerLayer(From: self.NextPieceContainer!, ContainerType: .NextPiece)
+                //let VisualPiece = self.GetContainerLayer(From: self.NextPieceContainer!, ContainerType: .NextPiece)
                 let FinalDuration = Duration == nil ? 0.3 : Duration!
                 UIView.animate(withDuration: FinalDuration, animations:
                     {
-                        VisualPiece?.opacity = 0.0
+                        self.PieceViewControl?.alpha = 0.0
                 }, completion:
                     {
                         _ in
-                        self.NextPieceContainer!.alpha = 0.0
+                        self.PieceViewControl!.alpha = 0.0
                 }
                 )
         }
     }
-    
-    var NextPiece3D: PieceViewer? = nil
     
     /// Show the current score. Assumes the score label is visible.
     /// - Note: Score text layers are generated each time this function is called (because it doesn't make sense to cache
