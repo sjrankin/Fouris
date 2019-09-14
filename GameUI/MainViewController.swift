@@ -170,7 +170,8 @@ class MainViewController: UIViewController,
                                      HighScoreLabel: HighScoreLabelView,
                                      GameOverLabel: GameOverLabelView,
                                      PressPlayLabel: PressPlayLabelView,
-                                     PauseLabel: PauseLabelView)
+                                     PauseLabel: PauseLabelView,
+                                     PieceControl: NextPieceViewControl)
         GameTextOverlay?.ShowPressPlay(Duration: 0.7)
         GameTextOverlay?.HideNextLabel()
         
@@ -623,7 +624,19 @@ class MainViewController: UIViewController,
                 Game!.GameBoard!.Map!.RotateMapRight()
                 if Settings.GetCanRotateBoard()
                 {
+                    #if false
+                    let CRotateValue = (CRotateIndex * 90) % 360
+                    CRotateIndex = CRotateIndex + 1
+                    print("RotateIndex=\(RotateIndex) {\(CRotateValue)}")
+                    GameView3D?.RotateContentsToAbsolute(CGFloat(CRotateValue), Completed: {self.RotateFinishFinalizing()})
+                    RotateIndex = RotateIndex + 1
+                    if RotateIndex >= RightRotations.count
+                    {
+                        RotateIndex = 0
+                    }
+                    #else
                     GameView3D?.RotateContentsRight(Duration: 0.15, Completed: {self.RotateFinishFinalizing()})
+                    #endif
                 }
                 else
                 {
@@ -634,6 +647,11 @@ class MainViewController: UIViewController,
                 break
         }
     }
+    
+    private var CRotateIndex = 0
+    private var RotateIndex = 0
+    private let RightRotations: [Angles] = [.Angle270, .Angle180, .Angle90, .Angle0]
+    private let LeftRotations: [Angles] = [.Angle90, .Angle180, .Angle270, .Angle0]
     
     /// Finish finalizing a piece when no rotation occurs.
     func NoRotateFinishFinalizing()
@@ -971,6 +989,7 @@ class MainViewController: UIViewController,
     func Play()
     {
         ForceResume()
+        RotateIndex = 0
         DebugClient.SetIdiotLight(IdiotLights.B2, Title: "Playing", FGColor: ColorNames.WhiteSmoke, BGColor: ColorNames.PineGreen)
         let GameCountMsg = MessageHelper.MakeKVPMessage(ID: GameCountID, Key: "Game Count", Value: "\(GameCount)")
         DebugClient.SendPreformattedCommand(GameCountMsg)
@@ -985,7 +1004,7 @@ class MainViewController: UIViewController,
         Game.StartGame(EnableAI: InAttractMode, PieceCategories: GamePieces, UseFastAI: UseFastAI)
         
         GameView3D?.DrawMap3D(FromBoard: Game.GameBoard!, CalledFrom: "Play")
-        GameView3D?.FadeBucketGrid()
+        //GameView3D?.FadeBucketGrid()
         GameTextOverlay?.ShowCurrentScore(NewScore: 0)
         CurrentlyPlaying = true
         PlayStopButton?.setTitle("Stop", for: .normal)
@@ -1773,6 +1792,7 @@ class MainViewController: UIViewController,
     @IBOutlet weak var TextLayerView: TextLayerManager!
     @IBOutlet weak var NextPieceLabelView: UIView!
     @IBOutlet weak var NextPieceView: UIView!
+    @IBOutlet weak var NextPieceViewControl: PieceViewer!
     @IBOutlet weak var ScoreLabelView: UIView!
     @IBOutlet weak var CurrentScoreLabelView: UIView!
     @IBOutlet weak var HighScoreLabelView: UIView!
