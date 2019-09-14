@@ -21,10 +21,12 @@ class Piece
     {
         didSet
         {
+            #if false
             if _GameBoard == nil
             {
                 print("GameBoard set to nil in piece \(ID)")
             }
+            #endif
         }
     }
     /// Get or set the game board where the piece will be/is being played.
@@ -616,7 +618,7 @@ class Piece
                     self.RandomRotationTimer = nil
                 }
                 
-                print("Setting GameBoard to nil in Piece.Terminate")
+                //print("Setting GameBoard to nil in Piece.Terminate")
                 self.GameBoard = nil
                 
                 self.Components.removeAll()
@@ -1271,10 +1273,25 @@ class Piece
     /// Called at the end of the freeze time period. The game board is called to freeze the piece into place
     /// and remove it from the list of in-play blocks. Additionally, if the piece is frozen with at least one
     /// one block above the rim of the bucket, the game is over.
-    ///
-    /// - Note: Automatic game over determination is handled here.
+    /// - Note:
+    ///   - Game over determination is handled here.
+    ///   - With certain game types, the freeze timer may continue working even after the piece is frozen and reset (board set
+    ///     to nil, etc). If that happens, this function will not work properly as it relies on `GameBoard` being valid. So, if
+    ///     this function detects `GameBoard` as invalid, it will return without taking any action other than killing the freeze
+    ///     timer.
     @objc func Frozen()
     {
+        if GameBoard == nil
+        {
+            //Nothing to do (or anything that we _can_ do.
+            OperationQueue.main.addOperation
+                {
+                    self.FreezeTimer?.invalidate()
+                    self.FreezeTimer = nil
+            }
+            print(">>>>> Encountered nil GameBoard in Frozen - killed the Freeze timer.")
+            return
+        }
         if !Thread.isMainThread
         {
             print("Calling PieceFroze from thread \((OperationQueue.current?.underlyingQueue?.label)!)")
