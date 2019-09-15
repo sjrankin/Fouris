@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import CoreGraphics
 import SceneKit
+import AVFoundation
 
 /// Runs Tetris in a 3D scene, allowing for more options of viewing and confounding the player.
 class View3D: SCNView,                          //Our main super class.
@@ -198,6 +199,11 @@ class View3D: SCNView,                          //Our main super class.
             
             case .Texture:
                 break
+            
+            case .LiveView:
+                let CaptureDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)!
+                self.backgroundColor = UIColor.clear
+                self.scene?.background.contents = CaptureDevice
             
             case .none:
                 break
