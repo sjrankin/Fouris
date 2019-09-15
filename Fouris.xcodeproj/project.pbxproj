@@ -94,6 +94,8 @@
 		177F4FD9229C1A7600FE72CD /* SerializerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177F4FD8229C1A7600FE72CD /* SerializerExtension.swift */; };
 		177FC1D42318E0F7005727B6 /* ColorPickerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177FC1D32318E0F7005727B6 /* ColorPickerProtocol.swift */; };
 		1782C0F122FE8CA5006CD9D5 /* GeneralAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1782C0F022FE8CA4006CD9D5 /* GeneralAI.swift */; };
+		17831EDB232DD73D007FF894 /* FlyingNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17831EDA232DD73D007FF894 /* FlyingNode.swift */; };
+		17831EDD232DFB54007FF894 /* FlyingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17831EDC232DFB54007FF894 /* FlyingProtocol.swift */; };
 		1785ED6222FD8C0A000B31C2 /* BoardDescriptions.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1785ED6122FD8C09000B31C2 /* BoardDescriptions.xml */; };
 		1785ED6522FD9BB2000B31C2 /* BoardDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1785ED6422FD9BB2000B31C2 /* BoardDescriptor.swift */; };
 		178F4CA6229131A900FBCFFD /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178F4CA5229131A900FBCFFD /* Board.swift */; };
@@ -290,6 +292,8 @@
 		177F4FD8229C1A7600FE72CD /* SerializerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerializerExtension.swift; sourceTree = "<group>"; };
 		177FC1D32318E0F7005727B6 /* ColorPickerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerProtocol.swift; sourceTree = "<group>"; };
 		1782C0F022FE8CA4006CD9D5 /* GeneralAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralAI.swift; sourceTree = "<group>"; };
+		17831EDA232DD73D007FF894 /* FlyingNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlyingNode.swift; sourceTree = "<group>"; };
+		17831EDC232DFB54007FF894 /* FlyingProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlyingProtocol.swift; sourceTree = "<group>"; };
 		1785ED6122FD8C09000B31C2 /* BoardDescriptions.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = BoardDescriptions.xml; sourceTree = "<group>"; };
 		1785ED6422FD9BB2000B31C2 /* BoardDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDescriptor.swift; sourceTree = "<group>"; };
 		178F4CA5229131A900FBCFFD /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
@@ -619,6 +623,16 @@
 			path = CustomControls;
 			sourceTree = "<group>";
 		};
+		17831ED9232DD71E007FF894 /* FlyingPieces */ = {
+			isa = PBXGroup;
+			children = (
+				17AC98212324AB6B0020FB05 /* FlyingPieces.swift */,
+				17831EDA232DD73D007FF894 /* FlyingNode.swift */,
+				17831EDC232DFB54007FF894 /* FlyingProtocol.swift */,
+			);
+			path = FlyingPieces;
+			sourceTree = "<group>";
+		};
 		1797522122C388D300BF539A /* MessageHelper */ = {
 			isa = PBXGroup;
 			children = (
@@ -761,8 +775,8 @@
 		17B875762323CFCC00BD8BBD /* About */ = {
 			isa = PBXGroup;
 			children = (
+				17831ED9232DD71E007FF894 /* FlyingPieces */,
 				17616AC82316497300DFFEFE /* AboutDialogController.swift */,
-				17AC98212324AB6B0020FB05 /* FlyingPieces.swift */,
 			);
 			path = About;
 			sourceTree = "<group>";
@@ -1252,6 +1266,7 @@
 				173762522310E7400075E1DD /* UITouchImageDelegate.swift in Sources */,
 				17E6E8C6227C35C0006D8817 /* ActionButton.swift in Sources */,
 				1797524422C38A4D00BF539A /* +Heartbeat.swift in Sources */,
+				17831EDD232DFB54007FF894 /* FlyingProtocol.swift in Sources */,
 				17C1E90B23190F5E004040B6 /* UIColorExtensions.swift in Sources */,
 				1767D28622AF4959005EE191 /* DebugClient.swift in Sources */,
 				17F0B4B1225CC22A0071514E /* Piece.swift in Sources */,
@@ -1290,6 +1305,7 @@
 				17B8757523236C9A00BD8BBD /* BlockView.swift in Sources */,
 				177F4FC2229BC01600FE72CD /* TileDescriptor.swift in Sources */,
 				1704E302232130E900D7C158 /* ThemeEditingProtocol.swift in Sources */,
+				17831EDB232DD73D007FF894 /* FlyingNode.swift in Sources */,
 				17E71A7722AD21620081991E /* MessageHandlerDelegate.swift in Sources */,
 				17F6ECEC2286E0F0000F8E11 /* GameViewProtocol.swift in Sources */,
 				173AA394231A8F6B00802289 /* PredefinedColorTable.swift in Sources */,
