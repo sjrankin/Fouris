@@ -62,19 +62,19 @@ public class Versioning
     }
     
     /// Build number.
-    public static let Build: Int = 1268
+    public static let Build: Int = 1292
     
     /// Build increment.
     private static let BuildIncrement = 1
     
     /// Build ID.
-    public static let BuildID: String = "ACA30F4D-07C1-4EFB-AC65-636BC808A236"
+    public static let BuildID: String = "0241C664-F9B5-4C51-9FCD-11C47E0BD889"
     
     /// Build date.
-    public static let BuildDate: String = "14 September 2019"
+    public static let BuildDate: String = "15 September 2019"
     
     /// Build Time.
-    public static let BuildTime: String = "18:14"
+    public static let BuildTime: String = "17:17"
     
     /// Return a standard build string.
     ///
@@ -196,7 +196,7 @@ public class Versioning
         let Line2H = NSMutableAttributedString(string: "Version ", attributes: HeaderAttributes)
         let Line2T = NSMutableAttributedString(string: MakeVersionString(IncludeVersionSuffix: true, IncludeVersionPrefix: false) + "\n", attributes: StandardLineAttributes)
         let Line3H = NSMutableAttributedString(string: "Build ", attributes: HeaderAttributes)
-        let Line3T = NSMutableAttributedString(string: MakeBuildString(IncludeBuildPrefix: true) + "\n", attributes: StandardLineAttributes)
+        let Line3T = NSMutableAttributedString(string: MakeBuildString(IncludeBuildPrefix: false) + "\n", attributes: StandardLineAttributes)
         let Line4H = NSMutableAttributedString(string: Parts[3].0 + " ", attributes: HeaderAttributes)
         let Line4T = NSMutableAttributedString(string: Parts[3].1 + "\n", attributes: StandardLineAttributes)
         let Line5H = NSMutableAttributedString(string: "Copyright © ", attributes: HeaderAttributes)
