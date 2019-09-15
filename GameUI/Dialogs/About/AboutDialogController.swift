@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SceneKit
 
-class AboutDialogController: UIViewController
+class AboutDialogController: UIViewController, UINavigationControllerDelegate
 {
     override func viewDidLoad()
     {
@@ -30,6 +30,9 @@ class AboutDialogController: UIViewController
         let Tap = UITapGestureRecognizer(target: self, action: #selector(TitleTap))
         Tap.numberOfTapsRequired = 1
         TitleLabel.addGestureRecognizer(Tap)
+        
+        CameraButton.isUserInteractionEnabled = false
+        CameraButton.alpha = 0.0
     }
     
     @objc func TitleTap(Recognizer: UIGestureRecognizer)
@@ -41,10 +44,30 @@ class AboutDialogController: UIViewController
             if ShowingDisplay
             {
                 PieceDisplay.Play(PieceCount: 400)
+                CameraButton.isUserInteractionEnabled = true
+                UIView.animate(withDuration: 0.5, animations:
+                    {
+                        self.CameraButton.alpha = 1.0
+                }, completion:
+                    {
+                        _ in
+                        self.CameraButton.alpha = 1.0
+                }
+                )
             }
             else
             {
                 PieceDisplay.Stop()
+                CameraButton.isUserInteractionEnabled = false
+                UIView.animate(withDuration: 0.75, animations:
+                    {
+                        self.CameraButton.alpha = 0.0
+                }, completion:
+                    {
+                        _ in
+                        self.CameraButton.alpha = 0.0
+                }
+                )
             }
         }
     }
@@ -59,6 +82,30 @@ class AboutDialogController: UIViewController
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func HandleCameraButtonPress(_ sender: Any)
+    {
+        let PieceImage = PieceDisplay.snapshot()
+        UIImageWriteToSavedPhotosAlbum(PieceImage,
+                                       self,
+                                       #selector(image(_:didFinishSavingWithError:contextInfo:)),
+                                       nil)
+    }
+    
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer)
+    {
+        if let SomeError = error
+        {
+            print("\(SomeError)")
+        }
+        else
+        {
+            let Alert = UIAlertController(title: "Saved", message: "Image save to the camera roll.", preferredStyle: UIAlertController.Style.alert)
+            Alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(Alert, animated: true)
+        }
+    }
+    
+    @IBOutlet weak var CameraButton: UIButton!
     @IBOutlet weak var TitleLabel: UILabel!
     @IBOutlet weak var PieceDisplay: FlyingPieces!
 }
