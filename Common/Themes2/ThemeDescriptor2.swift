@@ -1280,6 +1280,7 @@ enum BackgroundTypes3D: String, CaseIterable
     case Image = "Image"
     case Texture = "Texture"
     case CALayer = "CALayer"
+    case LiveView = "LiveView"
 }
 
 /// 3D antialiasing modes.
