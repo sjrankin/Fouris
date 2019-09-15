@@ -40,7 +40,7 @@ class AboutDialogController: UIViewController
             PieceDisplay.isHidden = !ShowingDisplay
             if ShowingDisplay
             {
-                PieceDisplay.Play(PieceCount: 100)
+                PieceDisplay.Play(PieceCount: 400)
             }
             else
             {
