@@ -62,19 +62,19 @@ public class Versioning
     }
     
     /// Build number.
-    public static let Build: Int = 1295
+    public static let Build: Int = 1306
     
     /// Build increment.
     private static let BuildIncrement = 1
     
     /// Build ID.
-    public static let BuildID: String = "A8F287A1-21A2-43D6-9D88-7F7D1F4D6557"
+    public static let BuildID: String = "655E2C2E-9693-4F57-B580-CA65F92CA747"
     
     /// Build date.
-    public static let BuildDate: String = "15 September 2019"
+    public static let BuildDate: String = "16 September 2019"
     
     /// Build Time.
-    public static let BuildTime: String = "20:27"
+    public static let BuildTime: String = "14:40"
     
     /// Return a standard build string.
     ///
