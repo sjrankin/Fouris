@@ -47,17 +47,15 @@ class Settings
         }
         _Settings.set("Initialized", forKey: "Initialized")
         _Settings.set(AIUserID, forKey: "CurrentUserID")
-        _Settings.set(true, forKey: "EnableHapticFeedback")
+        _Settings.set(false, forKey: "EnableHapticFeedback")
         _Settings.set(false, forKey: "EnableVibrationFeedbackForOldPhones")
         _Settings.set(true, forKey: "ShowAICommandsOnControls")
         _Settings.set(3, forKey: "MaximumSamePiecesInARow")
         _Settings.set(5, forKey: "AISneakPeakCount")
-        _Settings.set(true, forKey: "UseTouchBar")
         _Settings.set(0, forKey: "LastGameViewIndex")
         _Settings.set(false, forKey: "InDistractMode")
         _Settings.set("Standard", forKey: "GameType")
         _Settings.set(true, forKey: "RotateBoard")
-        _Settings.set(true, forKey: "PauseWhenFocusLost")
         _Settings.set(true, forKey: "StartWithAI")
         _Settings.set(true, forKey: "UseTDebug")
         _Settings.set(60.0, forKey: "AutoStartDuration")
@@ -266,20 +264,6 @@ class Settings
         _Settings.set(Enabled, forKey: "StartWithAI")
     }
     
-    /// Returns the flag that indicates the game should pause when it loses focus (for macOS only).
-    /// - Returns: True if the game should pause when the focus is lost, false if not.
-    public static func GetPauseWhenLostFocus() -> Bool
-    {
-        return _Settings.bool(forKey: "PauseWhenFocusLost")
-    }
-    
-    /// Set the pause game when focus lost flag. Valid only for macOS builds only.
-    /// - Parameter Enabled: Value of flag to set.
-    public static func SetPauseWhenLostFocus(Enabled: Bool)
-    {
-        _Settings.set(Enabled, forKey: "PauseWhenFocusLost")
-    }
-    
     /// Returns the current can rotate board flag, which indicates whether rotating boards can be shown
     /// to rotate or just suddenly appear in new orientations.
     /// - Returns: Flag that indicates if boards can rotate (true) or not (false).
@@ -390,23 +374,6 @@ class Settings
     public static func SetCurrent3DThemeID(ID: UUID)
     {
         _Settings.set(ID.uuidString, forKey: "Current3DTheme")
-    }
-    
-    /// Get the enable touch bar (if present) flag.
-    ///
-    /// - Returns: If true and if present, the touch bar is used for motion input. If false, don't use
-    ///            the touch bar even if it's present.
-    public static func EnableTouchBar() -> Bool
-    {
-        return _Settings.bool(forKey: "UseTouchBar")
-    }
-    
-    /// Set the enable touch bar flag.
-    ///
-    /// - Parameter Enabled: The enable touch bar flag.
-    public static func SetTouchBar(Enabled: Bool)
-    {
-        _Settings.set(Enabled, forKey: "UseTouchBar")
     }
     
     /// Returns the maximum number of same pieces in a row before duplicates will be discarded until a different piece
