@@ -35,7 +35,10 @@ import UIKit
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
         if let GameView = self.window?.rootViewController as? MainViewController
         {
-            GameView.ForcePause()
+            if !GameView.MakingVideo
+            {
+                GameView.ForcePause()
+            }
         }
         UIApplication.shared.isIdleTimerDisabled = false
     }
