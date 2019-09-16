@@ -60,6 +60,13 @@ class ThemeEditorController: UIViewController, ThemeEditingProtocol
         return PieceSelect
     }
     
+    @IBSegueAction func InstantiateRawThemeViewer(_ coder: NSCoder) -> RawThemeViewerCode?
+    {
+        let RawEditor = RawThemeViewerCode(coder: coder)
+        RawEditor?.ThemeDelegate = self
+        return RawEditor
+    }
+    
     @IBAction func HandleSaveButtonPressed(_ sender: Any)
     {
         ThemeDelegate?.EditResults(true, ThemeID: ThemeID, PieceID: nil)
@@ -72,6 +79,7 @@ class ThemeEditorController: UIViewController, ThemeEditingProtocol
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBOutlet weak var RawThemeViewButton: UIButton!
     @IBOutlet weak var PiecesView: UIView!
     @IBOutlet weak var BackgroundView: UIView!
     @IBOutlet weak var BucketSettingsView: UIView!
