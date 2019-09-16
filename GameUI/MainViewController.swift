@@ -10,8 +10,11 @@ import Foundation
 import SceneKit
 import MultipeerConnectivity
 import UIKit
+import ReplayKit
 
-class MainViewController: UIViewController, 
+class MainViewController: UIViewController,
+    UINavigationControllerDelegate,                     //Protocol for some system-level kits (such as saving photos).
+    RPPreviewViewControllerDelegate,                    //Protocol for screen recording.
     GameUINotificationProtocol,                         //Protocol for communicating from the game engine (and everything below it) to the UI.
     GameAINotificationProtocol,                         //Protocol for communication from the game AI engine to the UI.
     MainDelegate,                                       //Protocol for exporting some functionality defined in this class.
@@ -121,7 +124,6 @@ class MainViewController: UIViewController,
         AIData = AITestTable()
         
         CurrentBaseGameType = Settings.GetGameType()
-        print("BaseGameType=\(CurrentBaseGameType)")
         
         InitializeGameUI()
         setNeedsStatusBarAppearanceUpdate()
@@ -145,7 +147,6 @@ class MainViewController: UIViewController,
         EnableFreezeInPlaceButton(false)
         
         InitializeSlideIn()
-        print("Initializing game with \(CurrentBaseGameType)")
         Game = GameLogic(BaseGame: CurrentBaseGameType, EnableAI: false)
         Game.UIDelegate = self
         Game.AIDelegate = self
@@ -472,7 +473,7 @@ class MainViewController: UIViewController,
         Level?.Duration = Level!.Duration + GameDuration
         Level?.CumulativeScore = Level!.CumulativeScore + Game.CurrentGameScore
         Level?.CumulativePieces = Level!.CumulativePieces + Game.PiecesInGame
-
+        
         CumulativeDuration = CumulativeDuration + Game!.GameDuration()
         CumulativePieces = CumulativePieces + Double(Game!.PiecesInGame)
         let Mean: Double = CumulativeDuration / CumulativePieces
@@ -1593,7 +1594,7 @@ class MainViewController: UIViewController,
                 print("Game type is already set. No action taken.")
                 return
             }
-           SwitchGameType(BaseType: NewGameType, SubType: GameSubType!)
+            SwitchGameType(BaseType: NewGameType, SubType: GameSubType!)
         }
     }
     
@@ -1754,6 +1755,103 @@ class MainViewController: UIViewController,
         }
     }
     
+    // MARK: Media button handling.
+    
+    /// Handle the camera button press - save the current game view as an image (but not the entire screen).
+    /// - Parameter sender: Not used.
+    @IBAction func HandleCameraButtonPressed(_ sender: Any)
+    {
+        if let GameImage = GameView.AsImage()
+        {
+            UIImageWriteToSavedPhotosAlbum(GameImage,
+                                           self,
+                                           #selector(image(_:didFinishSavingWithError:contextInfo:)),
+                                           nil)
+        }
+        else
+        {
+            print("Error getting image of GameView.")
+        }
+    }
+    
+    /// Callback from the system once the image is saved (or an error generated).
+    /// - Parameter image: Not used.
+    /// - Parameter didFinishSavingWithError: Error message (if nil, no error).
+    /// - Parameter contextInfo: Not used.
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer)
+    {
+        if let SomeError = error
+        {
+            print("\(SomeError)")
+        }
+        else
+        {
+            if Settings.GetConfirmGameImageSave()
+            {
+                let Alert = UIAlertController(title: "Saved", message: "Game image save to the camera roll.", preferredStyle: UIAlertController.Style.alert)
+                Alert.addAction(UIAlertAction(title: "OK", style: .default))
+                self.present(Alert, animated: true)
+            }
+        }
+    }
+    
+    /// Handle the video button pressed. The user should press the button once to start recording, then press again to stop
+    /// recording. This app does not have any access to the video.
+    /// - Note:
+    ///   - The video button acts as a toggle with the tint color of the button changing to show whether the screen is
+    ///     being recorded (red in that case) or not (white when not recording).
+    ///   - The entire screen is recorded as per standard ReplayKit functionality.
+    /// - Parameter sender: Not used.
+    @IBAction func HandleVideoButtonPressed(_ sender: Any)
+    {
+        MakingVideo = !MakingVideo
+        VideoButton.tintColor = MakingVideo ? UIColor.systemRed : UIColor.white
+        if MakingVideo
+        {
+            let Recorder = RPScreenRecorder.shared()
+            Recorder.startRecording
+                {
+                    (error) in
+                    if let Error = error
+                    {
+                        print("\(Error.localizedDescription)")
+                    }
+            }
+        }
+        else
+        {
+            let Recorder = RPScreenRecorder.shared()
+            Recorder.stopRecording(handler:
+                {
+                    PreviewController, error in
+                    if let Error = error
+                    {
+                        print("\(Error.localizedDescription)")
+                    }
+                    if UIDevice.current.userInterfaceIdiom == .pad
+                    {
+                        PreviewController?.modalPresentationStyle = UIModalPresentationStyle.popover
+                        PreviewController?.popoverPresentationController?.sourceRect = CGRect.zero
+                        PreviewController?.popoverPresentationController?.sourceView = self.view
+                    }
+                    if PreviewController != nil
+                    {
+                        PreviewController?.previewControllerDelegate = self
+                    }
+                    self.present(PreviewController!, animated: true)
+            })
+        }
+    }
+    
+    /// The ReplayKit view controller is done. Dismiss it.
+    /// - Parameter previewController: The controller to dismiss.
+    func previewControllerDidFinish(_ previewController: RPPreviewViewController)
+    {
+        previewController.dismiss(animated: true)
+    }
+    
+    public var MakingVideo: Bool = false
+    
     // MARK: Variables used by +MainSlideInUI from within extensions.
     
     /// Stores the command list for the slide in menu/UI.
@@ -1813,6 +1911,8 @@ class MainViewController: UIViewController,
     @IBOutlet weak var DropDownButton: UIButton!
     @IBOutlet weak var UpAndAwayButton: UIButton!
     @IBOutlet weak var RotateRightButton: UIButton!
+    @IBOutlet weak var VideoButton: UIButton!
+    @IBOutlet weak var CameraButton: UIButton!
     
     // MARK: Enum mappings.
     
@@ -1865,3 +1965,16 @@ enum BaseGameSubTypes: String, CaseIterable
     case Empty = "Empty"
 }
 
+extension UIView
+{
+    /// Return the view (and its sub-views) as an image.
+    /// - Returns: UIImage of the instance UIView. Nil on error.
+    func AsImage() -> UIImage?
+    {
+        UIGraphicsBeginImageContextWithOptions(self.frame.size, false, 0.0)
+        self.drawHierarchy(in: self.bounds, afterScreenUpdates: false)
+        let Image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return Image!
+    }
+}
