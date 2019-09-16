@@ -1968,6 +1968,7 @@ enum BaseGameSubTypes: String, CaseIterable
 extension UIView
 {
     /// Return the view (and its sub-views) as an image.
+    /// - Note: See [How to Convert a UIView to an Image](https://stackoverflow.com/questions/30696307/how-to-convert-a-uiview-to-an-image)
     /// - Returns: UIImage of the instance UIView. Nil on error.
     func AsImage() -> UIImage?
     {
