@@ -1274,6 +1274,7 @@ enum GameTypes: String, CaseIterable
 /// - **Image**: Name of an image to display.
 /// - **Texture**: Name of a texture.
 /// - **CALayer**: Name of a CALayer.
+/// - **LiveView**: Uses live view background (when available).
 enum BackgroundTypes3D: String, CaseIterable
 {
     case Color = "Color"
