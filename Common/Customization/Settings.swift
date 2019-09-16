@@ -67,8 +67,21 @@ class Settings
         _Settings.set("", forKey: "MostRecentlyUsedColorList")
         _Settings.set(true, forKey: "ShowClosestColor")
         _Settings.set(0, forKey: "GameBackgroundType")
+        _Settings.set(false, forKey: "ConfirmGameImageSave")
         _Settings.set("83c630ee-81d4-11e9-bc42-526af7764f64", forKey: "CurrentTheme")
         _Settings.set("3f0d9fee-0b77-465b-a0ac-f1663da23cc9", forKey: "Current3DTheme")
+    }
+    
+    /// Get the confirm image saves for the main game view.
+    public static func GetConfirmGameImageSave() -> Bool
+    {
+        return _Settings.bool(forKey: "ConfirmGameImageSave")
+    }
+    
+    /// Set the confirm image save flag for the main game view.
+    public static func SetConfirmGameImageSave(NewValue: Bool)
+    {
+        _Settings.set(NewValue, forKey: "ConfirmGameImageSave")
     }
     
     /// Returns the game background type.
