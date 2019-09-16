@@ -33,6 +33,8 @@ class AboutDialogController: UIViewController, UINavigationControllerDelegate
         
         CameraButton.isUserInteractionEnabled = false
         CameraButton.alpha = 0.0
+        VideoButton.isUserInteractionEnabled = false
+        VideoButton.alpha = 0.0
     }
     
     @objc func TitleTap(Recognizer: UIGestureRecognizer)
@@ -45,27 +47,34 @@ class AboutDialogController: UIViewController, UINavigationControllerDelegate
             {
                 PieceDisplay.Play(PieceCount: 400)
                 CameraButton.isUserInteractionEnabled = true
+                VideoButton.isUserInteractionEnabled = true
                 UIView.animate(withDuration: 0.5, animations:
                     {
                         self.CameraButton.alpha = 1.0
+                        self.VideoButton.alpha = 1.0
                 }, completion:
                     {
                         _ in
                         self.CameraButton.alpha = 1.0
+                        self.VideoButton.alpha = 1.0
                 }
                 )
             }
             else
             {
+                PieceDisplay.StopVideo(Clear: true)
                 PieceDisplay.Stop()
                 CameraButton.isUserInteractionEnabled = false
+                VideoButton.isUserInteractionEnabled = false
                 UIView.animate(withDuration: 0.75, animations:
                     {
                         self.CameraButton.alpha = 0.0
+                        self.VideoButton.alpha = 0.0
                 }, completion:
                     {
                         _ in
                         self.CameraButton.alpha = 0.0
+                        self.VideoButton.alpha = 0.0
                 }
                 )
             }
@@ -91,6 +100,24 @@ class AboutDialogController: UIViewController, UINavigationControllerDelegate
                                        nil)
     }
     
+    @IBAction func HandleVideoButtonPress(_ sender: Any)
+    {
+        CreatingVideo = !CreatingVideo
+        if CreatingVideo
+        {
+            PieceDisplay.StartVideo()
+            VideoButton.tintColor = UIColor.systemRed
+        }
+        else
+        {
+            PieceDisplay.StopVideo()
+            //PieceDisplay.SaveVideo()
+            VideoButton.tintColor = UIColor.systemBlue
+        }
+    }
+    
+    private var CreatingVideo: Bool = false
+    
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer)
     {
         if let SomeError = error
@@ -105,6 +132,7 @@ class AboutDialogController: UIViewController, UINavigationControllerDelegate
         }
     }
     
+    @IBOutlet weak var VideoButton: UIButton!
     @IBOutlet weak var CameraButton: UIButton!
     @IBOutlet weak var TitleLabel: UILabel!
     @IBOutlet weak var PieceDisplay: FlyingPieces!
