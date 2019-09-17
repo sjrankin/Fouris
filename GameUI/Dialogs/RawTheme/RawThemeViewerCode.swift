@@ -102,20 +102,15 @@ class RawThemeViewerCode: UIViewController, UITableViewDataSource, UITableViewDe
                 let NewBool = NewValue as! Bool
                 Settings.SetShowClosestColor(NewValue: NewBool)
         })
-        SettingsGroup.AddField(ID: UUID(), Title: "Game background type", Default: 0 as Any,
-                               Starting: Settings.GetGameBackgroundType() as Any, FieldType: .Int, Handler:
-            {
-                NewValue in
-                let NewInt = NewValue as! Int
-                Settings.SetGameBackgroundType(NewValue: NewInt)
-        })
         FieldTables.append(SettingsGroup)
         
         //Game view.
         let ViewGroup = GroupData("Game View")
         ViewGroup.AddField(ID: UUID(), Title: "Show rendering statistics", Default: false as Any, Starting: false as Any,
                            FieldType: .Bool)
-        ViewGroup.AddField(ID: UUID(), Title: "Antialiasing mode", Default: 2 as Any, Starting: 2 as Any, FieldType: .Int)
+        ViewGroup.AddField(ID: UUID(), Title: "Antialiasing mode", Default: "MultiSampling4X" as Any, Starting: "MultiSampling4X" as Any,
+                           List: GroupData.EnumListToStringList(AntialiasingModes.allCases), FieldType: .StringList,
+                           Description: "The antialiasing mode for the scene view. Anything higher than MultiSampling4X is ignored.")
         ViewGroup.AddField(ID: UUID(), Title: "Field of view", Default: 92.5 as Any, Starting: 92.5 as Any,
                            FieldType: .Double)
         ViewGroup.AddField(ID: UUID(), Title: "Camera position", Default: SCNVector3(-0.5, 2.0, 15.0) as Any,
@@ -124,18 +119,36 @@ class RawThemeViewerCode: UIViewController, UITableViewDataSource, UITableViewDe
                            Starting: SCNVector4(0.0, 0.0, 0.0, 0.0), FieldType: .Vector4)
         ViewGroup.AddField(ID: UUID(), Title: "User can control camera", Default: false as Any, Starting: false as Any,
                            FieldType: .Bool)
+        ViewGroup.AddField(ID: UUID(), Title: "Orthographic", Default: false as Any, Starting: false as Any, FieldType: .Bool)
         ViewGroup.AddField(ID: UUID(), Title: "Use default camera", Default: false as Any, Starting: false as Any, FieldType: .Bool)
         ViewGroup.AddField(ID: UUID(), Title: "Light color", Default: UIColor.white as Any, Starting: UIColor.white as Any,
                            FieldType: .Color)
-        ViewGroup.AddField(ID: UUID(), Title: "Light type", Default: 0 as Any, Starting: 0 as Any, FieldType: .Int)
+        ViewGroup.AddField(ID: UUID(), Title: "Light type", Default: "Omni" as Any, Starting: "Omni" as Any,
+                           List: GroupData.EnumListToStringList(LightTypes.allCases), FieldType: .StringList,
+                           Description: "The type of light for the scene.")
         ViewGroup.AddField(ID: UUID(), Title: "Light position", Default: SCNVector3(-5.0, 15.0, 40.0) as Any,
                            Starting: SCNVector3(-5.0, 15.0, 40.0) as Any, FieldType: .Vector3)
         ViewGroup.AddField(ID: UUID(), Title: "Show background grid", Default: false as Any, Starting: false as Any,
                            FieldType: .Bool)
         ViewGroup.AddField(ID: UUID(), Title: "Show bucket grid", Default: false as Any, Starting: false as Any,
                            FieldType: .Bool)
+        ViewGroup.AddField(ID: UUID(), Title: "Bucket grid color", Default: UIColor.gray as Any, Starting: UIColor.gray as Any,
+                           FieldType: .Color)
         ViewGroup.AddField(ID: UUID(), Title: "Show bucket grid outline", Default: false as Any, Starting: false as Any,
                            FieldType: .Bool)
+        ViewGroup.AddField(ID: UUID(), Title: "Bucket grid outline color", Default: UIColor.red as Any,
+                           Starting: UIColor.red as Any, FieldType: .Color)
+        ViewGroup.AddField(ID: UUID(), Title: "Background type", Default: "Color" as Any, Starting: "Color" as Any,
+                           List: GroupData.EnumListToStringList(BackgroundTypes3D.allCases), FieldType: .StringList,
+                           Description: "The type of background to use for the game.")
+        ViewGroup.AddField(ID: UUID(), Title: "Background solid color", Default: UIColor.red as Any, Starting: UIColor.red as Any,
+                           FieldType: .Color)
+        ViewGroup.AddField(ID: UUID(), Title: "Solid color cycle time", Default: 0.0 as Any, Starting: 0.0 as Any, FieldType: .Double)
+        ViewGroup.AddField(ID: UUID(), Title: "Background image", Default: "IMG_0004.JPG", Starting: "IMG_0004.JPG", FieldType: .Image)
+        ViewGroup.AddField(ID: UUID(), Title: "Bucket rotates right", Default: true as Any, Starting: true as Any, FieldType: .Bool)
+        ViewGroup.AddField(ID: UUID(), Title: "Live view camera", Default: "Rear" as Any, Starting: "Rear" as Any,
+                           List: GroupData.EnumListToStringList(CameraLocations.allCases), FieldType: .StringList,
+                           Description: "The device camera to use for live view backgrounds.")
         FieldTables.append(ViewGroup)
         
         ThemeDataTable.reloadData()
@@ -200,10 +213,10 @@ class RawThemeViewerCode: UIViewController, UITableViewDataSource, UITableViewDe
                 return UITableViewCell()
             
             case .StringList:
-                return UITableViewCell()
-            
-            case .UUID:
-                return UITableViewCell()
+                Cell = StringListCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "StringListCell")
+                Cell?.Parent = self
+                Cell?.FieldDelegate = self
+                Cell?.Initialize(With: FieldData, ParentWidth: Width)
             
             case .Vector3:
                 Cell = Vector3Cell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "Vector3Cell")
@@ -215,8 +228,11 @@ class RawThemeViewerCode: UIViewController, UITableViewDataSource, UITableViewDe
                 Cell?.FieldDelegate = self
                 Cell?.Initialize(With: FieldData, ParentWidth: Width)
             
-            case .Enum:
-            return UITableViewCell()
+            case .Image:
+                Cell = ImageCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "ImageCell")
+                Cell?.FieldDelegate = self
+                Cell?.Parent = self
+                Cell?.Initialize(With: FieldData, ParentWidth: Width)
             
             case .none:
                 return UITableViewCell()
@@ -256,3 +272,4 @@ class RawThemeViewerCode: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBOutlet weak var ThemeDataTable: UITableView!
 }
+
