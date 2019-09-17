@@ -139,6 +139,10 @@
 		179C5E342322533F0003845B /* PieceEditorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179C5E332322533F0003845B /* PieceEditorCode.swift */; };
 		179C5E36232273130003845B /* ColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179C5E35232273130003845B /* ColorButton.swift */; };
 		179CB8CD2326145C0034E25B /* PieceViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179CB8CC2326145C0034E25B /* PieceViewer.swift */; };
+		179F0A74233074040051B148 /* ColorSwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179F0A73233074040051B148 /* ColorSwatch.swift */; };
+		179F0A7C2330C9140051B148 /* StringListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179F0A7B2330C9140051B148 /* StringListCell.swift */; };
+		179F0A7E2330D4B80051B148 /* ThemeEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179F0A7D2330D4B80051B148 /* ThemeEnums.swift */; };
+		179F0A802330FCEA0051B148 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179F0A7F2330FCEA0051B148 /* ImageCell.swift */; };
 		17A45B582271A59F002E705D /* AITestTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A45B572271A59F002E705D /* AITestTable.swift */; };
 		17A45B5B2271A5CC002E705D /* AITestNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A45B5A2271A5CC002E705D /* AITestNode.swift */; };
 		17A45B632271DA98002E705D /* AITestDataUpdatedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A45B612271DA8C002E705D /* AITestDataUpdatedProtocol.swift */; };
@@ -351,6 +355,10 @@
 		179C5E332322533F0003845B /* PieceEditorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceEditorCode.swift; sourceTree = "<group>"; };
 		179C5E35232273130003845B /* ColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorButton.swift; sourceTree = "<group>"; };
 		179CB8CC2326145C0034E25B /* PieceViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceViewer.swift; sourceTree = "<group>"; };
+		179F0A73233074040051B148 /* ColorSwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSwatch.swift; sourceTree = "<group>"; };
+		179F0A7B2330C9140051B148 /* StringListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringListCell.swift; sourceTree = "<group>"; };
+		179F0A7D2330D4B80051B148 /* ThemeEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeEnums.swift; sourceTree = "<group>"; };
+		179F0A7F2330FCEA0051B148 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		17A45B572271A59F002E705D /* AITestTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AITestTable.swift; sourceTree = "<group>"; };
 		17A45B5A2271A5CC002E705D /* AITestNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AITestNode.swift; sourceTree = "<group>"; };
 		17A45B5F2271D8CA002E705D /* MainDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDelegate.swift; sourceTree = "<group>"; };
@@ -523,6 +531,8 @@
 				174C9A6B232FA9DC00A5DC7A /* Vector3Cell.swift */,
 				174C9A6D232FACE900A5DC7A /* Vector4Cell.swift */,
 				174C9A6F232FB54900A5DC7A /* ColorCell.swift */,
+				179F0A7B2330C9140051B148 /* StringListCell.swift */,
+				179F0A7F2330FCEA0051B148 /* ImageCell.swift */,
 			);
 			path = FieldCells;
 			sourceTree = "<group>";
@@ -743,6 +753,7 @@
 				179C5E2923224C190003845B /* ThemeManager2.swift */,
 				179C5E2D23224D570003845B /* ThemeDescriptor2.swift */,
 				179C5E2F23224E350003845B /* TileDescriptor2.swift */,
+				179F0A7D2330D4B80051B148 /* ThemeEnums.swift */,
 			);
 			path = Themes2;
 			sourceTree = "<group>";
@@ -982,6 +993,7 @@
 				1759F6B422AB7F5C00574A01 /* TColor.swift */,
 				17C1E90A23190F5E004040B6 /* UIColorExtensions.swift */,
 				173B4B18231BA165007B22F6 /* RecentlyUsedColors.swift */,
+				179F0A73233074040051B148 /* ColorSwatch.swift */,
 				174CAAD5231CFA2B003823E2 /* ColorSpaceConverter.swift */,
 			);
 			path = Colors;
@@ -1224,6 +1236,7 @@
 				17FC443C228AB9E50065888F /* Score.swift in Sources */,
 				177F4FBF229BBBD300FE72CD /* ThemeDescriptor.swift in Sources */,
 				177F4FC6229BD2F500FE72CD /* Send.swift in Sources */,
+				179F0A802330FCEA0051B148 /* ImageCell.swift in Sources */,
 				17C14E1F23066E1600D9CF64 /* TextLayerDisplayProtocol.swift in Sources */,
 				17CE26A0225F5EE00056818E /* Stack.swift in Sources */,
 				174C9A64232F68F200A5DC7A /* GroupData.swift in Sources */,
@@ -1275,6 +1288,7 @@
 				17AF232523139B6600921E6C /* +TDebugProtocols2.swift in Sources */,
 				173762502310E5F10075E1DD /* UITouchImage.swift in Sources */,
 				174C9A6E232FACE900A5DC7A /* Vector4Cell.swift in Sources */,
+				179F0A7C2330C9140051B148 /* StringListCell.swift in Sources */,
 				17E2904E226357F200E304C9 /* GameLevelDescription.swift in Sources */,
 				1797524622C38A4D00BF539A /* +Broadcasting.swift in Sources */,
 				1721BA7C2260BECF00DC7AFC /* Coin.swift in Sources */,
@@ -1348,6 +1362,7 @@
 				17E71A6B22AD20CC0081991E /* State.swift in Sources */,
 				176F1B71227B0A0000681CDE /* TOC.swift in Sources */,
 				17376352230A85A70050EB22 /* TextOverlay.swift in Sources */,
+				179F0A7E2330D4B80051B148 /* ThemeEnums.swift in Sources */,
 				174BEFDD2287B4DF003A43E5 /* ViewEnvironment.swift in Sources */,
 				17BC04D8229127E1002A6F90 /* PieceIDMap.swift in Sources */,
 				171ED0FB22F567EA00CE2CDF /* AIProtocol.swift in Sources */,
@@ -1383,6 +1398,7 @@
 				17616ACB23166CB000DFFEFE /* SelectGameController.swift in Sources */,
 				177F4FCD229BD42500FE72CD /* Serializer.swift in Sources */,
 				17C898C322CDF60F004EA348 /* ArrayStatistics.swift in Sources */,
+				179F0A74233074040051B148 /* ColorSwatch.swift in Sources */,
 				17F0B494225CBE730071514E /* AppDelegate.swift in Sources */,
 				17CD4EB5231E370B0055E541 /* GradientEditorCode.swift in Sources */,
 				17616ACD23166DF700DFFEFE /* GameStyleTableViewCell.swift in Sources */,
