@@ -71,21 +71,9 @@ class ThemeDescriptor: Serializable
             //String
             _Title = Sanitized
             
-        case "_ViewType":
-            //ViewTypes
-            _ViewType = ViewTypes(rawValue: Sanitized)!
-            
-        case "_BucketType":
-            //BucketTypes
-            _BucketType = BucketTypes(rawValue: Sanitized)!
-            
         case "_BucketColor":
             //String
             _BucketColor = Sanitized
-            
-        case "_BucketImageName":
-            //String
-            _BucketImageName = Sanitized
             
         case "_BucketBlockName":
             //String
@@ -173,10 +161,6 @@ class ThemeDescriptor: Serializable
             
         //Center-related properties
             
-        case "_CenterType":
-            //BucketTypes
-            _CenterType = BucketTypes(rawValue: Sanitized)!
-            
         case "_CenterImageName":
             //String
             _CenterImageName = Sanitized
@@ -184,10 +168,6 @@ class ThemeDescriptor: Serializable
         case "_CenterBlockColor":
             //String
             _CenterBlockColor = Sanitized
-            
-        case "_CenterBlockHasBorder":
-            //Bool
-            _CenterBlockHasBorder = Bool(Sanitized)!
             
         case "_CenterBlockBorderWidth":
             //Double
@@ -905,22 +885,6 @@ class ThemeDescriptor: Serializable
     
     // MARK: Center-related properties.
     
-    /// Holds the type of the center - drawn or image.
-    private var _CenterType: BucketTypes = .Image
-    /// Get or set the graphic type of the center block.
-    public var CenterType: BucketTypes
-    {
-        get
-        {
-            return _CenterType
-        }
-        set
-        {
-            _CenterType = newValue
-            _Dirty = true
-        }
-    }
-    
     /// Holds the name of the center block image.
     private var _CenterImageName: String = "CenterBlock1"
     /// Get or set the name of the center block image.
@@ -1084,38 +1048,6 @@ class ThemeDescriptor: Serializable
     }
     
     // MARK: Bucket-related properties.
-    
-    /// Holds how to draw buckets.
-    private var _BucketType: BucketTypes = .Image
-    /// Get or set the method used to draw buckets.
-    public var BucketType: BucketTypes
-    {
-        get
-        {
-            return _BucketType
-        }
-        set
-        {
-            _BucketType = newValue
-            _Dirty = true
-        }
-    }
-    
-    /// Holds the name of the image to use as the bucket.
-    private var _BucketImageName: String = "FullBucket7"
-    /// Get or set the name of the bucket image. Ignored if `UseBucketImage` is false.
-    public var BucketImageName: String
-    {
-        get
-        {
-            return _BucketImageName
-        }
-        set
-        {
-            _BucketImageName = newValue
-            _Dirty = true
-        }
-    }
     
     /// Holds the name of the image to use to build the bucket.
     private var _BucketBlockName: String = "Bucket18"
@@ -1348,22 +1280,6 @@ class ThemeDescriptor: Serializable
         }
     }
     
-    /// Holds the view type the theme should be used for.
-    private var _ViewType: ViewTypes = .TwoD
-    /// Get or set the view type - this is the type of view (2D or 3D) the theme is intended to be used for.
-    public var ViewType: ViewTypes
-    {
-        get
-        {
-            return _ViewType
-        }
-        set
-        {
-            _ViewType = newValue
-            _Dirty = true
-        }
-    }
-    
     // MARK: Tile lists and list handling.
     
     /// Returns the bucket description from the theme header as a tile.
@@ -1371,8 +1287,8 @@ class ThemeDescriptor: Serializable
     public func GenerateBucketTile() -> TileDescriptor
     {
         let BucketTile = TileDescriptor()
-        BucketTile.ActiveImageName = BucketImageName
-        BucketTile.RetiredImageName = BucketImageName
+        //BucketTile.ActiveImageName = BucketImageName
+        //BucketTile.RetiredImageName = BucketImageName
         BucketTile.BackgroundColor = BucketColor
         BucketTile.RetiredBackgroundColor = BucketColor
         BucketTile.ShowBorder = ShowBucketBorder
@@ -1382,6 +1298,7 @@ class ThemeDescriptor: Serializable
         BucketTile.RetiredBorderThickness = BucketBorderWidth
         BucketTile.TileShape = DrawnBucketTileShape
         BucketTile.RetiredShape = DrawnBucketTileShape
+        /*
         if BucketType == .Drawn
         {
             BucketTile.VisualType = TileVisualTypes.Draw
@@ -1390,6 +1307,7 @@ class ThemeDescriptor: Serializable
         {
             BucketTile.VisualType = TileVisualTypes.Image
         }
+ */
         return BucketTile
     }
     
