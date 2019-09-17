@@ -27,11 +27,10 @@ protocol RawThemeFieldEditProtocol: class
 /// - **Vector3**: SCNVector3 fields.
 /// - **Vector4**: SCNVector4 fields.
 /// - **String**: String fields.
-/// - **UUID**: UUID fields.
 /// - **Color**: UIColor fields.
 /// - **Gradient**: Color gradient fields.
 /// - **StringList**: List of strings fields.
-/// - **Enum**: An enum.
+/// - **Image**: An image (uses image picker).
 enum FieldTypes: String, CaseIterable
 {
     case Bool = "Bool"
@@ -40,9 +39,8 @@ enum FieldTypes: String, CaseIterable
     case Vector3 = "Vector3"
     case Vector4 = "Vector4"
     case String = "String"
-    case UUID = "UUID"
     case Color = "Color"
     case Gradient = "Gradient"
     case StringList = "StringList"
-    case Enum = "Enum"
+    case Image = "Image"
 }
