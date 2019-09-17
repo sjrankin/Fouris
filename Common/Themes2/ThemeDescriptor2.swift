@@ -464,7 +464,7 @@ class ThemeDescriptor2: Serializable
     
     /// Holds the identifier to use to determine the 3D background.
     private var _BackgroundIdentifier3D: String = "Black"
-    /// Get or set the identifier to use in conjuction with `BackgroundType3D` to determine the 3D background.
+    /// Get or set the identifier to use in conjunction with `BackgroundType3D` to determine the 3D background.
     public var BackgroundIdentifier3D: String
     {
         get
@@ -745,22 +745,6 @@ class ThemeDescriptor2: Serializable
     
     // MARK: Center-related properties.
     
-    /// Holds the type of the center - drawn or image.
-    private var _CenterType: BucketTypes = .Image
-    /// Get or set the graphic type of the center block.
-    public var CenterType: BucketTypes
-    {
-        get
-        {
-            return _CenterType
-        }
-        set
-        {
-            _CenterType = newValue
-            _Dirty = true
-        }
-    }
-    
     /// Holds the name of the center block image.
     private var _CenterImageName: String = "CenterBlock1"
     /// Get or set the name of the center block image.
@@ -924,22 +908,6 @@ class ThemeDescriptor2: Serializable
     }
     
     // MARK: Bucket-related properties.
-    
-    /// Holds how to draw buckets.
-    private var _BucketType: BucketTypes = .Image
-    /// Get or set the method used to draw buckets.
-    public var BucketType: BucketTypes
-    {
-        get
-        {
-            return _BucketType
-        }
-        set
-        {
-            _BucketType = newValue
-            _Dirty = true
-        }
-    }
     
     /// Holds the name of the image to use as the bucket.
     private var _BucketImageName: String = "FullBucket7"
@@ -1232,6 +1200,7 @@ class ThemeDescriptor2: Serializable
     }
 }
 
+/*
 /// Types of game views. Used to indiate what game view are valid for a given theme.
 ///
 /// - **TwoD**: Two-dimensional game view.
@@ -1243,7 +1212,9 @@ enum ViewTypes: String, CaseIterable
     case ThreeD = "ThreeD"
     case Both = "Both"
 }
+*/
 
+/*
 /// Indicates how to draw a bucket.
 ///
 /// - **Image**: Use a single bucket image.
@@ -1257,6 +1228,7 @@ enum BucketTypes: String, CaseIterable
     case Drawn = "Drawn"
     case Rendered = "Rendered"
 }
+ */
 
 /// Game types - eg, how pieces fall and where they fall to and how the bucket behaves.
 ///
