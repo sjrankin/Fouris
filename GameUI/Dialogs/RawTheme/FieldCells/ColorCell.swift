@@ -23,12 +23,10 @@ class ColorCell: FieldCell, ColorPickerProtocol
         FieldLabel?.text = FieldTitle
         StyleTitle(FieldLabel!)
         let ColorSwatchWidth: CGFloat = 150.0
-        let ColorSwatchX: CGFloat = ParentWidth - (ColorSwatchWidth + 10)
-        ColorSwatch = UIView(frame: CGRect(x: ColorSwatchX, y: 5.0, width: ColorSwatchWidth, height: 65.0))
-        ColorSwatch.layer.borderColor = UIColor.black.cgColor
-        ColorSwatch.layer.borderWidth = 0.5
-        ColorSwatch.layer.cornerRadius = 5.0
-        ColorSwatch.backgroundColor = CurrentColor
+        let ColorSwatchX: CGFloat = ParentWidth - (ColorSwatchWidth + 20)
+        ColorSwatch = ColorSwatchColor(frame: CGRect(x: ColorSwatchX, y: 5.0, width: ColorSwatchWidth, height: 65.0))
+        ColorSwatch.TopColor = CurrentColor
+        contentView.addSubview(ColorSwatch)
         contentView.addSubview(ColorSwatch)
         let Tap = UITapGestureRecognizer(target: self, action: #selector(HandleTapGesture))
         Tap.numberOfTapsRequired = 1
@@ -42,8 +40,8 @@ class ColorCell: FieldCell, ColorPickerProtocol
         ColorLabel.text = ColorName == nil ? "" : ColorName!
     }
     
+    var ColorSwatch: ColorSwatchColor!
     var CurrentColor: UIColor!
-    var ColorSwatch: UIView!
     var ColorLabel: UILabel!
     
     func ColorToEdit(_ Color: UIColor, Tag: Any?)
@@ -60,7 +58,7 @@ class ColorCell: FieldCell, ColorPickerProtocol
                 if let EditedColor = Edited
                 {
                     CurrentColor = EditedColor
-                    ColorSwatch.backgroundColor = EditedColor
+                    ColorSwatch.TopColor = EditedColor
                     let ColorNames = PredefinedColors.NamesFrom(FindColor: CurrentColor)
                     let ColorName: String? = ColorNames.count > 0 ? ColorNames[0] : nil
                     ColorLabel.text = ColorName == nil ? "" : ColorName!
