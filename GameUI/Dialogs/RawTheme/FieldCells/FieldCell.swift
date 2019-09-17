@@ -47,6 +47,20 @@ class FieldCell: UITableViewCell
         WasInitialized = true
     }
     
+    func Initialize(FieldID: UUID, Title: String, Default: Any, Current: Any, FieldType: FieldTypes,
+                    List: [String], ParentWidth: CGFloat, ChangeHandler: ((Any) -> ())? = nil)
+    {
+        self.selectionStyle = .none
+        FieldTitle = Title
+        ID = FieldID
+        self.Current = Current
+        self.Default = Default
+        self.FieldType = FieldType
+        self.ParentWidth = ParentWidth
+        StringList = List
+        WasInitialized = true
+    }
+    
     func Initialize(With: GroupField, ParentWidth: CGFloat)
     {
         self.selectionStyle = .none
@@ -57,6 +71,8 @@ class FieldCell: UITableViewCell
         FieldType = With.FieldType
         ChangeHandler = With.Handler
         self.ParentWidth = ParentWidth
+        StringList = With.StringList
+        StringListDescription = With.ListDescription
         WasInitialized = true
     }
     
@@ -79,6 +95,10 @@ class FieldCell: UITableViewCell
     public var Current: Any!
     
     public var FieldType: FieldTypes!
+    
+    public var StringList: [String]!
+    
+    public var StringListDescription: String = ""
     
     func StyleTextBox(_ Box: UITextField)
     {
