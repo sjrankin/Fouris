@@ -25,8 +25,11 @@ class MainViewController: UIViewController,
     TDebugProtocol,                                     //Protocol for the debug client to talk to this class.
     StepperHelper,                                      //Protocol for the stepper to display data for the user.
     GameSelectorProtocol,                               //Protocol for selecting games.
-    UITouchImageDelegate                                //Protocol for touch image presses.
+    UITouchImageDelegate,                               //Protocol for touch image presses.
+    SettingsChangedProtocol                             //Protocol for receiving settings change notifications.
 {
+
+    
     // MARK: Globals.
     
     /// 3D game view instance.
@@ -196,7 +199,41 @@ class MainViewController: UIViewController,
     
     func InitializeUI()
     {
+        Settings.AddSubscriber(For: "Main", NewSubscriber: self)
         InitializeGestures()
+        if Settings.ShowFPSInUI()
+        {
+            FPSLabel.text = ""
+            FPSLabel.alpha = 1.0
+        }
+        else
+        {
+            FPSLabel.alpha = 0.0
+        }
+    }
+    
+    /// Handle changed settings.
+    /// - Parameter Field: The settings field that changed.
+    /// - Parameter NewValue: The new value for the specified field.
+    func SettingChanged(Field: SettingsFields, NewValue: Any)
+    {
+        switch Field
+        {
+            case .ShowFPSInUI:
+            let DoShowFPS = NewValue as! Bool
+            if DoShowFPS
+            {
+                FPSLabel.text = ""
+                FPSLabel.alpha = 1.0
+            }
+            else
+            {
+                FPSLabel.alpha = 0.0
+            }
+            
+            default:
+            break
+        }
     }
     
     /// Initialize gesture recognizers for piece motions. Available only on iOS devices.
@@ -480,6 +517,7 @@ class MainViewController: UIViewController,
         /*
          let DbgStr = "Game count: \(GameCount), Mean: \(Convert.RoundToString(Mean, ToNearest: 0.0001, CharCount: 7))"
          */
+        #if false
         let MeanS = Convert.RoundToString(Mean, ToNearest: 0.0001, CharCount: 7)
         var MinFPS = PieceFPS.min()
         if MinFPS == nil
@@ -506,7 +544,11 @@ class MainViewController: UIViewController,
         
         DebugClient.Send(DbgStr)
         //        DebugClient.Send("[\(GameCount)] Game piece count: \(Game!.PiecesInGame), Game duration: \(Game!.GameDuration()), Mean: \(Mean)")
-        
+        #else
+        StopAccumulating = true
+        let MeanVal = AccumulatedFPS / Double(FPSSampleCount)
+        FPSLabel.text = "μ \(Convert.RoundToString(MeanVal, ToNearest: 0.001, CharCount: 6))"
+        #endif
         GameTextOverlay?.ShowPressPlay(Duration: 0.5)
         
         if InAttractMode
@@ -636,7 +678,7 @@ class MainViewController: UIViewController,
                         RotateIndex = 0
                     }
                     #else
-                    GameView3D?.RotateContentsRight(Duration: 0.15, Completed: {self.RotateFinishFinalizing()})
+                    GameView3D?.RotateContentsRight(Duration: 0.33, Completed: {self.RotateFinishFinalizing()})
                     #endif
                 }
                 else
@@ -797,9 +839,17 @@ class MainViewController: UIViewController,
         GameTextOverlay?.ShowNextPiece(Next, Duration: 0.1)
     }
     
+    /// Received a performance sample (eg, frames per second for the most recent second) from the game view.
+    /// - Parameter FPS: Most recent frames per second (eg, the last second) from the game view.
     func PerformanceSample(FPS: Double)
     {
-        PieceFPS.append(FPS)
+        if StopAccumulating
+        {
+            return
+        }
+        AccumulatedFPS = AccumulatedFPS + FPS
+        FPSSampleCount = FPSSampleCount + 1
+        //PieceFPS.append(FPS)
         let FPSS = Convert.RoundToString(FPS, ToNearest: 0.001, CharCount: 6)
         var FG = ColorNames.PineGreen
         var BG = ColorNames.PaleGoldenrod
@@ -809,9 +859,17 @@ class MainViewController: UIViewController,
             BG = ColorNames.YellowPantone
         }
         DebugClient.SetIdiotLight(IdiotLights.C3, Title: "Frame Rate\n\(FPSS)", FGColor: FG, BGColor: BG)
+        if Settings.ShowFPSInUI()
+        {
+            FPSLabel.text = FPSS
+        }
     }
     
-    var PieceFPS = [Double]()
+    var StopAccumulating: Bool = false
+    var AccumulatedFPS: Double = 0.0
+    var FPSSampleCount: Int = 0
+    
+    //var PieceFPS = [Double]()
     
     /// Notice from the game when a column is dropped during the collapse process.
     ///
@@ -982,7 +1040,7 @@ class MainViewController: UIViewController,
     
     func ClearAndPlay()
     {
-        GameView3D?.DestroyMap3D(FromBoard: Game.GameBoard!, CalledFrom: "ClearAndPlay", DestroyBy: .FadeAway,
+        GameView3D?.DestroyMap3D(FromBoard: Game.GameBoard!, CalledFrom: "ClearAndPlay", DestroyBy: .Shrink,
                                  Completion: Play)
     }
     
@@ -990,6 +1048,7 @@ class MainViewController: UIViewController,
     func Play()
     {
         ForceResume()
+        StopAccumulating = false
         RotateIndex = 0
         DebugClient.SetIdiotLight(IdiotLights.B2, Title: "Playing", FGColor: ColorNames.WhiteSmoke, BGColor: ColorNames.PineGreen)
         let GameCountMsg = MessageHelper.MakeKVPMessage(ID: GameCountID, Key: "Game Count", Value: "\(GameCount)")
@@ -1013,7 +1072,9 @@ class MainViewController: UIViewController,
         {
             DebugClient.SetIdiotLight(IdiotLights.A2, Title: "Normal Mode", FGColor: ColorNames.Black, BGColor: ColorNames.White)
         }
+        #if false
         PieceFPS.removeAll()
+        #endif
     }
     
     var GameDuration: Double = 0.0
@@ -1913,6 +1974,7 @@ class MainViewController: UIViewController,
     @IBOutlet weak var RotateRightButton: UIButton!
     @IBOutlet weak var VideoButton: UIButton!
     @IBOutlet weak var CameraButton: UIButton!
+    @IBOutlet weak var FPSLabel: UILabel!
     
     // MARK: Enum mappings.
     
