@@ -75,8 +75,8 @@ class TextOverlay: TextLayerDisplayProtocol
         PressPlayContainer?.layer.zPosition = 10001
         PauseContainer?.layer.zPosition = 10000
         
-        PieceViewControl?.backgroundColor = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.35)
-        PieceViewControl?.layer.borderColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.35).cgColor
+        PieceViewControl?.backgroundColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.5)
+        PieceViewControl?.layer.borderColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.65).cgColor
         PieceViewControl?.layer.cornerRadius = 5.0
         PieceViewControl?.layer.borderWidth = 0.5
         PieceViewControl?.BlockSize = 6
