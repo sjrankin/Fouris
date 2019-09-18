@@ -100,6 +100,10 @@ class View3D: SCNView,                          //Our main super class.
         
         LightNode = CreateLight()
         self.scene?.rootNode.addChildNode(LightNode)
+        
+//        MasterSceneNode = SCNNode()
+//        self.scene?.rootNode.addChildNode(MasterSceneNode!)
+        
         DrawBackground()
         DrawBucketGrid(ShowLines: CurrentTheme!.ShowBucketGrid, IncludingOutline: true)
         OrbitCamera()
@@ -288,7 +292,7 @@ class View3D: SCNView,                          //Our main super class.
             BucketNode?.removeFromParentNode()
         }
         BucketNode = SCNNode()
-        
+
         switch BaseGameType
         {
             case .Standard:
@@ -333,6 +337,7 @@ class View3D: SCNView,                          //Our main super class.
                 CentralNode.position = SCNVector3(0.0, 0.0, 0.0)
                 BucketNode?.addChildNode(CentralNode)
         }
+                //MasterSceneNode?.addChildNode(BucketNode!)
         self.scene?.rootNode.addChildNode(BucketNode!)
         
         _BucketAdded = true
@@ -350,7 +355,6 @@ class View3D: SCNView,                          //Our main super class.
     /// - Returns: Node with the specified line. The node has the name "GridNodes".
     func MakeLine(From: SCNVector3, To: SCNVector3, Color: ColorNames, LineWidth: CGFloat = 0.01) -> SCNNode
     {
-        
         var Width: Float = 0.01
         var Height: Float = 0.01
         let FinalLineWidth = Float(LineWidth)
@@ -382,6 +386,7 @@ class View3D: SCNView,                          //Our main super class.
             let Start = SCNVector3(-64.5, Y, 0.0)
             let End = SCNVector3(128.5, Y, 0.0)
             let LineNode = MakeLine(From: Start, To: End, Color: ColorNames.White)
+//            MasterSceneNode?.addChildNode(LineNode)
             self.scene?.rootNode.addChildNode(LineNode)
         }
         for X in stride(from: -64.5, to: 128.5, by: 1.0)
@@ -389,6 +394,7 @@ class View3D: SCNView,                          //Our main super class.
             let Start = SCNVector3(X, -64.0, 0.0)
             let End = SCNVector3(X, 128.0, 0.0)
             let LineNode = MakeLine(From: Start, To: End, Color: ColorNames.White)
+//            MasterSceneNode?.addChildNode(LineNode)
             self.scene?.rootNode.addChildNode(LineNode)
         }
     }
@@ -885,6 +891,7 @@ class View3D: SCNView,                          //Our main super class.
         }
         MasterBlockNode = SCNNode()
         MasterBlockNode!.name = "Master Block Node"
+//        MasterSceneNode?.addChildNode(MasterBlockNode!)
         self.scene?.rootNode.addChildNode(MasterBlockNode!)
     }
     
@@ -1134,6 +1141,8 @@ class View3D: SCNView,                          //Our main super class.
             case .Cubic:
                 break
         }
+//        MasterSceneNode?.addChildNode(BucketGridNode!)
+//        MasterSceneNode?.addChildNode(OutlineNode!)
         self.scene?.rootNode.addChildNode(BucketGridNode!)
         self.scene?.rootNode.addChildNode(OutlineNode!)
     }
@@ -1229,7 +1238,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter Right: If true, the contents are rotated clockwise. If false, counter-clockwise.
     /// - Parameter Duration: Duration in seconds the rotation should take.
     /// - Parameter Completed: Completion handler called at the end of the rotation.
-    func RotateContents(Right: Bool, Duration: Double = 0.33, Completed: @escaping (() -> Void))
+    func RotateContents(Right: Bool, Duration: Double = 1.0, Completed: @escaping (() -> Void))
     {
         objc_sync_enter(RotateLock)
         defer{objc_sync_exit(RotateLock)}
@@ -1238,18 +1247,16 @@ class View3D: SCNView,                          //Our main super class.
         let RotateAction = SCNAction.rotateBy(x: 0.0, y: 0.0, z: ZRotation, duration: Duration)
         RemoveMovingPiece()
         #if false
-        let temp = SCNNode()
-        temp.addChildNode(BucketNode!)
-        temp.addChildNode(BucketGridNode!)
-        temp.addChildNode(MasterBlockNode!)
-        temp.runAction(RotateAction, completionHandler: {Completed()})
+        self.scene?.rootNode.runAction(RotateAction, completionHandler: {Completed()})
         #else
-        BucketNode?.runAction(RotateAction, completionHandler: {Completed()})
-        BucketGridNode?.runAction(RotateAction)
+        //BucketGridNode?.runAction(RotateAction)
+                //OutlineNode?.runAction(RotateAction)
         MasterBlockNode?.runAction(RotateAction)
-        OutlineNode?.runAction(RotateAction)
+                BucketNode?.runAction(RotateAction, completionHandler: {Completed()})
         #endif
     }
+    
+    private var MasterSceneNode: SCNNode? = nil
     
     /// Rotates the contents of the game (but not UI or falling piece) by 90° right (clockwise).
     /// - Parameter Duration: Duration in seconds the rotation should take.
