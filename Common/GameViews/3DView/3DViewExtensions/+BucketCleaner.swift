@@ -52,6 +52,21 @@ extension View3D
                 {
                     OperationQueue.main.addOperation
                         {
+                            #if false
+                            Block.removeAllActions()
+                            let FadeOut = SCNAction.fadeOut(duration: Double.random(in: 0.25 ... 1.25))
+                            //let Remove = SCNAction.removeFromParentNode()
+                            //let AnimationGroup = SCNAction.group([FadeOut, Remove])
+                            //Block.runAction(AnimationGroup, completionHandler:
+                            Block.runAction(FadeOut, completionHandler:
+                                {
+                                    Completed = Completed + 1
+                                    if Completed == BlockCount
+                                    {
+                                        Completion?()
+                                    }
+                            })
+                            #else
                             UIView.animate(withDuration: Double.random(in: 0.25 ... 1.0), animations:
                                 {
                                     Block.opacity = 0.0
@@ -65,7 +80,46 @@ extension View3D
                                         Completion?()
                                     }
                             })
+                            #endif
                     }
+            }
+            
+            case .Shrink:
+                for Block in self.BlockList
+                {
+                    #if false
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now(), execute:
+                        {
+                            Block.removeAllActions()
+                            let Scale = SCNAction.scale(to: 0.0, duration: Double.random(in: 0.25 ... 1.25))
+                            Block.runAction(Scale, completionHandler:
+                                {
+                                    Completed = Completed + 1
+                                    if Completed == BlockCount
+                                    {
+                                        Completion?()
+                                    }
+                            })
+                    })
+                    #else
+                    OperationQueue.main.addOperation
+                        {
+                            UIView.animate(withDuration: Double.random(in: 0.25 ... 1.0), animations:
+                                {
+                                    Block.scale = SCNVector3(0.0, 0.0, 0.0)
+                                    Block.opacity = 0.0
+                            }, completion:
+                                {
+                                           _ in
+                                Completed = Completed + 1
+                                if Completed == BlockCount
+                                {
+                                Completion?()
+                                }
+                            }
+                                )
+                    }
+                    #endif
             }
             
             case .SpinDown:
