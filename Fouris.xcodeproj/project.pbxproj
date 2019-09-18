@@ -30,6 +30,7 @@
 		171ED10422F56B9F00CE2CDF /* Rotating4GameAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171ED10322F56B9F00CE2CDF /* Rotating4GameAI.swift */; };
 		171ED10722F56D3300CE2CDF /* CubicGameAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171ED10622F56D3300CE2CDF /* CubicGameAI.swift */; };
 		1721BA7C2260BECF00DC7AFC /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721BA7B2260BECF00DC7AFC /* Coin.swift */; };
+		173592C52331FA540028FF9A /* RawThemeViewerCode2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173592C42331FA540028FF9A /* RawThemeViewerCode2.swift */; };
 		173762502310E5F10075E1DD /* UITouchImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1737624F2310E5F10075E1DD /* UITouchImage.swift */; };
 		173762522310E7400075E1DD /* UITouchImageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173762512310E7400075E1DD /* UITouchImageDelegate.swift */; };
 		17376352230A85A70050EB22 /* TextOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17376351230A85A70050EB22 /* TextOverlay.swift */; };
@@ -198,6 +199,14 @@
 		17E71A7D22AD21920081991E /* MultiPeerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E71A7C22AD21920081991E /* MultiPeerDelegate.swift */; };
 		17E71A8322AD21D40081991E /* ClientCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E71A8222AD21D40081991E /* ClientCommands.swift */; };
 		17E74BF0230E7C9B00A62274 /* MainSlideInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E74BEF230E7C9B00A62274 /* MainSlideInView.swift */; };
+		17ECE5A723321897003F4065 /* GroupData2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ECE5A623321897003F4065 /* GroupData2.swift */; };
+		17ECE5A923321EE3003F4065 /* +StringList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ECE5A823321EE3003F4065 /* +StringList.swift */; };
+		17ECE5AC23322540003F4065 /* +PopulateFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ECE5AB23322540003F4065 /* +PopulateFields.swift */; };
+		17ECE5AE23324D09003F4065 /* RawThemeViewerTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ECE5AD23324D09003F4065 /* RawThemeViewerTitleCell.swift */; };
+		17ECE5B023325416003F4065 /* +Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ECE5AF23325416003F4065 /* +Bool.swift */; };
+		17ECE5B2233256D8003F4065 /* +String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ECE5B1233256D8003F4065 /* +String.swift */; };
+		17ECE5B423325720003F4065 /* +Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ECE5B323325720003F4065 /* +Int.swift */; };
+		17ECE5B62332579F003F4065 /* +Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ECE5B52332579F003F4065 /* +Double.swift */; };
 		17ED240B22716273002B92E1 /* ColorServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ED240A22716273002B92E1 /* ColorServer.swift */; };
 		17ED240F22716610002B92E1 /* ColorTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ED240E22716610002B92E1 /* ColorTable.swift */; };
 		17F0B494225CBE730071514E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F0B493225CBE730071514E /* AppDelegate.swift */; };
@@ -244,6 +253,7 @@
 		1721BA7B2260BECF00DC7AFC /* Coin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
 		1722D5DB227697D400E88BF4 /* DebugDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugDelegate.swift; sourceTree = "<group>"; };
 		1722D5E12276B3E100E88BF4 /* ControlUIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlUIProtocol.swift; sourceTree = "<group>"; };
+		173592C42331FA540028FF9A /* RawThemeViewerCode2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawThemeViewerCode2.swift; sourceTree = "<group>"; };
 		1737624F2310E5F10075E1DD /* UITouchImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITouchImage.swift; sourceTree = "<group>"; };
 		173762512310E7400075E1DD /* UITouchImageDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITouchImageDelegate.swift; sourceTree = "<group>"; };
 		17376351230A85A70050EB22 /* TextOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TextOverlay.swift; path = iOS/TextOverlay.swift; sourceTree = "<group>"; };
@@ -415,6 +425,14 @@
 		17E71A7C22AD21920081991E /* MultiPeerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPeerDelegate.swift; sourceTree = "<group>"; };
 		17E71A8222AD21D40081991E /* ClientCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientCommands.swift; sourceTree = "<group>"; };
 		17E74BEF230E7C9B00A62274 /* MainSlideInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSlideInView.swift; sourceTree = "<group>"; };
+		17ECE5A623321897003F4065 /* GroupData2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupData2.swift; sourceTree = "<group>"; };
+		17ECE5A823321EE3003F4065 /* +StringList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+StringList.swift"; sourceTree = "<group>"; };
+		17ECE5AB23322540003F4065 /* +PopulateFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+PopulateFields.swift"; sourceTree = "<group>"; };
+		17ECE5AD23324D09003F4065 /* RawThemeViewerTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawThemeViewerTitleCell.swift; sourceTree = "<group>"; };
+		17ECE5AF23325416003F4065 /* +Bool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Bool.swift"; sourceTree = "<group>"; };
+		17ECE5B1233256D8003F4065 /* +String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+String.swift"; sourceTree = "<group>"; };
+		17ECE5B323325720003F4065 /* +Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Int.swift"; sourceTree = "<group>"; };
+		17ECE5B52332579F003F4065 /* +Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Double.swift"; sourceTree = "<group>"; };
 		17ED240A22716273002B92E1 /* ColorServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorServer.swift; sourceTree = "<group>"; };
 		17ED240E22716610002B92E1 /* ColorTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTable.swift; sourceTree = "<group>"; };
 		17F0B490225CBE730071514E /* Fouris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fouris.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -512,10 +530,14 @@
 		174C9A59232F5CB000A5DC7A /* RawTheme */ = {
 			isa = PBXGroup;
 			children = (
+				17ECE5AA23322515003F4065 /* RawThemeViewerExtensions */,
 				174C9A5E232F615200A5DC7A /* FieldCells */,
 				174C9A5A232F5CC500A5DC7A /* RawThemeViewerCode.swift */,
 				174C9A5C232F5E8A00A5DC7A /* RawThemeFieldEditProtocol.swift */,
 				174C9A63232F68F200A5DC7A /* GroupData.swift */,
+				173592C42331FA540028FF9A /* RawThemeViewerCode2.swift */,
+				17ECE5AD23324D09003F4065 /* RawThemeViewerTitleCell.swift */,
+				17ECE5A623321897003F4065 /* GroupData2.swift */,
 			);
 			path = RawTheme;
 			sourceTree = "<group>";
@@ -590,7 +612,6 @@
 				17616ACC23166DF700DFFEFE /* GameStyleTableViewCell.swift */,
 				17477A702317853C00AAEB14 /* ThemingController.swift */,
 				17477A722317891100AAEB14 /* ThemeEditorController.swift */,
-				17C1E90C23190FBE004040B6 /* OtherExtensions.swift */,
 				1704E301232130E900D7C158 /* ThemeEditingProtocol.swift */,
 			);
 			path = Dialogs;
@@ -608,16 +629,6 @@
 				1762FC1C229D2898000099F2 /* StandardThemes.xml */,
 			);
 			path = Runtime;
-			sourceTree = "<group>";
-		};
-		17660BE622892B0400082E23 /* ControlExtensions */ = {
-			isa = PBXGroup;
-			children = (
-				173762512310E7400075E1DD /* UITouchImageDelegate.swift */,
-				1737624F2310E5F10075E1DD /* UITouchImage.swift */,
-				17660BE722892B1E00082E23 /* UIButtonExtensions.swift */,
-			);
-			path = ControlExtensions;
 			sourceTree = "<group>";
 		};
 		176F1B6B227AD3BD00681CDE /* FileIO */ = {
@@ -680,6 +691,17 @@
 				1754E79D23252C5C00820FDE /* ColorButton */,
 			);
 			path = CustomControls;
+			sourceTree = "<group>";
+		};
+		178054BB2331D4B400916512 /* TypeExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				17660BE722892B1E00082E23 /* UIButtonExtensions.swift */,
+				1737624F2310E5F10075E1DD /* UITouchImage.swift */,
+				173762512310E7400075E1DD /* UITouchImageDelegate.swift */,
+				17C1E90C23190FBE004040B6 /* OtherExtensions.swift */,
+			);
+			path = TypeExtensions;
 			sourceTree = "<group>";
 		};
 		17831ED9232DD71E007FF894 /* FlyingPieces */ = {
@@ -984,6 +1006,19 @@
 			path = "TDebug Extensions";
 			sourceTree = "<group>";
 		};
+		17ECE5AA23322515003F4065 /* RawThemeViewerExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				17ECE5AB23322540003F4065 /* +PopulateFields.swift */,
+				17ECE5A823321EE3003F4065 /* +StringList.swift */,
+				17ECE5AF23325416003F4065 /* +Bool.swift */,
+				17ECE5B1233256D8003F4065 /* +String.swift */,
+				17ECE5B323325720003F4065 /* +Int.swift */,
+				17ECE5B52332579F003F4065 /* +Double.swift */,
+			);
+			path = RawThemeViewerExtensions;
+			sourceTree = "<group>";
+		};
 		17ED240D227165FF002B92E1 /* Colors */ = {
 			isa = PBXGroup;
 			children = (
@@ -1008,6 +1043,7 @@
 				1762FC1B229D2874000099F2 /* Runtime */,
 				177F4FCB229BD40F00FE72CD /* Serialization */,
 				17F0B4A6225CBE930071514E /* Common */,
+				178054BB2331D4B400916512 /* TypeExtensions */,
 				17F0B492225CBE730071514E /* GameUI */,
 				17F0B491225CBE730071514E /* Products */,
 			);
@@ -1027,7 +1063,6 @@
 				17F0B49A225CBE740071514E /* Assets.xcassets */,
 				17E71A8522AD23EF0081991E /* TDebug Extensions */,
 				179A61B5230FA71A00A202BA /* SlideInView */,
-				17660BE622892B0400082E23 /* ControlExtensions */,
 				17616AC72316496300DFFEFE /* Dialogs */,
 				17F0B493225CBE730071514E /* AppDelegate.swift */,
 				171D5D462313FC5200043856 /* MainStoryboard.storyboard */,
@@ -1235,6 +1270,7 @@
 				17477A772317F7E800AAEB14 /* PieceSelectorDialog.swift in Sources */,
 				17FC443C228AB9E50065888F /* Score.swift in Sources */,
 				177F4FBF229BBBD300FE72CD /* ThemeDescriptor.swift in Sources */,
+				17ECE5AC23322540003F4065 /* +PopulateFields.swift in Sources */,
 				177F4FC6229BD2F500FE72CD /* Send.swift in Sources */,
 				179F0A802330FCEA0051B148 /* ImageCell.swift in Sources */,
 				17C14E1F23066E1600D9CF64 /* TextLayerDisplayProtocol.swift in Sources */,
@@ -1255,6 +1291,7 @@
 				174C9A62232F63C200A5DC7A /* BooleanCell.swift in Sources */,
 				1704E2FC2321235500D7C158 /* AnimatedGradient.swift in Sources */,
 				1782C0F122FE8CA5006CD9D5 /* GeneralAI.swift in Sources */,
+				17ECE5B423325720003F4065 /* +Int.swift in Sources */,
 				17477A752317F1C200AAEB14 /* GameBackgroundDialog.swift in Sources */,
 				176F1B6E227AD3D500681CDE /* FileIO.swift in Sources */,
 				1756715C2302695800D0824D /* StepperHelper.swift in Sources */,
@@ -1266,6 +1303,7 @@
 				17E71A8322AD21D40081991E /* ClientCommands.swift in Sources */,
 				17376354230A87EE0050EB22 /* CATextLayer2.swift in Sources */,
 				1713735722EAE67700C9F9A7 /* SCNDodecahedron.swift in Sources */,
+				17ECE5A923321EE3003F4065 /* +StringList.swift in Sources */,
 				17E71A6E22AD20F40081991E /* StateProtocol.swift in Sources */,
 				17C2F3AD231A146C001EF200 /* ColorChipSelectorCode.swift in Sources */,
 				17CE26A3225F63660056818E /* Queue.swift in Sources */,
@@ -1284,6 +1322,7 @@
 				1710BF84231E841500F566B3 /* PresetGradientCell.swift in Sources */,
 				171ED10722F56D3300CE2CDF /* CubicGameAI.swift in Sources */,
 				1704E3002321301E00D7C158 /* SelectBackgroundImageCode.swift in Sources */,
+				17ECE5AE23324D09003F4065 /* RawThemeViewerTitleCell.swift in Sources */,
 				17CE269D225F127C0056818E /* Versioning.swift in Sources */,
 				17AF232523139B6600921E6C /* +TDebugProtocols2.swift in Sources */,
 				173762502310E5F10075E1DD /* UITouchImage.swift in Sources */,
@@ -1291,6 +1330,7 @@
 				179F0A7C2330C9140051B148 /* StringListCell.swift in Sources */,
 				17E2904E226357F200E304C9 /* GameLevelDescription.swift in Sources */,
 				1797524622C38A4D00BF539A /* +Broadcasting.swift in Sources */,
+				17ECE5B023325416003F4065 /* +Bool.swift in Sources */,
 				1721BA7C2260BECF00DC7AFC /* Coin.swift in Sources */,
 				1797524E22C38A4D00BF539A /* +IdiotLights.swift in Sources */,
 				17660BE822892B1E00082E23 /* UIButtonExtensions.swift in Sources */,
@@ -1339,11 +1379,13 @@
 				17C1E90B23190F5E004040B6 /* UIColorExtensions.swift in Sources */,
 				1767D28622AF4959005EE191 /* DebugClient.swift in Sources */,
 				17F0B4B1225CC22A0071514E /* Piece.swift in Sources */,
+				17ECE5B62332579F003F4065 /* +Double.swift in Sources */,
 				174C9A6A232F75FD00A5DC7A /* StringCell.swift in Sources */,
 				174C9A66232F746B00A5DC7A /* IntCell.swift in Sources */,
 				1797524222C38A4D00BF539A /* +VersionInfo.swift in Sources */,
 				1762FC19229CCFF6000099F2 /* RawParser.swift in Sources */,
 				17E71A7A22AD217B0081991E /* MultiPeer.swift in Sources */,
+				173592C52331FA540028FF9A /* RawThemeViewerCode2.swift in Sources */,
 				1797523C22C38A4D00BF539A /* +StatusCommands.swift in Sources */,
 				1754E79C23252C5500820FDE /* GridCell.swift in Sources */,
 				17616AC623163A3400DFFEFE /* SlideInItem.swift in Sources */,
@@ -1384,6 +1426,8 @@
 				17F6ECEC2286E0F0000F8E11 /* GameViewProtocol.swift in Sources */,
 				173AA394231A8F6B00802289 /* PredefinedColorTable.swift in Sources */,
 				17C1E90D23190FBE004040B6 /* OtherExtensions.swift in Sources */,
+				17ECE5A723321897003F4065 /* GroupData2.swift in Sources */,
+				17ECE5B2233256D8003F4065 /* +String.swift in Sources */,
 				1797525022C38A4D00BF539A /* +SpecialAndOtherCommands.swift in Sources */,
 				1749B6E122BB26A0003DC65D /* Conversions.swift in Sources */,
 				179C5E2A23224C190003845B /* ThemeManager2.swift in Sources */,
