@@ -23,6 +23,24 @@ class RawThemeViewerCode: UIViewController, UITableViewDataSource, UITableViewDe
     
     func CreateFieldTables()
     {
+        //Debug
+        let DebugGroup = GroupData("Debug")
+        DebugGroup.AddField(ID: UUID(), Title: "Show FPS in UI", Default: false, Starting: Settings.ShowFPSInUI(),
+                            FieldType: .Bool, Handler:
+            {
+                NewValue in
+                let NewBool = NewValue as! Bool
+                Settings.SetShowFPSInUI(NewValue: NewBool)
+        })
+        DebugGroup.AddField(ID: UUID(), Title: "Use TDebug", Default: true, Starting: Settings.GetUseTDebug(),
+                               FieldType: .Bool, Handler:
+            {
+                NewValue in
+                let NewBool = NewValue as! Bool
+                Settings.SetUseTDebug(Enabled: NewBool)
+        })
+        FieldTables.append(DebugGroup)
+        
         //Settings
         let SettingsGroup = GroupData("Settings")
         SettingsGroup.AddField(ID: UUID(), Title: "Confirm image save", Default: false as Any,
@@ -38,13 +56,6 @@ class RawThemeViewerCode: UIViewController, UITableViewDataSource, UITableViewDe
                 NewValue in
                 let NewDouble = NewValue as! Double
                 Settings.SetAutoStartDuration(ToNewValue: NewDouble)
-        })
-        SettingsGroup.AddField(ID: UUID(), Title: "Use TDebug", Default: true, Starting: Settings.GetUseTDebug(),
-                               FieldType: .Bool, Handler:
-            {
-                NewValue in
-                let NewBool = NewValue as! Bool
-                Settings.SetUseTDebug(Enabled: NewBool)
         })
         SettingsGroup.AddField(ID: UUID(), Title: "Start with AI", Default: false as Any,
                                Starting: Settings.GetStartWithAI() as Any, FieldType: .Bool, Handler:
@@ -138,6 +149,8 @@ class RawThemeViewerCode: UIViewController, UITableViewDataSource, UITableViewDe
                            FieldType: .Bool)
         ViewGroup.AddField(ID: UUID(), Title: "Bucket grid outline color", Default: UIColor.red as Any,
                            Starting: UIColor.red as Any, FieldType: .Color)
+                ViewGroup.AddField(ID: UUID(), Title: "Fade bucket grid", Default: false as Any, Starting: false as Any, FieldType: .Bool)
+        ViewGroup.AddField(ID: UUID(), Title: "Fade bucket outline", Default: false as Any, Starting: false as Any, FieldType:. Bool)
         ViewGroup.AddField(ID: UUID(), Title: "Background type", Default: "Color" as Any, Starting: "Color" as Any,
                            List: GroupData.EnumListToStringList(BackgroundTypes3D.allCases), FieldType: .StringList,
                            Description: "The type of background to use for the game.")
@@ -145,11 +158,21 @@ class RawThemeViewerCode: UIViewController, UITableViewDataSource, UITableViewDe
                            FieldType: .Color)
         ViewGroup.AddField(ID: UUID(), Title: "Solid color cycle time", Default: 0.0 as Any, Starting: 0.0 as Any, FieldType: .Double)
         ViewGroup.AddField(ID: UUID(), Title: "Background image", Default: "IMG_0004.JPG", Starting: "IMG_0004.JPG", FieldType: .Image)
-        ViewGroup.AddField(ID: UUID(), Title: "Bucket rotates right", Default: true as Any, Starting: true as Any, FieldType: .Bool)
         ViewGroup.AddField(ID: UUID(), Title: "Live view camera", Default: "Rear" as Any, Starting: "Rear" as Any,
                            List: GroupData.EnumListToStringList(CameraLocations.allCases), FieldType: .StringList,
                            Description: "The device camera to use for live view backgrounds.")
         FieldTables.append(ViewGroup)
+        
+        //Playing.
+        let PlayGroup = GroupData("Play")
+        PlayGroup.AddField(ID: UUID(), Title: "Rotate bucket between pieces", Default: true as Any, Starting: true as Any, FieldType: .Bool)
+        PlayGroup.AddField(ID: UUID(), Title: "Rotation duration (seconds)", Default: 0.25 as Any, Starting: 0.25 as Any, FieldType: .Double)
+                PlayGroup.AddField(ID: UUID(), Title: "Bucket rotates right", Default: true as Any, Starting: true as Any, FieldType: .Bool)
+        PlayGroup.AddField(ID: UUID(), Title: "Rotate grid", Default: false as Any, Starting: false as Any, FieldType: .Bool)
+        PlayGroup.AddField(ID: UUID(), Title: "Block destruction method", Default: "FadeAway" as Any, Starting: "FadeAway" as Any,
+                           List: GroupData.EnumListToStringList(DestructionMethods.allCases), FieldType: .StringList,
+                           Description: "How the blocks disappear when a new game starts.")
+        FieldTables.append(PlayGroup)
         
         ThemeDataTable.reloadData()
     }
