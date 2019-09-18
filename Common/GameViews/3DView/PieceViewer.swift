@@ -38,7 +38,6 @@ import SceneKit
         self.scene = PieceScene
         self.clipsToBounds = true
         self.antialiasingMode = .multisampling2X
-        self.debugOptions = [SCNDebugOptions.showSkeletons]
         self.allowsCameraControl = true
         AddCameraAndLight()
     }
@@ -52,13 +51,12 @@ import SceneKit
         }
         InfrastructureAdded = true
         
-        _Light = SCNLight()
-        _Light.color = UIColor.white.cgColor
-        _Light.type = .omni
-        let LightNode = SCNNode()
-        LightNode.light = _Light
-        LightNode.position = SCNVector3(-10.0, 10.0, 30.0)
-        self.scene?.rootNode.addChildNode(LightNode)
+        _LightNode = SCNNode()
+        _LightNode.light = SCNLight()
+        _LightNode.light?.color = UIColor.white.cgColor
+        _LightNode.light?.type = .ambient
+        _LightNode.position = SCNVector3(-10.0, 10.0, 30.0)
+        self.scene?.rootNode.addChildNode(_LightNode)
         
         _Camera = SCNCamera()
         _Camera.fieldOfView = 92.5
@@ -70,7 +68,7 @@ import SceneKit
     }
     
     /// The light.
-    private var _Light: SCNLight!
+    private var _LightNode: SCNNode!
     /// The camera.
     private var _Camera: SCNCamera!
         /// Holds the infrastructure (camera and light) added flag.
@@ -154,9 +152,9 @@ import SceneKit
         for (X, Y) in BlockList
         {
             let NodeShape = CreateGeometry(GeoShape: _Shape, Width: UnitSize, Height: UnitSize, Depth: UnitSize)
-            if _EnableTextures && _TextureName != nil
+            if _EnableTextures && _PieceTexture != nil
             {
-                NodeShape.materials.first?.diffuse.contents = UIImage(named: _TextureName!)
+                NodeShape.materials.first?.diffuse.contents = _PieceTexture
             }
             else
             {
@@ -266,6 +264,55 @@ import SceneKit
     }
     
     // MARK: Interface builder-related functions.
+    
+    /// Holds the the texture to use for each block.
+    private var _PieceTexture: UIImage? = nil
+    {
+        didSet
+        {
+            DrawPiece()
+        }
+    }
+    /// Get or set the texture to use for each block. If nil, colors are used instead.
+    @IBInspectable public var PieceTexture: UIImage?
+    {
+        get
+        {
+            return _PieceTexture
+        }
+        set
+        {
+            _PieceTexture = newValue
+        }
+    }
+    
+    /// Holds the show wire frame flag.
+    private var _ShowWireFrame: Bool = true
+    {
+        didSet
+        {
+            if _ShowWireFrame
+            {
+                self.debugOptions = [.showWireframe]
+            }
+            else
+            {
+                self.debugOptions = []
+            }
+        }
+    }
+    /// Get or set the show wire frame flag.
+    @IBInspectable public var ShowWireFrame: Bool
+    {
+        get
+        {
+            return _ShowWireFrame
+        }
+        set
+        {
+            _ShowWireFrame = newValue
+        }
+    }
     
     /// Holds the auto adjust block size flag.
     private var _AutoAdjustBlockSize: Bool = true
@@ -401,44 +448,12 @@ import SceneKit
         }
     }
     
-    /// Holds the name of the texture to use. If this value is nil, `_EnableTextures` is set to false.
-    private var _TextureName: String? = nil
-    {
-        didSet
-        {
-            if _EnableTextures
-            {
-                if _TextureName != nil
-                {
-            DrawPiece()
-                }
-                else
-                {
-                    _EnableTextures = false
-                }
-            }
-        }
-    }
-    /// Get or set the texture name. Setting this property won't change the piece unless `EnableTextures` is
-    /// also true.
-    @IBInspectable public var TextureName: String?
-    {
-        get
-        {
-            return _TextureName
-        }
-        set
-        {
-            _TextureName = newValue
-        }
-    }
-    
     /// Holds the enable textures flag.
     private var _EnableTextures: Bool = false
     {
         didSet
         {
-            if _TextureName != nil
+            if _PieceTexture != nil
             {
             DrawPiece()
             }
