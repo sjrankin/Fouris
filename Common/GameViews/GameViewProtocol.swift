@@ -162,6 +162,7 @@ protocol GameViewProtocol: class
 ///                     games only.
 /// - **ScatterRadially**: Blocks fly away in a straight line radially away from the bucket center.
 /// - **SpinDown**: Blocks spin rapidly and shrink simultaneously.
+/// - **Shrink**: Blocks shrink to nothingness.
 enum DestructionMethods: String, CaseIterable
 {
     case None = "None"
@@ -175,4 +176,5 @@ enum DestructionMethods: String, CaseIterable
     case FlyFromSides = "FlyFromSides"
     case ScatterRadially = "ScatterRadially"
     case SpinDown = "SpinDown"
+    case Shrink = "Shrink"
 }
