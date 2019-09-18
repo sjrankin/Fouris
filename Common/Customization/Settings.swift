@@ -23,6 +23,7 @@ class Settings
     private static var _WasInitialized = false
     private static var DocumentDirectory: URL? = nil
     private static var TableOfContents: TOC? = nil
+    private static var Subscribers: [(String, SettingsChangedProtocol?)]? = nil
     
     /// Initialize the settings. If not called before use, a fatal error will be generated.
     public static func Initialize()
@@ -66,8 +67,59 @@ class Settings
         _Settings.set(true, forKey: "ShowClosestColor")
         _Settings.set(0, forKey: "GameBackgroundType")
         _Settings.set(false, forKey: "ConfirmGameImageSave")
+        _Settings.set(false, forKey: "ShowFPSInUI")
         _Settings.set("83c630ee-81d4-11e9-bc42-526af7764f64", forKey: "CurrentTheme")
         _Settings.set("3f0d9fee-0b77-465b-a0ac-f1663da23cc9", forKey: "Current3DTheme")
+    }
+    
+    /// Add a subscriber for settings change notifications.
+    /// - Note: Not all settings send notifications.
+    /// - Parameter For: Name of the subscriber.
+    /// - Parameter NewSubscriber: The new subscriber.
+    public static func AddSubscriber(For: String, NewSubscriber: SettingsChangedProtocol?)
+    {
+        if Subscribers == nil
+        {
+            Subscribers = [(String, SettingsChangedProtocol?)]()
+        }
+        Subscribers?.append((For, NewSubscriber))
+    }
+    
+    /// Remove a subscriber from settings change notifications.
+    /// - Parameter From: Name of the subscriber.
+    /// - Parameter OldSubscriber: The subscriber to remove.
+    public static func RemoveSubscriber(From: String, OldSubscriber: SettingsChangedProtocol?)
+    {
+        if Subscribers == nil
+        {
+            return
+        }
+        Subscribers = Subscribers?.filter({!($0.0 == From)})
+    }
+    
+    /// Send a setting change notice to subscribers.
+    private static func SendNotice(From: SettingsFields, NewValue: Any)
+    {
+        if let SubscriberList = Subscribers
+        {
+            for Subscriber in SubscriberList
+            {
+                Subscriber.1?.SettingChanged(Field: From, NewValue: NewValue)
+            }
+        }
+    }
+    
+    /// Get the show FPS rate in the UI flag.
+    public static func ShowFPSInUI() -> Bool
+    {
+        return _Settings.bool(forKey: "ShowFPSInUI")
+    }
+    
+    /// Set the show FPS rate in the UI flag.
+    public static func SetShowFPSInUI(NewValue: Bool)
+    {
+        _Settings.set(NewValue, forKey: "ShowFPSInUI")
+        SendNotice(From: .ShowFPSInUI, NewValue: NewValue as Any)
     }
     
     /// Get the confirm image saves for the main game view.
@@ -892,4 +944,15 @@ extension Array where Element == Int
         }
         return Closest
     }
+}
+
+
+protocol SettingsChangedProtocol
+{
+    func SettingChanged(Field: SettingsFields, NewValue: Any)
+}
+
+enum SettingsFields: String, CaseIterable
+{
+    case ShowFPSInUI = "ShowFPSInUI"
 }
