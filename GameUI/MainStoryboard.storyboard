@@ -46,10 +46,12 @@
                                                             <userDefinedRuntimeAttribute type="color" keyPath="DiffuseColor">
                                                                 <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="EnableTextures" value="NO"/>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="EnableTextures" value="YES"/>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="BlockSize">
                                                                 <real key="value" value="3"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="ShowWireFrame" value="NO"/>
+                                                            <userDefinedRuntimeAttribute type="image" keyPath="PieceTexture" value="SamplePieceTexture"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </sceneKitView>
                                                 </subviews>
@@ -461,17 +463,27 @@
                                     <constraint firstItem="YHH-Jn-x5g" firstAttribute="leading" secondItem="yU0-Pv-MTo" secondAttribute="leadingMargin" id="wGr-wY-bao"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FPS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MSu-y0-Ijr">
+                                <rect key="frame" x="118" y="40" width="187" height="34"/>
+                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="30"/>
+                                <color key="textColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="eVc-5x-EsU" firstAttribute="bottom" secondItem="OtM-y9-PH5" secondAttribute="bottom" id="CbC-Ts-7dq"/>
+                            <constraint firstItem="MSu-y0-Ijr" firstAttribute="centerY" secondItem="mwG-lI-7bz" secondAttribute="centerY" id="Hdl-9m-zO5"/>
                             <constraint firstItem="mwG-lI-7bz" firstAttribute="leading" secondItem="OtM-y9-PH5" secondAttribute="leading" id="MUU-j2-u9x"/>
+                            <constraint firstItem="MSu-y0-Ijr" firstAttribute="top" secondItem="OtM-y9-PH5" secondAttribute="top" constant="40" id="Rev-MD-r1C"/>
                             <constraint firstItem="mwG-lI-7bz" firstAttribute="trailing" secondItem="tQ9-Ul-CQv" secondAttribute="trailing" id="SL9-c6-fLp"/>
                             <constraint firstItem="mwG-lI-7bz" firstAttribute="centerX" secondItem="yU0-Pv-MTo" secondAttribute="centerX" constant="229" id="TLJ-0V-6hI"/>
                             <constraint firstItem="yU0-Pv-MTo" firstAttribute="leading" secondItem="OtM-y9-PH5" secondAttribute="leading" constant="5" id="WKR-0l-y81"/>
                             <constraint firstItem="eVc-5x-EsU" firstAttribute="top" secondItem="tQ9-Ul-CQv" secondAttribute="bottom" id="XwD-9K-uTx"/>
+                            <constraint firstItem="MSu-y0-Ijr" firstAttribute="leading" secondItem="OtM-y9-PH5" secondAttribute="leading" constant="118" id="Yip-Ig-FZC"/>
                             <constraint firstItem="mwG-lI-7bz" firstAttribute="top" secondItem="OtM-y9-PH5" secondAttribute="top" constant="25" id="b89-pG-3Ro"/>
                             <constraint firstItem="mwG-lI-7bz" firstAttribute="leading" secondItem="tQ9-Ul-CQv" secondAttribute="leading" id="beT-QU-FlR"/>
+                            <constraint firstItem="OtM-y9-PH5" firstAttribute="trailing" secondItem="MSu-y0-Ijr" secondAttribute="trailing" constant="463" id="dpW-PH-fUf"/>
                             <constraint firstItem="XWq-tv-MbH" firstAttribute="trailing" secondItem="mwG-lI-7bz" secondAttribute="trailing" id="ePc-tx-nxb"/>
                             <constraint firstItem="tQ9-Ul-CQv" firstAttribute="top" secondItem="mwG-lI-7bz" secondAttribute="bottom" id="efL-xw-Eff"/>
                             <constraint firstItem="XWq-tv-MbH" firstAttribute="top" secondItem="B0c-tZ-5fb" secondAttribute="topMargin" constant="-77" id="j72-KU-O66"/>
@@ -489,6 +501,7 @@
                         <outlet property="CameraButton" destination="pad-7u-YZb" id="mxY-T6-X9H"/>
                         <outlet property="CurrentScoreLabelView" destination="dht-P4-rIC" id="0T0-Vf-V9v"/>
                         <outlet property="DropDownButton" destination="5s2-sY-YZn" id="VJ0-LA-lNb"/>
+                        <outlet property="FPSLabel" destination="MSu-y0-Ijr" id="Z5M-jo-YED"/>
                         <outlet property="FreezeInPlaceButton" destination="lCp-Yu-s9Q" id="UgN-Eh-ers"/>
                         <outlet property="GameControlView" destination="mwG-lI-7bz" id="zAR-O3-7sI"/>
                         <outlet property="GameOverLabelView" destination="fG3-c2-56a" id="myF-XF-REC"/>
@@ -748,6 +761,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="SamplePieceTexture" width="64" height="64"/>
         <image name="arrow.clockwise.circle" catalog="system" width="64" height="62"/>
         <image name="arrow.counterclockwise.circle" catalog="system" width="64" height="62"/>
         <image name="arrowtriangle.down.fill" catalog="system" width="64" height="60"/>
