@@ -60,13 +60,6 @@ class ThemeEditorController: UIViewController, ThemeEditingProtocol
         return PieceSelect
     }
     
-    @IBSegueAction func InstantiateRawThemeViewer(_ coder: NSCoder) -> RawThemeViewerCode?
-    {
-        let RawEditor = RawThemeViewerCode(coder: coder)
-        RawEditor?.ThemeDelegate = self
-        return RawEditor
-    }
-    
     @IBAction func HandleSaveButtonPressed(_ sender: Any)
     {
         ThemeDelegate?.EditResults(true, ThemeID: ThemeID, PieceID: nil)
