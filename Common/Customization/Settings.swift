@@ -60,6 +60,7 @@ class Settings
         _Settings.set(true, forKey: "StartWithAI")
         _Settings.set(true, forKey: "UseTDebug")
         _Settings.set(60.0, forKey: "AutoStartDuration")
+        _Settings.set(15.0, forKey: "AfterGameWaitDuration")
         _Settings.set(0, forKey: "ColorPickerColorSpace")
         _Settings.set(false, forKey: "ShowAlphaInColorPicker")
         _Settings.set(20, forKey: "MostRecentlyUsedColorCapacity")
@@ -261,6 +262,25 @@ class Settings
             return
         }
         _Settings.set(NewValue, forKey: "ColorPickerColorSpace")
+    }
+    
+    /// Get the amount of time to wait from game over to when to start a new game in attract mode.
+    /// - Returns: Number of seconds to wait between game over and staring a new game.
+    public static func GetAfterGameWaitDuration() -> Double
+    {
+        var WaitDuration = _Settings.double(forKey: "AfterGameWaitDuration")
+        if WaitDuration <= 0.0
+        {
+            WaitDuration = 15.0
+        }
+        return WaitDuration
+    }
+    
+    /// Sets a new wait time between game over and auto starting a new game in attract mode.
+    /// - Parameter NewValue: New wait time in seconds.
+    public static func SetAfterGameWaitDuration(NewValue: Double)
+    {
+        _Settings.set(NewValue, forKey: "AfterGameWaitDuration")
     }
     
     /// Get the auto start duration (the amount of time (in seconds) between when the start finishes
