@@ -24,8 +24,10 @@ class GradientEditorCode: UIViewController, GradientPickerProtocol,
     {
         super.viewDidLoad()
         
+        var Vertical: Bool!
+        var Reverse: Bool!
         OriginalGradient = CurrentGradient
-        GradientStopList = GradientManager.ParseGradient(CurrentGradient)
+        GradientStopList = GradientManager.ParseGradient(CurrentGradient, Vertical: &Vertical, Reverse: &Reverse)
         GradientView.backgroundColor = UIColor.black
         GradientView.layer.borderColor = UIColor.black.cgColor
         GradientView.layer.borderWidth = 0.5
@@ -63,7 +65,9 @@ class GradientEditorCode: UIViewController, GradientPickerProtocol,
             let SampleGradient = GradientManager.CreateGradientImage(From: WithGradient, WithFrame: GradientView.bounds,
                                                                      IsVertical: IsVertical, ReverseColors: false)
             GradientView.image = SampleGradient
-            GradientStopList = GradientManager.ParseGradient(WithGradient)
+            var Vertical: Bool!
+            var Reverse: Bool!
+            GradientStopList = GradientManager.ParseGradient(WithGradient, Vertical: &Vertical, Reverse: &Reverse)
         }
         GradientStopTable.reloadData()
     }
