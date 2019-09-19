@@ -495,8 +495,9 @@ class MainViewController: UIViewController,
         GameTextOverlay?.ShowGameOver(Duration: 0.4, HideAfter: 10.0)
         GameTextOverlay?.ShowCurrentScore(NewScore: Game.CurrentGameScore)
         GameTextOverlay?.ShowHighScore(NewScore: Game.HighScore)
-        GameTextOverlay?.HideNextLabel(Duration: 0.5)
+        GameTextOverlay?.HideNextLabel(Duration: 0.1)
         GameTextOverlay?.HideNextPiece(Duration: 0.1)
+                GameTextOverlay?.ShowPressPlay(Duration: 0.5)
         
         let UserIDString = UserDefaults.standard.string(forKey: "CurrentUserID")!
         let UserID = UUID(uuidString: UserIDString)!
@@ -549,8 +550,7 @@ class MainViewController: UIViewController,
         let MeanVal = AccumulatedFPS / Double(FPSSampleCount)
         FPSLabel.text = "μ \(Convert.RoundToString(MeanVal, ToNearest: 0.001, CharCount: 6))"
         #endif
-        GameTextOverlay?.ShowPressPlay(Duration: 0.5)
-        
+
         if InAttractMode
         {
             let _ = Timer.scheduledTimer(timeInterval: 10.0, target: self,
@@ -559,8 +559,7 @@ class MainViewController: UIViewController,
         }
         else
         {
-            //Eventually we need to change the time interval to something longer...
-            let _ = Timer.scheduledTimer(timeInterval: 10.0, target: self,
+            let _ = Timer.scheduledTimer(timeInterval: Settings.GetAfterGameWaitDuration(), target: self,
                                          selector: #selector(AutoStartInAttractMode),
                                          userInfo: nil, repeats: false)
         }
@@ -1038,6 +1037,7 @@ class MainViewController: UIViewController,
     
     let GameCountID = UUID()
     
+    /// Clears the game board then starts a new game.
     func ClearAndPlay()
     {
         GameView3D?.DestroyMap3D(FromBoard: Game.GameBoard!, CalledFrom: "ClearAndPlay", DestroyBy: .Shrink,
