@@ -8,13 +8,16 @@
 
 import Foundation
 import UIKit
+import Photos
 
 class RawThemeViewerCode2: UIViewController, UITableViewDelegate, UITableViewDataSource,
     UIPickerViewDelegate, UIPickerViewDataSource,
-    ThemeEditingProtocol, RawThemeFieldEditProtocol
+    UIImagePickerControllerDelegate, UINavigationControllerDelegate,
+    PHPhotoLibraryChangeObserver,
+    ThemeEditingProtocol, RawThemeFieldEditProtocol,
+    GradientPickerProtocol, ColorPickerProtocol
 {
-
-    
+    weak var ColorDelegate: ColorPickerProtocol? = nil
     weak var ThemeDelegate: ThemeEditingProtocol? = nil
     
     override func viewDidLoad()
@@ -41,6 +44,14 @@ class RawThemeViewerCode2: UIViewController, UITableViewDelegate, UITableViewDat
         DetailViews.append(StringListView)
         InitializeViews()
         PopulateFields()
+        InitializeColorSwatch()
+        InitializeGradientPicker()
+        InitializeImagePicker()
+    }
+    
+    deinit
+    {
+        PHPhotoLibrary.shared().unregisterChangeObserver(self)
     }
     
     var CurrentField: GroupField2? = nil
@@ -55,6 +66,25 @@ class RawThemeViewerCode2: UIViewController, UITableViewDelegate, UITableViewDat
         }
         StartingView.alpha = 1.0
         CurrentView = StartingView
+    }
+    
+    func InitializeColorSwatch()
+    {
+        let Tap = UITapGestureRecognizer(target: self, action: #selector(HandleColorTapped))
+        Tap.numberOfTapsRequired = 1
+        ColorSwatch.addGestureRecognizer(Tap)
+    }
+    
+    func InitializeGradientPicker()
+    {
+        let Tap = UITapGestureRecognizer(target: self, action: #selector(HandleGradientTapped))
+        Tap.numberOfTapsRequired = 1
+        GradientViewer.addGestureRecognizer(Tap)
+    }
+    
+func InitializeImagePicker()
+{
+    PHPhotoLibrary.shared().register(self)
     }
     
     private var CurrentView: UIView? = nil
@@ -182,6 +212,15 @@ class RawThemeViewerCode2: UIViewController, UITableViewDelegate, UITableViewDat
                 case .StringList:
                     PopulateStringListView(WithField: Field)
                 
+                case .Color:
+                    PopulateColorView(WithField: Field)
+                
+                case .Vector3:
+                PopulateVector3View(WithField: Field)
+                
+                case .Vector4:
+                    PopulateVector4View(WithField: Field)
+                
                 default:
                     break
             }
@@ -255,6 +294,89 @@ class RawThemeViewerCode2: UIViewController, UITableViewDelegate, UITableViewDat
         return Cell
     }
     
+    // MARK: Gradient picker functions.
+    
+    @objc func HandleGradientTapped(Recognizer: UIGestureRecognizer)
+    {
+        if Recognizer.state == .ended
+        {
+            let GradientControllerUI = UIStoryboard(name: "Theming", bundle: nil)
+            let GradientController = GradientControllerUI.instantiateViewController(identifier: "GradientEditorUI") as! GradientEditorCode
+            GradientController.GradientDelegate = self
+            GradientController.GradientToEdit(CurrentField?.State as! String, Tag: "RawViewerGradient")
+            self.present(GradientController, animated: true, completion: nil)
+        }
+    }
+    
+    func EditedGradient(_ Edited: String?, Tag: Any?)
+    {
+        if let RawTag = Tag as? String
+        {
+            if RawTag == "RawViewerGradient"
+            {
+                if let FinalGradient = Edited
+                {
+                    
+                }
+            }
+        }
+    }
+    @IBAction func HandleReverseGradientColorsChanged(_ sender: Any)
+    {
+    }
+    
+    @IBAction func HandleVerticalGradientChanged(_ sender: Any)
+    {
+    }
+    
+    func GradientToEdit(_ Edited: String?, Tag: Any?)
+    {
+        //Not used here.
+    }
+    
+    func SetStop(StopColorIndex: Int)
+    {
+        //Not used here.
+    }
+    
+    // MARK: Color picker functions.
+    
+    func ColorToEdit(_ Color: UIColor, Tag: Any?)
+    {
+        //Not used here.
+    }
+    
+    func EditedColor(_ Edited: UIColor?, Tag: Any?)
+    {
+        if let RawTag = Tag as? String
+        {
+            if RawTag == "RawViewerColor"
+            {
+                if let FinalColor = Edited
+                {
+                    ColorSwatch.TopColor = FinalColor
+                    let ColorNames = PredefinedColors.NamesFrom(FindColor: FinalColor)
+                    let ColorName: String? = ColorNames.count > 0 ? ColorNames[0] : nil
+                    ColorControlTitle.text = ColorName == nil ? "" : ColorName!
+                    ColorViewDirty.alpha = 1.0
+                    ColorViewDirty.tintColor = UIColor.red
+                }
+            }
+        }
+    }
+    
+    @objc func HandleColorTapped(Recognizer: UIGestureRecognizer)
+    {
+        if Recognizer.state == .ended
+        {
+            let ColorControllerUI = UIStoryboard(name: "Theming", bundle: nil)
+            let ColorController = ColorControllerUI.instantiateViewController(identifier: "ColorPicker") as! ColorPickerCode
+            ColorController.ColorDelegate = self
+            ColorController.ColorToEdit(ColorSwatch.TopColor, Tag: "RawViewerColor")
+            self.present(ColorController, animated: true, completion: nil)
+        }
+    }
+    
     // MARK: Theme editing functions.
     
     func EditTheme(ID: UUID)
@@ -293,7 +415,7 @@ class RawThemeViewerCode2: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func BoolDefaultPressed(_ sender: Any)
     {
-                BoolViewDirty.alpha = 0.0
+        BoolViewDirty.alpha = 0.0
     }
     
     @IBAction func BoolApplyPressed(_ sender: Any)
@@ -323,6 +445,11 @@ class RawThemeViewerCode2: UIViewController, UITableViewDelegate, UITableViewDat
     
     // MARK: Image button handling.
     
+    func photoLibraryDidChange(_ changeInstance: PHChange)
+    {
+        //Not used.
+    }
+    
     @IBAction func ImageApplyPressed(_ sender: Any)
     {
         ImageViewDirty.alpha = 0.0
@@ -330,7 +457,7 @@ class RawThemeViewerCode2: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func ImageDefaultPressed(_ sender: Any)
     {
-                ImageViewDirty.alpha = 0.0
+        ImageViewDirty.alpha = 0.0
     }
     
     @IBAction func ImageProgramImagePressed(_ sender: Any)
@@ -341,8 +468,28 @@ class RawThemeViewerCode2: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func ImagePhotoRollPressed(_ sender: Any)
     {
-        ImageViewDirty.alpha = 1.0
-        ImageViewDirty.tintColor = UIColor.red
+        ImagePicker = UIImagePickerController()
+        ImagePicker?.delegate = self
+        ImagePicker?.allowsEditing = false
+        ImagePicker?.sourceType = .photoLibrary
+        self.present(ImagePicker!, animated: true, completion: nil)
+    }
+    
+    var ImagePicker: UIImagePickerController? = nil
+    var ImageName: String!
+    
+    @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any])
+    {
+        if let PickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        {
+            ImageViewer.image = PickedImage
+            let Assets = info[UIImagePickerController.InfoKey.phAsset] as? PHAsset
+            let AssetResources = PHAssetResource.assetResources(for: Assets!)
+            ImageName = AssetResources.first!.originalFilename
+            CurrentField?.State = ImageName as Any
+            ImageViewDirty.alpha = 1.0
+            ImageViewDirty.tintColor = UIColor.red
+        }
     }
     
     // MARK: Gradient button handling.
@@ -354,7 +501,7 @@ class RawThemeViewerCode2: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func GradientDefaultPressed(_ sender: Any)
     {
-                GradientViewDirty.alpha = 0.0
+        GradientViewDirty.alpha = 0.0
     }
     
     // MARK: Color button handling.
@@ -366,7 +513,7 @@ class RawThemeViewerCode2: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func ColorDefaultPressed(_ sender: Any)
     {
-                ColorViewDirty.alpha = 0.0
+        ColorViewDirty.alpha = 0.0
     }
     
     // MARK: Double button handling.
@@ -378,7 +525,7 @@ class RawThemeViewerCode2: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func DoubleDefaultPressed(_ sender: Any)
     {
-                DoubleViewDirty.alpha = 0.0
+        DoubleViewDirty.alpha = 0.0
     }
     
     // MARK: Int button handling.
@@ -390,7 +537,7 @@ class RawThemeViewerCode2: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func IntDefaultPressed(_ sender: Any)
     {
-                IntViewDirty.alpha = 0.0
+        IntViewDirty.alpha = 0.0
     }
     
     // MARK: String button handling.
@@ -402,7 +549,7 @@ class RawThemeViewerCode2: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func StringDefaultPressed(_ sender: Any)
     {
-                StringViewDirty.alpha = 0.0
+        StringViewDirty.alpha = 0.0
     }
     
     // MARK: Vector3 button handling.
@@ -414,19 +561,19 @@ class RawThemeViewerCode2: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func Vector3DefaultPressed(_ sender: Any)
     {
-                Vector3ViewDirty.alpha = 0.0
+        Vector3ViewDirty.alpha = 0.0
     }
     
     // MARK: Vector4 button handling.
     
     @IBAction func Vector4ApplyPressed(_ sender: Any)
     {
-                Vector4ViewDirty.alpha = 0.0
+        Vector4ViewDirty.alpha = 0.0
     }
     
     @IBAction func Vector4DefaultPressed(_ sender: Any)
     {
-                Vector4ViewDirty.alpha = 0.0
+        Vector4ViewDirty.alpha = 0.0
     }
     
     // MARK: UI control outlets.
@@ -451,12 +598,15 @@ class RawThemeViewerCode2: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var ColorTitle: UILabel!
     @IBOutlet weak var ColorDescription: UILabel!
     @IBOutlet weak var ColorViewDirty: UIImageView!
+    @IBOutlet weak var ColorControlTitle: UILabel!
     
     // MARK: Gradient view controls.
     @IBOutlet weak var GradientTitle: UILabel!
     @IBOutlet weak var GradientDescription: UILabel!
-    @IBOutlet weak var GradientViewer: UIView!
+    @IBOutlet weak var GradientViewer: GradientSwatch!
     @IBOutlet weak var GradientViewDirty: UIImageView!
+    @IBOutlet weak var VerticalGradientSwitch: UISwitch!
+    @IBOutlet weak var ReverseGradientSwitch: UISwitch!
     
     // MARK: Image view controls.
     @IBOutlet weak var ImageTitle: UILabel!
