@@ -83,6 +83,21 @@ class GroupField2
         self.Handler = Handler
     }
     
+    /// Holds the dirty flag.
+    private var _Dirty: Bool = false
+    /// Get or set the dirty flag.
+    public var Dirty: Bool
+    {
+        get
+        {
+            return _Dirty
+        }
+        set
+        {
+            _Dirty = newValue
+        }
+    }
+    
     /// Holds the ID of the field.
     public var ID: UUID = UUID.Empty
     
@@ -92,8 +107,25 @@ class GroupField2
     /// Holds the default value of the field.
     public var Default: Any!
     
-    /// Holds the starting value of the field.
+    /// Holds the starting value of the field. Sets `State` to the same value
+    /// and clears the dirty flag.
     public var Starting: Any!
+    {
+        didSet
+        {
+            State = Starting
+            _Dirty = false
+        }
+    }
+    
+    /// Current state value.
+    public var State: Any!
+    {
+        didSet
+        {
+            _Dirty = true
+        }
+    }
     
     /// Holds the string list for as appropriate.
     public var StringList: [String]!
