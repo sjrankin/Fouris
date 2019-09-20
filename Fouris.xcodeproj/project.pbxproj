@@ -36,13 +36,14 @@
 		171ED10422F56B9F00CE2CDF /* Rotating4GameAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171ED10322F56B9F00CE2CDF /* Rotating4GameAI.swift */; };
 		171ED10722F56D3300CE2CDF /* CubicGameAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171ED10622F56D3300CE2CDF /* CubicGameAI.swift */; };
 		1721BA7C2260BECF00DC7AFC /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721BA7B2260BECF00DC7AFC /* Coin.swift */; };
-		173592C52331FA540028FF9A /* RawThemeViewerCode2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173592C42331FA540028FF9A /* RawThemeViewerCode2.swift */; };
+		173592C52331FA540028FF9A /* RawThemeViewerCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173592C42331FA540028FF9A /* RawThemeViewerCode.swift */; };
 		173762502310E5F10075E1DD /* UITouchImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1737624F2310E5F10075E1DD /* UITouchImage.swift */; };
 		173762522310E7400075E1DD /* UITouchImageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173762512310E7400075E1DD /* UITouchImageDelegate.swift */; };
 		17376352230A85A70050EB22 /* TextOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17376351230A85A70050EB22 /* TextOverlay.swift */; };
 		17376354230A87EE0050EB22 /* CATextLayer2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17376353230A87EE0050EB22 /* CATextLayer2.swift */; };
 		17376357230A9C9C0050EB22 /* +BucketCleaner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17376356230A9C9C0050EB22 /* +BucketCleaner.swift */; };
 		1737635A230AC6AD0050EB22 /* MiscellaneousExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17376359230AC6AD0050EB22 /* MiscellaneousExtensions.swift */; };
+		17381F422334B683003ED0A3 /* GroupField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17381F412334B683003ED0A3 /* GroupField.swift */; };
 		173AA38E231A8E9E00802289 /* PredefinedColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173AA38D231A8E9E00802289 /* PredefinedColor.swift */; };
 		173AA390231A8EC600802289 /* PredefinedColorGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173AA38F231A8EC600802289 /* PredefinedColorGroup.swift */; };
 		173AA392231A8EEE00802289 /* PredefinedColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173AA391231A8EEE00802289 /* PredefinedColors.swift */; };
@@ -194,7 +195,7 @@
 		17E71A7D22AD21920081991E /* MultiPeerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E71A7C22AD21920081991E /* MultiPeerDelegate.swift */; };
 		17E71A8322AD21D40081991E /* ClientCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E71A8222AD21D40081991E /* ClientCommands.swift */; };
 		17E74BF0230E7C9B00A62274 /* MainSlideInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E74BEF230E7C9B00A62274 /* MainSlideInView.swift */; };
-		17ECE5A723321897003F4065 /* GroupData2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ECE5A623321897003F4065 /* GroupData2.swift */; };
+		17ECE5A723321897003F4065 /* GroupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ECE5A623321897003F4065 /* GroupData.swift */; };
 		17ECE5A923321EE3003F4065 /* +StringList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ECE5A823321EE3003F4065 /* +StringList.swift */; };
 		17ECE5AC23322540003F4065 /* +PopulateFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ECE5AB23322540003F4065 /* +PopulateFields.swift */; };
 		17ECE5AE23324D09003F4065 /* RawThemeViewerTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ECE5AD23324D09003F4065 /* RawThemeViewerTitleCell.swift */; };
@@ -254,13 +255,14 @@
 		1721BA7B2260BECF00DC7AFC /* Coin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
 		1722D5DB227697D400E88BF4 /* DebugDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugDelegate.swift; sourceTree = "<group>"; };
 		1722D5E12276B3E100E88BF4 /* ControlUIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlUIProtocol.swift; sourceTree = "<group>"; };
-		173592C42331FA540028FF9A /* RawThemeViewerCode2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawThemeViewerCode2.swift; sourceTree = "<group>"; };
+		173592C42331FA540028FF9A /* RawThemeViewerCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawThemeViewerCode.swift; sourceTree = "<group>"; };
 		1737624F2310E5F10075E1DD /* UITouchImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITouchImage.swift; sourceTree = "<group>"; };
 		173762512310E7400075E1DD /* UITouchImageDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITouchImageDelegate.swift; sourceTree = "<group>"; };
 		17376351230A85A70050EB22 /* TextOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TextOverlay.swift; path = iOS/TextOverlay.swift; sourceTree = "<group>"; };
 		17376353230A87EE0050EB22 /* CATextLayer2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CATextLayer2.swift; sourceTree = "<group>"; };
 		17376356230A9C9C0050EB22 /* +BucketCleaner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+BucketCleaner.swift"; sourceTree = "<group>"; };
 		17376359230AC6AD0050EB22 /* MiscellaneousExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscellaneousExtensions.swift; sourceTree = "<group>"; };
+		17381F412334B683003ED0A3 /* GroupField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupField.swift; sourceTree = "<group>"; };
 		173AA38D231A8E9E00802289 /* PredefinedColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredefinedColor.swift; sourceTree = "<group>"; };
 		173AA38F231A8EC600802289 /* PredefinedColorGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredefinedColorGroup.swift; sourceTree = "<group>"; };
 		173AA391231A8EEE00802289 /* PredefinedColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredefinedColors.swift; sourceTree = "<group>"; };
@@ -415,7 +417,7 @@
 		17E71A7C22AD21920081991E /* MultiPeerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPeerDelegate.swift; sourceTree = "<group>"; };
 		17E71A8222AD21D40081991E /* ClientCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientCommands.swift; sourceTree = "<group>"; };
 		17E74BEF230E7C9B00A62274 /* MainSlideInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSlideInView.swift; sourceTree = "<group>"; };
-		17ECE5A623321897003F4065 /* GroupData2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupData2.swift; sourceTree = "<group>"; };
+		17ECE5A623321897003F4065 /* GroupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupData.swift; sourceTree = "<group>"; };
 		17ECE5A823321EE3003F4065 /* +StringList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+StringList.swift"; sourceTree = "<group>"; };
 		17ECE5AB23322540003F4065 /* +PopulateFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+PopulateFields.swift"; sourceTree = "<group>"; };
 		17ECE5AD23324D09003F4065 /* RawThemeViewerTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawThemeViewerTitleCell.swift; sourceTree = "<group>"; };
@@ -522,9 +524,10 @@
 			children = (
 				17ECE5AA23322515003F4065 /* RawThemeViewerExtensions */,
 				174C9A5C232F5E8A00A5DC7A /* RawThemeFieldEditProtocol.swift */,
-				173592C42331FA540028FF9A /* RawThemeViewerCode2.swift */,
+				173592C42331FA540028FF9A /* RawThemeViewerCode.swift */,
 				17ECE5AD23324D09003F4065 /* RawThemeViewerTitleCell.swift */,
-				17ECE5A623321897003F4065 /* GroupData2.swift */,
+				17ECE5A623321897003F4065 /* GroupData.swift */,
+				17381F412334B683003ED0A3 /* GroupField.swift */,
 			);
 			path = RawTheme;
 			sourceTree = "<group>";
@@ -1354,11 +1357,12 @@
 				17C1E90B23190F5E004040B6 /* UIColorExtensions.swift in Sources */,
 				1767D28622AF4959005EE191 /* DebugClient.swift in Sources */,
 				17F0B4B1225CC22A0071514E /* Piece.swift in Sources */,
+				17381F422334B683003ED0A3 /* GroupField.swift in Sources */,
 				17ECE5B62332579F003F4065 /* +Double.swift in Sources */,
 				1797524222C38A4D00BF539A /* +VersionInfo.swift in Sources */,
 				1762FC19229CCFF6000099F2 /* RawParser.swift in Sources */,
 				17E71A7A22AD217B0081991E /* MultiPeer.swift in Sources */,
-				173592C52331FA540028FF9A /* RawThemeViewerCode2.swift in Sources */,
+				173592C52331FA540028FF9A /* RawThemeViewerCode.swift in Sources */,
 				1797523C22C38A4D00BF539A /* +StatusCommands.swift in Sources */,
 				1754E79C23252C5500820FDE /* GridCell.swift in Sources */,
 				17616AC623163A3400DFFEFE /* SlideInItem.swift in Sources */,
@@ -1399,7 +1403,7 @@
 				17F6ECEC2286E0F0000F8E11 /* GameViewProtocol.swift in Sources */,
 				173AA394231A8F6B00802289 /* PredefinedColorTable.swift in Sources */,
 				17C1E90D23190FBE004040B6 /* OtherExtensions.swift in Sources */,
-				17ECE5A723321897003F4065 /* GroupData2.swift in Sources */,
+				17ECE5A723321897003F4065 /* GroupData.swift in Sources */,
 				17ECE5B2233256D8003F4065 /* +String.swift in Sources */,
 				1797525022C38A4D00BF539A /* +SpecialAndOtherCommands.swift in Sources */,
 				1749B6E122BB26A0003DC65D /* Conversions.swift in Sources */,
