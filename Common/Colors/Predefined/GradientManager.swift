@@ -20,7 +20,7 @@ import UIKit
 ///        The square brackets are required to specify HSB values. The caller can specify only a hue, a hue and
 ///        saturation, or hue, saturation and brightness. Hue and brightness only is invalid.
 ///      - Metadata proceeds the gradient descriptor and is set off by `GradientMetaDataStart` and
-///        `GradientMetaDataEnd` strings and a delimiting comma. Within a metadata block are key value pairs
+///        `GradientMetaDataEnd` strings and a delimiting semicolon. Within a metadata block are key value pairs
 ///        separated by commas in the format: `key=value`.
 ///          - Keys are:
 ///            - **Vertical**: Boolean. True to specify a vertical boolean, false for a horizontal boolean. Horizontal
@@ -32,8 +32,8 @@ import UIKit
 ///          - `GradientMetaDataEnd` is currently defined as `»` but may change. Always use the symbolic value and
 ///            not a constant.
 ///          - Metadata is not required.
-///          - Sample meta data may look like this: `«Vertical=true,Reverse=false»`. A full gradient descriptor
-///            may look like: `«Vertical=false,Reverse=true»,(Yellow)@(0.0),(Green)@(0.315),(Cyan)@(1.0)`.
+///          - Sample meta data may look like this: `«Vertical=true;Reverse=false»`. A full gradient descriptor
+///            may look like: `«Vertical=false;Reverse=true»,(Yellow)@(0.0),(Green)@(0.315),(Cyan)@(1.0)`.
 ///      - Gradients can animate using the `$` separator after the color value. Units are in seconds and are of
 ///        type `Double`. Default value is `0.0` meaning no color animation. The animation consists of changing
 ///        the hue of the enabled colors through the entire range over the period of the duration.
@@ -132,7 +132,7 @@ class GradientManager
         {
             if !ReverseFlag.isEmpty
             {
-                VerticalFlag = VerticalFlag + ","
+                VerticalFlag = VerticalFlag + ";"
             }
         }
         Metadata = Metadata + VerticalFlag
@@ -326,7 +326,9 @@ class GradientManager
     }
     
     /// Parse a metadata block and return values (if they are found) in the returned tuple.
-    /// - Note: Fatal errors are generated on mal-formed metadata.
+    /// - Note:
+    ///   - Fatal errors are generated on mal-formed metadata.
+    ///   - Metadata consists of a list of semicolon-separated key/value pairs. Keys are separated from values by **=** signs.
     /// - Parameter Raw: The raw metadata string.
     /// - Returns: Tuple with flag values for the Vertical and Reverse metadata values. If a value is nil,
     ///            no data was found in the metadata block for that key-value pair.
@@ -335,8 +337,8 @@ class GradientManager
         var VerticalFlag: Bool? = nil
         var ReverseFlag: Bool? = nil
         var Working = Raw.replacingOccurrences(of: GradientManager.GradientMetadataStart, with: "")
-                 Working = Raw.replacingOccurrences(of: GradientManager.GradientMetadataEnd, with: "")
-        let Parts = Working.split(separator: ",", omittingEmptySubsequences: true)
+        Working = Working.replacingOccurrences(of: GradientManager.GradientMetadataEnd, with: "")
+        let Parts = Working.split(separator: ";", omittingEmptySubsequences: true)
         for Part in Parts
         {
             let SomePart = String(Part)
@@ -390,7 +392,8 @@ class GradientManager
             let FirstCharacter = String(String(Part).first!)
             if FirstCharacter == GradientManager.GradientMetadataStart
             {
-                let (IsVertical, DoReverse) = ParseMetadata(String(Part))
+                let RawMetadata = String(Part)
+                let (IsVertical, DoReverse) = ParseMetadata(RawMetadata)
                 if let VerticalFlag = IsVertical
                 {
                     Vertical = VerticalFlag
@@ -407,6 +410,20 @@ class GradientManager
             }
         }
         return Results
+    }
+    
+    /// Edit the metadata in the passed gradient descriptor.
+    /// - Note: If the passed gradient descriptor does not have any metadata, this function will add it.
+    /// - Parameter Descriptor: The gradient descriptor whose metadata will be edited.
+    /// - Parameter NewVertical: New Vertical flag value.
+    /// - Parameter NewReverse: New Reverse flag value.
+    /// - Returns: New gradient descriptor with the edited metadata.
+    public static func EditMetadata(_ Descriptor: String, NewVertical: Bool, NewReverse: Bool) -> String
+    {
+        var OldVertical: Bool = false
+        var OldReverse: Bool = false
+        let Results = ParseGradient(Descriptor, Vertical: &OldVertical, Reverse: &OldReverse)
+        return AssembleGradient(Results, IsVertical: NewVertical, Reverse: NewReverse)
     }
     
     /// Given a list of gradient color stops, return a string representation of it.
@@ -462,8 +479,8 @@ class GradientManager
     /// - Returns: New full gradient with the newly inserted gradient stop.
     public static func InsertGradientStop(Into: String, _ Color: UIColor, _ Location: CGFloat) -> String
     {
-        var Vertical: Bool!
-        var Reverse: Bool!
+        var Vertical: Bool = false
+        var Reverse: Bool = false
         var Parts = ParseGradient(Into, Vertical: &Vertical, Reverse: &Reverse)
         Parts.append((Color, Location))
         Parts.sort{$0.1 < $1.1}
@@ -483,8 +500,8 @@ class GradientManager
         {
             return nil
         }
-        var Vertical: Bool!
-        var Reverse: Bool!
+        var Vertical: Bool = false
+        var Reverse: Bool = false
         var Parts = ParseGradient(Gradients, Vertical: &Vertical, Reverse: &Reverse)
         if AtIndex > Parts.count - 1
         {
@@ -503,8 +520,8 @@ class GradientManager
     ///            found at the specified location, the gradient is returned unchanged.
     public static func RemoveGradientStop(_ Gradients: String, AtLocation: CGFloat) -> String
     {
-        var Vertical: Bool!
-        var Reverse: Bool!
+        var Vertical: Bool = false
+        var Reverse: Bool = false
         var Parts = ParseGradient(Gradients, Vertical: &Vertical, Reverse: &Reverse)
         Parts.removeAll(where: {$0.1 == AtLocation})
         return AssembleGradient(Parts, IsVertical: Vertical, Reverse: Reverse)
@@ -544,8 +561,8 @@ class GradientManager
     ///            elsewhere in the gradient (eg, not at the end).
     public static func AddGradientStop(_ Gradients: String, Color: UIColor, Location: CGFloat) -> String
     {
-        var Vertical: Bool!
-        var Reverse: Bool!
+        var Vertical: Bool = false
+        var Reverse: Bool = false
         var Parts = ParseGradient(Gradients, Vertical: &Vertical, Reverse: &Reverse)
         Parts.append((Color, Location))
         return AssembleGradient(Parts, IsVertical: Vertical, Reverse: Reverse)
@@ -561,8 +578,8 @@ class GradientManager
     /// - Returns: New gradient description. The gradient stop may be moved depending on its `Location` value.
     public static func InsertGradientStop(_ Gradients: String, Index: Int, Color: UIColor, Location: CGFloat) -> String
     {
-        var Vertical: Bool!
-        var Reverse: Bool!
+        var Vertical: Bool = false
+        var Reverse: Bool = false
         var Parts = ParseGradient(Gradients, Vertical: &Vertical, Reverse: &Reverse)
         Parts.append((Color, Location))
         let Index1 = Index
@@ -577,8 +594,8 @@ class GradientManager
     /// - Returns: Sorted gradient description.
     public static func SortGradient(_ Gradients: String) -> String
     {
-        var Vertical: Bool!
-        var Reverse: Bool!
+        var Vertical: Bool = false
+        var Reverse: Bool = false
         var Parts = ParseGradient(Gradients, Vertical: &Vertical, Reverse: &Reverse)
         Parts.sort{$0.1 < $1.1}
         return AssembleGradient(Parts, IsVertical: Vertical, Reverse: Reverse)
@@ -594,8 +611,8 @@ class GradientManager
     /// - Returns: New gradient description with swapped gradients. Nil on error (most likely due to an index out of range).
     public static func SwapGradientStops(_ Gradients: String, Index1: Int, Index2: Int) -> String?
     {
-        var Vertical: Bool!
-        var Reverse: Bool!
+        var Vertical: Bool = false
+        var Reverse: Bool = false
         var Parts = ParseGradient(Gradients, Vertical: &Vertical, Reverse: &Reverse)
         if Index1 < 0
         {
@@ -642,8 +659,8 @@ class GradientManager
     /// - Returns: New gradient description with the edited gradient stop. On error, nil is returned.
     public static func ReplaceGradientStop(_ Gradients: String, Color: UIColor, Location: CGFloat, AtIndex: Int) -> String?
     {
-        var Vertical: Bool!
-        var Reverse: Bool!
+        var Vertical: Bool = false
+        var Reverse: Bool = false
         var Parts = ParseGradient(Gradients, Vertical: &Vertical, Reverse: &Reverse)
         if AtIndex < 0
         {
@@ -665,8 +682,8 @@ class GradientManager
     /// - Returns: Tuple of the color and location of the specified gradient stop on success, nil on failure.
     public static func GradientStop(From: String, At: Int) -> (UIColor, CGFloat)?
     {
-        var Vertical: Bool!
-        var Reverse: Bool!
+        var Vertical: Bool = false
+        var Reverse: Bool = false
         let Parts = ParseGradient(From, Vertical: &Vertical, Reverse: &Reverse)
         if At < 0
         {
@@ -695,8 +712,8 @@ class GradientManager
     public static func CreateGradientLayer(From: String, WithFrame: CGRect, IsVertical: Bool = true,
                                            ReverseColors: Bool = false, LayerName: String? = nil) -> CAGradientLayer
     {
-        var Vertical: Bool!
-        var Reverse: Bool!
+        var Vertical: Bool = false
+        var Reverse: Bool = false
         var GradientStops = ParseGradient(From, Vertical: &Vertical, Reverse: &Reverse)
         GradientStops.sort{$0.1 < $1.1}
         if ReverseColors
@@ -786,8 +803,8 @@ class GradientManager
     public static func CreateGradientImage(From: String, WithFrame: CGRect, IsVertical: Bool = true,
                                            ReverseColors: Bool = false) -> UIImage
     {
-        var Vertical: Bool!
-        var Reverse: Bool!
+        var Vertical: Bool = false
+        var Reverse: Bool = false
         var GradientStops = ParseGradient(From, Vertical: &Vertical, Reverse: &Reverse)
         GradientStops.sort{$0.1 < $1.1}
         if ReverseColors
@@ -834,6 +851,14 @@ class GradientManager
         let Image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return Image!
+    }
+    
+    public static func CreateGradientImageWithMetadata(From: String, WithFrame: CGRect) -> UIImage
+    {
+        var Vertical: Bool = false
+        var Reverse: Bool = false
+        let _ = ParseGradient(From, Vertical: &Vertical, Reverse: &Reverse)
+        return CreateGradientImage(From: From, WithFrame: WithFrame, IsVertical: Vertical, ReverseColors: Reverse)
     }
     
     /// Creates and returns a UIImage with the gradient defined by the passed enum value.
@@ -913,8 +938,8 @@ class GradientManager
         {
             return Results
         }
-        var Vertical: Bool!
-        var Reverse: Bool!
+        var Vertical: Bool = false
+        var Reverse: Bool = false
         let Raw = ParseGradient(From, Vertical: &Vertical, Reverse: &Reverse)
         if Raw.count < 1
         {
@@ -1043,8 +1068,8 @@ class GradientManager
     /// - Returns: True if a white color stop is present, false if not.
     public static func HasWhite(_ InGradient: String) -> Bool
     {
-        var Vertical: Bool!
-        var Reverse: Bool!
+        var Vertical: Bool = false
+        var Reverse: Bool = false
         let Parts = ParseGradient(InGradient, Vertical: &Vertical, Reverse: &Reverse)
         for Stop in Parts
         {
@@ -1080,8 +1105,8 @@ class GradientManager
     /// - Returns: True if the gradient is in the predefined gradient list, false if not.
     public static func IsPredefinedGradient(_ Description: String) -> Bool
     {
-        var Vertical: Bool!
-        var Reverse: Bool!
+        var Vertical: Bool = false
+        var Reverse: Bool = false
         let Parsed = ParseGradient(Description, Vertical: &Vertical, Reverse: &Reverse)
         for (_, _, SomeGradient) in GradientList
         {
