@@ -55,10 +55,15 @@ import UIKit
     /// Draw the gradient.
     func DrawGradient()
     {
+        #if true
+        let GradientAsImage = GradientManager.CreateGradientImageWithMetadata(From: _GradientDescriptor,
+                                                                              WithFrame: GradientImage.bounds)
+        #else
         let GradientAsImage = GradientManager.CreateGradientImage(From: _GradientDescriptor,
                                                                   WithFrame: GradientImage.bounds,
                                                                   IsVertical: _IsVertical,
                                                                   ReverseColors: _ReverseColors)
+        #endif
         GradientImage.image = GradientAsImage
     }
     
