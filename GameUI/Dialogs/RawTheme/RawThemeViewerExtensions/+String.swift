@@ -9,10 +9,11 @@
 import Foundation
 import UIKit
 
-extension RawThemeViewerCode2
+extension RawThemeViewerCode
 {
-    func PopulateStringView(WithField: GroupField2)
+    func PopulateStringView(WithField: GroupField)
     {
+        StringTextBox.isEnabled = !WithField.DisableControl
         StringDescription.layer.cornerRadius = 4.0
         StringDescription.clipsToBounds = true
         
