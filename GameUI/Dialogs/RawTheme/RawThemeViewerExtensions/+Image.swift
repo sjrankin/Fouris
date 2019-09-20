@@ -10,10 +10,12 @@ import Foundation
 import UIKit
 import Photos
 
-extension RawThemeViewerCode2
+extension RawThemeViewerCode
 {
-    func PopulateImageView(WithField: GroupField2)
+    func PopulateImageView(WithField: GroupField)
     {
+        ImagePhotoRollButton.isEnabled = !WithField.DisableControl
+        ImageProgramImagesButton.isEnabled = !WithField.DisableControl
         ImageDescription.layer.cornerRadius = 4.0
         ImageDescription.clipsToBounds = true
         
