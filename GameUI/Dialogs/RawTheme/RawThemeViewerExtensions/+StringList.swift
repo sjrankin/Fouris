@@ -9,10 +9,11 @@
 import Foundation
 import UIKit
 
-extension RawThemeViewerCode2
+extension RawThemeViewerCode
 {
-    func PopulateStringListView(WithField: GroupField2)
+    func PopulateStringListView(WithField: GroupField)
     {
+        StringListPicker.isUserInteractionEnabled = !WithField.DisableControl 
         StringListPicker.layer.borderColor = UIColor.black.cgColor
         StringListPicker.layer.borderWidth = 0.5
         StringListPicker.layer.cornerRadius = 5.0
