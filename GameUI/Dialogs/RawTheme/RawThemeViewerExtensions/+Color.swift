@@ -9,10 +9,11 @@
 import Foundation
 import UIKit
 
-extension RawThemeViewerCode2
+extension RawThemeViewerCode
 {
-    func PopulateColorView(WithField: GroupField2)
+    func PopulateColorView(WithField: GroupField)
     {
+        ColorSwatch.isUserInteractionEnabled = !WithField.DisableControl
         ColorDescription.layer.cornerRadius = 4.0
         ColorDescription.clipsToBounds = true
         
