@@ -1,5 +1,5 @@
 //
-//  RawThemeViewerCode2.swift
+//  RawThemeViewerCode.swift
 //  Fouris
 //
 //  Created by Stuart Rankin on 9/18/19.
@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Photos
 
-class RawThemeViewerCode2: UIViewController, UITableViewDelegate, UITableViewDataSource,
+class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewDataSource,
     UIPickerViewDelegate, UIPickerViewDataSource,
     UIImagePickerControllerDelegate, UINavigationControllerDelegate,
     PHPhotoLibraryChangeObserver,
@@ -54,7 +54,7 @@ class RawThemeViewerCode2: UIViewController, UITableViewDelegate, UITableViewDat
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
     }
     
-    var CurrentField: GroupField2? = nil
+    var CurrentField: GroupField? = nil
     
     private var DetailViews: [UIView] = [UIView]()
     
@@ -136,9 +136,9 @@ func InitializeImagePicker()
         })
     }
     
-    public var FieldTables: [GroupData2] = [GroupData2]()
+    public var FieldTables: [GroupData] = [GroupData]()
     
-    func GetFieldFrom(ID: UUID) -> GroupField2?
+    func GetFieldFrom(ID: UUID) -> GroupField?
     {
         for Group in FieldTables
         {
@@ -187,11 +187,9 @@ func InitializeImagePicker()
             case .Vector4:
                 return Vector4View
         }
-        
-        return nil
     }
     
-    func PopulateFieldView(With: GroupField2)
+    func PopulateFieldView(With: GroupField)
     {
         if let Field = GetFieldFrom(ID: With.ID)
         {
@@ -221,8 +219,14 @@ func InitializeImagePicker()
                 case .Vector4:
                     PopulateVector4View(WithField: Field)
                 
-                default:
-                    break
+                case .Image:
+                    PopulateImageView(WithField: Field)
+                
+                case .Gradient:
+                    PopulateGradientView(WithField: Field)
+                
+                case .none:
+                break
             }
         }
     }
@@ -303,9 +307,35 @@ func InitializeImagePicker()
             let GradientControllerUI = UIStoryboard(name: "Theming", bundle: nil)
             let GradientController = GradientControllerUI.instantiateViewController(identifier: "GradientEditorUI") as! GradientEditorCode
             GradientController.GradientDelegate = self
-            GradientController.GradientToEdit(CurrentField?.State as! String, Tag: "RawViewerGradient")
+            var FinalDescriptor = ""
+            if let RawDescriptor = CurrentField?.State as? String
+            {
+                FinalDescriptor = RawDescriptor
+            }
+            else
+            {
+            FinalDescriptor = "(White)@(0.0),(Black)@(1.0)"
+            }
+            GradientController.GradientToEdit(FinalDescriptor, Tag: "RawViewerGradient")
             self.present(GradientController, animated: true, completion: nil)
         }
+    }
+    
+    @IBSegueAction func InstantiateGradientEditor(_ coder: NSCoder) -> GradientEditorCode?
+    {
+        let Editor = GradientEditorCode(coder: coder)
+        Editor?.GradientDelegate = self
+        var FinalDescriptor = ""
+        if let RawDescriptor = CurrentField?.State as? String
+        {
+            FinalDescriptor = RawDescriptor
+        }
+        else
+        {
+            FinalDescriptor = "(White)@(0.0),(Black)@(1.0)"
+        }
+        Editor?.GradientToEdit(FinalDescriptor, Tag: "RawViewerGradient")
+        return Editor
     }
     
     func EditedGradient(_ Edited: String?, Tag: Any?)
@@ -316,17 +346,35 @@ func InitializeImagePicker()
             {
                 if let FinalGradient = Edited
                 {
-                    
+                    CurrentField?.State = FinalGradient as Any
+                    GradientViewer.GradientDescriptor = FinalGradient
                 }
             }
         }
     }
+    
     @IBAction func HandleReverseGradientColorsChanged(_ sender: Any)
     {
+        let DoReverse = ReverseGradientSwitch.isOn
+        let DoVertical = VerticalGradientSwitch.isOn
+        if let Descriptor = CurrentField?.State as? String
+        {
+            let NewDescriptor = GradientManager.EditMetadata(Descriptor, NewVertical: DoVertical, NewReverse: DoReverse)
+            CurrentField?.State = NewDescriptor as Any
+            GradientViewer.GradientDescriptor = NewDescriptor
+        }
     }
     
     @IBAction func HandleVerticalGradientChanged(_ sender: Any)
     {
+        let DoReverse = ReverseGradientSwitch.isOn
+        let DoVertical = VerticalGradientSwitch.isOn
+        if let Descriptor = CurrentField?.State as? String
+        {
+            let NewDescriptor = GradientManager.EditMetadata(Descriptor, NewVertical: DoVertical, NewReverse: DoReverse)
+            CurrentField?.State = NewDescriptor as Any
+            GradientViewer.GradientDescriptor = NewDescriptor
+        }
     }
     
     func GradientToEdit(_ Edited: String?, Tag: Any?)
@@ -439,6 +487,11 @@ func InitializeImagePicker()
     @IBAction func StringListApplyPressed(_ sender: Any)
     {
         StringListViewDirty.alpha = 0.0
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, forComponent component: Int)
+    {
+        
     }
     
     var StringListData: [String] = [String]()
@@ -607,12 +660,16 @@ func InitializeImagePicker()
     @IBOutlet weak var GradientViewDirty: UIImageView!
     @IBOutlet weak var VerticalGradientSwitch: UISwitch!
     @IBOutlet weak var ReverseGradientSwitch: UISwitch!
+    @IBOutlet weak var WarningBox: UIView!
+    @IBOutlet weak var WarningLabel: UILabel!
     
     // MARK: Image view controls.
     @IBOutlet weak var ImageTitle: UILabel!
     @IBOutlet weak var ImageDescription: UILabel!
     @IBOutlet weak var ImageViewer: UIImageView!
     @IBOutlet weak var ImageViewDirty: UIImageView!
+    @IBOutlet weak var ImagePhotoRollButton: UIButton!
+    @IBOutlet weak var ImageProgramImagesButton: UIButton!
     
     // MARK: String list view controls.
     @IBOutlet weak var StringListTitle: UILabel!
