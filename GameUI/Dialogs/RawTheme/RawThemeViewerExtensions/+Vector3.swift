@@ -10,13 +10,16 @@ import Foundation
 import UIKit
 import SceneKit
 
-extension RawThemeViewerCode2
+extension RawThemeViewerCode
 {
-    func PopulateVector3View(WithField: GroupField2)
+    func PopulateVector3View(WithField: GroupField)
     {
+        Vector3XBox.isEnabled = !WithField.DisableControl
+        Vector3YBox.isEnabled = !WithField.DisableControl
+        Vector3ZBox.isEnabled = !WithField.DisableControl
         Vector3Description.layer.cornerRadius = 4.0
         Vector3Description.clipsToBounds = true
-    
+        
         Vector3Title.text = WithField.Title
         Vector3Description.text = WithField.Description
         if let V3 = WithField.Starting as? SCNVector3
