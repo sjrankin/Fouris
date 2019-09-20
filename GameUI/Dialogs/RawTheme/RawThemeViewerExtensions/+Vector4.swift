@@ -10,10 +10,14 @@ import Foundation
 import UIKit
 import SceneKit
 
-extension RawThemeViewerCode2
+extension RawThemeViewerCode
 {
-    func PopulateVector4View(WithField: GroupField2)
+    func PopulateVector4View(WithField: GroupField)
     {
+        Vector4XBox.isEnabled = !WithField.DisableControl
+        Vector4YBox.isEnabled = !WithField.DisableControl
+        Vector4ZBox.isEnabled = !WithField.DisableControl
+        Vector4WBox.isEnabled = !WithField.DisableControl
         Vector4Description.layer.cornerRadius = 4.0
         Vector4Description.clipsToBounds = true
         
