@@ -9,10 +9,13 @@
 import Foundation
 import UIKit
 
-extension RawThemeViewerCode2
+extension RawThemeViewerCode
 {
-    func PopulateGradientView(WithField: GroupField2)
+    func PopulateGradientView(WithField: GroupField)
     {
+        GradientViewer.isUserInteractionEnabled = !WithField.DisableControl
+        VerticalGradientSwitch.isEnabled = !WithField.DisableControl
+        ReverseGradientSwitch.isEnabled = !WithField.DisableControl
         GradientDescription.layer.cornerRadius = 4.0
         GradientDescription.clipsToBounds = true
         
@@ -23,6 +26,7 @@ extension RawThemeViewerCode2
         if GradientDescription == nil
         {
             GradientDescription = "(White)@(0.0),(Black)@(1.0)"
+            WithField.State = GradientDescription as Any
         }
         GradientViewer.GradientDescriptor = GradientDescription!
         
