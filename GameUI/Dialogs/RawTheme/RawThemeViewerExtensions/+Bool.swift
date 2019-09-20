@@ -9,10 +9,11 @@
 import Foundation
 import UIKit
 
-extension RawThemeViewerCode2
+extension RawThemeViewerCode
 {
-    func PopulateBooleanView(WithField: GroupField2)
+    func PopulateBooleanView(WithField: GroupField)
     {
+        BoolSwitch.isEnabled = !WithField.DisableControl
         BoolDescription.layer.cornerRadius = 4.0
         BoolDescription.clipsToBounds = true
         
