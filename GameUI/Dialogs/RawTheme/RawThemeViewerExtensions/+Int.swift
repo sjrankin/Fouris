@@ -9,10 +9,11 @@
 import Foundation
 import UIKit
 
-extension RawThemeViewerCode2
+extension RawThemeViewerCode
 {
-    func PopulateIntView(WithField: GroupField2)
+    func PopulateIntView(WithField: GroupField)
     {
+        IntTextBox.isEnabled = !WithField.DisableControl
         IntDescription.layer.cornerRadius = 4.0
         IntDescription.clipsToBounds = true
         
