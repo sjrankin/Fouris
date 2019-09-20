@@ -10,12 +10,12 @@ import Foundation
 import UIKit
 import SceneKit
 
-extension RawThemeViewerCode2
+extension RawThemeViewerCode
 {
     func PopulateFields()
     {
         //Debug
-        let DebugGroup = GroupData2("Debug")
+        let DebugGroup = GroupData("Debug")
         DebugGroup.AddField(ID: UUID(), Title: "Show FPS in UI",
                             Description: "Show the game view's frames/second value in the main UI.", ControlTitle: "Show FPS",
                             Default: false, Starting: Settings.ShowFPSInUI(), FieldType: .Bool, List: nil, Handler:
@@ -52,7 +52,7 @@ extension RawThemeViewerCode2
         FieldTables.append(DebugGroup)
         
         //Settings
-        let SettingsGroup = GroupData2("Settings")
+        let SettingsGroup = GroupData("Settings")
         SettingsGroup.AddField(ID: UUID(), Title: "Confirm image save",
                                Description: "Shows an alert indicating an image was saved when saving screen shots.",
                                ControlTitle: "Confirm saved", Default: false as Any,
@@ -138,7 +138,7 @@ extension RawThemeViewerCode2
         FieldTables.append(SettingsGroup)
         
         //AI.
-        let AIGroup = GroupData2("AI")
+        let AIGroup = GroupData("AI")
         AIGroup.AddField(ID: UUID(), Title: "AI sneak peak count",
                          Description: "Number of pieces ahead the AI looks at to determine the best location for the current piece.",
                          ControlTitle: "Look-ahead count", Default: 1 as Any,
@@ -160,7 +160,7 @@ extension RawThemeViewerCode2
         FieldTables.append(AIGroup)
         
         //Playing.
-        let PlayGroup = GroupData2("Play")
+        let PlayGroup = GroupData("Play")
         PlayGroup.AddField(ID: UUID(), Title: "Show next piece",
                            Description: "Show the next queued piece during game play.",
                            ControlTitle: "Show next piece", Default: true as Any, Starting: true as Any,
@@ -168,15 +168,15 @@ extension RawThemeViewerCode2
         PlayGroup.AddField(ID: UUID(), Title: "Block destruction method",
                            Description: "The method to use to clear a block from the bucket at the end of the game.",
                            ControlTitle: "", Default: "FadeAway" as Any, Starting: "FadeAway" as Any, FieldType: .StringList,
-                           List: GroupData2.EnumListToStringList(DestructionMethods.allCases), Handler: nil)
+                           List: GroupData.EnumListToStringList(DestructionMethods.allCases), Handler: nil)
         FieldTables.append(PlayGroup)
         
         //Game view.
-        let GameGroup = GroupData2("Game View")
+        let GameGroup = GroupData("Game View")
         GameGroup.AddField(ID: UUID(), Title: "Antialiasing mode",
                            Description: "The antialiasing mode for the game view. Anything higher than MultiSampling4X is ignored (not available on iOS).",
                            ControlTitle: "", Default: "MultiSampling4X" as Any, Starting: "MultiSampling4X" as Any, FieldType: .StringList,
-                           List: GroupData2.EnumListToStringList(AntialiasingModes.allCases), Handler: nil)
+                           List: GroupData.EnumListToStringList(AntialiasingModes.allCases), Handler: nil)
         GameGroup.AddField(ID: UUID(), Title: "Field of view",
                            Description: "Field of view for the camera.",
                            ControlTitle: "Field of view", Default: 92.5 as Any, Starting: 92.5 as Any, FieldType: .Double,
@@ -200,7 +200,7 @@ extension RawThemeViewerCode2
         GameGroup.AddField(ID: UUID(), Title: "Light type",
                            Description: "The type of light to use for the game view.",
                            ControlTitle: "", Default: "Omni" as Any, Starting: "Omni" as Any,
-                           FieldType: .StringList, List: GroupData2.EnumListToStringList(LightTypes.allCases),
+                           FieldType: .StringList, List: GroupData.EnumListToStringList(LightTypes.allCases),
                            Handler: nil)
         GameGroup.AddField(ID: UUID(), Title: "Light position",
                            Description: "The position of the light in the game view scene.",
@@ -208,11 +208,11 @@ extension RawThemeViewerCode2
                            FieldType: .Vector3, List: nil, Handler: nil)
         FieldTables.append(GameGroup)
         
-        let BGGroup = GroupData2("Game Background")
+        let BGGroup = GroupData("Game Background")
         BGGroup.AddField(ID: UUID(), Title: "Game background",
                          Description: "How the background of the game looks and acts.",
                          ControlTitle: "", Default: "Color" as Any, Starting: "Color" as Any, FieldType: .StringList,
-                         List: GroupData2.EnumListToStringList(BackgroundTypes3D.allCases), Handler: nil)
+                         List: GroupData.EnumListToStringList(BackgroundTypes3D.allCases), Handler: nil)
         BGGroup.AddField(ID: UUID(), Title: "Game background color",
                          Description: "Solid color for the game background.",
                          ControlTitle: "", Default: UIColor.red as Any, Starting: UIColor.red as Any, FieldType: .Color,
@@ -233,14 +233,22 @@ extension RawThemeViewerCode2
                          Description: "Image to use for the game view background.",
                          ControlTitle: "", Default: "IMG_0004.JPG", Starting: "IMG_0004.JPG", FieldType: .Image,
                          List: nil, Handler: nil)
+        let DisableLiveView = UserDefaults.standard.bool(forKey: "RunningOnSimulator")
+        var WarningTriggers: [String: String] = [String: String]()
+        if UserDefaults.standard.bool(forKey: "RunningOnSimulator")
+        {
+            WarningTriggers["Rear"] = "Rear camera not available on simulator."
+            WarningTriggers["Front"] = "Front camera not available on simulator."
+        }
         BGGroup.AddField(ID: UUID(), Title: "Live background camera",
                          Description: "Camera to use for live view backgrounds. Valid only for those devices with cameras (eg, not simulators).",
                          ControlTitle: "", Default: "Rear", Starting: "Rear", FieldType: .StringList,
-                         List: GroupData2.EnumListToStringList(CameraLocations.allCases), Handler: nil)
+                         List: GroupData.EnumListToStringList(CameraLocations.allCases), Handler: nil,
+                         DisableControl: DisableLiveView, Warnings: WarningTriggers)
         FieldTables.append(BGGroup)
         
         //Bucket attributes.
-        let BucketGroup = GroupData2("Bucket")
+        let BucketGroup = GroupData("Bucket")
         BucketGroup.AddField(ID: UUID(), Title: "Show bucket grid",
                              Description: "Shows a grid in the bucket sized to fit piece blocks.",
                              ControlTitle: "Show grid", Default: true as Any, Starting: true as Any,
