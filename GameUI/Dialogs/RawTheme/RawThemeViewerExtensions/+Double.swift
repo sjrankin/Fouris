@@ -9,10 +9,11 @@
 import Foundation
 import UIKit
 
-extension RawThemeViewerCode2
+extension RawThemeViewerCode
 {
-    func PopulateDoubleView(WithField: GroupField2)
+    func PopulateDoubleView(WithField: GroupField)
     {
+        DoubleTextBox.isEnabled = !WithField.DisableControl
         DoubleDescription.layer.cornerRadius = 4.0
         DoubleDescription.clipsToBounds = true
         
