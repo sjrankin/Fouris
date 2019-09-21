@@ -491,7 +491,18 @@ func InitializeImagePicker()
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, forComponent component: Int)
     {
-        
+        let CurrentList = CurrentField?.StringList
+        if let Warning = CurrentField?.WarningTriggers[CurrentList![row]]
+        {
+            WarningBox.alpha = 1.0
+            WarningLabel.alpha = 1.0
+            WarningLabel.text = Warning
+        }
+        else
+        {
+            WarningBox.alpha = 0.0
+            WarningLabel.alpha = 0.0
+        }
     }
     
     var StringListData: [String] = [String]()
