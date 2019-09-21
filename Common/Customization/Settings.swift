@@ -69,6 +69,8 @@ class Settings
         _Settings.set(0, forKey: "GameBackgroundType")
         _Settings.set(false, forKey: "ConfirmGameImageSave")
         _Settings.set(false, forKey: "ShowFPSInUI")
+        _Settings.set(1.25, forKey: "BucketDestructionDuration")
+        _Settings.set(false, forKey: "FastClearBucket")
         _Settings.set("83c630ee-81d4-11e9-bc42-526af7764f64", forKey: "CurrentTheme")
         _Settings.set("3f0d9fee-0b77-465b-a0ac-f1663da23cc9", forKey: "Current3DTheme")
     }
@@ -108,6 +110,39 @@ class Settings
                 Subscriber.1?.SettingChanged(Field: From, NewValue: NewValue)
             }
         }
+    }
+    
+    /// Get the clear the bucket at game over in a hurry flag.
+    public static func GetFastClearBucket() -> Bool
+    {
+        return _Settings.bool(forKey: "FastClearBucket")
+    }
+    
+    /// Set the clear the bucket at game over in a hurry flag.
+    /// - Parameter NewValue: New value for the flag.
+    public static func SetFastClearBucket(NewValue: Bool)
+    {
+        _Settings.set(NewValue, forKey: "FastClearBucket")
+    }
+    
+    /// Return the amount of time to take to clear the bucket in an animated fashion.
+    /// - Note: If the stored value is less than or equal to 0.0, a default value of 1.25 is returned.
+    /// - Returns: The number of seconds to take to clear the bucket.
+    public static func GetBucketDestructionDurationTime() -> Double
+    {
+        var Value = _Settings.double(forKey: "BucketDestructionDuration")
+        if Value <= 0.0
+        {
+            Value = 1.25
+        }
+        return Value
+    }
+    
+    /// Set a new value for the number of seconds to clear the bucket.
+    /// - Parameter NewValue: The number of seconds to take to clear the bucket.
+    public static func SetBucketDestructionDurationTime(NewValue: Double)
+    {
+        _Settings.set(NewValue, forKey: "BucketDestructionDuration")
     }
     
     /// Get the show FPS rate in the UI flag.
