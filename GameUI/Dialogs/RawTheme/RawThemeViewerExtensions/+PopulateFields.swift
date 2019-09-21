@@ -169,6 +169,26 @@ extension RawThemeViewerCode
                            Description: "The method to use to clear a block from the bucket at the end of the game.",
                            ControlTitle: "", Default: "FadeAway" as Any, Starting: "FadeAway" as Any, FieldType: .StringList,
                            List: GroupData.EnumListToStringList(DestructionMethods.allCases), Handler: nil)
+        PlayGroup.AddField(ID: UUID(), Title: "Disable block destruction",
+                           Description: "Disables various visual means of clearing the bucket at the end of a game.",
+                           ControlTitle: "Disable destruction", Default: true as Any,
+                           Starting: Settings.GetFastClearBucket() as Any, FieldType: .Bool, List: nil,
+                           Handler:
+            {
+                NewValue in
+                let NewBool = NewValue as! Bool
+                Settings.SetFastClearBucket(NewValue: NewBool)
+        })
+        PlayGroup.AddField(ID: UUID(), Title: "Bucket destruction duration",
+                           Description: "The amount of time in seconds to clear the bucket in a visual fashion.",
+                           ControlTitle: "Seconds", Default: 1.25 as Any,
+                           Starting: Settings.GetBucketDestructionDurationTime() as Any, FieldType: .Double,
+                           List: nil, Handler:
+            {
+                NewValue in
+                let NewDouble = NewValue as! Double
+                Settings.SetBucketDestructionDurationTime(NewValue: NewDouble)
+        })
         FieldTables.append(PlayGroup)
         
         //Game view.
