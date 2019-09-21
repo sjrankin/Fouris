@@ -67,7 +67,14 @@ class GroupData
         let NewField = GroupField(ID: ID, Title: Title, Description: Description, ControlTitle: ControlTitle,
                                   Starting: Starting, Default: Default, FieldType: FieldType,
                                   List: List, Handler: Handler, DisableControl: DisableControl)
-        NewField.Warnings = Warnings
+        if let WarningList = Warnings
+        {
+            NewField.WarningTriggers = WarningList
+        }
+        else
+        {
+            NewField.WarningTriggers = [String: String]()
+        }
         AddField(NewField)
     }
     
