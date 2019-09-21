@@ -720,22 +720,15 @@ class View3D: SCNView,                          //Our main super class.
     /// Visually clear the bucket of pieces.
     /// - Note:
     ///   - Should be called only after the game is over.
-    ///   - This is for the **3D** game view only.
     ///   - All retired piece IDs are removed.
     /// - Parameter FromBoard: The board that contains the map to draw. *Not currently used.*
-    /// - Parameter CalledFrom: Name of the caller. Used for debugging purposes only.
     /// - Parameter DestroyBy: Determines how to empty the bucket.
-    func DestroyMap3D(FromBoard: Board, CalledFrom: String, DestroyBy: DestructionMethods,
-                      Completion: (() ->())?)
-    {
-        #if false
-        print("DestroyMap3D called from \(CalledFrom)")
-        #endif
-        objc_sync_enter(RotateLock)
-        defer{ objc_sync_exit(RotateLock) }
-        
-        BucketCleaner(DestroyBy, Completion: Completion)
-        RetiredPieceIDs.removeAll()
+    /// - Parameter MaxDuration: Maximum amount of time (in seconds) to take to clear the board.
+    func DestroyMap3D(FromBoard: Board, DestroyBy: DestructionMethods, MaxDuration: Double)
+        {
+            objc_sync_enter(RotateLock)
+            defer{objc_sync_exit(RotateLock)}
+            BucketCleaner(DestroyBy, MaxDuration: MaxDuration)
     }
     
     /// Draw the 3D game view map. Includes moving pieces.
