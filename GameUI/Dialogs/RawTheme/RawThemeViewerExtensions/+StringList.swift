@@ -13,6 +13,8 @@ extension RawThemeViewerCode
 {
     func PopulateStringListView(WithField: GroupField)
     {
+        WarningBox.alpha = 0.0
+        WarningLabel.alpha = 0.0
         StringListPicker.isUserInteractionEnabled = !WithField.DisableControl 
         StringListPicker.layer.borderColor = UIColor.black.cgColor
         StringListPicker.layer.borderWidth = 0.5
