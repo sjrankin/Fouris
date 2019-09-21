@@ -383,8 +383,16 @@ class MainViewController: UIViewController,
     
     func ClearAndStartAI()
     {
+        #if true
+        DispatchQueue.main.sync
+            {
+                GameView3D?.DestroyMap3D(FromBoard: Game.GameBoard!, DestroyBy: .FadeAway, MaxDuration: 1.25)
+        }
+        HandleStartInAIMode()
+        #else
         GameView3D?.DestroyMap3D(FromBoard: Game.GameBoard!, CalledFrom: "ClearAndStartAI",
                                  DestroyBy: .FadeAway, Completion: HandleStartInAIMode)
+        #endif
     }
     
     /// Start playing in AI mode.
@@ -1037,15 +1045,60 @@ class MainViewController: UIViewController,
     
     let GameCountID = UUID()
     
+    var FirstPlay = true
+    
     /// Clears the game board then starts a new game.
+    /// - Note:
+    ///   - The board is cleared in an animated fashion whose maximum duration is set in user settings.
+    ///   - If the bucket is cleared visually, the pieces are removed with a duration no longer than that found in the
+    ///     user settings (the key is `BucketDestructionDuration`). In this case, **Play** is called after an appropriate
+    ///     delay to allow for the visuals to occur. Otherwise, **Play** is called immediately.
+    ///   - If this is the first time this function is called in a given isntance, nothing is cleared and **Play** is called
+    ///     immediately.
     func ClearAndPlay()
     {
-        GameView3D?.DestroyMap3D(FromBoard: Game.GameBoard!, CalledFrom: "ClearAndPlay", DestroyBy: .Shrink,
-                                 Completion: Play)
+        if FirstPlay
+        {
+            FirstPlay = false
+            Play()
+            return
+        }
+        var PlayDelay = 0.0
+        if !Settings.GetFastClearBucket()
+        {
+            let Duration = Settings.GetBucketDestructionDurationTime()
+            PlayDelay = Duration + 0.1
+            if Thread.isMainThread
+            {
+                //If we're on the same thread as the UI, just call the function to clear the bucket.
+                GameView3D?.DestroyMap3D(FromBoard: Game.GameBoard!, DestroyBy: .ScatterDirectionally, MaxDuration: Duration)
+            }
+            else
+            {
+                //If we're not on the same thread as the UI (such as being called by a background timer), run the function on
+                //the main thread.
+                DispatchQueue.main.sync
+                    {
+                        GameView3D?.DestroyMap3D(FromBoard: Game.GameBoard!, DestroyBy: .ScatterDirectionally, MaxDuration: Duration)
+                }
+            }
+        }
+        else
+        {
+            //Nothing to do...
+        }
+        #if true
+        perform(#selector(Play), with: nil, afterDelay: PlayDelay)
+        #else
+        DispatchQueue.main.asyncAfter(deadline: .now() + PlayDelay)
+        {
+            Play()
+        }
+        #endif
     }
     
     /// Play the game, eg, start in normal user mode.
-    func Play()
+    @objc func Play()
     {
         ForceResume()
         StopAccumulating = false
