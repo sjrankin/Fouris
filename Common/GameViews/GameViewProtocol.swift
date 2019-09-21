@@ -30,13 +30,10 @@ protocol GameViewProtocol: class
     func DrawMap3D(FromBoard: Board, CalledFrom: String)
     
     /// Visually clear the bucket of pieces.
-    /// - Note: This is for the **3D** game view only.
-    /// - Parameter FromBoard: The board that contains the map to draw.
-    /// - Parameter CalledFrom: Name of the caller. Used for debugging purposes only.
-    /// - Parameter DestroyBy: Determines how to empty the bucket.
-    /// - Parameter Completion: Completion handler.
-    func DestroyMap3D(FromBoard: Board, CalledFrom: String, DestroyBy: DestructionMethods,
-                      Completion: (() -> ())?)
+    /// - Parameter FromBoard: *Not currently used*.
+    /// - Parameter DestroyBy: Determines how to visually empty the bucket.
+    /// - Parameter MaxDuration: Maxium length of time to empty the bucket.
+    func DestroyMap3D(FromBoard: Board, DestroyBy: DestructionMethods, MaxDuration: Double)
     
     /// Draw a textural game view map. Includes moving pieces.
     /// - Note: This is for the **textual** game view only.
@@ -149,32 +146,4 @@ protocol GameViewProtocol: class
     func SetBoardOpacity(To: Double, Duration: Double, Completed: (() -> ())?)
 }
 
-/// Used to specify how to empty the bucket after game over.
-/// - **None**: Do nothing - just clear the board.
-/// - **Scatter**: Scatter the blocks in random directions.
-/// - **Explode**: Blocks fly away radially from the center.
-/// - **FadeAway**: Blocks fade out.
-/// - **ExplodingBlocks**: Blocks explode.
-/// - **Drop**: Blocks drop out the bottom.
-/// - **ScatterHorizontally**: Blocks randomly fly left or right.
-/// - **ScatterVertically**: Blocks randomly fly up or down.
-/// - **FlyFromSides**: Blocks fly away directly from their side. Used for **.Rotating4**
-///                     games only.
-/// - **ScatterRadially**: Blocks fly away in a straight line radially away from the bucket center.
-/// - **SpinDown**: Blocks spin rapidly and shrink simultaneously.
-/// - **Shrink**: Blocks shrink to nothingness.
-enum DestructionMethods: String, CaseIterable
-{
-    case None = "None"
-    case Scatter = "Scatter"
-    case Explode = "Explode"
-    case FadeAway = "FadeAway"
-    case ExplodingBlocks = "ExplodingBlocks"
-    case Drop = "Drop"
-    case ScatterHorizontally = "ScatterHorizontally"
-    case ScatterVertially = "ScatterVertically"
-    case FlyFromSides = "FlyFromSides"
-    case ScatterRadially = "ScatterRadially"
-    case SpinDown = "SpinDown"
-    case Shrink = "Shrink"
-}
+
