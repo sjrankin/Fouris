@@ -64,17 +64,19 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
             4: .Big
     ]
     
-    func EditTheme(ID: UUID)
+    func EditTheme(Theme: ThemeDescriptor, DefaultTheme: ThemeDescriptor)
     {
-        ThemeID = ID
+        UserTheme = Theme
     }
     
-    func EditTheme(ID: UUID, PieceID: UUID)
+    func EditTheme(Theme: ThemeDescriptor, PieceID: UUID, DefaultTheme: ThemeDescriptor)
     {
-        ThemeID = ID
+        UserTheme = Theme
+        self.DefaultTheme = DefaultTheme
     }
     
-    var ThemeID: UUID = UUID.Empty
+    var UserTheme: ThemeDescriptor? = nil
+    var DefaultTheme: ThemeDescriptor? = nil
     
     func EditResults(_ Edited: Bool, ThemeID: UUID, PieceID: UUID?)
     {
@@ -325,7 +327,7 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
         {
             if let Cell = CurrentPieceTable.cellForRow(at: SelectedRow) as? GamePieceCell
             {
-                Editor?.EditTheme(ID: ThemeID, PieceID: Cell.PieceID)
+                Editor?.EditTheme(Theme: UserTheme!, PieceID: Cell.PieceID, DefaultTheme: DefaultTheme!)
             }
         }
         return Editor
@@ -339,7 +341,7 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
         {
             if let Cell = PieceSourceTable.cellForRow(at: SelectedRow) as? GamePieceCell
             {
-                Editor?.EditTheme(ID: ThemeID, PieceID: Cell.PieceID)
+                Editor?.EditTheme(Theme: UserTheme!, PieceID: Cell.PieceID, DefaultTheme: DefaultTheme!)
             }
         }
         return Editor
@@ -348,13 +350,13 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func HandleOKPressed(_ sender: Any)
     {
-        ThemeDelegate?.EditResults(true, ThemeID: ThemeID, PieceID: nil)
+        ThemeDelegate?.EditResults(true, ThemeID: UserTheme!.ID, PieceID: nil)
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func HandleCancelPressed(_ sender: Any)
     {
-        ThemeDelegate?.EditResults(false, ThemeID: ThemeID, PieceID: nil)
+        ThemeDelegate?.EditResults(false, ThemeID: UserTheme!.ID, PieceID: nil)
         self.dismiss(animated: true, completion: nil)
     }
     
