@@ -10,7 +10,7 @@
             <Property Name="_Active3DSurfaceTexture" Value="Color"/>
             <Property Name="_Retired3DSurfaceTexture" Value="Color"/>
             <Property Name="_ActiveTextureName" Value="Red"/>
-            <Property Name="_RetiredTextureName" Value="MacMaroon"/>
+            <Property Name="_RetiredTextureName" Value="Tomato"/>
             <Property Name="_ActiveDiffuseColor" Value="Red"/>
             <Property Name="_ActiveSpecularColor" Value="White"/>
             <Property Name="_RetiredDiffuseColor" Value="MacMaroon"/>
