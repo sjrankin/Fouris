@@ -11,8 +11,6 @@ import UIKit
 
 class ThemingController: UIViewController, UITableViewDataSource, UITableViewDelegate, ThemeEditingProtocol
 {
-
-    
     weak var ThemeDelegate: ThemeEditingProtocol? = nil
     
     override func viewDidLoad()
@@ -39,7 +37,7 @@ class ThemingController: UIViewController, UITableViewDataSource, UITableViewDel
     {
         let Editor = ThemeEditorController(coder: coder)
         Editor?.ThemeDelegate = self
-        EditTheme(ID: UUID.Empty)
+        EditTheme(Theme: UserTheme!, DefaultTheme: DefaultTheme!)
         return Editor
     }
     
@@ -47,18 +45,24 @@ class ThemingController: UIViewController, UITableViewDataSource, UITableViewDel
     {
         let Editor = ThemeEditorController(coder: coder)
         Editor?.ThemeDelegate = self
-        EditTheme(ID: ThemeID)
+        EditTheme(Theme: UserTheme!, DefaultTheme: DefaultTheme!)
         return Editor
     }
     
-    func EditTheme(ID: UUID)
+    func EditTheme(Theme: ThemeDescriptor, DefaultTheme: ThemeDescriptor)
     {
-        //Right now, no one should call this as this is the originator of theme edits.
+        UserTheme = Theme
+        self.DefaultTheme = DefaultTheme
     }
     
-    func EditTheme(ID: UUID, PieceID: UUID)
+    func EditTheme(Theme: ThemeDescriptor, PieceID: UUID, DefaultTheme: ThemeDescriptor)
     {
+        UserTheme = Theme
+        self.DefaultTheme = DefaultTheme
     }
+    
+    var UserTheme: ThemeDescriptor? = nil
+    var DefaultTheme: ThemeDescriptor? = nil
     
     func EditResults(_ Edited: Bool, ThemeID: UUID, PieceID: UUID?)
     {
