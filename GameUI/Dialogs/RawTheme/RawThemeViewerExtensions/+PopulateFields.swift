@@ -35,20 +35,43 @@ extension RawThemeViewerCode
         })
         DebugGroup.AddField(ID: UUID(), Title: "Show rendering statistics",
                             Description: "Use SceneKit's built-in display for showing real-time rendering information.",
-                            ControlTitle: "Show statistics", Default: false as Any, Starting: false as Any,
-                            FieldType: .Bool, List: nil, Handler: nil)
+                            ControlTitle: "Show statistics", Default: false as Any,
+                            Starting: self.UserTheme!.ShowStatistics as Any,
+                            FieldType: .Bool, List: nil, Handler:
+            {
+                NewValue in
+                let DoShow = NewValue as! Bool
+                self.UserTheme?.ShowStatistics = DoShow
+        })
         DebugGroup.AddField(ID: UUID(), Title: "Camera control",
                             Description: "User can control camera position.",
-                            ControlTitle: "User control", Default: false as Any, Starting: false as Any,
-                            FieldType: .Bool, List: nil, Handler: nil)
+                            ControlTitle: "User control", Default: false as Any,
+                            Starting: self.UserTheme!.CanControlCamera as Any,
+                            FieldType: .Bool, List: nil, Handler:
+            {
+                NewValue in
+                let CanControl = NewValue as! Bool
+                self.UserTheme?.CanControlCamera = CanControl
+        })
         DebugGroup.AddField(ID: UUID(), Title: "Use default camera",
                             Description: "Use the built-in default SceneKit camera.",
-                            ControlTitle: "Default camera", Default: false as Any, Starting: false as Any,
-                            FieldType: .Bool, List: nil, Handler: nil)
+                            ControlTitle: "Default camera", Default: false as Any,
+                            Starting: self.UserTheme!.UseDefaultCamera as Any,
+                            FieldType: .Bool, List: nil, Handler:
+            {
+                NewValue in
+                let DefaultCamera = NewValue as! Bool
+                self.UserTheme?.UseDefaultCamera = DefaultCamera
+        })
         DebugGroup.AddField(ID: UUID(), Title: "Show background grid",
                             Description: "Shows a grid in the background.", ControlTitle: "Show grid",
-                            Default: false as Any, Starting: false as Any,
-                            FieldType: .Bool, List: nil, Handler: nil)
+                            Default: false as Any, Starting: self.UserTheme!.ShowBackgroundGrid as Any,
+                            FieldType: .Bool, List: nil, Handler:
+            {
+                NewValue in
+                let ShowGrid = NewValue as! Bool
+                self.UserTheme?.ShowBackgroundGrid = ShowGrid
+        })
         FieldTables.append(DebugGroup)
         
         //Settings
@@ -142,20 +165,20 @@ extension RawThemeViewerCode
         AIGroup.AddField(ID: UUID(), Title: "AI sneak peak count",
                          Description: "Number of pieces ahead the AI looks at to determine the best location for the current piece.",
                          ControlTitle: "Look-ahead count", Default: 1 as Any,
-                         Starting: Settings.GetAISneakPeakCount() as Any, FieldType: .Int, List: nil, Handler:
+                         Starting: self.UserTheme!.AISneakPeakCount as Any, FieldType: .Int, List: nil, Handler:
             {
                 NewValue in
                 let NewInt = NewValue as! Int
-                Settings.SetAISneakPeakCount(To: NewInt)
+                self.UserTheme?.AISneakPeakCount = NewInt
         })
         AIGroup.AddField(ID: UUID(), Title: "Show AI commands",
                          Description: "Show AI actions on the UI as if it were pressing the buttons.",
                          ControlTitle: "Show AI actions", Default: true as Any,
-                         Starting: Settings.ShowAIUICommands() as Any, FieldType: .Bool, List: nil, Handler:
+                         Starting: self.UserTheme!.ShowAIActionsOnControls as Any, FieldType: .Bool, List: nil, Handler:
             {
                 NewValue in
                 let NewBool = NewValue as! Bool
-                Settings.SetAIUICommands(Enable: NewBool)
+                self.UserTheme?.ShowAIActionsOnControls = NewBool
         })
         FieldTables.append(AIGroup)
         
@@ -163,12 +186,27 @@ extension RawThemeViewerCode
         let PlayGroup = GroupData("Play")
         PlayGroup.AddField(ID: UUID(), Title: "Show next piece",
                            Description: "Show the next queued piece during game play.",
-                           ControlTitle: "Show next piece", Default: true as Any, Starting: true as Any,
-                           FieldType: .Bool, List: nil, Handler: nil)
+                           ControlTitle: "Show next piece", Default: true as Any,
+                           Starting: self.UserTheme!.ShowNextPiece as Any,
+                           FieldType: .Bool, List: nil, Handler:
+            {
+                NewValue in
+                let ShowNext = NewValue as! Bool
+                self.UserTheme?.ShowNextPiece = ShowNext
+        })
         PlayGroup.AddField(ID: UUID(), Title: "Block destruction method",
                            Description: "The method to use to clear a block from the bucket at the end of the game.",
-                           ControlTitle: "", Default: "FadeAway" as Any, Starting: "FadeAway" as Any, FieldType: .StringList,
-                           List: GroupData.EnumListToStringList(DestructionMethods.allCases), Handler: nil)
+                           ControlTitle: "", Default: "FadeAway" as Any,
+                           Starting: "\(self.UserTheme!.DestructionMethod)" as Any, FieldType: .StringList,
+                           List: GroupData.EnumListToStringList(DestructionMethods.allCases), Handler:
+            {
+                NewValue in
+                let MethodString = NewValue as! String
+                if let Method = DestructionMethods(rawValue: MethodString)
+                {
+                    self.UserTheme?.DestructionMethod = Method
+                }
+        })
         PlayGroup.AddField(ID: UUID(), Title: "Disable block destruction",
                            Description: "Disables various visual means of clearing the bucket at the end of a game.",
                            ControlTitle: "Disable destruction", Default: true as Any,
@@ -182,12 +220,12 @@ extension RawThemeViewerCode
         PlayGroup.AddField(ID: UUID(), Title: "Bucket destruction duration",
                            Description: "The amount of time in seconds to clear the bucket in a visual fashion.",
                            ControlTitle: "Seconds", Default: 1.25 as Any,
-                           Starting: Settings.GetBucketDestructionDurationTime() as Any, FieldType: .Double,
+                           Starting: self.UserTheme?.DestructionDuration as Any, FieldType: .Double,
                            List: nil, Handler:
             {
                 NewValue in
                 let NewDouble = NewValue as! Double
-                Settings.SetBucketDestructionDurationTime(NewValue: NewDouble)
+                self.UserTheme?.DestructionDuration = NewDouble
         })
         FieldTables.append(PlayGroup)
         
@@ -200,7 +238,12 @@ extension RawThemeViewerCode
         GameGroup.AddField(ID: UUID(), Title: "Field of view",
                            Description: "Field of view for the camera.",
                            ControlTitle: "Field of view", Default: 92.5 as Any, Starting: 92.5 as Any, FieldType: .Double,
-                           List: nil, Handler: nil)
+                           List: nil, Handler:
+            {
+                NewValue in
+                let NewFOV = NewValue as! Double
+                self.UserTheme?.CameraFieldOfView = NewFOV
+        })
         GameGroup.AddField(ID: UUID(), Title: "Camera position",
                            Description: "The position of the camera in the game view scene.",
                            ControlTitle: "", Default: SCNVector3(-0.5, 2.0, 15.0) as Any, Starting: SCNVector3(-0.5, 2.0, 15.0) as Any,
@@ -211,8 +254,22 @@ extension RawThemeViewerCode
                            FieldType: .Vector4, List: nil, Handler: nil)
         GameGroup.AddField(ID: UUID(), Title: "Orthographic projection",
                            Description: "Sets the camera to orthographic projection. If off, perspective projection is used.",
-                           ControlTitle: "Use orthographic", Default: false as Any, Starting: false as Any,
-                           FieldType: .Bool, List: nil, Handler: nil)
+                           ControlTitle: "Use orthographic", Default: false as Any, Starting: self.UserTheme?.IsOrthographic as Any,
+                           FieldType: .Bool, List: nil, Handler:
+            {
+                NewValue in
+                let UseOrthographic = NewValue as! Bool
+                self.UserTheme?.IsOrthographic = UseOrthographic
+        })
+        GameGroup.AddField(ID: UUID(), Title: "Orthographic scale",
+                           Description: "The scale of the orthographic project (if enabled).",
+                           ControlTitle: "", Default: 20.0 as Any, Starting: self.UserTheme?.OrthographicScale as Any,
+                           FieldType: .Double, List: nil, Handler:
+            {
+                NewValue in
+                let Scale = NewValue as! Double
+                self.UserTheme?.OrthographicScale = Scale
+        })
         GameGroup.AddField(ID: UUID(), Title: "Light color",
                            Description: "The color of the light.",
                            ControlTitle: "", Default: UIColor.white as Any, Starting: UIColor.white as Any,
@@ -236,7 +293,14 @@ extension RawThemeViewerCode
         BGGroup.AddField(ID: UUID(), Title: "Game background color",
                          Description: "Solid color for the game background.",
                          ControlTitle: "", Default: UIColor.red as Any, Starting: UIColor.red as Any, FieldType: .Color,
-                         List: nil, Handler: nil)
+                         List: nil, Handler:
+                {
+                    NewValue in
+                    let NewColor = NewValue as! UIColor
+                    let NewColorName = ColorServer.MakeColorName(From: NewColor)
+                    self.UserTheme!.BackgroundSolidColor = NewColorName!
+                }
+        )
         BGGroup.AddField(ID: UUID(), Title: "Solid color cycle time",
                          Description: "Time (in seconds) for the solid color background to cycle through 360° of hue. Set to 0 to disable.",
                          ControlTitle: "Seconds", Default: 0.0 as Any, Starting: 0.0 as Any, FieldType: .Double,
