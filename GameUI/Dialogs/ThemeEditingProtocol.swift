@@ -13,11 +13,20 @@ import UIKit
 protocol ThemeEditingProtocol: class
 {
     /// Used to send to an editor the ID of the theme to edit.
-    func EditTheme(ID: UUID)
+    /// - Parameter Theme: The theme to edit.
+    /// - Parameter DefaultTheme: The default theme.
+    func EditTheme(Theme: ThemeDescriptor, DefaultTheme: ThemeDescriptor)
     
     // Used to edit a piece in a theme.
-    func EditTheme(ID: UUID, PieceID: UUID)
+    /// - Parameter Theme: The theme to edit.
+    /// - Parameter PieceID: The piece shape ID to edit.
+    /// - Parameter DefaultTheme: The default theme.
+    func EditTheme(Theme: ThemeDescriptor, PieceID: UUID, DefaultTheme: ThemeDescriptor)
     
     /// Used to send to a caller the results of editing a theme.
+    /// - Parameter Edited: If true, the theme (or piece) was edited. If false, the theme
+    ///                     (or piece) was not edited.
+    /// - Parameter ThemeID: The ID of the edited theme.
+    /// - Parameter PieceID: The ID of the edited piece. May be nil depending on initial conditions.
     func EditResults(_ Edited: Bool, ThemeID: UUID, PieceID: UUID?)
 }
