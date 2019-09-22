@@ -65,7 +65,7 @@ class TextLayerManager: UIView
         set
         {
             _ThemeID = newValue
-            CurrentTheme = ThemeManager.ThemeFrom(ID: _ThemeID)
+            //CurrentTheme = ThemeManager.ThemeFrom(ID: _ThemeID)
             Redraw()
         }
     }
@@ -79,5 +79,5 @@ class TextLayerManager: UIView
     }
     
     /// Holds the current theme.
-    private var CurrentTheme: ThemeDescriptor? = nil
+    //private var CurrentTheme: ThemeDescriptor? = nil
 }
