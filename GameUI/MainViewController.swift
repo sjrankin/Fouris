@@ -37,7 +37,8 @@ class MainViewController: UIViewController,
     /// Game logic instance.
     var Game: GameLogic!
     
-    var Themes: ThemeManager2!
+    /// Theme manager.
+    var Themes: ThemeManager!
     
     /// AI test data table.
     var AIData: AITestTable? = nil
@@ -121,11 +122,9 @@ class MainViewController: UIViewController,
         Settings.Initialize()
         MasterPieceList.Initialize()
         LevelManager.Initialize()
-//        ThemeManager.Initialize()
-        Themes = ThemeManager2()
+        Themes = ThemeManager()
         Themes.Initialize()
         Themes.SubscribeToChanges(Subscriber: "MainViewController", SubscribingObject: self)
-        //ThemeManager2.Initialize()
         PieceVisualManager.Initialize()
         RecentlyUsedColors.Initialize(WithLimit: Settings.GetMostRecentlyUsedColorListCapacity())
         InitializeUI()
@@ -144,7 +143,7 @@ class MainViewController: UIViewController,
     override func viewDidDisappear(_ animated: Bool)
     {
         Settings.SaveUserData()
-        ThemeManager.SaveThemes()
+        Themes.SaveThemes()
         super.viewDidDisappear(animated)
     }
     
