@@ -94,9 +94,6 @@
 		17715CB922C757D0009FD441 /* StandardBoard.scn in Resources */ = {isa = PBXBuildFile; fileRef = 17715CB822C757D0009FD441 /* StandardBoard.scn */; };
 		17750FE7233732E700A188D6 /* ThemeChangeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17750FE6233732E700A188D6 /* ThemeChangeProtocol.swift */; };
 		17750FE923373E5B00A188D6 /* ThemeUpdatedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17750FE823373E5B00A188D6 /* ThemeUpdatedProtocol.swift */; };
-		177F4FBC229BBB1F00FE72CD /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177F4FBB229BBB1F00FE72CD /* ThemeManager.swift */; };
-		177F4FBF229BBBD300FE72CD /* ThemeDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177F4FBE229BBBD300FE72CD /* ThemeDescriptor.swift */; };
-		177F4FC2229BC01600FE72CD /* TileDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177F4FC1229BC01600FE72CD /* TileDescriptor.swift */; };
 		177F4FC6229BD2F500FE72CD /* Send.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177F4FC5229BD2F500FE72CD /* Send.swift */; };
 		177F4FC9229BD33900FE72CD /* Receive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177F4FC8229BD33900FE72CD /* Receive.swift */; };
 		177F4FCD229BD42500FE72CD /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177F4FCC229BD42500FE72CD /* Serializer.swift */; };
@@ -133,10 +130,10 @@
 		179C5E2123222EAA0003845B /* UserVisuals.xml in Resources */ = {isa = PBXBuildFile; fileRef = 179C5E2023222EAA0003845B /* UserVisuals.xml */; };
 		179C5E2323222F5A0003845B /* PieceVisuals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179C5E2223222F5A0003845B /* PieceVisuals.swift */; };
 		179C5E25232231F70003845B /* PieceVisualManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179C5E24232231F70003845B /* PieceVisualManager.swift */; };
-		179C5E2A23224C190003845B /* ThemeManager2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179C5E2923224C190003845B /* ThemeManager2.swift */; };
+		179C5E2A23224C190003845B /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179C5E2923224C190003845B /* ThemeManager.swift */; };
 		179C5E2C23224C660003845B /* UserGameThemes.xml in Resources */ = {isa = PBXBuildFile; fileRef = 179C5E2B23224C660003845B /* UserGameThemes.xml */; };
-		179C5E2E23224D570003845B /* ThemeDescriptor2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179C5E2D23224D570003845B /* ThemeDescriptor2.swift */; };
-		179C5E3023224E350003845B /* TileDescriptor2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179C5E2F23224E350003845B /* TileDescriptor2.swift */; };
+		179C5E2E23224D570003845B /* ThemeDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179C5E2D23224D570003845B /* ThemeDescriptor.swift */; };
+		179C5E3023224E350003845B /* TileDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179C5E2F23224E350003845B /* TileDescriptor.swift */; };
 		179C5E342322533F0003845B /* PieceEditorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179C5E332322533F0003845B /* PieceEditorCode.swift */; };
 		179C5E36232273130003845B /* ColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179C5E35232273130003845B /* ColorButton.swift */; };
 		179CB8CD2326145C0034E25B /* PieceViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179CB8CC2326145C0034E25B /* PieceViewer.swift */; };
@@ -314,9 +311,6 @@
 		17715CB822C757D0009FD441 /* StandardBoard.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = StandardBoard.scn; sourceTree = "<group>"; };
 		17750FE6233732E700A188D6 /* ThemeChangeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeChangeProtocol.swift; sourceTree = "<group>"; };
 		17750FE823373E5B00A188D6 /* ThemeUpdatedProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeUpdatedProtocol.swift; sourceTree = "<group>"; };
-		177F4FBB229BBB1F00FE72CD /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
-		177F4FBE229BBBD300FE72CD /* ThemeDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDescriptor.swift; sourceTree = "<group>"; };
-		177F4FC1229BC01600FE72CD /* TileDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileDescriptor.swift; sourceTree = "<group>"; };
 		177F4FC5229BD2F500FE72CD /* Send.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Send.swift; sourceTree = "<group>"; };
 		177F4FC8229BD33900FE72CD /* Receive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receive.swift; sourceTree = "<group>"; };
 		177F4FCC229BD42500FE72CD /* Serializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serializer.swift; sourceTree = "<group>"; };
@@ -356,10 +350,10 @@
 		179C5E2023222EAA0003845B /* UserVisuals.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = UserVisuals.xml; sourceTree = "<group>"; };
 		179C5E2223222F5A0003845B /* PieceVisuals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceVisuals.swift; sourceTree = "<group>"; };
 		179C5E24232231F70003845B /* PieceVisualManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceVisualManager.swift; sourceTree = "<group>"; };
-		179C5E2923224C190003845B /* ThemeManager2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager2.swift; sourceTree = "<group>"; };
+		179C5E2923224C190003845B /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		179C5E2B23224C660003845B /* UserGameThemes.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = UserGameThemes.xml; sourceTree = "<group>"; };
-		179C5E2D23224D570003845B /* ThemeDescriptor2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDescriptor2.swift; sourceTree = "<group>"; };
-		179C5E2F23224E350003845B /* TileDescriptor2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileDescriptor2.swift; sourceTree = "<group>"; };
+		179C5E2D23224D570003845B /* ThemeDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDescriptor.swift; sourceTree = "<group>"; };
+		179C5E2F23224E350003845B /* TileDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileDescriptor.swift; sourceTree = "<group>"; };
 		179C5E332322533F0003845B /* PieceEditorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceEditorCode.swift; sourceTree = "<group>"; };
 		179C5E35232273130003845B /* ColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorButton.swift; sourceTree = "<group>"; };
 		179CB8CC2326145C0034E25B /* PieceViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceViewer.swift; sourceTree = "<group>"; };
@@ -616,16 +610,6 @@
 			path = FileIO;
 			sourceTree = "<group>";
 		};
-		177F4FBA229BBABF00FE72CD /* Themes */ = {
-			isa = PBXGroup;
-			children = (
-				177F4FBB229BBB1F00FE72CD /* ThemeManager.swift */,
-				177F4FBE229BBBD300FE72CD /* ThemeDescriptor.swift */,
-				177F4FC1229BC01600FE72CD /* TileDescriptor.swift */,
-			);
-			path = Themes;
-			sourceTree = "<group>";
-		};
 		177F4FC4229BD2D200FE72CD /* RemoteControls */ = {
 			isa = PBXGroup;
 			children = (
@@ -747,17 +731,17 @@
 			path = Visuals;
 			sourceTree = "<group>";
 		};
-		179C5E2823224C040003845B /* Themes2 */ = {
+		179C5E2823224C040003845B /* Themes */ = {
 			isa = PBXGroup;
 			children = (
-				179C5E2923224C190003845B /* ThemeManager2.swift */,
-				179C5E2D23224D570003845B /* ThemeDescriptor2.swift */,
-				179C5E2F23224E350003845B /* TileDescriptor2.swift */,
+				179C5E2923224C190003845B /* ThemeManager.swift */,
+				179C5E2D23224D570003845B /* ThemeDescriptor.swift */,
+				179C5E2F23224E350003845B /* TileDescriptor.swift */,
 				179F0A7D2330D4B80051B148 /* ThemeEnums.swift */,
 				17750FE6233732E700A188D6 /* ThemeChangeProtocol.swift */,
 				17750FE823373E5B00A188D6 /* ThemeUpdatedProtocol.swift */,
 			);
-			path = Themes2;
+			path = Themes;
 			sourceTree = "<group>";
 		};
 		179C5E3723227DDA0003845B /* PieceEditing */ = {
@@ -1080,8 +1064,7 @@
 				177F4FCB229BD40F00FE72CD /* Serialization */,
 				1749B6DF22BB2687003DC65D /* Utilities */,
 				175671672302850800D0824D /* TimerManager */,
-				179C5E2823224C040003845B /* Themes2 */,
-				177F4FBA229BBABF00FE72CD /* Themes */,
+				179C5E2823224C040003845B /* Themes */,
 				179C5E1D23222B260003845B /* Visuals */,
 				177F4FC4229BD2D200FE72CD /* RemoteControls */,
 				17AB99D02297DC4E003C4674 /* ImageManagement */,
@@ -1256,7 +1239,6 @@
 				17715CB622C74D8E009FD441 /* +Tables.swift in Sources */,
 				17477A772317F7E800AAEB14 /* PieceSelectorDialog.swift in Sources */,
 				17FC443C228AB9E50065888F /* Score.swift in Sources */,
-				177F4FBF229BBBD300FE72CD /* ThemeDescriptor.swift in Sources */,
 				17ECE5AC23322540003F4065 /* +PopulateFields.swift in Sources */,
 				177F4FC6229BD2F500FE72CD /* Send.swift in Sources */,
 				17189FF5233332FD00317BF1 /* +Vector3.swift in Sources */,
@@ -1269,7 +1251,6 @@
 				17D48A8422B2111D00DD7C94 /* ThreeDProtocol.swift in Sources */,
 				17750FE923373E5B00A188D6 /* ThemeUpdatedProtocol.swift in Sources */,
 				17C0E6F722AF9C87003FAFA8 /* IdiotLightMessage.swift in Sources */,
-				177F4FBC229BBB1F00FE72CD /* ThemeManager.swift in Sources */,
 				173AA392231A8EEE00802289 /* PredefinedColors.swift in Sources */,
 				171ED10422F56B9F00CE2CDF /* Rotating4GameAI.swift in Sources */,
 				173B4B17231B96B2007B22F6 /* RecentColorCell.swift in Sources */,
@@ -1282,7 +1263,7 @@
 				176F1B6E227AD3D500681CDE /* FileIO.swift in Sources */,
 				1756715C2302695800D0824D /* StepperHelper.swift in Sources */,
 				17AF231F2313981C00921E6C /* MainViewController.swift in Sources */,
-				179C5E3023224E350003845B /* TileDescriptor2.swift in Sources */,
+				179C5E3023224E350003845B /* TileDescriptor.swift in Sources */,
 				17B4D2C622A4D1C700987BC5 /* LogicalLocation.swift in Sources */,
 				17660BEC2289995E00082E23 /* GameViewRequestProtocol.swift in Sources */,
 				17477A712317853C00AAEB14 /* ThemingController.swift in Sources */,
@@ -1384,7 +1365,7 @@
 				177F4FD3229C0F1C00FE72CD /* SerializerNode.swift in Sources */,
 				174BEFDF22881941003A43E5 /* GameAINotificationProtocol.swift in Sources */,
 				17ED240F22716610002B92E1 /* ColorTable.swift in Sources */,
-				179C5E2E23224D570003845B /* ThemeDescriptor2.swift in Sources */,
+				179C5E2E23224D570003845B /* ThemeDescriptor.swift in Sources */,
 				171ED0FD22F5689200CE2CDF /* MainAI.swift in Sources */,
 				17E71A6B22AD20CC0081991E /* State.swift in Sources */,
 				176F1B71227B0A0000681CDE /* TOC.swift in Sources */,
@@ -1404,7 +1385,6 @@
 				175098B32290338400A411DE /* MapType.swift in Sources */,
 				171020F0227D8A91002FAB63 /* PieceAttributes.swift in Sources */,
 				17B8757523236C9A00BD8BBD /* BlockView.swift in Sources */,
-				177F4FC2229BC01600FE72CD /* TileDescriptor.swift in Sources */,
 				1704E302232130E900D7C158 /* ThemeEditingProtocol.swift in Sources */,
 				17831EDB232DD73D007FF894 /* FlyingNode.swift in Sources */,
 				17E71A7722AD21620081991E /* MessageHandlerDelegate.swift in Sources */,
@@ -1415,7 +1395,7 @@
 				17ECE5B2233256D8003F4065 /* +String.swift in Sources */,
 				1797525022C38A4D00BF539A /* +SpecialAndOtherCommands.swift in Sources */,
 				1749B6E122BB26A0003DC65D /* Conversions.swift in Sources */,
-				179C5E2A23224C190003845B /* ThemeManager2.swift in Sources */,
+				179C5E2A23224C190003845B /* ThemeManager.swift in Sources */,
 				1754E79A2325285100820FDE /* Grid.swift in Sources */,
 				17F6ECEA2286E0C9000F8E11 /* UserData.swift in Sources */,
 				177F4FD6229C11A100FE72CD /* SerializerTree.swift in Sources */,
