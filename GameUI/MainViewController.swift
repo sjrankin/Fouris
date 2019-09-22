@@ -26,10 +26,9 @@ class MainViewController: UIViewController,
     StepperHelper,                                      //Protocol for the stepper to display data for the user.
     GameSelectorProtocol,                               //Protocol for selecting games.
     UITouchImageDelegate,                               //Protocol for touch image presses.
-    SettingsChangedProtocol                             //Protocol for receiving settings change notifications.
+    SettingsChangedProtocol,                            //Protocol for receiving settings change notifications.
+    ThemeUpdatedProtocol                                //Protocol for receiving updates to the theme.
 {
-
-    
     // MARK: Globals.
     
     /// 3D game view instance.
@@ -37,6 +36,8 @@ class MainViewController: UIViewController,
     
     /// Game logic instance.
     var Game: GameLogic!
+    
+    var Themes: ThemeManager2!
     
     /// AI test data table.
     var AIData: AITestTable? = nil
@@ -120,7 +121,11 @@ class MainViewController: UIViewController,
         Settings.Initialize()
         MasterPieceList.Initialize()
         LevelManager.Initialize()
-        ThemeManager.Initialize()
+//        ThemeManager.Initialize()
+        Themes = ThemeManager2()
+        Themes.Initialize()
+        Themes.SubscribeToChanges(Subscriber: "MainViewController", SubscribingObject: self)
+        //ThemeManager2.Initialize()
         PieceVisualManager.Initialize()
         RecentlyUsedColors.Initialize(WithLimit: Settings.GetMostRecentlyUsedColorListCapacity())
         InitializeUI()
@@ -156,8 +161,12 @@ class MainViewController: UIViewController,
         
         //Initialize the 3D game viewer.
         GameView3D = GameUISurface3D
+        #if true
+        GameView3D?.Initialize(With: Game!.GameBoard!, Theme: Themes, BaseType: CurrentBaseGameType)
+        #else
         GameView3D?.Initialize(With: Game!.GameBoard!, Theme: ThemeManager.GetDefault3DThemeID()!,
                                BaseType: CurrentBaseGameType)
+        #endif
         GameView3D?.Owner = self
         GameView3D?.SmoothMotionDelegate = self
         Smooth3D = GameView3D
@@ -1071,7 +1080,8 @@ class MainViewController: UIViewController,
             if Thread.isMainThread
             {
                 //If we're on the same thread as the UI, just call the function to clear the bucket.
-                GameView3D?.DestroyMap3D(FromBoard: Game.GameBoard!, DestroyBy: .ScatterDirectionally, MaxDuration: Duration)
+                GameView3D?.DestroyMap3D(FromBoard: Game.GameBoard!, DestroyBy: .Shrink, MaxDuration: Duration)
+                perform(#selector(Play), with: nil, afterDelay: PlayDelay)
             }
             else
             {
@@ -1079,7 +1089,9 @@ class MainViewController: UIViewController,
                 //the main thread.
                 DispatchQueue.main.sync
                     {
-                        GameView3D?.DestroyMap3D(FromBoard: Game.GameBoard!, DestroyBy: .ScatterDirectionally, MaxDuration: Duration)
+                        print("MainViewController.ClearAndPlay called from background thread.")
+                        GameView3D?.DestroyMap3D(FromBoard: Game.GameBoard!, DestroyBy: .Shrink, MaxDuration: Duration)
+                        perform(#selector(self.Play), with: nil, afterDelay: PlayDelay)
                 }
             }
         }
@@ -1087,14 +1099,6 @@ class MainViewController: UIViewController,
         {
             //Nothing to do...
         }
-        #if true
-        perform(#selector(Play), with: nil, afterDelay: PlayDelay)
-        #else
-        DispatchQueue.main.asyncAfter(deadline: .now() + PlayDelay)
-        {
-            Play()
-        }
-        #endif
     }
     
     /// Play the game, eg, start in normal user mode.
@@ -1965,6 +1969,13 @@ class MainViewController: UIViewController,
     }
     
     public var MakingVideo: Bool = false
+    
+    // MARK: Theme update protocol functions.
+    
+    func ThemeUpdated(ThemeName: String, FieldName: String)
+    {
+        print("Theme \(ThemeName) updated field \(FieldName)")
+    }
     
     // MARK: Variables used by +MainSlideInUI from within extensions.
     
