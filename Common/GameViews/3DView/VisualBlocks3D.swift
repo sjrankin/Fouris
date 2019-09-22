@@ -36,7 +36,7 @@ class VisualBlocks3D: SCNNode
     /// - Parameter AtY: Initial Y location of the block.
     /// - Parameter WithTile: Tile to use to create the visual look of the block.
     /// - Parameter IsRetired: Determines which set of attributes to use for the visual look.
-    init(_ WithID: UUID, AtX: CGFloat, AtY: CGFloat, WithTile: TileDescriptor, IsRetired: Bool)
+    init(_ WithID: UUID, AtX: CGFloat, AtY: CGFloat, WithTile: TileDescriptor2, IsRetired: Bool)
     {
         super.init()
         CommonInitialization()
@@ -56,7 +56,7 @@ class VisualBlocks3D: SCNNode
     /// - Parameter AtZ: Initial Z location of the block.
     /// - Parameter WithTile: Tile to use to create the visual look of the block.
     /// - Parameter IsRetired: Determines which set of attributes to use for the visual look.
-    init(_ WithID: UUID, AtX: CGFloat, AtY: CGFloat, AtZ: CGFloat, WithTile: TileDescriptor, IsRetired: Bool)
+    init(_ WithID: UUID, AtX: CGFloat, AtY: CGFloat, AtZ: CGFloat, WithTile: TileDescriptor2, IsRetired: Bool)
     {
         super.init()
         CommonInitialization()
@@ -88,10 +88,10 @@ class VisualBlocks3D: SCNNode
     private static var BlockCount = 0
     
     /// Reference to the tile descriptor for this block.
-    private var _BlockTile: TileDescriptor? = nil
+    private var _BlockTile: TileDescriptor2? = nil
     /// Get or set the tile descriptor used to describe the visual aspects of this block. Setting the
     /// value changes the visuals immediately.
-    public var BlockTile: TileDescriptor?
+    public var BlockTile: TileDescriptor2?
     {
         get
         {
@@ -163,7 +163,7 @@ class VisualBlocks3D: SCNNode
     /// Sets the passed tile's visual attributes to the block.
     /// - Parameter WithTile: The tile whose visual attributes will be used to draw the block.
     /// - Parameter IsRetired: Determines which set of visual attributes to use.
-    public func SetVisualAttributes(WithTile: TileDescriptor, IsRetired: Bool)
+    public func SetVisualAttributes(WithTile: TileDescriptor2, IsRetired: Bool)
     {
 //        print("Setting visual attributes [\(VACount)].")
         VACount = VACount + 1
@@ -181,6 +181,48 @@ class VisualBlocks3D: SCNNode
             self.geometry = BlockShape
         }
         
+        #if true
+        var Specular = "White"
+        var Diffuse = "ReallyDarkGray"
+        let TileShape = PieceFactory.GetShapeForPiece(ID: WithTile.PieceShapeID)
+        let TileVisual = PieceVisualManager.GetPieceTheme(PieceShape: TileShape!)
+        if IsRetired
+        {
+            switch TileVisual?.Retired3DSurfaceTexture
+            {
+                case .Color:
+                    Specular = TileVisual!.RetiredSpecularColor
+                    Diffuse = TileVisual!.RetiredDiffuseColor
+                    BlockShape!.firstMaterial!.specular.contents = ColorServer.ColorFrom(Specular)
+                    BlockShape!.firstMaterial!.diffuse.contents = ColorServer.ColorFrom(Diffuse)
+                
+                case .Image:
+                    Diffuse = TileVisual!.RetiredTextureName
+                BlockShape!.firstMaterial!.diffuse.contents = UIImage(named: Diffuse)
+                
+                case .none:
+                break
+            }
+        }
+        else
+        {
+            switch TileVisual?.Active3DSurfaceTexture
+            {
+                case .Color:
+                    Specular = TileVisual!.ActiveSpecularColor
+                    Diffuse = TileVisual!.ActiveDiffuseColor
+                    BlockShape!.firstMaterial!.specular.contents = ColorServer.ColorFrom(Specular)
+                    BlockShape!.firstMaterial!.diffuse.contents = ColorServer.ColorFrom(Diffuse)
+                
+                case .Image:
+                    Diffuse = TileVisual!.ActiveTextureName
+                    BlockShape!.firstMaterial!.diffuse.contents = UIImage(named: Diffuse)
+                
+                case .none:
+                break
+            }
+        }
+        #else
         var Specular = "White"
         var Diffuse = "ReallyDarkGray"
         switch WithTile.VisualType
@@ -231,8 +273,13 @@ class VisualBlocks3D: SCNNode
                 BlockShape!.materials.first?.specular.contents = ColorServer.ColorFrom(Specular)
                 BlockShape!.materials.first?.diffuse.contents = ColorServer.ColorFrom(Diffuse)
         }
+        #endif
         
+        #if true
+        let GeoShape = IsRetired ? TileVisual!.Retired3DBlockShape : TileVisual!.Active3DBlockShape
+        #else
         let GeoShape = IsRetired ? BlockTile?.Retired3DBlockShape : BlockTile?.Active3DBlockShape
+        #endif
         switch GeoShape
         {
             case .Torus:
@@ -277,9 +324,15 @@ class VisualBlocks3D: SCNNode
     /// - Returns: An SCNGeometry instance with the appropriate shape.
     private func CreateGeometry(Width: CGFloat, Height: CGFloat, Depth: CGFloat, IsRetired: Bool) -> SCNGeometry
     {
+        let TileShape = PieceFactory.GetShapeForPiece(ID: BlockTile!.PieceShapeID)
+        let TileVisual = PieceVisualManager.GetPieceTheme(PieceShape: TileShape!)
+        #if true
+        let GeoShape = IsRetired ? TileVisual!.Retired3DBlockShape : TileVisual!.Active3DBlockShape
+        #else
         let GeoShape = IsRetired ? BlockTile?.Retired3DBlockShape : BlockTile?.Active3DBlockShape
+        #endif
         var Geometry: SCNGeometry!
-        switch GeoShape!
+        switch GeoShape
         {
             case .Capsule:
                 Geometry = SCNCapsule(capRadius: Width * 0.35, height: Height)
@@ -326,7 +379,7 @@ class VisualBlocks3D: SCNNode
     /// - Parameter WithTile: The tile to use to get visual attributes.
     /// - Parameter IsRetired: Determines which set of visual attributes to use.
     public func Create(Width: CGFloat, Height: CGFloat, Depth: CGFloat, EdgeRadius: CGFloat,
-                       WithTile: TileDescriptor, IsRetired: Bool)
+                       WithTile: TileDescriptor2, IsRetired: Bool)
     {
         OriginalWidth = Width
         OriginalHeight = Height
@@ -345,7 +398,7 @@ class VisualBlocks3D: SCNNode
     /// - Note: The size of the geometry will be 1.0 x 1.0 x 1.0.
     /// - Parameter WithTile: The tile to use to get visual attributes.
     /// - Parameter IsRetired: Determines which set of visual attributes to use.
-    public func Create(WithTile: TileDescriptor, IsRetired: Bool)
+    public func Create(WithTile: TileDescriptor2, IsRetired: Bool)
     {
         Create(Width: 1.0, Height: 1.0, Depth: 1.0, EdgeRadius: 0.0, WithTile: WithTile, IsRetired: IsRetired)
     }
