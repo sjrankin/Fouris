@@ -86,15 +86,15 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
         TitleBarTitle.text = "Piece Editor: \(PieceShape)"
     }
     
-    func EditTheme(ID: UUID)
+    func EditTheme(Theme: ThemeDescriptor, DefaultTheme: ThemeDescriptor)
     {
-        fatalError("Caller needs to call EditTheme(UUID, UUID) instead.")
+        fatalError("Caller needs to call EditTheme(ThemeDescriptor, UUID, ThemeDescriptor) instead.")
     }
     
-    func EditTheme(ID: UUID, PieceID: UUID)
+    func EditTheme(Theme: ThemeDescriptor, PieceID: UUID, DefaultTheme: ThemeDescriptor)
     {
-        ThemeID = ID
-        self.PieceID = PieceID
+        UserTheme = Theme
+        self.DefaultTheme = DefaultTheme
     }
     
     var ThemeID: UUID = UUID.Empty
@@ -105,6 +105,9 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
     {
         
     }
+    
+    var UserTheme: ThemeDescriptor? = nil
+    var DefaultTheme: ThemeDescriptor? = nil
     
     func ColorToEdit(_ Color: UIColor, Tag: Any?)
     {
