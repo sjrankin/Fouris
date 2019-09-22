@@ -18,7 +18,8 @@ class View3D: SCNView,                          //Our main super class.
     GameViewProtocol,                           //How the UI communicates with a game view.
     ThreeDProtocol,                             //The 3D game protocol.
     SmoothMotionProtocol,                       //Smooth motion protocol.
-    TextLayerProtocol                           //Text layer protocol.
+    TextLayerProtocol,                          //Text layer protocol.
+    ThemeUpdatedProtocol                        //Theme properites updated protocol.
 {
     /// The scene that is shown in the 3D view.
     var GameScene: SCNScene!
@@ -32,16 +33,19 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter Theme: The ID of the initial theme to use (may be changed via the `SetTheme` function).
     /// - Parameter BaseType: The base game type. Can only be set via this function.
     /// - Parameter CenterType: The shape of the center block for **.Rotating4** games.
-    func Initialize(With: Board, Theme: UUID, BaseType: BaseGameTypes, CenterType: CenterShapes = .Square)
+    //func Initialize(With: Board, Theme: UUID, BaseType: BaseGameTypes, CenterType: CenterShapes = .Square)
+    func Initialize(With: Board, Theme: ThemeManager2, BaseType: BaseGameTypes)
     {
         //MasterBlockNode = SCNNode()
-        CenterBlockShape = CenterType
+        CenterBlockShape = .Square
         self.rendersContinuously = true
         CreateMasterBlockNode()
         _BaseGameType = BaseType
         SetBoard(With)
         //print("3D Theme: \(Theme.uuidString)")
-        CurrentTheme = ThemeManager.ThemeFrom(ID: Theme)
+        //CurrentTheme = ThemeManager.ThemeFrom(ID: Theme)
+        CurrentTheme = Theme.UserTheme
+        Theme.SubscribeToChanges(Subscriber: "View3D", SubscribingObject: self)
         self.showsStatistics = CurrentTheme!.ShowStatistics
         self.allowsCameraControl = false//CurrentTheme!.CanControlCamera
         OriginalCameraPosition = CurrentTheme!.CameraPosition
@@ -110,6 +114,11 @@ class View3D: SCNView,                          //Our main super class.
         AddPeskyLight()
         PerfTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(SendPerformanceData),
                                          userInfo: nil, repeats: true)
+    }
+    
+    func ThemeUpdated(ThemeName: String, FieldName: String)
+    {
+        
     }
     
     var CenterBlockShape: CenterShapes = .Square
@@ -190,13 +199,13 @@ class View3D: SCNView,                          //Our main super class.
     /// Draw the background according to the current theme.
     func DrawBackground()
     {
-        switch CurrentTheme?.BackgroundType3D
+        switch CurrentTheme?.BackgroundType
         {
             case .Color:
-                GameScene.background.contents = ColorServer.ColorFrom(CurrentTheme!.BackgroundIdentifier3D)
+                GameScene.background.contents = ColorServer.ColorFrom(CurrentTheme!.BackgroundSolidColor)
             
             case .Image:
-                GameScene.background.contents = ImageServer.GetNamedImage(named: CurrentTheme!.BackgroundIdentifier3D)
+                break
             
             case .CALayer:
                 break
@@ -205,7 +214,16 @@ class View3D: SCNView,                          //Our main super class.
                 break
             
             case .LiveView:
-                let CaptureDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)!
+                var CameraPosition: AVCaptureDevice.Position!
+                if CurrentTheme!.BackgroundLiveImageCamera == .Rear
+                {
+                    CameraPosition = .back
+                }
+                else
+                {
+                    CameraPosition = .front
+                }
+                let CaptureDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: CameraPosition)!
                 self.backgroundColor = UIColor.clear
                 self.scene?.background.contents = CaptureDevice
             
@@ -592,7 +610,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter Y: The initial Y location of the node.
     /// - Parameter IsRetired: Initial retired status of the node.
     /// - Parameter Tile: The theme tile descriptor for the node.
-    func AddBlockNode_Standard(ParentID: UUID, BlockID: UUID, X: Int, Y: Int, IsRetired: Bool, Tile: TileDescriptor)
+    func AddBlockNode_Standard(ParentID: UUID, BlockID: UUID, X: Int, Y: Int, IsRetired: Bool, Tile: TileDescriptor2)
     {
         let VBlock = VisualBlocks3D(BlockID, AtX: CGFloat(X), AtY: CGFloat(Y), WithTile: Tile, IsRetired: IsRetired)
         VBlock.ParentID = ParentID
@@ -609,7 +627,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter Y: The initial Y location of the node.
     /// - Parameter IsRetired: Initial retired status of the node.
     /// - Parameter Tile: The theme tile descriptor for the node.
-    func AddBlockNode_Rotating(ParentID: UUID, BlockID: UUID, X: CGFloat, Y: CGFloat, IsRetired: Bool, Tile: TileDescriptor)
+    func AddBlockNode_Rotating(ParentID: UUID, BlockID: UUID, X: CGFloat, Y: CGFloat, IsRetired: Bool, Tile: TileDescriptor2)
     {
         let VBlock = VisualBlocks3D(BlockID, AtX: X, AtY: Y, WithTile: Tile, IsRetired: IsRetired)
         VBlock.ParentID = ParentID
@@ -1197,6 +1215,7 @@ class View3D: SCNView,                          //Our main super class.
     {
     }
     
+    /// Lock used when the board is rotating.
     var RotateLock = NSObject()
     
     var RotateMe: SCNNode = SCNNode()
@@ -1228,6 +1247,7 @@ class View3D: SCNView,                          //Our main super class.
     }
     
     /// Rotates the contents of the game (but not UI or falling piece) by the specified number of degrees.
+    /// - Note: This function uses a synchronous lock to make sure that when the board is rotating, other things don't happen to it.
     /// - Parameter Right: If true, the contents are rotated clockwise. If false, counter-clockwise.
     /// - Parameter Duration: Duration in seconds the rotation should take.
     /// - Parameter Completed: Completion handler called at the end of the rotation.
@@ -1236,16 +1256,26 @@ class View3D: SCNView,                          //Our main super class.
         objc_sync_enter(RotateLock)
         defer{objc_sync_exit(RotateLock)}
         let DirectionalSign = CGFloat(Right ? -1.0 : 1.0)
+        #if false
+        let RotationCount = 90 / 5
+        var Rotations = [SCNAction]()
+        for _ in 0 ..< RotationCount
+        {
+            let ZRotation = DirectionalSign * 5.0 * CGFloat.pi / 180.0
+            let ZRotationAction = SCNAction.rotateBy(x: 0.0, y: 0.0, z: ZRotation, duration: Duration / Double(RotationCount))
+            Rotations.append(ZRotationAction)
+        }
+        let RotateSequence = SCNAction.sequence(Rotations)
+        MasterBlockNode?.runAction(RotateSequence)
+        BucketNode?.runAction(RotateSequence, completionHandler: {Completed()})
+        #else
         let ZRotation = DirectionalSign * 90.0 * CGFloat.pi / 180.0
         let RotateAction = SCNAction.rotateBy(x: 0.0, y: 0.0, z: ZRotation, duration: Duration)
         RemoveMovingPiece()
-        #if false
-        self.scene?.rootNode.runAction(RotateAction, completionHandler: {Completed()})
-        #else
         //BucketGridNode?.runAction(RotateAction)
-                //OutlineNode?.runAction(RotateAction)
+        //OutlineNode?.runAction(RotateAction)
         MasterBlockNode?.runAction(RotateAction)
-                BucketNode?.runAction(RotateAction, completionHandler: {Completed()})
+        BucketNode?.runAction(RotateAction, completionHandler: {Completed()})
         #endif
     }
     
@@ -1406,14 +1436,15 @@ class View3D: SCNView,                          //Our main super class.
     }
     
     /// Holds the current theme.
-    private var CurrentTheme: ThemeDescriptor? = nil
+    private var CurrentTheme: ThemeDescriptor2? = nil
+    //private var CurrentTheme: ThemeDescriptor? = nil
     
     /// Set a (potentially but most likely) new theme. Changed visuals may take a frame or two (or more) to
     /// take effect.
     /// - Parameter ThemeID: The ID of the new theme.
     func SetTheme(_ ThemeID: UUID)
     {
-        CurrentTheme = ThemeManager.ThemeFrom(ID: ThemeID)
+        //CurrentTheme = ThemeManager.ThemeFrom(ID: ThemeID)
     }
     
     func Refresh()
