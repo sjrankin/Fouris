@@ -16,6 +16,7 @@
     <Property Name="_LightPosition" Value="-5.0,15.0,40.0"/>
     <Property Name="_LightIntensity" Value="1000"/>
     <Property Name="_CanControlCamera" Value="false"/>
+    <Property Name="_UseDefaultCamera" Value="false"/>
     <Property Name="_ShowStatistics" Value="false"/>
     <Property Name="_ShowBackgroundGrid" Value="false"/>
     <Property Name="_BucketDiffuseColor" Value="Black"/>
@@ -39,6 +40,9 @@
     <Property Name="_AISneakPeakCount" Value="1"/>
     <Property Name="_StartWithAI" Value="false"/>
     <Property Name="_AfterGameWaitDuration" Value="15"/>
+    <Property Name="_ShowNextPiece" Value="true"/>
+    <Property Name="_IsOrthographic" Value="false"/>
+    <Property Name="_OrthographicScale" Value="20.0"/>
     <Array Name="_TileList">
         <Item Index="0">
             <Property Name="_PieceShapeID" Value="f4510cca-262a-4018-bf29-04d703702d65"/>
