@@ -18,8 +18,15 @@ extension View3D
     /// - Parameter Parent: The parent bucket node.
     func DrawCenterBlock(Parent: SCNNode, InShape: CenterShapes)
     {
+        #if true
+        print("Bucket diffuse color: \(CurrentTheme!.BucketDiffuseColor)")
+        print("Bucket specular color: \(CurrentTheme!.BucketSpecularColor)")
+        let DiffuseColor = ColorServer.ColorFrom(CurrentTheme!.BucketDiffuseColor)
+        let SpecularColor = ColorServer.ColorFrom(CurrentTheme!.BucketSpecularColor)
+        #else
         let DiffuseColor = ColorServer.ColorFrom(ColorNames.ReallyDarkGray)
         let SpecularColor = ColorServer.ColorFrom(ColorNames.White)
+        #endif
         switch InShape
         {
             case .Dot:
