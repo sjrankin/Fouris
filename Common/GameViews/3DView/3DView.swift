@@ -30,11 +30,9 @@ class View3D: SCNView,                          //Our main super class.
     ///         of time (on the order of tens of minutes). Therefore, using those two properties should be transient and for
     ///         debug use only.
     /// - Parameter With: The board to use for displaying contents.
-    /// - Parameter Theme: The ID of the initial theme to use (may be changed via the `SetTheme` function).
+    /// - Parameter Theme: The theme manager instance.
     /// - Parameter BaseType: The base game type. Can only be set via this function.
-    /// - Parameter CenterType: The shape of the center block for **.Rotating4** games.
-    //func Initialize(With: Board, Theme: UUID, BaseType: BaseGameTypes, CenterType: CenterShapes = .Square)
-    func Initialize(With: Board, Theme: ThemeManager2, BaseType: BaseGameTypes)
+    func Initialize(With: Board, Theme: ThemeManager, BaseType: BaseGameTypes) 
     {
         //MasterBlockNode = SCNNode()
         CenterBlockShape = .Square
@@ -42,12 +40,10 @@ class View3D: SCNView,                          //Our main super class.
         CreateMasterBlockNode()
         _BaseGameType = BaseType
         SetBoard(With)
-        //print("3D Theme: \(Theme.uuidString)")
-        //CurrentTheme = ThemeManager.ThemeFrom(ID: Theme)
         CurrentTheme = Theme.UserTheme
         Theme.SubscribeToChanges(Subscriber: "View3D", SubscribingObject: self)
         self.showsStatistics = CurrentTheme!.ShowStatistics
-        self.allowsCameraControl = false//CurrentTheme!.CanControlCamera
+        self.allowsCameraControl = CurrentTheme!.CanControlCamera
         OriginalCameraPosition = CurrentTheme!.CameraPosition
         OriginalCameraOrientation = CurrentTheme!.CameraOrientation
         #if false
@@ -202,7 +198,10 @@ class View3D: SCNView,                          //Our main super class.
         switch CurrentTheme?.BackgroundType
         {
             case .Color:
-                GameScene.background.contents = ColorServer.ColorFrom(CurrentTheme!.BackgroundSolidColor)
+                self.backgroundColor = ColorServer.ColorFrom(CurrentTheme!.BackgroundSolidColor)
+            
+            case .Gradient:
+            break
             
             case .Image:
                 break
@@ -240,6 +239,7 @@ class View3D: SCNView,                          //Our main super class.
         let LightColor = ColorServer.ColorFrom(CurrentTheme!.LightColor)
         Light.color = LightColor
         Light.type = CurrentTheme!.LightType
+        Light.intensity = CGFloat(CurrentTheme!.LightIntensity)
         let Node = SCNNode()
         Node.name = "SceneLight"
         Node.light = Light
@@ -610,7 +610,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter Y: The initial Y location of the node.
     /// - Parameter IsRetired: Initial retired status of the node.
     /// - Parameter Tile: The theme tile descriptor for the node.
-    func AddBlockNode_Standard(ParentID: UUID, BlockID: UUID, X: Int, Y: Int, IsRetired: Bool, Tile: TileDescriptor2)
+    func AddBlockNode_Standard(ParentID: UUID, BlockID: UUID, X: Int, Y: Int, IsRetired: Bool, Tile: TileDescriptor)
     {
         let VBlock = VisualBlocks3D(BlockID, AtX: CGFloat(X), AtY: CGFloat(Y), WithTile: Tile, IsRetired: IsRetired)
         VBlock.ParentID = ParentID
@@ -627,7 +627,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter Y: The initial Y location of the node.
     /// - Parameter IsRetired: Initial retired status of the node.
     /// - Parameter Tile: The theme tile descriptor for the node.
-    func AddBlockNode_Rotating(ParentID: UUID, BlockID: UUID, X: CGFloat, Y: CGFloat, IsRetired: Bool, Tile: TileDescriptor2)
+    func AddBlockNode_Rotating(ParentID: UUID, BlockID: UUID, X: CGFloat, Y: CGFloat, IsRetired: Bool, Tile: TileDescriptor)
     {
         let VBlock = VisualBlocks3D(BlockID, AtX: X, AtY: Y, WithTile: Tile, IsRetired: IsRetired)
         VBlock.ParentID = ParentID
@@ -1436,8 +1436,7 @@ class View3D: SCNView,                          //Our main super class.
     }
     
     /// Holds the current theme.
-    private var CurrentTheme: ThemeDescriptor2? = nil
-    //private var CurrentTheme: ThemeDescriptor? = nil
+    var CurrentTheme: ThemeDescriptor? = nil
     
     /// Set a (potentially but most likely) new theme. Changed visuals may take a frame or two (or more) to
     /// take effect.
