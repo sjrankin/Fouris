@@ -15,17 +15,25 @@ import simd
 /// board at the end of the game in preparation for a new game.
 extension View3D
 {
+    /// Creates a rotation matrix for rotating about the Z axis.
+    /// - Parameter By: The angle (in radians) to rotate.
+    /// - Returns: Rotation matrix to rotate about the Z axis on the passed angle.
     func RotateVectorOnZ(By: Float) -> simd_float3x3
     {
         let Rows =
-        [
-            simd_float3(cos(By), sin(By), 0),
-            simd_float3(-sin(By), cos(By), 0),
-            simd_float3(0, 0, 1)
+            [
+                simd_float3(cos(By), sin(By), 0),
+                simd_float3(-sin(By), cos(By), 0),
+                simd_float3(0, 0, 1)
         ]
         return float3x3(rows: Rows)
     }
     
+    /// Rotate a vector about the Z axis by the passed angle.
+    /// - Note: The vector is rotated about the origin.
+    /// - Parameter Vector: The vector to rotate.
+    /// - Parameter By: The angle (in radians) to rotate the vector by.
+    /// - Returns: Rotated vector.
     func RotateVector(Vector: SCNVector3, By Angle: Float) -> SCNVector3
     {
         let SVector = simd_float3(x: Vector.x, y: Vector.y, z: Vector.z)
@@ -34,11 +42,16 @@ extension View3D
         return SCNVector3(x: Rotated.x, y: Rotated.y, z: Rotated.z)
     }
     
+    /// Create a random vector.
+    /// - Parameter ToRange: The maximum value for the wall. The wall is one of the sides of the view.
+    /// - Parameter UseZ: If present, the Z value to use.
+    /// - Parameter DoNotRandomizeZ: If true, Z is not selected as a wall value (in other words, randomness is for X and Y only).
+    /// - Returns: Randomized vector.
     func RandomVector(ToRange: Float, UseZ: Float? = nil, DoNotRandomizeZ: Bool = false) -> SCNVector3
     {
         let RangeMultiplier: Float = Float([-1.0, 1.0].randomElement()!)
         var Vector: SCNVector3!
-        var FinalZ = UseZ == nil ? Float.random(in: 10.0 ... ToRange) : UseZ!
+        let FinalZ = UseZ == nil ? Float.random(in: 10.0 ... ToRange) : UseZ!
         var SwitchValues = [0, 1]
         if !DoNotRandomizeZ
         {
@@ -47,20 +60,20 @@ extension View3D
         switch SwitchValues.randomElement()!
         {
             case 0:
-            //X is the range.
+                //X is the range.
                 
                 Vector = SCNVector3(ToRange * RangeMultiplier, Float.random(in: 10.0 ... ToRange), FinalZ)
             
             case 1:
-            //Y is the range.
+                //Y is the range.
                 Vector = SCNVector3(Float.random(in: 10.0 ... ToRange), ToRange * RangeMultiplier, FinalZ)
             
             case 2:
-            //Z is the range.
-            Vector = SCNVector3(Float.random(in: 10.0 ... ToRange), Float.random(in: 10.0 ... ToRange), ToRange * RangeMultiplier)
+                //Z is the range.
+                Vector = SCNVector3(Float.random(in: 10.0 ... ToRange), Float.random(in: 10.0 ... ToRange), ToRange * RangeMultiplier)
             
             default:
-            return SCNVector3Zero
+                return SCNVector3Zero
         }
         
         return Vector
@@ -111,11 +124,7 @@ extension View3D
         while true
         {
             let NewMethod = DestructionMethods.allCases.randomElement()
-            if NewMethod == .Random
-            {
-                continue
-            }
-            if NewMethod == .None
+            if [DestructionMethods.Random, DestructionMethods.None, DestructionMethods.Fast].contains(NewMethod)
             {
                 continue
             }
@@ -144,9 +153,12 @@ extension View3D
         print("Cleaning bucket with Method: \(VisualMethod)")
         switch VisualMethod
         {
+            case .Fast:
+                //Fast is just a synonym for .None - it just removes all blocks and returnes.
+            fallthrough
             case .Random:
                 //Random doesn't actually do anything - it's an instruction to select a random method.
-            fallthrough
+                fallthrough
             case .None:
                 //Regardless of the number of blocks in the block list, do not perform any animation. Just remove all items.
                 for Block in self.BlockList
@@ -156,10 +168,22 @@ extension View3D
                 return
             
             case .Drop:
+                //Drop blocks out the bottom of the bucket.
                 for Block in self.BlockList
                 {
                     Block.removeAllActions()
                     let FallTo = SCNAction.move(to: SCNVector3(Block.X, -20.0, Block.Z), duration: Double.random(in: 0.25 ... MaxDuration))
+                    let KillBlock = SCNAction.removeFromParentNode()
+                    let Sequence = SCNAction.sequence([FallTo, KillBlock])
+                    Block.runAction(Sequence)
+            }
+            
+            case .FlyUpwards:
+                //Blocks fly out the top of the bucket.
+                for Block in self.BlockList
+                {
+                    Block.removeAllActions()
+                    let FallTo = SCNAction.move(to: SCNVector3(Block.X, 30.0, Block.Z), duration: Double.random(in: 0.25 ... MaxDuration))
                     let KillBlock = SCNAction.removeFromParentNode()
                     let Sequence = SCNAction.sequence([FallTo, KillBlock])
                     Block.runAction(Sequence)
@@ -172,6 +196,7 @@ extension View3D
                 break
             
             case .FadeAway:
+                //Blocks fade away.
                 for Block in self.BlockList
                 {
                     Block.removeAllActions()
@@ -182,6 +207,7 @@ extension View3D
             }
             
             case .Shrink:
+                //Blocks shrink to invisibility.
                 for Block in self.BlockList
                 {
                     Block.removeAllActions()
@@ -192,11 +218,12 @@ extension View3D
             }
             
             case .Grow:
+                ///Blocks grow to large sizes.
                 for Block in self.BlockList
                 {
                     Block.removeAllActions()
                     let AnimationDuration = Double.random(in: 0.25 ... MaxDuration)
-                    let Scale = SCNAction.scale(to: 10.0, duration: AnimationDuration)
+                    let Scale = SCNAction.scale(to: CGFloat.random(in: 8.0 ... 12.0), duration: AnimationDuration)
                     let FadeOut = SCNAction.fadeOut(duration: AnimationDuration)
                     let Group = SCNAction.group([Scale, FadeOut])
                     let KillBlock = SCNAction.removeFromParentNode()
@@ -205,6 +232,7 @@ extension View3D
             }
             
             case .SpinAway:
+                //Blocks spin and fly away radially.
                 for Block in self.BlockList
                 {
                     let TargetVector = RadialVector(From: SCNVector3(Block.X, Block.Y, Block.Z), TargetDistance: 40.0)
@@ -218,6 +246,7 @@ extension View3D
             }
             
             case .SpinDown:
+                //Blocks spin and shink to invisibility.
                 for Block in self.BlockList
                 {
                     let AnimationDuration = Double.random(in: 0.25 ... MaxDuration)
@@ -230,6 +259,7 @@ extension View3D
             }
             
             case .Scatter:
+                //Blocks scatter in random directions.
                 for Block in self.BlockList
                 {
                     let TargetVector = RandomVector(ToRange: 40.0, UseZ: Float(Block.Z), DoNotRandomizeZ: true)
@@ -241,6 +271,7 @@ extension View3D
             }
             
             case .ScatterRadially:
+                //Blocks fly away radially.
                 for Block in self.BlockList
                 {
                     let TargetVector = RadialVector(From: SCNVector3(Block.X, Block.Y, Block.Z), TargetDistance: 40.0)
@@ -249,7 +280,7 @@ extension View3D
                     let KillBlock = SCNAction.removeFromParentNode()
                     let Sequence = SCNAction.sequence([MoveTo, KillBlock])
                     Block.runAction(Sequence)
-                }
+            }
             
             case .ScatterHorizontally:
                 break
@@ -258,6 +289,7 @@ extension View3D
                 break
             
             case .ScatterDirectionally:
+                //Blocks fly away towards a compass direction.
                 for Block in self.BlockList
                 {
                     var TargetVector: SCNVector3 = SCNVector3Zero
@@ -288,35 +320,22 @@ extension View3D
                     let Sequence = SCNAction.sequence([MoveTo, KillBlock])
                     Block.runAction(Sequence)
             }
-            
-            case .FlyFromSides:
-                //Valid only for .Rotating4 games. If called for a non-.Rotating4 game,
-                //this case is treated the same as .None.
-                if BaseGameType == .Rotating4
-                {
-                    
-                }
-                else
-                {
-                    //We're not a .Rotating4 game so just return.
-                    return
-            }
         }
     }
 }
 
 /// Used to specify how to empty the bucket after game over.
 /// - **None**: Do nothing - just clear the board.
+/// - **Fast**: Same as **.None** but provided for semantic purposes.
 /// - **Scatter**: Scatter the blocks in random directions.
 /// - **Explode**: Blocks fly away radially from the center.
 /// - **FadeAway**: Blocks fade out.
 /// - **ExplodingBlocks**: Blocks explode.
 /// - **Drop**: Blocks drop out the bottom.
+/// - **FlyUpwards**: Blocks fly upwards out the top.
 /// - **ScatterHorizontally**: Blocks randomly fly left or right.
 /// - **ScatterVertically**: Blocks randomly fly up or down.
 /// - **ScatterDirectionally**: Blocks fly towards the closest edge.
-/// - **FlyFromSides**: Blocks fly away directly from their side. Used for **.Rotating4**
-///                     games only.
 /// - **ScatterRadially**: Blocks fly away in a straight line radially away from the bucket center.
 /// - **SpinDown**: Blocks spin rapidly and shrink simultaneously.
 /// - **SpinAway**: Blocks spin and fly away radially.
@@ -327,15 +346,16 @@ extension View3D
 enum DestructionMethods: String, CaseIterable
 {
     case None = "None"
+    case Fast = "Fast"
     case Scatter = "Scatter"
     case Explode = "Explode"
     case FadeAway = "FadeAway"
     case ExplodingBlocks = "ExplodingBlocks"
     case Drop = "Drop"
+    case FlyUpwards = "FlyUpwards"
     case ScatterHorizontally = "ScatterHorizontally"
     case ScatterVertically = "ScatterVertically"
     case ScatterDirectionally = "ScatterDirectionally"
-    case FlyFromSides = "FlyFromSides"
     case ScatterRadially = "ScatterRadially"
     case SpinDown = "SpinDown"
     case SpinAway = "SpinAway"
