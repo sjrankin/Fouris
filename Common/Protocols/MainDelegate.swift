@@ -13,4 +13,5 @@ protocol MainDelegate: class
 {
     func GetAIData() -> AITestTable?
     func SetNewUser(_ UserID: UUID)
+    func GetUserTheme() -> ThemeDescriptor?
 }
