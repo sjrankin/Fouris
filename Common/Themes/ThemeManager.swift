@@ -2,7 +2,7 @@
 //  ThemeManager.swift
 //  Fouris
 //
-//  Created by Stuart Rankin on 5/27/19.
+//  Created by Stuart Rankin on 9/6/19.
 //  Copyright © 2019 Stuart Rankin. All rights reserved.
 //
 
@@ -11,25 +11,34 @@ import UIKit
 
 /// This class manages visual themes for the pieces, background, text, and bucket. Themes are saved as files in the resource
 /// directory of the app.
-class ThemeManager
+class ThemeManager: ThemeChangeProtocol
 {
     /// Initialize the theme manager. Read standard themes from a serialized file in the resource directory. Set the
     /// current theme.
-    public static func Initialize()
+    public func Initialize()
     {
         _ThemeList = [(String, ThemeDescriptor)]()
-        if let SerializedTheme = FileIO.GetFileContentsFromResource("StandardThemes", ".xml")
+        if let SerializedTheme = FileIO.GetFileContentsFromResource("GameThemes", ".xml")
         {
             let Serialize = Serializer()
             let DeserializedOK = Serialize.Deserialize(From: SerializedTheme)
             if DeserializedOK
             {
-                CreateThemes(Serialize)
+                CreateThemes(Serialize, WithName: "GameThemes.xml")
             }
         }
-        if _ThemeList.count == 0
+        if let SerializedTheme = FileIO.GetFileContentsFromResource("UserGameThemes", ".xml")
         {
-            fatalError("Error reading themes.")
+            let Serialize = Serializer()
+            let DeserializedOK = Serialize.Deserialize(From: SerializedTheme)
+            if DeserializedOK
+            {
+                CreateThemes(Serialize, WithName: "UserGameThemes.xml")
+            }
+        }
+        if _ThemeList.count != 2
+        {
+            fatalError("Error reading themes. Missing either default or user theme.")
         }
         let SavedID = Settings.GetCurrentThemeID()
         if SavedID == UUID.Empty
@@ -42,43 +51,24 @@ class ThemeManager
         }
     }
     
-    /// Save themes. This applies only to user-defined themes as the standard themes are read-only.
-    ///
-    /// - Note: When in debug mode, standard themes are written as well.
-    public static func SaveThemes()
+    /// Save the user theme. This applies only to user-defined themes as the standard default theme is read-only.
+    /// - Note: Default theme is never written.
+    public func SaveThemes()
     {
         let Encoder = Serializer()
         var Serialized = ""
-        for ThemeMetadata in GetBuiltInThemes()
-        {
-            let Theme = ThemeFrom(ID: ThemeMetadata.1)
-            if Theme!.Dirty
-            {
-                Serialized = Serialized + Encoder.Encode(Theme!, WithTitle: Theme!.ThemeName)
-            }
-        }
-        //Write serialized standard theme here.
-        //print(Serialized)
-        let _ = FileIO.SaveFileContentsToResource(WithContents: Serialized, "StandardThemes", ".xml")
         
-        var UserSerialized = ""
-        for ThemeMetaData in GetUserThemes()
+        if UserTheme.Dirty
         {
-            let Theme = ThemeFrom(ID: ThemeMetaData.1)
-            if Theme!.Dirty
-            {
-                UserSerialized = UserSerialized + Encoder.Encode(Theme!, WithTitle: Theme!.ThemeName)
-            }
+            Serialized = Encoder.Encode(UserTheme, WithTitle: UserTheme.ThemeName)
+            let _ = FileIO.SaveFileContentsToResource(WithContents: Serialized, "UserThemes", ".xml")
         }
-        //Write serialized user themes here.
-        //print(UserSerialized)
-        let _ = FileIO.SaveFileContentsToResource(WithContents: UserSerialized, "UserThemes", ".xml")
     }
     
     /// Create themes from the deserialized data.
     ///
     /// - Parameter Deserialized: Serializer instance with deserialized data.
-    private static func CreateThemes(_ Deserialized: Serializer)
+    private func CreateThemes(_ Deserialized: Serializer, WithName: String)
     {
         let Root = Deserialized.Tree!.Root
         for Node in Root.Children
@@ -122,18 +112,49 @@ class ThemeManager
                         }
                     }
                 }
+                Theme.FileName = WithName
                 _ThemeList.append((Name, Theme))
+                if Name == "User"
+                {
+                    _UserTheme = Theme
+                }
+                if Name == "Default"
+                {
+                    _DefaultTheme = Theme
+                }
             }
         }
     }
     
+    /// Holds the user theme.
+    private var _UserTheme: ThemeDescriptor!
+    /// Get the user theme.
+    public var UserTheme: ThemeDescriptor
+    {
+        get
+        {
+            return _UserTheme
+        }
+    }
+
+    /// Holds the default theme.
+    private var _DefaultTheme: ThemeDescriptor!
+    /// Get the default theme.
+    public var DefaultTheme: ThemeDescriptor
+    {
+        get
+        {
+            return _DefaultTheme
+        }
+    }
+    
     /// Holds a list of all themes.
-    private static var _ThemeList = [(String, ThemeDescriptor)]()
+    private var _ThemeList = [(String, ThemeDescriptor)]()
     
     /// Holds the current theme.
-    private static var _Current: ThemeDescriptor? = nil
+    private var _Current: ThemeDescriptor? = nil
     /// Get the current theme. If nil, try to load a theme first.
-    public static var Current: ThemeDescriptor?
+    public var Current: ThemeDescriptor?
     {
         get
         {
@@ -142,7 +163,7 @@ class ThemeManager
     }
     
     /// Holds the current theme ID. Updates `Current` when set with a valid ID.
-    private static var _CurrentThemeID: UUID = UUID.Empty
+    private var _CurrentThemeID: UUID = UUID.Empty
     {
         didSet
         {
@@ -157,7 +178,7 @@ class ThemeManager
         }
     }
     /// Get or set the current theme's ID. Use this property to set themes.
-    public static var CurrentThemeID: UUID
+    public var CurrentThemeID: UUID
     {
         get
         {
@@ -169,42 +190,10 @@ class ThemeManager
         }
     }
     
-    /// Return a list of user-defined themes.
-    ///
-    /// - Returns: List of tuples in the order: (theme title, theme ID), one for each user-defined theme.
-    public static func GetUserThemes() -> [(String, UUID)]
-    {
-        var Results = [(String, UUID)]()
-        for (Title, Theme) in _ThemeList
-        {
-            if Theme.UserTheme
-            {
-                Results.append((Title, Theme.ID))
-            }
-        }
-        return Results
-    }
-    
-    /// Return a list of built-in themes.
-    ///
-    /// - Returns: List of tuples in the order: (theme title, theme ID), one for each built-in theme.
-    public static func GetBuiltInThemes() -> [(String, UUID)]
-    {
-        var Results = [(String, UUID)]()
-        for (Title, Theme) in _ThemeList
-        {
-            if !Theme.UserTheme
-            {
-                Results.append((Title, Theme.ID))
-            }
-        }
-        return Results
-    }
-    
     /// Return a list of all themes.
     ///
     /// - Returns: List of tuples in the order: (theme title, theme ID), one for each theme.
-    public static func GetAllThemes() -> [(String, UUID)]
+    public func GetAllThemes() -> [(String, UUID)]
     {
         var Results = [(String, UUID)]()
         for (Title, Theme) in _ThemeList
@@ -218,7 +207,7 @@ class ThemeManager
     ///
     /// - Parameter ID: ID of the theme to return.
     /// - Returns: The theme associated with the passed ID. Nil if not found.
-    public static func ThemeFrom(ID: UUID) -> ThemeDescriptor?
+    public func ThemeFrom(ID: UUID) -> ThemeDescriptor?
     {
         for (_, Theme) in _ThemeList
         {
@@ -234,7 +223,7 @@ class ThemeManager
     ///
     /// - Parameter ID: ID of the name to return.
     /// - Returns: The theme name associated with the passed ID. Nil if not found.
-    public static func ThemeNameFrom(ID: UUID) -> String?
+    public func ThemeNameFrom(ID: UUID) -> String?
     {
         if let Theme = ThemeFrom(ID: ID)
         {
@@ -243,45 +232,54 @@ class ThemeManager
         return nil
     }
     
-    /// Return the default theme.
-    /// - Returns: The default theme descriptor.
-    public static func GetDefaultTheme() -> ThemeDescriptor?
+    // MARK: Protocol function handling and change notice handling/management.
+    
+    /// Handle theme changes. Notifies all subscribers of the change. However, subscribers can set the
+    /// fields they want to be notified of changes - in that case, if the changed field is not in the
+    /// subscriber's list of fields, no change notice is sent.
+    /// - Parameter ThemeName: The name of the changed theme.
+    /// - Parameter FieldName: The name of the changed field.
+    func ThemeChanged(ThemeName: String, FieldName: String)
     {
-        for (_, Theme) in _ThemeList
+        for (_, (Delegate, FieldList)) in Subscribers
         {
-            if Theme.IsDefaultTheme
+            if let FList = FieldList
             {
-                return Theme
+                if !FList.contains(FieldName)
+                {
+                    return
+                }
             }
+            Delegate.ThemeUpdated(ThemeName: ThemeName, FieldName: FieldName)
         }
-        return nil
     }
     
-    /// Returns the default 3D theme.
-    /// - Returns: The default 3D theme descriptor.
-    public static func GetDefault3DTheme() -> ThemeDescriptor?
+    /// Holds the list of subscribers to change notices.
+    private var Subscribers = [String: (ThemeUpdatedProtocol, [String]?)]()
+    
+    /// Allows objects (that implement the `ThemeUpdatedProtocol`) to subscribe to changes in themes.
+    /// - Parameter Subscriber: The name of the subscriber. If this subscriber is already in the
+    ///                         subscribers list, it will not be added again. To change the list of
+    ///                         fields, the caller must first call `CancelSubscription` on the `Subscriber`
+    ///                         then call this function again with a new field list.
+    /// - Parameter SubscribingObject: The object that will be called with changes.
+    /// - Parameter FieldList: Optional list of fields (that must match those in the theme itself) the
+    ///                        subscriber wants to be notified if changed. If nil (or empty), all changes
+    ///                        will be reported to the subscriber.
+    public func SubscribeToChanges(Subscriber: String, SubscribingObject: ThemeUpdatedProtocol,
+                                          FieldList: [String]? = nil)
     {
-        for (_, Theme) in _ThemeList
+        if Subscribers[Subscriber] != nil
         {
-            if Theme.Default3DTheme
-            {
-                return Theme
-            }
+            return
         }
-        return nil
+        Subscribers[Subscriber] = (SubscribingObject, FieldList)
     }
     
-    /// Returns the default 3D theme ID.
-    /// - Returns: The default 3D theme ID.
-    public static func GetDefault3DThemeID() -> UUID?
+    /// Cancel an existing subscription for theme change notifications.
+    /// - Parameter Subscriber: The name of the subscriber.
+    public func CancelSubscription(Subscriber: String)
     {
-        for (_, Theme) in _ThemeList
-        {
-            if Theme.Default3DTheme
-            {
-                return Theme.ID
-            }
-        }
-        return nil
+        Subscribers.removeValue(forKey: Subscriber)
     }
 }
