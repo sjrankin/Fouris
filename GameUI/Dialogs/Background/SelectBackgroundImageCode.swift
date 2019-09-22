@@ -28,17 +28,17 @@ class SelectBackgroundImageCode: UIViewController, UIImagePickerControllerDelega
         }
     }
     
-    func EditTheme(ID: UUID)
+    func EditTheme(Theme: ThemeDescriptor, DefaultTheme: ThemeDescriptor)
     {
-        ThemeID = ID
+        UserTheme = Theme
     }
     
-    func EditTheme(ID: UUID, PieceID: UUID)
+    func EditTheme(Theme: ThemeDescriptor, PieceID: UUID, DefaultTheme: ThemeDescriptor)
     {
-        ThemeID = ID
+        UserTheme = Theme
     }
     
-    var ThemeID: UUID = UUID.Empty
+    var UserTheme: ThemeDescriptor!
     
     func EditResults(_ Edited: Bool, ThemeID: UUID, PieceID: UUID?)
     {
@@ -49,13 +49,13 @@ class SelectBackgroundImageCode: UIViewController, UIImagePickerControllerDelega
     
     @IBAction func HandleOKPressed(_ sender: Any)
     {
-        ThemeDelegate?.EditResults(true, ThemeID: ThemeID, PieceID: nil)
+        ThemeDelegate?.EditResults(true, ThemeID: UserTheme.ID, PieceID: nil)
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func HandleCancelPressed(_ sender: Any)
     {
-        ThemeDelegate?.EditResults(false, ThemeID: ThemeID, PieceID: nil)
+        ThemeDelegate?.EditResults(false, ThemeID: UserTheme.ID, PieceID: nil)
         self.dismiss(animated: true, completion: nil)
     }
     
