@@ -36,7 +36,7 @@ class VisualBlocks3D: SCNNode
     /// - Parameter AtY: Initial Y location of the block.
     /// - Parameter WithTile: Tile to use to create the visual look of the block.
     /// - Parameter IsRetired: Determines which set of attributes to use for the visual look.
-    init(_ WithID: UUID, AtX: CGFloat, AtY: CGFloat, WithTile: TileDescriptor2, IsRetired: Bool)
+    init(_ WithID: UUID, AtX: CGFloat, AtY: CGFloat, WithTile: TileDescriptor, IsRetired: Bool)
     {
         super.init()
         CommonInitialization()
@@ -56,7 +56,7 @@ class VisualBlocks3D: SCNNode
     /// - Parameter AtZ: Initial Z location of the block.
     /// - Parameter WithTile: Tile to use to create the visual look of the block.
     /// - Parameter IsRetired: Determines which set of attributes to use for the visual look.
-    init(_ WithID: UUID, AtX: CGFloat, AtY: CGFloat, AtZ: CGFloat, WithTile: TileDescriptor2, IsRetired: Bool)
+    init(_ WithID: UUID, AtX: CGFloat, AtY: CGFloat, AtZ: CGFloat, WithTile: TileDescriptor, IsRetired: Bool)
     {
         super.init()
         CommonInitialization()
@@ -88,10 +88,10 @@ class VisualBlocks3D: SCNNode
     private static var BlockCount = 0
     
     /// Reference to the tile descriptor for this block.
-    private var _BlockTile: TileDescriptor2? = nil
+    private var _BlockTile: TileDescriptor? = nil
     /// Get or set the tile descriptor used to describe the visual aspects of this block. Setting the
     /// value changes the visuals immediately.
-    public var BlockTile: TileDescriptor2?
+    public var BlockTile: TileDescriptor?
     {
         get
         {
@@ -163,9 +163,8 @@ class VisualBlocks3D: SCNNode
     /// Sets the passed tile's visual attributes to the block.
     /// - Parameter WithTile: The tile whose visual attributes will be used to draw the block.
     /// - Parameter IsRetired: Determines which set of visual attributes to use.
-    public func SetVisualAttributes(WithTile: TileDescriptor2, IsRetired: Bool)
+    public func SetVisualAttributes(WithTile: TileDescriptor, IsRetired: Bool)
     {
-//        print("Setting visual attributes [\(VACount)].")
         VACount = VACount + 1
         if BlockShape == nil
         {
@@ -181,7 +180,6 @@ class VisualBlocks3D: SCNNode
             self.geometry = BlockShape
         }
         
-        #if true
         var Specular = "White"
         var Diffuse = "ReallyDarkGray"
         let TileShape = PieceFactory.GetShapeForPiece(ID: WithTile.PieceShapeID)
@@ -222,64 +220,8 @@ class VisualBlocks3D: SCNNode
                 break
             }
         }
-        #else
-        var Specular = "White"
-        var Diffuse = "ReallyDarkGray"
-        switch WithTile.VisualType
-        {
-            case .Draw:
-                break
-            
-            case .Image:
-                if IsRetired
-                {
-                    //Specular = WithTile.RetiredTextureName
-                    Diffuse = WithTile.RetiredTextureName
-                }
-                else
-                {
-                    //Specular = WithTile.ActiveTextureName
-                    Diffuse = WithTile.ActiveTextureName
-                }
-                BlockShape!.materials.first?.diffuse.contents = UIImage(named: Diffuse)
-            
-            case .Render:
-                if WithTile.EnableColorOverride
-                {
-                    if IsRetired
-                    {
-                        Specular = WithTile.OverrideRetiredSpecularColor
-                        Diffuse = WithTile.OverrideRetiredDiffuseColor
-                    }
-                    else
-                    {
-                        Specular = WithTile.OverrideActiveSpecularColor
-                        Diffuse = WithTile.OverrideActiveDiffuseColor
-                    }
-                }
-                else
-                {
-                if IsRetired
-                {
-                    Specular = WithTile.RetiredSpecularColor
-                    Diffuse = WithTile.RetiredDiffuseColor
-                }
-                else
-                {
-                    Specular = WithTile.ActiveSpecularColor
-                    Diffuse = WithTile.ActiveDiffuseColor
-                }
-                }
-                BlockShape!.materials.first?.specular.contents = ColorServer.ColorFrom(Specular)
-                BlockShape!.materials.first?.diffuse.contents = ColorServer.ColorFrom(Diffuse)
-        }
-        #endif
-        
-        #if true
+
         let GeoShape = IsRetired ? TileVisual!.Retired3DBlockShape : TileVisual!.Active3DBlockShape
-        #else
-        let GeoShape = IsRetired ? BlockTile?.Retired3DBlockShape : BlockTile?.Active3DBlockShape
-        #endif
         switch GeoShape
         {
             case .Torus:
@@ -326,11 +268,7 @@ class VisualBlocks3D: SCNNode
     {
         let TileShape = PieceFactory.GetShapeForPiece(ID: BlockTile!.PieceShapeID)
         let TileVisual = PieceVisualManager.GetPieceTheme(PieceShape: TileShape!)
-        #if true
         let GeoShape = IsRetired ? TileVisual!.Retired3DBlockShape : TileVisual!.Active3DBlockShape
-        #else
-        let GeoShape = IsRetired ? BlockTile?.Retired3DBlockShape : BlockTile?.Active3DBlockShape
-        #endif
         var Geometry: SCNGeometry!
         switch GeoShape
         {
@@ -379,7 +317,7 @@ class VisualBlocks3D: SCNNode
     /// - Parameter WithTile: The tile to use to get visual attributes.
     /// - Parameter IsRetired: Determines which set of visual attributes to use.
     public func Create(Width: CGFloat, Height: CGFloat, Depth: CGFloat, EdgeRadius: CGFloat,
-                       WithTile: TileDescriptor2, IsRetired: Bool)
+                       WithTile: TileDescriptor, IsRetired: Bool)
     {
         OriginalWidth = Width
         OriginalHeight = Height
@@ -398,7 +336,7 @@ class VisualBlocks3D: SCNNode
     /// - Note: The size of the geometry will be 1.0 x 1.0 x 1.0.
     /// - Parameter WithTile: The tile to use to get visual attributes.
     /// - Parameter IsRetired: Determines which set of visual attributes to use.
-    public func Create(WithTile: TileDescriptor2, IsRetired: Bool)
+    public func Create(WithTile: TileDescriptor, IsRetired: Bool)
     {
         Create(Width: 1.0, Height: 1.0, Depth: 1.0, EdgeRadius: 0.0, WithTile: WithTile, IsRetired: IsRetired)
     }
