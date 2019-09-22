@@ -12,8 +12,9 @@
     <Property Name="_AntialiasingMode" Value="MultiSampling4X"/>
     <Property Name="_UseDefaultLighting" Value="false"/>
     <Property Name="_LightColor" Value="White"/>
-    <Property Name="_LightType" Value="Omni"/>
+    <Property Name="_LightType" Value="omni"/>
     <Property Name="_LightPosition" Value="-5.0,15.0,40.0"/>
+    <Property Name="_LightIntensity" Value="1000"/>
     <Property Name="_CanControlCamera" Value="false"/>
     <Property Name="_ShowStatistics" Value="false"/>
     <Property Name="_ShowBackgroundGrid" Value="false"/>
