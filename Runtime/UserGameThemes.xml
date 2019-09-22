@@ -1,4 +1,4 @@
-<Theme Name="Default">
+<Theme Name="User">
     <Property Name="_ID" Value="49de21df-e1ce-448d-9a87-8db26b07e7ab"/>
     <Property Name="_ThemeName" Value="User Theme"/>
     <Property Name="_Title" Value="User Game Theme"/>
@@ -16,18 +16,28 @@
     <Property Name="_CanControlCamera" Value="false"/>
     <Property Name="_ShowStatistics" Value="false"/>
     <Property Name="_ShowBackgroundGrid" Value="false"/>
+    <Property Name="_BucketDiffuseColor" Value="Black"/>
+    <Property Name="_BucketSpecularColor" Value="White"/>
     <Property Name="_ShowBucketGrid" Value="true"/>
     <Property Name="_ShowBucketGridOutline" Value="true"/>
     <Property Name="_BucketGridColor" Value="Gray"/>
     <Property Name="_BuketGridOutlineColor" Value="Red"/>
-    <Property Name="_BackgroundType" Value="SolidColor"/>
+    <Property Name="_BackgroundType" Value="Color"/>
     <Property Name="_BackgroundSolidColor" Value="Maroon"/>
     <Property Name="_BackgroundSolidColorCycleTime" Value="0"/>
     <Property Name="_BackgroundGradientColor" Value="(Red)@(0.0),(Blue)@(1.0)"/>
-    <Property Name="_BackgroundGradientColorOrientation" Value="Vertical"/>
+    <Property Name="_BackgroundGradientCycleTime" Value="0"/>
     <Property Name="_BackgroundImageName" Value="SampleImage.jpg"/>
+    <Property Name="_BackgroundImageFromCameraRoll" Value="true"/>
     <Property Name="_RotatingBucketDirection" Value="Right"/>
     <Property Name="_BackgroundLiveImageCamera" Value="Rear"/>
+    <Property Name="_DestructionMethod" Value="Shrink"/>
+    <Property Name="_DestructionDuration" Value="1.25"/>
+    <Property Name="_UseHapticFeedback" Value="false"/>
+    <Property Name="_ShowAIActionsOnControls" Value="true"/>
+    <Property Name="_AISneakPeakCount" Value="1"/>
+    <Property Name="_StartWithAI" Value="false"/>
+    <Property Name="_AfterGameWaitDuration" Value="15"/>
     <Array Name="_TileList">
         <Item Index="0">
             <Property Name="_PieceShapeID" Value="f4510cca-262a-4018-bf29-04d703702d65"/>
