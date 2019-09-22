@@ -1285,6 +1285,13 @@ class MainViewController: UIViewController,
     
     // MARK: AI delegate functions.
     
+    /// Someone wants a reference to the user theme.
+    /// - Returns: Current user theme instance.
+    func GetUserTheme() -> ThemeDescriptor?
+    {
+        return Themes.UserTheme
+    }
+    
     /// The AI delegate wants AI data.
     ///
     /// - Returns: A populated `AITestTable`.
