@@ -2,7 +2,7 @@
 //  ThemeDescriptor.swift
 //  Fouris
 //
-//  Created by Stuart Rankin on 5/27/19.
+//  Created by Stuart Rankin on 9/6/19.
 //  Copyright © 2019 Stuart Rankin. All rights reserved.
 //
 
@@ -13,10 +13,20 @@ import UIKit
 /// Contains the description of a visual theme.
 class ThemeDescriptor: Serializable
 {
+    /// Change notification delegate.
+    weak var ChangeDelegate: ThemeChangeProtocol? = nil
+    
     /// Initializer.
     init()
     {
         _Dirty = false
+    }
+    
+    /// Called when a property changes (but not when the theme is deserialized).
+    /// - Parameter: Name of the field that changed.
+    func ChangeNotice(FieldName: String)
+    {
+        ChangeDelegate?.ThemeChanged(ThemeName: ThemeName, FieldName: FieldName)
     }
     
     /// Holds the dirty flag. Used by user-defined themes.
@@ -55,261 +65,163 @@ class ThemeDescriptor: Serializable
         let Sanitized = Sanitize(Value)
         switch Key
         {
-        case "_ThemeName":
-            //String
-            _ThemeName = Sanitized
+            case "_ThemeName":
+                //String
+                _ThemeName = Sanitized
             
-        case "_UserTheme":
-            //Bool
-            _UserTheme = Bool(Sanitized)!
+            case "_ID":
+                //UUID
+                _ID = UUID(uuidString: Sanitized)!
             
-        case "_ID":
-            //UUID
-            _ID = UUID(uuidString: Sanitized)!
+            case "_Title":
+                //String
+                _Title = Sanitized
             
-        case "_Title":
-            //String
-            _Title = Sanitized
+            case "_Created":
+                //String
+                _Created = Sanitized
             
-        case "_BucketColor":
-            //String
-            _BucketColor = Sanitized
+            case "_Edited":
+                //String
+                _Edited = Sanitized
             
-        case "_BucketBlockName":
-            //String
-            _BucketBlockName = Sanitized
+            //General properties.
             
-        case "_BucketBorderWidth":
+            case "_BackgroundType":
+                //BackgroundTypes3D
+                _BackgroundType = BackgroundTypes3D(rawValue: Sanitized)!
+            
+            case "_BucketDiffuseColor":
+                //String
+                _BucketDiffuseColor = Sanitized
+            
+            case "_BucketSpecularColor":
+                //String
+                _BucketSpecularColor = Sanitized
+            
+            case "_ShowGrid":
+                //Bool
+                _ShowGrid = Bool(Value)!
+            
+            case "_ShowBucketGrid":
+                //Bool
+                _ShowBucketGrid = Bool(Value)!
+            
+            case "_ShowBucketGridOutline":
+                //Bool
+                _ShowBucketGridOutline = Bool(Value)!
+            
+            case "_BucketGridColor":
+                //String
+                _BucketGridColor = Sanitized
+            
+            case "_BucketGridOutlineColor":
+                //String
+                _BucketGridOutlineColor = Sanitized
+            
+            case "_AntialiasingMode":
+                //AntialiasingModes
+                _AntialiasingMode = AntialiasingModes(rawValue: Sanitized)!
+            
+            case "_CameraFieldOfView":
+                //Double
+                _CameraFieldOfView = Double(Sanitized)!
+            
+            case "_CameraPosition":
+                //{Three comma-separated doubles}
+                let Values = SplitStringIntoDoubles(Value, With: ",", ExpectedCount: 3)
+                _CameraPosition.x = Float(Values[0])
+                _CameraPosition.y = Float(Values[1])
+                _CameraPosition.z = Float(Values[2])
+            
+            case "_CameraOrientation":
+                //{Four comma-separated doubles}
+                let Values = SplitStringIntoDoubles(Value, With: ",", ExpectedCount: 4)
+                _CameraOrientation.x = Float(Values[0])
+                _CameraOrientation.y = Float(Values[1])
+                _CameraOrientation.z = Float(Values[2])
+                _CameraOrientation.w = Float(Values[3])
+            
+            case "_UseDefaultLighting":
+                //Bool
+                _UseDefaultLighting = Bool(Value)!
+            
+            case "_LightColor":
+                //String
+                _LightColor = Value
+            
+            case "_LightType":
+                //SCNLight.LightType
+                _LightType = SCNLight.LightType(rawValue: Value)
+            
+            case "_LightIntensity":
             //Double
-            _BucketBorderWidth = Double(Sanitized)!
+            _LightIntensity = Double(Value)!
             
-        case "_ShowBucketBorder":
-            //Bool
-            _ShowBucketBorder = Bool(Sanitized)!
+            case "_LightPosition":
+                //{Three comma-seperated doubles}
+                let Values = SplitStringIntoDoubles(Value, With: ",", ExpectedCount: 3)
+                _LightPosition.x = Float(Values[0])
+                _LightPosition.y = Float(Values[1])
+                _LightPosition.z = Float(Values[2])
             
-        case "_BucketBorderColor":
-            //String
-            _BucketBorderColor = Sanitized
+            case "_CanControlCamera":
+                //Bool
+                _CanControlCamera = Bool(Value)!
             
-        case "_DrawnBucketTileShape":
-            //TileShapes
-            _DrawnBucketTileShape = TileShapes(rawValue: Sanitized)!
+            case "_ShowStatistics":
+                //Bool
+                _ShowStatistics = Bool(Value)!
             
-        case "_BucketIsVisible":
-            //Bool
-            _BucketIsVisible = Bool(Sanitized)!
+            case "_IsOrthographic":
+                //Bool
+                _IsOrthographic = Bool(Value)!
             
-        case "_BackgroundColor":
-            //String
-            _BackgroundColor = Sanitized
+            case "_OrthographicScale":
+                //Double
+                _OrthographicScale = Double(Value)!
             
-        case "_NextColor":
-            //String
-            _NextColor = Sanitized
+            case "_ShowAIActionsOnControls":
+                //Bool
+                _ShowAIActionsOnControls = Bool(Value)!
             
-        case "_HighScoreColor":
-            //String
-            _HighScoreColor = Sanitized
+            case "_StartWithAI":
+                //Bool
+                _StartWithAI = Bool(Value)!
             
-        case "_GameScoreColor":
-            //String
-            _GameScoreColor = Sanitized
+            case "_AISneakPeakCount":
+                //Int
+                _AISneakPeakCount = Int(Value)!
             
-        case "_IsDefaultTheme":
-            //Bool
-            _IsDefaultTheme = Bool(Sanitized)!
+            case "_DestructionMethod":
+                //DestructionMethods
+                _DestructionMethod = DestructionMethods(rawValue: Value)!
             
-        case "_BucketGradientColor0":
-            //String
-            _BucketGradientColor0 = Sanitized
+            case "_DestructionDuration":
+                //Double
+                _DestructionDuration = Double(Value)!
             
-        case "_BucketGradientColor1":
-            //String
-            _BucketGradientColor1 = Sanitized
+            case "_AfterGameWaitDuration":
+                //Double
+                _AfterGameWaitDuration = Double(Value)!
             
-        case "_BucketGradientColor2":
-            //String
-            _BucketGradientColor2 = Sanitized
+            case "_UseHapticFeedback":
+                //Bool
+                _UseHapticFeedback = Bool(Value)!
             
-        case "_BucketGradientColor3":
-            //String
-            _BucketGradientColor3 = Sanitized
-            
-        case "_BucketColorGradientCount":
-            //Int
-            _BucketColorGradientCount = Int(Sanitized)!
-            
-        case "_BucketColorIsGradient":
-            //Bool
-            _BucketColorIsGradient = Bool(_BucketColorIsGradient)
-            
-        case "_OutOfBoundsGlowColor":
-            //String
-            _OutOfBoundsGlowColor = Sanitized
-            
-        case "_FreezingGlowColor":
-            //String
-            _FreezingGlowColor = Sanitized
-            
-        case "_ShowGlowForStatus":
-            //Bool
-            _ShowGlowForStatus = Bool(Sanitized)!
-            
-        case "_GameType":
-            //GameTypes
-            _GameType = GameTypes(rawValue: Sanitized)!
-            
-        //Center-related properties
-            
-        case "_CenterImageName":
-            //String
-            _CenterImageName = Sanitized
-            
-        case "_CenterBlockColor":
-            //String
-            _CenterBlockColor = Sanitized
-            
-        case "_CenterBlockBorderWidth":
-            //Double
-            _CenterBlockBorderWidth = Double(Sanitized)!
-            
-        case "_CenterBlockBorderColor":
-            //String
-            _CenterBlockBorderColor = Sanitized
-            
-        //Center outline-related properties
-            
-        case "_ShowOutline":
-            //Bool
-            _ShowOutline = Bool(Sanitized)!
-            
-        case "_OutlineThickness":
-            //Double
-            _OutlineThickness = Double(Sanitized)!
-            
-        case "_OutlineColor":
-            //String
-            _OutlineColor = Sanitized
-            
-        case "_OutlineGlows":
-            //Bool
-            _OutlineGlows = Bool(Sanitized)!
-            
-        case "_OutlineGlowColor":
-            //String
-            _OutlineGlowColor = Sanitized
-            
-        case "_GameOverImage":
-            //String
-            _GameOverImage = Sanitized
-            
-        case "_PressPlayImage":
-            //String
-            _PressPlayImage = Sanitized
-            
-        case "_PauseImage":
-            //String
-            _PauseImage = Sanitized
-            
-        //3D theme general properties.
-            
-        case "_BackgroundType3D":
-            //BackgroundTypes3D
-            _BackgroundType3D = BackgroundTypes3D(rawValue: Sanitized)!
-            
-        case "_BackgroundIdentifier3D":
-            //String
-            _BackgroundIdentifier3D = Sanitized
-            
-        case "_BucketColor3D":
-            //String
-            _BucketColor3D = Sanitized
-            
-        case "_Default3DTheme":
-            //Bool
-            _Default3DTheme = Bool(Sanitized)!
-            
-        case "_AntialiasingMode":
-            //AntialiasingModes
-            _AntialiasingMode = AntialiasingModes(rawValue: Sanitized)!
-            
-        case "_CameraFieldOfView":
-            //Double
-            _CameraFieldOfView = Double(Sanitized)!
-            
-        case "_CameraPosition":
-            //{Three comma-separated doubles}
-            let Values = SplitStringIntoDoubles(Value, With: ",", ExpectedCount: 3)
-            _CameraPosition.x = Float(Values[0])
-            _CameraPosition.y = Float(Values[1])
-            _CameraPosition.z = Float(Values[2])
-            
-        case "_CameraOrientation":
-            //{Four comma-separated doubles}
-            let Values = SplitStringIntoDoubles(Value, With: ",", ExpectedCount: 4)
-            _CameraOrientation.x = Float(Values[0])
-            _CameraOrientation.y = Float(Values[1])
-            _CameraOrientation.z = Float(Values[2])
-            _CameraOrientation.w = Float(Values[3])
-            
-        case "_UseDefaultLighting":
-            //Bool
-            _UseDefaultLighting = Bool(Value)!
-            
-        case "_LightColor":
-            //String
-            _LightColor = Value
-            
-        case "_LightType":
-            //SCNLight.LightType
-            _LightType = SCNLight.LightType(rawValue: Value)
-            
-        case "_LightPosition":
-            //{Three comma-seperated doubles}
-            let Values = SplitStringIntoDoubles(Value, With: ",", ExpectedCount: 3)
-            _LightPosition.x = Float(Values[0])
-            _LightPosition.y = Float(Values[1])
-            _LightPosition.z = Float(Values[2])
-            
-        case "_CanControlCamera":
-            //Bool
-            _CanControlCamera = Bool(Value)!
-            
-        case "_ShowStatistics":
-            //Bool
-            _ShowStatistics = Bool(Value)!
-            
-        case "_ShowGrid":
-            //Bool
-            _ShowGrid = Bool(Value)!
-            
-        case "_ShowBucketGrid":
-            //Bool
-            _ShowBucketGrid = Bool(Value)!
-            
-        case "_IsOrthographic":
-            //Bool
-            _IsOrthographic = Bool(Value)!
-            
-        case "_OrthographicScale":
-            //Double
-            _OrthographicScale = Double(Value)!
-            
-        default:
-            print("Encountered unexpected key: \(Key) in ThemeDescriptor.Populate")
-            break
+            default:
+                print("Encountered unexpected key (\(Key)) in ThemeDescriptor.Populate")
+                break
         }
     }
     
     /// Splits a string into an array of double values.
-    ///
     /// - Note:
     ///    - The string is assumed to containly only double values separated by the `With` character.
     ///    - A fatal error is generated if:
     ///       - The number of found values is not the same as the expected number of values found
     ///         in `ExpectedCount`.
     ///       - A value fails to be converted into a Double.
-    ///
     /// - Parameter Raw: The string to split.
     /// - Parameter With: The separator between the values.
     /// - Parameter ExpectedCount: The expected number of returned values.
@@ -340,7 +252,7 @@ class ThemeDescriptor: Serializable
         return Results
     }
     
-    // MARK: 3D theme properties.
+    // MARK: Bucket properties.
     
     /// Holds the show bucket grid flag.
     private var _ShowBucketGrid: Bool = false
@@ -356,8 +268,111 @@ class ThemeDescriptor: Serializable
         {
             _ShowBucketGrid = newValue
             _Dirty = true
+            ChangeNotice(FieldName: "ShowBucketGrid")
         }
     }
+    
+    /// Holds the show grid flag.
+    private var _ShowGrid: Bool = false
+    /// Get or set the show grid flag. Intended for debug use only.
+    public var ShowGrid: Bool
+    {
+        get
+        {
+            return _ShowGrid
+        }
+        set
+        {
+            _ShowGrid = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "ShowGrid")
+        }
+    }
+    
+    private var _ShowBucketGridOutline: Bool = true
+    public var ShowBucketGridOutline: Bool
+    {
+        get
+        {
+            return _ShowBucketGridOutline
+        }
+        set
+        {
+            _ShowBucketGridOutline = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "ShowBucketGridOutline")
+        }
+    }
+    
+    /// Holds the name/value of the bucket grid color.
+    private var _BucketGridColor: String = "Gray"
+    /// Get or set the name (or value in string format) of the bucket grid color.
+    public var BucketGridColor: String
+    {
+        get
+        {
+            return _BucketGridColor
+        }
+        set
+        {
+            _BucketGridColor = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "BucketGridColor")
+        }
+    }
+    
+    /// Holds the name/value of the bucket grid outline color.
+    private var _BucketGridOutlineColor: String = "Red"
+    /// Get or set the name (or value in string format) of the bucket grid outline color.
+    public var BucketGridOutlineColor: String
+    {
+        get
+        {
+            return _BucketGridOutlineColor
+        }
+        set
+        {
+            _BucketGridOutlineColor = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "BucketGridOutlineColor")
+        }
+    }
+    
+    /// Holds the specular color of the bucket.
+    private var _BucketSpecularColor: String = "White"
+    /// Get or set the specular color name for the bucket.
+    public var BucketSpecularColor: String
+    {
+        get
+        {
+            return _BucketSpecularColor
+        }
+        set
+        {
+            _BucketSpecularColor = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "BucketSpecularColor")
+        }
+    }
+    
+    /// Holds the diffuse color of the bucket.
+    private var _BucketDiffuseColor: String = "Black"
+    /// Get or set the specular color name for the bucket.
+    public var BucketDiffuseColor: String
+    {
+        get
+        {
+            return _BucketDiffuseColor
+        }
+        set
+        {
+            _BucketDiffuseColor = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "BucketDiffuseColor")
+        }
+    }
+    
+    // MARK: Camera properties.
     
     /// Holds the camera's orthographic flag.
     private var _IsOrthographic: Bool = false
@@ -373,6 +388,7 @@ class ThemeDescriptor: Serializable
         {
             _IsOrthographic = newValue
             _Dirty = true
+            ChangeNotice(FieldName: "IsOrthographic")
         }
     }
     
@@ -391,24 +407,61 @@ class ThemeDescriptor: Serializable
         {
             _OrthographicScale = newValue
             _Dirty = true
+            ChangeNotice(FieldName: "OrthographicScale")
         }
     }
     
-    /// Holds the show grid flag.
-    private var _ShowGrid: Bool = false
-    /// Get or set the show grid flag. Intended for debug use only.
-    public var ShowGrid: Bool
+    /// Holds the camera's field of view.
+    private var _CameraFieldOfView: Double = 90.0
+    /// Get or set the camera's field of view.
+    public var CameraFieldOfView: Double
     {
         get
         {
-            return _ShowGrid
+            return _CameraFieldOfView
         }
         set
         {
-            _ShowGrid = newValue
+            _CameraFieldOfView = newValue
             _Dirty = true
+            ChangeNotice(FieldName: "CamerFieldOfView")
         }
     }
+    
+    /// Holds the camera's position in the scene.
+    private var _CameraPosition: SCNVector3 = SCNVector3(x: 1.0, y: 1.0, z: 1.0)
+    /// Get or set the camera's position in the scene.
+    public var CameraPosition: SCNVector3
+    {
+        get
+        {
+            return _CameraPosition
+        }
+        set
+        {
+            _CameraPosition = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "CameraPosition")
+        }
+    }
+    
+    /// Holds the camera's orientation in the scene.
+    private var _CameraOrientation: SCNVector4 = SCNVector4(x: 0.2, y: 0.2, z: 0.2, w: -0.5)
+    /// Get or set the camera's orientation in the scene.
+    public var CameraOrientation: SCNVector4
+    {
+        get
+        {
+            return _CameraOrientation
+        }
+        set
+        {
+            _CameraOrientation = newValue
+            ChangeNotice(FieldName: "CameraOrientation")
+        }
+    }
+    
+    // MARK: Debug properties.
     
     /// Holds the show scene kit statistics flag.
     private var _ShowStatistics: Bool = false
@@ -423,6 +476,7 @@ class ThemeDescriptor: Serializable
         {
             _ShowStatistics = newValue
             _Dirty = true
+            ChangeNotice(FieldName: "ShowStatistics")
         }
     }
     
@@ -440,8 +494,11 @@ class ThemeDescriptor: Serializable
         {
             _CanControlCamera = newValue
             _Dirty = true
+            ChangeNotice(FieldName: "CanControlCamera")
         }
     }
+    
+    // MARK: Light properties.
     
     /// Holds the color of the light.
     private var _LightColor: String = "White"
@@ -456,6 +513,7 @@ class ThemeDescriptor: Serializable
         {
             _LightColor = newValue
             _Dirty = true
+            ChangeNotice(FieldName: "LightColor")
         }
     }
     
@@ -472,6 +530,7 @@ class ThemeDescriptor: Serializable
         {
             _LightType = newValue
             _Dirty = true
+            ChangeNotice(FieldName: "LightType")
         }
     }
     
@@ -488,6 +547,24 @@ class ThemeDescriptor: Serializable
         {
             _LightPosition = newValue
             _Dirty = true
+            ChangeNotice(FieldName: "LightPosition")
+        }
+    }
+    
+    /// Holds the light intensity value.
+    private var _LightIntensity: Double = 1000.0
+    /// Get or set the light intensity value.
+    public var LightIntensity: Double
+    {
+        get
+        {
+            return _LightIntensity
+        }
+        set
+        {
+            _LightIntensity = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "LightIntensity")
         }
     }
     
@@ -504,24 +581,11 @@ class ThemeDescriptor: Serializable
         {
             _UseDefaultLighting = newValue
             _Dirty = true
+            ChangeNotice(FieldName: "UseDefaultLighting")
         }
     }
     
-    /// Holds the default 3D theme flag.
-    private var _Default3DTheme: Bool = false
-    /// Get or set the default 3D theme flag.
-    public var Default3DTheme: Bool
-    {
-        get
-        {
-            return _Default3DTheme
-        }
-        set
-        {
-            _Default3DTheme = newValue
-            _Dirty = true
-        }
-    }
+    // MARK: Rendering properties.
     
     /// Hold the anti-aliasing mode.
     private var _AntialiasingMode: AntialiasingModes = .None
@@ -536,101 +600,307 @@ class ThemeDescriptor: Serializable
         {
             _AntialiasingMode = newValue
             _Dirty = true
+            ChangeNotice(FieldName: "AntialiasingMode")
         }
     }
     
-    /// Holds the camera's field of view.
-    private var _CameraFieldOfView: Double = 90.0
-    /// Get or set the camera's field of view.
-    public var CameraFieldOfView: Double
-    {
-        get
-        {
-            return _CameraFieldOfView
-        }
-        set
-        {
-            _CameraFieldOfView = newValue
-            _Dirty = true
-        }
-    }
-    
-    /// Holds the camera's position in the scene.
-    private var _CameraPosition: SCNVector3 = SCNVector3(x: 1.0, y: 1.0, z: 1.0)
-    /// Get or set the camera's position in the scene.
-    public var CameraPosition: SCNVector3
-    {
-        get
-        {
-            return _CameraPosition
-        }
-        set
-        {
-            _CameraPosition = newValue
-            _Dirty = true
-        }
-    }
-    
-    /// Holds the camera's orientation in the scene.
-    private var _CameraOrientation: SCNVector4 = SCNVector4(x: 0.2, y: 0.2, z: 0.2, w: -0.5)
-    /// Get or set the camera's orientation in the scene.
-    public var CameraOrientation: SCNVector4
-    {
-        get
-        {
-            return _CameraOrientation
-        }
-        set
-        {
-            _CameraOrientation = newValue
-        }
-    }
-    
-    /// Holds the color of the 3D bucket.
-    private var _BucketColor3D: String = "Black"
-    /// Get or set the color name for the 3D bucket.
-    public var BucketColor3D: String
-    {
-        get
-        {
-            return _BucketColor3D
-        }
-        set
-        {
-            _BucketColor3D = newValue
-            _Dirty = true
-        }
-    }
-    
-    /// Holds the identifier to use to determine the 3D background.
-    private var _BackgroundIdentifier3D: String = "Black"
-    /// Get or set the identifier to use in conjuction with `BackgroundType3D` to determine the 3D background.
-    public var BackgroundIdentifier3D: String
-    {
-        get
-        {
-            return _BackgroundIdentifier3D
-        }
-        set
-        {
-            _BackgroundIdentifier3D = newValue
-            _Dirty = true
-        }
-    }
+    // MARK: Background properties.
     
     /// Holds the background type for 3D game views.
-    private var _BackgroundType3D: BackgroundTypes3D = .Color
+    private var _BackgroundType: BackgroundTypes3D = .Color
     /// Get or set the background type for 3D game views.
-    public var BackgroundType3D: BackgroundTypes3D
+    public var BackgroundType: BackgroundTypes3D
     {
         get
         {
-            return _BackgroundType3D
+            return _BackgroundType
         }
         set
         {
-            _BackgroundType3D = newValue
+            _BackgroundType = newValue
             _Dirty = true
+            ChangeNotice(FieldName: "BackgroundType")
+        }
+    }
+    
+    /// Holds the name of the background solid color.
+    private var _BackgroundSolidColor: String = "Maroon"
+    /// Get or set the name of the background solid color.
+    public var BackgroundSolidColor: String
+    {
+        get
+        {
+            return _BackgroundSolidColor
+        }
+        set
+        {
+            _BackgroundSolidColor = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "BackgroundSolidColor")
+        }
+    }
+    
+    /// Holds the amount of time to cycle through the hues of the background solid color.
+    private var _BackgroundSolidColorCycleTime: Double = 0.0
+    /// Get or set the time (in seconds) to cycle through the hues of the background solid color.
+    public var BackgroundSolidColorCycleTime: Double
+    {
+        get
+        {
+            return _BackgroundSolidColorCycleTime
+        }
+        set
+        {
+            _BackgroundSolidColorCycleTime = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "BackgroundSolidColorCycleTime")
+        }
+    }
+    
+    /// Holds the background gradient descriptor.
+    private var _BackgroundGradientColor: String = "(Red)@(0.0),(Blue)@(1.0)"
+    /// Get or set the background gradient descriptor.
+    public var BackgroundGradientColor: String
+    {
+        get
+        {
+            return _BackgroundGradientColor
+        }
+        set
+        {
+            _BackgroundGradientColor = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "BackgroundGradientColor")
+        }
+    }
+    
+    /// Holds the cycle time for cycling through gradient hues.
+    private var _BackgroundGradientCycleTime: Double = 0.0
+    /// Get or set the time (in seconds) to cycle through the hues of the gradient colors.
+    public var BackgroundGradientCycleTime: Double
+    {
+        get
+        {
+            return _BackgroundGradientCycleTime
+        }
+        set
+        {
+            _BackgroundGradientCycleTime = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "BackgroundGradientCycleTime")
+        }
+    }
+    
+    /// Holds the name of the background image.
+    private var _BackgroundImageName: String = ""
+    /// Get or set the background image name.
+    public var BackgroundImageName: String
+    {
+        get
+        {
+            return _BackgroundImageName
+        }
+        set
+        {
+            _BackgroundImageName = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "BackgroundImageName")
+        }
+    }
+    
+    /// Holds the flag that tells the program where to look for the background image.
+    private var _BackgroundImageFromCameraRoll: Bool = true
+    /// Flag that tells the program where to look for the background image. If true, the camera roll is searched. Otherwise,
+    /// local (to the program) images are searched.
+    public var BackgroundImageFromCameraRoll: Bool
+    {
+        get
+        {
+            return _BackgroundImageFromCameraRoll
+        }
+        set
+        {
+            _BackgroundImageFromCameraRoll = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "BackgroundImageFromCameraRoll")
+        }
+    }
+    
+    /// Holds the camera to use to generate a live view background.
+    private var _BackgroundLiveImageCamera: CameraLocations = .Rear
+    /// Get or set the camera to use to generate a live view background. Ignored on devices (or simulators) that don't have cameras.
+    public var BackgroundLiveImageCamera: CameraLocations
+    {
+        get
+        {
+            return _BackgroundLiveImageCamera
+        }
+        set
+        {
+            _BackgroundLiveImageCamera = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "BackgroundLiveImageCamera")
+        }
+    }
+    
+    // MARK: Haptic properties.
+    
+    /// Holds the use haptic feedback flag.
+    private var _UseHapticFeedback: Bool = false
+    /// Get the use haptic feedback flag. Haptic feedback is available only on certain devices.
+    public var UseHapticFeedback: Bool
+    {
+        get
+        {
+            return _UseHapticFeedback
+        }
+        set
+        {
+            _UseHapticFeedback = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "UseHapticFeedback")
+        }
+    }
+    
+    // MARK: Game over properties.
+    
+    /// Holds the amount of time to wait after game over before starting a new game in AI mode.
+    private var _AfterGameWaitDuration: Double = 15.0
+    /// Get or set the amount of time to wait after game over before starting a new game in AI/attract mode.
+    /// Time is in seconds.
+    public var AfterGameWaitDuration: Double
+    {
+        get
+        {
+            return _AfterGameWaitDuration
+        }
+        set
+        {
+            _AfterGameWaitDuration = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "AfterGameWaitDuration")
+        }
+    }
+    
+    /// Holds the method type to clear the bucket of blocks.
+    private var _DestructionMethod: DestructionMethods = .Shrink
+    /// Get or set the method type used to clear the bucket of blocks.
+    public var DestructionMethod: DestructionMethods
+    {
+        get
+        {
+            return _DestructionMethod
+        }
+        set
+        {
+            _DestructionMethod = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "DestructionMethod")
+        }
+    }
+    
+    /// Holds the length of time to clear the bucket of blocks.
+    private var _DestructionDuration: Double = 1.25
+    /// Get or set the length of time to clear the blocks in the bucket, in seconds.
+    public var DestructionDuration: Double
+    {
+        get
+        {
+            return _DestructionDuration
+        }
+        set
+        {
+            _DestructionDuration = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "DestructionDuration")
+        }
+    }
+    
+    // MARK: AI properties.
+    
+    /// Holds the show AI actions on the UI control set flag.
+    private var _ShowAIActionsOnControls: Bool = true
+    /// Get or set the AI "uses" (eg, shows) actions on the UI control set flag.
+    public var ShowAIActionsOnControls: Bool
+    {
+        get
+        {
+            return _ShowAIActionsOnControls
+        }
+        set
+        {
+            _ShowAIActionsOnControls = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "ShowAIActionsOnControls")
+        }
+    }
+    
+    private var _StartWithAI: Bool = false
+    public var StartWithAI: Bool
+    {
+        get
+        {
+            return _StartWithAI
+        }
+        set
+        {
+            _StartWithAI = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "StartWithAI")
+        }
+    }
+    
+    /// Holds the AI sneak peak count.
+    private var _AISneakPeakCount: Int = 1
+    /// Get or set the number of pieces ahead the AI looks when calculating the best spot for pieces under
+    /// its control.
+    public var AISneakPeakCount: Int
+    {
+        get
+        {
+            return _AISneakPeakCount
+        }
+        set
+        {
+            _AISneakPeakCount = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "AISneakPeakCount")
+        }
+    }
+    
+    // MARK: Game play properties.
+    
+    /// Holds the game type.
+    private var _GameType: GameTypes = .Standard
+    /// Get or set the game type.
+    public var GameType: GameTypes
+    {
+        get
+        {
+            return _GameType
+        }
+        set
+        {
+            _GameType = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "GameType")
+        }
+    }
+    
+    /// Holds the bucket rotation type.
+    private var _RotatingBucketDirection: BucketRotationTypes = .Right
+    /// Get or set the direction the bucket rotates.
+    public var RotatingBucketDirection: BucketRotationTypes
+    {
+        get
+        {
+            return _RotatingBucketDirection
+        }
+        set
+        {
+            _RotatingBucketDirection = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "RotatingBucketDirection")
         }
     }
     
@@ -652,37 +922,34 @@ class ThemeDescriptor: Serializable
         }
     }
     
-    /// Holds the is-a-user-theme flag.
-    private var _UserTheme: Bool = false
-    /// If true, this is a user-designed theme and can be edited. If false, this is a factory theme
-    /// and cannot be edited.
-    public var UserTheme: Bool
+    /// Holds the create date.
+    private var _Created: String = ""
+    /// Get or set the create date.
+    public var CreateDate: String
     {
         get
         {
-            return _UserTheme
+            return _Created
         }
         set
         {
-            _UserTheme = newValue
+            _Created = newValue
             _Dirty = true
         }
     }
     
-    /// Hold the default theme flag.
-    private var _IsDefaultTheme: Bool = false
-    /// Get or set the flag that indicates this is the default theme. Theoretically, there should be only one
-    /// default theme. The default theme is used for two purposes: 1) If the user never specifies a theme, this is
-    /// the theme that is used; 2) If the user specifies a user theme then deletes it, this is the fall-back theme.
-    public var IsDefaultTheme: Bool
+    /// Holds the edit date.
+    private var _Edited: String = ""
+    /// Get or set the edit date.
+    public var EditDate: String
     {
         get
         {
-            return _IsDefaultTheme
+            return _Edited
         }
         set
         {
-            _IsDefaultTheme = newValue
+            _Edited = newValue
             _Dirty = true
         }
     }
@@ -719,597 +986,22 @@ class ThemeDescriptor: Serializable
         }
     }
     
-    /// Holds the out of bounds glow color.
-    private var _OutOfBoundsGlowColor: String = "Red"
-    /// Get or set the color name for when a piece is frozen out of bounds.
-    public var OutOfBoundsGlowColor: String
+    /// Holds the name of the source file.
+    private var _FileName: String = ""
+    /// Get or set the source file name for the theme.
+    public var FileName: String
     {
         get
         {
-            return _OutOfBoundsGlowColor
+            return _FileName
         }
         set
         {
-            _OutOfBoundsGlowColor = newValue
-            _Dirty = true
-        }
-    }
-    
-    /// Holds the piece is freezing glow color.
-    private var _FreezingGlowColor: String = "Yellow"
-    /// Get or set the color name for when a piece starts to freeze.
-    public var FreezingGlowColor: String
-    {
-        get
-        {
-            return _FreezingGlowColor
-        }
-        set
-        {
-            _FreezingGlowColor = newValue
-            _Dirty = true
-        }
-    }
-    
-    /// Holds the flag that tells the game view to glow to indicate piece status.
-    private var _ShowGlowForStatus: Bool = true
-    /// Get or set the glow for status flag.
-    public var ShowGlowForStatus: Bool
-    {
-        get
-        {
-            return _ShowGlowForStatus
-        }
-        set
-        {
-            _ShowGlowForStatus = newValue
-            _Dirty = true
-        }
-    }
-    
-    /// Holds the game type.
-    private var _GameType: GameTypes = .Standard
-    /// Get or set the game type.
-    public var GameType: GameTypes
-    {
-        get
-        {
-            return _GameType
-        }
-        set
-        {
-            _GameType = newValue
-            _Dirty = true
-        }
-    }
-    
-    // MARK: Game text properties.
-    
-    /// Holds the game over image name.
-    private var _GameOverImage: String = "GameOverImage15"
-    /// Get or set the name of the game over image.
-    public var GameOverImage: String
-    {
-        get
-        {
-            return _GameOverImage
-        }
-        set
-        {
-            _GameOverImage = newValue
-            _Dirty = true
-        }
-    }
-    
-    /// Holds the Press Play image name.
-    private var _PressPlayImage: String = "PressPlayText14"
-    /// Get or set the name of the Press Play image.
-    public var PressPlayImage: String
-    {
-        get
-        {
-            return _PressPlayImage
-        }
-        set
-        {
-            _PressPlayImage = newValue
-            _Dirty = true
-        }
-    }
-    
-    /// Holds the Pause image name.
-    private var _PauseImage: String = "PauseText13"
-    /// Get or set the name of the Pause image.
-    public var PauseImage: String
-    {
-        get
-        {
-            return _PauseImage
-        }
-        set
-        {
-            _PauseImage = newValue
-            _Dirty = true
-        }
-    }
-    
-    // MARK: Text label properties.
-    
-    /// Holds the color name for the "Game Score" label.
-    private var _GameScoreColor: String = "White"
-    /// Get or set the color name for the "Game Score" label.
-    public var GameScoreColor: String
-    {
-        get
-        {
-            return _GameScoreColor
-        }
-        set
-        {
-            _GameScoreColor = newValue
-            _Dirty = true
-        }
-    }
-    
-    /// Holds the color name for the "High Score" label.
-    private var _HighScoreColor: String = "Yellow"
-    /// Get or set the color name for the "High Score" label.
-    public var HighScoreColor: String
-    {
-        get
-        {
-            return _HighScoreColor
-        }
-        set
-        {
-            _HighScoreColor = newValue
-            _Dirty = true
-        }
-    }
-    
-    /// Hold the color name for the "Next" label.
-    private var _NextColor: String = "White"
-    /// Get or set the color name for the "Next" label.
-    public var NextColor: String
-    {
-        get
-        {
-            return _NextColor
-        }
-        set
-        {
-            _NextColor = newValue
-            _Dirty = true
-        }
-    }
-    
-    // MARK: Center-related properties.
-    
-    /// Holds the name of the center block image.
-    private var _CenterImageName: String = "CenterBlock1"
-    /// Get or set the name of the center block image.
-    public var CenterImageName: String
-    {
-        get
-        {
-            return _CenterImageName
-        }
-        set
-        {
-            _CenterImageName = newValue
-            _Dirty = true
-        }
-    }
-    
-    /// Holds the color of the center block.
-    private var _CenterBlockColor: String = "Yellow"
-    /// Get or set the color name of the center block.
-    public var CenterBlockColor: String
-    {
-        get
-        {
-            return _CenterBlockColor
-        }
-        set
-        {
-            _CenterBlockColor = newValue
-            _Dirty = true
-        }
-    }
-    
-    /// Holds the center block has a border flag.
-    private var _CenterBlockHasBorder: Bool = true
-    /// Get or set the value that determines if the center block is drawn with a border.
-    public var CenterBlockHasBorder: Bool
-    {
-        get
-        {
-            return _CenterBlockHasBorder
-        }
-        set
-        {
-            _CenterBlockHasBorder = newValue
-            _Dirty = true
-        }
-    }
-    
-    /// Holds the width of the center block border.
-    private var _CenterBlockBorderWidth: Double = 2.0
-    /// Get or set the width of the center block border.
-    public var CenterBlockBorderWidth: Double
-    {
-        get
-        {
-            return _CenterBlockBorderWidth
-        }
-        set
-        {
-            _CenterBlockBorderWidth = newValue
-            _Dirty = true
-        }
-    }
-    
-    /// Holds the center block border color.
-    private var _CenterBlockBorderColor: String = "Black"
-    /// Get or set the name of the color for the center block border.
-    public var CenterBlockBorderColor: String
-    {
-        get
-        {
-            return _CenterBlockBorderColor
-        }
-        set
-        {
-            _CenterBlockBorderColor = newValue
-            _Dirty = true
-        }
-    }
-    
-    // MARK: Outline-related properties.
-    
-    /// Holds the show outline flag for center-based game types.
-    private var _ShowOutline: Bool = true
-    /// Get or set the show outline flag for center-based game types.
-    public var ShowOutline: Bool
-    {
-        get
-        {
-            return _ShowOutline
-        }
-        set
-        {
-            _ShowOutline = newValue
-            _Dirty = false
-        }
-    }
-    
-    /// Holds the thickness of the outline.
-    private var _OutlineThickness: Double = 4.0
-    /// Get or set the thickness of the center-based outline.
-    public var OutlineThickness: Double
-    {
-        get
-        {
-            return _OutlineThickness
-        }
-        set
-        {
-            _OutlineThickness = newValue
-            _Dirty = true
-        }
-    }
-    
-    /// Holds the name of the color for the outline.
-    private var _OutlineColor: String = "Red"
-    /// Get or set the outline color name.
-    public var OutlineColor: String
-    {
-        get
-        {
-            return _OutlineColor
-        }
-        set
-        {
-            _OutlineColor = newValue
-            _Dirty = true
-        }
-    }
-    
-    /// Holds the flag that determines if the outline glows.
-    private var _OutlineGlows: Bool = false
-    /// Get or set the outline glows flag.
-    public var OutlineGlows: Bool
-    {
-        get
-        {
-            return _OutlineGlows
-        }
-        set
-        {
-            _OutlineGlows = newValue
-            _Dirty = true
-        }
-    }
-    
-    /// Holds the color name for the outline glow.
-    private var _OutlineGlowColor: String = "Yellow"
-    /// Get or set the color name for the outline glow color.
-    public var OutlineGlowColor: String
-    {
-        get
-        {
-            return _OutlineGlowColor
-        }
-        set
-        {
-            _OutlineGlowColor = newValue
-            _Dirty = true
-        }
-    }
-    
-    // MARK: Bucket-related properties.
-    
-    /// Holds the name of the image to use to build the bucket.
-    private var _BucketBlockName: String = "Bucket18"
-    /// Get or set the name of the image to use to build the bucket. Ignored if `UseBucketImage` is true.
-    public var BucketBlockName: String
-    {
-        get
-        {
-            return _BucketBlockName
-        }
-        set
-        {
-            _BucketBlockName = newValue
-            _Dirty = true
-        }
-    }
-    
-    /// Holds the name of the color to used to draw buckets as a shape.
-    private var _BucketColor: String = "Yellow"
-    /// Color of the shape to use to draw a bucket.
-    public var BucketColor: String
-    {
-        get
-        {
-            return _BucketColor
-        }
-        set
-        {
-            _BucketColor = newValue
-            _Dirty = true
-        }
-    }
-    
-    /// Holds the gradient bucket color flag.
-    private var _BucketColorIsGradient: Bool = false
-    /// Get or set the bucket color is gradient flag.
-    public var BucketColorIsGradient: Bool
-    {
-        get
-        {
-            return _BucketColorIsGradient
-        }
-        set
-        {
-            _BucketColorIsGradient = newValue
-            _Dirty = true
-        }
-    }
-    
-    /// Holds the number of colors in the color gradient.
-    private var _BucketColorGradientCount: Int = 0
-    /// Get or set the number of color gradients. If set to 0, `BucketColorIsGradient` is set to false.
-    public var BucketColorGradientCount: Int
-    {
-        get
-        {
-            return _BucketColorGradientCount
-        }
-        set
-        {
-            _BucketColorGradientCount = newValue
-            _Dirty = true
-            if _BucketColorGradientCount == 0
-            {
-                BucketColorIsGradient = false
-            }
-        }
-    }
-    
-    /// Holds color 0 of the gradient.
-    private var _BucketGradientColor0: String = "Black"
-    /// Get or set gradient color 0. Ignored if `BucketColorGradientCount` is less than 1.
-    public var BucketGradientColor0: String
-    {
-        get
-        {
-            return _BucketGradientColor0
-        }
-        set
-        {
-            _BucketGradientColor0 = newValue
-            _Dirty = true
-        }
-    }
-    
-    /// Holds color 1 of the gradient.
-    private var _BucketGradientColor1: String = "Black"
-    /// Get or set gradient color 1. Ignored if `BucketColorGradientCount` is less than 2
-    public var BucketGradientColor1: String
-    {
-        get
-        {
-            return _BucketGradientColor1
-        }
-        set
-        {
-            _BucketGradientColor1 = newValue
-            _Dirty = true
-        }
-    }
-    
-    /// Holds color 2 of the gradient.
-    private var _BucketGradientColor2: String = "Black"
-    /// Get or set gradient color 2. Ignored if `BucketColorGradientCount` is less than 3.
-    public var BucketGradientColor2: String
-    {
-        get
-        {
-            return _BucketGradientColor2
-        }
-        set
-        {
-            _BucketGradientColor2 = newValue
-            _Dirty = true
-        }
-    }
-    
-    /// Holds color 3 of the gradient.
-    private var _BucketGradientColor3: String = "Black"
-    /// Get or set gradient color 3. Ignored if `BucketColorGradientCount` is less than 4.
-    public var BucketGradientColor3: String
-    {
-        get
-        {
-            return _BucketGradientColor3
-        }
-        set
-        {
-            _BucketGradientColor3 = newValue
-            _Dirty = true
-        }
-    }
-    
-    /// Holds the show bucket border flag.
-    private var _ShowBucketBorder: Bool = false
-    /// Get or set the flag that determines if individual blocks of the bucket have borders. This flag is only
-    /// used when the bucket is drawn.
-    public var ShowBucketBorder: Bool
-    {
-        get
-        {
-            return _ShowBucketBorder
-        }
-        set
-        {
-            _ShowBucketBorder = newValue
-            _Dirty = true
-        }
-    }
-    
-    /// Holds the width of the bucket border.
-    private var _BucketBorderWidth: Double = 0.0
-    ///Get or set the width of the bucket border. Ignored if `ShowBucketBorder` is false.
-    public var BucketBorderWidth: Double
-    {
-        get
-        {
-            return _BucketBorderWidth
-        }
-        set
-        {
-            _BucketBorderWidth = newValue
-            _Dirty = true
-        }
-    }
-    
-    /// Holds the shape of the drawn bucket tile. Ignored if `ShowBucketBorder` is false.
-    private var _DrawnBucketTileShape: TileShapes = .Square
-    /// Get or set the shape of drawn bucket tiles.
-    public var DrawnBucketTileShape: TileShapes
-    {
-        get
-        {
-            return _DrawnBucketTileShape
-        }
-        set
-        {
-            _DrawnBucketTileShape = newValue
-            _Dirty = true
-        }
-    }
-    
-    /// Holds the name of the color for the bucket border.
-    private var _BucketBorderColor: String = "Black"
-    /// Get or set the name of the bucket border color. Ignored if `ShowBucketBorder` is false.
-    public var BucketBorderColor: String
-    {
-        get
-        {
-            return _BucketBorderColor
-        }
-        set
-        {
-            _BucketBorderColor = newValue
-            _Dirty = true
-        }
-    }
-    
-    /// Holds the bucket is visible flag.
-    private var _BucketIsVisible: Bool = true
-    /// Get or set the flag that determines bucket visibility.
-    public var BucketIsVisible: Bool
-    {
-        get
-        {
-            return _BucketIsVisible
-        }
-        set
-        {
-            _BucketIsVisible = newValue
-            _Dirty = true
-        }
-    }
-    
-    // MARK: Background.
-    
-    /// Holds the name of the color of the background.
-    private var _BackgroundColor: String = "ReallyDarkGray"
-    /// Get or set the name of the color of the background.
-    public var BackgroundColor: String
-    {
-        get
-        {
-            return _BackgroundColor
-        }
-        set
-        {
-            _BackgroundColor = newValue
-            _Dirty = true
+            _FileName = newValue
         }
     }
     
     // MARK: Tile lists and list handling.
-    
-    /// Returns the bucket description from the theme header as a tile.
-    /// - Returns: Tile descriptor populated with bucket description data.
-    public func GenerateBucketTile() -> TileDescriptor
-    {
-        let BucketTile = TileDescriptor()
-        //BucketTile.ActiveImageName = BucketImageName
-        //BucketTile.RetiredImageName = BucketImageName
-        BucketTile.BackgroundColor = BucketColor
-        BucketTile.RetiredBackgroundColor = BucketColor
-        BucketTile.ShowBorder = ShowBucketBorder
-        BucketTile.BorderColor = BucketBorderColor
-        BucketTile.RetiredBorderColor = BucketBorderColor
-        BucketTile.BorderThickness = BucketBorderWidth
-        BucketTile.RetiredBorderThickness = BucketBorderWidth
-        BucketTile.TileShape = DrawnBucketTileShape
-        BucketTile.RetiredShape = DrawnBucketTileShape
-        /*
-        if BucketType == .Drawn
-        {
-            BucketTile.VisualType = TileVisualTypes.Draw
-        }
-        else
-        {
-            BucketTile.VisualType = TileVisualTypes.Image
-        }
- */
-        return BucketTile
-    }
     
     /// Creates and returns a new tile descriptor class.
     ///
@@ -1320,7 +1012,7 @@ class ThemeDescriptor: Serializable
     }
     
     /// Holds a list of tile descriptors, one for each piece in a set.
-    private var _TileList = [TileDescriptor](repeating: TileDescriptor(), count: 10) 
+    private var _TileList = [TileDescriptor](repeating: TileDescriptor(), count: 10)
     /// Get or set the list of tile descriptors. Each descriptor should be applied to a single piece shape.
     public var TileList: [TileDescriptor]
     {
@@ -1351,32 +1043,6 @@ class ThemeDescriptor: Serializable
         return nil
     }
 }
-/*
-/// Types of game views. Used to indiate what game view are valid for a given theme.
-///
-/// - **TwoD**: Two-dimensional game view.
-/// - **ThreeD**: Three-dimensional game view.
-/// - **Both**: Both game views.
-enum ViewTypes: String, CaseIterable
-{
-    case TwoD = "TwoD"
-    case ThreeD = "ThreeD"
-    case Both = "Both"
-}
-
-/// Indicates how to draw a bucket.
-///
-/// - **Image**: Use a single bucket image.
-/// - **ImageBlocks**: Use multiple images to draw a bucket.
-/// - **Drawn**: Use shapes (from CAShapeLayer) to draw a bucket.
-/// - **Rendered**: 3D rendered.
-enum BucketTypes: String, CaseIterable
-{
-    case Image = "Image"
-    case ImageBlocks = "ImageBlocks"
-    case Drawn = "Drawn"
-    case Rendered = "Rendered"
-}
 
 /// Game types - eg, how pieces fall and where they fall to and how the bucket behaves.
 ///
@@ -1391,15 +1057,19 @@ enum GameTypes: String, CaseIterable
 /// 3D game view background types.
 ///
 /// - **Color**: Name of a color.
+/// - **Gradient**: Gradient descriptor.
 /// - **Image**: Name of an image to display.
 /// - **Texture**: Name of a texture.
 /// - **CALayer**: Name of a CALayer.
+/// - **LiveView**: Uses live view background (when available).
 enum BackgroundTypes3D: String, CaseIterable
 {
     case Color = "Color"
+    case Gradient = "Gradient"
     case Image = "Image"
     case Texture = "Texture"
     case CALayer = "CALayer"
+    case LiveView = "LiveView"
 }
 
 /// 3D antialiasing modes.
@@ -1417,4 +1087,16 @@ enum AntialiasingModes: String, CaseIterable
     case Multisampling8X = "MultiSampling8X"
     case Multisampling16X = "Multisampling16X"
 }
-*/
+
+/// Rotation direction/types.
+/// - **None**: No rotation.
+/// - **Right**: Rotate right (clockwise).
+/// - **Left**: Rotate left (counterclockwise).
+/// - **Random**: Rotate to random, ordinal locations.
+enum BucketRotationTypes: String, CaseIterable
+{
+    case None = "None"
+    case Right = "Right"
+    case Left = "Left"
+    case Random = "Random"
+}
