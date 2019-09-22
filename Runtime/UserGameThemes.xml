@@ -3,20 +3,22 @@
     <Property Name="_ThemeName" Value="User Theme"/>
     <Property Name="_Title" Value="User Game Theme"/>
     <Property Name="_Created" Value="2019-09-05"/>
+    <Property Name="_Edited" Value="2019-09-22"/>
     <Property Name="_UserTheme" Value="true"/>
     <Property Name="_IsDefaultTheme" Value="false"/>
     <Property Name="_CameraFieldOfView" Value="92.0"/>
-    <Property Name="_CameraPosition" Value="-0.5,2.0,15.0"/>
+    <Property Name="_CameraPosition" Value="0.0,2.0,15.0"/>
     <Property Name="_CameraOrientation" Value="0.0,0.0,0.0,0.0"/>
     <Property Name="_AntialiasingMode" Value="MultiSampling4X"/>
     <Property Name="_UseDefaultLighting" Value="false"/>
     <Property Name="_LightColor" Value="White"/>
-    <Property Name="_LightType" Value="Omni"/>
-    <Property Name="_LightPosition" Value="-5.0,15.0,40.0"/>
+    <Property Name="_LightType" Value="omni"/>
+    <Property Name="_LightPosition" Value="-10.0,15.0,40.0"/>
+    <Property Name="_LightIntensity" Value="1000"/>
     <Property Name="_CanControlCamera" Value="false"/>
     <Property Name="_ShowStatistics" Value="false"/>
     <Property Name="_ShowBackgroundGrid" Value="false"/>
-    <Property Name="_BucketDiffuseColor" Value="Black"/>
+    <Property Name="_BucketDiffuseColor" Value="ReallyDarkGray"/>
     <Property Name="_BucketSpecularColor" Value="White"/>
     <Property Name="_ShowBucketGrid" Value="true"/>
     <Property Name="_ShowBucketGridOutline" Value="true"/>
