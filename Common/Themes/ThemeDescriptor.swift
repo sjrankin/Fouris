@@ -127,6 +127,10 @@ class ThemeDescriptor: Serializable
                 //Double
                 _CameraFieldOfView = Double(Sanitized)!
             
+            case "_UseDefaultCamera":
+            //Bool
+            _UseDefaultCamera = Bool(Value)!
+            
             case "_CameraPosition":
                 //{Three comma-separated doubles}
                 let Values = SplitStringIntoDoubles(Value, With: ",", ExpectedCount: 3)
@@ -208,6 +212,14 @@ class ThemeDescriptor: Serializable
             case "_UseHapticFeedback":
                 //Bool
                 _UseHapticFeedback = Bool(Value)!
+            
+            case "_ShowBackgroundGrid":
+            //Bool
+            _ShowBackgroundGrid = Bool(Value)!
+            
+            case "_ShowNextPiece":
+            //Bool
+            _ShowNextPiece = Bool(Value)!
             
             default:
                 print("Encountered unexpected key (\(Key)) in ThemeDescriptor.Populate")
@@ -428,6 +440,23 @@ class ThemeDescriptor: Serializable
         }
     }
     
+    /// Holds the use default camera flag.
+    private var _UseDefaultCamera: Bool = false
+    /// Get or set the use default camera flag.
+    public var UseDefaultCamera: Bool
+    {
+        get
+        {
+            return _UseDefaultCamera
+        }
+        set
+        {
+            _UseDefaultCamera = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "UseDefaultCamera")
+        }
+    }
+    
     /// Holds the camera's position in the scene.
     private var _CameraPosition: SCNVector3 = SCNVector3(x: 1.0, y: 1.0, z: 1.0)
     /// Get or set the camera's position in the scene.
@@ -477,6 +506,23 @@ class ThemeDescriptor: Serializable
             _ShowStatistics = newValue
             _Dirty = true
             ChangeNotice(FieldName: "ShowStatistics")
+        }
+    }
+    
+    /// Holds the show background grid flag.
+    private var _ShowBackgroundGrid: Bool = false
+    /// Get or set the show background grid flag.
+    public var ShowBackgroundGrid: Bool
+    {
+        get
+        {
+            return _ShowBackgroundGrid
+        }
+        set
+        {
+            _ShowBackgroundGrid = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "ShowBackgroundGrid")
         }
     }
     
@@ -901,6 +947,23 @@ class ThemeDescriptor: Serializable
             _RotatingBucketDirection = newValue
             _Dirty = true
             ChangeNotice(FieldName: "RotatingBucketDirection")
+        }
+    }
+    
+    /// Holds the show next piece flag.
+    private var _ShowNextPiece: Bool = true
+    /// Get or set the show next piece flag.
+    public var ShowNextPiece: Bool
+    {
+        get
+        {
+            return _ShowNextPiece
+        }
+        set
+        {
+            _ShowNextPiece = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "ShowNextPiece")
         }
     }
     
