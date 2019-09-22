@@ -82,9 +82,9 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
         GradientViewer.addGestureRecognizer(Tap)
     }
     
-func InitializeImagePicker()
-{
-    PHPhotoLibrary.shared().register(self)
+    func InitializeImagePicker()
+    {
+        PHPhotoLibrary.shared().register(self)
     }
     
     private var CurrentView: UIView? = nil
@@ -214,7 +214,7 @@ func InitializeImagePicker()
                     PopulateColorView(WithField: Field)
                 
                 case .Vector3:
-                PopulateVector3View(WithField: Field)
+                    PopulateVector3View(WithField: Field)
                 
                 case .Vector4:
                     PopulateVector4View(WithField: Field)
@@ -226,7 +226,7 @@ func InitializeImagePicker()
                     PopulateGradientView(WithField: Field)
                 
                 case .none:
-                break
+                    break
             }
         }
     }
@@ -314,7 +314,7 @@ func InitializeImagePicker()
             }
             else
             {
-            FinalDescriptor = "(White)@(0.0),(Black)@(1.0)"
+                FinalDescriptor = "(White)@(0.0),(Black)@(1.0)"
             }
             GradientController.GradientToEdit(FinalDescriptor, Tag: "RawViewerGradient")
             self.present(GradientController, animated: true, completion: nil)
@@ -427,15 +427,20 @@ func InitializeImagePicker()
     
     // MARK: Theme editing functions.
     
-    func EditTheme(ID: UUID)
+    func EditTheme(Theme: ThemeDescriptor, DefaultTheme: ThemeDescriptor)
     {
-        //Not used.
+        UserTheme = Theme
+        self.DefaultTheme = DefaultTheme
     }
     
-    func EditTheme(ID: UUID, PieceID: UUID)
+    func EditTheme(Theme: ThemeDescriptor, PieceID: UUID, DefaultTheme: ThemeDescriptor)
     {
-        //Not used.
+        UserTheme = Theme
+        self.DefaultTheme = DefaultTheme
     }
+    
+    var UserTheme: ThemeDescriptor? = nil
+    var DefaultTheme: ThemeDescriptor? = nil
     
     func EditResults(_ Edited: Bool, ThemeID: UUID, PieceID: UUID?)
     {
