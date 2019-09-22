@@ -33,24 +33,29 @@ class PieceCreator: UIViewController, ThemeEditingProtocol, GridProtocol
     var RotateY: Bool = false
     var RotateZ: Bool = false
     
-    func EditTheme(ID: UUID)
+    func EditTheme(Theme: ThemeDescriptor, DefaultTheme: ThemeDescriptor)
     {
-        ThemeID = ID
+    UserTheme = Theme
+        self.DefaultTheme = DefaultTheme
     }
     
     var ThemeID = UUID.Empty
     
     var NewTheme = UUID.Empty
     
-    func EditTheme(ID: UUID, PieceID: UUID)
+    func EditTheme(Theme: ThemeDescriptor, PieceID: UUID, DefaultTheme: ThemeDescriptor)
     {
-        //Not used in this class.
+        UserTheme = Theme
+        self.DefaultTheme = DefaultTheme
     }
     
     func EditResults(_ Edited: Bool, ThemeID: UUID, PieceID: UUID?)
     {
         //Not used in this class.
     }
+    
+    var UserTheme: ThemeDescriptor? = nil
+    var DefaultTheme: ThemeDescriptor? = nil
     
     func ResetAllCells(ToSelection: Bool)
     {
