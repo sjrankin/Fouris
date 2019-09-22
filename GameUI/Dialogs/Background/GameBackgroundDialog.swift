@@ -67,17 +67,20 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, ThemeEditingP
         }
     }
     
-    func EditTheme(ID: UUID)
+    func EditTheme(Theme: ThemeDescriptor, DefaultTheme: ThemeDescriptor)
     {
-        ThemeID = ID
+        UserTheme = Theme
+        self.DefaultTheme = DefaultTheme
     }
     
-    func EditTheme(ID: UUID, PieceID: UUID)
+    func EditTheme(Theme: ThemeDescriptor, PieceID: UUID, DefaultTheme: ThemeDescriptor)
     {
-        ThemeID = ID
+        UserTheme = Theme
+        self.DefaultTheme = DefaultTheme
     }
     
-    var ThemeID: UUID = UUID.Empty
+    var UserTheme: ThemeDescriptor? = nil
+    var DefaultTheme: ThemeDescriptor? = nil
     
     func EditResults(_ Edited: Bool, ThemeID: UUID, PieceID: UUID?)  
     {
@@ -174,7 +177,7 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, ThemeEditingP
     {
         let Picker = SelectBackgroundImageCode(coder: coder)
         Picker?.ThemeDelegate = self
-        Picker?.EditTheme(ID: ThemeID)
+        Picker?.EditTheme(Theme: UserTheme!, DefaultTheme: DefaultTheme!)
         return Picker
     }
     
@@ -203,13 +206,13 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, ThemeEditingP
     
     @IBAction func HandleOKPressed(_ sender: Any)
     {
-        ThemeDelegate?.EditResults(true, ThemeID: ThemeID, PieceID: nil)
+        ThemeDelegate?.EditResults(true, ThemeID: UserTheme!.ID, PieceID: nil)
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func HandleCancelPressed(_ sender: Any)
     {
-        ThemeDelegate?.EditResults(false, ThemeID: ThemeID, PieceID: nil)
+        ThemeDelegate?.EditResults(false, ThemeID: UserTheme!.ID, PieceID: nil)
         self.dismiss(animated: true, completion: nil)
     }
     
