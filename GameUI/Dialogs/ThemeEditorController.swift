@@ -27,17 +27,20 @@ class ThemeEditorController: UIViewController, ThemeEditingProtocol
         PiecesView.layer.backgroundColor = ColorServer.CGColorFrom(ColorNames.WhiteSmoke)
     }
     
-    func EditTheme(ID: UUID)
+    func EditTheme(Theme: ThemeDescriptor, DefaultTheme: ThemeDescriptor)
     {
-        ThemeID = ID
+        self.Theme = Theme
+        self.DefaultTheme = DefaultTheme
     }
     
-    func EditTheme(ID: UUID, PieceID: UUID)
+    func EditTheme(Theme: ThemeDescriptor, PieceID: UUID, DefaultTheme: ThemeDescriptor)
     {
-        ThemeID = ID
+        self.Theme = Theme
+        self.DefaultTheme = DefaultTheme
     }
     
-    var ThemeID: UUID = UUID.Empty
+    var Theme: ThemeDescriptor? = nil
+    var DefaultTheme: ThemeDescriptor? = nil
     
     func EditResults(_ Edited: Bool, ThemeID: UUID, PieceID: UUID?)
     {
@@ -48,7 +51,7 @@ class ThemeEditorController: UIViewController, ThemeEditingProtocol
     {
         let GBack = GameBackgroundDialog(coder: coder)
         GBack?.ThemeDelegate = self
-        GBack?.EditTheme(ID: ThemeID)
+        GBack?.EditTheme(Theme: Theme!, DefaultTheme: DefaultTheme!)
         return GBack
     }
     
@@ -56,19 +59,19 @@ class ThemeEditorController: UIViewController, ThemeEditingProtocol
     {
         let PieceSelect = PieceSelectorDialog(coder: coder)
         PieceSelect?.ThemeDelegate = self
-        PieceSelect?.EditTheme(ID: ThemeID) 
+        PieceSelect?.EditTheme(Theme: Theme!, DefaultTheme: DefaultTheme!)
         return PieceSelect
     }
     
     @IBAction func HandleSaveButtonPressed(_ sender: Any)
     {
-        ThemeDelegate?.EditResults(true, ThemeID: ThemeID, PieceID: nil)
+        ThemeDelegate?.EditResults(true, ThemeID: Theme!.ID, PieceID: nil)
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func HandleCancelButtonPressed(_ sender: Any)
     {
-        ThemeDelegate?.EditResults(false, ThemeID: ThemeID, PieceID: nil)
+        ThemeDelegate?.EditResults(false, ThemeID: Theme!.ID, PieceID: nil)
         self.dismiss(animated: true, completion: nil)
     }
     
