@@ -478,4 +478,5 @@ enum ColorNames: UInt, CaseIterable
     case MacLavender = 0xd783ff
     case Bubblegum = 0xff84ff
     case Carnation = 0xff89d8
+    case Maroon = 0x800000
 }
