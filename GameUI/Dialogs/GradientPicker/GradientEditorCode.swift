@@ -91,11 +91,11 @@ class GradientEditorCode: UIViewController, GradientPickerProtocol,
                         ShowSample(WithGradient: CurrentGradient)
                     
                     case "FromPresetList":
-                    CurrentGradient = NewGradient
-                    ShowSample(WithGradient: CurrentGradient)
+                        CurrentGradient = NewGradient
+                        ShowSample(WithGradient: CurrentGradient)
                     
                     default:
-                    break
+                        break
                 }
             }
         }
@@ -214,7 +214,7 @@ class GradientEditorCode: UIViewController, GradientPickerProtocol,
             SelectedIndex = indexPath.row
             ColorToEdit = Color
             LocationToEdit = Location
-
+            
             performSegue(withIdentifier: "ToGradientStopEditor", sender: self)
         }
     }
@@ -242,11 +242,13 @@ class GradientEditorCode: UIViewController, GradientPickerProtocol,
     
     @IBAction func HandleOKPressed(_ sender: Any)
     {
+        GradientDelegate?.EditedGradient(CurrentGradient, Tag: CallerTag)
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func HandleCancelPressed(_ sender: Any)
     {
+        GradientDelegate?.EditedGradient(nil, Tag: CallerTag)
         self.dismiss(animated: true, completion: nil)
     }
     
