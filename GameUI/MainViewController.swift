@@ -197,6 +197,10 @@ class MainViewController: UIViewController,
                                      userInfo: nil, repeats: false)
     }
     
+    /// Sets the enable state of the freeze in place action button.
+    /// - Note: This button is provided for certain games that need a way to freeze a piece in place that may not be near
+    ///         near any other piece.
+    /// - Parameter DoEnable: The enable flag for the button.
     func EnableFreezeInPlaceButton(_ DoEnable: Bool)
     {
         FreezeInPlaceButton.isUserInteractionEnabled = DoEnable
@@ -205,6 +209,7 @@ class MainViewController: UIViewController,
     
     var GameTextOverlay: TextOverlay? = nil
     
+    /// Initialize the non-game UI (things that are not directly related to the game board).
     func InitializeUI()
     {
         Settings.AddSubscriber(For: "Main", NewSubscriber: self)
@@ -218,6 +223,28 @@ class MainViewController: UIViewController,
         {
             FPSLabel.alpha = 0.0
         }
+        ShowCameraControls()
+    }
+    
+    /// Set camera button visibility depending on the settings.
+    func ShowCameraControls()
+    {
+        VideoButton.isHidden = !Settings.GetShowCameraControls()
+        VideoButton.isUserInteractionEnabled = Settings.GetShowCameraControls()
+        CameraButton.isHidden = !Settings.GetShowCameraControls()
+        CameraButton.isUserInteractionEnabled = Settings.GetShowCameraControls()
+    }
+    
+    /// Set top toolbar visibility. Also sets the mode in which a long press at the top of the game view shows the slide-in menu.
+    func ShowTopToolbar()
+    {
+        
+    }
+    
+    /// Set motion control visibility.
+    func ShowMotionControls()
+    {
+        
     }
     
     /// Handle changed settings.
@@ -225,22 +252,29 @@ class MainViewController: UIViewController,
     /// - Parameter NewValue: The new value for the specified field.
     func SettingChanged(Field: SettingsFields, NewValue: Any)
     {
+        print("Setting \(Field) changed.")
         switch Field
         {
-            case .ShowFPSInUI:
-            let DoShowFPS = NewValue as! Bool
-            if DoShowFPS
-            {
-                FPSLabel.text = ""
-                FPSLabel.alpha = 1.0
-            }
-            else
-            {
-                FPSLabel.alpha = 0.0
-            }
+            case .ShowCameraControls:
+                ShowCameraControls()
             
-            default:
-            break
+            case .ShowTopToolbar:
+            ShowTopToolbar()
+            
+            case .ShowMotionControls:
+            ShowMotionControls()
+            
+            case .ShowFPSInUI:
+                let DoShowFPS = NewValue as! Bool
+                if DoShowFPS
+                {
+                    FPSLabel.text = ""
+                    FPSLabel.alpha = 1.0
+                }
+                else
+                {
+                    FPSLabel.alpha = 0.0
+            }
         }
     }
     
@@ -513,7 +547,7 @@ class MainViewController: UIViewController,
         GameTextOverlay?.ShowHighScore(NewScore: Game.HighScore)
         GameTextOverlay?.HideNextLabel(Duration: 0.1)
         GameTextOverlay?.HideNextPiece(Duration: 0.1)
-                GameTextOverlay?.ShowPressPlay(Duration: 0.5)
+        GameTextOverlay?.ShowPressPlay(Duration: 0.5)
         
         let UserIDString = UserDefaults.standard.string(forKey: "CurrentUserID")!
         let UserID = UUID(uuidString: UserIDString)!
@@ -566,7 +600,7 @@ class MainViewController: UIViewController,
         let MeanVal = AccumulatedFPS / Double(FPSSampleCount)
         FPSLabel.text = "μ \(Convert.RoundToString(MeanVal, ToNearest: 0.001, CharCount: 6))"
         #endif
-
+        
         if InAttractMode
         {
             let _ = Timer.scheduledTimer(timeInterval: 10.0, target: self,
@@ -1666,7 +1700,7 @@ class MainViewController: UIViewController,
         ClearAndPlay()
     }
     
-    @IBAction func HandleThemesSlideInButtonPressed(_ sender: Any)
+    @IBAction func HandleSettingsSlideInButtonPressed(_ sender: Any)
     {
         ForcePause()
         MainSlideIn.HideMainSlideIn()
