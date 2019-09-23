@@ -112,7 +112,7 @@ class View3D: SCNView,                          //Our main super class.
                                          userInfo: nil, repeats: true)
     }
     
-    func ThemeUpdated(ThemeName: String, FieldName: String)
+    func ThemeUpdated(ThemeName: String, Field: ThemeFields)
     {
         
     }
