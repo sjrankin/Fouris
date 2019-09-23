@@ -71,6 +71,9 @@ class Settings
         _Settings.set(false, forKey: "ShowFPSInUI")
         _Settings.set(1.25, forKey: "BucketDestructionDuration")
         _Settings.set(false, forKey: "FastClearBucket")
+        _Settings.set(true, forKey: "ShowCameraControls")
+        _Settings.set(true, forKey: "ShowMotionControls")
+        _Settings.set(true, forKey: "ShowTopToolbar")
         _Settings.set("83c630ee-81d4-11e9-bc42-526af7764f64", forKey: "CurrentTheme")
         _Settings.set("3f0d9fee-0b77-465b-a0ac-f1663da23cc9", forKey: "Current3DTheme")
     }
@@ -110,6 +113,51 @@ class Settings
                 Subscriber.1?.SettingChanged(Field: From, NewValue: NewValue)
             }
         }
+    }
+    
+    /// Get the show motion controls flag.
+    /// - Returns: Value indicating whether motion controls should be shown or not.
+    public static func GetShowMotionControls() -> Bool
+    {
+        return _Settings.bool(forKey: "ShowMotionControls")
+    }
+    
+    /// Set the show motion controls flag.
+    /// - Parameter NewValue: New value for the show motion controls flag.
+    public static func SetShowMotionControls(NewValue: Bool)
+    {
+        _Settings.set(NewValue, forKey: "ShowMotionControls")
+        SendNotice(From: .ShowMotionControls, NewValue: NewValue)
+    }
+    
+    /// Get the shot top toolbar flag.
+    /// - Returns: Value indicating whether the top toolbar should be shown or not.
+    public static func GetShowTopToolbar() -> Bool
+    {
+        return _Settings.bool(forKey: "ShowTopToolbar")
+    }
+    
+    /// Set the show top toolbar flag.
+    /// -Parameter NewValue: new value for the show top toolbar flag.
+    public static func SetShowTopToolbar(NewValue: Bool)
+    {
+        _Settings.set(NewValue, forKey: "ShowTopToolbar")
+        SendNotice(From: .ShowTopToolbar, NewValue: NewValue)
+    }
+    
+    /// Get the flag that determines whether camera controls are shown in the UI.
+    /// - Returns: Flag that determines whether camera controls are shown in the UI.
+    public static func GetShowCameraControls() -> Bool
+    {
+        return _Settings.bool(forKey: "ShowCameraControls")
+    }
+    
+    /// Set the flag that determines whether camera controls are shown in the UI.
+    /// - Parameter NewValue: New value of the show camera controls flag.
+    public static func SetShowCameraControls(NewValue: Bool)
+    {
+        _Settings.set(NewValue, forKey: "ShowCameraControls")
+        SendNotice(From: .ShowCameraControls, NewValue: NewValue as Any)
     }
     
     /// Get the clear the bucket at game over in a hurry flag.
@@ -1002,12 +1050,3 @@ extension Array where Element == Int
 }
 
 
-protocol SettingsChangedProtocol
-{
-    func SettingChanged(Field: SettingsFields, NewValue: Any)
-}
-
-enum SettingsFields: String, CaseIterable
-{
-    case ShowFPSInUI = "ShowFPSInUI"
-}
