@@ -106,6 +106,9 @@
 		17831EDD232DFB54007FF894 /* FlyingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17831EDC232DFB54007FF894 /* FlyingProtocol.swift */; };
 		1785ED6222FD8C0A000B31C2 /* BoardDescriptions.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1785ED6122FD8C09000B31C2 /* BoardDescriptions.xml */; };
 		1785ED6522FD9BB2000B31C2 /* BoardDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1785ED6422FD9BB2000B31C2 /* BoardDescriptor.swift */; };
+		178C0F042338786000A35C62 /* SettingsControllerCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178C0F032338786000A35C62 /* SettingsControllerCode.swift */; };
+		178C0F062338882100A35C62 /* SettingsChangedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178C0F052338882100A35C62 /* SettingsChangedProtocol.swift */; };
+		178C0F0B2338970400A35C62 /* +Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178C0F0A2338970400A35C62 /* +Action.swift */; };
 		178F4CA6229131A900FBCFFD /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178F4CA5229131A900FBCFFD /* Board.swift */; };
 		17912251231F78DF00C3330A /* GradientStopEditorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17912250231F78DF00C3330A /* GradientStopEditorCode.swift */; };
 		17912255231FAAFB00C3330A /* GamePieceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17912254231FAAFB00C3330A /* GamePieceCell.swift */; };
@@ -322,6 +325,9 @@
 		17831EDC232DFB54007FF894 /* FlyingProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlyingProtocol.swift; sourceTree = "<group>"; };
 		1785ED6122FD8C09000B31C2 /* BoardDescriptions.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = BoardDescriptions.xml; sourceTree = "<group>"; };
 		1785ED6422FD9BB2000B31C2 /* BoardDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDescriptor.swift; sourceTree = "<group>"; };
+		178C0F032338786000A35C62 /* SettingsControllerCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsControllerCode.swift; sourceTree = "<group>"; };
+		178C0F052338882100A35C62 /* SettingsChangedProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsChangedProtocol.swift; sourceTree = "<group>"; };
+		178C0F0A2338970400A35C62 /* +Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Action.swift"; sourceTree = "<group>"; };
 		178F4CA5229131A900FBCFFD /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		17912250231F78DF00C3330A /* GradientStopEditorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientStopEditorCode.swift; sourceTree = "<group>"; };
 		17912254231FAAFB00C3330A /* GamePieceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePieceCell.swift; sourceTree = "<group>"; };
@@ -519,7 +525,6 @@
 			isa = PBXGroup;
 			children = (
 				17ECE5AA23322515003F4065 /* RawThemeViewerExtensions */,
-				174C9A5C232F5E8A00A5DC7A /* RawThemeFieldEditProtocol.swift */,
 				173592C42331FA540028FF9A /* RawThemeViewerCode.swift */,
 				17ECE5AD23324D09003F4065 /* RawThemeViewerTitleCell.swift */,
 				17ECE5A623321897003F4065 /* GroupData.swift */,
@@ -569,6 +574,7 @@
 			isa = PBXGroup;
 			children = (
 				174C9A59232F5CB000A5DC7A /* RawTheme */,
+				174C9A5C232F5E8A00A5DC7A /* RawThemeFieldEditProtocol.swift */,
 				177FC1D72318E685005727B6 /* CustomControls */,
 				177FC1D22318E0E1005727B6 /* ColorPicker */,
 				17CD4EB6231E490D0055E541 /* GradientPicker */,
@@ -578,6 +584,7 @@
 				17477A6E231783C300AAEB14 /* Theming.storyboard */,
 				17616ACA23166CB000DFFEFE /* SelectGameController.swift */,
 				17A48E412327BC6900510EE6 /* GameSelectorProtocol.swift */,
+				178C0F032338786000A35C62 /* SettingsControllerCode.swift */,
 				17616ACC23166DF700DFFEFE /* GameStyleTableViewCell.swift */,
 				17477A722317891100AAEB14 /* ThemeEditorController.swift */,
 				1704E301232130E900D7C158 /* ThemeEditingProtocol.swift */,
@@ -703,6 +710,7 @@
 				1798FE5F2279808A008B26E9 /* UserData.swift */,
 				1798FE61227987D8008B26E9 /* LevelData.swift */,
 				176F1B6F227B09FB00681CDE /* TOC.swift */,
+				178C0F052338882100A35C62 /* SettingsChangedProtocol.swift */,
 			);
 			path = Customization;
 			sourceTree = "<group>";
@@ -982,6 +990,7 @@
 				17189FF6233333F800317BF1 /* +Vector4.swift */,
 				17189FFA233346C100317BF1 /* +Gradient.swift */,
 				17189FF82333347C00317BF1 /* +Image.swift */,
+				178C0F0A2338970400A35C62 /* +Action.swift */,
 			);
 			path = RawThemeViewerExtensions;
 			sourceTree = "<group>";
@@ -1237,6 +1246,7 @@
 				17477A772317F7E800AAEB14 /* PieceSelectorDialog.swift in Sources */,
 				17FC443C228AB9E50065888F /* Score.swift in Sources */,
 				17ECE5AC23322540003F4065 /* +PopulateFields.swift in Sources */,
+				178C0F042338786000A35C62 /* SettingsControllerCode.swift in Sources */,
 				177F4FC6229BD2F500FE72CD /* Send.swift in Sources */,
 				17189FF5233332FD00317BF1 /* +Vector3.swift in Sources */,
 				17C14E1F23066E1600D9CF64 /* TextLayerDisplayProtocol.swift in Sources */,
@@ -1247,6 +1257,7 @@
 				17912255231FAAFB00C3330A /* GamePieceCell.swift in Sources */,
 				17D48A8422B2111D00DD7C94 /* ThreeDProtocol.swift in Sources */,
 				17750FE923373E5B00A188D6 /* ThemeUpdatedProtocol.swift in Sources */,
+				178C0F0B2338970400A35C62 /* +Action.swift in Sources */,
 				17C0E6F722AF9C87003FAFA8 /* IdiotLightMessage.swift in Sources */,
 				173AA392231A8EEE00802289 /* PredefinedColors.swift in Sources */,
 				171ED10422F56B9F00CE2CDF /* Rotating4GameAI.swift in Sources */,
@@ -1257,6 +1268,7 @@
 				1782C0F122FE8CA5006CD9D5 /* GeneralAI.swift in Sources */,
 				17ECE5B423325720003F4065 /* +Int.swift in Sources */,
 				17477A752317F1C200AAEB14 /* GameBackgroundDialog.swift in Sources */,
+				178C0F062338882100A35C62 /* SettingsChangedProtocol.swift in Sources */,
 				176F1B6E227AD3D500681CDE /* FileIO.swift in Sources */,
 				1756715C2302695800D0824D /* StepperHelper.swift in Sources */,
 				17AF231F2313981C00921E6C /* MainViewController.swift in Sources */,
