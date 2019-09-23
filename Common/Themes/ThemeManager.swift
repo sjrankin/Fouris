@@ -40,6 +40,8 @@ class ThemeManager: ThemeChangeProtocol
         {
             fatalError("Error reading themes. Missing either default or user theme.")
         }
+        UserTheme.ChangeDelegate = self
+        DefaultTheme.ChangeDelegate = self
         let SavedID = Settings.GetCurrentThemeID()
         if SavedID == UUID.Empty
         {
@@ -238,24 +240,24 @@ class ThemeManager: ThemeChangeProtocol
     /// fields they want to be notified of changes - in that case, if the changed field is not in the
     /// subscriber's list of fields, no change notice is sent.
     /// - Parameter ThemeName: The name of the changed theme.
-    /// - Parameter FieldName: The name of the changed field.
-    func ThemeChanged(ThemeName: String, FieldName: String)
+    /// - Parameter Field: The field whose property changed.
+    func ThemeChanged(ThemeName: String, Field: ThemeFields)
     {
         for (_, (Delegate, FieldList)) in Subscribers
         {
             if let FList = FieldList
             {
-                if !FList.contains(FieldName)
+                if !FList.contains(Field)
                 {
                     return
                 }
             }
-            Delegate.ThemeUpdated(ThemeName: ThemeName, FieldName: FieldName)
+            Delegate.ThemeUpdated(ThemeName: ThemeName, Field: Field)
         }
     }
     
     /// Holds the list of subscribers to change notices.
-    private var Subscribers = [String: (ThemeUpdatedProtocol, [String]?)]()
+    private var Subscribers = [String: (ThemeUpdatedProtocol, [ThemeFields]?)]()
     
     /// Allows objects (that implement the `ThemeUpdatedProtocol`) to subscribe to changes in themes.
     /// - Parameter Subscriber: The name of the subscriber. If this subscriber is already in the
@@ -267,7 +269,7 @@ class ThemeManager: ThemeChangeProtocol
     ///                        subscriber wants to be notified if changed. If nil (or empty), all changes
     ///                        will be reported to the subscriber.
     public func SubscribeToChanges(Subscriber: String, SubscribingObject: ThemeUpdatedProtocol,
-                                          FieldList: [String]? = nil)
+                                          FieldList: [ThemeFields]? = nil)
     {
         if Subscribers[Subscriber] != nil
         {
