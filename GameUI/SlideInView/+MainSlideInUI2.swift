@@ -17,20 +17,3 @@ extension MainViewController
         SlideInSubView.layer.borderColor = ColorServer.CGColorFrom(ColorNames.ReallyDarkGray)
     }
 }
-
-/// Command tokens for slide-in UI commands.
-/// - Note: The commands here are not necessarily in the same order as presented to the user.
-/// - **NoCommand**: Default command which basically means the user selected something we don't recognize. This
-///                  should never be sent but is here just in case...
-/// - **AboutCommand**: Show the about dialog.
-/// - **SelectGameCommand**: Select the game type and style.
-/// - **SettingsCommand**: Run the general purpose settings dialog.
-/// - **ThemeCommand**: Run the theme dialog.
-enum SlideInCommands
-{
-    case NoCommand
-    case AboutCommand
-    case SelectGameCommand
-    case SettingsCommand
-    case ThemeCommand
-}
