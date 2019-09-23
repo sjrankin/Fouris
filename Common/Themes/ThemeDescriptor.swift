@@ -23,10 +23,10 @@ class ThemeDescriptor: Serializable
     }
     
     /// Called when a property changes (but not when the theme is deserialized).
-    /// - Parameter: Name of the field that changed.
-    func ChangeNotice(FieldName: String)
+    /// - Parameter: The field that changed.
+    func ChangeNotice(Field: ThemeFields)
     {
-        ChangeDelegate?.ThemeChanged(ThemeName: ThemeName, FieldName: FieldName)
+        ChangeDelegate?.ThemeChanged(ThemeName: ThemeName, Field: Field)
     }
     
     /// Holds the dirty flag. Used by user-defined themes.
@@ -86,10 +86,6 @@ class ThemeDescriptor: Serializable
                 _Edited = Sanitized
             
             //General properties.
-            
-            case "_BackgroundType":
-                //BackgroundTypes3D
-                _BackgroundType = BackgroundTypes3D(rawValue: Sanitized)!
             
             case "_BucketDiffuseColor":
                 //String
@@ -245,6 +241,40 @@ class ThemeDescriptor: Serializable
                 //Bool
                 _FadeBucketOutline = Bool(Value)!
             
+            case "_BackgroundType":
+                //BackgroundTypes3D
+                _BackgroundType = BackgroundTypes3D(rawValue: Sanitized)!
+            
+            //Game background properties.
+            
+            case "_BackgroundSolidColor":
+                //String
+                _BackgroundSolidColor = Sanitized
+            
+            case "_BackgroundSolidColorCycleTime":
+                //Double
+                _BackgroundSolidColorCycleTime = Double(Value)!
+            
+            case "_BackgroundGradientColor":
+                //String
+                _BackgroundGradientColor = Sanitized
+            
+            case "_BackgroundGradientCycleTime":
+                //Double
+                _BackgroundGradientCycleTime = Double(Value)!
+            
+            case "_BackgroundImageName":
+                //String
+                _BackgroundImageName = Sanitized
+            
+            case "_BackgroundImageFromCameraRoll":
+                //Bool
+                _BackgroundImageFromCameraRoll = Bool(Value)!
+            
+            case "_BackgroundLiveImageCamera":
+                //CameraLocations
+                _BackgroundLiveImageCamera = CameraLocations(rawValue: Sanitized)!
+            
             default:
                 print("Encountered unexpected key (\(Key)) in ThemeDescriptor.Populate")
                 break
@@ -304,7 +334,7 @@ class ThemeDescriptor: Serializable
         {
             _ShowBucketGrid = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "ShowBucketGrid")
+            ChangeNotice(Field: .ShowBucketGrid)
         }
     }
     
@@ -321,7 +351,7 @@ class ThemeDescriptor: Serializable
         {
             _ShowGrid = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "ShowGrid")
+            ChangeNotice(Field: .ShowGrid)
         }
     }
     
@@ -338,7 +368,7 @@ class ThemeDescriptor: Serializable
         {
             _ShowBucketGridOutline = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "ShowBucketGridOutline")
+            ChangeNotice(Field: .ShowBucketGridOutline)
         }
     }
     
@@ -355,7 +385,7 @@ class ThemeDescriptor: Serializable
         {
             _BucketGridColor = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "BucketGridColor")
+            ChangeNotice(Field: .BucketGridColor)
         }
     }
     
@@ -372,7 +402,7 @@ class ThemeDescriptor: Serializable
         {
             _BucketGridOutlineColor = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "BucketGridOutlineColor")
+            ChangeNotice(Field: .BucketGridOutlineColor)
         }
     }
     
@@ -389,7 +419,7 @@ class ThemeDescriptor: Serializable
         {
             _BucketSpecularColor = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "BucketSpecularColor")
+            ChangeNotice(Field: .BucketSpecularColor)
         }
     }
     
@@ -406,7 +436,7 @@ class ThemeDescriptor: Serializable
         {
             _BucketDiffuseColor = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "BucketDiffuseColor")
+            ChangeNotice(Field: .BucketDiffuseColor)
         }
     }
     
@@ -426,7 +456,7 @@ class ThemeDescriptor: Serializable
         {
             _IsOrthographic = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "IsOrthographic")
+            ChangeNotice(Field: .IsOrthographic)
         }
     }
     
@@ -445,7 +475,7 @@ class ThemeDescriptor: Serializable
         {
             _OrthographicScale = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "OrthographicScale")
+            ChangeNotice(Field: .OrthographicScale)
         }
     }
     
@@ -462,7 +492,7 @@ class ThemeDescriptor: Serializable
         {
             _CameraFieldOfView = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "CamerFieldOfView")
+            ChangeNotice(Field: .CameraFieldOfView)
         }
     }
     
@@ -479,7 +509,7 @@ class ThemeDescriptor: Serializable
         {
             _UseDefaultCamera = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "UseDefaultCamera")
+            ChangeNotice(Field: .UseDefaultCamera)
         }
     }
     
@@ -496,7 +526,7 @@ class ThemeDescriptor: Serializable
         {
             _CameraPosition = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "CameraPosition")
+            ChangeNotice(Field: .CameraPosition)
         }
     }
     
@@ -512,7 +542,7 @@ class ThemeDescriptor: Serializable
         set
         {
             _CameraOrientation = newValue
-            ChangeNotice(FieldName: "CameraOrientation")
+            ChangeNotice(Field: .CameraOrientation)
         }
     }
     
@@ -531,7 +561,7 @@ class ThemeDescriptor: Serializable
         {
             _ShowStatistics = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "ShowStatistics")
+            ChangeNotice(Field: .ShowStatistics)
         }
     }
     
@@ -548,7 +578,7 @@ class ThemeDescriptor: Serializable
         {
             _ShowBackgroundGrid = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "ShowBackgroundGrid")
+            ChangeNotice(Field: .ShowBackgroundGrid)
         }
     }
     
@@ -566,7 +596,7 @@ class ThemeDescriptor: Serializable
         {
             _CanControlCamera = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "CanControlCamera")
+            ChangeNotice(Field: .CanControlCamera)
         }
     }
     
@@ -585,7 +615,7 @@ class ThemeDescriptor: Serializable
         {
             _LightColor = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "LightColor")
+            ChangeNotice(Field: .LightColor)
         }
     }
     
@@ -602,7 +632,7 @@ class ThemeDescriptor: Serializable
         {
             _LightType = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "LightType")
+            ChangeNotice(Field: .LightType)
         }
     }
     
@@ -619,7 +649,7 @@ class ThemeDescriptor: Serializable
         {
             _LightPosition = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "LightPosition")
+            ChangeNotice(Field: .LightPosition)
         }
     }
     
@@ -636,7 +666,7 @@ class ThemeDescriptor: Serializable
         {
             _LightIntensity = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "LightIntensity")
+            ChangeNotice(Field: .LightIntensity)
         }
     }
     
@@ -653,7 +683,7 @@ class ThemeDescriptor: Serializable
         {
             _UseDefaultLighting = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "UseDefaultLighting")
+            ChangeNotice(Field: .UseDefaultLighting)
         }
     }
     
@@ -672,7 +702,7 @@ class ThemeDescriptor: Serializable
         {
             _AntialiasingMode = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "AntialiasingMode")
+            ChangeNotice(Field: .AntialiasingMode)
         }
     }
     
@@ -691,7 +721,7 @@ class ThemeDescriptor: Serializable
         {
             _BackgroundType = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "BackgroundType")
+            ChangeNotice(Field: .BackgroundType)
         }
     }
     
@@ -708,7 +738,7 @@ class ThemeDescriptor: Serializable
         {
             _BackgroundSolidColor = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "BackgroundSolidColor")
+            ChangeNotice(Field: .BackgroundSolidColor)
         }
     }
     
@@ -725,7 +755,7 @@ class ThemeDescriptor: Serializable
         {
             _BackgroundSolidColorCycleTime = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "BackgroundSolidColorCycleTime")
+            ChangeNotice(Field: .BackgroundSolidColorCycleTime)
         }
     }
     
@@ -742,7 +772,7 @@ class ThemeDescriptor: Serializable
         {
             _BackgroundGradientColor = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "BackgroundGradientColor")
+            ChangeNotice(Field: .BackgroundGradientColor)
         }
     }
     
@@ -759,7 +789,7 @@ class ThemeDescriptor: Serializable
         {
             _BackgroundGradientCycleTime = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "BackgroundGradientCycleTime")
+            ChangeNotice(Field: .BackgroundGradientColorCycleTime)
         }
     }
     
@@ -776,7 +806,7 @@ class ThemeDescriptor: Serializable
         {
             _BackgroundImageName = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "BackgroundImageName")
+            ChangeNotice(Field: .BackgroundImageName)
         }
     }
     
@@ -794,7 +824,7 @@ class ThemeDescriptor: Serializable
         {
             _BackgroundImageFromCameraRoll = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "BackgroundImageFromCameraRoll")
+            ChangeNotice(Field: .BackgroundImageFromCameraRoll)
         }
     }
     
@@ -811,7 +841,7 @@ class ThemeDescriptor: Serializable
         {
             _BackgroundLiveImageCamera = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "BackgroundLiveImageCamera")
+            ChangeNotice(Field: .BackgroundLiveImageCamera)
         }
     }
     
@@ -830,7 +860,7 @@ class ThemeDescriptor: Serializable
         {
             _UseHapticFeedback = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "UseHapticFeedback")
+            ChangeNotice(Field: .UseHapticFeedback)
         }
     }
     
@@ -850,7 +880,7 @@ class ThemeDescriptor: Serializable
         {
             _AfterGameWaitDuration = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "AfterGameWaitDuration")
+            ChangeNotice(Field: .AfterGameWaitDuration)
         }
     }
     
@@ -867,7 +897,7 @@ class ThemeDescriptor: Serializable
         {
             _DestructionMethod = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "DestructionMethod")
+            ChangeNotice(Field: .DestructionMethod)
         }
     }
     
@@ -884,7 +914,7 @@ class ThemeDescriptor: Serializable
         {
             _DestructionDuration = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "DestructionDuration")
+            ChangeNotice(Field: .DestructionDuration)
         }
     }
     
@@ -903,7 +933,7 @@ class ThemeDescriptor: Serializable
         {
             _ShowAIActionsOnControls = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "ShowAIActionsOnControls")
+            ChangeNotice(Field: .ShowAIActionsOnControls)
         }
     }
     
@@ -918,7 +948,7 @@ class ThemeDescriptor: Serializable
         {
             _StartWithAI = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "StartWithAI")
+            ChangeNotice(Field: .StartWithAI)
         }
     }
     
@@ -936,7 +966,7 @@ class ThemeDescriptor: Serializable
         {
             _AISneakPeakCount = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "AISneakPeakCount")
+            ChangeNotice(Field: .AISneakPeakCount)
         }
     }
     
@@ -955,7 +985,7 @@ class ThemeDescriptor: Serializable
         {
             _GameType = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "GameType")
+            ChangeNotice(Field: .GameType)
         }
     }
     
@@ -972,7 +1002,7 @@ class ThemeDescriptor: Serializable
         {
             _RotatingBucketDirection = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "RotatingBucketDirection")
+            ChangeNotice(Field: .RotatingBucketDirection)
         }
     }
     
@@ -989,7 +1019,7 @@ class ThemeDescriptor: Serializable
         {
             _RotateBucket = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "RotateBucket")
+            ChangeNotice(Field: .RotateBucket)
         }
     }
     
@@ -1006,7 +1036,7 @@ class ThemeDescriptor: Serializable
         {
             _RotationDuration = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "RotationDuration")
+            ChangeNotice(Field: .RotationDuration)
         }
     }
     
@@ -1023,7 +1053,7 @@ class ThemeDescriptor: Serializable
         {
             _RotateBucketGrid = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "RotateBucketGrid")
+            ChangeNotice(Field: .RotateBucketGrid)
         }
     }
     
@@ -1040,7 +1070,7 @@ class ThemeDescriptor: Serializable
         {
             _FadeBucketGrid = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "FadeBucketGrid")
+            ChangeNotice(Field: .FadeBucketGrid)
         }
     }
     
@@ -1057,7 +1087,7 @@ class ThemeDescriptor: Serializable
         {
             _FadeBucketOutline = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "FadeBucketOutline")
+            ChangeNotice(Field: .FadeBucketOutline)
         }
     }
     
@@ -1074,7 +1104,7 @@ class ThemeDescriptor: Serializable
         {
             _ShowNextPiece = newValue
             _Dirty = true
-            ChangeNotice(FieldName: "ShowNextPiece")
+            ChangeNotice(Field: .ShowNextPiece)
         }
     }
     
@@ -1273,4 +1303,56 @@ enum BucketRotationTypes: String, CaseIterable
     case Right = "Right"
     case Left = "Left"
     case Random = "Random"
+}
+
+/// Theme fields used when fields are changed and subscribers are notified.
+/// - Note: Field name is used as cases for the enum. Refer to the function
+///         definition for the meaning/use fo the field.
+enum ThemeFields: String, CaseIterable
+{
+    case ShowBucketGrid = "ShowBucketGrid"
+    case ShowGrid = "ShowGrid"
+    case ShowBucketGridOutline = "ShowBucketGridOutline"
+    case BucketGridColor = "BucketGridColor"
+    case BucketGridOutlineColor = "BucketGridOutlineColor"
+    case BucketSpecularColor = "BucketSpecularColor"
+    case BucketDiffuseColor = "BucketDiffuseColor"
+    case IsOrthographic = "IsOrthographic"
+    case OrthographicScale = "OrthographicScale"
+    case CameraFieldOfView = "CameraFieldOfView"
+    case UseDefaultCamera = "UseDefaultCamera"
+    case CameraPosition = "CameraPosition"
+    case CameraOrientation = "CameraOrientation"
+    case ShowStatistics = "ShowStatistics"
+    case ShowBackgroundGrid = "ShowBackgroundGrid"
+    case CanControlCamera = "CanControlCamera"
+    case LightColor = "LightColor"
+    case LightType = "LightType"
+    case LightPosition = "LightPosition"
+    case LightIntensity = "LightIntensity"
+    case UseDefaultLighting = "UseDefaultLighting"
+    case AntialiasingMode = "AntialiasingMode"
+    case BackgroundType = "BackgroundType"
+    case BackgroundSolidColor = "BackgroundSolidColor"
+    case BackgroundSolidColorCycleTime = "BackgroundSolidColorCycleTime"
+    case BackgroundGradientColor = "BackgroundGradientColor"
+    case BackgroundGradientColorCycleTime = "BackgroundGradientColorCycleTime"
+    case BackgroundImageName = "BackgroundImageName"
+    case BackgroundImageFromCameraRoll = "BackgroundImageFromCameraRoll"
+    case BackgroundLiveImageCamera = "BackgroundLiveImageCamera"
+    case UseHapticFeedback = "UseHapticFeedback"
+    case AfterGameWaitDuration = "AfterGameWaitDuration"
+    case DestructionMethod = "DestructionMethod"
+    case DestructionDuration = "DestructionDuration"
+    case ShowAIActionsOnControls = "ShowAIActionsOnControls"
+    case StartWithAI = "StartWithAI"
+    case AISneakPeakCount = "AISneakPeakCount"
+    case GameType = "GameType"
+    case RotatingBucketDirection = "RotatingBucketDirection"
+    case RotateBucket = "RotateBucket"
+    case RotationDuration = "RotationDuration"
+    case RotateBucketGrid = "RotateBucketGrid"
+    case FadeBucketGrid = "FadeBucketGrid"
+    case FadeBucketOutline = "FadeBucketOutline"
+    case ShowNextPiece = "ShowNextPiece"
 }
