@@ -88,29 +88,12 @@ extension RawThemeViewerCode
         SettingsGroup.AddField(ID: UUID(), Title: "Auto-start wait duration",
                                Description: "How long to wait after start-up before attract mode starts on its own after initial start of game.",
                                ControlTitle: "Seconds", Default: 60.0 as Any,
-                               Starting: Settings.GetAutoStartDuration() as Any, FieldType: .Double, List: nil, Handler:
+                               Starting: Settings.GetAutoStartDuration() as Any, FieldType: .Double,
+                               List: nil, Handler:
             {
                 NewValue in
                 let NewDouble = NewValue as! Double
                 Settings.SetAutoStartDuration(ToNewValue: NewDouble)
-        })
-        SettingsGroup.AddField(ID: UUID(), Title: "Game over wait duration",
-                               Description: "How long to wait between game over and starting a new game in attract mode.",
-                               ControlTitle: "Seconds", Default: 15.0 as Any,
-                               Starting: Settings.GetAfterGameWaitDuration() as Any, FieldType: .Double, List: nil, Handler:
-            {
-                NewValue in
-                let NewDouble = NewValue as! Double
-                Settings.SetAfterGameWaitDuration(NewValue: NewDouble)
-        })
-        SettingsGroup.AddField(ID: UUID(), Title: "Start with AI",
-                               Description: "This setting appears to conflict with Auto-start wait duration. Will be remvoed.",
-                               ControlTitle: "Start with AI", Default: false as Any,
-                               Starting: Settings.GetStartWithAI() as Any, FieldType: .Bool, List: nil, Handler:
-            {
-                NewValue in
-                let NewBool = NewValue as! Bool
-                Settings.SetStartWithAI(Enabled: NewBool)
         })
         SettingsGroup.AddField(ID: UUID(), Title: "Maximum identical pieces",
                                Description: "The maximum number of identical pieces that can be randomly generated in a row.",
@@ -121,24 +104,6 @@ extension RawThemeViewerCode
                 NewValue in
                 let NewInt = NewValue as! Int
                 Settings.SetMaximumSamePieces(ToValue: NewInt)
-        })
-        SettingsGroup.AddField(ID: UUID(), Title: "Enable vibrations",
-                               Description: "Use vibrations for freeze events. Valid only for earlier devices.",
-                               ControlTitle: "Use vibrations", Default: false as Any,
-                               Starting: Settings.EnableVibrateFeedback() as Any, FieldType: .Bool, List: nil, Handler:
-            {
-                NewValue in
-                let NewBool = NewValue as! Bool
-                Settings.SetVibrateFeedback(Enable: NewBool)
-        })
-        SettingsGroup.AddField(ID: UUID(), Title: "Enable haptic feedback",
-                               Description: "Use haptic feedback for those devices that support it.",
-                               ControlTitle: "Haptic feedback", Default: false as Any,
-                               Starting: Settings.EnableHapticFeedback() as Any, FieldType: .Bool, List: nil, Handler:
-            {
-                NewValue in
-                let NewBool = NewValue as! Bool
-                Settings.SetHapticFeedback(Enable: NewBool)
         })
         SettingsGroup.AddField(ID: UUID(), Title: "Show alpha in color picker",
                                Description: "Enable setting alpha in the color picker.",
@@ -179,6 +144,16 @@ extension RawThemeViewerCode
                 NewValue in
                 let NewBool = NewValue as! Bool
                 self.UserTheme?.ShowAIActionsOnControls = NewBool
+        })
+        AIGroup.AddField(ID: UUID(), Title: "Game over wait duration",
+                         Description: "How long to wait between game over and starting a new game in attract mode.",
+                         ControlTitle: "Seconds", Default: 15.0 as Any,
+                         Starting: self.UserTheme!.AfterGameWaitDuration as Any, FieldType: .Double,
+                         List: nil, Handler:
+            {
+                NewValue in
+                let NewDouble = NewValue as! Double
+                self.UserTheme!.AfterGameWaitDuration = NewDouble
         })
         FieldTables.append(AIGroup)
         
@@ -227,14 +202,31 @@ extension RawThemeViewerCode
                 let NewDouble = NewValue as! Double
                 self.UserTheme?.DestructionDuration = NewDouble
         })
+        PlayGroup.AddField(ID: UUID(), Title: "Enable haptic feedback",
+                           Description: "Use haptic feedback for those devices that support it.",
+                           ControlTitle: "Haptic feedback", Default: false as Any,
+                           Starting: self.UserTheme!.UseHapticFeedback as Any, FieldType: .Bool, List: nil,
+                           Handler:
+            {
+                NewValue in
+                let NewBool = NewValue as! Bool
+                self.UserTheme!.UseHapticFeedback = NewBool
+        })
         FieldTables.append(PlayGroup)
         
         //Game view.
         let GameGroup = GroupData("Game View")
         GameGroup.AddField(ID: UUID(), Title: "Antialiasing mode",
                            Description: "The antialiasing mode for the game view. Anything higher than MultiSampling4X is ignored (not available on iOS).",
-                           ControlTitle: "", Default: "MultiSampling4X" as Any, Starting: "MultiSampling4X" as Any, FieldType: .StringList,
-                           List: GroupData.EnumListToStringList(AntialiasingModes.allCases), Handler: nil)
+                           ControlTitle: "", Default: "MultiSampling4X" as Any,
+                           Starting: "\(UserTheme!.AntialiasingMode)" as Any, FieldType: .StringList,
+                           List: GroupData.EnumListToStringList(AntialiasingModes.allCases), Handler:
+            {
+                NewValue in
+                let RawString = NewValue as! String
+                let NewMode = AntialiasingModes(rawValue: RawString)!
+                self.UserTheme!.AntialiasingMode = NewMode
+        })
         GameGroup.AddField(ID: UUID(), Title: "Field of view",
                            Description: "Field of view for the camera.",
                            ControlTitle: "Field of view", Default: 92.5 as Any, Starting: 92.5 as Any, FieldType: .Double,
@@ -246,12 +238,24 @@ extension RawThemeViewerCode
         })
         GameGroup.AddField(ID: UUID(), Title: "Camera position",
                            Description: "The position of the camera in the game view scene.",
-                           ControlTitle: "", Default: SCNVector3(-0.5, 2.0, 15.0) as Any, Starting: SCNVector3(-0.5, 2.0, 15.0) as Any,
-                           FieldType: .Vector3, List: nil, Handler: nil)
+                           ControlTitle: "", Default: SCNVector3(-0.5, 2.0, 15.0) as Any,
+                           Starting: self.UserTheme!.CameraPosition as Any,
+                           FieldType: .Vector3, List: nil, Handler:
+            {
+                NewValue in
+                let NewVector = NewValue as! SCNVector3
+                self.UserTheme!.CameraPosition = NewVector
+        })
         GameGroup.AddField(ID: UUID(), Title: "Camera orientation",
                            Description: "The orientation of the camera in the game view scene.",
-                           ControlTitle: "", Default: SCNVector4(0.0, 0.0, 0.0, 0.0) as Any, Starting: SCNVector4(0.0, 0.0, 0.0, 0.0) as Any,
-                           FieldType: .Vector4, List: nil, Handler: nil)
+                           ControlTitle: "", Default: SCNVector4(0.0, 0.0, 0.0, 0.0) as Any,
+                           Starting: self.UserTheme!.CameraOrientation as Any,
+                           FieldType: .Vector4, List: nil, Handler:
+            {
+                NewValue in
+                let NewVector = NewValue as! SCNVector4
+                self.UserTheme!.CameraOrientation = NewVector
+        })
         GameGroup.AddField(ID: UUID(), Title: "Orthographic projection",
                            Description: "Sets the camera to orthographic projection. If off, perspective projection is used.",
                            ControlTitle: "Use orthographic", Default: false as Any, Starting: self.UserTheme?.IsOrthographic as Any,
@@ -272,51 +276,98 @@ extension RawThemeViewerCode
         })
         GameGroup.AddField(ID: UUID(), Title: "Light color",
                            Description: "The color of the light.",
-                           ControlTitle: "", Default: UIColor.white as Any, Starting: UIColor.white as Any,
-                           FieldType: .Color, List: nil, Handler: nil)
+                           ControlTitle: "", Default: UIColor.white as Any,
+                           Starting: ColorServer.ColorFrom(UserTheme!.LightColor) as Any,
+                           FieldType: .Color, List: nil, Handler:
+            {
+                NewValue in
+                let RawColor = NewValue as! UIColor
+                let ColorName = ColorServer.MakeColorName(From: RawColor)
+                self.UserTheme!.LightColor = ColorName!
+        })
         GameGroup.AddField(ID: UUID(), Title: "Light type",
                            Description: "The type of light to use for the game view.",
-                           ControlTitle: "", Default: "Omni" as Any, Starting: "Omni" as Any,
+                           ControlTitle: "", Default: "omni" as Any,
+                           Starting: "\(UserTheme!.LightType)" as Any,
                            FieldType: .StringList, List: GroupData.EnumListToStringList(LightTypes.allCases),
-                           Handler: nil)
+                           Handler:
+            {
+                NewValue in
+                let RawValue = NewValue as! String
+                self.UserTheme!.LightType = SCNLight.LightType(rawValue: RawValue)
+        })
         GameGroup.AddField(ID: UUID(), Title: "Light position",
                            Description: "The position of the light in the game view scene.",
-                           ControlTitle: "", Default: SCNVector3(-5.0, 15.0, 40.0) as Any, Starting: SCNVector3(-5.0, 15.0, 40.0) as Any,
-                           FieldType: .Vector3, List: nil, Handler: nil)
+                           ControlTitle: "", Default: SCNVector3(-5.0, 15.0, 40.0) as Any,
+                           Starting: UserTheme!.LightPosition as Any,
+                           FieldType: .Vector3, List: nil, Handler:
+            {
+                NewValue in
+                let NewVector = NewValue as! SCNVector3
+                self.UserTheme!.LightPosition = NewVector
+        })
         FieldTables.append(GameGroup)
         
         let BGGroup = GroupData("Game Background")
         BGGroup.AddField(ID: UUID(), Title: "Game background",
                          Description: "How the background of the game looks and acts.",
-                         ControlTitle: "", Default: "Color" as Any, Starting: "Color" as Any, FieldType: .StringList,
-                         List: GroupData.EnumListToStringList(BackgroundTypes3D.allCases), Handler: nil)
+                         ControlTitle: "", Default: "Color" as Any,
+                         Starting: "\(UserTheme!.BackgroundType)" as Any, FieldType: .StringList,
+                         List: GroupData.EnumListToStringList(BackgroundTypes3D.allCases), Handler:
+            {
+                NewValue in
+                let RawValue = NewValue as! String
+                self.UserTheme!.BackgroundType = BackgroundTypes3D(rawValue: RawValue)!
+        })
         BGGroup.AddField(ID: UUID(), Title: "Game background color",
                          Description: "Solid color for the game background.",
-                         ControlTitle: "", Default: UIColor.red as Any, Starting: UIColor.red as Any, FieldType: .Color,
+                         ControlTitle: "", Default: UIColor.red as Any,
+                         Starting: ColorServer.ColorFrom(UserTheme!.BackgroundSolidColor) as Any, FieldType: .Color,
                          List: nil, Handler:
-                {
-                    NewValue in
-                    let NewColor = NewValue as! UIColor
-                    let NewColorName = ColorServer.MakeColorName(From: NewColor)
-                    self.UserTheme!.BackgroundSolidColor = NewColorName!
-                }
+            {
+                NewValue in
+                let NewColor = NewValue as! UIColor
+                let NewColorName = ColorServer.MakeColorName(From: NewColor)
+                self.UserTheme!.BackgroundSolidColor = NewColorName!
+        }
         )
         BGGroup.AddField(ID: UUID(), Title: "Solid color cycle time",
                          Description: "Time (in seconds) for the solid color background to cycle through 360° of hue. Set to 0 to disable.",
-                         ControlTitle: "Seconds", Default: 0.0 as Any, Starting: 0.0 as Any, FieldType: .Double,
-                         List: nil, Handler: nil)
+                         ControlTitle: "Seconds", Default: 0.0 as Any,
+                         Starting: UserTheme!.BackgroundSolidColorCycleTime as Any, FieldType: .Double,
+                         List: nil, Handler:
+            {
+                NewValue in
+                let Cycle = NewValue as! Double
+                self.UserTheme!.BackgroundSolidColorCycleTime = Cycle
+        })
         BGGroup.AddField(ID: UUID(), Title: "Gradient background",
                          Description: "The gradient to use as the game view background.", ControlTitle: "",
-                         Default: "(Red)@(0.0),(Black)@(1.0)" as Any, Starting: "(Red)@(0.0),(Black)@(1.0)" as Any,
-                         FieldType: .Gradient, List: nil, Handler: nil)
+                         Default: "(Red)@(0.0),(Black)@(1.0)" as Any,
+                         Starting: UserTheme!.BackgroundGradientColor as Any,
+                         FieldType: .Gradient, List: nil, Handler:
+            {
+                NewValue in
+                self.UserTheme!.BackgroundGradientColor = NewValue as! String
+        })
         BGGroup.AddField(ID: UUID(), Title: "Gradient cycle time",
                          Description: "Time (in seconds) for the colors in the gradient to cycle through 360° of hue. Set to 0 to disable.",
-                         ControlTitle: "", Default: 0.0 as Any, Starting: 0.0 as Any, FieldType: .Double,
-                         List: nil, Handler: nil)
+                         ControlTitle: "", Default: 0.0 as Any,
+                         Starting: UserTheme!.BackgroundGradientCycleTime as Any, FieldType: .Double,
+                         List: nil, Handler:
+            {
+                NewValue in
+                self.UserTheme!.BackgroundGradientCycleTime = NewValue as! Double
+        })
         BGGroup.AddField(ID: UUID(), Title: "Background image",
                          Description: "Image to use for the game view background.",
-                         ControlTitle: "", Default: "IMG_0004.JPG", Starting: "IMG_0004.JPG", FieldType: .Image,
-                         List: nil, Handler: nil)
+                         ControlTitle: "", Default: "IMG_0004.JPG",
+                         Starting: UserTheme!.BackgroundImageName, FieldType: .Image,
+                         List: nil, Handler:
+            {
+                NewValue in
+                self.UserTheme!.BackgroundImageName = NewValue as! String
+        })
         let DisableLiveView = UserDefaults.standard.bool(forKey: "RunningOnSimulator")
         var WarningTriggers: [String: String] = [String: String]()
         if UserDefaults.standard.bool(forKey: "RunningOnSimulator")
@@ -335,44 +386,93 @@ extension RawThemeViewerCode
         let BucketGroup = GroupData("Bucket")
         BucketGroup.AddField(ID: UUID(), Title: "Show bucket grid",
                              Description: "Shows a grid in the bucket sized to fit piece blocks.",
-                             ControlTitle: "Show grid", Default: true as Any, Starting: true as Any,
-                             FieldType: .Bool, List: nil, Handler: nil)
+                             ControlTitle: "Show grid", Default: true as Any,
+                             Starting: UserTheme!.ShowBucketGrid as Any,
+                             FieldType: .Bool, List: nil, Handler:
+            {
+                NewValue in
+                self.UserTheme!.ShowBucketGrid = NewValue as! Bool
+        })
         BucketGroup.AddField(ID: UUID(), Title: "Bucket grid color",
                              Description: "Color of the bucket grid (ignored if not showing)", ControlTitle: "",
-                             Default: UIColor.gray as Any, Starting: UIColor.gray as Any,
-                             FieldType: .Color, List: nil, Handler: nil)
+                             Default: UIColor.gray as Any,
+                             Starting: ColorServer.ColorFrom(UserTheme!.BucketGridColor) as Any,
+                             FieldType: .Color, List: nil, Handler:
+            {
+                NewValue in
+                let NewColor = NewValue as! UIColor
+                let NewName = ColorServer.MakeColorName(From: NewColor)
+                self.UserTheme!.BucketGridColor = NewName!
+        })
         BucketGroup.AddField(ID: UUID(), Title: "Show bucket grid outline",
                              Description: "Draw an outline around the bucket grid.", ControlTitle: "Grid outline",
-                             Default: true as Any, Starting: true as Any,
-                             FieldType: .Bool, List: nil, Handler: nil)
+                             Default: true as Any, Starting: UserTheme!.ShowBucketGridOutline as Any,
+                             FieldType: .Bool, List: nil, Handler:
+            {
+                NewValue in
+                self.UserTheme!.ShowBucketGridOutline = NewValue as! Bool
+        })
         BucketGroup.AddField(ID: UUID(), Title: "Outline color",
                              Description: "The color of the bucket grid outline (ignored if not showing)",
-                             ControlTitle: "", Default: UIColor.red as Any, Starting: UIColor.red as Any,
-                             FieldType: .Color, List: nil, Handler: nil)
+                             ControlTitle: "", Default: UIColor.red as Any,
+                             Starting: ColorServer.ColorFrom(UserTheme!.BucketGridOutlineColor) as Any,
+                             FieldType: .Color, List: nil, Handler:
+            {
+                NewValue in
+                let NewColor = NewValue as! UIColor
+                let NewName = ColorServer.MakeColorName(From: NewColor)
+                self.UserTheme!.BucketGridOutlineColor = NewName!
+        })
         BucketGroup.AddField(ID: UUID(), Title: "Rotate bucket between pieces",
                              Description: "Rotate the bucket (for certain games) between each piece.",
                              ControlTitle: "Rotate bucket", Default: true as Any,
-                             Starting: true as Any, FieldType: .Bool, List: nil, Handler: nil)
-        BucketGroup.AddField(ID: UUID(), Title: "Rotation durations",
+                             Starting: UserTheme!.RotateBucket as Any, FieldType: .Bool, List: nil, Handler:
+            {
+                NewValue in
+                self.UserTheme!.RotateBucket = NewValue as! Bool
+        })
+        BucketGroup.AddField(ID: UUID(), Title: "Rotation duration",
                              Description: "Duration of the rotation of the bucket for certain games.",
                              ControlTitle: "Seconds", Default: 0.25 as Any,
-                             Starting: 0.25 as Any, FieldType: .Double, List: nil, Handler: nil)
-        BucketGroup.AddField(ID: UUID(), Title: "Bucket rotates right",
-                             Description: "Set on to rotate the bucket right (clockwise) for rotations (for certain games).",
-                             ControlTitle: "Rotate right", Default: true as Any,
-                             Starting: true as Any, FieldType: .Bool, List: nil, Handler: nil)
+                             Starting: UserTheme!.RotationDuration as Any, FieldType: .Double, List: nil, Handler:
+            {
+                NewValue in
+                self.UserTheme!.RotationDuration = NewValue as! Double
+        })
+        BucketGroup.AddField(ID: UUID(), Title: "Bucket rotation direction",
+                             Description: "The rotation of the bucket when rotating (and for those games that support rotation).",
+                             ControlTitle: "", Default: "Right",
+                             Starting: "\(UserTheme!.RotatingBucketDirection)", FieldType: .StringList,
+                             List: GroupData.EnumListToStringList(BucketRotationTypes.allCases), Handler:
+            {
+                NewValue in
+                let RawValue = NewValue as! String
+                self.UserTheme!.RotatingBucketDirection = BucketRotationTypes(rawValue: RawValue)!
+        })
         BucketGroup.AddField(ID: UUID(), Title: "Rotate bucket grid",
                              Description: "Rotate the bucket's grid and outline along with the bucket when appropriate.",
                              ControlTitle: "Rotate grid", Default: true as Any,
-                             Starting: true as Any, FieldType: .Bool, List: nil, Handler: nil)
+                             Starting: UserTheme!.RotateBucketGrid as Any, FieldType: .Bool, List: nil, Handler:
+            {
+                NewValue in
+                self.UserTheme!.RotateBucketGrid = NewValue as! Bool
+        })
         BucketGroup.AddField(ID: UUID(), Title: "Fade bucket grid",
                              Description: "Fades the bucket grid soon after the game starts.", ControlTitle: "Fade bucket grid",
-                             Default: false as Any, Starting: false as Any,
-                             FieldType: .Bool, List: nil, Handler: nil)
+                             Default: false as Any, Starting: UserTheme!.FadeBucketGrid as Any,
+                             FieldType: .Bool, List: nil, Handler:
+            {
+                NewValue in
+                self.UserTheme!.FadeBucketGrid = NewValue as! Bool
+        })
         BucketGroup.AddField(ID: UUID(), Title: "Fade bucket outline",
                              Description: "Fades the bucket grid ouline soon after the game starts.", ControlTitle: "Fade grid outline",
-                             Default: false as Any, Starting: false as Any,
-                             FieldType: .Bool, List: nil, Handler: nil)
+                             Default: false as Any, Starting: UserTheme!.FadeBucketOutline as Any,
+                             FieldType: .Bool, List: nil, Handler:
+            {
+                NewValue in
+                self.UserTheme!.FadeBucketOutline = NewValue as! Bool
+        })
         FieldTables.append(BucketGroup)
     }
 }
