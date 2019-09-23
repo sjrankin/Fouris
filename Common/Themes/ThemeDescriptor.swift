@@ -128,8 +128,8 @@ class ThemeDescriptor: Serializable
                 _CameraFieldOfView = Double(Sanitized)!
             
             case "_UseDefaultCamera":
-            //Bool
-            _UseDefaultCamera = Bool(Value)!
+                //Bool
+                _UseDefaultCamera = Bool(Value)!
             
             case "_CameraPosition":
                 //{Three comma-separated doubles}
@@ -159,8 +159,8 @@ class ThemeDescriptor: Serializable
                 _LightType = SCNLight.LightType(rawValue: Value)
             
             case "_LightIntensity":
-            //Double
-            _LightIntensity = Double(Value)!
+                //Double
+                _LightIntensity = Double(Value)!
             
             case "_LightPosition":
                 //{Three comma-seperated doubles}
@@ -214,12 +214,36 @@ class ThemeDescriptor: Serializable
                 _UseHapticFeedback = Bool(Value)!
             
             case "_ShowBackgroundGrid":
-            //Bool
-            _ShowBackgroundGrid = Bool(Value)!
+                //Bool
+                _ShowBackgroundGrid = Bool(Value)!
             
             case "_ShowNextPiece":
-            //Bool
-            _ShowNextPiece = Bool(Value)!
+                //Bool
+                _ShowNextPiece = Bool(Value)!
+            
+            case "_RotatingBucketDirection":
+                //BucketRotationTypes
+                _RotatingBucketDirection = BucketRotationTypes(rawValue: Value)!
+            
+            case "_RotateBucket":
+                //Bool
+                _RotateBucket = Bool(Value)!
+            
+            case "_RotationDuration":
+                //Double
+                _RotationDuration = Double(Value)!
+            
+            case "_RotateBucketGrid":
+                //Bool
+                _RotateBucketGrid = Bool(Value)!
+            
+            case "_FadeBucketGrid":
+                //Bool
+                _FadeBucketGrid = Bool(Value)!
+            
+            case "_FadeBucketOutline":
+                //Bool
+                _FadeBucketOutline = Bool(Value)!
             
             default:
                 print("Encountered unexpected key (\(Key)) in ThemeDescriptor.Populate")
@@ -301,7 +325,9 @@ class ThemeDescriptor: Serializable
         }
     }
     
+    /// Holds the show bucket grid outline flag.
     private var _ShowBucketGridOutline: Bool = true
+    /// Get or set the show bucket grid outline flag.
     public var ShowBucketGridOutline: Bool
     {
         get
@@ -947,6 +973,91 @@ class ThemeDescriptor: Serializable
             _RotatingBucketDirection = newValue
             _Dirty = true
             ChangeNotice(FieldName: "RotatingBucketDirection")
+        }
+    }
+    
+    /// Holds the rotate bucket flag.
+    private var _RotateBucket: Bool = true
+    /// Get or set the rotate bucket flag.
+    public var RotateBucket: Bool
+    {
+        get
+        {
+            return _RotateBucket
+        }
+        set
+        {
+            _RotateBucket = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "RotateBucket")
+        }
+    }
+    
+    /// Holds the time to rotate the bucket.
+    private var _RotationDuration: Double = 0.3
+    /// Get or set the number of seconds to take to rotate the bucket.
+    public var RotationDuration: Double
+    {
+        get
+        {
+            return _RotationDuration
+        }
+        set
+        {
+            _RotationDuration = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "RotationDuration")
+        }
+    }
+    
+    /// Holds the rotate bucket grid along with the bucket flag.
+    private var _RotateBucketGrid: Bool = false
+    /// Get or set the rotate bucket grid with the bucket flag.
+    public var RotateBucketGrid: Bool
+    {
+        get
+        {
+            return _RotateBucketGrid
+        }
+        set
+        {
+            _RotateBucketGrid = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "RotateBucketGrid")
+        }
+    }
+    
+    /// Holds the fade bucket grid flag.
+    private var _FadeBucketGrid: Bool = false
+    /// Get or set the fade bucket grid flag.
+    public var FadeBucketGrid: Bool
+    {
+        get
+        {
+            return _FadeBucketGrid
+        }
+        set
+        {
+            _FadeBucketGrid = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "FadeBucketGrid")
+        }
+    }
+    
+    /// Holds the fade bucket outline flag.
+    private var _FadeBucketOutline: Bool = false
+    /// Get or set the fade bucket outline flag.
+    public var FadeBucketOutline: Bool
+    {
+        get
+        {
+            return _FadeBucketOutline
+        }
+        set
+        {
+            _FadeBucketOutline = newValue
+            _Dirty = true
+            ChangeNotice(FieldName: "FadeBucketOutline")
         }
     }
     
