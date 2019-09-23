@@ -123,6 +123,33 @@ extension RawThemeViewerCode
                 let NewBool = NewValue as! Bool
                 Settings.SetShowClosestColor(NewValue: NewBool)
         })
+        SettingsGroup.AddField(ID: UUID(), Title: "Show camera controls",
+                               Description: "Show or hide camera-related controls in the UI.",
+                               ControlTitle: "Show controls", Default: true as Any,
+                               Starting: Settings.GetShowCameraControls() as Any, FieldType: .Bool,
+                               List: nil, Handler:
+            {
+                NewValue in
+                Settings.SetShowCameraControls(NewValue: NewValue as! Bool)
+        })
+        SettingsGroup.AddField(ID: UUID(), Title: "Show top toolbar",
+                               Description: "Show or hide the top toolbar. Long press shows the menu if toolbar is not visible.",
+                               ControlTitle: "Show toolbar", Default: true as Any,
+                               Starting: Settings.GetShowTopToolbar() as Any, FieldType: .Bool,
+                               List: nil, Handler:
+            {
+                NewValue in
+                Settings.SetShowTopToolbar(NewValue: NewValue as! Bool)
+        })
+        SettingsGroup.AddField(ID: UUID(), Title: "Show motion controls",
+                               Description: "show or hide the bottom motion controls. If hidden, you must use gestures to move pieces.",
+                               ControlTitle: "Show motion controls", Default: true as Any,
+                               Starting: Settings.GetShowMotionControls() as Any, FieldType: .Bool,
+                               List: nil, Handler:
+            {
+                NewValue in
+                Settings.SetShowMotionControls(NewValue: NewValue as! Bool)
+        })
         FieldTables.append(SettingsGroup)
         
         //AI.
@@ -474,5 +501,21 @@ extension RawThemeViewerCode
                 self.UserTheme!.FadeBucketOutline = NewValue as! Bool
         })
         FieldTables.append(BucketGroup)
+        
+        let ResetGroup = GroupData("Reset")
+        let ResetField = GroupField(ID: UUID(), Title: "Reset settings",
+                                    Description: "Reset all settings in the program. You will lose your changes.",
+                                    ControlTitle: "Reset Settings",
+                                    Starting: false as Any, Default: false as Any, FieldType: .Action,
+                                    List: nil, Handler:
+            {
+                _ in
+                self.HandleResetButtonPressed()
+        }, DisableControl: false)
+        ResetField.ActionBorderColor = UIColor.red
+        ResetField.ActionButtonBackgroundColor = ColorServer.ColorFrom(ColorNames.CottonCandy)
+        ResetField.ActionButtonTextColor = ColorServer.ColorFrom(ColorNames.Maroon)
+        ResetGroup.AddField(ResetField)
+        FieldTables.append(ResetGroup)
     }
 }
