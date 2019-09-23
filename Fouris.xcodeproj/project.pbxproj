@@ -53,7 +53,6 @@
 		173B4B19231BA165007B22F6 /* RecentlyUsedColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173B4B18231BA165007B22F6 /* RecentlyUsedColors.swift */; };
 		173EF49923252FF600343302 /* IntraGridProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173EF49823252FF600343302 /* IntraGridProtocol.swift */; };
 		17477A6F231783C300AAEB14 /* Theming.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17477A6E231783C300AAEB14 /* Theming.storyboard */; };
-		17477A712317853C00AAEB14 /* ThemingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17477A702317853C00AAEB14 /* ThemingController.swift */; };
 		17477A732317891100AAEB14 /* ThemeEditorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17477A722317891100AAEB14 /* ThemeEditorController.swift */; };
 		17477A752317F1C200AAEB14 /* GameBackgroundDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17477A742317F1C200AAEB14 /* GameBackgroundDialog.swift */; };
 		17477A772317F7E800AAEB14 /* PieceSelectorDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17477A762317F7E800AAEB14 /* PieceSelectorDialog.swift */; };
@@ -271,7 +270,6 @@
 		173B4B18231BA165007B22F6 /* RecentlyUsedColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyUsedColors.swift; sourceTree = "<group>"; };
 		173EF49823252FF600343302 /* IntraGridProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntraGridProtocol.swift; sourceTree = "<group>"; };
 		17477A6E231783C300AAEB14 /* Theming.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Theming.storyboard; sourceTree = "<group>"; };
-		17477A702317853C00AAEB14 /* ThemingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemingController.swift; sourceTree = "<group>"; };
 		17477A722317891100AAEB14 /* ThemeEditorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeEditorController.swift; sourceTree = "<group>"; };
 		17477A742317F1C200AAEB14 /* GameBackgroundDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBackgroundDialog.swift; sourceTree = "<group>"; };
 		17477A762317F7E800AAEB14 /* PieceSelectorDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceSelectorDialog.swift; sourceTree = "<group>"; };
@@ -581,7 +579,6 @@
 				17616ACA23166CB000DFFEFE /* SelectGameController.swift */,
 				17A48E412327BC6900510EE6 /* GameSelectorProtocol.swift */,
 				17616ACC23166DF700DFFEFE /* GameStyleTableViewCell.swift */,
-				17477A702317853C00AAEB14 /* ThemingController.swift */,
 				17477A722317891100AAEB14 /* ThemeEditorController.swift */,
 				1704E301232130E900D7C158 /* ThemeEditingProtocol.swift */,
 			);
@@ -1266,7 +1263,6 @@
 				179C5E3023224E350003845B /* TileDescriptor.swift in Sources */,
 				17B4D2C622A4D1C700987BC5 /* LogicalLocation.swift in Sources */,
 				17660BEC2289995E00082E23 /* GameViewRequestProtocol.swift in Sources */,
-				17477A712317853C00AAEB14 /* ThemingController.swift in Sources */,
 				17E71A8322AD21D40081991E /* ClientCommands.swift in Sources */,
 				17376354230A87EE0050EB22 /* CATextLayer2.swift in Sources */,
 				1713735722EAE67700C9F9A7 /* SCNDodecahedron.swift in Sources */,
