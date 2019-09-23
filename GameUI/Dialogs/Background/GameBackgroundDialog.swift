@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class GameBackgroundDialog: UIViewController, ColorPickerProtocol, ThemeEditingProtocol
+class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPickerProtocol, ThemeEditingProtocol
 {
     weak var ThemeDelegate: ThemeEditingProtocol? = nil
     weak var ColorDelegate: ColorPickerProtocol? = nil
@@ -32,39 +32,41 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, ThemeEditingP
         ImageSample.layer.borderColor = ColorServer.CGColorFrom(ColorNames.Black)
         ImageSample.backgroundColor = ColorServer.ColorFrom(ColorNames.Black)
         ImageViewer.image = UIImage(named: "DefaultImage")
-        BackgroundType = GameBackgroundTypes(rawValue: Settings.GetGameBackgroundType())!
         
+        BackgroundType = UpdateBackgroundType(UserTheme!.BackgroundType)
+        BackgroundTypeSegment.selectedSegmentIndex = BackgroundTypeToIndexMap[BackgroundType]!
+        HandleBGChange(ToType: BackgroundType)
+        GradientSample.GradientDescriptor = UserTheme!.BackgroundGradientColor
+        if UserTheme!.BackgroundImageName.isEmpty
+        {
+            ImageViewer.image = UIImage(named: "DefaultImage")
+        }
+        else
+        {
+            ImageViewer.image = UIImage(named: UserTheme!.BackgroundImageName)
+        }
+        ColorSample.TopColor = ColorServer.ColorFrom(UserTheme!.BackgroundSolidColor)
+        if UserTheme!.BackgroundLiveImageCamera == .Front
+        {
+            LiveViewCameraSegment.selectedSegmentIndex = 0
+        }
+        else
+        {
+            LiveViewCameraSegment.selectedSegmentIndex = 1
+        }
         if UserDefaults.standard.bool(forKey: "RunningOnSimulator")
         {
-            if BackgroundType == .LiveView
-            {
-                BackgroundType = .SolidColor
-            }
             BackgroundTypeSegment.setEnabled(false, forSegmentAt: 3)
             LiveViewCameraSegment.isEnabled = false
             CameraText.isEnabled = false
             NotAvailableText.isHidden = false
-        }
-        else
-        {
-            NotAvailableText.isHidden = true
+            LiveViewTitle.isEnabled = false
         }
         
-        HandleBGChange(ToType: BackgroundType)
-        switch BackgroundType
-        {
-            case .SolidColor:
-                BackgroundTypeSegment.selectedSegmentIndex = 0
-            
-            case .GradientColor:
-                BackgroundTypeSegment.selectedSegmentIndex = 1
-            
-            case .Image:
-                BackgroundTypeSegment.selectedSegmentIndex = 2
-            
-            case .LiveView:
-                BackgroundTypeSegment.selectedSegmentIndex = 3
-        }
+        var IsVertical: Bool = false
+        var Reversed: Bool = false
+        _ = GradientManager.ParseGradient(UserTheme!.BackgroundGradientColor, Vertical: &IsVertical, Reverse: &Reversed)
+        VerticalGradientSwitch.isOn = IsVertical
     }
     
     func EditTheme(Theme: ThemeDescriptor, DefaultTheme: ThemeDescriptor)
@@ -79,7 +81,40 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, ThemeEditingP
         self.DefaultTheme = DefaultTheme
     }
     
+    func UpdateBackgroundType(_ BGType: BackgroundTypes3D) -> BackgroundTypes3D
+    {
+        switch BGType
+        {
+            case .LiveView:
+                if UserDefaults.standard.bool(forKey: "RunningOnSimulator")
+                {
+                    return .Color
+                }
+                return .LiveView
+            
+            case .CALayer:
+                return .Color
+            
+            case .Texture:
+                return .Image
+            
+            default:
+                return BGType
+        }
+    }
+    
+    private let BackgroundTypeToIndexMap: [BackgroundTypes3D: Int] =
+        [
+            .CALayer: -1,
+            .Texture: -1,
+            .Color: 0,
+            .Gradient: 1,
+            .Image: 2,
+            .LiveView: 3
+    ]
+    
     var UserTheme: ThemeDescriptor? = nil
+    
     var DefaultTheme: ThemeDescriptor? = nil
     
     func EditResults(_ Edited: Bool, ThemeID: UUID, PieceID: UUID?)  
@@ -90,18 +125,34 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, ThemeEditingP
     @IBAction func HandleBackgroundTypeChanged(_ sender: Any)
     {
         let BGType = BackgroundTypeSegment.selectedSegmentIndex
-        BackgroundType = GameBackgroundTypes(rawValue: BGType)!
+        switch BGType
+        {
+            case 0:
+                BackgroundType = .Color
+            
+            case 1:
+                BackgroundType = .Gradient
+            
+            case 2:
+                BackgroundType = .Image
+            
+            case 3:
+                BackgroundType = .LiveView
+            
+            default:
+                return
+        }
         Settings.SetGameBackgroundType(NewValue: BGType)
         HandleBGChange(ToType: BackgroundType)
     }
     
-    var BackgroundType: GameBackgroundTypes = .SolidColor
+    var BackgroundType: BackgroundTypes3D = .Color
     
-    func HandleBGChange(ToType: GameBackgroundTypes)
+    func HandleBGChange(ToType: BackgroundTypes3D)
     {
         switch ToType
         {
-            case .SolidColor:
+            case .Color:
                 SolidColorTitle.textColor = ColorServer.ColorFrom(ColorNames.Black)
                 GradientColorTitle.textColor = ColorServer.ColorFrom(ColorNames.DarkGray)
                 ImageTitle.textColor = ColorServer.ColorFrom(ColorNames.DarkGray)
@@ -114,8 +165,10 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, ThemeEditingP
                 GradientColorBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
                 ImageBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
                 LiveViewBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
+                VerticalGradientLabel.isEnabled = false
+                VerticalGradientSwitch.isEnabled = false
             
-            case .GradientColor:
+            case .Gradient:
                 SolidColorTitle.textColor = ColorServer.ColorFrom(ColorNames.DarkGray)
                 GradientColorTitle.textColor = ColorServer.ColorFrom(ColorNames.Black)
                 ImageTitle.textColor = ColorServer.ColorFrom(ColorNames.DarkGray)
@@ -128,6 +181,8 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, ThemeEditingP
                 GradientColorBox.backgroundColor = ColorServer.ColorFrom(ColorNames.White)
                 ImageBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
                 LiveViewBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
+                VerticalGradientLabel.isEnabled = true
+                VerticalGradientSwitch.isEnabled = true
             
             case .Image:
                 SolidColorTitle.textColor = ColorServer.ColorFrom(ColorNames.DarkGray)
@@ -142,6 +197,8 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, ThemeEditingP
                 GradientColorBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
                 ImageBox.backgroundColor = ColorServer.ColorFrom(ColorNames.White)
                 LiveViewBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
+                VerticalGradientLabel.isEnabled = false
+                VerticalGradientSwitch.isEnabled = false
             
             case .LiveView:
                 SolidColorTitle.textColor = ColorServer.ColorFrom(ColorNames.DarkGray)
@@ -156,6 +213,11 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, ThemeEditingP
                 GradientColorBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
                 ImageBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
                 LiveViewBox.backgroundColor = ColorServer.ColorFrom(ColorNames.White)
+                VerticalGradientLabel.isEnabled = false
+                VerticalGradientSwitch.isEnabled = false
+            
+            default:
+                break
         }
     }
     
@@ -185,13 +247,16 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, ThemeEditingP
     {
         let ColorPicker = ColorPickerCode(coder: coder)
         ColorPicker?.ColorDelegate = self
-        ColorPicker?.ColorToEdit(UIColor.green, Tag: "SolidColorPicker")
+        let EditMe = ColorServer.ColorFrom(UserTheme!.BackgroundSolidColor)
+        ColorPicker?.ColorToEdit(EditMe, Tag: "SolidColorPicker")
         return ColorPicker
     }
     
     @IBSegueAction func InstantiateGradientEditor(_ coder: NSCoder) -> GradientEditorCode?
     {
         let GradientEditor = GradientEditorCode(coder: coder)
+        GradientEditor?.GradientDelegate = self
+        GradientEditor?.GradientToEdit(UserTheme!.BackgroundGradientColor, Tag: "GradientColorPicker")
         return GradientEditor
     }
     
@@ -202,17 +267,65 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, ThemeEditingP
     
     func EditedColor(_ Edited: UIColor?, Tag: Any?)
     {
+        if let RawTag = Tag as? String
+        {
+            if RawTag == "SolidColorPicker"
+            {
+                if let FinalColor = Edited
+                {
+                    ColorSample.TopColor = FinalColor
+                    UserTheme!.BackgroundSolidColor = ColorServer.MakeColorName(From: FinalColor)!
+                }
+            }
+        }
     }
     
-    @IBAction func HandleOKPressed(_ sender: Any)
+    // MARK: Gradient protocol functions.
+    
+    func EditedGradient(_ Edited: String?, Tag: Any?)
+    {
+        if let RawTag = Tag as? String
+        {
+            if RawTag == "GradientColorPicker"
+            {
+                let IsVertical = VerticalGradientSwitch.isOn
+                let Final = ForceVerticalGradient(Edited!, VerticalFlag: IsVertical)
+                GradientSample.GradientDescriptor = Final
+                UserTheme!.BackgroundGradientColor = Final
+            }
+        }
+    }
+    
+    func ForceVerticalGradient(_ RawGradient: String, VerticalFlag: Bool) -> String
+    {
+        var NotUsed: Bool = false
+        var Reversed: Bool = false
+        let Stops = GradientManager.ParseGradient(RawGradient, Vertical: &NotUsed, Reverse: &Reversed)
+        let Final = GradientManager.AssembleGradient(Stops, IsVertical: VerticalFlag, Reverse: Reversed)
+        return Final
+    }
+    
+    @IBAction func HandleVerticalSwitchChanged(_ sender: Any)
+    {
+        let VerticalSwitch = VerticalGradientSwitch.isOn
+        let Final = ForceVerticalGradient(UserTheme!.BackgroundGradientColor, VerticalFlag: VerticalSwitch)
+        UserTheme!.BackgroundGradientColor = Final
+        GradientSample.GradientDescriptor = Final
+    }
+    
+    func GradientToEdit(_ Edited: String?, Tag: Any?)
+    {
+        //Not used in this class.
+    }
+    
+    func SetStop(StopColorIndex: Int)
+    {
+        //Not used in this class.
+    }
+    
+    @IBAction func HandleClosePressed(_ sender: Any)
     {
         ThemeDelegate?.EditResults(true, ThemeID: UserTheme!.ID, PieceID: nil)
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func HandleCancelPressed(_ sender: Any)
-    {
-        ThemeDelegate?.EditResults(false, ThemeID: UserTheme!.ID, PieceID: nil)
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -226,24 +339,14 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, ThemeEditingP
     @IBOutlet weak var SelectImageButton: UIButton!
     @IBOutlet weak var SelectGradientButton: UIButton!
     @IBOutlet weak var SelectColorButton: UIButton!
-    @IBOutlet weak var ColorSample: UIView!
-    @IBOutlet weak var GradientSample: UIView!
+    @IBOutlet weak var ColorSample: ColorSwatchColor!
+    @IBOutlet weak var GradientSample: GradientSwatch!
     @IBOutlet weak var ImageSample: UIView!
     @IBOutlet weak var ImageBox: UIView!
     @IBOutlet weak var LiveViewBox: UIView!
     @IBOutlet weak var GradientColorBox: UIView!
     @IBOutlet weak var SolidColorBox: UIView!
+    @IBOutlet weak var VerticalGradientLabel: UILabel!
+    @IBOutlet weak var VerticalGradientSwitch: UISwitch!
 }
 
-/// Background types for games.
-/// - **SolidColor**: Solid color values.
-/// - **GradientColor**: Gradent colors.
-/// - **Image**: Images from the user.
-/// - **LiveView**: Live view from the camera. If camera not available, this option is invalid.
-enum GameBackgroundTypes: Int, CaseIterable
-{
-    case SolidColor = 0
-    case GradientColor = 1
-    case Image = 2
-    case LiveView = 3
-}
