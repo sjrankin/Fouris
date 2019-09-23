@@ -106,6 +106,16 @@ class GroupField
     /// (the value to the item key) will be displayed.
     public var WarningTriggers: [String: String] = [String: String]()
     
+    /// Disable control flag.
     public var DisableControl: Bool!
+    
+    /// Border color for the action view.
+    public var ActionBorderColor: UIColor = UIColor.clear
+    
+    /// Text color for the action button.
+    public var ActionButtonTextColor: UIColor = UIColor.systemBlue
+    
+    /// Background color for the action button.
+    public var ActionButtonBackgroundColor = UIColor.clear
 }
 
