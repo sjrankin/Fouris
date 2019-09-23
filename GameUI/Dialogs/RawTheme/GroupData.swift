@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SceneKit
 
 /// Holds groups of data for the raw theme viewer.
 class GroupData
@@ -95,6 +96,57 @@ class GroupData
             result.append("\(ListItem)")
         }
         return result
+    }
+    
+    /// Takes the double values in three text fields and returns an SCNVector3 value.
+    /// - Parameter XBox: X value text field.
+    /// - Parameter YBox: Y value text field.
+        /// - Parameter ZBox: Z value text field.
+    /// - Returns: SCNVector3 value based on the text fields. Nil if any text field has invalid data.
+    public static func AssembleVector3(XBox: UITextField, YBox: UITextField, ZBox: UITextField) -> SCNVector3?
+    {
+        let XRaw = XBox.text
+        let YRaw = YBox.text
+        let ZRaw = ZBox.text
+        if XRaw == nil || YRaw == nil || ZRaw == nil
+        {
+            return nil
+        }
+        let XVal = Double(XRaw!)
+        let YVal = Double(YRaw!)
+        let ZVal = Double(ZRaw!)
+        if XVal == nil || YVal == nil || ZVal == nil
+        {
+            return nil
+        }
+        return SCNVector3(XVal!, YVal!, ZVal!)
+    }
+    
+    /// Takes the double values in four text fields and returns an SCNVector4 value.
+    /// - Parameter XBox: X value text field.
+    /// - Parameter YBox: Y value text field.
+    /// - Parameter ZBox: Z value text field.
+    /// - Parameter WBox: W value text field.
+    /// - Returns: SCNVector4 value based on the text fields. Nil if any text field has invalid data.
+    public static func AssembleVector4(XBox: UITextField, YBox: UITextField, ZBox: UITextField, WBox: UITextField) -> SCNVector4?
+    {
+        let XRaw = XBox.text
+        let YRaw = YBox.text
+        let ZRaw = ZBox.text
+        let WRaw = WBox.text
+        if XRaw == nil || YRaw == nil || ZRaw == nil || WRaw == nil
+        {
+            return nil
+        }
+        let XVal = Double(XRaw!)
+        let YVal = Double(YRaw!)
+        let ZVal = Double(ZRaw!)
+        let WVal = Double(WRaw!)
+        if XVal == nil || YVal == nil || ZVal == nil || WVal == nil
+        {
+            return nil
+        }
+        return SCNVector4(XVal!, YVal!, ZVal!, WVal!)
     }
 }
 
