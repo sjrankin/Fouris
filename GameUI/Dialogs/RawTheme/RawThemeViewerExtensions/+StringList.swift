@@ -13,6 +13,7 @@ extension RawThemeViewerCode
 {
     func PopulateStringListView(WithField: GroupField)
     {
+        CurrentPickedString = nil
         WarningBox.alpha = 0.0
         WarningLabel.alpha = 0.0
         StringListPicker.isUserInteractionEnabled = !WithField.DisableControl 
