@@ -124,6 +124,7 @@ class MainViewController: UIViewController,
         LevelManager.Initialize()
         Themes = ThemeManager()
         Themes.Initialize()
+        UserTheme = Themes.UserTheme
         Themes.SubscribeToChanges(Subscriber: "MainViewController", SubscribingObject: self)
         PieceVisualManager.Initialize()
         RecentlyUsedColors.Initialize(WithLimit: Settings.GetMostRecentlyUsedColorListCapacity())
@@ -137,6 +138,8 @@ class MainViewController: UIViewController,
         
         Stepper.Delegate = self
     }
+    
+    var UserTheme: ThemeDescriptor? = nil
     
     /// If the view is disappearing, save data as it may not come back.
     /// - Parameter animated: Passed to the super class.
@@ -2013,9 +2016,22 @@ class MainViewController: UIViewController,
     
     // MARK: Theme update protocol functions.
     
-    func ThemeUpdated(ThemeName: String, FieldName: String)
+    /// Handle theme change notifications.
+    /// - Note:
+    ///    - This version of Fouris only supports a default theme and a user theme. Only the user theme reports changes at this time.
+    ///    - By the time control gets here, the changed property can be accessed to get its new value.
+    /// - Parameter ThemeName: The name of the theme in which a field changed.
+    /// - Parameter Field: The field that changed
+    func ThemeUpdated(ThemeName: String, Field: ThemeFields)
     {
-        print("Theme \(ThemeName) updated field \(FieldName)")
+        switch Field
+        {
+            case .BackgroundSolidColor:
+                print("New \(Field) value is \(UserTheme!.BackgroundSolidColor)")
+            
+            default:
+            print("Theme \(ThemeName) updated field \(Field)")
+        }
     }
     
     // MARK: Variables used by +MainSlideInUI from within extensions.
@@ -2025,15 +2041,6 @@ class MainViewController: UIViewController,
     
     /// The first time the slider came into view flag. Used in **+MainSliderUI.swift**.
     var FirstSlideIn: Bool = true
-    
-    let CommandIDs: [SlideInCommands: UUID] =
-        [
-            .NoCommand: UUID.Empty,
-            .AboutCommand: UUID(uuidString: "c1f857db-38cd-4aed-a50b-7392cb7453b5")!,
-            .SelectGameCommand: UUID(uuidString: "a1ec3bc6-1541-47fb-91b3-03ab49f4bbaa")!,
-            .SettingsCommand: UUID(uuidString: "e056c81c-1ca2-4249-b025-aed6ccafc81d")!,
-            .ThemeCommand: UUID(uuidString: "1b145c9d-d6b7-4576-96cb-6b4f5508b2ab")!
-    ]
     
     // MARK: Variables used by TDebug from within extensions.
     
