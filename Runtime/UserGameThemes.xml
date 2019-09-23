@@ -23,6 +23,12 @@
     <Property Name="_BucketSpecularColor" Value="White"/>
     <Property Name="_ShowBucketGrid" Value="true"/>
     <Property Name="_ShowBucketGridOutline" Value="true"/>
+    <Property Name="_RotateBucket" Value="true"/>
+    <Property Name="_RotatingBucketDirection" Value="Right"/>
+    <Property Name="_RotationDuration" Value="0.3"/>
+    <Property Name="_RotateBucketGrid" Value="false"/>
+    <Property Name="_FadeBucketGrid" Value="false"/>
+    <Property Name="_FadeBucketOutline" Value="false"/>
     <Property Name="_BucketGridColor" Value="Gray"/>
     <Property Name="_BuketGridOutlineColor" Value="Red"/>
     <Property Name="_BackgroundType" Value="Color"/>
@@ -32,14 +38,12 @@
     <Property Name="_BackgroundGradientCycleTime" Value="0"/>
     <Property Name="_BackgroundImageName" Value="SampleImage.jpg"/>
     <Property Name="_BackgroundImageFromCameraRoll" Value="true"/>
-    <Property Name="_RotatingBucketDirection" Value="Right"/>
     <Property Name="_BackgroundLiveImageCamera" Value="Rear"/>
     <Property Name="_DestructionMethod" Value="Shrink"/>
     <Property Name="_DestructionDuration" Value="1.25"/>
     <Property Name="_UseHapticFeedback" Value="false"/>
     <Property Name="_ShowAIActionsOnControls" Value="true"/>
     <Property Name="_AISneakPeakCount" Value="1"/>
-    <Property Name="_StartWithAI" Value="false"/>
     <Property Name="_AfterGameWaitDuration" Value="15"/>
     <Property Name="_ShowNextPiece" Value="true"/>
     <Property Name="_IsOrthographic" Value="false"/>
