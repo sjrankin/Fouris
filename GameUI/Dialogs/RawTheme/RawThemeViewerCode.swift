@@ -42,6 +42,7 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
         DetailViews.append(GradientView)
         DetailViews.append(ImageView)
         DetailViews.append(StringListView)
+        DetailViews.append(ActionView)
         InitializeViews()
         PopulateFields()
         InitializeColorSwatch()
@@ -123,6 +124,9 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
             
             case .Image:
                 NewView = ImageView
+            
+            case .Action:
+                NewView = ActionView
         }
         
         UIView.animate(withDuration: 0.1, animations:
@@ -186,6 +190,9 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
             
             case .Vector4:
                 return Vector4View
+            
+            case .Action:
+                return ActionView
         }
     }
     
@@ -225,6 +232,9 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
                 case .Gradient:
                     PopulateGradientView(WithField: Field)
                 
+                case .Action:
+                    PopulateActionView(WithField: Field)
+                
                 case .none:
                     break
             }
@@ -259,7 +269,35 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     
     // MARK: Table view functions.
     
-
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
+    {
+        let View = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 35.0))
+        let Header = UILabel(frame: CGRect(x: 10, y: 0, width: tableView.bounds.size.width - 20, height: 35))
+        Header.font = UIFont.systemFont(ofSize: 18.0, weight: UIFont.Weight.bold)
+        if FieldTables[section].HeaderTitle == "Reset"
+        {
+            View.layer.backgroundColor = ColorServer.CGColorFrom(ColorNames.Maroon)
+            Header.textColor = UIColor.yellow
+        }
+        else
+        {
+            View.layer.backgroundColor = UIColor.black.cgColor
+            Header.textColor = UIColor.white
+        }
+        Header.text = FieldTables[section].HeaderTitle
+        View.addSubview(Header)
+        return View
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
+    {
+        return 35.0
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat
+    {
+        return 0.0
+    }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
     {
@@ -476,6 +514,7 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func BoolApplyPressed(_ sender: Any)
     {
         BoolViewDirty.alpha = 0.0
+        CurrentField?.Handler!(BoolSwitch.isOn as Any)
     }
     
     @IBAction func BoolSwitchChanged(_ sender: Any)
@@ -494,6 +533,10 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func StringListApplyPressed(_ sender: Any)
     {
         StringListViewDirty.alpha = 0.0
+        if let CurrentItem = CurrentPickedString
+        {
+            CurrentField?.Handler!(CurrentItem as Any)
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, forComponent component: Int)
@@ -512,6 +555,8 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    var CurrentPickedString: String? = nil
+    
     var StringListData: [String] = [String]()
     
     // MARK: Image button handling.
@@ -524,6 +569,7 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func ImageApplyPressed(_ sender: Any)
     {
         ImageViewDirty.alpha = 0.0
+        CurrentField?.Handler!("" as Any)
     }
     
     @IBAction func ImageDefaultPressed(_ sender: Any)
@@ -563,11 +609,35 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    // MARK: Action button handling.
+    
+    @IBAction func HandleActionButtonPressed(_ sender: Any)
+    {
+        CurrentField?.Handler!("" as Any)
+    }
+    
+    func HandleResetButtonPressed()
+    {
+        let Alert = UIAlertController(title: "Reset Settings?",
+                                      message: "Do you really want to reset all settings to their default values? You will lose your settings.",
+                                      preferredStyle: UIAlertController.Style.alert)
+        Alert.addAction(UIAlertAction(title: "Reset", style: UIAlertAction.Style.destructive, handler: DoResetAllSettings))
+        Alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        self.present(Alert, animated: true, completion: nil)
+    }
+    
+    @objc func DoResetAllSettings(Action: UIAlertAction)
+    {
+        ActionResults.alpha = 1.0
+        ActionResults.text = "Nothing yet!"
+    }
+    
     // MARK: Gradient button handling.
     
     @IBAction func GradientApplyPressed(_ sender: Any)
     {
         GradientViewDirty.alpha = 0.0
+        CurrentField?.Handler!(GradientViewer.GradientDescriptor as Any)
     }
     
     @IBAction func GradientDefaultPressed(_ sender: Any)
@@ -580,6 +650,9 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func ColorApplyPressed(_ sender: Any)
     {
         ColorViewDirty.alpha = 0.0
+        let Color = ColorSwatch.TopColor
+        let ColorName = ColorServer.MakeColorName(From: Color)
+        CurrentField?.Handler!(ColorName as Any)
     }
     
     @IBAction func ColorDefaultPressed(_ sender: Any)
@@ -592,6 +665,13 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func DoubleApplyPressed(_ sender: Any)
     {
         DoubleViewDirty.alpha = 0.0
+        if let DoubleString = DoubleTextBox.text
+        {
+            if let DoubleValue = Double(DoubleString)
+            {
+                CurrentField?.Handler!(DoubleValue as Any)
+            }
+        }
     }
     
     @IBAction func DoubleDefaultPressed(_ sender: Any)
@@ -604,6 +684,13 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func IntApplyPressed(_ sender: Any)
     {
         IntViewDirty.alpha = 0.0
+        if let IntString = IntTextBox.text
+        {
+            if let IntValue = Double(IntString)
+            {
+                CurrentField?.Handler!(IntValue as Any)
+            }
+        }
     }
     
     @IBAction func IntDefaultPressed(_ sender: Any)
@@ -616,6 +703,7 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func StringApplyPressed(_ sender: Any)
     {
         StringViewDirty.alpha = 0.0
+        CurrentField?.Handler!(StringTextBox as Any)
     }
     
     @IBAction func StringDefaultPressed(_ sender: Any)
@@ -627,6 +715,10 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func Vector3ApplyPressed(_ sender: Any)
     {
+        if let Vector = GroupData.AssembleVector3(XBox: Vector3XBox, YBox: Vector3YBox, ZBox: Vector3ZBox)
+        {
+            CurrentField?.Handler!(Vector as Any)
+        }
         Vector3ViewDirty.alpha = 0.0
     }
     
@@ -639,6 +731,10 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func Vector4ApplyPressed(_ sender: Any)
     {
+        if let Vector = GroupData.AssembleVector4(XBox: Vector4XBox, YBox: Vector4YBox, ZBox: Vector4ZBox, WBox: Vector4WBox)
+        {
+            CurrentField?.Handler!(Vector as Any)
+        }
         Vector4ViewDirty.alpha = 0.0
     }
     
@@ -663,6 +759,7 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var StringView: UIView!
     @IBOutlet weak var BoolView: UIView!
     @IBOutlet weak var StartingView: UIView!
+    @IBOutlet weak var ActionView: UIView!
     
     // MARK: Color view controls.
     @IBOutlet weak var ColorSwatch: ColorSwatchColor!
@@ -738,4 +835,10 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var BoolControlTitle: UILabel!
     @IBOutlet weak var BoolSwitch: UISwitch!
     @IBOutlet weak var BoolViewDirty: UIImageView!
+    
+    // MARK: Action view controls.
+    @IBOutlet weak var ActionResults: UILabel!
+    @IBOutlet weak var ActionButton: UIButton!
+    @IBOutlet weak var ActionDescription: UILabel!
+    @IBOutlet weak var ActionTitle: UILabel!
 }
