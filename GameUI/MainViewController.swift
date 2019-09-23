@@ -1672,8 +1672,9 @@ class MainViewController: UIViewController,
         MainSlideIn.HideMainSlideIn()
         UpdateMainButton(false)
         let Storyboard = UIStoryboard(name: "Theming", bundle: nil)
-        if let Controller = Storyboard.instantiateViewController(withIdentifier: "ThemingHome") as? ThemingController
+        if let Controller = Storyboard.instantiateViewController(withIdentifier: "MainThemeEditor") as? ThemeEditorController
         {
+            Controller.EditTheme(Theme: Themes!.UserTheme, DefaultTheme: Themes!.DefaultTheme)
             self.present(Controller, animated: true, completion: nil)
         }
     }
