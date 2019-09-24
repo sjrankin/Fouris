@@ -2026,9 +2026,6 @@ class MainViewController: UIViewController,
     {
         switch Field
         {
-            case .BackgroundSolidColor:
-                print("New \(Field) value is \(UserTheme!.BackgroundSolidColor)")
-            
             default:
             print("Theme \(ThemeName) updated field \(Field)")
         }
