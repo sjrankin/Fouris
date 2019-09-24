@@ -13,7 +13,7 @@ import UIKit
 protocol ThemeChangeProtocol: class
 {
     /// Called when a theme is changed by setting a property.
-    /// - Parameter ThemeName: The name of the theme that changed.
+    /// - Parameter Theme: The theme that changed.
     /// - Parameter Field: The field that changed.
-    func ThemeChanged(ThemeName: String, Field: ThemeFields)
+    func ThemeChanged(Theme: ThemeDescriptor, Field: ThemeFields)
 }
