@@ -26,7 +26,7 @@ class ThemeDescriptor: Serializable
     /// - Parameter: The field that changed.
     func ChangeNotice(Field: ThemeFields)
     {
-        ChangeDelegate?.ThemeChanged(ThemeName: ThemeName, Field: Field)
+        ChangeDelegate?.ThemeChanged(Theme: self, Field: Field)
     }
     
     /// Holds the dirty flag. Used by user-defined themes.
@@ -151,8 +151,8 @@ class ThemeDescriptor: Serializable
                 _LightColor = Value
             
             case "_LightType":
-                //SCNLight.LightType
-                _LightType = SCNLight.LightType(rawValue: Value)
+                //GameLights
+                _LightType = GameLights(rawValue: Value)!
             
             case "_LightIntensity":
                 //Double
@@ -274,6 +274,18 @@ class ThemeDescriptor: Serializable
             case "_BackgroundLiveImageCamera":
                 //CameraLocations
                 _BackgroundLiveImageCamera = CameraLocations(rawValue: Sanitized)!
+            
+            case "_MinimumVersion":
+                //Int
+                _MinimumVersion = Int(Value)!
+            
+            case "_MinimumBuild":
+                //Int
+                _MinimumBuild = Int(Value)!
+            
+            case "_AutoStartDuration":
+                //Double
+                _AutoStartDuration = Double(Value)!
             
             default:
                 print("Encountered unexpected key (\(Key)) in ThemeDescriptor.Populate")
@@ -620,9 +632,9 @@ class ThemeDescriptor: Serializable
     }
     
     /// Holds the type of the light.
-    private var _LightType: SCNLight.LightType = .ambient
+    private var _LightType: GameLights = .omni
     /// Get or set the type of the light.
-    public var LightType: SCNLight.LightType
+    public var LightType: GameLights
     {
         get
         {
@@ -884,6 +896,23 @@ class ThemeDescriptor: Serializable
         }
     }
     
+    /// Holds the auto start duration.
+    private var _AutoStartDuration: Double = 60.0
+    /// Get or set the length of time (in seconds) from game start to running a game in attract/AI mode.
+    public var AutoStartDuration: Double
+    {
+        get
+        {
+            return _AutoStartDuration
+        }
+        set
+        {
+            _AutoStartDuration = newValue
+            _Dirty = true
+            ChangeNotice(Field: .AutoStartDuration)
+        }
+    }
+    
     /// Holds the method type to clear the bucket of blocks.
     private var _DestructionMethod: DestructionMethods = .Shrink
     /// Get or set the method type used to clear the bucket of blocks.
@@ -1110,6 +1139,40 @@ class ThemeDescriptor: Serializable
     
     // MARK: General descriptor properties.
     
+    /// Holds the minimum version number this theme is valid for.
+    private var _MinimumVersion: Int = 0
+    /// Get or set the minimum version number of Fouris that is needed to support this theme.
+    public var MinimumVersion: Int
+    {
+        get
+        {
+            return _MinimumVersion
+        }
+        set
+        {
+            _MinimumVersion = newValue
+            _Dirty = true
+            ChangeNotice(Field: .MinimumVersion)
+        }
+    }
+    
+    /// Holds the minimum build number this theme is valid for.
+    private var _MinimumBuild: Int = 0
+    /// Get or set the minimum build number of Fouris that is needed to support this theme.
+    public var MinimumBuild: Int
+    {
+        get
+        {
+            return _MinimumBuild
+        }
+        set
+        {
+            _MinimumBuild = newValue
+            _Dirty = true
+            ChangeNotice(Field: .MinimumBuild)
+        }
+    }
+    
     /// Holds the name of the theme (different from the title).
     private var _ThemeName: String = ""
     /// Get or set the name of the theme. This is different from the title and can be considered a "short theme name".
@@ -1205,6 +1268,35 @@ class ThemeDescriptor: Serializable
         }
     }
     
+    /// Returns the file name (from **FileName**) as two parts - the name itself and the extension.
+    /// - Returns: Tuple with file name parts.
+    public func FileNameParts() -> (Name: String, Extension: String)
+    {
+        let Parts = FileName.split(separator: ".")
+        if Parts.count != 2
+        {
+            return ("", "")
+        }
+        return (Name: String(Parts[0]), Extension: "." + String(Parts[1]))
+    }
+    
+    /// Holds the save after edit flag.
+    private var _SaveAfterEdit: Bool = true
+    /// Get or set the save after edit flag.
+    /// - Note: If this property is true, the theme is saved after every edit/change made to a property (provided
+    ///         the dirty flag is true, which should be the case).
+    public var SaveAfterEdit: Bool
+    {
+        get
+        {
+            return _SaveAfterEdit
+        }
+        set
+        {
+            _SaveAfterEdit = newValue
+        }
+    }
+    
     // MARK: Tile lists and list handling.
     
     /// Creates and returns a new tile descriptor class.
@@ -1292,6 +1384,19 @@ enum AntialiasingModes: String, CaseIterable
     case Multisampling16X = "Multisampling16X"
 }
 
+/// Game light types.
+/// - **omni**: Omni light.
+/// - **spot**: Spot light.
+/// - **directional**: Directional light.
+/// - **ambient**: Ambient light.
+enum GameLights: String, CaseIterable
+{
+    case omni = "omni"
+    case spot = "spot"
+    case directional = "directional"
+    case ambient = "ambient"
+}
+
 /// Rotation direction/types.
 /// - **None**: No rotation.
 /// - **Right**: Rotate right (clockwise).
@@ -1355,4 +1460,7 @@ enum ThemeFields: String, CaseIterable
     case FadeBucketGrid = "FadeBucketGrid"
     case FadeBucketOutline = "FadeBucketOutline"
     case ShowNextPiece = "ShowNextPiece"
+    case MinimumVersion = "MinimumVersion"
+    case MinimumBuild = "MinimumBuild"
+    case AutoStartDuration = "AutoStartDuration"
 }
