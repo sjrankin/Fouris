@@ -19,12 +19,12 @@ class Serializer
     // MARK: Serialization functions.
     
     /// Encode a `Serializable` object into an XML fragment.
-    ///
     /// - Notes:
-    ///   - This is not a general purpose encoder - it is tuned for themes for Wacky Tetris.
-    ///   - [Reference 1](https://gist.github.com/natecook1000/4ee3ee560000062b1ace)
-    ///   - [Reference 2](http://ericasadun.com/2014/06/24/swift-reflection-dump/)
-    ///
+    ///   - This is not a general purpose encoder - it is tuned for themes for Fouris.
+    ///   - Properties that do not start with an underscore ("`_`") are not serialized.
+    ///   - `_Dirty` is not serialized.
+    ///   - [Swift reflection dump](https://gist.github.com/natecook1000/4ee3ee560000062b1ace)
+    ///   - [Swift reflection dump](http://ericasadun.com/2014/06/24/swift-reflection-dump/)
     /// - Parameters:
     ///   - SerializeMe: The `Serializable` object to encode.
     ///   - WithTitle: The title of the root node. If this value is empty, no header tags are added to the result.
@@ -56,7 +56,14 @@ class Serializer
                 Fragment = Fragment + Indentation(IndentLevel + 2) + "</Array>\n"
                 
             default:
+                if (mirrored.label)! == "_Dirty"
+                {
+                    continue
+                }
+                if (mirrored.label?.starts(with: "_"))!
+                {
                 Fragment = Fragment + Indentation(IndentLevel + 2) + "<Property Name=\"\((mirrored.label)!)\" Value=\"\(mirrored.value)\"/>\n"
+                }
             }
         }
         if !WithTitle.isEmpty
