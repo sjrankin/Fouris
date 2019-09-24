@@ -9,11 +9,16 @@
 import Foundation
 import UIKit
 
-class SettingsControllerCode: UIViewController
+class SettingsControllerCode: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
 {
+
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        LanguageBox.layer.borderColor = UIColor.black.cgColor
+        LanguageBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
+        
         CameraControlBox.layer.borderColor = UIColor.black.cgColor
         CameraControlBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
         CameraControlBox.frame = CGRect(x: CameraControlBox.frame.minX, y: CameraControlBox.frame.minY,
@@ -31,6 +36,49 @@ class SettingsControllerCode: UIViewController
         ShowMotionControlsSwitch.isOn = Settings.GetShowMotionControls()
         ShowTopToolbarSwitch.isOn = Settings.GetShowTopToolbar()
         SetCameraState()
+        for LanguageName in SupportedLanguages.allCases
+        {
+            LanguageList.append("\(LanguageName)")
+        }
+        let CurrentLanguage = Settings.GetInterfaceLanguage()
+        let LanguageString = "\(CurrentLanguage)"
+        if let Index = LanguageList.firstIndex(of: LanguageString)
+        {
+            LanguagePicker.selectRow(Index, inComponent: 0, animated: true)
+        }
+        ColorNameLanguageSwitch.isOn = Settings.GetShowColorsInSourceLanguage()
+    }
+    
+    var LanguageList = [String]()
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int
+    {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
+    {
+        return SupportedLanguages.allCases.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
+    {
+        return LanguageList[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+    {
+        SelectedLanguage = LanguageList[row]
+    }
+    
+    var SelectedLanguage = ""
+    
+    @IBAction func HandleSetLanguagePressed(_ sender: Any)
+    {
+        if let NewLanguage = SupportedLanguages(rawValue: SelectedLanguage)
+        {
+        Settings.SetInterfaceLanguage(NewValue: NewLanguage)
+        }
     }
     
     func SetCameraState()
@@ -55,11 +103,19 @@ class SettingsControllerCode: UIViewController
         SetCameraState()
     }
     
+    @IBAction func HandleColorNameLanguageSwitchChanged(_ sender: Any)
+    {
+        Settings.SetShowColorsInSourceLanguage(NewValue: ColorNameLanguageSwitch.isOn)
+    }
+    
     @IBAction func HandleClosePressed(_ sender: Any)
     {
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBOutlet weak var ColorNameLanguageSwitch: UISwitch!
+    @IBOutlet weak var LanguagePicker: UIPickerView!
+    @IBOutlet weak var LanguageBox: UIView!
     @IBOutlet weak var ShowCameraText: UILabel!
     @IBOutlet weak var ShowTopToolbarSwitch: UISwitch!
     @IBOutlet weak var ShowMotionControlsSwitch: UISwitch!
