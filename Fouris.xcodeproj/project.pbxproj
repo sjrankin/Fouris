@@ -84,6 +84,8 @@
 		1763492D2312667A000BDF24 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1763492C2312667A000BDF24 /* Default-568h@2x.png */; };
 		17660BE822892B1E00082E23 /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17660BE722892B1E00082E23 /* UIButtonExtensions.swift */; };
 		17660BEC2289995E00082E23 /* GameViewRequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17660BEB2289995E00082E23 /* GameViewRequestProtocol.swift */; };
+		176708F02339EE5C000E2216 /* CustomStringConvertibleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176708EF2339EE5C000E2216 /* CustomStringConvertibleExtensions.swift */; };
+		176708F3233A0272000E2216 /* SupportedLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176708F2233A0272000E2216 /* SupportedLanguages.swift */; };
 		1767D28622AF4959005EE191 /* DebugClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1767D28522AF4959005EE191 /* DebugClient.swift */; };
 		1767D28B22AF5832005EE191 /* PeerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1767D28A22AF5832005EE191 /* PeerType.swift */; };
 		176F1B6E227AD3D500681CDE /* FileIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F1B6C227AD3D100681CDE /* FileIO.swift */; };
@@ -304,6 +306,8 @@
 		1763492C2312667A000BDF24 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		17660BE722892B1E00082E23 /* UIButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
 		17660BEB2289995E00082E23 /* GameViewRequestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewRequestProtocol.swift; sourceTree = "<group>"; };
+		176708EF2339EE5C000E2216 /* CustomStringConvertibleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStringConvertibleExtensions.swift; sourceTree = "<group>"; };
+		176708F2233A0272000E2216 /* SupportedLanguages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportedLanguages.swift; sourceTree = "<group>"; };
 		1767D28522AF4959005EE191 /* DebugClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugClient.swift; sourceTree = "<group>"; };
 		1767D28A22AF5832005EE191 /* PeerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerType.swift; sourceTree = "<group>"; };
 		176F1B6C227AD3D100681CDE /* FileIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileIO.swift; sourceTree = "<group>"; };
@@ -529,6 +533,7 @@
 				17ECE5AD23324D09003F4065 /* RawThemeViewerTitleCell.swift */,
 				17ECE5A623321897003F4065 /* GroupData.swift */,
 				17381F412334B683003ED0A3 /* GroupField.swift */,
+				174C9A5C232F5E8A00A5DC7A /* RawThemeFieldEditProtocol.swift */,
 			);
 			path = RawTheme;
 			sourceTree = "<group>";
@@ -574,7 +579,6 @@
 			isa = PBXGroup;
 			children = (
 				174C9A59232F5CB000A5DC7A /* RawTheme */,
-				174C9A5C232F5E8A00A5DC7A /* RawThemeFieldEditProtocol.swift */,
 				177FC1D72318E685005727B6 /* CustomControls */,
 				177FC1D22318E0E1005727B6 /* ColorPicker */,
 				17CD4EB6231E490D0055E541 /* GradientPicker */,
@@ -606,6 +610,14 @@
 			path = Runtime;
 			sourceTree = "<group>";
 		};
+		176708F1233A025D000E2216 /* Languages */ = {
+			isa = PBXGroup;
+			children = (
+				176708F2233A0272000E2216 /* SupportedLanguages.swift */,
+			);
+			path = Languages;
+			sourceTree = "<group>";
+		};
 		176F1B6B227AD3BD00681CDE /* FileIO */ = {
 			isa = PBXGroup;
 			children = (
@@ -632,6 +644,7 @@
 				177F4FD5229C11A100FE72CD /* SerializerTree.swift */,
 				177F4FD2229C0F1C00FE72CD /* SerializerNode.swift */,
 				177F4FCF229BD4CC00FE72CD /* Serializable.swift */,
+				176708EF2339EE5C000E2216 /* CustomStringConvertibleExtensions.swift */,
 			);
 			path = Serialization;
 			sourceTree = "<group>";
@@ -1039,6 +1052,7 @@
 				17E71A8522AD23EF0081991E /* TDebug Extensions */,
 				179A61B5230FA71A00A202BA /* SlideInView */,
 				17616AC72316496300DFFEFE /* Dialogs */,
+				176708F1233A025D000E2216 /* Languages */,
 				17F0B493225CBE730071514E /* AppDelegate.swift */,
 				171D5D462313FC5200043856 /* MainStoryboard.storyboard */,
 				17AF231E2313981C00921E6C /* MainViewController.swift */,
@@ -1327,6 +1341,7 @@
 				17A48E422327BC6900510EE6 /* GameSelectorProtocol.swift in Sources */,
 				179C5E1F23222B510003845B /* VisualDescriptor.swift in Sources */,
 				17D1FB6C2268A09400EDA707 /* GameAI.swift in Sources */,
+				176708F3233A0272000E2216 /* SupportedLanguages.swift in Sources */,
 				177F4FD9229C1A7600FE72CD /* SerializerExtension.swift in Sources */,
 				174CAAD6231CFA2B003823E2 /* ColorSpaceConverter.swift in Sources */,
 				1797523422C38A4D00BF539A /* +ClientCommands.swift in Sources */,
@@ -1401,6 +1416,7 @@
 				17C1E90D23190FBE004040B6 /* OtherExtensions.swift in Sources */,
 				17ECE5A723321897003F4065 /* GroupData.swift in Sources */,
 				17ECE5B2233256D8003F4065 /* +String.swift in Sources */,
+				176708F02339EE5C000E2216 /* CustomStringConvertibleExtensions.swift in Sources */,
 				1797525022C38A4D00BF539A /* +SpecialAndOtherCommands.swift in Sources */,
 				1749B6E122BB26A0003DC65D /* Conversions.swift in Sources */,
 				179C5E2A23224C190003845B /* ThemeManager.swift in Sources */,
