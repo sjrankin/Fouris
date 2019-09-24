@@ -114,7 +114,13 @@ class View3D: SCNView,                          //Our main super class.
     
     func ThemeUpdated(ThemeName: String, Field: ThemeFields)
     {
-        
+        print("Theme \(ThemeName) updated field \(Field)")
+        if [ThemeFields.BackgroundLiveImageCamera, ThemeFields.BackgroundType, ThemeFields.BackgroundGradientColor,
+            ThemeFields.BackgroundSolidColor, ThemeFields.BackgroundImageName, ThemeFields.BackgroundImageFromCameraRoll,
+            ThemeFields.BackgroundSolidColorCycleTime, ThemeFields.BackgroundSolidColorCycleTime].contains(Field)
+        {
+        DrawBackground()
+        }
     }
     
     var CenterBlockShape: CenterShapes = .Square
@@ -193,15 +199,17 @@ class View3D: SCNView,                          //Our main super class.
     }
     
     /// Draw the background according to the current theme.
+    /// - Note: If we're running on the simulator, live view is ignored.
     func DrawBackground()
     {
         switch CurrentTheme?.BackgroundType
         {
             case .Color:
+                print("Game view background color is \(CurrentTheme!.BackgroundSolidColor)")
                 self.backgroundColor = ColorServer.ColorFrom(CurrentTheme!.BackgroundSolidColor)
             
             case .Gradient:
-            break
+                print("Game view background gradient is \(CurrentTheme!.BackgroundGradientColor)")
             
             case .Image:
                 break
@@ -213,6 +221,10 @@ class View3D: SCNView,                          //Our main super class.
                 break
             
             case .LiveView:
+                if UserDefaults.standard.bool(forKey: "RunningOnSimulator")
+                {
+                    return
+                }
                 var CameraPosition: AVCaptureDevice.Position!
                 if CurrentTheme!.BackgroundLiveImageCamera == .Rear
                 {
@@ -238,7 +250,24 @@ class View3D: SCNView,                          //Our main super class.
         let Light = SCNLight()
         let LightColor = ColorServer.ColorFrom(CurrentTheme!.LightColor)
         Light.color = LightColor
+        #if true
+        switch CurrentTheme!.LightType
+        {
+            case .ambient:
+                Light.type = .ambient
+            
+            case .spot:
+                Light.type = .spot
+            
+            case .omni:
+                Light.type = .omni
+            
+            case .directional:
+                Light.type = .directional
+        }
+        #else
         Light.type = CurrentTheme!.LightType
+        #endif
         Light.intensity = CGFloat(CurrentTheme!.LightIntensity)
         let Node = SCNNode()
         Node.name = "SceneLight"
