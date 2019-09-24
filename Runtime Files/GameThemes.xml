@@ -1,5 +1,7 @@
 <Theme Name="Default">
     <Property Name="_ID" Value="247c07de-46fd-4b11-8166-c3fc6d340733"/>
+    <Property Name="_MinimumVersion" Value="0"/>
+    <Property Name="_MinimumBuild" Value="0"/>
     <Property Name="_ThemeName" Value="Default"/>
     <Property Name="_Title" Value="Default Game Theme"/>
     <Property Name="_Created" Value="2019-09-05"/>
@@ -44,6 +46,7 @@
     <Property Name="_ShowAIActionsOnControls" Value="true"/>
     <Property Name="_AISneakPeakCount" Value="1"/>
     <Property Name="_AfterGameWaitDuration" Value="15"/>
+    <Property Name="_AutoStartDuration" Value="60"/>
     <Property Name="_ShowNextPiece" Value="true"/>
     <Property Name="_IsOrthographic" Value="false"/>
     <Property Name="_OrthographicScale" Value="20.0"/>
