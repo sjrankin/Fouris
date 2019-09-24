@@ -22,10 +22,12 @@ protocol SettingsChangedProtocol: class
 /// - **ShowCameraControls**: Show camera controls in the UI.
 /// - **ShowMotionControls**: Show the motion control UI.
 /// - **ShowTopToolbar**: Show the top toolbar UI.
+/// - **InterfaceLanguage**: Change to the interface language.
 enum SettingsFields: String, CaseIterable
 {
     case ShowFPSInUI = "ShowFPSInUI"
     case ShowCameraControls = "ShowCameraControls"
     case ShowMotionControls = "ShowMotionConrols"
     case ShowTopToolbar = "ShowTopToolvar"
+    case InterfaceLanguage = "InterfaceLanguage"
 }
