@@ -29,6 +29,7 @@ class Settings
     public static func Initialize()
     {
         _WasInitialized = true
+        #if false
         let Storage = FileIO.GetStorageDirectory()
         DocumentDirectory = Storage!.1
         if let TOCJson = FileIO.GetFileContents(InDirectory: DocumentDirectory!, FromFile: "TOC.json")
@@ -42,38 +43,41 @@ class Settings
             AddUser(WithName: "Anonymous", AndID: UUID(uuidString: AnonymousUserID)!, WithType: .Anonymous)
             AddUser(WithName: "AI", AndID: UUID(uuidString: AIUserID)!, WithType: .AI)
         }
+        #endif
         if let _ = _Settings.string(forKey: "Initialized")
         {
             return
         }
         _Settings.set("Initialized", forKey: "Initialized")
-        _Settings.set(AIUserID, forKey: "CurrentUserID")
-        _Settings.set(false, forKey: "EnableHapticFeedback")
-        _Settings.set(false, forKey: "EnableVibrationFeedbackForOldPhones")
-        _Settings.set(true, forKey: "ShowAICommandsOnControls")
+//        _Settings.set(AIUserID, forKey: "CurrentUserID")
+//        _Settings.set(false, forKey: "EnableHapticFeedback")
+//        _Settings.set(false, forKey: "EnableVibrationFeedbackForOldPhones")
+//        _Settings.set(true, forKey: "ShowAICommandsOnControls")
         _Settings.set(3, forKey: "MaximumSamePiecesInARow")
-        _Settings.set(5, forKey: "AISneakPeakCount")
+//        _Settings.set(5, forKey: "AISneakPeakCount")
         _Settings.set(0, forKey: "LastGameViewIndex")
-        _Settings.set(false, forKey: "InDistractMode")
-        _Settings.set("Standard", forKey: "GameType")
-        _Settings.set(true, forKey: "RotateBoard")
-        _Settings.set(true, forKey: "StartWithAI")
+//        _Settings.set(false, forKey: "InDistractMode")
+//        _Settings.set("Standard", forKey: "GameType")
+//        _Settings.set(true, forKey: "RotateBoard")
+//        _Settings.set(true, forKey: "StartWithAI")
         _Settings.set(true, forKey: "UseTDebug")
-        _Settings.set(60.0, forKey: "AutoStartDuration")
-        _Settings.set(15.0, forKey: "AfterGameWaitDuration")
+//        _Settings.set(60.0, forKey: "AutoStartDuration")
+//        _Settings.set(15.0, forKey: "AfterGameWaitDuration")
         _Settings.set(0, forKey: "ColorPickerColorSpace")
         _Settings.set(false, forKey: "ShowAlphaInColorPicker")
         _Settings.set(20, forKey: "MostRecentlyUsedColorCapacity")
         _Settings.set("", forKey: "MostRecentlyUsedColorList")
-        _Settings.set(true, forKey: "ShowClosestColor")
-        _Settings.set(0, forKey: "GameBackgroundType")
+//        _Settings.set(true, forKey: "ShowClosestColor")
+//        _Settings.set(0, forKey: "GameBackgroundType")
         _Settings.set(false, forKey: "ConfirmGameImageSave")
-        _Settings.set(false, forKey: "ShowFPSInUI")
-        _Settings.set(1.25, forKey: "BucketDestructionDuration")
-        _Settings.set(false, forKey: "FastClearBucket")
+//        _Settings.set(false, forKey: "ShowFPSInUI")
+//        _Settings.set(1.25, forKey: "BucketDestructionDuration")
+//        _Settings.set(false, forKey: "FastClearBucket")
         _Settings.set(true, forKey: "ShowCameraControls")
         _Settings.set(true, forKey: "ShowMotionControls")
         _Settings.set(true, forKey: "ShowTopToolbar")
+        _Settings.set(true, forKey: "ShowColorsInOriginalLanguage")
+        _Settings.set("US English", forKey: "InterfaceLanguage")
         _Settings.set("83c630ee-81d4-11e9-bc42-526af7764f64", forKey: "CurrentTheme")
         _Settings.set("3f0d9fee-0b77-465b-a0ac-f1663da23cc9", forKey: "Current3DTheme")
     }
@@ -113,6 +117,33 @@ class Settings
                 Subscriber.1?.SettingChanged(Field: From, NewValue: NewValue)
             }
         }
+    }
+    
+    public static func GetInterfaceLanguage() -> SupportedLanguages
+    {
+        let Raw = _Settings.string(forKey: "InterfaceLanguage")
+        return SupportedLanguages(rawValue: Raw!)!
+    }
+    
+    public static func SetInterfaceLanguage(NewValue: SupportedLanguages)
+    {
+        let Raw = "\(NewValue)"
+        _Settings.set(Raw, forKey: "InterfaceLanguage")
+                SendNotice(From: .InterfaceLanguage, NewValue: NewValue)
+    }
+    
+    /// Get the show color names in the source language flag.
+    /// - Returns: Flag that indicates language to use for color names. If false, English is used.
+    public static func GetShowColorsInSourceLanguage() -> Bool
+    {
+        return _Settings.bool(forKey: "ShowColorsInOriginalLanguage")
+    }
+
+    /// Set the show color names in source language flag.
+    /// - Parameter NewValue: If true, color names are in their original language. If false, English is used.
+    public static func SetShowColorsInSourceLanguage(NewValue: Bool)
+    {
+        _Settings.set(NewValue, forKey: "ShowColorsInOriginalLanguage")
     }
     
     /// Get the show motion controls flag.
@@ -160,6 +191,7 @@ class Settings
         SendNotice(From: .ShowCameraControls, NewValue: NewValue as Any)
     }
     
+    #if false
     /// Get the clear the bucket at game over in a hurry flag.
     public static func GetFastClearBucket() -> Bool
     {
@@ -192,6 +224,7 @@ class Settings
     {
         _Settings.set(NewValue, forKey: "BucketDestructionDuration")
     }
+    #endif
     
     /// Get the show FPS rate in the UI flag.
     public static func ShowFPSInUI() -> Bool
@@ -218,6 +251,7 @@ class Settings
         _Settings.set(NewValue, forKey: "ConfirmGameImageSave")
     }
     
+    #if false
     /// Returns the game background type.
     /// - Returns: Value indicating the game background type.
     public static func GetGameBackgroundType() -> Int
@@ -231,6 +265,7 @@ class Settings
     {
         _Settings.set(NewValue, forKey: "GameBackgroundType")
     }
+    #endif
     
     /// Returns the show closest color flag for the color name picker.
     /// - Returns: Boolean flag for the show closest color in the color name picker.
@@ -347,6 +382,7 @@ class Settings
         _Settings.set(NewValue, forKey: "ColorPickerColorSpace")
     }
     
+    #if false
     /// Get the amount of time to wait from game over to when to start a new game in attract mode.
     /// - Returns: Number of seconds to wait between game over and staring a new game.
     public static func GetAfterGameWaitDuration() -> Double
@@ -388,6 +424,7 @@ class Settings
     {
         _Settings.set(ToNewValue, forKey: "AutoStartDuration")
     }
+    #endif
     
     /// Get the use TDebug flag.
     /// - Note: Valid for non-release builds only.
@@ -405,6 +442,24 @@ class Settings
         _Settings.set(Enabled, forKey: "UseTDebug")
     }
     
+    /// Returns the maximum number of same pieces in a row before duplicates will be discarded until a different piece
+    /// is generated.
+    ///
+    /// - Returns: Maximum number of same piece shapes in a row permitted.
+    public static func MaximumSamePieces() -> Int
+    {
+        return _Settings.integer(forKey: "MaximumSamePiecesInARow")
+    }
+    
+    /// Set the maximum allowable number of same pieces in a row.
+    /// - Parameter ToValue: New maximum piece value. Valid values are 2, 3, 4, 5, and 1000 where 1000 essentially
+    ///                      means no maximum number of like pieces in a row.
+    public static func SetMaximumSamePieces(ToValue: Int)
+    {
+        _Settings.set(ToValue, forKey: "MaximumSamePiecesInARow")
+    }
+    
+    #if false
     /// Returns the start with AI flag. If true, the game will start in AI mode immediately (like an attract
     /// mode). If false, the game will wait until the user starts.
     public static func GetStartWithAI() -> Bool
@@ -529,23 +584,6 @@ class Settings
     public static func SetCurrent3DThemeID(ID: UUID)
     {
         _Settings.set(ID.uuidString, forKey: "Current3DTheme")
-    }
-    
-    /// Returns the maximum number of same pieces in a row before duplicates will be discarded until a different piece
-    /// is generated.
-    ///
-    /// - Returns: Maximum number of same piece shapes in a row permitted.
-    public static func MaximumSamePieces() -> Int
-    {
-        return _Settings.integer(forKey: "MaximumSamePiecesInARow")
-    }
-    
-    /// Set the maximum allowable number of same pieces in a row.
-    /// - Parameter ToValue: New maximum piece value. Valid values are 2, 3, 4, 5, and 1000 where 1000 essentially
-    ///                      means no maximum number of like pieces in a row.
-    public static func SetMaximumSamePieces(ToValue: Int)
-    {
-        _Settings.set(ToValue, forKey: "MaximumSamePiecesInARow")
     }
     
     /// Sets the AI sneak peak count to the passed value. Invalid values set to the nearest valid value.
@@ -1023,6 +1061,7 @@ class Settings
             TheUser!.Levels.append(NewLevel)
         }
     }
+    #endif
 }
 
 /// Extension of integer arrays.
