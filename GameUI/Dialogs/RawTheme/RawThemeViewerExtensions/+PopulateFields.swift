@@ -88,12 +88,12 @@ extension RawThemeViewerCode
         SettingsGroup.AddField(ID: UUID(), Title: "Auto-start wait duration",
                                Description: "How long to wait after start-up before attract mode starts on its own after initial start of game.",
                                ControlTitle: "Seconds", Default: 60.0 as Any,
-                               Starting: Settings.GetAutoStartDuration() as Any, FieldType: .Double,
+                               Starting: self.UserTheme!.AutoStartDuration as Any, FieldType: .Double,
                                List: nil, Handler:
             {
                 NewValue in
                 let NewDouble = NewValue as! Double
-                Settings.SetAutoStartDuration(ToNewValue: NewDouble)
+                self.UserTheme!.AutoStartDuration = NewDouble
         })
         SettingsGroup.AddField(ID: UUID(), Title: "Maximum identical pieces",
                                Description: "The maximum number of identical pieces that can be randomly generated in a row.",
@@ -209,18 +209,8 @@ extension RawThemeViewerCode
                     self.UserTheme?.DestructionMethod = Method
                 }
         })
-        PlayGroup.AddField(ID: UUID(), Title: "Disable block destruction",
-                           Description: "Disables various visual means of clearing the bucket at the end of a game.",
-                           ControlTitle: "Disable destruction", Default: true as Any,
-                           Starting: Settings.GetFastClearBucket() as Any, FieldType: .Bool, List: nil,
-                           Handler:
-            {
-                NewValue in
-                let NewBool = NewValue as! Bool
-                Settings.SetFastClearBucket(NewValue: NewBool)
-        })
         PlayGroup.AddField(ID: UUID(), Title: "Bucket destruction duration",
-                           Description: "The amount of time in seconds to clear the bucket in a visual fashion.",
+                           Description: "The amount of time in seconds to clear the bucket in a visual fashion. Set to 0.0 to disable destruction of blocks.",
                            ControlTitle: "Seconds", Default: 1.25 as Any,
                            Starting: self.UserTheme?.DestructionDuration as Any, FieldType: .Double,
                            List: nil, Handler:
@@ -240,6 +230,31 @@ extension RawThemeViewerCode
                 self.UserTheme!.UseHapticFeedback = NewBool
         })
         FieldTables.append(PlayGroup)
+        
+        //Languages.
+        let LangGroup = GroupData("Languages")
+        LangGroup.AddField(ID: UUID(), Title: "Color names",
+                           Description: "If true, color names are shown in the original language where the color was described. If false, English is used for all color names.",
+                           ControlTitle: "Colors in source language", Default: true as Any,
+                           Starting: Settings.GetShowColorsInSourceLanguage() as Any, FieldType: .Bool,
+                           List: nil, Handler:
+            {
+                NewValue in
+                let NewBool = NewValue as! Bool
+                Settings.SetShowColorsInSourceLanguage(NewValue: NewBool)
+        })
+        LangGroup.AddField(ID: UUID(), Title: "Interface language",
+                           Description: "Language to use for the user interface.", ControlTitle: "",
+                           Default: "US English" as Any, Starting: "\(Settings.GetInterfaceLanguage())" as Any,
+                           FieldType: .StringList, List: GroupData.EnumListToStringList(SupportedLanguages.allCases),
+                           Handler:
+            {
+                NewValue in
+                let RawString = NewValue as! String
+                let NewLang = SupportedLanguages(rawValue: RawString)!
+                Settings.SetInterfaceLanguage(NewValue: NewLang)
+        })
+        FieldTables.append(LangGroup)
         
         //Game view.
         let GameGroup = GroupData("Game View")
@@ -316,12 +331,13 @@ extension RawThemeViewerCode
                            Description: "The type of light to use for the game view.",
                            ControlTitle: "", Default: "omni" as Any,
                            Starting: "\(UserTheme!.LightType)" as Any,
-                           FieldType: .StringList, List: GroupData.EnumListToStringList(LightTypes.allCases),
+                           FieldType: .StringList, List: GroupData.EnumListToStringList(GameLights.allCases),
                            Handler:
             {
                 NewValue in
                 let RawValue = NewValue as! String
-                self.UserTheme!.LightType = SCNLight.LightType(rawValue: RawValue)
+                self.UserTheme!.LightType = GameLights(rawValue: RawValue)!
+//                self.UserTheme!.LightType = SCNLight.LightType(rawValue: RawValue)
         })
         GameGroup.AddField(ID: UUID(), Title: "Light position",
                            Description: "The position of the light in the game view scene.",
