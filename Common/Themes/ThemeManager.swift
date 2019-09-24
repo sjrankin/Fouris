@@ -42,6 +42,7 @@ class ThemeManager: ThemeChangeProtocol
         }
         UserTheme.ChangeDelegate = self
         DefaultTheme.ChangeDelegate = self
+        #if false
         let SavedID = Settings.GetCurrentThemeID()
         if SavedID == UUID.Empty
         {
@@ -51,6 +52,7 @@ class ThemeManager: ThemeChangeProtocol
         {
             CurrentThemeID = Settings.GetCurrentThemeID()
         }
+        #endif
     }
     
     /// Save the user theme. This applies only to user-defined themes as the standard default theme is read-only.
@@ -64,6 +66,25 @@ class ThemeManager: ThemeChangeProtocol
         {
             Serialized = Encoder.Encode(UserTheme, WithTitle: UserTheme.ThemeName)
             let _ = FileIO.SaveFileContentsToResource(WithContents: Serialized, "UserThemes", ".xml")
+            UserTheme.Dirty = false
+        }
+    }
+    
+    /// Saves the passed theme.
+    /// - Note: Assumes the theme has a file name already assigned.
+    /// - Parameter Theme: The theme to save.
+    public func SaveTheme(_ Theme: ThemeDescriptor)
+    {
+        let Encoder = Serializer()
+        var Serialized = ""
+        if Theme.Dirty
+        {
+            Serialized = Encoder.Encode(Theme, WithTitle: UserTheme.ThemeName)
+            print("Serialize=\n\(Serialized)")
+            let FileNameParts = Theme.FileNameParts()
+            //print("Saving user theme to \(FileNameParts.Name) \(FileNameParts.Extension)")
+            let _ = FileIO.SaveFileContentsToResource(WithContents: Serialized, FileNameParts.Name, FileNameParts.Extension)
+            Theme.Dirty = false
         }
     }
     
@@ -153,6 +174,7 @@ class ThemeManager: ThemeChangeProtocol
     /// Holds a list of all themes.
     private var _ThemeList = [(String, ThemeDescriptor)]()
     
+    #if false
     /// Holds the current theme.
     private var _Current: ThemeDescriptor? = nil
     /// Get the current theme. If nil, try to load a theme first.
@@ -191,6 +213,7 @@ class ThemeManager: ThemeChangeProtocol
             _CurrentThemeID = newValue
         }
     }
+    #endif
     
     /// Return a list of all themes.
     ///
@@ -234,14 +257,16 @@ class ThemeManager: ThemeChangeProtocol
         return nil
     }
     
-    // MARK: Protocol function handling and change notice handling/management.
+    // MARK: Change notice handling/management protocol function implementation.
     
     /// Handle theme changes. Notifies all subscribers of the change. However, subscribers can set the
     /// fields they want to be notified of changes - in that case, if the changed field is not in the
     /// subscriber's list of fields, no change notice is sent.
-    /// - Parameter ThemeName: The name of the changed theme.
+    /// - Note: If the theme's `SaveAfterEdit` flag is true, the theme is saved after the delegate is notified
+    ///         of the change.
+    /// - Parameter Theme: The name of the changed theme.
     /// - Parameter Field: The field whose property changed.
-    func ThemeChanged(ThemeName: String, Field: ThemeFields)
+    func ThemeChanged(Theme: ThemeDescriptor, Field: ThemeFields)
     {
         for (_, (Delegate, FieldList)) in Subscribers
         {
@@ -252,8 +277,22 @@ class ThemeManager: ThemeChangeProtocol
                     return
                 }
             }
-            Delegate.ThemeUpdated(ThemeName: ThemeName, Field: Field)
+            Theme.EditDate = GetDateHere(Date())!
+            Delegate.ThemeUpdated(ThemeName: Theme.ThemeName, Field: Field)
+            if Theme.SaveAfterEdit
+            {
+                SaveTheme(Theme)
+            }
         }
+    }
+    
+    /// Returns the date and time as a string.
+    /// - Parameter Now: The date to return as a string.
+    /// - Returns: The passed date formatted by `DateFormatter` into a string.
+    func GetDateHere(_ Now: Date) -> String?
+    {
+        let Result = DateFormatter.localizedString(from: Now, dateStyle: .long, timeStyle: .long)
+        return Result
     }
     
     /// Holds the list of subscribers to change notices.
