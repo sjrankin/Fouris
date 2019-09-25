@@ -38,7 +38,7 @@ class SettingsControllerCode: UIViewController, UIPickerViewDelegate, UIPickerVi
         SetCameraState()
         for LanguageName in SupportedLanguages.allCases
         {
-            LanguageList.append("\(LanguageName)")
+            LanguageList.append(LanguageName.rawValue)
         }
         let CurrentLanguage = Settings.GetInterfaceLanguage()
         let LanguageString = "\(CurrentLanguage)"
@@ -63,6 +63,7 @@ class SettingsControllerCode: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
     {
+        
         return LanguageList[row]
     }
     
