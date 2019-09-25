@@ -5,7 +5,7 @@
     <Property Name="_ThemeName" Value="Default"/>
     <Property Name="_Title" Value="Default Game Theme"/>
     <Property Name="_Created" Value="2019-09-05"/>
-    <Property Name="_UserTheme" Value="false"/>
+    <Property Name="_IsUserTheme" Value="false"/>
     <Property Name="_IsDefaultTheme" Value="true"/>
     <Property Name="_CameraFieldOfView" Value="92.0"/>
     <Property Name="_CameraPosition" Value="-0.5,2.0,15.0"/>
@@ -26,7 +26,7 @@
     <Property Name="_ShowBucketGrid" Value="true"/>
     <Property Name="_ShowBucketGridOutline" Value="true"/>
     <Property Name="_BucketGridColor" Value="Gray"/>
-    <Property Name="_BuketGridOutlineColor" Value="Red"/>
+    <Property Name="_BucketGridOutlineColor" Value="Red"/>
     <Property Name="_RotateBucket" Value="true"/>
         <Property Name="_RotatingBucketDirection" Value="Right"/>
         <Property Name="_RotationDuration" Value="0.3"/>
