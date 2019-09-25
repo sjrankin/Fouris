@@ -44,5 +44,45 @@ extension UIButton
             self.setImage(UIImage(named: OriginalName), for: UIControl.State.normal)
         }
     }
+    
+    //https://stackoverflow.com/questions/31320819/scale-uibutton-animation-swift
+    func StartPulsation(Duration: Double = 0.5, From: Double = 0.75, To: Double = 1.25)
+    {
+        let Pulse = CASpringAnimation(keyPath: "transform.scale")
+        Pulse.duration = Duration
+        Pulse.fromValue = From
+        Pulse.toValue = To
+        Pulse.repeatCount = Float.greatestFiniteMagnitude
+        Pulse.autoreverses = true
+        Pulse.initialVelocity = 0.5
+        Pulse.damping = 1.0
+        layer.add(Pulse, forKey: "Pulse")
+    }
+    
+    func Scale(Duration: Double = 0.0, To: Double = 1.0)
+    {
+        let Scale = CASpringAnimation(keyPath: "transform.scale")
+        Scale.duration = Duration
+        Scale.toValue = To
+        Scale.repeatCount = 0
+        Scale.initialVelocity = 0.5
+        Scale.damping = 1.0
+        layer.add(Scale, forKey: "Scale")
+    }
+    
+    func StartColorCycling(Duration: Double = 0.61, To: UIColor = UIColor.red)
+    {
+        UIView.animate(withDuration: Duration, delay: 0.0,
+                       options: [.autoreverse, .repeat],
+                       animations: {
+                        self.tintColor = To
+        },
+                       completion: nil)
+    }
+    
+    func StopAnimations()
+    {
+        layer.removeAllAnimations()
+    }
 }
 
