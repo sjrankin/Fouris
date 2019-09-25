@@ -126,6 +126,18 @@ protocol GameViewProtocol: class
     /// - Parameter Completed: Completion handler called at the end of the rotation.
     func RotateContentsRight(Duration: Double, Completed: @escaping (() -> ()))
     
+    /// Rotates the contents of the game (but not UI or falling piece) in the direction indicated by the `Right` flag.
+    /// - Note: This function uses a synchronous lock to make sure that when the board is rotating, other things don't happen to it.
+    /// - Parameter Right: If true, the contents are rotated clockwise. If false, counter-clockwise.
+    /// - Parameter Duration: Duration in seconds the rotation should take.
+    func RotateContents(Right: Bool, Duration: Double)
+    
+    /// Rotates the contents of the game (not only the game portion, not the text or other non-playable objects).
+    /// - Parameter Duration: Duration in seconds it takes to rotate the contents.
+    /// - Parameter RotationDirection: Determines whether the rotation is clockwise or counterclockwise.
+    /// - Parameter RotateCount: Determines how many times to rotate in the specified direction.
+    func RotateContents(Duration: Double, RotationDirection: BucketRotationTypes, RotateCount: Int)
+    
     /// Set the theme of the game view
     /// - Parameter ThemeID: Theme ID to use.
     func SetTheme(_ ThemeID: UUID)
