@@ -131,7 +131,7 @@ class MainViewController: UIViewController,
         InitializeUI()
         AIData = AITestTable()
         
-        CurrentBaseGameType = Settings.GetGameType()
+        CurrentBaseGameType = UserTheme!.GameType
         
         InitializeGameUI()
         setNeedsStatusBarAppearanceUpdate()
@@ -145,7 +145,6 @@ class MainViewController: UIViewController,
     /// - Parameter animated: Passed to the super class.
     override func viewDidDisappear(_ animated: Bool)
     {
-        Settings.SaveUserData()
         Themes.SaveThemes()
         super.viewDidDisappear(animated)
     }
@@ -157,7 +156,7 @@ class MainViewController: UIViewController,
         EnableFreezeInPlaceButton(false)
         
         InitializeSlideIn()
-        Game = GameLogic(BaseGame: CurrentBaseGameType, EnableAI: false)
+        Game = GameLogic(BaseGame: CurrentBaseGameType, UserTheme: UserTheme!, EnableAI: false)
         Game.UIDelegate = self
         Game.AIDelegate = self
         
@@ -194,7 +193,7 @@ class MainViewController: UIViewController,
         GameControlView.layer.backgroundColor = ColorServer.CGColorFrom(ColorNames.ReallyDarkGray)
         MotionControlView.layer.backgroundColor = ColorServer.CGColorFrom(ColorNames.ReallyDarkGray)
         
-        let AutoStartDuration = Settings.GetAutoStartDuration()
+        let AutoStartDuration = UserTheme!.AutoStartDuration
         let _ = Timer.scheduledTimer(timeInterval: AutoStartDuration, target: self,
                                      selector: #selector(AutoStartInAttractMode),
                                      userInfo: nil, repeats: false)
@@ -278,6 +277,8 @@ class MainViewController: UIViewController,
                 {
                     FPSLabel.alpha = 0.0
             }
+            case .InterfaceLanguage:
+            break
         }
     }
     
@@ -431,7 +432,7 @@ class MainViewController: UIViewController,
         #if true
         DispatchQueue.main.sync
             {
-                GameView3D?.DestroyMap3D(FromBoard: Game.GameBoard!, DestroyBy: .FadeAway, MaxDuration: 1.25)
+                GameView3D?.DestroyMap3D(FromBoard: Game.GameBoard!, DestroyBy: UserTheme!.DestructionMethod, MaxDuration: 1.25)
         }
         HandleStartInAIMode()
         #else
@@ -552,57 +553,9 @@ class MainViewController: UIViewController,
         GameTextOverlay?.HideNextPiece(Duration: 0.1)
         GameTextOverlay?.ShowPressPlay(Duration: 0.5)
         
-        let UserIDString = UserDefaults.standard.string(forKey: "CurrentUserID")!
-        let UserID = UUID(uuidString: UserIDString)!
-        let User = Settings.GetUser(WithID: UserID)
-        let Level = User?.GetLevel(LevelID: 0)
-        Level?.GameCount = Level!.GameCount + 1
-        if Level!.HighScore < Game.HighScore
-        {
-            Level!.HighScore = Game.HighScore
-        }
-        Level?.Duration = Level!.Duration + GameDuration
-        Level?.CumulativeScore = Level!.CumulativeScore + Game.CurrentGameScore
-        Level?.CumulativePieces = Level!.CumulativePieces + Game.PiecesInGame
-        
-        CumulativeDuration = CumulativeDuration + Game!.GameDuration()
-        CumulativePieces = CumulativePieces + Double(Game!.PiecesInGame)
-        let Mean: Double = CumulativeDuration / CumulativePieces
-        /*
-         let DbgStr = "Game count: \(GameCount), Mean: \(Convert.RoundToString(Mean, ToNearest: 0.0001, CharCount: 7))"
-         */
-        #if false
-        let MeanS = Convert.RoundToString(Mean, ToNearest: 0.0001, CharCount: 7)
-        var MinFPS = PieceFPS.min()
-        if MinFPS == nil
-        {
-            MinFPS = 0.0
-        }
-        let MinFPSS = Convert.RoundToString(MinFPS!, ToNearest: 0.0001, CharCount: 7)
-        var MaxFPS = PieceFPS.max()
-        if MaxFPS == nil
-        {
-            MaxFPS = 0.0
-        }
-        let MaxFPSS = Convert.RoundToString(MaxFPS!, ToNearest: 0.0001, CharCount: 7)
-        let Median = Statistics.Median(PieceFPS)!
-        let MedianS = Convert.RoundToString(Median, ToNearest: 0.0001, CharCount: 7)
-        let MeanFPS = Statistics.Mean(PieceFPS)!
-        let MeanFPSS = Convert.RoundToString(MeanFPS, ToNearest: 0.0001, CharCount: 7)
-        let stdev = Statistics.StandardDeviation(PieceFPS)!
-        let stdevS = Convert.RoundToString(stdev, ToNearest: 0.0001, CharCount: 7)
-        PieceFPS.removeAll()
-        let DbgStr = "Game count: \(GameCount), Mean: " + MeanS + ", MinFPS: " + MinFPSS +
-            ", MaxFPS: " + MaxFPSS + ", Median FPS: " + MedianS + ", Mean FPS: " + MeanFPSS +
-        ", stddev: \(stdevS)"
-        
-        DebugClient.Send(DbgStr)
-        //        DebugClient.Send("[\(GameCount)] Game piece count: \(Game!.PiecesInGame), Game duration: \(Game!.GameDuration()), Mean: \(Mean)")
-        #else
         StopAccumulating = true
         let MeanVal = AccumulatedFPS / Double(FPSSampleCount)
         FPSLabel.text = "μ \(Convert.RoundToString(MeanVal, ToNearest: 0.001, CharCount: 6))"
-        #endif
         
         if InAttractMode
         {
@@ -612,7 +565,7 @@ class MainViewController: UIViewController,
         }
         else
         {
-            let _ = Timer.scheduledTimer(timeInterval: Settings.GetAfterGameWaitDuration(), target: self,
+            let _ = Timer.scheduledTimer(timeInterval: UserTheme!.AfterGameWaitDuration, target: self,
                                          selector: #selector(AutoStartInAttractMode),
                                          userInfo: nil, repeats: false)
         }
@@ -705,6 +658,11 @@ class MainViewController: UIViewController,
     }
     
     /// The specified piece froze. Draw the new map.
+    /// - Note: The `.Rotating4` game rotation is finalized via a `DispatchQueue.main.asyncAfter` call to `RotateFinishFinalizing` and
+    ///         not a completion handler on the `SCNAction.rotateBy` call in the game view because if the completion handler is slow
+    ///         for some reason, animation stutters/stalls. If the code is moved out of the completion handler, the worst is it takes
+    ///         a few seconds for a new piece to appear rather than stalling animation. Another benefit of doing things this way is
+    ///         it makes it a lot easier to debug code issues in the game and not in the SDK.
     /// - Parameter ThePiece: The finalized piece.
     func PieceFinalized(_ ThePiece: Piece)
     {
@@ -716,22 +674,36 @@ class MainViewController: UIViewController,
             case .Rotating4:
                 GameView3D?.MergePieceIntoBucket(ThePiece)
                 GameView3D?.DrawMap3D(FromBoard: Game!.GameBoard!, CalledFrom: "PieceFinalized")
-                Game!.GameBoard!.Map!.RotateMapRight()
-                if Settings.GetCanRotateBoard()
+                
+                if UserTheme!.RotateBucket
                 {
-                    #if false
-                    let CRotateValue = (CRotateIndex * 90) % 360
-                    CRotateIndex = CRotateIndex + 1
-                    print("RotateIndex=\(RotateIndex) {\(CRotateValue)}")
-                    GameView3D?.RotateContentsToAbsolute(CGFloat(CRotateValue), Completed: {self.RotateFinishFinalizing()})
-                    RotateIndex = RotateIndex + 1
-                    if RotateIndex >= RightRotations.count
+                    switch UserTheme!.RotatingBucketDirection
                     {
-                        RotateIndex = 0
+                        case .Left:
+                            Game!.GameBoard!.Map!.RotateMapLeft()
+                            GameView3D?.RotateContentsLeft(Duration: UserTheme!.RotationDuration, Completed: {self.Nop()})
+                        
+                        case .Right:
+                            Game!.GameBoard!.Map!.RotateMapRight()
+                            GameView3D?.RotateContentsRight(Duration: UserTheme!.RotationDuration, Completed: {self.Nop()})//{self.RotateFinishFinalizing()})
+                        
+                        case .Random:
+                            if Bool.random()
+                            {
+                                Game!.GameBoard!.Map!.RotateMapLeft()
+                                GameView3D?.RotateContentsLeft(Duration: UserTheme!.RotationDuration, Completed: {self.Nop()})
+                            }
+                            else
+                            {
+                                Game!.GameBoard!.Map!.RotateMapRight()
+                                GameView3D?.RotateContentsRight(Duration: UserTheme!.RotationDuration, Completed: {self.Nop()})
+                            }
+                        
+                        case .None:
+                            NoRotateFinishFinalizing()
+                            return
                     }
-                    #else
-                    GameView3D?.RotateContentsRight(Duration: 0.33, Completed: {self.RotateFinishFinalizing()})
-                    #endif
+                    DispatchQueue.main.asyncAfter(deadline: .now() + UserTheme!.RotationDuration, execute: {self.RotateFinishFinalizing()})
                 }
                 else
                 {
@@ -741,6 +713,11 @@ class MainViewController: UIViewController,
             case .Cubic:
                 break
         }
+    }
+    
+    func Nop()
+    {
+        
     }
     
     private var CRotateIndex = 0
@@ -1109,14 +1086,15 @@ class MainViewController: UIViewController,
             return
         }
         var PlayDelay = 0.0
-        if !Settings.GetFastClearBucket()
+        if UserTheme!.AfterGameWaitDuration > 0.0
         {
-            let Duration = Settings.GetBucketDestructionDurationTime()
+            let Duration = UserTheme!.DestructionDuration
+            print("Destruction method: \(UserTheme!.DestructionMethod)")
             PlayDelay = Duration + 0.1
             if Thread.isMainThread
             {
                 //If we're on the same thread as the UI, just call the function to clear the bucket.
-                GameView3D?.DestroyMap3D(FromBoard: Game.GameBoard!, DestroyBy: .Shrink, MaxDuration: Duration)
+                GameView3D?.DestroyMap3D(FromBoard: Game.GameBoard!, DestroyBy: UserTheme!.DestructionMethod, MaxDuration: Duration)
                 perform(#selector(Play), with: nil, afterDelay: PlayDelay)
             }
             else
@@ -1126,7 +1104,7 @@ class MainViewController: UIViewController,
                 DispatchQueue.main.sync
                     {
                         print("MainViewController.ClearAndPlay called from background thread.")
-                        GameView3D?.DestroyMap3D(FromBoard: Game.GameBoard!, DestroyBy: .Shrink, MaxDuration: Duration)
+                        GameView3D?.DestroyMap3D(FromBoard: Game.GameBoard!, DestroyBy: UserTheme!.DestructionMethod, MaxDuration: Duration)
                         perform(#selector(self.Play), with: nil, afterDelay: PlayDelay)
                 }
             }
@@ -1767,7 +1745,7 @@ class MainViewController: UIViewController,
     {
         print("Switching game type to \(BaseType)")
         CurrentBaseGameType = BaseType
-        Settings.SetGameType(CurrentBaseGameType)
+        UserTheme!.GameType = BaseType
         Stop()
         InitializeGameUI()
     }
