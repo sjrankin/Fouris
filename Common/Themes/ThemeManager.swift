@@ -13,12 +13,62 @@ import UIKit
 /// directory of the app.
 class ThemeManager: ThemeChangeProtocol
 {
+    /// If necessary, create the settings directory and move resource-bound settings files to it.
+    /// - Note: This should be necessary only the first time Fouris is run but we will execute this code everytime
+    ///         Fouris starts to be sure.
+    private func Preinitialize()
+    {
+        if !FileIO.DirectoryExists(DirectoryName: FileIO.SettingsDirectory)
+        {
+            print("Creating initial themes.")
+            FileIO.CreateDirectory(DirectoryName: FileIO.SettingsDirectory)
+            let DefaultTheme = FileIO.GetFileContentsFromResource("GameThemes", ".xml")
+            let _ = FileIO.SaveSettingsFile(Name: "GameThemes.xml", Contents: DefaultTheme!)
+            let UserTheme = FileIO.GetFileContentsFromResource("UserGameThemes", ".xml")
+            let _ = FileIO.SaveSettingsFile(Name: "UserGameThemes.xml", Contents: UserTheme!)
+            #if false
+            let DefaultEncoded = BufferManager.EncodeBuffer(DefaultTheme!)
+            let _ = FileIO.WriteBinaryFile(Name: "DefaultTheme.dat", Directory: FileIO.SettingsDirectory, BinaryData: DefaultEncoded)
+            let UserEncoded = BufferManager.EncodeBuffer(UserTheme!)
+            let _ = FileIO.WriteBinaryFile(Name: "UserGameThemes.dat", Directory: FileIO.SettingsDirectory, BinaryData: UserEncoded)
+            #endif
+        }
+        else
+        {
+            print("Settings directory exists.")
+        }
+    }
+    
     /// Initialize the theme manager. Read standard themes from a serialized file in the resource directory. Set the
     /// current theme.
     public func Initialize()
     {
+        Preinitialize()
         _ThemeList = [(String, ThemeDescriptor)]()
-        if let SerializedTheme = FileIO.GetFileContentsFromResource("GameThemes", ".xml")
+        #if false
+        let EncodedDefault = FileIO.ReadBinaryFile(Name: "DefaultTheme.dat", Directory: FileIO.SettingsDirectory)
+        let DecodedDefault = BufferManager.DecodeBuffer(EncodedDefault!)
+        let DecodedDefaultString = BufferManager.BufferToString(DecodedDefault)
+        
+        let EncodedUser = FileIO.ReadBinaryFile(Name: "UserGameThemes.dat", Directory: FileIO.SettingsDirectory)
+        let DecodedUser = BufferManager.DecodeBuffer(EncodedUser!)
+        let DecodedUserString = BufferManager.BufferToString(DecodedUser)
+        
+        let DefaultSerializer = Serializer()
+        let DeserializedDefaultOK = DefaultSerializer.Deserialize(From: DecodedDefaultString)
+        if DeserializedDefaultOK
+        {
+            CreateThemes(DefaultSerializer, WithName: "GameTheme.dat")
+        }
+        
+        let UserSerializer = Serializer()
+        let DeserializedUserOK = UserSerializer.Deserialize(From: DecodedUserString)
+        if DeserializedUserOK
+        {
+            CreateThemes(UserSerializer, WithName: "UserGameThemes.dat")
+        }
+        #else
+        if let SerializedTheme = FileIO.GetSettingsFile(Name: "GameThemes.xml")
         {
             let Serialize = Serializer()
             let DeserializedOK = Serialize.Deserialize(From: SerializedTheme)
@@ -27,32 +77,31 @@ class ThemeManager: ThemeChangeProtocol
                 CreateThemes(Serialize, WithName: "GameThemes.xml")
             }
         }
-        if let SerializedTheme = FileIO.GetFileContentsFromResource("UserGameThemes", ".xml")
+        else
+        {
+            fatalError("Error reading GameThemes.xml")
+        }
+        if let SerializedTheme = FileIO.GetSettingsFile(Name: "UserGameThemes.xml")
         {
             let Serialize = Serializer()
             let DeserializedOK = Serialize.Deserialize(From: SerializedTheme)
             if DeserializedOK
             {
+                print("Deserialized user theme:\n\(SerializedTheme)")
                 CreateThemes(Serialize, WithName: "UserGameThemes.xml")
             }
         }
+        else
+        {
+            fatalError("Error reading UserGameThemes.xml")
+        }
+        #endif
         if _ThemeList.count != 2
         {
             fatalError("Error reading themes. Missing either default or user theme.")
         }
         UserTheme.ChangeDelegate = self
         DefaultTheme.ChangeDelegate = self
-        #if false
-        let SavedID = Settings.GetCurrentThemeID()
-        if SavedID == UUID.Empty
-        {
-            CurrentThemeID = _ThemeList[0].1.ID
-        }
-        else
-        {
-            CurrentThemeID = Settings.GetCurrentThemeID()
-        }
-        #endif
     }
     
     /// Save the user theme. This applies only to user-defined themes as the standard default theme is read-only.
@@ -65,7 +114,11 @@ class ThemeManager: ThemeChangeProtocol
         if UserTheme.Dirty
         {
             Serialized = Encoder.Encode(UserTheme, WithTitle: UserTheme.ThemeName)
+            #if true
+            let _ = FileIO.SaveSettingsFile(Name: "UserThemes.xml", Contents: Serialized)
+            #else
             let _ = FileIO.SaveFileContentsToResource(WithContents: Serialized, "UserThemes", ".xml")
+            #endif
             UserTheme.Dirty = false
         }
     }
@@ -81,9 +134,12 @@ class ThemeManager: ThemeChangeProtocol
         {
             Serialized = Encoder.Encode(Theme, WithTitle: UserTheme.ThemeName)
             print("Serialize=\n\(Serialized)")
+            #if true
+            let _ = FileIO.SaveSettingsFile(Name: Theme.FileName, Contents: Serialized)
+            #else
             let FileNameParts = Theme.FileNameParts()
-            //print("Saving user theme to \(FileNameParts.Name) \(FileNameParts.Extension)")
             let _ = FileIO.SaveFileContentsToResource(WithContents: Serialized, FileNameParts.Name, FileNameParts.Extension)
+            #endif
             Theme.Dirty = false
         }
     }
@@ -137,7 +193,7 @@ class ThemeManager: ThemeChangeProtocol
                 }
                 Theme.FileName = WithName
                 _ThemeList.append((Name, Theme))
-                if Name == "User"
+                if Name == "User Theme"
                 {
                     _UserTheme = Theme
                 }
@@ -173,47 +229,6 @@ class ThemeManager: ThemeChangeProtocol
     
     /// Holds a list of all themes.
     private var _ThemeList = [(String, ThemeDescriptor)]()
-    
-    #if false
-    /// Holds the current theme.
-    private var _Current: ThemeDescriptor? = nil
-    /// Get the current theme. If nil, try to load a theme first.
-    public var Current: ThemeDescriptor?
-    {
-        get
-        {
-            return _Current
-        }
-    }
-    
-    /// Holds the current theme ID. Updates `Current` when set with a valid ID.
-    private var _CurrentThemeID: UUID = UUID.Empty
-    {
-        didSet
-        {
-            if _CurrentThemeID == UUID.Empty
-            {
-                return
-            }
-            if let Theme = ThemeFrom(ID: _CurrentThemeID)
-            {
-                _Current = Theme
-            }
-        }
-    }
-    /// Get or set the current theme's ID. Use this property to set themes.
-    public var CurrentThemeID: UUID
-    {
-        get
-        {
-            return _CurrentThemeID
-        }
-        set
-        {
-            _CurrentThemeID = newValue
-        }
-    }
-    #endif
     
     /// Return a list of all themes.
     ///
