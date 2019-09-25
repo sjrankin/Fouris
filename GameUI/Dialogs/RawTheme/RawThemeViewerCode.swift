@@ -261,8 +261,10 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
         LastSelectedPickerViewItem = StringListData[row]
+        CurrentPickedString = LastSelectedPickerViewItem
         StringListViewDirty.alpha = 1.0
         StringListViewDirty.tintColor = UIColor.red
+        ThrobApplyButton(StringListApplyButton)
     }
     
     var LastSelectedPickerViewItem: String? = nil
@@ -448,6 +450,7 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
                     ColorControlTitle.text = ColorName == nil ? "" : ColorName!
                     ColorViewDirty.alpha = 1.0
                     ColorViewDirty.tintColor = UIColor.red
+                    ThrobApplyButton(ColorApplyButton)
                 }
             }
         }
@@ -515,12 +518,14 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     {
         BoolViewDirty.alpha = 0.0
         CurrentField?.Handler!(BoolSwitch.isOn as Any)
+        ResetApplyButton(BoolApplyButton)
     }
     
     @IBAction func BoolSwitchChanged(_ sender: Any)
     {
         BoolViewDirty.alpha = 1.0
         BoolViewDirty.tintColor = UIColor.red
+        ThrobApplyButton(BoolApplyButton)
     }
     
     // MARK: String list button handling.
@@ -535,8 +540,10 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
         StringListViewDirty.alpha = 0.0
         if let CurrentItem = CurrentPickedString
         {
+            print("Selected item: \(CurrentItem)")
             CurrentField?.Handler!(CurrentItem as Any)
         }
+        ResetApplyButton(StringListApplyButton)
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, forComponent component: Int)
@@ -570,6 +577,7 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     {
         ImageViewDirty.alpha = 0.0
         CurrentField?.Handler!("" as Any)
+        ResetApplyButton(ImageApplyButton)
     }
     
     @IBAction func ImageDefaultPressed(_ sender: Any)
@@ -581,6 +589,7 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     {
         ImageViewDirty.alpha = 1.0
         ImageViewDirty.tintColor = UIColor.red
+        ThrobApplyButton(ImageApplyButton)
     }
     
     @IBAction func ImagePhotoRollPressed(_ sender: Any)
@@ -606,6 +615,7 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
             CurrentField?.State = ImageName as Any
             ImageViewDirty.alpha = 1.0
             ImageViewDirty.tintColor = UIColor.red
+            ThrobApplyButton(ImageApplyButton)
         }
     }
     
@@ -638,6 +648,7 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     {
         GradientViewDirty.alpha = 0.0
         CurrentField?.Handler!(GradientViewer.GradientDescriptor as Any)
+        ResetApplyButton(GradientApplyButton)
     }
     
     @IBAction func GradientDefaultPressed(_ sender: Any)
@@ -653,6 +664,7 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
         let Color = ColorSwatch.TopColor
         let ColorName = ColorServer.MakeColorName(From: Color)
         CurrentField?.Handler!(ColorName as Any)
+        ResetApplyButton(ColorApplyButton)
     }
     
     @IBAction func ColorDefaultPressed(_ sender: Any)
@@ -672,6 +684,7 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
                 CurrentField?.Handler!(DoubleValue as Any)
             }
         }
+        ResetApplyButton(DoubleApplyButton)
     }
     
     @IBAction func DoubleDefaultPressed(_ sender: Any)
@@ -691,6 +704,7 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
                 CurrentField?.Handler!(IntValue as Any)
             }
         }
+        ResetApplyButton(IntApplyButton)
     }
     
     @IBAction func IntDefaultPressed(_ sender: Any)
@@ -704,6 +718,7 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     {
         StringViewDirty.alpha = 0.0
         CurrentField?.Handler!(StringTextBox as Any)
+        ResetApplyButton(StringApplyButton)
     }
     
     @IBAction func StringDefaultPressed(_ sender: Any)
@@ -720,6 +735,7 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
             CurrentField?.Handler!(Vector as Any)
         }
         Vector3ViewDirty.alpha = 0.0
+        ResetApplyButton(Vector3ApplyButton)
     }
     
     @IBAction func Vector3DefaultPressed(_ sender: Any)
@@ -736,11 +752,27 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
             CurrentField?.Handler!(Vector as Any)
         }
         Vector4ViewDirty.alpha = 0.0
+        ResetApplyButton(Vector4ApplyButton)
     }
     
     @IBAction func Vector4DefaultPressed(_ sender: Any)
     {
         Vector4ViewDirty.alpha = 0.0
+    }
+    
+    // MARK: General purpose UI functions.
+    
+    func ThrobApplyButton(_ Button: UIButton)
+    {
+        Button.StartPulsation()
+        Button.StartColorCycling()
+    }
+    
+    func ResetApplyButton(_ Button: UIButton)
+    {
+        Button.StopAnimations()
+        Button.tintColor = UIColor.systemBlue
+        Button.Scale(Duration: 0.15)
     }
     
     // MARK: UI control outlets.
@@ -767,6 +799,7 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var ColorDescription: UILabel!
     @IBOutlet weak var ColorViewDirty: UIImageView!
     @IBOutlet weak var ColorControlTitle: UILabel!
+        @IBOutlet weak var ColorApplyButton: UIButton!
     
     // MARK: Gradient view controls.
     @IBOutlet weak var GradientTitle: UILabel!
@@ -777,6 +810,7 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var ReverseGradientSwitch: UISwitch!
     @IBOutlet weak var WarningBox: UIView!
     @IBOutlet weak var WarningLabel: UILabel!
+        @IBOutlet weak var GradientApplyButton: UIButton!
     
     // MARK: Image view controls.
     @IBOutlet weak var ImageTitle: UILabel!
@@ -785,12 +819,14 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var ImageViewDirty: UIImageView!
     @IBOutlet weak var ImagePhotoRollButton: UIButton!
     @IBOutlet weak var ImageProgramImagesButton: UIButton!
+        @IBOutlet weak var ImageApplyButton: UIButton!
     
     // MARK: String list view controls.
     @IBOutlet weak var StringListTitle: UILabel!
     @IBOutlet weak var StringListDescription: UILabel!
     @IBOutlet weak var StringListPicker: UIPickerView!
     @IBOutlet weak var StringListViewDirty: UIImageView!
+        @IBOutlet weak var StringListApplyButton: UIButton!
     
     // MARK: Vector3 view controls.
     @IBOutlet weak var Vector3Title: UILabel!
@@ -799,6 +835,7 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var Vector3YBox: UITextField!
     @IBOutlet weak var Vector3ZBox: UITextField!
     @IBOutlet weak var Vector3ViewDirty: UIImageView!
+    @IBOutlet weak var Vector3ApplyButton: UIButton!
     
     // MARK: Vector4 view controls.
     @IBOutlet weak var Vector4Title: UILabel!
@@ -808,6 +845,7 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var Vector4ZBox: UITextField!
     @IBOutlet weak var Vector4WBox: UITextField!
     @IBOutlet weak var Vector4ViewDirty: UIImageView!
+        @IBOutlet weak var Vector4ApplyButton: UIButton!
     
     // MARK: Double view controls.
     @IBOutlet weak var DoubleTitle: UILabel!
@@ -815,6 +853,7 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var DoubleControlTitle: UILabel!
     @IBOutlet weak var DoubleTextBox: UITextField!
     @IBOutlet weak var DoubleViewDirty: UIImageView!
+        @IBOutlet weak var DoubleApplyButton: UIButton!
     
     // MARK: Int view controls.
     @IBOutlet weak var IntTitle: UILabel!
@@ -822,12 +861,14 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var IntControlTitle: UILabel!
     @IBOutlet weak var IntTextBox: UITextField!
     @IBOutlet weak var IntViewDirty: UIImageView!
+        @IBOutlet weak var IntApplyButton: UIButton!
     
     // MARK: String view controls.
     @IBOutlet weak var StringTitle: UILabel!
     @IBOutlet weak var StringDescription: UILabel!
     @IBOutlet weak var StringTextBox: UITextField!
     @IBOutlet weak var StringViewDirty: UIImageView!
+        @IBOutlet weak var StringApplyButton: UIButton!
     
     // MARK: Bool view controls.
     @IBOutlet weak var BoolTitle: UILabel!
@@ -835,6 +876,7 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var BoolControlTitle: UILabel!
     @IBOutlet weak var BoolSwitch: UISwitch!
     @IBOutlet weak var BoolViewDirty: UIImageView!
+        @IBOutlet weak var BoolApplyButton: UIButton!
     
     // MARK: Action view controls.
     @IBOutlet weak var ActionResults: UILabel!
