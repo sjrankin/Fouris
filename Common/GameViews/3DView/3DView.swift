@@ -63,7 +63,7 @@ class View3D: SCNView,                          //Our main super class.
             case .MultiSampling2X:
                 AAMode = .multisampling2X
             
-            case .Multisampling4X:
+            case .MultiSampling4X:
                 AAMode = .multisampling4X
             
             default:
@@ -120,6 +120,17 @@ class View3D: SCNView,                          //Our main super class.
             ThemeFields.BackgroundSolidColorCycleTime, ThemeFields.BackgroundSolidColorCycleTime].contains(Field)
         {
         DrawBackground()
+        }
+        else
+        {
+            switch Field
+            {
+                case .CameraFieldOfView:
+                    CameraNode.camera?.fieldOfView = CGFloat(CurrentTheme!.CameraFieldOfView)
+                
+                default:
+                break
+            }
         }
     }
     
@@ -936,8 +947,11 @@ class View3D: SCNView,                          //Our main super class.
     }
     
     /// Clear the bucket of all pieces.
+    /// - Note: The bucket will not be cleared if the view is rotating.
     func ClearBucket()
     {
+        objc_sync_enter(RotateLock)
+        defer{objc_sync_exit(RotateLock)}
         CreateMasterBlockNode()
         for Node in BlockList
         {
@@ -997,40 +1011,47 @@ class View3D: SCNView,                          //Our main super class.
             case .Standard:
                 if ShowGrid
                 {
+                    #if false
                     //Horizontal bucket lines.
                     for Y in stride(from: 10.0, to: -10.5, by: -1.0)
                     {
-                        #if true
                         let LineGeometry = SCNGeometry.Line(From: SCNVector3(-0.5, Y, 0.0), To: SCNVector3(10.0, Y, 0.0))
                         LineGeometry.firstMaterial?.diffuse.contents = UIColor.gray
                         LineGeometry.firstMaterial?.specular.contents = UIColor.gray
                         let LineNode = SCNNode(geometry: LineGeometry)
                         LineNode.name = "Horizontal,\(Int(Y))"
-                        #else
-                        let Start = SCNVector3(-0.5, Y, 0.0)
-                        let End = SCNVector3(10.0, Y, 0.0)
-                        let LineNode = MakeLine(From: Start, To: End, Color: ColorNames.White, LineWidth: 0.03)
-                        LineNode.name = "Horizontal,\(Int(Y))"
-                        #endif
                         BucketGridNode?.addChildNode(LineNode)
                     }
                     //Vertical bucket lines.
                     for X in stride(from: -4.5, to: 5.0, by: 1.0)
                     {
-                        #if true
                         let LineGeometry = SCNGeometry.Line(From: SCNVector3(X, 0.0, 0.0), To: SCNVector3(X, 20.0, 0.0))
                         LineGeometry.firstMaterial?.diffuse.contents = UIColor.gray
                         LineGeometry.firstMaterial?.specular.contents = UIColor.gray
                         let LineNode = SCNNode(geometry: LineGeometry)
                         LineNode.name = "Vertical,\(Int(X))"
-                        #else
+                        BucketGridNode?.addChildNode(LineNode)
+                    }
+                    #else
+                    //Horizontal bucket lines.
+                    for Y in stride(from: 10.0, to: -10.5, by: -1.0)
+                    {
+                        let Start = SCNVector3(-0.5, Y, 0.0)
+                        let End = SCNVector3(10.5, Y, 0.0)
+                        let LineNode = MakeLine(From: Start, To: End, Color: ColorNames.White, LineWidth: 0.03)
+                        LineNode.name = "Horizontal,\(Int(Y))"
+                        BucketGridNode?.addChildNode(LineNode)
+                    }
+                    //Vertical bucket lines.
+                    for X in stride(from: -4.5, to: 5.0, by: 1.0)
+                    {
                         let Start = SCNVector3(X, 0.0, 0.0)
                         let End = SCNVector3(X, 20.0, 0.0)
                         let LineNode = MakeLine(From: Start, To: End, Color: ColorNames.White, LineWidth: 0.03)
                         LineNode.name = "Vertical,\(Int(X))"
-                        #endif
                         BucketGridNode?.addChildNode(LineNode)
                     }
+                    #endif
                 }
                 if DrawOutline
                 {
@@ -1301,10 +1322,13 @@ class View3D: SCNView,                          //Our main super class.
         let ZRotation = DirectionalSign * 90.0 * CGFloat.pi / 180.0
         let RotateAction = SCNAction.rotateBy(x: 0.0, y: 0.0, z: ZRotation, duration: Duration)
         RemoveMovingPiece()
-        //BucketGridNode?.runAction(RotateAction)
-        //OutlineNode?.runAction(RotateAction)
+        if CurrentTheme!.RotateBucketGrid
+        {
+        BucketGridNode?.runAction(RotateAction)
+        OutlineNode?.runAction(RotateAction)
+        }
         MasterBlockNode?.runAction(RotateAction)
-        BucketNode?.runAction(RotateAction, completionHandler: {Completed()})
+        BucketNode?.runAction(RotateAction)
         #endif
     }
     
@@ -1324,6 +1348,40 @@ class View3D: SCNView,                          //Our main super class.
     func RotateContentsLeft(Duration: Double = 0.33, Completed: @escaping (() -> Void))
     {
         RotateContents(Right: false, Duration: Duration, Completed: Completed)
+    }
+    
+    /// Rotates the contents of the game (but not UI or falling piece) in the direction indicated by the `Right` flag.
+    /// - Note: This function uses a synchronous lock to make sure that when the board is rotating, other things don't happen to it.
+    /// - Parameter Right: If true, the contents are rotated clockwise. If false, counter-clockwise.
+    /// - Parameter Duration: Duration in seconds the rotation should take.
+    func RotateContents(Right: Bool, Duration: Double = 1.0)
+    {
+        objc_sync_enter(RotateLock)
+        defer{objc_sync_exit(RotateLock)}
+        let DirectionalSign = CGFloat(Right ? -1.0 : 1.0)
+        let ZRotation = DirectionalSign * 90.0 * CGFloat.pi / 180.0
+        let RotateAction = SCNAction.rotateBy(x: 0.0, y: 0.0, z: ZRotation, duration: Duration)
+        RemoveMovingPiece()
+        if CurrentTheme!.RotateBucketGrid
+        {
+            BucketGridNode?.runAction(RotateAction)
+            OutlineNode?.runAction(RotateAction)
+        }
+        MasterBlockNode?.runAction(RotateAction)
+        BucketNode?.runAction(RotateAction)
+    }
+    
+    /// Rotates the contents of the game (not only the game portion, not the text or other non-playable objects).
+    /// - Parameter Duration: Duration in seconds it takes to rotate the contents.
+    /// - Parameter RotationDirection: Determines whether the rotation is clockwise or counterclockwise.
+    /// - Parameter RotateCount: Determines how many times to rotate in the specified direction.
+    func RotateContents(Duration: Double = 0.33, RotationDirection: BucketRotationTypes, RotateCount: Int = 1)
+    {
+        let CallCount = RotateCount < 1 ? 1 : RotateCount
+        for _ in 0 ..< CallCount
+        {
+            RotateContents(Right: RotationDirection == .Right, Duration: Duration)
+        }
     }
     
     /// Sets the opacity level of the entire board to the specified value.
