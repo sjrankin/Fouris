@@ -28,17 +28,23 @@ class GameLogic
     /// The "AI" to run in attract mode (or perhaps in "play against the computer" mode).
     var AI: MainAI? = nil
     
+    /// The user theme.
+    var UserTheme: ThemeDescriptor? = nil
+    
     /// Initializer. The game board is created here.
     ///
     /// - Parameters
     ///   - Parameter WithGameCount: If provided, the game sequence value (eg, number of times played).
     ///   - Parameter BaseGame: The base game type.
+    ///   - Parameter UserTheme: The current user theme.
     ///   - Parameter EnableAI: The AI is enabled as per the passed value.
-    init(WithGameCount: Int? = nil, BaseGame: BaseGameTypes, EnableAI: Bool)
+    init(WithGameCount: Int? = nil, BaseGame: BaseGameTypes, UserTheme: ThemeDescriptor,
+         EnableAI: Bool)
     {
         _BaseGameType = BaseGame
+        self.UserTheme = UserTheme
         _HighScore = 0
-
+        
         if let InitialCount = WithGameCount
         {
             GameCount = InitialCount
@@ -365,13 +371,13 @@ class GameLogic
         switch BaseGameType
         {
             case .Standard:
-            UIDelegate?.PieceMoved(MovedPiece, Direction: Direction, Commanded: Commanded)
+                UIDelegate?.PieceMoved(MovedPiece, Direction: Direction, Commanded: Commanded)
             
             case .Rotating4:
                 UIDelegate?.PieceMoved3D(MovedPiece, Direction: Direction, Commanded: Commanded)
             
             case .Cubic:
-            UIDelegate?.PieceMoved(MovedPiece, Direction: Direction, Commanded: Commanded)
+                UIDelegate?.PieceMoved(MovedPiece, Direction: Direction, Commanded: Commanded)
         }
         
         #else
@@ -625,7 +631,7 @@ class GameLogic
             DispatchQueue.main.async
                 {
                     self.AITimer = Timer.scheduledTimer(timeInterval: Duration, target: self, selector: #selector(self.GetAIMotion),
-                                           userInfo: nil, repeats: true)
+                                                        userInfo: nil, repeats: true)
             }
         }
     }
@@ -649,7 +655,13 @@ class GameLogic
     /// Get an AI motion to execute. Motions are in the AI motion queue.
     @objc func GetAIMotion()
     {
+        let StartTime = CACurrentMediaTime()
         let NextMotion = AI?.GetNextMotion()
+        let EndTime = CACurrentMediaTime() - StartTime
+        if EndTime > 0.01
+        {
+            print("AI Duration: \(EndTime)")
+        }
         if NextMotion! == Directions.NoDirection
         {
             _CurrentGameScore = GameBoard!.Map!.Scorer!.Current
@@ -663,9 +675,9 @@ class GameLogic
         let AIPieceID: UUID = AIPiece.ID
         #endif
         GameBoard?.InputFor(ID: AIPieceID, Direction: NextMotion!)
-        if Settings.ShowAIUICommands()
+        if UserTheme!.ShowAIActionsOnControls
         {
-           ShowAICommandsOnUI(Motion: NextMotion!)
+            ShowAICommandsOnUI(Motion: NextMotion!)
         }
     }
     
