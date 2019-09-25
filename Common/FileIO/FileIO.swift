@@ -16,7 +16,10 @@ class FileIO
     private static var AppDocDirectory = "Fouris"
     
     /// Sub-directory for game background images selected by the user.
-        public static let SampleDirectory = "/Images"
+    public static let SampleDirectory = "/Images"
+    
+    /// Sub-directory for settings.
+    public static let SettingsDirectory = "/Settings"
     
     /// Returns an URL for the document directory.
     ///
@@ -90,16 +93,8 @@ class FileIO
     /// - Returns: URL of the user's document directory.
     public static func DocumentDirectory() -> URL
     {
-        let Paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        return Paths[0]
-    }
-    
-    /// Returns the URL of the directory used to store app-related files.
-    ///
-    /// - Returns: URL of the directory used to store app-related files.
-    public static func AppDirectory() -> URL
-    {
-        return DocumentDirectory().appendingPathComponent(AppDocDirectory)
+        let Dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+        return Dir!
     }
     
     /// Return the directory where we can read and write data. This is assumed to be a sub-directory off of the user's
@@ -198,7 +193,7 @@ class FileIO
         {
             if DumpErrorMessage
             {
-            print("Error reading \(FinalPath.path): \(error.localizedDescription)")
+                print("Error reading \(FinalPath.path): \(error.localizedDescription)")
             }
             return nil
         }
@@ -330,7 +325,6 @@ class FileIO
     
     /// Returns the URL of the passed directory. The directory is assumed to be a sub-directory of the
     /// document directory.
-    ///
     /// - Parameter DirectoryName: Name of the directory whose URL is returned.
     /// - Returns: URL of the directory on success, nil if not found.
     public static func GetDirectoryURL(DirectoryName: String) -> URL?
@@ -482,5 +476,112 @@ class FileIO
             print("Error getting URL for " + SampleDirectory)
             return nil
         }
+    }
+    
+    /// Determines if the file in the specified URL exists.
+    /// - Parameter FileURL: URL of the file/directory to verify.
+    /// - Returns: True if the file exists at the specified path, false if not.
+    public static func FileExists(FileURL: URL) -> Bool
+    {
+        return FileManager.default.fileExists(atPath: FileURL.path)
+    }
+    
+    /// Determines if a file exists in a specific directory.
+    /// Parameter FileName: The name of the file to verify.
+    /// Parameter Directory: The directory where to look for the file.
+    /// Returns: True if the file exists in the specified directory, false if not.
+    public static func FileExists(FileName: String, Directory: String) -> Bool
+    {
+        let FPath = GetDirectoryURL(DirectoryName: Directory)?.appendingPathComponent(FileName)
+        return FileExists(FileURL: FPath!)
+    }
+    
+    /// Load a settings file from the settings directory.
+    /// - Note:
+    ///    - If the `SettingsDirectory` does not exist, nil is returned.
+    ///    - If the file is not found, nil is returned.
+    /// - Parameter Name: The name of the file whose contents will be returned.
+    /// - Returns: Contents of the file on success, nil on error.
+    public static func GetSettingsFile(Name: String) -> String?
+    {
+        if !DirectoryExists(DirectoryName: SettingsDirectory)
+        {
+            print("Cannot return \(Name) - \(SettingsDirectory) not found.")
+            CreateDirectory(DirectoryName: SettingsDirectory)
+            return nil
+        }
+        return GetFileContents(InDirectory: GetDirectoryURL(DirectoryName: SettingsDirectory)!, FromFile: Name)
+    }
+    
+    /// Save a settings file in the settings directory.
+    /// - Parameter Name: The name of the settings file. Existing files will be overwritten.
+    /// - Parameter Contents: The contents of the file to save.
+    /// - Returns: True on success, false on failure.
+    public static func SaveSettingsFile(Name: String, Contents: String) -> Bool
+    {
+        if !DirectoryExists(DirectoryName: SettingsDirectory)
+        {
+            CreateDirectory(DirectoryName: SettingsDirectory)
+        }
+        let SaveDirectory = GetDirectoryURL(DirectoryName: SettingsDirectory)
+        //print("SaveSettingsFile(\((SaveDirectory?.path)!))")
+        let FinalName = SaveDirectory?.appendingPathComponent(Name)
+        do
+        {
+            try Contents.write(to: FinalName!, atomically: false, encoding: .utf8)
+        }
+        catch
+        {
+            print("Error saving \(Name) to \(SettingsDirectory): error: \(error.localizedDescription)")
+            return false
+        }
+        return true
+    }
+    
+    /// Write an array of `Int`s as a binary file.
+    /// - Parameter Name: Name of the file to write. If the file already exists, it will be overwritten.
+    /// - Parameter Directory: Directory where to write the file.
+    /// - Parameter BinaryData: The data to write to the file.
+    /// - Returns: True on success, false on failure. If false is returned, an error message will be placed in the debug console.
+    public static func WriteBinaryFile(Name: String, Directory: String, BinaryData: [Int]) -> Bool
+    {
+        let BData = Data(bytes: BinaryData, count: BinaryData.count * MemoryLayout<Int>.stride)
+        let FileURL = GetDirectoryURL(DirectoryName: Directory)?.appendingPathComponent(Name)
+        do
+        {
+            try BData.write(to: FileURL!, options: Data.WritingOptions.atomic)
+        }
+        catch
+        {
+            print("Error writing \((FileURL?.path)!): error: \(error.localizedDescription)")
+            return false
+        }
+        return true
+    }
+    
+    /// Read a binary file and return it as an array of `Int`s.
+    /// - Note:
+    ///   - This function assumes the contents of the file are only `Int`s - no other decoding is done here.
+    ///   - This function uses a deprecated API call whose warning is obscure at best. For now, we will continue to use
+    ///     the deprecated function until Apple documents its replacement.
+    /// - Parameter Name: The name of the file to read.
+    /// - Parameter Directory: The directory where the file lives.
+    /// - Returns: Array of `Int`s from the file. Nil on error.
+    public static func ReadBinaryFile(Name: String, Directory: String) -> [Int]?
+    {
+        let FileURL = GetDirectoryURL(DirectoryName: Directory)?.appendingPathComponent(Name)
+        var Result = [Int]()
+        do
+        {
+            let RawData = try Data(contentsOf: FileURL!)
+            RawData.withUnsafeBytes{ (bytes: UnsafePointer<Int>) in
+                Result = Array(UnsafeBufferPointer(start: bytes, count: RawData.count / MemoryLayout<Int>.size))}
+        }
+        catch
+        {
+            print("Error reading \((FileURL?.path)!): error: \(error.localizedDescription)")
+            return nil
+        }
+        return Result
     }
 }
