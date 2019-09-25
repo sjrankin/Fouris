@@ -1,4 +1,4 @@
-<Theme Name="User">
+<Theme Name="User Theme">
     <Property Name="_ID" Value="49de21df-e1ce-448d-9a87-8db26b07e7ab"/>
     <Property Name="_MinimumVersion" Value="0"/>
     <Property Name="_MinimumBuild" Value="0"/>
@@ -6,7 +6,7 @@
     <Property Name="_Title" Value="User Game Theme"/>
     <Property Name="_Created" Value="2019-09-05"/>
     <Property Name="_Edited" Value="2019-09-22"/>
-    <Property Name="_UserTheme" Value="true"/>
+    <Property Name="_IsUserTheme" Value="true"/>
     <Property Name="_IsDefaultTheme" Value="false"/>
     <Property Name="_CameraFieldOfView" Value="92.0"/>
     <Property Name="_CameraPosition" Value="0.0,2.0,15.0"/>
@@ -32,7 +32,7 @@
     <Property Name="_FadeBucketGrid" Value="false"/>
     <Property Name="_FadeBucketOutline" Value="false"/>
     <Property Name="_BucketGridColor" Value="Gray"/>
-    <Property Name="_BuketGridOutlineColor" Value="Red"/>
+    <Property Name="_BucketGridOutlineColor" Value="Red"/>
     <Property Name="_BackgroundType" Value="Color"/>
     <Property Name="_BackgroundSolidColor" Value="Maroon"/>
     <Property Name="_BackgroundSolidColorCycleTime" Value="0"/>
