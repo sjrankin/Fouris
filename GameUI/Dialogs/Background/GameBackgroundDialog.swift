@@ -142,7 +142,7 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
             default:
                 return
         }
-        Settings.SetGameBackgroundType(NewValue: BGType)
+        UserTheme!.BackgroundType = BackgroundType
         HandleBGChange(ToType: BackgroundType)
     }
     
