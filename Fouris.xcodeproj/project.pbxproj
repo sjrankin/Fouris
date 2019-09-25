@@ -28,6 +28,7 @@
 		17189FF92333347C00317BF1 /* +Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17189FF82333347C00317BF1 /* +Image.swift */; };
 		17189FFB233346C100317BF1 /* +Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17189FFA233346C100317BF1 /* +Gradient.swift */; };
 		17189FFD233348AB00317BF1 /* GradientSwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17189FFC233348AB00317BF1 /* GradientSwatch.swift */; };
+		171BD472233B1BA10048808A /* BufferManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BD471233B1BA10048808A /* BufferManager.swift */; };
 		171BDEC422B8CE00005C3509 /* SmoothMotionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BDEC322B8CE00005C3509 /* SmoothMotionProtocol.swift */; };
 		171D5D472313FC5300043856 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 171D5D462313FC5200043856 /* MainStoryboard.storyboard */; };
 		171ED0FB22F567EA00CE2CDF /* AIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171ED0FA22F567EA00CE2CDF /* AIProtocol.swift */; };
@@ -89,7 +90,6 @@
 		1767D28622AF4959005EE191 /* DebugClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1767D28522AF4959005EE191 /* DebugClient.swift */; };
 		1767D28B22AF5832005EE191 /* PeerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1767D28A22AF5832005EE191 /* PeerType.swift */; };
 		176F1B6E227AD3D500681CDE /* FileIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F1B6C227AD3D100681CDE /* FileIO.swift */; };
-		176F1B71227B0A0000681CDE /* TOC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F1B6F227B09FB00681CDE /* TOC.swift */; };
 		176F1B72227B0A0600681CDE /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1798FE5D2279736C008B26E9 /* Settings.swift */; };
 		17715CB622C74D8E009FD441 /* +Tables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17715CB522C74D8E009FD441 /* +Tables.swift */; };
 		17715CB922C757D0009FD441 /* StandardBoard.scn in Resources */ = {isa = PBXBuildFile; fileRef = 17715CB822C757D0009FD441 /* StandardBoard.scn */; };
@@ -213,8 +213,6 @@
 		17F0B49E225CBE740071514E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17F0B49C225CBE740071514E /* LaunchScreen.storyboard */; };
 		17F0B4B1225CC22A0071514E /* Piece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F0B4B0225CC22A0071514E /* Piece.swift */; };
 		17F0B4BA225CCEE00071514E /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F0B4B9225CCEE00071514E /* GameLogic.swift */; };
-		17F6ECEA2286E0C9000F8E11 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1798FE5F2279808A008B26E9 /* UserData.swift */; };
-		17F6ECEB2286E0CC000F8E11 /* LevelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1798FE61227987D8008B26E9 /* LevelData.swift */; };
 		17F6ECEC2286E0F0000F8E11 /* GameViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171020ED227D68A2002FAB63 /* GameViewProtocol.swift */; };
 		17F6ECEE2286E1C7000F8E11 /* MainDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A45B5F2271D8CA002E705D /* MainDelegate.swift */; };
 		17F6ECF02286E1F2000F8E11 /* ControlProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1717BA6B2275CC2C008747D1 /* ControlProtocol.swift */; };
@@ -248,6 +246,7 @@
 		17189FF82333347C00317BF1 /* +Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Image.swift"; sourceTree = "<group>"; };
 		17189FFA233346C100317BF1 /* +Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Gradient.swift"; sourceTree = "<group>"; };
 		17189FFC233348AB00317BF1 /* GradientSwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientSwatch.swift; sourceTree = "<group>"; };
+		171BD471233B1BA10048808A /* BufferManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferManager.swift; sourceTree = "<group>"; };
 		171BDEC322B8CE00005C3509 /* SmoothMotionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmoothMotionProtocol.swift; sourceTree = "<group>"; };
 		171D5D462313FC5200043856 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		171ED0FA22F567EA00CE2CDF /* AIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIProtocol.swift; sourceTree = "<group>"; };
@@ -311,7 +310,6 @@
 		1767D28522AF4959005EE191 /* DebugClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugClient.swift; sourceTree = "<group>"; };
 		1767D28A22AF5832005EE191 /* PeerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerType.swift; sourceTree = "<group>"; };
 		176F1B6C227AD3D100681CDE /* FileIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileIO.swift; sourceTree = "<group>"; };
-		176F1B6F227B09FB00681CDE /* TOC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOC.swift; sourceTree = "<group>"; };
 		17715CB522C74D8E009FD441 /* +Tables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Tables.swift"; sourceTree = "<group>"; };
 		17715CB822C757D0009FD441 /* StandardBoard.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = StandardBoard.scn; sourceTree = "<group>"; };
 		17750FE6233732E700A188D6 /* ThemeChangeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeChangeProtocol.swift; sourceTree = "<group>"; };
@@ -351,8 +349,6 @@
 		1797523222C38A4D00BF539A /* +IdiotLights.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "+IdiotLights.swift"; sourceTree = "<group>"; };
 		1797523322C38A4D00BF539A /* +SpecialAndOtherCommands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "+SpecialAndOtherCommands.swift"; sourceTree = "<group>"; };
 		1798FE5D2279736C008B26E9 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
-		1798FE5F2279808A008B26E9 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
-		1798FE61227987D8008B26E9 /* LevelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelData.swift; sourceTree = "<group>"; };
 		179C5E1B2322282B0003845B /* PieceVisuals.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = PieceVisuals.xml; path = "Runtime Files/PieceVisuals.xml"; sourceTree = SOURCE_ROOT; };
 		179C5E1E23222B510003845B /* VisualDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualDescriptor.swift; sourceTree = "<group>"; };
 		179C5E2023222EAA0003845B /* UserVisuals.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = UserVisuals.xml; sourceTree = "<group>"; };
@@ -622,6 +618,7 @@
 			isa = PBXGroup;
 			children = (
 				176F1B6C227AD3D100681CDE /* FileIO.swift */,
+				171BD471233B1BA10048808A /* BufferManager.swift */,
 			);
 			path = FileIO;
 			sourceTree = "<group>";
@@ -720,9 +717,6 @@
 			isa = PBXGroup;
 			children = (
 				1798FE5D2279736C008B26E9 /* Settings.swift */,
-				1798FE5F2279808A008B26E9 /* UserData.swift */,
-				1798FE61227987D8008B26E9 /* LevelData.swift */,
-				176F1B6F227B09FB00681CDE /* TOC.swift */,
 				178C0F052338882100A35C62 /* SettingsChangedProtocol.swift */,
 			);
 			path = Customization;
@@ -1304,6 +1298,7 @@
 				1753ABED225E213200FC7089 /* PieceFactory.swift in Sources */,
 				179CB8CD2326145C0034E25B /* PieceViewer.swift in Sources */,
 				17AF2323231399CC00921E6C /* MainSlideInView2.swift in Sources */,
+				171BD472233B1BA10048808A /* BufferManager.swift in Sources */,
 				17A45B5B2271A5CC002E705D /* AITestNode.swift in Sources */,
 				1705ADE9225D804400628268 /* Extensions.swift in Sources */,
 				1767D28B22AF5832005EE191 /* PeerType.swift in Sources */,
@@ -1391,7 +1386,6 @@
 				179C5E2E23224D570003845B /* ThemeDescriptor.swift in Sources */,
 				171ED0FD22F5689200CE2CDF /* MainAI.swift in Sources */,
 				17E71A6B22AD20CC0081991E /* State.swift in Sources */,
-				176F1B71227B0A0000681CDE /* TOC.swift in Sources */,
 				17376352230A85A70050EB22 /* TextOverlay.swift in Sources */,
 				179F0A7E2330D4B80051B148 /* ThemeEnums.swift in Sources */,
 				174BEFDD2287B4DF003A43E5 /* ViewEnvironment.swift in Sources */,
@@ -1400,7 +1394,6 @@
 				1704E2FE232123DE00D7C158 /* AnimatedGradientStop.swift in Sources */,
 				17567158230265FD00D0824D /* Stepper.swift in Sources */,
 				17B11300232B693E007DFBD4 /* +3DDebug.swift in Sources */,
-				17F6ECEB2286E0CC000F8E11 /* LevelData.swift in Sources */,
 				174C9A5D232F5E8A00A5DC7A /* RawThemeFieldEditProtocol.swift in Sources */,
 				171ED0FF22F56B3300CE2CDF /* StandardGameAI.swift in Sources */,
 				178F4CA6229131A900FBCFFD /* Board.swift in Sources */,
@@ -1421,7 +1414,6 @@
 				1749B6E122BB26A0003DC65D /* Conversions.swift in Sources */,
 				179C5E2A23224C190003845B /* ThemeManager.swift in Sources */,
 				1754E79A2325285100820FDE /* Grid.swift in Sources */,
-				17F6ECEA2286E0C9000F8E11 /* UserData.swift in Sources */,
 				177F4FD6229C11A100FE72CD /* SerializerTree.swift in Sources */,
 				179C5E2323222F5A0003845B /* PieceVisuals.swift in Sources */,
 				1797523E22C38A4D00BF539A /* +TextMessages.swift in Sources */,
