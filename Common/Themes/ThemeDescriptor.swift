@@ -287,6 +287,26 @@ class ThemeDescriptor: Serializable
                 //Double
                 _AutoStartDuration = Double(Value)!
             
+            case "_GameType":
+                //BaseGameTypes
+                _GameType = BaseGameTypes(rawValue: Value)!
+            
+            case "_IsUserTheme":
+                //Bool
+                _IsUserTheme = Bool(Value)!
+            
+            case "_IsDefaultTheme":
+                //Bool
+                _IsDefaultTheme = Bool(Value)!
+            
+            case "_FileName":
+                //Do nothing for this field.
+                break
+            
+            case "_SaveAfterEdit":
+                //Do nothing for this field.
+                break
+            
             default:
                 print("Encountered unexpected key (\(Key)) in ThemeDescriptor.Populate")
                 break
@@ -1002,9 +1022,9 @@ class ThemeDescriptor: Serializable
     // MARK: Game play properties.
     
     /// Holds the game type.
-    private var _GameType: GameTypes = .Standard
+    private var _GameType: BaseGameTypes = .Standard
     /// Get or set the game type.
-    public var GameType: GameTypes
+    public var GameType: BaseGameTypes
     {
         get
         {
@@ -1297,6 +1317,36 @@ class ThemeDescriptor: Serializable
         }
     }
     
+    /// Holds the user theme flag.
+    private var _IsUserTheme: Bool = false
+    /// Get or set the flag that indicates this is the user-editable theme.
+    public var IsUserTheme: Bool
+    {
+        get
+        {
+            return _IsUserTheme
+        }
+        set
+        {
+            _IsUserTheme = newValue
+        }
+    }
+    
+    /// Holds the default theme flag.
+    private var _IsDefaultTheme: Bool = false
+    /// Get or set the flag that indicates this is the default theme.
+    public var IsDefaultTheme: Bool
+    {
+        get
+        {
+            return _IsDefaultTheme
+        }
+        set
+        {
+            _IsDefaultTheme = newValue
+        }
+    }
+    
     // MARK: Tile lists and list handling.
     
     /// Creates and returns a new tile descriptor class.
@@ -1340,16 +1390,6 @@ class ThemeDescriptor: Serializable
     }
 }
 
-/// Game types - eg, how pieces fall and where they fall to and how the bucket behaves.
-///
-/// - **Standard**: Standard Tetris game.
-/// - **Centered**: Blocks fall to the center, game may rotate bucket or blocks fall in from any side.
-enum GameTypes: String, CaseIterable
-{
-    case Standard = "Standard"
-    case Centered = "Centered"
-}
-
 /// 3D game view background types.
 ///
 /// - **Color**: Name of a color.
@@ -1379,9 +1419,9 @@ enum AntialiasingModes: String, CaseIterable
 {
     case None = "None"
     case MultiSampling2X = "MultiSampling2X"
-    case Multisampling4X = "MultiSampling4X"
-    case Multisampling8X = "MultiSampling8X"
-    case Multisampling16X = "Multisampling16X"
+    case MultiSampling4X = "MultiSampling4X"
+    case MultiSampling8X = "MultiSampling8X"
+    case MultiSampling16X = "MultiSampling16X"
 }
 
 /// Game light types.
