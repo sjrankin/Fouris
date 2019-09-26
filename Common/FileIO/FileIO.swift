@@ -21,6 +21,9 @@ class FileIO
     /// Sub-directory for settings.
     public static let SettingsDirectory = "/Settings"
     
+    /// Sub-directory for statistical history.
+    public static let HistoryDirectory = "/History"
+    
     /// Returns an URL for the document directory.
     ///
     /// - Returns: Document directory URL on success, nil on error.
@@ -496,9 +499,53 @@ class FileIO
         return FileExists(FileURL: FPath!)
     }
     
+    /// Load a history file from the settings directory.
+    /// - Note:
+    ///    - If the `HistoryDirectory` does not exist, nil is returned. Additionally, the history directory will
+    ///      be created in this case.
+    ///    - If the file is not found, nil is returned.
+    /// - Parameter Name: The name of the file whose contents will be returned.
+    /// - Returns: Contents of the file on success, nil on error.
+    public static func GetHistoryFile(Name: String) -> String?
+    {
+        if !DirectoryExists(DirectoryName: HistoryDirectory)
+        {
+            print("Cannot return \(Name) - \(HistoryDirectory) not found.")
+            CreateDirectory(DirectoryName: HistoryDirectory)
+            return nil
+        }
+        return GetFileContents(InDirectory: GetDirectoryURL(DirectoryName: HistoryDirectory)!, FromFile: Name)
+    }
+    
+    /// Save a history file in the history directory.
+    /// - Note: If the history directory does not exist, it is created here.
+    /// - Parameter Name: The name of the history file. Existing files will be overwritten.
+    /// - Parameter Contents: The contents of the file to save.
+    /// - Returns: True on success, false on failure.
+    public static func SaveHistoryFile(Name: String, Contents: String) -> Bool
+    {
+        if !DirectoryExists(DirectoryName: HistoryDirectory)
+        {
+            CreateDirectory(DirectoryName: HistoryDirectory)
+        }
+        let SaveDirectory = GetDirectoryURL(DirectoryName: HistoryDirectory)
+        let FinalName = SaveDirectory?.appendingPathComponent(Name)
+        do
+        {
+            try Contents.write(to: FinalName!, atomically: false, encoding: .utf8)
+        }
+        catch
+        {
+            print("Error saving \(Name) to \(HistoryDirectory): error: \(error.localizedDescription)")
+            return false
+        }
+        return true
+    }
+    
     /// Load a settings file from the settings directory.
     /// - Note:
-    ///    - If the `SettingsDirectory` does not exist, nil is returned.
+    ///    - If the `SettingsDirectory` does not exist, nil is returned. Additionally, the settings directory will
+    ///      be created in this case.
     ///    - If the file is not found, nil is returned.
     /// - Parameter Name: The name of the file whose contents will be returned.
     /// - Returns: Contents of the file on success, nil on error.
@@ -514,6 +561,7 @@ class FileIO
     }
     
     /// Save a settings file in the settings directory.
+    /// - Note: If the settings directory does not exist, it is created here.
     /// - Parameter Name: The name of the settings file. Existing files will be overwritten.
     /// - Parameter Contents: The contents of the file to save.
     /// - Returns: True on success, false on failure.
