@@ -797,10 +797,12 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter FromBoard: The board that contains the map to draw.
     func DrawMap3D(FromBoard: Board, CalledFrom: String = "")
     {
+        #if false
         if BaseGameType == .Rotating4
         {
             print("DrawMap3D called from \(CalledFrom)")
         }
+        #endif
         objc_sync_enter(RotateLock)
         defer{ objc_sync_exit(RotateLock) }
         
