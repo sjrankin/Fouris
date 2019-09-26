@@ -61,7 +61,6 @@ extension View3D
         {
             case 0:
                 //X is the range.
-                
                 Vector = SCNVector3(ToRange * RangeMultiplier, Float.random(in: 10.0 ... ToRange), FinalZ)
             
             case 1:
@@ -132,11 +131,22 @@ extension View3D
         }
     }
     
+    /// Adds a random value to the passed value and returns the result.
+    /// - Parameter Value: Base, source value.
+    /// - Parameter Range: Determines the range of the random number. The low range is `-Range` and the high range is `Range`.
+    /// - Returns: The value with a random value in the range added to it.
+    func SlightlyRandomize(_ Value: Double, Range: Double) -> Double
+    {
+        let Offset = Double.random(in: -Range ... Range)
+        return Value + Offset
+    }
+    
     /// Visually cleans the bucket by removing all retired blocks/pieces.
     /// - Note:
     ///   - Should be called only after the game ends.
     ///   - The list of blocks in **Blocks** is *not* modified.
     ///   - Control is not returned until all blocks' actions have been completed.
+    ///   - `.Fast` and `.None` have the save effect.
     /// - Parameter Method: The visual method to use to remove the blocks. If this value is **.Random**, a visual method will be
     ///                     selected at random (and not treated as **.None**.)
     /// - Parameter MaxDuration: The maximum amount of time to take to remove all of the blocks.
@@ -154,8 +164,8 @@ extension View3D
         switch VisualMethod
         {
             case .Fast:
-                //Fast is just a synonym for .None - it just removes all blocks and returnes.
-            fallthrough
+                //Fast is just a synonym for .None - it just removes all blocks and returns.
+                fallthrough
             case .Random:
                 //Random doesn't actually do anything - it's an instruction to select a random method.
                 fallthrough
@@ -172,7 +182,7 @@ extension View3D
                 for Block in self.BlockList
                 {
                     Block.removeAllActions()
-                    let FallTo = SCNAction.move(to: SCNVector3(Block.X, -20.0, Block.Z), duration: Double.random(in: 0.25 ... MaxDuration))
+                    let FallTo = SCNAction.move(to: SCNVector3(Block.X, -20.0, Block.Z), duration: Double.random(in: 0.15 ... MaxDuration))
                     let KillBlock = SCNAction.removeFromParentNode()
                     let Sequence = SCNAction.sequence([FallTo, KillBlock])
                     Block.runAction(Sequence)
@@ -183,7 +193,7 @@ extension View3D
                 for Block in self.BlockList
                 {
                     Block.removeAllActions()
-                    let FallTo = SCNAction.move(to: SCNVector3(Block.X, 30.0, Block.Z), duration: Double.random(in: 0.25 ... MaxDuration))
+                    let FallTo = SCNAction.move(to: SCNVector3(Block.X, 30.0, Block.Z), duration: Double.random(in: 0.15 ... MaxDuration))
                     let KillBlock = SCNAction.removeFromParentNode()
                     let Sequence = SCNAction.sequence([FallTo, KillBlock])
                     Block.runAction(Sequence)
@@ -200,7 +210,7 @@ extension View3D
                 for Block in self.BlockList
                 {
                     Block.removeAllActions()
-                    let FadeOut = SCNAction.fadeOut(duration: Double.random(in: 0.25 ... MaxDuration))
+                    let FadeOut = SCNAction.fadeOut(duration: Double.random(in: 0.15 ... MaxDuration))
                     let KillBlock = SCNAction.removeFromParentNode()
                     let Sequence = SCNAction.sequence([FadeOut, KillBlock])
                     Block.runAction(Sequence)
@@ -211,7 +221,7 @@ extension View3D
                 for Block in self.BlockList
                 {
                     Block.removeAllActions()
-                    let Scale = SCNAction.scale(to: 0.0, duration: Double.random(in: 0.25 ... MaxDuration))
+                    let Scale = SCNAction.scale(to: 0.0, duration: Double.random(in: 0.15 ... MaxDuration))
                     let KillBlock = SCNAction.removeFromParentNode()
                     let Sequence = SCNAction.sequence([Scale, KillBlock])
                     Block.runAction(Sequence)
@@ -236,7 +246,7 @@ extension View3D
                 for Block in self.BlockList
                 {
                     let TargetVector = RadialVector(From: SCNVector3(Block.X, Block.Y, Block.Z), TargetDistance: 40.0)
-                    let AnimationDuration = Double.random(in: 0.25 ... MaxDuration)
+                    let AnimationDuration = Double.random(in: 0.15 ... MaxDuration)
                     let SpinAction = SCNAction.rotateBy(x: 1.0, y: 1.0, z: 1.0, duration: AnimationDuration)
                     let MoveTo = SCNAction.move(to: TargetVector, duration: AnimationDuration)
                     let ActionGroup = SCNAction.group([SpinAction, MoveTo])
@@ -249,7 +259,7 @@ extension View3D
                 //Blocks spin and shink to invisibility.
                 for Block in self.BlockList
                 {
-                    let AnimationDuration = Double.random(in: 0.25 ... MaxDuration)
+                    let AnimationDuration = Double.random(in: 0.15 ... MaxDuration)
                     let SpinAction = SCNAction.rotateBy(x: 1.0, y: 1.0, z: 1.0, duration: AnimationDuration)
                     let ShrinkAction = SCNAction.scale(to: 0.01, duration: AnimationDuration)
                     let ActionGroup = SCNAction.group([SpinAction, ShrinkAction])
@@ -262,11 +272,29 @@ extension View3D
                 //Blocks scatter in random directions.
                 for Block in self.BlockList
                 {
-                    let TargetVector = RandomVector(ToRange: 40.0, UseZ: Float(Block.Z), DoNotRandomizeZ: true)
-                    let AnimationDuration = Double.random(in: 0.25 ... MaxDuration)
+                    let ZValue = CGFloat.random(in: -2.0 ... 2.0)
+                    let TargetVector = RandomVector(ToRange: 40.0, UseZ: Float(ZValue), DoNotRandomizeZ: true)
+                    let AnimationDuration = Double.random(in: 0.15 ... MaxDuration)
                     let MoveTo = SCNAction.move(to: TargetVector, duration: AnimationDuration)
                     let KillBlock = SCNAction.removeFromParentNode()
                     let Sequence = SCNAction.sequence([MoveTo, KillBlock])
+                    Block.runAction(Sequence)
+            }
+            
+            case .ScatterSpin:
+                //Blocks scatter in random directions, while spinning in random directions as well.
+                for Block in self.BlockList
+                {
+                    let ZValue = CGFloat.random(in: -2.0 ... 2.0)
+                    let TargetVector = RandomVector(ToRange: 40.0, UseZ: Float(ZValue), DoNotRandomizeZ: true)
+                    let AnimationDuration = Double.random(in: 0.15 ... MaxDuration)
+                    let SpinX = SCNAction.rotateBy(x: 1.0, y: 0.0, z: 0.0, duration: SlightlyRandomize(AnimationDuration - 0.1, Range: 0.1))
+                    let SpinY = SCNAction.rotateBy(x: 0.0, y: 1.0, z: 0.0, duration: SlightlyRandomize(AnimationDuration - 0.1, Range: 0.1))
+                    let SpinZ = SCNAction.rotateBy(x: 0.0, y: 0.0, z: 1.0, duration: SlightlyRandomize(AnimationDuration - 0.1, Range: 0.1))
+                    let MoveTo = SCNAction.move(to: TargetVector, duration: AnimationDuration)
+                    let MotionGroup = SCNAction.group([SpinX, SpinY, SpinZ, MoveTo])
+                    let KillBlock = SCNAction.removeFromParentNode()
+                    let Sequence = SCNAction.sequence([MotionGroup, KillBlock])
                     Block.runAction(Sequence)
             }
             
@@ -275,7 +303,7 @@ extension View3D
                 for Block in self.BlockList
                 {
                     let TargetVector = RadialVector(From: SCNVector3(Block.X, Block.Y, Block.Z), TargetDistance: 40.0)
-                    let AnimationDuration = Double.random(in: 0.25 ... MaxDuration)
+                    let AnimationDuration = Double.random(in: 0.15 ... MaxDuration)
                     let MoveTo = SCNAction.move(to: TargetVector, duration: AnimationDuration)
                     let KillBlock = SCNAction.removeFromParentNode()
                     let Sequence = SCNAction.sequence([MoveTo, KillBlock])
@@ -283,10 +311,30 @@ extension View3D
             }
             
             case .ScatterHorizontally:
-                break
+                ///Blocks scatter randomly, right or left
+                for Block in self.BlockList
+                {
+                    let Direction = [-1.0, 1.0].randomElement()!
+                    let TargetVector = SCNVector3(CGFloat(40.0 * Direction), Block.Y, Block.Z)
+                    let AnimationDuration = Double.random(in: 0.15 ... MaxDuration)
+                    let MoveTo = SCNAction.move(to: TargetVector, duration: AnimationDuration)
+                    let KillBlock = SCNAction.removeFromParentNode()
+                    let Sequence = SCNAction.sequence([MoveTo, KillBlock])
+                    Block.runAction(Sequence)
+            }
             
             case .ScatterVertically:
-                break
+                ///Blocks scatter randomly, up or down.
+                for Block in self.BlockList
+                {
+                    let Direction = [-1.0, 1.0].randomElement()!
+                    let TargetVector = SCNVector3(Block.X, CGFloat(40.0 * Direction), Block.Z)
+                    let AnimationDuration = Double.random(in: 0.15 ... MaxDuration)
+                    let MoveTo = SCNAction.move(to: TargetVector, duration: AnimationDuration)
+                    let KillBlock = SCNAction.removeFromParentNode()
+                    let Sequence = SCNAction.sequence([MoveTo, KillBlock])
+                    Block.runAction(Sequence)
+                }
             
             case .ScatterDirectionally:
                 //Blocks fly away towards a compass direction.
@@ -314,7 +362,7 @@ extension View3D
                         //Move left
                         TargetVector = SCNVector3(-40.0, Block.Y, Block.Z)
                     }
-                    let AnimationDuration = Double.random(in: 0.25 ... MaxDuration)
+                    let AnimationDuration = Double.random(in: 0.15 ... MaxDuration)
                     let MoveTo = SCNAction.move(to: TargetVector, duration: AnimationDuration)
                     let KillBlock = SCNAction.removeFromParentNode()
                     let Sequence = SCNAction.sequence([MoveTo, KillBlock])
@@ -328,6 +376,7 @@ extension View3D
 /// - **None**: Do nothing - just clear the board.
 /// - **Fast**: Same as **.None** but provided for semantic purposes.
 /// - **Scatter**: Scatter the blocks in random directions.
+/// - **ScatterSpin**: Same as `.Scatter` but pieces spin randomly.
 /// - **Explode**: Blocks fly away radially from the center.
 /// - **FadeAway**: Blocks fade out.
 /// - **ExplodingBlocks**: Blocks explode.
@@ -348,6 +397,7 @@ enum DestructionMethods: String, CaseIterable
     case None = "None"
     case Fast = "Fast"
     case Scatter = "Scatter"
+    case ScatterSpin = "ScatterSpin"
     case Explode = "Explode"
     case FadeAway = "FadeAway"
     case ExplodingBlocks = "ExplodingBlocks"
