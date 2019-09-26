@@ -167,7 +167,7 @@ class GameLogic
         GameBoard?.PlayMode = .Normal
         SpawnNewPiece = true
         _GameState = .Playing
-        let _ = GameBoard?.StartNewPiece(CalledFrom: "GameLogic: StartGame(Bool, [MetaPieces])")
+        let _ = GameBoard?.StartNewPiece2()
         FastAI = UseFastAI
         if FastAI && EnableAI
         {
@@ -215,7 +215,7 @@ class GameLogic
         }
         GameBoard?.PlayMode = .Step
         _GameState = .Playing
-        GameBoard?.StartNewPiece(CalledFrom: "GameLogic: StepGame")
+        GameBoard?.StartNewPiece2()
     }
     
     /// Execute one step in the game. Not currently implemented.
@@ -460,7 +460,19 @@ class GameLogic
     /// Spawn a new piece here. Should be call only when the previous piece has been frozen.
     func DoSpawnNewPiece()
     {
-        GameBoard?.StartNewPiece(CalledFrom: "GameLogic: DoSpawnNewPiece")
+        //let Start = CACurrentMediaTime()
+        GameBoard?.StartNewPiece2()
+        //print("Piece spawn duration: \(CACurrentMediaTime() - Start) seconds")
+        if (GameBoard?.PerformanceData.count)! > 0
+        {
+            if (GameBoard?.PerformanceData[0].1)! > 0.75
+            {
+                for (Label, Value) in GameBoard!.PerformanceData
+                {
+                    print(">*>*>*> \(Label): \(Value)")
+                }
+            }
+        }
         _PiecesInGame = _PiecesInGame + 1
     }
     
@@ -496,7 +508,7 @@ class GameLogic
         UIDelegate?.PieceDiscarded(OfPiece)
         if SpawnNewPiece
         {
-            GameBoard?.StartNewPiece(CalledFrom: "GameLogic: CompletedDiscard")
+            GameBoard?.StartNewPiece2()
             _PiecesInGame = _PiecesInGame + 1
         }
     }
@@ -602,7 +614,10 @@ class GameLogic
     /// - Parameter NewPiece: The new piece to drop.
     func HaveNewPiece(_ NewPiece: Piece)
     {
+        //let UIStart = CACurrentMediaTime()
         UIDelegate?.NewPieceStarted(NewPiece)
+        //print("UIDelegate?.NewPieceStarted duration: \(CACurrentMediaTime() - UIStart)")
+        let AIStart = CACurrentMediaTime()
         if EnableAI
         {
             //Get the best fit location for the piece.
@@ -610,6 +625,11 @@ class GameLogic
             UIDelegate?.PieceScoreUpdated(For: NewPiece.ID, NewScore: Int(AIScoreForPiece))
             //Move the piece to the proper location. Do this by running a timer that repeats until the AI's motion queue is empty.
             StartAIMotionTimer()
+        }
+        let AIDuration = CACurrentMediaTime() - AIStart
+        if AIDuration > 0.5
+        {
+        print(">>>>>>>>> AI Duration: \(AIDuration)")
         }
     }
     
