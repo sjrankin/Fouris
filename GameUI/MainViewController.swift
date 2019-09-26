@@ -128,6 +128,7 @@ class MainViewController: UIViewController,
         Themes.SubscribeToChanges(Subscriber: "MainViewController", SubscribingObject: self)
         PieceVisualManager.Initialize()
         RecentlyUsedColors.Initialize(WithLimit: Settings.GetMostRecentlyUsedColorListCapacity())
+        HistoryManager.Initialize()
         InitializeUI()
         AIData = AITestTable()
         
@@ -703,7 +704,11 @@ class MainViewController: UIViewController,
                             NoRotateFinishFinalizing()
                             return
                     }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + UserTheme!.RotationDuration, execute: {self.RotateFinishFinalizing()})
+                    //DispatchCalled = CACurrentMediaTime()
+                    //print("RotateFinishFinalized dispatched, Duration=\(UserTheme!.RotationDuration)")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + UserTheme!.RotationDuration,
+                                                  qos: .userInteractive,
+                                                  execute: {self.RotateFinishFinalizing()})
                 }
                 else
                 {
@@ -714,6 +719,8 @@ class MainViewController: UIViewController,
                 break
         }
     }
+    
+    //var DispatchCalled: Double = 0.0
     
     func Nop()
     {
@@ -728,15 +735,16 @@ class MainViewController: UIViewController,
     /// Finish finalizing a piece when no rotation occurs.
     func NoRotateFinishFinalizing()
     {
-        GameView3D?.DrawMap3D(FromBoard: Game!.GameBoard!, CalledFrom: "*NoRotateFinishFinalizing")
+        GameView3D?.DrawMap3D(FromBoard: Game!.GameBoard!, CalledFrom: "NoRotateFinishFinalizing")
         Game!.DoSpawnNewPiece()
     }
     
     /// Finish finalizing a piece when rotation occurs.
     func RotateFinishFinalizing()
     {
+        //print("RotateFinishFinalized called \(CACurrentMediaTime() - DispatchCalled) seconds after dispatch")
         GameView3D?.ClearBucket()
-        GameView3D?.DrawMap3D(FromBoard: Game!.GameBoard!, CalledFrom: "*RotateFinishFinalizing")
+        GameView3D?.DrawMap3D(FromBoard: Game!.GameBoard!, CalledFrom: "RotateFinishFinalizing")
         Game!.DoSpawnNewPiece()
     }
     
