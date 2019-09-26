@@ -390,6 +390,9 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
                 {
                     CurrentField?.State = FinalGradient as Any
                     GradientViewer.GradientDescriptor = FinalGradient
+                    GradientViewDirty.alpha = 1.0
+                    GradientViewDirty.tintColor = UIColor.red
+                    ThrobApplyButton(GradientApplyButton)
                 }
             }
         }
@@ -692,6 +695,13 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
         DoubleViewDirty.alpha = 0.0
     }
     
+    @IBAction func DoubleValueChanged(_ sender: Any)
+    {
+        DoubleViewDirty.alpha = 1.0
+        DoubleViewDirty.tintColor = UIColor.red
+        ThrobApplyButton(DoubleApplyButton)
+    }
+    
     // MARK: Int button handling.
     
     @IBAction func IntApplyPressed(_ sender: Any)
@@ -712,6 +722,13 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
         IntViewDirty.alpha = 0.0
     }
     
+    @IBAction func IntValueChanged(_ sender: Any)
+    {
+        IntViewDirty.alpha = 1.0
+        IntViewDirty.tintColor = UIColor.red
+        ThrobApplyButton(IntApplyButton)
+    }
+    
     // MARK: String button handling.
     
     @IBAction func StringApplyPressed(_ sender: Any)
@@ -724,6 +741,13 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func StringDefaultPressed(_ sender: Any)
     {
         StringViewDirty.alpha = 0.0
+    }
+    
+    @IBAction func StringValueChanged(_ sender: Any)
+    {
+        StringViewDirty.alpha = 1.0
+        StringViewDirty.tintColor = UIColor.red
+        ThrobApplyButton(StringApplyButton)
     }
     
     // MARK: Vector3 button handling.
@@ -743,6 +767,13 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
         Vector3ViewDirty.alpha = 0.0
     }
     
+    @IBAction func Vector3ComponentChanged(_ sender: Any)
+    {
+        Vector3ViewDirty.alpha = 1.0
+        Vector3ViewDirty.tintColor = UIColor.red
+        ThrobApplyButton(Vector3ApplyButton)
+    }
+    
     // MARK: Vector4 button handling.
     
     @IBAction func Vector4ApplyPressed(_ sender: Any)
@@ -758,6 +789,13 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func Vector4DefaultPressed(_ sender: Any)
     {
         Vector4ViewDirty.alpha = 0.0
+    }
+    
+    @IBAction func Vector4ComponentChanged(_ sender: Any)
+    {
+        Vector4ViewDirty.alpha = 1.0
+        Vector4ViewDirty.tintColor = UIColor.red
+        ThrobApplyButton(Vector4ApplyButton)
     }
     
     // MARK: General purpose UI functions.
