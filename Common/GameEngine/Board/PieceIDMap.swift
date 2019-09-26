@@ -179,6 +179,9 @@ class PieceIDMap
     /// - Parameter ButNotThese: List of IDs to not remove even if they are not in the UniqueID list.
     public func RemoveUnusedIDs(BoardMap: MapType.ContentsType, ButNotThese: [UUID])
     {
+        #if false
+        PieceMap = PieceMap.filter({!ButNotThese.contains($0.0)})
+        #else
         let Unique = UniqueIDs(BoardMap: BoardMap)
         var DeleteList = [UUID]()
         for (ID, _) in PieceMap
@@ -197,6 +200,7 @@ class PieceIDMap
         {
             RemoveID(DeleteID)
         }
+        #endif
     }
     
     /// Add attributes from a piece.
