@@ -499,7 +499,6 @@ class Rotating4GameAI: AIProtocol
         let LeftSideComplete = LeftSideIsComplete(InBoard)
         let RightSideComplete = RightSideIsComplete(InBoard)
         let FloorCompleted = LeftSideComplete && RightSideComplete
-        //print("LeftSideComplete=\(LeftSideComplete), RightSideComplete=\(RightSideComplete)")
         if FloorCompleted
         {
             //If the floor is completed (eg, no bottomless columns), use a offset matching algorithm.
