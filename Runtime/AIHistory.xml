@@ -1,0 +1,17 @@
+<History>
+    <Property Name="_StandardGameCount" Value="0"/>
+    <Property Name="_RotatingGameCount" Value="0"/>
+    <Property Name="_CubicGameCount" Value="0"/>
+    <Property Name="_StandardCumulativeScore" Value="0"/>
+    <Property Name="_RotatingCumulativeScore" Value="0"/>
+    <Property Name="_CubicCumulativeScore" Value="0"/>
+    <Property Name="_StandardHighScore" Value="0"/>
+    <Property Name="_RotatingHighScore" Value="0"/>
+    <Property Name="_CubicHighScore" Value="0"/>
+    <Property Name="_StandardCumulativeDuration" Value="0"/>
+    <Property Name="_RotatingCumulativeDuration" Value="0"/>
+    <Property Name="_CubicCumulativeDuration" Value="0"/>
+    <Property Name="_CumulativeStandardPieceCount" Value="0"/>
+    <Property Name="_CumulativeRotatingPieceCount" Value="0"/>
+    <Property Name="_CumulativeCubicPieceCount" Value="0"/>
+</History>
