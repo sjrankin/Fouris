@@ -368,40 +368,29 @@ class Board
         return Map!.HighestOccupiedLocations()
     }
     
-    /// Start a new piece. It is placed in the starting location above the bucket and has its
-    /// gravity turned on.
-    ///
-    /// - Parameters:
-    ///   - CalledFrom: Debug string - set to where the call site was.
-    ///   - SuppliedPiece: If present, the piece to use instead of a random piece.
-    /// - Returns: ID of the new piece. Returns **UUID.Empty** if the board is stopped and no more pieces
-    ///            can be added.
-    @discardableResult func StartNewPiece(CalledFrom: String, SuppliedPiece: Piece? = nil) -> UUID
+    /// Spawns a new piece. Assigns its initial location. Start the piece's gravity.
+    /// - Returns: ID of the new piece.
+    @discardableResult func StartNewPiece2() -> UUID
     {
         if BoardStopped
         {
             return UUID.Empty
         }
+        PerformanceData.removeAll()
+        let StartingTime = CACurrentMediaTime()
         
         var NewPiece: Piece!
-        if SuppliedPiece == nil
-        {
-            NewPiece = (Factory?.GetQueuedPiece(ForBoard: self, BaseGame: GameType))!
-        }
-        else
-        {
-            NewPiece = SuppliedPiece
-        }
+        let QueueStart = CACurrentMediaTime()
+        NewPiece = (Factory?.GetQueuedPiece(ForBoard: self, BaseGame: GameType))!
+        PerformanceData.append(("GetQueuedPiece duration", CACurrentMediaTime() - QueueStart))
+        
+        let PieceInit = CACurrentMediaTime()
         NewPiece.GravityIsEnabled = PiecesUseGravity
         NewPiece.PlayMode = PlayMode
-        let Next: Piece = (Factory?.GetNextPiece())!
-        Map!.IDMap!.AddPieceAttributes(Next.ID, Next.Attributes!)
-        Game?.NextPiece(Next)
         Map!.InPlay.append(NewPiece)
         let StartingPoint = Map!.GetPieceStartingPoint(ForPiece: NewPiece)
         let StartX = Int(StartingPoint.x)
         let StartY = Int(StartingPoint.y)
-        //print("StartingPoint=\(StartingPoint)")
         NewPiece.SetStartLocation(X: StartX, Y: StartY)
         NewPiece.SetFastGravity(UseFastAI)
         NewPiece.StartDropping()
@@ -409,20 +398,44 @@ class Board
         {
             NewPiece.UpdateLocation(XDelta: 0, YDelta: 0)
         }
+        PerformanceData.append(("New piece initialization", CACurrentMediaTime() - PieceInit))
+        
+        let AddIDStart = CACurrentMediaTime()
         Map!.IDMap!.AddID(NewPiece.ID, ForPiece: .GamePiece)
+        PerformanceData.append(("Add ID", CACurrentMediaTime() - AddIDStart))
+        let AddAttributesStart = CACurrentMediaTime()
         Map!.IDMap!.AddPieceAttributes(NewPiece.ID, NewPiece.Attributes!)
+        PerformanceData.append(("Add piece attributes", CACurrentMediaTime() - AddAttributesStart))
+        let CallOut = CACurrentMediaTime()
         Game?.HaveNewPiece(NewPiece)
+        PerformanceData.append(("HaveNewPiece callout",CACurrentMediaTime() - CallOut))
+        let RemoveIDsStart = CACurrentMediaTime()
         Map!.IDMap!.RemoveUnusedIDs(BoardMap: Map!.Contents, ButNotThese: [NewPiece.ID])
+        PerformanceData.append(("Remove unused IDs", CACurrentMediaTime() - RemoveIDsStart))
         PreGapCount = PostGapCount
+        let AddToRetired = CACurrentMediaTime()
         Map!.RetiredPieceShapes[NewPiece.ID] = NewPiece.ShapeID
+        PerformanceData.append(("Add to retired shapes", CACurrentMediaTime() - AddToRetired))
+        
+        //Now, get the next piece to show to the user.
+        let NextPieceStart = CACurrentMediaTime()
+        let Next: Piece = (Factory?.GetNextPiece())!
+        Map!.IDMap!.AddPieceAttributes(Next.ID, Next.Attributes!)
+        Game?.NextPiece(Next)
+        PerformanceData.append(("Get next piece", CACurrentMediaTime() - NextPieceStart))
+        
+        PerformanceData.insert(("StartNewPiece2 Duration", CACurrentMediaTime() - StartingTime), at: 0)
+        
         return NewPiece.ID
     }
+    
+    public var PerformanceData: [(String, Double)] = [(String, Double)]()
     
     /// Reset the piece to a new random piece.
     func ResetPiece()
     {
         Map!.RemoveInPlayPieces()
-        StartNewPiece(CalledFrom: "Board.ResetPiece")
+        StartNewPiece2()
     }
     
     /// Called by a piece when it cannot move in the requested direction.
