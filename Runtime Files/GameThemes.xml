@@ -30,7 +30,7 @@
     <Property Name="_RotateBucket" Value="true"/>
         <Property Name="_RotatingBucketDirection" Value="Right"/>
         <Property Name="_RotationDuration" Value="0.3"/>
-        <Property Name="_RotateBucketGrid" Value="false"/>
+        <Property Name="_RotateBucketGrid" Value="true"/>
         <Property Name="_FadeBucketGrid" Value="false"/>
         <Property Name="_FadeBucketOutline" Value="false"/>
     <Property Name="_BackgroundType" Value="Color"/>
