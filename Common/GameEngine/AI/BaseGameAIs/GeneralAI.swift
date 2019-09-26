@@ -288,6 +288,7 @@ class GeneralAI
     /// - Returns: The final, best score of the piece.
     public static func BestFit(_ GamePiece: Piece, CurrentScore: Int, GameBoard: Board) -> Double
     {
+        let BestFitStart = CACurrentMediaTime()
         MotionQueue = Queue()
         FoundBestFitFor = GamePiece
         var OriginIndex = -1
@@ -313,7 +314,11 @@ class GeneralAI
         
         var Reachable: Int = 0
         var Blocked: Int = 0
+        #if false
+        let OGapCount = CACurrentMediaTime()
         OriginalGapCount = GameBoard.Map!.UnreachablePointCount(Reachable: &Reachable, Blocked: &Blocked)
+        print("OriginalGapCount duration: \(CACurrentMediaTime() - OGapCount)")
+        #endif
         for Angle in [0, 90, 180, 270]
         {
             if Angle > 0
@@ -384,6 +389,7 @@ class GeneralAI
         //Add the motions necessary to put the piece into the place with the best score.
         let Motions = MotionCommandBlock2(InitialMoveDown: MoveDownFirst, AngleCount: BestAngle / 90, XOffset: BestXOffset)
         GenerateMotionCommands(Motions: Motions)
+        print("GeneralAI.BestFit duration: \(CACurrentMediaTime() - BestFitStart)")
         return BestScore
     }
 }
