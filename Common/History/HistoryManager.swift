@@ -12,6 +12,14 @@ import UIKit
 /// Maintains game history on a game-type by game-type basis. No personal information is used or stored.
 class HistoryManager
 {
+    private static func CreateHistoryFiles()
+    {
+        let InitialHistory = FileIO.GetFileContentsFromResource("History", ".xml")
+        let _ = FileIO.SaveHistoryFile(Name: "History.xml", Contents: InitialHistory!)
+        let AIInitialHistory = FileIO.GetFileContentsFromResource("AIHistory", ".xml")
+        let _ = FileIO.SaveHistoryFile(Name: "AIHistory.xml", Contents: AIInitialHistory!)
+    }
+    
     /// Pre-initialize - make sure the directory structure exists. If it does not, create it and add an initial history file.
     private static func Preinitialize()
     {
@@ -19,14 +27,15 @@ class HistoryManager
         {
             print("Creating initial history.")
             FileIO.CreateDirectory(DirectoryName: FileIO.HistoryDirectory)
-            let InitialHistory = FileIO.GetFileContentsFromResource("History", ".xml")
-            let _ = FileIO.SaveHistoryFile(Name: "History.xml", Contents: InitialHistory!)
-            let AIInitialHistory = FileIO.GetFileContentsFromResource("AIHistory", ".xml")
-            let _ = FileIO.SaveHistoryFile(Name: "AIHistory.xml", Contents: AIInitialHistory!)
+            CreateHistoryFiles()
         }
         else
         {
             print("History directory exists.")
+            if !FileIO.FileExists(FileName: "History.xml", Directory: FileIO.HistoryDirectory)
+            {
+                CreateHistoryFiles()
+            }
         }
     }
     
@@ -35,6 +44,7 @@ class HistoryManager
     public static func Initialize()
     {
         Preinitialize()
+        print("Reading history files.")
         if let SerializedHistory = FileIO.GetHistoryFile(Name: "History.xml")
         {
             let Serialize = Serializer()
@@ -43,6 +53,14 @@ class HistoryManager
             {
                 CreateHistory(Serialize, ForUser: true)
             }
+            else
+            {
+                fatalError("Error deserializing History.xml")
+            }
+        }
+        else
+        {
+            fatalError("Error getting file History.xml.")
         }
         if let SerializedHistory = FileIO.GetHistoryFile(Name: "AIHistory.xml")
         {
@@ -52,19 +70,33 @@ class HistoryManager
             {
                 CreateHistory(Serialize, ForUser: false)
             }
+            else
+            {
+                fatalError("Error deserializing AIHistory.xml")
+            }
+        }
+        else
+        {
+            fatalError("Error getting file AIHistory.xml.")
         }
     }
     
-    /// Save game history statistics.
+    /// Save game history statistics. Both the user's history and the AI's history are saved.
+    /// - Note: The saved history does not include any personal information.
     public static func SaveHistory()
     {
         if GameRunHistory == nil
         {
             return
         }
+        GameRunHistory!.TimeStamp = DateFormatter.localizedString(from: Date(), dateStyle: .long, timeStyle: .long)
         let Encoder = Serializer()
-        let Serialized = Encoder.Encode(GameRunHistory!, WithTitle: "History")
+        let Serialized = Encoder.Encode(GameRunHistory!, WithTitle: "User")
         let _ = FileIO.SaveHistoryFile(Name: "History.xml", Contents: Serialized)
+        AIGameRunHistory!.TimeStamp = DateFormatter.localizedString(from: Date(), dateStyle: .long, timeStyle: .long)
+        let AIEncoder = Serializer()
+        let AISerialized = AIEncoder.Encode(AIGameRunHistory!, WithTitle: "AI")
+        let _ = FileIO.SaveHistoryFile(Name: "AIHistory.xml", Contents: AISerialized)
     }
     
     /// Create the history class from the passed deserialier.
@@ -93,7 +125,7 @@ class HistoryManager
                 }
                 if ForUser
                 {
-                GameRunHistory = History
+                    GameRunHistory = History
                 }
                 else
                 {
