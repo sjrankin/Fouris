@@ -1,0 +1,34 @@
+<Piece>
+    <Property Name="_UserPieceName" Value="Sample"/>
+    <Property Name="_ID" Value="3c32ee10-dca1-46ec-b9a3-8ebc70ce9621"/>
+    <Property Name="_IsUserPiece" Value="true"/>
+    <Property Name="_PieceClass" Value="User"/>
+    <Property Name="_ThinOrientation" Value="0"/>
+    <Property Name="_WideOrientation" Value="1"/>
+    <Array Name="_LogicalLocations">
+        <Item Index="0">
+            <Property Name="_Location" Value="0,0"/>
+            <Property Name="_IsOrigin" Value="true"/>
+        </Item>
+        <Item Index="1">
+            <Property Name="_Location" Value="-1,1"/>
+            <Property Name="_IsOrigin" Value="false"/>
+        </Item>
+        <Item Index="2">
+            <Property Name="_Location" Value="-1,0"/>
+            <Property Name="_IsOrigin" Value="false"/>
+        </Item>
+        <Item Index="3">
+            <Property Name="_Location" Value="-1,-1"/>
+            <Property Name="_IsOrigin" Value="false"/>
+        </Item>
+        <Item Index="4">
+            <Property Name="_Location" Value="0,-1"/>
+            <Property Name="_IsOrigin" Value="false"/>
+        </Item>
+        <Item Index="5">
+            <Property Name="_Location" Value="1,-1"/>
+            <Property Name="_IsOrigin" Value="false"/>
+        </Item>
+    </Array>
+</Piece>
