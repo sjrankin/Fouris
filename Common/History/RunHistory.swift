@@ -29,6 +29,10 @@ class RunHistory: Serializable
     {
         switch Key
         {
+            case "_TimeStamp":
+            //String
+            _TimeStamp = Sanitize(Value)
+            
             case "_StandardGameCount":
                 //Int
                 _StandardGameCount = Int(Value)!
@@ -87,6 +91,21 @@ class RunHistory: Serializable
             
             default:
                 print("Encountered unexpected key for History.xml: \(Key)")
+        }
+    }
+    
+    /// Holds the time stamp of the file.
+    private var _TimeStamp: String = ""
+    /// Get or set the time stamp for the file (in string format).
+    public var TimeStamp: String
+    {
+        get
+        {
+            return _TimeStamp
+        }
+        set
+        {
+            _TimeStamp = newValue
         }
     }
     
