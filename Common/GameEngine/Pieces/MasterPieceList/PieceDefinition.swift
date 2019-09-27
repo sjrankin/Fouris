@@ -41,6 +41,10 @@ class PieceDefinition: Serializable
                 //PieceShapes
                 _Name = PieceShapes(rawValue: Sanitized)!
             
+            case "_UserPieceName":
+                //String
+                _UserPieceName = Sanitized
+            
             case "_ID":
                 //UUID
                 _ID = UUID(uuidString: Sanitized)!
@@ -66,11 +70,26 @@ class PieceDefinition: Serializable
                 _WideOrientation = Int(Sanitized)!
             
             case "_IsUserPiece":
-            //Bool
-            _IsUserPiece = Bool(Sanitized)!
+                //Bool
+                _IsUserPiece = Bool(Sanitized)!
             
             default:
                 break
+        }
+    }
+    
+    /// Holds the name of the piece for user-designed pieces.
+    private var _UserPieceName: String = ""
+    /// Get or set the user-designed piece name.
+    public var UserPieceName: String
+    {
+        get
+        {
+            return _UserPieceName
+        }
+        set
+        {
+            _UserPieceName = newValue
         }
     }
     
