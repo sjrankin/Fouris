@@ -13,6 +13,15 @@ import UIKit
 /// directory of the app.
 class ThemeManager: ThemeChangeProtocol
 {
+    /// Move resource-bound initial theme files to the settings directory for use by the game.
+    private func CreateSettingsFiles()
+    {
+        let DefaultTheme = FileIO.GetFileContentsFromResource("GameThemes", ".xml")
+        let _ = FileIO.SaveSettingsFile(Name: "GameThemes.xml", Contents: DefaultTheme!)
+        let UserTheme = FileIO.GetFileContentsFromResource("UserGameThemes", ".xml")
+        let _ = FileIO.SaveSettingsFile(Name: "UserGameThemes.xml", Contents: UserTheme!)
+    }
+    
     /// If necessary, create the settings directory and move resource-bound settings files to it.
     /// - Note: This should be necessary only the first time Fouris is run but we will execute this code everytime
     ///         Fouris starts to be sure.
@@ -22,10 +31,14 @@ class ThemeManager: ThemeChangeProtocol
         {
             print("Creating initial themes.")
             FileIO.CreateDirectory(DirectoryName: FileIO.SettingsDirectory)
+            #if true
+            CreateSettingsFiles()
+            #else
             let DefaultTheme = FileIO.GetFileContentsFromResource("GameThemes", ".xml")
             let _ = FileIO.SaveSettingsFile(Name: "GameThemes.xml", Contents: DefaultTheme!)
             let UserTheme = FileIO.GetFileContentsFromResource("UserGameThemes", ".xml")
             let _ = FileIO.SaveSettingsFile(Name: "UserGameThemes.xml", Contents: UserTheme!)
+            #endif
             #if false
             let DefaultEncoded = BufferManager.EncodeBuffer(DefaultTheme!)
             let _ = FileIO.WriteBinaryFile(Name: "DefaultTheme.dat", Directory: FileIO.SettingsDirectory, BinaryData: DefaultEncoded)
@@ -36,6 +49,11 @@ class ThemeManager: ThemeChangeProtocol
         else
         {
             print("Settings directory exists.")
+            if !FileIO.FileExists(FileName: "GameThemes.xml", Directory: FileIO.SettingsDirectory)
+            {
+                print("* Creating initial themes.")
+                CreateSettingsFiles()
+            }
         }
     }
     
