@@ -13,19 +13,44 @@ import UIKit
 /// of the application and deserialized at start-up.
 class MasterPieceList
 {
+    private static func CreatePieceFiles()
+    {
+        let DefaultDescriptions = FileIO.GetFileContentsFromResource("PieceDescriptions", ".xml")
+        let _ = FileIO.SaveSettingsFile(Name: "PieceDescriptions.xml", Contents: DefaultDescriptions!)
+        let UserDescriptions = FileIO.GetFileContentsFromResource("UserPieceDescriptions", ".xml")
+        let _ = FileIO.SaveSettingsFile(Name: "UserPieceDescriptions.xml", Contents: UserDescriptions!)
+    }
+    
+    private static func Preinitialize()
+    {
+        if !FileIO.DirectoryExists(DirectoryName: FileIO.SettingsDirectory)
+        {
+            print("Creating initial piece descriptions.")
+            CreatePieceFiles()
+        }
+        else
+        {
+            if !FileIO.FileExists(FileName: "PieceDescriptions.xml", Directory: FileIO.SettingsDirectory)
+            {
+                CreatePieceFiles()
+            }
+        }
+    }
+    
     /// Initialize the master piece list. Load the serialized piece list and deserialize into something we can use.
     ///
     /// - Note: A fatal error will be generated if there is an error reading the contents of the piece definition file or if
     ///         there is an error deserializing the raw contents of the piece definition file.
     public static func Initialize()
     {
+        Preinitialize()
         _PieceDefinitions = [PieceDefinition]()
-        if let SerializedPieces = FileIO.GetFileContentsFromResource("PieceDescriptions", ".xml")
+        if let SerializedPieces = FileIO.GetSettingsFile(Name: "PieceDescriptions.xml")
         {
             let Deserialize = Serializer()
             if Deserialize.Deserialize(From: SerializedPieces)
             {
-                CreatePieces(Deserialize)
+                CreatePieces(Deserialize, IsDefault: true)
             }
             else
             {
@@ -36,12 +61,24 @@ class MasterPieceList
         {
             fatalError("Unable to read piece definitions.")
         }
+        if let UserPieces = FileIO.GetSettingsFile(Name: "UserPieceDescriptions.xml")
+        {
+            let Deserialize = Serializer()
+            if Deserialize.Deserialize(From: UserPieces)
+            {
+                CreatePieces(Deserialize, IsDefault: false)
+            }
+            else
+            {
+                fatalError("Error deserializing UserPieceDescriptions.xml")
+            }
+        }
     }
     
     /// Create the list of pieces for the master piece list.
     ///
     /// - Parameter Deserialized: Serializer/deserializer with the raw, tokenized contents of the piece definition file.
-    private static func CreatePieces(_ Deserialized: Serializer)
+    private static func CreatePieces(_ Deserialized: Serializer, IsDefault: Bool)
     {
         let Root = Deserialized.Tree!.Root
         for Node in Root.Children
@@ -85,8 +122,49 @@ class MasterPieceList
                     }
                 }
                 _PieceDefinitions.append(PDef)
+                if IsDefault
+                {
+                    DefaultPieces = PDef
+                }
+                else
+                {
+                    UserPieces = PDef
+                }
             }
         }
+    }
+    
+    private static var _DefaultPieces: PieceDefinition? = nil
+    public static var DefaultPieces: PieceDefinition?
+    {
+        get
+        {
+            return _DefaultPieces
+        }
+        set
+        {
+            _DefaultPieces = newValue
+        }
+    }
+    
+    private static var _UserPieces: PieceDefinition? = nil
+    public static var UserPieces: PieceDefinition?
+    {
+        get
+        {
+            return _UserPieces
+        }
+        set
+        {
+            _UserPieces = newValue
+        }
+    }
+    
+    public static func SaveUserPieceDefinitions(PieceSet: PieceDefinition)
+    {
+        let Encoder = Serializer()
+        let Serialized = Encoder.Encode(PieceSet, WithTitle: "Piece")
+        let _ = FileIO.SaveSettingsFile(Name: "UserPieceDescriptions.xml", Contents: Serialized)
     }
     
     /// Holds the list of piece definitions.
