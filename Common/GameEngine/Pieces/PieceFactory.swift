@@ -1030,6 +1030,7 @@ enum TestPieces: String, CaseIterable
 /// - **WithGaps**: Pieces with built-in gaps.
 /// - **BigPieces**: Really big pieces.
 /// - **Random**: Randomly-generated pieces.
+/// - **User**: User-designed pieces.
 enum PieceClasses: String, CaseIterable
 {
     case Standard = "Standard"
@@ -1039,6 +1040,7 @@ enum PieceClasses: String, CaseIterable
     case WithGaps = "WithGaps"
     case BigPieces = "BigPieces"
     case Random = "Random"
+    case User = "User"
 }
 
 /// All valid shapes for the game.
