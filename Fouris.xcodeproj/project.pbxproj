@@ -189,6 +189,7 @@
 		17D1FB6C2268A09400EDA707 /* GameAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D1FB6B2268A09400EDA707 /* GameAI.swift */; };
 		17D48A7B22B202B000DD7C94 /* 3DView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D48A7A22B202B000DD7C94 /* 3DView.swift */; };
 		17D48A8422B2111D00DD7C94 /* ThreeDProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D48A8322B2111D00DD7C94 /* ThreeDProtocol.swift */; };
+		17D6B195233DC42400EFCE31 /* UserPieceDescriptions.xml in Resources */ = {isa = PBXBuildFile; fileRef = 17D6B194233DC42400EFCE31 /* UserPieceDescriptions.xml */; };
 		17DCD7EA2309436F0072B306 /* +CentralShapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCD7E92309436F0072B306 /* +CentralShapes.swift */; };
 		17DCD7EE23096E340072B306 /* +MapType_BucketCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCD7ED23096E340072B306 /* +MapType_BucketCreation.swift */; };
 		17DCFD34230291B100A00600 /* ManagedTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCFD33230291B100A00600 /* ManagedTimer.swift */; };
@@ -416,6 +417,7 @@
 		17D1FB6B2268A09400EDA707 /* GameAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAI.swift; sourceTree = "<group>"; };
 		17D48A7A22B202B000DD7C94 /* 3DView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 3DView.swift; sourceTree = "<group>"; };
 		17D48A8322B2111D00DD7C94 /* ThreeDProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDProtocol.swift; sourceTree = "<group>"; };
+		17D6B194233DC42400EFCE31 /* UserPieceDescriptions.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = UserPieceDescriptions.xml; sourceTree = "<group>"; };
 		17DCD7E92309436F0072B306 /* +CentralShapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+CentralShapes.swift"; sourceTree = "<group>"; };
 		17DCD7ED23096E340072B306 /* +MapType_BucketCreation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+MapType_BucketCreation.swift"; sourceTree = "<group>"; };
 		17DCFD33230291B100A00600 /* ManagedTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedTimer.swift; sourceTree = "<group>"; };
@@ -624,6 +626,7 @@
 				179C5E2B23224C660003845B /* UserGameThemes.xml */,
 				1785ED6122FD8C09000B31C2 /* BoardDescriptions.xml */,
 				17B4D2CB22A4D64900987BC5 /* PieceDescriptions.xml */,
+				17D6B194233DC42400EFCE31 /* UserPieceDescriptions.xml */,
 				1762FC1C229D2898000099F2 /* StandardThemes.xml */,
 			);
 			path = Runtime;
@@ -856,10 +859,9 @@
 		17B875762323CFCC00BD8BBD /* About */ = {
 			isa = PBXGroup;
 			children = (
+				17D6B196233DD0BD00EFCE31 /* History */,
 				17831ED9232DD71E007FF894 /* FlyingPieces */,
 				17616AC82316497300DFFEFE /* AboutDialogController.swift */,
-				178DEEC2233CE5F900E09D0E /* StatViewer.swift */,
-				178DEEC4233CE68F00E09D0E /* StatViewerTableCell.swift */,
 			);
 			path = About;
 			sourceTree = "<group>";
@@ -908,6 +910,15 @@
 				17CE26A2225F63660056818E /* Queue.swift */,
 			);
 			path = DataStructures;
+			sourceTree = "<group>";
+		};
+		17D6B196233DD0BD00EFCE31 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				178DEEC2233CE5F900E09D0E /* StatViewer.swift */,
+				178DEEC4233CE68F00E09D0E /* StatViewerTableCell.swift */,
+			);
+			path = History;
 			sourceTree = "<group>";
 		};
 		17DCD7EC230945390072B306 /* 3DViewExtensions */ = {
@@ -1226,6 +1237,7 @@
 				179C5E1C2322282B0003845B /* PieceVisuals.xml in Resources */,
 				1716A207233CA1D000C4850C /* History.xml in Resources */,
 				17F0B49E225CBE740071514E /* LaunchScreen.storyboard in Resources */,
+				17D6B195233DC42400EFCE31 /* UserPieceDescriptions.xml in Resources */,
 				179C5E2123222EAA0003845B /* UserVisuals.xml in Resources */,
 				17477A6F231783C300AAEB14 /* Theming.storyboard in Resources */,
 				17F0B49B225CBE740071514E /* Assets.xcassets in Resources */,
