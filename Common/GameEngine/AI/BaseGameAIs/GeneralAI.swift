@@ -389,7 +389,7 @@ class GeneralAI
         //Add the motions necessary to put the piece into the place with the best score.
         let Motions = MotionCommandBlock2(InitialMoveDown: MoveDownFirst, AngleCount: BestAngle / 90, XOffset: BestXOffset)
         GenerateMotionCommands(Motions: Motions)
-        print("GeneralAI.BestFit duration: \(CACurrentMediaTime() - BestFitStart)")
+        //print("GeneralAI.BestFit duration: \(CACurrentMediaTime() - BestFitStart)")
         return BestScore
     }
 }
