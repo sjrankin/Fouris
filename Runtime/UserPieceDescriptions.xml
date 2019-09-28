@@ -1,34 +1,19 @@
-<Piece>
-    <Property Name="_UserPieceName" Value="Sample"/>
-    <Property Name="_ID" Value="3c32ee10-dca1-46ec-b9a3-8ebc70ce9621"/>
-    <Property Name="_IsUserPiece" Value="true"/>
-    <Property Name="_PieceClass" Value="User"/>
-    <Property Name="_ThinOrientation" Value="0"/>
-    <Property Name="_WideOrientation" Value="1"/>
-    <Array Name="_LogicalLocations">
-        <Item Index="0">
-            <Property Name="_Location" Value="0,0"/>
-            <Property Name="_IsOrigin" Value="true"/>
-        </Item>
-        <Item Index="1">
-            <Property Name="_Location" Value="-1,1"/>
-            <Property Name="_IsOrigin" Value="false"/>
-        </Item>
-        <Item Index="2">
-            <Property Name="_Location" Value="-1,0"/>
-            <Property Name="_IsOrigin" Value="false"/>
-        </Item>
-        <Item Index="3">
-            <Property Name="_Location" Value="-1,-1"/>
-            <Property Name="_IsOrigin" Value="false"/>
-        </Item>
-        <Item Index="4">
-            <Property Name="_Location" Value="0,-1"/>
-            <Property Name="_IsOrigin" Value="false"/>
-        </Item>
-        <Item Index="5">
-            <Property Name="_Location" Value="1,-1"/>
-            <Property Name="_IsOrigin" Value="false"/>
-        </Item>
-    </Array>
-</Piece>
+<?xml version="1.0" encoding="UTF-8"?>
+<Pieces GroupName="User">
+    <PieceClass Type="User">
+        <Piece Name="Sample" ID="3c32ee10-dca1-46ec-b9a3-8ebc70ce9621">
+            <! The next node defines the type of piece. In this file, set UserDefined to true. !>
+                <UserPiece UserDefined="true"/>
+                <Geometry Thin="1" Wide="0" Symmetric="false"/>
+                <LogicalLocations>
+                    Initial, logical block locations go here. For best visual results, the block at (0,0) should be the origin block.
+                    <Location Index="0" XY="0,0" IsOrigin="true"/>
+                    <Location Index="1" XY="-1,1" IsOrigin="false"/>
+                    <Location Index="2" XY="-1,0" IsOrigin="false"/>
+                    <Location Index="3" XY="-1,-1" IsOrigin="false"/>
+                    <Location Index="4" XY="0,-1" IsOrigin="false"/>
+                    <Location Index="5" XY="1,-1" IsOrigin="false"/>
+                </LogicalLocations>
+            </Piece>
+        </PieceClass>
+    </Pieces>
