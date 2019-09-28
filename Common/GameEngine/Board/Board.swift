@@ -22,8 +22,10 @@ class Board
     /// The map of pieces on the board.
     var Map: MapType? = nil
     
+    #if false
     /// The current game level description.
     var GameLevel: GameLevelDescription? = nil
+    #endif
     
     /// Initializer.
     ///
@@ -31,17 +33,15 @@ class Board
     ///   - BoardID: ID of the board.
     ///   - Sequence: Sequence (eg, number of games) for the game.
     ///   - TheGame: Reference to the game logic.
-    ///   - WithLevel: Level descriptor.
     ///   - BaseGame: The base game type.
     ///   - BoardWidth: Width of the board.
     ///   - BoardHeight: Height of the board.
     ///   - Scorer: Game scorer.
-    init(BoardID: UUID, Sequence: Int, TheGame: GameLogic, WithLevel: GameLevelDescription?,
+    init(BoardID: UUID, Sequence: Int, TheGame: GameLogic,
          BaseGame: BaseGameTypes, BoardWidth: Int, BoardHeight: Int)
     {
         print("Creating board for \(BaseGame): Size=\(BoardWidth)x\(BoardHeight)")
         _ID = BoardID
-        GameLevel = WithLevel
         Game = TheGame
         _GameCount = Sequence
         Factory = PieceFactory(5, Sequence: GameCount, PieceCategories: [.Standard])
