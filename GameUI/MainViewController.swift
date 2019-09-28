@@ -55,11 +55,13 @@ class MainViewController: UIViewController,
     /// The set of pieces to use.
     var GamePieces = [MetaPieces.Standard]
     
+    #if false
     /// The current level the user is playing.
     var CurrentLevel = LevelTypes.ReallyEasy
     
     /// The current mode.
     var CurrentMode = ModeTypes.AttractMode
+    #endif
     
     /// Multi-peer manager for debugging.
     var MPMgr: MultiPeerManager!
@@ -120,8 +122,13 @@ class MainViewController: UIViewController,
         #endif
         
         Settings.Initialize()
+        PieceManager.Initialize()
+        let UserPieces = PieceManager.UserPieces!
+        let DefaultPieces = PieceManager.DefaultPieces!
         MasterPieceList.Initialize()
+        #if false
         LevelManager.Initialize()
+        #endif
         Themes = ThemeManager()
         Themes.Initialize()
         UserTheme = Themes.UserTheme
@@ -1574,6 +1581,7 @@ class MainViewController: UIViewController,
         
     }
     
+    #if false
     // MARK: Game-level delegate functions.
     
     /// Returns the current level and mode.
@@ -1597,10 +1605,9 @@ class MainViewController: UIViewController,
     {
         
     }
+    #endif
     
     // MARK: General-UI interactions.
-    
-    
     
     var ProposedNewGameType: BaseGameTypes = .Standard
     var CurrentBaseGameType: BaseGameTypes = .Standard
