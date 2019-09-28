@@ -33,6 +33,40 @@ class FileIO
         return Dir
     }
     
+    /// Return the contents of a file.
+    /// - Parameter From: The URL of the file.
+    /// - Returns: Contents of the file in string format. Nil returned on error.
+    public static func GetFileContents(From: URL) -> String?
+    {
+        do
+        {
+            return try String(contentsOfFile: From.path)
+        }
+        catch
+        {
+            print("Error \(error.localizedDescription) when reading \(From.path)")
+            return nil
+        }
+    }
+    
+    /// Write the provided string to a file.
+    /// - Parameter To: The URL of the file to write. Existing files are overwritten.
+    /// - Parameter Contents: The string to write.
+    /// - Returns: True on success, false on error.
+    public static func WriteFileContents(To: URL, Contents: String) -> Bool
+    {
+        do
+        {
+            try Contents.write(to: To, atomically: true, encoding: String.Encoding.utf8)
+            return true
+        }
+        catch
+        {
+                        print("Error \(error.localizedDescription) when writing \(To.path)")
+            return false
+        }
+    }
+    
     /// Returns the contents of a file (in string format) that resides in the bundle's resource directory.
     ///
     /// - Note: A fatal error will be generated if either `FileName` or `WithExtension` is empty.
@@ -497,6 +531,16 @@ class FileIO
     {
         let FPath = GetDirectoryURL(DirectoryName: Directory)?.appendingPathComponent(FileName)
         return FileExists(FileURL: FPath!)
+    }
+    
+    /// Converts a file name and directory name (where the file lives) into an URL.
+    /// - Parameter FileName: Name of the file in the directory.
+    /// - Parameter Directory: Name of the directory.
+    /// - Returns: URL of the file in the directory.
+    public static func MakeFileURL(FileName: String, Directory: String) -> URL?
+    {
+        let TheURL = GetDirectoryURL(DirectoryName: Directory)?.appendingPathComponent(FileName)
+        return TheURL
     }
     
     /// Load a history file from the settings directory.
