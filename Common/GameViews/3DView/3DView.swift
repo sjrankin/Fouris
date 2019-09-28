@@ -638,8 +638,40 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter Finalized: The piece that was finalized.
     func MergePieceIntoBucket(_ Finalized: Piece)
     {
+        #if true
+        VisuallyRetirePiece(Finalized, Completion:
+            {
+                self.RetiredPieceIDs.append(Finalized.ID)
+                self.RemoveMovingPiece()
+        })
+        #else
         RetiredPieceIDs.append(Finalized.ID)
         RemoveMovingPiece()
+        #endif
+    }
+    
+    //https://stackoverflow.com/questions/40472524/how-to-add-animations-to-change-sncnodes-color-scenekit
+    func VisuallyRetirePiece(_ Finalized: Piece, Completion: (() -> ())?)
+    {
+        if MovingPieceNode != nil
+        {
+            let OriginalColor = MovingPieceNode!.childNodes[0].geometry?.firstMaterial?.diffuse.contents as! UIColor
+            let ORed = OriginalColor.r
+            let OGreen = OriginalColor.g
+            let OBlue = OriginalColor.b
+            let ColorChanger = SCNAction.customAction(duration: 0.1, action:
+            {
+                (Node, ElapsedTime) in
+                let Percent = ElapsedTime / 5.0
+                let NewColor = UIColor(red: ORed * Percent, green: OGreen * Percent, blue: OBlue * Percent, alpha: 1.0)
+                Node.geometry!.firstMaterial!.diffuse.contents = NewColor
+            })
+            for Block in MovingPieceNode!.childNodes
+            {
+                Block.geometry?.firstMaterial?.diffuse.contents = UIColor.cyan
+                Block.runAction(ColorChanger)
+            }
+        }
     }
     
     /// Create and add a block node for a piece.
@@ -1322,7 +1354,8 @@ class View3D: SCNView,                          //Our main super class.
         BucketNode?.runAction(RotateSequence, completionHandler: {Completed()})
         #else
         let ZRotation = DirectionalSign * 90.0 * CGFloat.pi / 180.0
-        let RotateAction = SCNAction.rotateBy(x: 0.0, y: 0.0, z: ZRotation, duration: Duration)
+//        let RotateAction = SCNAction.rotateBy(x: 0.0, y: 0.0, z: ZRotation, duration: Duration)
+        let RotateAction = SCNAction.rotateTo(x: 0.0, y: 0.0, z: ZRotation, duration: Duration)
         RemoveMovingPiece()
         if CurrentTheme!.RotateBucketGrid
         {
