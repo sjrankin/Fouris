@@ -54,7 +54,7 @@ class GameLogic
             GameCount = 0
         }
         self.EnableAI = EnableAI
-        MakeBoard([.Standard], Level: nil)
+        MakeBoard([.Standard])
         AI = MainAI()
         AI?.Start(WithBoard: GameBoard!, BaseGame: BaseGame)
     }
@@ -304,7 +304,7 @@ class GameLogic
     /// - Parameters:
     ///   - Categories: Valid piece categories.
     ///   - Level: Describes the level to use.
-    func MakeBoard(_ Categories: [MetaPieces] = [MetaPieces.Standard], Level: GameLevelDescription? = nil)
+    func MakeBoard(_ Categories: [MetaPieces] = [MetaPieces.Standard])
     {
         var BWidth = 12
         var BHeight = 30
@@ -322,7 +322,7 @@ class GameLogic
                 break
         }
         GameCount = GameCount + 1
-        GameBoard = Board(BoardID: UUID(), Sequence: GameCount, TheGame: self, WithLevel: Level,
+        GameBoard = Board(BoardID: UUID(), Sequence: GameCount, TheGame: self,
                           BaseGame: BaseGameType, BoardWidth: BWidth, BoardHeight: BHeight)
     }
     
