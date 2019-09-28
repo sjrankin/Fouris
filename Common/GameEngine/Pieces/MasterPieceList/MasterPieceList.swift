@@ -44,6 +44,9 @@ class MasterPieceList
     public static func Initialize()
     {
         Preinitialize()
+        #if true
+        
+        #else
         _PieceDefinitions = [PieceDefinition]()
         if let SerializedPieces = FileIO.GetSettingsFile(Name: "PieceDescriptions.xml")
         {
@@ -73,7 +76,11 @@ class MasterPieceList
                 fatalError("Error deserializing UserPieceDescriptions.xml")
             }
         }
+        #endif
     }
+    
+    private var DefaultPiecesDoc: XMLDocument!
+    private var UserPiecesDoc: XMLDocument!
     
     /// Create the list of pieces for the master piece list.
     ///
