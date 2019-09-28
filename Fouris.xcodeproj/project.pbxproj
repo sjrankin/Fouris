@@ -15,6 +15,10 @@
 		1705ADE9225D804400628268 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1705ADE8225D804400628268 /* Extensions.swift */; };
 		1705ADEC225D911B00628268 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1705ADEB225D911B00628268 /* Block.swift */; };
 		170F854122B5D3E5005405B6 /* VisualBlocks3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170F854022B5D3E5005405B6 /* VisualBlocks3D.swift */; };
+		170FC65E233DDF4A00F9A8F1 /* XMLDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170FC65D233DDF4A00F9A8F1 /* XMLDocument.swift */; };
+		170FC666233DE3E300F9A8F1 /* XMLKVP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170FC665233DE3E300F9A8F1 /* XMLKVP.swift */; };
+		170FC66A233DFA9900F9A8F1 /* XMLSemanticParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170FC669233DFA9900F9A8F1 /* XMLSemanticParser.swift */; };
+		170FC672233E003F00F9A8F1 /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170FC671233E003F00F9A8F1 /* Tree.swift */; };
 		171020F0227D8A91002FAB63 /* PieceAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171020EF227D8A91002FAB63 /* PieceAttributes.swift */; };
 		1710BF7E231E4C9800F566B3 /* GradientStopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1710BF7D231E4C9800F566B3 /* GradientStopCell.swift */; };
 		1710BF80231E5A3400F566B3 /* GradientExportCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1710BF7F231E5A3400F566B3 /* GradientExportCode.swift */; };
@@ -57,6 +61,15 @@
 		173B4B17231B96B2007B22F6 /* RecentColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173B4B16231B96B2007B22F6 /* RecentColorCell.swift */; };
 		173B4B19231BA165007B22F6 /* RecentlyUsedColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173B4B18231BA165007B22F6 /* RecentlyUsedColors.swift */; };
 		173EF49923252FF600343302 /* IntraGridProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173EF49823252FF600343302 /* IntraGridProtocol.swift */; };
+		174328F2233F0F7F00F98863 /* XMLDeserializeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174328F1233F0F7F00F98863 /* XMLDeserializeProtocol.swift */; };
+		174328F4233F111100F98863 /* XMLTreeTraversalProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174328F3233F111100F98863 /* XMLTreeTraversalProtocol.swift */; };
+		174328F7233F1C3F00F98863 /* PieceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174328F6233F1C3F00F98863 /* PieceManager.swift */; };
+		174328F9233F1E0E00F98863 /* PieceDefinition2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174328F8233F1E0E00F98863 /* PieceDefinition2.swift */; };
+		174328FB233F20DD00F98863 /* PieceBlockLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174328FA233F20DD00F98863 /* PieceBlockLocation.swift */; };
+		174328FD233F22D700F98863 /* Point3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174328FC233F22D700F98863 /* Point3D.swift */; };
+		17432901233F265D00F98863 /* PieceCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17432900233F265D00F98863 /* PieceCollection.swift */; };
+		17432903233F411E00F98863 /* XMLNode+Other.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17432902233F411E00F98863 /* XMLNode+Other.swift */; };
+		17432905233F4C2C00F98863 /* PieceDescriptions.xml in Resources */ = {isa = PBXBuildFile; fileRef = 17432904233F4C2C00F98863 /* PieceDescriptions.xml */; };
 		17477A6F231783C300AAEB14 /* Theming.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17477A6E231783C300AAEB14 /* Theming.storyboard */; };
 		17477A732317891100AAEB14 /* ThemeEditorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17477A722317891100AAEB14 /* ThemeEditorController.swift */; };
 		17477A752317F1C200AAEB14 /* GameBackgroundDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17477A742317F1C200AAEB14 /* GameBackgroundDialog.swift */; };
@@ -115,6 +128,9 @@
 		178C0F042338786000A35C62 /* SettingsControllerCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178C0F032338786000A35C62 /* SettingsControllerCode.swift */; };
 		178C0F062338882100A35C62 /* SettingsChangedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178C0F052338882100A35C62 /* SettingsChangedProtocol.swift */; };
 		178C0F0B2338970400A35C62 /* +Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178C0F0A2338970400A35C62 /* +Action.swift */; };
+		178C9FA1233E2E8D00A1FC16 /* XMLEntityParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178C9FA0233E2E8D00A1FC16 /* XMLEntityParser.swift */; };
+		178C9FA3233E360400A1FC16 /* XMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178C9FA2233E360400A1FC16 /* XMLNode.swift */; };
+		178C9FA5233E3DFF00A1FC16 /* XMLAttributeListParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178C9FA4233E3DFF00A1FC16 /* XMLAttributeListParser.swift */; };
 		178DEEC3233CE5F900E09D0E /* StatViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178DEEC2233CE5F900E09D0E /* StatViewer.swift */; };
 		178DEEC5233CE68F00E09D0E /* StatViewerTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178DEEC4233CE68F00E09D0E /* StatViewerTableCell.swift */; };
 		178F4CA6229131A900FBCFFD /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178F4CA5229131A900FBCFFD /* Board.swift */; };
@@ -164,7 +180,6 @@
 		17B4D2C322A4CD3900987BC5 /* PieceDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B4D2C222A4CD3900987BC5 /* PieceDefinition.swift */; };
 		17B4D2C622A4D1C700987BC5 /* LogicalLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B4D2C522A4D1C700987BC5 /* LogicalLocation.swift */; };
 		17B4D2C922A4D49D00987BC5 /* MasterPieceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B4D2C822A4D49D00987BC5 /* MasterPieceList.swift */; };
-		17B4D2CC22A4D64900987BC5 /* PieceDescriptions.xml in Resources */ = {isa = PBXBuildFile; fileRef = 17B4D2CB22A4D64900987BC5 /* PieceDescriptions.xml */; };
 		17B4E5732294EA2F0050CDE5 /* MapFloodFill.metal in Sources */ = {isa = PBXBuildFile; fileRef = 17B4E5722294EA2F0050CDE5 /* MapFloodFill.metal */; };
 		17B72E14230ACD7D00B1E5CD /* TextLayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B72E13230ACD7D00B1E5CD /* TextLayerManager.swift */; };
 		17B8757523236C9A00BD8BBD /* BlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B8757423236C9A00BD8BBD /* BlockView.swift */; };
@@ -193,9 +208,6 @@
 		17DCD7EA2309436F0072B306 /* +CentralShapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCD7E92309436F0072B306 /* +CentralShapes.swift */; };
 		17DCD7EE23096E340072B306 /* +MapType_BucketCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCD7ED23096E340072B306 /* +MapType_BucketCreation.swift */; };
 		17DCFD34230291B100A00600 /* ManagedTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCFD33230291B100A00600 /* ManagedTimer.swift */; };
-		17E2904E226357F200E304C9 /* GameLevelDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E2904D226357F200E304C9 /* GameLevelDescription.swift */; };
-		17E6E8C3227C30BE006D8817 /* LevelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E6E8C1227C30B8006D8817 /* LevelManager.swift */; };
-		17E6E8C6227C35C0006D8817 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E6E8C4227C35BC006D8817 /* ActionButton.swift */; };
 		17E71A6B22AD20CC0081991E /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E71A6A22AD20CC0081991E /* State.swift */; };
 		17E71A6E22AD20F40081991E /* StateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E71A6D22AD20F40081991E /* StateProtocol.swift */; };
 		17E71A7122AD211E0081991E /* OSColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E71A7022AD211E0081991E /* OSColorExtensions.swift */; };
@@ -238,6 +250,10 @@
 		1705ADE8225D804400628268 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1705ADEB225D911B00628268 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		170F854022B5D3E5005405B6 /* VisualBlocks3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualBlocks3D.swift; sourceTree = "<group>"; };
+		170FC65D233DDF4A00F9A8F1 /* XMLDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLDocument.swift; sourceTree = "<group>"; };
+		170FC665233DE3E300F9A8F1 /* XMLKVP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLKVP.swift; sourceTree = "<group>"; };
+		170FC669233DFA9900F9A8F1 /* XMLSemanticParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLSemanticParser.swift; sourceTree = "<group>"; };
+		170FC671233E003F00F9A8F1 /* Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
 		171020ED227D68A2002FAB63 /* GameViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewProtocol.swift; sourceTree = "<group>"; };
 		171020EF227D8A91002FAB63 /* PieceAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceAttributes.swift; sourceTree = "<group>"; };
 		1710BF7D231E4C9800F566B3 /* GradientStopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientStopCell.swift; sourceTree = "<group>"; };
@@ -284,6 +300,15 @@
 		173B4B16231B96B2007B22F6 /* RecentColorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentColorCell.swift; sourceTree = "<group>"; };
 		173B4B18231BA165007B22F6 /* RecentlyUsedColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyUsedColors.swift; sourceTree = "<group>"; };
 		173EF49823252FF600343302 /* IntraGridProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntraGridProtocol.swift; sourceTree = "<group>"; };
+		174328F1233F0F7F00F98863 /* XMLDeserializeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLDeserializeProtocol.swift; sourceTree = "<group>"; };
+		174328F3233F111100F98863 /* XMLTreeTraversalProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLTreeTraversalProtocol.swift; sourceTree = "<group>"; };
+		174328F6233F1C3F00F98863 /* PieceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceManager.swift; sourceTree = "<group>"; };
+		174328F8233F1E0E00F98863 /* PieceDefinition2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceDefinition2.swift; sourceTree = "<group>"; };
+		174328FA233F20DD00F98863 /* PieceBlockLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceBlockLocation.swift; sourceTree = "<group>"; };
+		174328FC233F22D700F98863 /* Point3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point3D.swift; sourceTree = "<group>"; };
+		17432900233F265D00F98863 /* PieceCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceCollection.swift; sourceTree = "<group>"; };
+		17432902233F411E00F98863 /* XMLNode+Other.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XMLNode+Other.swift"; sourceTree = "<group>"; };
+		17432904233F4C2C00F98863 /* PieceDescriptions.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PieceDescriptions.xml; sourceTree = "<group>"; };
 		17477A6E231783C300AAEB14 /* Theming.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Theming.storyboard; sourceTree = "<group>"; };
 		17477A722317891100AAEB14 /* ThemeEditorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeEditorController.swift; sourceTree = "<group>"; };
 		17477A742317F1C200AAEB14 /* GameBackgroundDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBackgroundDialog.swift; sourceTree = "<group>"; };
@@ -341,6 +366,9 @@
 		178C0F032338786000A35C62 /* SettingsControllerCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsControllerCode.swift; sourceTree = "<group>"; };
 		178C0F052338882100A35C62 /* SettingsChangedProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsChangedProtocol.swift; sourceTree = "<group>"; };
 		178C0F0A2338970400A35C62 /* +Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Action.swift"; sourceTree = "<group>"; };
+		178C9FA0233E2E8D00A1FC16 /* XMLEntityParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLEntityParser.swift; sourceTree = "<group>"; };
+		178C9FA2233E360400A1FC16 /* XMLNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLNode.swift; sourceTree = "<group>"; };
+		178C9FA4233E3DFF00A1FC16 /* XMLAttributeListParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLAttributeListParser.swift; sourceTree = "<group>"; };
 		178DEEC2233CE5F900E09D0E /* StatViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatViewer.swift; sourceTree = "<group>"; };
 		178DEEC4233CE68F00E09D0E /* StatViewerTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatViewerTableCell.swift; sourceTree = "<group>"; };
 		178F4CA5229131A900FBCFFD /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
@@ -392,7 +420,6 @@
 		17B4D2C222A4CD3900987BC5 /* PieceDefinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceDefinition.swift; sourceTree = "<group>"; };
 		17B4D2C522A4D1C700987BC5 /* LogicalLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicalLocation.swift; sourceTree = "<group>"; };
 		17B4D2C822A4D49D00987BC5 /* MasterPieceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterPieceList.swift; sourceTree = "<group>"; };
-		17B4D2CB22A4D64900987BC5 /* PieceDescriptions.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PieceDescriptions.xml; sourceTree = "<group>"; };
 		17B4E5722294EA2F0050CDE5 /* MapFloodFill.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = MapFloodFill.metal; sourceTree = "<group>"; };
 		17B72E13230ACD7D00B1E5CD /* TextLayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextLayerManager.swift; sourceTree = "<group>"; };
 		17B8757423236C9A00BD8BBD /* BlockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockView.swift; sourceTree = "<group>"; };
@@ -421,9 +448,6 @@
 		17DCD7E92309436F0072B306 /* +CentralShapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+CentralShapes.swift"; sourceTree = "<group>"; };
 		17DCD7ED23096E340072B306 /* +MapType_BucketCreation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+MapType_BucketCreation.swift"; sourceTree = "<group>"; };
 		17DCFD33230291B100A00600 /* ManagedTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedTimer.swift; sourceTree = "<group>"; };
-		17E2904D226357F200E304C9 /* GameLevelDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLevelDescription.swift; sourceTree = "<group>"; };
-		17E6E8C1227C30B8006D8817 /* LevelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelManager.swift; sourceTree = "<group>"; };
-		17E6E8C4227C35BC006D8817 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		17E71A6A22AD20CC0081991E /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		17E71A6D22AD20F40081991E /* StateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateProtocol.swift; sourceTree = "<group>"; };
 		17E71A7022AD211E0081991E /* OSColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSColorExtensions.swift; sourceTree = "<group>"; };
@@ -465,6 +489,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		170FC65C233DDF3200F9A8F1 /* XMLDocument */ = {
+			isa = PBXGroup;
+			children = (
+				170FC65D233DDF4A00F9A8F1 /* XMLDocument.swift */,
+				170FC665233DE3E300F9A8F1 /* XMLKVP.swift */,
+				170FC669233DFA9900F9A8F1 /* XMLSemanticParser.swift */,
+				178C9FA0233E2E8D00A1FC16 /* XMLEntityParser.swift */,
+				178C9FA2233E360400A1FC16 /* XMLNode.swift */,
+				17432902233F411E00F98863 /* XMLNode+Other.swift */,
+				178C9FA4233E3DFF00A1FC16 /* XMLAttributeListParser.swift */,
+				174328F1233F0F7F00F98863 /* XMLDeserializeProtocol.swift */,
+				174328F3233F111100F98863 /* XMLTreeTraversalProtocol.swift */,
+			);
+			path = XMLDocument;
+			sourceTree = "<group>";
+		};
 		171020EA227D655E002FAB63 /* 3DView */ = {
 			isa = PBXGroup;
 			children = (
@@ -532,6 +572,31 @@
 				1704E2FD232123DE00D7C158 /* AnimatedGradientStop.swift */,
 			);
 			path = Predefined;
+			sourceTree = "<group>";
+		};
+		174328F5233F1C3000F98863 /* Pieces */ = {
+			isa = PBXGroup;
+			children = (
+				174328F6233F1C3F00F98863 /* PieceManager.swift */,
+				17432900233F265D00F98863 /* PieceCollection.swift */,
+				174328F8233F1E0E00F98863 /* PieceDefinition2.swift */,
+				174328FA233F20DD00F98863 /* PieceBlockLocation.swift */,
+				174328FC233F22D700F98863 /* Point3D.swift */,
+			);
+			path = Pieces;
+			sourceTree = "<group>";
+		};
+		17432908233F77F400F98863 /* DataManagers */ = {
+			isa = PBXGroup;
+			children = (
+				170FC65C233DDF3200F9A8F1 /* XMLDocument */,
+				177F4FCB229BD40F00FE72CD /* Serialization */,
+				179C5E1D23222B260003845B /* Visuals */,
+				179C5E2823224C040003845B /* Themes */,
+				1716A208233CA1E200C4850C /* History */,
+				174328F5233F1C3000F98863 /* Pieces */,
+			);
+			path = DataManagers;
 			sourceTree = "<group>";
 		};
 		1749B6DF22BB2687003DC65D /* Utilities */ = {
@@ -625,7 +690,7 @@
 				1704E2F92320E19A00D7C158 /* GameThemes.xml */,
 				179C5E2B23224C660003845B /* UserGameThemes.xml */,
 				1785ED6122FD8C09000B31C2 /* BoardDescriptions.xml */,
-				17B4D2CB22A4D64900987BC5 /* PieceDescriptions.xml */,
+				17432904233F4C2C00F98863 /* PieceDescriptions.xml */,
 				17D6B194233DC42400EFCE31 /* UserPieceDescriptions.xml */,
 				1762FC1C229D2898000099F2 /* StandardThemes.xml */,
 			);
@@ -906,6 +971,7 @@
 		17CE269E225F5ECF0056818E /* DataStructures */ = {
 			isa = PBXGroup;
 			children = (
+				170FC671233E003F00F9A8F1 /* Tree.swift */,
 				17CE269F225F5EE00056818E /* Stack.swift */,
 				17CE26A2225F63660056818E /* Queue.swift */,
 			);
@@ -946,16 +1012,6 @@
 				17DCD7ED23096E340072B306 /* +MapType_BucketCreation.swift */,
 			);
 			path = MapExtensions;
-			sourceTree = "<group>";
-		};
-		17E6E8C0227C309E006D8817 /* Levels */ = {
-			isa = PBXGroup;
-			children = (
-				17E2904D226357F200E304C9 /* GameLevelDescription.swift */,
-				17E6E8C1227C30B8006D8817 /* LevelManager.swift */,
-				17E6E8C4227C35BC006D8817 /* ActionButton.swift */,
-			);
-			path = Levels;
 			sourceTree = "<group>";
 		};
 		17E71A6122AD20350081991E /* TDebug */ = {
@@ -1095,7 +1151,6 @@
 		17F0B4A5225CBE820071514E /* GameEngine */ = {
 			isa = PBXGroup;
 			children = (
-				17E6E8C0227C309E006D8817 /* Levels */,
 				17A45B562271A57E002E705D /* AI */,
 				17F0B4B2225CC6ED0071514E /* Pieces */,
 				17FC443A228AB9930065888F /* Board */,
@@ -1111,12 +1166,9 @@
 		17F0B4A6225CBE930071514E /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				1716A208233CA1E200C4850C /* History */,
-				177F4FCB229BD40F00FE72CD /* Serialization */,
-				1749B6DF22BB2687003DC65D /* Utilities */,
 				175671672302850800D0824D /* TimerManager */,
-				179C5E2823224C040003845B /* Themes */,
-				179C5E1D23222B260003845B /* Visuals */,
+				17432908233F77F400F98863 /* DataManagers */,
+				1749B6DF22BB2687003DC65D /* Utilities */,
 				177F4FC4229BD2D200FE72CD /* RemoteControls */,
 				17AB99D02297DC4E003C4674 /* ImageManagement */,
 				17F6ECEF2286E1DE000F8E11 /* Protocols */,
@@ -1238,13 +1290,13 @@
 				1716A207233CA1D000C4850C /* History.xml in Resources */,
 				17F0B49E225CBE740071514E /* LaunchScreen.storyboard in Resources */,
 				17D6B195233DC42400EFCE31 /* UserPieceDescriptions.xml in Resources */,
+				17432905233F4C2C00F98863 /* PieceDescriptions.xml in Resources */,
 				179C5E2123222EAA0003845B /* UserVisuals.xml in Resources */,
 				17477A6F231783C300AAEB14 /* Theming.storyboard in Resources */,
 				17F0B49B225CBE740071514E /* Assets.xcassets in Resources */,
 				1762FC1D229D2898000099F2 /* StandardThemes.xml in Resources */,
 				1785ED6222FD8C0A000B31C2 /* BoardDescriptions.xml in Resources */,
 				179C5E2C23224C660003845B /* UserGameThemes.xml in Resources */,
-				17B4D2CC22A4D64900987BC5 /* PieceDescriptions.xml in Resources */,
 				1763492D2312667A000BDF24 /* Default-568h@2x.png in Resources */,
 				1716A20E233CB26400C4850C /* AIHistory.xml in Resources */,
 				171D5D472313FC5300043856 /* MainStoryboard.storyboard in Resources */,
@@ -1281,7 +1333,9 @@
 			files = (
 				178DEEC3233CE5F900E09D0E /* StatViewer.swift in Sources */,
 				1710BF80231E5A3400F566B3 /* GradientExportCode.swift in Sources */,
+				178C9FA5233E3DFF00A1FC16 /* XMLAttributeListParser.swift in Sources */,
 				17C2F3A9231A10DD001EF200 /* Utility.swift in Sources */,
+				170FC666233DE3E300F9A8F1 /* XMLKVP.swift in Sources */,
 				1753ABF0225E262D00FC7089 /* GameUINotificationProtocol.swift in Sources */,
 				17C1E90F23193E8A004040B6 /* GradientManager.swift in Sources */,
 				17C2F3AB231A1395001EF200 /* ColorPickerCode.swift in Sources */,
@@ -1292,6 +1346,7 @@
 				1710BF7E231E4C9800F566B3 /* GradientStopCell.swift in Sources */,
 				17F0B4BA225CCEE00071514E /* GameLogic.swift in Sources */,
 				17715CB622C74D8E009FD441 /* +Tables.swift in Sources */,
+				178C9FA1233E2E8D00A1FC16 /* XMLEntityParser.swift in Sources */,
 				17477A772317F7E800AAEB14 /* PieceSelectorDialog.swift in Sources */,
 				17FC443C228AB9E50065888F /* Score.swift in Sources */,
 				17ECE5AC23322540003F4065 /* +PopulateFields.swift in Sources */,
@@ -1301,7 +1356,6 @@
 				17C14E1F23066E1600D9CF64 /* TextLayerDisplayProtocol.swift in Sources */,
 				17CE26A0225F5EE00056818E /* Stack.swift in Sources */,
 				1797523822C38A4D00BF539A /* +PeerCommands.swift in Sources */,
-				17E6E8C3227C30BE006D8817 /* LevelManager.swift in Sources */,
 				177F4FC9229BD33900FE72CD /* Receive.swift in Sources */,
 				17912255231FAAFB00C3330A /* GamePieceCell.swift in Sources */,
 				17D48A8422B2111D00DD7C94 /* ThreeDProtocol.swift in Sources */,
@@ -1313,6 +1367,7 @@
 				173B4B17231B96B2007B22F6 /* RecentColorCell.swift in Sources */,
 				179C5E36232273130003845B /* ColorButton.swift in Sources */,
 				17B4D2C922A4D49D00987BC5 /* MasterPieceList.swift in Sources */,
+				178C9FA3233E360400A1FC16 /* XMLNode.swift in Sources */,
 				1704E2FC2321235500D7C158 /* AnimatedGradient.swift in Sources */,
 				1782C0F122FE8CA5006CD9D5 /* GeneralAI.swift in Sources */,
 				17ECE5B423325720003F4065 /* +Int.swift in Sources */,
@@ -1327,12 +1382,14 @@
 				17E71A8322AD21D40081991E /* ClientCommands.swift in Sources */,
 				17376354230A87EE0050EB22 /* CATextLayer2.swift in Sources */,
 				1713735722EAE67700C9F9A7 /* SCNDodecahedron.swift in Sources */,
+				170FC672233E003F00F9A8F1 /* Tree.swift in Sources */,
 				17ECE5A923321EE3003F4065 /* +StringList.swift in Sources */,
 				17E71A6E22AD20F40081991E /* StateProtocol.swift in Sources */,
 				17C2F3AD231A146C001EF200 /* ColorChipSelectorCode.swift in Sources */,
 				17CE26A3225F63660056818E /* Queue.swift in Sources */,
 				171BDEC422B8CE00005C3509 /* SmoothMotionProtocol.swift in Sources */,
 				1754E7A023252CA500820FDE /* GridProtocol.swift in Sources */,
+				17432901233F265D00F98863 /* PieceCollection.swift in Sources */,
 				17CA147E22BC9E9600D099C1 /* TDebugProtocol.swift in Sources */,
 				17D48A7B22B202B000DD7C94 /* 3DView.swift in Sources */,
 				173B4B19231BA165007B22F6 /* RecentlyUsedColors.swift in Sources */,
@@ -1351,7 +1408,6 @@
 				17CE269D225F127C0056818E /* Versioning.swift in Sources */,
 				17AF232523139B6600921E6C /* +TDebugProtocols2.swift in Sources */,
 				173762502310E5F10075E1DD /* UITouchImage.swift in Sources */,
-				17E2904E226357F200E304C9 /* GameLevelDescription.swift in Sources */,
 				1716A20C233CA50E00C4850C /* RunHistory.swift in Sources */,
 				1797524622C38A4D00BF539A /* +Broadcasting.swift in Sources */,
 				17ECE5B023325416003F4065 /* +Bool.swift in Sources */,
@@ -1363,6 +1419,8 @@
 				173AA390231A8EC600802289 /* PredefinedColorGroup.swift in Sources */,
 				179C5E25232231F70003845B /* PieceVisualManager.swift in Sources */,
 				177FC1D42318E0F7005727B6 /* ColorPickerProtocol.swift in Sources */,
+				170FC66A233DFA9900F9A8F1 /* XMLSemanticParser.swift in Sources */,
+				174328FB233F20DD00F98863 /* PieceBlockLocation.swift in Sources */,
 				17FA044D232649F8004E5FC8 /* BlockCoordinates.swift in Sources */,
 				17F6ECF22286E322000F8E11 /* ControlUIProtocol.swift in Sources */,
 				17376357230A9C9C0050EB22 /* +BucketCleaner.swift in Sources */,
@@ -1371,6 +1429,7 @@
 				17AC98222324AB6B0020FB05 /* FlyingPieces.swift in Sources */,
 				1710BF82231E829800F566B3 /* PresetGradientListCode.swift in Sources */,
 				170F854122B5D3E5005405B6 /* VisualBlocks3D.swift in Sources */,
+				174328FD233F22D700F98863 /* Point3D.swift in Sources */,
 				173B4B15231B9136007B22F6 /* RecentColorListCode.swift in Sources */,
 				17F6ECF02286E1F2000F8E11 /* ControlProtocol.swift in Sources */,
 				179C5E342322533F0003845B /* PieceEditorCode.swift in Sources */,
@@ -1381,6 +1440,7 @@
 				176708F3233A0272000E2216 /* SupportedLanguages.swift in Sources */,
 				177F4FD9229C1A7600FE72CD /* SerializerExtension.swift in Sources */,
 				174CAAD6231CFA2B003823E2 /* ColorSpaceConverter.swift in Sources */,
+				170FC65E233DDF4A00F9A8F1 /* XMLDocument.swift in Sources */,
 				1797523422C38A4D00BF539A /* +ClientCommands.swift in Sources */,
 				17E74BF0230E7C9B00A62274 /* MainSlideInView.swift in Sources */,
 				1749B6E422BB3F68003DC65D /* TextLayerProtocol.swift in Sources */,
@@ -1400,19 +1460,21 @@
 				17B4E5732294EA2F0050CDE5 /* MapFloodFill.metal in Sources */,
 				17B72E14230ACD7D00B1E5CD /* TextLayerManager.swift in Sources */,
 				173762522310E7400075E1DD /* UITouchImageDelegate.swift in Sources */,
-				17E6E8C6227C35C0006D8817 /* ActionButton.swift in Sources */,
 				1797524422C38A4D00BF539A /* +Heartbeat.swift in Sources */,
 				17831EDD232DFB54007FF894 /* FlyingProtocol.swift in Sources */,
 				17C1E90B23190F5E004040B6 /* UIColorExtensions.swift in Sources */,
 				1767D28622AF4959005EE191 /* DebugClient.swift in Sources */,
 				17F0B4B1225CC22A0071514E /* Piece.swift in Sources */,
+				17432903233F411E00F98863 /* XMLNode+Other.swift in Sources */,
 				17381F422334B683003ED0A3 /* GroupField.swift in Sources */,
 				17ECE5B62332579F003F4065 /* +Double.swift in Sources */,
 				1797524222C38A4D00BF539A /* +VersionInfo.swift in Sources */,
+				174328F9233F1E0E00F98863 /* PieceDefinition2.swift in Sources */,
 				1762FC19229CCFF6000099F2 /* RawParser.swift in Sources */,
 				17E71A7A22AD217B0081991E /* MultiPeer.swift in Sources */,
 				173592C52331FA540028FF9A /* RawThemeViewerCode.swift in Sources */,
 				1797523C22C38A4D00BF539A /* +StatusCommands.swift in Sources */,
+				174328F7233F1C3F00F98863 /* PieceManager.swift in Sources */,
 				1754E79C23252C5500820FDE /* GridCell.swift in Sources */,
 				17616AC623163A3400DFFEFE /* SlideInItem.swift in Sources */,
 				1737635A230AC6AD0050EB22 /* MiscellaneousExtensions.swift in Sources */,
@@ -1469,11 +1531,13 @@
 				17C898C322CDF60F004EA348 /* ArrayStatistics.swift in Sources */,
 				179F0A74233074040051B148 /* ColorSwatch.swift in Sources */,
 				17F0B494225CBE730071514E /* AppDelegate.swift in Sources */,
+				174328F2233F0F7F00F98863 /* XMLDeserializeProtocol.swift in Sources */,
 				17CD4EB5231E370B0055E541 /* GradientEditorCode.swift in Sources */,
 				17616ACD23166DF700DFFEFE /* GameStyleTableViewCell.swift in Sources */,
 				173AA38E231A8E9E00802289 /* PredefinedColor.swift in Sources */,
 				176F1B72227B0A0600681CDE /* Settings.swift in Sources */,
 				17477A732317891100AAEB14 /* ThemeEditorController.swift in Sources */,
+				174328F4233F111100F98863 /* XMLTreeTraversalProtocol.swift in Sources */,
 				17616AC92316497300DFFEFE /* AboutDialogController.swift in Sources */,
 				17A45B632271DA98002E705D /* AITestDataUpdatedProtocol.swift in Sources */,
 				1797523622C38A4D00BF539A /* +Handshake.swift in Sources */,
