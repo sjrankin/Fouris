@@ -1,0 +1,1108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Pieces Type="Default">
+    <Piece>
+        <PieceName Name="Bar"/>
+        <ID UUID="f4510cca-262a-4018-bf29-04d703702d65"/>
+        <PieceClass Class="Standard"/>
+        <Thin IsThin="0"/>
+        <Wide IsWide="1"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="0,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="0,0"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="0,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="3">
+                <Coordinate XY="0,2"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="Square"/>
+        <ID UUID="b5bb59a5-b006-487b-a7b1-e0daf4a48810"/>
+        <PieceClass Class="Standard"/>
+        <Thin IsThin="0"/>
+        <Wide IsWide="0"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="0,0"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="1,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="0,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="3">
+                <Coordinate XY="1,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="S"/>
+        <ID UUID="05463ade-1996-49e0-aae9-55cad6f8f605"/>
+        <PieceClass Class="Standard"/>
+        <Thin IsThin="1"/>
+        <Wide IsWide="0"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="1,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="1,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="0,1"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="3">
+                <Coordinate XY="0,2"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="Z"/>
+        <ID UUID="0f2709f0-b5ed-4ed9-b8c5-d65a1e1d69e8"/>
+        <PieceClass Class="Standard"/>
+        <Thin IsThin="1"/>
+        <Wide IsWide="0"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="0,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="0,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="1,1"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="3">
+                <Coordinate XY="1,2"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="T"/>
+        <ID UUID="26e5dee4-0cc5-492f-ab31-b5b810863bf4"/>
+        <PieceClass Class="Standard"/>
+        <Thin IsThin="1"/>
+        <Wide IsWide="0"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="0,0"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="1,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="-1,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="3">
+                <Coordinate XY="0,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="L"/>
+        <ID UUID="69cc6259-93f2-438d-8a9f-e0e65ad6c841"/>
+        <PieceClass Class="Standard"/>
+        <Thin IsThin="0"/>
+        <Wide IsWide="1"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="0,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="0,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="0,2"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="3">
+                <Coordinate XY="1,2"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="backL"/>
+        <ID UUID="7c73c10c-86b3-406d-964e-f12abbf914cc"/>
+        <PieceClass Class="Standard"/>
+        <Thin IsThin="0"/>
+        <Wide IsWide="1"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="1,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="1,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="1,2"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="3">
+                <Coordinate XY="0,2"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="Random4x4"/>
+        <Property Name="_ID", Value="268dcdc3-9067-46d2-818a-0b118e7ff08b"/>
+        <PieceClass Class="Random"/>
+        <Property Name="_RandomSquareSize" Value="4"/>
+        <Thin IsThin="0"/>
+        <Wide IsWide="0"/>
+    </Piece>
+    <Piece>
+        <PieceName Name="Random3x3"/>
+        <Property Name="_ID", Value="1c669225-6cc8-4ad5-b128-86452f613ac9"/>
+        <PieceClass Class="Random"/>
+        <Property Name="_RandomSquareSize" Value="3"/>
+        <Thin IsThin="0"/>
+        <Wide IsWide="0"/>
+    </Piece>
+    <Piece>
+        <PieceName Name="Random2x2"/>
+        <Property Name="_ID", Value="cc51e58c-c4d5-4a22-afa0-f8cbb80a4c6e"/>
+        <PieceClass Class="Random"/>
+        <Property Name="_RandomSquareSize" Value="2"/>
+        <Thin IsThin="0"/>
+        <Wide IsWide="0"/>
+    </Piece>
+    <Piece>
+        <PieceName Name="Zig"/>
+        <ID UUID="70b8f7ab-cd14-4f1a-a709-91bcfe24f3ab"/>
+        <PieceClass Class="NonStandard"/>
+        <Thin IsThin="0"/>
+        <Wide IsWide="0"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="-1,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="0,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="0,0"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="3">
+                <Coordinate XY="0,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="4">
+                <Coordinate XY="1,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="Zag"/>
+        <ID UUID="85041a61-7d17-4434-a990-a033f38f34e0"/>
+        <PieceClass Class="NonStandard"/>
+        <Thin IsThin="0"/>
+        <Wide IsWide="0"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="1,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="0,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="0,0"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="3">
+                <Coordinate XY="0,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="4">
+                <Coordinate XY="-1,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="ShortL"/>
+        <ID UUID="3ff7a6e9-21b4-4afc-b5ee-0ed4e6a63f1e"/>
+        <PieceClass Class="NonStandard"/>
+        <Thin IsThin="0"/>
+        <Wide IsWide="0"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="0,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="0,0"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="1,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="ShortBackL"/>
+        <ID UUID="35d6b1f9-b921-4d7f-8448-66b179b2ab7f"/>
+        <PieceClass Class="NonStandard"/>
+        <Thin IsThin="0"/>
+        <Wide IsWide="0"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="0,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="0,0"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="-1,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="C"/>
+        <ID UUID="49bf8a5b-6570-4456-90c8-2924811a6e59"/>
+        <PieceClass Class="NonStandard"/>
+        <Thin IsThin="1"/>
+        <Wide IsWide="0"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="-1,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="1,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="-1,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="3">
+                <Coordinate XY="0,0"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="4">
+                <Coordinate XY="1,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="Plus"/>
+        <ID UUID="dec6e2c4-ff38-454a-ac56-dbe789267060"/>
+        <PieceClass Class="NonStandard"/>
+        <Thin IsThin="0"/>
+        <Wide IsWide="0"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="0,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="0,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="0,0"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="3">
+                <Coordinate XY="-1,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="4">
+                <Coordinate XY="1,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="Corner"/>
+        <ID UUID="09cbb902-d875-4337-8756-3e58bf408491"/>
+        <PieceClass Class="NonStandard"/>
+        <Thin IsThin="0"/>
+        <Wide IsWide="0"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="0,-2"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="0,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="0,0"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="3">
+                <Coordinate XY="1,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="4">
+                <Coordinate XY="2,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="JoinedSquares"/>
+        <ID UUID="2284f6ce-34c3-49de-b187-ba1220a0ac6f"/>
+        <PieceClass Class="NonStandard"/>
+        <Thin IsThin="0"/>
+        <Wide IsWide="0"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="0,0"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="-1,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="0,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="3">
+                <Coordinate XY="-1,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="4">
+                <Coordinate XY="1,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="5">
+                <Coordinate XY="0,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="6">
+                <Coordinate XY="1,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="EmptyBox"/>
+        <ID UUID="88312d0c-73c1-4220-b91c-4d77e05236b1"/>
+        <PieceClass Class="WithGaps"/>
+        <RotationallySymmetric Symmetry="true"/>
+        <Thin IsThin="0"/>
+        <Wide IsWide="0"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="-1,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="1,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="-1,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="3">
+                <Coordinate XY="1,1"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="4">
+                <Coordinate XY="0,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="5">
+                <Coordinate XY="1,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="6">
+                <Coordinate XY="0,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="7">
+                <Coordinate XY="-1,0"/>
+                <IsOrigin Value="true"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="lowerI"/>
+        <ID UUID="b69d3279-2e29-4eb1-924a-2e09187c21f9"/>
+        <PieceClass Class="WithGaps"/>
+        <Thin IsThin="0"/>
+        <Wide IsWide="1"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="0,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="0,2"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="0,3"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="EmptyDiamond"/>
+        <ID UUID="99d6c473-36b5-4504-b6e4-faece29fbe28"/>
+        <PieceClass Class="WithGaps"/>
+        <RotationallySymmetric Symmetry="true"/>
+        <Thin IsThin="0"/>
+        <Wide IsWide="0"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="0,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="0,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="-1,0"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="3">
+                <Coordinate XY="1,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="ParallelLines"/>
+        <ID UUID="1b9fe0f0-9157-46da-b462-5222643bb1f7"/>
+        <PieceClass Class="WithGaps"/>
+        <Thin IsThin="0"/>
+        <Wide IsWide="0"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="-1,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="-1,0"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="-1,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="3">
+                <Coordinate XY="1,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="4">
+                <Coordinate XY="1,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="5">
+                <Coordinate XY="1,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="Test1x1"/>
+        <ID UUID="a81a0932-52bf-4619-a24b-2f1217d4fe7f"/>
+        <PieceClass Class="TestPieces"/>
+        <RotationallySymmetric Symmetry="true"/>
+        <Thin IsThin="0"/>
+        <Wide IsWide="0"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="0,0"/>
+                <IsOrigin Value="true"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="Test2x2"/>
+        <ID UUID="690a5673-7900-4388-ab05-6beaa7bd0369"/>
+        <PieceClass Class="TestPieces"/>
+        <RotationallySymmetric Symmetry="true"/>
+        <Thin IsThin="0"/>
+        <Wide IsWide="0"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="1,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="1,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="0,1"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="3">
+                <Coordinate XY="0,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="Test3x3"/>
+        <ID UUID="817130a9-5f47-4887-b04c-c7d3e429d694"/>
+        <PieceClass Class="TestPieces"/>
+        <RotationallySymmetric Symmetry="true"/>
+        <Thin IsThin="0"/>
+        <Wide IsWide="0"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="-1,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="0,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="1,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="3">
+                <Coordinate XY="-1,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="4">
+                <Coordinate XY="0,0"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="5">
+                <Coordinate XY="1,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="6">
+                <Coordinate XY="-1,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="7">
+                <Coordinate XY="0,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="8">
+                <Coordinate XY="1,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="BigBlock3x3"/>
+        <ID UUID="936170f5-1300-4553-ada8-141bdfb4d85f"/>
+        <PieceClass Class="BigPieces"/>
+        <RotationallySymmetric Symmetry="true"/>
+        <Thin IsThin="0"/>
+        <Wide IsWide="0"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="-1,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="0,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="1,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="3">
+                <Coordinate XY="-1,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="4">
+                <Coordinate XY="0,0"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="5">
+                <Coordinate XY="1,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="6">
+                <Coordinate XY="-1,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="7">
+                <Coordinate XY="0,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="8">
+                <Coordinate XY="1,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="BigBlock4x4"/>
+        <ID UUID="494c7a96-060d-4c81-8f9a-609ae0e71a5e"/>
+        <PieceClass Class="BigPieces"/>
+        <RotationallySymmetric Symmetry="true"/>
+        <Thin IsThin="0"/>
+        <Wide IsWide="0"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="-2,-2"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="-1,-2"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="0,-2"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="3">
+                <Coordinate XY="1,-2"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="4">
+                <Coordinate XY="-2,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="5">
+                <Coordinate XY="-1,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="6">
+                <Coordinate XY="0,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="7">
+                <Coordinate XY="1,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="8">
+                <Coordinate XY="-2,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="9">
+                <Coordinate XY="-1,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="10">
+                <Coordinate XY="0,0"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="11">
+                <Coordinate XY="1,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="12">
+                <Coordinate XY="-2,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="13">
+                <Coordinate XY="-1,1"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="14">
+                <Coordinate XY="0,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="15">
+                <Coordinate XY="1,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="Sweeper"/>
+        <ID UUID="97b5a353-acfa-43dc-9deb-7c8aa0f32000"/>
+        <PieceClass Class="BigPieces"/>
+        <Thin IsThin="1"/>
+        <Wide IsWide="0"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="0,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="1,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="2,0"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="3">
+                <Coordinate XY="3,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="4">
+                <Coordinate XY="4,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="CapitalI"/>
+        <ID UUID="c540885c-1b60-4577-af7b-f5d309e73d84"/>
+        <PieceClass Class="BigPieces"/>
+        <Thin IsThin="0"/>
+        <Wide IsWide="1"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="-1,-2"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="0,-2"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="1,-2"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="3">
+                <Coordinate XY="-1,2"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="4">
+                <Coordinate XY="0,2"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="5">
+                <Coordinate XY="1,2"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="6">
+                <Coordinate XY="0,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="7">
+                <Coordinate XY="0,0"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="8">
+                <Coordinate XY="0,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="CapitalO"/>
+        <ID UUID="0e7135e2-6bf7-457d-add4-63a0f1b57560"/>
+        <PieceClass Class="BigPieces"/>
+        <Thin IsThin="0"/>
+        <Wide IsWide="1"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="0,2"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="1,2"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="-1,1"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="3">
+                <Coordinate XY="-1,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="4">
+                <Coordinate XY="-1,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="5">
+                <Coordinate XY="2,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="6">
+                <Coordinate XY="2,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="7">
+                <Coordinate XY="2,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="8">
+                <Coordinate XY="0,-2"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="9">
+                <Coordinate XY="1,-2"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="Diagonal"/>
+        <ID UUID="63285186-a589-4185-acd6-1e6e8c1368ed"/>
+        <PieceClass Class="Malicious"/>
+        <Thin IsThin="0"/>
+        <Wide IsWide="0"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="-1,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="0,0"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="1,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="X"/>
+        <ID UUID="8ef520af-17e0-4011-8579-a92a9d520c5a"/>
+        <PieceClass Class="Malicious"/>
+        <RotationallySymmetric Symmetry="true"/>
+        <Thin IsThin="0"/>
+        <Wide IsWide="0"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="-1,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="1,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="0,0"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="3">
+                <Coordinate XY="1,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="4">
+                <Coordinate XY="-1,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="BigGap"/>
+        <ID UUID="007c0348-e287-43cc-8901-bfce604f796b"/>
+        <PieceClass Class="Malicious"/>
+        <Thin IsThin="0"/>
+        <Wide IsWide="0"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="0,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="0,2"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="1,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="3">
+                <Coordinate XY="1,2"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="4">
+                <Coordinate XY="-1,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="5">
+                <Coordinate XY="-1,0"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="6">
+                <Coordinate XY="-1,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="7">
+                <Coordinate XY="-1,2"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="8">
+                <Coordinate XY="2,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="9">
+                <Coordinate XY="2,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="10">
+                <Coordinate XY="2,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="11">
+                <Coordinate XY="2,2"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="LongGap"/>
+        <ID UUID="742b73be-56ad-4f36-903c-dbd160428d96"/>
+        <PieceClass Class="Malicious"/>
+        <Thin IsThin="0"/>
+        <Wide IsWide="1"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="0,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="0,2"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="-1,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="3">
+                <Coordinate XY="-1,0"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="4">
+                <Coordinate XY="-1,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="5">
+                <Coordinate XY="-1,2"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="6">
+                <Coordinate XY="1,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="7">
+                <Coordinate XY="1,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="8">
+                <Coordinate XY="1,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="9">
+                <Coordinate XY="1,2"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="LongDiagonal"/>
+        <ID UUID="5d87accc-3edf-4c7f-b226-d83254d499ad"/>
+        <PieceClass Class="Malicious"/>
+        <RotationallySymmetric Symmetry="true"/>
+        <Thin IsThin="0"/>
+        <Wide IsWide="0"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="-1,-1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="0,0"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="1,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="3">
+                <Coordinate XY="2,2"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="V"/>
+        <ID UUID="4dbea417-4654-459b-9aaf-9bcde56720be"/>
+        <PieceClass Class="Malicious"/>
+        <RotationallySymmetric Symmetry="true"/>
+        <Thin IsThin="1"/>
+        <Wide IsWide="0"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="-1,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="0,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="2">
+                <Coordinate XY="1,-1"/>
+                <IsOrigin Value="true"/>
+            </Location>
+            <Location Index="3">
+                <Coordinate XY="2,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="4">
+                <Coordinate XY="3,1"/>
+                <IsOrigin Value="false"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+    <Piece>
+        <PieceName Name="FarApart"/>
+        <ID UUID="6a2b5de2-4336-4927-affa-980a89c061a6"/>
+        <PieceClass Class="Malicious"/>
+        <RotationallySymmetric Symmetry="true"/>
+        <Thin IsThin="1"/>
+        <Wide IsWide="0"/>
+        <LogicalLocations>
+            <Location Index="0">
+                <Coordinate XY="-3,0"/>
+                <IsOrigin Value="false"/>
+            </Location>
+            <Location Index="1">
+                <Coordinate XY="2,1"/>
+                <IsOrigin Value="true"/>
+            </Location>
+        </LogicalLocations>
+    </Piece>
+</Pieces>
