@@ -12,6 +12,7 @@ import UIKit
 /// Maintains game history on a game-type by game-type basis. No personal information is used or stored.
 class HistoryManager
 {
+    /// Copy resource-bound initial history files to the history sub-directory.
     private static func CreateHistoryFiles()
     {
         let InitialHistory = FileIO.GetFileContentsFromResource("History", ".xml")
@@ -136,8 +137,10 @@ class HistoryManager
     }
     
     /// Holds the set of game execution statistics.
-    /// - Note: Callers are enouraged to use the provided functions to access statistics.
+    /// - Note: Callers are encouraged to use the provided functions to access statistics.
     public static var GameRunHistory: RunHistory? = nil
     
+    /// Holds the set of AI game execution statistics.
+    /// - Note: Callers are encouraged to use the provided functions to access statistics.
     public static var AIGameRunHistory: RunHistory? = nil
 }
