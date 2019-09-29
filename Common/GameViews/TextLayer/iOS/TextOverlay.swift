@@ -30,7 +30,6 @@ class TextOverlay: TextLayerDisplayProtocol
     /// Sets the controls to use to display text. Text is an attributed string displayed in a CATextLayer, so each text object
     /// needs to reside in a view (abstracted by the typealias **TextContainerType**). Those views are passed in this function.
     /// - Parameter NextLabel: Container for the "Next" label.
-    /// - Parameter NextPieceView: Container for the next game piece.
     /// - Parameter ScoreLabel: Container for the "Score" label.
     /// - Parameter CurrentScoreLabel: Container for the current score label.
     /// - Parameter HighScoreLabel: Container for the high score label.
@@ -39,7 +38,6 @@ class TextOverlay: TextLayerDisplayProtocol
     /// - Parameter PauseLabel: Container for the "Pause" label.
     /// - Parameter PieceControl: The piece view control.
     func SetControls(NextLabel: UIView?,
-                     NextPieceView: UIView?,
                      ScoreLabel: UIView?,
                      CurrentScoreLabel: UIView?,
                      HighScoreLabel: UIView?,
@@ -49,7 +47,6 @@ class TextOverlay: TextLayerDisplayProtocol
                      PieceControl: PieceViewer?)
     {
         NextLabelContainer = NextLabel
-        NextPieceContainer = NextPieceView
         ScoreLabelContainer = ScoreLabel
         CurrentScoreContainer = CurrentScoreLabel
         HighScoreContainer = HighScoreLabel
@@ -59,7 +56,6 @@ class TextOverlay: TextLayerDisplayProtocol
         PieceViewControl = PieceControl
         //The views all have background colors in the interface builder so set everything to transparent here.
         NextLabelContainer?.layer.backgroundColor = UIColor.clear.cgColor
-        NextPieceContainer?.layer.backgroundColor = UIColor.clear.cgColor
         ScoreLabelContainer?.layer.backgroundColor = UIColor.clear.cgColor
         CurrentScoreContainer?.layer.backgroundColor = UIColor.clear.cgColor
         HighScoreContainer?.layer.backgroundColor = UIColor.clear.cgColor
@@ -67,7 +63,6 @@ class TextOverlay: TextLayerDisplayProtocol
         PressPlayContainer?.layer.backgroundColor = UIColor.clear.cgColor
         PauseContainer?.layer.backgroundColor = UIColor.clear.cgColor
         NextLabelContainer?.layer.zPosition = 10000
-        NextPieceContainer?.layer.zPosition = 10000
         ScoreLabelContainer?.layer.zPosition = 10000
         CurrentScoreContainer?.layer.zPosition = 10000
         HighScoreContainer?.layer.zPosition = 10000
@@ -77,8 +72,6 @@ class TextOverlay: TextLayerDisplayProtocol
         
         PieceViewControl?.backgroundColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.5)
         PieceViewControl?.layer.borderColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.65).cgColor
-        PieceViewControl?.layer.cornerRadius = 5.0
-        PieceViewControl?.layer.borderWidth = 0.5
         PieceViewControl?.BlockSize = 6
         PieceViewControl?.alpha = 0.0
         
@@ -86,7 +79,6 @@ class TextOverlay: TextLayerDisplayProtocol
     }
     
     var NextLabelContainer: UIView? = nil
-    var NextPieceContainer: UIView? = nil
     var ScoreLabelContainer: UIView? = nil
     var CurrentScoreContainer: UIView? = nil
     var HighScoreContainer: UIView? = nil
@@ -398,7 +390,6 @@ class TextOverlay: TextLayerDisplayProtocol
     {
         OperationQueue.main.addOperation
             {
-                #if true
                 self.PieceViewControl?.Clear()
                 self.PieceViewControl?.AddPiece(NextPiece)
                 self.PieceViewControl?.RotatePiece(OnX: false, OnY: false, OnZ: true)
@@ -412,25 +403,6 @@ class TextOverlay: TextLayerDisplayProtocol
                         self.PieceViewControl!.alpha = 1.0
                 }
                 )
-                #else
-                self.NextPieceContainer!.alpha = 1.0
-                let VisualPiece: CAShapeLayer = PieceFactory.GetGenericView(ForPiece: NextPiece, WithShadow: true)
-                self.NextPieceContainer?.layer.sublayers?.removeAll()
-                let FinalDuration = Duration == nil ? 0.1 : Duration!
-                VisualPiece.name = ContainerTypes.NextPiece.rawValue
-                let YOffset = 5.0
-                VisualPiece.bounds = VisualPiece.bounds.WithNewPosition(CGPoint(x: -5, y: YOffset))
-                self.NextPieceContainer?.layer.addSublayer(VisualPiece)
-                UIView.animate(withDuration: FinalDuration, animations:
-                    {
-                        VisualPiece.opacity = 1.0
-                }, completion:
-                    {
-                        _ in
-                        self.NextLabelContainer!.alpha = 1.0
-                }
-                )
-                #endif
         }
     }
     
