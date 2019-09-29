@@ -84,6 +84,8 @@ class MainViewController: UIViewController,
         
         Versioning.PublishVersion(">")
         
+        let _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(IncrementSeconds), userInfo: nil, repeats: true)
+        
         #if true
         let BadgeCount = Versioning.Build
         let App = UIApplication.shared
@@ -123,12 +125,6 @@ class MainViewController: UIViewController,
         
         Settings.Initialize()
         PieceManager.Initialize()
-        let UserPieces = PieceManager.UserPieces!
-        let DefaultPieces = PieceManager.DefaultPieces!
-        MasterPieceList.Initialize()
-        #if false
-        LevelManager.Initialize()
-        #endif
         Themes = ThemeManager()
         Themes.Initialize()
         UserTheme = Themes.UserTheme
@@ -145,6 +141,31 @@ class MainViewController: UIViewController,
         setNeedsStatusBarAppearanceUpdate()
         
         Stepper.Delegate = self
+    }
+    
+    /// Layout complete. Save certain information.
+    override func viewDidLayoutSubviews()
+    {
+        OriginalGameViewBounds = GameView.bounds
+        OrignalTopToolbarBounds = GameControlView.bounds
+        OriginalMotionControlBounds = MotionControlView.bounds
+    }
+    
+    /// Number of seconds the instance has been running.
+    var InstanceSeconds: Int = 0
+    
+    /// Game instance second counter. Used to keep track of how long the program (not necessarily game) is running. If the proper
+    /// settings are in place, the seconds are displayed in the UI.
+    @objc func IncrementSeconds()
+    {
+        InstanceSeconds = InstanceSeconds + 1
+        if Settings.ShowInstanceSeconds()
+        {
+            if FPSLabel.alpha > 0.0
+            {
+                FPSLabel.text = "\(InstanceSeconds)"
+            }
+        }
     }
     
     var UserTheme: ThemeDescriptor? = nil
@@ -170,12 +191,7 @@ class MainViewController: UIViewController,
         
         //Initialize the 3D game viewer.
         GameView3D = GameUISurface3D
-        #if true
         GameView3D?.Initialize(With: Game!.GameBoard!, Theme: Themes, BaseType: CurrentBaseGameType)
-        #else
-        GameView3D?.Initialize(With: Game!.GameBoard!, Theme: ThemeManager.GetDefault3DThemeID()!,
-                               BaseType: CurrentBaseGameType)
-        #endif
         GameView3D?.Owner = self
         GameView3D?.SmoothMotionDelegate = self
         Smooth3D = GameView3D
@@ -186,7 +202,6 @@ class MainViewController: UIViewController,
         TextLayerView.Initialize(With: UUID.Empty, LayerFrame: TextLayerView.frame)
         GameTextOverlay = TextOverlay(Device: UIDevice.current.userInterfaceIdiom)
         GameTextOverlay?.SetControls(NextLabel: NextPieceLabelView,
-                                     NextPieceView: NextPieceView,
                                      ScoreLabel: ScoreLabelView,
                                      CurrentScoreLabel: CurrentScoreLabelView,
                                      HighScoreLabel: HighScoreLabelView,
@@ -194,6 +209,8 @@ class MainViewController: UIViewController,
                                      PressPlayLabel: PressPlayLabelView,
                                      PauseLabel: PauseLabelView,
                                      PieceControl: NextPieceViewControl)
+        NextPieceView.layer.backgroundColor = UIColor.clear.cgColor
+        NextPieceView.layer.borderColor = UIColor.clear.cgColor
         GameTextOverlay?.ShowPressPlay(Duration: 0.7)
         GameTextOverlay?.HideNextLabel()
         
@@ -205,6 +222,8 @@ class MainViewController: UIViewController,
         let _ = Timer.scheduledTimer(timeInterval: AutoStartDuration, target: self,
                                      selector: #selector(AutoStartInAttractMode),
                                      userInfo: nil, repeats: false)
+        
+        InitializeGestures()
     }
     
     /// Sets the enable state of the freeze in place action button.
@@ -223,17 +242,34 @@ class MainViewController: UIViewController,
     func InitializeUI()
     {
         Settings.AddSubscriber(For: "Main", NewSubscriber: self)
-        InitializeGestures()
         if Settings.ShowFPSInUI()
         {
             FPSLabel.text = ""
             FPSLabel.alpha = 1.0
+            FPSLabel.isUserInteractionEnabled = true
         }
         else
         {
             FPSLabel.alpha = 0.0
+            FPSLabel.isUserInteractionEnabled = false
         }
+        let Tap = UITapGestureRecognizer(target: self, action: #selector(FPSTapped))
+        Tap.numberOfTouchesRequired = 1
+        FPSLabel.addGestureRecognizer(Tap)
+        SlideInCameraControlBox.layer.backgroundColor = ColorServer.CGColorFrom(ColorNames.WhiteSmoke)
+        SlideInCameraControlBox.layer.borderColor = UIColor.black.cgColor
         ShowCameraControls()
+    }
+    
+    /// Handle taps on the FPS text display. This toggles the contents from frames/second to instance seconds.
+    /// - Parameter Recognizer: The tap gesture recognizer.
+    @objc func FPSTapped(Recognizer: UIGestureRecognizer)
+    {
+        if Recognizer.state == .ended
+        {
+            let OldShowSeconds = Settings.ShowInstanceSeconds()
+            Settings.SetShowInstanceSeconds(NewValue: !OldShowSeconds)
+        }
     }
     
     /// Set camera button visibility depending on the settings.
@@ -243,7 +279,23 @@ class MainViewController: UIViewController,
         VideoButton.isUserInteractionEnabled = Settings.GetShowCameraControls()
         CameraButton.isHidden = !Settings.GetShowCameraControls()
         CameraButton.isUserInteractionEnabled = Settings.GetShowCameraControls()
+        if Settings.GetShowCameraControls()
+        {
+            SlideInCameraControlBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
+                    SlideInCameraControlBox.layer.borderColor = UIColor.black.cgColor
+            SlideInCameraControlBox.alpha = 1.0
+            SlideInCameraControlBox.isUserInteractionEnabled = true
+        }
+        else
+        {
+            SlideInCameraControlBox.alpha = 0.0
+            SlideInCameraControlBox.isUserInteractionEnabled = false
+        }
     }
+    
+    private var OriginalGameViewBounds: CGRect!
+    
+    private var OrignalTopToolbarBounds: CGRect!
     
     /// Set top toolbar visibility. Also sets the mode in which a long press at the top of the game view shows the slide-in menu.
     func ShowTopToolbar()
@@ -251,10 +303,52 @@ class MainViewController: UIViewController,
         
     }
     
+    private var OriginalMotionControlBounds: CGRect!
+    
     /// Set motion control visibility.
     func ShowMotionControls()
     {
-        
+        let DoShow = Settings.GetShowMotionControls()
+        if DoShow
+        {
+            print("Showing Motion Controls")
+            print("  MotionControlView.frame=\((OriginalMotionControlBounds)!)")
+            print("  GameView.frame=\((OriginalGameViewBounds)!)")
+                        MotionControlView.isHidden = false
+            MotionControlView.frame = OriginalMotionControlBounds
+            GameView.frame = OriginalGameViewBounds
+        }
+        else
+        {
+            #if true
+                        let NewGameHeight = GameView.frame.height + OriginalMotionControlBounds.height
+            print("Hiding Motion Controls")
+            print("  NewGameHeight=\(NewGameHeight)")
+            let NewMotionControlFrame = CGRect(x: 0, y: self.MotionControlView.frame.height, width: self.MotionControlView.frame.width,
+                                               height: 0)
+            let NewGameViewFrame = CGRect(x: 0, y: self.OriginalGameViewBounds.height,
+                                          width: self.OriginalGameViewBounds.width,
+                                          height: NewGameHeight)
+            print("  NewMotionControlFrame=\(NewMotionControlFrame)")
+            print("  NewGameViewFrame=\(NewGameViewFrame)")
+            UIView.animate(withDuration: 1.0,
+                           animations:
+                {
+                    self.MotionControlView.frame = NewMotionControlFrame
+                    self.GameView.frame = NewGameViewFrame
+            }, completion:
+                {
+                    _ in
+                    self.MotionControlView.frame = NewMotionControlFrame
+                    self.GameView.frame = NewGameViewFrame
+            })
+            #else
+            MotionControlView.isHidden = true
+            MotionControlView.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
+            let NewGameViewHeight = GameView.frame.height + OriginalMotionControlBounds.height
+            GameView.frame = CGRect(x: 0, y: 0, width: GameView.frame.width, height: NewGameViewHeight)
+            #endif
+        }
     }
     
     /// Handle changed settings.
@@ -262,17 +356,17 @@ class MainViewController: UIViewController,
     /// - Parameter NewValue: The new value for the specified field.
     func SettingChanged(Field: SettingsFields, NewValue: Any)
     {
-        print("Setting \(Field) changed.")
+        //print("Setting \(Field) changed.")
         switch Field
         {
             case .ShowCameraControls:
                 ShowCameraControls()
             
             case .ShowTopToolbar:
-            ShowTopToolbar()
+                ShowTopToolbar()
             
             case .ShowMotionControls:
-            ShowMotionControls()
+                ShowMotionControls()
             
             case .ShowFPSInUI:
                 let DoShowFPS = NewValue as! Bool
@@ -280,17 +374,19 @@ class MainViewController: UIViewController,
                 {
                     FPSLabel.text = ""
                     FPSLabel.alpha = 1.0
+                    FPSLabel.isUserInteractionEnabled = true
                 }
                 else
                 {
                     FPSLabel.alpha = 0.0
+                    FPSLabel.isUserInteractionEnabled = false
             }
             case .InterfaceLanguage:
-            break
+                break
         }
     }
     
-    /// Initialize gesture recognizers for piece motions. Available only on iOS devices.
+    /// Initialize gesture recognizers for piece motions.
     func InitializeGestures()
     {
         let TapGesture = UITapGestureRecognizer(target: self, action: #selector(HandleTap))
@@ -310,7 +406,6 @@ class MainViewController: UIViewController,
     }
     
     /// Handle taps in the game view. Depending on where the tap is, the piece will move in the given direction.
-    ///
     /// - Parameter sender: The tap gesture.
     @objc func HandleTap(sender: UITapGestureRecognizer)
     {
@@ -563,7 +658,10 @@ class MainViewController: UIViewController,
         
         StopAccumulating = true
         let MeanVal = AccumulatedFPS / Double(FPSSampleCount)
-        FPSLabel.text = "μ \(Convert.RoundToString(MeanVal, ToNearest: 0.001, CharCount: 6))"
+        if !Settings.ShowInstanceSeconds()
+        {
+            FPSLabel.text = "μ \(Convert.RoundToString(MeanVal, ToNearest: 0.001, CharCount: 6))"
+        }
         
         if InAttractMode
         {
@@ -705,7 +803,7 @@ class MainViewController: UIViewController,
                             {
                                 Game!.GameBoard!.Map!.RotateMapRight()
                                 GameView3D?.RotateContentsRight(Duration: UserTheme!.RotationDuration, Completed: {self.Nop()})
-                            }
+                        }
                         
                         case .None:
                             NoRotateFinishFinalizing()
@@ -905,7 +1003,10 @@ class MainViewController: UIViewController,
         DebugClient.SetIdiotLight(IdiotLights.C3, Title: "Frame Rate\n\(FPSS)", FGColor: FG, BGColor: BG)
         if Settings.ShowFPSInUI()
         {
-            FPSLabel.text = FPSS
+            if !Settings.ShowInstanceSeconds()
+            {
+                FPSLabel.text = FPSS
+            }
         }
     }
     
@@ -1057,6 +1158,7 @@ class MainViewController: UIViewController,
         {
             IsPaused = false
             PauseResumeButton?.setTitle("Pause", for: .normal)
+            SlideInPauseButton.setTitle("Pause", for: .normal)
             GameTextOverlay?.HidePause(Duration: 0.1)
             Game.ResumeGame()
             DebugClient.Send("Game resumed.")
@@ -1066,6 +1168,7 @@ class MainViewController: UIViewController,
         {
             IsPaused = true
             PauseResumeButton?.setTitle("Resume", for: .normal)
+            SlideInPauseButton.setTitle("Resume", for: .normal)
             GameTextOverlay?.ShowPause(Duration: 0.1)
             Game.PauseGame()
             DebugClient.Send("Game paused.")
@@ -1294,12 +1397,14 @@ class MainViewController: UIViewController,
             Stop()
             GameTextOverlay?.ShowPressPlay(Duration: 0.5)
             PlayStopButton?.setTitle("Play", for: .normal)
+            SlideInPlayButton.setTitle("Play", for: .normal)
         }
         else
         {
             InAttractMode = false
             Play()
             PlayStopButton?.setTitle("Stop", for: .normal)
+            SlideInPlayButton.setTitle("Stop", for: .normal)
         }
     }
     
@@ -1961,6 +2066,7 @@ class MainViewController: UIViewController,
     {
         MakingVideo = !MakingVideo
         VideoButton.tintColor = MakingVideo ? UIColor.systemRed : UIColor.white
+        SlideInVideoButton.tintColor = MakingVideo ? UIColor.systemRed : UIColor.systemBlue
         if MakingVideo
         {
             let Recorder = RPScreenRecorder.shared()
@@ -2020,7 +2126,24 @@ class MainViewController: UIViewController,
         switch Field
         {
             default:
-            print("Theme \(ThemeName) updated field \(Field)")
+                print("Theme \(ThemeName) updated field \(Field)")
+        }
+    }
+    
+    // MARK: Flame button handling.
+    
+    @IBAction func HandleFlameButtonPressed(_ sender: Any)
+    {
+        let Button = sender as! UIButton
+        if Settings.GetShowMotionControls()
+        {
+            Settings.SetShowMotionControls(NewValue: false)
+            Button.tintColor = UIColor.red
+        }
+        else
+        {
+            Settings.SetShowMotionControls(NewValue: true)
+            Button.tintColor = UIColor.orange
         }
     }
     
@@ -2075,8 +2198,13 @@ class MainViewController: UIViewController,
     @IBOutlet weak var UpAndAwayButton: UIButton!
     @IBOutlet weak var RotateRightButton: UIButton!
     @IBOutlet weak var VideoButton: UIButton!
+    @IBOutlet weak var SlideInVideoButton: UIButton!
     @IBOutlet weak var CameraButton: UIButton!
+        @IBOutlet weak var SlideInCameraButton: UIButton!
     @IBOutlet weak var FPSLabel: UILabel!
+            @IBOutlet weak var SlideInCameraControlBox: UIView!
+    @IBOutlet weak var SlideInPlayButton: UIButton!
+    @IBOutlet weak var SlideInPauseButton: UIButton!
     
     // MARK: Enum mappings.
     
