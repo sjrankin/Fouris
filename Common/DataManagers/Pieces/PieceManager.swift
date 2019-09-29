@@ -88,4 +88,44 @@ class PieceManager
     {
         return InCollection.GetPieceClass(WithType)
     }
+    
+    public static func GetPiecesForClass(_ Class: PieceClasses) -> [PieceDefinition2]
+    {
+        var Results = [PieceDefinition2]()
+        let AllGroups = [_DefaultPieces, _UserPieces]
+        for PieceGroup in AllGroups
+        {
+            for (TheClass, PieceSet) in PieceGroup!.Classes
+            {
+                if TheClass == Class
+                {
+                    for SomePiece in PieceSet
+                    {
+                        Results.append(SomePiece)
+                    }
+                }
+            }
+        }
+        return Results
+    }
+    
+    public static func GetPieceDefinitionFor(ID: UUID) -> PieceDefinition2?
+    {
+        for (_, Def) in DefaultPieces!.Classes
+        {
+            for PieceDef in Def
+            {
+            if PieceDef.ID == ID
+            {
+                return PieceDef
+            }
+            }
+        }
+        return nil
+    }
+    
+    public static func SaveUserPieces()
+    {
+        
+    }
 }
