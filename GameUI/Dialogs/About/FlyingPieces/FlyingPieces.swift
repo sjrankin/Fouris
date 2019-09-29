@@ -211,13 +211,13 @@ class FlyingPieces: SCNView, SCNSceneRendererDelegate, RPPreviewViewControllerDe
     {
         var PieceNode: FlyingNode? = nil
         let ShapeID = PieceFactory.ShapeIDMap[Shape]
-        if let Definition = MasterPieceList.GetPieceDefinitionFor(ID: ShapeID!)
+        if let Definition = PieceManager.GetPieceDefinitionFor(ID: ShapeID!)
         {
             PieceNode = FlyingNode(UIColor.white, ColorServer.RandomColor(MinRed: 0.25, MinGreen: 0.25, MinBlue: 0.25))
-            for Point in Definition.LogicalLocations
+            for Point in Definition.Locations
             {
                 PieceNode?.FlyingDelegate = self
-                PieceNode?.AddBlock(At: (Point.X, Point.Y), WithSize: 2.0)
+                PieceNode?.AddBlock(At: (Point.Coordinates.X!, Point.Coordinates.Y!), WithSize: 2.0)
             }
         }
         else
