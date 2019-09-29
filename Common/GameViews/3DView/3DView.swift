@@ -19,7 +19,8 @@ class View3D: SCNView,                          //Our main super class.
     ThreeDProtocol,                             //The 3D game protocol.
     SmoothMotionProtocol,                       //Smooth motion protocol.
     TextLayerProtocol,                          //Text layer protocol.
-    ThemeUpdatedProtocol                        //Theme properites updated protocol.
+    ThemeUpdatedProtocol,                       //Theme properites updated protocol.
+    ParentSizeChangedProtocol                   //The parent view of this view had a size change protocol.
 {
     /// The scene that is shown in the 3D view.
     var GameScene: SCNScene!
@@ -110,6 +111,13 @@ class View3D: SCNView,                          //Our main super class.
         AddPeskyLight()
         PerfTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(SendPerformanceData),
                                          userInfo: nil, repeats: true)
+        
+        ShowControls()
+    }
+    
+        func NewParentSize(Bounds: CGRect, Frame: CGRect)
+        {
+            
     }
     
     func ThemeUpdated(ThemeName: String, Field: ThemeFields)
@@ -638,7 +646,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter Finalized: The piece that was finalized.
     func MergePieceIntoBucket(_ Finalized: Piece)
     {
-        #if true
+        #if false
         VisuallyRetirePiece(Finalized, Completion:
             {
                 self.RetiredPieceIDs.append(Finalized.ID)
@@ -797,7 +805,7 @@ class View3D: SCNView,                          //Our main super class.
         {
             if MovingPieceNode != nil
             {
-                print("Removing node \((MovingPieceNode?.name)!)")
+                //print("Removing node \((MovingPieceNode?.name)!)")
                 MovingPieceNode!.removeFromParentNode()
                 MovingPieceNode = nil
                 UpdateMasterBlockNode()
@@ -1354,8 +1362,8 @@ class View3D: SCNView,                          //Our main super class.
         BucketNode?.runAction(RotateSequence, completionHandler: {Completed()})
         #else
         let ZRotation = DirectionalSign * 90.0 * CGFloat.pi / 180.0
-//        let RotateAction = SCNAction.rotateBy(x: 0.0, y: 0.0, z: ZRotation, duration: Duration)
-        let RotateAction = SCNAction.rotateTo(x: 0.0, y: 0.0, z: ZRotation, duration: Duration)
+        let RotateAction = SCNAction.rotateBy(x: 0.0, y: 0.0, z: ZRotation, duration: Duration)
+//        let RotateAction = SCNAction.rotateTo(x: 0.0, y: 0.0, z: ZRotation, duration: Duration)
         RemoveMovingPiece()
         if CurrentTheme!.RotateBucketGrid
         {
@@ -1625,6 +1633,197 @@ class View3D: SCNView,                          //Our main super class.
         self.pointOfView?.position = OriginalCameraPosition!
         self.pointOfView?.orientation = OriginalCameraOrientation!
     }
+    
+    // MARK: Control display and handling.
+    
+    func MakeButton(ForButton: NodeButtons) -> SCNNode
+    {
+        let Box = SCNBox(width: 2.0, height: 2.0, length: 0.001, chamferRadius: 0.0)
+        let Config = UIImage.SymbolConfiguration(pointSize: 20.0, weight: UIImage.SymbolWeight.bold)
+        Box.firstMaterial?.diffuse.contents = UIImage(systemName: ButtonDictionary[ForButton]!.0, withConfiguration: Config)
+        let Node = SCNNode(geometry: Box)
+        Node.name = "\(ForButton)"
+        Node.position = ButtonDictionary[ForButton]!.1
+        return Node
+    }
+    
+    func InitializeButtonTaps()
+    {
+        if TapsInitialized
+        {
+            return
+        }
+        TapsInitialized = true
+        let Tap = UITapGestureRecognizer(target: self, action: #selector(ButtonTapped))
+        Tap.numberOfTapsRequired = 1
+        self.addGestureRecognizer(Tap)
+    }
+    
+    var TapsInitialized = false
+    
+    @objc func ButtonTapped(Recognizer: UIGestureRecognizer)
+    {
+        if Recognizer.state == .ended
+        {
+            let Surface = self as SCNView
+            let Point = Recognizer.location(in: Surface)
+            let HitResults = Surface.hitTest(Point, options: [:])
+            if HitResults.count > 0
+            {
+                let Result: Any = HitResults[0]
+                if let Button = Result as? SCNNode
+                {
+                    print("Tapped on node with name \"\((Button.name)!)\"")
+                }
+            }
+        }
+    }
+    
+    let ButtonDictionary: [NodeButtons: (String, SCNVector3)] =
+    [
+        .LeftButton: ("arrowtriangle.left.fill", SCNVector3(-12.0, -10.0, 1.0)),
+            .UpButton: ("arrowtriangle.up.fill", SCNVector3(-9.5, -12.5, 1.0)),
+            .DownButton: ("arrowtriangle.down.fill", SCNVector3(-9.5, -10.0, 1.0)),
+            .RightButton: ("arrowtriangle.right.fill", SCNVector3(12.0, -10.0, 1.0)),
+            .DropDownButton: ("arrowtriangle.down", SCNVector3(9.5, -10.0, 1.0)),
+            .FlyAwayButton: ("arrowtriangle.up", SCNVector3(9.5, -12.5, 1.0)),
+            .RotateLeftButton: ("arrow.counterclockwise", SCNVector3(-12.0, -12.5, 1.0)),
+            .RotateRightButton: ("arrow.clockwise", SCNVector3(12.0, -12.5, 1.0)),
+            .FreezeButton: ("snow", SCNVector3(0.0, -11.5, 1.0))
+    ]
+
+    var MoveLeftNode: SCNNode? = nil
+    var RotateLeftNode: SCNNode? = nil
+    var MoveDownNode: SCNNode? = nil
+    var MoveUpNode: SCNNode? = nil
+    var MoveRightNode: SCNNode? = nil
+    var RotateRightNode: SCNNode? = nil
+    var DropDownNode: SCNNode? = nil
+    var FlyAwayNode: SCNNode? = nil
+    var FreezeNode: SCNNode? = nil
+    
+    func ShowControls()
+    {
+        #if true
+        InitializeButtonTaps()
+        if MoveLeftNode == nil
+        {
+            MoveLeftNode = MakeButton(ForButton: .LeftButton)
+            self.scene?.rootNode.addChildNode(MoveLeftNode!)
+        }
+        if RotateLeftNode == nil
+        {
+            RotateLeftNode = MakeButton(ForButton: .RotateLeftButton)
+            self.scene?.rootNode.addChildNode(RotateLeftNode!)
+        }
+        if MoveDownNode == nil
+        {
+            MoveDownNode = MakeButton(ForButton: .DownButton)
+            self.scene?.rootNode.addChildNode(MoveDownNode!)
+        }
+        if MoveUpNode == nil
+        {
+            MoveUpNode = MakeButton(ForButton: .UpButton)
+            self.scene?.rootNode.addChildNode(MoveUpNode!)
+        }
+        if FreezeNode == nil
+        {
+            FreezeNode = MakeButton(ForButton: .FreezeButton)
+            self.scene?.rootNode.addChildNode(FreezeNode!)
+        }
+        if MoveRightNode == nil
+        {
+            MoveRightNode = MakeButton(ForButton: .RightButton)
+            self.scene?.rootNode.addChildNode(MoveRightNode!)
+        }
+        if RotateRightNode == nil
+        {
+            RotateRightNode = MakeButton(ForButton: .RotateRightButton)
+            self.scene?.rootNode.addChildNode(RotateRightNode!)
+        }
+        if DropDownNode == nil
+        {
+            DropDownNode = MakeButton(ForButton: .DropDownButton)
+            self.scene?.rootNode.addChildNode(DropDownNode!)
+        }
+        if FlyAwayNode == nil
+        {
+            FlyAwayNode = MakeButton(ForButton: .FlyAwayButton)
+            self.scene?.rootNode.addChildNode(FlyAwayNode!)
+        }
+        #else
+        if MoveLeftNode == nil
+        {
+            MoveLeftNode = SCNNode(geometry: SCNBox(width: 2.0, height: 2.0, length: 0.001, chamferRadius: 0.0))
+            MoveLeftNode?.position = SCNVector3(-12.0, -10.0, 1.0)
+            MoveLeftNode?.geometry?.firstMaterial?.diffuse.contents = UIImage(systemName: "arrowtriangle.left.fill")
+            MoveLeftNode?.geometry?.firstMaterial?.specular.contents = UIColor.white
+            self.scene?.rootNode.addChildNode(MoveLeftNode!)
+        }
+        if RotateLeftNode == nil
+        {
+            RotateLeftNode = SCNNode(geometry: SCNBox(width: 2.0, height: 2.0, length: 0.001, chamferRadius: 0.0))
+            RotateLeftNode?.position = SCNVector3(-12.0, -12.5, 1.0)
+            RotateLeftNode?.geometry?.firstMaterial?.diffuse.contents = UIImage(systemName: "arrow.counterclockwise")
+            RotateLeftNode?.geometry?.firstMaterial?.specular.contents = UIColor.white
+            self.scene?.rootNode.addChildNode(RotateLeftNode!)
+        }
+        if MoveDownNode == nil
+        {
+            MoveDownNode = SCNNode(geometry: SCNBox(width: 2.0, height: 2.0, length: 0.001, chamferRadius: 0.0))
+            MoveDownNode?.position = SCNVector3(-9.5, -10.0, 1.0)
+            MoveDownNode?.geometry?.firstMaterial?.diffuse.contents = UIImage(systemName: "arrowtriangle.down.fill")
+            MoveDownNode?.geometry?.firstMaterial?.specular.contents = UIColor.white
+            self.scene?.rootNode.addChildNode(MoveDownNode!)
+        }
+        if MoveUpNode == nil
+        {
+            MoveUpNode = SCNNode(geometry: SCNBox(width: 2.0, height: 2.0, length: 0.001, chamferRadius: 0.0))
+            MoveUpNode?.position = SCNVector3(-9.5, -12.5, 1.0)
+            MoveUpNode?.geometry?.firstMaterial?.diffuse.contents = UIImage(systemName: "arrowtriangle.up.fill")
+            MoveUpNode?.geometry?.firstMaterial?.specular.contents = UIColor.white
+            self.scene?.rootNode.addChildNode(MoveUpNode!)
+        }
+        
+        if MoveRightNode == nil
+        {
+            MoveRightNode = SCNNode(geometry: SCNBox(width: 2.0, height: 2.0, length: 0.001, chamferRadius: 0.0))
+            MoveRightNode?.position = SCNVector3(12.0, -10.0, 1.0)
+            MoveRightNode?.geometry?.firstMaterial?.diffuse.contents = UIImage(systemName: "arrowtriangle.right.fill")
+            MoveRightNode?.geometry?.firstMaterial?.specular.contents = UIColor.white
+            self.scene?.rootNode.addChildNode(MoveRightNode!)
+        }
+        if RotateRightNode == nil
+        {
+            RotateRightNode = SCNNode(geometry: SCNBox(width: 2.0, height: 2.0, length: 0.001, chamferRadius: 0.0))
+            RotateRightNode?.position = SCNVector3(12.0, -12.5, 1.0)
+            RotateRightNode?.geometry?.firstMaterial?.diffuse.contents = UIImage(systemName: "arrow.clockwise")
+            RotateRightNode?.geometry?.firstMaterial?.specular.contents = UIColor.white
+            self.scene?.rootNode.addChildNode(RotateRightNode!)
+        }
+        if DropDownNode == nil
+        {
+            DropDownNode = SCNNode(geometry: SCNBox(width: 2.0, height: 2.0, length: 0.001, chamferRadius: 0.0))
+            DropDownNode?.position = SCNVector3(9.5, -10.0, 1.0)
+            DropDownNode?.geometry?.firstMaterial?.diffuse.contents = UIImage(systemName: "arrowtriangle.down")
+            DropDownNode?.geometry?.firstMaterial?.specular.contents = UIColor.white
+            self.scene?.rootNode.addChildNode(DropDownNode!)
+        }
+        if FlyAwayNode == nil
+        {
+            FlyAwayNode = SCNNode(geometry: SCNBox(width: 2.0, height: 2.0, length: 0.001, chamferRadius: 0.0))
+            FlyAwayNode?.position = SCNVector3(9.5, -12.5, 1.0)
+            FlyAwayNode?.geometry?.firstMaterial?.diffuse.contents = UIImage(systemName: "arrowtriangle.up")
+            FlyAwayNode?.geometry?.firstMaterial?.specular.contents = UIColor.white
+            self.scene?.rootNode.addChildNode(FlyAwayNode!)
+        }
+        #endif
+    }
+    
+    func HideControls()
+    {
+        
+    }
 }
 
 // MARK: Global enums related to 3DView.
@@ -1664,4 +1863,17 @@ enum Angles: CGFloat, CaseIterable
     case Angle90 = 90.0
     case Angle180 = 180.0
     case Angle270 = 270.0
+}
+
+enum NodeButtons: String, CaseIterable
+{
+    case LeftButton = "LeftButton"
+    case UpButton = "UpButton"
+    case DownButton = "DownButton"
+    case RightButton = "RightButton"
+    case DropDownButton = "DropDownButton"
+    case FlyAwayButton = "FlyAwayButton"
+    case RotateLeftButton = "RotateLeftButton"
+    case RotateRightButton = "RotateRightButton"
+    case FreezeButton = "FreezeButton"
 }
