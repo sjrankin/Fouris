@@ -592,7 +592,7 @@ class Piece
     ///         if it is not called, deinit will generated a fatal error.
     func Terminate()
     {
-        print("Terminating piece \(ID.uuidString)")
+        //print("Terminating piece \(ID.uuidString)")
         OperationQueue.main.addOperation
             {
                 //Terminate all timers first to make sure they do not refer to something that does not exist due to being
