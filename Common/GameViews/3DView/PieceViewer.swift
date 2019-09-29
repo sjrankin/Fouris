@@ -37,7 +37,7 @@ import SceneKit
         let PieceScene = SCNScene()
         self.scene = PieceScene
         self.clipsToBounds = true
-        self.antialiasingMode = .multisampling2X
+        self.antialiasingMode = .multisampling4X
         self.allowsCameraControl = true
         AddCameraAndLight()
     }
@@ -526,9 +526,9 @@ import SceneKit
     
     /// Add a block at the specified coordinate.
     /// - Parameter Location: Block logical location.
-    func AddBlockAt(_ Location: LogicalLocation)
+    func AddBlockAt(_ Location: PieceBlockLocation)
     {
-        DoAddBlock(Location.X, Location.Y)
+        DoAddBlock(Location.Coordinates.X!, Location.Coordinates.Y!)
     }
     
     /// Add a block at the specified coordinate.
@@ -548,20 +548,20 @@ import SceneKit
     
     /// Remove a block from the specified coordinate.
     /// - Parameter Location: The logical location of the block to remove.
-    func RemoveBlockAt(_ Location: LogicalLocation)
+    func RemoveBlockAt(_ Location: PieceBlockLocation)
     {
-        DoRemoveBlock(Location.X, Location.Y)
+        DoRemoveBlock(Location.Coordinates.X!, Location.Coordinates.Y!)
     }
     
     /// Add a piece to display in the view.
     /// - Note: Existing blocks will be removed.
     /// - Parameter ThePiece: A piece definition that will be displayed.
-    func AddPiece(_ ThePiece: PieceDefinition)
+    func AddPiece(_ ThePiece: PieceDefinition2)
     {
         BlockList.removeAll()
-        for Location in ThePiece.LogicalLocations
+        for Location in ThePiece.Locations
         {
-            DoAddBlock(Location.X, Location.Y)
+            DoAddBlock(Location.Coordinates.X!, Location.Coordinates.Y!)
         }
     }
     
