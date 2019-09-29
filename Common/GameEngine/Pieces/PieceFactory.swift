@@ -395,11 +395,13 @@ class PieceFactory
         let SomePiece = Piece(.GamePiece, PieceID: WithID, ForBoard, BaseGameType: BaseGame)
         SomePiece.Shape = PieceShape
         SomePiece.ShapeID = PieceFactory.ShapeIDMap[PieceShape]!
-        if let Definition = MasterPieceList.GetPieceDefinitionFor(ID: SomePiece.ShapeID)
+//        if let Definition = MasterPieceList.GetPieceDefinitionFor(ID: SomePiece.ShapeID)
+        if let Definition = PieceManager.GetPieceDefinitionFor(ID: SomePiece.ShapeID)
         {
             SomePiece.Components = [Block]()
             SomePiece.WideOrientationCount = Definition.WideOrientation
             SomePiece.ThinOrientationCount = Definition.ThinOrientation
+            #if false
             if Definition.PieceClass == .Random
             {
                 //Generate a random piece here.
@@ -441,6 +443,14 @@ class PieceFactory
                 }
                 SomePiece.IsRotationallySymmetric = Definition.RotationallySymmetric
             }
+            #else
+            for LLocation in Definition.Locations
+            {
+                SomePiece.Components.append(Block(LLocation.Coordinates.X!, LLocation.Coordinates.Y!,
+                                                  IsOriginBlock: LLocation.IsOrigin, BlockID: UUID()))
+                SomePiece.IsRotationallySymmetric = Definition.RotationallySymmetric
+            }
+            #endif
         }
         else
         {
@@ -459,11 +469,20 @@ class PieceFactory
         let SomePiece = Piece(.GamePiece)
         SomePiece.Shape = PieceShape
         SomePiece.ShapeID = PieceFactory.ShapeIDMap[PieceShape]!
-        if let Definition = MasterPieceList.GetPieceDefinitionFor(ID: SomePiece.ShapeID)
+//        if let Definition = MasterPieceList.GetPieceDefinitionFor(ID: SomePiece.ShapeID)
+        if let Definition = PieceManager.GetPieceDefinitionFor(ID: SomePiece.ShapeID)
         {
             SomePiece.Components = [Block]()
             SomePiece.WideOrientationCount = Definition.WideOrientation
             SomePiece.ThinOrientationCount = Definition.ThinOrientation
+            #if true
+            for LLocation in Definition.Locations
+            {
+                SomePiece.Components.append(Block(LLocation.Coordinates.X!, LLocation.Coordinates.Y!,
+                                                  IsOriginBlock: LLocation.IsOrigin, BlockID: UUID()))
+                SomePiece.IsRotationallySymmetric = Definition.RotationallySymmetric
+            }
+            #else
             if Definition.PieceClass == .Random
             {
                 //Generate a random piece here.
@@ -505,6 +524,7 @@ class PieceFactory
                 }
                 SomePiece.IsRotationallySymmetric = Definition.RotationallySymmetric
             }
+            #endif
         }
         else
         {
