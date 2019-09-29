@@ -13,8 +13,10 @@ import UIKit
 /// Implements an overlay placed over the main game views that allows the game to shows text that isn't actually in the
 /// game view. This is especially useful for the 3D view which can rotated and move - if the text were part of the 3D game
 /// view, it would move around, too, making it difficult to see.
-class TextLayerManager: UIView
+class TextLayerManager: UIView, ParentSizeChangedProtocol
 {
+
+    
     /// Initializer
     /// - Parameter frame: Rectangle for the frame.
     override init(frame frameRect: CGRect)
@@ -51,6 +53,11 @@ class TextLayerManager: UIView
         self.bounds = Frame
         CurrentSize = CGSize(width: Frame.width, height: Frame.height)
         Redraw()
+    }
+    
+    func NewParentSize(Bounds: CGRect, Frame: CGRect)
+    {
+        
     }
     
     /// Holds the ID of the current theme.
