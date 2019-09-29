@@ -567,7 +567,6 @@ class Board
     
     /// Called by a piece after it freezes into place. Checks for rows to remove. Calculates the score. Calls
     /// the Game instance to finalize the piece visually (if needed).
-    ///
     /// - Parameter ID: ID of the block that froze.
     func PieceFroze(ID: UUID)
     {
