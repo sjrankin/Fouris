@@ -28,6 +28,8 @@ class Settings
             return
         }
         _Settings.set("Initialized", forKey: "Initialized")
+        _Settings.set(false, forKey: "ShowFPSInUI")
+        _Settings.set(false, forKey: "ShowInstanceSecondsInstead")
         _Settings.set(3, forKey: "MaximumSamePiecesInARow")
         _Settings.set(0, forKey: "LastGameViewIndex")
         _Settings.set(true, forKey: "UseTDebug")
@@ -175,6 +177,20 @@ class Settings
     {
         _Settings.set(NewValue, forKey: "ShowFPSInUI")
         SendNotice(From: .ShowFPSInUI, NewValue: NewValue as Any)
+    }
+    
+    /// Get the show instance seconds instead of FPS values.
+    /// - Truens: True if seconds should be shown instead of FPS, false if FPS should be shown.
+    public static func ShowInstanceSeconds() -> Bool
+    {
+        return _Settings.bool(forKey: "ShowInstanceSecondsInstead")
+    }
+
+    /// Set the show instance seconds flag.
+    /// - Parameter NewValue: New show instance seconds flag value.
+    public static func SetShowInstanceSeconds(NewValue: Bool)
+    {
+        _Settings.set(NewValue, forKey: "ShowInstanceSecondsInstead")
     }
     
     /// Get the confirm image saves for the main game view.
