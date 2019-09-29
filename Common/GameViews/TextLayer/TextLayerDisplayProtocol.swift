@@ -14,7 +14,6 @@ protocol TextLayerDisplayProtocol: class
     /// Sets the controls to use to display text. Text is an attributed string displayed in a CATextLayer, so each text object
     /// needs to reside in a view Those views are passed in this function.
     /// - Parameter NextLabel: Container for the "Next" label.
-    /// - Parameter NextPieceView: Container for the next game piece.
     /// - Parameter ScoreLabel: Container for the "Score" label.
     /// - Parameter CurrentScoreLabel: Container for the current score label.
     /// - Parameter HighScoreLabel: Container for the high score label.
@@ -23,7 +22,6 @@ protocol TextLayerDisplayProtocol: class
     /// - Parameter PauseLabel: Container for the "Pause" label.
     /// - Parameter PieceControl: Piece viewer control for the next piece.
     func SetControls(NextLabel: UIView?,
-                     NextPieceView: UIView?,
                      ScoreLabel: UIView?,
                      CurrentScoreLabel: UIView?,
                      HighScoreLabel: UIView?,
