@@ -120,6 +120,13 @@ class XMLDocument: CustomStringConvertible
         }
     }
     
+    /// Returns a minimal, standard XML file header.
+    /// - Returns: XML file header.
+    public func GetXMLHeader() -> String
+    {
+        return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+    }
+    
     /// Traverses the node tree.
     /// - Parameter FromNode: The node traversed.
     /// - Parameter CallAtNode: Handler to call at each node.
