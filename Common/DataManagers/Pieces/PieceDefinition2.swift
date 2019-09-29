@@ -80,7 +80,7 @@ class PieceDefinition2
     
     /// Holds the thin orientation value.
     private var _ThinOrientation: Int = 0
-    /// Get or set the thin orientation value.
+    /// Get or set the thin orientation value. This the number of times to rotate the piece **right** to make the piece in its thinnest orientation.
     public var ThinOrientation: Int
     {
         get
@@ -96,7 +96,7 @@ class PieceDefinition2
     
     /// Holds the wide orientation value.
     private var _WideOrientation: Int = 0
-    /// Get or set the wide orientation value.
+    /// Get or set the wide orientation value. This the number of times to rotate the piece **right** to make the piece in its widest orientation.
     public var WideOrientation: Int
     {
         get
@@ -156,5 +156,101 @@ class PieceDefinition2
         {
             _Dirty = newValue
         }
+    }
+    
+    // MARK: Helper functions.
+    
+    /// Holds cached, normalized locations.
+    private var CachedNormalizedLocations = [(CGPoint)]()
+    
+    /// Return a set of normalized coordinates where no coordinate value is less than 0.
+    ///
+    /// - Note: Normalized locations are cached (mainly because once read, the definition doesn't change) for
+    ///         performance purposes.
+    ///
+    /// - Parameter ResetCache: If true, the cache is reset and regenerated.
+    /// - Returns: Set or normalized coordinates.
+    public func NormalizedLocations(ResetCache: Bool = false) -> [(CGPoint)]
+    {
+        if ResetCache
+        {
+            CachedNormalizedLocations = [(CGPoint)]()
+        }
+        if !CachedNormalizedLocations.isEmpty
+        {
+            return CachedNormalizedLocations
+        }
+        var Results = [(CGPoint)]()
+        var SmallestX = Int.max
+        var SmallestY = Int.max
+        for Loc in Locations
+        {
+            if Loc.Coordinates.X! < SmallestX
+            {
+                SmallestX = Loc.Coordinates.X!
+            }
+            if Loc.Coordinates.Y! < SmallestY
+            {
+                SmallestY = Loc.Coordinates.Y!
+            }
+        }
+        for Loc in Locations
+        {
+            Results.append(CGPoint(x: Loc.Coordinates.X! + SmallestX, y: Loc.Coordinates.Y! + SmallestY))
+        }
+        CachedNormalizedLocations = Results
+        return Results
+    }
+    
+    /// Return the least and greatest horizontal coordinates in the set of locations for the piece.
+    public func WidthRange() -> (Int, Int)
+    {
+        var Greatest = Int.min
+        var Least = Int.max
+        for Location in Locations
+        {
+            if Location.Coordinates.X! < Least
+            {
+                Least = Location.Coordinates.X!
+            }
+            if Location.Coordinates.X! > Greatest
+            {
+                Greatest = Location.Coordinates.X!
+            }
+        }
+        return (Least, Greatest)
+    }
+    
+    /// Return the least and greatest vertical coordinates in the set of locations for the piece.
+    public func HeightRange() -> (Int, Int)
+    {
+        var Greatest = Int.min
+        var Least = Int.max
+        for Location in Locations
+        {
+            if Location.Coordinates.Y! < Least
+            {
+                Least = Location.Coordinates.Y!
+            }
+            if Location.Coordinates.Y! > Greatest
+            {
+                Greatest = Location.Coordinates.Y!
+            }
+        }
+        return (Least, Greatest)
+    }
+    
+    /// Return the width of the piece in its original configuration.
+    public func OriginalWidth() -> Int
+    {
+        let (Least, Greatest) = WidthRange()
+        return Greatest - Least + 1
+    }
+    
+    /// Return the width of the piece in its original configuration.
+    public func OriginalHeight() -> Int
+    {
+        let (Least, Greatest) = HeightRange()
+        return Greatest - Least + 1
     }
 }
