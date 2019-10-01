@@ -36,6 +36,7 @@
 		17189FF92333347C00317BF1 /* +Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17189FF82333347C00317BF1 /* +Image.swift */; };
 		17189FFB233346C100317BF1 /* +Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17189FFA233346C100317BF1 /* +Gradient.swift */; };
 		17189FFD233348AB00317BF1 /* GradientSwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17189FFC233348AB00317BF1 /* GradientSwatch.swift */; };
+		171A3E672343498C00C92585 /* SCNButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171A3E662343498C00C92585 /* SCNButtonNode.swift */; };
 		171BD472233B1BA10048808A /* BufferManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BD471233B1BA10048808A /* BufferManager.swift */; };
 		171BDEC422B8CE00005C3509 /* SmoothMotionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BDEC322B8CE00005C3509 /* SmoothMotionProtocol.swift */; };
 		171D5D472313FC5300043856 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 171D5D462313FC5200043856 /* MainStoryboard.storyboard */; };
@@ -98,7 +99,6 @@
 		17616ACB23166CB000DFFEFE /* SelectGameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17616ACA23166CB000DFFEFE /* SelectGameController.swift */; };
 		17616ACD23166DF700DFFEFE /* GameStyleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17616ACC23166DF700DFFEFE /* GameStyleTableViewCell.swift */; };
 		1762FC19229CCFF6000099F2 /* RawParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762FC18229CCFF6000099F2 /* RawParser.swift */; };
-		1762FC1D229D2898000099F2 /* StandardThemes.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1762FC1C229D2898000099F2 /* StandardThemes.xml */; };
 		1763492D2312667A000BDF24 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1763492C2312667A000BDF24 /* Default-568h@2x.png */; };
 		17660BE822892B1E00082E23 /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17660BE722892B1E00082E23 /* UIButtonExtensions.swift */; };
 		17660BEC2289995E00082E23 /* GameViewRequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17660BEB2289995E00082E23 /* GameViewRequestProtocol.swift */; };
@@ -272,6 +272,7 @@
 		17189FF82333347C00317BF1 /* +Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Image.swift"; sourceTree = "<group>"; };
 		17189FFA233346C100317BF1 /* +Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Gradient.swift"; sourceTree = "<group>"; };
 		17189FFC233348AB00317BF1 /* GradientSwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientSwatch.swift; sourceTree = "<group>"; };
+		171A3E662343498C00C92585 /* SCNButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNButtonNode.swift; sourceTree = "<group>"; };
 		171BD471233B1BA10048808A /* BufferManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferManager.swift; sourceTree = "<group>"; };
 		171BDEC322B8CE00005C3509 /* SmoothMotionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmoothMotionProtocol.swift; sourceTree = "<group>"; };
 		171D5D462313FC5200043856 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
@@ -512,6 +513,7 @@
 				17D48A7A22B202B000DD7C94 /* 3DView.swift */,
 				1750A6FD232A69300006CF39 /* SCNGeometryExtensions.swift */,
 				170F854022B5D3E5005405B6 /* VisualBlocks3D.swift */,
+				171A3E662343498C00C92585 /* SCNButtonNode.swift */,
 				17FA044C232649F8004E5FC8 /* BlockCoordinates.swift */,
 				17D48A8322B2111D00DD7C94 /* ThreeDProtocol.swift */,
 				179CB8CC2326145C0034E25B /* PieceViewer.swift */,
@@ -1283,7 +1285,6 @@
 				179C5E2123222EAA0003845B /* UserVisuals.xml in Resources */,
 				17477A6F231783C300AAEB14 /* Theming.storyboard in Resources */,
 				17F0B49B225CBE740071514E /* Assets.xcassets in Resources */,
-				1762FC1D229D2898000099F2 /* StandardThemes.xml in Resources */,
 				1785ED6222FD8C0A000B31C2 /* BoardDescriptions.xml in Resources */,
 				179C5E2C23224C660003845B /* UserGameThemes.xml in Resources */,
 				1763492D2312667A000BDF24 /* Default-568h@2x.png in Resources */,
@@ -1356,6 +1357,7 @@
 				173B4B17231B96B2007B22F6 /* RecentColorCell.swift in Sources */,
 				179C5E36232273130003845B /* ColorButton.swift in Sources */,
 				178C9FA3233E360400A1FC16 /* XMLNode.swift in Sources */,
+				171A3E672343498C00C92585 /* SCNButtonNode.swift in Sources */,
 				1704E2FC2321235500D7C158 /* AnimatedGradient.swift in Sources */,
 				1782C0F122FE8CA5006CD9D5 /* GeneralAI.swift in Sources */,
 				17ECE5B423325720003F4065 /* +Int.swift in Sources */,
