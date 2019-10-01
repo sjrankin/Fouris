@@ -15,8 +15,6 @@ import UIKit
 /// view, it would move around, too, making it difficult to see.
 class TextLayerManager: UIView, ParentSizeChangedProtocol
 {
-
-    
     /// Initializer
     /// - Parameter frame: Rectangle for the frame.
     override init(frame frameRect: CGRect)
