@@ -12,7 +12,7 @@ import CoreGraphics
 import SceneKit
 import AVFoundation
 
-/// Runs Tetris in a 3D scene, allowing for more options of viewing and confounding the player.
+/// Runs Fouris in a 3D scene, allowing for more options of viewing and confounding the player.
 class View3D: SCNView,                          //Our main super class.
     SCNSceneRendererDelegate,                   //To get notifications when a new frame is drawn in order to calculate the frame rate.
     GameViewProtocol,                           //How the UI communicates with a game view.
@@ -25,6 +25,12 @@ class View3D: SCNView,                          //Our main super class.
     /// The scene that is shown in the 3D view.
     var GameScene: SCNScene!
     
+    /// Light mask for the game.
+    let GameLight: Int = 0x1 << 1
+    
+    /// Light mask for the controls.
+    let ControlLight: Int = 0x1 << 2
+    
     /// Initialize the view.
     /// - Note: Setting 'self.showsStatistics' to true will lead to the scene freezing after a period of time (on the order of
     ///         hours). Likewise, setting `self.allowsCameraControl` will lead to non-responsiveness in the UI after a period
@@ -35,6 +41,8 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter BaseType: The base game type. Can only be set via this function.
     func Initialize(With: Board, Theme: ThemeManager, BaseType: BaseGameTypes) 
     {
+        print("View3D Frame=\(self.frame)")
+        self.isUserInteractionEnabled = true
         //MasterBlockNode = SCNNode()
         CenterBlockShape = .Square
         self.rendersContinuously = true
@@ -43,7 +51,15 @@ class View3D: SCNView,                          //Our main super class.
         SetBoard(With)
         CurrentTheme = Theme.UserTheme
         Theme.SubscribeToChanges(Subscriber: "View3D", SubscribingObject: self)
+        if CurrentTheme!.ShowStatistics
+        {
+            print("Show statistics is enabled in View3D. This may lead to performance degradation.")
+        }
         self.showsStatistics = CurrentTheme!.ShowStatistics
+        if CurrentTheme!.CanControlCamera
+        {
+            print("Can control camera is enabled in View3D. This may lead to performance degradation.")
+        }
         self.allowsCameraControl = CurrentTheme!.CanControlCamera
         OriginalCameraPosition = CurrentTheme!.CameraPosition
         OriginalCameraOrientation = CurrentTheme!.CameraOrientation
@@ -99,8 +115,11 @@ class View3D: SCNView,                          //Our main super class.
             CreateGrid()
         }
         
-        LightNode = CreateLight()
+        LightNode = CreateGameLight()
         self.scene?.rootNode.addChildNode(LightNode)
+        
+        let ControlLightNode = CreateControlLight()
+        self.scene?.rootNode.addChildNode(ControlLightNode)
         
 //        MasterSceneNode = SCNNode()
 //        self.scene?.rootNode.addChildNode(MasterSceneNode!)
@@ -264,11 +283,12 @@ class View3D: SCNView,                          //Our main super class.
     
     /// Create the standard light using current theme data.
     /// - Returns: Scene node with light data.
-    func CreateLight() -> SCNNode
+    func CreateGameLight() -> SCNNode
     {
         let Light = SCNLight()
         let LightColor = ColorServer.ColorFrom(CurrentTheme!.LightColor)
         Light.color = LightColor
+        Light.categoryBitMask = GameLight
         #if true
         switch CurrentTheme!.LightType
         {
@@ -289,9 +309,23 @@ class View3D: SCNView,                          //Our main super class.
         #endif
         Light.intensity = CGFloat(CurrentTheme!.LightIntensity)
         let Node = SCNNode()
-        Node.name = "SceneLight"
+        Node.name = "GameLight"
         Node.light = Light
         Node.position = CurrentTheme!.LightPosition
+        return Node
+    }
+    
+    func CreateControlLight() -> SCNNode
+    {
+        let Light = SCNLight()
+        Light.color = UIColor.white
+//        Light.categoryBitMask = ControlLight
+        Light.type = .omni
+        let Node = SCNNode()
+        Node.name = "ControlLight"
+        Node.light = Light
+        Node.light?.categoryBitMask = ControlLight
+        Node.position = SCNVector3(0.0, -10.0, 10.0)
         return Node
     }
     
@@ -695,6 +729,7 @@ class View3D: SCNView,                          //Our main super class.
         let VBlock = VisualBlocks3D(BlockID, AtX: CGFloat(X), AtY: CGFloat(Y), WithTile: Tile, IsRetired: IsRetired)
         VBlock.ParentID = ParentID
         VBlock.Marked = true
+        VBlock.categoryBitMask = GameLight
         BlockList.insert(VBlock)
         self.scene?.rootNode.addChildNode(VBlock)
     }
@@ -712,6 +747,7 @@ class View3D: SCNView,                          //Our main super class.
         let VBlock = VisualBlocks3D(BlockID, AtX: X, AtY: Y, WithTile: Tile, IsRetired: IsRetired)
         VBlock.ParentID = ParentID
         VBlock.Marked = true
+        VBlock.categoryBitMask = GameLight
         BlockList.insert(VBlock)
         MasterBlockNode!.addChildNode(VBlock)
     }
@@ -790,6 +826,7 @@ class View3D: SCNView,                          //Our main super class.
             }
             let Tile = CurrentTheme?.TileDescriptorFor(PieceTypeID!)
             let VBlock = VisualBlocks3D(Block.ID, AtX: XOffset, AtY: YOffset, WithTile: Tile!, IsRetired: false)
+            VBlock.categoryBitMask = GameLight
             MovingPieceBlocks.append(VBlock)
             MovingPieceNode?.addChildNode(VBlock)
         }
@@ -1061,6 +1098,7 @@ class View3D: SCNView,                          //Our main super class.
                         LineGeometry.firstMaterial?.diffuse.contents = UIColor.gray
                         LineGeometry.firstMaterial?.specular.contents = UIColor.gray
                         let LineNode = SCNNode(geometry: LineGeometry)
+                        LineNode.categoryBitMask = GameLight
                         LineNode.name = "Horizontal,\(Int(Y))"
                         BucketGridNode?.addChildNode(LineNode)
                     }
@@ -1071,6 +1109,7 @@ class View3D: SCNView,                          //Our main super class.
                         LineGeometry.firstMaterial?.diffuse.contents = UIColor.gray
                         LineGeometry.firstMaterial?.specular.contents = UIColor.gray
                         let LineNode = SCNNode(geometry: LineGeometry)
+                        LineNode.categoryBitMask = GameLight
                         LineNode.name = "Vertical,\(Int(X))"
                         BucketGridNode?.addChildNode(LineNode)
                     }
@@ -1081,6 +1120,7 @@ class View3D: SCNView,                          //Our main super class.
                         let Start = SCNVector3(-0.5, Y, 0.0)
                         let End = SCNVector3(10.5, Y, 0.0)
                         let LineNode = MakeLine(From: Start, To: End, Color: ColorNames.White, LineWidth: 0.03)
+                        LineNode.categoryBitMask = GameLight
                         LineNode.name = "Horizontal,\(Int(Y))"
                         BucketGridNode?.addChildNode(LineNode)
                     }
@@ -1090,6 +1130,7 @@ class View3D: SCNView,                          //Our main super class.
                         let Start = SCNVector3(X, 0.0, 0.0)
                         let End = SCNVector3(X, 20.0, 0.0)
                         let LineNode = MakeLine(From: Start, To: End, Color: ColorNames.White, LineWidth: 0.03)
+                        LineNode.categoryBitMask = GameLight
                         LineNode.name = "Vertical,\(Int(X))"
                         BucketGridNode?.addChildNode(LineNode)
                     }
@@ -1100,6 +1141,7 @@ class View3D: SCNView,                          //Our main super class.
                     let TopStart = SCNVector3(-0.5, 10.0, 0.0)
                     let TopEnd = SCNVector3(10.5, 10.0, 0.0)
                     let TopLine = MakeLine(From: TopStart, To: TopEnd, Color: ColorNames.Red, LineWidth: 0.08)
+                    TopLine.categoryBitMask = GameLight
                     TopLine.name = "TopLine"
                     BucketGridNode?.addChildNode(TopLine)
             }
@@ -1115,12 +1157,14 @@ class View3D: SCNView,                          //Our main super class.
                         LineGeometry.firstMaterial?.specular.contents = UIColor.gray
                         LineGeometry.firstMaterial?.diffuse.contents = UIColor.gray
                         let LineNode = SCNNode(geometry: LineGeometry)
+                        LineNode.categoryBitMask = GameLight
                         LineNode.name = "Horizontal,\(Int(Y))"
                         BucketGridNode?.addChildNode(LineNode)
                         #else
                         let Start = SCNVector3(0.0, Y, 0.0)
                         let End = SCNVector3(20.0, Y, 0.0)
                         let LineNode = MakeLine(From: Start, To: End, Color: ColorNames.White, LineWidth: 0.02)
+                        LineNode.categoryBitMask = GameLight
                         LineNode.name = "Horizontal,\(Int(Y))"
                         BucketGridNode?.addChildNode(LineNode)
                         #endif
@@ -1133,12 +1177,14 @@ class View3D: SCNView,                          //Our main super class.
                         LineGeometry.firstMaterial?.specular.contents = UIColor.gray
                         LineGeometry.firstMaterial?.diffuse.contents = UIColor.gray
                         let LineNode = SCNNode(geometry: LineGeometry)
+                        LineNode.categoryBitMask = GameLight
                         LineNode.name = "Vertical,\(Int(X))"
                         BucketGridNode?.addChildNode(LineNode)
                         #else
                         let Start = SCNVector3(X, 0.0, 0.0)
                         let End = SCNVector3(X, 20.0, 0.0)
                         let LineNode = MakeLine(From: Start, To: End, Color: ColorNames.White, LineWidth: 0.02)
+                        LineNode.categoryBitMask = GameLight
                         LineNode.name = "Vertical,\(Int(X))"
                         BucketGridNode?.addChildNode(LineNode)
                         #endif
@@ -1152,18 +1198,21 @@ class View3D: SCNView,                          //Our main super class.
                     TopLine.materials.first?.specular.contents = UIColor.red
                     TopLine.materials.first?.diffuse.contents = UIColor.red
                     let TopNode = SCNNode(geometry: TopLine)
+                    TopNode.categoryBitMask = GameLight
                     TopNode.name = "TopLine"
                     OutlineNode?.addChildNode(TopNode)
                     let BottomLine = SCNGeometry.Line(From: SCNVector3(-10.0, -10.0, 0.0), To: SCNVector3(10.0, -10.0, 0.0))
                     BottomLine.materials.first?.specular.contents = UIColor.red
                     BottomLine.materials.first?.diffuse.contents = UIColor.red
                     let BottomNode = SCNNode(geometry: BottomLine)
+                    BottomNode.categoryBitMask = GameLight
                     BottomNode.name = "BottomLine"
                     OutlineNode?.addChildNode(BottomNode)
                     let LeftLine = SCNGeometry.Line(From: SCNVector3(-10.0, 10.0, 0.0), To: SCNVector3(-10.0, -10.0, 0.0))
                     LeftLine.materials.first?.specular.contents = UIColor.red
                     LeftLine.materials.first?.diffuse.contents = UIColor.red
                     let LeftNode = SCNNode(geometry: LeftLine)
+                    LeftNode.categoryBitMask = GameLight
                     LeftNode.name = "LeftLine"
                     OutlineNode?.addChildNode(LeftNode)
                     let RightLine = SCNGeometry.Line(From: SCNVector3(10.0, 10.0, 0.0), To: SCNVector3(10.0, -10.0, 0.0))
@@ -1171,26 +1220,31 @@ class View3D: SCNView,                          //Our main super class.
                     RightLine.materials.first?.diffuse.contents = UIColor.red
                     let RightNode = SCNNode(geometry: RightLine)
                     RightNode.name = "RightLine"
+                    RightNode.categoryBitMask = GameLight
                     OutlineNode?.addChildNode(RightNode)
                     #else
                     let TopStart = SCNVector3(0.0, 10.0, 0.0)
                     let TopEnd = SCNVector3(20.0, 10.0, 0.0)
                     let TopLine = MakeLine(From: TopStart, To: TopEnd, Color: ColorNames.Red, LineWidth: 0.08)
+                    TopLine.categoryBitMask = GameLight
                     TopLine.name = "TopLine"
                     OutlineNode?.addChildNode(TopLine)
                     let BottomStart = SCNVector3(0.0, -10.0, 0.0)
                     let BottomEnd = SCNVector3(20.0, -10.0, 0.0)
                     let BottomLine = MakeLine(From: BottomStart, To: BottomEnd, Color: ColorNames.Red, LineWidth: 0.08)
+                    BottomLine.categoryBitMask = GameLight
                     BottomLine.name = "BottomLine"
                     OutlineNode?.addChildNode(BottomLine)
                     let LeftStart = SCNVector3(-10.0, 0.0, 0.0)
                     let LeftEnd = SCNVector3(-10.0, 20.0, 0.0)
                     let LeftLine = MakeLine(From: LeftStart, To: LeftEnd, Color: ColorNames.Red, LineWidth: 0.08)
+                    LeftLine.categoryBitMask = GameLight
                     LeftLine.name = "LeftLine"
                     OutlineNode?.addChildNode(LeftLine)
                     let RightStart = SCNVector3(10.0, 0.0, 0.0)
                     let RightEnd = SCNVector3(10.0, 20.0, 0.0)
                     let RightLine = MakeLine(From: RightStart, To: RightEnd, Color: ColorNames.Red, LineWidth: 0.08)
+                    RightLine.categoryBitMask = GameLight
                     RightLine.name = "RightLine"
                     OutlineNode?.addChildNode(RightLine)
                     #endif
@@ -1202,6 +1256,7 @@ class View3D: SCNView,                          //Our main super class.
                 TopLabel.materials.first!.diffuse.contents = ColorServer.ColorFrom(ColorNames.Cyan)
                 TopLabel.flatness = 0.2
                 let TopNode = SCNNode(geometry: TopLabel)
+                TopNode.categoryBitMask = GameLight
                 TopNode.name = "Top"
                 TopNode.scale = SCNVector3(0.02, 0.02, 0.02)
                 TopNode.position = SCNVector3(-0.5, 10.4, 0.0)
@@ -1212,6 +1267,7 @@ class View3D: SCNView,                          //Our main super class.
                 BottomLabel.materials.first!.diffuse.contents = ColorServer.ColorFrom(ColorNames.Yellow)
                 BottomLabel.flatness = 0.2
                 let BottomNode = SCNNode(geometry: BottomLabel)
+                BottomNode.categoryBitMask = GameLight
                 BottomNode.name = "Bottom"
                 BottomNode.scale = SCNVector3(0.02, 0.02, 0.02)
                 BottomNode.rotation = SCNVector4(0.0, 0.0, 1.0, CGFloat.pi)
@@ -1223,6 +1279,7 @@ class View3D: SCNView,                          //Our main super class.
                 RightLabel.materials.first!.diffuse.contents = ColorServer.ColorFrom(ColorNames.Magenta)
                 RightLabel.flatness = 0.2
                 let RightNode = SCNNode(geometry: RightLabel)
+                RightNode.categoryBitMask = GameLight
                 RightNode.name = "Right"
                 RightNode.scale = SCNVector3(0.02, 0.02, 0.02)
                 RightNode.rotation = SCNVector4(0.0, 0.0, 1.0, 270.0 * CGFloat.pi / 180.0)
@@ -1234,6 +1291,7 @@ class View3D: SCNView,                          //Our main super class.
                 LeftLabel.materials.first!.diffuse.contents = ColorServer.ColorFrom(ColorNames.Black)
                 RightLabel.flatness = 0.2
                 let LeftNode = SCNNode(geometry: LeftLabel)
+                LeftNode.categoryBitMask = GameLight
                 LeftNode.name = "Left"
                 LeftNode.scale = SCNVector3(0.02, 0.02, 0.02)
                 LeftNode.rotation = SCNVector4(0.0, 0.0, 1.0, CGFloat.pi * 0.5)
@@ -1636,17 +1694,136 @@ class View3D: SCNView,                          //Our main super class.
     
     // MARK: Control display and handling.
     
+    func GetNodeBoundingSize(_ Node: SCNNode) -> CGSize
+    {
+        let BoundingSize = Node.boundingBox
+        let XSize = Double(BoundingSize.max.x - BoundingSize.min.x)
+        let YSize = Double(BoundingSize.max.y - BoundingSize.min.y)
+        return CGSize(width: XSize, height: YSize)
+    }
+    
+    func AddUnicodeButton(ForButton: NodeButtons, _ CodePoint: Int, Font: UIFont, Location: SCNVector3, Color: UIColor, ScaleFactor: Double = 0.1) -> SCNNode
+    {
+        let UnicodeChar = UnicodeScalar(CodePoint)
+        let UnicodeString = "\((UnicodeChar)!)"
+        let SText = SCNText(string: UnicodeString, extrusionDepth: 1)
+        SText.font = Font
+        SText.flatness = 0
+        SText.firstMaterial?.diffuse.contents = Color
+        SText.firstMaterial?.specular.contents = UIColor.white
+        let Node = SCNNode(geometry: SText)
+        Node.name = "\(ForButton)"
+        Node.scale = SCNVector3(ScaleFactor, ScaleFactor, ScaleFactor)
+        
+        let SourceSize = GetNodeBoundingSize(Node)
+        let BGBox = SCNBox(width: SourceSize.width, height: SourceSize.height, length: 0.001, chamferRadius: 0.0)
+        BGBox.firstMaterial?.diffuse.contents = UIColor.clear
+        BGBox.firstMaterial?.specular.contents = UIColor.clear
+        let BGNode = SCNNode(geometry: BGBox)
+        let FinalWidth = SourceSize.width * 0.06
+        let FinalHeight = SourceSize.height * 0.1
+        BGNode.position = SCNVector3(FinalWidth, FinalHeight, -0.1)
+        BGNode.scale = SCNVector3(ScaleFactor, ScaleFactor, ScaleFactor)
+        BGNode.name = "\(ForButton)"
+        
+        let FinalNode = SCNNode()
+        FinalNode.position = Location
+        FinalNode.addChildNode(Node)
+        FinalNode.addChildNode(BGNode)
+        FinalNode.categoryBitMask = ControlLight
+        return FinalNode
+    }
+    
+    func AddTextButton(ForButton: NodeButtons, _ Text: String, Font: UIFont, Location: SCNVector3, Color: UIColor, ScaleFactor: Double = 0.1) -> SCNNode
+    {
+        let SText = SCNText(string: Text, extrusionDepth: 1)
+        SText.font = Font
+        SText.flatness = 0
+        SText.firstMaterial?.diffuse.contents = Color
+        SText.firstMaterial?.specular.contents = UIColor.white
+        let Node = SCNNode(geometry: SText)
+        Node.name = "\(ForButton)"
+        Node.scale = SCNVector3(ScaleFactor, ScaleFactor, ScaleFactor)
+        
+        let SourceSize = GetNodeBoundingSize(Node)
+        let BGBox = SCNBox(width: SourceSize.width, height: SourceSize.height, length: 0.001, chamferRadius: 0.0)
+        BGBox.firstMaterial?.diffuse.contents = UIColor.clear
+        BGBox.firstMaterial?.specular.contents = UIColor.clear
+        let BGNode = SCNNode(geometry: BGBox)
+        let FinalWidth = SourceSize.width * 0.06
+        let FinalHeight = SourceSize.height * 0.075
+        BGNode.position = SCNVector3(FinalWidth, FinalHeight, -0.1)
+        BGNode.scale = SCNVector3(ScaleFactor, ScaleFactor, ScaleFactor)
+        BGNode.name = "\(ForButton)"
+        
+        let FinalNode = SCNNode()
+        FinalNode.position = Location
+        FinalNode.addChildNode(Node)
+        FinalNode.addChildNode(BGNode)
+        FinalNode.categoryBitMask = ControlLight
+        return FinalNode
+    }
+    
+    func MakeButton(ForButton: NodeButtons) -> SCNNode
+    {
+        var ButtonFont = UIFont.systemFont(ofSize: 32.0, weight: UIFont.Weight.black)
+        if let Descriptor = ButtonFont.fontDescriptor.withDesign(.rounded)
+        {
+            ButtonFont = UIFont(descriptor: Descriptor, size: 32.0)
+        }
+        switch ForButton
+        {
+            case .DownButton:
+                return AddUnicodeButton(ForButton: ForButton, 0x25bc, Font: ButtonFont, Location: ButtonDictionary[ForButton]!.Location, Color: UIColor.white)
+            
+            case .DropDownButton:
+                return AddUnicodeButton(ForButton: ForButton, 0x25bc, Font: ButtonFont, Location: ButtonDictionary[ForButton]!.Location, Color: UIColor.systemGreen)
+            
+            case .FlyAwayButton:
+                return AddUnicodeButton(ForButton: ForButton, 0x25b2, Font: ButtonFont, Location: ButtonDictionary[ForButton]!.Location, Color: UIColor.systemBlue)
+            
+            case .FreezeButton:
+                return AddTextButton(ForButton: ForButton, "❄︎", Font: ButtonFont, Location: ButtonDictionary[ForButton]!.Location, Color: UIColor.cyan)
+            
+            case .LeftButton:
+                return AddUnicodeButton(ForButton: ForButton, 0x25c0, Font: ButtonFont, Location: ButtonDictionary[ForButton]!.Location, Color: UIColor.white)
+            
+            case .RightButton:
+                return AddUnicodeButton(ForButton: ForButton, 0x25b6, Font: ButtonFont, Location: ButtonDictionary[ForButton]!.Location, Color: UIColor.white)
+            
+            case .RotateLeftButton:
+                return AddTextButton(ForButton: ForButton, "↺", Font: ButtonFont, Location: ButtonDictionary[ForButton]!.Location, Color: UIColor.white)
+            
+            case .RotateRightButton:
+                return AddTextButton(ForButton: ForButton, "↻", Font: ButtonFont, Location: ButtonDictionary[ForButton]!.Location, Color: UIColor.white)
+            
+            case .UpButton:
+                return AddUnicodeButton(ForButton: ForButton, 0x25b2, Font: ButtonFont, Location: ButtonDictionary[ForButton]!.Location, Color: UIColor.white)
+        }
+    }
+    
+    /*
+    /// Creates a node to be used in the view as a motion control button.
+    /// - Parameter ForButton: Indicates which type of button to created. Also indicates the image and location of the button.
+    /// - Returns: Node to be placed into the game view.
     func MakeButton(ForButton: NodeButtons) -> SCNNode
     {
         let Box = SCNBox(width: 2.0, height: 2.0, length: 0.001, chamferRadius: 0.0)
-        let Config = UIImage.SymbolConfiguration(pointSize: 20.0, weight: UIImage.SymbolWeight.bold)
-        Box.firstMaterial?.diffuse.contents = UIImage(systemName: ButtonDictionary[ForButton]!.0, withConfiguration: Config)
+        let Config = UIImage.SymbolConfiguration(pointSize: 40.0, weight: UIImage.SymbolWeight.bold)
+        var ButtonImage = UIImage(systemName: ButtonDictionary[ForButton]!.ImageName, withConfiguration: Config)?.withRenderingMode(.alwaysTemplate)
+        ButtonImage = ButtonImage?.withTintColor(UIColor.blue)
+        //ButtonImage = UIImage(data: (ButtonImage?.jpegData(compressionQuality: 1.0))!)
+        Box.firstMaterial?.diffuse.contents = ButtonImage?.cgImage
+        //Box.firstMaterial?.specular.contents = ButtonImage?.cgImage
         let Node = SCNNode(geometry: Box)
+        Node.categoryBitMask = ControlLight
         Node.name = "\(ForButton)"
-        Node.position = ButtonDictionary[ForButton]!.1
+        Node.position = ButtonDictionary[ForButton]!.Location
         return Node
     }
+ */
     
+    /// Initialize tap processing.
     func InitializeButtonTaps()
     {
         if TapsInitialized
@@ -1659,8 +1836,11 @@ class View3D: SCNView,                          //Our main super class.
         self.addGestureRecognizer(Tap)
     }
     
+    /// Keeps the tap gesture recognizer from being added multiple times.
     var TapsInitialized = false
     
+    /// Handle button node tapping.
+    /// - Recognizer: The tap gesture recognizer.
     @objc func ButtonTapped(Recognizer: UIGestureRecognizer)
     {
         if Recognizer.state == .ended
@@ -1679,7 +1859,8 @@ class View3D: SCNView,                          //Our main super class.
         }
     }
     
-    let ButtonDictionary: [NodeButtons: (String, SCNVector3)] =
+    /// Dictionary between node button types and the system image name and location of each node.
+    let ButtonDictionary: [NodeButtons: (ImageName: String, Location: SCNVector3)] =
     [
         .LeftButton: ("arrowtriangle.left.fill", SCNVector3(-12.0, -10.0, 1.0)),
             .UpButton: ("arrowtriangle.up.fill", SCNVector3(-9.5, -12.5, 1.0)),
@@ -1692,20 +1873,37 @@ class View3D: SCNView,                          //Our main super class.
             .FreezeButton: ("snow", SCNVector3(0.0, -11.5, 1.0))
     ]
 
+    /// Move left node.
     var MoveLeftNode: SCNNode? = nil
+    
+    /// Rotate left node.
     var RotateLeftNode: SCNNode? = nil
+    
+    /// Move down node.
     var MoveDownNode: SCNNode? = nil
+    
+    /// Move up node.
     var MoveUpNode: SCNNode? = nil
+    
+    /// Move right node.
     var MoveRightNode: SCNNode? = nil
+    
+    /// Rotate right node.
     var RotateRightNode: SCNNode? = nil
+    
+    /// Drop down node.
     var DropDownNode: SCNNode? = nil
+    
+    /// Fly away node.
     var FlyAwayNode: SCNNode? = nil
+    
+    /// Freeze node.
     var FreezeNode: SCNNode? = nil
     
+    /// Show game view controls.
     func ShowControls()
     {
-        #if true
-        InitializeButtonTaps()
+        //InitializeButtonTaps()
         if MoveLeftNode == nil
         {
             MoveLeftNode = MakeButton(ForButton: .LeftButton)
@@ -1751,78 +1949,12 @@ class View3D: SCNView,                          //Our main super class.
             FlyAwayNode = MakeButton(ForButton: .FlyAwayButton)
             self.scene?.rootNode.addChildNode(FlyAwayNode!)
         }
-        #else
-        if MoveLeftNode == nil
-        {
-            MoveLeftNode = SCNNode(geometry: SCNBox(width: 2.0, height: 2.0, length: 0.001, chamferRadius: 0.0))
-            MoveLeftNode?.position = SCNVector3(-12.0, -10.0, 1.0)
-            MoveLeftNode?.geometry?.firstMaterial?.diffuse.contents = UIImage(systemName: "arrowtriangle.left.fill")
-            MoveLeftNode?.geometry?.firstMaterial?.specular.contents = UIColor.white
-            self.scene?.rootNode.addChildNode(MoveLeftNode!)
-        }
-        if RotateLeftNode == nil
-        {
-            RotateLeftNode = SCNNode(geometry: SCNBox(width: 2.0, height: 2.0, length: 0.001, chamferRadius: 0.0))
-            RotateLeftNode?.position = SCNVector3(-12.0, -12.5, 1.0)
-            RotateLeftNode?.geometry?.firstMaterial?.diffuse.contents = UIImage(systemName: "arrow.counterclockwise")
-            RotateLeftNode?.geometry?.firstMaterial?.specular.contents = UIColor.white
-            self.scene?.rootNode.addChildNode(RotateLeftNode!)
-        }
-        if MoveDownNode == nil
-        {
-            MoveDownNode = SCNNode(geometry: SCNBox(width: 2.0, height: 2.0, length: 0.001, chamferRadius: 0.0))
-            MoveDownNode?.position = SCNVector3(-9.5, -10.0, 1.0)
-            MoveDownNode?.geometry?.firstMaterial?.diffuse.contents = UIImage(systemName: "arrowtriangle.down.fill")
-            MoveDownNode?.geometry?.firstMaterial?.specular.contents = UIColor.white
-            self.scene?.rootNode.addChildNode(MoveDownNode!)
-        }
-        if MoveUpNode == nil
-        {
-            MoveUpNode = SCNNode(geometry: SCNBox(width: 2.0, height: 2.0, length: 0.001, chamferRadius: 0.0))
-            MoveUpNode?.position = SCNVector3(-9.5, -12.5, 1.0)
-            MoveUpNode?.geometry?.firstMaterial?.diffuse.contents = UIImage(systemName: "arrowtriangle.up.fill")
-            MoveUpNode?.geometry?.firstMaterial?.specular.contents = UIColor.white
-            self.scene?.rootNode.addChildNode(MoveUpNode!)
-        }
-        
-        if MoveRightNode == nil
-        {
-            MoveRightNode = SCNNode(geometry: SCNBox(width: 2.0, height: 2.0, length: 0.001, chamferRadius: 0.0))
-            MoveRightNode?.position = SCNVector3(12.0, -10.0, 1.0)
-            MoveRightNode?.geometry?.firstMaterial?.diffuse.contents = UIImage(systemName: "arrowtriangle.right.fill")
-            MoveRightNode?.geometry?.firstMaterial?.specular.contents = UIColor.white
-            self.scene?.rootNode.addChildNode(MoveRightNode!)
-        }
-        if RotateRightNode == nil
-        {
-            RotateRightNode = SCNNode(geometry: SCNBox(width: 2.0, height: 2.0, length: 0.001, chamferRadius: 0.0))
-            RotateRightNode?.position = SCNVector3(12.0, -12.5, 1.0)
-            RotateRightNode?.geometry?.firstMaterial?.diffuse.contents = UIImage(systemName: "arrow.clockwise")
-            RotateRightNode?.geometry?.firstMaterial?.specular.contents = UIColor.white
-            self.scene?.rootNode.addChildNode(RotateRightNode!)
-        }
-        if DropDownNode == nil
-        {
-            DropDownNode = SCNNode(geometry: SCNBox(width: 2.0, height: 2.0, length: 0.001, chamferRadius: 0.0))
-            DropDownNode?.position = SCNVector3(9.5, -10.0, 1.0)
-            DropDownNode?.geometry?.firstMaterial?.diffuse.contents = UIImage(systemName: "arrowtriangle.down")
-            DropDownNode?.geometry?.firstMaterial?.specular.contents = UIColor.white
-            self.scene?.rootNode.addChildNode(DropDownNode!)
-        }
-        if FlyAwayNode == nil
-        {
-            FlyAwayNode = SCNNode(geometry: SCNBox(width: 2.0, height: 2.0, length: 0.001, chamferRadius: 0.0))
-            FlyAwayNode?.position = SCNVector3(9.5, -12.5, 1.0)
-            FlyAwayNode?.geometry?.firstMaterial?.diffuse.contents = UIImage(systemName: "arrowtriangle.up")
-            FlyAwayNode?.geometry?.firstMaterial?.specular.contents = UIColor.white
-            self.scene?.rootNode.addChildNode(FlyAwayNode!)
-        }
-        #endif
     }
     
+        /// Hide game view controls.
     func HideControls()
     {
-        
+
     }
 }
 
