@@ -17,7 +17,9 @@ class PieceCollection: XMLDeserializeProtocol
         _Classes = [PieceClasses: [PieceDefinition2]]()
     }
     
+    /// Holds a dictionary of piece class piece definitions.
     private var _Classes: [PieceClasses: [PieceDefinition2]] = [PieceClasses: [PieceDefinition2]]()
+    /// Get or set the dictionary of piece class piece definitions.
     public var Classes: [PieceClasses: [PieceDefinition2]]
     {
         get
@@ -29,7 +31,10 @@ class PieceCollection: XMLDeserializeProtocol
             _Classes = newValue
         }
     }
-    
+
+    /// Return a list of all pieces in the specified piece class.
+    /// - Parameter PieceClass: The piece class whose pieces will be returned.
+    /// - Returns: All pieces in the specified piece class. Nil if the piece class cannot be found.
     public func GetPieceClass(_ PieceClass: PieceClasses) -> [PieceDefinition2]?
     {
         return Classes[PieceClass]
@@ -48,7 +53,6 @@ class PieceCollection: XMLDeserializeProtocol
                     if PieceNode.Name == "PieceClass"
                     {
                         let ClassName = XMLNode.GetAttributeNamed("Type", InNode: PieceNode)!
-                        print(" PieceClass: \(ClassName)")
                         let PieceClass = PieceClasses(rawValue: ClassName)!
                         if _Classes[PieceClass] == nil
                         {
@@ -59,7 +63,6 @@ class PieceCollection: XMLDeserializeProtocol
                             if Child.Name == "Piece"
                             {
                                 let PieceName = XMLNode.GetAttributeNamed("Name", InNode: Child)!
-                                print("  Piece: \(PieceName)")
                                 let RawPieceID = XMLNode.GetAttributeNamed("ID", InNode: Child)!
                                 let PieceID = UUID(uuidString: RawPieceID)!
                                 let NewPiece = PieceDefinition2()
@@ -123,7 +126,6 @@ class PieceCollection: XMLDeserializeProtocol
                                                     fatalError("Invalid Y coordinate in \(RawXY)")
                                                 }
                                                 let NewPoint = Point3D<Int>(X, Y)
-                                                print("   Location (\(X),\(Y))")
                                                 NewLocation.Coordinates = NewPoint
                                                 NewPiece.Locations.append(NewLocation)
                                         }
