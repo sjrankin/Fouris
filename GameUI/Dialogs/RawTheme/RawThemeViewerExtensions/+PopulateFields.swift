@@ -76,6 +76,15 @@ extension RawThemeViewerCode
         
         //Settings
         let SettingsGroup = GroupData("Settings")
+        SettingsGroup.AddField(ID: UUID(), Title: "Show version",
+                               Description: "Shows a small version box on the screen when first starting.",
+                               ControlTitle: "Show version on start up", Default: true as Any,
+                               Starting: Settings.GetShowVersionBox() as Any, FieldType: .Bool, List: nil, Handler:
+            {
+                NewValue in
+                let NewBool = NewValue as! Bool
+                Settings.SetShowVersionBox(NewValue: NewBool)
+        })
         SettingsGroup.AddField(ID: UUID(), Title: "Confirm image save",
                                Description: "Shows an alert indicating an image was saved when saving screen shots.",
                                ControlTitle: "Confirm saved", Default: false as Any,
@@ -271,7 +280,8 @@ extension RawThemeViewerCode
         })
         GameGroup.AddField(ID: UUID(), Title: "Field of view",
                            Description: "Field of view for the camera.",
-                           ControlTitle: "Field of view", Default: 92.5 as Any, Starting: 92.5 as Any, FieldType: .Double,
+                           ControlTitle: "Field of view", Default: 92.5 as Any,
+                           Starting: UserTheme!.CameraFieldOfView as Any, FieldType: .Double,
                            List: nil, Handler:
             {
                 NewValue in
