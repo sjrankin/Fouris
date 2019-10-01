@@ -146,7 +146,7 @@ class MainViewController: UIViewController,
     /// Layout complete. Save certain information.
     override func viewDidLayoutSubviews()
     {
-        OriginalGameViewBounds = GameView.bounds
+        OriginalGameViewBounds = GameViewContainer.bounds
         OrignalTopToolbarBounds = GameControlView.bounds
         OriginalMotionControlBounds = MotionControlView.bounds
     }
@@ -316,12 +316,12 @@ class MainViewController: UIViewController,
             print("  GameView.frame=\((OriginalGameViewBounds)!)")
                         MotionControlView.isHidden = false
             MotionControlView.frame = OriginalMotionControlBounds
-            GameView.frame = OriginalGameViewBounds
+            GameViewContainer.frame = OriginalGameViewBounds
         }
         else
         {
             #if true
-                        let NewGameHeight = GameView.frame.height + OriginalMotionControlBounds.height
+                        let NewGameHeight = GameViewContainer.frame.height + OriginalMotionControlBounds.height
             print("Hiding Motion Controls")
             print("  NewGameHeight=\(NewGameHeight)")
             let NewMotionControlFrame = CGRect(x: 0, y: self.MotionControlView.frame.height, width: self.MotionControlView.frame.width,
@@ -335,18 +335,18 @@ class MainViewController: UIViewController,
                            animations:
                 {
                     self.MotionControlView.frame = NewMotionControlFrame
-                    self.GameView.frame = NewGameViewFrame
+                    self.GameViewContainer.frame = NewGameViewFrame
             }, completion:
                 {
                     _ in
                     self.MotionControlView.frame = NewMotionControlFrame
-                    self.GameView.frame = NewGameViewFrame
+                    self.GameViewContainer.frame = NewGameViewFrame
             })
             #else
             MotionControlView.isHidden = true
             MotionControlView.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
-            let NewGameViewHeight = GameView.frame.height + OriginalMotionControlBounds.height
-            GameView.frame = CGRect(x: 0, y: 0, width: GameView.frame.width, height: NewGameViewHeight)
+            let NewGameViewHeight = GameViewContainer.frame.height + OriginalMotionControlBounds.height
+            GameViewContainer.frame = CGRect(x: 0, y: 0, width: GameViewContainer.frame.width, height: NewGameViewHeight)
             #endif
         }
     }
@@ -390,6 +390,7 @@ class MainViewController: UIViewController,
     func InitializeGestures()
     {
         let TapGesture = UITapGestureRecognizer(target: self, action: #selector(HandleTap))
+        TapGesture.numberOfTouchesRequired = 1
         GameUISurface3D.addGestureRecognizer(TapGesture)
         let SwipeUpGesture = UISwipeGestureRecognizer(target: self, action: #selector(HandleSwipeUp))
         SwipeUpGesture.direction = .up
@@ -403,15 +404,28 @@ class MainViewController: UIViewController,
         let SwipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(HandleSwipeRight))
         SwipeRightGesture.direction = .right
         GameUISurface3D.addGestureRecognizer(SwipeRightGesture)
+        let Count = GameUISurface3D.gestureRecognizers?.count
+        print("View3D gesture count: \((Count)!)")
     }
     
     /// Handle taps in the game view. Depending on where the tap is, the piece will move in the given direction.
-    /// - Parameter sender: The tap gesture.
-    @objc func HandleTap(sender: UITapGestureRecognizer)
+    /// - Parameter Recognizer: The tap gesture.
+    @objc func HandleTap(Recognizer: UITapGestureRecognizer)
     {
-        if sender.state == .ended
+        if Recognizer.state == .ended
         {
-            let Location = sender.location(in: GameUISurface3D)
+            let Location = Recognizer.location(in: GameUISurface3D)
+            let Point = Recognizer.location(in: GameUISurface3D)
+            let HitResults = GameUISurface3D.hitTest(Point, options: [:])
+            if HitResults.count > 0
+            {
+                let Node = HitResults[0].node
+                if let NodeName = Node.name
+                {
+                    print("Pressed node \(NodeName)")
+                    return
+                }
+            }
             let TapMotion = TranslateTapToMotion(TapLocation: Location, SurfaceSize: GameUISurface3D!.bounds.size)
             switch TapMotion
             {
@@ -1744,7 +1758,7 @@ class MainViewController: UIViewController,
         if FirstSlideIn
         {
             FirstSlideIn = false
-            GameView.bringSubviewToFront(MainSlideIn)
+            GameViewContainer.bringSubviewToFront(MainSlideIn)
         }
         if MainSlideIn!.IsVisible
         {
@@ -2021,7 +2035,7 @@ class MainViewController: UIViewController,
     /// - Parameter sender: Not used.
     @IBAction func HandleCameraButtonPressed(_ sender: Any)
     {
-        if let GameImage = GameView.AsImage()
+        if let GameImage = GameViewContainer.AsImage()
         {
             UIImageWriteToSavedPhotosAlbum(GameImage,
                                            self,
@@ -2172,7 +2186,7 @@ class MainViewController: UIViewController,
     @IBOutlet weak var GameUISurface3D: View3D!
     @IBOutlet weak var GameControlView: UIView!
     @IBOutlet weak var MotionControlView: UIView!
-    @IBOutlet weak var GameView: UIView!
+    @IBOutlet weak var GameViewContainer: UIView!
     @IBOutlet weak var TextLayerView: TextLayerManager!
     @IBOutlet weak var NextPieceLabelView: UIView!
     @IBOutlet weak var NextPieceView: UIView!
