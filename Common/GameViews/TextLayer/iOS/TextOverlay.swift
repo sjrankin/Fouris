@@ -37,6 +37,8 @@ class TextOverlay: TextLayerDisplayProtocol
     /// - Parameter PressPlayLabel: Container for the "Press Play" label.
     /// - Parameter PauseLabel: Container for the "Pause" label.
     /// - Parameter PieceControl: The piece view control.
+    /// - Parameter VersionBox: Box with label to show version information.
+    /// - Parameter VersionLabel: Label to display version information.
     func SetControls(NextLabel: UIView?,
                      ScoreLabel: UIView?,
                      CurrentScoreLabel: UIView?,
@@ -44,8 +46,12 @@ class TextOverlay: TextLayerDisplayProtocol
                      GameOverLabel: UIView?,
                      PressPlayLabel: UIView?,
                      PauseLabel: UIView?,
-                     PieceControl: PieceViewer?)
+                     PieceControl: PieceViewer?,
+                     VersionBox: UIView?,
+                     VersionLabel: UILabel?)
     {
+        VersionContainer = VersionBox
+        VersionData = VersionLabel
         NextLabelContainer = NextLabel
         ScoreLabelContainer = ScoreLabel
         CurrentScoreContainer = CurrentScoreLabel
@@ -62,6 +68,9 @@ class TextOverlay: TextLayerDisplayProtocol
         GameOverContainer?.layer.backgroundColor = UIColor.clear.cgColor
         PressPlayContainer?.layer.backgroundColor = UIColor.clear.cgColor
         PauseContainer?.layer.backgroundColor = UIColor.clear.cgColor
+        VersionContainer?.layer.backgroundColor = UIColor.black.cgColor
+        VersionContainer?.layer.borderColor = UIColor.white.cgColor
+        VersionContainer?.alpha = 0.0
         NextLabelContainer?.layer.zPosition = 10000
         ScoreLabelContainer?.layer.zPosition = 10000
         CurrentScoreContainer?.layer.zPosition = 10000
@@ -78,6 +87,8 @@ class TextOverlay: TextLayerDisplayProtocol
         InitializeLabels()
     }
     
+    var VersionContainer: UIView? = nil
+    var VersionData: UILabel? = nil
     var NextLabelContainer: UIView? = nil
     var ScoreLabelContainer: UIView? = nil
     var CurrentScoreContainer: UIView? = nil
@@ -662,4 +673,72 @@ class TextOverlay: TextLayerDisplayProtocol
     
     /// Flag that indicates the game over label was created.
     private var GameOverLabelCreated = false
+    
+    func ShowVersionBox(WithString: String, HideAfter: Double = 5.0, CanTapToDismiss: Bool = true)
+    {
+        if !VersionBoxIsHidden
+        {
+            return
+        }
+        VersionBoxIsHidden = false
+        if CanTapToDismiss
+        {
+            VersionContainer!.isUserInteractionEnabled = true
+            let Tap = UITapGestureRecognizer(target: self, action: #selector(DismissVersionBox))
+            Tap.numberOfTouchesRequired = 1
+            VersionContainer!.addGestureRecognizer(Tap)
+        }
+        VersionData?.text = WithString
+        UIView.animate(withDuration: 0.5, animations:
+            {
+                self.VersionContainer!.alpha = 1.0
+        }, completion:
+            {
+                _ in
+                self.VersionContainer!.alpha = 1.0
+                if HideAfter > 0.0
+                {
+                let _ = Timer.scheduledTimer(timeInterval: HideAfter, target: self,
+                                             selector: #selector(self.AutoHideVersionBox), userInfo: nil, repeats: false)
+                }
+        })
+    }
+    
+    @objc func DismissVersionBox(Recognizer: UIGestureRecognizer)
+    {
+        if Recognizer.state == .ended
+        {
+            HideVersionBox(Duration: 0.5)
+        }
+    }
+    
+    @objc func AutoHideVersionBox()
+    {
+        OperationQueue.main.addOperation
+            {
+            self.HideVersionBox()
+        }
+    }
+    
+    func HideVersionBox(Duration: Double = 1.0)
+    {
+        if VersionBoxIsHidden
+        {
+            return
+        }
+        VersionBoxIsHidden = true
+        VersionContainer!.isUserInteractionEnabled = false
+        UIView.animate(withDuration: Duration,
+                       animations:
+            {
+                self.VersionContainer!.alpha = 0.0
+        },
+                       completion:
+            {
+                _ in
+                self.VersionContainer!.alpha = 0.0
+        })
+    }
+    
+    public var VersionBoxIsHidden: Bool = true
 }
