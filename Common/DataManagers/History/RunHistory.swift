@@ -30,8 +30,8 @@ class RunHistory: Serializable
         switch Key
         {
             case "_TimeStamp":
-            //String
-            _TimeStamp = Sanitize(Value)
+                //String
+                _TimeStamp = Sanitize(Value)
             
             case "_StandardGameCount":
                 //Int
@@ -72,6 +72,10 @@ class RunHistory: Serializable
             case "_CumulativeRotatingPieceCount":
                 //Int
                 _CumulativeRotatingPieceCount = Int(Value)!
+            
+            case "_CubicGameCount":
+                //Int
+                _CubicGameCount = Int(Value)!
             
             case "_CubicCumulativeScore":
                 //Int
