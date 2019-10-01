@@ -149,7 +149,18 @@ class MainViewController: UIViewController,
         OriginalGameViewBounds = GameViewContainer.bounds
         OrignalTopToolbarBounds = GameControlView.bounds
         OriginalMotionControlBounds = MotionControlView.bounds
+        if !VersionShown
+        {
+            VersionShown = true
+            if Settings.GetShowVersionBox()
+            {
+                GameTextOverlay?.ShowVersionBox(WithString: "Fouris \(Versioning.MakeVersionString(IncludeVersionPrefix: false))")
+            }
+        }
     }
+    
+    /// Prevents `viewDidLayoutSubviews` from showing more than one version box.
+    var VersionShown = false
     
     /// Number of seconds the instance has been running.
     var InstanceSeconds: Int = 0
@@ -208,7 +219,9 @@ class MainViewController: UIViewController,
                                      GameOverLabel: GameOverLabelView,
                                      PressPlayLabel: PressPlayLabelView,
                                      PauseLabel: PauseLabelView,
-                                     PieceControl: NextPieceViewControl)
+                                     PieceControl: NextPieceViewControl,
+                                     VersionBox: TextVersionBox,
+                                     VersionLabel: VersionTextLabel)
         NextPieceView.layer.backgroundColor = UIColor.clear.cgColor
         NextPieceView.layer.borderColor = UIColor.clear.cgColor
         GameTextOverlay?.ShowPressPlay(Duration: 0.7)
@@ -259,6 +272,8 @@ class MainViewController: UIViewController,
         SlideInCameraControlBox.layer.backgroundColor = ColorServer.CGColorFrom(ColorNames.WhiteSmoke)
         SlideInCameraControlBox.layer.borderColor = UIColor.black.cgColor
         ShowCameraControls()
+        
+//        GameTextOverlay?.ShowVersionBox(WithString: "Fouris \(Versioning.MakeVersionString(IncludeVersionPrefix: false))")
     }
     
     /// Handle taps on the FPS text display. This toggles the contents from frames/second to instance seconds.
@@ -405,7 +420,9 @@ class MainViewController: UIViewController,
         SwipeRightGesture.direction = .right
         GameUISurface3D.addGestureRecognizer(SwipeRightGesture)
         let Count = GameUISurface3D.gestureRecognizers?.count
+        #if false
         print("View3D gesture count: \((Count)!)")
+        #endif
     }
     
     /// Handle taps in the game view. Depending on where the tap is, the piece will move in the given direction.
@@ -420,11 +437,17 @@ class MainViewController: UIViewController,
             if HitResults.count > 0
             {
                 let Node = HitResults[0].node
-                if let NodeName = Node.name
+                if let PressedNode = Node as? SCNButtonNode
                 {
-                    print("Pressed node \(NodeName)")
-                    return
+                    if let ParentNode = GameUISurface3D.GetParentNode(Of: PressedNode)
+                    {
+                        if let VNode = ParentNode.GetNodeWithTag(Value: "ShapeNode")
+                        {
+                            VNode.HighlightButton(ResetDuration: 0.1, Delay: 0.1)
+                        }
+                    }
                 }
+                return
             }
             let TapMotion = TranslateTapToMotion(TapLocation: Location, SurfaceSize: GameUISurface3D!.bounds.size)
             switch TapMotion
@@ -1221,7 +1244,7 @@ class MainViewController: UIViewController,
         if UserTheme!.AfterGameWaitDuration > 0.0
         {
             let Duration = UserTheme!.DestructionDuration
-            print("Destruction method: \(UserTheme!.DestructionMethod)")
+            //print("Destruction method: \(UserTheme!.DestructionMethod)")
             PlayDelay = Duration + 0.1
             if Thread.isMainThread
             {
@@ -1256,7 +1279,8 @@ class MainViewController: UIViewController,
         DebugClient.SetIdiotLight(IdiotLights.B2, Title: "Playing", FGColor: ColorNames.WhiteSmoke, BGColor: ColorNames.PineGreen)
         let GameCountMsg = MessageHelper.MakeKVPMessage(ID: GameCountID, Key: "Game Count", Value: "\(GameCount)")
         DebugClient.SendPreformattedCommand(GameCountMsg)
-        
+
+        GameTextOverlay?.HideVersionBox(Duration: 0.2)
         GameTextOverlay?.HideGameOver(Duration: 0.0)
         GameTextOverlay?.HidePressPlay(Duration: 0.0)
         GameTextOverlay?.ShowNextLabel(Duration: 0.1)
@@ -2219,6 +2243,8 @@ class MainViewController: UIViewController,
             @IBOutlet weak var SlideInCameraControlBox: UIView!
     @IBOutlet weak var SlideInPlayButton: UIButton!
     @IBOutlet weak var SlideInPauseButton: UIButton!
+    @IBOutlet weak var TextVersionBox: UIView!
+    @IBOutlet weak var VersionTextLabel: UILabel!
     
     // MARK: Enum mappings.
     
