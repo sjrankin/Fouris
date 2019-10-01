@@ -154,6 +154,7 @@ class View3D: SCNView,                          //Our main super class.
             {
                 case .CameraFieldOfView:
                     CameraNode.camera?.fieldOfView = CGFloat(CurrentTheme!.CameraFieldOfView)
+                print("Camera field of view changed to \(CurrentTheme!.CameraFieldOfView)")
                 
                 default:
                 break
@@ -315,17 +316,19 @@ class View3D: SCNView,                          //Our main super class.
         return Node
     }
     
+    /// Create the control light. This light is used for those nodes in the scene that are not directly game related, eg,
+    /// motion buttons.
+    /// - Returns: Node with the control light.
     func CreateControlLight() -> SCNNode
     {
         let Light = SCNLight()
         Light.color = UIColor.white
-//        Light.categoryBitMask = ControlLight
         Light.type = .omni
         let Node = SCNNode()
         Node.name = "ControlLight"
         Node.light = Light
         Node.light?.categoryBitMask = ControlLight
-        Node.position = SCNVector3(0.0, -10.0, 10.0)
+        Node.position = SCNVector3(-3.0, 15.0, 50.0)
         return Node
     }
     
@@ -1702,7 +1705,8 @@ class View3D: SCNView,                          //Our main super class.
         return CGSize(width: XSize, height: YSize)
     }
     
-    func AddUnicodeButton(ForButton: NodeButtons, _ CodePoint: Int, Font: UIFont, Location: SCNVector3, Color: UIColor, ScaleFactor: Double = 0.1) -> SCNNode
+    func AddUnicodeButton(ForButton: NodeButtons, _ CodePoint: Int, Font: UIFont, Location: SCNVector3,
+                          Color: UIColor, Highlight: UIColor, ScaleFactor: Double = 0.1) -> SCNButtonNode
     {
         let UnicodeChar = UnicodeScalar(CodePoint)
         let UnicodeString = "\((UnicodeChar)!)"
@@ -1711,244 +1715,181 @@ class View3D: SCNView,                          //Our main super class.
         SText.flatness = 0
         SText.firstMaterial?.diffuse.contents = Color
         SText.firstMaterial?.specular.contents = UIColor.white
-        let Node = SCNNode(geometry: SText)
+        let Node = SCNButtonNode(geometry: SText)
+        Node.ButtonColor = Color
+        Node.HighlightColor = Highlight
         Node.name = "\(ForButton)"
+        Node.categoryBitMask = ControlLight
         Node.scale = SCNVector3(ScaleFactor, ScaleFactor, ScaleFactor)
+        Node.StringTag = "ShapeNode"
         
         let SourceSize = GetNodeBoundingSize(Node)
         let BGBox = SCNBox(width: SourceSize.width, height: SourceSize.height, length: 0.001, chamferRadius: 0.0)
         BGBox.firstMaterial?.diffuse.contents = UIColor.clear
         BGBox.firstMaterial?.specular.contents = UIColor.clear
-        let BGNode = SCNNode(geometry: BGBox)
+        let BGNode = SCNButtonNode(geometry: BGBox)
         let FinalWidth = SourceSize.width * 0.06
         let FinalHeight = SourceSize.height * 0.1
         BGNode.position = SCNVector3(FinalWidth, FinalHeight, -0.1)
         BGNode.scale = SCNVector3(ScaleFactor, ScaleFactor, ScaleFactor)
         BGNode.name = "\(ForButton)"
+        BGNode.StringTag = "BackgroundNode"
         
-        let FinalNode = SCNNode()
+        let FinalNode = SCNButtonNode()
         FinalNode.position = Location
         FinalNode.addChildNode(Node)
         FinalNode.addChildNode(BGNode)
         FinalNode.categoryBitMask = ControlLight
+        FinalNode.StringTag = "ParentNode"
         return FinalNode
     }
     
-    func AddTextButton(ForButton: NodeButtons, _ Text: String, Font: UIFont, Location: SCNVector3, Color: UIColor, ScaleFactor: Double = 0.1) -> SCNNode
+    func AddTextButton(ForButton: NodeButtons, _ Text: String, Font: UIFont, Location: SCNVector3,
+                       Color: UIColor, Highlight: UIColor, ScaleFactor: Double = 0.1) -> SCNButtonNode
     {
         let SText = SCNText(string: Text, extrusionDepth: 1)
         SText.font = Font
         SText.flatness = 0
         SText.firstMaterial?.diffuse.contents = Color
         SText.firstMaterial?.specular.contents = UIColor.white
-        let Node = SCNNode(geometry: SText)
+        let Node = SCNButtonNode(geometry: SText)
+        Node.ButtonColor = Color
+        Node.HighlightColor = Highlight
         Node.name = "\(ForButton)"
+        Node.categoryBitMask = ControlLight
         Node.scale = SCNVector3(ScaleFactor, ScaleFactor, ScaleFactor)
+        Node.StringTag = "ShapeNode"
         
         let SourceSize = GetNodeBoundingSize(Node)
         let BGBox = SCNBox(width: SourceSize.width, height: SourceSize.height, length: 0.001, chamferRadius: 0.0)
         BGBox.firstMaterial?.diffuse.contents = UIColor.clear
         BGBox.firstMaterial?.specular.contents = UIColor.clear
-        let BGNode = SCNNode(geometry: BGBox)
+        let BGNode = SCNButtonNode(geometry: BGBox)
         let FinalWidth = SourceSize.width * 0.06
         let FinalHeight = SourceSize.height * 0.075
         BGNode.position = SCNVector3(FinalWidth, FinalHeight, -0.1)
         BGNode.scale = SCNVector3(ScaleFactor, ScaleFactor, ScaleFactor)
         BGNode.name = "\(ForButton)"
+        BGNode.StringTag = "BackgroundNode"
         
-        let FinalNode = SCNNode()
+        let FinalNode = SCNButtonNode()
         FinalNode.position = Location
         FinalNode.addChildNode(Node)
         FinalNode.addChildNode(BGNode)
         FinalNode.categoryBitMask = ControlLight
+        FinalNode.StringTag = "ParentNode"
         return FinalNode
     }
     
-    func MakeButton(ForButton: NodeButtons) -> SCNNode
+    /// Make a in-scene motion button.
+    /// - Parameter ForButton: Determines the button to create and add to the scene.
+    func MakeButton(ForButton: NodeButtons)
     {
-        var ButtonFont = UIFont.systemFont(ofSize: 32.0, weight: UIFont.Weight.black)
+        var ButtonFont = UIFont.systemFont(ofSize: 20.0, weight: UIFont.Weight.bold)
         if let Descriptor = ButtonFont.fontDescriptor.withDesign(.rounded)
         {
             ButtonFont = UIFont(descriptor: Descriptor, size: 32.0)
         }
+        var FinalNode: SCNButtonNode!
         switch ForButton
         {
             case .DownButton:
-                return AddUnicodeButton(ForButton: ForButton, 0x25bc, Font: ButtonFont, Location: ButtonDictionary[ForButton]!.Location, Color: UIColor.white)
+                FinalNode = AddUnicodeButton(ForButton: ForButton, 0x25bc, Font: ButtonFont,
+                                             Location: ButtonDictionary[ForButton]!.Location,
+                                             Color: ButtonDictionary[ForButton]!.Color, Highlight: ButtonDictionary[ForButton]!.Highlight)
             
             case .DropDownButton:
-                return AddUnicodeButton(ForButton: ForButton, 0x25bc, Font: ButtonFont, Location: ButtonDictionary[ForButton]!.Location, Color: UIColor.systemGreen)
+                FinalNode = AddUnicodeButton(ForButton: ForButton, 0x25bc, Font: ButtonFont,
+                                             Location: ButtonDictionary[ForButton]!.Location,
+                                             Color: ButtonDictionary[ForButton]!.Color, Highlight: ButtonDictionary[ForButton]!.Highlight)
             
             case .FlyAwayButton:
-                return AddUnicodeButton(ForButton: ForButton, 0x25b2, Font: ButtonFont, Location: ButtonDictionary[ForButton]!.Location, Color: UIColor.systemBlue)
+                FinalNode = AddUnicodeButton(ForButton: ForButton, 0x25b2, Font: ButtonFont,
+                                             Location: ButtonDictionary[ForButton]!.Location,
+                                             Color: ButtonDictionary[ForButton]!.Color, Highlight: ButtonDictionary[ForButton]!.Highlight)
             
             case .FreezeButton:
-                return AddTextButton(ForButton: ForButton, "❄︎", Font: ButtonFont, Location: ButtonDictionary[ForButton]!.Location, Color: UIColor.cyan)
+                FinalNode = AddTextButton(ForButton: ForButton, "❄︎", Font: ButtonFont,
+                                          Location: ButtonDictionary[ForButton]!.Location,
+                                          Color: ButtonDictionary[ForButton]!.Color, Highlight: ButtonDictionary[ForButton]!.Highlight)
             
             case .LeftButton:
-                return AddUnicodeButton(ForButton: ForButton, 0x25c0, Font: ButtonFont, Location: ButtonDictionary[ForButton]!.Location, Color: UIColor.white)
+                FinalNode = AddUnicodeButton(ForButton: ForButton, 0x25c0, Font: ButtonFont,
+                                             Location: ButtonDictionary[ForButton]!.Location,
+                                             Color: ButtonDictionary[ForButton]!.Color, Highlight: ButtonDictionary[ForButton]!.Highlight)
             
             case .RightButton:
-                return AddUnicodeButton(ForButton: ForButton, 0x25b6, Font: ButtonFont, Location: ButtonDictionary[ForButton]!.Location, Color: UIColor.white)
+                FinalNode = AddUnicodeButton(ForButton: ForButton, 0x25b6, Font: ButtonFont,
+                                             Location: ButtonDictionary[ForButton]!.Location,
+                                             Color: ButtonDictionary[ForButton]!.Color, Highlight: ButtonDictionary[ForButton]!.Highlight)
             
             case .RotateLeftButton:
-                return AddTextButton(ForButton: ForButton, "↺", Font: ButtonFont, Location: ButtonDictionary[ForButton]!.Location, Color: UIColor.white)
+                FinalNode = AddTextButton(ForButton: ForButton, "↺", Font: ButtonFont,
+                                          Location: ButtonDictionary[ForButton]!.Location,
+                                          Color: ButtonDictionary[ForButton]!.Color, Highlight: ButtonDictionary[ForButton]!.Highlight)
             
             case .RotateRightButton:
-                return AddTextButton(ForButton: ForButton, "↻", Font: ButtonFont, Location: ButtonDictionary[ForButton]!.Location, Color: UIColor.white)
+                FinalNode = AddTextButton(ForButton: ForButton, "↻", Font: ButtonFont,
+                                          Location: ButtonDictionary[ForButton]!.Location,
+                                          Color: ButtonDictionary[ForButton]!.Color, Highlight: ButtonDictionary[ForButton]!.Highlight)
             
             case .UpButton:
-                return AddUnicodeButton(ForButton: ForButton, 0x25b2, Font: ButtonFont, Location: ButtonDictionary[ForButton]!.Location, Color: UIColor.white)
+                FinalNode = AddUnicodeButton(ForButton: ForButton, 0x25b2, Font: ButtonFont,
+                                             Location: ButtonDictionary[ForButton]!.Location,
+                                             Color: ButtonDictionary[ForButton]!.Color, Highlight: ButtonDictionary[ForButton]!.Highlight)
         }
+        
+        ButtonList[ForButton] = FinalNode
+        self.scene?.rootNode.addChildNode(FinalNode!)
     }
     
-    /*
-    /// Creates a node to be used in the view as a motion control button.
-    /// - Parameter ForButton: Indicates which type of button to created. Also indicates the image and location of the button.
-    /// - Returns: Node to be placed into the game view.
-    func MakeButton(ForButton: NodeButtons) -> SCNNode
-    {
-        let Box = SCNBox(width: 2.0, height: 2.0, length: 0.001, chamferRadius: 0.0)
-        let Config = UIImage.SymbolConfiguration(pointSize: 40.0, weight: UIImage.SymbolWeight.bold)
-        var ButtonImage = UIImage(systemName: ButtonDictionary[ForButton]!.ImageName, withConfiguration: Config)?.withRenderingMode(.alwaysTemplate)
-        ButtonImage = ButtonImage?.withTintColor(UIColor.blue)
-        //ButtonImage = UIImage(data: (ButtonImage?.jpegData(compressionQuality: 1.0))!)
-        Box.firstMaterial?.diffuse.contents = ButtonImage?.cgImage
-        //Box.firstMaterial?.specular.contents = ButtonImage?.cgImage
-        let Node = SCNNode(geometry: Box)
-        Node.categoryBitMask = ControlLight
-        Node.name = "\(ForButton)"
-        Node.position = ButtonDictionary[ForButton]!.Location
-        return Node
-    }
- */
-    
-    /// Initialize tap processing.
-    func InitializeButtonTaps()
-    {
-        if TapsInitialized
-        {
-            return
-        }
-        TapsInitialized = true
-        let Tap = UITapGestureRecognizer(target: self, action: #selector(ButtonTapped))
-        Tap.numberOfTapsRequired = 1
-        self.addGestureRecognizer(Tap)
-    }
-    
-    /// Keeps the tap gesture recognizer from being added multiple times.
-    var TapsInitialized = false
-    
-    /// Handle button node tapping.
-    /// - Recognizer: The tap gesture recognizer.
-    @objc func ButtonTapped(Recognizer: UIGestureRecognizer)
-    {
-        if Recognizer.state == .ended
-        {
-            let Surface = self as SCNView
-            let Point = Recognizer.location(in: Surface)
-            let HitResults = Surface.hitTest(Point, options: [:])
-            if HitResults.count > 0
-            {
-                let Result: Any = HitResults[0]
-                if let Button = Result as? SCNNode
-                {
-                    print("Tapped on node with name \"\((Button.name)!)\"")
-                }
-            }
-        }
-    }
+    var ButtonList: [NodeButtons: SCNButtonNode] = [NodeButtons: SCNButtonNode]()
     
     /// Dictionary between node button types and the system image name and location of each node.
-    let ButtonDictionary: [NodeButtons: (ImageName: String, Location: SCNVector3)] =
+    let ButtonDictionary: [NodeButtons: (Location: SCNVector3, Color: UIColor, Highlight: UIColor)] =
     [
-        .LeftButton: ("arrowtriangle.left.fill", SCNVector3(-12.0, -10.0, 1.0)),
-            .UpButton: ("arrowtriangle.up.fill", SCNVector3(-9.5, -12.5, 1.0)),
-            .DownButton: ("arrowtriangle.down.fill", SCNVector3(-9.5, -10.0, 1.0)),
-            .RightButton: ("arrowtriangle.right.fill", SCNVector3(12.0, -10.0, 1.0)),
-            .DropDownButton: ("arrowtriangle.down", SCNVector3(9.5, -10.0, 1.0)),
-            .FlyAwayButton: ("arrowtriangle.up", SCNVector3(9.5, -12.5, 1.0)),
-            .RotateLeftButton: ("arrow.counterclockwise", SCNVector3(-12.0, -12.5, 1.0)),
-            .RotateRightButton: ("arrow.clockwise", SCNVector3(12.0, -12.5, 1.0)),
-            .FreezeButton: ("snow", SCNVector3(0.0, -11.5, 1.0))
+        .LeftButton: (SCNVector3(-13.0, -10.0, 1.0), UIColor.white, UIColor.yellow),
+        .RotateLeftButton: (SCNVector3(-13.0, -12.8, 1.0), UIColor.white, UIColor.yellow),
+        .UpButton: (SCNVector3(-10.0, -12.8, 1.0), UIColor.white, UIColor.yellow),
+        .DownButton:  (SCNVector3(-10.0, -10.0, 1.0), UIColor.white, UIColor.yellow),
+        
+        .RightButton:  (SCNVector3(10.5, -10.0, 1.0), UIColor.white, UIColor.yellow),
+        .DropDownButton:  (SCNVector3(7.5, -10.0, 1.0), UIColor.systemGreen, UIColor.yellow),
+        .FlyAwayButton:  (SCNVector3(7.5, -12.8, 1.0), UIColor.systemBlue, UIColor.yellow),
+        .RotateRightButton:  (SCNVector3(10.5, -12.8, 1.0), UIColor.white, UIColor.yellow),
+        
+        .FreezeButton: (SCNVector3(-0.9, -11.5, 1.0), UIColor.cyan, UIColor.blue)
     ]
-
-    /// Move left node.
-    var MoveLeftNode: SCNNode? = nil
     
-    /// Rotate left node.
-    var RotateLeftNode: SCNNode? = nil
-    
-    /// Move down node.
-    var MoveDownNode: SCNNode? = nil
-    
-    /// Move up node.
-    var MoveUpNode: SCNNode? = nil
-    
-    /// Move right node.
-    var MoveRightNode: SCNNode? = nil
-    
-    /// Rotate right node.
-    var RotateRightNode: SCNNode? = nil
-    
-    /// Drop down node.
-    var DropDownNode: SCNNode? = nil
-    
-    /// Fly away node.
-    var FlyAwayNode: SCNNode? = nil
-    
-    /// Freeze node.
-    var FreezeNode: SCNNode? = nil
+    /// Returns the parent node of the passed button node.
+    /// - Parameter Of: The node whose parent will be returned.
+    /// - Returns: The parent of the passed node. Nil if not found.
+    func GetParentNode(Of: SCNButtonNode) -> SCNButtonNode?
+    {
+        for (_, Parent) in ButtonList
+        {
+             if Parent.childNode(withName: Of.name!, recursively: true) != nil
+             {
+                return Parent
+            }
+        }
+        return nil
+    }
     
     /// Show game view controls.
     func ShowControls()
     {
-        //InitializeButtonTaps()
-        if MoveLeftNode == nil
-        {
-            MoveLeftNode = MakeButton(ForButton: .LeftButton)
-            self.scene?.rootNode.addChildNode(MoveLeftNode!)
-        }
-        if RotateLeftNode == nil
-        {
-            RotateLeftNode = MakeButton(ForButton: .RotateLeftButton)
-            self.scene?.rootNode.addChildNode(RotateLeftNode!)
-        }
-        if MoveDownNode == nil
-        {
-            MoveDownNode = MakeButton(ForButton: .DownButton)
-            self.scene?.rootNode.addChildNode(MoveDownNode!)
-        }
-        if MoveUpNode == nil
-        {
-            MoveUpNode = MakeButton(ForButton: .UpButton)
-            self.scene?.rootNode.addChildNode(MoveUpNode!)
-        }
-        if FreezeNode == nil
-        {
-            FreezeNode = MakeButton(ForButton: .FreezeButton)
-            self.scene?.rootNode.addChildNode(FreezeNode!)
-        }
-        if MoveRightNode == nil
-        {
-            MoveRightNode = MakeButton(ForButton: .RightButton)
-            self.scene?.rootNode.addChildNode(MoveRightNode!)
-        }
-        if RotateRightNode == nil
-        {
-            RotateRightNode = MakeButton(ForButton: .RotateRightButton)
-            self.scene?.rootNode.addChildNode(RotateRightNode!)
-        }
-        if DropDownNode == nil
-        {
-            DropDownNode = MakeButton(ForButton: .DropDownButton)
-            self.scene?.rootNode.addChildNode(DropDownNode!)
-        }
-        if FlyAwayNode == nil
-        {
-            FlyAwayNode = MakeButton(ForButton: .FlyAwayButton)
-            self.scene?.rootNode.addChildNode(FlyAwayNode!)
-        }
+        //Standard buttons
+        MakeButton(ForButton: .LeftButton)
+        MakeButton(ForButton: .DownButton)
+        MakeButton(ForButton: .RotateLeftButton)
+        MakeButton(ForButton: .RightButton)
+        MakeButton(ForButton: .RotateRightButton)
+        //Optional buttons
+        MakeButton(ForButton: .UpButton)
+        MakeButton(ForButton: .DropDownButton)
+        MakeButton(ForButton: .FlyAwayButton)
+        MakeButton(ForButton: .FreezeButton)
     }
     
         /// Hide game view controls.
