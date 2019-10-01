@@ -160,7 +160,7 @@ extension View3D
         }
         
         let VisualMethod = GetVisualMethod(From: Method)
-        print("Cleaning bucket with Method: \(VisualMethod)")
+        //print("Cleaning bucket with Method: \(VisualMethod)")
         switch VisualMethod
         {
             case .Fast:
