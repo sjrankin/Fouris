@@ -678,7 +678,7 @@
 			path = Dialogs;
 			sourceTree = "<group>";
 		};
-		1762FC1B229D2874000099F2 /* Runtime */ = {
+		1762FC1B229D2874000099F2 /* RuntimeData */ = {
 			isa = PBXGroup;
 			children = (
 				1716A20D233CB26300C4850C /* AIHistory.xml */,
@@ -692,7 +692,7 @@
 				17D6B194233DC42400EFCE31 /* UserPieceDescriptions.xml */,
 				1762FC1C229D2898000099F2 /* StandardThemes.xml */,
 			);
-			path = Runtime;
+			path = RuntimeData;
 			sourceTree = "<group>";
 		};
 		176708F1233A025D000E2216 /* Languages */ = {
@@ -1103,7 +1103,7 @@
 				1763492C2312667A000BDF24 /* Default-568h@2x.png */,
 				17E71A6122AD20350081991E /* TDebug */,
 				17567154230264D000D0824D /* Stepping */,
-				1762FC1B229D2874000099F2 /* Runtime */,
+				1762FC1B229D2874000099F2 /* RuntimeData */,
 				17F0B4A6225CBE930071514E /* Common */,
 				178054BB2331D4B400916512 /* TypeExtensions */,
 				17F0B492225CBE730071514E /* GameUI */,
