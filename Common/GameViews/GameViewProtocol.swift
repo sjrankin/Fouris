@@ -157,8 +157,10 @@ protocol GameViewProtocol: class
     /// - Parameter Completed: Completion block.
     func SetBoardOpacity(To: Double, Duration: Double, Completed: (() -> ())?)
     
+    /// Show controls in the game view.
     func ShowControls()
     
+    /// Hide controls in the game view.
     func HideControls()
 }
 
