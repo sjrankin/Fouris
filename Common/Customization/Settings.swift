@@ -28,6 +28,7 @@ class Settings
             return
         }
         _Settings.set("Initialized", forKey: "Initialized")
+        _Settings.set(true, forKey: "ShowInitialVersionBox")
         _Settings.set(false, forKey: "ShowFPSInUI")
         _Settings.set(false, forKey: "ShowInstanceSecondsInstead")
         _Settings.set(3, forKey: "MaximumSamePiecesInARow")
@@ -96,6 +97,20 @@ class Settings
         {
             return SupportedLanguages.EnglishUS
         }
+    }
+    
+    /// Get the flag that shows the version box when first starting up.
+    /// - Returns: The show version box flag.
+    public static func GetShowVersionBox() -> Bool
+    {
+        return _Settings.bool(forKey: "ShowInitialVersionBox")
+    }
+    
+    /// Set the show version box when starting flag.
+    /// - Parameter NewValue: New value for the show initial version box flag.
+    public static func SetShowVersionBox(NewValue: Bool)
+    {
+        _Settings.set(NewValue, forKey: "ShowInitialVersionBox")
     }
     
     /// Set the UI language.
