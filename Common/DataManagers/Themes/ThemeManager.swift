@@ -105,7 +105,7 @@ class ThemeManager: ThemeChangeProtocol
             let DeserializedOK = Serialize.Deserialize(From: SerializedTheme)
             if DeserializedOK
             {
-                print("Deserialized user theme:\n\(SerializedTheme)")
+                //print("Deserialized user theme:\n\(SerializedTheme)")
                 CreateThemes(Serialize, WithName: "UserGameThemes.xml")
             }
         }
