@@ -282,6 +282,38 @@ class SCNButtonNode: SCNNode
         self.runAction(Sequence)
     }
     
+    /// Flash the button for the specified amount of time.
+    /// - Note:
+    ///   - The flash color is the `HighlightColor`. Once the duration has expired, the original
+    ///     button color will be shown.
+    ///   - No color transitions are performed.
+    /// - Parameter FlashDuration: Number of seconds to flash the button. Defaults to 0.15 seconds.
+    public func Flash(FlashDuration: Double = 0.15)
+    {
+        self.geometry?.firstMaterial?.diffuse.contents = HighlightColor
+        DispatchQueue.main.asyncAfter(deadline: .now() + FlashDuration,
+                                      execute:
+            {
+                self.geometry?.firstMaterial?.diffuse.contents = self.ButtonColor
+        })
+    }
+    
+    /// Flash the button for the specified amount of time.
+    /// - Note:
+    ///   - Once the duration has expired, the original button color will be shown.
+    ///   - No color transitions are performed.
+    /// - Parameter WithColor: The color to use to indicate the button is being flashed/highlighted.
+    /// - Parameter FlashDuration: Number of seconds to flash the button. Defaults to 0.15 seconds.
+    public func Flash(WithColor: UIColor, FlashDuration: Double = 0.15)
+    {
+        self.geometry?.firstMaterial?.diffuse.contents = WithColor
+        DispatchQueue.main.asyncAfter(deadline: .now() + FlashDuration,
+                                      execute:
+            {
+                self.geometry?.firstMaterial?.diffuse.contents = self.ButtonColor
+        })
+    }
+    
     /// Find a child node of this node with the specified `StringTag` value.
     /// - Parameter Value: The value of the child node's `StringTag` property to look for.
     /// - Returns: First child node shows `StringTag` value is the same as `Value`. If none found, nil is returned.
