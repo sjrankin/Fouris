@@ -65,7 +65,7 @@
 		174328F2233F0F7F00F98863 /* XMLDeserializeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174328F1233F0F7F00F98863 /* XMLDeserializeProtocol.swift */; };
 		174328F4233F111100F98863 /* XMLTreeTraversalProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174328F3233F111100F98863 /* XMLTreeTraversalProtocol.swift */; };
 		174328F7233F1C3F00F98863 /* PieceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174328F6233F1C3F00F98863 /* PieceManager.swift */; };
-		174328F9233F1E0E00F98863 /* PieceDefinition2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174328F8233F1E0E00F98863 /* PieceDefinition2.swift */; };
+		174328F9233F1E0E00F98863 /* PieceDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174328F8233F1E0E00F98863 /* PieceDefinition.swift */; };
 		174328FB233F20DD00F98863 /* PieceBlockLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174328FA233F20DD00F98863 /* PieceBlockLocation.swift */; };
 		174328FD233F22D700F98863 /* Point3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174328FC233F22D700F98863 /* Point3D.swift */; };
 		17432901233F265D00F98863 /* PieceCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17432900233F265D00F98863 /* PieceCollection.swift */; };
@@ -303,7 +303,7 @@
 		174328F1233F0F7F00F98863 /* XMLDeserializeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLDeserializeProtocol.swift; sourceTree = "<group>"; };
 		174328F3233F111100F98863 /* XMLTreeTraversalProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLTreeTraversalProtocol.swift; sourceTree = "<group>"; };
 		174328F6233F1C3F00F98863 /* PieceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceManager.swift; sourceTree = "<group>"; };
-		174328F8233F1E0E00F98863 /* PieceDefinition2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceDefinition2.swift; sourceTree = "<group>"; };
+		174328F8233F1E0E00F98863 /* PieceDefinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceDefinition.swift; sourceTree = "<group>"; };
 		174328FA233F20DD00F98863 /* PieceBlockLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceBlockLocation.swift; sourceTree = "<group>"; };
 		174328FC233F22D700F98863 /* Point3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point3D.swift; sourceTree = "<group>"; };
 		17432900233F265D00F98863 /* PieceCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceCollection.swift; sourceTree = "<group>"; };
@@ -337,7 +337,6 @@
 		17616ACA23166CB000DFFEFE /* SelectGameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGameController.swift; sourceTree = "<group>"; };
 		17616ACC23166DF700DFFEFE /* GameStyleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStyleTableViewCell.swift; sourceTree = "<group>"; };
 		1762FC18229CCFF6000099F2 /* RawParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawParser.swift; sourceTree = "<group>"; };
-		1762FC1C229D2898000099F2 /* StandardThemes.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = StandardThemes.xml; path = Runtime/StandardThemes.xml; sourceTree = SOURCE_ROOT; };
 		1763492C2312667A000BDF24 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		17660BE722892B1E00082E23 /* UIButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
 		17660BEB2289995E00082E23 /* GameViewRequestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewRequestProtocol.swift; sourceTree = "<group>"; };
@@ -579,7 +578,7 @@
 			children = (
 				174328F6233F1C3F00F98863 /* PieceManager.swift */,
 				17432900233F265D00F98863 /* PieceCollection.swift */,
-				174328F8233F1E0E00F98863 /* PieceDefinition2.swift */,
+				174328F8233F1E0E00F98863 /* PieceDefinition.swift */,
 				174328FA233F20DD00F98863 /* PieceBlockLocation.swift */,
 				174328FC233F22D700F98863 /* Point3D.swift */,
 			);
@@ -692,7 +691,6 @@
 				1785ED6122FD8C09000B31C2 /* BoardDescriptions.xml */,
 				17432904233F4C2C00F98863 /* PieceDescriptions.xml */,
 				17D6B194233DC42400EFCE31 /* UserPieceDescriptions.xml */,
-				1762FC1C229D2898000099F2 /* StandardThemes.xml */,
 			);
 			path = RuntimeData;
 			sourceTree = "<group>";
@@ -1458,7 +1456,7 @@
 				17381F422334B683003ED0A3 /* GroupField.swift in Sources */,
 				17ECE5B62332579F003F4065 /* +Double.swift in Sources */,
 				1797524222C38A4D00BF539A /* +VersionInfo.swift in Sources */,
-				174328F9233F1E0E00F98863 /* PieceDefinition2.swift in Sources */,
+				174328F9233F1E0E00F98863 /* PieceDefinition.swift in Sources */,
 				1762FC19229CCFF6000099F2 /* RawParser.swift in Sources */,
 				17E71A7A22AD217B0081991E /* MultiPeer.swift in Sources */,
 				173592C52331FA540028FF9A /* RawThemeViewerCode.swift in Sources */,
