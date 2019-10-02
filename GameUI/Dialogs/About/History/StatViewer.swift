@@ -35,15 +35,15 @@ class StatViewer: UIViewController, UITableViewDelegate, UITableViewDataSource
     func PopulateTable(WithUser: Bool)
     {
         StatData.removeAll()
-        let Statistics = WithUser ? HistoryManager.GameRunHistory : HistoryManager.AIGameRunHistory
+        let Statistics = WithUser ? HistoryManager2.GameHistory : HistoryManager2.AIGameHistory
         for (GameType, _) in StatIndex
         {
             var SData = [(String, Double?, Int?, String?)]()
-            let GameCount: Int = (Statistics?.GetGameCount(For: GameType))!
-            let CumulativeScore: Int = (Statistics?.GetCumulativeScore(For: GameType))!
-            let CumulativeDuration: Int = (Statistics?.GetTotalGameSeconds(For: GameType))!
-            let CumulativePieces: Int = (Statistics?.GetTotalPieceCount(For: GameType))!
-            SData.append(("High Score", nil, Statistics?.GetHighScore(For: GameType), nil))
+            let GameCount: Int = (Statistics?.Games![GameType]!.GameCount)!
+            let CumulativeScore: Int = (Statistics?.Games![GameType]!.CumulativeScore)!
+            let CumulativeDuration: Int = (Statistics?.Games![GameType]!.Duration)!
+            let CumulativePieces: Int = (Statistics?.Games![GameType]!.CumulativePieces)!
+            SData.append(("High Score", nil, (Statistics?.Games![GameType]!.HighScore)!, nil))
             SData.append(("Game Starts", nil, GameCount, nil))
             SData.append(("Total Duration (seconds)", nil, CumulativeDuration, nil))
             SData.append(("Total Completed Pieces", nil, CumulativePieces, nil))
