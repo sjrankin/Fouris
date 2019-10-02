@@ -10,17 +10,19 @@ import Foundation
 import UIKit
 
 /// Holds a collection of piece definitions.
-class PieceCollection: XMLDeserializeProtocol
+class PieceCollection: CustomStringConvertible, XMLDeserializeProtocol
 {
+    
+    
     init()
     {
-        _Classes = [PieceClasses: [PieceDefinition2]]()
+        _Classes = [PieceClasses: [PieceDefinition]]()
     }
     
     /// Holds a dictionary of piece class piece definitions.
-    private var _Classes: [PieceClasses: [PieceDefinition2]] = [PieceClasses: [PieceDefinition2]]()
+    private var _Classes: [PieceClasses: [PieceDefinition]] = [PieceClasses: [PieceDefinition]]()
     /// Get or set the dictionary of piece class piece definitions.
-    public var Classes: [PieceClasses: [PieceDefinition2]]
+    public var Classes: [PieceClasses: [PieceDefinition]]
     {
         get
         {
@@ -31,16 +33,38 @@ class PieceCollection: XMLDeserializeProtocol
             _Classes = newValue
         }
     }
-
+    
     /// Return a list of all pieces in the specified piece class.
     /// - Parameter PieceClass: The piece class whose pieces will be returned.
     /// - Returns: All pieces in the specified piece class. Nil if the piece class cannot be found.
-    public func GetPieceClass(_ PieceClass: PieceClasses) -> [PieceDefinition2]?
+    public func GetPieceClass(_ PieceClass: PieceClasses) -> [PieceDefinition]?
     {
         return Classes[PieceClass]
     }
     
+    /// Holds the group/collection name.
+    private var _GroupName: String = ""
+    private var _GroupNameID: UUID = UUID.Empty
+    /// Get or set the group/collection name.
+    public var GroupName: String
+    {
+        get
+        {
+            return _GroupName
+        }
+        set
+        {
+            _GroupName = newValue
+        }
+    }
+    
     // MARK: Serialization and deserialization.
+    
+    /// Serialize the contents of the piece collection to an XMLDocument.
+    func Serialize() -> XMLDocument
+    {
+        return XMLDocument()
+    }
     
     /// Deserialize from the passed node.
     func DeserializedNode(_ Node: XMLNode)
@@ -48,6 +72,9 @@ class PieceCollection: XMLDeserializeProtocol
         switch Node.Name
         {
             case "Pieces":
+                let CollectionName = XMLNode.GetAttributeNamed("GroupName", InNode: Node)!
+                _GroupName = CollectionName
+                _GroupNameID = Node.ID
                 for PieceNode in Node.Children
                 {
                     if PieceNode.Name == "PieceClass"
@@ -56,7 +83,7 @@ class PieceCollection: XMLDeserializeProtocol
                         let PieceClass = PieceClasses(rawValue: ClassName)!
                         if _Classes[PieceClass] == nil
                         {
-                            _Classes[PieceClass] = [PieceDefinition2]()
+                            _Classes[PieceClass] = [PieceDefinition]()
                         }
                         for Child in PieceNode.Children
                         {
@@ -64,14 +91,34 @@ class PieceCollection: XMLDeserializeProtocol
                             {
                                 let PieceName = XMLNode.GetAttributeNamed("Name", InNode: Child)!
                                 let RawPieceID = XMLNode.GetAttributeNamed("ID", InNode: Child)!
+                                let CanDelete = XMLNode.GetAttributeNamed("CanDelete", InNode: Child)
                                 let PieceID = UUID(uuidString: RawPieceID)!
-                                let NewPiece = PieceDefinition2()
+                                let NewPiece = PieceDefinition()
                                 NewPiece.ID = PieceID
                                 NewPiece.PieceClass = PieceClass
                                 NewPiece.Name = PieceName
+                                if CanDelete != nil
+                                {
+                                    let CanReallyDelete: Bool = Bool(CanDelete!)!
+                                    NewPiece.CanDelete = CanReallyDelete
+                                }
+                                else
+                                {
+                                    NewPiece.CanDelete = false
+                                }
                                 _Classes[PieceClass]?.append(NewPiece)
                                 for PieceChild in Child.Children
                                 {
+                                    if PieceChild.NodeType == .Comment
+                                    {
+                                        let Comment = PieceChild.Value
+                                        NewPiece.CommentNodes.append(Comment)
+                                        continue
+                                    }
+                                    if !PieceChild.Value.isEmpty && PieceChild.Name == "Piece"
+                                    {
+                                        NewPiece.NodePayload = PieceChild.Value
+                                    }
                                     switch PieceChild.Name
                                     {
                                         case "UserPiece":
@@ -91,6 +138,15 @@ class PieceCollection: XMLDeserializeProtocol
                                             NewPiece.RotationallySymmetric = RotationallySymmetric
                                         
                                         case "LogicalLocations":
+                                            if PieceChild.NodeType == .Comment
+                                            {
+                                                NewPiece.LocationComments.append(PieceChild.Value)
+                                                continue
+                                            }
+                                            if !PieceChild.Value.isEmpty
+                                            {
+                                                NewPiece.LocationPayload = PieceChild.Value
+                                            }
                                             for Location in PieceChild.Children
                                             {
                                                 let NewLocation = PieceBlockLocation()
@@ -142,5 +198,72 @@ class PieceCollection: XMLDeserializeProtocol
             default:
                 return
         }
+    }
+    
+    // MARK: CustomStringConvertible functions and related
+    
+    /// Returns the specified number of spaces in a string.
+    /// - Parameter Count: Number of spaces to return.
+    /// - Returns: Specified number of spaces.
+    private func Spaces(_ Count: Int) -> String
+    {
+        var Working = ""
+        for _ in 0 ..< Count
+        {
+            Working = Working + " "
+        }
+        return Working
+    }
+    
+    /// Returns the passed string surrounded by quotation marks.
+    /// - Parameter Raw: The string to return surrounded by quotation marks.
+    /// - Returns: `Raw` surrounded by quotation marks.
+    private func Quoted(_ Raw: String) -> String
+    {
+        return "\"\(Raw)\""
+    }
+    
+    /// Converts the contents of this collection into an XML document string.
+    /// - Parameter IncludeDocumentHeader: If true, a standard (and minimal) XML document header is appended to the beginning of
+    ///                                    the returned string.
+    /// - Parameter AddTerminalReturn: If true, a return character is added to the end of the returned string.
+    /// - Returns: XML document populated with the contents of the class instance.
+    func ToString(IncludeDocumentHeader: Bool = true, AddTerminalReturn: Bool = true) -> String
+    {
+        var Working = ""
+        if IncludeDocumentHeader
+        {
+            Working = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+        }
+        Working = Working + "<Pieces GroupName=" + Quoted(GroupName) + ">\n"
+        
+        let Indent = 4
+        for (SomeClass, Pieces) in Classes
+        {
+            let ClassName = "\(SomeClass)"
+            Working = Working + Spaces(Indent) + "<PieceClass Type=" + Quoted(ClassName) + ">\n"
+            
+            let NextDent = Indent + 4
+            for ClassPiece in Pieces
+            {
+                Working = Working + ClassPiece.ToString(IndentSize: NextDent)
+            }
+            
+            Working = Working + Spaces(Indent) + "</PieceClass>\n"
+        }
+        
+        Working = Working + "</Pieces>"
+        if AddTerminalReturn
+        {
+            Working = Working + "\n"
+        }
+        return Working
+    }
+    
+    /// Returns a description of the class suitable for printint.
+    /// - Note: Calls `ToString()`.
+    public var description: String
+    {
+        return ToString()
     }
 }
