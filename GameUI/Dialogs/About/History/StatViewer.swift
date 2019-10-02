@@ -16,6 +16,7 @@ class StatViewer: UIViewController, UITableViewDelegate, UITableViewDataSource
         super.viewDidLoad()
         StatTable.layer.borderColor = UIColor.black.cgColor
         ShowSegments.selectedSegmentIndex = 0
+        GameTypeSegment.selectedSegmentIndex = 0
         PopulateTable(WithUser: true)
     }
     
@@ -32,12 +33,18 @@ class StatViewer: UIViewController, UITableViewDelegate, UITableViewDataSource
             BaseGameTypes.Rotating4: "Rotating Game"
     ]
     
+    var CurrentGameTypeView: BaseGameTypes = .Standard
+    
     func PopulateTable(WithUser: Bool)
     {
         StatData.removeAll()
         let Statistics = WithUser ? HistoryManager2.GameHistory : HistoryManager2.AIGameHistory
         for (GameType, _) in StatIndex
         {
+            if GameType != CurrentGameTypeView
+            {
+                continue
+            }
             var SData = [(String, Double?, Int?, String?)]()
             let GameCount: Int = (Statistics?.Games![GameType]!.GameCount)!
             let CumulativeScore: Int = (Statistics?.Games![GameType]!.CumulativeScore)!
@@ -69,14 +76,7 @@ class StatViewer: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        for (GameType, Index) in StatIndex
-        {
-            if Index == section
-            {
-                return StatData[GameType]!.count
-            }
-        }
-        return 0
+            return StatData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
@@ -100,6 +100,20 @@ class StatViewer: UIViewController, UITableViewDelegate, UITableViewDataSource
         StatTable.reloadData()
     }
     
+    @IBAction func HandleGameTypeChanged(_ sender: Any)
+    {
+        if GameTypeSegment.selectedSegmentIndex == 0
+        {
+            CurrentGameTypeView = .Standard
+        }
+        else
+        {
+            CurrentGameTypeView = .Rotating4
+        }
+        PopulateTable(WithUser: ShowSegments.selectedSegmentIndex == 0)
+        StatTable.reloadData()
+    }
+    
     @IBAction func HandleResetPressed(_ sender: Any)
     {
         let Alert = UIAlertController(title: "Reset Statistics",
@@ -107,6 +121,7 @@ class StatViewer: UIViewController, UITableViewDelegate, UITableViewDataSource
                                       preferredStyle: UIAlertController.Style.alert)
         Alert.addAction(UIAlertAction(title: "Reset", style: UIAlertAction.Style.destructive, handler: HandleReset))
         Alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        self.present(Alert, animated: true)
     }
     
     @objc func HandleReset(Action: UIAlertAction)
@@ -118,7 +133,8 @@ class StatViewer: UIViewController, UITableViewDelegate, UITableViewDataSource
     {
         self.dismiss(animated: true, completion: nil)
     }
-    
+
     @IBOutlet weak var StatTable: UITableView!
     @IBOutlet weak var ShowSegments: UISegmentedControl!
+    @IBOutlet weak var GameTypeSegment: UISegmentedControl!
 }
