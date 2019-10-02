@@ -1,5 +1,5 @@
 //
-//  PieceDefinition2.swift
+//  PieceDefinition.swift
 //  Fouris
 //
 //  Created by Stuart Rankin on 9/28/19.
@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// Holds the definition of one piece.
-class PieceDefinition2
+class PieceDefinition: CustomStringConvertible
 {
     // MARK: Piece attributes.
     
@@ -46,6 +46,66 @@ class PieceDefinition2
         }
     }
     
+    /// Holds the node ID from the source XML document tree.
+    private var _NodeID: UUID = UUID.Empty
+    /// Get or set the node ID from the source XML document tree.
+    public var NodeID: UUID
+    {
+        get
+        {
+            return _NodeID
+        }
+        set
+        {
+            _NodeID = newValue
+        }
+    }
+    
+    /// Holds comment nodes for the piece.
+    private var _CommentNodes: [String] = [String]()
+    /// Get or set comment nodes for the piece.
+    public var CommentNodes: [String]
+    {
+        get
+        {
+            return _CommentNodes
+        }
+        set
+        {
+            _CommentNodes = newValue
+        }
+    }
+    
+    /// Holds the payload for a node.
+    private var _NodePayload: String = ""
+    /// Get or set the node's payload value.
+    public var NodePayload: String
+    {
+        get
+        {
+            return _NodePayload
+        }
+        set
+        {
+            _NodePayload = newValue
+        }
+    }
+    
+    /// Holds the can delete piece flag.
+    private var _CanDelete: Bool = false
+    /// Get or set the can delete piece flag. Unless set otherwise, all pieces may not be deleted.
+    public var CanDelete: Bool
+    {
+        get
+        {
+            return _CanDelete
+        }
+        set
+        {
+            _CanDelete = newValue
+        }
+    }
+    
     /// Holds the piece class of the piece.
     private var _PieceClass: PieceClasses = .Standard
     /// Get or set the class of the piece.
@@ -73,7 +133,7 @@ class PieceDefinition2
         }
         set
         {
-            _IsUserPiece = false
+            _IsUserPiece = newValue
             _Dirty = true
         }
     }
@@ -138,6 +198,32 @@ class PieceDefinition2
         set
         {
             _Locations = newValue
+        }
+    }
+    
+    private var _LocationPayload: String = ""
+    public var LocationPayload: String
+    {
+        get
+        {
+            return _LocationPayload
+        }
+        set
+        {
+            _LocationPayload = newValue
+        }
+    }
+    
+    private var _LocationComments: [String] = [String]()
+    public var LocationComments: [String]
+    {
+        get
+        {
+            return _LocationComments
+        }
+        set
+        {
+            _LocationComments = newValue
         }
     }
     
@@ -252,5 +338,82 @@ class PieceDefinition2
     {
         let (Least, Greatest) = HeightRange()
         return Greatest - Least + 1
+    }
+    
+    // MARK: CustomStringConvertible functions and related.
+    
+    /// Returns a string with the passed number of spaces in it.
+    /// - Parameter Count: Number of spaces to include in the string.
+    /// - Returns: String with the specified number of spaces in it.
+    private func Spaces(_ Count: Int) -> String
+    {
+        var SpaceString = ""
+        for _ in 0 ..< Count
+        {
+            SpaceString = SpaceString + " "
+        }
+        return SpaceString
+    }
+    
+    /// Returns the passed string surrounded by quotation marks.
+    /// - Parameter Raw: The string to return surrounded by quotation marks.
+    /// - Returns: `Raw` surrounded by quotation marks.
+    private func Quoted(_ Raw: String) -> String
+    {
+        return "\"\(Raw)\""
+    }
+    
+    /// Returns a string in XML format (at least fragments of XML) with the contents of this instance in it.
+    /// - Parameter IndentSize: Number of spaces to prepend the initial line for purposes of indentation. Nested
+    ///                         lines are indented `+4` spaces at each level.
+    /// - Returns: XML string with the contents of this instance.
+    public func ToString(IndentSize: Int) -> String
+    {
+        var Working = ""
+        Working = Spaces(IndentSize) + "<Piece Name=" + Quoted(Name) + " ID=" +
+            Quoted(ID.uuidString) + " CanDelete=" + Quoted("\(CanDelete)") + ">\n"
+        
+        var NextDent = IndentSize + 4
+        if !NodePayload.isEmpty
+        {
+            Working.append(Spaces(NextDent) + NodePayload + "\n")
+        }
+        for CommentNode in CommentNodes
+        {
+            Working.append(Spaces(NextDent) + "<!-- " + CommentNode + " -->\n")
+        }
+        Working.append(Spaces(NextDent) + "<UserPiece UserDefined=" + Quoted("\(IsUserPiece)") + "/>\n")
+        Working.append(Spaces(NextDent) + "<Geometry Thin=" + Quoted("\(ThinOrientation)") +
+            " Wide=" + Quoted("\(WideOrientation)") + " Symmetric=" +
+            Quoted("\(RotationallySymmetric)") + "/>\n")
+        
+        Working.append(Spaces(NextDent) + "<LogicalLocations>\n")
+        NextDent = NextDent + 4
+        if !LocationPayload.isEmpty
+        {
+            Working.append(Spaces(NextDent) + LocationPayload.trimmingCharacters(in: CharacterSet.whitespaces) + "\n")
+        }
+        for CommentNode in LocationComments
+        {
+            Working.append(Spaces(NextDent) + "<! " + CommentNode + " !>\n")
+        }
+        for Location in Locations
+        {
+            Working.append(Location.ToString(IndentSize: NextDent, AddReturn: true))
+        }
+        NextDent = NextDent - 4
+        Working.append(Spaces(NextDent) + "</LogicalLocations>\n")
+        Working.append(Spaces(IndentSize) + "</Piece>\n")
+        return Working
+    }
+    
+    /// Returns the contents of this instance as an XML string.
+    /// - Note: Calls `ToString()`.
+    public var description: String
+    {
+        get
+        {
+            return ToString(IndentSize: 0)
+        }
     }
 }
