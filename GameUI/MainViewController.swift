@@ -131,7 +131,7 @@ class MainViewController: UIViewController,
         Themes.SubscribeToChanges(Subscriber: "MainViewController", SubscribingObject: self)
         PieceVisualManager.Initialize()
         RecentlyUsedColors.Initialize(WithLimit: Settings.GetMostRecentlyUsedColorListCapacity())
-        HistoryManager.Initialize()
+        HistoryManager2.Initialize()
         InitializeUI()
         AIData = AITestTable()
         
@@ -154,10 +154,20 @@ class MainViewController: UIViewController,
             VersionShown = true
             if Settings.GetShowVersionBox()
             {
+                VersionBoxShowing = true
                 GameTextOverlay?.ShowVersionBox(WithString: "Fouris \(Versioning.MakeVersionString(IncludeVersionPrefix: false))")
             }
         }
     }
+    
+    /// Called when the version box disappears.
+    func VersionBoxDisappeared()
+    {
+        VersionBoxShowing = true
+    }
+    
+    /// Version box is showing flag.
+    var VersionBoxShowing = false
     
     /// Prevents `viewDidLayoutSubviews` from showing more than one version box.
     var VersionShown = false
@@ -212,6 +222,7 @@ class MainViewController: UIViewController,
         //Initialize the game text layer.
         TextLayerView.Initialize(With: UUID.Empty, LayerFrame: TextLayerView.frame)
         GameTextOverlay = TextOverlay(Device: UIDevice.current.userInterfaceIdiom)
+        GameTextOverlay?.MainClassDelegate = self
         GameTextOverlay?.SetControls(NextLabel: NextPieceLabelView,
                                      ScoreLabel: ScoreLabelView,
                                      CurrentScoreLabel: CurrentScoreLabelView,
@@ -426,11 +437,18 @@ class MainViewController: UIViewController,
     }
     
     /// Handle taps in the game view. Depending on where the tap is, the piece will move in the given direction.
+    /// - Note: If the version box is showing (which should happen only when the game starts), tapping will remove the version box
+    ///         and immediately return.
     /// - Parameter Recognizer: The tap gesture.
     @objc func HandleTap(Recognizer: UITapGestureRecognizer)
     {
         if Recognizer.state == .ended
         {
+            if VersionBoxShowing
+            {
+                GameTextOverlay?.HideVersionBox(Duration: 0.2)
+                return
+            }
             let Location = Recognizer.location(in: GameUISurface3D)
             let Point = Recognizer.location(in: GameUISurface3D)
             let HitResults = GameUISurface3D.hitTest(Point, options: [:])
@@ -667,6 +685,12 @@ class MainViewController: UIViewController,
     ///     the game will start in AI mode.
     func GameOver()
     {
+        let GamePlayDuration = CACurrentMediaTime() - GamePlayStart
+        let History = HistoryManager2.GetHistory(InAttractMode)
+        History?.Games![CurrentBaseGameType]!.AddDuration(NewDuration: Int(GamePlayDuration))
+        History?.Games![CurrentBaseGameType]!.SetHighScore(NewScore: Game.HighScore)
+        History?.Games![CurrentBaseGameType]!.AddScore(NewScore: Game.CurrentGameScore)
+        HistoryManager2.Save()
         PlayStopButton?.setTitle("Play", for: .normal)
         var GameDuration = Game.GameDuration()
         GameDuration = round(GameDuration)
@@ -1270,9 +1294,14 @@ class MainViewController: UIViewController,
         }
     }
     
+    var GamePlayStart: Double = 0.0
+    
     /// Play the game, eg, start in normal user mode.
     @objc func Play()
     {
+        GamePlayStart = CACurrentMediaTime()
+        let History = HistoryManager2.GetHistory(InAttractMode)
+        History?.Games![CurrentBaseGameType]!.IncrementGameCount()
         ForceResume()
         StopAccumulating = false
         RotateIndex = 0
