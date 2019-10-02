@@ -50,6 +50,8 @@ class PieceManager
         let _ = DefaultPieceDocument?.DeserializeTo(Caller: _DefaultPieces!)
         _UserPieces = PieceCollection()
         let _ = UserPieceDocument?.DeserializeTo(Caller: _UserPieces!)
+        let test = _DefaultPieces!.ToString()
+        print(test)
     }
     
     static var DefaultPieceDocument: XMLDocument? = nil
@@ -84,14 +86,22 @@ class PieceManager
         }
     }
     
-    public static func GetPieceClass(WithType: PieceClasses, InCollection: PieceCollection) -> [PieceDefinition2]?
+    /// Returns all piece definitions of a given class and piece collection.
+    /// - Parameter WithType: The piece class pieces to return.
+    /// - Parameter InCollection: The piece collection to search to return piece definitions.
+    /// - Returns: List of piece definitions that match the passed search criteria.
+    public static func GetPieceClass(WithType: PieceClasses, InCollection: PieceCollection) -> [PieceDefinition]?
     {
         return InCollection.GetPieceClass(WithType)
     }
     
-    public static func GetPiecesForClass(_ Class: PieceClasses) -> [PieceDefinition2]
+    /// Returns a list of all piece defintions for a given class.
+    /// - Parameter Class: The piece class whose piece definitions will be returned.
+    /// - Returns: All piece definitions for a given piece class. If the returned list is empty,
+    ///            either the piece class was not found or it contained no definitions.
+    public static func GetPiecesForClass(_ Class: PieceClasses) -> [PieceDefinition]
     {
-        var Results = [PieceDefinition2]()
+        var Results = [PieceDefinition]()
         let AllGroups = [_DefaultPieces, _UserPieces]
         for PieceGroup in AllGroups
         {
@@ -109,7 +119,10 @@ class PieceManager
         return Results
     }
     
-    public static func GetPieceDefinitionFor(ID: UUID) -> PieceDefinition2?
+    /// Return a piece definition for a piece with the specified ID.
+    /// - Parameter ID: The ID whose piece definition will be returned.
+    /// - Returns: Piece defintion for the specified ID on success, nil if not found.
+    public static func GetPieceDefinitionFor(ID: UUID) -> PieceDefinition?
     {
         for (_, Def) in DefaultPieces!.Classes
         {
@@ -124,6 +137,7 @@ class PieceManager
         return nil
     }
     
+    /// Save user piece definitions.
     public static func SaveUserPieces()
     {
         
