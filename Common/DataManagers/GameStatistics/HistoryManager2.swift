@@ -114,11 +114,13 @@ class HistoryManager2
         if GameHistory!.Dirty
         {
             let Serialized = GameHistory?.ToString()
+            print("Saving user history: \((Serialized)!)")
             let _ = FileIO.SaveHistoryFile(Name: "GameHistory.xml", Contents: Serialized!)
         }
         if AIGameHistory!.Dirty
         {
             let Serialized = AIGameHistory?.ToString()
+                        print("Saving AI history: \((Serialized)!)")
             let _ = FileIO.SaveHistoryFile(Name: "AIGameHistory.xml", Contents: Serialized!)
         }
     }
