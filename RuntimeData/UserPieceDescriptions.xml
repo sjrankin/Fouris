@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Pieces GroupName="User">
     <PieceClass Type="User">
-        <Piece Name="Sample" ID="3c32ee10-dca1-46ec-b9a3-8ebc70ce9621">
-            <! The next node defines the type of piece. In this file, set UserDefined to true. !>
+        <Piece Name="Sample" ID="3c32ee10-dca1-46ec-b9a3-8ebc70ce9621" CanDelete="false">
+            <!-- The next node defines the type of piece. In this file, set UserDefined to true. -->
                 <UserPiece UserDefined="true"/>
                 <Geometry Thin="1" Wide="0" Symmetric="false"/>
                 <LogicalLocations>
