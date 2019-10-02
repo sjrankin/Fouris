@@ -162,6 +162,13 @@ protocol GameViewProtocol: class
     
     /// Hide controls in the game view.
     func HideControls()
+    
+    /// Flash a button with its pre-set highlight color.
+    /// - Note: "Flash" means showing the highlight color for a short amount of time to simulate a
+    ///         button press by the AI.
+    /// - Parameter Button: The button to flash.
+    /// - Parameter Duration: How long to flash the button in seconds.
+    func FlashButton(_ Button: NodeButtons, Duration: Double)
 }
 
 
