@@ -556,7 +556,7 @@ import SceneKit
     /// Add a piece to display in the view.
     /// - Note: Existing blocks will be removed.
     /// - Parameter ThePiece: A piece definition that will be displayed.
-    func AddPiece(_ ThePiece: PieceDefinition2)
+    func AddPiece(_ ThePiece: PieceDefinition)
     {
         BlockList.removeAll()
         for Location in ThePiece.Locations
