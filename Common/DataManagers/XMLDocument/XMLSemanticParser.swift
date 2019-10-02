@@ -74,11 +74,11 @@ class XMLSemanticParser
                 continue
             }
             
-            if Working.starts(with: "<!")
+            if Working.starts(with: "<!--")
             {
                 //Found a comment.
-                Working = Working.replacingOccurrences(of: "<!", with: "")
-                Working = Working.replacingOccurrences(of: "!>", with: "")
+                Working = Working.replacingOccurrences(of: "<!--", with: "")
+                Working = Working.replacingOccurrences(of: "-->", with: "")
                 Working = Working.trimmingCharacters(in: CharacterSet.whitespaces)
                 let CommentNode = XMLNode("Comment", .Comment)
                 CommentNode.Value = Working
