@@ -17,6 +17,8 @@ import UIKit
 ///   - This version of the source is for iOS.
 class TextOverlay: TextLayerDisplayProtocol
 {
+    weak var MainClassDelegate: MainDelegate? = nil
+    
     /// Initializer.
     /// - Parameter Device: The hardware idiom (eg, table or phone).
     init(Device: UIUserInterfaceIdiom)
@@ -674,20 +676,16 @@ class TextOverlay: TextLayerDisplayProtocol
     /// Flag that indicates the game over label was created.
     private var GameOverLabelCreated = false
     
-    func ShowVersionBox(WithString: String, HideAfter: Double = 5.0, CanTapToDismiss: Bool = true)
+    /// Shows a simple title and version box. Intended to be shown only for a very short time at the start of the game.
+    /// - Parameter WithString: The string to show in the box.
+    /// - Parameter HideAfter: The number of seconds to show the version box before hiding it. Default is 5 seconds.
+    func ShowVersionBox(WithString: String, HideAfter: Double = 5.0)
     {
         if !VersionBoxIsHidden
         {
             return
         }
         VersionBoxIsHidden = false
-        if CanTapToDismiss
-        {
-            VersionContainer!.isUserInteractionEnabled = true
-            let Tap = UITapGestureRecognizer(target: self, action: #selector(DismissVersionBox))
-            Tap.numberOfTouchesRequired = 1
-            VersionContainer!.addGestureRecognizer(Tap)
-        }
         VersionData?.text = WithString
         UIView.animate(withDuration: 0.5, animations:
             {
@@ -704,14 +702,7 @@ class TextOverlay: TextLayerDisplayProtocol
         })
     }
     
-    @objc func DismissVersionBox(Recognizer: UIGestureRecognizer)
-    {
-        if Recognizer.state == .ended
-        {
-            HideVersionBox(Duration: 0.5)
-        }
-    }
-    
+    /// Called by the hide version box timer to hide the version box.
     @objc func AutoHideVersionBox()
     {
         OperationQueue.main.addOperation
@@ -720,6 +711,8 @@ class TextOverlay: TextLayerDisplayProtocol
         }
     }
     
+    /// Hides the version box.
+    /// - Parameter Duration: Number of seconds to take to hide the version box.
     func HideVersionBox(Duration: Double = 1.0)
     {
         if VersionBoxIsHidden
@@ -737,6 +730,7 @@ class TextOverlay: TextLayerDisplayProtocol
             {
                 _ in
                 self.VersionContainer!.alpha = 0.0
+                self.MainClassDelegate?.VersionBoxDisappeared()
         })
     }
     
