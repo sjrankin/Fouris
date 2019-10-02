@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<History Name="User" TimeStamp="initial">
+    <GameType Name="Standard">
+        <GameCount Started="0"/>
+        <Score Cumulative="0" High="0"/>
+        <Duration Seconds="0"/>
+        <Pieces Cumulative="0"/>
+    </GameType>
+    <GameType Name="Rotating4">
+        <GameCount Started="0"/>
+        <Score Cumulative="0" High="0"/>
+        <Duration Seconds="0"/>
+        <Pieces Cumulative="0"/>
+    </GameType>
+    <GameType Name="Cubic">
+        <GameCount Started="0"/>
+        <Score Cumulative="0" High="0"/>
+        <Duration Seconds="0"/>
+        <Pieces Cumulative="0"/>
+    </GameType>
+</History>
+
