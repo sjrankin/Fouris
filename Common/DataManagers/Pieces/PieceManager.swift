@@ -50,8 +50,6 @@ class PieceManager
         let _ = DefaultPieceDocument?.DeserializeTo(Caller: _DefaultPieces!)
         _UserPieces = PieceCollection()
         let _ = UserPieceDocument?.DeserializeTo(Caller: _UserPieces!)
-        let test = _DefaultPieces!.ToString()
-        print(test)
     }
     
     static var DefaultPieceDocument: XMLDocument? = nil
@@ -140,6 +138,7 @@ class PieceManager
     /// Save user piece definitions.
     public static func SaveUserPieces()
     {
-        
+        let Serialized = UserPieces?.ToString()
+        let _ = FileIO.SaveSettingsFile(Name: "UserPieceDescriptions.xml", Contents: Serialized!)
     }
 }
