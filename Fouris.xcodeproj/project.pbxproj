@@ -26,10 +26,6 @@
 		1710BF84231E841500F566B3 /* PresetGradientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1710BF83231E841500F566B3 /* PresetGradientCell.swift */; };
 		1713735722EAE67700C9F9A7 /* SCNDodecahedron.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1713735622EAE67700C9F9A7 /* SCNDodecahedron.swift */; };
 		1713735A22EAE6D500C9F9A7 /* SCNTetrahedron.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1713735922EAE6D500C9F9A7 /* SCNTetrahedron.swift */; };
-		1716A207233CA1D000C4850C /* History.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1716A206233CA1CF00C4850C /* History.xml */; };
-		1716A20A233CA1F100C4850C /* HistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1716A209233CA1F100C4850C /* HistoryManager.swift */; };
-		1716A20C233CA50E00C4850C /* RunHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1716A20B233CA50E00C4850C /* RunHistory.swift */; };
-		1716A20E233CB26400C4850C /* AIHistory.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1716A20D233CB26300C4850C /* AIHistory.xml */; };
 		17189FF32333262300317BF1 /* +Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17189FF22333262300317BF1 /* +Color.swift */; };
 		17189FF5233332FD00317BF1 /* +Vector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17189FF4233332FD00317BF1 /* +Vector3.swift */; };
 		17189FF7233333F800317BF1 /* +Vector4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17189FF6233333F800317BF1 /* +Vector4.swift */; };
@@ -237,6 +233,11 @@
 		17F6ECF12286E201000F8E11 /* DebugDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1722D5DB227697D400E88BF4 /* DebugDelegate.swift */; };
 		17F6ECF22286E322000F8E11 /* ControlUIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1722D5E12276B3E100E88BF4 /* ControlUIProtocol.swift */; };
 		17FA044D232649F8004E5FC8 /* BlockCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FA044C232649F8004E5FC8 /* BlockCoordinates.swift */; };
+		17FBF70F234473DB00BB87A6 /* GameHistory.xml in Resources */ = {isa = PBXBuildFile; fileRef = 17FBF70E234473DB00BB87A6 /* GameHistory.xml */; };
+		17FBF711234474A400BB87A6 /* AIGameHistory.xml in Resources */ = {isa = PBXBuildFile; fileRef = 17FBF710234474A400BB87A6 /* AIGameHistory.xml */; };
+		17FBF714234474FF00BB87A6 /* HistoryManager2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FBF713234474FF00BB87A6 /* HistoryManager2.swift */; };
+		17FBF7162344774000BB87A6 /* RunHistory2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FBF7152344774000BB87A6 /* RunHistory2.swift */; };
+		17FBF7182344782D00BB87A6 /* GameHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FBF7172344782D00BB87A6 /* GameHistory.swift */; };
 		17FC443C228AB9E50065888F /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FC443B228AB9E50065888F /* Score.swift */; };
 /* End PBXBuildFile section */
 
@@ -261,10 +262,6 @@
 		1710BF83231E841500F566B3 /* PresetGradientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetGradientCell.swift; sourceTree = "<group>"; };
 		1713735622EAE67700C9F9A7 /* SCNDodecahedron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNDodecahedron.swift; sourceTree = "<group>"; };
 		1713735922EAE6D500C9F9A7 /* SCNTetrahedron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNTetrahedron.swift; sourceTree = "<group>"; };
-		1716A206233CA1CF00C4850C /* History.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = History.xml; sourceTree = "<group>"; };
-		1716A209233CA1F100C4850C /* HistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryManager.swift; sourceTree = "<group>"; };
-		1716A20B233CA50E00C4850C /* RunHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunHistory.swift; sourceTree = "<group>"; };
-		1716A20D233CB26300C4850C /* AIHistory.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = AIHistory.xml; sourceTree = "<group>"; };
 		1717BA6B2275CC2C008747D1 /* ControlProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlProtocol.swift; sourceTree = "<group>"; };
 		17189FF22333262300317BF1 /* +Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Color.swift"; sourceTree = "<group>"; };
 		17189FF4233332FD00317BF1 /* +Vector3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Vector3.swift"; sourceTree = "<group>"; };
@@ -473,6 +470,11 @@
 		17F0B4B9225CCEE00071514E /* GameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
 		17F9A30722A7BF2F00581594 /* NSImage+ResizeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+ResizeImage.swift"; sourceTree = "<group>"; };
 		17FA044C232649F8004E5FC8 /* BlockCoordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockCoordinates.swift; sourceTree = "<group>"; };
+		17FBF70E234473DB00BB87A6 /* GameHistory.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = GameHistory.xml; sourceTree = "<group>"; };
+		17FBF710234474A400BB87A6 /* AIGameHistory.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = AIGameHistory.xml; sourceTree = "<group>"; };
+		17FBF713234474FF00BB87A6 /* HistoryManager2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryManager2.swift; sourceTree = "<group>"; };
+		17FBF7152344774000BB87A6 /* RunHistory2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunHistory2.swift; sourceTree = "<group>"; };
+		17FBF7172344782D00BB87A6 /* GameHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHistory.swift; sourceTree = "<group>"; };
 		17FC443B228AB9E50065888F /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -530,15 +532,6 @@
 			path = "Non-Standard Shapes";
 			sourceTree = "<group>";
 		};
-		1716A208233CA1E200C4850C /* History */ = {
-			isa = PBXGroup;
-			children = (
-				1716A209233CA1F100C4850C /* HistoryManager.swift */,
-				1716A20B233CA50E00C4850C /* RunHistory.swift */,
-			);
-			path = History;
-			sourceTree = "<group>";
-		};
 		171ED10922F6A62400CE2CDF /* Old */ = {
 			isa = PBXGroup;
 			children = (
@@ -588,11 +581,11 @@
 		17432908233F77F400F98863 /* DataManagers */ = {
 			isa = PBXGroup;
 			children = (
+				17FBF712234474E100BB87A6 /* GameStatistics */,
 				170FC65C233DDF3200F9A8F1 /* XMLDocument */,
 				177F4FCB229BD40F00FE72CD /* Serialization */,
 				179C5E1D23222B260003845B /* Visuals */,
 				179C5E2823224C040003845B /* Themes */,
-				1716A208233CA1E200C4850C /* History */,
 				174328F5233F1C3000F98863 /* Pieces */,
 			);
 			path = DataManagers;
@@ -682,8 +675,6 @@
 		1762FC1B229D2874000099F2 /* RuntimeData */ = {
 			isa = PBXGroup;
 			children = (
-				1716A20D233CB26300C4850C /* AIHistory.xml */,
-				1716A206233CA1CF00C4850C /* History.xml */,
 				179C5E1B2322282B0003845B /* PieceVisuals.xml */,
 				179C5E2023222EAA0003845B /* UserVisuals.xml */,
 				1704E2F92320E19A00D7C158 /* GameThemes.xml */,
@@ -691,6 +682,8 @@
 				1785ED6122FD8C09000B31C2 /* BoardDescriptions.xml */,
 				17432904233F4C2C00F98863 /* PieceDescriptions.xml */,
 				17D6B194233DC42400EFCE31 /* UserPieceDescriptions.xml */,
+				17FBF70E234473DB00BB87A6 /* GameHistory.xml */,
+				17FBF710234474A400BB87A6 /* AIGameHistory.xml */,
 			);
 			path = RuntimeData;
 			sourceTree = "<group>";
@@ -1202,6 +1195,16 @@
 			path = Scenes;
 			sourceTree = "<group>";
 		};
+		17FBF712234474E100BB87A6 /* GameStatistics */ = {
+			isa = PBXGroup;
+			children = (
+				17FBF713234474FF00BB87A6 /* HistoryManager2.swift */,
+				17FBF7152344774000BB87A6 /* RunHistory2.swift */,
+				17FBF7172344782D00BB87A6 /* GameHistory.swift */,
+			);
+			path = GameStatistics;
+			sourceTree = "<group>";
+		};
 		17FC443A228AB9930065888F /* Board */ = {
 			isa = PBXGroup;
 			children = (
@@ -1276,8 +1279,8 @@
 			files = (
 				1704E2FA2320E19A00D7C158 /* GameThemes.xml in Resources */,
 				179C5E1C2322282B0003845B /* PieceVisuals.xml in Resources */,
-				1716A207233CA1D000C4850C /* History.xml in Resources */,
 				17F0B49E225CBE740071514E /* LaunchScreen.storyboard in Resources */,
+				17FBF711234474A400BB87A6 /* AIGameHistory.xml in Resources */,
 				17D6B195233DC42400EFCE31 /* UserPieceDescriptions.xml in Resources */,
 				17432905233F4C2C00F98863 /* PieceDescriptions.xml in Resources */,
 				179C5E2123222EAA0003845B /* UserVisuals.xml in Resources */,
@@ -1286,9 +1289,9 @@
 				1785ED6222FD8C0A000B31C2 /* BoardDescriptions.xml in Resources */,
 				179C5E2C23224C660003845B /* UserGameThemes.xml in Resources */,
 				1763492D2312667A000BDF24 /* Default-568h@2x.png in Resources */,
-				1716A20E233CB26400C4850C /* AIHistory.xml in Resources */,
 				171D5D472313FC5300043856 /* MainStoryboard.storyboard in Resources */,
 				17715CB922C757D0009FD441 /* StandardBoard.scn in Resources */,
+				17FBF70F234473DB00BB87A6 /* GameHistory.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1349,6 +1352,7 @@
 				17D48A8422B2111D00DD7C94 /* ThreeDProtocol.swift in Sources */,
 				17750FE923373E5B00A188D6 /* ThemeUpdatedProtocol.swift in Sources */,
 				178C0F0B2338970400A35C62 /* +Action.swift in Sources */,
+				17FBF714234474FF00BB87A6 /* HistoryManager2.swift in Sources */,
 				17C0E6F722AF9C87003FAFA8 /* IdiotLightMessage.swift in Sources */,
 				173AA392231A8EEE00802289 /* PredefinedColors.swift in Sources */,
 				171ED10422F56B9F00CE2CDF /* Rotating4GameAI.swift in Sources */,
@@ -1396,7 +1400,6 @@
 				17CE269D225F127C0056818E /* Versioning.swift in Sources */,
 				17AF232523139B6600921E6C /* +TDebugProtocols2.swift in Sources */,
 				173762502310E5F10075E1DD /* UITouchImage.swift in Sources */,
-				1716A20C233CA50E00C4850C /* RunHistory.swift in Sources */,
 				1797524622C38A4D00BF539A /* +Broadcasting.swift in Sources */,
 				17ECE5B023325416003F4065 /* +Bool.swift in Sources */,
 				1721BA7C2260BECF00DC7AFC /* Coin.swift in Sources */,
@@ -1461,6 +1464,7 @@
 				17E71A7A22AD217B0081991E /* MultiPeer.swift in Sources */,
 				173592C52331FA540028FF9A /* RawThemeViewerCode.swift in Sources */,
 				1797523C22C38A4D00BF539A /* +StatusCommands.swift in Sources */,
+				17FBF7162344774000BB87A6 /* RunHistory2.swift in Sources */,
 				174328F7233F1C3F00F98863 /* PieceManager.swift in Sources */,
 				1754E79C23252C5500820FDE /* GridCell.swift in Sources */,
 				17616AC623163A3400DFFEFE /* SlideInItem.swift in Sources */,
@@ -1480,6 +1484,7 @@
 				17376352230A85A70050EB22 /* TextOverlay.swift in Sources */,
 				179F0A7E2330D4B80051B148 /* ThemeEnums.swift in Sources */,
 				174BEFDD2287B4DF003A43E5 /* ViewEnvironment.swift in Sources */,
+				17FBF7182344782D00BB87A6 /* GameHistory.swift in Sources */,
 				17BC04D8229127E1002A6F90 /* PieceIDMap.swift in Sources */,
 				171ED0FB22F567EA00CE2CDF /* AIProtocol.swift in Sources */,
 				1704E2FE232123DE00D7C158 /* AnimatedGradientStop.swift in Sources */,
@@ -1498,7 +1503,6 @@
 				17F6ECEC2286E0F0000F8E11 /* GameViewProtocol.swift in Sources */,
 				173AA394231A8F6B00802289 /* PredefinedColorTable.swift in Sources */,
 				17C1E90D23190FBE004040B6 /* OtherExtensions.swift in Sources */,
-				1716A20A233CA1F100C4850C /* HistoryManager.swift in Sources */,
 				17ECE5A723321897003F4065 /* GroupData.swift in Sources */,
 				17ECE5B2233256D8003F4065 /* +String.swift in Sources */,
 				176708F02339EE5C000E2216 /* CustomStringConvertibleExtensions.swift in Sources */,
