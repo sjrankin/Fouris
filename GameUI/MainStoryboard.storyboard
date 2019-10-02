@@ -935,14 +935,23 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="83" id="z9s-j1-33y"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show for" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gHB-eD-zOm">
-                                <rect key="frame" x="20" y="107.5" width="68" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show statistics for" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gHB-eD-zOm">
+                                <rect key="frame" x="20" y="107" width="141" height="21.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21.5" id="pne-l1-oLO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For game type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ja-49-CVH">
+                                <rect key="frame" x="20" y="155.5" width="111" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tap-d5-oLU">
-                                <rect key="frame" x="20" y="157" width="672" height="714"/>
+                                <rect key="frame" x="20" y="202.5" width="672" height="631.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -958,10 +967,7 @@
                                 </connections>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="48o-Mh-maS">
-                                <rect key="frame" x="126" y="102" width="154" height="32.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="154" id="sMo-jI-GNQ"/>
-                                </constraints>
+                                <rect key="frame" x="199" y="102" width="154" height="32.5"/>
                                 <viewLayoutGuide key="safeArea" id="VC8-ee-mL6"/>
                                 <segments>
                                     <segment title="User"/>
@@ -971,29 +977,56 @@
                                     <action selector="HandleStatSourceChanged:" destination="xgg-WH-Fjk" eventType="primaryActionTriggered" id="wOI-gF-1xd"/>
                                 </connections>
                             </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Data from games in play will not be shown here." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RnC-oi-Jcl">
+                                <rect key="frame" x="21" y="855" width="510" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="e6D-S9-tip">
+                                <rect key="frame" x="199" y="151" width="171" height="32"/>
+                                <segments>
+                                    <segment title="Standard"/>
+                                    <segment title="Rotating"/>
+                                </segments>
+                                <connections>
+                                    <action selector="HandleGameTypeChanged:" destination="xgg-WH-Fjk" eventType="primaryActionTriggered" id="2Wi-Jv-3ki"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Axk-Hp-PYo" firstAttribute="leading" secondItem="wJt-qM-V9m" secondAttribute="leading" id="0Y9-7u-qXI"/>
+                            <constraint firstItem="5ja-49-CVH" firstAttribute="centerY" secondItem="e6D-S9-tip" secondAttribute="centerY" id="42g-Lg-QV9"/>
+                            <constraint firstItem="RnC-oi-Jcl" firstAttribute="leading" secondItem="fe0-ku-0bn" secondAttribute="leading" constant="21" id="4H7-S8-1ai"/>
                             <constraint firstItem="9ST-8k-I0O" firstAttribute="leading" secondItem="wJt-qM-V9m" secondAttribute="leading" id="62b-ko-kBw"/>
+                            <constraint firstItem="Tap-d5-oLU" firstAttribute="top" secondItem="e6D-S9-tip" secondAttribute="bottom" constant="21" id="6sS-kE-JMy"/>
+                            <constraint firstItem="48o-Mh-maS" firstAttribute="centerX" secondItem="RnC-oi-Jcl" secondAttribute="centerX" id="7EG-td-wDm"/>
+                            <constraint firstItem="5ja-49-CVH" firstAttribute="leading" secondItem="Tap-d5-oLU" secondAttribute="leading" id="JEk-JU-o5G"/>
+                            <constraint firstItem="9ST-8k-I0O" firstAttribute="top" secondItem="RnC-oi-Jcl" secondAttribute="bottom" constant="25" id="KAJ-28-fy0"/>
                             <constraint firstAttribute="bottom" secondItem="9ST-8k-I0O" secondAttribute="bottom" id="L0r-t2-spZ"/>
+                            <constraint firstItem="gHB-eD-zOm" firstAttribute="leading" secondItem="wJt-qM-V9m" secondAttribute="leadingMargin" id="LHt-yx-Xug"/>
                             <constraint firstAttribute="trailing" secondItem="Axk-Hp-PYo" secondAttribute="trailing" id="NbC-X9-Was"/>
-                            <constraint firstItem="48o-Mh-maS" firstAttribute="top" secondItem="Axk-Hp-PYo" secondAttribute="bottom" constant="19" id="O5F-FX-aib"/>
-                            <constraint firstItem="48o-Mh-maS" firstAttribute="leading" secondItem="gHB-eD-zOm" secondAttribute="trailing" constant="38" id="aMj-r7-QSj"/>
-                            <constraint firstItem="Tap-d5-oLU" firstAttribute="centerX" secondItem="9ST-8k-I0O" secondAttribute="centerX" id="bc9-rI-vZT"/>
-                            <constraint firstItem="gHB-eD-zOm" firstAttribute="top" secondItem="Axk-Hp-PYo" secondAttribute="bottom" constant="24.5" id="hmc-ef-g03"/>
-                            <constraint firstItem="Tap-d5-oLU" firstAttribute="top" secondItem="48o-Mh-maS" secondAttribute="bottom" constant="23.5" id="i3A-RJ-hbr"/>
+                            <constraint firstItem="48o-Mh-maS" firstAttribute="leading" secondItem="gHB-eD-zOm" secondAttribute="trailing" constant="38" id="RxA-xA-QJT"/>
+                            <constraint firstItem="RnC-oi-Jcl" firstAttribute="top" secondItem="Tap-d5-oLU" secondAttribute="bottom" constant="21" id="Up5-zg-U5m"/>
+                            <constraint firstItem="gHB-eD-zOm" firstAttribute="firstBaseline" secondItem="48o-Mh-maS" secondAttribute="firstBaseline" id="YW3-hD-Vt5"/>
+                            <constraint firstItem="e6D-S9-tip" firstAttribute="top" secondItem="48o-Mh-maS" secondAttribute="bottom" constant="17.5" id="bhN-Ps-cEQ"/>
+                            <constraint firstItem="48o-Mh-maS" firstAttribute="leading" secondItem="e6D-S9-tip" secondAttribute="leading" id="eRv-bs-XIX"/>
+                            <constraint firstItem="48o-Mh-maS" firstAttribute="top" secondItem="Axk-Hp-PYo" secondAttribute="bottom" constant="19" id="hiG-om-QTR"/>
                             <constraint firstItem="Axk-Hp-PYo" firstAttribute="top" secondItem="wJt-qM-V9m" secondAttribute="top" id="i5a-jB-fRf"/>
+                            <constraint firstItem="48o-Mh-maS" firstAttribute="baseline" secondItem="gHB-eD-zOm" secondAttribute="firstBaseline" id="mYx-Oc-Pte"/>
                             <constraint firstAttribute="trailing" secondItem="9ST-8k-I0O" secondAttribute="trailing" id="nC8-cR-7ex"/>
-                            <constraint firstItem="gHB-eD-zOm" firstAttribute="leading" secondItem="wJt-qM-V9m" secondAttribute="leadingMargin" id="sWz-TD-326"/>
-                            <constraint firstItem="gHB-eD-zOm" firstAttribute="centerY" secondItem="48o-Mh-maS" secondAttribute="centerY" id="td8-J8-b2a"/>
-                            <constraint firstItem="9ST-8k-I0O" firstAttribute="top" secondItem="Tap-d5-oLU" secondAttribute="bottom" constant="30" id="tm1-Uf-jVl"/>
-                            <constraint firstItem="Tap-d5-oLU" firstAttribute="leading" secondItem="gHB-eD-zOm" secondAttribute="leading" id="wtB-pX-poX"/>
+                            <constraint firstItem="gHB-eD-zOm" firstAttribute="centerY" secondItem="48o-Mh-maS" secondAttribute="centerY" id="pqk-gh-ER7"/>
+                            <constraint firstItem="fe0-ku-0bn" firstAttribute="trailing" secondItem="RnC-oi-Jcl" secondAttribute="trailing" constant="181" id="qev-SQ-yoC"/>
+                            <constraint firstItem="Tap-d5-oLU" firstAttribute="centerX" secondItem="9ST-8k-I0O" secondAttribute="centerX" id="vPz-bn-NmY"/>
+                            <constraint firstItem="gHB-eD-zOm" firstAttribute="leading" secondItem="5ja-49-CVH" secondAttribute="leading" id="w3e-Qr-jyJ"/>
+                            <constraint firstItem="fe0-ku-0bn" firstAttribute="trailing" secondItem="e6D-S9-tip" secondAttribute="trailing" constant="342" id="yMB-VN-kz6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fe0-ku-0bn"/>
                     </view>
                     <navigationItem key="navigationItem" id="pbp-OB-K82"/>
                     <connections>
+                        <outlet property="GameTypeSegment" destination="e6D-S9-tip" id="4DM-ke-4Av"/>
                         <outlet property="ShowSegments" destination="48o-Mh-maS" id="Brw-7K-m4v"/>
                         <outlet property="StatTable" destination="Tap-d5-oLU" id="MK6-PL-uEG"/>
                     </connections>
