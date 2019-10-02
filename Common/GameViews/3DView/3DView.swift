@@ -1876,6 +1876,22 @@ class View3D: SCNView,                          //Our main super class.
         return nil
     }
     
+    /// Flash a button with its pre-set highlight color.
+    /// - Note: "Flash" means showing the highlight color for a short amount of time to simulate a
+    ///         button press by the AI.
+    /// - Parameter Button: The button to flash.
+    /// - Parameter Duration: How long to flash the button in seconds. Defaults to 0.15 seconds.
+    func FlashButton(_ Button: NodeButtons, Duration: Double = 0.15)
+    {
+        if let Node = ButtonList[Button]
+        {
+            if let ShapeNode = Node.GetNodeWithTag(Value: "ShapeNode")
+            {
+                ShapeNode.Flash()
+            }
+        }
+    }
+    
     /// Show game view controls.
     func ShowControls()
     {
