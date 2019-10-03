@@ -37,7 +37,7 @@ extension View3D
                 Center.materials.first?.specular.contents = SpecularColor
                 let CentralNode = SCNNode(geometry: Center)
                 CentralNode.position = SCNVector3(0.0, 0.0, 0.0)
-                                CentralNode.categoryBitMask = GameLight
+                CentralNode.categoryBitMask = GameLight
                 Parent.addChildNode(CentralNode)
             
             case .Square:
@@ -46,7 +46,7 @@ extension View3D
                 Center.materials.first?.specular.contents = SpecularColor
                 let CentralNode = SCNNode(geometry: Center)
                 CentralNode.position = SCNVector3(0.0, 0.0, 0.0)
-                                CentralNode.categoryBitMask = GameLight
+                CentralNode.categoryBitMask = GameLight
                 Parent.addChildNode(CentralNode)
             
             case .BigSquare:
@@ -55,7 +55,7 @@ extension View3D
                 Center.materials.first?.specular.contents = SpecularColor
                 let CentralNode = SCNNode(geometry: Center)
                 CentralNode.position = SCNVector3(0.0, 0.0, 0.0)
-                                CentralNode.categoryBitMask = GameLight
+                CentralNode.categoryBitMask = GameLight
                 Parent.addChildNode(CentralNode)
             
             case .SmallRectangle:
@@ -64,7 +64,7 @@ extension View3D
                 Center.materials.first?.specular.contents = SpecularColor
                 let CentralNode = SCNNode(geometry: Center)
                 CentralNode.position = SCNVector3(0.0, 0.0, 0.0)
-                                CentralNode.categoryBitMask = GameLight
+                CentralNode.categoryBitMask = GameLight
                 Parent.addChildNode(CentralNode)
             
             case .Rectangle:
@@ -73,7 +73,7 @@ extension View3D
                 Center.materials.first?.specular.contents = SpecularColor
                 let CentralNode = SCNNode(geometry: Center)
                 CentralNode.position = SCNVector3(0.0, 0.0, 0.0)
-                                CentralNode.categoryBitMask = GameLight
+                CentralNode.categoryBitMask = GameLight
                 Parent.addChildNode(CentralNode)
             
             case .BigRectangle:
@@ -82,7 +82,7 @@ extension View3D
                 Center.materials.first?.specular.contents = SpecularColor
                 let CentralNode = SCNNode(geometry: Center)
                 CentralNode.position = SCNVector3(0.0, 0.0, 0.0)
-                                CentralNode.categoryBitMask = GameLight
+                CentralNode.categoryBitMask = GameLight
                 Parent.addChildNode(CentralNode)
             
             case .SmallDiamond:
@@ -94,7 +94,7 @@ extension View3D
                 R1.materials.first?.specular.contents = SpecularColor
                 let R1Node = SCNNode(geometry: R1)
                 R1Node.position = SCNVector3(0.0, 1.0, 0.0)
-                                R1Node.categoryBitMask = GameLight
+                R1Node.categoryBitMask = GameLight
                 Group.addChildNode(R1Node)
                 
                 let R2 = SCNBox(width: 3.0, height: 1.0, length: 1.0, chamferRadius: 0.0)
@@ -160,7 +160,7 @@ extension View3D
             case .BigDiamond:
                 let Group = SCNNode()
                 Parent.addChildNode(Group)
-            
+                
                 let R1 = SCNBox(width: 1.0, height: 1.0, length: 1.0, chamferRadius: 0.0)
                 R1.materials.first?.diffuse.contents = DiffuseColor
                 R1.materials.first?.specular.contents = SpecularColor
@@ -184,7 +184,7 @@ extension View3D
                 R3Node.position = SCNVector3(-2.0, 1.0, 0.0)
                 R3Node.categoryBitMask = GameLight
                 Group.addChildNode(R3Node)
-
+                
                 let R4 = SCNBox(width: 7.0, height: 1.0, length: 1.0, chamferRadius: 0.0)
                 R4.materials.first?.diffuse.contents = DiffuseColor
                 R4.materials.first?.specular.contents = SpecularColor
@@ -208,7 +208,7 @@ extension View3D
                 R6Node.position = SCNVector3(-1.0, -2.0, 0.0)
                 R6Node.categoryBitMask = GameLight
                 Group.addChildNode(R6Node)
-            
+                
                 let R7 = SCNBox(width: 1.0, height: 1.0, length: 1.0, chamferRadius: 0.0)
                 R7.materials.first?.diffuse.contents = DiffuseColor
                 R7.materials.first?.specular.contents = SpecularColor
