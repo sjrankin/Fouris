@@ -818,16 +818,6 @@ class GameLogic
     
     var RowDeletionCount: Int = 0
     
-    /// Received column dropped message. Pass to UI.
-    ///
-    /// - Note: This message is sent for each column dropped.
-    ///
-    /// - Parameter Column: The index of the column that was dropped.
-    func ColumnDropped(Column: Int)
-    {
-        UIDelegate?.ColumnDropped(Column: Column)
-    }
-    
     /// Received board done compressing message. Pass to UI.
     ///
     /// - Parameter DidCompress: If true, the board actually compressed (meaning there were blocks removed). If
@@ -837,17 +827,6 @@ class GameLogic
         UIDelegate?.BoardDoneCompressing(DidCompress: DidCompress)
         //_CurrentGameScore = _CurrentGameScore + (RowDeletionCount * 500)
         //RowDeletionCount = 0
-    }
-    
-    /// Received column will drop message. Pass to UI.
-    ///
-    /// - Parameters:
-    ///   - Column: The column index.
-    ///   - From: From row...
-    ///   - ToTarget: ...to row.
-    func DropColumn(Column: Int, From: Int, ToTarget: Int)
-    {
-        UIDelegate?.DropColumn(Column: Column, From: From, ToTarget: ToTarget)
     }
     
     /// Play the game by ourself using little or no intelligence and lots of randomness.
