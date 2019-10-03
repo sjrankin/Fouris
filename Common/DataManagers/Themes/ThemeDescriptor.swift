@@ -307,6 +307,22 @@ class ThemeDescriptor: Serializable
                 //Do nothing for this field.
                 break
             
+            case "_ShowUpButton":
+            //Bool
+            _ShowUpButton = Bool(Value)!
+            
+            case "_ShowFlyAwayButton":
+            //Bool
+            _ShowFlyAwayButton = Bool(Value)!
+            
+            case "_ShowDropDownButton":
+            //Bool
+            _ShowDropDownButton = Bool(Value)!
+            
+            case "_ShowFreezeButton":
+            //Bool
+            _ShowFreezeButton = Bool(Value)!
+            
             default:
                 print("Encountered unexpected key (\(Key)) in ThemeDescriptor.Populate")
                 break
@@ -1157,6 +1173,76 @@ class ThemeDescriptor: Serializable
         }
     }
     
+    // MARK: Button properites.
+    
+    /// Holds the show up button value.
+    private var _ShowUpButton: Bool = true
+    /// Get or set the show up motion button flag.
+    public var ShowUpButton: Bool
+    {
+        get
+        {
+            return _ShowUpButton
+        }
+        set
+        {
+            _ShowUpButton = newValue
+            _Dirty = true
+            ChangeNotice(Field: .ShowUpButton)
+        }
+    }
+    
+    /// Holds the show fly away button value.
+    private var _ShowFlyAwayButton: Bool = true
+    /// Get or set the show fly away button flag.
+    public var ShowFlyAwayButton: Bool
+    {
+        get
+        {
+            return _ShowFlyAwayButton
+        }
+        set
+        {
+            _ShowFlyAwayButton = newValue
+            _Dirty = true
+            ChangeNotice(Field: .ShowFlyAwayButton)
+        }
+    }
+    
+    /// Holds the show drop down button flag.
+    private var _ShowDropDownButton: Bool = true
+    /// Get or set the show drop down button flag.
+    public var ShowDropDownButton: Bool
+    {
+        get
+        {
+            return _ShowDropDownButton
+        }
+        set
+        {
+            _ShowDropDownButton = newValue
+            _Dirty = true
+            ChangeNotice(Field: .ShowDropDownButton)
+        }
+    }
+    
+    /// Holds the show freeze button flag.
+    private var _ShowFreezeButton: Bool = true
+    /// Get or set the show freeze button flag.
+    public var ShowFreezeButton: Bool
+    {
+        get
+        {
+            return _ShowFreezeButton
+        }
+        set
+        {
+            _ShowFreezeButton = newValue
+            _Dirty = true
+            ChangeNotice(Field: .ShowFreezeButton)
+        }
+    }
+    
     // MARK: General descriptor properties.
     
     /// Holds the minimum version number this theme is valid for.
@@ -1503,4 +1589,8 @@ enum ThemeFields: String, CaseIterable
     case MinimumVersion = "MinimumVersion"
     case MinimumBuild = "MinimumBuild"
     case AutoStartDuration = "AutoStartDuration"
+    case ShowUpButton = "ShowUpButton"
+    case ShowFlyAwayButton = "ShowFlyAwayButton"
+    case ShowDropDownButton = "ShowDropDownButton"
+    case ShowFreezeButton = "ShowFreezeButton"
 }
