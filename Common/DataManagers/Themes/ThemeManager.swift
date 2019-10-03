@@ -29,29 +29,14 @@ class ThemeManager: ThemeChangeProtocol
     {
         if !FileIO.DirectoryExists(DirectoryName: FileIO.SettingsDirectory)
         {
-            print("Creating initial themes.")
             FileIO.CreateDirectory(DirectoryName: FileIO.SettingsDirectory)
-            #if true
             CreateSettingsFiles()
-            #else
-            let DefaultTheme = FileIO.GetFileContentsFromResource("GameThemes", ".xml")
-            let _ = FileIO.SaveSettingsFile(Name: "GameThemes.xml", Contents: DefaultTheme!)
-            let UserTheme = FileIO.GetFileContentsFromResource("UserGameThemes", ".xml")
-            let _ = FileIO.SaveSettingsFile(Name: "UserGameThemes.xml", Contents: UserTheme!)
-            #endif
-            #if false
-            let DefaultEncoded = BufferManager.EncodeBuffer(DefaultTheme!)
-            let _ = FileIO.WriteBinaryFile(Name: "DefaultTheme.dat", Directory: FileIO.SettingsDirectory, BinaryData: DefaultEncoded)
-            let UserEncoded = BufferManager.EncodeBuffer(UserTheme!)
-            let _ = FileIO.WriteBinaryFile(Name: "UserGameThemes.dat", Directory: FileIO.SettingsDirectory, BinaryData: UserEncoded)
-            #endif
         }
         else
         {
             print("Settings directory exists.")
             if !FileIO.FileExists(FileName: "GameThemes.xml", Directory: FileIO.SettingsDirectory)
             {
-                print("* Creating initial themes.")
                 CreateSettingsFiles()
             }
         }
