@@ -50,6 +50,10 @@
     <Property Name="_ShowNextPiece" Value="true"/>
     <Property Name="_IsOrthographic" Value="false"/>
     <Property Name="_OrthographicScale" Value="20.0"/>
+    <Property Name="_ShowUpButton" Value="true"/>
+    <Property Name="_ShowFlyAwayButton" Value="true"/>
+    <Property Name="_ShowDropDownButton" Value="true"/>
+    <Property Name="_ShowFreezeButton" Value="true"/>
     <Array Name="_TileList">
         <Item Index="0">
             <Property Name="_PieceShapeID" Value="f4510cca-262a-4018-bf29-04d703702d65"/>
