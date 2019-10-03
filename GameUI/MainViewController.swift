@@ -155,7 +155,7 @@ class MainViewController: UIViewController,
             if Settings.GetShowVersionBox()
             {
                 VersionBoxShowing = true
-                GameTextOverlay?.ShowVersionBox(WithString: "Fouris \(Versioning.MakeVersionString(IncludeVersionPrefix: false))")
+                GameTextOverlay?.ShowVersionBox(WithString: Versioning.MakeSimpleVersionString())
             }
         }
     }
@@ -256,8 +256,18 @@ class MainViewController: UIViewController,
     /// - Parameter DoEnable: The enable flag for the button.
     func EnableFreezeInPlaceButton(_ DoEnable: Bool)
     {
+        if DoEnable
+        {
+        GameUISurface3D?.AppendButton(Which: .FreezeButton)
+        }
+        else
+        {
+            GameUISurface3D?.RemoveButton(Which: .FreezeButton)
+        }
+        /*
         FreezeInPlaceButton.isUserInteractionEnabled = DoEnable
         FreezeInPlaceButton.isHidden = !DoEnable
+ */
     }
     
     var GameTextOverlay: TextOverlay? = nil
@@ -457,6 +467,35 @@ class MainViewController: UIViewController,
                         {
                             VNode.HighlightButton(ResetDuration: 0.1, Delay: 0.1)
                         }
+                    }
+                    switch PressedNode.ButtonType
+                    {
+                        case .DownButton:
+                        HandleMoveDownPressed()
+                        
+                        case .DropDownButton:
+                        HandleDropDownPressed()
+                        
+                        case .FlyAwayButton:
+                        HandleUpAndAwayPressed()
+                        
+                        case .FreezeButton:
+                        HandleFreezeInPlacePressed()
+                        
+                        case .LeftButton:
+                        HandleMoveLeftPressed()
+                        
+                        case .RightButton:
+                        HandleMoveRightPressed()
+                        
+                        case .RotateLeftButton:
+                        HandleRotateLeftPressed()
+                        
+                        case .RotateRightButton:
+                        HandleRotateRightPressed()
+                        
+                        case .UpButton:
+                        HandleMoveUpPressed()
                     }
                 }
                 return
@@ -1372,6 +1411,52 @@ class MainViewController: UIViewController,
     
     // MARK: Game-control related functions.
     
+    #if true
+    func HandleMoveLeftPressed()
+{
+    MoveLeft()
+    }
+    
+    func HandleMoveRightPressed()
+{
+    MoveRight()
+    }
+    
+    func HandleMoveUpPressed()
+{
+    MoveUp()
+    }
+    
+    func HandleMoveDownPressed()
+{
+    MoveDown()
+    }
+    
+    func HandleUpAndAwayPressed()
+{
+    MoveUpAndAway()
+    }
+    
+    func HandleDropDownPressed()
+{
+    DropDown()
+    }
+    
+    func HandleRotateLeftPressed()
+{
+    RotateRight()
+    }
+    
+    func HandleRotateRightPressed()
+{
+    RotateLeft()
+    }
+    
+    func HandleFreezeInPlacePressed()
+{
+    FreezeInPlace()
+    }
+    #else
     /// Handle the move left button pressed.
     ///
     /// - Parameter sender: Not used.
@@ -1447,6 +1532,7 @@ class MainViewController: UIViewController,
     {
         FreezeInPlace()
     }
+    #endif
     
     /// Handle the play button pressed.
     ///
@@ -1510,6 +1596,8 @@ class MainViewController: UIViewController,
     /// AI is moving a piece upwards.
     func AI_MoveUp()
     {
+        GameUISurface3D?.FlashButton(.UpButton)
+        /*
         #if true
         UIView.animate(withDuration: 0.15,
                        animations:
@@ -1524,11 +1612,14 @@ class MainViewController: UIViewController,
         MoveUpButton2.Highlight(WithImage: "UpArrowHighlighted48", ForSeconds: 0.15,
                                 OriginalName: "UpArrow48")
         #endif
+ */
     }
     
     /// AI is throwing a piece away.
     func AI_MoveUpAndAway()
     {
+        GameUISurface3D?.FlashButton(.FlyAwayButton)
+        /*
         #if true
         UIView.animate(withDuration: 0.15,
                        animations:
@@ -1543,11 +1634,14 @@ class MainViewController: UIViewController,
         UpAndAwayButton2.Highlight(WithImage: "FlyAwayArrowHighlighted48", ForSeconds: 0.15,
                                    OriginalName: "FlyAwayArrow48")
         #endif
+ */
     }
     
     /// AI is moving a piece downwards.
     func AI_MoveDown()
     {
+        GameUISurface3D?.FlashButton(.DownButton)
+        /*
         #if true
         UIView.animate(withDuration: 0.15,
                        animations:
@@ -1562,11 +1656,14 @@ class MainViewController: UIViewController,
         MoveDownButton2.Highlight(WithImage: "DownArrowHighlighted48", ForSeconds: 0.15,
                                   OriginalName: "DownArrow48")
         #endif
+ */
     }
     
     /// AI is dropping a piece downwards.
     func AI_DropDown()
     {
+        GameUISurface3D?.FlashButton(.DropDownButton)
+        /*
         #if true
         UIView.animate(withDuration: 0.15,
                        animations:
@@ -1581,11 +1678,14 @@ class MainViewController: UIViewController,
         DropDownButton2.Highlight(WithImage: "DropDownArrowHighlighted48", ForSeconds: 0.15,
                                   OriginalName: "DropDownArrow48")
         #endif
+ */
     }
     
     /// AI is moving a piece to the left.
     func AI_MoveLeft()
     {
+        GameUISurface3D?.FlashButton(.LeftButton)
+        /*
         #if true
         UIView.animate(withDuration: 0.15,
                        animations:
@@ -1600,11 +1700,14 @@ class MainViewController: UIViewController,
         MoveLeftButton2.Highlight(WithImage: "LeftArrowHighlighted48", ForSeconds: 0.15,
                                   OriginalName: "LeftArrow48")
         #endif
+ */
     }
     
     /// AI is moving a piece to the right.
     func AI_MoveRight()
     {
+        GameUISurface3D?.FlashButton(.RightButton)
+        /*
         #if true
         UIView.animate(withDuration: 0.15,
                        animations:
@@ -1620,11 +1723,14 @@ class MainViewController: UIViewController,
         MoveRightButton2.Highlight(WithImage: "RightArrowHighlighted48", ForSeconds: 0.15,
                                    OriginalName: "RightArrow48")
         #endif
+ */
     }
     
     /// AI is rotating a piece clockwise.
     func AI_RotateRight()
     {
+        GameUISurface3D?.FlashButton(.RotateRightButton)
+        /*
         #if true
         UIView.animate(withDuration: 0.15,
                        animations:
@@ -1639,11 +1745,14 @@ class MainViewController: UIViewController,
         RotateRightButton2.Highlight(WithImage: "RotateRightHighlighted48", ForSeconds: 0.15,
                                      OriginalName: "RotateRight48_2")
         #endif
+ */
     }
     
     /// AI is rotating a piece counter-clockwise.
     func AI_RotateLeft()
     {
+        GameUISurface3D?.FlashButton(.RotateLeftButton)
+        /*
         #if true
         UIView.animate(withDuration: 0.15,
                        animations:
@@ -1658,11 +1767,14 @@ class MainViewController: UIViewController,
         RotateLeftButton2.Highlight(WithImage: "RotateLeftHighlighted48", ForSeconds: 0.15,
                                     OriginalName: "RotateLeft48_2")
         #endif
+ */
     }
     
     /// AI is freezing a piece into place.
     func AI_FreezeInPlace()
     {
+        GameUISurface3D?.FlashButton(.FreezeButton)
+        /*
         UIView.animate(withDuration: 0.15,
                        animations:
             {
@@ -1672,6 +1784,7 @@ class MainViewController: UIViewController,
                 _ in
                 self.FreezeInPlaceButton.tintColor = UIColor.cyan
         })
+ */
     }
     
     // MARK: Game view request functions.
@@ -2250,6 +2363,7 @@ class MainViewController: UIViewController,
     @IBOutlet weak var SlideInAttractButton: UIButton!
     @IBOutlet weak var SlideInCloseButton: UIButton!
     @IBOutlet weak var TopOverlapView: UIView!
+    #if false
     @IBOutlet weak var FreezeInPlaceButton: UIButton!
     @IBOutlet weak var SlideInSubView: UIView!
     @IBOutlet weak var MoveLeftButton: UIButton!
@@ -2260,6 +2374,7 @@ class MainViewController: UIViewController,
     @IBOutlet weak var DropDownButton: UIButton!
     @IBOutlet weak var UpAndAwayButton: UIButton!
     @IBOutlet weak var RotateRightButton: UIButton!
+    #endif
     @IBOutlet weak var VideoButton: UIButton!
     @IBOutlet weak var SlideInVideoButton: UIButton!
     @IBOutlet weak var CameraButton: UIButton!
