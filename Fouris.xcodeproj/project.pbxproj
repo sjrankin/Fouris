@@ -235,8 +235,8 @@
 		17FA044D232649F8004E5FC8 /* BlockCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FA044C232649F8004E5FC8 /* BlockCoordinates.swift */; };
 		17FBF70F234473DB00BB87A6 /* GameHistory.xml in Resources */ = {isa = PBXBuildFile; fileRef = 17FBF70E234473DB00BB87A6 /* GameHistory.xml */; };
 		17FBF711234474A400BB87A6 /* AIGameHistory.xml in Resources */ = {isa = PBXBuildFile; fileRef = 17FBF710234474A400BB87A6 /* AIGameHistory.xml */; };
-		17FBF714234474FF00BB87A6 /* HistoryManager2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FBF713234474FF00BB87A6 /* HistoryManager2.swift */; };
-		17FBF7162344774000BB87A6 /* RunHistory2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FBF7152344774000BB87A6 /* RunHistory2.swift */; };
+		17FBF714234474FF00BB87A6 /* HistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FBF713234474FF00BB87A6 /* HistoryManager.swift */; };
+		17FBF7162344774000BB87A6 /* RunHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FBF7152344774000BB87A6 /* RunHistory.swift */; };
 		17FBF7182344782D00BB87A6 /* GameHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FBF7172344782D00BB87A6 /* GameHistory.swift */; };
 		17FC443C228AB9E50065888F /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FC443B228AB9E50065888F /* Score.swift */; };
 /* End PBXBuildFile section */
@@ -472,8 +472,8 @@
 		17FA044C232649F8004E5FC8 /* BlockCoordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockCoordinates.swift; sourceTree = "<group>"; };
 		17FBF70E234473DB00BB87A6 /* GameHistory.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = GameHistory.xml; sourceTree = "<group>"; };
 		17FBF710234474A400BB87A6 /* AIGameHistory.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = AIGameHistory.xml; sourceTree = "<group>"; };
-		17FBF713234474FF00BB87A6 /* HistoryManager2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryManager2.swift; sourceTree = "<group>"; };
-		17FBF7152344774000BB87A6 /* RunHistory2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunHistory2.swift; sourceTree = "<group>"; };
+		17FBF713234474FF00BB87A6 /* HistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryManager.swift; sourceTree = "<group>"; };
+		17FBF7152344774000BB87A6 /* RunHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunHistory.swift; sourceTree = "<group>"; };
 		17FBF7172344782D00BB87A6 /* GameHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHistory.swift; sourceTree = "<group>"; };
 		17FC443B228AB9E50065888F /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1198,8 +1198,8 @@
 		17FBF712234474E100BB87A6 /* GameStatistics */ = {
 			isa = PBXGroup;
 			children = (
-				17FBF713234474FF00BB87A6 /* HistoryManager2.swift */,
-				17FBF7152344774000BB87A6 /* RunHistory2.swift */,
+				17FBF713234474FF00BB87A6 /* HistoryManager.swift */,
+				17FBF7152344774000BB87A6 /* RunHistory.swift */,
 				17FBF7172344782D00BB87A6 /* GameHistory.swift */,
 			);
 			path = GameStatistics;
@@ -1352,7 +1352,7 @@
 				17D48A8422B2111D00DD7C94 /* ThreeDProtocol.swift in Sources */,
 				17750FE923373E5B00A188D6 /* ThemeUpdatedProtocol.swift in Sources */,
 				178C0F0B2338970400A35C62 /* +Action.swift in Sources */,
-				17FBF714234474FF00BB87A6 /* HistoryManager2.swift in Sources */,
+				17FBF714234474FF00BB87A6 /* HistoryManager.swift in Sources */,
 				17C0E6F722AF9C87003FAFA8 /* IdiotLightMessage.swift in Sources */,
 				173AA392231A8EEE00802289 /* PredefinedColors.swift in Sources */,
 				171ED10422F56B9F00CE2CDF /* Rotating4GameAI.swift in Sources */,
@@ -1464,7 +1464,7 @@
 				17E71A7A22AD217B0081991E /* MultiPeer.swift in Sources */,
 				173592C52331FA540028FF9A /* RawThemeViewerCode.swift in Sources */,
 				1797523C22C38A4D00BF539A /* +StatusCommands.swift in Sources */,
-				17FBF7162344774000BB87A6 /* RunHistory2.swift in Sources */,
+				17FBF7162344774000BB87A6 /* RunHistory.swift in Sources */,
 				174328F7233F1C3F00F98863 /* PieceManager.swift in Sources */,
 				1754E79C23252C5500820FDE /* GridCell.swift in Sources */,
 				17616AC623163A3400DFFEFE /* SlideInItem.swift in Sources */,
