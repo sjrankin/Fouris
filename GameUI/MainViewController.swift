@@ -131,7 +131,7 @@ class MainViewController: UIViewController,
         Themes.SubscribeToChanges(Subscriber: "MainViewController", SubscribingObject: self)
         PieceVisualManager.Initialize()
         RecentlyUsedColors.Initialize(WithLimit: Settings.GetMostRecentlyUsedColorListCapacity())
-        HistoryManager2.Initialize()
+        HistoryManager.Initialize()
         InitializeUI()
         AIData = AITestTable()
         
@@ -163,11 +163,11 @@ class MainViewController: UIViewController,
     /// Called when the version box disappears.
     func VersionBoxDisappeared()
     {
-        VersionBoxShowing = true
+        VersionBoxShowing = false
     }
     
     /// Version box is showing flag.
-    var VersionBoxShowing = false
+    var VersionBoxShowing = true
     
     /// Prevents `viewDidLayoutSubviews` from showing more than one version box.
     var VersionShown = false
@@ -283,8 +283,6 @@ class MainViewController: UIViewController,
         SlideInCameraControlBox.layer.backgroundColor = ColorServer.CGColorFrom(ColorNames.WhiteSmoke)
         SlideInCameraControlBox.layer.borderColor = UIColor.black.cgColor
         ShowCameraControls()
-        
-//        GameTextOverlay?.ShowVersionBox(WithString: "Fouris \(Versioning.MakeVersionString(IncludeVersionPrefix: false))")
     }
     
     /// Handle taps on the FPS text display. This toggles the contents from frames/second to instance seconds.
@@ -430,10 +428,6 @@ class MainViewController: UIViewController,
         let SwipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(HandleSwipeRight))
         SwipeRightGesture.direction = .right
         GameUISurface3D.addGestureRecognizer(SwipeRightGesture)
-        let Count = GameUISurface3D.gestureRecognizers?.count
-        #if false
-        print("View3D gesture count: \((Count)!)")
-        #endif
     }
     
     /// Handle taps in the game view. Depending on where the tap is, the piece will move in the given direction.
@@ -686,11 +680,11 @@ class MainViewController: UIViewController,
     func GameOver()
     {
         let GamePlayDuration = CACurrentMediaTime() - GamePlayStart
-        let History = HistoryManager2.GetHistory(InAttractMode)
+        let History = HistoryManager.GetHistory(InAttractMode)
         History?.Games![CurrentBaseGameType]!.AddDuration(NewDuration: Int(GamePlayDuration))
         History?.Games![CurrentBaseGameType]!.SetHighScore(NewScore: Game.HighScore)
         History?.Games![CurrentBaseGameType]!.AddScore(NewScore: Game.CurrentGameScore)
-        HistoryManager2.Save()
+        HistoryManager.Save()
         PlayStopButton?.setTitle("Play", for: .normal)
         var GameDuration = Game.GameDuration()
         GameDuration = round(GameDuration)
@@ -792,9 +786,11 @@ class MainViewController: UIViewController,
     {
     }
     
-    /// The contents of the map were updated. Update the views.
+    /// The contents of the map were updated. Update the views. Update game statistics.
     func MapUpdated()
     {
+        let History = HistoryManager.GetHistory(InAttractMode)
+        History?.Games![CurrentBaseGameType]!.IncrementPieceCount()
         switch CurrentBaseGameType
         {
             case .Standard:
@@ -1300,7 +1296,7 @@ class MainViewController: UIViewController,
     @objc func Play()
     {
         GamePlayStart = CACurrentMediaTime()
-        let History = HistoryManager2.GetHistory(InAttractMode)
+        let History = HistoryManager.GetHistory(InAttractMode)
         History?.Games![CurrentBaseGameType]!.IncrementGameCount()
         ForceResume()
         StopAccumulating = false
