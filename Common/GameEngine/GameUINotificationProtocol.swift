@@ -145,19 +145,6 @@ protocol GameUINotificationProtocol: class
     /// - Parameter Next: The next piece after the current piece.
     func NextPiece(_ Next: Piece)
     
-    /// Called when a row is dropped as part of the row removal process.
-    ///
-    /// - Parameter Column: The index of the column that dropped.
-    func ColumnDropped(Column: Int)
-    
-    /// Called prior to dropping a column. Supplies information on what will be dropped.
-    ///
-    /// - Parameters:
-    ///   - Column: The column (X) where the drop will occur.
-    ///   - From: Starting row (Y) of the drop.
-    ///   - ToTarget: Ending row (Y) of the drop, eg, where the drop will stop.
-    func DropColumn(Column: Int, From: Int, ToTarget: Int)
-    
     /// Called after the board is done compressing pieces after a row-clearing event. This
     /// is called after all rows have been removed and all columns have been dropped.
     ///
