@@ -146,9 +146,6 @@ class MainViewController: UIViewController,
     /// Layout complete. Save certain information.
     override func viewDidLayoutSubviews()
     {
-        OriginalGameViewBounds = GameViewContainer.bounds
-        OrignalTopToolbarBounds = GameControlView.bounds
-        OriginalMotionControlBounds = MotionControlView.bounds
         if !VersionShown
         {
             VersionShown = true
@@ -240,7 +237,6 @@ class MainViewController: UIViewController,
         
         //Initialize view backgrounds.
         GameControlView.layer.backgroundColor = ColorServer.CGColorFrom(ColorNames.ReallyDarkGray)
-        MotionControlView.layer.backgroundColor = ColorServer.CGColorFrom(ColorNames.ReallyDarkGray)
         
         let AutoStartDuration = UserTheme!.AutoStartDuration
         let _ = Timer.scheduledTimer(timeInterval: AutoStartDuration, target: self,
@@ -258,16 +254,12 @@ class MainViewController: UIViewController,
     {
         if DoEnable
         {
-        GameUISurface3D?.AppendButton(Which: .FreezeButton)
+            GameUISurface3D?.AppendButton(Which: .FreezeButton)
         }
         else
         {
             GameUISurface3D?.RemoveButton(Which: .FreezeButton)
         }
-        /*
-        FreezeInPlaceButton.isUserInteractionEnabled = DoEnable
-        FreezeInPlaceButton.isHidden = !DoEnable
- */
     }
     
     var GameTextOverlay: TextOverlay? = nil
@@ -316,7 +308,7 @@ class MainViewController: UIViewController,
         if Settings.GetShowCameraControls()
         {
             SlideInCameraControlBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
-                    SlideInCameraControlBox.layer.borderColor = UIColor.black.cgColor
+            SlideInCameraControlBox.layer.borderColor = UIColor.black.cgColor
             SlideInCameraControlBox.alpha = 1.0
             SlideInCameraControlBox.isUserInteractionEnabled = true
         }
@@ -327,61 +319,17 @@ class MainViewController: UIViewController,
         }
     }
     
-    private var OriginalGameViewBounds: CGRect!
-    
-    private var OrignalTopToolbarBounds: CGRect!
-    
-    /// Set top toolbar visibility. Also sets the mode in which a long press at the top of the game view shows the slide-in menu.
-    func ShowTopToolbar()
-    {
-        
-    }
-    
-    private var OriginalMotionControlBounds: CGRect!
-    
     /// Set motion control visibility.
     func ShowMotionControls()
     {
         let DoShow = Settings.GetShowMotionControls()
         if DoShow
         {
-            print("Showing Motion Controls")
-            print("  MotionControlView.frame=\((OriginalMotionControlBounds)!)")
-            print("  GameView.frame=\((OriginalGameViewBounds)!)")
-                        MotionControlView.isHidden = false
-            MotionControlView.frame = OriginalMotionControlBounds
-            GameViewContainer.frame = OriginalGameViewBounds
+            GameUISurface3D?.ShowControls()
         }
         else
         {
-            #if true
-                        let NewGameHeight = GameViewContainer.frame.height + OriginalMotionControlBounds.height
-            print("Hiding Motion Controls")
-            print("  NewGameHeight=\(NewGameHeight)")
-            let NewMotionControlFrame = CGRect(x: 0, y: self.MotionControlView.frame.height, width: self.MotionControlView.frame.width,
-                                               height: 0)
-            let NewGameViewFrame = CGRect(x: 0, y: self.OriginalGameViewBounds.height,
-                                          width: self.OriginalGameViewBounds.width,
-                                          height: NewGameHeight)
-            print("  NewMotionControlFrame=\(NewMotionControlFrame)")
-            print("  NewGameViewFrame=\(NewGameViewFrame)")
-            UIView.animate(withDuration: 1.0,
-                           animations:
-                {
-                    self.MotionControlView.frame = NewMotionControlFrame
-                    self.GameViewContainer.frame = NewGameViewFrame
-            }, completion:
-                {
-                    _ in
-                    self.MotionControlView.frame = NewMotionControlFrame
-                    self.GameViewContainer.frame = NewGameViewFrame
-            })
-            #else
-            MotionControlView.isHidden = true
-            MotionControlView.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
-            let NewGameViewHeight = GameViewContainer.frame.height + OriginalMotionControlBounds.height
-            GameViewContainer.frame = CGRect(x: 0, y: 0, width: GameViewContainer.frame.width, height: NewGameViewHeight)
-            #endif
+            GameUISurface3D?.HideControls()
         }
     }
     
@@ -390,14 +338,10 @@ class MainViewController: UIViewController,
     /// - Parameter NewValue: The new value for the specified field.
     func SettingChanged(Field: SettingsFields, NewValue: Any)
     {
-        //print("Setting \(Field) changed.")
         switch Field
         {
             case .ShowCameraControls:
                 ShowCameraControls()
-            
-            case .ShowTopToolbar:
-                ShowTopToolbar()
             
             case .ShowMotionControls:
                 ShowMotionControls()
@@ -417,6 +361,9 @@ class MainViewController: UIViewController,
             }
             case .InterfaceLanguage:
                 break
+            
+            default:
+            break
         }
     }
     
@@ -471,31 +418,31 @@ class MainViewController: UIViewController,
                     switch PressedNode.ButtonType
                     {
                         case .DownButton:
-                        HandleMoveDownPressed()
+                            HandleMoveDownPressed()
                         
                         case .DropDownButton:
-                        HandleDropDownPressed()
+                            HandleDropDownPressed()
                         
                         case .FlyAwayButton:
-                        HandleUpAndAwayPressed()
+                            HandleUpAndAwayPressed()
                         
                         case .FreezeButton:
-                        HandleFreezeInPlacePressed()
+                            HandleFreezeInPlacePressed()
                         
                         case .LeftButton:
-                        HandleMoveLeftPressed()
+                            HandleMoveLeftPressed()
                         
                         case .RightButton:
-                        HandleMoveRightPressed()
+                            HandleMoveRightPressed()
                         
                         case .RotateLeftButton:
-                        HandleRotateLeftPressed()
+                            HandleRotateLeftPressed()
                         
                         case .RotateRightButton:
-                        HandleRotateRightPressed()
+                            HandleRotateRightPressed()
                         
                         case .UpButton:
-                        HandleMoveUpPressed()
+                            HandleMoveUpPressed()
                     }
                 }
                 return
@@ -639,7 +586,6 @@ class MainViewController: UIViewController,
         InAttractMode = true
         Game.AIScoringMethod = .OffsetMapping
         //3D setup
-        //GameView3D?.DestroyMap3D(FromBoard: Game.GameBoard!, CalledFrom: "HandleStartInAIMode", DestroyBy: .FadeAway)
         GameView3D?.DrawMap3D(FromBoard: Game.GameBoard!, CalledFrom: "HandleStartInAIMode")
         Game!.SetPredeterminedOrder(UsePredeterminedOrder, FirstIs: .T)
         
@@ -1053,9 +999,7 @@ class MainViewController: UIViewController,
     }
     
     /// Notice from the game that a new high score is available.
-    ///
     /// - Note: The high score is shown in the game view, not the UI.
-    ///
     /// - Parameter HighScore: The new high score.
     func NewHighScore(HighScore: Int)
     {
@@ -1069,7 +1013,6 @@ class MainViewController: UIViewController,
     var PreviousHighScore = -1
     
     /// Notice from the game what the new next piece is.
-    ///
     /// - Parameter Next: The next piece after the current piece.
     func NextPiece(_ Next: Piece)
     {
@@ -1111,23 +1054,6 @@ class MainViewController: UIViewController,
     var FPSSampleCount: Int = 0
     
     //var PieceFPS = [Double]()
-    
-    /// Notice from the game when a column is dropped during the collapse process.
-    ///
-    /// - Parameter Column: The column that was dropped.
-    func ColumnDropped(Column: Int)
-    {
-    }
-    
-    /// TBD
-    ///
-    /// - Parameters:
-    ///   - Column: TBD
-    ///   - From: TBD
-    ///   - ToTarget: TBD
-    func DropColumn(Column: Int, From: Int, ToTarget: Int)
-    {
-    }
     
     /// Notice from the game that it is done compressing the board.
     ///
@@ -1343,7 +1269,7 @@ class MainViewController: UIViewController,
         DebugClient.SetIdiotLight(IdiotLights.B2, Title: "Playing", FGColor: ColorNames.WhiteSmoke, BGColor: ColorNames.PineGreen)
         let GameCountMsg = MessageHelper.MakeKVPMessage(ID: GameCountID, Key: "Game Count", Value: "\(GameCount)")
         DebugClient.SendPreformattedCommand(GameCountMsg)
-
+        
         GameTextOverlay?.HideVersionBox(Duration: 0.2)
         GameTextOverlay?.HideGameOver(Duration: 0.0)
         GameTextOverlay?.HidePressPlay(Duration: 0.0)
@@ -1411,129 +1337,51 @@ class MainViewController: UIViewController,
     
     // MARK: Game-control related functions.
     
-    #if true
     func HandleMoveLeftPressed()
-{
-    MoveLeft()
-    }
-    
-    func HandleMoveRightPressed()
-{
-    MoveRight()
-    }
-    
-    func HandleMoveUpPressed()
-{
-    MoveUp()
-    }
-    
-    func HandleMoveDownPressed()
-{
-    MoveDown()
-    }
-    
-    func HandleUpAndAwayPressed()
-{
-    MoveUpAndAway()
-    }
-    
-    func HandleDropDownPressed()
-{
-    DropDown()
-    }
-    
-    func HandleRotateLeftPressed()
-{
-    RotateRight()
-    }
-    
-    func HandleRotateRightPressed()
-{
-    RotateLeft()
-    }
-    
-    func HandleFreezeInPlacePressed()
-{
-    FreezeInPlace()
-    }
-    #else
-    /// Handle the move left button pressed.
-    ///
-    /// - Parameter sender: Not used.
-    @IBAction func HandleMoveLeftPressed(_ sender: Any)
     {
         MoveLeft()
     }
     
-    /// Handle the move right button pressed.
-    ///
-    /// - Parameter sender: Not used.
-    @IBAction func HandleMoveRightPressed(_ sender: Any)
+    func HandleMoveRightPressed()
     {
         MoveRight()
     }
     
-    /// Handle the move up button pressed.
-    ///
-    /// - Parameter sender: Not used.
-    @IBAction func HandleMoveUpPressed(_ sender: Any)
+    func HandleMoveUpPressed()
     {
         MoveUp()
     }
     
-    /// Handle the move up and away button pressed.
-    ///
-    /// - Parameter sender: Not used.
-    @IBAction func HandleUpAndAwayPressed(_ sender: Any)
-    {
-        MoveUpAndAway()
-    }
-    
-    /// Handle the move down button pressed.
-    ///
-    /// - Parameter sender: Not used.
-    @IBAction func HandleMoveDownPressed(_ sender: Any)
+    func HandleMoveDownPressed()
     {
         MoveDown()
     }
     
-    /// Handle the drop down button pressed.
-    ///
-    /// - Parameter sender: Not used.
-    @IBAction func HandleDropDownPressed(_ sender: Any)
+    func HandleUpAndAwayPressed()
+    {
+        MoveUpAndAway()
+    }
+    
+    func HandleDropDownPressed()
     {
         DropDown()
     }
     
-    /// Handle the rotate left button pressed.
-    ///
-    /// - Parameter sender: Not used.
-    @IBAction func HandleRotateLeftPressed(_ sender: Any)
+    func HandleRotateLeftPressed()
     {
-        //Even though the function is titled "HandleRotateLeftPressed", we will rotate the piece to the right due to
-        //how the piece implemented rotations.
         RotateRight()
     }
     
-    /// Handle the rotate right button pressed.
-    ///
-    /// - Parameter sender: Not used.
-    @IBAction func HandleRotateRightPressed(_ sender: Any)
+    func HandleRotateRightPressed()
     {
-        //Even though the function is titled "HandleRotateRightPressed", we will rotate the piece to the left due to
-        //how the piece implemented rotations.
         RotateLeft()
     }
     
-    /// Handle the freeze in place button pressed.
-    /// - Note: This button is valid only in certain games.
-    /// - Parameter sender: Not used.
-    @IBAction func HandleFreezeInPlacePressed(_ sender: Any)
+    func HandleFreezeInPlacePressed()
     {
         FreezeInPlace()
     }
-    #endif
-    
+   
     /// Handle the play button pressed.
     ///
     /// - Note: The button's visuals will change depending on whether the game is in play or stopped.
@@ -1597,194 +1445,54 @@ class MainViewController: UIViewController,
     func AI_MoveUp()
     {
         GameUISurface3D?.FlashButton(.UpButton)
-        /*
-        #if true
-        UIView.animate(withDuration: 0.15,
-                       animations:
-            {
-                self.MoveUpButton.tintColor = UIColor.yellow
-        }, completion:
-            {
-                _ in
-                self.MoveUpButton.tintColor = UIColor.white
-        })
-        #else
-        MoveUpButton2.Highlight(WithImage: "UpArrowHighlighted48", ForSeconds: 0.15,
-                                OriginalName: "UpArrow48")
-        #endif
- */
     }
     
     /// AI is throwing a piece away.
     func AI_MoveUpAndAway()
     {
         GameUISurface3D?.FlashButton(.FlyAwayButton)
-        /*
-        #if true
-        UIView.animate(withDuration: 0.15,
-                       animations:
-            {
-                self.UpAndAwayButton.tintColor = UIColor.yellow
-        }, completion:
-            {
-                _ in
-                self.UpAndAwayButton.tintColor = UIColor.cyan
-        })
-        #else
-        UpAndAwayButton2.Highlight(WithImage: "FlyAwayArrowHighlighted48", ForSeconds: 0.15,
-                                   OriginalName: "FlyAwayArrow48")
-        #endif
- */
     }
     
     /// AI is moving a piece downwards.
     func AI_MoveDown()
     {
         GameUISurface3D?.FlashButton(.DownButton)
-        /*
-        #if true
-        UIView.animate(withDuration: 0.15,
-                       animations:
-            {
-                self.MoveDownButton.tintColor = UIColor.yellow
-        }, completion:
-            {
-                _ in
-                self.MoveDownButton.tintColor = UIColor.white
-        })
-        #else
-        MoveDownButton2.Highlight(WithImage: "DownArrowHighlighted48", ForSeconds: 0.15,
-                                  OriginalName: "DownArrow48")
-        #endif
- */
     }
     
     /// AI is dropping a piece downwards.
     func AI_DropDown()
     {
         GameUISurface3D?.FlashButton(.DropDownButton)
-        /*
-        #if true
-        UIView.animate(withDuration: 0.15,
-                       animations:
-            {
-                self.DropDownButton.tintColor = UIColor.yellow
-        }, completion:
-            {
-                _ in
-                self.DropDownButton.tintColor = UIColor.systemGreen
-        })
-        #else
-        DropDownButton2.Highlight(WithImage: "DropDownArrowHighlighted48", ForSeconds: 0.15,
-                                  OriginalName: "DropDownArrow48")
-        #endif
- */
     }
     
     /// AI is moving a piece to the left.
     func AI_MoveLeft()
     {
         GameUISurface3D?.FlashButton(.LeftButton)
-        /*
-        #if true
-        UIView.animate(withDuration: 0.15,
-                       animations:
-            {
-                self.MoveLeftButton.tintColor = UIColor.yellow
-        }, completion:
-            {
-                _ in
-                self.MoveLeftButton.tintColor = UIColor.white
-        })
-        #else
-        MoveLeftButton2.Highlight(WithImage: "LeftArrowHighlighted48", ForSeconds: 0.15,
-                                  OriginalName: "LeftArrow48")
-        #endif
- */
     }
     
     /// AI is moving a piece to the right.
     func AI_MoveRight()
     {
         GameUISurface3D?.FlashButton(.RightButton)
-        /*
-        #if true
-        UIView.animate(withDuration: 0.15,
-                       animations:
-            {
-                self.MoveRightButton.tintColor = UIColor.yellow
-        }, completion:
-            {
-                _ in
-                self.MoveRightButton.tintColor = UIColor.white
-        }
-        )
-        #else
-        MoveRightButton2.Highlight(WithImage: "RightArrowHighlighted48", ForSeconds: 0.15,
-                                   OriginalName: "RightArrow48")
-        #endif
- */
     }
     
     /// AI is rotating a piece clockwise.
     func AI_RotateRight()
     {
         GameUISurface3D?.FlashButton(.RotateRightButton)
-        /*
-        #if true
-        UIView.animate(withDuration: 0.15,
-                       animations:
-            {
-                self.RotateRightButton.tintColor = UIColor.yellow
-        }, completion:
-            {
-                _ in
-                self.RotateRightButton.tintColor = UIColor.white
-        })
-        #else
-        RotateRightButton2.Highlight(WithImage: "RotateRightHighlighted48", ForSeconds: 0.15,
-                                     OriginalName: "RotateRight48_2")
-        #endif
- */
     }
     
     /// AI is rotating a piece counter-clockwise.
     func AI_RotateLeft()
     {
         GameUISurface3D?.FlashButton(.RotateLeftButton)
-        /*
-        #if true
-        UIView.animate(withDuration: 0.15,
-                       animations:
-            {
-                self.RotateRightButton.tintColor = UIColor.yellow
-        }, completion:
-            {
-                _ in
-                self.RotateRightButton.tintColor = UIColor.white
-        })
-        #else
-        RotateLeftButton2.Highlight(WithImage: "RotateLeftHighlighted48", ForSeconds: 0.15,
-                                    OriginalName: "RotateLeft48_2")
-        #endif
- */
     }
     
     /// AI is freezing a piece into place.
     func AI_FreezeInPlace()
     {
         GameUISurface3D?.FlashButton(.FreezeButton)
-        /*
-        UIView.animate(withDuration: 0.15,
-                       animations:
-            {
-                self.FreezeInPlaceButton.tintColor = UIColor.yellow
-        }, completion:
-            {
-                _ in
-                self.FreezeInPlaceButton.tintColor = UIColor.cyan
-        })
- */
     }
     
     // MARK: Game view request functions.
@@ -1862,32 +1570,6 @@ class MainViewController: UIViewController,
         
     }
     
-    #if false
-    // MARK: Game-level delegate functions.
-    
-    /// Returns the current level and mode.
-    ///
-    /// - Parameters:
-    ///   - CurrentLevel: The level the game is currently playing in.
-    ///   - CurrentMode: The mode the game is currently playing in.
-    func GetLevelInformation(CurrentLevel: inout LevelTypes, CurrentMode: inout ModeTypes)
-    {
-        CurrentLevel = LevelTypes.ReallyEasy
-        CurrentMode = ModeTypes.AttractMode
-    }
-    
-    /// Handle new level selected from the level setting sheet.
-    ///
-    /// - Parameters:
-    ///   - WasCanceled: Determines if the user pressed the cancel button - if so, `NewLevel` and `NewMode` are undefined.
-    ///   - NewLevel: The new level if `WasCanceled` is false.
-    ///   - NewMode: The new mode if `WasCanceled` is false.
-    func LevelSelected(WasCanceled: Bool, NewLevel: LevelTypes?, NewMode: ModeTypes?)
-    {
-        
-    }
-    #endif
-    
     // MARK: General-UI interactions.
     
     var ProposedNewGameType: BaseGameTypes = .Standard
@@ -1959,6 +1641,7 @@ class MainViewController: UIViewController,
     }
     
     /// Handle the attract button in the slide in view pressed. Start a new game in attract mode (AI running).
+    /// - Note: It is important the AttractTimer is destroyed or timing issues will cause crashes.
     /// - Parameter sender: Not used.
     @IBAction func HandleSlideInAttractButtonPressed(_ sender: Any)
     {
@@ -1977,6 +1660,8 @@ class MainViewController: UIViewController,
         ClearAndPlay()
     }
     
+    /// Show the slide-in menu.
+    /// - Parameter sender: Not used.
     @IBAction func HandleSettingsSlideInButtonPressed(_ sender: Any)
     {
         ForcePause()
@@ -1990,6 +1675,9 @@ class MainViewController: UIViewController,
         }
     }
     
+    /// About dialog instantiated. Clean up the slide-in menu.
+    /// - Parameter coder: See Apple documentation.
+    /// - Returns: About dialog controller code.
     @IBSegueAction func InstantiateAboutDialog(_ coder: NSCoder) -> AboutDialogController?
     {
         ForcePause()
@@ -1999,6 +1687,9 @@ class MainViewController: UIViewController,
         return About
     }
     
+    /// Game selector dialog instantiated. Clean up the slide-in menu.
+    /// Parameter code: See Apple documentation.
+    /// - Returns: Game selector code.
     @IBSegueAction func InstantiateGameSelector(_ coder: NSCoder) -> SelectGameController?
     {
         ForcePause()
@@ -2060,9 +1751,7 @@ class MainViewController: UIViewController,
     // MARK: AI Scoring for debugging.
     
     /// Set AI scoring method.
-    ///
     /// - Note: Not current in use.
-    ///
     /// - Parameter Method: The method to use to score with the AI.
     func SetAIScoring(Method: AIScoringMethods)
     {
@@ -2070,9 +1759,7 @@ class MainViewController: UIViewController,
     }
     
     /// Determines if the default scoring method should be used.
-    ///
     /// - Note: Not current in use.
-    ///
     /// - Parameter IsDefault: If true, use the default method.
     func SetAIDefaultScoring(IsDefault: Bool)
     {
@@ -2080,9 +1767,7 @@ class MainViewController: UIViewController,
     }
     
     /// Sets the valid piece groups to use by the AI.
-    ///
     /// - Note: Not current in use.
-    ///
     /// - Parameter PieceGroups: The piece groups to use.
     func SetPieceGroups(PieceGroups: MetaPieces)
     {
@@ -2090,9 +1775,7 @@ class MainViewController: UIViewController,
     }
     
     /// How to select pices.
-    ///
     /// - Note: Not current in use.
-    ///
     /// - Parameter Method: The method to use to select pieces.
     func SetPieceSelection(Method: PieceSelectionMethods)
     {
@@ -2100,9 +1783,7 @@ class MainViewController: UIViewController,
     }
     
     /// Returns the AI scoring to use.
-    ///
     /// - Note: Defaults to `.OffsetMapping`.
-    ///
     /// - Returns: The AI scoring to use.
     func GetAIScoring() -> AIScoringMethods
     {
@@ -2110,9 +1791,7 @@ class MainViewController: UIViewController,
     }
     
     /// Return use the default scoring method flag.
-    ///
     /// - Note: Always returns false.
-    ///
     /// - Returns: Value indicating whether to use the default method or not.
     func GetAIDefaultScoring() -> Bool
     {
@@ -2120,9 +1799,7 @@ class MainViewController: UIViewController,
     }
     
     /// Returns the group of pieces to use by the AI.
-    ///
     /// - Note: Always returns `.Standard`.
-    ///
     /// - Returns: Piece group to use.
     func GetPieceGroups() -> MetaPieces
     {
@@ -2347,7 +2024,6 @@ class MainViewController: UIViewController,
     @IBOutlet weak var PauseResumeButton: UIButton!
     @IBOutlet weak var GameUISurface3D: View3D!
     @IBOutlet weak var GameControlView: UIView!
-    @IBOutlet weak var MotionControlView: UIView!
     @IBOutlet weak var GameViewContainer: UIView!
     @IBOutlet weak var TextLayerView: TextLayerManager!
     @IBOutlet weak var NextPieceLabelView: UIView!
@@ -2362,25 +2038,13 @@ class MainViewController: UIViewController,
     @IBOutlet weak var MainSlideIn: MainSlideInView2!
     @IBOutlet weak var SlideInAttractButton: UIButton!
     @IBOutlet weak var SlideInCloseButton: UIButton!
-    @IBOutlet weak var TopOverlapView: UIView!
-    #if false
-    @IBOutlet weak var FreezeInPlaceButton: UIButton!
     @IBOutlet weak var SlideInSubView: UIView!
-    @IBOutlet weak var MoveLeftButton: UIButton!
-    @IBOutlet weak var MoveDownButton: UIButton!
-    @IBOutlet weak var MoveUpButton: UIButton!
-    @IBOutlet weak var RotateLeftButton: UIButton!
-    @IBOutlet weak var MoveRightButton: UIButton!
-    @IBOutlet weak var DropDownButton: UIButton!
-    @IBOutlet weak var UpAndAwayButton: UIButton!
-    @IBOutlet weak var RotateRightButton: UIButton!
-    #endif
     @IBOutlet weak var VideoButton: UIButton!
     @IBOutlet weak var SlideInVideoButton: UIButton!
     @IBOutlet weak var CameraButton: UIButton!
-        @IBOutlet weak var SlideInCameraButton: UIButton!
+    @IBOutlet weak var SlideInCameraButton: UIButton!
     @IBOutlet weak var FPSLabel: UILabel!
-            @IBOutlet weak var SlideInCameraControlBox: UIView!
+    @IBOutlet weak var SlideInCameraControlBox: UIView!
     @IBOutlet weak var SlideInPlayButton: UIButton!
     @IBOutlet weak var SlideInPauseButton: UIButton!
     @IBOutlet weak var TextVersionBox: UIView!
