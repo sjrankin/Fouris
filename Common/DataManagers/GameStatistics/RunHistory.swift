@@ -9,8 +9,11 @@
 import Foundation
 import UIKit
 
-class RunHistory2: CustomStringConvertible, XMLDeserializeProtocol
+/// Contains game run history in instance form.
+/// - Note: No individually identifiable information is collected or stored.
+class RunHistory: CustomStringConvertible, XMLDeserializeProtocol
 {
+    /// Initializer.
     init()
     {
         _Games = [BaseGameTypes: GameHistory]()
@@ -19,6 +22,8 @@ class RunHistory2: CustomStringConvertible, XMLDeserializeProtocol
         _Games![.Cubic] = GameHistory()
     }
     
+    /// Get the dirty flag.
+    /// - Note: The dirty flag is from individual game statistic collections.
     public var Dirty: Bool
     {
         get
@@ -37,7 +42,9 @@ class RunHistory2: CustomStringConvertible, XMLDeserializeProtocol
         }
     }
     
+    /// Holds a dictionary of game statistics.
     private var _Games: [BaseGameTypes: GameHistory]? = nil
+    /// Get or set game statistics.
     public var Games: [BaseGameTypes: GameHistory]?
     {
         get
@@ -49,8 +56,10 @@ class RunHistory2: CustomStringConvertible, XMLDeserializeProtocol
             _Games = newValue
         }
     }
-    
+
+    /// Holds the history name.
     private var _HistoryName: String = ""
+    /// Get or set the history name.
     public var HistoryName: String
     {
         get
@@ -63,7 +72,9 @@ class RunHistory2: CustomStringConvertible, XMLDeserializeProtocol
         }
     }
     
+    /// Holds the time stamp.
     private var _TimeStamp: String = ""
+    /// Get or set the time stamp (in string format) for the last time the history was saved.
     public var TimeStamp: String
     {
         get
@@ -77,6 +88,10 @@ class RunHistory2: CustomStringConvertible, XMLDeserializeProtocol
     }
     
     /// Deserialize from the passed node.
+    /// - Note: Deserialization takes from from the top-most, non-document root node. Nodes are
+    ///         traversed here so only the top-most node is processed from a call, regardless of
+    ///         which node is passed to us.
+    /// - Parameter Node: The node to deserialied.
     func DeserializedNode(_ Node: XMLNode)
     {
         if Node.Name == "XMLDocument"
