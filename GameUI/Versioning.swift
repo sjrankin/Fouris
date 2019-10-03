@@ -10,8 +10,11 @@ import Foundation
 import UIKit
 
 /// Contains versioning and copyright information. The contents of this file are automatically updated with each
-/// build by the VersionUpdater utility.
-public class Versioning
+/// build by the VersionUpdater utility. This file also contains functions to return versioning information in various
+/// formats.
+/// - Note: Depending on when the automatic update to this file happens, the build times and numbers may be one off; this will
+///         happen if this file is updated as a post-build step. To avoid this, use a pre-build step instead.
+public class Versioning: CustomStringConvertible
 {
     /// Major version number.
     public static let MajorVersion: String = "1"
@@ -52,6 +55,21 @@ public class Versioning
             }
         }
         return Final
+    }
+    
+    /// Create and return a simple version string.
+    /// - Parameter NoBuild: If true, the build number will not be included. Default is false
+    /// - Note: The version string will consist of: `<Application Name> <Version>, (<Build>)` or `<Application Name> <Version>`,
+    ///         depending on the value of `NoBuild`.
+    public static func MakeSimpleVersionString(NoBuild: Bool = false) -> String
+    {
+        var Label = ApplicationName
+        Label.append(" " + "\(MajorVersion)" + "." + "\(MinorVersion)")
+        if !NoBuild
+        {
+        Label.append(", (\(Build))")
+        }
+        return Label
     }
     
     /// Publishes the version string to the debug console.
@@ -103,9 +121,7 @@ public class Versioning
         if Years.count > 1
         {
             Years = Years.sorted()
-            let FirstYear = Years.first
-            let LastYear = Years.last
-            CopyrightYears = "\(FirstYear!) - \(LastYear!)"
+            CopyrightYears = "\(Years.first!) - \(Years.last!)"
         }
         else
         {
@@ -299,5 +315,19 @@ public class Versioning
         Emit = Emit + Spaces + "  " + CopyrightText() + "\n"
         Emit = Emit + Spaces + "</Version>"
         return Emit
+    }
+    
+    /// Allows a caller to print the contents of the class easily.
+    /// - Note:
+    ///   - The returned string is from the `EmitXML()` function.
+    ///   - This is an instance property and so probably won't be called. `CustomStringConvertible` does not allow for static
+    ///     versions of `description` unfortunately. However, this property is provided just in case there is a time when the
+    ///     caller may want to print an instance of the static class, which doesn't really make sense.
+    public var description: String
+    {
+        get
+        {
+            return Versioning.EmitXML()
+        }
     }
 }
