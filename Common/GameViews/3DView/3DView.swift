@@ -121,8 +121,8 @@ class View3D: SCNView,                          //Our main super class.
         let ControlLightNode = CreateControlLight()
         self.scene?.rootNode.addChildNode(ControlLightNode)
         
-//        MasterSceneNode = SCNNode()
-//        self.scene?.rootNode.addChildNode(MasterSceneNode!)
+        //        MasterSceneNode = SCNNode()
+        //        self.scene?.rootNode.addChildNode(MasterSceneNode!)
         
         DrawBackground()
         DrawBucketGrid(ShowLines: CurrentTheme!.ShowBucketGrid, IncludingOutline: true)
@@ -134,9 +134,9 @@ class View3D: SCNView,                          //Our main super class.
         ShowControls()
     }
     
-        func NewParentSize(Bounds: CGRect, Frame: CGRect)
-        {
-            
+    func NewParentSize(Bounds: CGRect, Frame: CGRect)
+    {
+        
     }
     
     func ThemeUpdated(ThemeName: String, Field: ThemeFields)
@@ -146,7 +146,7 @@ class View3D: SCNView,                          //Our main super class.
             ThemeFields.BackgroundSolidColor, ThemeFields.BackgroundImageName, ThemeFields.BackgroundImageFromCameraRoll,
             ThemeFields.BackgroundSolidColorCycleTime, ThemeFields.BackgroundSolidColorCycleTime].contains(Field)
         {
-        DrawBackground()
+            DrawBackground()
         }
         else
         {
@@ -154,10 +154,10 @@ class View3D: SCNView,                          //Our main super class.
             {
                 case .CameraFieldOfView:
                     CameraNode.camera?.fieldOfView = CGFloat(CurrentTheme!.CameraFieldOfView)
-                print("Camera field of view changed to \(CurrentTheme!.CameraFieldOfView)")
+                    print("Camera field of view changed to \(CurrentTheme!.CameraFieldOfView)")
                 
                 default:
-                break
+                    break
             }
         }
     }
@@ -395,7 +395,7 @@ class View3D: SCNView,                          //Our main super class.
             BucketNode?.removeFromParentNode()
         }
         BucketNode = SCNNode()
-
+        
         switch BaseGameType
         {
             case .Standard:
@@ -440,7 +440,7 @@ class View3D: SCNView,                          //Our main super class.
                 CentralNode.position = SCNVector3(0.0, 0.0, 0.0)
                 BucketNode?.addChildNode(CentralNode)
         }
-                //MasterSceneNode?.addChildNode(BucketNode!)
+        //MasterSceneNode?.addChildNode(BucketNode!)
         self.scene?.rootNode.addChildNode(BucketNode!)
         
         _BucketAdded = true
@@ -489,7 +489,7 @@ class View3D: SCNView,                          //Our main super class.
             let Start = SCNVector3(-64.5, Y, 0.0)
             let End = SCNVector3(128.5, Y, 0.0)
             let LineNode = MakeLine(From: Start, To: End, Color: ColorNames.White)
-//            MasterSceneNode?.addChildNode(LineNode)
+            //            MasterSceneNode?.addChildNode(LineNode)
             self.scene?.rootNode.addChildNode(LineNode)
         }
         for X in stride(from: -64.5, to: 128.5, by: 1.0)
@@ -497,7 +497,7 @@ class View3D: SCNView,                          //Our main super class.
             let Start = SCNVector3(X, -64.0, 0.0)
             let End = SCNVector3(X, 128.0, 0.0)
             let LineNode = MakeLine(From: Start, To: End, Color: ColorNames.White)
-//            MasterSceneNode?.addChildNode(LineNode)
+            //            MasterSceneNode?.addChildNode(LineNode)
             self.scene?.rootNode.addChildNode(LineNode)
         }
     }
@@ -863,10 +863,10 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter DestroyBy: Determines how to empty the bucket.
     /// - Parameter MaxDuration: Maximum amount of time (in seconds) to take to clear the board.
     func DestroyMap3D(FromBoard: Board, DestroyBy: DestructionMethods, MaxDuration: Double)
-        {
-            objc_sync_enter(RotateLock)
-            defer{objc_sync_exit(RotateLock)}
-            BucketCleaner(DestroyBy, MaxDuration: MaxDuration)
+    {
+        objc_sync_enter(RotateLock)
+        defer{objc_sync_exit(RotateLock)}
+        BucketCleaner(DestroyBy, MaxDuration: MaxDuration)
     }
     
     /// Draw the 3D game view map. Includes moving pieces.
@@ -1024,7 +1024,7 @@ class View3D: SCNView,                          //Our main super class.
         }
         MasterBlockNode = SCNNode()
         MasterBlockNode!.name = "Master Block Node"
-//        MasterSceneNode?.addChildNode(MasterBlockNode!)
+        //        MasterSceneNode?.addChildNode(MasterBlockNode!)
         self.scene?.rootNode.addChildNode(MasterBlockNode!)
     }
     
@@ -1305,8 +1305,8 @@ class View3D: SCNView,                          //Our main super class.
             case .Cubic:
                 break
         }
-//        MasterSceneNode?.addChildNode(BucketGridNode!)
-//        MasterSceneNode?.addChildNode(OutlineNode!)
+        //        MasterSceneNode?.addChildNode(BucketGridNode!)
+        //        MasterSceneNode?.addChildNode(OutlineNode!)
         self.scene?.rootNode.addChildNode(BucketGridNode!)
         self.scene?.rootNode.addChildNode(OutlineNode!)
     }
@@ -1424,12 +1424,12 @@ class View3D: SCNView,                          //Our main super class.
         #else
         let ZRotation = DirectionalSign * 90.0 * CGFloat.pi / 180.0
         let RotateAction = SCNAction.rotateBy(x: 0.0, y: 0.0, z: ZRotation, duration: Duration)
-//        let RotateAction = SCNAction.rotateTo(x: 0.0, y: 0.0, z: ZRotation, duration: Duration)
+        //        let RotateAction = SCNAction.rotateTo(x: 0.0, y: 0.0, z: ZRotation, duration: Duration)
         RemoveMovingPiece()
         if CurrentTheme!.RotateBucketGrid
         {
-        BucketGridNode?.runAction(RotateAction)
-        OutlineNode?.runAction(RotateAction)
+            BucketGridNode?.runAction(RotateAction)
+            OutlineNode?.runAction(RotateAction)
         }
         MasterBlockNode?.runAction(RotateAction)
         BucketNode?.runAction(RotateAction)
@@ -1847,18 +1847,18 @@ class View3D: SCNView,                          //Our main super class.
     
     /// Dictionary between node button types and the system image name and location of each node.
     let ButtonDictionary: [NodeButtons: (Location: SCNVector3, Color: UIColor, Highlight: UIColor)] =
-    [
-        .LeftButton: (SCNVector3(-13.0, -10.0, 1.0), UIColor.white, UIColor.yellow),
-        .RotateLeftButton: (SCNVector3(-13.0, -12.8, 1.0), UIColor.white, UIColor.yellow),
-        .UpButton: (SCNVector3(-10.0, -12.8, 1.0), UIColor.white, UIColor.yellow),
-        .DownButton:  (SCNVector3(-10.0, -10.0, 1.0), UIColor.white, UIColor.yellow),
-        
-        .RightButton:  (SCNVector3(10.5, -10.0, 1.0), UIColor.white, UIColor.yellow),
-        .DropDownButton:  (SCNVector3(7.5, -10.0, 1.0), UIColor.systemGreen, UIColor.yellow),
-        .FlyAwayButton:  (SCNVector3(7.5, -12.8, 1.0), UIColor.systemBlue, UIColor.yellow),
-        .RotateRightButton:  (SCNVector3(10.5, -12.8, 1.0), UIColor.white, UIColor.yellow),
-        
-        .FreezeButton: (SCNVector3(-0.9, -11.5, 1.0), UIColor.cyan, UIColor.blue)
+        [
+            .LeftButton: (SCNVector3(-13.0, -10.0, 1.0), UIColor.white, UIColor.yellow),
+            .RotateLeftButton: (SCNVector3(-13.0, -12.8, 1.0), UIColor.white, UIColor.yellow),
+            .UpButton: (SCNVector3(-10.0, -12.8, 1.0), UIColor.white, UIColor.yellow),
+            .DownButton:  (SCNVector3(-10.0, -10.0, 1.0), UIColor.white, UIColor.yellow),
+            
+            .RightButton:  (SCNVector3(10.5, -10.0, 1.0), UIColor.white, UIColor.yellow),
+            .DropDownButton:  (SCNVector3(7.5, -10.0, 1.0), UIColor.systemGreen, UIColor.yellow),
+            .FlyAwayButton:  (SCNVector3(7.5, -12.8, 1.0), UIColor.systemBlue, UIColor.yellow),
+            .RotateRightButton:  (SCNVector3(10.5, -12.8, 1.0), UIColor.white, UIColor.yellow),
+            
+            .FreezeButton: (SCNVector3(-0.9, -11.5, 1.0), UIColor.cyan, UIColor.blue)
     ]
     
     /// Returns the parent node of the passed button node.
@@ -1868,8 +1868,8 @@ class View3D: SCNView,                          //Our main super class.
     {
         for (_, Parent) in ButtonList
         {
-             if Parent.childNode(withName: Of.name!, recursively: true) != nil
-             {
+            if Parent.childNode(withName: Of.name!, recursively: true) != nil
+            {
                 return Parent
             }
         }
@@ -1893,25 +1893,65 @@ class View3D: SCNView,                          //Our main super class.
     }
     
     /// Show game view controls.
-    func ShowControls()
+    /// - Parameter Which: Array of buttons to show. If nil, all buttons are shown. Default is nil. Passing an empty array will
+    ///                    remove all buttons.
+    func ShowControls(With: [NodeButtons]? = nil)
     {
-        //Standard buttons
-        MakeButton(ForButton: .LeftButton)
-        MakeButton(ForButton: .DownButton)
-        MakeButton(ForButton: .RotateLeftButton)
-        MakeButton(ForButton: .RightButton)
-        MakeButton(ForButton: .RotateRightButton)
-        //Optional buttons
-        MakeButton(ForButton: .UpButton)
-        MakeButton(ForButton: .DropDownButton)
-        MakeButton(ForButton: .FlyAwayButton)
-        MakeButton(ForButton: .FreezeButton)
+        //Remove all of the buttons first.
+        for (_, Button) in ButtonList
+        {
+            Button.removeFromParentNode()
+        }
+        ButtonList.removeAll()
+        
+        if With == nil
+        {
+            MakeButton(ForButton: .LeftButton)
+            MakeButton(ForButton: .DownButton)
+            MakeButton(ForButton: .RotateLeftButton)
+            MakeButton(ForButton: .RightButton)
+            MakeButton(ForButton: .RotateRightButton)
+            MakeButton(ForButton: .UpButton)
+            MakeButton(ForButton: .DropDownButton)
+            MakeButton(ForButton: .FlyAwayButton)
+            MakeButton(ForButton: .FreezeButton)
+        }
+        else
+        {
+            for SomeButton in With!
+            {
+                MakeButton(ForButton: SomeButton)
+            }
+        }
     }
     
-        /// Hide game view controls.
+    /// Adds the specified button to the set of motion controls. If the button is already present, no action is taken.
+    /// - Parameter Which: The button to add.
+    func AppendButton(Which: NodeButtons)
+    {
+        if ButtonList.keys.contains(Which)
+        {
+            return
+        }
+        MakeButton(ForButton: Which)
+    }
+    
+    /// Removes the specified button from the set of motion controls. If the button is not present, no action is taken.
+    /// - Parameter Which: The button to remove.
+    func RemoveButton(Which: NodeButtons)
+    {
+        if ButtonList.keys.contains(Which)
+        {
+            ButtonList[Which]?.removeFromParentNode()
+            ButtonList.removeValue(forKey: Which)
+        }
+    }
+    
+    /// Hides all motion controls in the game surface and may optionally change the visual size
+    /// of the bucket.
     func HideControls()
     {
-
+        ShowControls(With: [])
     }
 }
 
@@ -1954,6 +1994,16 @@ enum Angles: CGFloat, CaseIterable
     case Angle270 = 270.0
 }
 
+/// Set of motion control buttons built in to the game surface.
+/// - **LeftButton**: Button to move the piece to the left.
+/// - **UpButton**: Button to move the piece up.
+/// - **DownButton**: Button to move the piece down.
+/// - **RightButton**: Button to move the piece to the right.
+/// - **DropDownButton**: Button to drop the piece.
+/// - **FlyAwayButton**: Button to fly the piece away.
+/// - **RotateLeftButton**: Button to rotate the piece counterclockwise by 90°.
+/// - **RotateRightButton**: Button to rotate the piece clockwise by 90°.
+/// - **FreezeButton**: Button to freeze a button in place.
 enum NodeButtons: String, CaseIterable
 {
     case LeftButton = "LeftButton"
