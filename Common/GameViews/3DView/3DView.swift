@@ -132,6 +132,7 @@ class View3D: SCNView,                          //Our main super class.
                                          userInfo: nil, repeats: true)
         
         ShowControls()
+        DrawCenterLines()
     }
     
     func NewParentSize(Bounds: CGRect, Frame: CGRect)
@@ -421,16 +422,7 @@ class View3D: SCNView,                          //Our main super class.
                 BucketNode?.addChildNode(BottomNode)
             
             case .Rotating4:
-                #if true
                 DrawCenterBlock(Parent: BucketNode!, InShape: CenterBlockShape)
-                #else
-                let Center = SCNBox(width: 4.0, height: 4.0, length: 1.0, chamferRadius: 0.0)
-                Center.materials.first?.diffuse.contents = ColorServer.ColorFrom(ColorNames.ReallyDarkGray)
-                Center.materials.first?.specular.contents = ColorServer.ColorFrom(ColorNames.White)
-                let CentralNode = SCNNode(geometry: Center)
-                CentralNode.position = SCNVector3(0.0, 0.0, 0.0)
-                BucketNode?.addChildNode(CentralNode)
-            #endif
             
             case .Cubic:
                 let Center = SCNBox(width: 2.0, height: 2.0, length: 2.0, chamferRadius: 0.0)
@@ -448,6 +440,18 @@ class View3D: SCNView,                          //Our main super class.
     
     /// Flag indicating the bucket was added. Do we need this in this class?
     var _BucketAdded: Bool = false
+    
+    /// Draw a vertical and horizontal line passing through the origin.
+    func DrawCenterLines()
+    {
+        let Width: CGFloat = 0.05
+        let VLine = MakeLine(From: SCNVector3(0.0, 20.0, 2.0), To: SCNVector3(0.0, -80.0, 2.0), Color: ColorNames.Yellow, LineWidth: Width)
+        let HLine = MakeLine(From: SCNVector3(-20.0, 0.0, 2.0), To: SCNVector3(80.0, 0.0, 2.0), Color: ColorNames.Yellow, LineWidth: Width)
+        VLine.categoryBitMask = ControlLight
+        HLine.categoryBitMask = ControlLight
+        self.scene?.rootNode.addChildNode(VLine)
+        self.scene?.rootNode.addChildNode(HLine)
+    }
     
     /// Create a "line" and return it in a scene node.
     /// - Note: The line is really a very thin box. This makes lines a rather heavy operation.
@@ -1368,6 +1372,8 @@ class View3D: SCNView,                          //Our main super class.
     {
     }
     
+    // MARK: Bucket rotatation routines.
+    
     /// Lock used when the board is rotating.
     var RotateLock = NSObject()
     
@@ -1463,8 +1469,15 @@ class View3D: SCNView,                          //Our main super class.
         objc_sync_enter(RotateLock)
         defer{objc_sync_exit(RotateLock)}
         let DirectionalSign = CGFloat(Right ? -1.0 : 1.0)
-        let ZRotation = DirectionalSign * 90.0 * CGFloat.pi / 180.0
-        let RotateAction = SCNAction.rotateBy(x: 0.0, y: 0.0, z: ZRotation, duration: Duration)
+//        let ZRotation = DirectionalSign * 90.0 * CGFloat.pi / 180.0
+        let LAbsoluteZ = AbsoluteZ * CGFloat.pi / 180.0
+        AbsoluteZ = AbsoluteZ + CGFloat(Right ? 90.0 : -90.0)
+        if AbsoluteZ >= 360.0
+        {
+            AbsoluteZ = 0.0
+        }
+        let RotateAction = SCNAction.rotateTo(x: 0.0, y: 0.0, z: LAbsoluteZ, duration: Duration)
+//        let RotateAction = SCNAction.rotateBy(x: 0.0, y: 0.0, z: ZRotation, duration: Duration)
         RemoveMovingPiece()
         if CurrentTheme!.RotateBucketGrid
         {
@@ -1474,6 +1487,8 @@ class View3D: SCNView,                          //Our main super class.
         MasterBlockNode?.runAction(RotateAction)
         BucketNode?.runAction(RotateAction)
     }
+    
+    var AbsoluteZ: CGFloat = 0.0
     
     /// Rotates the contents of the game (not only the game portion, not the text or other non-playable objects).
     /// - Parameter Duration: Duration in seconds it takes to rotate the contents.
@@ -1705,12 +1720,21 @@ class View3D: SCNView,                          //Our main super class.
         return CGSize(width: XSize, height: YSize)
     }
     
+    /// Add a text button with text created from a Unicode code point.
+    /// - Parameter ForButton: The button type.
+    /// - Parameter CodePoint: Unicode code point. This function uses the system font so if the system font does not support
+    ///                        the given code point, an ugly symbol will be displayed instead.
+    /// - Parameter Font: The font to use. This function assumes the font is the system font.
+    /// - Parameter Location: Where to place the button.
+    /// - Parameter Color: The standard button color - used as the diffuse material color.
+    /// - Parameter Highlight: The highlight button color.
+    /// - Parameter ScaleFactor: Used to scale the button.
     func AddUnicodeButton(ForButton: NodeButtons, _ CodePoint: Int, Font: UIFont, Location: SCNVector3,
                           Color: UIColor, Highlight: UIColor, ScaleFactor: Double = 0.1) -> SCNButtonNode
     {
         let UnicodeChar = UnicodeScalar(CodePoint)
         let UnicodeString = "\((UnicodeChar)!)"
-        let SText = SCNText(string: UnicodeString, extrusionDepth: 1)
+        let SText = SCNText(string: UnicodeString, extrusionDepth: 2)
         SText.font = Font
         SText.flatness = 0
         SText.firstMaterial?.diffuse.contents = Color
@@ -1744,10 +1768,18 @@ class View3D: SCNView,                          //Our main super class.
         return FinalNode
     }
     
+    /// Add a text button with the passed text.
+    /// - Parameter ForButton: The button type.
+    /// - Parameter CodePoint: The text to use for the button
+    /// - Parameter Font: The font to use. This function assumes the font is the system font.
+    /// - Parameter Location: Where to place the button.
+    /// - Parameter Color: The standard button color - used as the diffuse material color.
+    /// - Parameter Highlight: The highlight button color.
+    /// - Parameter ScaleFactor: Used to scale the button.
     func AddTextButton(ForButton: NodeButtons, _ Text: String, Font: UIFont, Location: SCNVector3,
                        Color: UIColor, Highlight: UIColor, ScaleFactor: Double = 0.1) -> SCNButtonNode
     {
-        let SText = SCNText(string: Text, extrusionDepth: 1)
+        let SText = SCNText(string: Text, extrusionDepth: 2)
         SText.font = Font
         SText.flatness = 0
         SText.firstMaterial?.diffuse.contents = Color
@@ -1796,47 +1828,65 @@ class View3D: SCNView,                          //Our main super class.
             case .DownButton:
                 FinalNode = AddUnicodeButton(ForButton: ForButton, 0x25bc, Font: ButtonFont,
                                              Location: ButtonDictionary[ForButton]!.Location,
-                                             Color: ButtonDictionary[ForButton]!.Color, Highlight: ButtonDictionary[ForButton]!.Highlight)
+                                             Color: ButtonDictionary[ForButton]!.Color,
+                                             Highlight: ButtonDictionary[ForButton]!.Highlight,
+                                             ScaleFactor: ButtonDictionary[ForButton]!.Scale)
             
             case .DropDownButton:
                 FinalNode = AddUnicodeButton(ForButton: ForButton, 0x25bc, Font: ButtonFont,
                                              Location: ButtonDictionary[ForButton]!.Location,
-                                             Color: ButtonDictionary[ForButton]!.Color, Highlight: ButtonDictionary[ForButton]!.Highlight)
+                                             Color: ButtonDictionary[ForButton]!.Color,
+                                             Highlight: ButtonDictionary[ForButton]!.Highlight,
+                                             ScaleFactor: ButtonDictionary[ForButton]!.Scale)
             
             case .FlyAwayButton:
                 FinalNode = AddUnicodeButton(ForButton: ForButton, 0x25b2, Font: ButtonFont,
                                              Location: ButtonDictionary[ForButton]!.Location,
-                                             Color: ButtonDictionary[ForButton]!.Color, Highlight: ButtonDictionary[ForButton]!.Highlight)
+                                             Color: ButtonDictionary[ForButton]!.Color,
+                                             Highlight: ButtonDictionary[ForButton]!.Highlight,
+                                             ScaleFactor: ButtonDictionary[ForButton]!.Scale)
             
             case .FreezeButton:
                 FinalNode = AddTextButton(ForButton: ForButton, "❄︎", Font: ButtonFont,
                                           Location: ButtonDictionary[ForButton]!.Location,
-                                          Color: ButtonDictionary[ForButton]!.Color, Highlight: ButtonDictionary[ForButton]!.Highlight)
+                                          Color: ButtonDictionary[ForButton]!.Color,
+                                          Highlight: ButtonDictionary[ForButton]!.Highlight,
+                                          ScaleFactor: ButtonDictionary[ForButton]!.Scale)
             
             case .LeftButton:
                 FinalNode = AddUnicodeButton(ForButton: ForButton, 0x25c0, Font: ButtonFont,
                                              Location: ButtonDictionary[ForButton]!.Location,
-                                             Color: ButtonDictionary[ForButton]!.Color, Highlight: ButtonDictionary[ForButton]!.Highlight)
+                                             Color: ButtonDictionary[ForButton]!.Color,
+                                             Highlight: ButtonDictionary[ForButton]!.Highlight,
+            ScaleFactor: ButtonDictionary[ForButton]!.Scale)
             
             case .RightButton:
                 FinalNode = AddUnicodeButton(ForButton: ForButton, 0x25b6, Font: ButtonFont,
                                              Location: ButtonDictionary[ForButton]!.Location,
-                                             Color: ButtonDictionary[ForButton]!.Color, Highlight: ButtonDictionary[ForButton]!.Highlight)
+                                             Color: ButtonDictionary[ForButton]!.Color,
+                                             Highlight: ButtonDictionary[ForButton]!.Highlight,
+                                             ScaleFactor: ButtonDictionary[ForButton]!.Scale)
             
             case .RotateLeftButton:
                 FinalNode = AddTextButton(ForButton: ForButton, "↺", Font: ButtonFont,
                                           Location: ButtonDictionary[ForButton]!.Location,
-                                          Color: ButtonDictionary[ForButton]!.Color, Highlight: ButtonDictionary[ForButton]!.Highlight)
+                                          Color: ButtonDictionary[ForButton]!.Color,
+                                          Highlight: ButtonDictionary[ForButton]!.Highlight,
+                                          ScaleFactor: ButtonDictionary[ForButton]!.Scale)
             
             case .RotateRightButton:
                 FinalNode = AddTextButton(ForButton: ForButton, "↻", Font: ButtonFont,
                                           Location: ButtonDictionary[ForButton]!.Location,
-                                          Color: ButtonDictionary[ForButton]!.Color, Highlight: ButtonDictionary[ForButton]!.Highlight)
+                                          Color: ButtonDictionary[ForButton]!.Color,
+                                          Highlight: ButtonDictionary[ForButton]!.Highlight,
+                                          ScaleFactor: ButtonDictionary[ForButton]!.Scale)
             
             case .UpButton:
                 FinalNode = AddUnicodeButton(ForButton: ForButton, 0x25b2, Font: ButtonFont,
                                              Location: ButtonDictionary[ForButton]!.Location,
-                                             Color: ButtonDictionary[ForButton]!.Color, Highlight: ButtonDictionary[ForButton]!.Highlight)
+                                             Color: ButtonDictionary[ForButton]!.Color,
+                                             Highlight: ButtonDictionary[ForButton]!.Highlight,
+            ScaleFactor: ButtonDictionary[ForButton]!.Scale)
         }
         
         ButtonList[ForButton] = FinalNode
@@ -1846,19 +1896,19 @@ class View3D: SCNView,                          //Our main super class.
     var ButtonList: [NodeButtons: SCNButtonNode] = [NodeButtons: SCNButtonNode]()
     
     /// Dictionary between node button types and the system image name and location of each node.
-    let ButtonDictionary: [NodeButtons: (Location: SCNVector3, Color: UIColor, Highlight: UIColor)] =
+    let ButtonDictionary: [NodeButtons: (Location: SCNVector3, Scale: Double, Color: UIColor, Highlight: UIColor)] =
         [
-            .LeftButton: (SCNVector3(-13.0, -10.0, 1.0), UIColor.white, UIColor.yellow),
-            .RotateLeftButton: (SCNVector3(-13.0, -12.8, 1.0), UIColor.white, UIColor.yellow),
-            .UpButton: (SCNVector3(-10.0, -12.8, 1.0), UIColor.white, UIColor.yellow),
-            .DownButton:  (SCNVector3(-10.0, -10.0, 1.0), UIColor.white, UIColor.yellow),
+            .LeftButton: (SCNVector3(-11.2, -12.2, 1.0), 0.08, UIColor.white, UIColor.yellow),
+            .RotateLeftButton: (SCNVector3(-11.2, -14.5, 1.0), 0.08, UIColor.white, UIColor.yellow),
+            .UpButton: (SCNVector3(-8.5, -14.5, 1.0), 0.08, UIColor.white, UIColor.yellow),
+            .DownButton:  (SCNVector3(-8.5, -12.2, 1.0), 0.08, UIColor.white, UIColor.yellow),
             
-            .RightButton:  (SCNVector3(10.5, -10.0, 1.0), UIColor.white, UIColor.yellow),
-            .DropDownButton:  (SCNVector3(7.5, -10.0, 1.0), UIColor.systemGreen, UIColor.yellow),
-            .FlyAwayButton:  (SCNVector3(7.5, -12.8, 1.0), UIColor.systemBlue, UIColor.yellow),
-            .RotateRightButton:  (SCNVector3(10.5, -12.8, 1.0), UIColor.white, UIColor.yellow),
+            .RightButton:  (SCNVector3(9.2, -12.2, 1.0), 0.08, UIColor.white, UIColor.yellow),
+            .DropDownButton:  (SCNVector3(6.5, -12.2, 1.0), 0.08, UIColor.systemGreen, UIColor.yellow),
+            .FlyAwayButton:  (SCNVector3(6.5, -14.5, 1.0), 0.08, UIColor.systemBlue, UIColor.yellow),
+            .RotateRightButton:  (SCNVector3(9.2, -14.5, 1.0), 0.08, UIColor.white, UIColor.yellow),
             
-            .FreezeButton: (SCNVector3(-0.9, -11.5, 1.0), UIColor.cyan, UIColor.blue)
+            .FreezeButton: (SCNVector3(-1.0, -13.5, 1.0), 0.08, UIColor.cyan, UIColor.blue)
     ]
     
     /// Returns the parent node of the passed button node.
