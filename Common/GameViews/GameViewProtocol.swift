@@ -158,9 +158,19 @@ protocol GameViewProtocol: class
     func SetBoardOpacity(To: Double, Duration: Double, Completed: (() -> ())?)
     
     /// Show controls in the game view.
-    func ShowControls()
+    /// - Parameter Which: Array of buttons to show. If nil, all buttons are shown.
+    func ShowControls(With: [NodeButtons]?)
     
-    /// Hide controls in the game view.
+    /// Adds the specified button to the set of motion controls. If the button is already present, no action is taken.
+    /// - Parameter Which: The button to add.
+    func AppendButton(Which: NodeButtons)
+    
+    /// Removes the specified button from the set of motion controls. If the button is not present, no action is taken.
+    /// - Parameter Which: The button to remove.
+    func RemoveButton(Which: NodeButtons)
+    
+    /// Hides all motion controls in the game surface and may optionally change the visual size
+    /// of the bucket.
     func HideControls()
     
     /// Flash a button with its pre-set highlight color.
