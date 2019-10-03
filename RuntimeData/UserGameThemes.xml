@@ -9,7 +9,7 @@
     <Property Name="_IsUserTheme" Value="true"/>
     <Property Name="_IsDefaultTheme" Value="false"/>
     <Property Name="_CameraFieldOfView" Value="92.0"/>
-    <Property Name="_CameraPosition" Value="0.0,2.0,15.0"/>
+    <Property Name="_CameraPosition" Value="0.0,0.0,15.0"/>
     <Property Name="_CameraOrientation" Value="0.0,0.0,0.0,0.0"/>
     <Property Name="_AntialiasingMode" Value="MultiSampling4X"/>
     <Property Name="_UseDefaultLighting" Value="false"/>
