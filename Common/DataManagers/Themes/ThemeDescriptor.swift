@@ -1476,6 +1476,7 @@ class ThemeDescriptor: Serializable
     }
 }
 
+#if false
 /// 3D game view background types.
 ///
 /// - **Color**: Name of a color.
@@ -1594,3 +1595,4 @@ enum ThemeFields: String, CaseIterable
     case ShowDropDownButton = "ShowDropDownButton"
     case ShowFreezeButton = "ShowFreezeButton"
 }
+#endif
