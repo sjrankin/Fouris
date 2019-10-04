@@ -1410,27 +1410,20 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter Right: If true, the contents are rotated clockwise. If false, counter-clockwise.
     /// - Parameter Duration: Duration in seconds the rotation should take.
     /// - Parameter Completed: Completion handler called at the end of the rotation.
-    func RotateContents(Right: Bool, Duration: Double = 1.0, Completed: @escaping (() -> Void))
+    func RotateContents(Right: Bool, Duration: Double = 0.33, Completed: @escaping (() -> Void))
     {
         objc_sync_enter(RotateLock)
         defer{objc_sync_exit(RotateLock)}
         let DirectionalSign = CGFloat(Right ? -1.0 : 1.0)
         #if false
-        let RotationCount = 90 / 5
-        var Rotations = [SCNAction]()
-        for _ in 0 ..< RotationCount
+        RadialIndex = RadialIndex + 1
+        if RadialIndex > Radians.count - 1
         {
-            let ZRotation = DirectionalSign * 5.0 * CGFloat.pi / 180.0
-            let ZRotationAction = SCNAction.rotateBy(x: 0.0, y: 0.0, z: ZRotation, duration: Duration / Double(RotationCount))
-            Rotations.append(ZRotationAction)
+            RadialIndex = 0
         }
-        let RotateSequence = SCNAction.sequence(Rotations)
-        MasterBlockNode?.runAction(RotateSequence)
-        BucketNode?.runAction(RotateSequence, completionHandler: {Completed()})
-        #else
-        let ZRotation = DirectionalSign * 90.0 * CGFloat.pi / 180.0
-        let RotateAction = SCNAction.rotateBy(x: 0.0, y: 0.0, z: ZRotation, duration: Duration)
-        //        let RotateAction = SCNAction.rotateTo(x: 0.0, y: 0.0, z: ZRotation, duration: Duration)
+        print("RadialIndex=\(RadialIndex)")
+        let RotationalRadians = DirectionalSign * Radians[RadialIndex]
+        let RotateAction = SCNAction.rotateTo(x: 0.0, y: 0.0, z: RotationalRadians, duration: Duration)
         RemoveMovingPiece()
         if CurrentTheme!.RotateBucketGrid
         {
@@ -1439,8 +1432,32 @@ class View3D: SCNView,                          //Our main super class.
         }
         MasterBlockNode?.runAction(RotateAction)
         BucketNode?.runAction(RotateAction)
+        #else
+        RIndex = RIndex + 1
+        if RIndex > 3
+        {
+            RIndex = 0
+        }
+        let Radian = CGFloat((RIndex * 90)) * CGFloat.pi / 180.0
+        let ZRotation = DirectionalSign * Radian
+//        let ZRotation = CGFloat(RIndex) * HalfPi * DirectionalSign //DirectionalSign * 90.0 * CGFloat.pi / 180.0
+        let ZDRotation = DirectionalSign * HalfPi
+        let RotateActionD = SCNAction.rotateBy(x: 0.0, y: 0.0, z: ZDRotation, duration: Duration)
+        let RotateAction = SCNAction.rotateTo(x: 0.0, y: 0.0, z: ZRotation, duration: Duration, usesShortestUnitArc: true)
+        RemoveMovingPiece()
+        if CurrentTheme!.RotateBucketGrid
+        {
+            BucketGridNode?.runAction(RotateAction)
+            OutlineNode?.runAction(RotateAction)
+        }
+        MasterBlockNode?.runAction(RotateActionD)
+        BucketNode?.runAction(RotateActionD)
         #endif
     }
+    
+    var RIndex = 0
+    
+    let HalfPi = CGFloat.pi / 2.0
     
     private var MasterSceneNode: SCNNode? = nil
     
@@ -1460,6 +1477,11 @@ class View3D: SCNView,                          //Our main super class.
         RotateContents(Right: false, Duration: Duration, Completed: Completed)
     }
     
+    /// 90° angles from 0 to 270 converted to radians (values generated in a Playground).
+    let Radians: [CGFloat] = [0.0, 1.5707963267948966, 3.141592653589793, 4.71238898038469, 3.141592653589793, 1.5707963267948966]
+    /// Holds the index into `Radians` for each rotation.
+    var RadialIndex = 0
+    
     /// Rotates the contents of the game (but not UI or falling piece) in the direction indicated by the `Right` flag.
     /// - Note: This function uses a synchronous lock to make sure that when the board is rotating, other things don't happen to it.
     /// - Parameter Right: If true, the contents are rotated clockwise. If false, counter-clockwise.
@@ -1468,6 +1490,25 @@ class View3D: SCNView,                          //Our main super class.
     {
         objc_sync_enter(RotateLock)
         defer{objc_sync_exit(RotateLock)}
+        #if true
+        RadialIndex = RadialIndex + 1
+        if RadialIndex > Radians.count - 1
+        {
+            RadialIndex = 0
+        }
+        let DirectionalSign = CGFloat(Right ? -1.0 : 1.0)
+        let RotationalRadians = DirectionalSign * Radians[RadialIndex]
+        let RotateAction = SCNAction.rotateTo(x: 0.0, y: 0.0, z: RotationalRadians, duration: Duration,
+                                              usesShortestUnitArc: true)
+        RemoveMovingPiece()
+        if CurrentTheme!.RotateBucketGrid
+        {
+            BucketGridNode?.runAction(RotateAction)
+            OutlineNode?.runAction(RotateAction)
+        }
+        MasterBlockNode?.runAction(RotateAction)
+        BucketNode?.runAction(RotateAction)
+        #else
         let DirectionalSign = CGFloat(Right ? -1.0 : 1.0)
 //        let ZRotation = DirectionalSign * 90.0 * CGFloat.pi / 180.0
         let LAbsoluteZ = AbsoluteZ * CGFloat.pi / 180.0
@@ -1486,6 +1527,7 @@ class View3D: SCNView,                          //Our main super class.
         }
         MasterBlockNode?.runAction(RotateAction)
         BucketNode?.runAction(RotateAction)
+        #endif
     }
     
     var AbsoluteZ: CGFloat = 0.0
