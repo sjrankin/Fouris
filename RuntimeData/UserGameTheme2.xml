@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Theme ID="49de21df-e1ce-448d-9a87-8db26b07e7ab" Name="User Theme" UserTheme="true">
     <Runtime MinimumVersion="1" MinimumBuild="0"/>
-    <Dates Created="2019-10-03" Edited=""/>
+    <Dates Created="2019-10-03" Edited="Not Edited"/>
     <Quality>
         <Antialiasing Mode="MultiSampling4X"/>
     </Quality>
@@ -24,7 +24,7 @@
     <Background Type="Color">
         <Color Color="Maroon" CycleDuration="0.0"/>
         <Gradient Definition="(Red)@(0.0),(Blue)@(1.0)" CycleDuration="0.0"/>
-        <Image FileName="" FromCameraRoll="false"/>
+        <Image FileName="Not Set" FromCameraRoll="false"/>
         <LiveView Camera="Rear"/>
     </Background>
     <Bucket>
