@@ -129,6 +129,12 @@ class MainViewController: UIViewController,
         Themes.Initialize()
         UserTheme = Themes.UserTheme
         Themes.SubscribeToChanges(Subscriber: "MainViewController", SubscribingObject: self)
+        
+        let Themes3 = ThemeManager3()
+        Themes3.Initialize()
+        let UserTheme3 = Themes3.UserTheme
+        Themes3.SubscribeToChanges(Subscriber: "MainViewController", SubscribingObject: self) 
+        
         PieceVisualManager.Initialize()
         RecentlyUsedColors.Initialize(WithLimit: Settings.GetMostRecentlyUsedColorListCapacity())
         HistoryManager.Initialize()
