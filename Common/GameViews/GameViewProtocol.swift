@@ -35,6 +35,18 @@ protocol GameViewProtocol: class
     /// - Parameter MaxDuration: Maxium length of time to empty the bucket.
     func DestroyMap3D(FromBoard: Board, DestroyBy: DestructionMethods, MaxDuration: Double)
     
+    /// Hides the board with specified visual effects.
+    /// - Parameter Method: The method to use to hide the board.
+    /// - Parameter Duration: The amount of time from start to finish of the visual effect to hide
+    ///                       the board, in seconds.
+    func HideBoard(Method: HideBoardMethods, Duration: Double)
+    
+    /// Shows the board with specified visual effects.
+    /// - Parameter Method: The method to use to show the board.
+    /// - Parameter Duration: The amount of time from start to finish of the visual effect to show
+    ///                       the board, in seconds.
+    func ShowBoard(Method: ShowBoardMethods, Duration: Double)
+    
     /// Draw a textural game view map. Includes moving pieces.
     /// - Note: This is for the **textual** game view only.
     /// - Parameter WithText: Contains the textual version of the game board.
