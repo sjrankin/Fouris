@@ -104,8 +104,68 @@ class ThemeManager3: ThemeChangeProtocol2
     
     // MARK: ThemeChangeProtocol functions.
     
+    /// Returns the date and time as a string.
+    /// - Parameter Now: The date to return as a string.
+    /// - Returns: The passed date formatted by `DateFormatter` into a string.
+    func GetDateHere(_ Now: Date) -> String?
+    {
+        let Result = DateFormatter.localizedString(from: Now, dateStyle: .long, timeStyle: .long)
+        return Result
+    }
+    
+    /// Handle theme changes. Notifies all subscribers of the change. However, subscribers can set the
+    /// fields they want to be notified of changes - in that case, if the changed field is not in the
+    /// subscriber's list of fields, no change notice is sent.
+    /// - Note: If the theme's `SaveAfterEdit` flag is true, the theme is saved after the delegate is notified
+    ///         of the change.
+    /// - Parameter Theme: The name of the changed theme.
+    /// - Parameter Field: The field whose property changed.
     func ThemeChanged(Theme: ThemeDescriptor2, Field: ThemeFields)
     {
-        
+        for (_, (Delegate, FieldList)) in Subscribers
+        {
+            if let FList = FieldList
+            {
+                if !FList.contains(Field)
+                {
+                    return
+                }
+            }
+            Theme.EditDate = GetDateHere(Date())!
+            Delegate.ThemeUpdated(ThemeName: Theme.ThemeName, Field: Field)
+            if Theme.SaveAfterEdit
+            {
+                SaveUserTheme()
+            }
+        }
+    }
+    
+    /// Holds the list of subscribers to change notices.
+    private var Subscribers = [String: (ThemeUpdatedProtocol, [ThemeFields]?)]()
+    
+    /// Allows objects (that implement the `ThemeUpdatedProtocol`) to subscribe to changes in themes.
+    /// - Parameter Subscriber: The name of the subscriber. If this subscriber is already in the
+    ///                         subscribers list, it will not be added again. To change the list of
+    ///                         fields, the caller must first call `CancelSubscription` on the `Subscriber`
+    ///                         then call this function again with a new field list.
+    /// - Parameter SubscribingObject: The object that will be called with changes.
+    /// - Parameter FieldList: Optional list of fields (that must match those in the theme itself) the
+    ///                        subscriber wants to be notified if changed. If nil (or empty), all changes
+    ///                        will be reported to the subscriber.
+    public func SubscribeToChanges(Subscriber: String, SubscribingObject: ThemeUpdatedProtocol,
+                                   FieldList: [ThemeFields]? = nil)
+    {
+        if Subscribers[Subscriber] != nil
+        {
+            return
+        }
+        Subscribers[Subscriber] = (SubscribingObject, FieldList)
+    }
+    
+    /// Cancel an existing subscription for theme change notifications.
+    /// - Parameter Subscriber: The name of the subscriber.
+    public func CancelSubscription(Subscriber: String)
+    {
+        Subscribers.removeValue(forKey: Subscriber)
     }
 }
