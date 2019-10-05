@@ -1122,9 +1122,9 @@ class ThemeDescriptor2: CustomStringConvertible, XMLDeserializeProtocol
     // MARK: General descriptor properties.
     
     /// Holds the minimum version number this theme is valid for.
-    private var _MinimumVersion: Int = 0
+    private var _MinimumVersion: Double = 1.0
     /// Get or set the minimum version number of Fouris that is needed to support this theme.
-    public var MinimumVersion: Int
+    public var MinimumVersion: Double
     {
         get
         {
@@ -1315,7 +1315,7 @@ class ThemeDescriptor2: CustomStringConvertible, XMLDeserializeProtocol
                         case "Runtime":
                             let MinVer = XMLNode.GetAttributeNamed("MinimumVersion", InNode: Child)!
                             let MinBld = XMLNode.GetAttributeNamed("MinimumBuild", InNode: Child)!
-                            MinimumVersion = Int(MinVer)!
+                            MinimumVersion = Double(MinVer)!
                             MinimumBuild = Int(MinBld)!
                         
                         case "Dates":
