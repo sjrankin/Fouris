@@ -210,6 +210,7 @@
 		17DCD7EA2309436F0072B306 /* +CentralShapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCD7E92309436F0072B306 /* +CentralShapes.swift */; };
 		17DCD7EE23096E340072B306 /* +MapType_BucketCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCD7ED23096E340072B306 /* +MapType_BucketCreation.swift */; };
 		17DCFD34230291B100A00600 /* ManagedTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCFD33230291B100A00600 /* ManagedTimer.swift */; };
+		17E619A92348495B00C391CF /* +BoardRemoval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E619A82348495B00C391CF /* +BoardRemoval.swift */; };
 		17E71A6B22AD20CC0081991E /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E71A6A22AD20CC0081991E /* State.swift */; };
 		17E71A6E22AD20F40081991E /* StateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E71A6D22AD20F40081991E /* StateProtocol.swift */; };
 		17E71A7122AD211E0081991E /* OSColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E71A7022AD211E0081991E /* OSColorExtensions.swift */; };
@@ -457,6 +458,7 @@
 		17DCD7E92309436F0072B306 /* +CentralShapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+CentralShapes.swift"; sourceTree = "<group>"; };
 		17DCD7ED23096E340072B306 /* +MapType_BucketCreation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+MapType_BucketCreation.swift"; sourceTree = "<group>"; };
 		17DCFD33230291B100A00600 /* ManagedTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedTimer.swift; sourceTree = "<group>"; };
+		17E619A82348495B00C391CF /* +BoardRemoval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+BoardRemoval.swift"; sourceTree = "<group>"; };
 		17E71A6A22AD20CC0081991E /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		17E71A6D22AD20F40081991E /* StateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateProtocol.swift; sourceTree = "<group>"; };
 		17E71A7022AD211E0081991E /* OSColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSColorExtensions.swift; sourceTree = "<group>"; };
@@ -1003,6 +1005,7 @@
 				17DCD7E92309436F0072B306 /* +CentralShapes.swift */,
 				17376356230A9C9C0050EB22 /* +BucketCleaner.swift */,
 				17B112FF232B693E007DFBD4 /* +3DDebug.swift */,
+				17E619A82348495B00C391CF /* +BoardRemoval.swift */,
 			);
 			path = 3DViewExtensions;
 			sourceTree = "<group>";
@@ -1557,6 +1560,7 @@
 				17616ACB23166CB000DFFEFE /* SelectGameController.swift in Sources */,
 				177F4FCD229BD42500FE72CD /* Serializer.swift in Sources */,
 				17C898C322CDF60F004EA348 /* ArrayStatistics.swift in Sources */,
+				17E619A92348495B00C391CF /* +BoardRemoval.swift in Sources */,
 				179F0A74233074040051B148 /* ColorSwatch.swift in Sources */,
 				17F0B494225CBE730071514E /* AppDelegate.swift in Sources */,
 				174328F2233F0F7F00F98863 /* XMLDeserializeProtocol.swift in Sources */,
