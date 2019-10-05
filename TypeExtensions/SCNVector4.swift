@@ -30,7 +30,7 @@ extension SCNVector4
         let RawX = String(Parts[0]).trimmingCharacters(in: CharacterSet.whitespaces)
         let RawY = String(Parts[1]).trimmingCharacters(in: CharacterSet.whitespaces)
         let RawZ = String(Parts[2]).trimmingCharacters(in: CharacterSet.whitespaces)
-        let RawW = String(Parts[4]).trimmingCharacters(in: CharacterSet.whitespaces)
+        let RawW = String(Parts[3]).trimmingCharacters(in: CharacterSet.whitespaces)
         
         if let X = Float(RawX)
         {
