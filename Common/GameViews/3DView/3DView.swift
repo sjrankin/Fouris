@@ -386,6 +386,8 @@ class View3D: SCNView,                          //Our main super class.
         }
     }
     
+    // MARK: Bucket-related functions.
+    
     var BucketNode: SCNNode? = nil
     
     /// Create a 3D bucket and add it to the scene. Attributes are from the current theme.
@@ -1415,24 +1417,6 @@ class View3D: SCNView,                          //Our main super class.
         objc_sync_enter(RotateLock)
         defer{objc_sync_exit(RotateLock)}
         let DirectionalSign = CGFloat(Right ? -1.0 : 1.0)
-        #if false
-        RadialIndex = RadialIndex + 1
-        if RadialIndex > Radians.count - 1
-        {
-            RadialIndex = 0
-        }
-        print("RadialIndex=\(RadialIndex)")
-        let RotationalRadians = DirectionalSign * Radians[RadialIndex]
-        let RotateAction = SCNAction.rotateTo(x: 0.0, y: 0.0, z: RotationalRadians, duration: Duration)
-        RemoveMovingPiece()
-        if CurrentTheme!.RotateBucketGrid
-        {
-            BucketGridNode?.runAction(RotateAction)
-            OutlineNode?.runAction(RotateAction)
-        }
-        MasterBlockNode?.runAction(RotateAction)
-        BucketNode?.runAction(RotateAction)
-        #else
         RIndex = RIndex + 1
         if RIndex > 3
         {
@@ -1440,19 +1424,17 @@ class View3D: SCNView,                          //Our main super class.
         }
         let Radian = CGFloat((RIndex * 90)) * CGFloat.pi / 180.0
         let ZRotation = DirectionalSign * Radian
-//        let ZRotation = CGFloat(RIndex) * HalfPi * DirectionalSign //DirectionalSign * 90.0 * CGFloat.pi / 180.0
-        let ZDRotation = DirectionalSign * HalfPi
-        let RotateActionD = SCNAction.rotateBy(x: 0.0, y: 0.0, z: ZDRotation, duration: Duration)
-        let RotateAction = SCNAction.rotateTo(x: 0.0, y: 0.0, z: ZRotation, duration: Duration, usesShortestUnitArc: true)
+        let ZRotationTo = DirectionalSign * HalfPi
+        let RotateToAction = SCNAction.rotateBy(x: 0.0, y: 0.0, z: ZRotationTo, duration: Duration)
+        let RotateByAction = SCNAction.rotateTo(x: 0.0, y: 0.0, z: ZRotation, duration: Duration, usesShortestUnitArc: true)
         RemoveMovingPiece()
         if CurrentTheme!.RotateBucketGrid
         {
-            BucketGridNode?.runAction(RotateAction)
-            OutlineNode?.runAction(RotateAction)
+            BucketGridNode?.runAction(RotateByAction)
+            OutlineNode?.runAction(RotateByAction)
         }
-        MasterBlockNode?.runAction(RotateActionD)
-        BucketNode?.runAction(RotateActionD)
-        #endif
+        MasterBlockNode?.runAction(RotateToAction)
+        BucketNode?.runAction(RotateToAction)
     }
     
     var RIndex = 0
