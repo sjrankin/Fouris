@@ -39,6 +39,7 @@ class ExportCode: UIViewController, ThemeEditingProtocol
     
     @IBAction func HandleViewThemePressed(_ sender: Any)
     {
+        ShowingVisuals = false
         ShowingHistory = false
         let ThemeString = UserTheme!.ToString()
         ContentsViewer.text = ThemeString
@@ -46,8 +47,31 @@ class ExportCode: UIViewController, ThemeEditingProtocol
         ContentsTitle.isHidden = false
     }
     
+    @IBAction func HandleViewVisualsPressed(_ sender: Any)
+    {
+        ShowingHistory = false
+        ShowingVisuals = true
+        let VisualIndex = VisualsSegment.selectedSegmentIndex
+        var VisDump = ""
+        var Title = ""
+        if VisualIndex == 0
+        {
+            Title = "User-Defined Visuals"
+            VisDump = PieceVisualManager2.UserVisuals!.ToString()
+        }
+        else
+        {
+            Title = "Default Visuals"
+            VisDump = PieceVisualManager2.DefaultVisuals!.ToString()
+        }
+        ContentsViewer.text = VisDump
+        ContentsTitle.text = Title
+        ContentsTitle.isHidden = false
+    }
+    
     @IBAction func HandleViewHistoryPressed(_ sender: Any)
     {
+        ShowingVisuals = false
         ShowingHistory = true
         let HistoryIndex = HistoryTypeSegment.selectedSegmentIndex
         var HistoryDump = ""
@@ -68,12 +92,17 @@ class ExportCode: UIViewController, ThemeEditingProtocol
     }
     
     var ShowingHistory = false
+    var ShowingVisuals = false
     
     @IBAction func HandleExportThemeButton(_ sender: Any)
     {
     }
     
     @IBAction func HandleExportHistoryButton(_ sender: Any)
+    {
+    }
+    
+    @IBAction func HandleExportVisualsButton(_ sender: Any)
     {
     }
     
@@ -85,11 +114,20 @@ class ExportCode: UIViewController, ThemeEditingProtocol
         }
     }
     
+    @IBAction func HandleVisualViewChanged(_ sender: Any)
+    {
+        if ShowingVisuals
+        {
+            HandleViewVisualsPressed(sender)
+        }
+    }
+    
     @IBAction func HandleCloseButton(_ sender: Any)
     {
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBOutlet weak var VisualsSegment: UISegmentedControl!
     @IBOutlet weak var HistoryTypeSegment: UISegmentedControl!
     @IBOutlet weak var ContentsBox: UIView!
     @IBOutlet weak var ContentsTitle: UILabel!
