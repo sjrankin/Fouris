@@ -735,12 +735,21 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter ShapeID: The ID of the piece.
     func AddBlockNode_Standard(ParentID: UUID, BlockID: UUID, X: Int, Y: Int, IsRetired: Bool, ShapeID: UUID)
     {
-        let VBlock = VisualBlocks3D(BlockID, AtX: CGFloat(X), AtY: CGFloat(Y), ShapeID: ShapeID, IsRetired: IsRetired)
+        if let PVisual = PieceVisualManager2.UserVisuals!.GetVisualWith(ID: ShapeID)
+        {
+            let VBlock = VisualBlocks3D(BlockID, AtX: CGFloat(X), AtY: CGFloat(Y), ActiveVisuals: PVisual.ActiveVisuals!,
+                                        RetiredVisuals: PVisual.RetiredVisuals!, IsRetired: IsRetired)
+//        let VBlock = VisualBlocks3D(BlockID, AtX: CGFloat(X), AtY: CGFloat(Y), ShapeID: ShapeID, IsRetired: IsRetired)
         VBlock.ParentID = ParentID
         VBlock.Marked = true
         VBlock.categoryBitMask = GameLight
         BlockList.insert(VBlock)
         self.scene?.rootNode.addChildNode(VBlock)
+        }
+        else
+        {
+            print("Error getting visuals for shape ID \(ShapeID)")
+        }
     }
     
     /// Create and add a block node for a piece.
@@ -753,12 +762,21 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter ShapeID: The ID of the piece.
     func AddBlockNode_Rotating(ParentID: UUID, BlockID: UUID, X: CGFloat, Y: CGFloat, IsRetired: Bool, ShapeID: UUID)
     {
-        let VBlock = VisualBlocks3D(BlockID, AtX: X, AtY: Y, ShapeID: ShapeID, IsRetired: IsRetired)
+        if let PVisual = PieceVisualManager2.UserVisuals!.GetVisualWith(ID: ShapeID)
+        {
+            let VBlock = VisualBlocks3D(BlockID, AtX: CGFloat(X), AtY: CGFloat(Y), ActiveVisuals: PVisual.ActiveVisuals!,
+                                        RetiredVisuals: PVisual.RetiredVisuals!, IsRetired: IsRetired)
+        //let VBlock = VisualBlocks3D(BlockID, AtX: X, AtY: Y, ShapeID: ShapeID, IsRetired: IsRetired)
         VBlock.ParentID = ParentID
         VBlock.Marked = true
         VBlock.categoryBitMask = GameLight
         BlockList.insert(VBlock)
         MasterBlockNode!.addChildNode(VBlock)
+        }
+        else
+        {
+            print("Error getting visuals for shape ID \(ShapeID)")
+        }
     }
     
     /// Remove all moving piece blocks from the master block node.
@@ -824,6 +842,7 @@ class View3D: SCNView,                          //Our main super class.
         MovingPieceNode?.name = "Moving Piece"
         let CurrentMap = InBoard.Map!
         let ItemID = GamePiece.ID
+        let PVisuals = PieceVisualManager2.UserVisuals!.GetVisualWith(ID: GamePiece.ShapeID)
         for Block in GamePiece.Locations!
         {
             if Block.ID == UUID.Empty
@@ -839,7 +858,9 @@ class View3D: SCNView,                          //Our main super class.
                 print("Could not find ItemID in RetiredPieceShapes.")
                 return
             }
-            let VBlock = VisualBlocks3D(Block.ID, AtX: XOffset, AtY: YOffset, ShapeID: GamePiece.ShapeID, IsRetired: false)
+            let VBlock = VisualBlocks3D(Block.ID, AtX: XOffset, AtY: YOffset, ActiveVisuals: PVisuals!.ActiveVisuals!,
+                                        RetiredVisuals: PVisuals!.RetiredVisuals!, IsRetired: false)
+//            let VBlock = VisualBlocks3D(Block.ID, AtX: XOffset, AtY: YOffset, ShapeID: GamePiece.ShapeID, IsRetired: false)
             VBlock.categoryBitMask = GameLight
             MovingPieceBlocks.append(VBlock)
             MovingPieceNode?.addChildNode(VBlock)
