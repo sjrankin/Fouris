@@ -205,6 +205,12 @@
 		17CE269D225F127C0056818E /* Versioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CE269C225F127C0056818E /* Versioning.swift */; };
 		17CE26A0225F5EE00056818E /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CE269F225F5EE00056818E /* Stack.swift */; };
 		17CE26A3225F63660056818E /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CE26A2225F63660056818E /* Queue.swift */; };
+		17D015922349AFF50012FFE1 /* DefaultPieceVisuals.xml in Resources */ = {isa = PBXBuildFile; fileRef = 17D015902349AFF50012FFE1 /* DefaultPieceVisuals.xml */; };
+		17D015932349AFF50012FFE1 /* UserPieceVisuals.xml in Resources */ = {isa = PBXBuildFile; fileRef = 17D015912349AFF50012FFE1 /* UserPieceVisuals.xml */; };
+		17D015962349B0900012FFE1 /* PieceVisualManager2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D015952349B0900012FFE1 /* PieceVisualManager2.swift */; };
+		17D015982349B0B80012FFE1 /* PieceVisuals2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D015972349B0B80012FFE1 /* PieceVisuals2.swift */; };
+		17D0159A2349B4020012FFE1 /* PieceVisual2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D015992349B4020012FFE1 /* PieceVisual2.swift */; };
+		17D0159C2349B48D0012FFE1 /* StateVisual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D0159B2349B48D0012FFE1 /* StateVisual.swift */; };
 		17D1FB6C2268A09400EDA707 /* GameAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D1FB6B2268A09400EDA707 /* GameAI.swift */; };
 		17D48A7B22B202B000DD7C94 /* 3DView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D48A7A22B202B000DD7C94 /* 3DView.swift */; };
 		17D48A8422B2111D00DD7C94 /* ThreeDProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D48A8322B2111D00DD7C94 /* ThreeDProtocol.swift */; };
@@ -458,6 +464,12 @@
 		17CE269C225F127C0056818E /* Versioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Versioning.swift; sourceTree = "<group>"; };
 		17CE269F225F5EE00056818E /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		17CE26A2225F63660056818E /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		17D015902349AFF50012FFE1 /* DefaultPieceVisuals.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = DefaultPieceVisuals.xml; sourceTree = "<group>"; };
+		17D015912349AFF50012FFE1 /* UserPieceVisuals.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = UserPieceVisuals.xml; sourceTree = "<group>"; };
+		17D015952349B0900012FFE1 /* PieceVisualManager2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceVisualManager2.swift; sourceTree = "<group>"; };
+		17D015972349B0B80012FFE1 /* PieceVisuals2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceVisuals2.swift; sourceTree = "<group>"; };
+		17D015992349B4020012FFE1 /* PieceVisual2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceVisual2.swift; sourceTree = "<group>"; };
+		17D0159B2349B48D0012FFE1 /* StateVisual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateVisual.swift; sourceTree = "<group>"; };
 		17D1FB6B2268A09400EDA707 /* GameAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAI.swift; sourceTree = "<group>"; };
 		17D48A7A22B202B000DD7C94 /* 3DView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 3DView.swift; sourceTree = "<group>"; };
 		17D48A8322B2111D00DD7C94 /* ThreeDProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDProtocol.swift; sourceTree = "<group>"; };
@@ -620,6 +632,7 @@
 		17432908233F77F400F98863 /* DataManagers */ = {
 			isa = PBXGroup;
 			children = (
+				17D015942349B0770012FFE1 /* Visuals2 */,
 				17FBF712234474E100BB87A6 /* GameStatistics */,
 				170FC65C233DDF3200F9A8F1 /* XMLDocument */,
 				177F4FCB229BD40F00FE72CD /* Serialization */,
@@ -716,6 +729,8 @@
 		1762FC1B229D2874000099F2 /* RuntimeData */ = {
 			isa = PBXGroup;
 			children = (
+				17D015902349AFF50012FFE1 /* DefaultPieceVisuals.xml */,
+				17D015912349AFF50012FFE1 /* UserPieceVisuals.xml */,
 				179C5E1B2322282B0003845B /* PieceVisuals.xml */,
 				179C5E2023222EAA0003845B /* UserVisuals.xml */,
 				1704E2F92320E19A00D7C158 /* GameThemes.xml */,
@@ -1002,6 +1017,17 @@
 				17CE26A2225F63660056818E /* Queue.swift */,
 			);
 			path = DataStructures;
+			sourceTree = "<group>";
+		};
+		17D015942349B0770012FFE1 /* Visuals2 */ = {
+			isa = PBXGroup;
+			children = (
+				17D015952349B0900012FFE1 /* PieceVisualManager2.swift */,
+				17D015972349B0B80012FFE1 /* PieceVisuals2.swift */,
+				17D015992349B4020012FFE1 /* PieceVisual2.swift */,
+				17D0159B2349B48D0012FFE1 /* StateVisual.swift */,
+			);
+			path = Visuals2;
 			sourceTree = "<group>";
 		};
 		17D6B196233DD0BD00EFCE31 /* History */ = {
@@ -1332,6 +1358,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17D015932349AFF50012FFE1 /* UserPieceVisuals.xml in Resources */,
 				1704E2FA2320E19A00D7C158 /* GameThemes.xml in Resources */,
 				179C5E1C2322282B0003845B /* PieceVisuals.xml in Resources */,
 				17F0B49E225CBE740071514E /* LaunchScreen.storyboard in Resources */,
@@ -1340,6 +1367,7 @@
 				17D6B195233DC42400EFCE31 /* UserPieceDescriptions.xml in Resources */,
 				17432905233F4C2C00F98863 /* PieceDescriptions.xml in Resources */,
 				179C5E2123222EAA0003845B /* UserVisuals.xml in Resources */,
+				17D015922349AFF50012FFE1 /* DefaultPieceVisuals.xml in Resources */,
 				17477A6F231783C300AAEB14 /* Theming.storyboard in Resources */,
 				17F0B49B225CBE740071514E /* Assets.xcassets in Resources */,
 				1785ED6222FD8C0A000B31C2 /* BoardDescriptions.xml in Resources */,
@@ -1444,6 +1472,7 @@
 				17D48A7B22B202B000DD7C94 /* 3DView.swift in Sources */,
 				173B4B19231BA165007B22F6 /* RecentlyUsedColors.swift in Sources */,
 				1753ABED225E213200FC7089 /* PieceFactory.swift in Sources */,
+				17D0159A2349B4020012FFE1 /* PieceVisual2.swift in Sources */,
 				179CB8CD2326145C0034E25B /* PieceViewer.swift in Sources */,
 				17AF2323231399CC00921E6C /* MainSlideInView2.swift in Sources */,
 				171BD472233B1BA10048808A /* BufferManager.swift in Sources */,
@@ -1463,12 +1492,14 @@
 				17ECE5B023325416003F4065 /* +Bool.swift in Sources */,
 				1721BA7C2260BECF00DC7AFC /* Coin.swift in Sources */,
 				1797524E22C38A4D00BF539A /* +IdiotLights.swift in Sources */,
+				17D015982349B0B80012FFE1 /* PieceVisuals2.swift in Sources */,
 				17660BE822892B1E00082E23 /* UIButtonExtensions.swift in Sources */,
 				17189FFD233348AB00317BF1 /* GradientSwatch.swift in Sources */,
 				17CD4EB8231E492D0055E541 /* GradientPickerProtocol.swift in Sources */,
 				173AA390231A8EC600802289 /* PredefinedColorGroup.swift in Sources */,
 				179C5E25232231F70003845B /* PieceVisualManager.swift in Sources */,
 				177FC1D42318E0F7005727B6 /* ColorPickerProtocol.swift in Sources */,
+				17D015962349B0900012FFE1 /* PieceVisualManager2.swift in Sources */,
 				170FC66A233DFA9900F9A8F1 /* XMLSemanticParser.swift in Sources */,
 				174328FB233F20DD00F98863 /* PieceBlockLocation.swift in Sources */,
 				17A2BDD42348CFC000D50235 /* ExportCode.swift in Sources */,
@@ -1553,6 +1584,7 @@
 				1704E2FE232123DE00D7C158 /* AnimatedGradientStop.swift in Sources */,
 				17567158230265FD00D0824D /* Stepper.swift in Sources */,
 				17B11300232B693E007DFBD4 /* +3DDebug.swift in Sources */,
+				17D0159C2349B48D0012FFE1 /* StateVisual.swift in Sources */,
 				17404B2E234626E700976DE2 /* SCNVector3.swift in Sources */,
 				174C9A5D232F5E8A00A5DC7A /* RawThemeFieldEditProtocol.swift in Sources */,
 				171ED0FF22F56B3300CE2CDF /* StandardGameAI.swift in Sources */,
