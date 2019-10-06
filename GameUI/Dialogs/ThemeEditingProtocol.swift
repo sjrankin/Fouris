@@ -14,14 +14,12 @@ protocol ThemeEditingProtocol: class
 {
     /// Used to send to an editor the ID of the theme to edit.
     /// - Parameter Theme: The theme to edit.
-    /// - Parameter DefaultTheme: The default theme.
-    func EditTheme(Theme: ThemeDescriptor, DefaultTheme: ThemeDescriptor)
+    func EditTheme(Theme: ThemeDescriptor2)
     
     // Used to edit a piece in a theme.
     /// - Parameter Theme: The theme to edit.
     /// - Parameter PieceID: The piece shape ID to edit.
-    /// - Parameter DefaultTheme: The default theme.
-    func EditTheme(Theme: ThemeDescriptor, PieceID: UUID, DefaultTheme: ThemeDescriptor)
+    func EditTheme(Theme: ThemeDescriptor2, PieceID: UUID)
     
     /// Used to send to a caller the results of editing a theme.
     /// - Parameter Edited: If true, the theme (or piece) was edited. If false, the theme
