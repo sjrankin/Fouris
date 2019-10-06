@@ -25,7 +25,6 @@ class MainViewController: UIViewController,
     TDebugProtocol,                                     //Protocol for the debug client to talk to this class.
     StepperHelper,                                      //Protocol for the stepper to display data for the user.
     GameSelectorProtocol,                               //Protocol for selecting games.
-    UITouchImageDelegate,                               //Protocol for touch image presses.
     SettingsChangedProtocol,                            //Protocol for receiving settings change notifications.
     ThemeUpdatedProtocol                                //Protocol for receiving updates to the theme.
 {
@@ -38,7 +37,7 @@ class MainViewController: UIViewController,
     var Game: GameLogic!
     
     /// Theme manager.
-    var Themes: ThemeManager!
+    var Themes: ThemeManager3!
     
     /// AI test data table.
     var AIData: AITestTable? = nil
@@ -54,14 +53,6 @@ class MainViewController: UIViewController,
     
     /// The set of pieces to use.
     var GamePieces = [MetaPieces.Standard]
-    
-    #if false
-    /// The current level the user is playing.
-    var CurrentLevel = LevelTypes.ReallyEasy
-    
-    /// The current mode.
-    var CurrentMode = ModeTypes.AttractMode
-    #endif
     
     /// Multi-peer manager for debugging.
     var MPMgr: MultiPeerManager!
@@ -125,24 +116,19 @@ class MainViewController: UIViewController,
         
         Settings.Initialize()
         PieceManager.Initialize()
-        Themes = ThemeManager()
+        Themes = ThemeManager3()
         Themes.Initialize()
         UserTheme = Themes.UserTheme
+        print("UserTheme=\n\(UserTheme!.ToString())")
         Themes.SubscribeToChanges(Subscriber: "MainViewController", SubscribingObject: self)
-        
-        let Themes3 = ThemeManager3()
-        Themes3.Initialize()
-        let UserTheme3 = Themes3.UserTheme
-        Themes3.SubscribeToChanges(Subscriber: "MainViewController", SubscribingObject: self) 
-        
+        CurrentBaseGameType = UserTheme!.GameType
+        print("CurrentBaseGameType=\(CurrentBaseGameType)")
         PieceVisualManager.Initialize()
         RecentlyUsedColors.Initialize(WithLimit: Settings.GetMostRecentlyUsedColorListCapacity())
         HistoryManager.Initialize()
         InitializeUI()
         AIData = AITestTable()
-        
-        CurrentBaseGameType = UserTheme!.GameType
-        
+    
         InitializeGameUI()
         setNeedsStatusBarAppearanceUpdate()
         
@@ -192,13 +178,14 @@ class MainViewController: UIViewController,
         }
     }
     
-    var UserTheme: ThemeDescriptor? = nil
+    /// User theme.
+    var UserTheme: ThemeDescriptor2? = nil
     
     /// If the view is disappearing, save data as it may not come back.
     /// - Parameter animated: Passed to the super class.
     override func viewDidDisappear(_ animated: Bool)
     {
-        Themes.SaveThemes()
+        Themes.SaveUserTheme()
         super.viewDidDisappear(animated)
     }
     
@@ -215,7 +202,7 @@ class MainViewController: UIViewController,
         
         //Initialize the 3D game viewer.
         GameView3D = GameUISurface3D
-        GameView3D?.Initialize(With: Game!.GameBoard!, Theme: Themes, BaseType: CurrentBaseGameType)
+        GameView3D?.Initialize(With: Game!.GameBoard!, Theme: Themes, BaseType: CurrentBaseGameType) 
         GameView3D?.Owner = self
         GameView3D?.SmoothMotionDelegate = self
         Smooth3D = GameView3D
@@ -573,16 +560,11 @@ class MainViewController: UIViewController,
     
     func ClearAndStartAI()
     {
-        #if true
         DispatchQueue.main.sync
             {
                 GameView3D?.DestroyMap3D(FromBoard: Game.GameBoard!, DestroyBy: UserTheme!.DestructionMethod, MaxDuration: 1.25)
         }
         HandleStartInAIMode()
-        #else
-        GameView3D?.DestroyMap3D(FromBoard: Game.GameBoard!, CalledFrom: "ClearAndStartAI",
-                                 DestroyBy: .FadeAway, Completion: HandleStartInAIMode)
-        #endif
     }
     
     /// Start playing in AI mode.
@@ -591,9 +573,8 @@ class MainViewController: UIViewController,
         Game.StopGame()
         InAttractMode = true
         Game.AIScoringMethod = .OffsetMapping
-        //3D setup
         GameView3D?.DrawMap3D(FromBoard: Game.GameBoard!, CalledFrom: "HandleStartInAIMode")
-        Game!.SetPredeterminedOrder(UsePredeterminedOrder, FirstIs: .T)
+        //Game!.SetPredeterminedOrder(UsePredeterminedOrder, FirstIs: .T)
         
         DebugClient.Send("Game \(GameCount) started in attract mode.")
         Game.StartGame(EnableAI: true, PieceCategories: [.Standard], UseFastAI: UseFastAI)
@@ -895,7 +876,6 @@ class MainViewController: UIViewController,
     /// Finish finalizing a piece when rotation occurs.
     func RotateFinishFinalizing()
     {
-        //print("RotateFinishFinalized called \(CACurrentMediaTime() - DispatchCalled) seconds after dispatch")
         GameView3D?.ClearBucket()
         GameView3D?.DrawMap3D(FromBoard: Game!.GameBoard!, CalledFrom: "RotateFinishFinalizing")
         Game!.DoSpawnNewPiece()
@@ -1062,9 +1042,7 @@ class MainViewController: UIViewController,
     //var PieceFPS = [Double]()
     
     /// Notice from the game that it is done compressing the board.
-    ///
     /// - Note: The board is compressed when the game (the map, actually) sees full rows and removes them.
-    ///
     /// - Parameter DidCompress: True if the board was actually compressed or false if there was nothing to compress.
     func BoardDoneCompressing(DidCompress: Bool)
     {
@@ -1080,6 +1058,7 @@ class MainViewController: UIViewController,
     
     // MARK: Control protocol functions.
     
+    /// Freeze the piece in place.
     func FreezeInPlace()
     {
         if let PieceID = Game.CurrentPiece
@@ -1287,7 +1266,6 @@ class MainViewController: UIViewController,
         Game.StartGame(EnableAI: InAttractMode, PieceCategories: GamePieces, UseFastAI: UseFastAI)
         
         GameView3D?.DrawMap3D(FromBoard: Game.GameBoard!, CalledFrom: "Play")
-        //GameView3D?.FadeBucketGrid()
         GameTextOverlay?.ShowCurrentScore(NewScore: 0)
         CurrentlyPlaying = true
         PlayStopButton?.setTitle("Stop", for: .normal)
@@ -1295,9 +1273,6 @@ class MainViewController: UIViewController,
         {
             DebugClient.SetIdiotLight(IdiotLights.A2, Title: "Normal Mode", FGColor: ColorNames.Black, BGColor: ColorNames.White)
         }
-        #if false
-        PieceFPS.removeAll()
-        #endif
     }
     
     var GameDuration: Double = 0.0
@@ -1425,7 +1400,7 @@ class MainViewController: UIViewController,
     
     /// Someone wants a reference to the user theme.
     /// - Returns: Current user theme instance.
-    func GetUserTheme() -> ThemeDescriptor?
+    func GetUserTheme() -> ThemeDescriptor2?
     {
         return Themes.UserTheme
     }
@@ -1579,6 +1554,7 @@ class MainViewController: UIViewController,
     // MARK: General-UI interactions.
     
     var ProposedNewGameType: BaseGameTypes = .Standard
+
     var CurrentBaseGameType: BaseGameTypes = .Standard
     
     var UsePredeterminedOrder: Bool = false
@@ -1676,7 +1652,7 @@ class MainViewController: UIViewController,
         let Storyboard = UIStoryboard(name: "Theming", bundle: nil)
         if let Controller = Storyboard.instantiateViewController(withIdentifier: "MainThemeEditor") as? ThemeEditorController
         {
-            Controller.EditTheme(Theme: Themes!.UserTheme, DefaultTheme: Themes!.DefaultTheme)
+            Controller.EditTheme(Theme: Themes!.UserTheme!)
             self.present(Controller, animated: true, completion: nil)
         }
     }
@@ -1736,9 +1712,11 @@ class MainViewController: UIViewController,
     /// - Parameter SubType: The game sub type to use.
     func SwitchGameType(BaseType: BaseGameTypes, SubType: BaseGameSubTypes)
     {
-        print("Switching game type to \(BaseType)")
+        print("Switching game type to \(BaseType), \(SubType)")
         CurrentBaseGameType = BaseType
         UserTheme!.GameType = BaseType
+        UserTheme!.SubGameType = SubType
+        Themes.SaveUserTheme()
         Stop()
         InitializeGameUI()
     }
@@ -1834,44 +1812,6 @@ class MainViewController: UIViewController,
     func DisplayStep(From: String, Message: String, Stepped: Steps)
     {
         
-    }
-    
-    // MARK: UITouchImage function implementations.
-    
-    /// Handle **UITouchImage** press actions.
-    /// - Parameter sender: The **UITouchImage** control that was pressed.
-    /// - Parameter PressedButton: The logical button that was pressed.
-    func Touched(_ sender: UITouchImage, PressedButton: UIMotionButtons)
-    {
-        switch PressedButton
-        {
-            case .MoveLeft:
-                MoveLeft()
-            
-            case .MoveRight:
-                MoveRight()
-            
-            case .MoveDown:
-                MoveDown()
-            
-            case .MoveUp:
-                MoveUp()
-            
-            case .DropDown:
-                DropDown()
-            
-            case .RotateLeft:
-                RotateLeft()
-            
-            case .RotateRight:
-                RotateRight()
-            
-            case .FlyAway:
-                MoveUpAndAway()
-            
-            default:
-                break
-        }
     }
     
     // MARK: Media button handling.
