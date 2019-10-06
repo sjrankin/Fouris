@@ -369,6 +369,15 @@ extension View3D
                     Block.runAction(Sequence)
             }
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + MaxDuration, execute:
+            {
+                self.HideBoard(Method: HideBoardMethods.FadeOut, Duration: 0.5)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.51, execute:
+                    {
+                        self.ShowBoard(Method: .FadeIn, Duration: 0.5)
+                })
+        })
     }
 }
 
