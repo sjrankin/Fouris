@@ -521,9 +521,7 @@ class Board
     }
     
     /// Called by a piece when it stopped/froze out of bounds. Signals game over.
-    ///
     /// - Note: **Game over determination occurs here.**
-    ///
     /// - Parameter ID: ID of the piece that froze (at least partially) out of bounds.
     func StoppedOutOfBounds(ID: UUID)
     {
@@ -547,7 +545,6 @@ class Board
     }
     
     /// The game is over (for whatever reason). Clean things up.
-    ///
     /// - Note: The PieceFactory queue **must** be cleared because each piece has an associated
     ///         link to the board. Boards change between games so if we don't remove the old pieces
     ///         in the queue, they will point to a non-existent board.
@@ -558,7 +555,6 @@ class Board
     }
     
     /// Delete the frozen piece from the in-play list.
-    ///
     /// - Parameter ID: ID of the piece to delete.
     func DeleteFrozen(_ ID: UUID)
     {
@@ -595,7 +591,6 @@ class Board
     var PostGapCount: Int = 0
     
     /// Get the piece from the in-play list with the specified ID.
-    ///
     /// - Parameter ID: ID of the piece to return.
     /// - Returns: The piece on success, nil if not found.
     func GetPiece(ID: UUID) -> Piece?
@@ -700,9 +695,7 @@ class Board
     
     /// Implements subscripting into the current map bucket. Get or set the item type at the specified address. Invalid
     /// addresses have no affect (eg, return nil or do nothing if trying to set).
-    ///
     /// - Note: This is for accessing the contents of the **bucket**, **not** the map.
-    ///
     /// - Parameters:
     ///   - X: Column value.
     ///   - Y: Row value.
@@ -774,7 +767,6 @@ class Board
 }
 
 /// All possible motion directions and rotations.
-///
 /// - **Left**: Move left.
 /// - **Right**: Move right.
 /// - **Up**: Move up
@@ -804,7 +796,6 @@ enum Directions: Int, CaseIterable
 }
 
 /// Types of board pieces.
-///
 /// - **GamePiece**: Falling game.
 /// - **RetiredGamePiece**: Retired game piece frozen into place.
 /// - **Bucket**: The bucket boundary.
