@@ -33,20 +33,18 @@ class PieceCreator: UIViewController, ThemeEditingProtocol, GridProtocol
     var RotateY: Bool = false
     var RotateZ: Bool = false
     
-    func EditTheme(Theme: ThemeDescriptor, DefaultTheme: ThemeDescriptor)
+    func EditTheme(Theme: ThemeDescriptor2)
     {
-    UserTheme = Theme
-        self.DefaultTheme = DefaultTheme
+        UserTheme = Theme
     }
     
     var ThemeID = UUID.Empty
     
     var NewTheme = UUID.Empty
     
-    func EditTheme(Theme: ThemeDescriptor, PieceID: UUID, DefaultTheme: ThemeDescriptor)
+    func EditTheme(Theme: ThemeDescriptor2, PieceID: UUID)
     {
         UserTheme = Theme
-        self.DefaultTheme = DefaultTheme
     }
     
     func EditResults(_ Edited: Bool, ThemeID: UUID, PieceID: UUID?)
@@ -54,8 +52,7 @@ class PieceCreator: UIViewController, ThemeEditingProtocol, GridProtocol
         //Not used in this class.
     }
     
-    var UserTheme: ThemeDescriptor? = nil
-    var DefaultTheme: ThemeDescriptor? = nil
+    var UserTheme: ThemeDescriptor2? = nil
     
     func ResetAllCells(ToSelection: Bool)
     {
