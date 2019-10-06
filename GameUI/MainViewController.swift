@@ -123,9 +123,14 @@ class MainViewController: UIViewController,
         Themes.SubscribeToChanges(Subscriber: "MainViewController", SubscribingObject: self)
         CurrentBaseGameType = UserTheme!.GameType
         print("CurrentBaseGameType=\(CurrentBaseGameType)")
+        #if true
+        PieceVisualManager2.Initialize()
+        #else
         PieceVisualManager.Initialize()
+        #endif
         RecentlyUsedColors.Initialize(WithLimit: Settings.GetMostRecentlyUsedColorListCapacity())
         HistoryManager.Initialize()
+        
         InitializeUI()
         AIData = AITestTable()
     
