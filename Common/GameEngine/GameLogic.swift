@@ -29,7 +29,7 @@ class GameLogic
     var AI: MainAI? = nil
     
     /// The user theme.
-    var UserTheme: ThemeDescriptor? = nil
+    var UserTheme: ThemeDescriptor2? = nil
     
     /// Initializer. The game board is created here.
     ///
@@ -38,7 +38,7 @@ class GameLogic
     ///   - Parameter BaseGame: The base game type.
     ///   - Parameter UserTheme: The current user theme.
     ///   - Parameter EnableAI: The AI is enabled as per the passed value.
-    init(WithGameCount: Int? = nil, BaseGame: BaseGameTypes, UserTheme: ThemeDescriptor,
+    init(WithGameCount: Int? = nil, BaseGame: BaseGameTypes, UserTheme: ThemeDescriptor2,
          EnableAI: Bool)
     {
         _BaseGameType = BaseGame
