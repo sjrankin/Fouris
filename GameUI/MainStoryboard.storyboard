@@ -380,17 +380,8 @@
                                     <view clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zGM-rB-Vdc">
                                         <rect key="frame" x="20" y="377" width="260" height="50"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oRd-Zf-lZi">
-                                                <rect key="frame" x="14" y="4.5" width="52.5" height="41"/>
-                                                <state key="normal" image="camera" catalog="system">
-                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30" scale="large" weight="bold"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="HandleCameraButtonPressed:" destination="anR-7Y-bzH" eventType="primaryActionTriggered" id="YqN-Ie-ffS"/>
-                                                </connections>
-                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z48-JF-EPA">
-                                                <rect key="frame" x="189" y="7" width="54" height="36"/>
+                                                <rect key="frame" x="8" y="7" width="54" height="36"/>
                                                 <state key="normal" image="video.fill" catalog="system">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30" scale="large" weight="bold"/>
                                                 </state>
@@ -398,14 +389,23 @@
                                                     <action selector="HandleVideoButtonPressed:" destination="anR-7Y-bzH" eventType="primaryActionTriggered" id="T2N-WX-7Qn"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oRd-Zf-lZi">
+                                                <rect key="frame" x="199" y="4.5" width="52.5" height="41"/>
+                                                <state key="normal" image="camera" catalog="system">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30" scale="large" weight="bold"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="HandleCameraButtonPressed:" destination="anR-7Y-bzH" eventType="primaryActionTriggered" id="YqN-Ie-ffS"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="oRd-Zf-lZi" firstAttribute="centerY" secondItem="zGM-rB-Vdc" secondAttribute="centerY" id="05t-2R-k7h"/>
                                             <constraint firstItem="Z48-JF-EPA" firstAttribute="centerY" secondItem="zGM-rB-Vdc" secondAttribute="centerY" id="18z-AB-V4b"/>
-                                            <constraint firstItem="oRd-Zf-lZi" firstAttribute="leading" secondItem="zGM-rB-Vdc" secondAttribute="leading" constant="14" id="3Cl-Pr-aC1"/>
-                                            <constraint firstItem="oRd-Zf-lZi" firstAttribute="leading" secondItem="zGM-rB-Vdc" secondAttribute="leading" constant="14" id="5jX-4N-aNV"/>
-                                            <constraint firstItem="Z48-JF-EPA" firstAttribute="trailing" secondItem="zGM-rB-Vdc" secondAttribute="trailingMargin" constant="-9" id="DBx-xv-V3z"/>
+                                            <constraint firstItem="oRd-Zf-lZi" firstAttribute="leading" secondItem="zGM-rB-Vdc" secondAttribute="leading" constant="199" id="3Cl-Pr-aC1"/>
+                                            <constraint firstItem="oRd-Zf-lZi" firstAttribute="leading" secondItem="zGM-rB-Vdc" secondAttribute="leading" constant="199" id="5jX-4N-aNV"/>
+                                            <constraint firstItem="Z48-JF-EPA" firstAttribute="trailing" secondItem="zGM-rB-Vdc" secondAttribute="trailingMargin" constant="-190" id="DBx-xv-V3z"/>
                                             <constraint firstItem="Z48-JF-EPA" firstAttribute="top" secondItem="Xqv-HT-xgU" secondAttribute="top" constant="7" id="Kbr-1S-QWc"/>
                                         </constraints>
                                         <viewLayoutGuide key="safeArea" id="Xqv-HT-xgU"/>
@@ -793,13 +793,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For game type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ja-49-CVH">
-                                <rect key="frame" x="20" y="155" width="111" height="21"/>
+                                <rect key="frame" x="20" y="154.5" width="111" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tap-d5-oLU">
-                                <rect key="frame" x="20" y="202" width="672" height="632"/>
+                                <rect key="frame" x="20" y="201.5" width="672" height="632.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -815,7 +815,7 @@
                                 </connections>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="48o-Mh-maS">
-                                <rect key="frame" x="199" y="102" width="154" height="32"/>
+                                <rect key="frame" x="199" y="102" width="154" height="31.5"/>
                                 <viewLayoutGuide key="safeArea" id="VC8-ee-mL6"/>
                                 <segments>
                                     <segment title="User"/>
@@ -832,7 +832,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="e6D-S9-tip">
-                                <rect key="frame" x="199" y="150.5" width="171" height="32"/>
+                                <rect key="frame" x="199" y="150" width="171" height="32"/>
                                 <segments>
                                     <segment title="Standard"/>
                                     <segment title="Rotating"/>
