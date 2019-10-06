@@ -28,17 +28,17 @@ class SelectBackgroundImageCode: UIViewController, UIImagePickerControllerDelega
         }
     }
     
-    func EditTheme(Theme: ThemeDescriptor, DefaultTheme: ThemeDescriptor)
+    func EditTheme(Theme: ThemeDescriptor2)
     {
         UserTheme = Theme
     }
     
-    func EditTheme(Theme: ThemeDescriptor, PieceID: UUID, DefaultTheme: ThemeDescriptor)
+    func EditTheme(Theme: ThemeDescriptor2, PieceID: UUID)
     {
         UserTheme = Theme
     }
     
-    var UserTheme: ThemeDescriptor!
+    var UserTheme: ThemeDescriptor2!
     
     func EditResults(_ Edited: Bool, ThemeID: UUID, PieceID: UUID?)
     {
