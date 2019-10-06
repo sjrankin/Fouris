@@ -473,20 +473,17 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     
     // MARK: Theme editing functions.
     
-    func EditTheme(Theme: ThemeDescriptor, DefaultTheme: ThemeDescriptor)
+    func EditTheme(Theme: ThemeDescriptor2)
     {
         UserTheme = Theme
-        self.DefaultTheme = DefaultTheme
     }
     
-    func EditTheme(Theme: ThemeDescriptor, PieceID: UUID, DefaultTheme: ThemeDescriptor)
+    func EditTheme(Theme: ThemeDescriptor2, PieceID: UUID)
     {
         UserTheme = Theme
-        self.DefaultTheme = DefaultTheme
     }
     
-    var UserTheme: ThemeDescriptor? = nil
-    var DefaultTheme: ThemeDescriptor? = nil
+    var UserTheme: ThemeDescriptor2? = nil
     
     func EditResults(_ Edited: Bool, ThemeID: UUID, PieceID: UUID?)
     {
@@ -837,7 +834,7 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var ColorDescription: UILabel!
     @IBOutlet weak var ColorViewDirty: UIImageView!
     @IBOutlet weak var ColorControlTitle: UILabel!
-        @IBOutlet weak var ColorApplyButton: UIButton!
+    @IBOutlet weak var ColorApplyButton: UIButton!
     
     // MARK: Gradient view controls.
     @IBOutlet weak var GradientTitle: UILabel!
@@ -848,7 +845,7 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var ReverseGradientSwitch: UISwitch!
     @IBOutlet weak var WarningBox: UIView!
     @IBOutlet weak var WarningLabel: UILabel!
-        @IBOutlet weak var GradientApplyButton: UIButton!
+    @IBOutlet weak var GradientApplyButton: UIButton!
     
     // MARK: Image view controls.
     @IBOutlet weak var ImageTitle: UILabel!
@@ -857,14 +854,14 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var ImageViewDirty: UIImageView!
     @IBOutlet weak var ImagePhotoRollButton: UIButton!
     @IBOutlet weak var ImageProgramImagesButton: UIButton!
-        @IBOutlet weak var ImageApplyButton: UIButton!
+    @IBOutlet weak var ImageApplyButton: UIButton!
     
     // MARK: String list view controls.
     @IBOutlet weak var StringListTitle: UILabel!
     @IBOutlet weak var StringListDescription: UILabel!
     @IBOutlet weak var StringListPicker: UIPickerView!
     @IBOutlet weak var StringListViewDirty: UIImageView!
-        @IBOutlet weak var StringListApplyButton: UIButton!
+    @IBOutlet weak var StringListApplyButton: UIButton!
     
     // MARK: Vector3 view controls.
     @IBOutlet weak var Vector3Title: UILabel!
@@ -883,7 +880,7 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var Vector4ZBox: UITextField!
     @IBOutlet weak var Vector4WBox: UITextField!
     @IBOutlet weak var Vector4ViewDirty: UIImageView!
-        @IBOutlet weak var Vector4ApplyButton: UIButton!
+    @IBOutlet weak var Vector4ApplyButton: UIButton!
     
     // MARK: Double view controls.
     @IBOutlet weak var DoubleTitle: UILabel!
@@ -891,7 +888,7 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var DoubleControlTitle: UILabel!
     @IBOutlet weak var DoubleTextBox: UITextField!
     @IBOutlet weak var DoubleViewDirty: UIImageView!
-        @IBOutlet weak var DoubleApplyButton: UIButton!
+    @IBOutlet weak var DoubleApplyButton: UIButton!
     
     // MARK: Int view controls.
     @IBOutlet weak var IntTitle: UILabel!
@@ -899,14 +896,14 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var IntControlTitle: UILabel!
     @IBOutlet weak var IntTextBox: UITextField!
     @IBOutlet weak var IntViewDirty: UIImageView!
-        @IBOutlet weak var IntApplyButton: UIButton!
+    @IBOutlet weak var IntApplyButton: UIButton!
     
     // MARK: String view controls.
     @IBOutlet weak var StringTitle: UILabel!
     @IBOutlet weak var StringDescription: UILabel!
     @IBOutlet weak var StringTextBox: UITextField!
     @IBOutlet weak var StringViewDirty: UIImageView!
-        @IBOutlet weak var StringApplyButton: UIButton!
+    @IBOutlet weak var StringApplyButton: UIButton!
     
     // MARK: Bool view controls.
     @IBOutlet weak var BoolTitle: UILabel!
@@ -914,7 +911,7 @@ class RawThemeViewerCode: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var BoolControlTitle: UILabel!
     @IBOutlet weak var BoolSwitch: UISwitch!
     @IBOutlet weak var BoolViewDirty: UIImageView!
-        @IBOutlet weak var BoolApplyButton: UIButton!
+    @IBOutlet weak var BoolApplyButton: UIButton!
     
     // MARK: Action view controls.
     @IBOutlet weak var ActionResults: UILabel!
