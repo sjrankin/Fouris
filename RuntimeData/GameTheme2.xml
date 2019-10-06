@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Theme Type="Default" ID="247c07de-46fd-4b11-8166-c3fc6d340733" Name="Default Theme" UserTheme="false">
     <Runtime MinimumVersion="1.0" MinimumBuild="0"/>
+    <Game Base="Standard" SubType="MediumCentralBlock"/>
     <Dates Created="2019-10-03" Edited="Not Edited"/>
     <Quality>
         <Antialiasing Mode="MultiSampling4X"/>
@@ -34,6 +35,10 @@
         <Rotation Enable="true" Direction="Right" Duration="0.3"/>
         <Destruction Method="Shrink" Duration="1.25"/>
     </Bucket>
+    <Board>
+        <Show Method="Appear" Duration="0.25"/>
+        <Hide Method="Disappear" Duration="0.25"/>
+    </Board>
     <Buttons>
         <AllButtons Hide="false"/>
         <UpButton Show="true"/>
@@ -41,6 +46,9 @@
         <DropDownButton Show="true"/>
         <FreezeButton Show="true"/>
     </Buttons>
+    <Feedback>
+        <Haptic Enable="false"/>
+    </Feedback>
     <TextOverlay>
         <NextPiece Show="true" Rotate="true"/>
     </TextOverlay>
@@ -60,14 +68,14 @@
             <CenterLines Show="false" Color="#ffffff" Width="2.0"/>
         </GridLines>
     </Debug>
-    <Blocks>
-        <Block ID="f4510cca-262a-4018-bf29-04d703702d65"/>
-        <Block ID="b5bb59a5-b006-487b-a7b1-e0daf4a48810"/>
-        <Block ID="05463ade-1996-49e0-aae9-55cad6f8f605"/>
-        <Block ID="0f2709f0-b5ed-4ed9-b8c5-d65a1e1d69e8"/>
-        <Block ID="26e5dee4-0cc5-492f-ab31-b5b810863bf4"/>
-        <Block ID="69cc6259-93f2-438d-8a9f-e0e65ad6c841"/>
-        <Block ID="7c73c10c-86b3-406d-964e-f12abbf914cc"/>
-    </Blocks>
+    <Pieces>
+        <Piece ID="f4510cca-262a-4018-bf29-04d703702d65"/>
+        <Piece ID="b5bb59a5-b006-487b-a7b1-e0daf4a48810"/>
+        <Piece ID="05463ade-1996-49e0-aae9-55cad6f8f605"/>
+        <Piece ID="0f2709f0-b5ed-4ed9-b8c5-d65a1e1d69e8"/>
+        <Piece ID="26e5dee4-0cc5-492f-ab31-b5b810863bf4"/>
+        <Piece ID="69cc6259-93f2-438d-8a9f-e0e65ad6c841"/>
+        <Piece ID="7c73c10c-86b3-406d-964e-f12abbf914cc"/>
+    </Pieces>
 </Theme>
 
