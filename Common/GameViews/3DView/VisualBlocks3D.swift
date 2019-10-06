@@ -34,16 +34,16 @@ class VisualBlocks3D: SCNNode
     /// - Parameter WithID: ID of the block to link it to the source object in the board map.
     /// - Parameter AtX: Initial X location of the block.
     /// - Parameter AtY: Initial Y location of the block.
-    /// - Parameter WithTile: Tile to use to create the visual look of the block.
+    /// - Parameter ShapeID: ID of the piece.
     /// - Parameter IsRetired: Determines which set of attributes to use for the visual look.
-    init(_ WithID: UUID, AtX: CGFloat, AtY: CGFloat, WithTile: TileDescriptor, IsRetired: Bool)
+    init(_ WithID: UUID, AtX: CGFloat, AtY: CGFloat, ShapeID: UUID, IsRetired: Bool)
     {
         super.init()
         CommonInitialization()
         _ID = WithID
         _IsRetired = IsRetired
-        BlockTile = WithTile
-        Create(WithTile: WithTile, IsRetired: IsRetired)
+        CurrentPieceID = ShapeID
+        Create(ShapeID: ShapeID, IsRetired: IsRetired)
         X = AtX
         Y = AtY
         Z = 0.0
@@ -54,16 +54,16 @@ class VisualBlocks3D: SCNNode
     /// - Parameter AtX: Initial X location of the block.
     /// - Parameter AtY: Initial Y location of the block.
     /// - Parameter AtZ: Initial Z location of the block.
-    /// - Parameter WithTile: Tile to use to create the visual look of the block.
+    /// - Parameter ShapeID: ID of the piece.
     /// - Parameter IsRetired: Determines which set of attributes to use for the visual look.
-    init(_ WithID: UUID, AtX: CGFloat, AtY: CGFloat, AtZ: CGFloat, WithTile: TileDescriptor, IsRetired: Bool)
+    init(_ WithID: UUID, AtX: CGFloat, AtY: CGFloat, AtZ: CGFloat, ShapeID: UUID, IsRetired: Bool)
     {
         super.init()
         CommonInitialization()
         _ID = WithID
         _IsRetired = IsRetired
-        BlockTile = WithTile
-        Create(WithTile: WithTile, IsRetired: IsRetired)
+        CurrentPieceID = ShapeID
+        Create(ShapeID: ShapeID, IsRetired: IsRetired)
         X = AtX
         Y = AtY
         Z = AtZ
@@ -87,23 +87,20 @@ class VisualBlocks3D: SCNNode
     
     private static var BlockCount = 0
     
-    /// Reference to the tile descriptor for this block.
-    private var _BlockTile: TileDescriptor? = nil
-    /// Get or set the tile descriptor used to describe the visual aspects of this block. Setting the
-    /// value changes the visuals immediately.
-    public var BlockTile: TileDescriptor?
+    /// Holds the ID of the current piece. This is the ID of the piece's shape, not the individual piece.
+    private var _CurrentPieceID: UUID = UUID.Empty
+    /// Get or set the ID of the current piece. This is the ID of the piece's shape, not the individual piece
+    /// that happens to have a given shape.
+    public var CurrentPieceID: UUID
     {
         get
         {
-            return _BlockTile
+            return _CurrentPieceID
         }
         set
         {
-            _BlockTile = newValue
-            if let Tile = _BlockTile
-            {
-                SetVisualAttributes(WithTile: Tile, IsRetired: IsRetired)
-            }
+            _CurrentPieceID = newValue
+            SetVisualAttributes(ShapeID: _CurrentPieceID, IsRetired: IsRetired)
         }
     }
     
@@ -152,10 +149,7 @@ class VisualBlocks3D: SCNNode
                 return
             }
             _IsRetired = newValue
-            if let Tile = BlockTile
-            {
-                SetVisualAttributes(WithTile: Tile, IsRetired: _IsRetired)
-            }
+            SetVisualAttributes(ShapeID: CurrentPieceID, IsRetired: _IsRetired)
         }
     }
     
@@ -163,7 +157,7 @@ class VisualBlocks3D: SCNNode
     /// Sets the passed tile's visual attributes to the block.
     /// - Parameter WithTile: The tile whose visual attributes will be used to draw the block.
     /// - Parameter IsRetired: Determines which set of visual attributes to use.
-    public func SetVisualAttributes(WithTile: TileDescriptor, IsRetired: Bool)
+    public func SetVisualAttributes(/*WithTile: TileDescriptor*/ShapeID: UUID, IsRetired: Bool)
     {
         VACount = VACount + 1
         if BlockShape == nil
@@ -182,46 +176,46 @@ class VisualBlocks3D: SCNNode
         
         var Specular = "White"
         var Diffuse = "ReallyDarkGray"
-        let TileShape = PieceFactory.GetShapeForPiece(ID: WithTile.PieceShapeID)
-        let TileVisual = PieceVisualManager.GetPieceTheme(PieceShape: TileShape!)
+        let PieceShape = PieceFactory.GetShapeForPiece(ID: ShapeID)
+        let PieceVisual = PieceVisualManager.GetPieceTheme(PieceShape: PieceShape!)
         if IsRetired
         {
-            switch TileVisual?.Retired3DSurfaceTexture
+            switch PieceVisual?.Retired3DSurfaceTexture
             {
                 case .Color:
-                    Specular = TileVisual!.RetiredSpecularColor
-                    Diffuse = TileVisual!.RetiredDiffuseColor
+                    Specular = PieceVisual!.RetiredSpecularColor
+                    Diffuse = PieceVisual!.RetiredDiffuseColor
                     BlockShape!.firstMaterial!.specular.contents = ColorServer.ColorFrom(Specular)
                     BlockShape!.firstMaterial!.diffuse.contents = ColorServer.ColorFrom(Diffuse)
                 
                 case .Image:
-                    Diffuse = TileVisual!.RetiredTextureName
-                BlockShape!.firstMaterial!.diffuse.contents = UIImage(named: Diffuse)
+                    Diffuse = PieceVisual!.RetiredTextureName
+                    BlockShape!.firstMaterial!.diffuse.contents = UIImage(named: Diffuse)
                 
                 case .none:
-                break
+                    break
             }
         }
         else
         {
-            switch TileVisual?.Active3DSurfaceTexture
+            switch PieceVisual?.Active3DSurfaceTexture
             {
                 case .Color:
-                    Specular = TileVisual!.ActiveSpecularColor
-                    Diffuse = TileVisual!.ActiveDiffuseColor
+                    Specular = PieceVisual!.ActiveSpecularColor
+                    Diffuse = PieceVisual!.ActiveDiffuseColor
                     BlockShape!.firstMaterial!.specular.contents = ColorServer.ColorFrom(Specular)
                     BlockShape!.firstMaterial!.diffuse.contents = ColorServer.ColorFrom(Diffuse)
                 
                 case .Image:
-                    Diffuse = TileVisual!.ActiveTextureName
+                    Diffuse = PieceVisual!.ActiveTextureName
                     BlockShape!.firstMaterial!.diffuse.contents = UIImage(named: Diffuse)
                 
                 case .none:
-                break
+                    break
             }
         }
-
-        let GeoShape = IsRetired ? TileVisual!.Retired3DBlockShape : TileVisual!.Active3DBlockShape
+        
+        let GeoShape = IsRetired ? PieceVisual!.Retired3DBlockShape : PieceVisual!.Active3DBlockShape
         switch GeoShape
         {
             case .Torus:
@@ -266,9 +260,10 @@ class VisualBlocks3D: SCNNode
     /// - Returns: An SCNGeometry instance with the appropriate shape.
     private func CreateGeometry(Width: CGFloat, Height: CGFloat, Depth: CGFloat, IsRetired: Bool) -> SCNGeometry
     {
-        let TileShape = PieceFactory.GetShapeForPiece(ID: BlockTile!.PieceShapeID)
-        let TileVisual = PieceVisualManager.GetPieceTheme(PieceShape: TileShape!)
-        let GeoShape = IsRetired ? TileVisual!.Retired3DBlockShape : TileVisual!.Active3DBlockShape
+        let BlockShape = PieceFactory.GetShapeForPiece(ID: CurrentPieceID)
+        print("CreateGeometry: CurrentPieceID=\(CurrentPieceID)")
+        let BlockVisual = PieceVisualManager.GetPieceTheme(PieceShape: BlockShape!)
+        let GeoShape = IsRetired ? BlockVisual!.Retired3DBlockShape : BlockVisual!.Active3DBlockShape
         var Geometry: SCNGeometry!
         switch GeoShape
         {
@@ -314,10 +309,10 @@ class VisualBlocks3D: SCNNode
     /// - Parameter Height: Height of the box.
     /// - Parameter Depth: Depth of the box.
     /// - Parameter EdgeRadius: Chamfer radius (rounded edges) of the box.
-    /// - Parameter WithTile: The tile to use to get visual attributes.
+    /// - Parameter ShapeID: ID of the piece's shape.
     /// - Parameter IsRetired: Determines which set of visual attributes to use.
     public func Create(Width: CGFloat, Height: CGFloat, Depth: CGFloat, EdgeRadius: CGFloat,
-                       WithTile: TileDescriptor, IsRetired: Bool)
+                       ShapeID: UUID, IsRetired: Bool)
     {
         OriginalWidth = Width
         OriginalHeight = Height
@@ -325,7 +320,7 @@ class VisualBlocks3D: SCNNode
         let BlockGeometry = CreateGeometry(Width: Width, Height: Height, Depth: Depth, IsRetired: IsRetired)
         self.geometry = BlockGeometry
         BlockShape = BlockGeometry
-        SetVisualAttributes(WithTile: WithTile, IsRetired: IsRetired)
+        SetVisualAttributes(ShapeID: ShapeID, IsRetired: IsRetired)
     }
     
     private var OriginalWidth: CGFloat = 1.0
@@ -334,11 +329,11 @@ class VisualBlocks3D: SCNNode
     
     /// Create the geometry with default sizes and apply visual attributes.
     /// - Note: The size of the geometry will be 1.0 x 1.0 x 1.0.
-    /// - Parameter WithTile: The tile to use to get visual attributes.
+    /// - Parameter ShapeID: ID of the piece's shape.
     /// - Parameter IsRetired: Determines which set of visual attributes to use.
-    public func Create(WithTile: TileDescriptor, IsRetired: Bool)
+    public func Create(ShapeID: UUID, IsRetired: Bool)
     {
-        Create(Width: 1.0, Height: 1.0, Depth: 1.0, EdgeRadius: 0.0, WithTile: WithTile, IsRetired: IsRetired)
+        Create(Width: 1.0, Height: 1.0, Depth: 1.0, EdgeRadius: 0.0, ShapeID: ShapeID, IsRetired: IsRetired)
     }
     
     /// Removes the block from the parent node (the scene).
