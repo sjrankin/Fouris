@@ -542,6 +542,20 @@ extension RawThemeViewerCode
         ResetField.ActionButtonBackgroundColor = ColorServer.ColorFrom(ColorNames.CottonCandy)
         ResetField.ActionButtonTextColor = ColorServer.ColorFrom(ColorNames.Maroon)
         ResetGroup.AddField(ResetField)
+        let ResetUserTheme = GroupField(ID: UUID(), Title: "Reset themes",
+                                        Description: "Reset theme file in User Defaults. You will lose your changes.",
+                                        ControlTitle: "Reset Theme",
+                                        Starting: false as Any, Default: false as Any, FieldType: .Action,
+                                        List: nil, Handler:
+            {
+                _ in
+                UserDefaults.standard.set(ThemeManager3.RawTheme(), forKey: "UserTheme")
+        }, DisableControl: false)
+        ResetUserTheme.ActionBorderColor = UIColor.red
+        ResetUserTheme.ActionButtonBackgroundColor = ColorServer.ColorFrom(ColorNames.CottonCandy)
+        ResetUserTheme.ActionButtonTextColor = ColorServer.ColorFrom(ColorNames.Maroon)
+        ResetGroup.AddField(ResetUserTheme)
+        
         FieldTables.append(ResetGroup)
     }
 }
