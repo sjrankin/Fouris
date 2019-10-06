@@ -29,21 +29,19 @@ class ThemeEditorController: UIViewController, ThemeEditingProtocol
         ShowBucketBoundsSwitch.isOn = UserTheme!.ShowBucketGridOutline
     }
     
-    func EditTheme(Theme: ThemeDescriptor, DefaultTheme: ThemeDescriptor)
+    func EditTheme(Theme: ThemeDescriptor2)
     {
         self.UserTheme = Theme
-        self.DefaultTheme = DefaultTheme
     }
     
-    func EditTheme(Theme: ThemeDescriptor, PieceID: UUID, DefaultTheme: ThemeDescriptor)
+    func EditTheme(Theme: ThemeDescriptor2, PieceID: UUID)
     {
         self.UserTheme = Theme
-        self.DefaultTheme = DefaultTheme
     }
     
-    var UserTheme: ThemeDescriptor? = nil
+    var UserTheme: ThemeDescriptor2? = nil
 
-    var DefaultTheme: ThemeDescriptor? = nil
+    var DefaultTheme: ThemeDescriptor2? = nil
     
     func EditResults(_ Edited: Bool, ThemeID: UUID, PieceID: UUID?)
     {
@@ -56,7 +54,7 @@ class ThemeEditorController: UIViewController, ThemeEditingProtocol
     {
         let GBack = GameBackgroundDialog(coder: coder)
         GBack?.ThemeDelegate = self
-        GBack?.EditTheme(Theme: UserTheme!, DefaultTheme: DefaultTheme!)
+        GBack?.EditTheme(Theme: UserTheme!)
         return GBack
     }
     
@@ -64,14 +62,14 @@ class ThemeEditorController: UIViewController, ThemeEditingProtocol
     {
         let PieceSelect = PieceSelectorDialog(coder: coder)
         PieceSelect?.ThemeDelegate = self
-        PieceSelect?.EditTheme(Theme: UserTheme!, DefaultTheme: DefaultTheme!)
+        PieceSelect?.EditTheme(Theme: UserTheme!)
         return PieceSelect
     }
     @IBSegueAction func InstantiateRawThemeEditor(_ coder: NSCoder) -> RawThemeViewerCode?
     {
         let Editor = RawThemeViewerCode(coder: coder)
         Editor?.ThemeDelegate = self
-        Editor?.EditTheme(Theme: UserTheme!, DefaultTheme: DefaultTheme!)
+        Editor?.EditTheme(Theme: UserTheme!)
         return Editor
     }
     
@@ -79,6 +77,13 @@ class ThemeEditorController: UIViewController, ThemeEditingProtocol
     {
         let Editor = SettingsControllerCode(coder: coder)
         return Editor
+    }
+    
+    @IBSegueAction func InstantiateExporter(_ coder: NSCoder) -> ExportCode?
+    {
+        let Exporter = ExportCode(coder: coder)
+        Exporter?.EditTheme(Theme: UserTheme!)
+        return Exporter
     }
     
     // MARK: Bucket grid controls.
