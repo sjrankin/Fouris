@@ -28,32 +28,51 @@ class ThemeManager3: ThemeChangeProtocol2
     {
         if !FileIO.DirectoryExists(DirectoryName: FileIO.SettingsDirectory)
         {
+            print("Creating settings directory.")
             FileIO.CreateDirectory(DirectoryName: FileIO.SettingsDirectory)
             CreateSettingsFiles()
         }
         else
         {
             print("Settings directory exists.")
-            if !FileIO.FileExists(FileName: "GameTheme.xml", Directory: FileIO.SettingsDirectory)
+            if !FileIO.FilesExist(FileList: ["GameTheme2.xml", "UserGameTheme2.sml"], InDirectory: FileIO.SettingsDirectory)
             {
+                print("Creating settings files.")
                 CreateSettingsFiles()
             }
         }
+    }
+  
+    private func Preinitialize2() -> String
+    {
+        if let GameTheme = UserDefaults.standard.string(forKey: "GameTheme")
+        {
+            return GameTheme
+        }
+        return ThemeManager3.RawTheme()
     }
     
     /// Initialize the theme manager. Creates initial theme files if they do not exist. Reads theme files and provides data via the
     /// `DefaultTheme` and `UserTheme` properties.
     public func Initialize()
     {
+        #if true
+        let Raw = Preinitialize2()
+        UserThemeDocument = XMLDocument(FromString: Raw)
+        _UserTheme = ThemeDescriptor2()
+        _UserTheme?.ChangeDelegate = self
+        let _ = UserThemeDocument?.DeserializeTo(Caller: _UserTheme!)
+        #else
         Preinitialize()
         DefaultThemeDocument = XMLDocument(File: FileIO.MakeFileURL(FileName: "GameTheme2.xml", Directory: FileIO.SettingsDirectory)!)
-                UserThemeDocument = XMLDocument(File: FileIO.MakeFileURL(FileName: "UserGameTheme2.xml", Directory: FileIO.SettingsDirectory)!)
+        UserThemeDocument = XMLDocument(File: FileIO.MakeFileURL(FileName: "UserGameTheme2.xml", Directory: FileIO.SettingsDirectory)!)
         _DefaultTheme = ThemeDescriptor2()
         _DefaultTheme?.ChangeDelegate = self
         _UserTheme = ThemeDescriptor2()
         _UserTheme?.ChangeDelegate = self
         let _ = DefaultThemeDocument?.DeserializeTo(Caller: _DefaultTheme!)
         let _ = UserThemeDocument?.DeserializeTo(Caller: _UserTheme!)
+        #endif
     }
     
     /// Holds the default theme document.
@@ -98,8 +117,25 @@ class ThemeManager3: ThemeChangeProtocol2
         if UserTheme!.Dirty
         {
             let Serialized = UserTheme?.ToString()
+            #if true
+            UserDefaults.standard.set(Serialized, forKey: "GameTheme")
+            print("Save theme:\n\(Serialized!)")
+            #else
             let _ = FileIO.SaveSettingsFile(Name: "UserGameTheme2.xml", Contents: Serialized!)
+            print("Saved theme:\n\(Serialized!)")
+            #endif
         }
+    }
+    
+    /// Resets the user theme to the raw default value defined elsewhere in the class (see `RawTheme`).
+    /// - Note: All user settings will be lost.
+    public func ResetUserTheme()
+    {
+        UserDefaults.standard.set(ThemeManager3.RawTheme(), forKey: "GameTheme")
+        UserThemeDocument = XMLDocument(FromString: ThemeManager3.RawTheme())
+        _UserTheme = ThemeDescriptor2()
+        _UserTheme?.ChangeDelegate = self
+        let _ = UserThemeDocument?.DeserializeTo(Caller: _UserTheme!)
     }
     
     // MARK: ThemeChangeProtocol functions.
