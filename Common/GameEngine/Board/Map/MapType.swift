@@ -649,10 +649,8 @@ class MapType
     }
     
     /// Returns the Y value closest to the top of the bucket (eg, bucket entrance) for each column in the bucket.
-    ///
     /// - Note: If there are no retired game pieces (or bucket parts) in a given column, the column's returned
     ///         value will be -1.
-    ///
     /// - Returns: Dictionary of columns and highest occupied locations, eg, [Column: Row].
     public func HighestOccupiedLocations() -> [Int: Int]
     {
@@ -727,7 +725,6 @@ class MapType
     }
     
     /// Merge a piece in its final location to the contents of the map.
-    ///
     /// - Parameters:
     ///   - Retired: The piece to merge.
     func MergePieceWithMap(Retired: Piece)
