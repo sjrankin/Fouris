@@ -2011,12 +2011,36 @@
                                     <action selector="HandleExportHistoryButton:" destination="ckW-Jk-Vho" eventType="primaryActionTriggered" id="UE7-Iv-s4y"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a9j-Gs-5q8">
+                                <rect key="frame" x="20" y="183" width="136" height="36"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <state key="normal" title="Export Visuals"/>
+                                <connections>
+                                    <action selector="HandleExportVisualsButton:" destination="ckW-Jk-Vho" eventType="primaryActionTriggered" id="LCx-F3-fkp"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UdO-4E-QPY">
                                 <rect key="frame" x="576" y="95" width="116" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="View Theme"/>
                                 <connections>
                                     <action selector="HandleViewThemePressed:" destination="ckW-Jk-Vho" eventType="primaryActionTriggered" id="ZcM-bK-TN7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xlq-Y3-NSB">
+                                <rect key="frame" x="572" y="138.5" width="120" height="36.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <state key="normal" title="View History"/>
+                                <connections>
+                                    <action selector="HandleViewHistoryPressed:" destination="ckW-Jk-Vho" eventType="primaryActionTriggered" id="KZD-v6-B38"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gya-y8-qWa">
+                                <rect key="frame" x="572" y="183" width="120" height="36"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <state key="normal" title="View Visuals"/>
+                                <connections>
+                                    <action selector="HandleViewVisualsPressed:" destination="ckW-Jk-Vho" eventType="primaryActionTriggered" id="wa9-cv-zyZ"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Theme Contents" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jKM-t2-b3C">
@@ -2054,7 +2078,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Ig7-oL-9kC">
-                                <rect key="frame" x="308" y="139" width="97" height="32"/>
+                                <rect key="frame" x="307.5" y="138.5" width="97" height="32"/>
                                 <segments>
                                     <segment title="User"/>
                                     <segment title="AI"/>
@@ -2063,14 +2087,16 @@
                                     <action selector="HandleHistoryViewChanged:" destination="ckW-Jk-Vho" eventType="primaryActionTriggered" id="zI3-Qp-EQD"/>
                                 </connections>
                             </segmentedControl>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xlq-Y3-NSB">
-                                <rect key="frame" x="572" y="139" width="120" height="36"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <state key="normal" title="View History"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ykt-AN-nb4">
+                                <rect key="frame" x="292" y="185" width="127" height="32"/>
+                                <segments>
+                                    <segment title="User"/>
+                                    <segment title="Default"/>
+                                </segments>
                                 <connections>
-                                    <action selector="HandleViewHistoryPressed:" destination="ckW-Jk-Vho" eventType="primaryActionTriggered" id="KZD-v6-B38"/>
+                                    <action selector="HandleVisualViewChanged:" destination="ckW-Jk-Vho" eventType="primaryActionTriggered" id="QEs-Ud-fbQ"/>
                                 </connections>
-                            </button>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -2078,21 +2104,30 @@
                             <constraint firstItem="UdO-4E-QPY" firstAttribute="baseline" secondItem="vwW-pn-Tle" secondAttribute="baseline" id="2wS-PC-LMs"/>
                             <constraint firstItem="Ig7-oL-9kC" firstAttribute="top" secondItem="Xlq-Y3-NSB" secondAttribute="top" id="4Fq-yi-HYv"/>
                             <constraint firstItem="fJd-JK-wDf" firstAttribute="baseline" secondItem="Xlq-Y3-NSB" secondAttribute="baseline" id="6dq-9S-4fc"/>
+                            <constraint firstItem="ykt-AN-nb4" firstAttribute="top" secondItem="Ig7-oL-9kC" secondAttribute="bottom" constant="16" id="6e0-sW-CFG"/>
                             <constraint firstItem="SEj-NJ-nOJ" firstAttribute="trailing" secondItem="jKM-t2-b3C" secondAttribute="trailing" id="6zz-NZ-w4o"/>
+                            <constraint firstItem="a9j-Gs-5q8" firstAttribute="baseline" secondItem="Gya-y8-qWa" secondAttribute="baseline" id="72e-hb-QnV"/>
                             <constraint firstItem="bol-Cf-jUg" firstAttribute="leading" secondItem="2dz-kO-ydZ" secondAttribute="leading" id="7VM-sd-nvv"/>
                             <constraint firstItem="fJd-JK-wDf" firstAttribute="leading" secondItem="vwW-pn-Tle" secondAttribute="leading" id="9bF-3N-dqD"/>
                             <constraint firstItem="bol-Cf-jUg" firstAttribute="top" secondItem="SEj-NJ-nOJ" secondAttribute="bottom" constant="8" id="DKd-l5-BZg"/>
                             <constraint firstItem="SEj-NJ-nOJ" firstAttribute="top" secondItem="2dz-kO-ydZ" secondAttribute="top" constant="365" id="ESV-dh-EdV"/>
                             <constraint firstAttribute="trailing" secondItem="bol-Cf-jUg" secondAttribute="trailing" id="G5H-rK-0rk"/>
                             <constraint firstItem="UdO-4E-QPY" firstAttribute="trailing" secondItem="2dz-kO-ydZ" secondAttribute="trailingMargin" id="GUQ-eb-hn5"/>
+                            <constraint firstItem="ykt-AN-nb4" firstAttribute="centerX" secondItem="Ig7-oL-9kC" secondAttribute="centerX" id="Kem-Ot-fa8"/>
                             <constraint firstItem="jKM-t2-b3C" firstAttribute="leading" secondItem="vwW-pn-Tle" secondAttribute="leading" id="RJr-P2-ewh"/>
                             <constraint firstItem="YOy-m1-vVu" firstAttribute="leading" secondItem="2dz-kO-ydZ" secondAttribute="leading" id="SOW-4P-Mei"/>
                             <constraint firstItem="Ig7-oL-9kC" firstAttribute="centerX" secondItem="YOy-m1-vVu" secondAttribute="centerX" id="UG4-bx-eLC"/>
+                            <constraint firstItem="Gya-y8-qWa" firstAttribute="top" secondItem="Xlq-Y3-NSB" secondAttribute="bottom" constant="8" id="Xit-Eg-Wui"/>
                             <constraint firstAttribute="trailing" secondItem="YOy-m1-vVu" secondAttribute="trailing" id="Y41-j4-5Iv"/>
+                            <constraint firstItem="a9j-Gs-5q8" firstAttribute="centerY" secondItem="ykt-AN-nb4" secondAttribute="centerY" id="YlX-xl-7Bc"/>
                             <constraint firstItem="YOy-m1-vVu" firstAttribute="top" secondItem="2dz-kO-ydZ" secondAttribute="top" id="YvV-97-nWR"/>
+                            <constraint firstItem="a9j-Gs-5q8" firstAttribute="leading" secondItem="fJd-JK-wDf" secondAttribute="leading" id="Zff-IG-n0j"/>
                             <constraint firstItem="Xlq-Y3-NSB" firstAttribute="trailing" secondItem="UdO-4E-QPY" secondAttribute="trailing" id="bZr-XQ-FLH"/>
                             <constraint firstItem="SEj-NJ-nOJ" firstAttribute="trailing" secondItem="UdO-4E-QPY" secondAttribute="trailing" id="cLb-xH-3a9"/>
+                            <constraint firstItem="a9j-Gs-5q8" firstAttribute="top" secondItem="2dz-kO-ydZ" secondAttribute="top" constant="183" id="jaq-lo-73I"/>
                             <constraint firstItem="SEj-NJ-nOJ" firstAttribute="leading" secondItem="jKM-t2-b3C" secondAttribute="leading" id="lN5-RP-Jin"/>
+                            <constraint firstItem="a9j-Gs-5q8" firstAttribute="top" secondItem="Gya-y8-qWa" secondAttribute="top" id="mb2-9B-Mcc"/>
+                            <constraint firstItem="Gya-y8-qWa" firstAttribute="leading" secondItem="Xlq-Y3-NSB" secondAttribute="leading" id="r2l-EI-6Pa"/>
                             <constraint firstAttribute="bottom" secondItem="bol-Cf-jUg" secondAttribute="bottom" id="vvT-YD-h4G"/>
                             <constraint firstItem="vwW-pn-Tle" firstAttribute="leading" secondItem="2dz-kO-ydZ" secondAttribute="leadingMargin" id="xbt-4a-COs"/>
                             <constraint firstItem="SEj-NJ-nOJ" firstAttribute="top" secondItem="jKM-t2-b3C" secondAttribute="bottom" constant="8" id="y18-pQ-7TR"/>
@@ -2106,6 +2141,7 @@
                         <outlet property="ContentsTitle" destination="jKM-t2-b3C" id="4Wc-8r-Gqf"/>
                         <outlet property="ContentsViewer" destination="aE8-x7-gcE" id="ies-ng-G7k"/>
                         <outlet property="HistoryTypeSegment" destination="Ig7-oL-9kC" id="McJ-73-Eio"/>
+                        <outlet property="VisualsSegment" destination="ykt-AN-nb4" id="U31-Ya-LpY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5oa-G0-QQj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
