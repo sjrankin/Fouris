@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDataSource, ThemeEditingProtocol
-{
+{    
     weak var ThemeDelegate: ThemeEditingProtocol? = nil
     
     let CurrentTable = 100
@@ -64,19 +64,17 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
             4: .Big
     ]
     
-    func EditTheme(Theme: ThemeDescriptor, DefaultTheme: ThemeDescriptor)
+    func EditTheme(Theme: ThemeDescriptor2)
     {
         UserTheme = Theme
     }
     
-    func EditTheme(Theme: ThemeDescriptor, PieceID: UUID, DefaultTheme: ThemeDescriptor)
+    func EditTheme(Theme: ThemeDescriptor2, PieceID: UUID)
     {
         UserTheme = Theme
-        self.DefaultTheme = DefaultTheme
     }
     
-    var UserTheme: ThemeDescriptor? = nil
-    var DefaultTheme: ThemeDescriptor? = nil
+    var UserTheme: ThemeDescriptor2? = nil
     
     func EditResults(_ Edited: Bool, ThemeID: UUID, PieceID: UUID?)
     {
@@ -327,7 +325,7 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
         {
             if let Cell = CurrentPieceTable.cellForRow(at: SelectedRow) as? GamePieceCell
             {
-                Editor?.EditTheme(Theme: UserTheme!, PieceID: Cell.PieceID, DefaultTheme: DefaultTheme!)
+                Editor?.EditTheme(Theme: UserTheme!, PieceID: Cell.PieceID)
             }
         }
         return Editor
@@ -341,7 +339,7 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
         {
             if let Cell = PieceSourceTable.cellForRow(at: SelectedRow) as? GamePieceCell
             {
-                Editor?.EditTheme(Theme: UserTheme!, PieceID: Cell.PieceID, DefaultTheme: DefaultTheme!)
+                Editor?.EditTheme(Theme: UserTheme!, PieceID: Cell.PieceID)
             }
         }
         return Editor
