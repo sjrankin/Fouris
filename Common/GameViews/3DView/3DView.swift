@@ -39,7 +39,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter With: The board to use for displaying contents.
     /// - Parameter Theme: The theme manager instance.
     /// - Parameter BaseType: The base game type. Can only be set via this function.
-    func Initialize(With: Board, Theme: ThemeManager, BaseType: BaseGameTypes) 
+    func Initialize(With: Board, Theme: ThemeManager3, BaseType: BaseGameTypes)
     {
         print("View3D Frame=\(self.frame)")
         self.isUserInteractionEnabled = true
@@ -732,10 +732,10 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter X: The initial X location of the node.
     /// - Parameter Y: The initial Y location of the node.
     /// - Parameter IsRetired: Initial retired status of the node.
-    /// - Parameter Tile: The theme tile descriptor for the node.
-    func AddBlockNode_Standard(ParentID: UUID, BlockID: UUID, X: Int, Y: Int, IsRetired: Bool, Tile: TileDescriptor)
+    /// - Parameter ShapeID: The ID of the piece.
+    func AddBlockNode_Standard(ParentID: UUID, BlockID: UUID, X: Int, Y: Int, IsRetired: Bool, ShapeID: UUID)
     {
-        let VBlock = VisualBlocks3D(BlockID, AtX: CGFloat(X), AtY: CGFloat(Y), WithTile: Tile, IsRetired: IsRetired)
+        let VBlock = VisualBlocks3D(BlockID, AtX: CGFloat(X), AtY: CGFloat(Y), ShapeID: ShapeID, IsRetired: IsRetired)
         VBlock.ParentID = ParentID
         VBlock.Marked = true
         VBlock.categoryBitMask = GameLight
@@ -750,10 +750,10 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter X: The initial X location of the node.
     /// - Parameter Y: The initial Y location of the node.
     /// - Parameter IsRetired: Initial retired status of the node.
-    /// - Parameter Tile: The theme tile descriptor for the node.
-    func AddBlockNode_Rotating(ParentID: UUID, BlockID: UUID, X: CGFloat, Y: CGFloat, IsRetired: Bool, Tile: TileDescriptor)
+    /// - Parameter ShapeID: The ID of the piece.
+    func AddBlockNode_Rotating(ParentID: UUID, BlockID: UUID, X: CGFloat, Y: CGFloat, IsRetired: Bool, ShapeID: UUID)
     {
-        let VBlock = VisualBlocks3D(BlockID, AtX: X, AtY: Y, WithTile: Tile, IsRetired: IsRetired)
+        let VBlock = VisualBlocks3D(BlockID, AtX: X, AtY: Y, ShapeID: ShapeID, IsRetired: IsRetired)
         VBlock.ParentID = ParentID
         VBlock.Marked = true
         VBlock.categoryBitMask = GameLight
@@ -826,15 +826,20 @@ class View3D: SCNView,                          //Our main super class.
         let ItemID = GamePiece.ID
         for Block in GamePiece.Locations!
         {
+            if Block.ID == UUID.Empty
+            {
+                print("Block.ID is not set in DrawPiece3D")
+                return
+            }
             let YOffset = (30 - 10 - 1) - 1.5 - CGFloat(Block.Y)
             let XOffset = CGFloat(Block.X) - 17.5
             let PieceTypeID = CurrentMap.RetiredPieceShapes[ItemID]
             if PieceTypeID == nil
             {
+                print("Could not find ItemID in RetiredPieceShapes.")
                 return
             }
-            let Tile = CurrentTheme?.TileDescriptorFor(PieceTypeID!)
-            let VBlock = VisualBlocks3D(Block.ID, AtX: XOffset, AtY: YOffset, WithTile: Tile!, IsRetired: false)
+            let VBlock = VisualBlocks3D(Block.ID, AtX: XOffset, AtY: YOffset, ShapeID: Block.ID, IsRetired: false)
             VBlock.categoryBitMask = GameLight
             MovingPieceBlocks.append(VBlock)
             MovingPieceNode?.addChildNode(VBlock)
@@ -955,8 +960,7 @@ class View3D: SCNView,                          //Our main super class.
                 }
                 else
                 {
-                    let PieceTypeID = CurrentMap.RetiredPieceShapes[ItemID]
-                    let Tile = CurrentTheme?.TileDescriptorFor(PieceTypeID!)
+                    let PieceTypeID = CurrentMap.RetiredPieceShapes[ItemID]!
                     if BaseGameType == .Rotating4
                     {
                         YOffset = YOffset - 0.5
@@ -965,11 +969,11 @@ class View3D: SCNView,                          //Our main super class.
                     {
                         case .Standard:
                             AddBlockNode_Standard(ParentID: ItemID, BlockID: BlockID, X: Int(XOffset), Y: Int(YOffset),
-                                                  IsRetired: IsRetired, Tile: Tile!)
+                                                  IsRetired: IsRetired, ShapeID: BlockID)//PieceTypeID)
                         
                         case .Rotating4:
                             AddBlockNode_Rotating(ParentID: ItemID, BlockID: BlockID, X: XOffset, Y: YOffset,
-                                                  IsRetired: IsRetired, Tile: Tile!)
+                                                  IsRetired: IsRetired, ShapeID: BlockID)// PieceTypeID)
                         case .Cubic:
                             break
                     }
@@ -1666,7 +1670,7 @@ class View3D: SCNView,                          //Our main super class.
     }
     
     /// Holds the current theme.
-    var CurrentTheme: ThemeDescriptor? = nil
+    var CurrentTheme: ThemeDescriptor2? = nil
     
     /// Set a (potentially but most likely) new theme. Changed visuals may take a frame or two (or more) to
     /// take effect.
@@ -1734,188 +1738,7 @@ class View3D: SCNView,                          //Our main super class.
         self.pointOfView?.orientation = OriginalCameraOrientation!
     }
     
-    // MARK: Control display and handling.
-    
-    func GetNodeBoundingSize(_ Node: SCNNode) -> CGSize
-    {
-        let BoundingSize = Node.boundingBox
-        let XSize = Double(BoundingSize.max.x - BoundingSize.min.x)
-        let YSize = Double(BoundingSize.max.y - BoundingSize.min.y)
-        return CGSize(width: XSize, height: YSize)
-    }
-    
-    /// Add a text button with text created from a Unicode code point.
-    /// - Parameter ForButton: The button type.
-    /// - Parameter CodePoint: Unicode code point. This function uses the system font so if the system font does not support
-    ///                        the given code point, an ugly symbol will be displayed instead.
-    /// - Parameter Font: The font to use. This function assumes the font is the system font.
-    /// - Parameter Location: Where to place the button.
-    /// - Parameter Color: The standard button color - used as the diffuse material color.
-    /// - Parameter Highlight: The highlight button color.
-    /// - Parameter ScaleFactor: Used to scale the button.
-    func AddUnicodeButton(ForButton: NodeButtons, _ CodePoint: Int, Font: UIFont, Location: SCNVector3,
-                          Color: UIColor, Highlight: UIColor, ScaleFactor: Double = 0.1) -> SCNButtonNode
-    {
-        let UnicodeChar = UnicodeScalar(CodePoint)
-        let UnicodeString = "\((UnicodeChar)!)"
-        let SText = SCNText(string: UnicodeString, extrusionDepth: 2)
-        SText.font = Font
-        SText.flatness = 0
-        SText.firstMaterial?.diffuse.contents = Color
-        SText.firstMaterial?.specular.contents = UIColor.white
-        let Node = SCNButtonNode(geometry: SText)
-        Node.ButtonColor = Color
-        Node.HighlightColor = Highlight
-        Node.name = "\(ForButton)"
-        Node.categoryBitMask = ControlLight
-        Node.scale = SCNVector3(ScaleFactor, ScaleFactor, ScaleFactor)
-        Node.StringTag = "ShapeNode"
-        
-        let SourceSize = GetNodeBoundingSize(Node)
-        let BGBox = SCNBox(width: SourceSize.width, height: SourceSize.height, length: 0.001, chamferRadius: 0.0)
-        BGBox.firstMaterial?.diffuse.contents = UIColor.clear
-        BGBox.firstMaterial?.specular.contents = UIColor.clear
-        let BGNode = SCNButtonNode(geometry: BGBox)
-        let FinalWidth = SourceSize.width * 0.06
-        let FinalHeight = SourceSize.height * 0.1
-        BGNode.position = SCNVector3(FinalWidth, FinalHeight, -0.1)
-        BGNode.scale = SCNVector3(ScaleFactor, ScaleFactor, ScaleFactor)
-        BGNode.name = "\(ForButton)"
-        BGNode.StringTag = "BackgroundNode"
-        
-        let FinalNode = SCNButtonNode()
-        FinalNode.position = Location
-        FinalNode.addChildNode(Node)
-        FinalNode.addChildNode(BGNode)
-        FinalNode.categoryBitMask = ControlLight
-        FinalNode.StringTag = "ParentNode"
-        return FinalNode
-    }
-    
-    /// Add a text button with the passed text.
-    /// - Parameter ForButton: The button type.
-    /// - Parameter CodePoint: The text to use for the button
-    /// - Parameter Font: The font to use. This function assumes the font is the system font.
-    /// - Parameter Location: Where to place the button.
-    /// - Parameter Color: The standard button color - used as the diffuse material color.
-    /// - Parameter Highlight: The highlight button color.
-    /// - Parameter ScaleFactor: Used to scale the button.
-    func AddTextButton(ForButton: NodeButtons, _ Text: String, Font: UIFont, Location: SCNVector3,
-                       Color: UIColor, Highlight: UIColor, ScaleFactor: Double = 0.1) -> SCNButtonNode
-    {
-        let SText = SCNText(string: Text, extrusionDepth: 2)
-        SText.font = Font
-        SText.flatness = 0
-        SText.firstMaterial?.diffuse.contents = Color
-        SText.firstMaterial?.specular.contents = UIColor.white
-        let Node = SCNButtonNode(geometry: SText)
-        Node.ButtonColor = Color
-        Node.HighlightColor = Highlight
-        Node.name = "\(ForButton)"
-        Node.categoryBitMask = ControlLight
-        Node.scale = SCNVector3(ScaleFactor, ScaleFactor, ScaleFactor)
-        Node.StringTag = "ShapeNode"
-        
-        let SourceSize = GetNodeBoundingSize(Node)
-        let BGBox = SCNBox(width: SourceSize.width, height: SourceSize.height, length: 0.001, chamferRadius: 0.0)
-        BGBox.firstMaterial?.diffuse.contents = UIColor.clear
-        BGBox.firstMaterial?.specular.contents = UIColor.clear
-        let BGNode = SCNButtonNode(geometry: BGBox)
-        let FinalWidth = SourceSize.width * 0.06
-        let FinalHeight = SourceSize.height * 0.075
-        BGNode.position = SCNVector3(FinalWidth, FinalHeight, -0.1)
-        BGNode.scale = SCNVector3(ScaleFactor, ScaleFactor, ScaleFactor)
-        BGNode.name = "\(ForButton)"
-        BGNode.StringTag = "BackgroundNode"
-        
-        let FinalNode = SCNButtonNode()
-        FinalNode.position = Location
-        FinalNode.addChildNode(Node)
-        FinalNode.addChildNode(BGNode)
-        FinalNode.categoryBitMask = ControlLight
-        FinalNode.StringTag = "ParentNode"
-        return FinalNode
-    }
-    
-    /// Make a in-scene motion button.
-    /// - Parameter ForButton: Determines the button to create and add to the scene.
-    func MakeButton(ForButton: NodeButtons)
-    {
-        var ButtonFont = UIFont.systemFont(ofSize: 20.0, weight: UIFont.Weight.bold)
-        if let Descriptor = ButtonFont.fontDescriptor.withDesign(.rounded)
-        {
-            ButtonFont = UIFont(descriptor: Descriptor, size: 32.0)
-        }
-        var FinalNode: SCNButtonNode!
-        switch ForButton
-        {
-            case .DownButton:
-                FinalNode = AddUnicodeButton(ForButton: ForButton, 0x25bc, Font: ButtonFont,
-                                             Location: ButtonDictionary[ForButton]!.Location,
-                                             Color: ButtonDictionary[ForButton]!.Color,
-                                             Highlight: ButtonDictionary[ForButton]!.Highlight,
-                                             ScaleFactor: ButtonDictionary[ForButton]!.Scale)
-            
-            case .DropDownButton:
-                FinalNode = AddUnicodeButton(ForButton: ForButton, 0x25bc, Font: ButtonFont,
-                                             Location: ButtonDictionary[ForButton]!.Location,
-                                             Color: ButtonDictionary[ForButton]!.Color,
-                                             Highlight: ButtonDictionary[ForButton]!.Highlight,
-                                             ScaleFactor: ButtonDictionary[ForButton]!.Scale)
-            
-            case .FlyAwayButton:
-                FinalNode = AddUnicodeButton(ForButton: ForButton, 0x25b2, Font: ButtonFont,
-                                             Location: ButtonDictionary[ForButton]!.Location,
-                                             Color: ButtonDictionary[ForButton]!.Color,
-                                             Highlight: ButtonDictionary[ForButton]!.Highlight,
-                                             ScaleFactor: ButtonDictionary[ForButton]!.Scale)
-            
-            case .FreezeButton:
-                FinalNode = AddTextButton(ForButton: ForButton, "❄︎", Font: ButtonFont,
-                                          Location: ButtonDictionary[ForButton]!.Location,
-                                          Color: ButtonDictionary[ForButton]!.Color,
-                                          Highlight: ButtonDictionary[ForButton]!.Highlight,
-                                          ScaleFactor: ButtonDictionary[ForButton]!.Scale)
-            
-            case .LeftButton:
-                FinalNode = AddUnicodeButton(ForButton: ForButton, 0x25c0, Font: ButtonFont,
-                                             Location: ButtonDictionary[ForButton]!.Location,
-                                             Color: ButtonDictionary[ForButton]!.Color,
-                                             Highlight: ButtonDictionary[ForButton]!.Highlight,
-            ScaleFactor: ButtonDictionary[ForButton]!.Scale)
-            
-            case .RightButton:
-                FinalNode = AddUnicodeButton(ForButton: ForButton, 0x25b6, Font: ButtonFont,
-                                             Location: ButtonDictionary[ForButton]!.Location,
-                                             Color: ButtonDictionary[ForButton]!.Color,
-                                             Highlight: ButtonDictionary[ForButton]!.Highlight,
-                                             ScaleFactor: ButtonDictionary[ForButton]!.Scale)
-            
-            case .RotateLeftButton:
-                FinalNode = AddTextButton(ForButton: ForButton, "↺", Font: ButtonFont,
-                                          Location: ButtonDictionary[ForButton]!.Location,
-                                          Color: ButtonDictionary[ForButton]!.Color,
-                                          Highlight: ButtonDictionary[ForButton]!.Highlight,
-                                          ScaleFactor: ButtonDictionary[ForButton]!.Scale)
-            
-            case .RotateRightButton:
-                FinalNode = AddTextButton(ForButton: ForButton, "↻", Font: ButtonFont,
-                                          Location: ButtonDictionary[ForButton]!.Location,
-                                          Color: ButtonDictionary[ForButton]!.Color,
-                                          Highlight: ButtonDictionary[ForButton]!.Highlight,
-                                          ScaleFactor: ButtonDictionary[ForButton]!.Scale)
-            
-            case .UpButton:
-                FinalNode = AddUnicodeButton(ForButton: ForButton, 0x25b2, Font: ButtonFont,
-                                             Location: ButtonDictionary[ForButton]!.Location,
-                                             Color: ButtonDictionary[ForButton]!.Color,
-                                             Highlight: ButtonDictionary[ForButton]!.Highlight,
-            ScaleFactor: ButtonDictionary[ForButton]!.Scale)
-        }
-        
-        ButtonList[ForButton] = FinalNode
-        self.scene?.rootNode.addChildNode(FinalNode!)
-    }
+    // MARK: Variables for buttons and button state. Button functions are found in +TextButtons.swift.
     
     var ButtonList: [NodeButtons: SCNButtonNode] = [NodeButtons: SCNButtonNode]()
     
@@ -1934,99 +1757,6 @@ class View3D: SCNView,                          //Our main super class.
             
             .FreezeButton: (SCNVector3(-1.0, -13.5, 1.0), 0.08, UIColor.cyan, UIColor.blue)
     ]
-    
-    /// Returns the parent node of the passed button node.
-    /// - Parameter Of: The node whose parent will be returned.
-    /// - Returns: The parent of the passed node. Nil if not found.
-    func GetParentNode(Of: SCNButtonNode) -> SCNButtonNode?
-    {
-        for (_, Parent) in ButtonList
-        {
-            if Parent.childNode(withName: Of.name!, recursively: true) != nil
-            {
-                return Parent
-            }
-        }
-        return nil
-    }
-    
-    /// Flash a button with its pre-set highlight color.
-    /// - Note: "Flash" means showing the highlight color for a short amount of time to simulate a
-    ///         button press by the AI.
-    /// - Parameter Button: The button to flash.
-    /// - Parameter Duration: How long to flash the button in seconds. Defaults to 0.15 seconds.
-    func FlashButton(_ Button: NodeButtons, Duration: Double = 0.15)
-    {
-        if let Node = ButtonList[Button]
-        {
-            if let ShapeNode = Node.GetNodeWithTag(Value: "ShapeNode")
-            {
-                ShapeNode.Flash()
-            }
-        }
-    }
-    
-    /// Show game view controls.
-    /// - Parameter Which: Array of buttons to show. If nil, all buttons are shown. Default is nil. Passing an empty array will
-    ///                    remove all buttons.
-    func ShowControls(With: [NodeButtons]? = nil)
-    {
-        //Remove all of the buttons first.
-        for (_, Button) in ButtonList
-        {
-            Button.removeFromParentNode()
-        }
-        ButtonList.removeAll()
-        
-        if With == nil
-        {
-            MakeButton(ForButton: .LeftButton)
-            MakeButton(ForButton: .DownButton)
-            MakeButton(ForButton: .RotateLeftButton)
-            MakeButton(ForButton: .RightButton)
-            MakeButton(ForButton: .RotateRightButton)
-            MakeButton(ForButton: .UpButton)
-            MakeButton(ForButton: .DropDownButton)
-            MakeButton(ForButton: .FlyAwayButton)
-            MakeButton(ForButton: .FreezeButton)
-        }
-        else
-        {
-            for SomeButton in With!
-            {
-                MakeButton(ForButton: SomeButton)
-            }
-        }
-    }
-    
-    /// Adds the specified button to the set of motion controls. If the button is already present, no action is taken.
-    /// - Parameter Which: The button to add.
-    func AppendButton(Which: NodeButtons)
-    {
-        if ButtonList.keys.contains(Which)
-        {
-            return
-        }
-        MakeButton(ForButton: Which)
-    }
-    
-    /// Removes the specified button from the set of motion controls. If the button is not present, no action is taken.
-    /// - Parameter Which: The button to remove.
-    func RemoveButton(Which: NodeButtons)
-    {
-        if ButtonList.keys.contains(Which)
-        {
-            ButtonList[Which]?.removeFromParentNode()
-            ButtonList.removeValue(forKey: Which)
-        }
-    }
-    
-    /// Hides all motion controls in the game surface and may optionally change the visual size
-    /// of the bucket.
-    func HideControls()
-    {
-        ShowControls(With: [])
-    }
 }
 
 // MARK: Global enums related to 3DView.
