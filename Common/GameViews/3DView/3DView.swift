@@ -839,7 +839,7 @@ class View3D: SCNView,                          //Our main super class.
                 print("Could not find ItemID in RetiredPieceShapes.")
                 return
             }
-            let VBlock = VisualBlocks3D(Block.ID, AtX: XOffset, AtY: YOffset, ShapeID: Block.ID, IsRetired: false)
+            let VBlock = VisualBlocks3D(Block.ID, AtX: XOffset, AtY: YOffset, ShapeID: GamePiece.ShapeID, IsRetired: false)
             VBlock.categoryBitMask = GameLight
             MovingPieceBlocks.append(VBlock)
             MovingPieceNode?.addChildNode(VBlock)
@@ -969,11 +969,11 @@ class View3D: SCNView,                          //Our main super class.
                     {
                         case .Standard:
                             AddBlockNode_Standard(ParentID: ItemID, BlockID: BlockID, X: Int(XOffset), Y: Int(YOffset),
-                                                  IsRetired: IsRetired, ShapeID: BlockID)//PieceTypeID)
+                                                  IsRetired: IsRetired, ShapeID: PieceTypeID)
                         
                         case .Rotating4:
                             AddBlockNode_Rotating(ParentID: ItemID, BlockID: BlockID, X: XOffset, Y: YOffset,
-                                                  IsRetired: IsRetired, ShapeID: BlockID)// PieceTypeID)
+                                                  IsRetired: IsRetired, ShapeID: PieceTypeID)
                         case .Cubic:
                             break
                     }
