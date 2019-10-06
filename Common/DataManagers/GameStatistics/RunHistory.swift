@@ -106,10 +106,13 @@ class RunHistory: CustomStringConvertible, XMLDeserializeProtocol
             _HistoryName = Name
             for GameTypeNode in Node.Children
             {
+                if GameTypeNode.Name == "Comment"
+                {
+                    continue
+                }
                 let RawGameType = XMLNode.GetAttributeNamed("Name", InNode: GameTypeNode)!
                 if let GameType = BaseGameTypes(rawValue: RawGameType)
                 {
-                    print("GameType=\(GameType)")
                     _Games![GameType]!._GameType = GameType
                     for GameDataNode in GameTypeNode.Children
                     {
