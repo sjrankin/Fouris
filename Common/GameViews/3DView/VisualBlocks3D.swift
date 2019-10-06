@@ -260,10 +260,25 @@ class VisualBlocks3D: SCNNode
     /// - Returns: An SCNGeometry instance with the appropriate shape.
     private func CreateGeometry(Width: CGFloat, Height: CGFloat, Depth: CGFloat, IsRetired: Bool) -> SCNGeometry
     {
+        var GeoShape: TileShapes3D!
+        #if true
+        print("CurrentPieceID=\(CurrentPieceID)")
+        let BlockShape = PieceFactory.GetShapeForPiece(ID: CurrentPieceID)!
+        let BlockShapeID = PieceFactory.ShapeIDMap[BlockShape]!
+        if let Visual = PieceVisualManager2.UserVisuals!.GetCachedVisualWith(ID: BlockShapeID)
+        {
+            GeoShape = IsRetired ? Visual.RetiredVisuals?.BlockShape : Visual.ActiveVisuals?.BlockShape
+        }
+        else
+        {
+            fatalError("Did not find piece visual with ID \(BlockShapeID)")
+        }
+        #else
         let BlockShape = PieceFactory.GetShapeForPiece(ID: CurrentPieceID)
         print("CreateGeometry: CurrentPieceID=\(CurrentPieceID)")
         let BlockVisual = PieceVisualManager.GetPieceTheme(PieceShape: BlockShape!)
         let GeoShape = IsRetired ? BlockVisual!.Retired3DBlockShape : BlockVisual!.Active3DBlockShape
+        #endif
         var Geometry: SCNGeometry!
         switch GeoShape
         {
@@ -299,6 +314,9 @@ class VisualBlocks3D: SCNNode
             
             case .Tetrahedron:
                 Geometry = SCNTetrahedron.Geometry(BaseLength: Width, Height: Height)
+            
+            case .none:
+            fatalError("Ran into .none for GeoShape")
         }
         
         return Geometry!
