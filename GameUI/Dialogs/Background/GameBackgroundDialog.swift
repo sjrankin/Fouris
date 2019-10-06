@@ -69,16 +69,14 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
         VerticalGradientSwitch.isOn = IsVertical
     }
     
-    func EditTheme(Theme: ThemeDescriptor, DefaultTheme: ThemeDescriptor)
+    func EditTheme(Theme: ThemeDescriptor2)
     {
         UserTheme = Theme
-        self.DefaultTheme = DefaultTheme
     }
     
-    func EditTheme(Theme: ThemeDescriptor, PieceID: UUID, DefaultTheme: ThemeDescriptor)
+    func EditTheme(Theme: ThemeDescriptor2, PieceID: UUID)
     {
         UserTheme = Theme
-        self.DefaultTheme = DefaultTheme
     }
     
     func UpdateBackgroundType(_ BGType: BackgroundTypes3D) -> BackgroundTypes3D
@@ -113,9 +111,7 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
             .LiveView: 3
     ]
     
-    var UserTheme: ThemeDescriptor? = nil
-    
-    var DefaultTheme: ThemeDescriptor? = nil
+    var UserTheme: ThemeDescriptor2? = nil
     
     func EditResults(_ Edited: Bool, ThemeID: UUID, PieceID: UUID?)  
     {
@@ -239,7 +235,7 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
     {
         let Picker = SelectBackgroundImageCode(coder: coder)
         Picker?.ThemeDelegate = self
-        Picker?.EditTheme(Theme: UserTheme!, DefaultTheme: DefaultTheme!)
+        Picker?.EditTheme(Theme: UserTheme!)
         return Picker
     }
     
