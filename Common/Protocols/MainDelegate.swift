@@ -19,7 +19,7 @@ protocol MainDelegate: class
     func SetNewUser(_ UserID: UUID)
     
     /// Not currently used.
-    func GetUserTheme() -> ThemeDescriptor?
+    func GetUserTheme() -> ThemeDescriptor2?
     
     /// Called when the initial version box disappears.
     func VersionBoxDisappeared()
