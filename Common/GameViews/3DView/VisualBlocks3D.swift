@@ -36,14 +36,20 @@ class VisualBlocks3D: SCNNode
     /// - Parameter AtY: Initial Y location of the block.
     /// - Parameter ShapeID: ID of the piece.
     /// - Parameter IsRetired: Determines which set of attributes to use for the visual look.
-    init(_ WithID: UUID, AtX: CGFloat, AtY: CGFloat, ShapeID: UUID, IsRetired: Bool)
+    init(_ WithID: UUID, AtX: CGFloat, AtY: CGFloat, ActiveVisuals: StateVisual, RetiredVisuals: StateVisual, IsRetired: Bool)
     {
         super.init()
         CommonInitialization()
         _ID = WithID
         _IsRetired = IsRetired
+        #if true
+        ActiveVisual = ActiveVisuals
+        RetiredVisual = RetiredVisuals
+        Create(Width: 1.0, Height: 1.0, Depth: 1.0, EdgeRadius: 0.0, Visual: (IsRetired ? RetiredVisual : ActiveVisual)!)
+        #else
         CurrentPieceID = ShapeID
         Create(ShapeID: ShapeID, IsRetired: IsRetired)
+        #endif
         X = AtX
         Y = AtY
         Z = 0.0
@@ -56,14 +62,20 @@ class VisualBlocks3D: SCNNode
     /// - Parameter AtZ: Initial Z location of the block.
     /// - Parameter ShapeID: ID of the piece.
     /// - Parameter IsRetired: Determines which set of attributes to use for the visual look.
-    init(_ WithID: UUID, AtX: CGFloat, AtY: CGFloat, AtZ: CGFloat, ShapeID: UUID, IsRetired: Bool)
+    init(_ WithID: UUID, AtX: CGFloat, AtY: CGFloat, AtZ: CGFloat, ActiveVisuals: StateVisual, RetiredVisuals: StateVisual, IsRetired: Bool)
     {
         super.init()
         CommonInitialization()
         _ID = WithID
         _IsRetired = IsRetired
+        #if false
         CurrentPieceID = ShapeID
         Create(ShapeID: ShapeID, IsRetired: IsRetired)
+        #else
+        ActiveVisual = ActiveVisuals
+        RetiredVisual = RetiredVisuals
+               Create(Width: 1.0, Height: 1.0, Depth: 1.0, EdgeRadius: 0.0, Visual: (IsRetired ? RetiredVisual : ActiveVisual)!)
+        #endif
         X = AtX
         Y = AtY
         Z = AtZ
@@ -75,6 +87,32 @@ class VisualBlocks3D: SCNNode
     {
         super.init(coder: coder)
         CommonInitialization()
+    }
+    
+    private var _ActiveVisual: StateVisual? = nil
+    public var ActiveVisual: StateVisual?
+    {
+        get
+        {
+            return _ActiveVisual
+        }
+        set
+        {
+            _ActiveVisual = newValue
+        }
+    }
+    
+    private var _RetiredVisual: StateVisual? = nil
+    public var RetiredVisual: StateVisual?
+    {
+        get
+        {
+            return _RetiredVisual
+        }
+        set
+        {
+            _RetiredVisual = newValue
+        }
     }
     
     /// Initialization common to all initializers.
@@ -100,7 +138,8 @@ class VisualBlocks3D: SCNNode
         set
         {
             _CurrentPieceID = newValue
-            SetVisualAttributes(ShapeID: _CurrentPieceID, IsRetired: IsRetired)
+            SetVisualAttributes((IsRetired ? RetiredVisual : ActiveVisual)!)
+//            SetVisualAttributes(ShapeID: _CurrentPieceID, IsRetired: IsRetired)
         }
     }
     
@@ -149,7 +188,8 @@ class VisualBlocks3D: SCNNode
                 return
             }
             _IsRetired = newValue
-            SetVisualAttributes(ShapeID: CurrentPieceID, IsRetired: _IsRetired)
+            SetVisualAttributes((IsRetired ? RetiredVisual : ActiveVisual)!)
+//            SetVisualAttributes(ShapeID: CurrentPieceID, IsRetired: _IsRetired)
         }
     }
     
@@ -157,7 +197,7 @@ class VisualBlocks3D: SCNNode
     /// Sets the passed tile's visual attributes to the block.
     /// - Parameter WithTile: The tile whose visual attributes will be used to draw the block.
     /// - Parameter IsRetired: Determines which set of visual attributes to use.
-    public func SetVisualAttributes(/*WithTile: TileDescriptor*/ShapeID: UUID, IsRetired: Bool)
+    public func SetVisualAttributes(_ Visuals: StateVisual)
     {
         VACount = VACount + 1
         if BlockShape == nil
@@ -165,6 +205,41 @@ class VisualBlocks3D: SCNNode
             return
         }
         
+        #if true
+        if Visuals.VisualType == .Retired
+        {
+            BlockShape = CreateGeometry(Width: OriginalWidth, Height: OriginalHeight, Depth: OriginalDepth, IsRetired: true)
+                self.geometry = BlockShape
+        }
+        if Visuals.SurfaceType == .Color
+        {
+        BlockShape!.firstMaterial!.diffuse.contents = ColorServer.ColorFrom(Visuals.DiffuseColor)
+        BlockShape!.firstMaterial!.specular.contents = ColorServer.ColorFrom(Visuals.SpecularColor)
+        }
+        else
+        {
+            BlockShape!.firstMaterial!.diffuse.contents = Visuals.DiffuseTexture
+            BlockShape!.firstMaterial!.specular.contents = Visuals.SpecularTexture
+        }
+        let GeoShape = Visuals.BlockShape
+        switch GeoShape
+        {
+            case .Torus:
+                self.removeAllActions()
+                let RotateAction = SCNAction.rotateBy(x: CGFloat.pi * 2.0, y: 0.0, z: 0.0, duration: 5.0)
+                RotateAction.timingMode = .linear
+                self.runAction(SCNAction.repeatForever(RotateAction))
+            
+            case .Tube:
+                self.removeAllActions()
+                let RotateAction = SCNAction.rotateBy(x: CGFloat.pi * 2.0, y: 0.0, z: 0.0, duration: 5.0)
+                RotateAction.timingMode = .linear
+                self.runAction(SCNAction.repeatForever(RotateAction))
+            
+            default:
+                break
+        }
+        #else
         //Check the retired flag and change the shape *before* updating the shape if the retired state is true.
         //This is because if the shape is changed, the textures/colors need to be reset to the new colors, so
         //we change the shape first, as needed, *then* set the colors/textures.
@@ -233,6 +308,7 @@ class VisualBlocks3D: SCNNode
             default:
                 break
         }
+        #endif
     }
     
     /// Holds the geometry of the node.
@@ -262,17 +338,8 @@ class VisualBlocks3D: SCNNode
     {
         var GeoShape: TileShapes3D!
         #if true
-        print("CurrentPieceID=\(CurrentPieceID)")
-        let BlockShape = PieceFactory.GetShapeForPiece(ID: CurrentPieceID)!
-        let BlockShapeID = PieceFactory.ShapeIDMap[BlockShape]!
-        if let Visual = PieceVisualManager2.UserVisuals!.GetCachedVisualWith(ID: BlockShapeID)
-        {
-            GeoShape = IsRetired ? Visual.RetiredVisuals?.BlockShape : Visual.ActiveVisuals?.BlockShape
-        }
-        else
-        {
-            fatalError("Did not find piece visual with ID \(BlockShapeID)")
-        }
+        let Visual = (IsRetired ? RetiredVisual : ActiveVisual)!
+        GeoShape = Visual.BlockShape
         #else
         let BlockShape = PieceFactory.GetShapeForPiece(ID: CurrentPieceID)
         print("CreateGeometry: CurrentPieceID=\(CurrentPieceID)")
@@ -330,7 +397,7 @@ class VisualBlocks3D: SCNNode
     /// - Parameter ShapeID: ID of the piece's shape.
     /// - Parameter IsRetired: Determines which set of visual attributes to use.
     public func Create(Width: CGFloat, Height: CGFloat, Depth: CGFloat, EdgeRadius: CGFloat,
-                       ShapeID: UUID, IsRetired: Bool)
+                       Visual: StateVisual)
     {
         OriginalWidth = Width
         OriginalHeight = Height
@@ -338,7 +405,8 @@ class VisualBlocks3D: SCNNode
         let BlockGeometry = CreateGeometry(Width: Width, Height: Height, Depth: Depth, IsRetired: IsRetired)
         self.geometry = BlockGeometry
         BlockShape = BlockGeometry
-        SetVisualAttributes(ShapeID: ShapeID, IsRetired: IsRetired)
+        SetVisualAttributes(Visual)
+       // SetVisualAttributes(ShapeID: ShapeID, IsRetired: IsRetired)
     }
     
     private var OriginalWidth: CGFloat = 1.0
@@ -351,7 +419,11 @@ class VisualBlocks3D: SCNNode
     /// - Parameter IsRetired: Determines which set of visual attributes to use.
     public func Create(ShapeID: UUID, IsRetired: Bool)
     {
-        Create(Width: 1.0, Height: 1.0, Depth: 1.0, EdgeRadius: 0.0, ShapeID: ShapeID, IsRetired: IsRetired)
+        if let Visual = PieceVisualManager2.DefaultVisuals!.GetVisualWith(ID: ShapeID)
+        {
+            let FinalVisual = (IsRetired ? Visual.RetiredVisuals : Visual.ActiveVisuals)
+            Create(Width: 1.0, Height: 1.0, Depth: 1.0, EdgeRadius: 0.0, Visual: FinalVisual!)
+        }
     }
     
     /// Removes the block from the parent node (the scene).
