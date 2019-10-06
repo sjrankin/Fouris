@@ -68,7 +68,7 @@ class Block
     }
     
     /// Holds the ID of the block.
-    private var _ID: UUID!
+    private var _ID: UUID = UUID.Empty
     /// Get or set the ID of the block.
     public var ID: UUID
     {
