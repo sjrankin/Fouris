@@ -168,6 +168,8 @@
 		179CB8CD2326145C0034E25B /* PieceViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179CB8CC2326145C0034E25B /* PieceViewer.swift */; };
 		179F0A74233074040051B148 /* ColorSwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179F0A73233074040051B148 /* ColorSwatch.swift */; };
 		179F0A7E2330D4B80051B148 /* ThemeEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179F0A7D2330D4B80051B148 /* ThemeEnums.swift */; };
+		17A2BDD22348C92200D50235 /* +GameThemeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A2BDD12348C92200D50235 /* +GameThemeData.swift */; };
+		17A2BDD42348CFC000D50235 /* ExportCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A2BDD32348CFC000D50235 /* ExportCode.swift */; };
 		17A45B582271A59F002E705D /* AITestTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A45B572271A59F002E705D /* AITestTable.swift */; };
 		17A45B5B2271A5CC002E705D /* AITestNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A45B5A2271A5CC002E705D /* AITestNode.swift */; };
 		17A45B632271DA98002E705D /* AITestDataUpdatedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A45B612271DA8C002E705D /* AITestDataUpdatedProtocol.swift */; };
@@ -211,6 +213,9 @@
 		17DCD7EE23096E340072B306 /* +MapType_BucketCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCD7ED23096E340072B306 /* +MapType_BucketCreation.swift */; };
 		17DCFD34230291B100A00600 /* ManagedTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCFD33230291B100A00600 /* ManagedTimer.swift */; };
 		17E619A92348495B00C391CF /* +BoardRemoval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E619A82348495B00C391CF /* +BoardRemoval.swift */; };
+		17E619AB2348569800C391CF /* +TextButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E619AA2348569800C391CF /* +TextButtons.swift */; };
+		17E619AD23485B7C00C391CF /* +ThemeDescriptorParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E619AC23485B7C00C391CF /* +ThemeDescriptorParser.swift */; };
+		17E619AF23485BF000C391CF /* +ThemeDescriptorWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E619AE23485BF000C391CF /* +ThemeDescriptorWriter.swift */; };
 		17E71A6B22AD20CC0081991E /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E71A6A22AD20CC0081991E /* State.swift */; };
 		17E71A6E22AD20F40081991E /* StateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E71A6D22AD20F40081991E /* StateProtocol.swift */; };
 		17E71A7122AD211E0081991E /* OSColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E71A7022AD211E0081991E /* OSColorExtensions.swift */; };
@@ -415,6 +420,8 @@
 		179CB8CC2326145C0034E25B /* PieceViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceViewer.swift; sourceTree = "<group>"; };
 		179F0A73233074040051B148 /* ColorSwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSwatch.swift; sourceTree = "<group>"; };
 		179F0A7D2330D4B80051B148 /* ThemeEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeEnums.swift; sourceTree = "<group>"; };
+		17A2BDD12348C92200D50235 /* +GameThemeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+GameThemeData.swift"; sourceTree = "<group>"; };
+		17A2BDD32348CFC000D50235 /* ExportCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportCode.swift; sourceTree = "<group>"; };
 		17A45B572271A59F002E705D /* AITestTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AITestTable.swift; sourceTree = "<group>"; };
 		17A45B5A2271A5CC002E705D /* AITestNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AITestNode.swift; sourceTree = "<group>"; };
 		17A45B5F2271D8CA002E705D /* MainDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDelegate.swift; sourceTree = "<group>"; };
@@ -459,6 +466,9 @@
 		17DCD7ED23096E340072B306 /* +MapType_BucketCreation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+MapType_BucketCreation.swift"; sourceTree = "<group>"; };
 		17DCFD33230291B100A00600 /* ManagedTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedTimer.swift; sourceTree = "<group>"; };
 		17E619A82348495B00C391CF /* +BoardRemoval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+BoardRemoval.swift"; sourceTree = "<group>"; };
+		17E619AA2348569800C391CF /* +TextButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+TextButtons.swift"; sourceTree = "<group>"; };
+		17E619AC23485B7C00C391CF /* +ThemeDescriptorParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+ThemeDescriptorParser.swift"; sourceTree = "<group>"; };
+		17E619AE23485BF000C391CF /* +ThemeDescriptorWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+ThemeDescriptorWriter.swift"; sourceTree = "<group>"; };
 		17E71A6A22AD20CC0081991E /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		17E71A6D22AD20F40081991E /* StateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateProtocol.swift; sourceTree = "<group>"; };
 		17E71A7022AD211E0081991E /* OSColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSColorExtensions.swift; sourceTree = "<group>"; };
@@ -526,11 +536,11 @@
 			children = (
 				1713735522EAE65B00C9F9A7 /* Non-Standard Shapes */,
 				17F81ACC22B271D1007214C3 /* Scenes */,
+				17E619B0234864C000C391CF /* InViewButtons */,
 				17DCD7EC230945390072B306 /* 3DViewExtensions */,
 				17D48A7A22B202B000DD7C94 /* 3DView.swift */,
 				1750A6FD232A69300006CF39 /* SCNGeometryExtensions.swift */,
 				170F854022B5D3E5005405B6 /* VisualBlocks3D.swift */,
-				171A3E662343498C00C92585 /* SCNButtonNode.swift */,
 				17FA044C232649F8004E5FC8 /* BlockCoordinates.swift */,
 				17D48A8322B2111D00DD7C94 /* ThreeDProtocol.swift */,
 				179CB8CC2326145C0034E25B /* PieceViewer.swift */,
@@ -587,6 +597,9 @@
 			children = (
 				17404B272345E0D600976DE2 /* ThemeManager3.swift */,
 				17404B292345E2D900976DE2 /* ThemeDescriptor2.swift */,
+				17E619AE23485BF000C391CF /* +ThemeDescriptorWriter.swift */,
+				17E619AC23485B7C00C391CF /* +ThemeDescriptorParser.swift */,
+				17A2BDD12348C92200D50235 /* +GameThemeData.swift */,
 				17404B2B2345E4B300976DE2 /* ThemeChangeProtocol2.swift */,
 			);
 			path = Themes3;
@@ -692,6 +705,7 @@
 				17616ACA23166CB000DFFEFE /* SelectGameController.swift */,
 				17A48E412327BC6900510EE6 /* GameSelectorProtocol.swift */,
 				178C0F032338786000A35C62 /* SettingsControllerCode.swift */,
+				17A2BDD32348CFC000D50235 /* ExportCode.swift */,
 				17616ACC23166DF700DFFEFE /* GameStyleTableViewCell.swift */,
 				17477A722317891100AAEB14 /* ThemeEditorController.swift */,
 				1704E301232130E900D7C158 /* ThemeEditingProtocol.swift */,
@@ -1006,6 +1020,7 @@
 				17376356230A9C9C0050EB22 /* +BucketCleaner.swift */,
 				17B112FF232B693E007DFBD4 /* +3DDebug.swift */,
 				17E619A82348495B00C391CF /* +BoardRemoval.swift */,
+				17E619AA2348569800C391CF /* +TextButtons.swift */,
 			);
 			path = 3DViewExtensions;
 			sourceTree = "<group>";
@@ -1025,6 +1040,14 @@
 				17DCD7ED23096E340072B306 /* +MapType_BucketCreation.swift */,
 			);
 			path = MapExtensions;
+			sourceTree = "<group>";
+		};
+		17E619B0234864C000C391CF /* InViewButtons */ = {
+			isa = PBXGroup;
+			children = (
+				171A3E662343498C00C92585 /* SCNButtonNode.swift */,
+			);
+			path = InViewButtons;
 			sourceTree = "<group>";
 		};
 		17E71A6122AD20350081991E /* TDebug */ = {
@@ -1448,6 +1471,7 @@
 				177FC1D42318E0F7005727B6 /* ColorPickerProtocol.swift in Sources */,
 				170FC66A233DFA9900F9A8F1 /* XMLSemanticParser.swift in Sources */,
 				174328FB233F20DD00F98863 /* PieceBlockLocation.swift in Sources */,
+				17A2BDD42348CFC000D50235 /* ExportCode.swift in Sources */,
 				17FA044D232649F8004E5FC8 /* BlockCoordinates.swift in Sources */,
 				17F6ECF22286E322000F8E11 /* ControlUIProtocol.swift in Sources */,
 				17376357230A9C9C0050EB22 /* +BucketCleaner.swift in Sources */,
@@ -1464,6 +1488,7 @@
 				17A48E422327BC6900510EE6 /* GameSelectorProtocol.swift in Sources */,
 				179C5E1F23222B510003845B /* VisualDescriptor.swift in Sources */,
 				17D1FB6C2268A09400EDA707 /* GameAI.swift in Sources */,
+				17E619AB2348569800C391CF /* +TextButtons.swift in Sources */,
 				176708F3233A0272000E2216 /* SupportedLanguages.swift in Sources */,
 				177F4FD9229C1A7600FE72CD /* SerializerExtension.swift in Sources */,
 				174CAAD6231CFA2B003823E2 /* ColorSpaceConverter.swift in Sources */,
@@ -1489,6 +1514,7 @@
 				173762522310E7400075E1DD /* UITouchImageDelegate.swift in Sources */,
 				1797524422C38A4D00BF539A /* +Heartbeat.swift in Sources */,
 				17831EDD232DFB54007FF894 /* FlyingProtocol.swift in Sources */,
+				17A2BDD22348C92200D50235 /* +GameThemeData.swift in Sources */,
 				17C1E90B23190F5E004040B6 /* UIColorExtensions.swift in Sources */,
 				1767D28622AF4959005EE191 /* DebugClient.swift in Sources */,
 				17F0B4B1225CC22A0071514E /* Piece.swift in Sources */,
@@ -1530,6 +1556,7 @@
 				17404B2E234626E700976DE2 /* SCNVector3.swift in Sources */,
 				174C9A5D232F5E8A00A5DC7A /* RawThemeFieldEditProtocol.swift in Sources */,
 				171ED0FF22F56B3300CE2CDF /* StandardGameAI.swift in Sources */,
+				17E619AD23485B7C00C391CF /* +ThemeDescriptorParser.swift in Sources */,
 				178F4CA6229131A900FBCFFD /* Board.swift in Sources */,
 				17E71A7D22AD21920081991E /* MultiPeerDelegate.swift in Sources */,
 				175098B32290338400A411DE /* MapType.swift in Sources */,
@@ -1547,6 +1574,7 @@
 				176708F02339EE5C000E2216 /* CustomStringConvertibleExtensions.swift in Sources */,
 				1797525022C38A4D00BF539A /* +SpecialAndOtherCommands.swift in Sources */,
 				1749B6E122BB26A0003DC65D /* Conversions.swift in Sources */,
+				17E619AF23485BF000C391CF /* +ThemeDescriptorWriter.swift in Sources */,
 				179C5E2A23224C190003845B /* ThemeManager.swift in Sources */,
 				1754E79A2325285100820FDE /* Grid.swift in Sources */,
 				178DEEC5233CE68F00E09D0E /* StatViewerTableCell.swift in Sources */,
