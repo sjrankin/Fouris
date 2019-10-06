@@ -35,6 +35,17 @@ class XMLDocument: CustomStringConvertible
         }
     }
     
+    /// Initializer.
+    /// - Parameter FromString: String that contains an XML document to load.
+    init?(FromString: String)
+    {
+        let LoadOK = LoadDocument(Raw: FromString)
+        if !LoadOK
+        {
+            return nil
+        }
+    }
+    
     /// Default initializer.
     init()
     {
