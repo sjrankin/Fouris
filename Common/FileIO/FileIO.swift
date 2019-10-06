@@ -533,6 +533,40 @@ class FileIO
         return FileExists(FileURL: FPath!)
     }
     
+    /// Determines if all of the file names in the passed array exist in the passed directory. All files must be present in
+    /// order for this function to return true.
+    /// - Parameter FileList: List of files to check for existence.
+    /// - Parameter InDirectory: The directory to search for the files.
+    /// - Returns: True if all of the files listed in `FileList` exist in `InDirectory`, false if not.
+    public static func FilesExist(FileList: [String], InDirectory: String) -> Bool
+    {
+        for FileName in FileList
+        {
+            if !FileExists(FileName: FileName, Directory: InDirectory)
+            {
+                return false
+            }
+        }
+        return true
+    }
+    
+    /// Determines if at least one of the files in `FileList` is in the directory `InDirectory`.
+    /// - Note: Returns on first successful file found operation.
+    /// - Parameter FileList: List of files to check for existence.
+    /// - Parameter InDirectory: The directory to search for files.
+    /// - Returns: True if at least one of the files in `FileList` is in `InDirectory`, false if not.
+    public static func AnyFileExists(FileList: [String], InDirectory: String) -> Bool
+    {
+        for FileName in FileList
+        {
+            if FileExists(FileName: FileName, Directory: InDirectory)
+            {
+                return true
+            }
+        }
+        return false
+    }
+    
     /// Converts a file name and directory name (where the file lives) into an URL.
     /// - Parameter FileName: Name of the file in the directory.
     /// - Parameter Directory: Name of the directory.
