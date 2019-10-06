@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <History Name="User" TimeStamp="initial">
+    <!-- Playing games not reflected in history. -->
     <GameType Name="Standard">
         <GameCount Started="0"/>
         <Score Cumulative="0" High="0"/>
