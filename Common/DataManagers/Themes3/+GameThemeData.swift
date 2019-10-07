@@ -80,10 +80,14 @@ extension ThemeManager3
         <Debug Enable="true">
         <Camera UserCanControl="false"/>
         <Statistics ShowStatistics="false"/>
+        <Heartbeat Show="true" Interval="1.0"/>
         <GridLines>
         <BackgroundGrid Show="false" Color="#e0e0e0" Width="0.5"/>
         <CenterLines Show="false" Color="#ffffff" Width="2.0"/>
         </GridLines>
+        <Rotating4>
+        <Center ChangeColorAfterRotation="true"/>
+        </Rotating4>
         </Debug>
         <Pieces>
         <Piece ID="f4510cca-262a-4018-bf29-04d703702d65"/>
