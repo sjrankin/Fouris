@@ -72,7 +72,39 @@ extension RawThemeViewerCode
                 let ShowGrid = NewValue as! Bool
                 self.UserTheme?.ShowBackgroundGrid = ShowGrid
         })
+        DebugGroup.AddField(ID: UUID(), Title: "Heartbeat",
+                            Description: "Shows a graphic that indicates the main loop is running.",
+                            ControlTitle: "Show heartbeat",
+                            Default: false as Any, Starting: self.UserTheme!.ShowHeartbeat as Any,
+                            FieldType: .Bool, List: nil, Handler:
+            {
+                NewValue in
+                let ShowBeat = NewValue as! Bool
+                self.UserTheme?.ShowHeartbeat = ShowBeat
+        })
+        DebugGroup.AddField(ID: UUID(), Title: "Heartbeat interval",
+                            Description: "Amount of time (in seconds) between updating the heartbeat graphic.",
+                            ControlTitle: "", Default: 1.0 as Any, Starting: self.UserTheme!.HeartbeatInterval as Any,
+                            FieldType: .Double, List: nil, Handler:
+            {
+                NewValue in
+                let NewDouble = NewValue as! Double
+                self.UserTheme!.HeartbeatInterval = NewDouble
+        })
         FieldTables.append(DebugGroup)
+        
+        let RotateDebugGroup = GroupData("Rotating Game Debug")
+        RotateDebugGroup.AddField(ID: UUID(), Title: "Change center color",
+                                  Description: "Change the color of the center block/bucket parts after each piece freezes.",
+                                  ControlTitle: "Change colors", Default: false as Any,
+                                  Starting: self.UserTheme!.ChangeColorAfterRotation as Any,
+                                  FieldType: .Bool, List: nil, Handler:
+            {
+                NewValue in
+                let ChangeColors = NewValue as! Bool
+                self.UserTheme?.ChangeColorAfterRotation = ChangeColors
+        })
+        FieldTables.append(RotateDebugGroup)
         
         //Settings
         let SettingsGroup = GroupData("Settings")
