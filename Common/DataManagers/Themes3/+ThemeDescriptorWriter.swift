@@ -142,12 +142,17 @@ extension ThemeDescriptor2
         Working.append(Spaces(4) + "<Debug Enable=" + Quoted("\(EnableDebug)") + ">\n")
         Working.append(Spaces(8) + "<Camera UserCanControl=" + Quoted("\(CanControlCamera)") + "/>\n")
         Working.append(Spaces(8) + "<Statistics ShowStatistics=" + Quoted("\(ShowStatistics)") + "/>\n")
+        Working.append(Spaces(8) + "<Heartbeat Show=" + Quoted("\(ShowHeartbeat)") +
+        " Interval=" + Quoted("\(HeartbeatInterval)") + "/>\n") 
         Working.append(Spaces(8) + "<GridLines>\n")
         Working.append(Spaces(12) + "<BackgroundGrid Show=" + Quoted("\(ShowBackgroundGrid)") +
             " Color=" + Quoted(BackgroundGridColor) + " Width=" + Quoted("\(BackgroundGridWidth)") + "/>\n")
         Working.append(Spaces(12) + "<CenterLines Show=" + Quoted("\(ShowCenterLines)") +
             " Color=" + Quoted(CenterLineColor) + " Width=" + Quoted("\(CenterLineWidth)") + "/>\n")
         Working.append(Spaces(8) + "</GridLines>\n")
+        Working.append(Spaces(8) + "<Rotating4>\n")
+        Working.append(Spaces(12) + "<Center ChangeColorAfterRotation=" + Quoted("\(ChangeColorAfterRotation)") + "/>\n")
+        Working.append(Spaces(8) + "</Rotating4>\n")
         Working.append(Spaces(4) + "</Debug>\n")
         
         Working.append(Spaces(4) + "<Pieces>\n")
