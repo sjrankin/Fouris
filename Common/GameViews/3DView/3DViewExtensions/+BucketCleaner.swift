@@ -372,11 +372,15 @@ extension View3D
         
         DispatchQueue.main.asyncAfter(deadline: .now() + MaxDuration, execute:
             {
+                #if true
+                self.ResetBoard(HideMethod: .FadeOut, HideDuration: 0.5, ShowMethod: .FadeIn, ShowDuration: 0.5)
+                #else
                 self.HideBoard(Method: HideBoardMethods.FadeOut, Duration: 0.5)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.51, execute:
                     {
                         self.ShowBoard(Method: .FadeIn, Duration: 0.5)
                 })
+                #endif
         })
     }
 }
