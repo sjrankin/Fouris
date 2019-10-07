@@ -39,23 +39,32 @@
                                         <color key="textColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="nZE-aM-3FJ">
-                                        <rect key="frame" x="343.5" y="19.5" width="404.5" height="50"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="nZE-aM-3FJ">
+                                        <rect key="frame" x="308.5" y="19.5" width="439.5" height="50"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ihd-GS-Kr9">
-                                                <rect key="frame" x="0.0" y="0.0" width="28" height="50"/>
+                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ihd-GS-Kr9">
+                                                <rect key="frame" x="0.0" y="0.0" width="35" height="50"/>
                                                 <viewLayoutGuide key="safeArea" id="wlE-ts-3jd"/>
+                                                <color key="tintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" image="heart" catalog="system">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22" scale="large" weight="black"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FAa-FB-Yxh">
+                                                <rect key="frame" x="67" y="0.0" width="28" height="50"/>
+                                                <viewLayoutGuide key="safeArea" id="Kjo-WR-Ifc"/>
                                                 <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" image="flame.fill" catalog="system">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22" scale="large" weight="black"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="HandleFlameButtonPressed:" destination="anR-7Y-bzH" eventType="primaryActionTriggered" id="6eM-RL-Y8k"/>
+                                                    <action selector="HandleFlameButtonPressed:" destination="anR-7Y-bzH" eventType="primaryActionTriggered" id="YEc-wL-Qh5"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="umP-b5-Ztg">
-                                                <rect key="frame" x="68" y="0.0" width="41" height="50"/>
+                                                <rect key="frame" x="127" y="0.0" width="41" height="50"/>
                                                 <viewLayoutGuide key="safeArea" id="wfF-jc-2wh"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" image="video.fill" catalog="system">
@@ -67,7 +76,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pad-7u-YZb">
-                                                <rect key="frame" x="149" y="0.0" width="39.5" height="50"/>
+                                                <rect key="frame" x="200" y="0.0" width="39.5" height="50"/>
                                                 <viewLayoutGuide key="safeArea" id="BeO-vz-yJY"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" image="camera" catalog="system">
@@ -79,7 +88,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tYf-lX-OiH">
-                                                <rect key="frame" x="228.5" y="0.0" width="56" height="50"/>
+                                                <rect key="frame" x="271.5" y="0.0" width="56" height="50"/>
                                                 <viewLayoutGuide key="safeArea" id="RT3-pw-BbW"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                                                 <state key="normal" title="Play">
@@ -90,7 +99,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KXp-V6-UPf">
-                                                <rect key="frame" x="324.5" y="0.0" width="80" height="50"/>
+                                                <rect key="frame" x="359.5" y="0.0" width="80" height="50"/>
                                                 <viewLayoutGuide key="safeArea" id="3ID-Mx-x4p"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                                                 <state key="normal" title="Pause">
@@ -459,6 +468,7 @@
                         <outlet property="GameOverLabelView" destination="fG3-c2-56a" id="myF-XF-REC"/>
                         <outlet property="GameUISurface3D" destination="vct-Mh-0Vi" id="Naq-c6-d6M"/>
                         <outlet property="GameViewContainer" destination="tQ9-Ul-CQv" id="mbb-L8-9vo"/>
+                        <outlet property="HeartbeatGraphic" destination="ihd-GS-Kr9" id="Yw0-JL-hvD"/>
                         <outlet property="HighScoreLabelView" destination="yrA-tS-iWf" id="CSj-CV-On6"/>
                         <outlet property="MainSlideIn" destination="yU0-Pv-MTo" id="UFC-vm-UZe"/>
                         <outlet property="MainUIButton" destination="Qep-yn-tJG" id="bLt-gL-ZPx"/>
@@ -784,7 +794,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show statistics for" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gHB-eD-zOm">
-                                <rect key="frame" x="20" y="106.5" width="141" height="21.5"/>
+                                <rect key="frame" x="20" y="106" width="141" height="21.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21.5" id="pne-l1-oLO"/>
                                 </constraints>
@@ -793,13 +803,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For game type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ja-49-CVH">
-                                <rect key="frame" x="20" y="154.5" width="111" height="21"/>
+                                <rect key="frame" x="20" y="154" width="111" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tap-d5-oLU">
-                                <rect key="frame" x="20" y="201.5" width="672" height="632.5"/>
+                                <rect key="frame" x="20" y="201" width="672" height="633"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -815,7 +825,7 @@
                                 </connections>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="48o-Mh-maS">
-                                <rect key="frame" x="199" y="102" width="154" height="31.5"/>
+                                <rect key="frame" x="199" y="102" width="154" height="31"/>
                                 <viewLayoutGuide key="safeArea" id="VC8-ee-mL6"/>
                                 <segments>
                                     <segment title="User"/>
@@ -832,7 +842,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="e6D-S9-tip">
-                                <rect key="frame" x="199" y="150" width="171" height="32"/>
+                                <rect key="frame" x="199" y="149.5" width="171" height="32"/>
                                 <segments>
                                     <segment title="Standard"/>
                                     <segment title="Rotating"/>
@@ -890,6 +900,7 @@
         <image name="cube.fill" catalog="system" width="64" height="62"/>
         <image name="escape" catalog="system" width="64" height="60"/>
         <image name="flame.fill" catalog="system" width="54" height="64"/>
+        <image name="heart" catalog="system" width="64" height="54"/>
         <image name="number.circle" catalog="system" width="64" height="60"/>
         <image name="video" catalog="system" width="64" height="40"/>
         <image name="video.fill" catalog="system" width="64" height="40"/>
