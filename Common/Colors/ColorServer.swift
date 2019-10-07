@@ -89,12 +89,11 @@ class ColorServer
         return nil
     }
     
-    /// Returns a random color.
-    ///
+    /// Returns a light random color.
     /// - Parameters:
-    ///   - MinRed: Minimum red channel value.
-    ///   - MinGreen: Minimum green channel value.
-    ///   - MinBlue: Minimum blue channel value.
+    ///   - MinRed: Minimum red channel value. Default value is 0.65.
+    ///   - MinGreen: Minimum green channel value. Default value is 0.65.
+    ///   - MinBlue: Minimum blue channel value. Default value is 0.65.
     /// - Returns: Random color.
     public static func RandomColor(MinRed: CGFloat = 0.65, MinGreen: CGFloat = 0.65, MinBlue: CGFloat = 0.65) -> UIColor
     {
@@ -103,7 +102,6 @@ class ColorServer
     }
     
     /// Return a set of three random values (between the specified minimum and 1.0).
-    ///
     /// - Parameters:
     ///   - MinRed: Minimum red value.
     ///   - MinGreen: Minimum green value.
@@ -115,6 +113,19 @@ class ColorServer
         let RGreen = CGFloat(Double.random(in: Double(MinGreen) ... 1.0))
         let RBlue = CGFloat(Double.random(in: Double(MinBlue) ... 1.0))
         return (RRed, RGreen, RBlue)
+    }
+    
+    /// Returns a dark random color.
+    /// - Parameter MaxRed: Maximum red color channel.
+    /// - Parameter MaxGreen: Maximum green color channel.
+    /// - Parameter MaxBlue: Maximum blue color channel.
+    /// - Returns: Random color.
+    public static func DarkRandomColor(MaxRed: CGFloat = 0.65, MaxGreen: CGFloat = 0.65, MaxBlue: CGFloat = 0.65) -> UIColor
+    {
+        let RRed = CGFloat(Double.random(in: Double(0.0) ... Double(MaxRed)))
+                let RGreen = CGFloat(Double.random(in: Double(0.0) ... Double(MaxGreen)))
+                let RBlue = CGFloat(Double.random(in: Double(0.0) ... Double(MaxBlue)))
+        return UIColor(red: RRed, green: RGreen, blue: RBlue, alpha: 1.0)
     }
     
     /// Returns a randomly selected color name color.
