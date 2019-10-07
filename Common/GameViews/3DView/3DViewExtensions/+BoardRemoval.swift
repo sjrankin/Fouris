@@ -53,7 +53,7 @@ extension View3D
                         self.BucketNode?.runAction(BucketFadeIn,
                         completionHandler:
                             {
-                                objc_sync_exit(self.CanUseBucket)
+                                //objc_sync_exit(self.CanUseBucket)
                         })
                 })
             
