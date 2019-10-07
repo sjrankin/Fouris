@@ -284,10 +284,13 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
         {
             if RawTag == "GradientColorPicker"
             {
+                if let FinalEdit = Edited
+                {
                 let IsVertical = VerticalGradientSwitch.isOn
-                let Final = ForceVerticalGradient(Edited!, VerticalFlag: IsVertical)
+                let Final = ForceVerticalGradient(FinalEdit, VerticalFlag: IsVertical)
                 GradientSample.GradientDescriptor = Final
                 UserTheme!.BackgroundGradientColor = Final
+                }
             }
         }
     }
