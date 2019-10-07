@@ -326,6 +326,36 @@ class ThemeDescriptor2: CustomStringConvertible, XMLDeserializeProtocol
         }
     }
     
+    public var _ShowHeartbeat: Bool = false
+    public var ShowHeartbeat: Bool
+    {
+        get
+        {
+            return _ShowHeartbeat
+        }
+        set
+        {
+            _ShowHeartbeat = newValue
+            _Dirty = true
+            ChangeNotice(Field: .ShowHeartbeat)
+        }
+    }
+    
+    public var _HeartbeatInterval: Double = 1.0
+    public var HeartbeatInterval: Double
+    {
+        get
+        {
+            return _HeartbeatInterval
+        }
+        set
+        {
+            _HeartbeatInterval = newValue
+            _Dirty = true
+            ChangeNotice(Field: .HeartbeatInterval)
+        }
+    }
+    
     // MARK: Light properties.
     
     /// Holds the color of the light.
@@ -1143,6 +1173,21 @@ class ThemeDescriptor2: CustomStringConvertible, XMLDeserializeProtocol
         }
     }
     
+    public var _ChangeColorAfterRotation: Bool = false
+    public var ChangeColorAfterRotation: Bool
+    {
+        get
+        {
+            return _ChangeColorAfterRotation
+        }
+        set
+        {
+            _ChangeColorAfterRotation = newValue
+            _Dirty = true
+            ChangeNotice(Field: .ChangeColorAfterRotation)
+        }
+    }
+    
     // MARK: Board properties.
     
     public var _ShowBoardMethod: ShowBoardMethods = .Appear
@@ -1525,4 +1570,7 @@ enum ThemeFields: String, CaseIterable
     case ShowBoardDuration = "ShowBoardDuration"
     case HideBoardMethod = "HideBoardMethod"
     case HideBoardDuration = "HideBoardDuration"
+    case ShowHeartbeat = "ShowHeartbeat"
+    case HeartbeatInterval = "HeartbeatInterval"
+    case ChangeColorAfterRotation = "ChangeColorAfterRotation"
 }
