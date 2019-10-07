@@ -121,9 +121,6 @@ class View3D: SCNView,                          //Our main super class.
         let ControlLightNode = CreateControlLight()
         self.scene?.rootNode.addChildNode(ControlLightNode)
         
-        //        MasterSceneNode = SCNNode()
-        //        self.scene?.rootNode.addChildNode(MasterSceneNode!)
-        
         DrawBackground()
         DrawBucketGrid(ShowLines: CurrentTheme!.ShowBucketGrid, IncludingOutline: true)
         OrbitCamera()
@@ -140,10 +137,14 @@ class View3D: SCNView,                          //Our main super class.
         
     }
     
+    /// The theme was updated. See what changed and take the appropriate action.
+    /// - Parameter ThemeName: The name of the theme that changed.
+    /// - Parameter Field: The field that changed.
     func ThemeUpdated(ThemeName: String, Field: ThemeFields)
     {
         print("Theme \(ThemeName) updated field \(Field)")
         if [ThemeFields.BackgroundLiveImageCamera, ThemeFields.BackgroundType, ThemeFields.BackgroundGradientColor,
+            ThemeFields.ShowCenterLines, ThemeFields.CenterLineColor, ThemeFields.CenterLineWidth,
             ThemeFields.BackgroundSolidColor, ThemeFields.BackgroundImageName, ThemeFields.BackgroundImageFromCameraRoll,
             ThemeFields.BackgroundSolidColorCycleTime, ThemeFields.BackgroundSolidColorCycleTime].contains(Field)
         {
@@ -153,6 +154,13 @@ class View3D: SCNView,                          //Our main super class.
         {
             switch Field
             {
+                case .ShowCenterLines:
+                fallthrough
+                case .CenterLineColor:
+                fallthrough
+                case .CenterLineWidth:
+                DrawCenterLines()
+                
                 case .CameraFieldOfView:
                     CameraNode.camera?.fieldOfView = CGFloat(CurrentTheme!.CameraFieldOfView)
                     print("Camera field of view changed to \(CurrentTheme!.CameraFieldOfView)")
@@ -291,7 +299,6 @@ class View3D: SCNView,                          //Our main super class.
         let LightColor = ColorServer.ColorFrom(CurrentTheme!.LightColor)
         Light.color = LightColor
         Light.categoryBitMask = GameLight
-        #if true
         switch CurrentTheme!.LightType
         {
             case .ambient:
@@ -306,9 +313,6 @@ class View3D: SCNView,                          //Our main super class.
             case .directional:
                 Light.type = .directional
         }
-        #else
-        Light.type = CurrentTheme!.LightType
-        #endif
         Light.intensity = CGFloat(CurrentTheme!.LightIntensity)
         let Node = SCNNode()
         Node.name = "GameLight"
@@ -355,12 +359,10 @@ class View3D: SCNView,                          //Our main super class.
                 if Node.name == WithName
                 {
                     KillList.append(Node)
-                    //Node.removeFromParentNode()
                 }
         }
         for Node in KillList
         {
-            //            Node.geometry!.firstMaterial!.normal.contents = nil
             Node.geometry!.firstMaterial!.specular.contents = nil
             Node.geometry!.firstMaterial!.diffuse.contents = nil
             Node.removeAllActions()
@@ -391,7 +393,8 @@ class View3D: SCNView,                          //Our main super class.
     var BucketNode: SCNNode? = nil
     
     /// Create a 3D bucket and add it to the scene. Attributes are from the current theme.
-    func CreateBucket()
+    /// - Parameter InitialOpacity: The initial opacity of the bucket. Defaults to 1.0.
+    func CreateBucket(InitialOpacity: CGFloat = 1.0)
     {
         if BucketNode != nil
         {
@@ -423,8 +426,10 @@ class View3D: SCNView,                          //Our main super class.
                 BottomNode.position = SCNVector3(-0.5, -10.5, 0)
                 BucketNode?.addChildNode(BottomNode)
             
+                BucketNode?.opacity = InitialOpacity
+            
             case .Rotating4:
-                DrawCenterBlock(Parent: BucketNode!, InShape: CenterBlockShape)
+                DrawCenterBlock(Parent: BucketNode!, InShape: CenterBlockShape, InitialOpacity: InitialOpacity)
             
             case .Cubic:
                 let Center = SCNBox(width: 2.0, height: 2.0, length: 2.0, chamferRadius: 0.0)
@@ -433,10 +438,10 @@ class View3D: SCNView,                          //Our main super class.
                 let CentralNode = SCNNode(geometry: Center)
                 CentralNode.position = SCNVector3(0.0, 0.0, 0.0)
                 BucketNode?.addChildNode(CentralNode)
+                BucketNode?.opacity = InitialOpacity
         }
-        //MasterSceneNode?.addChildNode(BucketNode!)
-        self.scene?.rootNode.addChildNode(BucketNode!)
         
+        self.scene?.rootNode.addChildNode(BucketNode!)
         _BucketAdded = true
     }
     
@@ -444,25 +449,36 @@ class View3D: SCNView,                          //Our main super class.
     var _BucketAdded: Bool = false
     
     /// Draw a vertical and horizontal line passing through the origin.
+    /// - Note: Whether or not center lines are drawn is determined by the settings in the current theme.
+    /// - Note: Center lines are intended to be used for debugging only.
     func DrawCenterLines()
     {
-        let Width: CGFloat = 0.05
-        let VLine = MakeLine(From: SCNVector3(0.0, 20.0, 2.0), To: SCNVector3(0.0, -80.0, 2.0), Color: ColorNames.Yellow, LineWidth: Width)
-        let HLine = MakeLine(From: SCNVector3(-20.0, 0.0, 2.0), To: SCNVector3(80.0, 0.0, 2.0), Color: ColorNames.Yellow, LineWidth: Width)
-        VLine.categoryBitMask = ControlLight
-        HLine.categoryBitMask = ControlLight
-        self.scene?.rootNode.addChildNode(VLine)
-        self.scene?.rootNode.addChildNode(HLine)
+        CenterLineVertical?.removeFromParentNode()
+        CenterLineHorizontal?.removeFromParentNode()
+        if CurrentTheme!.ShowCenterLines
+        {
+            let Width: CGFloat = CGFloat(CurrentTheme!.CenterLineWidth)
+            let LineColor = ColorServer.ColorFrom(CurrentTheme!.CenterLineColor)
+            CenterLineVertical = MakeLine(From: SCNVector3(0.0, 20.0, 2.0), To: SCNVector3(0.0, -80.0, 2.0), Color: LineColor, LineWidth: Width)
+            CenterLineHorizontal = MakeLine(From: SCNVector3(-20.0, 0.0, 2.0), To: SCNVector3(80.0, 0.0, 2.0), Color: LineColor, LineWidth: Width)
+            CenterLineVertical!.categoryBitMask = ControlLight
+            CenterLineHorizontal!.categoryBitMask = ControlLight
+            self.scene?.rootNode.addChildNode(CenterLineVertical!)
+            self.scene?.rootNode.addChildNode(CenterLineHorizontal!)
+        }
     }
+    
+    private var CenterLineVertical: SCNNode? = nil
+    private var CenterLineHorizontal: SCNNode? = nil
     
     /// Create a "line" and return it in a scene node.
     /// - Note: The line is really a very thin box. This makes lines a rather heavy operation.
     /// - Parameter From: Starting point of the line.
     /// - Parameter To: Ending point of the line.
-    /// - Parameter Color: Color name to use to color the line.
+    /// - Parameter Color: The color of the line.
     /// - Parameter LineWidth: Width of the line - defaults to 0.01.
     /// - Returns: Node with the specified line. The node has the name "GridNodes".
-    func MakeLine(From: SCNVector3, To: SCNVector3, Color: ColorNames, LineWidth: CGFloat = 0.01) -> SCNNode
+    func MakeLine(From: SCNVector3, To: SCNVector3, Color: UIColor, LineWidth: CGFloat = 0.01) -> SCNNode
     {
         var Width: Float = 0.01
         var Height: Float = 0.01
@@ -479,8 +495,9 @@ class View3D: SCNView,                          //Our main super class.
         }
         let Line = SCNBox(width: CGFloat(Width), height: CGFloat(Height), length: 0.01,
                           chamferRadius: 0.0)
-        Line.materials.first?.diffuse.contents = ColorServer.ColorFrom(Color)
+        Line.materials.first?.diffuse.contents = Color
         let Node = SCNNode(geometry: Line)
+        Node.categoryBitMask = GameLight
         Node.position = From
         Node.name = "GridNodes"
         return Node
@@ -494,16 +511,14 @@ class View3D: SCNView,                          //Our main super class.
         {
             let Start = SCNVector3(-64.5, Y, 0.0)
             let End = SCNVector3(128.5, Y, 0.0)
-            let LineNode = MakeLine(From: Start, To: End, Color: ColorNames.White)
-            //            MasterSceneNode?.addChildNode(LineNode)
+            let LineNode = MakeLine(From: Start, To: End, Color: UIColor.white)
             self.scene?.rootNode.addChildNode(LineNode)
         }
         for X in stride(from: -64.5, to: 128.5, by: 1.0)
         {
             let Start = SCNVector3(X, -64.0, 0.0)
             let End = SCNVector3(X, 128.0, 0.0)
-            let LineNode = MakeLine(From: Start, To: End, Color: ColorNames.White)
-            //            MasterSceneNode?.addChildNode(LineNode)
+            let LineNode = MakeLine(From: Start, To: End, Color: UIColor.white)
             self.scene?.rootNode.addChildNode(LineNode)
         }
     }
@@ -739,12 +754,11 @@ class View3D: SCNView,                          //Our main super class.
         {
             let VBlock = VisualBlocks3D(BlockID, AtX: CGFloat(X), AtY: CGFloat(Y), ActiveVisuals: PVisual.ActiveVisuals!,
                                         RetiredVisuals: PVisual.RetiredVisuals!, IsRetired: IsRetired)
-//        let VBlock = VisualBlocks3D(BlockID, AtX: CGFloat(X), AtY: CGFloat(Y), ShapeID: ShapeID, IsRetired: IsRetired)
-        VBlock.ParentID = ParentID
-        VBlock.Marked = true
-        VBlock.categoryBitMask = GameLight
-        BlockList.insert(VBlock)
-        self.scene?.rootNode.addChildNode(VBlock)
+            VBlock.ParentID = ParentID
+            VBlock.Marked = true
+            VBlock.categoryBitMask = GameLight
+            BlockList.insert(VBlock)
+            self.scene?.rootNode.addChildNode(VBlock)
         }
         else
         {
@@ -766,12 +780,11 @@ class View3D: SCNView,                          //Our main super class.
         {
             let VBlock = VisualBlocks3D(BlockID, AtX: CGFloat(X), AtY: CGFloat(Y), ActiveVisuals: PVisual.ActiveVisuals!,
                                         RetiredVisuals: PVisual.RetiredVisuals!, IsRetired: IsRetired)
-        //let VBlock = VisualBlocks3D(BlockID, AtX: X, AtY: Y, ShapeID: ShapeID, IsRetired: IsRetired)
-        VBlock.ParentID = ParentID
-        VBlock.Marked = true
-        VBlock.categoryBitMask = GameLight
-        BlockList.insert(VBlock)
-        MasterBlockNode!.addChildNode(VBlock)
+            VBlock.ParentID = ParentID
+            VBlock.Marked = true
+            VBlock.categoryBitMask = GameLight
+            BlockList.insert(VBlock)
+            MasterBlockNode!.addChildNode(VBlock)
         }
         else
         {
@@ -860,7 +873,6 @@ class View3D: SCNView,                          //Our main super class.
             }
             let VBlock = VisualBlocks3D(Block.ID, AtX: XOffset, AtY: YOffset, ActiveVisuals: PVisuals!.ActiveVisuals!,
                                         RetiredVisuals: PVisuals!.RetiredVisuals!, IsRetired: false)
-//            let VBlock = VisualBlocks3D(Block.ID, AtX: XOffset, AtY: YOffset, ShapeID: GamePiece.ShapeID, IsRetired: false)
             VBlock.categoryBitMask = GameLight
             MovingPieceBlocks.append(VBlock)
             MovingPieceNode?.addChildNode(VBlock)
@@ -877,7 +889,6 @@ class View3D: SCNView,                          //Our main super class.
         {
             if MovingPieceNode != nil
             {
-                //print("Removing node \((MovingPieceNode?.name)!)")
                 MovingPieceNode!.removeFromParentNode()
                 MovingPieceNode = nil
                 UpdateMasterBlockNode()
@@ -1040,7 +1051,10 @@ class View3D: SCNView,                          //Our main super class.
         CurrentMap = TheBoard.Map
     }
     
+    /// Holds the board in which we are working.
     var CurrentBoard: Board? = nil
+    
+    /// Holds the map for the current board.
     var CurrentMap: MapType? = nil
     
     /// Creates the master block node. This is the node in which all blocks are placed. This is done to allow for
@@ -1055,7 +1069,6 @@ class View3D: SCNView,                          //Our main super class.
         }
         MasterBlockNode = SCNNode()
         MasterBlockNode!.name = "Master Block Node"
-        //        MasterSceneNode?.addChildNode(MasterBlockNode!)
         self.scene?.rootNode.addChildNode(MasterBlockNode!)
     }
     
@@ -1107,12 +1120,17 @@ class View3D: SCNView,                          //Our main super class.
     /// The node that holds the outline.
     var OutlineNode: SCNNode? = nil
     
+    var CanUseBucket: NSObject = NSObject()
+    
     /// Function that does the actual "line" drawing of the bucket grid.
     /// - Note: The lines are really very thin boxes; SceneKit doesn't support lines as graphical objects.
     /// - Parameter ShowGrid: If true, the grid is drawn. If false, no grid is drawn, but see **DrawOutline**.
     /// - Parameter DrawOutline: If true, a perimeter outline is drawn.
-    func DrawGridInBucket(ShowGrid: Bool = true, DrawOutline: Bool)
+    /// - Parameter InitialOpacity: The initial opacity of the grids.
+    func DrawGridInBucket(ShowGrid: Bool = true, DrawOutline: Bool, InitialOpacity: CGFloat = 1.0)
     {
+        objc_sync_enter(CanUseBucket)
+        defer{objc_sync_exit(CanUseBucket)}
         if BucketGridNode != nil
         {
             BucketGridNode?.removeFromParentNode()
@@ -1124,36 +1142,12 @@ class View3D: SCNView,                          //Our main super class.
             case .Standard:
                 if ShowGrid
                 {
-                    #if false
-                    //Horizontal bucket lines.
-                    for Y in stride(from: 10.0, to: -10.5, by: -1.0)
-                    {
-                        let LineGeometry = SCNGeometry.Line(From: SCNVector3(-0.5, Y, 0.0), To: SCNVector3(10.0, Y, 0.0))
-                        LineGeometry.firstMaterial?.diffuse.contents = UIColor.gray
-                        LineGeometry.firstMaterial?.specular.contents = UIColor.gray
-                        let LineNode = SCNNode(geometry: LineGeometry)
-                        LineNode.categoryBitMask = GameLight
-                        LineNode.name = "Horizontal,\(Int(Y))"
-                        BucketGridNode?.addChildNode(LineNode)
-                    }
-                    //Vertical bucket lines.
-                    for X in stride(from: -4.5, to: 5.0, by: 1.0)
-                    {
-                        let LineGeometry = SCNGeometry.Line(From: SCNVector3(X, 0.0, 0.0), To: SCNVector3(X, 20.0, 0.0))
-                        LineGeometry.firstMaterial?.diffuse.contents = UIColor.gray
-                        LineGeometry.firstMaterial?.specular.contents = UIColor.gray
-                        let LineNode = SCNNode(geometry: LineGeometry)
-                        LineNode.categoryBitMask = GameLight
-                        LineNode.name = "Vertical,\(Int(X))"
-                        BucketGridNode?.addChildNode(LineNode)
-                    }
-                    #else
                     //Horizontal bucket lines.
                     for Y in stride(from: 10.0, to: -10.5, by: -1.0)
                     {
                         let Start = SCNVector3(-0.5, Y, 0.0)
                         let End = SCNVector3(10.5, Y, 0.0)
-                        let LineNode = MakeLine(From: Start, To: End, Color: ColorNames.White, LineWidth: 0.03)
+                        let LineNode = MakeLine(From: Start, To: End, Color: UIColor.white, LineWidth: 0.03)
                         LineNode.categoryBitMask = GameLight
                         LineNode.name = "Horizontal,\(Int(Y))"
                         BucketGridNode?.addChildNode(LineNode)
@@ -1163,22 +1157,22 @@ class View3D: SCNView,                          //Our main super class.
                     {
                         let Start = SCNVector3(X, 0.0, 0.0)
                         let End = SCNVector3(X, 20.0, 0.0)
-                        let LineNode = MakeLine(From: Start, To: End, Color: ColorNames.White, LineWidth: 0.03)
+                        let LineNode = MakeLine(From: Start, To: End, Color: UIColor.white, LineWidth: 0.03)
                         LineNode.categoryBitMask = GameLight
                         LineNode.name = "Vertical,\(Int(X))"
                         BucketGridNode?.addChildNode(LineNode)
                     }
-                    #endif
                 }
                 if DrawOutline
                 {
                     let TopStart = SCNVector3(-0.5, 10.0, 0.0)
                     let TopEnd = SCNVector3(10.5, 10.0, 0.0)
-                    let TopLine = MakeLine(From: TopStart, To: TopEnd, Color: ColorNames.Red, LineWidth: 0.08)
+                    let TopLine = MakeLine(From: TopStart, To: TopEnd, Color: UIColor.red, LineWidth: 0.08)
                     TopLine.categoryBitMask = GameLight
                     TopLine.name = "TopLine"
                     BucketGridNode?.addChildNode(TopLine)
             }
+                BucketGridNode?.opacity = InitialOpacity
             
             case .Rotating4:
                 if ShowGrid
@@ -1186,103 +1180,53 @@ class View3D: SCNView,                          //Our main super class.
                     //Horizontal bucket lines.
                     for Y in stride(from: 10.0, to: -10.5, by: -1.0)
                     {
-                        #if false
-                        let LineGeometry = SCNGeometry.Line(From: SCNVector3(-10.0, Y, 0.0), To: SCNVector3(10.0, Y, 0.0))
-                        LineGeometry.firstMaterial?.specular.contents = UIColor.gray
-                        LineGeometry.firstMaterial?.diffuse.contents = UIColor.gray
-                        let LineNode = SCNNode(geometry: LineGeometry)
-                        LineNode.categoryBitMask = GameLight
-                        LineNode.name = "Horizontal,\(Int(Y))"
-                        BucketGridNode?.addChildNode(LineNode)
-                        #else
                         let Start = SCNVector3(0.0, Y, 0.0)
                         let End = SCNVector3(20.0, Y, 0.0)
-                        let LineNode = MakeLine(From: Start, To: End, Color: ColorNames.White, LineWidth: 0.02)
+                        let LineNode = MakeLine(From: Start, To: End, Color: UIColor.white, LineWidth: 0.02)
                         LineNode.categoryBitMask = GameLight
                         LineNode.name = "Horizontal,\(Int(Y))"
                         BucketGridNode?.addChildNode(LineNode)
-                        #endif
                     }
                     //Vertical bucket lines.
                     for X in stride(from: -10.0, to: 10.5, by: 1.0)
                     {
-                        #if false
-                        let LineGeometry = SCNGeometry.Line(From: SCNVector3(X, -10.0, 0.0), To: SCNVector3(X, 10.0, 0.0))
-                        LineGeometry.firstMaterial?.specular.contents = UIColor.gray
-                        LineGeometry.firstMaterial?.diffuse.contents = UIColor.gray
-                        let LineNode = SCNNode(geometry: LineGeometry)
-                        LineNode.categoryBitMask = GameLight
-                        LineNode.name = "Vertical,\(Int(X))"
-                        BucketGridNode?.addChildNode(LineNode)
-                        #else
                         let Start = SCNVector3(X, 0.0, 0.0)
                         let End = SCNVector3(X, 20.0, 0.0)
-                        let LineNode = MakeLine(From: Start, To: End, Color: ColorNames.White, LineWidth: 0.02)
+                        let LineNode = MakeLine(From: Start, To: End, Color: UIColor.white, LineWidth: 0.02)
                         LineNode.categoryBitMask = GameLight
                         LineNode.name = "Vertical,\(Int(X))"
                         BucketGridNode?.addChildNode(LineNode)
-                        #endif
                     }
                 }
                 //Outline.
                 if DrawOutline
                 {
-                    #if false
-                    let TopLine = SCNGeometry.Line(From: SCNVector3(-10.0, 10.0, 0.0), To: SCNVector3(10.0, 10.0, 0.0))
-                    TopLine.materials.first?.specular.contents = UIColor.red
-                    TopLine.materials.first?.diffuse.contents = UIColor.red
-                    let TopNode = SCNNode(geometry: TopLine)
-                    TopNode.categoryBitMask = GameLight
-                    TopNode.name = "TopLine"
-                    OutlineNode?.addChildNode(TopNode)
-                    let BottomLine = SCNGeometry.Line(From: SCNVector3(-10.0, -10.0, 0.0), To: SCNVector3(10.0, -10.0, 0.0))
-                    BottomLine.materials.first?.specular.contents = UIColor.red
-                    BottomLine.materials.first?.diffuse.contents = UIColor.red
-                    let BottomNode = SCNNode(geometry: BottomLine)
-                    BottomNode.categoryBitMask = GameLight
-                    BottomNode.name = "BottomLine"
-                    OutlineNode?.addChildNode(BottomNode)
-                    let LeftLine = SCNGeometry.Line(From: SCNVector3(-10.0, 10.0, 0.0), To: SCNVector3(-10.0, -10.0, 0.0))
-                    LeftLine.materials.first?.specular.contents = UIColor.red
-                    LeftLine.materials.first?.diffuse.contents = UIColor.red
-                    let LeftNode = SCNNode(geometry: LeftLine)
-                    LeftNode.categoryBitMask = GameLight
-                    LeftNode.name = "LeftLine"
-                    OutlineNode?.addChildNode(LeftNode)
-                    let RightLine = SCNGeometry.Line(From: SCNVector3(10.0, 10.0, 0.0), To: SCNVector3(10.0, -10.0, 0.0))
-                    RightLine.materials.first?.specular.contents = UIColor.red
-                    RightLine.materials.first?.diffuse.contents = UIColor.red
-                    let RightNode = SCNNode(geometry: RightLine)
-                    RightNode.name = "RightLine"
-                    RightNode.categoryBitMask = GameLight
-                    OutlineNode?.addChildNode(RightNode)
-                    #else
                     let TopStart = SCNVector3(0.0, 10.0, 0.0)
                     let TopEnd = SCNVector3(20.0, 10.0, 0.0)
-                    let TopLine = MakeLine(From: TopStart, To: TopEnd, Color: ColorNames.Red, LineWidth: 0.08)
+                    let TopLine = MakeLine(From: TopStart, To: TopEnd, Color: UIColor.red, LineWidth: 0.08)
                     TopLine.categoryBitMask = GameLight
                     TopLine.name = "TopLine"
                     OutlineNode?.addChildNode(TopLine)
                     let BottomStart = SCNVector3(0.0, -10.0, 0.0)
                     let BottomEnd = SCNVector3(20.0, -10.0, 0.0)
-                    let BottomLine = MakeLine(From: BottomStart, To: BottomEnd, Color: ColorNames.Red, LineWidth: 0.08)
+                    let BottomLine = MakeLine(From: BottomStart, To: BottomEnd, Color: UIColor.red, LineWidth: 0.08)
                     BottomLine.categoryBitMask = GameLight
                     BottomLine.name = "BottomLine"
                     OutlineNode?.addChildNode(BottomLine)
                     let LeftStart = SCNVector3(-10.0, 0.0, 0.0)
                     let LeftEnd = SCNVector3(-10.0, 20.0, 0.0)
-                    let LeftLine = MakeLine(From: LeftStart, To: LeftEnd, Color: ColorNames.Red, LineWidth: 0.08)
+                    let LeftLine = MakeLine(From: LeftStart, To: LeftEnd, Color: UIColor.red, LineWidth: 0.08)
                     LeftLine.categoryBitMask = GameLight
                     LeftLine.name = "LeftLine"
                     OutlineNode?.addChildNode(LeftLine)
                     let RightStart = SCNVector3(10.0, 0.0, 0.0)
                     let RightEnd = SCNVector3(10.0, 20.0, 0.0)
-                    let RightLine = MakeLine(From: RightStart, To: RightEnd, Color: ColorNames.Red, LineWidth: 0.08)
+                    let RightLine = MakeLine(From: RightStart, To: RightEnd, Color: UIColor.red, LineWidth: 0.08)
                     RightLine.categoryBitMask = GameLight
                     RightLine.name = "RightLine"
                     OutlineNode?.addChildNode(RightLine)
-                    #endif
                 }
+                BucketGridNode?.opacity = InitialOpacity
                 
                 #if false
                 let TopLabel = SCNText(string: "Top", extrusionDepth: 0.5)
@@ -1336,8 +1280,6 @@ class View3D: SCNView,                          //Our main super class.
             case .Cubic:
                 break
         }
-        //        MasterSceneNode?.addChildNode(BucketGridNode!)
-        //        MasterSceneNode?.addChildNode(OutlineNode!)
         self.scene?.rootNode.addChildNode(BucketGridNode!)
         self.scene?.rootNode.addChildNode(OutlineNode!)
     }
@@ -1404,36 +1346,11 @@ class View3D: SCNView,                          //Our main super class.
     /// Lock used when the board is rotating.
     var RotateLock = NSObject()
     
-    var RotateMe: SCNNode = SCNNode()
-    
-    func RotateContentsTo(_ Angle: Angles, Duration: Double = 0.33, Completed: @escaping () -> Void)
-    {
-        objc_sync_enter(RotateLock)
-        defer{objc_sync_exit(RotateLock)}
-        let Radians = Angle.rawValue * CGFloat.pi / 180.0
-        let RotateAction = SCNAction.rotateTo(x: 0.0, y: 0.0, z: Radians, duration: Duration)
-        RemoveMovingPiece()
-        BucketNode?.runAction(RotateAction, completionHandler: {Completed()})
-        BucketGridNode?.runAction(RotateAction)
-        MasterBlockNode?.runAction(RotateAction)
-        OutlineNode?.runAction(RotateAction)
-    }
-    
-    func RotateContentsToAbsolute(_ Angle: CGFloat, Duration: Double = 0.33, Completed: @escaping () -> Void)
-    {
-        objc_sync_enter(RotateLock)
-        defer{objc_sync_exit(RotateLock)}
-        let Radians = Angle * CGFloat.pi / 180.0
-        let RotateAction = SCNAction.rotateTo(x: 0.0, y: 0.0, z: Radians, duration: Duration)
-        RemoveMovingPiece()
-        BucketNode?.runAction(RotateAction, completionHandler: {Completed()})
-        BucketGridNode?.runAction(RotateAction)
-        MasterBlockNode?.runAction(RotateAction)
-        OutlineNode?.runAction(RotateAction)
-    }
-    
     /// Rotates the contents of the game (but not UI or falling piece) by the specified number of degrees.
-    /// - Note: This function uses a synchronous lock to make sure that when the board is rotating, other things don't happen to it.
+    /// - Note:
+    ///   - This function uses a synchronous lock to make sure that when the board is rotating, other things don't happen to it.
+    ///   - This function uses two rotational actions because for some reason, using the same action on different SCNNodes
+    ///     results in unpredictable and undesired behavior.
     /// - Parameter Right: If true, the contents are rotated clockwise. If false, counter-clockwise.
     /// - Parameter Duration: Duration in seconds the rotation should take.
     /// - Parameter Completed: Completion handler called at the end of the rotation.
@@ -1442,12 +1359,12 @@ class View3D: SCNView,                          //Our main super class.
         objc_sync_enter(RotateLock)
         defer{objc_sync_exit(RotateLock)}
         let DirectionalSign = CGFloat(Right ? -1.0 : 1.0)
-        RIndex = RIndex + 1
-        if RIndex > 3
+        RotationCardinalIndex = RotationCardinalIndex + 1
+        if RotationCardinalIndex > 3
         {
-            RIndex = 0
+            RotationCardinalIndex = 0
         }
-        let Radian = CGFloat((RIndex * 90)) * CGFloat.pi / 180.0
+        let Radian = CGFloat((RotationCardinalIndex * 90)) * CGFloat.pi / 180.0
         let ZRotation = DirectionalSign * Radian
         let ZRotationTo = DirectionalSign * HalfPi
         let RotateToAction = SCNAction.rotateBy(x: 0.0, y: 0.0, z: ZRotationTo, duration: Duration)
@@ -1462,11 +1379,9 @@ class View3D: SCNView,                          //Our main super class.
         BucketNode?.runAction(RotateToAction)
     }
     
-    var RIndex = 0
+    var RotationCardinalIndex = 0
     
     let HalfPi = CGFloat.pi / 2.0
-    
-    private var MasterSceneNode: SCNNode? = nil
     
     /// Rotates the contents of the game (but not UI or falling piece) by 90° right (clockwise).
     /// - Parameter Duration: Duration in seconds the rotation should take.
@@ -1482,74 +1397,6 @@ class View3D: SCNView,                          //Our main super class.
     func RotateContentsLeft(Duration: Double = 0.33, Completed: @escaping (() -> Void))
     {
         RotateContents(Right: false, Duration: Duration, Completed: Completed)
-    }
-    
-    /// 90° angles from 0 to 270 converted to radians (values generated in a Playground).
-    let Radians: [CGFloat] = [0.0, 1.5707963267948966, 3.141592653589793, 4.71238898038469, 3.141592653589793, 1.5707963267948966]
-    /// Holds the index into `Radians` for each rotation.
-    var RadialIndex = 0
-    
-    /// Rotates the contents of the game (but not UI or falling piece) in the direction indicated by the `Right` flag.
-    /// - Note: This function uses a synchronous lock to make sure that when the board is rotating, other things don't happen to it.
-    /// - Parameter Right: If true, the contents are rotated clockwise. If false, counter-clockwise.
-    /// - Parameter Duration: Duration in seconds the rotation should take.
-    func RotateContents(Right: Bool, Duration: Double = 1.0)
-    {
-        objc_sync_enter(RotateLock)
-        defer{objc_sync_exit(RotateLock)}
-        #if true
-        RadialIndex = RadialIndex + 1
-        if RadialIndex > Radians.count - 1
-        {
-            RadialIndex = 0
-        }
-        let DirectionalSign = CGFloat(Right ? -1.0 : 1.0)
-        let RotationalRadians = DirectionalSign * Radians[RadialIndex]
-        let RotateAction = SCNAction.rotateTo(x: 0.0, y: 0.0, z: RotationalRadians, duration: Duration,
-                                              usesShortestUnitArc: true)
-        RemoveMovingPiece()
-        if CurrentTheme!.RotateBucketGrid
-        {
-            BucketGridNode?.runAction(RotateAction)
-            OutlineNode?.runAction(RotateAction)
-        }
-        MasterBlockNode?.runAction(RotateAction)
-        BucketNode?.runAction(RotateAction)
-        #else
-        let DirectionalSign = CGFloat(Right ? -1.0 : 1.0)
-//        let ZRotation = DirectionalSign * 90.0 * CGFloat.pi / 180.0
-        let LAbsoluteZ = AbsoluteZ * CGFloat.pi / 180.0
-        AbsoluteZ = AbsoluteZ + CGFloat(Right ? 90.0 : -90.0)
-        if AbsoluteZ >= 360.0
-        {
-            AbsoluteZ = 0.0
-        }
-        let RotateAction = SCNAction.rotateTo(x: 0.0, y: 0.0, z: LAbsoluteZ, duration: Duration)
-//        let RotateAction = SCNAction.rotateBy(x: 0.0, y: 0.0, z: ZRotation, duration: Duration)
-        RemoveMovingPiece()
-        if CurrentTheme!.RotateBucketGrid
-        {
-            BucketGridNode?.runAction(RotateAction)
-            OutlineNode?.runAction(RotateAction)
-        }
-        MasterBlockNode?.runAction(RotateAction)
-        BucketNode?.runAction(RotateAction)
-        #endif
-    }
-    
-    var AbsoluteZ: CGFloat = 0.0
-    
-    /// Rotates the contents of the game (not only the game portion, not the text or other non-playable objects).
-    /// - Parameter Duration: Duration in seconds it takes to rotate the contents.
-    /// - Parameter RotationDirection: Determines whether the rotation is clockwise or counterclockwise.
-    /// - Parameter RotateCount: Determines how many times to rotate in the specified direction.
-    func RotateContents(Duration: Double = 0.33, RotationDirection: BucketRotationTypes, RotateCount: Int = 1)
-    {
-        let CallCount = RotateCount < 1 ? 1 : RotateCount
-        for _ in 0 ..< CallCount
-        {
-            RotateContents(Right: RotationDirection == .Right, Duration: Duration)
-        }
     }
     
     /// Sets the opacity level of the entire board to the specified value.
@@ -1692,14 +1539,6 @@ class View3D: SCNView,                          //Our main super class.
     
     /// Holds the current theme.
     var CurrentTheme: ThemeDescriptor2? = nil
-    
-    /// Set a (potentially but most likely) new theme. Changed visuals may take a frame or two (or more) to
-    /// take effect.
-    /// - Parameter ThemeID: The ID of the new theme.
-    func SetTheme(_ ThemeID: UUID)
-    {
-        //CurrentTheme = ThemeManager.ThemeFrom(ID: ThemeID)
-    }
     
     func Refresh()
     {
