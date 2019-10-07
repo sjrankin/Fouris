@@ -13,11 +13,61 @@ import SceneKit
 /// Extension for board removal and addition.
 extension View3D
 {
+    /// Hides, then shows the game board. The game board consists of the bucket and any bucket grids the user has set to visible.
+    /// - Note:
+    ///    - This method is intended as a workaround to the SCNAction.rotateBy bug - if the node is deleted, cumulative errors
+    ///      are not longer relevant.
+    ///    - When this function is running, there is a lock around accessing the bucket and grid nodes.
+    /// - Parameter HideMethod: The method to use to hide the board.
+    /// - Parameter HideDuration: The length of time to hide the board.
+    /// - Parameter ShowMethod: The method to use to show the board.
+    /// - Parameter ShowDuration: The length of time to show the board.
+    func ResetBoard(HideMethod: HideBoardMethods, HideDuration: Double,
+                    ShowMethod: ShowBoardMethods, ShowDuration: Double)
+    {
+        //objc_sync_enter(CanUseBucket)
+        var HidingMethod = HideMethod
+        HidingMethod = HidingMethod == .Random ? RandomHideMethod(Excluding: [.Random]) : HidingMethod
+        var ShowingMethod = ShowMethod
+        ShowingMethod = ShowingMethod == .Random ? RandomShowMethod(Excluding: [.Random]) : ShowingMethod
+        
+        switch HidingMethod
+        {
+            case .FadeOut:
+                let BucketFadeOut = SCNAction.fadeOut(duration: HideDuration)
+                let RemoveBucket = SCNAction.removeFromParentNode()
+                let BucketSequence = SCNAction.sequence([BucketFadeOut, RemoveBucket])
+                self.BucketNode?.runAction(BucketSequence)
+                let GridFadeOut = SCNAction.fadeOut(duration: HideDuration)
+                let RemoveGrid = SCNAction.removeFromParentNode()
+                let GridSequence = SCNAction.sequence([GridFadeOut, RemoveGrid])
+                BucketNode?.runAction(GridSequence,
+                                      completionHandler:
+                    {
+                        self.DrawGridInBucket(ShowGrid: self.CurrentTheme!.ShowBucketGrid,
+                                              DrawOutline: self.CurrentTheme!.ShowBucketGridOutline)
+                        let GridFadeIn = SCNAction.fadeIn(duration: ShowDuration)
+                        self.BucketGridNode?.runAction(GridFadeIn)
+                        self.CreateBucket()
+                        let BucketFadeIn = SCNAction.fadeIn(duration: ShowDuration)
+                        self.BucketNode?.runAction(BucketFadeIn,
+                        completionHandler:
+                            {
+                                objc_sync_exit(self.CanUseBucket)
+                        })
+                })
+            
+            default:
+            break
+        }
+    }
+    
     /// Create nodes for the visual game board.
     func CreateGameBoard()
     {
         CreateBucket()
-        CreateGrid()
+        DrawGridInBucket(ShowGrid: CurrentTheme!.ShowBucketGrid, DrawOutline: CurrentTheme!.ShowBucketGridOutline)
+        objc_sync_exit(CanUseBucket)
     }
     
     /// Remove nodes containing the visual game board.
@@ -49,10 +99,12 @@ extension View3D
     /// Hides the board with specified visual effects.
     /// - Note: This function will delete the grid, grid outline, and bucket nodes once the visual transition is finished.
     /// - Parameter Method: The method to use to hide the board. If this value is `.Disappear`, the game board is hidden with no delay.
+    ///                     If this value is `.Random`, a randomly select method is used.
     /// - Parameter Duration: The amount of time from start to finish of the visual effect to hide
     ///                       the board, in seconds.
     func HideBoard(Method: HideBoardMethods, Duration: Double)
     {
+        objc_sync_enter(CanUseBucket)
         var HideMethod = Method
         if HideMethod == .Random
         {
@@ -67,6 +119,8 @@ extension View3D
             
             case .FadeOut:
                 let FadeOut = SCNAction.fadeOut(duration: Duration)
+                let Remove = SCNAction.removeFromParentNode()
+                let Sequence = SCNAction.sequence([FadeOut, Remove])
                 BucketNode?.runAction(FadeOut,
                                       completionHandler:
                     {
