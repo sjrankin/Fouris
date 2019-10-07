@@ -1044,8 +1044,8 @@
 			children = (
 				17DCD7E92309436F0072B306 /* +CentralShapes.swift */,
 				17376356230A9C9C0050EB22 /* +BucketCleaner.swift */,
-				17B112FF232B693E007DFBD4 /* +3DDebug.swift */,
 				17E619A82348495B00C391CF /* +BoardRemoval.swift */,
+				17B112FF232B693E007DFBD4 /* +3DDebug.swift */,
 				17E619AA2348569800C391CF /* +TextButtons.swift */,
 			);
 			path = 3DViewExtensions;
