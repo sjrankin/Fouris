@@ -283,6 +283,11 @@ class MainViewController: UIViewController,
         SlideInCameraControlBox.layer.backgroundColor = ColorServer.CGColorFrom(ColorNames.WhiteSmoke)
         SlideInCameraControlBox.layer.borderColor = UIColor.black.cgColor
         ShowCameraControls()
+        HeartbeatGraphic.alpha = 0.0
+        if UserTheme!.ShowHeartbeat
+        {
+            StartHeartbeat()
+        }
     }
     
     /// Handle taps on the FPS text display. This toggles the contents from frames/second to instance seconds.
@@ -1929,10 +1934,68 @@ class MainViewController: UIViewController,
     {
         switch Field
         {
+            case .HeartbeatInterval:
+                if UserTheme!.ShowHeartbeat
+                {
+                    HeartbeatTimer?.invalidate()
+                    HeartbeatTimer = nil
+                StartHeartbeat()
+            }
+            
+            case .ShowHeartbeat:
+                let ShowHeartbeat = UserTheme!.ShowHeartbeat
+            if ShowHeartbeat
+            {
+                StartHeartbeat()
+            }
+            else
+            {
+                StopHeartbeat()
+            }
+            
             default:
                 print("Theme \(ThemeName) updated field \(Field)")
         }
     }
+    
+    func StartHeartbeat()
+    {
+        HeartbeatGraphic.isHidden = false
+        HeartbeatGraphic.alpha = 1.0
+        HeartbeatTimer = Timer.scheduledTimer(timeInterval: UserTheme!.HeartbeatInterval,
+                                              target: self, selector: #selector(HandleHeartbeat),
+                                              userInfo: nil, repeats: true)
+    }
+    
+    func StopHeartbeat()
+    {
+        HeartbeatGraphic.isHidden = true
+        HeartbeatGraphic.alpha = 0.0
+        HeartbeatTimer?.invalidate()
+        HeartbeatTimer = nil
+    }
+    
+    @objc func HandleHeartbeat()
+    {
+        OperationQueue.main.addOperation
+            {
+                if self.HeartbeatCount.isMultiple(of: 2)
+                {
+                    self.HeartbeatGraphic.tintColor = ColorServer.ColorFrom(ColorNames.Maroon)
+                    self.HeartbeatGraphic.setImage(UIImage(systemName: "heart"), for: UIControl.State.normal)
+                }
+                else
+                {
+                    self.HeartbeatGraphic.tintColor = ColorServer.ColorFrom(ColorNames.Maraschino)
+                    self.HeartbeatGraphic.setImage(UIImage(systemName: "heart.fill"), for: UIControl.State.normal)
+                }
+                self.HeartbeatCount = self.HeartbeatCount + 1
+        }
+    }
+    
+    var HeartbeatCount: Int = 0
+    
+    var HeartbeatTimer: Timer? = nil
     
     // MARK: Flame button handling.
     
@@ -2000,6 +2063,7 @@ class MainViewController: UIViewController,
     @IBOutlet weak var SlideInPauseButton: UIButton!
     @IBOutlet weak var TextVersionBox: UIView!
     @IBOutlet weak var VersionTextLabel: UILabel!
+    @IBOutlet weak var HeartbeatGraphic: UIButton!
     
     // MARK: Enum mappings.
     
