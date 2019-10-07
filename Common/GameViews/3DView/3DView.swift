@@ -1377,10 +1377,34 @@ class View3D: SCNView,                          //Our main super class.
         }
         MasterBlockNode?.runAction(RotateToAction)
         BucketNode?.runAction(RotateToAction)
+        if CurrentTheme!.EnableDebug
+        {
+            if CurrentTheme!.ChangeColorAfterRotation
+            {
+                ChangeBucketColor()
+            }
+        }
     }
     
+    /// Change the color of the bucket.
+    /// - Note:
+    ///   - Intended for use for debugging.
+    ///   - `BucketNode` and all of its children (if any) have the diffuse surface set.
+    func ChangeBucketColor()
+    {
+        let NewColor = ColorServer.DarkRandomColor()
+        BucketNode?.geometry?.firstMaterial?.diffuse.contents = NewColor
+        BucketNode?.enumerateChildNodes(
+            {
+                Node, _ in
+                Node.geometry?.firstMaterial?.diffuse.contents = NewColor
+        })
+    }
+    
+    /// Indicates which cardinal direction a rotation is.
     var RotationCardinalIndex = 0
     
+    /// 90° expressed in radians.
     let HalfPi = CGFloat.pi / 2.0
     
     /// Rotates the contents of the game (but not UI or falling piece) by 90° right (clockwise).
