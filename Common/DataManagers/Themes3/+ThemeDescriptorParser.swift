@@ -363,6 +363,26 @@ extension ThemeDescriptor2
                                         let ShowStat = XMLNode.GetAttributeNamed("ShowStatistics", InNode: DChild)!
                                         _ShowStatistics = Bool(ShowStat)!
                                     
+                                    case "Heartbeat":
+                                        let ShowBeat = XMLNode.GetAttributeNamed("Show", InNode: DChild)!
+                                    _ShowHeartbeat = Bool(ShowBeat)! 
+                                        let BeatInterval = XMLNode.GetAttributeNamed("Interval", InNode: DChild)!
+                                    _HeartbeatInterval = Double(BeatInterval)!
+                                    
+                                    case "Rotating4":
+                                        for RChild in DChild.Children
+                                        {
+                                            switch RChild.Name
+                                            {
+                                                case "Center":
+                                                    let ChangeColors = XMLNode.GetAttributeNamed("ChangeColorAfterRotation", InNode: RChild)!
+                                                _ChangeColorAfterRotation = Bool(ChangeColors)!
+                                                
+                                                default:
+                                                break
+                                            }
+                                    }
+                                    
                                     case "GridLines":
                                         for GridChild in DChild.Children
                                         {
