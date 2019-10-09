@@ -12,34 +12,47 @@ import UIKit
 /// Holds a collection of piece definitions.
 class PieceCollection: CustomStringConvertible, XMLDeserializeProtocol
 {
-    
-    
+    /// Default initializer.
     init()
     {
-        _Classes = [PieceClasses: [PieceDefinition]]()
     }
     
-    /// Holds a dictionary of piece class piece definitions.
-    private var _Classes: [PieceClasses: [PieceDefinition]] = [PieceClasses: [PieceDefinition]]()
-    /// Get or set the dictionary of piece class piece definitions.
-    public var Classes: [PieceClasses: [PieceDefinition]]
+    /// Holds the list of pieces in the collection.
+    private var _Pieces: [PieceDefinition] = [PieceDefinition]()
+    /// Get or set the list of pieces in the collection.
+    public var Pieces: [PieceDefinition]
     {
         get
         {
-            return _Classes
+            return _Pieces
         }
         set
         {
-            _Classes = newValue
+            _Pieces = newValue
         }
     }
     
-    /// Return a list of all pieces in the specified piece class.
-    /// - Parameter PieceClass: The piece class whose pieces will be returned.
-    /// - Returns: All pieces in the specified piece class. Nil if the piece class cannot be found.
-    public func GetPieceClass(_ PieceClass: PieceClasses) -> [PieceDefinition]?
+    /// Returns a list of all pieces of the specified piece class.
+    /// - Parameter PieceClass: The class of piece to return.
+    /// - Returns: All pieces of the specified class. If none found, an empty list is returned.
+    public func PiecesOfClass(_ PieceClass: PieceClasses) -> [PieceDefinition]
     {
-        return Classes[PieceClass]
+        return Pieces.filter{!($0.PieceClass == PieceClass)}
+    }
+    
+    /// Returns the piece with the specified ID.
+    /// - Parameter ID: The ID of the piece to return.
+    /// - Returns: The piece with the specified ID on success, nil if not found.
+    public func PieceWith(ID: UUID) -> PieceDefinition?
+    {
+        for SomePiece in Pieces
+        {
+            if SomePiece.ID == ID
+            {
+                return SomePiece
+            }
+        }
+        return nil
     }
     
     /// Holds the group/collection name.
@@ -75,121 +88,112 @@ class PieceCollection: CustomStringConvertible, XMLDeserializeProtocol
                 let CollectionName = XMLNode.GetAttributeNamed("GroupName", InNode: Node)!
                 _GroupName = CollectionName
                 _GroupNameID = Node.ID
-                for PieceNode in Node.Children
+                
+                for Child in Node.Children
                 {
-                    if PieceNode.Name == "PieceClass"
+                    if Child.Name == "Piece"
                     {
-                        let ClassName = XMLNode.GetAttributeNamed("Type", InNode: PieceNode)!
-                        let PieceClass = PieceClasses(rawValue: ClassName)!
-                        if _Classes[PieceClass] == nil
+                        let PieceName = XMLNode.GetAttributeNamed("Name", InNode: Child)!
+                        let RawPieceID = XMLNode.GetAttributeNamed("ID", InNode: Child)!
+                        //CanDelete must be an optional variable to test for its existence in the document.
+                        let CanDelete = XMLNode.GetAttributeNamed("CanDelete", InNode: Child)
+                        let ClassName = XMLNode.GetAttributeNamed("Class", InNode: Child)!
+                        let PieceID = UUID(uuidString: RawPieceID)!
+                        let NewPiece = PieceDefinition()
+                        NewPiece.ID = PieceID
+                        NewPiece.PieceClass = PieceClasses(rawValue: ClassName)!
+                        NewPiece.Name = PieceName
+                        if CanDelete != nil
                         {
-                            _Classes[PieceClass] = [PieceDefinition]()
+                            let CanReallyDelete: Bool = Bool(CanDelete!)!
+                            NewPiece.CanDelete = CanReallyDelete
                         }
-                        for Child in PieceNode.Children
+                        else
                         {
-                            if Child.Name == "Piece"
+                            NewPiece.CanDelete = false
+                        }
+                        _Pieces.append(NewPiece)
+                        for PieceChild in Child.Children
+                        {
+                            if PieceChild.NodeType == .Comment
                             {
-                                let PieceName = XMLNode.GetAttributeNamed("Name", InNode: Child)!
-                                let RawPieceID = XMLNode.GetAttributeNamed("ID", InNode: Child)!
-                                let CanDelete = XMLNode.GetAttributeNamed("CanDelete", InNode: Child)
-                                let PieceID = UUID(uuidString: RawPieceID)!
-                                let NewPiece = PieceDefinition()
-                                NewPiece.ID = PieceID
-                                NewPiece.PieceClass = PieceClass
-                                NewPiece.Name = PieceName
-                                if CanDelete != nil
-                                {
-                                    let CanReallyDelete: Bool = Bool(CanDelete!)!
-                                    NewPiece.CanDelete = CanReallyDelete
-                                }
-                                else
-                                {
-                                    NewPiece.CanDelete = false
-                                }
-                                _Classes[PieceClass]?.append(NewPiece)
-                                for PieceChild in Child.Children
-                                {
+                                let Comment = PieceChild.Value
+                                NewPiece.CommentNodes.append(Comment)
+                                continue
+                            }
+                            if !PieceChild.Value.isEmpty && PieceChild.Name == "Piece"
+                            {
+                                NewPiece.NodePayload = PieceChild.Value
+                            }
+                            switch PieceChild.Name
+                            {
+                                case "UserPiece":
+                                    let RawIsUser = XMLNode.GetAttributeNamed("UserDefined", InNode: PieceChild)!
+                                    let IsUser = Bool(RawIsUser)!
+                                    NewPiece.IsUserPiece = IsUser
+                                
+                                case "Geometry":
+                                    let RawThin = XMLNode.GetAttributeNamed("Thin", InNode: PieceChild)!
+                                    let IsThin = Int(RawThin)!
+                                    NewPiece.ThinOrientation = IsThin
+                                    let RawWide = XMLNode.GetAttributeNamed("Wide", InNode: PieceChild)!
+                                    let IsWide = Int(RawWide)!
+                                    NewPiece.WideOrientation = IsWide
+                                    let RawSymmetry = XMLNode.GetAttributeNamed("Symmetric", InNode: PieceChild)!
+                                    let RotationallySymmetric = Bool(RawSymmetry)!
+                                    NewPiece.RotationallySymmetric = RotationallySymmetric
+                                
+                                case "LogicalLocations":
                                     if PieceChild.NodeType == .Comment
                                     {
-                                        let Comment = PieceChild.Value
-                                        NewPiece.CommentNodes.append(Comment)
+                                        NewPiece.LocationComments.append(PieceChild.Value)
                                         continue
                                     }
-                                    if !PieceChild.Value.isEmpty && PieceChild.Name == "Piece"
+                                    if !PieceChild.Value.isEmpty
                                     {
-                                        NewPiece.NodePayload = PieceChild.Value
+                                        NewPiece.LocationPayload = PieceChild.Value
                                     }
-                                    switch PieceChild.Name
+                                    for Location in PieceChild.Children
                                     {
-                                        case "UserPiece":
-                                            let RawIsUser = XMLNode.GetAttributeNamed("UserDefined", InNode: PieceChild)!
-                                            let IsUser = Bool(RawIsUser)!
-                                            NewPiece.IsUserPiece = IsUser
-                                        
-                                        case "Geometry":
-                                            let RawThin = XMLNode.GetAttributeNamed("Thin", InNode: PieceChild)!
-                                            let IsThin = Int(RawThin)!
-                                            NewPiece.ThinOrientation = IsThin
-                                            let RawWide = XMLNode.GetAttributeNamed("Wide", InNode: PieceChild)!
-                                            let IsWide = Int(RawWide)!
-                                            NewPiece.WideOrientation = IsWide
-                                            let RawSymmetry = XMLNode.GetAttributeNamed("Symmetric", InNode: PieceChild)!
-                                            let RotationallySymmetric = Bool(RawSymmetry)!
-                                            NewPiece.RotationallySymmetric = RotationallySymmetric
-                                        
-                                        case "LogicalLocations":
-                                            if PieceChild.NodeType == .Comment
-                                            {
-                                                NewPiece.LocationComments.append(PieceChild.Value)
-                                                continue
-                                            }
-                                            if !PieceChild.Value.isEmpty
-                                            {
-                                                NewPiece.LocationPayload = PieceChild.Value
-                                            }
-                                            for Location in PieceChild.Children
-                                            {
-                                                let NewLocation = PieceBlockLocation()
-                                                let RawIndex = XMLNode.GetAttributeNamed("Index", InNode: Location)!
-                                                let Index = Int(RawIndex)!
-                                                NewLocation.Index = Index
-                                                let RawOrigin = XMLNode.GetAttributeNamed("IsOrigin", InNode: Location)!
-                                                let IsOrigin = Bool(RawOrigin)!
-                                                NewLocation.IsOrigin = IsOrigin
-                                                let RawXY = XMLNode.GetAttributeNamed("XY", InNode: Location)!
-                                                let Parts = RawXY.split(separator: ",", omittingEmptySubsequences: true)
-                                                if Parts.count != 2
-                                                {
-                                                    fatalError("Found invalid XY coordinate: \(RawXY)")
-                                                }
-                                                
-                                                var X: Int = 0
-                                                var Y: Int = 0
-                                                if let PX = Int(String(Parts[0]))
-                                                {
-                                                    X = PX
-                                                }
-                                                else
-                                                {
-                                                    fatalError("Invalid X coordinate in \(RawXY)")
-                                                }
-                                                if let PY = Int(String(Parts[1]))
-                                                {
-                                                    Y = PY
-                                                }
-                                                else
-                                                {
-                                                    fatalError("Invalid Y coordinate in \(RawXY)")
-                                                }
-                                                let NewPoint = Point3D<Int>(X, Y)
-                                                NewLocation.Coordinates = NewPoint
-                                                NewPiece.Locations.append(NewLocation)
+                                        let NewLocation = PieceBlockLocation()
+                                        let RawIndex = XMLNode.GetAttributeNamed("Index", InNode: Location)!
+                                        let Index = Int(RawIndex)!
+                                        NewLocation.Index = Index
+                                        let RawOrigin = XMLNode.GetAttributeNamed("IsOrigin", InNode: Location)!
+                                        let IsOrigin = Bool(RawOrigin)!
+                                        NewLocation.IsOrigin = IsOrigin
+                                        let RawXY = XMLNode.GetAttributeNamed("XY", InNode: Location)!
+                                        let Parts = RawXY.split(separator: ",", omittingEmptySubsequences: true)
+                                        if Parts.count != 2
+                                        {
+                                            fatalError("Found invalid XY coordinate: \(RawXY)")
                                         }
                                         
-                                        default:
-                                            break
-                                    }
+                                        var X: Int = 0
+                                        var Y: Int = 0
+                                        if let PX = Int(String(Parts[0]))
+                                        {
+                                            X = PX
+                                        }
+                                        else
+                                        {
+                                            fatalError("Invalid X coordinate in \(RawXY)")
+                                        }
+                                        if let PY = Int(String(Parts[1]))
+                                        {
+                                            Y = PY
+                                        }
+                                        else
+                                        {
+                                            fatalError("Invalid Y coordinate in \(RawXY)")
+                                        }
+                                        let NewPoint = Point3D<Int>(X, Y)
+                                        NewLocation.Coordinates = NewPoint
+                                        NewPiece.Locations.append(NewLocation)
                                 }
+                                
+                                default:
+                                    break
                             }
                         }
                     }
@@ -238,18 +242,10 @@ class PieceCollection: CustomStringConvertible, XMLDeserializeProtocol
         Working = Working + "<Pieces GroupName=" + Quoted(GroupName) + ">\n"
         
         let Indent = 4
-        for (SomeClass, Pieces) in Classes
+        
+        for SomePiece in Pieces
         {
-            let ClassName = "\(SomeClass)"
-            Working = Working + Spaces(Indent) + "<PieceClass Type=" + Quoted(ClassName) + ">\n"
-            
-            let NextDent = Indent + 4
-            for ClassPiece in Pieces
-            {
-                Working = Working + ClassPiece.ToString(IndentSize: NextDent)
-            }
-            
-            Working = Working + Spaces(Indent) + "</PieceClass>\n"
+            Working = Working + SomePiece.ToString(IndentSize: Indent + 4)
         }
         
         Working = Working + "</Pieces>"
