@@ -1,383 +1,366 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Pieces GroupName="Default">
-    <PieceClass Type="Standard">
-        <Piece Name="Bar" ID="f4510cca-262a-4018-bf29-04d703702d65">
-            <UserPiece UserDefined="false"/>
-            <Geometry Thin="0" Wide="0" Symmetric="false"/>
-            <LogicalLocations>
-                <Location Index="0" XY="0,-1" IsOrigin="false"/>
-                <Location Index="1" XY="0,0" IsOrigin="true"/>
-                <Location Index="2" XY="0,1" IsOrigin="false"/>
-                <Location Index="3" XY="0,2" IsOrigin="false"/>
-            </LogicalLocations>
-        </Piece>
-        
-        <Piece Name="Square" ID="b5bb59a5-b006-487b-a7b1-e0daf4a48810">
-            <UserPiece UserDefined="false"/>
-            <Geometry Thin="0" Wide="0" Symmetric="true"/>
-            <LogicalLocations>
-                <Location Index="0" XY="0,0" IsOrigin="true"/>
-                <Location Index="1" XY="1,0" IsOrigin="false"/>
-                <Location Index="2" XY="0,1" IsOrigin="false"/>
-                <Location Index="3" XY="1,1" IsOrigin="false"/>
-            </LogicalLocations>
-        </Piece>
-        
-        <Piece Name="S" ID="05463ade-1996-49e0-aae9-55cad6f8f605">
-            <UserPiece UserDefined="false"/>
-            <Geometry Thin="1" Wide="0" Symmetric="false"/>
-            <LogicalLocations>
-                <Location Index="0" XY="1,0" IsOrigin="false"/>
-                <Location Index="1" XY="1,1" IsOrigin="false"/>
-                <Location Index="2" XY="0,1" IsOrigin="true"/>
-                <Location Index="3" XY="0,2" IsOrigin="false"/>
-            </LogicalLocations>
-        </Piece>
-        
-        <Piece Name="Z" ID="0f2709f0-b5ed-4ed9-b8c5-d65a1e1d69e8">
-            <UserPiece UserDefined="false"/>
-            <Geometry Thin="1" Wide="0" Symmetric="false"/>
-            <LogicalLocations>
-                <Location Index="0" XY="0,0" IsOrigin="false"/>
-                <Location Index="1" XY="0,1" IsOrigin="false"/>
-                <Location Index="2" XY="1,1" IsOrigin="true"/>
-                <Location Index="3" XY="1,2" IsOrigin="false"/>
-            </LogicalLocations>
-        </Piece>
-        
-        <Piece Name="T" ID="26e5dee4-0cc5-492f-ab31-b5b810863bf4">
-            <UserPiece UserDefined="false"/>
-            <Geometry Thin="1" Wide="0" Symmetric="false"/>
-            <LogicalLocations>
-                <Location Index="0" XY="0,0" IsOrigin="true"/>
-                <Location Index="1" XY="1,0" IsOrigin="false"/>
-                <Location Index="2" XY="-1,0" IsOrigin="false"/>
-                <Location Index="3" XY="0,1" IsOrigin="false"/>
-            </LogicalLocations>
-        </Piece>
-        
-        <Piece Name="L" ID="69cc6259-93f2-438d-8a9f-e0e65ad6c841">
-            <UserPiece UserDefined="false"/>
-            <Geometry Thin="0" Wide="1" Symmetric="false"/>
-            <LogicalLocations>
-                <Location Index="0" XY="0,0" IsOrigin="false"/>
-                <Location Index="1" XY="0,1" IsOrigin="false"/>
-                <Location Index="2" XY="0,2" IsOrigin="true"/>
-                <Location Index="3" XY="1,2" IsOrigin="false"/>
-            </LogicalLocations>
-            
-        </Piece>
-        <Piece Name="backL" ID="7c73c10c-86b3-406d-964e-f12abbf914cc">
-            <UserPiece UserDefined="false"/>
-            <Geometry Thin="0" Wide="1" Symmetric="false"/>
-            <LogicalLocations>
-                <Location Index="0" XY="1,0" IsOrigin="false"/>
-                <Location Index="1" XY="1,1" IsOrigin="false"/>
-                <Location Index="2" XY="1,2" IsOrigin="true"/>
-                <Location Index="3" XY="0,2" IsOrigin="false"/>
-            </LogicalLocations>
-        </Piece>
-    </PieceClass>
-    
-    <PieceClass Type="NonStandard">
-        <Piece Name="Zig" ID="70b8f7ab-cd14-4f1a-a709-91bcfe24f3ab">
-            <UserPiece UserDefined="false"/>
-            <Geometry Thin="0" Wide="0" Symmetric="false"/>
-            <LogicalLocations>
-                <Location Index="0" XY="-1,-1" IsOrigin="false"/>
-                <Location Index="1" XY="0,-1" IsOrigin="false"/>
-                <Location Index="2" XY="0,0" IsOrigin="true"/>
-                <Location Index="3" XY="0,1" IsOrigin="false"/>
-                <Location Index="4" XY="1,1" IsOrigin="false"/>
-            </LogicalLocations>
-        </Piece>
-        <Piece Name="Zag" ID="85041a61-7d17-4434-a990-a033f38f34e0">
-            <UserPiece UserDefined="false"/>
-            <Geometry Thin="0" Wide="0" Symmetric="false"/>
-            <LogicalLocations>
-                <Location Index="0" XY="1,-1" IsOrigin="false"/>
-                <Location Index="1" XY="0,-1" IsOrigin="false"/>
-                <Location Index="2" XY="0,0" IsOrigin="true"/>
-                <Location Index="3" XY="0,1" IsOrigin="false"/>
-                <Location Index="4" XY="-1,1" IsOrigin="false"/>
-            </LogicalLocations>
-        </Piece>
-        <Piece Name="ShortL" ID="3ff7a6e9-21b4-4afc-b5ee-0ed4e6a63f1e">
-            <UserPiece UserDefined="false"/>
-            <Geometry Thin="0" Wide="0" Symmetric="false"/>
-            <LogicalLocations>
-                <Location Index="0" XY="0,-1" IsOrigin="false"/>
-                <Location Index="1" XY="0,0" IsOrigin="true"/>
-                <Location Index="2" XY="1,0" IsOrigin="false"/>
-            </LogicalLocations>
-        </Piece>
-        <Piece Name="ShortBackL" ID="35d6b1f9-b921-4d7f-8448-66b179b2ab7f">
-            <UserPiece UserDefined="false"/>
-            <Geometry Thin="0" Wide="0" Symmetric="false"/>
-            <LogicalLocations>
-                <Location Index="0" XY="0,-1" IsOrigin="false"/>
-                <Location Index="1" XY="0,0" IsOrigin="true"/>
-                <Location Index="2" XY="-1,0" IsOrigin="false"/>
-            </LogicalLocations>
-        </Piece>
-        <Piece Name="C" ID="49bf8a5b-6570-4456-90c8-2924811a6e59">
-            <UserPiece UserDefined="false"/>
-            <Geometry Thin="1" Wide="0" Symmetric="false"/>
-            <LogicalLocations>
-                <Location Index="0" XY="-1,1" IsOrigin="false"/>
-                <Location Index="1" XY="1,1" IsOrigin="false"/>
-                <Location Index="2" XY="-1,0" IsOrigin="false"/>
-                <Location Index="3" XY="0,0" IsOrigin="true"/>
-                <Location Index="4" XY="1,0" IsOrigin="false"/>
-            </LogicalLocations>
-        </Piece>
-        <Piece Name="Plus" ID="dec6e2c4-ff38-454a-ac56-dbe789267060">
-            <UserPiece UserDefined="false"/>
-            <Geometry Thin="0" Wide="0" Symmetric="true"/>
-            <LogicalLocations>
-                <Location Index="0" XY="0,-1" IsOrigin="false"/>
-                <Location Index="1" XY="0,1" IsOrigin="false"/>
-                <Location Index="2" XY="0,0" IsOrigin="true"/>
-                <Location Index="3" XY="-1,0" IsOrigin="false"/>
-                <Location Index="4" XY="1,0" IsOrigin="false"/>
-            </LogicalLocations>
-        </Piece>
-        <Piece Name="Corner" ID="09cbb902-d875-4337-8756-3e58bf408491">
-            <UserPiece UserDefined="false"/>
-            <Geometry Thin="0" Wide="0" Symmetric="false"/>
-            <LogicalLocations>
-                <Location Index="0" XY="0,-2" IsOrigin="false"/>
-                <Location Index="1" XY="0,-1" IsOrigin="false"/>
-                <Location Index="2" XY="0,0" IsOrigin="true"/>
-                <Location Index="3" XY="1,0" IsOrigin="false"/>
-                <Location Index="4" XY="2,0" IsOrigin="false"/>
-            </LogicalLocations>
-        </Piece>
-        <Piece Name="JoinedSquares" ID="2284f6ce-34c3-49de-b187-ba1220a0ac6f">
-            <UserPiece UserDefined="false"/>
-            <Geometry Thin="0" Wide="0" Symmetric="false"/>
-            <LogicalLocations>
-                <Location Index="0" XY="0,0" IsOrigin="true"/>
-                <Location Index="1" XY="-1,-1" IsOrigin="false"/>
-                <Location Index="2" XY="0,-1" IsOrigin="false"/>
-                <Location Index="3" XY="-1,0" IsOrigin="false"/>
-                <Location Index="4" XY="1,0" IsOrigin="false"/>
-                <Location Index="5" XY="0,1" IsOrigin="false"/>
-                <Location Index="6" XY="1,1" IsOrigin="false"/>
-            </LogicalLocations>
-        </Piece>
-    </PieceClass>
-    <PieceClass Type="WithGaps">
-        <Piece Name="EmptyBox" ID="88312d0c-73c1-4220-b91c-4d77e05236b1">
-            <UserPiece UserDefined="false"/>
-            <Geometry Thin="0" Wide="0" Symmetric="true"/>
-            <LogicalLocations>
-                <Location Index="0" XY="-1,-1" IsOrigin="false"/>
-                <Location Index="1" XY="1,-1" IsOrigin="false"/>
-                <Location Index="2" XY="-1,1" IsOrigin="false"/>
-                <Location Index="3" XY="1,1" IsOrigin="true"/>
-                <Location Index="4" XY="0,1" IsOrigin="false"/>
-                <Location Index="5" XY="1,0" IsOrigin="false"/>
-                <Location Index="6" XY="0,-1" IsOrigin="false"/>
-                <Location Index="7" XY="-1,0" IsOrigin="true"/>
-            </LogicalLocations>
-        </Piece>
-        <Piece Name="lowerI" ID="b69d3279-2e29-4eb1-924a-2e09187c21f9">
-            <UserPiece UserDefined="false"/>
-            <Geometry Thin="0" Wide="1" Symmetric="false"/>
-            <LogicalLocations>
-                <Location Index="0" XY="0,0" IsOrigin="false"/>
-                <Location Index="1" XY="0,2" IsOrigin="true"/>
-                <Location Index="2" XY="0,3" IsOrigin="false"/>
-            </LogicalLocations>
-        </Piece>
-        <Piece Name="EmptyDiamond" ID="99d6c473-36b5-4504-b6e4-faece29fbe28">
-            <UserPiece UserDefined="false"/>
-            <Geometry Thin="0" Wide="0" Symmetric="true"/>
-            <LogicalLocations>
-                <Location Index="0" XY="0,-1" IsOrigin="false"/>
-                <Location Index="1" XY="0,1" IsOrigin="false"/>
-                <Location Index="2" XY="-1,0" IsOrigin="true"/>
-                <Location Index="3" XY="1,0" IsOrigin="false"/>
-            </LogicalLocations>
-        </Piece>
-        <Piece Name="ParallelLines" ID="1b9fe0f0-9157-46da-b462-5222643bb1f7">
-            <UserPiece UserDefined="false"/>
-            <Geometry Thin="0" Wide="0" Symmetric="false"/>
-            <LogicalLocations>
-                <Location Index="0" XY="-1,-1" IsOrigin="false"/>
-                <Location Index="1" XY="-1,0" IsOrigin="true"/>
-                <Location Index="2" XY="-1,1" IsOrigin="false"/>
-                <Location Index="3" XY="1,-1" IsOrigin="false"/>
-                <Location Index="4" XY="1,0" IsOrigin="false"/>
-                <Location Index="5" XY="1,1" IsOrigin="false"/>
-            </LogicalLocations>
-        </Piece>
-    </PieceClass>
-    <PieceClass Type="BigPieces">
-        <Piece Name="BigBlock3x3" ID="936170f5-1300-4553-ada8-141bdfb4d85f">
-            <UserPiece UserDefined="false"/>
-            <Geometry Thin="0" Wide="0" Symmetric="true"/>
-            <LogicalLocations>
-                <Location Index="0" XY="-1,-1" IsOrigin="false"/>
-                <Location Index="1" XY="0,-1" IsOrigin="false"/>
-                <Location Index="2" XY="1,-1" IsOrigin="false"/>
-                <Location Index="3" XY="-1,0" IsOrigin="false"/>
-                <Location Index="4" XY="0,0" IsOrigin="true"/>
-                <Location Index="5" XY="1,0" IsOrigin="false"/>
-                <Location Index="6" XY="-1,1" IsOrigin="false"/>
-                <Location Index="7" XY="0,1" IsOrigin="false"/>
-                <Location Index="8" XY="1,1" IsOrigin="false"/>
-            </LogicalLocations>
-        </Piece>
-        <Piece Name="BigBlock4x4" ID="494c7a96-060d-4c81-8f9a-609ae0e71a5e">
-            <UserPiece UserDefined="false"/>
-            <Geometry Thin="0" Wide="0" Symmetric="false"/>
-            <LogicalLocations>
-                <Location Index="0" XY="-2,-2" IsOrigin="false"/>
-                <Location Index="1" XY="-1,-2" IsOrigin="false"/>
-                <Location Index="2" XY="0,-2" IsOrigin="false"/>
-                <Location Index="3" XY="1,-2" IsOrigin="false"/>
-                <Location Index="4" XY="-2,-1" IsOrigin="false"/>
-                <Location Index="5" XY="-1,-1" IsOrigin="false"/>
-                <Location Index="6" XY="0,-1" IsOrigin="false"/>
-                <Location Index="7" XY="1,-1" IsOrigin="false"/>
-                <Location Index="8" XY="-2,0" IsOrigin="false"/>
-                <Location Index="9" XY="-1,0" IsOrigin="false"/>
-                <Location Index="10" XY="0,0" IsOrigin="true"/>
-                <Location Index="11" XY="1,0" IsOrigin="false"/>
-                <Location Index="12" XY="-2,1" IsOrigin="false"/>
-                <Location Index="13" XY="-1,1" IsOrigin="true"/>
-                <Location Index="14" XY="0,1" IsOrigin="false"/>
-                <Location Index="15" XY="1,1" IsOrigin="false"/>
-            </LogicalLocations>
-        </Piece>
-        <Piece Name="Sweeper" ID="97b5a353-acfa-43dc-9deb-7c8aa0f32000">
-            <UserPiece UserDefined="false"/>
-            <Geometry Thin="1" Wide="0" Symmetric="false"/>
-            <LogicalLocations>
-                <Location Index="0" XY="0,0" IsOrigin="false"/>
-                <Location Index="1" XY="1,0" IsOrigin="false"/>
-                <Location Index="2" XY="2,0" IsOrigin="true"/>
-                <Location Index="3" XY="3,0" IsOrigin="false"/>
-                <Location Index="4" XY="4,0" IsOrigin="false"/>
-            </LogicalLocations>
-        </Piece>
-        <Piece Name="CapitalI" ID="c540885c-1b60-4577-af7b-f5d309e73d84">
-            <UserPiece UserDefined="false"/>
-            <Geometry Thin="0" Wide="1" Symmetric="false"/>
-            <LogicalLocations>
-                <Location Index="0" XY="-1,-2" IsOrigin="false"/>
-                <Location Index="1" XY="0,-2" IsOrigin="false"/>
-                <Location Index="2" XY="1,-2" IsOrigin="false"/>
-                <Location Index="3" XY="-1,2" IsOrigin="false"/>
-                <Location Index="4" XY="0,2" IsOrigin="false"/>
-                <Location Index="5" XY="1,2" IsOrigin="false"/>
-                <Location Index="6" XY="0,-1" IsOrigin="false"/>
-                <Location Index="7" XY="0,0" IsOrigin="true"/>
-                <Location Index="8" XY="0,1" IsOrigin="false"/>
-            </LogicalLocations>
-        </Piece>
-        <Piece Name="CapitalO" ID="0e7135e2-6bf7-457d-add4-63a0f1b57560">
-            <UserPiece UserDefined="false"/>
-            <Geometry Thin="0" Wide="1" Symmetric="false">
-                <LogicalLocations>
-                    <Location Index="0" XY="0,2" IsOrigin="false"/>
-                    <Location Index="1" XY="1,2" IsOrigin="false"/>
-                    <Location Index="2" XY="-1,1" IsOrigin="true"/>
-                    <Location Index="3" XY="-1,0" IsOrigin="false"/>
-                    <Location Index="4" XY="-1,-1" IsOrigin="false"/>
-                    <Location Index="5" XY="2,1" IsOrigin="false"/>
-                    <Location Index="6" XY="2,0" IsOrigin="false"/>
-                    <Location Index="7" XY="2,-1" IsOrigin="false"/>
-                    <Location Index="8" XY="0,-2" IsOrigin="false"/>
-                    <Location Index="9" XY="1,-2" IsOrigin="false"/>
-                </LogicalLocations>
-            </Piece>
-        </PieceClass>
-        <PieceClass Type="Malicious">
-            <Piece Name="Diagonal" ID="63285186-a589-4185-acd6-1e6e8c1368ed">
-                <UserPiece UserDefined="false"/>
-                <Geometry Thin="0" Wide="0" Symmetric="false"/>
-                <LogicalLocations>
-                    <Location Index="0" XY="-1,-1" IsOrigin="false"/>
-                    <Location Index="1" XY="0,0" IsOrigin="true"/>
-                    <Location Index="2" XY="1,1" IsOrigin="false"/>
-                </LogicalLocations>
-            </Piece>
-            <Piece Name="X" ID="8ef520af-17e0-4011-8579-a92a9d520c5a">
-                <UserPiece UserDefined="false"/>
-                <Geometry Thin="0" Wide="0" Symmetric="true"/>
-                <LogicalLocations>
-                    <Location Index="0" XY="-1,-1" IsOrigin="false"/>
-                    <Location Index="1" XY="1,-1" IsOrigin="false"/>
-                    <Location Index="2" XY="0,0" IsOrigin="true"/>
-                    <Location Index="3" XY="1,1" IsOrigin="false"/>
-                    <Location Index="4" XY="-1,1" IsOrigin="false"/>
-                </LogicalLocations>
-            </Piece>
-            <Piece Name="BigGap" ID="007c0348-e287-43cc-8901-bfce604f796b">
-                <UserPiece UserDefined="false"/>
-                <Geometry Thin="0" Wide="0" Symmetric="false"/>
-                <LogicalLocations>
-                    <Location Index="0" XY="0,-1" IsOrigin="false"/>
-                    <Location Index="1" XY="0,2" IsOrigin="false"/>
-                    <Location Index="2" XY="1,-1" IsOrigin="false"/>
-                    <Location Index="3" XY="1,2" IsOrigin="false"/>
-                    <Location Index="4" XY="-1,-1" IsOrigin="false"/>
-                    <Location Index="5" XY="-1,0" IsOrigin="true"/>
-                    <Location Index="6" XY="-1,1" IsOrigin="false"/>
-                    <Location Index="7" XY="-1,2" IsOrigin="false"/>
-                    <Location Index="8" XY="2,-1" IsOrigin="false"/>
-                    <Location Index="9" XY="2,0" IsOrigin="false"/>
-                    <Location Index="10" XY="2,1" IsOrigin="false"/>
-                    <Location Index="11" XY="2,2" IsOrigin="false"/>
-                </LogicalLocations>
-            </Piece>
-            <Piece Name="LongGap" ID="742b73be-56ad-4f36-903c-dbd160428d96">
-                <UserPiece UserDefined="false"/>
-                <Geometry Thin="0" Wide="1" Symmetric="false"/>
-                <LogicalLocations>
-                    <Location Index="0" XY="0,-1" IsOrigin="false"/>
-                    <Location Index="1" XY="0,2" IsOrigin="false"/>
-                    <Location Index="2" XY="-1,-1" IsOrigin="false"/>
-                    <Location Index="3" XY="-1,0" IsOrigin="true"/>
-                    <Location Index="4" XY="-1,1" IsOrigin="false"/>
-                    <Location Index="5" XY="-1,2" IsOrigin="false"/>
-                    <Location Index="6" XY="1,-1" IsOrigin="false"/>
-                    <Location Index="7" XY="1,0" IsOrigin="false"/>
-                    <Location Index="8" XY="1,1" IsOrigin="false"/>
-                    <Location Index="9" XY="1,2" IsOrigin="false"/>
-                </LogicalLocations>
-            </Piece>
-            <Piece Name="LongDiagonal" ID="5d87accc-3edf-4c7f-b226-d83254d499ad">
-                <UserPiece UserDefined="false"/>
-                <Geometry Thin="0" Wide="0" Symmetric="false"/>
-                <LogicalLocations>
-                    <Location Index="0" XY="-1,-1" IsOrigin="false"/>
-                    <Location Index="1" XY="0,0" IsOrigin="true"/>
-                    <Location Index="2" XY="1,1" IsOrigin="false"/>
-                    <Location Index="3" XY="2,2" IsOrigin="false"/>
-                </LogicalLocations>
-            </Piece>
-            <Piece Name="V" ID="4dbea417-4654-459b-9aaf-9bcde56720be">
-                <UserPiece UserDefined="false"/>
-                <Geometry Thin="1" Wide="0" Symmetric="false"/>
-                <LogicalLocations>
-                    <Location Index="0" XY="-1,1" IsOrigin="false"/>
-                    <Location Index="1" XY="0,0" IsOrigin="false"/>
-                    <Location Index="2" XY="1,-1" IsOrigin="true"/>
-                    <Location Index="3" XY="2,0" IsOrigin="false"/>
-                    <Location Index="4" XY="3,1" IsOrigin="false"/>
-                </LogicalLocations>
-            </Piece>
-            <Piece Name="FarApart" ID="6a2b5de2-4336-4927-affa-980a89c061a6">
-                <UserPiece UserDefined="false"/>
-                <Geometry Thin="1" Wide="0" Symmetric="false"/>
-                <LogicalLocations>
-                    <Location Index="0" XY="-3,0" IsOrigin="false"/>
-                    <Location Index="1" XY="2,1" IsOrigin="true"/>
-                </LogicalLocations>
-            </Piece>
-        </PieceClass>
-    </Pieces>
+    <Piece Name="Bar" ID="f4510cca-262a-4018-bf29-04d703702d65" Class="Standard">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="0" Wide="0" Symmetric="false"/>
+        <LogicalLocations>
+            <Location Index="0" XY="0,-1" IsOrigin="false"/>
+            <Location Index="1" XY="0,0" IsOrigin="true"/>
+            <Location Index="2" XY="0,1" IsOrigin="false"/>
+            <Location Index="3" XY="0,2" IsOrigin="false"/>
+        </LogicalLocations>
+    </Piece>
+    <Piece Name="Square" ID="b5bb59a5-b006-487b-a7b1-e0daf4a48810" Class="Standard">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="0" Wide="0" Symmetric="true"/>
+        <LogicalLocations>
+            <Location Index="0" XY="0,0" IsOrigin="true"/>
+            <Location Index="1" XY="1,0" IsOrigin="false"/>
+            <Location Index="2" XY="0,1" IsOrigin="false"/>
+            <Location Index="3" XY="1,1" IsOrigin="false"/>
+        </LogicalLocations>
+    </Piece>
+    <Piece Name="S" ID="05463ade-1996-49e0-aae9-55cad6f8f605" Class="Standard">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="1" Wide="0" Symmetric="false"/>
+        <LogicalLocations>
+            <Location Index="0" XY="1,0" IsOrigin="false"/>
+            <Location Index="1" XY="1,1" IsOrigin="false"/>
+            <Location Index="2" XY="0,1" IsOrigin="true"/>
+            <Location Index="3" XY="0,2" IsOrigin="false"/>
+        </LogicalLocations>
+    </Piece>
+    <Piece Name="Z" ID="0f2709f0-b5ed-4ed9-b8c5-d65a1e1d69e8" Class="Standard">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="1" Wide="0" Symmetric="false"/>
+        <LogicalLocations>
+            <Location Index="0" XY="0,0" IsOrigin="false"/>
+            <Location Index="1" XY="0,1" IsOrigin="false"/>
+            <Location Index="2" XY="1,1" IsOrigin="true"/>
+            <Location Index="3" XY="1,2" IsOrigin="false"/>
+        </LogicalLocations>
+    </Piece>
+    <Piece Name="T" ID="26e5dee4-0cc5-492f-ab31-b5b810863bf4" Class="Standard">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="1" Wide="0" Symmetric="false"/>
+        <LogicalLocations>
+            <Location Index="0" XY="0,0" IsOrigin="true"/>
+            <Location Index="1" XY="1,0" IsOrigin="false"/>
+            <Location Index="2" XY="-1,0" IsOrigin="false"/>
+            <Location Index="3" XY="0,1" IsOrigin="false"/>
+        </LogicalLocations>
+    </Piece>
+    <Piece Name="L" ID="69cc6259-93f2-438d-8a9f-e0e65ad6c841" Class="Standard">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="0" Wide="1" Symmetric="false"/>
+        <LogicalLocations>
+            <Location Index="0" XY="0,0" IsOrigin="false"/>
+            <Location Index="1" XY="0,1" IsOrigin="false"/>
+            <Location Index="2" XY="0,2" IsOrigin="true"/>
+            <Location Index="3" XY="1,2" IsOrigin="false"/>
+        </LogicalLocations>
+    </Piece>
+    <Piece Name="backL" ID="7c73c10c-86b3-406d-964e-f12abbf914cc" Class="Standard">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="0" Wide="1" Symmetric="false"/>
+        <LogicalLocations>
+            <Location Index="0" XY="1,0" IsOrigin="false"/>
+            <Location Index="1" XY="1,1" IsOrigin="false"/>
+            <Location Index="2" XY="1,2" IsOrigin="true"/>
+            <Location Index="3" XY="0,2" IsOrigin="false"/>
+        </LogicalLocations>
+    </Piece>
+    <Piece Name="Zig" ID="70b8f7ab-cd14-4f1a-a709-91bcfe24f3ab" Class="NonStandard">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="0" Wide="0" Symmetric="false"/>
+        <LogicalLocations>
+            <Location Index="0" XY="-1,-1" IsOrigin="false"/>
+            <Location Index="1" XY="0,-1" IsOrigin="false"/>
+            <Location Index="2" XY="0,0" IsOrigin="true"/>
+            <Location Index="3" XY="0,1" IsOrigin="false"/>
+            <Location Index="4" XY="1,1" IsOrigin="false"/>
+        </LogicalLocations>
+    </Piece>
+    <Piece Name="Zag" ID="85041a61-7d17-4434-a990-a033f38f34e0" Class="NonStandard">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="0" Wide="0" Symmetric="false"/>
+        <LogicalLocations>
+            <Location Index="0" XY="1,-1" IsOrigin="false"/>
+            <Location Index="1" XY="0,-1" IsOrigin="false"/>
+            <Location Index="2" XY="0,0" IsOrigin="true"/>
+            <Location Index="3" XY="0,1" IsOrigin="false"/>
+            <Location Index="4" XY="-1,1" IsOrigin="false"/>
+        </LogicalLocations>
+    </Piece>
+    <Piece Name="ShortL" ID="3ff7a6e9-21b4-4afc-b5ee-0ed4e6a63f1e" Class="NonStandard">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="0" Wide="0" Symmetric="false"/>
+        <LogicalLocations>
+            <Location Index="0" XY="0,-1" IsOrigin="false"/>
+            <Location Index="1" XY="0,0" IsOrigin="true"/>
+            <Location Index="2" XY="1,0" IsOrigin="false"/>
+        </LogicalLocations>
+    </Piece>
+    <Piece Name="ShortBackL" ID="35d6b1f9-b921-4d7f-8448-66b179b2ab7f" Class="NonStandard">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="0" Wide="0" Symmetric="false"/>
+        <LogicalLocations>
+            <Location Index="0" XY="0,-1" IsOrigin="false"/>
+            <Location Index="1" XY="0,0" IsOrigin="true"/>
+            <Location Index="2" XY="-1,0" IsOrigin="false"/>
+        </LogicalLocations>
+    </Piece>
+    <Piece Name="C" ID="49bf8a5b-6570-4456-90c8-2924811a6e59" Class="NonStandard">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="1" Wide="0" Symmetric="false"/>
+        <LogicalLocations>
+            <Location Index="0" XY="-1,1" IsOrigin="false"/>
+            <Location Index="1" XY="1,1" IsOrigin="false"/>
+            <Location Index="2" XY="-1,0" IsOrigin="false"/>
+            <Location Index="3" XY="0,0" IsOrigin="true"/>
+            <Location Index="4" XY="1,0" IsOrigin="false"/>
+        </LogicalLocations>
+    </Piece>
+    <Piece Name="Plus" ID="dec6e2c4-ff38-454a-ac56-dbe789267060" Class="NonStandard">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="0" Wide="0" Symmetric="true"/>
+        <LogicalLocations>
+            <Location Index="0" XY="0,-1" IsOrigin="false"/>
+            <Location Index="1" XY="0,1" IsOrigin="false"/>
+            <Location Index="2" XY="0,0" IsOrigin="true"/>
+            <Location Index="3" XY="-1,0" IsOrigin="false"/>
+            <Location Index="4" XY="1,0" IsOrigin="false"/>
+        </LogicalLocations>
+    </Piece>
+    <Piece Name="Corner" ID="09cbb902-d875-4337-8756-3e58bf408491" Class="NonStandard">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="0" Wide="0" Symmetric="false"/>
+        <LogicalLocations>
+            <Location Index="0" XY="0,-2" IsOrigin="false"/>
+            <Location Index="1" XY="0,-1" IsOrigin="false"/>
+            <Location Index="2" XY="0,0" IsOrigin="true"/>
+            <Location Index="3" XY="1,0" IsOrigin="false"/>
+            <Location Index="4" XY="2,0" IsOrigin="false"/>
+        </LogicalLocations>
+    </Piece>
+    <Piece Name="JoinedSquares" ID="2284f6ce-34c3-49de-b187-ba1220a0ac6f" Class="NonStandard">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="0" Wide="0" Symmetric="false"/>
+        <LogicalLocations>
+            <Location Index="0" XY="0,0" IsOrigin="true"/>
+            <Location Index="1" XY="-1,-1" IsOrigin="false"/>
+            <Location Index="2" XY="0,-1" IsOrigin="false"/>
+            <Location Index="3" XY="-1,0" IsOrigin="false"/>
+            <Location Index="4" XY="1,0" IsOrigin="false"/>
+            <Location Index="5" XY="0,1" IsOrigin="false"/>
+            <Location Index="6" XY="1,1" IsOrigin="false"/>
+        </LogicalLocations>
+    </Piece>
+    <Piece Name="EmptyBox" ID="88312d0c-73c1-4220-b91c-4d77e05236b1" Class="WithGaps">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="0" Wide="0" Symmetric="true"/>
+        <LogicalLocations>
+            <Location Index="0" XY="-1,-1" IsOrigin="false"/>
+            <Location Index="1" XY="1,-1" IsOrigin="false"/>
+            <Location Index="2" XY="-1,1" IsOrigin="false"/>
+            <Location Index="3" XY="1,1" IsOrigin="true"/>
+            <Location Index="4" XY="0,1" IsOrigin="false"/>
+            <Location Index="5" XY="1,0" IsOrigin="false"/>
+            <Location Index="6" XY="0,-1" IsOrigin="false"/>
+            <Location Index="7" XY="-1,0" IsOrigin="true"/>
+        </LogicalLocations>
+    </Piece>
+    <Piece Name="lowerI" ID="b69d3279-2e29-4eb1-924a-2e09187c21f9" Class="WithGaps">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="0" Wide="1" Symmetric="false"/>
+        <LogicalLocations>
+            <Location Index="0" XY="0,0" IsOrigin="false"/>
+            <Location Index="1" XY="0,2" IsOrigin="true"/>
+            <Location Index="2" XY="0,3" IsOrigin="false"/>
+        </LogicalLocations>
+    </Piece>
+    <Piece Name="EmptyDiamond" ID="99d6c473-36b5-4504-b6e4-faece29fbe28" Class="WithGaps">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="0" Wide="0" Symmetric="true"/>
+        <LogicalLocations>
+            <Location Index="0" XY="0,-1" IsOrigin="false"/>
+            <Location Index="1" XY="0,1" IsOrigin="false"/>
+            <Location Index="2" XY="-1,0" IsOrigin="true"/>
+            <Location Index="3" XY="1,0" IsOrigin="false"/>
+        </LogicalLocations>
+    </Piece>
+    <Piece Name="ParallelLines" ID="1b9fe0f0-9157-46da-b462-5222643bb1f7" Class="WithGaps">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="0" Wide="0" Symmetric="false"/>
+        <LogicalLocations>
+            <Location Index="0" XY="-1,-1" IsOrigin="false"/>
+            <Location Index="1" XY="-1,0" IsOrigin="true"/>
+            <Location Index="2" XY="-1,1" IsOrigin="false"/>
+            <Location Index="3" XY="1,-1" IsOrigin="false"/>
+            <Location Index="4" XY="1,0" IsOrigin="false"/>
+            <Location Index="5" XY="1,1" IsOrigin="false"/>
+        </LogicalLocations>
+    </Piece>
+    <Piece Name="BigBlock3x3" ID="936170f5-1300-4553-ada8-141bdfb4d85f" Class="BigPieces">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="0" Wide="0" Symmetric="true"/>
+        <LogicalLocations>
+            <Location Index="0" XY="-1,-1" IsOrigin="false"/>
+            <Location Index="1" XY="0,-1" IsOrigin="false"/>
+            <Location Index="2" XY="1,-1" IsOrigin="false"/>
+            <Location Index="3" XY="-1,0" IsOrigin="false"/>
+            <Location Index="4" XY="0,0" IsOrigin="true"/>
+            <Location Index="5" XY="1,0" IsOrigin="false"/>
+            <Location Index="6" XY="-1,1" IsOrigin="false"/>
+            <Location Index="7" XY="0,1" IsOrigin="false"/>
+            <Location Index="8" XY="1,1" IsOrigin="false"/>
+        </LogicalLocations>
+    </Piece>
+    <Piece Name="BigBlock4x4" ID="494c7a96-060d-4c81-8f9a-609ae0e71a5e" Class="BigPieces">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="0" Wide="0" Symmetric="false"/>
+        <LogicalLocations>
+            <Location Index="0" XY="-2,-2" IsOrigin="false"/>
+            <Location Index="1" XY="-1,-2" IsOrigin="false"/>
+            <Location Index="2" XY="0,-2" IsOrigin="false"/>
+            <Location Index="3" XY="1,-2" IsOrigin="false"/>
+            <Location Index="4" XY="-2,-1" IsOrigin="false"/>
+            <Location Index="5" XY="-1,-1" IsOrigin="false"/>
+            <Location Index="6" XY="0,-1" IsOrigin="false"/>
+            <Location Index="7" XY="1,-1" IsOrigin="false"/>
+            <Location Index="8" XY="-2,0" IsOrigin="false"/>
+            <Location Index="9" XY="-1,0" IsOrigin="false"/>
+            <Location Index="10" XY="0,0" IsOrigin="true"/>
+            <Location Index="11" XY="1,0" IsOrigin="false"/>
+            <Location Index="12" XY="-2,1" IsOrigin="false"/>
+            <Location Index="13" XY="-1,1" IsOrigin="true"/>
+            <Location Index="14" XY="0,1" IsOrigin="false"/>
+            <Location Index="15" XY="1,1" IsOrigin="false"/>
+        </LogicalLocations>
+    </Piece>
+    <Piece Name="Sweeper" ID="97b5a353-acfa-43dc-9deb-7c8aa0f32000" Class="BigPieces">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="1" Wide="0" Symmetric="false"/>
+        <LogicalLocations>
+            <Location Index="0" XY="0,0" IsOrigin="false"/>
+            <Location Index="1" XY="1,0" IsOrigin="false"/>
+            <Location Index="2" XY="2,0" IsOrigin="true"/>
+            <Location Index="3" XY="3,0" IsOrigin="false"/>
+            <Location Index="4" XY="4,0" IsOrigin="false"/>
+        </LogicalLocations>
+    </Piece>
+    <Piece Name="CapitalI" ID="c540885c-1b60-4577-af7b-f5d309e73d84" Class="BigPieces">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="0" Wide="1" Symmetric="false"/>
+        <LogicalLocations>
+            <Location Index="0" XY="-1,-2" IsOrigin="false"/>
+            <Location Index="1" XY="0,-2" IsOrigin="false"/>
+            <Location Index="2" XY="1,-2" IsOrigin="false"/>
+            <Location Index="3" XY="-1,2" IsOrigin="false"/>
+            <Location Index="4" XY="0,2" IsOrigin="false"/>
+            <Location Index="5" XY="1,2" IsOrigin="false"/>
+            <Location Index="6" XY="0,-1" IsOrigin="false"/>
+            <Location Index="7" XY="0,0" IsOrigin="true"/>
+            <Location Index="8" XY="0,1" IsOrigin="false"/>
+        </LogicalLocations>
+    </Piece>
+    <Piece Name="CapitalO" ID="0e7135e2-6bf7-457d-add4-63a0f1b57560" Class="BigPieces">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="0" Wide="1" Symmetric="false"/>
+        <LogicalLocations>
+            <Location Index="0" XY="0,2" IsOrigin="false"/>
+            <Location Index="1" XY="1,2" IsOrigin="false"/>
+            <Location Index="2" XY="-1,1" IsOrigin="true"/>
+            <Location Index="3" XY="-1,0" IsOrigin="false"/>
+            <Location Index="4" XY="-1,-1" IsOrigin="false"/>
+            <Location Index="5" XY="2,1" IsOrigin="false"/>
+            <Location Index="6" XY="2,0" IsOrigin="false"/>
+            <Location Index="7" XY="2,-1" IsOrigin="false"/>
+            <Location Index="8" XY="0,-2" IsOrigin="false"/>
+            <Location Index="9" XY="1,-2" IsOrigin="false"/>
+        </LogicalLocations>
+    </Piece>
+    <Piece Name="Diagonal" ID="63285186-a589-4185-acd6-1e6e8c1368ed" Class="Malicious">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="0" Wide="0" Symmetric="false"/>
+        <LogicalLocations>
+            <Location Index="0" XY="-1,-1" IsOrigin="false"/>
+            <Location Index="1" XY="0,0" IsOrigin="true"/>
+            <Location Index="2" XY="1,1" IsOrigin="false"/>
+        </LogicalLocations>
+    </Piece>
+    <Piece Name="X" ID="8ef520af-17e0-4011-8579-a92a9d520c5a" Class="Malicious">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="0" Wide="0" Symmetric="true"/>
+        <LogicalLocations>
+            <Location Index="0" XY="-1,-1" IsOrigin="false"/>
+            <Location Index="1" XY="1,-1" IsOrigin="false"/>
+            <Location Index="2" XY="0,0" IsOrigin="true"/>
+            <Location Index="3" XY="1,1" IsOrigin="false"/>
+            <Location Index="4" XY="-1,1" IsOrigin="false"/>
+        </LogicalLocations>
+    </Piece>
+    <Piece Name="BigGap" ID="007c0348-e287-43cc-8901-bfce604f796b" Class="Malicious">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="0" Wide="0" Symmetric="false"/>
+        <LogicalLocations>
+            <Location Index="0" XY="0,-1" IsOrigin="false"/>
+            <Location Index="1" XY="0,2" IsOrigin="false"/>
+            <Location Index="2" XY="1,-1" IsOrigin="false"/>
+            <Location Index="3" XY="1,2" IsOrigin="false"/>
+            <Location Index="4" XY="-1,-1" IsOrigin="false"/>
+            <Location Index="5" XY="-1,0" IsOrigin="true"/>
+            <Location Index="6" XY="-1,1" IsOrigin="false"/>
+            <Location Index="7" XY="-1,2" IsOrigin="false"/>
+            <Location Index="8" XY="2,-1" IsOrigin="false"/>
+            <Location Index="9" XY="2,0" IsOrigin="false"/>
+            <Location Index="10" XY="2,1" IsOrigin="false"/>
+            <Location Index="11" XY="2,2" IsOrigin="false"/>
+        </LogicalLocations>
+    </Piece>
+    <Piece Name="LongGap" ID="742b73be-56ad-4f36-903c-dbd160428d96" Class="Malicious">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="0" Wide="1" Symmetric="false"/>
+        <LogicalLocations>
+            <Location Index="0" XY="0,-1" IsOrigin="false"/>
+            <Location Index="1" XY="0,2" IsOrigin="false"/>
+            <Location Index="2" XY="-1,-1" IsOrigin="false"/>
+            <Location Index="3" XY="-1,0" IsOrigin="true"/>
+            <Location Index="4" XY="-1,1" IsOrigin="false"/>
+            <Location Index="5" XY="-1,2" IsOrigin="false"/>
+            <Location Index="6" XY="1,-1" IsOrigin="false"/>
+            <Location Index="7" XY="1,0" IsOrigin="false"/>
+            <Location Index="8" XY="1,1" IsOrigin="false"/>
+            <Location Index="9" XY="1,2" IsOrigin="false"/>
+        </LogicalLocations>
+    </Piece>
+    <Piece Name="LongDiagonal" ID="5d87accc-3edf-4c7f-b226-d83254d499ad" Class="Malicious">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="0" Wide="0" Symmetric="false"/>
+        <LogicalLocations>
+            <Location Index="0" XY="-1,-1" IsOrigin="false"/>
+            <Location Index="1" XY="0,0" IsOrigin="true"/>
+            <Location Index="2" XY="1,1" IsOrigin="false"/>
+            <Location Index="3" XY="2,2" IsOrigin="false"/>
+        </LogicalLocations>
+    </Piece>
+    <Piece Name="V" ID="4dbea417-4654-459b-9aaf-9bcde56720be" Class="Malicious">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="1" Wide="0" Symmetric="false"/>
+        <LogicalLocations>
+            <Location Index="0" XY="-1,1" IsOrigin="false"/>
+            <Location Index="1" XY="0,0" IsOrigin="false"/>
+            <Location Index="2" XY="1,-1" IsOrigin="true"/>
+            <Location Index="3" XY="2,0" IsOrigin="false"/>
+            <Location Index="4" XY="3,1" IsOrigin="false"/>
+        </LogicalLocations>
+    </Piece>
+    <Piece Name="FarApart" ID="6a2b5de2-4336-4927-affa-980a89c061a6" Class="Malicious">
+        <UserPiece UserDefined="false"/>
+        <Geometry Thin="1" Wide="0" Symmetric="false"/>
+        <LogicalLocations>
+            <Location Index="0" XY="-3,0" IsOrigin="false"/>
+            <Location Index="1" XY="2,1" IsOrigin="true"/>
+        </LogicalLocations>
+    </Piece>
+</Pieces>
