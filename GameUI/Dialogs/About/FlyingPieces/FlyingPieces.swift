@@ -210,8 +210,8 @@ class FlyingPieces: SCNView, SCNSceneRendererDelegate, RPPreviewViewControllerDe
     func MakePiece(_ Shape: PieceShapes) -> FlyingNode?
     {
         var PieceNode: FlyingNode? = nil
-        let ShapeID = PieceFactory.ShapeIDMap[Shape]
-        if let Definition = PieceManager.GetPieceDefinitionFor(ID: ShapeID!)
+        let ShapeID = PieceFactory.ShapeIDMap[Shape]!
+        if let Definition = PieceManager.GetPieceDefinitionFor(ID: ShapeID)
         {
             PieceNode = FlyingNode(UIColor.white, ColorServer.RandomColor(MinRed: 0.25, MinGreen: 0.25, MinBlue: 0.25))
             for Point in Definition.Locations
@@ -222,7 +222,7 @@ class FlyingPieces: SCNView, SCNSceneRendererDelegate, RPPreviewViewControllerDe
         }
         else
         {
-            print("Error getting definition for \(Shape)/\((ShapeID)!)")
+            print("Error getting definition for \(Shape), ID=\((ShapeID))")
         }
         return PieceNode
     }
@@ -237,7 +237,11 @@ class FlyingPieces: SCNView, SCNSceneRendererDelegate, RPPreviewViewControllerDe
             NewPiece.StartMoving(ToEdgeOfUniverse: true, Duration: (8.0, 20.0))
             NewPiece.opacity = 0.0
             PrimaryNode?.addChildNode(NewPiece)
-            NewPiece.runAction(SCNAction.fadeIn(duration: 0.5))
+            NewPiece.runAction(SCNAction.fadeIn(duration: 0.5),
+                               completionHandler:
+                {
+                    self.MotionCompleted(Node: NewPiece, Replace: true)
+            })
         }
     }
     
@@ -251,14 +255,21 @@ class FlyingPieces: SCNView, SCNSceneRendererDelegate, RPPreviewViewControllerDe
     /// - Parameter Replace: If true, a new piece is created to keep steady state going.
     func MotionCompleted(Node: SCNNode, Replace: Bool)
     {
-        Node.removeAllActions()
-        Node.removeFromParentNode()
-        if Replace
-        {
-            OperationQueue.main.addOperation
-                {
-                    self.MakeOnePiece()
-            }
+        OperationQueue.main.addOperation
+            {
+                let FadeOut = SCNAction.fadeOut(duration: 0.2)
+                let RemoveNode = SCNAction.removeFromParentNode()
+                let Sequence = SCNAction.sequence([FadeOut, RemoveNode])
+                Node.runAction(Sequence, completionHandler:
+                    {
+                        if Replace
+                        {
+                            OperationQueue.main.addOperation
+                                {
+                                    self.MakeOnePiece()
+                            }
+                        }
+                })
         }
     }
     
