@@ -54,14 +54,16 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
         {
             LiveViewCameraSegment.selectedSegmentIndex = 1
         }
-        if UserDefaults.standard.bool(forKey: "RunningOnSimulator")
-        {
+        #if targetEnvironment(simulator)
             BackgroundTypeSegment.setEnabled(false, forSegmentAt: 3)
             LiveViewCameraSegment.isEnabled = false
             CameraText.isEnabled = false
             NotAvailableText.isHidden = false
             LiveViewTitle.isEnabled = false
-        }
+        #else
+        NotAvailableText.isHidden = true
+        NotAvailableText.alpha = 0.0
+        #endif
         
         var IsVertical: Bool = false
         var Reversed: Bool = false
@@ -84,10 +86,9 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
         switch BGType
         {
             case .LiveView:
-                if UserDefaults.standard.bool(forKey: "RunningOnSimulator")
-                {
-                    return .Color
-                }
+                #if targetEnvironment(simulator)
+                return .Color
+                #endif
                 return .LiveView
             
             case .CALayer:
