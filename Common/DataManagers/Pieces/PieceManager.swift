@@ -88,51 +88,18 @@ class PieceManager
     /// - Parameter WithType: The piece class pieces to return.
     /// - Parameter InCollection: The piece collection to search to return piece definitions.
     /// - Returns: List of piece definitions that match the passed search criteria.
-    public static func GetPieceClass(WithType: PieceClasses, InCollection: PieceCollection) -> [PieceDefinition]?
+    public static func GetPieceClass(WithType: PieceClasses, InCollection: PieceCollection) -> [PieceDefinition]
     {
-        return InCollection.GetPieceClass(WithType)
-    }
-    
-    /// Returns a list of all piece defintions for a given class.
-    /// - Parameter Class: The piece class whose piece definitions will be returned.
-    /// - Returns: All piece definitions for a given piece class. If the returned list is empty,
-    ///            either the piece class was not found or it contained no definitions.
-    public static func GetPiecesForClass(_ Class: PieceClasses) -> [PieceDefinition]
-    {
-        var Results = [PieceDefinition]()
-        let AllGroups = [_DefaultPieces, _UserPieces]
-        for PieceGroup in AllGroups
-        {
-            for (TheClass, PieceSet) in PieceGroup!.Classes
-            {
-                if TheClass == Class
-                {
-                    for SomePiece in PieceSet
-                    {
-                        Results.append(SomePiece)
-                    }
-                }
-            }
-        }
-        return Results
+        return InCollection.PiecesOfClass(WithType)
     }
     
     /// Return a piece definition for a piece with the specified ID.
+    /// - Note: `DefaultPieces` is searched for the piece.
     /// - Parameter ID: The ID whose piece definition will be returned.
     /// - Returns: Piece defintion for the specified ID on success, nil if not found.
     public static func GetPieceDefinitionFor(ID: UUID) -> PieceDefinition?
     {
-        for (_, Def) in DefaultPieces!.Classes
-        {
-            for PieceDef in Def
-            {
-            if PieceDef.ID == ID
-            {
-                return PieceDef
-            }
-            }
-        }
-        return nil
+        return DefaultPieces?.PieceWith(ID: ID)
     }
     
     /// Save user piece definitions.
