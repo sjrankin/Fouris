@@ -371,7 +371,8 @@ class PieceDefinition: CustomStringConvertible
     {
         var Working = ""
         Working = Spaces(IndentSize) + "<Piece Name=" + Quoted(Name) + " ID=" +
-            Quoted(ID.uuidString) + " CanDelete=" + Quoted("\(CanDelete)") + ">\n"
+            Quoted(ID.uuidString) + " CanDelete=" + Quoted("\(CanDelete)") +
+            " Class=" + Quoted(PieceClass.rawValue) + ">\n"
         
         var NextDent = IndentSize + 4
         if !NodePayload.isEmpty
