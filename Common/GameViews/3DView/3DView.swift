@@ -254,10 +254,12 @@ class View3D: SCNView,                          //Our main super class.
         {
             case .Color:
                 print("Game view background color is \(CurrentTheme!.BackgroundSolidColor)")
-                self.backgroundColor = ColorServer.ColorFrom(CurrentTheme!.BackgroundSolidColor)
+                self.scene?.background.contents = ColorServer.ColorFrom(CurrentTheme!.BackgroundSolidColor)
             
             case .Gradient:
                 print("Game view background gradient is \(CurrentTheme!.BackgroundGradientColor)")
+                let BackgroundGradient = GradientManager.CreateGradientImage(From: CurrentTheme!.BackgroundGradientColor, WithFrame: self.frame)
+                self.scene?.background.contents = BackgroundGradient
             
             case .Image:
                 break
