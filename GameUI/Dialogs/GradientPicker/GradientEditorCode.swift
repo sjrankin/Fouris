@@ -26,6 +26,8 @@ class GradientEditorCode: UIViewController, GradientPickerProtocol,
         
         var Vertical: Bool = false
         var Reverse: Bool = false
+        ControlView.layer.borderColor = UIColor.black.cgColor
+        ControlView.layer.backgroundColor = UIColor.clear.cgColor
         OriginalGradient = CurrentGradient
         GradientStopList = GradientManager.ParseGradient(CurrentGradient, Vertical: &Vertical, Reverse: &Reverse)
         GradientView.backgroundColor = UIColor.black
@@ -228,12 +230,12 @@ class GradientEditorCode: UIViewController, GradientPickerProtocol,
         return GSEditor
     }
     
-    @IBSegueAction func HandleExportGradientInstantiation(_ coder: NSCoder) -> GradientExportCode?
+    @IBSegueAction func HandleExportGradient2Instantiation(_ coder: NSCoder) -> GradientExport2?
     {
-        let GExport = GradientExportCode(coder: coder)
-        GExport?.GradientDelegate = self
-        GExport?.GradientToEdit(CurrentGradient, Tag: "")
-        return GExport
+        let Export = GradientExport2(coder: coder)
+        Export?.GradientDelegate = self
+        Export?.GradientToEdit(CurrentGradient, Tag: "")
+        return Export
     }
     
     var ColorToEdit: UIColor = UIColor.black
@@ -252,6 +254,7 @@ class GradientEditorCode: UIViewController, GradientPickerProtocol,
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBOutlet weak var ControlView: UIView!
     @IBOutlet weak var PresetsButton: UIButton!
     @IBOutlet weak var ClearButton: UIButton!
     @IBOutlet weak var ResetButton: UIButton!
