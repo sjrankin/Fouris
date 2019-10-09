@@ -2088,7 +2088,7 @@
                                 </connections>
                             </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ykt-AN-nb4">
-                                <rect key="frame" x="292" y="185" width="127" height="32"/>
+                                <rect key="frame" x="292.5" y="185.5" width="127" height="32"/>
                                 <segments>
                                     <segment title="User"/>
                                     <segment title="Default"/>
@@ -2371,7 +2371,7 @@
                                                 <attributedString key="attributedText">
                                                     <fragment content="Diffuse color">
                                                         <attributes>
-                                                            <font key="NSFont" size="19" name=".AppleSystemUIFont"/>
+                                                            <font key="NSFont" metaFont="system" size="19"/>
                                                         </attributes>
                                                     </fragment>
                                                     <fragment>
@@ -2384,7 +2384,7 @@ Cg
                                                     </fragment>
                                                     <fragment content="Tap to update">
                                                         <attributes>
-                                                            <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
+                                                            <font key="NSFont" metaFont="menu" size="14"/>
                                                         </attributes>
                                                     </fragment>
                                                 </attributedString>
@@ -2415,7 +2415,7 @@ Cg
                                                 <attributedString key="attributedText">
                                                     <fragment content="Specular color">
                                                         <attributes>
-                                                            <font key="NSFont" size="19" name=".AppleSystemUIFont"/>
+                                                            <font key="NSFont" metaFont="system" size="19"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
@@ -2430,7 +2430,7 @@ Cg
                                                     </fragment>
                                                     <fragment content="Tap to update">
                                                         <attributes>
-                                                            <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
+                                                            <font key="NSFont" metaFont="menu" size="14"/>
                                                         </attributes>
                                                     </fragment>
                                                 </attributedString>
@@ -2461,7 +2461,7 @@ Cg
                                                 <attributedString key="attributedText">
                                                     <fragment content="Texture">
                                                         <attributes>
-                                                            <font key="NSFont" size="19" name=".AppleSystemUIFont"/>
+                                                            <font key="NSFont" metaFont="system" size="19"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
@@ -2476,7 +2476,7 @@ Cg
                                                     </fragment>
                                                     <fragment content="Tap to update">
                                                         <attributes>
-                                                            <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
+                                                            <font key="NSFont" metaFont="menu" size="14"/>
                                                         </attributes>
                                                     </fragment>
                                                 </attributedString>
@@ -2509,7 +2509,7 @@ Cg
                                                 <attributedString key="attributedText">
                                                     <fragment content="Block shape">
                                                         <attributes>
-                                                            <font key="NSFont" size="19" name=".AppleSystemUIFont"/>
+                                                            <font key="NSFont" metaFont="system" size="19"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
@@ -2524,7 +2524,7 @@ Cg
                                                     </fragment>
                                                     <fragment content="Tap to update">
                                                         <attributes>
-                                                            <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
+                                                            <font key="NSFont" metaFont="menu" size="14"/>
                                                         </attributes>
                                                     </fragment>
                                                 </attributedString>
@@ -2614,7 +2614,7 @@ Cg
                                                 <attributedString key="attributedText">
                                                     <fragment content="Diffuse color">
                                                         <attributes>
-                                                            <font key="NSFont" size="19" name=".AppleSystemUIFont"/>
+                                                            <font key="NSFont" metaFont="system" size="19"/>
                                                         </attributes>
                                                     </fragment>
                                                     <fragment>
@@ -2627,7 +2627,7 @@ Cg
                                                     </fragment>
                                                     <fragment content="Tap to update">
                                                         <attributes>
-                                                            <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
+                                                            <font key="NSFont" metaFont="menu" size="14"/>
                                                         </attributes>
                                                     </fragment>
                                                 </attributedString>
@@ -2658,7 +2658,7 @@ Cg
                                                 <attributedString key="attributedText">
                                                     <fragment content="Specular color">
                                                         <attributes>
-                                                            <font key="NSFont" size="19" name=".AppleSystemUIFont"/>
+                                                            <font key="NSFont" metaFont="system" size="19"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
@@ -2673,7 +2673,7 @@ Cg
                                                     </fragment>
                                                     <fragment content="Tap to update">
                                                         <attributes>
-                                                            <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
+                                                            <font key="NSFont" metaFont="menu" size="14"/>
                                                         </attributes>
                                                     </fragment>
                                                 </attributedString>
@@ -2704,7 +2704,7 @@ Cg
                                                 <attributedString key="attributedText">
                                                     <fragment content="Texture">
                                                         <attributes>
-                                                            <font key="NSFont" size="19" name=".AppleSystemUIFont"/>
+                                                            <font key="NSFont" metaFont="system" size="19"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
@@ -2719,7 +2719,7 @@ Cg
                                                     </fragment>
                                                     <fragment content="Tap to update">
                                                         <attributes>
-                                                            <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
+                                                            <font key="NSFont" metaFont="menu" size="14"/>
                                                         </attributes>
                                                     </fragment>
                                                 </attributedString>
@@ -2752,7 +2752,7 @@ Cg
                                                 <attributedString key="attributedText">
                                                     <fragment content="Block shape">
                                                         <attributes>
-                                                            <font key="NSFont" size="19" name=".AppleSystemUIFont"/>
+                                                            <font key="NSFont" metaFont="system" size="19"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
@@ -2767,7 +2767,7 @@ Cg
                                                     </fragment>
                                                     <fragment content="Tap to update">
                                                         <attributes>
-                                                            <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
+                                                            <font key="NSFont" metaFont="menu" size="14"/>
                                                         </attributes>
                                                     </fragment>
                                                 </attributedString>
@@ -3237,13 +3237,28 @@ Cg
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QHK-d4-HST">
+                                        <rect key="frame" x="530" y="36" width="162" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="162" id="uIa-Ed-jdP"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Preset Gradients">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="kRV-Xt-V8z" kind="show" identifier="ToPresetGradientList" destinationCreationSelector="InstantiatePresetsDialog:" id="Pqh-hs-iAw"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="wnO-R4-WnQ" firstAttribute="top" secondItem="aar-uE-Sn0" secondAttribute="top" constant="29" id="5q4-Qy-7Cj"/>
+                                    <constraint firstItem="QHK-d4-HST" firstAttribute="centerY" secondItem="wnO-R4-WnQ" secondAttribute="centerY" id="K1s-8E-dbo"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="87" id="MAh-yt-tLF"/>
                                     <constraint firstItem="wnO-R4-WnQ" firstAttribute="bottom" secondItem="wr8-aF-TrY" secondAttribute="bottomMargin" id="Vwv-9b-h5K"/>
                                     <constraint firstAttribute="height" constant="87" id="dPW-3w-1oc"/>
+                                    <constraint firstItem="QHK-d4-HST" firstAttribute="trailing" secondItem="wr8-aF-TrY" secondAttribute="trailingMargin" id="eEq-Dz-izu"/>
                                     <constraint firstItem="wnO-R4-WnQ" firstAttribute="leading" secondItem="aar-uE-Sn0" secondAttribute="leading" constant="14" id="qUh-DD-hcc"/>
                                 </constraints>
                                 <viewLayoutGuide key="safeArea" id="aar-uE-Sn0"/>
@@ -3255,30 +3270,18 @@ Cg
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QZc-QL-Vtu">
-                                <rect key="frame" x="0.0" y="916" width="712" height="68"/>
+                                <rect key="frame" x="0.0" y="917" width="712" height="67"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZEL-3c-81p">
-                                        <rect key="frame" x="25" y="12" width="44" height="48"/>
+                                        <rect key="frame" x="25" y="12" width="44" height="47"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                         <state key="normal" title="OK"/>
                                         <connections>
                                             <action selector="HandleOKPressed:" destination="Tdm-VM-X1e" eventType="primaryActionTriggered" id="vRL-69-MEC"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hRh-Iv-Cm4">
-                                        <rect key="frame" x="339" y="11" width="34" height="45"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                        <viewLayoutGuide key="safeArea" id="1Lq-6Q-SsD"/>
-                                        <state key="normal" title="Save" image="square.and.arrow.up.fill" catalog="system">
-                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="27" scale="large" weight="bold"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="HandleOKPressed:" destination="Tdm-VM-X1e" eventType="primaryActionTriggered" id="HWP-Uo-1l4"/>
-                                            <segue destination="UpI-pZ-guv" kind="show" identifier="ToGradientExport" destinationCreationSelector="HandleExportGradientInstantiation:" id="HRF-Cc-bSP"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sIz-TJ-NZP">
-                                        <rect key="frame" x="594" y="12" width="98" height="48"/>
+                                        <rect key="frame" x="594" y="11.5" width="98" height="48"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                         <state key="normal" title="Cancel"/>
                                         <connections>
@@ -3288,6 +3291,7 @@ Cg
                                 </subviews>
                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="67" id="I3j-2u-bco"/>
                                     <constraint firstItem="ZEL-3c-81p" firstAttribute="baseline" secondItem="sIz-TJ-NZP" secondAttribute="baseline" id="J9U-UP-LSz"/>
                                     <constraint firstItem="ZEL-3c-81p" firstAttribute="bottom" secondItem="QZc-QL-Vtu" secondAttribute="bottomMargin" id="QT4-SJ-g5i"/>
                                     <constraint firstItem="ZEL-3c-81p" firstAttribute="top" secondItem="QZc-QL-Vtu" secondAttribute="top" constant="12" id="ReN-Cq-diT"/>
@@ -3296,96 +3300,127 @@ Cg
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YbH-lh-Ftx">
-                                <rect key="frame" x="20" y="357" width="672" height="471"/>
+                                <rect key="frame" x="20" y="357" width="672" height="400"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="400" id="gbm-yK-IZg"/>
+                                </constraints>
                                 <connections>
                                     <outlet property="dataSource" destination="Tdm-VM-X1e" id="e5G-mR-ypS"/>
                                     <outlet property="delegate" destination="Tdm-VM-X1e" id="LQD-2J-tXI"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hHu-Wi-6YF">
-                                <rect key="frame" x="26" y="841" width="33" height="29"/>
+                            <button opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hRh-Iv-Cm4">
+                                <rect key="frame" x="339" y="851" width="34" height="45"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="33" id="4P7-Hb-gxu"/>
+                                    <constraint firstAttribute="height" constant="45" id="vrT-Zz-2uC"/>
                                 </constraints>
-                                <state key="normal" title="Add" image="plus" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24" scale="large" weight="bold"/>
+                                <viewLayoutGuide key="safeArea" id="1Lq-6Q-SsD"/>
+                                <state key="normal" image="square.and.arrow.up.fill" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="27" scale="large" weight="bold"/>
                                 </state>
                                 <connections>
-                                    <action selector="HandleAddButton:" destination="Tdm-VM-X1e" eventType="primaryActionTriggered" id="3GI-63-r3X"/>
+                                    <segue destination="nTX-Wx-aw9" kind="show" destinationCreationSelector="HandleExportGradient2Instantiation:" id="C8m-j2-7XA"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A4e-WZ-yfy">
-                                <rect key="frame" x="198" y="842" width="34" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Edit"/>
-                                <connections>
-                                    <action selector="HandleEditButton:" destination="Tdm-VM-X1e" eventType="primaryActionTriggered" id="n9S-dA-BgD"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wFR-KT-tKB">
-                                <rect key="frame" x="278" y="842" width="71" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Reverse"/>
-                                <connections>
-                                    <action selector="HandleReverseGradientButton:" destination="Tdm-VM-X1e" eventType="primaryActionTriggered" id="d4U-ls-WBv"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q26-sk-gYf">
-                                <rect key="frame" x="401" y="842" width="50" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Reset"/>
-                                <connections>
-                                    <action selector="HandleResetButton:" destination="Tdm-VM-X1e" eventType="primaryActionTriggered" id="Ne7-hf-O7j"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QHK-d4-HST">
-                                <rect key="frame" x="502" y="842" width="65" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Presets"/>
-                                <connections>
-                                    <segue destination="kRV-Xt-V8z" kind="show" identifier="ToPresetGradientList" destinationCreationSelector="InstantiatePresetsDialog:" id="Pqh-hs-iAw"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eRx-mZ-FAx">
-                                <rect key="frame" x="657" y="840" width="35" height="37"/>
-                                <state key="normal" image="trash.fill" catalog="system">
-                                    <color key="titleColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24" scale="large" weight="bold"/>
-                                </state>
-                                <connections>
-                                    <action selector="HandleClearButton:" destination="Tdm-VM-X1e" eventType="primaryActionTriggered" id="iMN-KM-FQO"/>
-                                </connections>
-                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G0T-0r-6sd">
+                                <rect key="frame" x="20" y="765" width="672" height="57"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hHu-Wi-6YF">
+                                        <rect key="frame" x="8" y="14" width="33" height="29"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="33" id="iyN-75-ecw"/>
+                                            <constraint firstAttribute="height" constant="29" id="lQY-aP-tDy"/>
+                                        </constraints>
+                                        <state key="normal" title="Add" image="plus" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24" scale="large" weight="bold"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="HandleAddButton:" destination="Tdm-VM-X1e" eventType="primaryActionTriggered" id="3GI-63-r3X"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wFR-KT-tKB">
+                                        <rect key="frame" x="236" y="10.5" width="71" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Reverse"/>
+                                        <connections>
+                                            <action selector="HandleReverseGradientButton:" destination="Tdm-VM-X1e" eventType="primaryActionTriggered" id="d4U-ls-WBv"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q26-sk-gYf">
+                                        <rect key="frame" x="384" y="10" width="50" height="37"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Reset"/>
+                                        <connections>
+                                            <action selector="HandleResetButton:" destination="Tdm-VM-X1e" eventType="primaryActionTriggered" id="Ne7-hf-O7j"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eRx-mZ-FAx">
+                                        <rect key="frame" x="629" y="10" width="35" height="37"/>
+                                        <state key="normal" image="trash.fill" catalog="system">
+                                            <color key="titleColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24" scale="large" weight="bold"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="HandleClearButton:" destination="Tdm-VM-X1e" eventType="primaryActionTriggered" id="iMN-KM-FQO"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A4e-WZ-yfy">
+                                        <rect key="frame" x="115" y="14" width="34" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Edit"/>
+                                        <connections>
+                                            <action selector="HandleEditButton:" destination="Tdm-VM-X1e" eventType="primaryActionTriggered" id="n9S-dA-BgD"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="hHu-Wi-6YF" firstAttribute="centerY" secondItem="wFR-KT-tKB" secondAttribute="centerY" id="9xY-up-FZK"/>
+                                    <constraint firstItem="q26-sk-gYf" firstAttribute="top" secondItem="eRx-mZ-FAx" secondAttribute="top" id="E3d-6M-ep9"/>
+                                    <constraint firstItem="q26-sk-gYf" firstAttribute="bottom" secondItem="G0T-0r-6sd" secondAttribute="bottomMargin" constant="-2" id="E8Z-d1-dz6"/>
+                                    <constraint firstItem="hHu-Wi-6YF" firstAttribute="bottom" secondItem="A4e-WZ-yfy" secondAttribute="bottom" id="I9p-kt-ShM"/>
+                                    <constraint firstItem="q26-sk-gYf" firstAttribute="top" secondItem="G0T-0r-6sd" secondAttribute="top" constant="10" id="NHA-KY-hXM"/>
+                                    <constraint firstItem="q26-sk-gYf" firstAttribute="leading" secondItem="wFR-KT-tKB" secondAttribute="trailing" constant="77" id="RJI-HW-l8c"/>
+                                    <constraint firstItem="wFR-KT-tKB" firstAttribute="leading" secondItem="A4e-WZ-yfy" secondAttribute="trailing" constant="87" id="T4w-UC-T94"/>
+                                    <constraint firstItem="eRx-mZ-FAx" firstAttribute="trailing" secondItem="G0T-0r-6sd" secondAttribute="trailingMargin" id="Tav-em-kNX"/>
+                                    <constraint firstItem="A4e-WZ-yfy" firstAttribute="leading" secondItem="hHu-Wi-6YF" secondAttribute="trailing" constant="74" id="cqO-eZ-JqO"/>
+                                    <constraint firstAttribute="height" constant="57" id="kmy-WR-wcR"/>
+                                    <constraint firstItem="hHu-Wi-6YF" firstAttribute="centerY" secondItem="q26-sk-gYf" secondAttribute="centerY" id="ogD-pT-FRg"/>
+                                    <constraint firstItem="hHu-Wi-6YF" firstAttribute="top" secondItem="A4e-WZ-yfy" secondAttribute="top" id="pSf-uK-JdT"/>
+                                    <constraint firstItem="hHu-Wi-6YF" firstAttribute="leading" secondItem="G0T-0r-6sd" secondAttribute="leadingMargin" id="tDd-SQ-u3q"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <real key="value" value="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="hRh-Iv-Cm4" firstAttribute="leading" secondItem="Oq6-VG-7uP" secondAttribute="leading" constant="339" id="0U5-al-nrt"/>
                             <constraint firstItem="wr8-aF-TrY" firstAttribute="leading" secondItem="Oq6-VG-7uP" secondAttribute="leading" id="0Yg-a8-qSV"/>
                             <constraint firstItem="fTn-Ba-g9k" firstAttribute="top" secondItem="8gv-jr-IBm" secondAttribute="top" constant="85" id="2Rd-hu-AlC"/>
-                            <constraint firstItem="QZc-QL-Vtu" firstAttribute="top" secondItem="eRx-mZ-FAx" secondAttribute="bottom" constant="39" id="2WY-Tc-5IW"/>
                             <constraint firstItem="fTn-Ba-g9k" firstAttribute="top" secondItem="wr8-aF-TrY" secondAttribute="bottom" constant="8" id="4We-7x-3hR"/>
                             <constraint firstItem="fTn-Ba-g9k" firstAttribute="leading" secondItem="8gv-jr-IBm" secondAttribute="leadingMargin" id="4yP-WT-KFv"/>
                             <constraint firstItem="YbH-lh-Ftx" firstAttribute="top" secondItem="fTn-Ba-g9k" secondAttribute="bottom" constant="8" id="52V-ld-0mR"/>
-                            <constraint firstItem="QZc-QL-Vtu" firstAttribute="top" secondItem="YbH-lh-Ftx" secondAttribute="bottom" constant="88" id="Bou-Xp-hZW"/>
-                            <constraint firstItem="wFR-KT-tKB" firstAttribute="baseline" secondItem="q26-sk-gYf" secondAttribute="baseline" id="Jr1-21-zBD"/>
-                            <constraint firstItem="QHK-d4-HST" firstAttribute="baseline" secondItem="q26-sk-gYf" secondAttribute="baseline" id="Jr4-le-qVf"/>
-                            <constraint firstItem="eRx-mZ-FAx" firstAttribute="trailing" secondItem="YbH-lh-Ftx" secondAttribute="trailing" id="KDl-nH-SeQ"/>
-                            <constraint firstItem="A4e-WZ-yfy" firstAttribute="leading" secondItem="8gv-jr-IBm" secondAttribute="leading" constant="198" id="MIJ-9z-DfU"/>
+                            <constraint firstItem="G0T-0r-6sd" firstAttribute="top" secondItem="YbH-lh-Ftx" secondAttribute="bottom" constant="8" id="GLk-2u-rpA"/>
+                            <constraint firstItem="QZc-QL-Vtu" firstAttribute="top" secondItem="hRh-Iv-Cm4" secondAttribute="bottom" constant="21" id="Jft-Dk-kdu"/>
                             <constraint firstItem="QZc-QL-Vtu" firstAttribute="bottom" secondItem="Oq6-VG-7uP" secondAttribute="bottom" id="NnK-Dh-FrB"/>
-                            <constraint firstItem="A4e-WZ-yfy" firstAttribute="baseline" secondItem="wFR-KT-tKB" secondAttribute="baseline" id="S5T-qo-Skc"/>
+                            <constraint firstItem="hRh-Iv-Cm4" firstAttribute="top" secondItem="G0T-0r-6sd" secondAttribute="bottom" constant="29" id="Uke-hp-fuf"/>
                             <constraint firstItem="fTn-Ba-g9k" firstAttribute="leading" secondItem="YbH-lh-Ftx" secondAttribute="leading" id="VmP-T0-DKu"/>
-                            <constraint firstItem="hHu-Wi-6YF" firstAttribute="top" secondItem="YbH-lh-Ftx" secondAttribute="bottom" constant="13" id="XBd-f5-1cT"/>
                             <constraint firstItem="QZc-QL-Vtu" firstAttribute="leading" secondItem="wr8-aF-TrY" secondAttribute="leading" id="YVW-qW-bFK"/>
-                            <constraint firstItem="hHu-Wi-6YF" firstAttribute="leading" secondItem="Oq6-VG-7uP" secondAttribute="leading" constant="26" id="aYE-Mb-Fdi"/>
+                            <constraint firstItem="G0T-0r-6sd" firstAttribute="trailing" secondItem="YbH-lh-Ftx" secondAttribute="trailing" id="aes-rc-tvg"/>
                             <constraint firstItem="fTn-Ba-g9k" firstAttribute="trailing" secondItem="YbH-lh-Ftx" secondAttribute="trailing" id="aiT-cv-u8z"/>
-                            <constraint firstItem="q26-sk-gYf" firstAttribute="leading" secondItem="wFR-KT-tKB" secondAttribute="trailing" constant="52" id="asK-Kg-W9e"/>
+                            <constraint firstItem="hRh-Iv-Cm4" firstAttribute="centerX" secondItem="QZc-QL-Vtu" secondAttribute="centerX" id="am7-X1-gRV"/>
                             <constraint firstItem="wr8-aF-TrY" firstAttribute="centerX" secondItem="8gv-jr-IBm" secondAttribute="centerX" id="h8m-lC-YP9"/>
-                            <constraint firstItem="q26-sk-gYf" firstAttribute="baseline" secondItem="eRx-mZ-FAx" secondAttribute="baseline" id="i43-Or-9Qe"/>
-                            <constraint firstItem="wFR-KT-tKB" firstAttribute="leading" secondItem="A4e-WZ-yfy" secondAttribute="trailing" constant="46" id="ijq-WJ-OOp"/>
-                            <constraint firstItem="A4e-WZ-yfy" firstAttribute="top" secondItem="YbH-lh-Ftx" secondAttribute="bottom" constant="14" id="mWF-H3-wY3"/>
                             <constraint firstItem="QZc-QL-Vtu" firstAttribute="centerX" secondItem="fTn-Ba-g9k" secondAttribute="centerX" id="ooQ-vg-OjS"/>
                             <constraint firstItem="QZc-QL-Vtu" firstAttribute="trailing" secondItem="wr8-aF-TrY" secondAttribute="trailing" id="p80-cI-tgM"/>
-                            <constraint firstItem="QHK-d4-HST" firstAttribute="leading" secondItem="q26-sk-gYf" secondAttribute="trailing" constant="51" id="x45-hc-rwv"/>
+                            <constraint firstItem="G0T-0r-6sd" firstAttribute="leading" secondItem="YbH-lh-Ftx" secondAttribute="leading" id="pSE-rl-4lm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Oq6-VG-7uP"/>
                     </view>
@@ -3393,6 +3428,7 @@ Cg
                     <connections>
                         <outlet property="AddGradientStopButton" destination="hHu-Wi-6YF" id="DsK-sG-Vb6"/>
                         <outlet property="ClearButton" destination="eRx-mZ-FAx" id="1Fv-PR-Uvd"/>
+                        <outlet property="ControlView" destination="G0T-0r-6sd" id="3l6-sS-OPd"/>
                         <outlet property="EditButton" destination="A4e-WZ-yfy" id="cOc-HT-aaD"/>
                         <outlet property="GradientStopTable" destination="YbH-lh-Ftx" id="TYS-fc-UMc"/>
                         <outlet property="GradientView" destination="fTn-Ba-g9k" id="xDn-xM-yPA"/>
@@ -3943,41 +3979,106 @@ Cg
             </objects>
             <point key="canvasLocation" x="2525" y="1498.828125"/>
         </scene>
-        <!--Gradient Export Code-->
-        <scene sceneID="xOu-vR-6X8">
+        <!--Gradient Export2-->
+        <scene sceneID="WMK-t9-aIY">
             <objects>
-                <viewController storyboardIdentifier="GradientExportUI" id="UpI-pZ-guv" customClass="GradientExportCode" customModule="Fouris" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="1yJ-zt-OEA">
+                <viewController id="nTX-Wx-aw9" customClass="GradientExport2" customModule="Fouris" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BTR-cu-FSF">
                         <rect key="frame" x="0.0" y="0.0" width="712" height="984"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lw7-1T-UZ8">
-                                <rect key="frame" x="0.0" y="906" width="712" height="77.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="MWL-M9-ZH9">
+                                <rect key="frame" x="20" y="98" width="324.5" height="31"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GhZ-9g-5mS">
-                                        <rect key="frame" x="20" y="21.5" width="80" height="48"/>
-                                        <viewLayoutGuide key="safeArea" id="fpE-0T-uIM"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Width" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rUC-8L-o8D">
+                                        <rect key="frame" x="0.0" y="0.0" width="45.5" height="31"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="oi7-nZ-T7j">
+                                        <rect key="frame" x="60.5" y="0.0" width="264" height="32"/>
+                                        <segments>
+                                            <segment title="256"/>
+                                            <segment title="512"/>
+                                            <segment title="1024"/>
+                                            <segment title="2048"/>
+                                            <segment title="4096"/>
+                                        </segments>
+                                    </segmentedControl>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="jG0-Xx-mx5">
+                                <rect key="frame" x="20" y="150" width="330" height="31"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Height" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Av5-if-Qj3">
+                                        <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="iAp-7J-5HY">
+                                        <rect key="frame" x="66" y="0.0" width="264" height="32"/>
+                                        <segments>
+                                            <segment title="256"/>
+                                            <segment title="512"/>
+                                            <segment title="1024"/>
+                                            <segment title="2048"/>
+                                            <segment title="4096"/>
+                                        </segments>
+                                    </segmentedControl>
+                                </subviews>
+                            </stackView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Bj-9e-lZ2" customClass="UIImageView">
+                                <rect key="frame" x="20" y="220" width="672" height="456"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <real key="value" value="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oHp-U0-y1n">
+                                <rect key="frame" x="310" y="717" width="93" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <state key="normal" title="Export"/>
+                                <connections>
+                                    <action selector="HandleExportPressed:" destination="nTX-Wx-aw9" eventType="primaryActionTriggered" id="as0-tD-dBJ"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L8z-bt-UqP">
+                                <rect key="frame" x="0.0" y="920" width="712" height="64"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LgF-IE-37W">
+                                        <rect key="frame" x="20" y="8" width="80" height="48"/>
+                                        <viewLayoutGuide key="safeArea" id="Kac-mt-VQm"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                         <state key="normal" title="Close"/>
                                         <connections>
-                                            <action selector="HandleClosePressed:" destination="UpI-pZ-guv" eventType="primaryActionTriggered" id="SjF-gy-40J"/>
+                                            <action selector="HandleClosePressed:" destination="nTX-Wx-aw9" eventType="primaryActionTriggered" id="OTd-EJ-Fvm"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="GhZ-9g-5mS" firstAttribute="top" secondItem="eoc-bq-dSw" secondAttribute="top" constant="21.5" id="2jN-fX-llx"/>
-                                    <constraint firstItem="GhZ-9g-5mS" firstAttribute="leading" secondItem="lw7-1T-UZ8" secondAttribute="leadingMargin" id="6ri-MF-ReL"/>
-                                    <constraint firstItem="GhZ-9g-5mS" firstAttribute="bottom" secondItem="lw7-1T-UZ8" secondAttribute="bottomMargin" id="Osi-3d-M1f"/>
+                                    <constraint firstAttribute="height" constant="64" id="0KY-OM-SVw"/>
+                                    <constraint firstItem="LgF-IE-37W" firstAttribute="leading" secondItem="L8z-bt-UqP" secondAttribute="leadingMargin" id="6ns-oQ-yxu"/>
+                                    <constraint firstItem="LgF-IE-37W" firstAttribute="top" secondItem="dtl-Te-ihl" secondAttribute="top" constant="8" id="c2V-jr-8xK"/>
+                                    <constraint firstItem="LgF-IE-37W" firstAttribute="bottom" secondItem="L8z-bt-UqP" secondAttribute="bottomMargin" id="xWU-Dc-zSv"/>
                                 </constraints>
-                                <viewLayoutGuide key="safeArea" id="eoc-bq-dSw"/>
+                                <viewLayoutGuide key="safeArea" id="dtl-Te-ihl"/>
                             </view>
-                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hLL-aY-GeT">
-                                <rect key="frame" x="0.0" y="-10" width="712" height="87"/>
+                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TCR-mA-CJb">
+                                <rect key="frame" x="0.0" y="0.0" width="712" height="67"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" text="Export Gradient as Image" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DZt-LR-seV">
-                                        <rect key="frame" x="14" y="29.5" width="434.5" height="49.5"/>
-                                        <viewLayoutGuide key="safeArea" id="WzW-GF-flC"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" text="Export Gradient as Image" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zIh-Da-vgb">
+                                        <rect key="frame" x="12" y="9.5" width="434.5" height="49.5"/>
+                                        <viewLayoutGuide key="safeArea" id="bHo-hz-Woh"/>
                                         <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="36"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -3985,157 +4086,62 @@ Cg
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="87" id="URP-QX-STT"/>
-                                    <constraint firstItem="DZt-LR-seV" firstAttribute="leading" secondItem="aBC-Tl-sHJ" secondAttribute="leading" constant="14" id="bBf-3J-0DM"/>
-                                    <constraint firstItem="DZt-LR-seV" firstAttribute="bottom" secondItem="hLL-aY-GeT" secondAttribute="bottomMargin" id="bKc-tw-Fbf"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="87" id="w35-FI-4Li"/>
+                                    <constraint firstItem="zIh-Da-vgb" firstAttribute="bottom" secondItem="TCR-mA-CJb" secondAttribute="bottomMargin" id="5v9-YF-ceW"/>
+                                    <constraint firstAttribute="height" constant="67" id="AcM-DJ-1Oo"/>
+                                    <constraint firstItem="zIh-Da-vgb" firstAttribute="leading" secondItem="07P-OT-fYw" secondAttribute="leading" constant="12" id="y5K-CG-bbY"/>
                                 </constraints>
-                                <viewLayoutGuide key="safeArea" id="aBC-Tl-sHJ"/>
+                                <viewLayoutGuide key="safeArea" id="07P-OT-fYw"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rsa-2E-WXa">
-                                <rect key="frame" x="20" y="85" width="672" height="141"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="eAy-Ee-Ga5">
+                                <rect key="frame" x="427" y="98" width="265" height="31"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="wUC-Vl-iRh">
-                                        <rect key="frame" x="8" y="8" width="330" height="113"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="7oq-bg-GkP">
-                                                <rect key="frame" x="0.0" y="0.0" width="330" height="31"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Width" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v66-7r-puw">
-                                                        <rect key="frame" x="0.0" y="0.0" width="45.5" height="31"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="QAE-Z0-L0n">
-                                                        <rect key="frame" x="60.5" y="0.0" width="269.5" height="32"/>
-                                                        <segments>
-                                                            <segment title="256"/>
-                                                            <segment title="512"/>
-                                                            <segment title="1024"/>
-                                                            <segment title="2048"/>
-                                                            <segment title="4096"/>
-                                                        </segments>
-                                                    </segmentedControl>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="IIP-h7-8JK">
-                                                <rect key="frame" x="0.0" y="41" width="330" height="31"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Height" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LNY-mr-IoO">
-                                                        <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="weV-Sj-iBc">
-                                                        <rect key="frame" x="66" y="0.0" width="264" height="32"/>
-                                                        <segments>
-                                                            <segment title="256"/>
-                                                            <segment title="512"/>
-                                                            <segment title="1024"/>
-                                                            <segment title="2048"/>
-                                                            <segment title="4096"/>
-                                                        </segments>
-                                                    </segmentedControl>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ZFG-fb-hEc">
-                                                <rect key="frame" x="0.0" y="82" width="330" height="31"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Orientation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZDd-JN-Gm4">
-                                                        <rect key="frame" x="0.0" y="0.0" width="85" height="31"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="jzu-xt-GqK">
-                                                        <rect key="frame" x="100" y="0.0" width="230" height="32"/>
-                                                        <segments>
-                                                            <segment title="Vertical"/>
-                                                            <segment title="Horizontal"/>
-                                                        </segments>
-                                                        <connections>
-                                                            <action selector="HandleOrientationChanged:" destination="UpI-pZ-guv" eventType="primaryActionTriggered" id="ki0-5x-6Qn"/>
-                                                        </connections>
-                                                    </segmentedControl>
-                                                </subviews>
-                                            </stackView>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Orientation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zdg-AA-Tqe">
+                                        <rect key="frame" x="0.0" y="0.0" width="85" height="31"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8As-U0-ZfO">
+                                        <rect key="frame" x="100" y="0.0" width="165" height="32"/>
+                                        <segments>
+                                            <segment title="Vertical"/>
+                                            <segment title="Horizontal"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="HandleGradientOrientationChanged:" destination="nTX-Wx-aw9" eventType="primaryActionTriggered" id="GhM-ea-slv"/>
+                                        </connections>
+                                    </segmentedControl>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstItem="wUC-Vl-iRh" firstAttribute="leading" secondItem="rsa-2E-WXa" secondAttribute="leadingMargin" id="0zU-Zq-2Eg"/>
-                                    <constraint firstItem="wUC-Vl-iRh" firstAttribute="top" secondItem="rsa-2E-WXa" secondAttribute="topMargin" id="UEf-DM-DGh"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                        <real key="value" value="0.5"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4Xi-lk-ul1">
-                                <rect key="frame" x="20" y="244" width="672" height="231"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="231" id="DTS-cJ-Yce"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                        <real key="value" value="0.5"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wE8-LY-x1G">
-                                <rect key="frame" x="309.5" y="524" width="93" height="48"/>
-                                <viewLayoutGuide key="safeArea" id="9sv-Yw-kwo"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
-                                <state key="normal" title="Export"/>
-                                <connections>
-                                    <action selector="HandleExportPressed:" destination="UpI-pZ-guv" eventType="primaryActionTriggered" id="AGI-Fd-435"/>
-                                </connections>
-                            </button>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="wE8-LY-x1G" firstAttribute="top" secondItem="4Xi-lk-ul1" secondAttribute="bottom" constant="49" id="4qn-lA-Lcd"/>
-                            <constraint firstItem="lw7-1T-UZ8" firstAttribute="centerX" secondItem="1yJ-zt-OEA" secondAttribute="centerX" id="7si-Jg-l2P"/>
-                            <constraint firstItem="rsa-2E-WXa" firstAttribute="trailing" secondItem="4Xi-lk-ul1" secondAttribute="trailing" id="HbN-0h-UUt"/>
-                            <constraint firstItem="rsa-2E-WXa" firstAttribute="top" secondItem="hLL-aY-GeT" secondAttribute="bottom" constant="8" id="KfF-ZP-nm8"/>
-                            <constraint firstItem="1uV-9d-dMn" firstAttribute="bottom" secondItem="lw7-1T-UZ8" secondAttribute="bottom" constant="0.5" id="OWP-2U-i4N"/>
-                            <constraint firstItem="4Xi-lk-ul1" firstAttribute="centerX" secondItem="wE8-LY-x1G" secondAttribute="centerX" id="ZRQ-6H-YIT"/>
-                            <constraint firstItem="rsa-2E-WXa" firstAttribute="leading" secondItem="1yJ-zt-OEA" secondAttribute="leadingMargin" id="an1-4T-4of"/>
-                            <constraint firstItem="hLL-aY-GeT" firstAttribute="leading" secondItem="lw7-1T-UZ8" secondAttribute="leading" id="cFn-CL-R8c"/>
-                            <constraint firstItem="4Xi-lk-ul1" firstAttribute="top" secondItem="1yJ-zt-OEA" secondAttribute="top" constant="244" id="crf-9m-xh6"/>
-                            <constraint firstItem="lw7-1T-UZ8" firstAttribute="leading" secondItem="1uV-9d-dMn" secondAttribute="leading" id="hMg-pE-hGP"/>
-                            <constraint firstItem="rsa-2E-WXa" firstAttribute="centerX" secondItem="hLL-aY-GeT" secondAttribute="centerX" id="kbw-No-oLu"/>
-                            <constraint firstItem="hLL-aY-GeT" firstAttribute="top" secondItem="1yJ-zt-OEA" secondAttribute="topMargin" constant="-10" id="khV-hP-rLp"/>
-                            <constraint firstItem="4Xi-lk-ul1" firstAttribute="top" secondItem="rsa-2E-WXa" secondAttribute="bottom" constant="18" id="r0b-in-nf5"/>
-                            <constraint firstItem="rsa-2E-WXa" firstAttribute="leading" secondItem="4Xi-lk-ul1" secondAttribute="leading" id="uSl-cd-NeC"/>
-                            <constraint firstItem="hLL-aY-GeT" firstAttribute="trailing" secondItem="lw7-1T-UZ8" secondAttribute="trailing" id="vrc-wa-8yF"/>
+                            <constraint firstItem="eAy-Ee-Ga5" firstAttribute="trailing" secondItem="BTR-cu-FSF" secondAttribute="trailingMargin" id="9dC-DV-Dd6"/>
+                            <constraint firstItem="MWL-M9-ZH9" firstAttribute="top" secondItem="eAy-Ee-Ga5" secondAttribute="top" id="CeT-Cv-kqS"/>
+                            <constraint firstAttribute="bottom" secondItem="L8z-bt-UqP" secondAttribute="bottom" id="IoT-KT-oNf"/>
+                            <constraint firstItem="TCR-mA-CJb" firstAttribute="leading" secondItem="BTR-cu-FSF" secondAttribute="leading" id="Mt5-oQ-4kr"/>
+                            <constraint firstItem="MWL-M9-ZH9" firstAttribute="top" secondItem="vbI-af-BJP" secondAttribute="top" constant="98" id="Qt3-KV-gae"/>
+                            <constraint firstItem="TCR-mA-CJb" firstAttribute="top" secondItem="BTR-cu-FSF" secondAttribute="top" id="cAf-cs-J1G"/>
+                            <constraint firstItem="jG0-Xx-mx5" firstAttribute="top" secondItem="MWL-M9-ZH9" secondAttribute="bottom" constant="21" id="fky-l2-ZWZ"/>
+                            <constraint firstAttribute="trailing" secondItem="TCR-mA-CJb" secondAttribute="trailing" id="lOd-ZM-uLy"/>
+                            <constraint firstItem="MWL-M9-ZH9" firstAttribute="leading" secondItem="jG0-Xx-mx5" secondAttribute="leading" id="mb6-Zk-jpC"/>
+                            <constraint firstItem="L8z-bt-UqP" firstAttribute="leading" secondItem="BTR-cu-FSF" secondAttribute="leading" id="onb-s1-CKC"/>
+                            <constraint firstItem="MWL-M9-ZH9" firstAttribute="leading" secondItem="BTR-cu-FSF" secondAttribute="leadingMargin" id="pWK-nO-Nmg"/>
+                            <constraint firstAttribute="trailing" secondItem="L8z-bt-UqP" secondAttribute="trailing" id="uEF-Lf-cWi"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="1uV-9d-dMn"/>
+                        <viewLayoutGuide key="safeArea" id="vbI-af-BJP"/>
                     </view>
-                    <navigationItem key="navigationItem" id="cg4-33-Kkr"/>
+                    <navigationItem key="navigationItem" id="BLg-wt-WWk"/>
                     <connections>
-                        <outlet property="ControlView" destination="rsa-2E-WXa" id="dHc-Lf-7eb"/>
-                        <outlet property="ExportButton" destination="wE8-LY-x1G" id="aTm-64-qWM"/>
-                        <outlet property="HeightSegment" destination="weV-Sj-iBc" id="Y3k-yD-9ej"/>
-                        <outlet property="OrientationSegment" destination="jzu-xt-GqK" id="ec1-az-R75"/>
-                        <outlet property="SampleView" destination="4Xi-lk-ul1" id="2Yf-v4-IEH"/>
-                        <outlet property="WidthSegment" destination="QAE-Z0-L0n" id="tib-pF-H4f"/>
+                        <outlet property="GradientSample" destination="0Bj-9e-lZ2" id="cqB-Rp-cig"/>
+                        <outlet property="HeightSegment" destination="iAp-7J-5HY" id="nEo-rb-f1q"/>
+                        <outlet property="OrientationSegment" destination="8As-U0-ZfO" id="fHl-7U-32O"/>
+                        <outlet property="WidthSegment" destination="oi7-nZ-T7j" id="HIj-WA-hYW"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uBR-B8-ZxK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ebB-HA-0Oz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2525" y="2235"/>
+            <point key="canvasLocation" x="2525" y="2214"/>
         </scene>
         <!--Preset Gradient List Code-->
         <scene sceneID="pCB-mt-qc5">
