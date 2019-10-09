@@ -34,6 +34,7 @@ extension View3D
         switch HidingMethod
         {
             case .FadeOut:
+                print("Started Bucket/grid removal")
                 let BucketFadeOut = SCNAction.fadeOut(duration: HideDuration)
                 let RemoveBucket = SCNAction.removeFromParentNode()
                 let BucketSequence = SCNAction.sequence([BucketFadeOut, RemoveBucket])
@@ -53,6 +54,7 @@ extension View3D
                         self.BucketNode?.runAction(BucketFadeIn,
                         completionHandler:
                             {
+                                print("Bucket/grid removal completed.")
                                 //objc_sync_exit(self.CanUseBucket)
                         })
                 })
