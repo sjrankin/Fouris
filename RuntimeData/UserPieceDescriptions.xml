@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Pieces GroupName="User">
-    <PieceClass Type="User">
-        <Piece Name="Sample" ID="3c32ee10-dca1-46ec-b9a3-8ebc70ce9621" CanDelete="false">
-            <!-- The next node defines the type of piece. In this file, set UserDefined to true. -->
-                <UserPiece UserDefined="true"/>
-                <Geometry Thin="1" Wide="0" Symmetric="false"/>
-                <LogicalLocations>
-                    Initial, logical block locations go here. For best visual results, the block at (0,0) should be the origin block.
-                    <Location Index="0" XY="0,0" IsOrigin="true"/>
-                    <Location Index="1" XY="-1,1" IsOrigin="false"/>
-                    <Location Index="2" XY="-1,0" IsOrigin="false"/>
-                    <Location Index="3" XY="-1,-1" IsOrigin="false"/>
-                    <Location Index="4" XY="0,-1" IsOrigin="false"/>
-                    <Location Index="5" XY="1,-1" IsOrigin="false"/>
-                </LogicalLocations>
-            </Piece>
-        </PieceClass>
-    </Pieces>
+    <Piece Name="Sample" ID="3c32ee10-dca1-46ec-b9a3-8ebc70ce9621" CanDelete="false" Class="User">
+        <!-- The next node defines the type of piece. In this file, set UserDefined to true. -->
+        <UserPiece UserDefined="true"/>
+        <Geometry Thin="1" Wide="0" Symmetric="false"/>
+        <LogicalLocations>
+            Initial, logical block locations go here. For best visual results, the block at (0,0) should be the origin block.
+            <Location Index="0" XY="0,0" IsOrigin="true"/>
+            <Location Index="1" XY="-1,1" IsOrigin="false"/>
+            <Location Index="2" XY="-1,0" IsOrigin="false"/>
+            <Location Index="3" XY="-1,-1" IsOrigin="false"/>
+            <Location Index="4" XY="0,-1" IsOrigin="false"/>
+            <Location Index="5" XY="1,-1" IsOrigin="false"/>
+        </LogicalLocations>
+    </Piece>
+</Pieces>
