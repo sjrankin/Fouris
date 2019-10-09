@@ -42,6 +42,8 @@
 		171ED10422F56B9F00CE2CDF /* Rotating4GameAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171ED10322F56B9F00CE2CDF /* Rotating4GameAI.swift */; };
 		171ED10722F56D3300CE2CDF /* CubicGameAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171ED10622F56D3300CE2CDF /* CubicGameAI.swift */; };
 		1721BA7C2260BECF00DC7AFC /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721BA7B2260BECF00DC7AFC /* Coin.swift */; };
+		17316504234C85380091A620 /* CreditViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17316503234C85380091A620 /* CreditViewer.swift */; };
+		17316506234C865E0091A620 /* AttributionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17316505234C865E0091A620 /* AttributionData.swift */; };
 		173592C52331FA540028FF9A /* RawThemeViewerCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173592C42331FA540028FF9A /* RawThemeViewerCode.swift */; };
 		173762502310E5F10075E1DD /* UITouchImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1737624F2310E5F10075E1DD /* UITouchImage.swift */; };
 		173762522310E7400075E1DD /* UITouchImageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173762512310E7400075E1DD /* UITouchImageDelegate.swift */; };
@@ -300,6 +302,8 @@
 		1721BA7B2260BECF00DC7AFC /* Coin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
 		1722D5DB227697D400E88BF4 /* DebugDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugDelegate.swift; sourceTree = "<group>"; };
 		1722D5E12276B3E100E88BF4 /* ControlUIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlUIProtocol.swift; sourceTree = "<group>"; };
+		17316503234C85380091A620 /* CreditViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditViewer.swift; sourceTree = "<group>"; };
+		17316505234C865E0091A620 /* AttributionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributionData.swift; sourceTree = "<group>"; };
 		173592C42331FA540028FF9A /* RawThemeViewerCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawThemeViewerCode.swift; sourceTree = "<group>"; };
 		1737624F2310E5F10075E1DD /* UITouchImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITouchImage.swift; sourceTree = "<group>"; };
 		173762512310E7400075E1DD /* UITouchImageDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITouchImageDelegate.swift; sourceTree = "<group>"; };
@@ -968,6 +972,8 @@
 				17D6B196233DD0BD00EFCE31 /* History */,
 				17831ED9232DD71E007FF894 /* FlyingPieces */,
 				17616AC82316497300DFFEFE /* AboutDialogController.swift */,
+				17316503234C85380091A620 /* CreditViewer.swift */,
+				17316505234C865E0091A620 /* AttributionData.swift */,
 			);
 			path = About;
 			sourceTree = "<group>";
@@ -1459,6 +1465,7 @@
 				17660BEC2289995E00082E23 /* GameViewRequestProtocol.swift in Sources */,
 				17E71A8322AD21D40081991E /* ClientCommands.swift in Sources */,
 				17376354230A87EE0050EB22 /* CATextLayer2.swift in Sources */,
+				17316504234C85380091A620 /* CreditViewer.swift in Sources */,
 				1713735722EAE67700C9F9A7 /* SCNDodecahedron.swift in Sources */,
 				170FC672233E003F00F9A8F1 /* Tree.swift in Sources */,
 				17ECE5A923321EE3003F4065 /* +StringList.swift in Sources */,
@@ -1527,6 +1534,7 @@
 				1797523422C38A4D00BF539A /* +ClientCommands.swift in Sources */,
 				17E74BF0230E7C9B00A62274 /* MainSlideInView.swift in Sources */,
 				1749B6E422BB3F68003DC65D /* TextLayerProtocol.swift in Sources */,
+				17316506234C865E0091A620 /* AttributionData.swift in Sources */,
 				17E71A7422AD21410081991E /* MessageHandler.swift in Sources */,
 				1785ED6522FD9BB2000B31C2 /* BoardDescriptor.swift in Sources */,
 				17A45B582271A59F002E705D /* AITestTable.swift in Sources */,
