@@ -27,14 +27,9 @@ class SettingsControllerCode: UIViewController, UIPickerViewDelegate, UIPickerVi
         MotionControlsBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
         MotionControlsBox.frame = CGRect(x: MotionControlsBox.frame.minX, y: MotionControlsBox.frame.minY,
                                         width: MotionControlsBox.frame.width, height: 128)
-        TopToolbarBox.layer.borderColor = UIColor.black.cgColor
-        TopToolbarBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
-        TopToolbarBox.frame = CGRect(x: TopToolbarBox.frame.minX, y: TopToolbarBox.frame.minY,
-                                         width: TopToolbarBox.frame.width, height: 128)
         
         ShowCameraSwitch.isOn = Settings.GetShowCameraControls()
         ShowMotionControlsSwitch.isOn = Settings.GetShowMotionControls()
-        ShowTopToolbarSwitch.isOn = Settings.GetShowTopToolbar()
         SetCameraState()
         for LanguageName in SupportedLanguages.allCases
         {
@@ -84,8 +79,6 @@ class SettingsControllerCode: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     func SetCameraState()
     {
-        ShowCameraText.isEnabled = Settings.GetShowTopToolbar()
-        ShowCameraSwitch.isEnabled = Settings.GetShowTopToolbar()
     }
     
     @IBAction func HandleCameraSwitchChanged(_ sender: Any)
@@ -96,12 +89,6 @@ class SettingsControllerCode: UIViewController, UIPickerViewDelegate, UIPickerVi
     @IBAction func HandleMotionControlsSwitchChanged(_ sender: Any)
     {
         Settings.SetShowMotionControls(NewValue: ShowMotionControlsSwitch.isOn)
-    }
-    
-    @IBAction func HandleTopToolbarSwitchChanged(_ sender: Any)
-    {
-        Settings.SetShowTopToolbar(NewValue: ShowTopToolbarSwitch.isOn)
-        SetCameraState()
     }
     
     @IBAction func HandleColorNameLanguageSwitchChanged(_ sender: Any)
@@ -118,10 +105,8 @@ class SettingsControllerCode: UIViewController, UIPickerViewDelegate, UIPickerVi
     @IBOutlet weak var LanguagePicker: UIPickerView!
     @IBOutlet weak var LanguageBox: UIView!
     @IBOutlet weak var ShowCameraText: UILabel!
-    @IBOutlet weak var ShowTopToolbarSwitch: UISwitch!
     @IBOutlet weak var ShowMotionControlsSwitch: UISwitch!
     @IBOutlet weak var ShowCameraSwitch: UISwitch!
     @IBOutlet weak var CameraControlBox: UIView!
     @IBOutlet weak var MotionControlsBox: UIView!
-    @IBOutlet weak var TopToolbarBox: UIView!
 }
