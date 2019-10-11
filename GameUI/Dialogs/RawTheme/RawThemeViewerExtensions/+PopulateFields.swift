@@ -173,15 +173,6 @@ extension RawThemeViewerCode
                 NewValue in
                 Settings.SetShowCameraControls(NewValue: NewValue as! Bool)
         })
-        SettingsGroup.AddField(ID: UUID(), Title: "Show top toolbar",
-                               Description: "Show or hide the top toolbar. Long press shows the menu if toolbar is not visible.",
-                               ControlTitle: "Show toolbar", Default: true as Any,
-                               Starting: Settings.GetShowTopToolbar() as Any, FieldType: .Bool,
-                               List: nil, Handler:
-            {
-                NewValue in
-                Settings.SetShowTopToolbar(NewValue: NewValue as! Bool)
-        })
         SettingsGroup.AddField(ID: UUID(), Title: "Show motion controls",
                                Description: "show or hide the bottom motion controls. If hidden, you must use gestures to move pieces.",
                                ControlTitle: "Show motion controls", Default: true as Any,
