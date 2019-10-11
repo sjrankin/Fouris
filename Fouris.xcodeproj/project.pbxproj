@@ -14,6 +14,7 @@
 		1704E302232130E900D7C158 /* ThemeEditingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1704E301232130E900D7C158 /* ThemeEditingProtocol.swift */; };
 		1705ADE9225D804400628268 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1705ADE8225D804400628268 /* Extensions.swift */; };
 		1705ADEC225D911B00628268 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1705ADEB225D911B00628268 /* Block.swift */; };
+		170745262350A4D800CB412D /* SCNnGon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170745252350A4D800CB412D /* SCNnGon.swift */; };
 		170F854122B5D3E5005405B6 /* VisualBlocks3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170F854022B5D3E5005405B6 /* VisualBlocks3D.swift */; };
 		170FC65E233DDF4A00F9A8F1 /* XMLDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170FC65D233DDF4A00F9A8F1 /* XMLDocument.swift */; };
 		170FC666233DE3E300F9A8F1 /* XMLKVP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170FC665233DE3E300F9A8F1 /* XMLKVP.swift */; };
@@ -270,6 +271,7 @@
 		1704E301232130E900D7C158 /* ThemeEditingProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeEditingProtocol.swift; sourceTree = "<group>"; };
 		1705ADE8225D804400628268 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1705ADEB225D911B00628268 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
+		170745252350A4D800CB412D /* SCNnGon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNnGon.swift; sourceTree = "<group>"; };
 		170F854022B5D3E5005405B6 /* VisualBlocks3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualBlocks3D.swift; sourceTree = "<group>"; };
 		170FC65D233DDF4A00F9A8F1 /* XMLDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLDocument.swift; sourceTree = "<group>"; };
 		170FC665233DE3E300F9A8F1 /* XMLKVP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLKVP.swift; sourceTree = "<group>"; };
@@ -570,6 +572,7 @@
 			children = (
 				1713735622EAE67700C9F9A7 /* SCNDodecahedron.swift */,
 				1713735922EAE6D500C9F9A7 /* SCNTetrahedron.swift */,
+				170745252350A4D800CB412D /* SCNnGon.swift */,
 			);
 			path = "Non-Standard Shapes";
 			sourceTree = "<group>";
@@ -1517,6 +1520,7 @@
 				17ED240B22716273002B92E1 /* ColorServer.swift in Sources */,
 				17AC98222324AB6B0020FB05 /* FlyingPieces.swift in Sources */,
 				1710BF82231E829800F566B3 /* PresetGradientListCode.swift in Sources */,
+				170745262350A4D800CB412D /* SCNnGon.swift in Sources */,
 				170F854122B5D3E5005405B6 /* VisualBlocks3D.swift in Sources */,
 				174328FD233F22D700F98863 /* Point3D.swift in Sources */,
 				173B4B15231B9136007B22F6 /* RecentColorListCode.swift in Sources */,
