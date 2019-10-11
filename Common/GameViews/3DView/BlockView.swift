@@ -566,6 +566,9 @@ import SceneKit
             
             case .Tetrahedron:
                 Geometry = SCNTetrahedron.Geometry(BaseLength: Width, Height: Height)
+            
+            case .Hexagon:
+                Geometry = SCNnGon.Geometry(VertexCount: 6, Radius: Width, Depth: Depth)
         }
         return Geometry
     }
