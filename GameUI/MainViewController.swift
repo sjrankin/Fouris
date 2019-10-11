@@ -94,7 +94,7 @@ class MainViewController: UIViewController,
                 }
                 else
                 {
-                    print("Not authorized to display badges.")
+                    print("Not authorized to display badges. (\((error?.localizedDescription)!))")
                 }
         }
         )
