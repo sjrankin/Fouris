@@ -185,6 +185,7 @@ import SceneKit
     ///     - **.Dodecahedron** uses **Width** divided by 2 for the radius of the points defining the solid.
     ///     - **.Tetrahedron** uses **Width** as the base segment length and **Height** as the height of *each* central point. To
     ///       have the overall height the same as the width, set **Height** to (***Width** * 0.5).
+    ///     - **.Hexagon** uses **Width** as the radial value and **Depth** as its depth.
     /// - Parameter GeoShape: The geometric shape.
     /// - Parameter Width: Width of the block.
     /// - Parameter Height: Height of the block.
@@ -227,6 +228,9 @@ import SceneKit
             
             case .Tetrahedron:
                 Geometry = SCNTetrahedron.Geometry(BaseLength: Width, Height: Height)
+            
+            case .Hexagon:
+                Geometry = SCNnGon.Geometry(VertexCount: 6, Radius: Width, Depth: Depth)
         }
         return Geometry!
     }
