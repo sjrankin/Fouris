@@ -934,6 +934,9 @@ class VisualDescriptor
 /// - **Capsule**: Block is capsule shaped.
 /// - **Cylinder**: Block is cylinder shaped.
 /// - **Tube**: Block is tube shaped.
+/// - **Dodecahedron**: Block is dodecahedron shaped.
+/// - **Tetrahedron**: Block is tetrahedron shaped.
+/// - **Hexagon**: Block is hexagonal and flat shaped.
 enum TileShapes3D: String, CaseIterable
 {
     case Cubic = "Cubic"
@@ -947,6 +950,7 @@ enum TileShapes3D: String, CaseIterable
     case Tube = "Tube"
     case Dodecahedron = "Dodecahedron"
     case Tetrahedron = "Tetrahedron"
+    case Hexagon = "Hexagon"
 }
 
 /// Texture types for rendered 3D blocks.
