@@ -41,7 +41,6 @@ class Settings
         _Settings.set(false, forKey: "ConfirmGameImageSave")
         _Settings.set(true, forKey: "ShowCameraControls")
         _Settings.set(true, forKey: "ShowMotionControls")
-        _Settings.set(true, forKey: "ShowTopToolbar")
         _Settings.set(true, forKey: "ShowColorsInOriginalLanguage")
         _Settings.set("US English", forKey: "InterfaceLanguage")
         _Settings.set("83c630ee-81d4-11e9-bc42-526af7764f64", forKey: "CurrentTheme")
@@ -149,21 +148,6 @@ class Settings
     {
         _Settings.set(NewValue, forKey: "ShowMotionControls")
         SendNotice(From: .ShowMotionControls, NewValue: NewValue)
-    }
-    
-    /// Get the shot top toolbar flag.
-    /// - Returns: Value indicating whether the top toolbar should be shown or not.
-    public static func GetShowTopToolbar() -> Bool
-    {
-        return _Settings.bool(forKey: "ShowTopToolbar")
-    }
-    
-    /// Set the show top toolbar flag.
-    /// -Parameter NewValue: new value for the show top toolbar flag.
-    public static func SetShowTopToolbar(NewValue: Bool)
-    {
-        _Settings.set(NewValue, forKey: "ShowTopToolbar")
-        SendNotice(From: .ShowTopToolbar, NewValue: NewValue)
     }
     
     /// Get the flag that determines whether camera controls are shown in the UI.
