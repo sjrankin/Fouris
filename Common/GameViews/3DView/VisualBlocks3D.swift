@@ -298,6 +298,9 @@ class VisualBlocks3D: SCNNode
             case .Tetrahedron:
                 Geometry = SCNTetrahedron.Geometry(BaseLength: Width, Height: Height)
             
+            case .Hexagon: 
+                Geometry = SCNnGon.Geometry(VertexCount: 6, Radius: 1.0, Depth: 0.5)
+            
             case .none:
                 fatalError("Ran into .none for GeoShape")
         }
