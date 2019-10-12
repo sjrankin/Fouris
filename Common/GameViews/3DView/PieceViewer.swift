@@ -39,6 +39,7 @@ import SceneKit
         self.clipsToBounds = true
         self.antialiasingMode = .multisampling4X
         self.allowsCameraControl = true
+        self.debugOptions = [.showWireframe]
         AddCameraAndLight()
     }
     
@@ -59,20 +60,31 @@ import SceneKit
         self.scene?.rootNode.addChildNode(_LightNode)
         
         _Camera = SCNCamera()
-        _Camera.fieldOfView = 92.5
-        let CameraNode = SCNNode()
-        CameraNode.camera = _Camera
-        CameraNode.position = SCNVector3(0.0, 0.0, 25.0)
-        CameraNode.orientation = SCNVector4(0.0, 0.0, 0.0, 0.0)
-        self.scene?.rootNode.addChildNode(CameraNode)
+        _Camera.fieldOfView = 120.0
+        _CameraNode = SCNNode()
+        _CameraNode.camera = _Camera
+        _CameraNode.position = SCNVector3(0.0, 0.0, 25.0)
+        _CameraNode.orientation = SCNVector4(0.0, 0.0, 0.0, 0.0)
+        self.scene?.rootNode.addChildNode(_CameraNode)
     }
     
     /// The light.
     private var _LightNode: SCNNode!
     /// The camera.
     private var _Camera: SCNCamera!
-        /// Holds the infrastructure (camera and light) added flag.
+    /// The camera node.
+    private var _CameraNode: SCNNode!
+    /// Holds the infrastructure (camera and light) added flag.
     private var InfrastructureAdded: Bool = false
+    
+    /// Sets the field of view for the piece.
+    /// - Parameter NewFOV: New field of view value.
+    public func SetFOV(_ NewFOV: CGFloat)
+    {
+        _CameraNode.camera?.fieldOfView = NewFOV
+        _CameraNode.position = SCNVector3(0.0,0.0,40.0)
+        DrawPiece()
+    }
     
     /// Starts the view.
     public func Start()
@@ -82,7 +94,7 @@ import SceneKit
     
     /// If the bounds of the view changes, redraw things.
     override var bounds: CGRect
-    {
+        {
         didSet
         {
             DrawPiece()
@@ -146,7 +158,7 @@ import SceneKit
             }
             else
             {
-            UnitSize = SmallestViewDimension / CGFloat(GreatestExtent) * 0.9
+                UnitSize = SmallestViewDimension / CGFloat(GreatestExtent) * 0.9
             }
         }
         for (X, Y) in BlockList
@@ -185,7 +197,7 @@ import SceneKit
     ///     - **.Dodecahedron** uses **Width** divided by 2 for the radius of the points defining the solid.
     ///     - **.Tetrahedron** uses **Width** as the base segment length and **Height** as the height of *each* central point. To
     ///       have the overall height the same as the width, set **Height** to (***Width** * 0.5).
-    ///     - **.Hexagon** uses **Width** as the radial value and **Depth** as its depth.
+    ///     - **.Hexagon** uses (**Width** * 0.5) as the radial value and (**Depth** * 0.5) as its depth.
     /// - Parameter GeoShape: The geometric shape.
     /// - Parameter Width: Width of the block.
     /// - Parameter Height: Height of the block.
@@ -230,7 +242,7 @@ import SceneKit
                 Geometry = SCNTetrahedron.Geometry(BaseLength: Width, Height: Height)
             
             case .Hexagon:
-                Geometry = SCNnGon.Geometry(VertexCount: 6, Radius: Width, Depth: Depth)
+                Geometry = SCNnGon.Geometry(VertexCount: 6, Radius: Width * 0.5, Depth: Depth * 0.5)
         }
         return Geometry!
     }
@@ -240,8 +252,8 @@ import SceneKit
     ///         position it was when the call with all `false`s is received. To stop and reset the piece to its
     ///         original orientation, call `ResetRotations`.
     /// - Parameter OnX: Determines if rotation occurs on the X axis.
-        /// - Parameter OnY: Determines if rotation occurs on the Y axis.
-        /// - Parameter OnZ: Determines if rotation occurs on the Z axis.
+    /// - Parameter OnY: Determines if rotation occurs on the Y axis.
+    /// - Parameter OnZ: Determines if rotation occurs on the Z axis.
     public func RotatePiece(OnX: Bool, OnY: Bool, OnZ: Bool)
     {
         PieceNode?.removeAllActions()
@@ -279,7 +291,7 @@ import SceneKit
     }
     /// Get or set the texture to use for each block. If nil, colors are used instead.
     @IBInspectable public var PieceTexture: UIImage?
-    {
+        {
         get
         {
             return _PieceTexture
@@ -307,7 +319,7 @@ import SceneKit
     }
     /// Get or set the show wire frame flag.
     @IBInspectable public var ShowWireFrame: Bool
-    {
+        {
         get
         {
             return _ShowWireFrame
@@ -328,7 +340,7 @@ import SceneKit
     }
     /// Get or set the auto adjust block size flag.
     @IBInspectable public var AutoAdjustBlockSize: Bool
-    {
+        {
         get
         {
             return _AutoAdjustBlockSize
@@ -349,7 +361,7 @@ import SceneKit
     }
     /// Get or set the block size.
     @IBInspectable public var BlockSize: CGFloat
-    {
+        {
         get
         {
             return _BlockSize
@@ -370,7 +382,7 @@ import SceneKit
     }
     /// Get or set the specular color.
     @IBInspectable public var SpecularColor: UIColor
-    {
+        {
         get
         {
             return _SpecularColor
@@ -459,13 +471,13 @@ import SceneKit
         {
             if _PieceTexture != nil
             {
-            DrawPiece()
+                DrawPiece()
             }
         }
     }
     /// Get or set the enable textures flag.
     @IBInspectable public var EnableTextures: Bool
-    {
+        {
         get
         {
             return _EnableTextures
