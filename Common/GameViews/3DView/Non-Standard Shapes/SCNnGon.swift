@@ -66,12 +66,20 @@ class SCNnGon: SCNNode
         CommonInitialization()
     }
     
+    /// Returns the geometry necessary to create the n-gon.
+    /// - Parameters:
+    ///   - VertexCount: Number of vertices in the n-gon.
+    ///   - Radius: Radius of the n-gon.
+    ///   - Depth: Depth of the shape.
+    /// - Returns: `SCNGeometry` object with the n-gon defined.
     public static func Geometry(VertexCount: Int, Radius: CGFloat, Depth: CGFloat) -> SCNGeometry
     {
         var Vertices = [CGPoint]()
         let AngleIncrement = 360.0 / Double(VertexCount)
         let TerminalAngle = 360.0 - AngleIncrement
-        for Angle in stride(from: 0.0, through: Double(TerminalAngle), by: Double(AngleIncrement))
+        let Start = AngleIncrement / 2.0
+//        for Angle in stride(from: 0.0, through: Double(TerminalAngle), by: Double(AngleIncrement))
+        for Angle in stride(from: Start, through: Double(TerminalAngle + Start), by: Double(AngleIncrement))
         {
             let Adjusted = 360.0 - Angle
             let Radians = CGFloat(Adjusted) * CGFloat.pi / 180.0
