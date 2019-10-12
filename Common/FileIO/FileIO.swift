@@ -24,6 +24,9 @@ class FileIO
     /// Sub-directory for statistical history.
     public static let HistoryDirectory = "/History"
     
+    /// Sub-directory for logging.
+    public static let LogDirectory = "/Logs"
+    
     /// Returns an URL for the document directory.
     ///
     /// - Returns: Document directory URL on success, nil on error.
@@ -664,6 +667,30 @@ class FileIO
         return true
     }
     
+    /// Save a file to the log directory. The directory is created if it does not yet exist.
+    /// - Parameter Name: Name of the file to save.
+    /// - Parameter Contents: Contents of the file to save.
+    /// - Returns: True on success, false on failure.
+    public static func SaveLogFile(Name: String, Contents: String) -> Bool
+    {
+        if !DirectoryExists(DirectoryName: LogDirectory)
+        {
+            CreateDirectory(DirectoryName: LogDirectory)
+        }
+        let SaveDirectory = GetDirectoryURL(DirectoryName: LogDirectory)
+        let FinalName = SaveDirectory?.appendingPathComponent(Name)
+        do
+        {
+            try Contents.write(to: FinalName!, atomically: false, encoding: .utf8)
+        }
+        catch
+        {
+            print("Error saving \(Name) to \(LogDirectory): error: \(error.localizedDescription)")
+            return false
+        }
+        return true
+    }
+    
     /// Write an array of `Int`s as a binary file.
     /// - Parameter Name: Name of the file to write. If the file already exists, it will be overwritten.
     /// - Parameter Directory: Directory where to write the file.
@@ -709,5 +736,41 @@ class FileIO
             return nil
         }
         return Result
+    }
+    
+    /// Deletes all files in the specified directory older than the passed number of days.
+    /// - Note: This function does *not* search and delete files in sub-directories of the passed directory.
+    /// - Parameter InDirectory: The directory in which to delete old files.
+    /// - Parameter OlderThan: Number of days old or older the file must be to delete the file. Calculated on a call-by-call
+    ///                        basis. Defaults to 30 (for 30 days).
+    public static func DeleteFiles(InDirectory: String, OlderThan: Int = 30) -> Bool
+    {
+        if OlderThan <= 0
+        {
+            print("The parameter OlderThan must be positive.")
+            return false
+        }
+        let MinimumDate = Date().addingTimeInterval(Double(-OlderThan) * 24 * 60 * 60)
+        do
+        {
+            let DirURL = GetDirectoryURL(DirectoryName: InDirectory)!
+            if FileManager.default.changeCurrentDirectoryPath(DirURL.path)
+            {
+                for File in try FileManager.default.contentsOfDirectory(atPath: ".")
+                {
+                    let CreationDate = try FileManager.default.attributesOfItem(atPath: File)[FileAttributeKey.creationDate] as! Date
+                if CreationDate < MinimumDate
+                {
+                    try FileManager.default.removeItem(atPath: File)
+                    }
+                }
+            }
+        }
+        catch
+        {
+            print("Error deleting old files. (\(error.localizedDescription))")
+            return false
+        }
+        return true
     }
 }
