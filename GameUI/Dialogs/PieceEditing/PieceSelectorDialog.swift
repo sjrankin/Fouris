@@ -339,6 +339,7 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
         {
             if let Cell = PieceSourceTable.cellForRow(at: SelectedRow) as? GamePieceCell
             {
+                print("Calling piece visual editor with piece ID: \(Cell.PieceID)")
                 Editor?.EditTheme(Theme: UserTheme!, PieceID: Cell.PieceID)
             }
         }
