@@ -143,10 +143,14 @@ class View3D: SCNView,                          //Our main super class.
     func ThemeUpdated(ThemeName: String, Field: ThemeFields)
     {
         print("Theme \(ThemeName) updated field \(Field)")
+        if Field == .BackgroundSolidColor || Field == .BackgroundSolidColorCycleTime
+        {
+            NewBackgroundSolidColor()
+            return
+        }
         if [ThemeFields.BackgroundLiveImageCamera, ThemeFields.BackgroundType, ThemeFields.BackgroundGradientColor,
             ThemeFields.ShowCenterLines, ThemeFields.CenterLineColor, ThemeFields.CenterLineWidth,
-            ThemeFields.BackgroundSolidColor, ThemeFields.BackgroundImageName, ThemeFields.BackgroundImageFromCameraRoll,
-            ThemeFields.BackgroundSolidColorCycleTime, ThemeFields.BackgroundSolidColorCycleTime].contains(Field)
+            ThemeFields.BackgroundSolidColor, ThemeFields.BackgroundImageName, ThemeFields.BackgroundImageFromCameraRoll].contains(Field)
         {
             DrawBackground()
         }
@@ -246,6 +250,63 @@ class View3D: SCNView,                          //Our main super class.
         return CameraNode
     }
     
+    /// Handle hue shifting of the solid background color.
+    /// - Note: To turn off hue shifting, pass `0.0` in `Duration`. This also has the effect of setting the background color to
+    ///         a non-changing solid color.
+    /// - Parameter Duration: Duration of the hue shift through 360°.
+    private func UpdateHueShifting(Duration: Double)
+    {
+        if Duration <= 0.0
+        {
+            HueTimer?.invalidate()
+            HueTimer = nil
+            self.scene?.background.contents = ColorServer.ColorFrom(CurrentTheme!.BackgroundSolidColor)
+            return
+        }
+        WorkingColor = ColorServer.ColorFrom(CurrentTheme!.BackgroundSolidColor)
+        let Interval = CurrentTheme!.BackgroundSolidColorCycleTime / 360.0
+        HueTimer = Timer.scheduledTimer(timeInterval: Interval, target: self, selector: #selector(UpdateSolidColorBackground),
+                                        userInfo: nil, repeats: true)
+    }
+    
+    /// Shift the solid color background by (1/360)°.
+    @objc func UpdateSolidColorBackground()
+    {
+        var Hue = WorkingColor.Hue
+        let Saturation = WorkingColor.Saturation
+        let Brightness = WorkingColor.Brightness
+        let Alpha = WorkingColor.Alpha()
+        Hue = Hue + (1.0 / 360.0)
+        if Hue > 1.0
+        {
+            Hue = 0.0
+        }
+        if Hue < 0.0
+        {
+            Hue = 1.0
+        }
+        WorkingColor = UIColor(hue: Hue, saturation: Saturation, brightness: Brightness, alpha: Alpha)
+        OperationQueue.main.addOperation
+            {
+                self.scene?.background.contents = self.WorkingColor
+    }
+    }
+
+    /// Holds the solid color hue shifting working value.
+    var WorkingColor: UIColor = UIColor.white
+    
+    /// Timer for shifting the color of the background.
+    var HueTimer: Timer? = nil
+    
+    /// Should be called when solid color parameters change.
+    /// - Note: This function takes care of any currently shifting colors by immediately terminating the timer and resetting things
+    ///         to a known value.
+    func NewBackgroundSolidColor()
+    {
+        UpdateHueShifting(Duration: 0.0)
+        DrawBackground()
+    }
+    
     /// Draw the background according to the current theme.
     /// - Note: If we're running on the simulator, live view is ignored.
     func DrawBackground()
@@ -253,11 +314,11 @@ class View3D: SCNView,                          //Our main super class.
         switch CurrentTheme?.BackgroundType
         {
             case .Color:
-                print("Game view background color is \(CurrentTheme!.BackgroundSolidColor)")
-                self.scene?.background.contents = ColorServer.ColorFrom(CurrentTheme!.BackgroundSolidColor)
+                    UpdateHueShifting(Duration: CurrentTheme!.BackgroundSolidColorCycleTime)
             
             case .Gradient:
-                print("Game view background gradient is \(CurrentTheme!.BackgroundGradientColor)")
+                //print("Game view background gradient is \(CurrentTheme!.BackgroundGradientColor)")
+                UpdateHueShifting(Duration: 0.0)
                 let BackgroundGradient = GradientManager.CreateGradientImage(From: CurrentTheme!.BackgroundGradientColor, WithFrame: self.frame)
                 self.scene?.background.contents = BackgroundGradient
             
