@@ -13,6 +13,9 @@ import UIKit
 /// - Note: The gradient is converted to a UIImage and display in a UIImageView, which is a sub-view of the main UIView.
 @IBDesignable class GradientSwatch: UIView
 {
+    /// Holds the delegate to the observer, if any.
+    weak var ObserverDelegate: GradientObserver? = nil
+    
     /// Initializer.
     /// - Parameter frame: Frame of the control.
     override init(frame: CGRect)
@@ -53,17 +56,13 @@ import UIKit
     }
     
     /// Draw the gradient.
-    func DrawGradient()
+    /// - Parameter WithOverride: If present, the gradient description to use. Otherwise, the backing value of `GradientDescriptor`
+    ///                           is used.
+    func DrawGradient(WithOverride: String? = nil)
     {
-        #if true
-        let GradientAsImage = GradientManager.CreateGradientImageWithMetadata(From: _GradientDescriptor,
+        let Descriptor: String = WithOverride == nil ? _GradientDescriptor : WithOverride!
+        let GradientAsImage = GradientManager.CreateGradientImageWithMetadata(From: Descriptor,
                                                                               WithFrame: GradientImage.bounds)
-        #else
-        let GradientAsImage = GradientManager.CreateGradientImage(From: _GradientDescriptor,
-                                                                  WithFrame: GradientImage.bounds,
-                                                                  IsVertical: _IsVertical,
-                                                                  ReverseColors: _ReverseColors)
-        #endif
         GradientImage.image = GradientAsImage
     }
     
@@ -130,6 +129,94 @@ import UIKit
         set
         {
             _ReverseColors = newValue
+        }
+    }
+    
+    private func UpdateHueShifting()
+    {
+        if _HueShiftDuration <= 0.0 || !_EnableHueShifting
+        {
+            HueTimer?.invalidate()
+            HueTimer = nil
+            ShiftingStops.removeAll()
+            DrawGradient()
+            return
+        }
+        ShiftingStops = GradientManager.ParseGradient(_GradientDescriptor, Vertical: &ShiftVertical, Reverse: &ShiftReversed)
+        let Interval = HueShiftDuration / 360.0
+        HueTimer = Timer.scheduledTimer(timeInterval: Interval, target: self, selector: #selector(UpdateShiftGradient),
+                                        userInfo: nil, repeats: true)
+    }
+    
+    var ShiftVertical: Bool = false
+    var ShiftReversed: Bool = false
+    
+    var ShiftingStops: [(UIColor, CGFloat)] = [(UIColor, CGFloat)]()
+    
+    private var HueTimer: Timer? = nil
+    
+    @objc func UpdateShiftGradient()
+    {
+        var NewStops = [(UIColor, CGFloat)]()
+        for (Working, Stop) in ShiftingStops
+        {
+            var Hue = Working.Hue
+            let Saturation = Working.Saturation
+            let Brightness = Working.Brightness
+            let Alpha = Working.Alpha()
+            Hue = Hue + (1.0 / 360.0)
+            if Hue > 1.0
+            {
+                Hue = 0.0
+            }
+            if Hue < 0.0
+            {
+                Hue = 1.0
+            }
+            let FinalColor = UIColor(hue: Hue, saturation: Saturation, brightness: Brightness, alpha: Alpha)
+            NewStops.append((FinalColor, Stop))
+        }
+        let NewGradient = GradientManager.AssembleGradient(NewStops, IsVertical: ShiftVertical, Reverse: ShiftReversed)
+        ShiftingStops = NewStops
+        DrawGradient(WithOverride: NewGradient)
+        ObserverDelegate?.GradientChanged(NewGradient: NewGradient)
+    }
+    
+    private var _EnableHueShifting: Bool = false
+    {
+        didSet
+        {
+            UpdateHueShifting()
+        }
+    }
+    @IBInspectable public var EnableHueShifting: Bool
+        {
+        get
+        {
+            return _EnableHueShifting
+        }
+        set
+        {
+            _EnableHueShifting = newValue
+        }
+    }
+    
+    private var _HueShiftDuration: Double = 60.0
+    {
+        didSet
+        {
+            UpdateHueShifting()
+        }
+    }
+    @IBInspectable public var HueShiftDuration: Double
+        {
+        get
+        {
+            return _HueShiftDuration
+        }
+        set
+        {
+            _HueShiftDuration = newValue
         }
     }
 }
