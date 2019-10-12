@@ -148,7 +148,12 @@ class View3D: SCNView,                          //Our main super class.
             NewBackgroundSolidColor()
             return
         }
-        if [ThemeFields.BackgroundLiveImageCamera, ThemeFields.BackgroundType, ThemeFields.BackgroundGradientColor,
+        if Field == .BackgroundGradientColor || Field == .BackgroundGradientColorCycleTime
+        {
+            NewGradientColorBackground()
+            return
+        }
+        if [ThemeFields.BackgroundLiveImageCamera, ThemeFields.BackgroundType,
             ThemeFields.ShowCenterLines, ThemeFields.CenterLineColor, ThemeFields.CenterLineWidth,
             ThemeFields.BackgroundSolidColor, ThemeFields.BackgroundImageName, ThemeFields.BackgroundImageFromCameraRoll].contains(Field)
         {
@@ -159,11 +164,11 @@ class View3D: SCNView,                          //Our main super class.
             switch Field
             {
                 case .ShowCenterLines:
-                fallthrough
+                    fallthrough
                 case .CenterLineColor:
-                fallthrough
+                    fallthrough
                 case .CenterLineWidth:
-                DrawCenterLines()
+                    DrawCenterLines()
                 
                 case .CameraFieldOfView:
                     CameraNode.camera?.fieldOfView = CGFloat(CurrentTheme!.CameraFieldOfView)
@@ -289,9 +294,9 @@ class View3D: SCNView,                          //Our main super class.
         OperationQueue.main.addOperation
             {
                 self.scene?.background.contents = self.WorkingColor
+        }
     }
-    }
-
+    
     /// Holds the solid color hue shifting working value.
     var WorkingColor: UIColor = UIColor.white
     
@@ -307,6 +312,75 @@ class View3D: SCNView,                          //Our main super class.
         DrawBackground()
     }
     
+    /// Updates gradient color shifting.
+    /// - Note: Set `Duration` to `0.0` to turn off gradient color shifting.
+    /// - Parameter Duration: Duration of the color shifts in the background gradient, in seconds.
+    func UpdateGradientShifting(Duration: Double)
+    {
+        if Duration <= 0.0
+        {
+            GradientTimer?.invalidate()
+            GradientTimer = nil
+            let BackgroundGradient = GradientManager.CreateGradientImage(From: CurrentTheme!.BackgroundGradientColor, WithFrame: self.frame)
+            self.scene?.background.contents = BackgroundGradient
+            return
+        }
+        ShiftingStops = GradientManager.ParseGradient(CurrentTheme!.BackgroundGradientColor, Vertical: &ShiftVertical, Reverse: &ShiftReversed)
+        let Interval = Duration / 360.0
+        GradientTimer = Timer.scheduledTimer(timeInterval: Interval, target: self, selector: #selector(UpdateShiftGradient),
+                                             userInfo: nil, repeats: true)
+    }
+    
+    /// Holds the working set of color stops when shifting gradient colors.
+    var ShiftingStops: [(UIColor, CGFloat)] = [(UIColor, CGFloat)]()
+    
+    /// Holds the original vertical flag in order to reassemble the gradient later.
+    var ShiftVertical: Bool = false
+    
+    /// Holds the original reverse flag in order to reassemble the gradient later.
+    var ShiftReversed: Bool = false
+    
+    /// The timer for shifting colors in the gradient.
+    var GradientTimer: Timer? = nil
+    
+    /// Shift the each color in the gradient by (1/360)° then update the background.
+    @objc func UpdateShiftGradient()
+    {
+        var NewStops = [(UIColor, CGFloat)]()
+        for (Working, Stop) in ShiftingStops
+        {
+            var Hue = Working.Hue
+            let Saturation = Working.Saturation
+            let Brightness = Working.Brightness
+            let Alpha = Working.Alpha()
+            Hue = Hue + (1.0 / 360.0)
+            if Hue > 1.0
+            {
+                Hue = 0.0
+            }
+            if Hue < 0.0
+            {
+                Hue = 1.0
+            }
+            let FinalColor = UIColor(hue: Hue, saturation: Saturation, brightness: Brightness, alpha: Alpha)
+            NewStops.append((FinalColor, Stop))
+        }
+        let NewGradient = GradientManager.AssembleGradient(NewStops, IsVertical: ShiftVertical, Reverse: ShiftReversed)
+        ShiftingStops = NewStops
+        let BackgroundGradient = GradientManager.CreateGradientImage(From: NewGradient, WithFrame: self.frame)
+        OperationQueue.main.addOperation
+            {
+                self.scene?.background.contents = BackgroundGradient
+        }
+    }
+    
+    /// Handle changes in the gradient background. Sets the color shifting to a known state (off).
+    func NewGradientColorBackground()
+    {
+        UpdateGradientShifting(Duration: 0.0)
+        DrawBackground()
+    }
+    
     /// Draw the background according to the current theme.
     /// - Note: If we're running on the simulator, live view is ignored.
     func DrawBackground()
@@ -314,13 +388,12 @@ class View3D: SCNView,                          //Our main super class.
         switch CurrentTheme?.BackgroundType
         {
             case .Color:
-                    UpdateHueShifting(Duration: CurrentTheme!.BackgroundSolidColorCycleTime)
+                UpdateGradientShifting(Duration: 0.0)
+                UpdateHueShifting(Duration: CurrentTheme!.BackgroundSolidColorCycleTime)
             
             case .Gradient:
-                //print("Game view background gradient is \(CurrentTheme!.BackgroundGradientColor)")
                 UpdateHueShifting(Duration: 0.0)
-                let BackgroundGradient = GradientManager.CreateGradientImage(From: CurrentTheme!.BackgroundGradientColor, WithFrame: self.frame)
-                self.scene?.background.contents = BackgroundGradient
+                UpdateGradientShifting(Duration: CurrentTheme!.BackgroundGradientCycleTime)
             
             case .Image:
                 break
@@ -336,6 +409,8 @@ class View3D: SCNView,                          //Our main super class.
                 {
                     return
                 }
+                UpdateGradientShifting(Duration: 0.0)
+                UpdateHueShifting(Duration: 0.0)
                 var CameraPosition: AVCaptureDevice.Position!
                 if CurrentTheme!.BackgroundLiveImageCamera == .Rear
                 {
@@ -492,7 +567,7 @@ class View3D: SCNView,                          //Our main super class.
                 let BottomNode = SCNNode(geometry: Bottom)
                 BottomNode.position = SCNVector3(-0.5, -10.5, 0)
                 BucketNode?.addChildNode(BottomNode)
-            
+                
                 BucketNode?.opacity = InitialOpacity
             
             case .Rotating4:
@@ -1254,7 +1329,7 @@ class View3D: SCNView,                          //Our main super class.
                     TopLine.categoryBitMask = GameLight
                     TopLine.name = "TopLine"
                     BucketGridNode?.addChildNode(TopLine)
-            }
+                }
                 BucketGridNode?.opacity = InitialOpacity
             
             case .Rotating4:
