@@ -90,6 +90,26 @@ import UIKit
         return Layer
     }
     
+    private func GetColorLayer() -> CALayer?
+    {
+        for Layer in self.layer.sublayers!
+        {
+            if Layer.name == "ColorLayer"
+            {
+                return Layer
+            }
+        }
+        return nil
+    }
+    
+    private func UpdateColorLayer(WithColor: UIColor)
+    {
+        if let ColorLayer = GetColorLayer()
+        {
+            ColorLayer.backgroundColor = WithColor.cgColor
+        }
+    }
+    
     /// Holds the top-most color.
     private var _TopColor: UIColor = UIColor.white
     {
@@ -171,6 +191,82 @@ import UIKit
         set
         {
             _BorderWidth = newValue
+        }
+    }
+    
+    private func UpdateHueShifting()
+    {
+        if !_EnableHueShifting || _HueShiftDuration <= 0.0
+        {
+            HueTimer?.invalidate()
+            HueTimer = nil
+            UpdateColorLayer(WithColor: _TopColor)
+            return
+        }
+        WorkingColor = _TopColor
+        let Interval = HueShiftDuration / 360.0
+        HueTimer = Timer.scheduledTimer(timeInterval: Interval, target: self, selector: #selector(UpdateColor),
+            userInfo: nil, repeats: true)
+    }
+    
+    var HueTimer: Timer? = nil
+    
+    var WorkingColor: UIColor = UIColor.white
+    
+    @objc func UpdateColor()
+    {
+        var Hue = WorkingColor.Hue
+        let Saturation = WorkingColor.Saturation
+        let Brightness = WorkingColor.Brightness
+        let Alpha = WorkingColor.Alpha()
+        Hue = Hue + (1.0 / 360.0)
+        if Hue > 1.0
+        {
+            Hue = 0.0
+        }
+        if Hue < 0.0
+        {
+            Hue = 1.0
+        }
+        WorkingColor = UIColor(hue: Hue, saturation: Saturation, brightness: Brightness, alpha: Alpha)
+        UpdateColorLayer(WithColor: WorkingColor)
+    }
+    
+    private var _EnableHueShifting: Bool = false
+    {
+        didSet
+        {
+            UpdateHueShifting()
+        }
+    }
+    @IBInspectable public var EnableHueShifting: Bool
+        {
+        get
+        {
+            return _EnableHueShifting
+        }
+        set
+        {
+            _EnableHueShifting = newValue
+        }
+    }
+    
+    private var _HueShiftDuration: Double = 60.0
+    {
+        didSet
+        {
+            UpdateHueShifting()
+        }
+    }
+    @IBInspectable public var HueShiftDuration: Double
+        {
+        get
+        {
+            return _HueShiftDuration
+        }
+        set
+        {
+            _HueShiftDuration = newValue
         }
     }
 }
