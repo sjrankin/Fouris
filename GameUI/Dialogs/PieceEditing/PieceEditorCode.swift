@@ -18,6 +18,8 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
     {
         super.viewDidLoad()
         StyleVisuals()
+        ScaleSlider.value = 90.0
+        ScaleValueLabel.text = "90°"
     }
     
     func StyleVisuals()
@@ -58,11 +60,11 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
         
         //Sample block views for setting shapes of blocks in pieces - not to be confused with the piece sample views.
         ActiveBlockView.Initialize()
-        ActiveBlockView.SetBlockSizes(X: 20.0, Y: 20.0, Z: 20.0)
+        ActiveBlockView.SetBlockSizes(X: 18.0, Y: 18.0, Z: 18.0)
         ActiveBlockView.StartRotations()
         ActiveBlockView.ViewBackgroundColor = ColorServer.ColorFrom(ColorNames.AzukiIro)
         RetiredBlockView.Initialize()
-        RetiredBlockView.SetBlockSizes(X: 20.0, Y: 20.0, Z: 20.0)
+        RetiredBlockView.SetBlockSizes(X: 18.0, Y: 18.0, Z: 18.0)
         RetiredBlockView.StartRotations()
         RetiredBlockView.ViewBackgroundColor = ColorServer.ColorFrom(ColorNames.AzukiIro)
         
@@ -72,18 +74,21 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
         let PieceShape = PieceFactory.GetShapeForPiece(ID: PieceID)!
         let ActualPiece = PieceFactory.CreateEphermeralPiece(PieceShape)
         ActiveSamplePiece.Initialize()
-        ActiveSamplePiece.BlockSize = 3.0
+        ActiveSamplePiece.BlockSize = 2.0
         ActiveSamplePiece.SpecularColor = UIColor.yellow
         ActiveSamplePiece.DiffuseColor = UIColor.orange
+        ActiveSamplePiece.AutoAdjustBlockSize = true
         ActiveSamplePiece.Start()
         ActiveSamplePiece.AddPiece(ActualPiece)
         RetiredSamplePiece.Initialize()
+        RetiredSamplePiece.BlockSize = 2.0
         RetiredSamplePiece.SpecularColor = UIColor.red
         RetiredSamplePiece.DiffuseColor = UIColor.brown
+        RetiredSamplePiece.AutoAdjustBlockSize = true
         RetiredSamplePiece.Start()
         RetiredSamplePiece.AddPiece(ActualPiece)
         
-        TitleBarTitle.text = "Piece Editor: \(PieceShape)"
+        TitleBarTitle.text = "Visual Piece Editor: \(PieceShape)"
     }
     
     func EditTheme(Theme: ThemeDescriptor2)
@@ -94,6 +99,7 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
     func EditTheme(Theme: ThemeDescriptor2, PieceID: UUID)
     {
         UserTheme = Theme
+        self.PieceID = PieceID
     }
     
     var ThemeID: UUID = UUID.Empty
@@ -176,26 +182,32 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
     
     @objc func HandleActiveBlockShapeSelection(Action: UIAlertAction)
     {
-        if let SelectedShape = ShapeMap[Action.title!]
+        for (Name, Shape) in ShapeMap
         {
-            ActiveBlockView.Shape = SelectedShape
-            ActiveBlockView.StartRotations()
+            if Name == Action.title!
+            {
+                ActiveBlockView.Shape = Shape
+                ActiveBlockView.StartRotations()
+                ActiveSamplePiece.Shape = Shape
+            }
         }
     }
     
-    /// Map between tile shape ID type and its title.
-    let ShapeMap: [String: TileShapes3D] =
+    /// Map between tile shape ID type and its title. This was converted from a dictionary to an array because Swift dictionaries
+    /// are non-deterministic for order and order is important in this case.
+    let ShapeMap: [(String, TileShapes3D)] =
         [
-            "Cube": .Cubic,
-            "Rounded Cube": .RoundedCube,
-            "Sphere": .Spherical,
-            "Cone": .Cone,
-            "Pyramid": .Pyramid,
-            "Cylinder": .Cylinder,
-            "Tube": .Tube,
-            "Capsule": .Capsule,
-            "Torus": .Torus,
-            "Tetrahedron": .Tetrahedron
+            ("Cube", .Cubic),
+            ("Rounded Cube", .RoundedCube),
+            ("Sphere", .Spherical),
+            ("Cone", .Cone),
+            ("Pyramid", .Pyramid),
+            ("Cylinder", .Cylinder),
+            ("Tube", .Tube),
+            ("Capsule", .Capsule),
+            ("Torus", .Torus),
+            ("Tetrahedron", .Tetrahedron),
+            ("Hexagon", .Hexagon)
     ]
     
     @IBAction func HandleActiveTextureButtonPressed(_ sender: Any)
@@ -228,10 +240,14 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
     
     @objc func HandleRetiredBlockShapeSelection(Action: UIAlertAction)
     {
-        if let SelectedShape = ShapeMap[Action.title!]
+        for (Name, Shape) in ShapeMap
         {
-            RetiredBlockView.Shape = SelectedShape
-            RetiredBlockView.StartRotations()
+            if Name == Action.title!
+            {
+                RetiredBlockView.Shape = Shape
+                RetiredBlockView.StartRotations()
+                RetiredSamplePiece.Shape = Shape
+            }
         }
     }
     
@@ -303,6 +319,25 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func HandleScaleSliderChanged(_ sender: Any)
+    {
+        let NewScale = ScaleSlider.value
+        let DisplayValue: Int = Int(NewScale)
+        if let Previous = PreviousScaleValue
+        {
+            if Previous == DisplayValue
+            {
+                return
+            }
+        }
+        PreviousScaleValue = DisplayValue
+                ScaleValueLabel.text = "\(DisplayValue)°"
+        ActiveSamplePiece.SetFOV(CGFloat(DisplayValue))
+        RetiredSamplePiece.SetFOV(CGFloat(DisplayValue))
+    }
+    
+    var PreviousScaleValue: Int? = nil
+    
     // MARK: Instantiations.
     
     @IBSegueAction func InstantiateColorPickerForActiveDiffuseColor(_ coder: NSCoder) -> ColorPickerCode?
@@ -341,6 +376,8 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
     
     @IBOutlet weak var TitleBarTitle: UILabel!
     @IBOutlet weak var RotationSegment: UISegmentedControl!
+    @IBOutlet weak var ScaleSlider: UISlider!
+    @IBOutlet weak var ScaleValueLabel: UILabel!
     
     @IBOutlet weak var ActiveSamplePiece: PieceViewer!
     @IBOutlet weak var ActiveSurfaceTypeSegment: UISegmentedControl!
