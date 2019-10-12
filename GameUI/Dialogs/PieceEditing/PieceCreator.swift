@@ -24,6 +24,8 @@ class PieceCreator: UIViewController, ThemeEditingProtocol, GridProtocol
         SampleView.layer.borderColor = UIColor.black.cgColor
         SampleView.backgroundColor = ColorServer.ColorFrom(ColorNames.AzukiIro)
         SampleView.layer.cornerRadius = 5.0
+        SampleView.DiffuseColor = UIColor.blue
+        SampleView.SpecularColor = UIColor.cyan
         RotateXSwitch.isOn = false
         RotateYSwitch.isOn = false
         RotateZSwitch.isOn = false
