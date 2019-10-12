@@ -80,19 +80,19 @@ public class Versioning: CustomStringConvertible
     }
     
     /// Build number.
-    public static let Build: Int = 2183
+    public static let Build: Int = 2190
     
     /// Build increment.
     private static let BuildIncrement = 1
     
     /// Build ID.
-    public static let BuildID: String = "1C3A35DF-04C3-496D-BCED-0246010F08AE"
+    public static let BuildID: String = "9E4CCE06-DF99-4751-A14B-DAC3AA4223BF"
     
     /// Build date.
     public static let BuildDate: String = "12 October 2019"
     
     /// Build Time.
-    public static let BuildTime: String = "17:25"
+    public static let BuildTime: String = "22:23"
     
     /// Return a standard build string.
     ///
@@ -285,7 +285,6 @@ public class Versioning: CustomStringConvertible
     }
     
     /// Return an XML-formatted key-value pair string.
-    ///
     /// - Parameters:
     ///   - Key: The key part of the key-value pair.
     ///   - Value: The value part of the key-value pair.
@@ -297,7 +296,6 @@ public class Versioning: CustomStringConvertible
     }
     
     /// Emit version information as an XML string.
-    ///
     /// - Parameter LeadingSpaceCount: The number of leading spaces to insert before
     ///                                each line of the returned result. If not specified,
     ///                                no extra leading spaces are used.
@@ -315,6 +313,20 @@ public class Versioning: CustomStringConvertible
         Emit = Emit + Spaces + "  " + CopyrightText() + "\n"
         Emit = Emit + Spaces + "</Version>"
         return Emit
+    }
+    
+    /// Returns versioning data as an array of key-value pairs.
+    /// - Returns: Array of key value pairs with versioning data.
+    public static func GetKeyValueData() -> [(String, String)]
+    {
+        var KVP = [(String, String)]()
+        KVP.append(("Application", ApplicationName))
+        KVP.append(("Version", MajorVersion + "." + MinorVersion))
+        KVP.append(("Build", String(describing: Build)))
+        KVP.append(("BuildDate", BuildDate + ", " + BuildTime))
+        KVP.append(("BuildID", BuildID))
+        KVP.append(("Copyright", CopyrightText()))
+        return KVP
     }
     
     /// Allows a caller to print the contents of the class easily.
