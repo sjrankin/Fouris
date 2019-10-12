@@ -252,6 +252,7 @@ class VisualBlocks3D: SCNNode
     ///     - **.Dodecahedron** uses **Width** divided by 2 for the radius of the points defining the solid.
     ///     - **.Tetrahedron** uses **Width** as the base segment length and **Height** as the height of *each* central point. To
     ///       have the overall height the same as the width, set **Height** to (***Width** * 0.5).
+    ///     - **.Hexagon** uses (**Width** * 0.5) as the radius and (**Depth** * 0.5) as the depth.
     /// - Parameter Width: Width of the block.
     /// - Parameter Height: Height of the block.
     /// - Parameter Depth: Depth of the block.
@@ -299,7 +300,7 @@ class VisualBlocks3D: SCNNode
                 Geometry = SCNTetrahedron.Geometry(BaseLength: Width, Height: Height)
             
             case .Hexagon: 
-                Geometry = SCNnGon.Geometry(VertexCount: 6, Radius: 1.0, Depth: 0.5)
+                Geometry = SCNnGon.Geometry(VertexCount: 6, Radius: Width * 0.5, Depth: 0.5)
             
             case .none:
                 fatalError("Ran into .none for GeoShape")
