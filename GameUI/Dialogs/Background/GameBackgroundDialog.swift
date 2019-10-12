@@ -152,6 +152,15 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
     {
         let Index = GradientCycleDuration.selectedSegmentIndex
         UserTheme!.BackgroundGradientCycleTime = UICycleTimeToSeconds(Index: Index)
+        if UserTheme!.BackgroundGradientCycleTime == 0.0
+        {
+            GradientSample.EnableHueShifting = false
+        }
+        else
+        {
+            GradientSample.HueShiftDuration = UserTheme!.BackgroundGradientCycleTime
+            GradientSample.EnableHueShifting = true
+        }
     }
     
     func EditTheme(Theme: ThemeDescriptor2)
