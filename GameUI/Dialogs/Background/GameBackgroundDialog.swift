@@ -31,6 +31,12 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
         GradientSample.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
         ImageSample.layer.borderColor = ColorServer.CGColorFrom(ColorNames.Black)
         ImageSample.backgroundColor = ColorServer.ColorFrom(ColorNames.Black)
+        
+        let ColorCycleTime = UserTheme!.BackgroundSolidColorCycleTime
+        ColorCycleDuration.selectedSegmentIndex = CycleTimeToUI(CycleTime: ColorCycleTime)
+        let GradientCycleTime = UserTheme!.BackgroundGradientCycleTime
+        GradientCycleDuration.selectedSegmentIndex = CycleTimeToUI(CycleTime: GradientCycleTime)
+        
         ImageViewer.image = UIImage(named: "DefaultImage")
         
         BackgroundType = UpdateBackgroundType(UserTheme!.BackgroundType)
@@ -64,11 +70,88 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
         NotAvailableText.isHidden = true
         NotAvailableText.alpha = 0.0
         #endif
-        
-        var IsVertical: Bool = false
-        var Reversed: Bool = false
-        _ = GradientManager.ParseGradient(UserTheme!.BackgroundGradientColor, Vertical: &IsVertical, Reverse: &Reversed)
-        VerticalGradientSwitch.isOn = IsVertical
+    }
+    
+    func CycleTimeToUI(CycleTime: Double) -> Int
+    {
+        let ITime = Int(CycleTime)
+        switch ITime
+        {
+            case 0:
+            return 0
+            
+            case 15:
+            return 1
+            
+            case 30:
+            return 2
+            
+            case 60:
+            return 3
+            
+            case 90:
+            return 4
+            
+            case 300:
+            return 5
+            
+            case 600:
+            return 6
+            
+            default:
+            return 3
+        }
+    }
+    
+    func UICycleTimeToSeconds(Index: Int) -> Double
+    {
+        switch Index
+        {
+            case 0:
+                return 0.0
+            
+            case 1:
+                return 15.0
+            
+            case 2:
+                return 30.0
+            
+            case 3:
+                return 60.0
+            
+            case 4:
+                return 90.0
+            
+            case 5:
+                return 300.0
+            
+            case 6:
+                return 600.0
+            
+            default:
+                return 0.0
+        }
+    }
+    
+    @IBAction func HandleColorCycleTimeChanged(_ sender: Any)
+    {
+        let Index = ColorCycleDuration.selectedSegmentIndex
+        UserTheme!.BackgroundSolidColorCycleTime = UICycleTimeToSeconds(Index: Index)
+        if UserTheme!.BackgroundSolidColorCycleTime == 0.0
+        {
+            ColorSample.EnableHueShifting = false
+        }
+        else
+        {
+            ColorSample.HueShiftDuration = UserTheme!.BackgroundSolidColorCycleTime
+                        ColorSample.EnableHueShifting = true
+        }
+    }
+    
+    @IBAction func HandleGradientCycleTimeChanged(_ sender: Any)
+    {
+        let Index = GradientCycleDuration.selectedSegmentIndex
+        UserTheme!.BackgroundGradientCycleTime = UICycleTimeToSeconds(Index: Index)
     }
     
     func EditTheme(Theme: ThemeDescriptor2)
@@ -162,8 +245,10 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
                 GradientColorBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
                 ImageBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
                 LiveViewBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
-                VerticalGradientLabel.isEnabled = false
-                VerticalGradientSwitch.isEnabled = false
+                ColorCycleLabel.isEnabled = true
+                ColorCycleDuration.isEnabled = true
+                GradientCycleLabel.isEnabled = false
+                GradientCycleDuration.isEnabled = false
             
             case .Gradient:
                 SolidColorTitle.textColor = ColorServer.ColorFrom(ColorNames.DarkGray)
@@ -178,8 +263,10 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
                 GradientColorBox.backgroundColor = ColorServer.ColorFrom(ColorNames.White)
                 ImageBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
                 LiveViewBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
-                VerticalGradientLabel.isEnabled = true
-                VerticalGradientSwitch.isEnabled = true
+                ColorCycleLabel.isEnabled = false
+                ColorCycleDuration.isEnabled = false
+                GradientCycleLabel.isEnabled = true
+                GradientCycleDuration.isEnabled = true
             
             case .Image:
                 SolidColorTitle.textColor = ColorServer.ColorFrom(ColorNames.DarkGray)
@@ -194,8 +281,10 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
                 GradientColorBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
                 ImageBox.backgroundColor = ColorServer.ColorFrom(ColorNames.White)
                 LiveViewBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
-                VerticalGradientLabel.isEnabled = false
-                VerticalGradientSwitch.isEnabled = false
+                ColorCycleLabel.isEnabled = false
+                ColorCycleDuration.isEnabled = false
+                GradientCycleLabel.isEnabled = false
+                GradientCycleDuration.isEnabled = false
             
             case .LiveView:
                 SolidColorTitle.textColor = ColorServer.ColorFrom(ColorNames.DarkGray)
@@ -210,8 +299,10 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
                 GradientColorBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
                 ImageBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
                 LiveViewBox.backgroundColor = ColorServer.ColorFrom(ColorNames.White)
-                VerticalGradientLabel.isEnabled = false
-                VerticalGradientSwitch.isEnabled = false
+                ColorCycleLabel.isEnabled = false
+                ColorCycleDuration.isEnabled = false
+                GradientCycleLabel.isEnabled = false
+                GradientCycleDuration.isEnabled = false
             
             default:
                 break
@@ -287,10 +378,8 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
             {
                 if let FinalEdit = Edited
                 {
-                let IsVertical = VerticalGradientSwitch.isOn
-                let Final = ForceVerticalGradient(FinalEdit, VerticalFlag: IsVertical)
-                GradientSample.GradientDescriptor = Final
-                UserTheme!.BackgroundGradientColor = Final
+                GradientSample.GradientDescriptor = FinalEdit
+                UserTheme!.BackgroundGradientColor = FinalEdit
                 }
             }
         }
@@ -303,14 +392,6 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
         let Stops = GradientManager.ParseGradient(RawGradient, Vertical: &NotUsed, Reverse: &Reversed)
         let Final = GradientManager.AssembleGradient(Stops, IsVertical: VerticalFlag, Reverse: Reversed)
         return Final
-    }
-    
-    @IBAction func HandleVerticalSwitchChanged(_ sender: Any)
-    {
-        let VerticalSwitch = VerticalGradientSwitch.isOn
-        let Final = ForceVerticalGradient(UserTheme!.BackgroundGradientColor, VerticalFlag: VerticalSwitch)
-        UserTheme!.BackgroundGradientColor = Final
-        GradientSample.GradientDescriptor = Final
     }
     
     func GradientToEdit(_ Edited: String?, Tag: Any?)
@@ -346,7 +427,9 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
     @IBOutlet weak var LiveViewBox: UIView!
     @IBOutlet weak var GradientColorBox: UIView!
     @IBOutlet weak var SolidColorBox: UIView!
-    @IBOutlet weak var VerticalGradientLabel: UILabel!
-    @IBOutlet weak var VerticalGradientSwitch: UISwitch!
+    @IBOutlet weak var ColorCycleLabel: UILabel!
+    @IBOutlet weak var GradientCycleLabel: UILabel!
+    @IBOutlet weak var ColorCycleDuration: UISegmentedControl!
+    @IBOutlet weak var GradientCycleDuration: UISegmentedControl!
 }
 
