@@ -466,6 +466,7 @@ class PieceFactory
     /// - Returns: The newly created piece.
     public static func CreateEphermeralPiece(_ PieceShape: PieceShapes) -> Piece
     {
+        print("Getting ephemeral piece \(PieceShape)")
         let SomePiece = Piece(.GamePiece)
         SomePiece.Shape = PieceShape
         SomePiece.ShapeID = PieceFactory.ShapeIDMap[PieceShape]!
