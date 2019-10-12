@@ -101,6 +101,7 @@ class MainViewController: UIViewController,
         #endif
         
         #if false
+        //Initialize the link with TDebug.
         State.Initialize(WithDelegate: self)
         TDebugPrefix = UUID()
         MPMgr = MultiPeerManager()
@@ -119,10 +120,10 @@ class MainViewController: UIViewController,
         Themes = ThemeManager3()
         Themes.Initialize()
         UserTheme = Themes.UserTheme
-        print("UserTheme=\n\(UserTheme!.ToString())")
+        //print("UserTheme=\n\(UserTheme!.ToString())")
         Themes.SubscribeToChanges(Subscriber: "MainViewController", SubscribingObject: self)
         CurrentBaseGameType = UserTheme!.GameType
-        print("CurrentBaseGameType=\(CurrentBaseGameType)")
+        //print("CurrentBaseGameType=\(CurrentBaseGameType)")
         #if true
         PieceVisualManager2.Initialize()
         #else
