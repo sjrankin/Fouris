@@ -1,5 +1,5 @@
 //
-//  +CentralShapes.swift
+//  +DrawCenterBlock.swift
 //  Fouris
 //
 //  Created by Stuart Rankin on 8/18/19.
@@ -41,7 +41,7 @@ extension View3D
                 let CentralNode = SCNNode(geometry: Center)
                 CentralNode.position = SCNVector3(0.0, 0.0, 0.0)
                 CentralNode.categoryBitMask = GameLight
-                                CentralNode.opacity = InitialOpacity
+                CentralNode.opacity = InitialOpacity
                 Parent.addChildNode(CentralNode)
             
             case .Square:
@@ -51,7 +51,7 @@ extension View3D
                 let CentralNode = SCNNode(geometry: Center)
                 CentralNode.position = SCNVector3(0.0, 0.0, 0.0)
                 CentralNode.categoryBitMask = GameLight
-                                CentralNode.opacity = InitialOpacity
+                CentralNode.opacity = InitialOpacity
                 Parent.addChildNode(CentralNode)
             
             case .BigSquare:
@@ -61,7 +61,7 @@ extension View3D
                 let CentralNode = SCNNode(geometry: Center)
                 CentralNode.position = SCNVector3(0.0, 0.0, 0.0)
                 CentralNode.categoryBitMask = GameLight
-                                CentralNode.opacity = InitialOpacity
+                CentralNode.opacity = InitialOpacity
                 Parent.addChildNode(CentralNode)
             
             case .SmallRectangle:
@@ -71,7 +71,7 @@ extension View3D
                 let CentralNode = SCNNode(geometry: Center)
                 CentralNode.position = SCNVector3(0.0, 0.0, 0.0)
                 CentralNode.categoryBitMask = GameLight
-                                CentralNode.opacity = InitialOpacity
+                CentralNode.opacity = InitialOpacity
                 Parent.addChildNode(CentralNode)
             
             case .Rectangle:
@@ -81,7 +81,7 @@ extension View3D
                 let CentralNode = SCNNode(geometry: Center)
                 CentralNode.position = SCNVector3(0.0, 0.0, 0.0)
                 CentralNode.categoryBitMask = GameLight
-                                CentralNode.opacity = InitialOpacity
+                CentralNode.opacity = InitialOpacity
                 Parent.addChildNode(CentralNode)
             
             case .BigRectangle:
@@ -91,7 +91,7 @@ extension View3D
                 let CentralNode = SCNNode(geometry: Center)
                 CentralNode.position = SCNVector3(0.0, 0.0, 0.0)
                 CentralNode.categoryBitMask = GameLight
-                                CentralNode.opacity = InitialOpacity
+                CentralNode.opacity = InitialOpacity
                 Parent.addChildNode(CentralNode)
             
             case .SmallDiamond:
@@ -165,7 +165,7 @@ extension View3D
                 let R5Node = SCNNode(geometry: R5)
                 R5Node.position = SCNVector3(0.0, -2.0, 0.0)
                 R5Node.categoryBitMask = GameLight
-                                Group.opacity = InitialOpacity
+                Group.opacity = InitialOpacity
                 Group.addChildNode(R5Node)
             
             case .BigDiamond:
@@ -226,7 +226,7 @@ extension View3D
                 let R7Node = SCNNode(geometry: R7)
                 R7Node.position = SCNVector3(0.0, -3.0, 0.0)
                 R7Node.categoryBitMask = GameLight
-                                Group.opacity = InitialOpacity
+                Group.opacity = InitialOpacity
                 Group.addChildNode(R7Node)
             
             case .Bracket2:
@@ -279,7 +279,7 @@ extension View3D
                 let LowerRightVerticalNode = SCNNode(geometry: LowerRightVertical)
                 LowerRightVerticalNode.position = SCNVector3(2.0, -3.0, 0.0)
                 LowerRightVerticalNode.categoryBitMask = GameLight
-                                Group.opacity = InitialOpacity
+                Group.opacity = InitialOpacity
                 Group.addChildNode(LowerRightVerticalNode)
             
             case .Bracket4:
@@ -349,7 +349,7 @@ extension View3D
                 LRBNode.position = SCNVector3(4.0, -2.0, 0.0)
                 LRBNode.categoryBitMask = GameLight
                 Group.addChildNode(LRBNode)
-                            Group.opacity = InitialOpacity
+                Group.opacity = InitialOpacity
         }
     }
 }
