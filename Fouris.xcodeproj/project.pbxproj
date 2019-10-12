@@ -177,6 +177,7 @@
 		17A45B5B2271A5CC002E705D /* AITestNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A45B5A2271A5CC002E705D /* AITestNode.swift */; };
 		17A45B632271DA98002E705D /* AITestDataUpdatedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A45B612271DA8C002E705D /* AITestDataUpdatedProtocol.swift */; };
 		17A48E422327BC6900510EE6 /* GameSelectorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A48E412327BC6900510EE6 /* GameSelectorProtocol.swift */; };
+		17A946612351B96400A01C17 /* GradientObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A946602351B96400A01C17 /* GradientObserver.swift */; };
 		17AA4FB523408FCB0022FF90 /* GameViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AA4FB423408FCB0022FF90 /* GameViewContainer.swift */; };
 		17AA4FB7234090F40022FF90 /* ParentSizeChangedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AA4FB6234090F40022FF90 /* ParentSizeChangedProtocol.swift */; };
 		17AB99D22297DC66003C4674 /* ImageServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AB99D12297DC66003C4674 /* ImageServer.swift */; };
@@ -439,6 +440,7 @@
 		17A45B5F2271D8CA002E705D /* MainDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDelegate.swift; sourceTree = "<group>"; };
 		17A45B612271DA8C002E705D /* AITestDataUpdatedProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AITestDataUpdatedProtocol.swift; sourceTree = "<group>"; };
 		17A48E412327BC6900510EE6 /* GameSelectorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSelectorProtocol.swift; sourceTree = "<group>"; };
+		17A946602351B96400A01C17 /* GradientObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientObserver.swift; sourceTree = "<group>"; };
 		17AA4FB423408FCB0022FF90 /* GameViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewContainer.swift; sourceTree = "<group>"; };
 		17AA4FB6234090F40022FF90 /* ParentSizeChangedProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentSizeChangedProtocol.swift; sourceTree = "<group>"; };
 		17AB99D12297DC66003C4674 /* ImageServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageServer.swift; sourceTree = "<group>"; };
@@ -1013,6 +1015,7 @@
 				1710BF81231E829800F566B3 /* PresetGradientListCode.swift */,
 				1710BF83231E841500F566B3 /* PresetGradientCell.swift */,
 				17189FFC233348AB00317BF1 /* GradientSwatch.swift */,
+				17A946602351B96400A01C17 /* GradientObserver.swift */,
 				172C73BF234DCB0700418D6A /* GradientExport2.swift */,
 			);
 			path = GradientPicker;
@@ -1627,6 +1630,7 @@
 				179C5E2323222F5A0003845B /* PieceVisuals.swift in Sources */,
 				1797523E22C38A4D00BF539A /* +TextMessages.swift in Sources */,
 				1797524022C38A4D00BF539A /* +EchoCommands.swift in Sources */,
+				17A946612351B96400A01C17 /* GradientObserver.swift in Sources */,
 				17C2F3AF231A14F2001EF200 /* ColorNamePickerCode.swift in Sources */,
 				17E71A7122AD211E0081991E /* OSColorExtensions.swift in Sources */,
 				17616ACB23166CB000DFFEFE /* SelectGameController.swift in Sources */,
