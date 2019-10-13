@@ -145,10 +145,12 @@ class ActivityLog
     public static func ToString(AppendTerminalReturn: Bool = true) -> String
     {
         var Working = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+        Working.append("<Log>\n")
         for Item in LogItems
         {
             Working.append(Item.ToString(Indent: 4, AddTerminalReturn: true))
         }
+        Working.append("</Log>\n")
         if AppendTerminalReturn
         {
             Working.append("\n")
