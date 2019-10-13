@@ -27,6 +27,9 @@ class FileIO
     /// Sub-directory for logging.
     public static let LogDirectory = "/Logs"
     
+    /// Sub-directory for debugging.
+    public static let DebugDirectory = "/Debug"
+    
     /// Returns an URL for the document directory.
     ///
     /// - Returns: Document directory URL on success, nil on error.
@@ -319,7 +322,61 @@ class FileIO
     }
     
     /// Save an image to the specified directory.
-    ///
+    /// - Note: This function will check for the existence of the directory and create it if it does not exist.
+    /// - Parameters:
+    ///   - Image: The UIImage to save.
+    ///   - WithName: The name to use when saving the image.
+    ///   - InDirectory: The directory in which to save the image.
+    ///   - AsJPG: If true, save as a .JPG image. If false, save as a .PNG image.
+    /// - Returns: True on success, nil on failure.
+    public static func SaveImageEx(_ Image: UIImage, WithName: String, InDirectory: String, AsJPG: Bool = true) -> Bool
+    {
+        var DirURL: URL? = nil
+        if !DirectoryExists(DirectoryName: InDirectory)
+        {
+            DirURL = CreateDirectory(DirectoryName: InDirectory)
+        }
+        else
+        {
+            DirURL = GetDirectoryURL(DirectoryName: InDirectory)
+        }
+        if AsJPG
+        {
+            if let Data = Image.jpegData(compressionQuality: 1.0)
+            {
+                let FileName = DirURL!.appendingPathComponent(WithName)
+                do
+                {
+                    try Data.write(to: FileName)
+                }
+                catch
+                {
+                    print("Error writing \(FileName.path): \(error.localizedDescription)")
+                    return false
+                }
+            }
+        }
+        else
+        {
+            if let Data = Image.pngData()
+            {
+                let FileName = DirURL!.appendingPathComponent(WithName)
+                do
+                {
+                    try Data.write(to: FileName)
+                }
+                catch
+                {
+                    print("Error writing \(FileName.path): \(error.localizedDescription)")
+                    return false
+                }
+            }
+        }
+        return true
+    }
+    
+    /// Save an image to the specified directory.
+    /// - Note: This function does not check to see if the passed directory exists.
     /// - Parameters:
     ///   - Image: The UIImage to save.
     ///   - WithName: The name to use when saving the image.
@@ -739,10 +796,13 @@ class FileIO
     }
     
     /// Deletes all files in the specified directory older than the passed number of days.
-    /// - Note: This function does *not* search and delete files in sub-directories of the passed directory.
+    /// - Note:
+    ///   - This function does *not* search and delete files in sub-directories of the passed directory.
+    ///   - If the directory passed to us does not exist, a debug message is printed to the debug console and false is returned.
     /// - Parameter InDirectory: The directory in which to delete old files.
     /// - Parameter OlderThan: Number of days old or older the file must be to delete the file. Calculated on a call-by-call
     ///                        basis. Defaults to 30 (for 30 days).
+    /// - Returns: True on success (files deleted), false on error.
     public static func DeleteFiles(InDirectory: String, OlderThan: Int = 30) -> Bool
     {
         if OlderThan <= 0
@@ -751,24 +811,31 @@ class FileIO
             return false
         }
         let MinimumDate = Date().addingTimeInterval(Double(-OlderThan) * 24 * 60 * 60)
-        do
+        if let DirURL = GetDirectoryURL(DirectoryName: InDirectory)
         {
-            let DirURL = GetDirectoryURL(DirectoryName: InDirectory)!
-            if FileManager.default.changeCurrentDirectoryPath(DirURL.path)
+            do
             {
-                for File in try FileManager.default.contentsOfDirectory(atPath: ".")
+                if FileManager.default.changeCurrentDirectoryPath(DirURL.path)
                 {
-                    let CreationDate = try FileManager.default.attributesOfItem(atPath: File)[FileAttributeKey.creationDate] as! Date
-                if CreationDate < MinimumDate
-                {
-                    try FileManager.default.removeItem(atPath: File)
+                    for File in try FileManager.default.contentsOfDirectory(atPath: ".")
+                    {
+                        let CreationDate = try FileManager.default.attributesOfItem(atPath: File)[FileAttributeKey.creationDate] as! Date
+                        if CreationDate < MinimumDate
+                        {
+                            try FileManager.default.removeItem(atPath: File)
+                        }
                     }
                 }
             }
+            catch
+            {
+                print("Error deleting old files. (\(error.localizedDescription))")
+                return false
+            }
         }
-        catch
+        else
         {
-            print("Error deleting old files. (\(error.localizedDescription))")
+            print("Could not find \(InDirectory).")
             return false
         }
         return true
