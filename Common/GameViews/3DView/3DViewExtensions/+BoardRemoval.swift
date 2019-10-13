@@ -26,19 +26,24 @@ extension View3D
                     ShowMethod: ShowBoardMethods, ShowDuration: Double)
     {
         #if true
-        BucketGridNode?.removeFromParentNode()
-        OutlineNode?.removeFromParentNode()
-        BucketNode?.removeFromParentNode()
-        let (NewGrid, NewOutline) = DrawGridInBucket(ShowGrid: CurrentTheme!.ShowBucketGrid,
-                                                     DrawOutline: CurrentTheme!.ShowBucketGridOutline,
+        var NotUsed: String? = nil
+        ActivityLog.AddEntry(Title: "CleanUp", Source: "View3D", KVPs: [("Message","Resetting game board objects.")], LogFileName: &NotUsed)
+        OperationQueue.main.addOperation
+            {
+                self.BucketGridNode?.removeFromParentNode()
+                self.OutlineNode?.removeFromParentNode()
+                self.BucketNode?.removeFromParentNode()
+                let (NewGrid, NewOutline) = self.DrawGridInBucket(ShowGrid: self.CurrentTheme!.ShowBucketGrid,
+                                                             DrawOutline: self.CurrentTheme!.ShowBucketGridOutline,
                                                      InitialOpacity: 1.0)
-        BucketGridNode = NewGrid
-        OutlineNode = NewOutline
-        self.scene?.rootNode.addChildNode(BucketGridNode!)
-        self.scene?.rootNode.addChildNode(OutlineNode!)
-        let NewBucket = CreateBucket(InitialOpacity: 1.0, Shape: CenterBlockShape)
-        BucketNode = NewBucket
-        self.scene?.rootNode.addChildNode(BucketNode!)
+                self.BucketGridNode = NewGrid
+                self.OutlineNode = NewOutline
+                self.scene?.rootNode.addChildNode(self.BucketGridNode!)
+                self.scene?.rootNode.addChildNode(self.OutlineNode!)
+                let NewBucket = self.CreateBucket(InitialOpacity: 1.0, Shape: self.CenterBlockShape)
+                self.BucketNode = NewBucket
+                self.scene?.rootNode.addChildNode(self.BucketNode!)
+        }
         #else
         //objc_sync_enter(CanUseBucket)
         var HidingMethod = HideMethod
