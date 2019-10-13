@@ -109,7 +109,9 @@ class View3D: SCNView,                          //Our main super class.
         }
         #endif
         
-        CreateBucket()
+        let Node = CreateBucket(InitialOpacity: 1.0, Shape: CenterBlockShape)
+        BucketNode = Node
+        self.scene?.rootNode.addChildNode(BucketNode!)
         if CurrentTheme!.ShowGrid
         {
             CreateGrid()
@@ -534,7 +536,9 @@ class View3D: SCNView,                          //Our main super class.
     
     /// Create a 3D bucket and add it to the scene. Attributes are from the current theme.
     /// - Parameter InitialOpacity: The initial opacity of the bucket. Defaults to 1.0.
-    func CreateBucket(InitialOpacity: CGFloat = 1.0)
+    /// - Parameter Shape: The bucket's shape.
+    /// - Returns: The bucket node.
+    func CreateBucket(InitialOpacity: CGFloat = 1.0, Shape: CenterShapes) -> SCNNode
     {
         if BucketNode != nil
         {
@@ -542,7 +546,7 @@ class View3D: SCNView,                          //Our main super class.
             BucketNode?.removeFromParentNode()
             print("Done removing bucket from parent.")
         }
-        BucketNode = SCNNode()
+        let LocalBucketNode = SCNNode()
         
         switch BaseGameType
         {
@@ -552,26 +556,30 @@ class View3D: SCNView,                          //Our main super class.
                 LeftSide.materials.first?.specular.contents = ColorServer.ColorFrom(ColorNames.White)
                 let LeftSideNode = SCNNode(geometry: LeftSide)
                 LeftSideNode.position = SCNVector3(-6, 0, 0)
-                BucketNode?.addChildNode(LeftSideNode)
+                LocalBucketNode.addChildNode(LeftSideNode)
                 
                 let RightSide = SCNBox(width: 1.0, height: 20.0, length: 1.0, chamferRadius: 0.0)
                 RightSide.materials.first?.diffuse.contents = ColorServer.ColorFrom(ColorNames.ReallyDarkGray)
                 RightSide.materials.first?.specular.contents = ColorServer.ColorFrom(ColorNames.White)
                 let RightSideNode = SCNNode(geometry: RightSide)
                 RightSideNode.position = SCNVector3(5, 0, 0)
-                BucketNode?.addChildNode(RightSideNode)
+                LocalBucketNode.addChildNode(RightSideNode)
                 
                 let Bottom = SCNBox(width: 12.0, height: 1.0, length: 1.0, chamferRadius: 0.0)
                 Bottom.materials.first?.diffuse.contents = ColorServer.ColorFrom(ColorNames.ReallyDarkGray)
                 Bottom.materials.first?.specular.contents = ColorServer.ColorFrom(ColorNames.White)
                 let BottomNode = SCNNode(geometry: Bottom)
                 BottomNode.position = SCNVector3(-0.5, -10.5, 0)
-                BucketNode?.addChildNode(BottomNode)
+                LocalBucketNode.addChildNode(BottomNode)
                 
-                BucketNode?.opacity = InitialOpacity
+                LocalBucketNode.opacity = InitialOpacity
             
             case .Rotating4:
+                #if true
+                DrawCenterBlock(Parent: LocalBucketNode, InShape: Shape, InitialOpacity: InitialOpacity)
+                #else
                 DrawCenterBlock(Parent: BucketNode!, InShape: CenterBlockShape, InitialOpacity: InitialOpacity)
+                #endif
             
             case .Cubic:
                 let Center = SCNBox(width: 2.0, height: 2.0, length: 2.0, chamferRadius: 0.0)
@@ -579,12 +587,16 @@ class View3D: SCNView,                          //Our main super class.
                 Center.materials.first?.specular.contents = ColorServer.ColorFrom(ColorNames.White)
                 let CentralNode = SCNNode(geometry: Center)
                 CentralNode.position = SCNVector3(0.0, 0.0, 0.0)
-                BucketNode?.addChildNode(CentralNode)
-                BucketNode?.opacity = InitialOpacity
+                LocalBucketNode.addChildNode(CentralNode)
+                LocalBucketNode.opacity = InitialOpacity
         }
         
+                _BucketAdded = true
+        #if false
         self.scene?.rootNode.addChildNode(BucketNode!)
-        _BucketAdded = true
+        #else
+        return LocalBucketNode
+        #endif
     }
     
     /// Flag indicating the bucket was added. Do we need this in this class?
@@ -1283,7 +1295,13 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter ShowGrid: If true, the grid is drawn. If false, no grid is drawn, but see **DrawOutline**.
     /// - Parameter DrawOutline: If true, a perimeter outline is drawn.
     /// - Parameter InitialOpacity: The initial opacity of the grids.
-    func DrawGridInBucket(ShowGrid: Bool = true, DrawOutline: Bool, InitialOpacity: CGFloat = 1.0)
+    /// - Parameter LineColorOverride: If provided, this is the color of the lines of the grid. If not provided, the color specified
+    ///                                in the current theme will be used. Default is nil, which means use the theme's color.
+    /// - Parameter OutlineColorOverride: If provided, this is the color of the lines of the outline. If not provided, the color specified
+    ///                                   in the current theme will be used. Default is nil, which means use the theme's color.
+    /// - Returns: Tuple with Grid being the bucket interior grid, and Outline the grid outline node.
+    func DrawGridInBucket(ShowGrid: Bool = true, DrawOutline: Bool, InitialOpacity: CGFloat = 1.0,
+                          LineColorOverride: UIColor? = nil, OutlineColorOverride: UIColor? = nil) -> (Grid: SCNNode, Outline: SCNNode)
     {
         objc_sync_enter(CanUseBucket)
         defer{objc_sync_exit(CanUseBucket)}
@@ -1293,8 +1311,20 @@ class View3D: SCNView,                          //Our main super class.
             BucketGridNode?.removeFromParentNode()
         }
         print("Done removing bucket grid node.")
-        BucketGridNode = SCNNode()
-        OutlineNode = SCNNode()
+        let BucketGridNode = SCNNode()
+        let OutlineNode = SCNNode()
+        
+        var LineColor = UIColor.white
+        var OutlineColor = UIColor.red
+        if LineColorOverride != nil
+        {
+            LineColor = LineColorOverride!
+        }
+        if OutlineColorOverride != nil
+        {
+            OutlineColor = OutlineColorOverride!
+        }
+        
         switch BaseGameType
         {
             case .Standard:
@@ -1305,32 +1335,32 @@ class View3D: SCNView,                          //Our main super class.
                     {
                         let Start = SCNVector3(-0.5, Y, 0.0)
                         let End = SCNVector3(10.5, Y, 0.0)
-                        let LineNode = MakeLine(From: Start, To: End, Color: UIColor.white, LineWidth: 0.03)
+                        let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.03)
                         LineNode.categoryBitMask = GameLight
                         LineNode.name = "Horizontal,\(Int(Y))"
-                        BucketGridNode?.addChildNode(LineNode)
+                        BucketGridNode.addChildNode(LineNode)
                     }
                     //Vertical bucket lines.
                     for X in stride(from: -4.5, to: 5.0, by: 1.0)
                     {
                         let Start = SCNVector3(X, 0.0, 0.0)
                         let End = SCNVector3(X, 20.0, 0.0)
-                        let LineNode = MakeLine(From: Start, To: End, Color: UIColor.white, LineWidth: 0.03)
+                        let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.03)
                         LineNode.categoryBitMask = GameLight
                         LineNode.name = "Vertical,\(Int(X))"
-                        BucketGridNode?.addChildNode(LineNode)
+                        BucketGridNode.addChildNode(LineNode)
                     }
                 }
                 if DrawOutline
                 {
                     let TopStart = SCNVector3(-0.5, 10.0, 0.0)
                     let TopEnd = SCNVector3(10.5, 10.0, 0.0)
-                    let TopLine = MakeLine(From: TopStart, To: TopEnd, Color: UIColor.red, LineWidth: 0.08)
+                    let TopLine = MakeLine(From: TopStart, To: TopEnd, Color: OutlineColor, LineWidth: 0.08)
                     TopLine.categoryBitMask = GameLight
                     TopLine.name = "TopLine"
-                    BucketGridNode?.addChildNode(TopLine)
+                    BucketGridNode.addChildNode(TopLine)
                 }
-                BucketGridNode?.opacity = InitialOpacity
+                BucketGridNode.opacity = InitialOpacity
             
             case .Rotating4:
                 if ShowGrid
@@ -1340,20 +1370,20 @@ class View3D: SCNView,                          //Our main super class.
                     {
                         let Start = SCNVector3(0.0, Y, 0.0)
                         let End = SCNVector3(20.0, Y, 0.0)
-                        let LineNode = MakeLine(From: Start, To: End, Color: UIColor.white, LineWidth: 0.02)
+                        let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.02)
                         LineNode.categoryBitMask = GameLight
                         LineNode.name = "Horizontal,\(Int(Y))"
-                        BucketGridNode?.addChildNode(LineNode)
+                        BucketGridNode.addChildNode(LineNode)
                     }
                     //Vertical bucket lines.
                     for X in stride(from: -10.0, to: 10.5, by: 1.0)
                     {
                         let Start = SCNVector3(X, 0.0, 0.0)
                         let End = SCNVector3(X, 20.0, 0.0)
-                        let LineNode = MakeLine(From: Start, To: End, Color: UIColor.white, LineWidth: 0.02)
+                        let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.02)
                         LineNode.categoryBitMask = GameLight
                         LineNode.name = "Vertical,\(Int(X))"
-                        BucketGridNode?.addChildNode(LineNode)
+                        BucketGridNode.addChildNode(LineNode)
                     }
                 }
                 //Outline.
@@ -1361,30 +1391,30 @@ class View3D: SCNView,                          //Our main super class.
                 {
                     let TopStart = SCNVector3(0.0, 10.0, 0.0)
                     let TopEnd = SCNVector3(20.0, 10.0, 0.0)
-                    let TopLine = MakeLine(From: TopStart, To: TopEnd, Color: UIColor.red, LineWidth: 0.08)
+                    let TopLine = MakeLine(From: TopStart, To: TopEnd, Color: OutlineColor, LineWidth: 0.08)
                     TopLine.categoryBitMask = GameLight
                     TopLine.name = "TopLine"
-                    OutlineNode?.addChildNode(TopLine)
+                    OutlineNode.addChildNode(TopLine)
                     let BottomStart = SCNVector3(0.0, -10.0, 0.0)
                     let BottomEnd = SCNVector3(20.0, -10.0, 0.0)
-                    let BottomLine = MakeLine(From: BottomStart, To: BottomEnd, Color: UIColor.red, LineWidth: 0.08)
+                    let BottomLine = MakeLine(From: BottomStart, To: BottomEnd, Color: OutlineColor, LineWidth: 0.08)
                     BottomLine.categoryBitMask = GameLight
                     BottomLine.name = "BottomLine"
-                    OutlineNode?.addChildNode(BottomLine)
+                    OutlineNode.addChildNode(BottomLine)
                     let LeftStart = SCNVector3(-10.0, 0.0, 0.0)
                     let LeftEnd = SCNVector3(-10.0, 20.0, 0.0)
-                    let LeftLine = MakeLine(From: LeftStart, To: LeftEnd, Color: UIColor.red, LineWidth: 0.08)
+                    let LeftLine = MakeLine(From: LeftStart, To: LeftEnd, Color: OutlineColor, LineWidth: 0.08)
                     LeftLine.categoryBitMask = GameLight
                     LeftLine.name = "LeftLine"
-                    OutlineNode?.addChildNode(LeftLine)
+                    OutlineNode.addChildNode(LeftLine)
                     let RightStart = SCNVector3(10.0, 0.0, 0.0)
                     let RightEnd = SCNVector3(10.0, 20.0, 0.0)
-                    let RightLine = MakeLine(From: RightStart, To: RightEnd, Color: UIColor.red, LineWidth: 0.08)
+                    let RightLine = MakeLine(From: RightStart, To: RightEnd, Color: OutlineColor, LineWidth: 0.08)
                     RightLine.categoryBitMask = GameLight
                     RightLine.name = "RightLine"
-                    OutlineNode?.addChildNode(RightLine)
+                    OutlineNode.addChildNode(RightLine)
                 }
-                BucketGridNode?.opacity = InitialOpacity
+                BucketGridNode.opacity = InitialOpacity
                 
                 #if false
                 let TopLabel = SCNText(string: "Top", extrusionDepth: 0.5)
@@ -1396,7 +1426,7 @@ class View3D: SCNView,                          //Our main super class.
                 TopNode.name = "Top"
                 TopNode.scale = SCNVector3(0.02, 0.02, 0.02)
                 TopNode.position = SCNVector3(-0.5, 10.4, 0.0)
-                BucketGridNode?.addChildNode(TopNode)
+                BucketGridNode.addChildNode(TopNode)
                 
                 let BottomLabel = SCNText(string: "Bottom", extrusionDepth: 0.5)
                 BottomLabel.materials.first!.specular.contents = ColorServer.ColorFrom(ColorNames.Black)
@@ -1408,7 +1438,7 @@ class View3D: SCNView,                          //Our main super class.
                 BottomNode.scale = SCNVector3(0.02, 0.02, 0.02)
                 BottomNode.rotation = SCNVector4(0.0, 0.0, 1.0, CGFloat.pi)
                 BottomNode.position = SCNVector3(0.5, -10.5, 0.0)
-                BucketGridNode?.addChildNode(BottomNode)
+                BucketGridNode.addChildNode(BottomNode)
                 
                 let RightLabel = SCNText(string: "Right", extrusionDepth: 0.5)
                 RightLabel.materials.first!.specular.contents = ColorServer.ColorFrom(ColorNames.Black)
@@ -1420,7 +1450,7 @@ class View3D: SCNView,                          //Our main super class.
                 RightNode.scale = SCNVector3(0.02, 0.02, 0.02)
                 RightNode.rotation = SCNVector4(0.0, 0.0, 1.0, 270.0 * CGFloat.pi / 180.0)
                 RightNode.position = SCNVector3(10.5, 1.0, 0.0)
-                BucketGridNode?.addChildNode(RightNode)
+                BucketGridNode.addChildNode(RightNode)
                 
                 let LeftLabel = SCNText(string: "Left", extrusionDepth: 0.5)
                 LeftLabel.materials.first!.specular.contents = ColorServer.ColorFrom(ColorNames.Gray)
@@ -1432,14 +1462,18 @@ class View3D: SCNView,                          //Our main super class.
                 LeftNode.scale = SCNVector3(0.02, 0.02, 0.02)
                 LeftNode.rotation = SCNVector4(0.0, 0.0, 1.0, CGFloat.pi * 0.5)
                 LeftNode.position = SCNVector3(-10.5, 0.0, 0.0)
-                BucketGridNode?.addChildNode(LeftNode)
+                BucketGridNode.addChildNode(LeftNode)
             #endif
             
             case .Cubic:
                 break
         }
+        #if false
         self.scene?.rootNode.addChildNode(BucketGridNode!)
         self.scene?.rootNode.addChildNode(OutlineNode!)
+        #else
+        return (Grid: BucketGridNode, Outline: OutlineNode)
+        #endif
     }
     
     /// Fades the bucket grid to an alpha of 0.0 then removes the lines from the scene.
@@ -1464,7 +1498,11 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter IncludingOutline: If true, the outline is drawn as well.
     func DrawBucketGrid(ShowLines: Bool, IncludingOutline: Bool = true)
     {
-        DrawGridInBucket(ShowGrid: ShowLines, DrawOutline: IncludingOutline)
+        let (Grid, Outline) = DrawGridInBucket(ShowGrid: ShowLines, DrawOutline: IncludingOutline)
+        BucketGridNode = Grid
+        OutlineNode = Outline
+        self.scene?.rootNode.addChildNode(BucketGridNode!)
+        self.scene?.rootNode.addChildNode(OutlineNode!)
     }
     
     /// Hide the bucket grid by removing all grid nodes from the scene.
@@ -1537,6 +1575,7 @@ class View3D: SCNView,                          //Our main super class.
         }
         MasterBlockNode?.runAction(RotateToAction)
         BucketNode?.runAction(RotateToAction)
+        #if false
         if CurrentTheme!.EnableDebug
         {
             if CurrentTheme!.ChangeColorAfterRotation
@@ -1544,6 +1583,7 @@ class View3D: SCNView,                          //Our main super class.
                 ChangeBucketColor()
             }
         }
+        #endif
     }
     
     /// Change the color of the bucket.
@@ -1818,6 +1858,17 @@ class View3D: SCNView,                          //Our main super class.
 /// - **BigDiamond**: Diamond, 6 x 6 square rotated 90°.
 /// - **Bracket2**: Two brackets facing each other.
 /// - **Bracket4**: Four brackets arranged in a square.
+/// - **FourLines**: Four lines parallel to each side with gaps to either side.
+/// - **Corners**: Blocks on corners.
+/// - **Quadrant**: Board broken into quadrants.
+/// - **Plus**: Center block is **+** shaped.
+/// - **HorizontalLine**: Center block is a horizontal line from one side to the other.
+/// - **ParallelLines**: Two parallel lines.
+/// - **Empty**: No bucket blocks in the interior.
+/// - **CornerDots**: A dot in each corner.
+/// - **FourSmallSquares**: Four small squares, one in each quadrant.
+/// - **ShortDiagonals**: Small `X`-shaped central block.
+/// - **LongDiagonals**: Large `X`-shaped central block.
 enum CenterShapes: String, CaseIterable
 {
     case Dot = "Dot"
@@ -1832,6 +1883,17 @@ enum CenterShapes: String, CaseIterable
     case BigDiamond = "BigDiamond"
     case Bracket2 = "Bracket2"
     case Bracket4 = "Bracket4"
+    case FourLines = "FourLines"
+    case Corners = "Corners"
+    case Quadrant = "Quadrant"
+    case Plus = "Plus"
+    case HorizontalLine = "HorizontalLine"
+    case ParallelLines = "ParallelLines"
+    case Empty = "Empty"
+    case CornerDots = "CornerDots"
+    case FourSmallSquares = "FourSmallSquares"
+    case ShortDiagonals = "ShortDiagonals"
+    case LongDiagonals = "LongDiagonals"
 }
 
 enum Angles: CGFloat, CaseIterable
