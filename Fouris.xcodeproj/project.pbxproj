@@ -116,6 +116,7 @@
 		176F1B72227B0A0600681CDE /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1798FE5D2279736C008B26E9 /* Settings.swift */; };
 		17715CB622C74D8E009FD441 /* +Tables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17715CB522C74D8E009FD441 /* +Tables.swift */; };
 		17715CB922C757D0009FD441 /* StandardBoard.scn in Resources */ = {isa = PBXBuildFile; fileRef = 17715CB822C757D0009FD441 /* StandardBoard.scn */; };
+		17724AF62352C3F3001A6825 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17724AF52352C3F3001A6825 /* Platform.swift */; };
 		17750FE7233732E700A188D6 /* ThemeChangeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17750FE6233732E700A188D6 /* ThemeChangeProtocol.swift */; };
 		17750FE923373E5B00A188D6 /* ThemeUpdatedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17750FE823373E5B00A188D6 /* ThemeUpdatedProtocol.swift */; };
 		177F4FC6229BD2F500FE72CD /* Send.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177F4FC5229BD2F500FE72CD /* Send.swift */; };
@@ -193,6 +194,7 @@
 		17B4E5732294EA2F0050CDE5 /* MapFloodFill.metal in Sources */ = {isa = PBXBuildFile; fileRef = 17B4E5722294EA2F0050CDE5 /* MapFloodFill.metal */; };
 		17B72E14230ACD7D00B1E5CD /* TextLayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B72E13230ACD7D00B1E5CD /* TextLayerManager.swift */; };
 		17B8757523236C9A00BD8BBD /* BlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B8757423236C9A00BD8BBD /* BlockView.swift */; };
+		17BADD6D2352D5F3006ADE5E /* +BucketRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BADD6C2352D5F3006ADE5E /* +BucketRenderer.swift */; };
 		17BC04D8229127E1002A6F90 /* PieceIDMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BC04D7229127E1002A6F90 /* PieceIDMap.swift */; };
 		17C0E6F722AF9C87003FAFA8 /* IdiotLightMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0E6F622AF9C87003FAFA8 /* IdiotLightMessage.swift */; };
 		17C14E1F23066E1600D9CF64 /* TextLayerDisplayProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C14E1E23066E1600D9CF64 /* TextLayerDisplayProtocol.swift */; };
@@ -379,6 +381,7 @@
 		176F1B6C227AD3D100681CDE /* FileIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileIO.swift; sourceTree = "<group>"; };
 		17715CB522C74D8E009FD441 /* +Tables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Tables.swift"; sourceTree = "<group>"; };
 		17715CB822C757D0009FD441 /* StandardBoard.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = StandardBoard.scn; sourceTree = "<group>"; };
+		17724AF52352C3F3001A6825 /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		17750FE6233732E700A188D6 /* ThemeChangeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeChangeProtocol.swift; sourceTree = "<group>"; };
 		17750FE823373E5B00A188D6 /* ThemeUpdatedProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeUpdatedProtocol.swift; sourceTree = "<group>"; };
 		177F4FC5229BD2F500FE72CD /* Send.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Send.swift; sourceTree = "<group>"; };
@@ -458,6 +461,7 @@
 		17B4E5722294EA2F0050CDE5 /* MapFloodFill.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = MapFloodFill.metal; sourceTree = "<group>"; };
 		17B72E13230ACD7D00B1E5CD /* TextLayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextLayerManager.swift; sourceTree = "<group>"; };
 		17B8757423236C9A00BD8BBD /* BlockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockView.swift; sourceTree = "<group>"; };
+		17BADD6C2352D5F3006ADE5E /* +BucketRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+BucketRenderer.swift"; sourceTree = "<group>"; };
 		17BC04D7229127E1002A6F90 /* PieceIDMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceIDMap.swift; sourceTree = "<group>"; };
 		17C0E6F622AF9C87003FAFA8 /* IdiotLightMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdiotLightMessage.swift; sourceTree = "<group>"; };
 		17C14E1E23066E1600D9CF64 /* TextLayerDisplayProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextLayerDisplayProtocol.swift; sourceTree = "<group>"; };
@@ -1072,6 +1076,7 @@
 				17E619A82348495B00C391CF /* +BoardRemoval.swift */,
 				17B112FF232B693E007DFBD4 /* +3DDebug.swift */,
 				17E619AA2348569800C391CF /* +TextButtons.swift */,
+				17BADD6C2352D5F3006ADE5E /* +BucketRenderer.swift */,
 			);
 			path = 3DViewExtensions;
 			sourceTree = "<group>";
@@ -1228,6 +1233,7 @@
 				17AE96A02351F92200412979 /* ActivityLog */,
 				176708F1233A025D000E2216 /* Languages */,
 				17F0B493225CBE730071514E /* AppDelegate.swift */,
+				17724AF52352C3F3001A6825 /* Platform.swift */,
 				171D5D462313FC5200043856 /* MainStoryboard.storyboard */,
 				17AF231E2313981C00921E6C /* MainViewController.swift */,
 				17AA4FB423408FCB0022FF90 /* GameViewContainer.swift */,
@@ -1465,6 +1471,7 @@
 				17750FE923373E5B00A188D6 /* ThemeUpdatedProtocol.swift in Sources */,
 				178C0F0B2338970400A35C62 /* +Action.swift in Sources */,
 				17FBF714234474FF00BB87A6 /* HistoryManager.swift in Sources */,
+				17BADD6D2352D5F3006ADE5E /* +BucketRenderer.swift in Sources */,
 				17C0E6F722AF9C87003FAFA8 /* IdiotLightMessage.swift in Sources */,
 				173AA392231A8EEE00802289 /* PredefinedColors.swift in Sources */,
 				171ED10422F56B9F00CE2CDF /* Rotating4GameAI.swift in Sources */,
@@ -1530,6 +1537,7 @@
 				170FC66A233DFA9900F9A8F1 /* XMLSemanticParser.swift in Sources */,
 				174328FB233F20DD00F98863 /* PieceBlockLocation.swift in Sources */,
 				17A2BDD42348CFC000D50235 /* ExportCode.swift in Sources */,
+				17724AF62352C3F3001A6825 /* Platform.swift in Sources */,
 				17FA044D232649F8004E5FC8 /* BlockCoordinates.swift in Sources */,
 				17F6ECF22286E322000F8E11 /* ControlUIProtocol.swift in Sources */,
 				17376357230A9C9C0050EB22 /* +BucketCleaner.swift in Sources */,
