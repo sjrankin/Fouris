@@ -164,11 +164,11 @@ class LogEntry: CustomStringConvertible
         var Working = ""
         if Title.isEmpty
         {
-            Working.append("<Entry")
+            Working.append(Spaces(Indent) + "<Entry")
         }
         else
         {
-            Working.append("<" + Title)
+            Working.append(Spaces(Indent) + "<" + Title)
         }
         Working.append(" Time=" + Quoted(DateFormatter.localizedString(from: Date(), dateStyle: .long, timeStyle: .long)))
         if let ItemSource = Source
