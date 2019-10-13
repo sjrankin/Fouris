@@ -25,6 +25,21 @@ extension View3D
     func ResetBoard(HideMethod: HideBoardMethods, HideDuration: Double,
                     ShowMethod: ShowBoardMethods, ShowDuration: Double)
     {
+        #if true
+        BucketGridNode?.removeFromParentNode()
+        OutlineNode?.removeFromParentNode()
+        BucketNode?.removeFromParentNode()
+        let (NewGrid, NewOutline) = DrawGridInBucket(ShowGrid: CurrentTheme!.ShowBucketGrid,
+                                                     DrawOutline: CurrentTheme!.ShowBucketGridOutline,
+                                                     InitialOpacity: 1.0)
+        BucketGridNode = NewGrid
+        OutlineNode = NewOutline
+        self.scene?.rootNode.addChildNode(BucketGridNode!)
+        self.scene?.rootNode.addChildNode(OutlineNode!)
+        let NewBucket = CreateBucket(InitialOpacity: 1.0, Shape: CenterBlockShape)
+        BucketNode = NewBucket
+        self.scene?.rootNode.addChildNode(BucketNode!)
+        #else
         //objc_sync_enter(CanUseBucket)
         var HidingMethod = HideMethod
         HidingMethod = HidingMethod == .Random ? RandomHideMethod(Excluding: [.Random]) : HidingMethod
@@ -45,11 +60,13 @@ extension View3D
                 BucketNode?.runAction(GridSequence,
                                       completionHandler:
                     {
-                        self.DrawGridInBucket(ShowGrid: self.CurrentTheme!.ShowBucketGrid,
+                        let (Grid, Outline) = self.DrawGridInBucket(ShowGrid: self.CurrentTheme!.ShowBucketGrid,
                                               DrawOutline: self.CurrentTheme!.ShowBucketGridOutline)
                         let GridFadeIn = SCNAction.fadeIn(duration: ShowDuration)
                         self.BucketGridNode?.runAction(GridFadeIn)
-                        self.CreateBucket()
+                        let NewNode = self.CreateBucket(InitialOpacity: 1.0, Shape: self.CenterBlockShape)
+                        self.BucketNode = NewNode
+                        self.scene?.rootNode.addChildNode(self.BucketNode!)
                         let BucketFadeIn = SCNAction.fadeIn(duration: ShowDuration)
                         self.BucketNode?.runAction(BucketFadeIn,
                         completionHandler:
@@ -62,13 +79,23 @@ extension View3D
             default:
             break
         }
+        #endif
     }
     
     /// Create nodes for the visual game board.
     func CreateGameBoard()
     {
-        CreateBucket()
-        DrawGridInBucket(ShowGrid: CurrentTheme!.ShowBucketGrid, DrawOutline: CurrentTheme!.ShowBucketGridOutline)
+        BucketNode?.removeFromParentNode()
+        let Bucket = CreateBucket(InitialOpacity: 1.0, Shape: CenterBlockShape)
+        BucketNode = Bucket
+        self.scene?.rootNode.addChildNode(BucketNode!)
+        BucketGridNode?.removeFromParentNode()
+        OutlineNode?.removeFromParentNode()
+        let (Grid, Outline) = DrawGridInBucket(ShowGrid: CurrentTheme!.ShowBucketGrid, DrawOutline: CurrentTheme!.ShowBucketGridOutline)
+        BucketGridNode = Grid
+        OutlineNode = Outline
+        self.scene?.rootNode.addChildNode(BucketGridNode!)
+        self.scene?.rootNode.addChildNode(OutlineNode!)
         objc_sync_exit(CanUseBucket)
     }
     
