@@ -1659,6 +1659,9 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter ID: The ID of the node that froze out of bounds.
     func PieceOutOfBounds(_ ID: UUID)
     {
+        var NotUsed: String? = nil
+        ActivityLog.AddEntry(Title: "Game", Source: "View3D", KVPs: [("Message","Piece out of bounds. Freezing in place."),("PieceID",ID.uuidString)],
+                             LogFileName: &NotUsed)
         //print("Piece \(ID) froze out of bounds.")
         let NodeCount = GetNodeCount()
         if NodeCount > MaxSceneNodes
@@ -1691,6 +1694,48 @@ class View3D: SCNView,                          //Our main super class.
                 break
         }
         
+        #if true
+        let StartColor = UIColor.yellow
+        let EndColor = UIColor.red
+        for Block in FinalBlocks
+        {
+            Block.geometry?.firstMaterial?.diffuse.contents = UIColor.yellow
+        }
+        var RDelta = EndColor.r - StartColor.r
+        var GDelta = EndColor.g - StartColor.g
+        var BDelta = EndColor.b - StartColor.b
+        let FinalDuration = 0.5
+        let ColorToRed = SCNAction.customAction(duration: FinalDuration, action:
+        {
+        (Node, Time) in
+            let Percent: CGFloat = Time / CGFloat(FinalDuration)
+            let Red = abs(EndColor.r + (RDelta * Percent))
+            let Green = abs(EndColor.g + (GDelta * Percent))
+            let Blue = abs(EndColor.b + (BDelta * Percent))
+            Node.geometry?.firstMaterial?.diffuse.contents = UIColor(red: Red, green: Green, blue: Blue, alpha: 1.0)
+        }
+        )
+         RDelta = StartColor.r - EndColor.r
+         GDelta = StartColor.g - EndColor.g
+         BDelta = StartColor.b - EndColor.b
+        let ColorToYellow = SCNAction.customAction(duration: FinalDuration, action:
+        {
+            (Node, Time) in
+            let Percent: CGFloat = Time / CGFloat(FinalDuration)
+            let Red = abs(StartColor.r - (RDelta * Percent))
+            let Green = abs(StartColor.g - (GDelta * Percent))
+            let Blue = abs(StartColor.b - (BDelta * Percent))
+            Node.geometry?.firstMaterial?.diffuse.contents = UIColor(red: Red, green: Green, blue: Blue, alpha: 1.0)
+        }
+        )
+        let Wait = SCNAction.wait(duration: 0.05)
+        let Sequence = SCNAction.sequence([ColorToRed, Wait, ColorToYellow, Wait])
+        let Forever = SCNAction.repeatForever(Sequence)
+        for Block in FinalBlocks
+        {
+            Block.runAction(Forever)
+        }
+        #else
         let Rotate = SCNAction.rotateBy(x: CGFloat.pi * 2.0, y: CGFloat.pi * 2.0, z: CGFloat.pi * 2.0, duration: 0.75)
         Rotate.timingMode = .easeInEaseOut
         let ScalingDown = SCNAction.scale(by: 0.75, duration: 0.5)
@@ -1703,6 +1748,7 @@ class View3D: SCNView,                          //Our main super class.
         {
             Block.runAction(ScaleLoop)
         }
+        #endif
     }
     
     var FinalBlocks = [VisualBlocks3D]()
