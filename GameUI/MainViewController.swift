@@ -73,6 +73,19 @@ class MainViewController: UIViewController,
     {
         super.viewDidLoad()
         
+        ActivityLog.Initialize()
+        #if targetEnvironment(simulator)
+            var NotUsed: String? = nil
+            ActivityLog.AddEntry(Title: "Hardware", Source: "MainViewController", KVPs: [("Hardware","Simulator")], LogFileName: &NotUsed)
+        #else
+        var NotUsed: String? = nil
+        let HardwareName = Platform.NiceModelName()
+        let MetalName = Platform.MetalDeviceName()
+        let RAM = Platform.RAMSize()
+        let Total = RAM.0 + RAM.1
+        ActivityLog.AddEntry(Title: "Hardware", Source: "MainViewController", KVPs: [("Device",HardwareName),("Metal",MetalName),("RAM","\(Total)")], LogFileName: &NotUsed)
+        ActivityLog.AddEntry(Title: "Software", Source: "MainViewController", KVPs: [("OS", Platform.iOSVersion())], LogFileName: &NotUsed)
+        #endif
         Versioning.PublishVersion(">")
         
         let _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(IncrementSeconds), userInfo: nil, repeats: true)
@@ -305,6 +318,9 @@ class MainViewController: UIViewController,
     /// Set camera button visibility depending on the settings.
     func ShowCameraControls()
     {
+        var NotUsed: String? = nil
+        ActivityLog.AddEntry(Title: "UI", Source: "MainViewController", KVPs: [("ShowCameraControls","\(Settings.GetShowCameraControls())")],
+                             LogFileName: &NotUsed)
         VideoButton.isHidden = !Settings.GetShowCameraControls()
         VideoButton.isUserInteractionEnabled = Settings.GetShowCameraControls()
         CameraButton.isHidden = !Settings.GetShowCameraControls()
@@ -327,6 +343,9 @@ class MainViewController: UIViewController,
     func ShowMotionControls()
     {
         let DoShow = Settings.GetShowMotionControls()
+        var NotUsed: String? = nil
+        ActivityLog.AddEntry(Title: "UI", Source: "MainViewController", KVPs: [("ShowMotionControls","\(DoShow)")],
+                             LogFileName: &NotUsed)
         if DoShow
         {
             GameUISurface3D?.ShowControls()
@@ -569,6 +588,7 @@ class MainViewController: UIViewController,
     
     // MARK: Functions related to AI/attract mode and debugging.
     
+    /// Clears the board and starts in AI mode.
     func ClearAndStartAI()
     {
         DispatchQueue.main.sync
@@ -581,6 +601,9 @@ class MainViewController: UIViewController,
     /// Start playing in AI mode.
     func HandleStartInAIMode()
     {
+        var NotUsed: String? = nil
+        ActivityLog.AddEntry(Title: "Game", Source: "MainViewController", KVPs: [("Message","Starting game in AI mode.")],
+                             LogFileName: &NotUsed)
         Game.StopGame()
         InAttractMode = true
         Game.AIScoringMethod = .OffsetMapping
@@ -662,6 +685,9 @@ class MainViewController: UIViewController,
     ///     the game will start in AI mode.
     func GameOver()
     {
+        var NotUsed: String? = nil
+        ActivityLog.AddEntry(Title: "Game", Source: "MainViewController", KVPs: [("Message","Game over condition reached.")],
+                             LogFileName: &NotUsed)
         let GamePlayDuration = CACurrentMediaTime() - GamePlayStart
         let History = HistoryManager.GetHistory(InAttractMode)
         History?.Games![CurrentBaseGameType]!.AddDuration(NewDuration: Int(GamePlayDuration))
@@ -812,6 +838,9 @@ class MainViewController: UIViewController,
     /// - Parameter ThePiece: The finalized piece.
     func PieceFinalized(_ ThePiece: Piece)
     {
+        var NotUsed: String? = nil
+        ActivityLog.AddEntry(Title: "Game", Source: "MainViewController", KVPs: [("Message","Piece finalized."),("PieceID",ThePiece.ID.uuidString)],
+                             LogFileName: &NotUsed)
         switch CurrentBaseGameType
         {
             case .Standard:
@@ -1174,6 +1203,9 @@ class MainViewController: UIViewController,
     {
         if IsPaused
         {
+            var NotUsed: String? = nil
+            ActivityLog.AddEntry(Title: "Game", Source: "MainViewController", KVPs: [("Message","Game resumed.")],
+                                 LogFileName: &NotUsed)
             IsPaused = false
             PauseResumeButton?.setTitle("Pause", for: .normal)
             SlideInPauseButton.setTitle("Pause", for: .normal)
@@ -1184,6 +1216,9 @@ class MainViewController: UIViewController,
         }
         else
         {
+            var NotUsed: String? = nil
+            ActivityLog.AddEntry(Title: "Game", Source: "MainViewController", KVPs: [("Message","Game paused.")],
+                                 LogFileName: &NotUsed)
             IsPaused = true
             PauseResumeButton?.setTitle("Resume", for: .normal)
             SlideInPauseButton.setTitle("Resume", for: .normal)
@@ -1256,6 +1291,9 @@ class MainViewController: UIViewController,
     /// Play the game, eg, start in normal user mode.
     @objc func Play()
     {
+        var NotUsed: String? = nil
+        ActivityLog.AddEntry(Title: "Game", Source: "MainViewController", KVPs: [("Message","Starting game.")],
+                             LogFileName: &NotUsed)
         GamePlayStart = CACurrentMediaTime()
         let History = HistoryManager.GetHistory(InAttractMode)
         History?.Games![CurrentBaseGameType]!.IncrementGameCount()
@@ -1723,6 +1761,9 @@ class MainViewController: UIViewController,
     /// - Parameter SubType: The game sub type to use.
     func SwitchGameType(BaseType: BaseGameTypes, SubType: BaseGameSubTypes)
     {
+        var NotUsed: String? = nil
+        ActivityLog.AddEntry(Title: "GameType", Source: "MainViewController", KVPs: [("GameType","\(BaseType)"),("SubType","\(SubType)")],
+                             LogFileName: &NotUsed)
         print("Switching game type to \(BaseType), \(SubType)")
         CurrentBaseGameType = BaseType
         UserTheme!.GameType = BaseType
@@ -1858,6 +1899,9 @@ class MainViewController: UIViewController,
         {
             if Settings.GetConfirmGameImageSave()
             {
+                var NotUsed: String? = nil
+                ActivityLog.AddEntry(Title: "UI", Source: "MainViewController", KVPs: [("Message","Image saved to camera roll.")],
+                                     LogFileName: &NotUsed)
                 let Alert = UIAlertController(title: "Saved", message: "Game image save to the camera roll.", preferredStyle: UIAlertController.Style.alert)
                 Alert.addAction(UIAlertAction(title: "OK", style: .default))
                 self.present(Alert, animated: true)
@@ -1918,6 +1962,9 @@ class MainViewController: UIViewController,
     /// - Parameter previewController: The controller to dismiss.
     func previewControllerDidFinish(_ previewController: RPPreviewViewController)
     {
+        var NotUsed: String? = nil
+        ActivityLog.AddEntry(Title: "UI", Source: "MainViewController", KVPs: [("Message","Video saved to camera roll.")],
+                             LogFileName: &NotUsed)
         previewController.dismiss(animated: true)
     }
     
@@ -2002,6 +2049,9 @@ class MainViewController: UIViewController,
     
     @IBAction func HandleFlameButtonPressed(_ sender: Any)
     {
+        #if false
+        GameView3D?.SaveAllBucketImages()
+        #else
         let Button = sender as! UIButton
         if Settings.GetShowMotionControls()
         {
@@ -2013,6 +2063,7 @@ class MainViewController: UIViewController,
             Settings.SetShowMotionControls(NewValue: true)
             Button.tintColor = UIColor.orange
         }
+        #endif
     }
     
     // MARK: Variables used by +MainSlideInUI from within extensions.
