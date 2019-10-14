@@ -259,8 +259,11 @@ class MultiPeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState)
     {
         print("Peer \(peerID.displayName) changed state: \(state.rawValue)")
-        Delegate?.ConnectedDeviceChanged(Manager: self, ConnectedDevices: Session.connectedPeers,
+        OperationQueue.main.addOperation
+            {
+                self.Delegate?.ConnectedDeviceChanged(Manager: self, ConnectedDevices: self.Session.connectedPeers,
                                          Changed: peerID, NewState: state)
+        }
     }
     
     /// Handle the received data from a session event.
@@ -279,14 +282,18 @@ class MultiPeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
         let Cmd = MessageHelper.GetMessageType(Message!)
         if Cmd == MessageTypes.IDEncapsulatedCommand
         {
-            if let (ID, EnMsg) = MessageHelper.DecodeEncapsulatedCommand(Message!)
-            {
-                Delegate?.ReceivedAsyncData(Manager: self, Peer: peerID, CommandID: ID, RawData: EnMsg)
-                return
+            OperationQueue.main.addOperation
+                {
+                    if let (ID, EnMsg) = MessageHelper.DecodeEncapsulatedCommand(Message!)
+                    {
+                        self.Delegate?.ReceivedAsyncData(Manager: self, Peer: peerID, CommandID: ID, RawData: EnMsg)
+                        return
+                    }
             }
+            
+            self.Delegate?.ReceivedData(Manager: self, Peer: peerID, RawData: Message!,
+                                        OverrideMessageType: nil, EncapsulatedID: nil)
         }
-        Delegate?.ReceivedData(Manager: self, Peer: peerID, RawData: Message!,
-                               OverrideMessageType: nil, EncapsulatedID: nil)
     }
     
     /// Handle the received input stream from a session event.
