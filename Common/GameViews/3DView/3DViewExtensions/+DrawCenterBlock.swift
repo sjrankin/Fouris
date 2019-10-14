@@ -690,6 +690,24 @@ extension View3D
                 
                 Group.opacity = InitialOpacity
                 Parent.addChildNode(Group)
+            
+            case .OneOpening:
+                break
+            
+            case .Classic:
+                break
+            
+            case .TallThin:
+                break
+            
+            case .ShortWide:
+                break
+            
+            case .Big:
+                break
+            
+            case .Small:
+                break
         }
     }
 }
