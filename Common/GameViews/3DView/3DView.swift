@@ -132,6 +132,16 @@ class View3D: SCNView,                          //Our main super class.
         
         ShowControls()
         DrawCenterLines()
+        
+        #if true
+        let Obnoxious = SCNLight()
+        Obnoxious.type = .spot
+        Obnoxious.color = UIColor.white
+        let ObNode = SCNNode()
+        ObNode.light = Obnoxious
+        ObNode.position = SCNVector3(0, 0, -3)
+        ObNode.constraints?.append(SCNLookAtConstraint(target: CameraNode))
+        #endif
     }
     
     func NewParentSize(Bounds: CGRect, Frame: CGRect)
@@ -510,7 +520,7 @@ class View3D: SCNView,                          //Our main super class.
             Node.removeFromParentNode()
         }
         BlockList = BlockList.filter({$0.name != WithName})
-        print("RemoveNodes completed.")
+        print("  RemoveNodes completed.")
     }
     
     /// Remove all nodes whose names are in the passed list.
@@ -544,7 +554,7 @@ class View3D: SCNView,                          //Our main super class.
         {
             print("Removing bucket from parent.")
             BucketNode?.removeFromParentNode()
-            print("Done removing bucket from parent.")
+            print("  Done removing bucket from parent.")
         }
         let LocalBucketNode = SCNNode()
         
@@ -589,6 +599,9 @@ class View3D: SCNView,                          //Our main super class.
                 CentralNode.position = SCNVector3(0.0, 0.0, 0.0)
                 LocalBucketNode.addChildNode(CentralNode)
                 LocalBucketNode.opacity = InitialOpacity
+            
+            case .SemiRotating:
+            break
         }
         
                 _BucketAdded = true
@@ -610,7 +623,7 @@ class View3D: SCNView,                          //Our main super class.
         print("Removing center lines.")
         CenterLineVertical?.removeFromParentNode()
         CenterLineHorizontal?.removeFromParentNode()
-        print("Don removing center lines.")
+        print("  Done removing center lines.")
         if CurrentTheme!.ShowCenterLines
         {
             let Width: CGFloat = CGFloat(CurrentTheme!.CenterLineWidth)
@@ -960,7 +973,7 @@ class View3D: SCNView,                          //Our main super class.
                     $0.removeFromParentNode()
                 }
             })
-            print("Done removing nodes from the MasterBlockNode")
+            print("  Done removing nodes from the MasterBlockNode")
         }
     }
     
@@ -976,6 +989,8 @@ class View3D: SCNView,                          //Our main super class.
             case .Standard:
                 return ![.Visible, .InvisibleBucket, .Bucket].contains(BlockType)
             
+            case .SemiRotating:
+            fallthrough
             case .Rotating4:
                 return ![.Visible, .InvisibleBucket, .Bucket, .GamePiece, .BucketExterior].contains(BlockType)
             
@@ -1009,7 +1024,7 @@ class View3D: SCNView,                          //Our main super class.
         {
             MovingPieceNode?.removeFromParentNode()
         }
-        print("Done removing moving piece node.")
+        print("  Done removing moving piece node.")
         MovingPieceBlocks = [VisualBlocks3D]()
         MovingPieceNode = SCNNode()
         MovingPieceNode?.name = "Moving Piece"
@@ -1037,7 +1052,9 @@ class View3D: SCNView,                          //Our main super class.
             MovingPieceBlocks.append(VBlock)
             MovingPieceNode?.addChildNode(VBlock)
         }
+        print("Adding moving piece blocks to root node.")
         self.scene?.rootNode.addChildNode(MovingPieceNode!)
+        print("  Done moving piece blocks to root node.")
     }
     
     var MovingPieceBlocks = [VisualBlocks3D]()
@@ -1054,7 +1071,7 @@ class View3D: SCNView,                          //Our main super class.
                 MovingPieceNode = nil
                 UpdateMasterBlockNode()
             }
-            print("Done removing piece from rotating game.")
+            print("  Done removing piece from rotating game.")
         }
     }
     
@@ -1121,6 +1138,10 @@ class View3D: SCNView,                          //Our main super class.
                         YOffset = (30 - 10 - 1) - 1.0 - CGFloat(Y)
                         XOffset = CGFloat(X) - 17.5
                     
+                    case .SemiRotating:
+                    XOffset = 0
+                    YOffset = 0
+                    
                     case .Cubic:
                         XOffset = 0
                         YOffset = 0
@@ -1168,6 +1189,10 @@ class View3D: SCNView,                          //Our main super class.
                         case .Rotating4:
                             AddBlockNode_Rotating(ParentID: ItemID, BlockID: BlockID, X: XOffset, Y: YOffset,
                                                   IsRetired: IsRetired, ShapeID: PieceTypeID)
+                        
+                        case .SemiRotating:
+                        break
+                        
                         case .Cubic:
                             break
                     }
@@ -1229,7 +1254,7 @@ class View3D: SCNView,                          //Our main super class.
             MasterBlockNode!.removeAllActions()
             MasterBlockNode!.removeFromParentNode()
             MasterBlockNode = nil
-            print("Done removing everything from master block node.")
+            print("  Done removing everything from master block node.")
         }
         MasterBlockNode = SCNNode()
         MasterBlockNode!.name = "Master Block Node"
@@ -1249,7 +1274,7 @@ class View3D: SCNView,                          //Our main super class.
             Node.removeAllActions()
             Node.removeFromParentNode()
         }
-        print("Done clearing the bucket.")
+        print("  Done clearing the bucket.")
         BlockList.removeAll()
     }
     
@@ -1268,7 +1293,7 @@ class View3D: SCNView,                          //Our main super class.
                     Node.removeFromParentNode()
                 }
         }
-        print("Done emptying the map.")
+        print("  Done emptying the map.")
     }
     
     func LayoutCompleted()
@@ -1310,7 +1335,7 @@ class View3D: SCNView,                          //Our main super class.
         {
             BucketGridNode?.removeFromParentNode()
         }
-        print("Done removing bucket grid node.")
+        print("  Done removing bucket grid node.")
         let BucketGridNode = SCNNode()
         let OutlineNode = SCNNode()
         
@@ -1465,6 +1490,9 @@ class View3D: SCNView,                          //Our main super class.
                 BucketGridNode.addChildNode(LeftNode)
             #endif
             
+            case .SemiRotating:
+            break
+            
             case .Cubic:
                 break
         }
@@ -1489,7 +1517,7 @@ class View3D: SCNView,                          //Our main super class.
                 self.BucketGridNode = nil
         }
         )
-        print("Done removing bucket grid node in FadeBucketGrid")
+        print("  Done removing bucket grid node in FadeBucketGrid")
     }
     
     /// Show or hide a buck grid. The bucket grid is unit sized (according to the block size) that fills the
@@ -1691,6 +1719,9 @@ class View3D: SCNView,                          //Our main super class.
                     BlockList.insert(Block)
             }
             
+            case .SemiRotating:
+            break
+            
             case .Cubic:
                 break
         }
@@ -1888,11 +1919,46 @@ class View3D: SCNView,                          //Our main super class.
             
             .FreezeButton: (SCNVector3(-1.0, -13.5, 1.0), 0.08, UIColor.cyan, UIColor.blue)
     ]
+    
+    // MARK: Board behavior tables.
+    
+    let BoardBehaivor: [CenterShapes: (BucketRotates: Bool, PiecesInSync: Bool)] =
+        [
+            .Dot: (BucketRotates: true, PiecesInSync: true),
+            .Square: (BucketRotates: true, PiecesInSync: true),
+            .SmallSquare: (BucketRotates: true, PiecesInSync: true),
+            .BigSquare: (BucketRotates: true, PiecesInSync: true),
+            .SmallRectangle: (BucketRotates: true, PiecesInSync: true),
+            .Rectangle: (BucketRotates: true, PiecesInSync: true),
+            .BigRectangle: (BucketRotates: true, PiecesInSync: true),
+            .SmallDiamond: (BucketRotates: true, PiecesInSync: true),
+            .Diamond: (BucketRotates: true, PiecesInSync: true),
+            .BigDiamond: (BucketRotates: true, PiecesInSync: true),
+            .Bracket2: (BucketRotates: true, PiecesInSync: true),
+            .Bracket4: (BucketRotates: true, PiecesInSync: true),
+            .FourLines: (BucketRotates: true, PiecesInSync: true),
+            .Corners: (BucketRotates: true, PiecesInSync: true),
+            .Quadrant: (BucketRotates: true, PiecesInSync: true),
+            .Plus: (BucketRotates: true, PiecesInSync: true),
+            .HorizontalLine: (BucketRotates: true, PiecesInSync: true),
+            .ParallelLines: (BucketRotates: true, PiecesInSync: true),
+            .Empty: (BucketRotates: true, PiecesInSync: true),
+            .CornerDots: (BucketRotates: true, PiecesInSync: true),
+            .ShortDiagonals: (BucketRotates: true, PiecesInSync: true),
+            .LongDiagonals: (BucketRotates: true, PiecesInSync: true),
+            .OneOpening: (BucketRotates: false, PiecesInSync: false),
+            .Classic: (BucketRotates: false, PiecesInSync: true),
+            .TallThin: (BucketRotates: false, PiecesInSync: true),
+            .ShortWide: (BucketRotates: false, PiecesInSync: true),
+            .Big: (BucketRotates: false, PiecesInSync: true),
+            .Small: (BucketRotates: false, PiecesInSync: true),
+    ]
 }
 
 // MARK: Global enums related to 3DView.
 
-/// Possible shapes for center blocks for **.Rotating4** games.
+/// Possible shapes for center blocks and other blocks.
+/// - Note: This enum contains all possible interior block shapes for non-rotating, rotating, and semi-rotating games.
 /// - **Dot**: 1 x 1 center (or close enough to it) block.
 /// - **Square**: 4 x 4 center square.
 /// - **SmallSquare**: 2 x 2 center square.
@@ -1916,8 +1982,15 @@ class View3D: SCNView,                          //Our main super class.
 /// - **FourSmallSquares**: Four small squares, one in each quadrant.
 /// - **ShortDiagonals**: Small `X`-shaped central block.
 /// - **LongDiagonals**: Large `X`-shaped central block.
+/// - **OneOpening**: Bucket with one opening.
+/// - **Classic**: Classic Tetris game proportions.
+/// - **TallThin**: Tall and thin bucket.
+/// - **ShortWide**: Short and wide bucket.
+/// - **Big**: Big bucket.
+/// - **Small** Small bucket.
 enum CenterShapes: String, CaseIterable
 {
+    //Rotating games.
     case Dot = "Dot"
     case Square = "Square"
     case SmallSquare = "SmallSquare"
@@ -1941,6 +2014,14 @@ enum CenterShapes: String, CaseIterable
     case FourSmallSquares = "FourSmallSquares"
     case ShortDiagonals = "ShortDiagonals"
     case LongDiagonals = "LongDiagonals"
+    //Semi-rotating games. (Blocks rotate but the bucket does not.)
+    case OneOpening = "OneOpening"
+    //Non-rotating games.
+    case Classic = "Classic"
+    case TallThin = "TallThin"
+    case ShortWide = "ShortWide"
+    case Big = "Big"
+    case Small = "Small"
 }
 
 enum Angles: CGFloat, CaseIterable
