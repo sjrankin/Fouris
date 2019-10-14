@@ -14,7 +14,7 @@ import UIKit
 ///    - There are two two main layers to the map: The first layer is the piece type layer which identifies the type of
 ///      piece in a give location in the map, such as bucket, visible (empty), retired piece, active piece, and the like.
 ///      The second layer is the block map which is a map of identifies of which individual block occupies which location.
-class MapType
+class MapType: CustomStringConvertible
 {
     /// Initializer.
     ///
@@ -184,6 +184,9 @@ class MapType
                               BucketRight: _BucketInteriorRight + 1, Map: &_Contents,
                               BucketID: BucketID, InvisibleBucketID: InvisibleBucketID, BucketExteriorID: BucketExteriorID,
                               BaseType: BaseType)
+        #if false
+        print(MapType.PrettyPrint(Map: self))
+        #endif
         _BucketSize = CGSize(width: _BucketInteriorWidth, height: _BucketInteriorHeight)
         if Scorer == nil
         {
@@ -1663,8 +1666,26 @@ class MapType
             for X in 0 ..< Map.Width
             {
                 let MapTypeID = Final![Y][X]
-                let MapType = Map.IDMap!.IDtoPiece(MapTypeID)!
-                PrettyMap = PrettyMap + TextMapping[MapType]!
+                let MapTypePiece = Map.IDMap!.IDtoPiece(MapTypeID)!
+                #if true
+                var stemp = ""
+                switch MapTypePiece
+                {
+                    case .Bucket:
+                    stemp = "∏"
+                    case .InvisibleBucket:
+                    stemp = "•"
+                    case .BucketExterior:
+                    stemp = "·"
+                    case .Visible:
+                    stemp = " "
+                    default:
+                    stemp = ""
+                }
+                PrettyMap = PrettyMap + stemp
+                #else
+                PrettyMap = PrettyMap + TextMapping[MapTypePiece]!
+                #endif
             }
             if ShowCoordinates
             {
@@ -1679,6 +1700,7 @@ class MapType
             {
                 PrettyMap = PrettyMap + ColumnHeaders[X]
             }
+            PrettyMap = PrettyMap + "\n"
         }
         
         return PrettyMap
@@ -1746,6 +1768,14 @@ class MapType
         }
         
         return PrettyMap
+    }
+    
+    public var description: String
+    {
+        get
+        {
+            return MapType.PrettyPrint(Map: self)
+        }
     }
     
     /// Clone the passed map.
