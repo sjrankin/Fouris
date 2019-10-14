@@ -51,11 +51,11 @@ class GameStyleTableViewCell: UITableViewCell
     var GameImage: UIImageView!
     var GameTitle: UILabel!
     
-    public func Initialize(Title: String, Image: UIImage, ID: UUID)
+    public func Initialize(Title: String, Image: UIImage, SubType: CenterShapes)
     {
         GameTitle.text = Title
         GameImage.image = ResizeImage(Image)
-        GameID = ID
+        GameShape = SubType
     }
     
     private func ResizeImage(_ Image: UIImage) -> UIImage
@@ -67,7 +67,7 @@ class GameStyleTableViewCell: UITableViewCell
         return Resized!
     }
     
-    var GameID: UUID = UUID.Empty
+    var GameShape: CenterShapes = CenterShapes.Empty
     
     func GetTitle() -> String
 {
