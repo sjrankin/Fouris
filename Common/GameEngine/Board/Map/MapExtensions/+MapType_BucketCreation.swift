@@ -53,6 +53,8 @@ extension MapType
                     Map[0][X] = InvisibleBucketID
             }
             
+            case .SemiRotating:
+            fallthrough
             case .Rotating4:
                 CreateRotatingBucket(Width: Width, Height: Height, BucketTop: BucketTop, BucketBottom: BucketBottom,
                                      BucketLeft: BucketLeft, BucketRight: BucketRight, Map: &Map, BucketID: BucketID,
@@ -80,7 +82,6 @@ extension MapType
                                              Map: inout ContentsType, BucketID: UUID, InvisibleBucketID: UUID, BucketExteriorID: UUID,
                                              RotatingCenter: CenterShapes = .Square)
     {
-        print("BucketTop=\(BucketTop), BucketLeft=\(BucketLeft), BucketBottom=\(BucketBottom), BucketRight=\(BucketRight)")
         //Fill the map with bucket exteriors.
         for Y in 0 ..< BucketTop
         {
@@ -402,6 +403,24 @@ extension MapType
             
             case .Empty:
                 break
+            
+            case .OneOpening:
+            break
+            
+            case .Classic:
+            break
+            
+            case .TallThin:
+            break
+            
+            case .ShortWide:
+            break
+            
+            case .Big:
+            break
+            
+            case .Small:
+            break
         }
         
         #if false
