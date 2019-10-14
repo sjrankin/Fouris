@@ -1289,7 +1289,9 @@ class Piece
                     self.FreezeTimer?.invalidate()
                     self.FreezeTimer = nil
             }
-            print(">>>>> Encountered nil GameBoard in Frozen - killed the Freeze timer.")
+            var NotUsed: String? = nil
+            ActivityLog.AddEntry(Title: "Game", Source: "Piece", KVPs: [("Message","Encountered nil GameBoard in Frozen - killed the Freeze Timer.")], LogFileName: &NotUsed)
+//            print(">>>>> Encountered nil GameBoard in Frozen - killed the Freeze timer.")
             return
         }
         if !Thread.isMainThread
