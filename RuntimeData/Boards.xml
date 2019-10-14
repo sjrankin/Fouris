@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Boards>
+    <Board Type="Dot" GameType="Rotating4">
+        <Sizes>
+            <GameBoard Width="36" Height="36"/>
+            <BucketRegion X="8" Y="8" Width="20" Height="20"/>
+        </Sizes>
+        <Map>
+        </Map>
+        <Rotations BucketRotates="true" PiecesRotate="true"/>
+        <Buttons>
+            <Left Visible="true"/>
+            <Right Visible="true"/>
+            <Up Visible="true"/>
+            <Down Visible="true"/>
+            <DropDown Visible="true"/>
+            <FlyAway Visible="true"/>
+            <RotateLeft Visible="true"/>
+            <RotateRight Visible="true"/>
+            <Freeze Action="Invisible"/>
+        </Buttons>
+    </Board>
+    <Board Type="Empty" GameType="Rotating4">
+        <Sizes>
+            <GameBoard Width="36" Height="36"/>
+            <BucketRegion X="8" Y="8" Width="20" Height="20"/>
+        </Sizes>
+        <Map>
+        </Map>
+        <Rotations BucketRotates="false" PiecesRotate="true"/>
+        <Buttons>
+            <Left Visible="true"/>
+            <Right Visible="true"/>
+            <Up Visible="true"/>
+            <Down Visible="true"/>
+            <DropDown Visible="true"/>
+            <FlyAway Visible="true"/>
+            <RotateLeft Visible="true"/>
+            <RotateRight Visible="true"/>
+            <Freeze Action="Once"/>
+        </Buttons>
+    </Board>
+    <Board Type="OneOpening" GameType="SemiRotating">
+        <Sizes>
+            <GameBoard Width="36" Height="36"/>
+            <BucketRegion X="8" Y="8" Width="20" Height="20"/>
+        </Sizes>
+        <Map>
+        </Map>
+        <Rotations BucketRotates="false" PiecesRotate="true"/>
+        <Buttons>
+            <Left Visible="true"/>
+            <Right Visible="true"/>
+            <Up Visible="true"/>
+            <Down Visible="true"/>
+            <DropDown Visible="true"/>
+            <FlyAway Visible="true"/>
+            <RotateLeft Visible="true"/>
+            <RotateRight Visible="true"/>
+            <Freeze Action="Invisible"/>
+        </Buttons>
+    </Board>
+</Boards>
