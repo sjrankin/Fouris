@@ -53,12 +53,14 @@ protocol AIProtocol: class
 /// AI types.
 /// - **Standard**: AI for standard games.
 /// - **Rotating4**: AI for rotating square games.
+/// - **SemiRotating**: AI for semi-rotating games.
 /// - **Cubic**: AI for cubic games.
 enum AITypes: Int, CaseIterable
 {
     case Standard = 0
     case Rotating4 = 1
-    case Cubic = 2
+    case SemiRotating = 2
+    case Cubic = 3
 }
 
 /// Describes how to move a block to its best fit calculated location. Used internally to the AI classes.
