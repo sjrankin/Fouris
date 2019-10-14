@@ -80,6 +80,7 @@ extension MapType
                                              Map: inout ContentsType, BucketID: UUID, InvisibleBucketID: UUID, BucketExteriorID: UUID,
                                              RotatingCenter: CenterShapes = .Square)
     {
+        print("BucketTop=\(BucketTop), BucketLeft=\(BucketLeft), BucketBottom=\(BucketBottom), BucketRight=\(BucketRight)")
         //Fill the map with bucket exteriors.
         for Y in 0 ..< BucketTop
         {
@@ -122,55 +123,285 @@ extension MapType
         }
         
         //Add bucket blocks.
+        let XOffset = 8
+        let YOffset = 8
         switch RotatingCenter
         {
+            case .SmallRectangle:
+                Map[9 + YOffset][10 + XOffset] = BucketID
+                Map[9 + YOffset][11 + XOffset] = BucketID
+            
+            case .Rectangle:
+                for Y in 9 ... 10
+                {
+                    for X in 8 ... 11
+                    {
+                        Map[Y + YOffset][X + XOffset] = BucketID
+                    }
+            }
+            
+            case .BigRectangle:
+                for Y in 8 ... 10
+                {
+                    for X in 6 ... 13
+                    {
+                        Map[Y + YOffset][X + XOffset] = BucketID
+                    }
+            }
+            
+            case .CornerDots:
+                Map[0 + YOffset][19 + XOffset] = BucketID
+                Map[0 + YOffset][0 + XOffset] = BucketID
+                Map[19 + YOffset][0 + XOffset] = BucketID
+                Map[19 + YOffset][19 + XOffset] = BucketID
+            
+            case .Corners:
+                Map[0 + YOffset][0 + XOffset] = BucketID
+                Map[0 + YOffset][1 + XOffset] = BucketID
+                Map[0 + YOffset][2 + XOffset] = BucketID
+                Map[0 + YOffset][17 + XOffset] = BucketID
+                Map[0 + YOffset][18 + XOffset] = BucketID
+                Map[0 + YOffset][19 + XOffset] = BucketID
+                Map[19 + YOffset][0 + XOffset] = BucketID
+                Map[19 + YOffset][1 + XOffset] = BucketID
+                Map[19 + YOffset][2 + XOffset] = BucketID
+                Map[19 + YOffset][17 + XOffset] = BucketID
+                Map[19 + YOffset][18 + XOffset] = BucketID
+                Map[19 + YOffset][19 + XOffset] = BucketID
+                Map[1 + YOffset][0 + XOffset] = BucketID
+                Map[2 + YOffset][0 + XOffset] = BucketID
+                Map[1 + YOffset][19 + XOffset] = BucketID
+                Map[2 + YOffset][19 + XOffset] = BucketID
+                Map[17 + YOffset][0 + XOffset] = BucketID
+                Map[18 + YOffset][0 + XOffset] = BucketID
+                Map[17 + YOffset][19 + XOffset] = BucketID
+                Map[18 + YOffset][19 + XOffset] = BucketID
+            
             case .Dot:
-            let Y = (Height / 2)
-            let X = (Width / 2)
-            Map[Y][X] = BucketID
+                Map[9 + YOffset][10 + XOffset] = BucketID
             
             case .SmallSquare:
-                let YStart = (Height / 2) - 1
-                let YEnd = YStart + 1
-                let XStart = (Width / 2) - 1
-                let XEnd = XStart + 1
-                for Y in YStart ... YEnd
+                for Y in 9 ... 10
                 {
-                    for X in XStart ... XEnd
+                    for X in 9 ... 10
                     {
-                        Map[Y][X] = BucketID
+                        Map[Y + YOffset][X + XOffset] = BucketID
                     }
             }
             
             case .Square:
-                //The rotating game has the bucket in the center.
-                let YStart = (Height / 2) - 2
-                let YEnd = YStart + 3
-                let XStart = (Width / 2) - 2
-                let XEnd = XStart + 3
-                for Y in YStart ... YEnd
+                for Y in 8 ... 11
                 {
-                    for X in XStart ... XEnd
+                    for X in 8 ... 11
                     {
-                        Map[Y][X] = BucketID
-                    }
-                }
-
-            case .BigSquare:
-                let YStart = (Height / 2) - 3
-                let YEnd = YStart + 5
-                let XStart = (Width / 2) - 3
-                let XEnd = XStart + 5
-                for Y in YStart ... YEnd
-                {
-                    for X in XStart ... XEnd
-                    {
-                        Map[Y][X] = BucketID
+                        Map[Y + YOffset][X + XOffset] = BucketID
                     }
             }
             
-            default:
-            break
+            case .BigSquare:
+                for Y in 7 ... 12
+                {
+                    for X in 7 ... 12
+                    {
+                        Map[Y + YOffset][X + XOffset] = BucketID
+                    }
+            }
+            
+            case .FourSmallSquares:
+                for Y in 4 ... 5
+                {
+                    for X in 4 ... 5
+                    {
+                        Map[Y + YOffset][X + XOffset] = BucketID
+                    }
+                }
+                for Y in 14 ... 15
+                {
+                    for X in 4 ... 5
+                    {
+                        Map[Y + YOffset][X + XOffset] = BucketID
+                    }
+                }
+                for Y in 4 ... 5
+                {
+                    for X in 14 ... 15
+                    {
+                        Map[Y + YOffset][X + XOffset] = BucketID
+                    }
+                }
+                for Y in 14 ... 15
+                {
+                    for X in 14 ... 15
+                    {
+                        Map[Y + YOffset][X + XOffset] = BucketID
+                    }
+            }
+            
+            case .HorizontalLine:
+                for X in 0 ... 19
+                {
+                    Map[9 + YOffset][X + XOffset] = BucketID
+            }
+            
+            case .Quadrant:
+                for X in 0 ... 19
+                {
+                    Map[9 + YOffset][X + XOffset] = BucketID
+                }
+                for Y in 0 ... 19
+                {
+                    Map[Y + YOffset][10 + XOffset] = BucketID
+            }
+            
+            case .ShortDiagonals:
+                for Y in 6 ... 13
+                {
+                    for X in 6 ... 13
+                    {
+                        Map[Y + YOffset][X + XOffset] = BucketID
+                    }
+                }
+                for Y in stride(from: 13, through: 6, by: -1)
+                {
+                    for X in stride(from: 13, through: 6, by: -1)
+                    {
+                        Map[Y + YOffset][X + XOffset] = BucketID
+                    }
+            }
+            
+            case .LongDiagonals:
+                for Y in 4 ... 15
+                {
+                    for X in 4 ... 15
+                    {
+                        Map[Y + YOffset][X + XOffset] = BucketID
+                    }
+                }
+                for Y in stride(from: 15, through: 4, by: -1)
+                {
+                    for X in stride(from: 15, through: 4, by: -1)
+                    {
+                        Map[Y + YOffset][X + XOffset] = BucketID
+                    }
+            }
+            
+            case .ParallelLines:
+                for Y in 6 ... 13
+                {
+                    Map[Y + YOffset][5 + XOffset] = BucketID
+                    Map[Y + YOffset][14 + XOffset] = BucketID
+            }
+            
+            case .FourLines:
+                for X in 7 ... 12
+                {
+                    Map[0 + YOffset][X + XOffset] = BucketID
+                    Map[19 + YOffset][X + XOffset] = BucketID
+                }
+                for Y in 7 ... 12
+                {
+                    Map[Y + YOffset][0 + XOffset] = BucketID
+                    Map[Y + YOffset][19 + XOffset] = BucketID
+            }
+            
+            case .Plus:
+                for X in 8 ... 12
+                {
+                    Map[9 + YOffset][X + XOffset] = BucketID
+                }
+                for Y in 7 ... 11
+                {
+                    Map[Y + YOffset][10 + XOffset] = BucketID
+            }
+            
+            case .SmallDiamond:
+                Map[8 + YOffset][9 + XOffset] = BucketID
+                Map[9 + YOffset][9 + XOffset] = BucketID
+                Map[10 + YOffset][9 + XOffset] = BucketID
+                Map[8 + YOffset][9 + XOffset] = BucketID
+                Map[10 + YOffset][9 + XOffset] = BucketID
+            
+            case .Diamond:
+                Map[7 + YOffset][10 + XOffset] = BucketID
+                Map[11 + YOffset][10 + XOffset] = BucketID
+                for X in 9 ... 11
+                {
+                    Map[8 + YOffset][X + XOffset] = BucketID
+                }
+                for X in 8 ... 12
+                {
+                    Map[9 + YOffset][X + XOffset] = BucketID
+                }
+                for X in 9 ... 11
+                {
+                    Map[10 + YOffset][X + XOffset] = BucketID
+            }
+            
+            case .BigDiamond:
+                Map[6 + YOffset][10 + XOffset] = BucketID
+                Map[12 + YOffset][10 + XOffset] = BucketID
+                for X in 9 ... 11
+                {
+                    Map[7 + YOffset][X + XOffset] = BucketID
+                }
+                for X in 8 ... 12
+                {
+                    Map[8 + YOffset][X + XOffset] = BucketID
+                }
+                for X in 7 ... 13
+                {
+                    Map[9 + YOffset][X + XOffset] = BucketID
+                }
+                for X in 8 ... 12
+                {
+                    Map[10 + YOffset][X + XOffset] = BucketID
+                }
+                for X in 9 ... 11
+                {
+                    Map[11 + YOffset][X + XOffset] = BucketID
+            }
+            
+            case .Bracket2:
+                for Y in 7 ... 12
+                {
+                    Map[Y + YOffset][5 + XOffset] = BucketID
+                    Map[Y + YOffset][14 + XOffset] = BucketID
+                }
+                for X in 6 ... 7
+                {
+                    Map[7 + YOffset][X + XOffset] = BucketID
+                    Map[12 + YOffset][X + XOffset] = BucketID
+                }
+                for X in 12 ... 13
+                {
+                    Map[7 + YOffset][X + XOffset] = BucketID
+                    Map[12 + YOffset][X + XOffset] = BucketID
+            }
+            
+            case .Bracket4:
+                for X in 5 ... 7
+                {
+                    Map[5 + YOffset][X + XOffset] = BucketID
+                    Map[14 + YOffset][X + XOffset] = BucketID
+                }
+                for X in 12 ... 14
+                {
+                    Map[5 + YOffset][X + XOffset] = BucketID
+                    Map[14 + YOffset][X + XOffset] = BucketID
+                }
+                for Y in 6 ... 7
+                {
+                    Map[Y + YOffset][5 + XOffset] = BucketID
+                    Map[Y + YOffset][14 + XOffset] = BucketID
+                }
+                for Y in 12 ... 13
+                {
+                    Map[Y + YOffset][5 + XOffset] = BucketID
+                    Map[Y + YOffset][14 + XOffset] = BucketID
+            }
+            
+            case .Empty:
+                break
         }
         
         #if false
