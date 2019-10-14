@@ -68,6 +68,9 @@ class MainAI
             case .Rotating4:
                 CurrentAI = GameAIs[.Rotating4]
             
+            case .SemiRotating:
+                CurrentAI = GameAIs[.Rotating4]
+            
             case .Cubic:
                 CurrentAI = GameAIs[.Cubic]
         }
