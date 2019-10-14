@@ -143,6 +143,10 @@
 		178F4CA6229131A900FBCFFD /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178F4CA5229131A900FBCFFD /* Board.swift */; };
 		17912251231F78DF00C3330A /* GradientStopEditorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17912250231F78DF00C3330A /* GradientStopEditorCode.swift */; };
 		17912255231FAAFB00C3330A /* GamePieceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17912254231FAAFB00C3330A /* GamePieceCell.swift */; };
+		17968AF923549B1E008E6211 /* Boards.xml in Resources */ = {isa = PBXBuildFile; fileRef = 17968AF823549B1E008E6211 /* Boards.xml */; };
+		17968AFC23549B3C008E6211 /* BoardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17968AFB23549B3C008E6211 /* BoardManager.swift */; };
+		17968AFE23549C45008E6211 /* BoardCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17968AFD23549C45008E6211 /* BoardCollection.swift */; };
+		17968B0023549E1D008E6211 /* BoardDescriptor2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17968AFF23549E1D008E6211 /* BoardDescriptor2.swift */; };
 		1797523422C38A4D00BF539A /* +ClientCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1797522522C38A4B00BF539A /* +ClientCommands.swift */; };
 		1797523622C38A4D00BF539A /* +Handshake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1797522622C38A4C00BF539A /* +Handshake.swift */; };
 		1797523822C38A4D00BF539A /* +PeerCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1797522722C38A4C00BF539A /* +PeerCommands.swift */; };
@@ -408,6 +412,10 @@
 		178F4CA5229131A900FBCFFD /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		17912250231F78DF00C3330A /* GradientStopEditorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientStopEditorCode.swift; sourceTree = "<group>"; };
 		17912254231FAAFB00C3330A /* GamePieceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePieceCell.swift; sourceTree = "<group>"; };
+		17968AF823549B1E008E6211 /* Boards.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Boards.xml; sourceTree = "<group>"; };
+		17968AFB23549B3C008E6211 /* BoardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardManager.swift; sourceTree = "<group>"; };
+		17968AFD23549C45008E6211 /* BoardCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCollection.swift; sourceTree = "<group>"; };
+		17968AFF23549E1D008E6211 /* BoardDescriptor2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDescriptor2.swift; sourceTree = "<group>"; };
 		1797522522C38A4B00BF539A /* +ClientCommands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "+ClientCommands.swift"; sourceTree = "<group>"; };
 		1797522622C38A4C00BF539A /* +Handshake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "+Handshake.swift"; sourceTree = "<group>"; };
 		1797522722C38A4C00BF539A /* +PeerCommands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "+PeerCommands.swift"; sourceTree = "<group>"; };
@@ -649,6 +657,7 @@
 		17432908233F77F400F98863 /* DataManagers */ = {
 			isa = PBXGroup;
 			children = (
+				17968AFA23549B29008E6211 /* Boards */,
 				17D015942349B0770012FFE1 /* Visuals2 */,
 				17FBF712234474E100BB87A6 /* GameStatistics */,
 				170FC65C233DDF3200F9A8F1 /* XMLDocument */,
@@ -746,6 +755,7 @@
 		1762FC1B229D2874000099F2 /* RuntimeData */ = {
 			isa = PBXGroup;
 			children = (
+				17968AF823549B1E008E6211 /* Boards.xml */,
 				17D015902349AFF50012FFE1 /* DefaultPieceVisuals.xml */,
 				17D015912349AFF50012FFE1 /* UserPieceVisuals.xml */,
 				179C5E1B2322282B0003845B /* PieceVisuals.xml */,
@@ -847,6 +857,16 @@
 				17831EDC232DFB54007FF894 /* FlyingProtocol.swift */,
 			);
 			path = FlyingPieces;
+			sourceTree = "<group>";
+		};
+		17968AFA23549B29008E6211 /* Boards */ = {
+			isa = PBXGroup;
+			children = (
+				17968AFB23549B3C008E6211 /* BoardManager.swift */,
+				17968AFD23549C45008E6211 /* BoardCollection.swift */,
+				17968AFF23549E1D008E6211 /* BoardDescriptor2.swift */,
+			);
+			path = Boards;
 			sourceTree = "<group>";
 		};
 		1797522122C388D300BF539A /* MessageHelper */ = {
@@ -1394,6 +1414,7 @@
 				1704E2FA2320E19A00D7C158 /* GameThemes.xml in Resources */,
 				179C5E1C2322282B0003845B /* PieceVisuals.xml in Resources */,
 				17F0B49E225CBE740071514E /* LaunchScreen.storyboard in Resources */,
+				17968AF923549B1E008E6211 /* Boards.xml in Resources */,
 				17FBF711234474A400BB87A6 /* AIGameHistory.xml in Resources */,
 				17404B252345CF4400976DE2 /* GameTheme2.xml in Resources */,
 				17D6B195233DC42400EFCE31 /* UserPieceDescriptions.xml in Resources */,
@@ -1549,6 +1570,7 @@
 				170F854122B5D3E5005405B6 /* VisualBlocks3D.swift in Sources */,
 				174328FD233F22D700F98863 /* Point3D.swift in Sources */,
 				17AE969F2351F91000412979 /* ActivityLog.swift in Sources */,
+				17968AFE23549C45008E6211 /* BoardCollection.swift in Sources */,
 				173B4B15231B9136007B22F6 /* RecentColorListCode.swift in Sources */,
 				17F6ECF02286E1F2000F8E11 /* ControlProtocol.swift in Sources */,
 				179C5E342322533F0003845B /* PieceEditorCode.swift in Sources */,
@@ -1572,6 +1594,7 @@
 				1759F6B522AB7F5D00574A01 /* TColor.swift in Sources */,
 				177F4FD0229BD4CC00FE72CD /* Serializable.swift in Sources */,
 				1797524C22C38A4D00BF539A /* +KVPCommands.swift in Sources */,
+				17968B0023549E1D008E6211 /* BoardDescriptor2.swift in Sources */,
 				17F6ECF12286E201000F8E11 /* DebugDelegate.swift in Sources */,
 				17189FF92333347C00317BF1 /* +Image.swift in Sources */,
 				17912251231F78DF00C3330A /* GradientStopEditorCode.swift in Sources */,
@@ -1618,6 +1641,7 @@
 				179F0A7E2330D4B80051B148 /* ThemeEnums.swift in Sources */,
 				174BEFDD2287B4DF003A43E5 /* ViewEnvironment.swift in Sources */,
 				17FBF7182344782D00BB87A6 /* GameHistory.swift in Sources */,
+				17968AFC23549B3C008E6211 /* BoardManager.swift in Sources */,
 				17BC04D8229127E1002A6F90 /* PieceIDMap.swift in Sources */,
 				171ED0FB22F567EA00CE2CDF /* AIProtocol.swift in Sources */,
 				1704E2FE232123DE00D7C158 /* AnimatedGradientStop.swift in Sources */,
