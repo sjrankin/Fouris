@@ -1688,6 +1688,7 @@ class View3D: SCNView,                          //Our main super class.
                 for Block in MovingPieceBlocks
                 {
                     FinalBlocks.append(Block)
+                    BlockList.insert(Block)
             }
             
             case .Cubic:
