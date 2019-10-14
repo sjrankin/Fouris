@@ -318,6 +318,10 @@ class GameLogic
                 BWidth = 36
                 BHeight = 36
             
+            case .SemiRotating:
+            BWidth = 36
+            BHeight = 36
+            
             case .Cubic:
                 break
         }
@@ -374,6 +378,9 @@ class GameLogic
                 UIDelegate?.PieceMoved(MovedPiece, Direction: Direction, Commanded: Commanded)
             
             case .Rotating4:
+                UIDelegate?.PieceMoved3D(MovedPiece, Direction: Direction, Commanded: Commanded)
+            
+            case .SemiRotating:
                 UIDelegate?.PieceMoved3D(MovedPiece, Direction: Direction, Commanded: Commanded)
             
             case .Cubic:
@@ -440,6 +447,9 @@ class GameLogic
                 let NewTime = CACurrentMediaTime() - ScoringStartTime
                 let TimeAdder = Int(NewTime / (Double(LargestBlockCount) - Double(BlockCount)))
                 _CurrentGameScore = _CurrentGameScore + ThePiece.Locations.count + TimeAdder
+            
+            case .SemiRotating:
+                _CurrentGameScore = GameBoard!.Map!.Scorer!.Current
             
             case .Cubic:
                 _CurrentGameScore = _CurrentGameScore + 1
