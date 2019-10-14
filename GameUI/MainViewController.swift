@@ -808,6 +808,9 @@ class MainViewController: UIViewController,
             case .Rotating4:
                 break
             
+            case .SemiRotating:
+            break
+            
             case .Cubic:
                 GameView3D?.DrawMap3D(FromBoard: Game.GameBoard!)
         }
@@ -846,6 +849,8 @@ class MainViewController: UIViewController,
             case .Standard:
                 break
             
+            case .SemiRotating:
+            fallthrough
             case .Rotating4:
                 GameView3D?.MergePieceIntoBucket(ThePiece)
                 GameView3D?.DrawMap3D(FromBoard: Game!.GameBoard!, CalledFrom: "PieceFinalized")
@@ -2138,11 +2143,13 @@ class MainViewController: UIViewController,
 /// have various bucket sizes or obstructions.
 /// - **Standard**: Standard Tetris game.
 /// - **Rotating4**: Rotating square with falling pieces.
+/// - **SemiRotating**: Either board rotates and pieces do not, or pieces rotate and board does not.
 /// - **Cubic**: Three dimensional falling piece game.
 enum BaseGameTypes: String, CaseIterable
 {
     case Standard = "Standard"
     case Rotating4 = "Rotating4"
+    case SemiRotating = "SemiRotating"
     case Cubic = "Cubic"
 }
 
