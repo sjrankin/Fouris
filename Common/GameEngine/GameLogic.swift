@@ -629,7 +629,11 @@ class GameLogic
         let AIDuration = CACurrentMediaTime() - AIStart
         if AIDuration > 0.5
         {
-        print(">>>>>>>>> AI Duration: \(AIDuration)")
+            var NotUsed: String? = nil
+            ActivityLog.AddEntry(Title: "AI", Source: "GameLogic",
+                                 KVPs: [("Message","AI duration too long."),("AIDuration","\(AIDuration)")],
+                                 LogFileName: &NotUsed)
+        //print(">>>>>>>>> AI Duration: \(AIDuration)")
         }
     }
     
