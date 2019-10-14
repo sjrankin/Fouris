@@ -30,24 +30,35 @@ class SelectGameController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func InitializeTables()
     {
-        StandardGames.append(("Classic", "Standard_Classic", StandardGameMap[.Classic]!))
-        StandardGames.append(("Tall & Thin", "Standard_TallThin", StandardGameMap[.TallThin]!))
-        StandardGames.append(("Short & Wide", "Standard_ShortWide", StandardGameMap[.ShortWide]!))
-        StandardGames.append(("Big", "Standard_Big", StandardGameMap[.Big]!))
-        StandardGames.append(("Small", "Standard_Small", StandardGameMap[.Small]!))
+        StandardGames.append(("Classic", "Standard_Classic", .Classic))
+        StandardGames.append(("Tall & Thin", "Standard_TallThin", .TallThin))
+        StandardGames.append(("Short & Wide", "Standard_ShortWide", .ShortWide))
+        StandardGames.append(("Big", "Standard_Big", .Big))
+        StandardGames.append(("Small", "Standard_Small", .Small))
         
-        RotatingGames.append(("Small Central Block", "SmallSquare", RotatingGameMap[.SmallCentralBlock]!))
-        RotatingGames.append(("Medium Central Block", "Square", RotatingGameMap[.MediumCentralBlock]!))
-        RotatingGames.append(("Large Central Block", "BigSquare", RotatingGameMap[.BigCentralBlock]!))
-        RotatingGames.append(("Small Central Diamond", "SmallDiamond", RotatingGameMap[.SmallDiamond]!))
-        RotatingGames.append(("Medium Central Diamond", "Diamond", RotatingGameMap[.MediumDiamond]!))
-        RotatingGames.append(("Large Central Diamond", "BigDiamond", RotatingGameMap[.BigDiamond]!))
-        RotatingGames.append(("Corner Brackets", "Corners", RotatingGameMap[.Corners]!))
-        RotatingGames.append(("4 Central Brackets", "Bracket4", RotatingGameMap[.Brackets4]!))
-        RotatingGames.append(("2 Central Brackets", "Bracket2", RotatingGameMap[.Brackets2]!))
-        RotatingGames.append(("Central X", "ShortDiagonals", RotatingGameMap[.X]!))
-        RotatingGames.append(("Central Plus", "Plus", RotatingGameMap[.Plus]!))
-        RotatingGames.append(("Empty", "Empty", RotatingGameMap[.Empty]!))
+        RotatingGames.append(("Center Dot", "Dot", .Dot))
+        RotatingGames.append(("Small Central Block", "SmallSquare", .SmallSquare))
+        RotatingGames.append(("Medium Central Block", "Square", .Square))
+        RotatingGames.append(("Large Central Block", "BigSquare", .BigSquare))
+        RotatingGames.append(("Four Small Squares", "FourSmallSquares", .FourSmallSquares))
+        RotatingGames.append(("Small Central Rectangel", "SmallRectangle", .SmallRectangle))
+        RotatingGames.append(("Medium Central Rectangle", "Rectangle", .Rectangle))
+        RotatingGames.append(("Large Central Rectangle", "BigRectangle", .BigRectangle))
+        RotatingGames.append(("Small Central Diamond", "SmallDiamond", .SmallDiamond))
+        RotatingGames.append(("Medium Central Diamond", "Diamond", .Diamond))
+        RotatingGames.append(("Large Central Diamond", "BigDiamond", .BigDiamond))
+        RotatingGames.append(("Corner Brackets", "Corners", .Corners))
+        RotatingGames.append(("Corner Dots", "", .CornerDots))
+        RotatingGames.append(("4 Central Brackets", "Bracket4", .Bracket4))
+        RotatingGames.append(("2 Central Brackets", "Bracket2", .Bracket2))
+        RotatingGames.append(("Diagonal Lines", "ShortDiagonals", .ShortDiagonals))
+        RotatingGames.append(("Long Diagonal Lines", "LongDiagonals", .LongDiagonals))
+        RotatingGames.append(("Four Border Lines", "FourLines", .FourLines))
+        RotatingGames.append(("Parallel Lines", "ParallelLines", .ParallelLines))
+        RotatingGames.append(("Horizontal Line", "HorizontalLine", .HorizontalLine))
+        RotatingGames.append(("Two Perpendicular Lines", "Quadrant", .Quadrant))
+        RotatingGames.append(("Central Plus", "Plus", .Plus))
+        RotatingGames.append(("Empty", "Empty", .Empty))
         
         CubicGames.removeAll()
     }
@@ -83,14 +94,14 @@ class SelectGameController: UIViewController, UITableViewDelegate, UITableViewDa
         {
             case 0:
                 let Cell = GameStyleTableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "StyleCell")
-                let (Title, ImageName, ID) = StandardGames[indexPath.row]
-                Cell.Initialize(Title: Title, Image: UIImage(named: ImageName)!, ID: ID)
+                let (Title, ImageName, SubType) = StandardGames[indexPath.row]
+                Cell.Initialize(Title: Title, Image: UIImage(named: ImageName)!, SubType: SubType)
                 return Cell
             
             case 1:
                 let Cell = GameStyleTableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "StyleCell")
-                let (Title, ImageName, ID) = RotatingGames[indexPath.row]
-                Cell.Initialize(Title: Title, Image: UIImage(named: ImageName)!, ID: ID)
+                let (Title, ImageName, SubType) = RotatingGames[indexPath.row]
+                Cell.Initialize(Title: Title, Image: UIImage(named: ImageName)!, SubType: SubType)
                 return Cell
             
             case 2:
@@ -104,9 +115,9 @@ class SelectGameController: UIViewController, UITableViewDelegate, UITableViewDa
     var SelectedGameType: UUID = UUID.Empty
     var LastSelectedItem: Int = -1
     
-    var StandardGames = [(String, String, UUID)]()
-    var RotatingGames = [(String, String, UUID)]()
-    var CubicGames = [(String, String, UUID)]()
+    var StandardGames = [(String, String, CenterShapes)]()
+    var RotatingGames = [(String, String, CenterShapes)]()
+    var CubicGames = [(String, String, CenterShapes)]()
     
     @IBAction func HandleBaseGameChanged(_ sender: Any)
     {
@@ -131,54 +142,6 @@ class SelectGameController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     @IBOutlet weak var GameStyleTableView: UITableView!
-    
-    let StandardGameMap: [StandardGameStyles: UUID] =
-        [
-            .Classic: UUID(uuidString: "13a6257a-ba5f-4aa6-b011-8c99f1736bde")!,
-            .TallThin: UUID(uuidString: "0dfbc476-d2e1-49c8-8c03-5959a674ca7f")!,
-            .ShortWide: UUID(uuidString: "02072d6c-4d84-4878-ba5e-3004649f3e4a")!,
-            .Big: UUID(uuidString: "e9a1ccba-de94-4584-8600-0a5c86dbf275")!,
-            .Small: UUID(uuidString: "166654f6-64f9-49bc-aee0-56632bb09431")!,
-    ]
-    
-    let RotatingGameMap: [RotatingGameStyles: UUID] =
-        [
-            .SmallCentralBlock: UUID(uuidString: "4786d6ef-3f29-465f-ba32-88fa54836753")!,
-            .MediumCentralBlock: UUID(uuidString: "581f1b14-4bec-4d47-aacd-d46bb2b4d42c")!,
-            .BigCentralBlock: UUID(uuidString: "01d32275-37a8-43e2-8b04-ced15d71d286")!,
-            .Corners: UUID(uuidString: "9bf3a3aa-bfb3-44e9-9410-9421d3a68c5d")!,
-            .Brackets4: UUID(uuidString: "41dab19c-9d0d-4cb6-ab9e-5624db54df0f")!,
-            .Brackets2: UUID(uuidString: "dc07f7b9-4bb6-40a7-b8b0-daaba5bf69b4")!,
-            .SmallDiamond: UUID(uuidString: "820c3ecc-31bd-48dc-ab10-76b51489c2e2")!,
-            .MediumDiamond: UUID(uuidString: "a8b97d71-0eb9-4560-980a-a30d45dc65c0")!,
-            .BigDiamond: UUID(uuidString: "2fc831a2-8855-453e-8dbe-aab7bd51ec2e")!,
-            .X: UUID(uuidString: "8a408229-2dfe-4596-ab2b-3fe889f119aa")!,
-            .Plus: UUID(uuidString: "693c6f68-d458-4bbb-a2a1-261f59e7ca4e")!,
-            .Empty: UUID(uuidString: "745c2d24-481c-4624-81fe-51241be37c75")!,
-    ]
 }
 
-enum StandardGameStyles
-{
-    case Classic
-    case TallThin
-    case ShortWide
-    case Big
-    case Small
-}
 
-enum RotatingGameStyles
-{
-    case SmallCentralBlock
-    case MediumCentralBlock
-    case BigCentralBlock
-    case Corners
-    case Brackets4
-    case Brackets2
-    case SmallDiamond
-    case MediumDiamond
-    case BigDiamond
-    case X
-    case Plus
-    case Empty
-}
