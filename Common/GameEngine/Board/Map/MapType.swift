@@ -172,6 +172,9 @@ class MapType: CustomStringConvertible
                 DebugClient.Send("_BucketInteriorWidth=\(_BucketInteriorWidth), _BucketInteriorHeight=\(_BucketInteriorHeight)")
             #endif
             
+            case .SemiRotating:
+            break
+            
             case .Cubic:
                 break
         }
@@ -214,6 +217,9 @@ class MapType: CustomStringConvertible
                     return false
             }
             
+            case .SemiRotating:
+            return false
+            
             case .Cubic:
                 return false
         }
@@ -247,6 +253,9 @@ class MapType: CustomStringConvertible
                 let X = 16
                 let Y = BucketTop - ForPiece.MaxComponentDimension - 2
                 return CGPoint(x: X, y: Y)
+            
+            case .SemiRotating:
+                return CGPoint(x: 0, y: 0)
             
             case .Cubic:
                 return CGPoint(x: 0, y: 0)
@@ -995,6 +1004,9 @@ class MapType: CustomStringConvertible
                     }
                     FullRowCount = FullRowCount + Int(CanCollapseRow ? 1 : 0)
             }
+            
+            case .SemiRotating:
+            return false
             
             case .Cubic:
                 return false
