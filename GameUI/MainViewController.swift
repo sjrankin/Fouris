@@ -2055,7 +2055,7 @@ class MainViewController: UIViewController,
     
     @IBAction func HandleFlameButtonPressed(_ sender: Any)
     {
-        #if false
+        #if true
         GameView3D?.SaveAllBucketImages()
         #else
         let Button = sender as! UIButton
