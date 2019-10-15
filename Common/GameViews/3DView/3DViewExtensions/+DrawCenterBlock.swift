@@ -708,6 +708,9 @@ extension View3D
             
             case .Small:
                 break
+            
+            case .SquareBucket:
+                break
         }
     }
 }
