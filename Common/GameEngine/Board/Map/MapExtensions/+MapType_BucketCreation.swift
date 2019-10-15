@@ -54,7 +54,7 @@ extension MapType
             }
             
             case .SemiRotating:
-            fallthrough
+                fallthrough
             case .Rotating4:
                 CreateRotatingBucket(Width: Width, Height: Height, BucketTop: BucketTop, BucketBottom: BucketBottom,
                                      BucketLeft: BucketLeft, BucketRight: BucketRight, Map: &Map, BucketID: BucketID,
@@ -405,22 +405,25 @@ extension MapType
                 break
             
             case .OneOpening:
-            break
+                break
             
             case .Classic:
-            break
+                break
             
             case .TallThin:
-            break
+                break
             
             case .ShortWide:
-            break
+                break
             
             case .Big:
-            break
+                break
             
             case .Small:
-            break
+                break
+            
+            case .SquareBucket:
+                break
         }
         
         #if false
