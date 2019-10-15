@@ -101,6 +101,11 @@ class SelectGameController: UIViewController, UITableViewDelegate, UITableViewDa
             case 1:
                 let Cell = GameStyleTableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "StyleCell")
                 let (Title, ImageName, SubType) = RotatingGames[indexPath.row]
+                if ImageName.isEmpty
+                {
+                    print("Found empty game type at \(indexPath.row)")
+                    return Cell
+                }
                 Cell.Initialize(Title: Title, Image: UIImage(named: ImageName)!, SubType: SubType)
                 return Cell
             
