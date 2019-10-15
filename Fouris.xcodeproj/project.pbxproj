@@ -119,6 +119,7 @@
 		17724AF62352C3F3001A6825 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17724AF52352C3F3001A6825 /* Platform.swift */; };
 		17750FE7233732E700A188D6 /* ThemeChangeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17750FE6233732E700A188D6 /* ThemeChangeProtocol.swift */; };
 		17750FE923373E5B00A188D6 /* ThemeUpdatedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17750FE823373E5B00A188D6 /* ThemeUpdatedProtocol.swift */; };
+		17776ECE2355B40500D4DDD9 /* ConstrainedQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17776ECD2355B40500D4DDD9 /* ConstrainedQueue.swift */; };
 		177F4FC6229BD2F500FE72CD /* Send.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177F4FC5229BD2F500FE72CD /* Send.swift */; };
 		177F4FC9229BD33900FE72CD /* Receive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177F4FC8229BD33900FE72CD /* Receive.swift */; };
 		177F4FCD229BD42500FE72CD /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177F4FCC229BD42500FE72CD /* Serializer.swift */; };
@@ -388,6 +389,7 @@
 		17724AF52352C3F3001A6825 /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		17750FE6233732E700A188D6 /* ThemeChangeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeChangeProtocol.swift; sourceTree = "<group>"; };
 		17750FE823373E5B00A188D6 /* ThemeUpdatedProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeUpdatedProtocol.swift; sourceTree = "<group>"; };
+		17776ECD2355B40500D4DDD9 /* ConstrainedQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstrainedQueue.swift; sourceTree = "<group>"; };
 		177F4FC5229BD2F500FE72CD /* Send.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Send.swift; sourceTree = "<group>"; };
 		177F4FC8229BD33900FE72CD /* Receive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receive.swift; sourceTree = "<group>"; };
 		177F4FCC229BD42500FE72CD /* Serializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serializer.swift; sourceTree = "<group>"; };
@@ -1064,6 +1066,7 @@
 				170FC671233E003F00F9A8F1 /* Tree.swift */,
 				17CE269F225F5EE00056818E /* Stack.swift */,
 				17CE26A2225F63660056818E /* Queue.swift */,
+				17776ECD2355B40500D4DDD9 /* ConstrainedQueue.swift */,
 			);
 			path = DataStructures;
 			sourceTree = "<group>";
@@ -1624,6 +1627,7 @@
 				174328F7233F1C3F00F98863 /* PieceManager.swift in Sources */,
 				1754E79C23252C5500820FDE /* GridCell.swift in Sources */,
 				17616AC623163A3400DFFEFE /* SlideInItem.swift in Sources */,
+				17776ECE2355B40500D4DDD9 /* ConstrainedQueue.swift in Sources */,
 				1737635A230AC6AD0050EB22 /* MiscellaneousExtensions.swift in Sources */,
 				175A9BB42333735D00F463BF /* PHAssetExtension.swift in Sources */,
 				17AB99D22297DC66003C4674 /* ImageServer.swift in Sources */,
