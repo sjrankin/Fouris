@@ -2022,6 +2022,7 @@ enum CenterShapes: String, CaseIterable
     case ShortWide = "ShortWide"
     case Big = "Big"
     case Small = "Small"
+    case SquareBucket = "SquareBucket"
 }
 
 enum Angles: CGFloat, CaseIterable
