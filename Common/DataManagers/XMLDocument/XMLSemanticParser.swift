@@ -41,7 +41,8 @@ class XMLSemanticParser
     
     /// Parse a list of XML string entities into an XML tree.
     /// - Note: This version assumes all XML string entities live on one line and are not split into multiple lines. **XML text
-    ///         entities that span lines will cause this parser to fail in unpredictable ways.**
+    ///         entities that span lines will cause this parser to fail in unpredictable ways.** Except for node contents - they
+    ///         are parsed correctly if they span multiple lines.
     /// - Parameter EntityList: The list of XML text entities, created by `XMLEntityParser`.
     /// - Returns: The root node of the XML tree.
     public static func ParseToTree(_ EntityList: [String]) -> XMLNode
@@ -49,6 +50,7 @@ class XMLSemanticParser
         let Root = XMLNode("XMLDocument", .DocumentHeader)
         var CurrentNode = Root
         
+        var ContentAggregator = ""
         var Line = 0
         for Entity in EntityList
         {
@@ -71,6 +73,8 @@ class XMLSemanticParser
                     fatalError("Unexpectedly found nil parent at \"</\" token near line \(Line).")
                 }
                 CurrentNode = CurrentNode.Parent!
+                CurrentNode.Value = ContentAggregator
+                ContentAggregator = ""
                 continue
             }
             
@@ -83,6 +87,15 @@ class XMLSemanticParser
                 let CommentNode = XMLNode("Comment", .Comment)
                 CommentNode.Value = Working
                 CurrentNode.Children.append(CommentNode)
+                continue
+            }
+            
+            if !Working.trimmingCharacters(in: CharacterSet.whitespaces).starts(with: "<")
+            {
+                //We are in the content section of a node.
+                ContentAggregator = ContentAggregator + Working
+                ContentAggregator = ContentAggregator + "\n"
+                print(ContentAggregator)
                 continue
             }
             
