@@ -129,6 +129,7 @@ class MainViewController: UIViewController,
         #endif
         
         Settings.Initialize()
+        BoardManager.Initialize()
         PieceManager.Initialize()
         Themes = ThemeManager3()
         Themes.Initialize()
