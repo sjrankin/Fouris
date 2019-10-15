@@ -123,7 +123,8 @@ class XMLNode: CustomStringConvertible
     
     /// Holds the value associated with the node.
     private var _Value: String = ""
-    /// Get or set the value associated with the node.
+    /// Get or set the value associated with the node. This is the text between the node start entity and the node end
+    /// entity (excluding child nodes and comments).
     public var Value: String
     {
         get
