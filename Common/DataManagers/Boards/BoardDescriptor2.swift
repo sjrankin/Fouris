@@ -466,6 +466,31 @@ class BoardDescriptor2
             Index = Index + 1
         }
     }
+    
+    /// Holds a list of all bucket block locations in the map. Not populated until `BucketBlockList` is called.
+    var BlockList: [(CGPoint)]? = nil
+    
+    /// Returns a list of points in the game board where bucket blocks are placed.
+    /// - Returns: List of bucket block locations.
+    public func BucketBlockList() -> [(CGPoint)]
+    {
+        if let CachedList = BlockList
+        {
+            return CachedList
+        }
+        BlockList = [(CGPoint)]()
+        for Y in 0 ..< GameBoardHeight
+        {
+            for X in 0 ..< GameBoardWidth
+            {
+                if MapDataAt(X: X, Y: Y) == .BucketBlock
+                {
+                    BlockList!.append(CGPoint(x: X, y: Y))
+                }
+            }
+        }
+        return BlockList!
+    }
 }
 
 /// Actions related to the behavior and visibility of the freeze button.
