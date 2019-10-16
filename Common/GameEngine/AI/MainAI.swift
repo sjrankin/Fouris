@@ -25,56 +25,55 @@ class MainAI
     /// Start the AI. Used to initialize internal structures.
     /// - Note: This function **must** be called when the base game type changes.
     /// - Parameter WithBoard: The board used by the game.
-    /// - Parameter BaseGame: The base game type.
-    public func Start(WithBoard: Board, BaseGame: BaseGameTypes)
+    /// - Parameter BoardShape: The shape of the game
+    public func Start(WithBoard: Board, BoardShape: BucketShapes)
     {
         MotionQueue = Queue<Directions>()
         GameBoard = WithBoard
-        BaseGameType = BaseGame
+        BucketShape = BoardShape
     }
     
-    /// Holds the base game type.
-    private var _BaseGameType: BaseGameTypes = .Standard
+    private var _BucketShape: BucketShapes = .Classic
     {
         didSet
         {
-            SetGameAI(_BaseGameType)
+            SetGameAI(_BucketShape)
         }
     }
-    /// Get or set the base game type. Setting this property changes the base game type immediately, shutting down any
-    /// prior AI execution.
-    public var BaseGameType: BaseGameTypes
+    public var BucketShape: BucketShapes
     {
         get
         {
-            return _BaseGameType
+            return _BucketShape
         }
         set
         {
-            _BaseGameType = newValue
+            _BucketShape = newValue
         }
     }
     
     /// Initialize the type of AI based on the base game type.
     /// - Note: The selected AI will be reinitialized by calling this function.
-    /// - Parameter Base: Determines the type of AI to use.
-    private func SetGameAI(_ Base: BaseGameTypes)
+    /// - Parameter Shape: Determines the AI to use.
+    private func SetGameAI(_ Shape: BucketShapes)
     {
-        switch Base
+       if let BucketClass = BoardData.GetBoardClass(For: Shape)
+       {
+        switch BucketClass
         {
-            case .Standard:
+            case .Rotatable:
+                CurrentAI = GameAIs[.Rotating4]
+            
+            case .Static:
                 CurrentAI = GameAIs[.Standard]
             
-            case .Rotating4:
-                CurrentAI = GameAIs[.Rotating4]
-            
-            case .SemiRotating:
-                CurrentAI = GameAIs[.Rotating4]
-            
-            case .Cubic:
+            case .ThreeDimensional:
                 CurrentAI = GameAIs[.Cubic]
         }
-        
+        CurrentAI!.Initialize(WithBoard: GameBoard!)
+        return
+        }
+        CurrentAI = GameAIs[.Standard]
         CurrentAI!.Initialize(WithBoard: GameBoard!)
     }
     
