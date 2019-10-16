@@ -51,11 +51,11 @@ class GameStyleTableViewCell: UITableViewCell
     var GameImage: UIImageView!
     var GameTitle: UILabel!
     
-    public func Initialize(Title: String, Image: UIImage, SubType: BucketShapes)
+    public func Initialize(Title: String, Image: UIImage, BucketShape: BucketShapes)
     {
         GameTitle.text = Title
         GameImage.image = ResizeImage(Image)
-        GameShape = SubType
+        GameShape = BucketShape
     }
     
     private func ResizeImage(_ Image: UIImage) -> UIImage
