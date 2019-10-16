@@ -137,6 +137,7 @@ class MainViewController: UIViewController,
         //print("UserTheme=\n\(UserTheme!.ToString())")
         Themes.SubscribeToChanges(Subscriber: "MainViewController", SubscribingObject: self)
         CurrentBaseGameType = .Rotating4
+        PreviousGameShape = UserTheme!.BucketShape
         //print("CurrentBaseGameType=\(CurrentBaseGameType)")
         #if true
         PieceVisualManager2.Initialize()
@@ -216,7 +217,11 @@ class MainViewController: UIViewController,
         EnableFreezeInPlaceButton(false)
         
         InitializeSlideIn()
+        #if true
+        Game = GameLogic(UserTheme: UserTheme!, EnableAI: false)
+        #else
         Game = GameLogic(BaseGame: CurrentBaseGameType, UserTheme: UserTheme!, EnableAI: false)
+        #endif
         Game.UIDelegate = self
         Game.AIDelegate = self
         
@@ -1759,7 +1764,7 @@ class MainViewController: UIViewController,
                 return
             }
         }
-       print("++++> At GameTypeChanged to \((NewGameShape)!)")
+        SwitchGameType(NewGameType: NewGameShape!)
     }
     
     func SwitchGameType(NewGameType: BucketShapes)
@@ -1781,7 +1786,7 @@ class MainViewController: UIViewController,
     ///                          this value will be nil.
     /// - Parameter GameSubType: The new sub type game (or old one if only the `NewBaseType` changed). If `DidChange` is false,
     ///                          this value will be nil.
-    func GameTypeChanged(DidChange: Bool, NewBaseType: BaseGameTypes?, GameSubType: BaseGameSubTypes?)
+    func GameTypeChangedOld(DidChange: Bool, NewBaseType: BaseGameTypes?, GameSubType: BaseGameSubTypes?)
     {
         print("At GameTypeChanged")
         if !DidChange
