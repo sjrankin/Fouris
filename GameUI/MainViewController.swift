@@ -28,7 +28,7 @@ class MainViewController: UIViewController,
     SettingsChangedProtocol,                            //Protocol for receiving settings change notifications.
     ThemeUpdatedProtocol                                //Protocol for receiving updates to the theme.
 {
-    // MARK: Globals.
+    // MARK: - Globals.
     
     /// 3D game view instance.
     var GameView3D: View3D? = nil
@@ -66,7 +66,7 @@ class MainViewController: UIViewController,
     /// Prefix for use with the TDebug program.
     var TDebugPrefix: UUID!
     
-    // MARK: UI-required functions.
+    // MARK: - UI-required initialization functions.
     
     /// Handle the viewDidLoad event.
     override func viewDidLoad()
@@ -136,7 +136,7 @@ class MainViewController: UIViewController,
         UserTheme = Themes.UserTheme
         //print("UserTheme=\n\(UserTheme!.ToString())")
         Themes.SubscribeToChanges(Subscriber: "MainViewController", SubscribingObject: self)
-        CurrentBaseGameType = UserTheme!.GameType
+        CurrentBaseGameType = .Rotating4
         //print("CurrentBaseGameType=\(CurrentBaseGameType)")
         #if true
         PieceVisualManager2.Initialize()
@@ -587,7 +587,7 @@ class MainViewController: UIViewController,
         }
     }
     
-    // MARK: Functions related to AI/attract mode and debugging.
+    // MARK: - Functions related to AI/attract mode and debugging.
     
     /// Clears the board and starts in AI mode.
     func ClearAndStartAI()
@@ -621,7 +621,7 @@ class MainViewController: UIViewController,
         DebugClient.SetIdiotLight(IdiotLights.A2, Title: "Attract Mode", FGColor: ColorNames.Blue, BGColor: ColorNames.WhiteSmoke)
     }
     
-    // MARK: Game engine and related protocol-required functions.
+    // MARK: - Game engine and related protocol-required functions.
     
     /// The game wants us to set the opacity of the specified piece.
     ///
@@ -1102,7 +1102,7 @@ class MainViewController: UIViewController,
         }
     }
     
-    // MARK: Control protocol functions.
+    // MARK: - Control protocol functions.
     
     /// Freeze the piece in place.
     func FreezeInPlace()
@@ -1371,7 +1371,7 @@ class MainViewController: UIViewController,
         }
     }
     
-    // MARK: Game-control related functions.
+    // MARK: - Game-control related functions.
     
     func HandleMoveLeftPressed()
     {
@@ -1451,7 +1451,7 @@ class MainViewController: UIViewController,
         Pause()
     }
     
-    // MARK: AI delegate functions.
+    // MARK: - AI delegate functions.
     
     /// Someone wants a reference to the user theme.
     /// - Returns: Current user theme instance.
@@ -1531,7 +1531,7 @@ class MainViewController: UIViewController,
         GameUISurface3D?.FlashButton(.FreezeButton)
     }
     
-    // MARK: Game view request functions.
+    // MARK: - Game view request functions.
     
     /// The game view wants us to redraw the board.
     func NeedRedraw()
@@ -1543,7 +1543,7 @@ class MainViewController: UIViewController,
     {
     }
     
-    // MARK: Smooth motion protocol function implementations.
+    // MARK: - Smooth motion protocol function implementations.
     
     weak var Smooth3D: SmoothMotionProtocol? = nil
     weak var Smooth2D: SmoothMotionProtocol? = nil
@@ -1606,7 +1606,7 @@ class MainViewController: UIViewController,
         
     }
     
-    // MARK: General-UI interactions.
+    // MARK: - General-UI interactions.
     
     var ProposedNewGameType: BaseGameTypes = .Standard
 
@@ -1620,7 +1620,7 @@ class MainViewController: UIViewController,
     
     var AttractTimer: Timer? = nil
     
-    // MARK: General UI functions
+    // MARK: - General UI functions
     
     /// Returns the value needed to set a dark style status bar.
     override var preferredStatusBarStyle: UIStatusBarStyle
@@ -1628,7 +1628,7 @@ class MainViewController: UIViewController,
         return .lightContent
     }
     
-    // MARK: Slide-in view functions.
+    // MARK: - Slide-in view functions.
     
     /// Handle the pressing of the main UI button. If the slide in view is already visible, hide it. If the slide in view is
     /// hidden, show it.
@@ -1737,6 +1737,44 @@ class MainViewController: UIViewController,
         return Selector
     }
     
+    /// Handle game type changes from the user. Called from the game type selector dialog.
+    /// - Note: If the new game shape is the same as the old game shape, no action will be taken.
+    /// - Parameter DidChange: If true, the game type changed. We still need to see if it is different from the current game
+    ///                        type. If false, the user canceled the game selection dialog.
+    /// - Parameter NewGameShape: The new shape of the game. If nil, the user canceled the game selection dialog.
+    func GameTypeChanged(DidChange: Bool, NewGameShape: BucketShapes?)
+    {
+        if !DidChange
+        {
+            return
+        }
+        if PreviousGameShape == nil
+        {
+            PreviousGameShape = NewGameShape
+        }
+        else
+        {
+            if PreviousGameShape! == NewGameShape
+            {
+                return
+            }
+        }
+       print("++++> At GameTypeChanged to \((NewGameShape)!)")
+    }
+    
+    func SwitchGameType(NewGameType: BucketShapes)
+    {
+        var NotUsed: String? = nil
+        ActivityLog.AddEntry(Title: "GameType", Source: "MainViewController", KVPs: [("GameType","\(NewGameType)")],
+                             LogFileName: &NotUsed)
+        UserTheme!.BucketShape = NewGameType
+        Themes.SaveUserTheme()
+        Stop()
+        InitializeGameUI()
+    }
+    
+    var PreviousGameShape: BucketShapes? = nil
+    
     /// Called when the game selector dialog closes.
     /// - Parameter DidChange: If true, the game type or sub type or both changed.
     /// - Parameter NewBaseType: The new base type (or old one if only the `GameSubType` changed). If `DidChange` is false,
@@ -1758,28 +1796,25 @@ class MainViewController: UIViewController,
                 print("Game type is already set. No action taken.")
                 return
             }
-            SwitchGameType(BaseType: NewGameType, SubType: GameSubType!)
+            SwitchGameTypeOld(BaseType: NewGameType, SubType: GameSubType!)
         }
     }
     
     /// Switch the game type here. The current game will be stopped and the UI reinitialized.
     /// - Parameter BaseType: The game base type to use.
     /// - Parameter SubType: The game sub type to use.
-    func SwitchGameType(BaseType: BaseGameTypes, SubType: BaseGameSubTypes)
+    func SwitchGameTypeOld(BaseType: BaseGameTypes, SubType: BaseGameSubTypes)
     {
         var NotUsed: String? = nil
         ActivityLog.AddEntry(Title: "GameType", Source: "MainViewController", KVPs: [("GameType","\(BaseType)"),("SubType","\(SubType)")],
                              LogFileName: &NotUsed)
         print("Switching game type to \(BaseType), \(SubType)")
-        CurrentBaseGameType = BaseType
-        UserTheme!.GameType = BaseType
-        UserTheme!.SubGameType = SubType
         Themes.SaveUserTheme()
         Stop()
         InitializeGameUI()
     }
     
-    // MARK: Debug delegate functions and other debug code.
+    // MARK: - Debug delegate functions and other debug code.
     
     /// Dump the game board as a text object.
     /// - Note: The game is dumped to a child window.
@@ -1790,7 +1825,7 @@ class MainViewController: UIViewController,
     {
     }
     
-    // MARK: AI Scoring for debugging.
+    // MARK: - AI Scoring for debugging.
     
     /// Set AI scoring method.
     /// - Note: Not current in use.
@@ -1848,7 +1883,7 @@ class MainViewController: UIViewController,
         return .Standard
     }
     
-    // MARK: Implementation of TDebugProtocol functions.
+    // MARK: - Implementation of TDebugProtocol functions.
     
     /// Called when the connection state between us and the remote TDebug instance changes.
     /// - Parameter Connected: Will contain the connection state.
@@ -1861,7 +1896,7 @@ class MainViewController: UIViewController,
         }
     }
     
-    // MARK: Implementation of StepperHelper protocol functions.
+    // MARK: - Implementation of StepperHelper protocol functions.
     
     /// Display information from a step. Control should not return until the user dismisses the UI element.
     /// - Parameter From: String describing where the step occurred.
@@ -1872,7 +1907,7 @@ class MainViewController: UIViewController,
         
     }
     
-    // MARK: Media button handling.
+    // MARK: - Media button handling.
     
     /// Handle the camera button press - save the current game view as an image (but not the entire screen).
     /// - Parameter sender: Not used.
@@ -1976,7 +2011,7 @@ class MainViewController: UIViewController,
     
     public var MakingVideo: Bool = false
     
-    // MARK: Theme update protocol functions.
+    // MARK: - Theme update protocol functions.
     
     /// Handle theme change notifications.
     /// - Note:
@@ -2051,7 +2086,7 @@ class MainViewController: UIViewController,
     
     var HeartbeatTimer: Timer? = nil
     
-    // MARK: Flame button handling.
+    // MARK: - Flame button handling.
     
     @IBAction func HandleFlameButtonPressed(_ sender: Any)
     {
@@ -2072,7 +2107,7 @@ class MainViewController: UIViewController,
         #endif
     }
     
-    // MARK: Variables used by +MainSlideInUI from within extensions.
+    // MARK: - Variables used by +MainSlideInUI from within extensions.
     
     /// Stores the command list for the slide in menu/UI.
     var CommandList = [SlideInItem]()
@@ -2080,7 +2115,7 @@ class MainViewController: UIViewController,
     /// The first time the slider came into view flag. Used in **+MainSliderUI.swift**.
     var FirstSlideIn: Bool = true
     
-    // MARK: Variables used by TDebug from within extensions.
+    // MARK: - Variables used by TDebug from within extensions.
     
     var EchoTimer: Timer!
     var EchoBackTo: MCPeerID!
@@ -2089,7 +2124,7 @@ class MainViewController: UIViewController,
     var DebugPeerID: MCPeerID? = nil
     var DebugPeerPrefix: UUID? = nil
     
-    // MARK: Interface builder outlets.
+    // MARK: - Interface builder outlets.
     
     @IBOutlet weak var MainUIButton: UIButton!
     @IBOutlet weak var PlayStopButton: UIButton!
@@ -2123,7 +2158,7 @@ class MainViewController: UIViewController,
     @IBOutlet weak var VersionTextLabel: UILabel!
     @IBOutlet weak var HeartbeatGraphic: UIButton!
     
-    // MARK: Enum mappings.
+    // MARK: - Enum mappings.
     
     let BaseGameToInt: [BaseGameTypes: Int] =
         [
