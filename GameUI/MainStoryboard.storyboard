@@ -506,23 +506,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="712" height="984"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="XIF-ml-2dU">
-                                <rect key="frame" x="20" y="103" width="227" height="32"/>
-                                <segments>
-                                    <segment title="Standard"/>
-                                    <segment title="Rotating"/>
-                                    <segment title="Cubic" enabled="NO"/>
-                                </segments>
-                                <connections>
-                                    <action selector="HandleBaseGameChanged:" destination="mn6-Jo-NIf" eventType="primaryActionTriggered" id="f37-yx-8nV"/>
-                                </connections>
-                            </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Style" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Iu-8H-MJS">
-                                <rect key="frame" x="20" y="178" width="120" height="29"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jlr-uf-ZGv">
                                 <rect key="frame" x="0.0" y="0.0" width="712" height="80"/>
                                 <subviews>
@@ -572,41 +555,46 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="snd-oC-R5x">
-                                <rect key="frame" x="20" y="224" width="672" height="530"/>
+                                <rect key="frame" x="20" y="135" width="672" height="660"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="530" id="asU-UK-nIN"/>
+                                    <constraint firstAttribute="height" constant="660" id="asU-UK-nIN"/>
                                 </constraints>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Changing the game style or sub-type will restart your game." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dFL-TQ-sXL">
-                                <rect key="frame" x="20" y="811" width="672" height="53"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Changing the game style or sub-type will restart your game." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dFL-TQ-sXL">
+                                <rect key="frame" x="20" y="811" width="672" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Style" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Iu-8H-MJS">
+                                <rect key="frame" x="20" y="89" width="120" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="XIF-ml-2dU" firstAttribute="leading" secondItem="4Iu-8H-MJS" secondAttribute="leading" id="4Hn-Mz-D9y"/>
-                            <constraint firstItem="XIF-ml-2dU" firstAttribute="leading" secondItem="rai-Kh-gbM" secondAttribute="leadingMargin" id="5qq-8a-tyJ"/>
+                            <constraint firstItem="snd-oC-R5x" firstAttribute="leading" secondItem="rai-Kh-gbM" secondAttribute="leadingMargin" id="6lx-JX-SFU"/>
                             <constraint firstItem="jlr-uf-ZGv" firstAttribute="leading" secondItem="rai-Kh-gbM" secondAttribute="leading" id="91Y-zz-kmb"/>
                             <constraint firstItem="DTm-dV-Vlw" firstAttribute="leading" secondItem="rai-Kh-gbM" secondAttribute="leading" id="DeX-12-hCA"/>
                             <constraint firstAttribute="trailing" secondItem="jlr-uf-ZGv" secondAttribute="trailing" id="Pgd-p8-SfT"/>
                             <constraint firstItem="4Iu-8H-MJS" firstAttribute="leading" secondItem="snd-oC-R5x" secondAttribute="leading" id="Rsn-Vg-LXd"/>
                             <constraint firstItem="jlr-uf-ZGv" firstAttribute="top" secondItem="rai-Kh-gbM" secondAttribute="top" id="S1q-bL-NCz"/>
+                            <constraint firstItem="dFL-TQ-sXL" firstAttribute="top" secondItem="snd-oC-R5x" secondAttribute="bottom" constant="16" id="TTF-Jf-5Wi"/>
                             <constraint firstItem="snd-oC-R5x" firstAttribute="top" secondItem="4Iu-8H-MJS" secondAttribute="bottom" constant="17" id="U3l-k2-1Lv"/>
                             <constraint firstAttribute="trailing" secondItem="DTm-dV-Vlw" secondAttribute="trailing" id="ZZz-vM-61R"/>
+                            <constraint firstItem="snd-oC-R5x" firstAttribute="trailing" secondItem="dFL-TQ-sXL" secondAttribute="trailing" id="azg-kW-XM8"/>
+                            <constraint firstItem="snd-oC-R5x" firstAttribute="top" secondItem="rai-Kh-gbM" secondAttribute="top" constant="135" id="eac-QH-nzo"/>
                             <constraint firstItem="snd-oC-R5x" firstAttribute="centerX" secondItem="jlr-uf-ZGv" secondAttribute="centerX" id="joP-ng-iSr"/>
+                            <constraint firstItem="snd-oC-R5x" firstAttribute="leading" secondItem="dFL-TQ-sXL" secondAttribute="leading" id="nLF-ht-QwI"/>
                             <constraint firstAttribute="bottom" secondItem="DTm-dV-Vlw" secondAttribute="bottom" id="plt-YF-50y"/>
-                            <constraint firstItem="XIF-ml-2dU" firstAttribute="top" secondItem="jlr-uf-ZGv" secondAttribute="bottom" constant="23" id="rKz-pi-4SI"/>
-                            <constraint firstItem="4Iu-8H-MJS" firstAttribute="top" secondItem="XIF-ml-2dU" secondAttribute="bottom" constant="44" id="yFK-ZH-EGI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="TLt-Jh-odx"/>
                     </view>
                     <navigationItem key="navigationItem" id="Svu-vY-rOI"/>
                     <connections>
-                        <outlet property="BaseGameSegment" destination="XIF-ml-2dU" id="DeP-8d-Vpy"/>
                         <outlet property="GameStyleTableView" destination="snd-oC-R5x" id="dOy-ST-r1W"/>
                     </connections>
                 </viewController>
@@ -928,7 +916,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show statistics for" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gHB-eD-zOm">
-                                <rect key="frame" x="20" y="106" width="141" height="21.5"/>
+                                <rect key="frame" x="20" y="105.5" width="141" height="21.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21.5" id="pne-l1-oLO"/>
                                 </constraints>
@@ -937,13 +925,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For game type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ja-49-CVH">
-                                <rect key="frame" x="20" y="153.5" width="111" height="21"/>
+                                <rect key="frame" x="20" y="153" width="111" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tap-d5-oLU">
-                                <rect key="frame" x="20" y="200.5" width="672" height="633.5"/>
+                                <rect key="frame" x="20" y="200" width="672" height="634"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -959,7 +947,7 @@
                                 </connections>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="48o-Mh-maS">
-                                <rect key="frame" x="199" y="102" width="154" height="30.5"/>
+                                <rect key="frame" x="199" y="102" width="154" height="30"/>
                                 <viewLayoutGuide key="safeArea" id="VC8-ee-mL6"/>
                                 <segments>
                                     <segment title="User"/>
@@ -976,7 +964,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="e6D-S9-tip">
-                                <rect key="frame" x="199" y="149" width="171" height="32"/>
+                                <rect key="frame" x="199" y="148.5" width="171" height="32"/>
                                 <segments>
                                     <segment title="Standard"/>
                                     <segment title="Rotating"/>
