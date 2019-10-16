@@ -225,6 +225,7 @@
 		17DCD7EA2309436F0072B306 /* +DrawCenterBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCD7E92309436F0072B306 /* +DrawCenterBlock.swift */; };
 		17DCD7EE23096E340072B306 /* +MapType_BucketCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCD7ED23096E340072B306 /* +MapType_BucketCreation.swift */; };
 		17DCFD34230291B100A00600 /* ManagedTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCFD33230291B100A00600 /* ManagedTimer.swift */; };
+		17DEE6B623573AFF00099D18 /* BoardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DEE6B523573AFF00099D18 /* BoardData.swift */; };
 		17E619A92348495B00C391CF /* +BoardRemoval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E619A82348495B00C391CF /* +BoardRemoval.swift */; };
 		17E619AB2348569800C391CF /* +TextButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E619AA2348569800C391CF /* +TextButtons.swift */; };
 		17E619AD23485B7C00C391CF /* +ThemeDescriptorParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E619AC23485B7C00C391CF /* +ThemeDescriptorParser.swift */; };
@@ -491,6 +492,7 @@
 		17DCD7E92309436F0072B306 /* +DrawCenterBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+DrawCenterBlock.swift"; sourceTree = "<group>"; };
 		17DCD7ED23096E340072B306 /* +MapType_BucketCreation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+MapType_BucketCreation.swift"; sourceTree = "<group>"; };
 		17DCFD33230291B100A00600 /* ManagedTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedTimer.swift; sourceTree = "<group>"; };
+		17DEE6B523573AFF00099D18 /* BoardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardData.swift; sourceTree = "<group>"; };
 		17E619A82348495B00C391CF /* +BoardRemoval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+BoardRemoval.swift"; sourceTree = "<group>"; };
 		17E619AA2348569800C391CF /* +TextButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+TextButtons.swift"; sourceTree = "<group>"; };
 		17E619AC23485B7C00C391CF /* +ThemeDescriptorParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+ThemeDescriptorParser.swift"; sourceTree = "<group>"; };
@@ -854,6 +856,7 @@
 				17968AFB23549B3C008E6211 /* BoardManager.swift */,
 				17968AFD23549C45008E6211 /* BoardCollection.swift */,
 				17968AFF23549E1D008E6211 /* BoardDescriptor2.swift */,
+				17DEE6B523573AFF00099D18 /* BoardData.swift */,
 			);
 			path = Boards;
 			sourceTree = "<group>";
@@ -1568,6 +1571,7 @@
 				17AE96A22351F93D00412979 /* LogEntry.swift in Sources */,
 				17189FF32333262300317BF1 /* +Color.swift in Sources */,
 				17B4E5732294EA2F0050CDE5 /* MapFloodFill.metal in Sources */,
+				17DEE6B623573AFF00099D18 /* BoardData.swift in Sources */,
 				17404B30234628CB00976DE2 /* SCNVector4.swift in Sources */,
 				17B72E14230ACD7D00B1E5CD /* TextLayerManager.swift in Sources */,
 				173762522310E7400075E1DD /* UITouchImageDelegate.swift in Sources */,
