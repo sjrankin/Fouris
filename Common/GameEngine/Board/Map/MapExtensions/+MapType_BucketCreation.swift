@@ -11,6 +11,58 @@ import UIKit
 
 extension MapType
 {
+    #if true
+    /// Initialize the contents of the map with the bucket. Depending on the contents of **BaseType**, the shape of the
+    /// bucket will vary.
+    /// - Parameters:
+    ///   - Width: Width of the map.
+    ///   - Height: Height of the map.
+    ///   - BucketTop: Top of the bucket.
+    ///   - BucketBottom: Bottom of the bucket.
+    ///   - BucketLeft: Left location of the bucket.
+    ///   - BucketRight: Right location of the bucket.
+    ///   - Map: The map to initialize.
+    ///   - BucketID: ID of the bucket piece.
+    ///   - InvisibleBucketID: ID of the invisible bucket ID.
+    ///   - BucketExteriorID: ID of the exterior location (eg, on the board but out of the bucket).
+    ///   - BucketShape: The shape of the bucket.
+    public static func InitializeMap(Width: Int, Height: Int, BucketTop: Int, BucketBottom: Int, BucketLeft: Int, BucketRight: Int,
+                                     Map: inout ContentsType, BucketID: UUID, InvisibleBucketID: UUID, BucketExteriorID: UUID,
+                                     BucketShape: BucketShapes)
+    {
+        let BoardClass = BoardData.GetBoardClass(For: BucketShape)!
+        switch BoardClass
+        {
+            case .Static:
+                //Make the sides of the bucket above the bucket (eg, invisible bucket pieces). This is a standard Tetris-looking bucket.
+                for Y in 0 ..< BucketTop
+                {
+                    Map[Y][0] = InvisibleBucketID
+                    Map[Y][Width - 1] = InvisibleBucketID
+                }
+                //Make the tops of the bucket
+                for Y in BucketTop ... BucketBottom
+                {
+                    Map[Y][0] = BucketID
+                    Map[Y][Width - 1] = BucketID
+                }
+                //Make the bottom of the bucket and the top of the map (with invisible bucket pieces).
+                for X in 0 ..< Width
+                {
+                    Map[BucketBottom][X] = BucketID
+                    Map[0][X] = InvisibleBucketID
+            }
+            
+            case .Rotatable:
+                CreateRotatingBucket(Width: Width, Height: Height, BucketTop: BucketTop, BucketBottom: BucketBottom,
+                                     BucketLeft: BucketLeft, BucketRight: BucketRight, Map: &Map, BucketID: BucketID,
+                                     InvisibleBucketID: InvisibleBucketID, BucketExteriorID: BucketExteriorID)
+            
+            case .ThreeDimensional:
+                break
+        }
+    }
+    #else
     /// Initialize the contents of the map with the bucket. Depending on the contents of **BaseType**, the shape of the
     /// bucket will vary.
     ///
@@ -64,6 +116,7 @@ extension MapType
                 break
         }
     }
+    #endif
     
     /// Initialize the contents of the map with the bucket for **.Rotating4** game buckets.
     /// - Parameters:
