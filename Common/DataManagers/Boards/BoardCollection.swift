@@ -43,7 +43,7 @@ class BoardCollection: XMLDeserializeProtocol
                     let Board = BoardDescriptor2()
                     BoardList.append(Board)
                     let BucketS = XMLNode.GetAttributeNamed("Type", InNode: Child)!
-                    Board._BucketShape = CenterShapes(rawValue: BucketS)!
+                    Board._BucketShape = BucketShapes(rawValue: BucketS)!
                     let GameS = XMLNode.GetAttributeNamed("GameType", InNode: Child)!
                     Board._GameType = BaseGameTypes(rawValue: GameS)!
                     for BoardChild in Child.Children
