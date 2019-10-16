@@ -22,11 +22,38 @@ class Board
     /// The map of pieces on the board.
     var Map: MapType? = nil
     
-    #if false
-    /// The current game level description.
-    var GameLevel: GameLevelDescription? = nil
-    #endif
-    
+    // MARK: - Initialization.
+
+    #if true
+    /// Initializer.
+    /// - Parameters:
+    ///   - BoardID: ID of the board.
+    ///   - Sequence: Sequence (eg, number of games) for the game.
+    ///   - TheGame: Reference to the game logic.
+    ///   - BucketShape: Shape of the bucket.
+    ///   - BoardWidth: Width of the board.
+    ///   - BoardHeight: Height of the board.
+    ///   - Scorer: Game scorer.
+    init(BoardID: UUID, Sequence: Int, TheGame: GameLogic,
+         BucketShape: BucketShapes, BoardWidth: Int, BoardHeight: Int)
+    {
+        _ID = BoardID
+        Game = TheGame
+        _GameCount = Sequence
+        Factory = PieceFactory(5, Sequence: GameCount, PieceCategories: [.Standard])
+        Map = MapType(Width: BoardWidth, Height: BoardHeight, ID: UUID(), BucketShape: BucketShape)
+        _Width = BoardWidth
+        _Height = BoardHeight
+        _BucketTop = Map!.BucketTop
+        BucketTopInterior = _BucketTop
+        BucketBottom = Map!.BucketBottom
+        BucketBottomInterior = Map!.BucketBottom - 1
+        BucketInteriorLeft = Map!.BucketInteriorLeft
+        BucketInteriorRight = Map!.BucketInteriorRight
+        BucketInteriorWidth = Map!.BucketInteriorWidth
+        BucketInteriorHeight = Map!.BucketInteriorHeight
+    }
+    #else
     /// Initializer.
     ///
     /// - Parameters:
@@ -58,6 +85,7 @@ class Board
         BucketInteriorHeight = Map!.BucketInteriorHeight
         print("BucketInteriorLeft=\(BucketInteriorLeft), BucketInteriorRight=\(BucketInteriorRight)")
     }
+    #endif
     
     /// Determines whether the passed point is fully in the bucket or not.
     /// - Parameter Point: The point to check against the current bucket configuration.
