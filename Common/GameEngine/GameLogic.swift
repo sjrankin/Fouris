@@ -31,17 +31,15 @@ class GameLogic
     /// The user theme.
     var UserTheme: ThemeDescriptor2? = nil
     
+    // MARK: - Initialization
+    
     /// Initializer. The game board is created here.
-    ///
     /// - Parameters
     ///   - Parameter WithGameCount: If provided, the game sequence value (eg, number of times played).
-    ///   - Parameter BaseGame: The base game type.
     ///   - Parameter UserTheme: The current user theme.
     ///   - Parameter EnableAI: The AI is enabled as per the passed value.
-    init(WithGameCount: Int? = nil, BaseGame: BaseGameTypes, UserTheme: ThemeDescriptor2,
-         EnableAI: Bool)
+    init(WithGameCount: Int? = nil, UserTheme: ThemeDescriptor2, EnableAI: Bool)
     {
-        _BaseGameType = BaseGame
         self.UserTheme = UserTheme
         _HighScore = 0
         
@@ -56,24 +54,13 @@ class GameLogic
         self.EnableAI = EnableAI
         MakeBoard([.Standard])
         AI = MainAI()
-        AI?.Start(WithBoard: GameBoard!, BaseGame: BaseGame)
+        AI?.Start(WithBoard: GameBoard!, BoardShape: UserTheme.BucketShape)
     }
     
     /// Deinitializer. Shut down the master timer.
     deinit
     {
         AI = nil
-    }
-    
-    /// Holds the base game type value.
-    private var _BaseGameType: BaseGameTypes = .Standard
-    /// Get the base game type. Can be set only during initialization.
-    public var BaseGameType: BaseGameTypes
-    {
-        get
-        {
-            return _BaseGameType
-        }
     }
     
     /// Holds the fast AI flag.
@@ -299,6 +286,8 @@ class GameLogic
         _GameState = .Stopped
     }
     
+    // TODO: - Change MakeBoard to use the BoardManager
+    
     /// Create a game board.
     ///
     /// - Parameters:
@@ -306,6 +295,17 @@ class GameLogic
     ///   - Level: Describes the level to use.
     func MakeBoard(_ Categories: [MetaPieces] = [MetaPieces.Standard])
     {
+        #if true
+        if let BoardDescription = BoardManager.GetBoardFor((UserTheme?.BucketShape)!)
+       {
+        let BWidth = BoardDescription.BucketWidth
+        let BHeight = BoardDescription.BucketHeight
+        GameCount = GameCount + 1
+        GameBoard = Board(BoardID: UUID(), Sequence: GameCount, TheGame: self,
+                          BucketShape: UserTheme!.BucketShape, BoardWidth: BWidth,
+                          BoardHeight: BHeight)
+        }
+        #else
         var BWidth = 12
         var BHeight = 30
         switch BaseGameType
@@ -328,6 +328,7 @@ class GameLogic
         GameCount = GameCount + 1
         GameBoard = Board(BoardID: UUID(), Sequence: GameCount, TheGame: self,
                           BaseGame: BaseGameType, BoardWidth: BWidth, BoardHeight: BHeight)
+        #endif
     }
     
     /// Get or set the game board.
@@ -361,7 +362,7 @@ class GameLogic
         UIDelegate?.PieceUpdated(WithPiece, X: XOffset, Y: YOffset)
     }
     
-    // MARK: Game logic protocol implementations
+    // MARK: - Game logic protocol implementations
     
     /// Called when a piece is successfully moved.
     ///
@@ -372,6 +373,21 @@ class GameLogic
     func PieceMoved(_ MovedPiece: Piece, Direction: Directions, Commanded: Bool)
     {
         #if true
+        if let PieceClass = BoardData.GetBoardClass(For: UserTheme!.BucketShape)
+        {
+            switch PieceClass
+            {
+                case .Rotatable:
+                    UIDelegate?.PieceMoved3D(MovedPiece, Direction: Direction, Commanded: Commanded)
+                
+                case .Static:
+                UIDelegate?.PieceMoved(MovedPiece, Direction: Direction, Commanded: Commanded)
+                
+                case .ThreeDimensional:
+                UIDelegate?.PieceMoved(MovedPiece, Direction: Direction, Commanded: Commanded)
+            }
+        }
+        #else
         switch BaseGameType
         {
             case .Standard:
@@ -386,39 +402,6 @@ class GameLogic
             case .Cubic:
                 UIDelegate?.PieceMoved(MovedPiece, Direction: Direction, Commanded: Commanded)
         }
-        
-        #else
-        if BaseGameType == .Rotating4
-        {
-            var XDelta = 0
-            var YDelta = 0
-            switch Direction
-            {
-                case .Down:
-                    YDelta = 1
-                
-                case .Up:
-                    YDelta = -1
-                
-                case .Left:
-                    XDelta = 1
-                
-                case .Right:
-                    XDelta = -1
-                
-                default:
-                    break
-            }
-            if XDelta == 0 || YDelta == 0
-            {
-                return
-            }
-            UIDelegate?.SmoothMove(MovedPiece, ToOffsetX: XDelta, ToOffsetY: YDelta)
-        }
-        else
-        {
-            UIDelegate?.PieceMoved(MovedPiece, Direction: Direction, Commanded: Commanded)
-        }
         #endif
     }
     
@@ -428,6 +411,39 @@ class GameLogic
     /// - Parameter ThePiece: The piece that was frozen into place.
     func DropFinalized(_ ThePiece: Piece)
     {
+        #if true
+        if let BoardClass = BoardData.GetBoardClass(For: UserTheme!.BucketShape)
+        {
+            switch BoardClass
+            {
+                case .Rotatable:
+                    var BlockCount = ThePiece.Locations.count
+                    if BlockCount >= LargestBlockCount
+                    {
+                        LargestBlockCount = BlockCount + 1
+                    }
+                    if BlockCount < 1
+                    {
+                        BlockCount = 1
+                    }
+                    CumulativeBlockCount = CumulativeBlockCount + ThePiece.Locations.count
+                    let NewTime = CACurrentMediaTime() - ScoringStartTime
+                    let TimeAdder = Int(NewTime / (Double(LargestBlockCount) - Double(BlockCount)))
+                    _CurrentGameScore = _CurrentGameScore + ThePiece.Locations.count + TimeAdder
+                
+                case .Static:
+                    _CurrentGameScore = GameBoard!.Map!.Scorer!.Current
+                
+                case .ThreeDimensional:
+                                    _CurrentGameScore = GameBoard!.Map!.Scorer!.Current
+            }
+                    UIDelegate?.PieceFinalized(ThePiece)
+            if SpawnNewPiece && BoardClass != .Rotatable
+            {
+                DoSpawnNewPiece()
+            }
+        }
+        #else
         switch BaseGameType
         {
             case .Standard:
@@ -461,6 +477,7 @@ class GameLogic
             //GameBoard?.StartNewPiece(CalledFrom: "GameLogic: DropFinalized")
             //_PiecesInGame = _PiecesInGame + 1
         }
+        #endif
     }
     
     var CumulativeBlockCount: Int = 0
@@ -477,10 +494,15 @@ class GameLogic
         {
             if (GameBoard?.PerformanceData[0].1)! > 0.75
             {
+                var KVP = [(String, String)]()
                 for (Label, Value) in GameBoard!.PerformanceData
                 {
-                    print(">*>*>*> \(Label): \(Value)")
+                    KVP.append((Label,"\(Value)"))
+//                    print(">*>*>*> \(Label): \(Value)")
                 }
+                var NotUsed: String? = nil
+                ActivityLog.AddEntry(Title: "Performance", Source: "GameLogic",
+                                     KVPs: KVP, LogFileName: &NotUsed)
             }
         }
         _PiecesInGame = _PiecesInGame + 1
@@ -571,6 +593,8 @@ class GameLogic
     {
         UIDelegate?.StoppedFreezing(ID)
     }
+    
+    // MARK: - Scoring functions.
     
     /// Holds the current game score. When set, sends a message to the UI with the new score. Updates the
     /// highs score every time the current score is set (provided the current score is greater than the
