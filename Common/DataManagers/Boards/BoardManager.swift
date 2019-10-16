@@ -55,7 +55,7 @@ class BoardManager
         }
     }
     
-    public static func GetBoardFor(_ Shape: CenterShapes) -> BoardDescriptor2?
+    public static func GetBoardFor(_ Shape: BucketShapes) -> BoardDescriptor2?
     {
         if _Boards == nil
         {
