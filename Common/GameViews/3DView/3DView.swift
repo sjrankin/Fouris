@@ -1287,7 +1287,17 @@ class View3D: SCNView,                          //Our main super class.
             Node.removeFromParentNode()
         }
         print("  Done clearing the bucket.")
+        #if true
+        print("Removing all blocks from BlockList.")
         BlockList.removeAll()
+        print("  Done removing all blocks from BlockList.")
+        #else
+        OperationQueue.main.addOperation
+            {
+                //Sometimes this call seems to trigger an exception from within SceneKit.
+                self.BlockList.removeAll()
+        }
+        #endif
     }
     
     /// Empty the map of all block nodes.
@@ -1988,40 +1998,6 @@ class View3D: SCNView,                          //Our main super class.
             .FreezeButton: (SCNVector3(-1.0, -13.5, 1.0), 0.08, UIColor.cyan, UIColor.blue)
     ]
     
-    // MARK: - Board behavior tables.
-    
-    let BoardBehaivor: [BucketShapes: (BucketRotates: Bool, PiecesInSync: Bool)] =
-        [
-            .Dot: (BucketRotates: true, PiecesInSync: true),
-            .Square: (BucketRotates: true, PiecesInSync: true),
-            .SmallSquare: (BucketRotates: true, PiecesInSync: true),
-            .BigSquare: (BucketRotates: true, PiecesInSync: true),
-            .SmallRectangle: (BucketRotates: true, PiecesInSync: true),
-            .Rectangle: (BucketRotates: true, PiecesInSync: true),
-            .BigRectangle: (BucketRotates: true, PiecesInSync: true),
-            .SmallDiamond: (BucketRotates: true, PiecesInSync: true),
-            .Diamond: (BucketRotates: true, PiecesInSync: true),
-            .BigDiamond: (BucketRotates: true, PiecesInSync: true),
-            .Bracket2: (BucketRotates: true, PiecesInSync: true),
-            .Bracket4: (BucketRotates: true, PiecesInSync: true),
-            .FourLines: (BucketRotates: true, PiecesInSync: true),
-            .Corners: (BucketRotates: true, PiecesInSync: true),
-            .Quadrant: (BucketRotates: true, PiecesInSync: true),
-            .Plus: (BucketRotates: true, PiecesInSync: true),
-            .HorizontalLine: (BucketRotates: true, PiecesInSync: true),
-            .ParallelLines: (BucketRotates: true, PiecesInSync: true),
-            .Empty: (BucketRotates: true, PiecesInSync: true),
-            .CornerDots: (BucketRotates: true, PiecesInSync: true),
-            .ShortDiagonals: (BucketRotates: true, PiecesInSync: true),
-            .LongDiagonals: (BucketRotates: true, PiecesInSync: true),
-            .OneOpening: (BucketRotates: false, PiecesInSync: false),
-            .Classic: (BucketRotates: false, PiecesInSync: true),
-            .TallThin: (BucketRotates: false, PiecesInSync: true),
-            .ShortWide: (BucketRotates: false, PiecesInSync: true),
-            .Big: (BucketRotates: false, PiecesInSync: true),
-            .Small: (BucketRotates: false, PiecesInSync: true),
-    ]
-    
     // MARK: - Renderer variables.
     
     var NodeRemovalList = [String]()
@@ -2035,77 +2011,6 @@ enum GameViewObjects: String, CaseIterable
     case Bucket = "Bucket"
     case BucketGrid = "BucketGrid"
     case BucketGridOutline = "BucketGridOutline"
-}
-
-/// Possible shapes for center blocks and other blocks.
-/// - Note: This enum contains all possible interior block shapes for non-rotating, rotating, and semi-rotating games.
-/// - **Dot**: 1 x 1 center (or close enough to it) block.
-/// - **Square**: 4 x 4 center square.
-/// - **SmallSquare**: 2 x 2 center square.
-/// - **BigSquare**: 6 x 6 center square.
-/// - **SmallRectangle**: 2 x 1 center (or close enough) rectangle.
-/// - **Rectangle**: 4 x 2 center rectangle.
-/// - **BigRectangle**: 8 x 3 center (or close enough) rectangle.
-/// - **SmallDiamond**: Diamond, 3 x 3 square rotated 90°.
-/// - **Diamond**: Diamond, 5 x 5 square rotated 90°.
-/// - **BigDiamond**: Diamond, 6 x 6 square rotated 90°.
-/// - **Bracket2**: Two brackets facing each other.
-/// - **Bracket4**: Four brackets arranged in a square.
-/// - **FourLines**: Four lines parallel to each side with gaps to either side.
-/// - **Corners**: Blocks on corners.
-/// - **Quadrant**: Board broken into quadrants.
-/// - **Plus**: Center block is **+** shaped.
-/// - **HorizontalLine**: Center block is a horizontal line from one side to the other.
-/// - **ParallelLines**: Two parallel lines.
-/// - **Empty**: No bucket blocks in the interior.
-/// - **CornerDots**: A dot in each corner.
-/// - **FourSmallSquares**: Four small squares, one in each quadrant.
-/// - **ShortDiagonals**: Small `X`-shaped central block.
-/// - **LongDiagonals**: Large `X`-shaped central block.
-/// - **OneOpening**: Bucket with one opening.
-/// - **Classic**: Classic Tetris game proportions.
-/// - **TallThin**: Tall and thin bucket.
-/// - **ShortWide**: Short and wide bucket.
-/// - **Big**: Big bucket.
-/// - **Small**: Small bucket.
-/// - **SquareBucket**: Square, non-rotating bucket.
-/// - **Giant**: Huge bucket.
-enum BucketShapes: String, CaseIterable
-{
-    //Rotating games.
-    case Dot = "Dot"
-    case Square = "Square"
-    case SmallSquare = "SmallSquare"
-    case BigSquare = "BigSquare"
-    case SmallRectangle = "SmallRectangle"
-    case Rectangle = "Rectangle"
-    case BigRectangle = "BigRectangle"
-    case SmallDiamond = "SmallDiamond"
-    case Diamond = "Diamond"
-    case BigDiamond = "BigDiamond"
-    case Bracket2 = "Bracket2"
-    case Bracket4 = "Bracket4"
-    case FourLines = "FourLines"
-    case Corners = "Corners"
-    case Quadrant = "Quadrant"
-    case Plus = "Plus"
-    case HorizontalLine = "HorizontalLine"
-    case ParallelLines = "ParallelLines"
-    case Empty = "Empty"
-    case CornerDots = "CornerDots"
-    case FourSmallSquares = "FourSmallSquares"
-    case ShortDiagonals = "ShortDiagonals"
-    case LongDiagonals = "LongDiagonals"
-    //Semi-rotating games. (Blocks rotate but the bucket does not.)
-    case OneOpening = "OneOpening"
-    //Non-rotating games.
-    case Classic = "Classic"
-    case TallThin = "TallThin"
-    case ShortWide = "ShortWide"
-    case Big = "Big"
-    case Small = "Small"
-    case SquareBucket = "SquareBucket"
-    case Giant = "Giant"
 }
 
 enum Angles: CGFloat, CaseIterable
