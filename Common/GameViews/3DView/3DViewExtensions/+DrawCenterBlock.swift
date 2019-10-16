@@ -11,10 +11,10 @@ import UIKit
 import CoreGraphics
 import SceneKit
 
-/// Holds functions related to central blocks for **.Rotating4** games.
+/// Holds functions related to the creation of buckets.
 extension View3D
 {
-    /// Draw the center block for **.Rotating4** games.
+    /// Draw the bucket based on the contents of the current game's board.
     /// - Parameter Parent: The parent bucket node.
     /// - Parameter InShape: Determines the shape of the bucket.
     /// - Parameter InitialOpacity: Determines the opacity of the center block.
@@ -42,6 +42,8 @@ extension View3D
             let BoxNode = SCNNode(geometry: Box)
             BoxNode.categoryBitMask = GameLight
             let FinalX = Location.x - GWidth2
+            //Negate the vertical component because the map has lower vertical values on top and the game view
+            //(SceneKit) has lower vertical values on the bottom.
             let FinalY = -(Location.y - GHeight2)
             BoxNode.position = SCNVector3(FinalX, FinalY, 0.0)
             BNode.addChildNode(BoxNode)
