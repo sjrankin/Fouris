@@ -48,8 +48,7 @@ extension ThemeDescriptor2
         Working.append(Spaces(4) + "<Runtime MinimumVersion=" + Quoted("\(MinimumVersion)") +
             " MinimumBuild=" + Quoted("\(MinimumBuild)") + "/>\n")
         
-        Working.append(Spaces(4) + "<Game Base=" + Quoted(GameType.rawValue) +
-            " SubType=" + Quoted(SubGameType.rawValue) + "/>\n")
+        Working.append(Spaces(4) + "<Game BucketShape=" + Quoted(BucketShape.rawValue) + "/>\n")
         
         Working.append(Spaces(4) + "<Dates Created=" + Quoted(CreateDate) +
             " Edited=" + Quoted(DateFormatter.localizedString(from: Date(), dateStyle: .long, timeStyle: .long)) + "/>\n")
