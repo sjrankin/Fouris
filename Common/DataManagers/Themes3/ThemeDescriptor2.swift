@@ -813,35 +813,20 @@ class ThemeDescriptor2: CustomStringConvertible, XMLDeserializeProtocol
     
     // MARK: Game play properties.
     
-    /// Holds the game type.
-    public var _GameType: BaseGameTypes = .Standard
-    /// Get or set the game type.
-    public var GameType: BaseGameTypes
+    /// Holds the bucket shape.
+    public var _BucketShape: BucketShapes = .Classic
+    /// Get or set the bucket shape for the game.
+    public var BucketShape: BucketShapes
     {
         get
         {
-            return _GameType
+            return _BucketShape
         }
         set
         {
-            _GameType = newValue
+            _BucketShape = newValue
             _Dirty = true
-            ChangeNotice(Field: .GameType)
-        }
-    }
-    
-    public var _SubGameType: BaseGameSubTypes = .Classic
-    public var SubGameType: BaseGameSubTypes
-    {
-        get
-        {
-            return _SubGameType
-        }
-        set
-        {
-            _SubGameType = newValue
-            _Dirty = true
-            ChangeNotice(Field: .SubGameType)
+            ChangeNotice(Field: .BucketShape)
         }
     }
     
@@ -1495,6 +1480,20 @@ enum BucketRotationTypes: String, CaseIterable
     case Random = "Random"
 }
 
+enum LightTypes: String, CaseIterable
+{
+    case Ambient = "Ambient"
+    case Directional = "Directional"
+    case Omni = "Omni"
+    case Spot = "Spot"
+}
+
+enum CameraLocations: String, CaseIterable
+{
+    case Rear = "Rear"
+    case Front = "Front"
+}
+
 /// Theme fields used when fields are changed and subscribers are notified.
 /// - Note: Field name is used as cases for the enum. Refer to the function
 ///         definition for the meaning/use fo the field.
@@ -1573,4 +1572,5 @@ enum ThemeFields: String, CaseIterable
     case ShowHeartbeat = "ShowHeartbeat"
     case HeartbeatInterval = "HeartbeatInterval"
     case ChangeColorAfterRotation = "ChangeColorAfterRotation"
+    case BucketShape = "BucketShape"
 }
