@@ -39,11 +39,8 @@ extension ThemeDescriptor2
                             _MinimumBuild = Int(MinBld)!
                         
                         case "Game":
-                            let Base = XMLNode.GetAttributeNamed("Base", InNode: Child)!
-                            print("Game type=\(Base)")
-                            _GameType = BaseGameTypes(rawValue: Base)!
-                            let SubType = XMLNode.GetAttributeNamed("SubType", InNode: Child)!
-                            _SubGameType = BaseGameSubTypes(rawValue: SubType)!
+                            let Shape = XMLNode.GetAttributeNamed("BucketShape", InNode: Child)!
+                            _BucketShape = BucketShapes(rawValue: Shape)!
                         
                         case "Dates":
                             let CDate = XMLNode.GetAttributeNamed("Created", InNode: Child)!
