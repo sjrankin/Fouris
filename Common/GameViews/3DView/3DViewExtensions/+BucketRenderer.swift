@@ -18,7 +18,7 @@ extension View3D
     ///    - Intended for use for generating game assets using the graphics engine rather than an external program.
     /// - Parameter WithShape: The shape of the bucket to render.
     /// - Returns: An image of the rendered empty board.
-    public func RenderBucket(WithShape: CenterShapes) -> UIImage
+    public func RenderBucket(WithShape: BucketShapes) -> UIImage
     {
         let BView = SCNView(frame: self.frame)
         BView.scene = SCNScene()
@@ -52,10 +52,10 @@ extension View3D
     
     /// Renders all buckets for the `.Rotating4` game and returns all images in an array.
     /// - Returns: Array of tuples with the shape and the shape's image.
-    public func RenderAllBuckets() -> [(CenterShapes, UIImage)]
+    public func RenderAllBuckets() -> [(BucketShapes, UIImage)]
     {
-        var Results = [(CenterShapes, UIImage)]()
-        for Shape in CenterShapes.allCases
+        var Results = [(BucketShapes, UIImage)]()
+        for Shape in BucketShapes.allCases
         {
             let BucketImage = RenderBucket(WithShape: Shape)
             Results.append((Shape, BucketImage))
