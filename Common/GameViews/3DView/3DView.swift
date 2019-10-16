@@ -31,6 +31,8 @@ class View3D: SCNView,                          //Our main super class.
     /// Light mask for the controls.
     let ControlLight: Int = 0x1 << 2
     
+    // MARK: - Initialization.
+    
     /// Initialize the view.
     /// - Note: Setting 'self.showsStatistics' to true will lead to the scene freezing after a period of time (on the order of
     ///         hours). Likewise, setting `self.allowsCameraControl` will lead to non-responsiveness in the UI after a period
@@ -267,6 +269,8 @@ class View3D: SCNView,                          //Our main super class.
         return CameraNode
     }
     
+    // MARK: - Background colors and hue shifting.
+    
     /// Handle hue shifting of the solid background color.
     /// - Note: To turn off hue shifting, pass `0.0` in `Duration`. This also has the effect of setting the background color to
     ///         a non-changing solid color.
@@ -502,6 +506,9 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter WithName: All nodes with this name will be removed.
     func RemoveNodes(WithName: String)
     {
+        #if true
+        NodeRemovalList.append(WithName)
+        #else
         var KillList = [SCNNode]()
         self.scene?.rootNode.enumerateChildNodes
             {
@@ -521,6 +528,7 @@ class View3D: SCNView,                          //Our main super class.
         }
         BlockList = BlockList.filter({$0.name != WithName})
         print("  RemoveNodes completed.")
+        #endif
     }
     
     /// Remove all nodes whose names are in the passed list.
@@ -534,10 +542,14 @@ class View3D: SCNView,                          //Our main super class.
         {
             return
         }
+        #if true
+        NodeRemovalList.append(contentsOf: WithNames)
+        #else
         for Name in WithNames
         {
             RemoveNodes(WithName: Name)
         }
+        #endif
     }
     
     // MARK: Bucket-related functions.
@@ -1393,7 +1405,6 @@ class View3D: SCNView,                          //Our main super class.
                 let BucketHeight = Double(GameBoard.BucketHeight)
                                     let HalfY = BucketHeight / 2.0
                 let HalfX = BucketWidth / 2.0
-                print(">>>> Bucket size: \(BucketWidth),\(BucketHeight)")
                 #if true
                 if ShowGrid
                 {
@@ -1624,7 +1635,7 @@ class View3D: SCNView,                          //Our main super class.
     {
     }
     
-    // MARK: Bucket rotatation routines.
+    // MARK: - Bucket rotatation routines.
     
     /// Lock used when the board is rotating.
     var RotateLock = NSObject()
@@ -1903,7 +1914,7 @@ class View3D: SCNView,                          //Our main super class.
     {
     }
     
-    // MARK: ThreeDProtocol function implementations.
+    // MARK: - ThreeDProtocol function implementations.
     
     /// Set the camera node's camera data. Used mainly for debugging purposes.
     /// - Parameter FOV: The FOV (field of view) parameter for the camera.
@@ -1947,7 +1958,7 @@ class View3D: SCNView,                          //Our main super class.
         return (LightNode.position, LightNode.light!.type, ColorName!, self.autoenablesDefaultLighting)
     }
     
-    // MARK: Text layer protocol function implementation
+    // MARK: - Text layer protocol function implementation
     
     /// Handle double click events relayed to us by the text layer. Double click events will cause the camera to be reset
     /// to it's theme-appropriate values.
@@ -1957,7 +1968,7 @@ class View3D: SCNView,                          //Our main super class.
         self.pointOfView?.orientation = OriginalCameraOrientation!
     }
     
-    // MARK: Variables for buttons and button state. Button functions are found in +TextButtons.swift.
+    // MARK: - Variables for buttons and button state. Button functions are found in +TextButtons.swift.
     
     var ButtonList: [NodeButtons: SCNButtonNode] = [NodeButtons: SCNButtonNode]()
     
@@ -1977,7 +1988,7 @@ class View3D: SCNView,                          //Our main super class.
             .FreezeButton: (SCNVector3(-1.0, -13.5, 1.0), 0.08, UIColor.cyan, UIColor.blue)
     ]
     
-    // MARK: Board behavior tables.
+    // MARK: - Board behavior tables.
     
     let BoardBehaivor: [BucketShapes: (BucketRotates: Bool, PiecesInSync: Bool)] =
         [
@@ -2010,9 +2021,21 @@ class View3D: SCNView,                          //Our main super class.
             .Big: (BucketRotates: false, PiecesInSync: true),
             .Small: (BucketRotates: false, PiecesInSync: true),
     ]
+    
+    // MARK: - Renderer variables.
+    
+    var NodeRemovalList = [String]()
+    var ObjectRemovalList = Set<GameViewObjects>()
 }
 
-// MARK: Global enums related to 3DView.
+// MARK: - Global enums related to 3DView.
+
+enum GameViewObjects: String, CaseIterable
+{
+    case Bucket = "Bucket"
+    case BucketGrid = "BucketGrid"
+    case BucketGridOutline = "BucketGridOutline"
+}
 
 /// Possible shapes for center blocks and other blocks.
 /// - Note: This enum contains all possible interior block shapes for non-rotating, rotating, and semi-rotating games.
@@ -2044,7 +2067,9 @@ class View3D: SCNView,                          //Our main super class.
 /// - **TallThin**: Tall and thin bucket.
 /// - **ShortWide**: Short and wide bucket.
 /// - **Big**: Big bucket.
-/// - **Small** Small bucket.
+/// - **Small**: Small bucket.
+/// - **SquareBucket**: Square, non-rotating bucket.
+/// - **Giant**: Huge bucket.
 enum BucketShapes: String, CaseIterable
 {
     //Rotating games.
@@ -2080,6 +2105,7 @@ enum BucketShapes: String, CaseIterable
     case Big = "Big"
     case Small = "Small"
     case SquareBucket = "SquareBucket"
+    case Giant = "Giant"
 }
 
 enum Angles: CGFloat, CaseIterable
