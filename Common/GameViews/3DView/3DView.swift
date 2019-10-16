@@ -192,7 +192,7 @@ class View3D: SCNView,                          //Our main super class.
         }
     }
     
-    var CenterBlockShape: CenterShapes = .Square
+    var CenterBlockShape: BucketShapes = .Square
     
     /// Holds the base game type.
     private var _BaseGameType: BaseGameTypes = .Standard
@@ -548,7 +548,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter InitialOpacity: The initial opacity of the bucket. Defaults to 1.0.
     /// - Parameter Shape: The bucket's shape.
     /// - Returns: The bucket node.
-    func CreateBucket(InitialOpacity: CGFloat = 1.0, Shape: CenterShapes) -> SCNNode
+    func CreateBucket(InitialOpacity: CGFloat = 1.0, Shape: BucketShapes) -> SCNNode
     {
         if BucketNode != nil
         {
@@ -1388,6 +1388,66 @@ class View3D: SCNView,                          //Our main super class.
                 BucketGridNode.opacity = InitialOpacity
             
             case .Rotating4:
+                let GameBoard = BoardManager.GetBoardFor(.Square)!
+                let BucketWidth = Double(GameBoard.BucketWidth)
+                let BucketHeight = Double(GameBoard.BucketHeight)
+                                    let HalfY = BucketHeight / 2.0
+                let HalfX = BucketWidth / 2.0
+                print(">>>> Bucket size: \(BucketWidth),\(BucketHeight)")
+                #if true
+                if ShowGrid
+                {
+                    // Horizontal lines.
+                    for Y in stride(from: HalfY, to: -HalfY - 0.5, by: -1.0)
+                    {
+                        let Start = SCNVector3(0.0, Y, 0.0)
+                        let End = SCNVector3(20.0, Y, 0.0)
+                        let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.02)
+                        LineNode.categoryBitMask = GameLight
+                        LineNode.name = "Horizontal,\(Int(Y))"
+                        BucketGridNode.addChildNode(LineNode)
+                    }
+                    //Vertical lines.
+                    for X in stride(from: -HalfX, to: HalfX + 0.5, by: 1.0)
+                    {
+                        let Start = SCNVector3(X, 0.0, 0.0)
+                        let End = SCNVector3(X, 20.0, 0.0)
+                        let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.02)
+                        LineNode.categoryBitMask = GameLight
+                        LineNode.name = "Vertical,\(Int(X))"
+                        BucketGridNode.addChildNode(LineNode)
+                    }
+                }
+                //Outline.
+                if DrawOutline
+                {
+                    let TopStart = SCNVector3(0.0, HalfY, 0.0)
+                    let TopEnd = SCNVector3(BucketWidth, HalfY, 0.0)
+                    let TopLine = MakeLine(From: TopStart, To: TopEnd, Color: OutlineColor, LineWidth: 0.08)
+                    TopLine.categoryBitMask = GameLight
+                    TopLine.name = "TopLine"
+                    OutlineNode.addChildNode(TopLine)
+                    let BottomStart = SCNVector3(0.0, -HalfY, 0.0)
+                    let BottomEnd = SCNVector3(BucketWidth, -HalfY, 0.0)
+                    let BottomLine = MakeLine(From: BottomStart, To: BottomEnd, Color: OutlineColor, LineWidth: 0.08)
+                    BottomLine.categoryBitMask = GameLight
+                    BottomLine.name = "BottomLine"
+                    OutlineNode.addChildNode(BottomLine)
+                    let LeftStart = SCNVector3(-HalfX, 0.0, 0.0)
+                    let LeftEnd = SCNVector3(-HalfX, BucketHeight, 0.0)
+                    let LeftLine = MakeLine(From: LeftStart, To: LeftEnd, Color: OutlineColor, LineWidth: 0.08)
+                    LeftLine.categoryBitMask = GameLight
+                    LeftLine.name = "LeftLine"
+                    OutlineNode.addChildNode(LeftLine)
+                    let RightStart = SCNVector3(HalfX, 0.0, 0.0)
+                    let RightEnd = SCNVector3(HalfX, BucketHeight, 0.0)
+                    let RightLine = MakeLine(From: RightStart, To: RightEnd, Color: OutlineColor, LineWidth: 0.08)
+                    RightLine.categoryBitMask = GameLight
+                    RightLine.name = "RightLine"
+                    OutlineNode.addChildNode(RightLine)
+                }
+                BucketGridNode.opacity = InitialOpacity
+                #else
                 if ShowGrid
                 {
                     //Horizontal bucket lines.
@@ -1440,6 +1500,7 @@ class View3D: SCNView,                          //Our main super class.
                     OutlineNode.addChildNode(RightLine)
                 }
                 BucketGridNode.opacity = InitialOpacity
+                #endif
                 
                 #if false
                 let TopLabel = SCNText(string: "Top", extrusionDepth: 0.5)
@@ -1496,12 +1557,8 @@ class View3D: SCNView,                          //Our main super class.
             case .Cubic:
                 break
         }
-        #if false
-        self.scene?.rootNode.addChildNode(BucketGridNode!)
-        self.scene?.rootNode.addChildNode(OutlineNode!)
-        #else
+        
         return (Grid: BucketGridNode, Outline: OutlineNode)
-        #endif
     }
     
     /// Fades the bucket grid to an alpha of 0.0 then removes the lines from the scene.
@@ -1922,7 +1979,7 @@ class View3D: SCNView,                          //Our main super class.
     
     // MARK: Board behavior tables.
     
-    let BoardBehaivor: [CenterShapes: (BucketRotates: Bool, PiecesInSync: Bool)] =
+    let BoardBehaivor: [BucketShapes: (BucketRotates: Bool, PiecesInSync: Bool)] =
         [
             .Dot: (BucketRotates: true, PiecesInSync: true),
             .Square: (BucketRotates: true, PiecesInSync: true),
@@ -1988,7 +2045,7 @@ class View3D: SCNView,                          //Our main super class.
 /// - **ShortWide**: Short and wide bucket.
 /// - **Big**: Big bucket.
 /// - **Small** Small bucket.
-enum CenterShapes: String, CaseIterable
+enum BucketShapes: String, CaseIterable
 {
     //Rotating games.
     case Dot = "Dot"
