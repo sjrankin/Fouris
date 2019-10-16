@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Theme Type="Default" ID="247c07de-46fd-4b11-8166-c3fc6d340733" Name="Default Theme" UserTheme="false">
     <Runtime MinimumVersion="1.0" MinimumBuild="0"/>
-    <Game Base="Standard" SubType="MediumCentralBlock"/>
+    <Game BucketShape="Classic"/>
     <Dates Created="2019-10-03" Edited="Not Edited"/>
     <Quality>
         <Antialiasing Mode="MultiSampling4X"/>
