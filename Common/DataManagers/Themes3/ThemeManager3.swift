@@ -119,10 +119,10 @@ class ThemeManager3: ThemeChangeProtocol2
             let Serialized = UserTheme?.ToString()
             #if true
             UserDefaults.standard.set(Serialized, forKey: "GameTheme")
-            print("Save theme:\n\(Serialized!)")
+            //print("Save theme:\n\(Serialized!)")
             #else
             let _ = FileIO.SaveSettingsFile(Name: "UserGameTheme2.xml", Contents: Serialized!)
-            print("Saved theme:\n\(Serialized!)")
+            //print("Saved theme:\n\(Serialized!)")
             #endif
         }
     }
