@@ -475,6 +475,8 @@ class BoardDescriptor2
             }
             Index = Index + 1
         }
+        _BucketX = LeftMostBucket
+        _BucketY = TopMostBucket
         _BucketWidth = RightMostBucket - LeftMostBucket + 1
         _BucketHeight = BottomMostBucket - TopMostBucket + 1
     }
