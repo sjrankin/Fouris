@@ -13,9 +13,9 @@ import UIKit
 class BoardDescriptor2
 {
     /// Holds the description of the bucket shape.
-    public var _BucketShape: CenterShapes = .Empty
+    public var _BucketShape: BucketShapes = .Empty
     /// Get or set the description of the bucket shape.
-    public var BucketShape: CenterShapes
+    public var BucketShape: BucketShapes
     {
         get
         {
@@ -440,7 +440,9 @@ class BoardDescriptor2
         }
         var Index = 0
         var LeftMostBucket = Int.max
+        var RightMostBucket = -1
         var TopMostBucket = Int.max
+        var BottomMostBucket = -1
         for Line in _MapLines
         {
             var CharIndex = 0
@@ -456,15 +458,25 @@ class BoardDescriptor2
                     {
                         LeftMostBucket = CharIndex
                     }
+                    if CharIndex > RightMostBucket
+                    {
+                        RightMostBucket = CharIndex
+                    }
                     if Index < TopMostBucket
                     {
                         TopMostBucket = Index
+                    }
+                    if Index > BottomMostBucket
+                    {
+                        BottomMostBucket = Index
                     }
                 }
                 CharIndex = CharIndex + 1
             }
             Index = Index + 1
         }
+        _BucketWidth = RightMostBucket - LeftMostBucket + 1
+        _BucketHeight = BottomMostBucket - TopMostBucket + 1
     }
     
     /// Holds a list of all bucket block locations in the map. Not populated until `BucketBlockList` is called.
