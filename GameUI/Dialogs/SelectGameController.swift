@@ -120,9 +120,9 @@ class SelectGameController: UIViewController, UITableViewDelegate, UITableViewDa
     var SelectedGameType: UUID = UUID.Empty
     var LastSelectedItem: Int = -1
     
-    var StandardGames = [(String, String, CenterShapes)]()
-    var RotatingGames = [(String, String, CenterShapes)]()
-    var CubicGames = [(String, String, CenterShapes)]()
+    var StandardGames = [(String, String, BucketShapes)]()
+    var RotatingGames = [(String, String, BucketShapes)]()
+    var CubicGames = [(String, String, BucketShapes)]()
     
     @IBAction func HandleBaseGameChanged(_ sender: Any)
     {
