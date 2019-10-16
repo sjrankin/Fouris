@@ -124,10 +124,29 @@ extension MapType
         }
         
         //Add bucket blocks.
+        #if true
+        let GameBoard = BoardManager.GetBoardFor(RotatingCenter)!
+        let Locations = GameBoard.BucketBlockList()
+        for Location in Locations
+        {
+            let X = Int(Location.x)
+            let Y = Int(Location.y)
+            Map[Y][X] = BucketID
+        }
+        #else
         let XOffset = 8
         let YOffset = 8
         switch RotatingCenter
         {
+            case .Square:
+                for Y in 8 ... 11
+                {
+                    for X in 8 ... 11
+                    {
+                        Map[Y + YOffset][X + XOffset] = BucketID
+                    }
+            }
+            
             case .SmallRectangle:
                 Map[9 + YOffset][10 + XOffset] = BucketID
                 Map[9 + YOffset][11 + XOffset] = BucketID
@@ -190,14 +209,7 @@ extension MapType
                     }
             }
             
-            case .Square:
-                for Y in 8 ... 11
-                {
-                    for X in 8 ... 11
-                    {
-                        Map[Y + YOffset][X + XOffset] = BucketID
-                    }
-            }
+
             
             case .BigSquare:
                 for Y in 7 ... 12
@@ -425,6 +437,7 @@ extension MapType
             case .SquareBucket:
                 break
         }
+        #endif
         
         #if false
         //Used for rotational debug.
