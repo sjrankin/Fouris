@@ -29,7 +29,7 @@ extension MapType
     ///   - RotatingCenter: For **BaseType**s of **.Rotating4**, the center shape to use.
     public static func InitializeMap(Width: Int, Height: Int, BucketTop: Int, BucketBottom: Int, BucketLeft: Int, BucketRight: Int,
                                      Map: inout ContentsType, BucketID: UUID, InvisibleBucketID: UUID, BucketExteriorID: UUID,
-                                     BaseType: BaseGameTypes, RotatingCenter: CenterShapes = .Square)
+                                     BaseType: BaseGameTypes, RotatingCenter: BucketShapes = .Square)
     {
         switch BaseType
         {
@@ -80,7 +80,7 @@ extension MapType
     ///   - RotatingCenter: The center block shape.
     private static func CreateRotatingBucket(Width: Int, Height: Int, BucketTop: Int, BucketBottom: Int, BucketLeft: Int, BucketRight: Int,
                                              Map: inout ContentsType, BucketID: UUID, InvisibleBucketID: UUID, BucketExteriorID: UUID,
-                                             RotatingCenter: CenterShapes = .Square)
+                                             RotatingCenter: BucketShapes = .Square)
     {
         //Fill the map with bucket exteriors.
         for Y in 0 ..< BucketTop
