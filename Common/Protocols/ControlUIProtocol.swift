@@ -39,35 +39,8 @@ protocol ControlUIProtocol: class
     /// - Parameter Seconds: Number of seconds between game over and the start of the new game.
     func StartNewGameIn(Seconds: Double)
     
-    /// Enable all of the buttons in the passed button list. By implication, if the button is
-    /// not in this list, it will be disabled.
-    ///
-    /// - Parameter EnableList: List of buttons to enable.
-    func EnableButtons(EnableList: [EnableButtons])
-    
     /// Called when the app is terminating.
     func AppTerminating()
 }
 
-/// List of buttons that may be enabled or disabled, depending on the game level, debug
-/// level, etc.
-///
-/// - LeftButton: Move left button.
-/// - RightButton: Move right button.
-/// - DownButton: Move down button.
-/// - DropButton: Drop block button.
-/// - UpButton: Move up button.
-/// - UpAndAwayButton: Move up and throw away button.
-/// - RotateLeftButton: Rotate left button.
-/// - RotateRightButton: Rotate right button.
-enum EnableButtons: Int, CaseIterable
-{
-    case LeftButton = 100
-    case RightButton = 101
-    case DownButton = 102
-    case DropButton = 103
-    case UpButton = 104
-    case UpAndAwayButton = 105
-    case RotateLeftButton = 106
-    case RotateRightButton = 107
-}
+
