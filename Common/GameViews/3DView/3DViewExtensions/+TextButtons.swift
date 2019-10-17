@@ -191,6 +191,13 @@ extension View3D
                                              Color: ButtonDictionary[ForButton]!.Color,
                                              Highlight: ButtonDictionary[ForButton]!.Highlight,
                                              ScaleFactor: ButtonDictionary[ForButton]!.Scale)
+            
+            case .HeartButton:
+                FinalNode = AddTextButton(ForButton: ForButton, "♥︎", Font: ButtonFont,
+                                          Location: ButtonDictionary[ForButton]!.Location,
+                                          Color: ButtonDictionary[ForButton]!.Color,
+                                          Highlight: ButtonDictionary[ForButton]!.Highlight,
+                                          ScaleFactor: ButtonDictionary[ForButton]!.Scale)
         }
         
         ButtonList[ForButton] = FinalNode
@@ -228,6 +235,34 @@ extension View3D
         }
     }
     
+    /// Unconditionally sets the button color to its normal color.
+    /// - Parameter Button: The button whose color will be reset to normal.
+    func SetButtonColorToNormal(Button: NodeButtons)
+    {
+        if let TheButton = ButtonList[Button]
+        {
+            if let ShapeNode = TheButton.GetNodeWithTag(Value: "ShapeNode")
+            {
+                let NormalColor = ButtonDictionary[Button]!.Color
+                ShapeNode.SetButtonColor(NewColor: NormalColor)
+            }
+        }
+    }
+    
+    /// Unconditionally sets the button color to its highlight color.
+    /// - Paraemter Button: The button whose color will be set to highlight.
+    func SetButtonColorToHighlight(Button: NodeButtons)
+    {
+        if let TheButton = ButtonList[Button]
+        {
+            if let ShapeNode = TheButton.GetNodeWithTag(Value: "ShapeNode")
+            {
+                let HighlightColor = ButtonDictionary[Button]!.Highlight
+                ShapeNode.SetButtonColor(NewColor: HighlightColor)
+            }
+        }
+    }
+    
     /// Show game view controls.
     /// - Parameter Which: Array of buttons to show. If nil, all buttons are shown. Default is nil. Passing an empty array will
     ///                    remove all buttons.
@@ -236,6 +271,10 @@ extension View3D
         //Remove all of the buttons first.
         for (_, Button) in ButtonList
         {
+            if Button.ButtonType == .HeartButton
+            {
+                continue
+            }
             Button.removeFromParentNode()
         }
         ButtonList.removeAll()
@@ -288,5 +327,74 @@ extension View3D
     func HideControls()
     {
         ShowControls(With: [])
+    }
+    
+    /// Given a button type, return the button itself.
+    /// - Parameter Which: The button type to return.
+    /// - Returns: The button associated with the passed type on success, nil if not found (or not created for use yet).
+    func GetButton(_ Which: NodeButtons) -> SCNButtonNode?
+    {
+        if let ButtonNode = ButtonList[Which]
+        {
+            if let ShapeNode = ButtonNode.GetNodeWithTag(Value: "ShapeNode")
+            {
+                return ShapeNode
+            }
+        }
+        return nil
+    }
+    
+    /// Animate the extrusion depth of the button.
+    /// - Parameter Which: The button whose extrusion depth will be animated.
+    /// - Parameter ToHeight: The new height of the node.
+    /// - Paremeter Duration: The duration of the animation.
+    func AnimateExtrusion(_ Which: NodeButtons, ToHeight: CGFloat, Duration: Double = 0.25)
+    {
+        if let ButtonNode = ButtonList[Which]
+        {
+            if let ShapeNode = ButtonNode.GetNodeWithTag(Value: "ShapeNode")
+            {
+                if let STextGeo = ShapeNode.geometry as? SCNText
+                {
+                    UIView.animate(withDuration: Duration, animations:
+                        {
+                            STextGeo.extrusionDepth = ToHeight
+                    })
+                }
+            }
+        }
+    }
+    
+    /// Sets the visual state of the heart button to indicate a regular heartbeat on the main UI thread.
+    /// - Parameter IsHighlighted: Determines whether the heart button is highlighted or normal.
+    /// - Parameter Duration: The duration of the animation for scaling and extrusion.
+    /// - Parameter Colors: Set of colors for the highlight state and the normal state.
+    /// - Parameter Sizes: Set of scale values for the highlight size and the normal size.
+    /// - Parameter Extrusions: Set of extrusion values for the highlight extrusion depth and the normal
+    ///                         extrusion depth.
+    func AnimateHeartbeat(IsHighlighted: Bool, Duration: Double,
+                          Colors: (Highlighted: UIColor, Normal: UIColor),
+                          Sizes: (Highlighted: CGFloat, Normal: CGFloat),
+                          Extrusions: (Highlighted: CGFloat, Normal: CGFloat))
+    {
+        if let ButtonNode = ButtonList[.HeartButton]
+        {
+            if let ShapeNode = ButtonNode.GetNodeWithTag(Value: "ShapeNode")
+            {
+                let NewColor = IsHighlighted ? Colors.Highlighted : Colors.Normal
+                let NewSize = IsHighlighted ? Sizes.Highlighted : Sizes.Normal
+                let NewExtrusion = IsHighlighted ? Extrusions.Highlighted : Extrusions.Normal
+                if let TextNode = ShapeNode.geometry as? SCNText
+                {
+                    TextNode.firstMaterial?.diffuse.contents = NewColor
+                    UIView.animate(withDuration: Duration, animations:
+                        {
+                            TextNode.extrusionDepth = NewExtrusion
+                    })
+                    let ScaleAction = SCNAction.scale(to: NewSize, duration: Duration)
+                    ShapeNode.runAction(ScaleAction)
+                }
+            }
+        }
     }
 }
