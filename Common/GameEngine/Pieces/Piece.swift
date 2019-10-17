@@ -14,7 +14,7 @@ import UIKit
 /// - Note: It is critical that all references to timers, whether setting, reading, or invalidating, are enclosed
 ///         in `OperationQueue.main.addOperation` or `DispatchQueue.main.async` blocks. This is to ensure all timers
 ///         are used on the same thread.
-class Piece
+class Piece: CustomStringConvertible
 {
     /// Reference to the board where the piece will be played.
     weak var _GameBoard: Board? = nil
@@ -1867,6 +1867,27 @@ class Piece
         set
         {
             _Attributes = newValue
+        }
+    }
+    
+    /// Returns a description of the contents of the Piece.
+    public var description: String
+    {
+        get
+        {
+            var CompS = "("
+            for Component in Components
+            {
+                CompS.append("(\(Component.X),\(Component.Y)) ")
+            }
+            CompS.append(")")
+            var LocS = " ("
+            for Location in Locations
+            {
+                LocS.append("(\(Location.X),\(Location.Y)) ")
+            }
+            LocS.append(")")
+            return "Shape: \(Shape), Components: \(CompS), Locations: \(LocS)"
         }
     }
 }
