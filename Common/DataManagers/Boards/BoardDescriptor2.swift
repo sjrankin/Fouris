@@ -93,9 +93,9 @@ class BoardDescriptor2
         }
     }
     
-    /// Holds the right-side of the bucket.
+    /// Holds the top of the bucket.
     private var _BucketY: Int = 5
-    /// Get the right side of the bucket.
+    /// Get the top of the bucket.
     public var BucketY: Int
     {
         get
