@@ -11,7 +11,7 @@ import UIKit
 
 /// This class represents an individual component in a `Piece`. `Piece`s are made up of one or
 /// more `Block`s.
-class Block
+class Block: CustomStringConvertible
 {
     /// Default intializer.
     init()
@@ -148,5 +148,14 @@ class Block
     public func LocationWith(Offset: CGPoint) -> CGPoint
     {
         return Location.WithOffset(Offset)
+    }
+    
+    /// Returns a string description of the contents of the class.
+    public var description: String
+    {
+        get
+        {
+            return "(x: \(X), y: \(Y)) {\(ID.uuidString)}"
+        }
     }
 }
