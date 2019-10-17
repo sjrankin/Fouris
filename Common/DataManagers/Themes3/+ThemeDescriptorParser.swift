@@ -102,7 +102,7 @@ extension ThemeDescriptor2
                                         _LightType = GameLights(rawValue: LType)!
                                         for GLChild in LChild.Children
                                         {
-                                            print("GameLight Child: \(GLChild.Name)")
+                                            //print("GameLight Child: \(GLChild.Name)")
                                             switch GLChild.Name
                                             {
                                                 case "Position":
