@@ -415,11 +415,11 @@ class Board
         let PieceInit = CACurrentMediaTime()
         NewPiece.GravityIsEnabled = PiecesUseGravity
         NewPiece.PlayMode = PlayMode
-        Map!.InPlay.append(NewPiece)
         let StartingPoint = Map!.GetPieceStartingPoint(ForPiece: NewPiece)
         let StartX = Int(StartingPoint.x)
         let StartY = Int(StartingPoint.y)
         NewPiece.SetStartLocation(X: StartX, Y: StartY)
+        Map!.InPlay.append(NewPiece)
         NewPiece.SetFastGravity(UseFastAI)
         NewPiece.StartDropping()
         if PlayMode == .Step
