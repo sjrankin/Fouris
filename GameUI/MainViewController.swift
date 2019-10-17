@@ -75,8 +75,8 @@ class MainViewController: UIViewController,
         
         ActivityLog.Initialize()
         #if targetEnvironment(simulator)
-            var NotUsed: String? = nil
-            ActivityLog.AddEntry(Title: "Hardware", Source: "MainViewController", KVPs: [("Hardware","Simulator")], LogFileName: &NotUsed)
+        var NotUsed: String? = nil
+        ActivityLog.AddEntry(Title: "Hardware", Source: "MainViewController", KVPs: [("Hardware","Simulator")], LogFileName: &NotUsed)
         #else
         var NotUsed: String? = nil
         let HardwareName = Platform.NiceModelName()
@@ -149,8 +149,9 @@ class MainViewController: UIViewController,
         
         InitializeUI()
         AIData = AITestTable()
-    
+        
         InitializeGameUI()
+        //StartHeartbeat()
         setNeedsStatusBarAppearanceUpdate()
         
         Stepper.Delegate = self
@@ -227,7 +228,7 @@ class MainViewController: UIViewController,
         
         //Initialize the 3D game viewer.
         GameView3D = GameUISurface3D
-        GameView3D?.Initialize(With: Game!.GameBoard!, Theme: Themes, BaseType: CurrentBaseGameType) 
+        GameView3D?.Initialize(With: Game!.GameBoard!, Theme: Themes, BucketShape: UserTheme!.BucketShape) 
         GameView3D?.Owner = self
         GameView3D?.SmoothMotionDelegate = self
         Smooth3D = GameView3D
@@ -262,6 +263,14 @@ class MainViewController: UIViewController,
                                      userInfo: nil, repeats: false)
         
         InitializeGestures()
+        
+        #if true
+        HeartbeatGraphic.alpha = 0.0
+        if UserTheme!.ShowHeartbeat
+        {
+            StartHeartbeat()
+        }
+        #endif
     }
     
     /// Sets the enable state of the freeze in place action button.
@@ -303,11 +312,13 @@ class MainViewController: UIViewController,
         SlideInCameraControlBox.layer.backgroundColor = ColorServer.CGColorFrom(ColorNames.WhiteSmoke)
         SlideInCameraControlBox.layer.borderColor = UIColor.black.cgColor
         ShowCameraControls()
+        #if false
         HeartbeatGraphic.alpha = 0.0
         if UserTheme!.ShowHeartbeat
         {
             StartHeartbeat()
         }
+        #endif
     }
     
     /// Handle taps on the FPS text display. This toggles the contents from frames/second to instance seconds.
@@ -392,7 +403,7 @@ class MainViewController: UIViewController,
                 break
             
             default:
-            break
+                break
         }
     }
     
@@ -472,6 +483,9 @@ class MainViewController: UIViewController,
                         
                         case .UpButton:
                             HandleMoveUpPressed()
+                        
+                        case .HeartButton:
+                            break
                     }
                 }
                 return
@@ -806,6 +820,20 @@ class MainViewController: UIViewController,
     {
         let History = HistoryManager.GetHistory(InAttractMode)
         History?.Games![CurrentBaseGameType]!.IncrementPieceCount()
+        #if true
+        let BoardClass = BoardData.GetBoardClass(For: UserTheme!.BucketShape)!
+        switch BoardClass
+        {
+            case .Static:
+                GameView3D?.DrawMap3D(FromBoard: Game.GameBoard!, CalledFrom: "MapUpdated")
+            
+            case .Rotatable:
+                break
+            
+            case .ThreeDimensional:
+                break
+        }
+        #else
         switch CurrentBaseGameType
         {
             case .Standard:
@@ -815,11 +843,12 @@ class MainViewController: UIViewController,
                 break
             
             case .SemiRotating:
-            break
+                break
             
             case .Cubic:
                 GameView3D?.DrawMap3D(FromBoard: Game.GameBoard!)
         }
+        #endif
         DumpGameBoard(Game.GameBoard!)
     }
     
@@ -827,6 +856,20 @@ class MainViewController: UIViewController,
     /// different things.
     func PieceUpdated(_ ThePiece: Piece, X: Int, Y: Int)
     {
+        #if true
+        let BoardClass = BoardData.GetBoardClass(For: UserTheme!.BucketShape)!
+        switch BoardClass
+        {
+            case .Static:
+                break
+            
+            case .Rotatable:
+                GameView3D?.DrawPiece3D(InBoard: Game.GameBoard!, GamePiece: ThePiece)
+            
+            case .ThreeDimensional:
+                break
+        }
+        #else
         switch CurrentBaseGameType
         {
             case .Rotating4:
@@ -836,6 +879,7 @@ class MainViewController: UIViewController,
                 break
         }
         //GameView3D?.MovePieceSmoothly(ThePiece, ToOffsetX: CGFloat(X), ToOffsetY: CGFloat(Y), Duration: 0.35)
+        #endif
     }
     
     /// The specified piece froze. Draw the new map.
@@ -850,13 +894,69 @@ class MainViewController: UIViewController,
         var NotUsed: String? = nil
         ActivityLog.AddEntry(Title: "Game", Source: "MainViewController", KVPs: [("Message","Piece finalized."),("PieceID",ThePiece.ID.uuidString)],
                              LogFileName: &NotUsed)
+        #if true
+        let BoardClass = BoardData.GetBoardClass(For: UserTheme!.BucketShape)!
+        switch BoardClass
+        {
+            case .Static:
+                GameView3D?.MergePieceIntoBucket(ThePiece)
+                GameView3D?.DrawMap3D(FromBoard: Game!.GameBoard!, CalledFrom: "PieceFinalized")
+                break
+            
+            case .Rotatable:
+                GameView3D?.MergePieceIntoBucket(ThePiece)
+                GameView3D?.DrawMap3D(FromBoard: Game!.GameBoard!, CalledFrom: "PieceFinalized")
+                
+                if UserTheme!.RotateBucket
+                {
+                    switch UserTheme!.RotatingBucketDirection
+                    {
+                        case .Left:
+                            Game!.GameBoard!.Map!.RotateMapLeft()
+                            GameView3D?.RotateContentsLeft(Duration: UserTheme!.RotationDuration, Completed: {self.Nop()})
+                        
+                        case .Right:
+                            Game!.GameBoard!.Map!.RotateMapRight()
+                            GameView3D?.RotateContentsRight(Duration: UserTheme!.RotationDuration, Completed: {self.Nop()})//{self.RotateFinishFinalizing()})
+                        
+                        case .Random:
+                            if Bool.random()
+                            {
+                                Game!.GameBoard!.Map!.RotateMapLeft()
+                                GameView3D?.RotateContentsLeft(Duration: UserTheme!.RotationDuration, Completed: {self.Nop()})
+                            }
+                            else
+                            {
+                                Game!.GameBoard!.Map!.RotateMapRight()
+                                GameView3D?.RotateContentsRight(Duration: UserTheme!.RotationDuration, Completed: {self.Nop()})
+                        }
+                        
+                        case .None:
+                            NoRotateFinishFinalizing()
+                            return
+                    }
+                    //DispatchCalled = CACurrentMediaTime()
+                    //print("RotateFinishFinalized dispatched, Duration=\(UserTheme!.RotationDuration)")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + UserTheme!.RotationDuration,
+                                                  qos: .userInteractive,
+                                                  execute: {self.RotateFinishFinalizing()})
+                }
+                else
+                {
+                    NoRotateFinishFinalizing()
+            }
+            
+            case .ThreeDimensional:
+                break
+        }
+        #else
         switch CurrentBaseGameType
         {
             case .Standard:
                 break
             
             case .SemiRotating:
-            fallthrough
+                fallthrough
             case .Rotating4:
                 GameView3D?.MergePieceIntoBucket(ThePiece)
                 GameView3D?.DrawMap3D(FromBoard: Game!.GameBoard!, CalledFrom: "PieceFinalized")
@@ -903,6 +1003,7 @@ class MainViewController: UIViewController,
             case .Cubic:
                 break
         }
+        #endif
     }
     
     //var DispatchCalled: Double = 0.0
@@ -1422,7 +1523,7 @@ class MainViewController: UIViewController,
     {
         FreezeInPlace()
     }
-   
+    
     /// Handle the play button pressed.
     ///
     /// - Note: The button's visuals will change depending on whether the game is in play or stopped.
@@ -1614,7 +1715,7 @@ class MainViewController: UIViewController,
     // MARK: - General-UI interactions.
     
     var ProposedNewGameType: BaseGameTypes = .Standard
-
+    
     var CurrentBaseGameType: BaseGameTypes = .Standard
     
     var UsePredeterminedOrder: Bool = false
@@ -2033,18 +2134,18 @@ class MainViewController: UIViewController,
                 {
                     HeartbeatTimer?.invalidate()
                     HeartbeatTimer = nil
-                StartHeartbeat()
+                    StartHeartbeat()
             }
             
             case .ShowHeartbeat:
                 let ShowHeartbeat = UserTheme!.ShowHeartbeat
-            if ShowHeartbeat
-            {
-                StartHeartbeat()
-            }
-            else
-            {
-                StopHeartbeat()
+                if ShowHeartbeat
+                {
+                    StartHeartbeat()
+                }
+                else
+                {
+                    StopHeartbeat()
             }
             
             default:
@@ -2054,8 +2155,9 @@ class MainViewController: UIViewController,
     
     func StartHeartbeat()
     {
-        HeartbeatGraphic.isHidden = false
-        HeartbeatGraphic.alpha = 1.0
+        GameView3D?.SetHeartbeatVisibility(Show: true)
+        //HeartbeatGraphic.isHidden = false
+        //HeartbeatGraphic.alpha = 1.0
         HeartbeatTimer = Timer.scheduledTimer(timeInterval: UserTheme!.HeartbeatInterval,
                                               target: self, selector: #selector(HandleHeartbeat),
                                               userInfo: nil, repeats: true)
@@ -2063,8 +2165,9 @@ class MainViewController: UIViewController,
     
     func StopHeartbeat()
     {
-        HeartbeatGraphic.isHidden = true
-        HeartbeatGraphic.alpha = 0.0
+        //GameView3D?.SetHeartbeatVisibility(Show: false)
+        //HeartbeatGraphic.isHidden = true
+        //HeartbeatGraphic.alpha = 0.0
         HeartbeatTimer?.invalidate()
         HeartbeatTimer = nil
     }
@@ -2075,13 +2178,25 @@ class MainViewController: UIViewController,
             {
                 if self.HeartbeatCount.isMultiple(of: 2)
                 {
+                    self.GameView3D?.AnimateHeartbeat(IsHighlighted: true, Duration: 0.2,
+                                                      Colors: (Highlighted: UIColor.red, Normal: ColorServer.ColorFrom(ColorNames.Plum)),
+                                                      Sizes: (Highlighted: 0.053, Normal: 0.05),
+                                                      Extrusions: (Highlighted: 4.0, Normal: 2.0))
+                    #if false
                     self.HeartbeatGraphic.tintColor = ColorServer.ColorFrom(ColorNames.Maroon)
                     self.HeartbeatGraphic.setImage(UIImage(systemName: "heart"), for: UIControl.State.normal)
+                    #endif
                 }
                 else
                 {
+                    self.GameView3D?.AnimateHeartbeat(IsHighlighted: false, Duration: 0.2,
+                                                      Colors: (Highlighted: UIColor.red, Normal: ColorServer.ColorFrom(ColorNames.Plum)),
+                                                      Sizes: (Highlighted: 0.053, Normal: 0.05),
+                                                      Extrusions: (Highlighted: 4.0, Normal: 2.0))
+                    #if false
                     self.HeartbeatGraphic.tintColor = ColorServer.ColorFrom(ColorNames.Maraschino)
                     self.HeartbeatGraphic.setImage(UIImage(systemName: "heart.fill"), for: UIControl.State.normal)
+                    #endif
                 }
                 self.HeartbeatCount = self.HeartbeatCount + 1
         }
