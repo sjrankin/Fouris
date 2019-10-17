@@ -175,6 +175,10 @@ protocol GameViewProtocol: class
     /// - Parameter Button: The button to flash.
     /// - Parameter Duration: How long to flash the button in seconds.
     func FlashButton(_ Button: NodeButtons, Duration: Double)
+    
+    func SetHeartbeatVisibility(Show: Bool)
+    
+    func ToggleHeartState()
 }
 
 
