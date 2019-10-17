@@ -25,9 +25,13 @@ class MapType: CustomStringConvertible
     ///   - BucketShape: Shape of the game's bucket.
     init(Width: Int, Height: Int, ID: UUID, BucketShape: BucketShapes)
     {
+        print("init(Width: \(Width), Height: \(Height), ID: \(ID.uuidString), BucketShape: \(BucketShape))")
         _MapID = ID
-        self.Width = Width
-        self.Height = Height
+        let Board = BoardManager.GetBoardFor(BucketShape)!
+        self.Width = Board.GameBoardWidth
+        self.Height = Board.GameBoardHeight
+//        self.Width = Width
+//        self.Height = Height
         Initialize(Width: Width, Height: Height, BoardBucketShape: BucketShape)
     }
     #else
@@ -53,9 +57,13 @@ class MapType: CustomStringConvertible
     /// - Parameter ID: ID of the map.
     init(ID: UUID)
     {
+        print("init(ID: \(ID.uuidString))")
+        let Board = BoardManager.GetBoardFor(.Classic)!
         _MapID = ID
-        Width = 12
-        Height = 34
+        self.Width = Board.GameBoardWidth
+        self.Height = Board.GameBoardHeight
+//        Width = 12
+//        Height = 34
         Initialize(Width: Width, Height: Height, BoardBucketShape: .Classic)
     }
     #else
@@ -148,7 +156,9 @@ class MapType: CustomStringConvertible
     ///   - BucketShape: The shape of the bucket in the map.
     private func Initialize(Width: Int, Height: Int, BoardBucketShape: BucketShapes)
     {
+        print("Initialize(Width: \(Width), Height: \(Height), BoardBucketShape: \(BoardBucketShape)")
         _BucketShape = BoardBucketShape
+        let RawBucket = BoardManager.GetBoardFor(BoardBucketShape)
         _BoardClass = BoardData.GetBoardClass(For: BucketShape)!
         #if true
         if BoardClass == .Rotatable || BoardClass == .ThreeDimensional
@@ -169,14 +179,38 @@ class MapType: CustomStringConvertible
         #endif
         _CurrentRotation = 0
         InPlay = [Piece]()
+        #if true
+                _IDMap = PieceIDMap()
+        _CurrentBoardSize = CGSize(width: RawBucket!.GameBoardWidth, height: RawBucket!.GameBoardHeight)
+        print("_CurrentBoardSize: \(_CurrentBoardSize)")
+        _Contents = MapType.CreateMap(Width: RawBucket!.GameBoardWidth, Height: RawBucket!.GameBoardHeight,
+                                      FillWith: IDMap!.StaticID(For: .Visible))
+        _BlockMap = MapType.CreateMap(Width: RawBucket!.GameBoardWidth, Height: RawBucket!.GameBoardHeight,
+                                      FillWith: UUID.Empty)
+        #else
         _CurrentBoardSize = CGSize(width: Width, height: Height)
         _IDMap = PieceIDMap()
         _Contents = MapType.CreateMap(Width: Width, Height: Height, FillWith: IDMap!.StaticID(For: .Visible))
         _BlockMap = MapType.CreateMap(Width: Width, Height: Height, FillWith: UUID.Empty)
+        #endif
         
         switch BoardClass
         {
             case .Static:
+                #if true
+                print("Bucket size: \(RawBucket!.BucketWidth), \(RawBucket!.BucketHeight)")
+                print("Bucket location: \(RawBucket!.BucketX),\(RawBucket!.BucketY)")
+                print("GameBoard size: \(RawBucket!.GameBoardSize())")
+                _BucketBottom = RawBucket!.BucketHeight - 1
+                _BucketInteriorBottom = _BucketBottom - 1
+                _BucketTop = RawBucket!.BucketY
+                _BucketInteriorTop = _BucketTop
+                _BucketInteriorLeft = 1
+                _BucketInteriorRight = RawBucket!.BucketWidth - 1
+                _BucketInteriorWidth = RawBucket!.BucketWidth - 2
+                _BucketInteriorHeight = RawBucket!.BucketHeight - 1
+                print("_Bucket: Top=\(_BucketTop), Bottom=\(_BucketBottom)")
+                #else
                 _BucketBottom = Height - 1
                 _BucketInteriorBottom = _BucketBottom - 1
                 _BucketTop = Height - 21
@@ -185,8 +219,24 @@ class MapType: CustomStringConvertible
                 _BucketInteriorRight = Width - 1 - 1
                 _BucketInteriorWidth = (BucketInteriorRight - 1) - (BucketInteriorLeft - 1) - 1
                 _BucketInteriorHeight = (BucketBottom - 1) - (BucketTop - 1) - 1
+                #endif
             
             case .Rotatable:
+                #if true
+                let BW = RawBucket!.BucketWidth
+                let BH = RawBucket!.BucketHeight
+                _BucketBottom = Height - (BH / 2) + 1
+                _BucketInteriorBottom = _BucketBottom
+                _BucketTop = (Height / 2) - (BH / 2)
+                _BucketInteriorTop = _BucketTop
+                _BucketInteriorLeft = (Width - BW) / 2
+                _BucketInteriorRight = (Width - _BucketInteriorLeft) - 1
+                _BucketInteriorWidth = BW
+                _BucketInteriorHeight = BH
+                
+                _CenterBlockUpperLeft = CGPoint(x: (Width / 2) - 2, y: (Height / 2) - 2)
+                _CenterBlockLowerRight = CGPoint(x: (Width / 2) - 2 + 3, y: (Height / 2) - 2 + 3)
+                #else
                 let BW = 20
                 let BH = 20
                 _BucketBottom = Height - (BH / 2) + 1
@@ -200,6 +250,7 @@ class MapType: CustomStringConvertible
                 
                 _CenterBlockUpperLeft = CGPoint(x: (Width / 2) - 2, y: (Height / 2) - 2)
                 _CenterBlockLowerRight = CGPoint(x: (Width / 2) - 2 + 3, y: (Height / 2) - 2 + 3)
+                #endif
             
             case .ThreeDimensional:
                 break
@@ -365,11 +416,14 @@ class MapType: CustomStringConvertible
     /// - Returns: The point where the piece will be placed in the map.
     public func GetPieceStartingPoint(ForPiece: Piece) -> CGPoint
     {
+        let BoardDef = BoardManager.GetBoardFor(_BucketShape)!
         switch BoardClass
         {
             case .Static:
                 let X = GetHorizontalCenter() - ForPiece.Width / 2
-                let Y = BucketTop - ForPiece.MaxComponentDimension - 2
+//                let Y = BucketTop - ForPiece.MaxComponentDimension - 2
+                let Y = ForPiece.MaxComponentDimension + 0
+                print(">>>>>> Static start location for \(ForPiece.Shape) is \(X),\(Y)")
                 return CGPoint(x: X, y: Y)
             
             case .Rotatable:
