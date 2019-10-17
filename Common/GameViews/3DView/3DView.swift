@@ -33,6 +33,118 @@ class View3D: SCNView,                          //Our main super class.
     
     // MARK: - Initialization.
     
+    #if true
+    /// Initialize the view.
+    /// - Note: Setting 'self.showsStatistics' to true will lead to the scene freezing after a period of time (on the order of
+    ///         hours). Likewise, setting `self.allowsCameraControl` will lead to non-responsiveness in the UI after a period
+    ///         of time (on the order of tens of minutes). Therefore, using those two properties should be transient and for
+    ///         debug use only.
+    /// - Parameter With: The board to use for displaying contents.
+    /// - Parameter Theme: The theme manager instance.
+    /// - Parameter BucketShape: The shape of the game's bucket.
+    func Initialize(With: Board, Theme: ThemeManager3, BucketShape: BucketShapes)
+    {
+        print("View3D Frame=\(self.frame)")
+        self.isUserInteractionEnabled = true
+        CenterBlockShape = BucketShape
+        self.rendersContinuously = true
+        CreateMasterBlockNode()
+        SetBoard(With)
+        CurrentTheme = Theme.UserTheme
+        Theme.SubscribeToChanges(Subscriber: "View3D", SubscribingObject: self)
+        if CurrentTheme!.ShowStatistics
+        {
+            print("Show statistics is enabled in View3D. This may lead to performance degradation.")
+        }
+        self.showsStatistics = CurrentTheme!.ShowStatistics
+        if CurrentTheme!.CanControlCamera
+        {
+            print("Can control camera is enabled in View3D. This may lead to performance degradation.")
+        }
+        self.allowsCameraControl = CurrentTheme!.CanControlCamera
+        OriginalCameraPosition = CurrentTheme!.CameraPosition
+        OriginalCameraOrientation = CurrentTheme!.CameraOrientation
+        #if false
+        self.debugOptions = [.showBoundingBoxes, .renderAsWireframe]
+        #endif
+        GameScene = SCNScene()
+        self.delegate = self
+        self.isPlaying = true
+        self.scene = GameScene
+        self.autoenablesDefaultLighting = CurrentTheme!.UseDefaultLighting
+        var AAMode: SCNAntialiasingMode = .multisampling2X
+        switch CurrentTheme!.AntialiasingMode
+        {
+            case .None:
+                AAMode = .none
+            
+            case .MultiSampling2X:
+                AAMode = .multisampling2X
+            
+            case .MultiSampling4X:
+                AAMode = .multisampling4X
+            
+            default:
+                AAMode = .multisampling2X
+        }
+        self.antialiasingMode = AAMode
+        self.scene?.rootNode.addChildNode(MakeCamera())
+        
+        #if true
+        if self.allowsCameraControl
+        {
+            //https://stackoverflow.com/questions/24768031/can-i-get-the-scnview-camera-position-when-using-allowscameracontrol
+            CameraObserver = self.observe(\.pointOfView?.position, options: [.new])
+            {
+                (Node, Change) in
+                OperationQueue.current?.addOperation
+                    {
+                        let DPos = Convert.ConvertToString(Node.pointOfView!.position, AddLabels: true, AddParentheses: true)
+                        let DOri = Convert.ConvertToString(Node.pointOfView!.orientation, AddLabels: true, AddParentheses: true)
+                        var KVPMsg = MessageHelper.MakeKVPMessage(ID: self.PositionKVP, Key: "Camera Position", Value: DPos)
+                        DebugClient.SendPreformattedCommand(KVPMsg)
+                        KVPMsg = MessageHelper.MakeKVPMessage(ID: self.OrientationKVP, Key: "Camera Orientation", Value: DOri)
+                        DebugClient.SendPreformattedCommand(KVPMsg)
+                }
+            }
+        }
+        #endif
+        
+        let Node = CreateBucket(InitialOpacity: 1.0, Shape: CenterBlockShape)
+        BucketNode = Node
+        self.scene?.rootNode.addChildNode(BucketNode!)
+        if CurrentTheme!.ShowGrid
+        {
+            CreateGrid()
+        }
+        
+        LightNode = CreateGameLight()
+        self.scene?.rootNode.addChildNode(LightNode)
+        
+        let ControlLightNode = CreateControlLight()
+        self.scene?.rootNode.addChildNode(ControlLightNode)
+        
+        DrawBackground()
+        DrawBucketGrid(ShowLines: CurrentTheme!.ShowBucketGrid, IncludingOutline: true)
+        OrbitCamera()
+        AddPeskyLight()
+        PerfTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(SendPerformanceData),
+                                         userInfo: nil, repeats: true)
+        
+        ShowControls()
+        DrawCenterLines()
+        
+        #if true
+        let Obnoxious = SCNLight()
+        Obnoxious.type = .spot
+        Obnoxious.color = UIColor.white
+        let ObNode = SCNNode()
+        ObNode.light = Obnoxious
+        ObNode.position = SCNVector3(0, 0, -3)
+        ObNode.constraints?.append(SCNLookAtConstraint(target: CameraNode))
+        #endif
+    }
+    #else
     /// Initialize the view.
     /// - Note: Setting 'self.showsStatistics' to true will lead to the scene freezing after a period of time (on the order of
     ///         hours). Likewise, setting `self.allowsCameraControl` will lead to non-responsiveness in the UI after a period
@@ -145,6 +257,7 @@ class View3D: SCNView,                          //Our main super class.
         ObNode.constraints?.append(SCNLookAtConstraint(target: CameraNode))
         #endif
     }
+    #endif
     
     func NewParentSize(Bounds: CGRect, Frame: CGRect)
     {
@@ -196,6 +309,7 @@ class View3D: SCNView,                          //Our main super class.
     
     var CenterBlockShape: BucketShapes = .Square
     
+    #if false
     /// Holds the base game type.
     private var _BaseGameType: BaseGameTypes = .Standard
     /// Get the current base game type. You should delete the current instance and call **Initialize** on a new instance to
@@ -207,6 +321,7 @@ class View3D: SCNView,                          //Our main super class.
             return _BaseGameType
         }
     }
+    #endif
     
     var PerfTimer: Timer? = nil
     @objc func SendPerformanceData()
@@ -570,13 +685,15 @@ class View3D: SCNView,                          //Our main super class.
         }
         let LocalBucketNode = SCNNode()
         
-        switch BaseGameType
+        let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape)!
+        switch BoardClass
         {
-            case .Standard:
+            case .Static:
                 let LeftSide = SCNBox(width: 1.0, height: 20.0, length: 1.0, chamferRadius: 0.0)
                 LeftSide.materials.first?.diffuse.contents = ColorServer.ColorFrom(ColorNames.ReallyDarkGray)
                 LeftSide.materials.first?.specular.contents = ColorServer.ColorFrom(ColorNames.White)
                 let LeftSideNode = SCNNode(geometry: LeftSide)
+                LeftSideNode.categoryBitMask = GameLight
                 LeftSideNode.position = SCNVector3(-6, 0, 0)
                 LocalBucketNode.addChildNode(LeftSideNode)
                 
@@ -584,6 +701,7 @@ class View3D: SCNView,                          //Our main super class.
                 RightSide.materials.first?.diffuse.contents = ColorServer.ColorFrom(ColorNames.ReallyDarkGray)
                 RightSide.materials.first?.specular.contents = ColorServer.ColorFrom(ColorNames.White)
                 let RightSideNode = SCNNode(geometry: RightSide)
+                RightSideNode.categoryBitMask = GameLight
                 RightSideNode.position = SCNVector3(5, 0, 0)
                 LocalBucketNode.addChildNode(RightSideNode)
                 
@@ -591,19 +709,17 @@ class View3D: SCNView,                          //Our main super class.
                 Bottom.materials.first?.diffuse.contents = ColorServer.ColorFrom(ColorNames.ReallyDarkGray)
                 Bottom.materials.first?.specular.contents = ColorServer.ColorFrom(ColorNames.White)
                 let BottomNode = SCNNode(geometry: Bottom)
+                BottomNode.categoryBitMask = GameLight
                 BottomNode.position = SCNVector3(-0.5, -10.5, 0)
                 LocalBucketNode.addChildNode(BottomNode)
                 
+                LocalBucketNode.categoryBitMask = GameLight
                 LocalBucketNode.opacity = InitialOpacity
             
-            case .Rotating4:
-                #if true
+            case .Rotatable:
                 DrawCenterBlock(Parent: LocalBucketNode, InShape: Shape, InitialOpacity: InitialOpacity)
-                #else
-                DrawCenterBlock(Parent: BucketNode!, InShape: CenterBlockShape, InitialOpacity: InitialOpacity)
-                #endif
             
-            case .Cubic:
+            case .ThreeDimensional:
                 let Center = SCNBox(width: 2.0, height: 2.0, length: 2.0, chamferRadius: 0.0)
                 Center.materials.first?.diffuse.contents = ColorServer.ColorFrom(ColorNames.ReallyDarkGray)
                 Center.materials.first?.specular.contents = ColorServer.ColorFrom(ColorNames.White)
@@ -611,17 +727,10 @@ class View3D: SCNView,                          //Our main super class.
                 CentralNode.position = SCNVector3(0.0, 0.0, 0.0)
                 LocalBucketNode.addChildNode(CentralNode)
                 LocalBucketNode.opacity = InitialOpacity
-            
-            case .SemiRotating:
-            break
         }
         
-                _BucketAdded = true
-        #if false
-        self.scene?.rootNode.addChildNode(BucketNode!)
-        #else
+        _BucketAdded = true
         return LocalBucketNode
-        #endif
     }
     
     /// Flag indicating the bucket was added. Do we need this in this class?
@@ -796,6 +905,7 @@ class View3D: SCNView,                          //Our main super class.
     
     func MovePieceSmoothly(_ GamePiece: Piece, ToOffsetX: CGFloat, ToOffsetY: CGFloat, Duration: Double)
     {
+        #if false
         if SmoothPiece == nil
         {
             SmoothPiece = SCNNode()
@@ -807,6 +917,7 @@ class View3D: SCNView,                          //Our main super class.
         for Block in GamePiece.CurrentLocations()
         {
         }
+        #endif
     }
     
     /// Start a piece moving smoothly to the specified location.
@@ -878,7 +989,9 @@ class View3D: SCNView,                          //Our main super class.
     func RotatePieceSmoothly(_ GamePiece: Piece, ByDegrees: CGFloat, Duration: Double,
                              OnAxis: RotationalAxes = .X)
     {
+        #if false
         let Radians = ByDegrees * CGFloat.pi / 180.0
+        #endif
     }
     
     /// The moving piece is in its final location. Add its ID to the list of retired IDs and remove the moving blocks.
@@ -897,7 +1010,10 @@ class View3D: SCNView,                          //Our main super class.
         #endif
     }
     
-    //https://stackoverflow.com/questions/40472524/how-to-add-animations-to-change-sncnodes-color-scenekit
+    /// Show a piece such that the user knows it is being retired (eg, frozen).
+    /// - Note: [How to add animations to change SCNNode's color](https://stackoverflow.com/questions/40472524/how-to-add-animations-to-change-sncnodes-color-scenekit)
+    /// - Parameter Finalized: The piece that is freezing but not yet frozen.
+    /// - Parameter Completion: Completion block.
     func VisuallyRetirePiece(_ Finalized: Piece, Completion: (() -> ())?)
     {
         if MovingPieceNode != nil
@@ -931,6 +1047,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter ShapeID: The ID of the piece.
     func AddBlockNode_Standard(ParentID: UUID, BlockID: UUID, X: Int, Y: Int, IsRetired: Bool, ShapeID: UUID)
     {
+        print("Adding standard block node to \(X),\(Y)")
         if let PVisual = PieceVisualManager2.UserVisuals!.GetVisualWith(ID: ShapeID)
         {
             let VBlock = VisualBlocks3D(BlockID, AtX: CGFloat(X), AtY: CGFloat(Y), ActiveVisuals: PVisual.ActiveVisuals!,
@@ -996,19 +1113,34 @@ class View3D: SCNView,                          //Our main super class.
     /// - Returns: True if the block should be drawn, false if not.
     func ValidBlockToDraw(BlockType: PieceTypes) -> Bool
     {
+        #if true
+        let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape)!
+        switch BoardClass
+        {
+            case .Static:
+                return ![.Visible, .InvisibleBucket, .Bucket].contains(BlockType)
+            
+            case .Rotatable:
+                return ![.Visible, .InvisibleBucket, .Bucket, .GamePiece, .BucketExterior].contains(BlockType)
+            
+            case .ThreeDimensional:
+                return false
+        }
+        #else
         switch BaseGameType
         {
             case .Standard:
                 return ![.Visible, .InvisibleBucket, .Bucket].contains(BlockType)
             
             case .SemiRotating:
-            fallthrough
+                fallthrough
             case .Rotating4:
                 return ![.Visible, .InvisibleBucket, .Bucket, .GamePiece, .BucketExterior].contains(BlockType)
             
             case .Cubic:
                 return false
         }
+        #endif
     }
     
     /// Contains a list of IDs of blocks that have been retired. Used to keep the game from moving them when they are no longer
@@ -1050,8 +1182,13 @@ class View3D: SCNView,                          //Our main super class.
                 print("Block.ID is not set in DrawPiece3D")
                 return
             }
+            #if false
+            let YOffset = 10 - CGFloat(Block.Y) - 0.5
+            let XOffset = CGFloat(Block.X) - 6.0
+            #else
             let YOffset = (30 - 10 - 1) - 1.5 - CGFloat(Block.Y)
             let XOffset = CGFloat(Block.X) - 17.5
+            #endif
             let PieceTypeID = CurrentMap.RetiredPieceShapes[ItemID]
             if PieceTypeID == nil
             {
@@ -1074,6 +1211,20 @@ class View3D: SCNView,                          //Our main super class.
     /// Remove the moving piece, if it exists.
     func RemoveMovingPiece()
     {
+        let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape)!
+        #if true
+        if BoardClass == .Rotatable
+        {
+            print("Removing moving piece in rotating game.")
+            if MovingPieceNode != nil
+            {
+                MovingPieceNode!.removeFromParentNode()
+                MovingPieceNode = nil
+                UpdateMasterBlockNode()
+            }
+            print("  Done removing piece from rotating game.")
+        }
+        #else
         if BaseGameType == .Rotating4
         {
             print("Removing moving piece in rotating game.")
@@ -1085,6 +1236,7 @@ class View3D: SCNView,                          //Our main super class.
             }
             print("  Done removing piece from rotating game.")
         }
+        #endif
     }
     
     var MovingPieceNode: SCNNode? = nil
@@ -1119,6 +1271,7 @@ class View3D: SCNView,                          //Our main super class.
         #endif
         objc_sync_enter(RotateLock)
         defer{ objc_sync_exit(RotateLock) }
+        let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape)!
         
         BlockList.forEach({$0.Marked = false})
         
@@ -1140,6 +1293,22 @@ class View3D: SCNView,                          //Our main super class.
                 //Generate offsets to ensure the block is in the proper position in the 3D scene.
                 var YOffset: CGFloat = 0
                 var XOffset: CGFloat = 0
+                #if true
+                switch BoardClass
+                {
+                    case .Rotatable:
+                        YOffset = (30 - 10 - 1) - 1.0 - CGFloat(Y)
+                        XOffset = CGFloat(X) - 17.5
+                    
+                    case .Static:
+                         YOffset = 10 - CGFloat(Y) //+ 0.5
+                         XOffset = CGFloat(X) - 6.0
+                    
+                    case .ThreeDimensional:
+                        XOffset = 0
+                        YOffset = 0
+                }
+                #else
                 switch BaseGameType
                 {
                     case .Standard:
@@ -1151,13 +1320,14 @@ class View3D: SCNView,                          //Our main super class.
                         XOffset = CGFloat(X) - 17.5
                     
                     case .SemiRotating:
-                    XOffset = 0
-                    YOffset = 0
+                        XOffset = 0
+                        YOffset = 0
                     
                     case .Cubic:
                         XOffset = 0
                         YOffset = 0
                 }
+                #endif
                 
                 let IsRetired = ItemType! == .RetiredGamePiece
                 
@@ -1188,10 +1358,32 @@ class View3D: SCNView,                          //Our main super class.
                 else
                 {
                     let PieceTypeID = CurrentMap.RetiredPieceShapes[ItemID]!
+                    #if true
+                    if BoardClass == .Rotatable
+                    {
+                        YOffset = YOffset - 0.5
+                    }
+                    #else
                     if BaseGameType == .Rotating4
                     {
                         YOffset = YOffset - 0.5
                     }
+                    #endif
+                    #if true
+                    switch BoardClass
+                    {
+                        case .Static:
+                            AddBlockNode_Standard(ParentID: ItemID, BlockID: BlockID, X: Int(XOffset), Y: Int(YOffset),
+                                                  IsRetired: IsRetired, ShapeID: PieceTypeID)
+                        
+                        case .Rotatable:
+                            AddBlockNode_Rotating(ParentID: ItemID, BlockID: BlockID, X: XOffset, Y: YOffset,
+                                                  IsRetired: IsRetired, ShapeID: PieceTypeID)
+                        
+                        case .ThreeDimensional:
+                            break
+                    }
+                    #else
                     switch BaseGameType
                     {
                         case .Standard:
@@ -1203,11 +1395,12 @@ class View3D: SCNView,                          //Our main super class.
                                                   IsRetired: IsRetired, ShapeID: PieceTypeID)
                         
                         case .SemiRotating:
-                        break
+                            break
                         
                         case .Cubic:
                             break
                     }
+                    #endif
                 }
             }
         }
@@ -1372,6 +1565,109 @@ class View3D: SCNView,                          //Our main super class.
             OutlineColor = OutlineColorOverride!
         }
         
+        let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape)!
+        
+        #if true
+        switch BoardClass
+        {
+            case .Static:
+                if ShowGrid
+                {
+                    //Horizontal bucket lines.
+                    for Y in stride(from: 10.0, to: -10.5, by: -1.0)
+                    {
+                        let Start = SCNVector3(-0.5, Y, 0.0)
+                        let End = SCNVector3(10.5, Y, 0.0)
+                        let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.03)
+                        LineNode.categoryBitMask = GameLight
+                        LineNode.name = "Horizontal,\(Int(Y))"
+                        BucketGridNode.addChildNode(LineNode)
+                    }
+                    //Vertical bucket lines.
+                    for X in stride(from: -4.5, to: 5.0, by: 1.0)
+                    {
+                        let Start = SCNVector3(X, 0.0, 0.0)
+                        let End = SCNVector3(X, 20.0, 0.0)
+                        let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.03)
+                        LineNode.categoryBitMask = GameLight
+                        LineNode.name = "Vertical,\(Int(X))"
+                        BucketGridNode.addChildNode(LineNode)
+                    }
+                }
+                if DrawOutline
+                {
+                    let TopStart = SCNVector3(-0.5, 10.0, 0.0)
+                    let TopEnd = SCNVector3(10.5, 10.0, 0.0)
+                    let TopLine = MakeLine(From: TopStart, To: TopEnd, Color: OutlineColor, LineWidth: 0.08)
+                    TopLine.categoryBitMask = GameLight
+                    TopLine.name = "TopLine"
+                    BucketGridNode.addChildNode(TopLine)
+                }
+                BucketGridNode.opacity = InitialOpacity
+            
+            case .Rotatable:
+                let GameBoard = BoardManager.GetBoardFor(CenterBlockShape)!
+                let BucketWidth = Double(GameBoard.BucketWidth)
+                let BucketHeight = Double(GameBoard.BucketHeight)
+                let HalfY = BucketHeight / 2.0
+                let HalfX = BucketWidth / 2.0
+                if ShowGrid
+                {
+                    // Horizontal lines.
+                    for Y in stride(from: HalfY, to: -HalfY - 0.5, by: -1.0)
+                    {
+                        let Start = SCNVector3(0.0, Y, 0.0)
+                        let End = SCNVector3(20.0, Y, 0.0)
+                        let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.02)
+                        LineNode.categoryBitMask = GameLight
+                        LineNode.name = "Horizontal,\(Int(Y))"
+                        BucketGridNode.addChildNode(LineNode)
+                    }
+                    //Vertical lines.
+                    for X in stride(from: -HalfX, to: HalfX + 0.5, by: 1.0)
+                    {
+                        let Start = SCNVector3(X, 0.0, 0.0)
+                        let End = SCNVector3(X, 20.0, 0.0)
+                        let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.02)
+                        LineNode.categoryBitMask = GameLight
+                        LineNode.name = "Vertical,\(Int(X))"
+                        BucketGridNode.addChildNode(LineNode)
+                    }
+                }
+                //Outline.
+                if DrawOutline
+                {
+                    let TopStart = SCNVector3(0.0, HalfY, 0.0)
+                    let TopEnd = SCNVector3(BucketWidth, HalfY, 0.0)
+                    let TopLine = MakeLine(From: TopStart, To: TopEnd, Color: OutlineColor, LineWidth: 0.08)
+                    TopLine.categoryBitMask = GameLight
+                    TopLine.name = "TopLine"
+                    OutlineNode.addChildNode(TopLine)
+                    let BottomStart = SCNVector3(0.0, -HalfY, 0.0)
+                    let BottomEnd = SCNVector3(BucketWidth, -HalfY, 0.0)
+                    let BottomLine = MakeLine(From: BottomStart, To: BottomEnd, Color: OutlineColor, LineWidth: 0.08)
+                    BottomLine.categoryBitMask = GameLight
+                    BottomLine.name = "BottomLine"
+                    OutlineNode.addChildNode(BottomLine)
+                    let LeftStart = SCNVector3(-HalfX, 0.0, 0.0)
+                    let LeftEnd = SCNVector3(-HalfX, BucketHeight, 0.0)
+                    let LeftLine = MakeLine(From: LeftStart, To: LeftEnd, Color: OutlineColor, LineWidth: 0.08)
+                    LeftLine.categoryBitMask = GameLight
+                    LeftLine.name = "LeftLine"
+                    OutlineNode.addChildNode(LeftLine)
+                    let RightStart = SCNVector3(HalfX, 0.0, 0.0)
+                    let RightEnd = SCNVector3(HalfX, BucketHeight, 0.0)
+                    let RightLine = MakeLine(From: RightStart, To: RightEnd, Color: OutlineColor, LineWidth: 0.08)
+                    RightLine.categoryBitMask = GameLight
+                    RightLine.name = "RightLine"
+                    OutlineNode.addChildNode(RightLine)
+                }
+                BucketGridNode.opacity = InitialOpacity
+            
+            case .ThreeDimensional:
+                break
+        }
+        #else
         switch BaseGameType
         {
             case .Standard:
@@ -1413,7 +1709,7 @@ class View3D: SCNView,                          //Our main super class.
                 let GameBoard = BoardManager.GetBoardFor(.Square)!
                 let BucketWidth = Double(GameBoard.BucketWidth)
                 let BucketHeight = Double(GameBoard.BucketHeight)
-                                    let HalfY = BucketHeight / 2.0
+                let HalfY = BucketHeight / 2.0
                 let HalfX = BucketWidth / 2.0
                 #if true
                 if ShowGrid
@@ -1573,11 +1869,12 @@ class View3D: SCNView,                          //Our main super class.
             #endif
             
             case .SemiRotating:
-            break
+                break
             
             case .Cubic:
                 break
         }
+        #endif
         
         return (Grid: BucketGridNode, Outline: OutlineNode)
     }
@@ -1780,6 +2077,30 @@ class View3D: SCNView,                          //Our main super class.
         DebugClient.SendPreformattedCommand(MaxNodeCountKVP)
         
         FinalBlocks = [VisualBlocks3D]()
+        #if true
+        let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape)!
+        switch BoardClass
+        {
+            case .Static:
+                for Block in BlockList
+                {
+                    if Block.ParentID == ID
+                    {
+                        FinalBlocks.append(Block)
+                    }
+            }
+            
+            case .Rotatable:
+                for Block in MovingPieceBlocks
+                {
+                    FinalBlocks.append(Block)
+                    BlockList.insert(Block)
+            }
+            
+            case .ThreeDimensional:
+                break
+        }
+        #else
         switch BaseGameType
         {
             case .Standard:
@@ -1798,11 +2119,12 @@ class View3D: SCNView,                          //Our main super class.
             }
             
             case .SemiRotating:
-            break
+                break
             
             case .Cubic:
                 break
         }
+        #endif
         
         #if true
         let StartColor = UIColor.yellow
@@ -1817,7 +2139,7 @@ class View3D: SCNView,                          //Our main super class.
         let FinalDuration = 0.5
         let ColorToRed = SCNAction.customAction(duration: FinalDuration, action:
         {
-        (Node, Time) in
+            (Node, Time) in
             let Percent: CGFloat = Time / CGFloat(FinalDuration)
             let Red = abs(EndColor.r + (RDelta * Percent))
             let Green = abs(EndColor.g + (GDelta * Percent))
@@ -1825,9 +2147,9 @@ class View3D: SCNView,                          //Our main super class.
             Node.geometry?.firstMaterial?.diffuse.contents = UIColor(red: Red, green: Green, blue: Blue, alpha: 1.0)
         }
         )
-         RDelta = StartColor.r - EndColor.r
-         GDelta = StartColor.g - EndColor.g
-         BDelta = StartColor.b - EndColor.b
+        RDelta = StartColor.r - EndColor.r
+        GDelta = StartColor.g - EndColor.g
+        BDelta = StartColor.b - EndColor.b
         let ColorToYellow = SCNAction.customAction(duration: FinalDuration, action:
         {
             (Node, Time) in
@@ -1978,6 +2300,42 @@ class View3D: SCNView,                          //Our main super class.
         self.pointOfView?.orientation = OriginalCameraOrientation!
     }
     
+    // MARK: - Heartbeat functions.
+    
+    var ShowingHeart = false
+    
+    func SetHeartbeatVisibility(Show: Bool)
+    {
+        if Show == ShowingHeart
+        {
+            return
+        }
+        ShowingHeart = Show
+        if ShowingHeart
+        {
+            AppendButton(Which: .HeartButton)
+        }
+        else
+        {
+            RemoveButton(Which: .HeartButton)
+        }
+    }
+    
+    var HeartHighlighted = false
+    
+    func ToggleHeartState()
+    {
+        HeartHighlighted = !HeartHighlighted
+        if HeartHighlighted
+        {
+            SetButtonColorToHighlight(Button: .HeartButton)
+        }
+        else
+        {
+            SetButtonColorToNormal(Button: .HeartButton)
+        }
+    }
+    
     // MARK: - Variables for buttons and button state. Button functions are found in +TextButtons.swift.
     
     var ButtonList: [NodeButtons: SCNButtonNode] = [NodeButtons: SCNButtonNode]()
@@ -1995,7 +2353,9 @@ class View3D: SCNView,                          //Our main super class.
             .FlyAwayButton:  (SCNVector3(6.5, -14.5, 1.0), 0.08, UIColor.systemBlue, UIColor.yellow),
             .RotateRightButton:  (SCNVector3(9.2, -14.5, 1.0), 0.08, UIColor.white, UIColor.yellow),
             
-            .FreezeButton: (SCNVector3(-1.0, -13.5, 1.0), 0.08, UIColor.cyan, UIColor.blue)
+            .FreezeButton: (SCNVector3(-1.0, -13.5, 1.0), 0.08, UIColor.cyan, UIColor.blue),
+            
+            .HeartButton: (SCNVector3(5.0, 11, 1.0), 0.05, UIColor.systemPink, UIColor.red)
     ]
     
     // MARK: - Renderer variables.
@@ -2031,6 +2391,7 @@ enum Angles: CGFloat, CaseIterable
 /// - **RotateLeftButton**: Button to rotate the piece counterclockwise by 90°.
 /// - **RotateRightButton**: Button to rotate the piece clockwise by 90°.
 /// - **FreezeButton**: Button to freeze a button in place.
+/// - **HeartButton**: Button used to display the heartbeat.
 enum NodeButtons: String, CaseIterable
 {
     case LeftButton = "LeftButton"
@@ -2042,4 +2403,5 @@ enum NodeButtons: String, CaseIterable
     case RotateLeftButton = "RotateLeftButton"
     case RotateRightButton = "RotateRightButton"
     case FreezeButton = "FreezeButton"
+    case HeartButton = "HeartButton"
 }
