@@ -50,6 +50,7 @@ extension View3D
         }
         BNode.position = SCNVector3(0.0, 0.0, 0.0)
         BNode.opacity = InitialOpacity
+        BNode.categoryBitMask = GameLight
         Parent.addChildNode(BNode)
     }
 }
