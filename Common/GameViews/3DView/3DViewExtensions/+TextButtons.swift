@@ -13,114 +13,20 @@ import SceneKit
 /// Contains functions for the creation and manipulation of text node buttons in the game view.
 extension View3D
 {
-    /// Returns the bounding size of the passed node.
-    /// - Parameter Node: The SCNNode whose bounding size will be returned.
-    /// - Returns: Bounding size of the passed SCNNode.
-    func GetNodeBoundingSize(_ Node: SCNNode) -> CGSize
-    {
-        let BoundingSize = Node.boundingBox
-        let XSize = Double(BoundingSize.max.x - BoundingSize.min.x)
-        let YSize = Double(BoundingSize.max.y - BoundingSize.min.y)
-        return CGSize(width: XSize, height: YSize)
-    }
-    
-    /// Add a text button with text created from a Unicode code point.
-    /// - Parameter ForButton: The button type.
-    /// - Parameter CodePoint: Unicode code point. This function uses the system font so if the system font does not support
-    ///                        the given code point, an ugly symbol will be displayed instead.
-    /// - Parameter Font: The font to use. This function assumes the font is the system font.
-    /// - Parameter Location: Where to place the button.
-    /// - Parameter Color: The standard button color - used as the diffuse material color.
-    /// - Parameter Highlight: The highlight button color.
-    /// - Parameter ScaleFactor: Used to scale the button.
-    func AddUnicodeButton(ForButton: NodeButtons, _ CodePoint: Int, Font: UIFont, Location: SCNVector3,
-                          Color: UIColor, Highlight: UIColor, ScaleFactor: Double = 0.1) -> SCNButtonNode
-    {
-        let UnicodeChar = UnicodeScalar(CodePoint)
-        let UnicodeString = "\((UnicodeChar)!)"
-        let SText = SCNText(string: UnicodeString, extrusionDepth: 2)
-        SText.font = Font
-        SText.flatness = 0
-        SText.firstMaterial?.diffuse.contents = Color
-        SText.firstMaterial?.specular.contents = UIColor.white
-        let Node = SCNButtonNode(geometry: SText)
-        Node.ButtonColor = Color
-        Node.HighlightColor = Highlight
-        Node.name = "\(ForButton)"
-        Node.categoryBitMask = ControlLight
-        Node.scale = SCNVector3(ScaleFactor, ScaleFactor, ScaleFactor)
-        Node.StringTag = "ShapeNode"
-        
-        let SourceSize = GetNodeBoundingSize(Node)
-        let BGBox = SCNBox(width: SourceSize.width, height: SourceSize.height, length: 0.001, chamferRadius: 0.0)
-        BGBox.firstMaterial?.diffuse.contents = UIColor.clear
-        BGBox.firstMaterial?.specular.contents = UIColor.clear
-        let BGNode = SCNButtonNode(geometry: BGBox)
-        let FinalWidth = SourceSize.width * 0.06
-        let FinalHeight = SourceSize.height * 0.1
-        BGNode.position = SCNVector3(FinalWidth, FinalHeight, -0.1)
-        BGNode.scale = SCNVector3(ScaleFactor, ScaleFactor, ScaleFactor)
-        BGNode.name = "\(ForButton)"
-        BGNode.StringTag = "BackgroundNode"
-        
-        let FinalNode = SCNButtonNode()
-        FinalNode.position = Location
-        FinalNode.addChildNode(Node)
-        FinalNode.addChildNode(BGNode)
-        FinalNode.categoryBitMask = ControlLight
-        FinalNode.StringTag = "ParentNode"
-        return FinalNode
-    }
-    
-    /// Add a text button with the passed text.
-    /// - Parameter ForButton: The button type.
-    /// - Parameter CodePoint: The text to use for the button
-    /// - Parameter Font: The font to use. This function assumes the font is the system font.
-    /// - Parameter Location: Where to place the button.
-    /// - Parameter Color: The standard button color - used as the diffuse material color.
-    /// - Parameter Highlight: The highlight button color.
-    /// - Parameter ScaleFactor: Used to scale the button.
-    func AddTextButton(ForButton: NodeButtons, _ Text: String, Font: UIFont, Location: SCNVector3,
-                       Color: UIColor, Highlight: UIColor, ScaleFactor: Double = 0.1) -> SCNButtonNode
-    {
-        let SText = SCNText(string: Text, extrusionDepth: 2)
-        SText.font = Font
-        SText.flatness = 0
-        SText.firstMaterial?.diffuse.contents = Color
-        SText.firstMaterial?.specular.contents = UIColor.white
-        let Node = SCNButtonNode(geometry: SText)
-        Node.ButtonColor = Color
-        Node.HighlightColor = Highlight
-        Node.name = "\(ForButton)"
-        Node.categoryBitMask = ControlLight
-        Node.scale = SCNVector3(ScaleFactor, ScaleFactor, ScaleFactor)
-        Node.StringTag = "ShapeNode"
-        
-        let SourceSize = GetNodeBoundingSize(Node)
-        let BGBox = SCNBox(width: SourceSize.width, height: SourceSize.height, length: 0.001, chamferRadius: 0.0)
-        BGBox.firstMaterial?.diffuse.contents = UIColor.clear
-        BGBox.firstMaterial?.specular.contents = UIColor.clear
-        let BGNode = SCNButtonNode(geometry: BGBox)
-        let FinalWidth = SourceSize.width * 0.06
-        let FinalHeight = SourceSize.height * 0.075
-        BGNode.position = SCNVector3(FinalWidth, FinalHeight, -0.1)
-        BGNode.scale = SCNVector3(ScaleFactor, ScaleFactor, ScaleFactor)
-        BGNode.name = "\(ForButton)"
-        BGNode.StringTag = "BackgroundNode"
-        
-        let FinalNode = SCNButtonNode()
-        FinalNode.position = Location
-        FinalNode.addChildNode(Node)
-        FinalNode.addChildNode(BGNode)
-        FinalNode.categoryBitMask = ControlLight
-        FinalNode.StringTag = "ParentNode"
-        return FinalNode
-    }
-    
     /// Make a in-scene motion button.
+    /// - Note: Depending on the device type, different button sizes and locations are used. This is determined at run time.
     /// - Parameter ForButton: Determines the button to create and add to the scene.
-    func MakeButton(ForButton: NodeButtons)
+    /// - Parameter NodeText: If supplied the text to use for the node. If not supplied, default values are used.
+    func MakeButton(ForButton: NodeButtons, NodeText: String? = nil)
     {
+        if UIDevice.current.userInterfaceIdiom == .phone
+        {
+           ButtonDictionary = SmallButtonDictionary
+        }
+        else
+        {
+            ButtonDictionary = BigButtonDictionary
+        }
         var ButtonFont = UIFont.systemFont(ofSize: 20.0, weight: UIFont.Weight.bold)
         if let Descriptor = ButtonFont.fontDescriptor.withDesign(.rounded)
         {
@@ -129,75 +35,170 @@ extension View3D
         var FinalNode: SCNButtonNode!
         switch ForButton
         {
+            case .MainButton:
+                #if false
+                let Sphere = SCNSphere(radius: 0.6)
+                Sphere.firstMaterial?.diffuse.contents = UIImage(named: "Checkerboard64")
+                Sphere.firstMaterial?.specular.contents = UIColor.white
+                let SphereNode = SCNNode(geometry: Sphere)
+                SphereNode.categoryBitMask = ControlLight
+                let Torus = SCNTorus(ringRadius: 0.5, pipeRadius: 0.35)
+                Torus.firstMaterial?.diffuse.contents = UIImage(named: "Checkerboard64")
+                Torus.firstMaterial?.specular.contents = UIColor.white
+                let TorusNode = SCNNode(geometry: Torus)
+                TorusNode.categoryBitMask = ControlLight
+                let Combined = SCNNode()
+                Combined.addChildNode(SphereNode)
+                Combined.addChildNode(TorusNode)
+                MainButtonObject = Combined
+                #else
+                let Box = SCNBox(width: 1.0, height: 1.0, length: 1.0, chamferRadius: 0.0)
+                Box.firstMaterial?.diffuse.contents = UIImage(named: "Checkerboard64")
+                Box.firstMaterial?.specular.contents = UIColor.white
+                MainButtonObject = SCNNode(geometry: Box)
+                #endif
+                MainButtonObject?.categoryBitMask = ControlLight
+                let Around = CGFloat.pi / 180.0 * 360.0
+                let Rotate = SCNAction.rotateBy(x: Around, y: Around, z: Around, duration: 15.0)
+                let Forever = SCNAction.repeatForever(Rotate)
+                MainButtonObject?.runAction(Forever)
+                let FinalNode = SCNButtonNode.AddObjectButton(ForButton: .MainButton, SourceNode: MainButtonObject!,
+                                                              Location: ButtonDictionary[ForButton]!.Location,
+                                                              LightMask: ControlLight)
+                FinalNode.SetBackgroundColor(Diffuse: UIColor.cyan)
+                #if false
+                FinalNode.castsShadow = true
+                #endif
+                self.scene?.rootNode.addChildNode(FinalNode)
+            return
+            
+            case .FPSButton:
+                let ButtonText = NodeText == nil ? "60.000" : NodeText!
+                FinalNode = SCNButtonNode.AddTextButton(ForButton: .FPSButton, ButtonText, Font: ButtonFont,
+                                                        Location: ButtonDictionary[ForButton]!.Location,
+                                                        Color: ButtonDictionary[ForButton]!.Color,
+                                                        Highlight: ButtonDictionary[ForButton]!.Highlight,
+                                                        ScaleFactor: ButtonDictionary[ForButton]!.Scale,
+                                                        LightMask: ControlLight, Depth: 0.0)
+            
+            case .PlayButton:
+                                let ButtonText = NodeText == nil ? "Play" : NodeText!
+                FinalNode = SCNButtonNode.AddTextButton(ForButton: .PlayButton, ButtonText, Font: ButtonFont,
+                                                        Location: ButtonDictionary[ForButton]!.Location,
+                                                        Color: ButtonDictionary[ForButton]!.Color,
+                                                        Highlight: ButtonDictionary[ForButton]!.Highlight,
+                                                        ScaleFactor: ButtonDictionary[ForButton]!.Scale,
+                                                        LightMask: ControlLight, Depth: 2.0)
+            
+            case .PauseButton:
+                                let ButtonText = NodeText == nil ? "Resume" : NodeText!
+                FinalNode = SCNButtonNode.AddTextButton(ForButton: .PauseButton, ButtonText, Font: ButtonFont,
+                                                        Location: ButtonDictionary[ForButton]!.Location,
+                                                        Color: ButtonDictionary[ForButton]!.Color,
+                                                        Highlight: ButtonDictionary[ForButton]!.Highlight,
+                                                        ScaleFactor: ButtonDictionary[ForButton]!.Scale,
+                                                        LightMask: ControlLight, Depth: 2.0)
+            
+            case .VideoButton:
+                let OverrideFont = UIFont(name: "NotoEmoji", size: 40.0)!
+                FinalNode = SCNButtonNode.AddUnicodeButton(ForButton: ForButton, 0x1f4f9, Font: OverrideFont,
+                                                           Location: ButtonDictionary[ForButton]!.Location,
+                                                           Color: ButtonDictionary[ForButton]!.Color,
+                                                           Highlight: ButtonDictionary[ForButton]!.Highlight,
+                                                           ScaleFactor: ButtonDictionary[ForButton]!.Scale,
+                                                           LightMask: ControlLight)
+            
+            case .CameraButton:
+                let OverrideFont = UIFont(name: "NotoEmoji", size: 40.0)!
+                FinalNode = SCNButtonNode.AddUnicodeButton(ForButton: ForButton, 0x1f4f7, Font: OverrideFont,
+                                                        Location: ButtonDictionary[ForButton]!.Location,
+                                                        Color: ButtonDictionary[ForButton]!.Color,
+                                                        Highlight: ButtonDictionary[ForButton]!.Highlight,
+                                                        ScaleFactor: ButtonDictionary[ForButton]!.Scale,
+                                                        LightMask: ControlLight)
+            
             case .DownButton:
-                FinalNode = AddUnicodeButton(ForButton: ForButton, 0x25bc, Font: ButtonFont,
-                                             Location: ButtonDictionary[ForButton]!.Location,
-                                             Color: ButtonDictionary[ForButton]!.Color,
-                                             Highlight: ButtonDictionary[ForButton]!.Highlight,
-                                             ScaleFactor: ButtonDictionary[ForButton]!.Scale)
+                FinalNode = SCNButtonNode.AddUnicodeButton(ForButton: ForButton, 0x25bc, Font: ButtonFont,
+                                                           Location: ButtonDictionary[ForButton]!.Location,
+                                                           Color: ButtonDictionary[ForButton]!.Color,
+                                                           Highlight: ButtonDictionary[ForButton]!.Highlight,
+                                                           ScaleFactor: ButtonDictionary[ForButton]!.Scale,
+                                                           LightMask: ControlLight)
             
             case .DropDownButton:
-                FinalNode = AddUnicodeButton(ForButton: ForButton, 0x25bc, Font: ButtonFont,
-                                             Location: ButtonDictionary[ForButton]!.Location,
-                                             Color: ButtonDictionary[ForButton]!.Color,
-                                             Highlight: ButtonDictionary[ForButton]!.Highlight,
-                                             ScaleFactor: ButtonDictionary[ForButton]!.Scale)
+                FinalNode = SCNButtonNode.AddUnicodeButton(ForButton: ForButton, 0x25bc, Font: ButtonFont,
+                                                           Location: ButtonDictionary[ForButton]!.Location,
+                                                           Color: ButtonDictionary[ForButton]!.Color,
+                                                           Highlight: ButtonDictionary[ForButton]!.Highlight,
+                                                           ScaleFactor: ButtonDictionary[ForButton]!.Scale,
+                                                           LightMask: ControlLight)
             
             case .FlyAwayButton:
-                FinalNode = AddUnicodeButton(ForButton: ForButton, 0x25b2, Font: ButtonFont,
-                                             Location: ButtonDictionary[ForButton]!.Location,
-                                             Color: ButtonDictionary[ForButton]!.Color,
-                                             Highlight: ButtonDictionary[ForButton]!.Highlight,
-                                             ScaleFactor: ButtonDictionary[ForButton]!.Scale)
+                FinalNode = SCNButtonNode.AddUnicodeButton(ForButton: ForButton, 0x25b2, Font: ButtonFont,
+                                                           Location: ButtonDictionary[ForButton]!.Location,
+                                                           Color: ButtonDictionary[ForButton]!.Color,
+                                                           Highlight: ButtonDictionary[ForButton]!.Highlight,
+                                                           ScaleFactor: ButtonDictionary[ForButton]!.Scale,
+                                                           LightMask: ControlLight)
             
             case .FreezeButton:
-                FinalNode = AddTextButton(ForButton: ForButton, "❄︎", Font: ButtonFont,
-                                          Location: ButtonDictionary[ForButton]!.Location,
-                                          Color: ButtonDictionary[ForButton]!.Color,
-                                          Highlight: ButtonDictionary[ForButton]!.Highlight,
-                                          ScaleFactor: ButtonDictionary[ForButton]!.Scale)
+                FinalNode = SCNButtonNode.AddTextButton(ForButton: ForButton, "❄︎", Font: ButtonFont,
+                                                        Location: ButtonDictionary[ForButton]!.Location,
+                                                        Color: ButtonDictionary[ForButton]!.Color,
+                                                        Highlight: ButtonDictionary[ForButton]!.Highlight,
+                                                        ScaleFactor: ButtonDictionary[ForButton]!.Scale,
+                                                        LightMask: ControlLight)
             
             case .LeftButton:
-                FinalNode = AddUnicodeButton(ForButton: ForButton, 0x25c0, Font: ButtonFont,
-                                             Location: ButtonDictionary[ForButton]!.Location,
-                                             Color: ButtonDictionary[ForButton]!.Color,
-                                             Highlight: ButtonDictionary[ForButton]!.Highlight,
-                                             ScaleFactor: ButtonDictionary[ForButton]!.Scale)
+                FinalNode = SCNButtonNode.AddUnicodeButton(ForButton: ForButton, 0x25c0, Font: ButtonFont,
+                                                           Location: ButtonDictionary[ForButton]!.Location,
+                                                           Color: ButtonDictionary[ForButton]!.Color,
+                                                           Highlight: ButtonDictionary[ForButton]!.Highlight,
+                                                           ScaleFactor: ButtonDictionary[ForButton]!.Scale,
+                                                           LightMask: ControlLight)
             
             case .RightButton:
-                FinalNode = AddUnicodeButton(ForButton: ForButton, 0x25b6, Font: ButtonFont,
-                                             Location: ButtonDictionary[ForButton]!.Location,
-                                             Color: ButtonDictionary[ForButton]!.Color,
-                                             Highlight: ButtonDictionary[ForButton]!.Highlight,
-                                             ScaleFactor: ButtonDictionary[ForButton]!.Scale)
+                FinalNode = SCNButtonNode.AddUnicodeButton(ForButton: ForButton, 0x25b6, Font: ButtonFont,
+                                                           Location: ButtonDictionary[ForButton]!.Location,
+                                                           Color: ButtonDictionary[ForButton]!.Color,
+                                                           Highlight: ButtonDictionary[ForButton]!.Highlight,
+                                                           ScaleFactor: ButtonDictionary[ForButton]!.Scale,
+                                                           LightMask: ControlLight)
             
             case .RotateLeftButton:
-                FinalNode = AddTextButton(ForButton: ForButton, "↺", Font: ButtonFont,
-                                          Location: ButtonDictionary[ForButton]!.Location,
-                                          Color: ButtonDictionary[ForButton]!.Color,
-                                          Highlight: ButtonDictionary[ForButton]!.Highlight,
-                                          ScaleFactor: ButtonDictionary[ForButton]!.Scale)
+                FinalNode = SCNButtonNode.AddTextButton(ForButton: ForButton, "↺", Font: ButtonFont,
+                                                        Location: ButtonDictionary[ForButton]!.Location,
+                                                        Color: ButtonDictionary[ForButton]!.Color,
+                                                        Highlight: ButtonDictionary[ForButton]!.Highlight,
+                                                        ScaleFactor: ButtonDictionary[ForButton]!.Scale,
+                                                        LightMask: ControlLight)
             
             case .RotateRightButton:
-                FinalNode = AddTextButton(ForButton: ForButton, "↻", Font: ButtonFont,
-                                          Location: ButtonDictionary[ForButton]!.Location,
-                                          Color: ButtonDictionary[ForButton]!.Color,
-                                          Highlight: ButtonDictionary[ForButton]!.Highlight,
-                                          ScaleFactor: ButtonDictionary[ForButton]!.Scale)
+                FinalNode = SCNButtonNode.AddTextButton(ForButton: ForButton, "↻", Font: ButtonFont,
+                                                        Location: ButtonDictionary[ForButton]!.Location,
+                                                        Color: ButtonDictionary[ForButton]!.Color,
+                                                        Highlight: ButtonDictionary[ForButton]!.Highlight,
+                                                        ScaleFactor: ButtonDictionary[ForButton]!.Scale,
+                                                        LightMask: ControlLight)
             
             case .UpButton:
-                FinalNode = AddUnicodeButton(ForButton: ForButton, 0x25b2, Font: ButtonFont,
-                                             Location: ButtonDictionary[ForButton]!.Location,
-                                             Color: ButtonDictionary[ForButton]!.Color,
-                                             Highlight: ButtonDictionary[ForButton]!.Highlight,
-                                             ScaleFactor: ButtonDictionary[ForButton]!.Scale)
+                FinalNode = SCNButtonNode.AddUnicodeButton(ForButton: ForButton, 0x25b2, Font: ButtonFont,
+                                                           Location: ButtonDictionary[ForButton]!.Location,
+                                                           Color: ButtonDictionary[ForButton]!.Color,
+                                                           Highlight: ButtonDictionary[ForButton]!.Highlight,
+                                                           ScaleFactor: ButtonDictionary[ForButton]!.Scale,
+                                                           LightMask: ControlLight)
             
             case .HeartButton:
-                FinalNode = AddTextButton(ForButton: ForButton, "♥︎", Font: ButtonFont,
-                                          Location: ButtonDictionary[ForButton]!.Location,
-                                          Color: ButtonDictionary[ForButton]!.Color,
-                                          Highlight: ButtonDictionary[ForButton]!.Highlight,
-                                          ScaleFactor: ButtonDictionary[ForButton]!.Scale)
+                FinalNode = SCNButtonNode.AddTextButton(ForButton: ForButton, "♥︎", Font: ButtonFont,
+                                                        Location: ButtonDictionary[ForButton]!.Location,
+                                                        Color: ButtonDictionary[ForButton]!.Color,
+                                                        Highlight: ButtonDictionary[ForButton]!.Highlight,
+                                                        ScaleFactor: ButtonDictionary[ForButton]!.Scale,
+                                                        LightMask: ControlLight)
+            
+            default:
+            return
         }
         
         ButtonList[ForButton] = FinalNode
@@ -263,15 +264,24 @@ extension View3D
         }
     }
     
+    func SetText(OnButton: NodeButtons, ToNextText: String)
+    {
+        if let TheButton = ButtonList[OnButton]
+        {
+            TheButton.removeFromParentNode()
+            MakeButton(ForButton: OnButton, NodeText: ToNextText)
+        }
+    }
+    
     /// Show game view controls.
     /// - Parameter Which: Array of buttons to show. If nil, all buttons are shown. Default is nil. Passing an empty array will
     ///                    remove all buttons.
     func ShowControls(With: [NodeButtons]? = nil)
     {
-        //Remove all of the buttons first.
+        //Remove some of the buttons first.
         for (_, Button) in ButtonList
         {
-            if Button.ButtonType == .HeartButton
+            if [.HeartButton, .MainButton, .FPSButton, .PlayButton, .PauseButton, .VideoButton, .CameraButton].contains(Button.ButtonType)
             {
                 continue
             }
@@ -281,6 +291,15 @@ extension View3D
         
         if With == nil
         {
+            MakeButton(ForButton: .MainButton)
+            MakeButton(ForButton: .FPSButton)
+            MakeButton(ForButton: .PlayButton)
+            MakeButton(ForButton: .PauseButton)
+            if UIDevice.current.userInterfaceIdiom == .pad
+            {
+            MakeButton(ForButton: .VideoButton)
+            MakeButton(ForButton: .CameraButton)
+            }
             MakeButton(ForButton: .LeftButton)
             MakeButton(ForButton: .DownButton)
             MakeButton(ForButton: .RotateLeftButton)
@@ -322,6 +341,47 @@ extension View3D
         }
     }
     
+    /// Disables a control already in place. This means the control is added to the `DisabledControls` set and its opacity
+    /// is set to `0.0`. The main class should call `IsDisabled` on each hit test success to see if the user pressed a disabled
+    /// button.
+    /// - Parameter Which: The node to disable.
+    func DisableControl(Which: NodeButtons)
+    {
+        if ButtonList.keys.contains(Which)
+        {
+            ButtonList[Which]?.opacity = 0.0
+            _DisabledControls.insert(Which)
+        }
+    }
+    
+    /// Enables a disabled. This means the control is removed from the `DisabledControls` set and its opacity
+    /// is set to `1.0`.
+    /// - Parameter Which: The node to enable.
+    func EnableControl(Which: NodeButtons)
+    {
+        if ButtonList.keys.contains(Which)
+        {
+            ButtonList[Which]?.opacity = 1.0
+            _DisabledControls.remove(Which)
+        }
+    }
+    
+    /// Set of disabled controls/buttons.
+    public var DisabledControls: Set<NodeButtons>
+    {
+        get
+        {
+            return _DisabledControls
+        }
+    }
+    
+    /// Determines if the passed button is enabled or disabled.
+    /// - Returns: True if the passed button is disabled, false if is not.
+    public func IsDisabledButton(_ Button: NodeButtons) -> Bool
+    {
+        return DisabledControls.contains(Button)
+    }
+    
     /// Hides all motion controls in the game surface and may optionally change the visual size
     /// of the bucket.
     func HideControls()
@@ -342,6 +402,13 @@ extension View3D
             }
         }
         return nil
+    }
+    
+    /// Change the main button's texture to the supplied image.
+    /// - Parameter To: The new image to use for the texture.
+    func ChangeMainButtonTexture(To: UIImage)
+    {
+        MainButtonObject?.geometry?.firstMaterial?.diffuse.contents = To
     }
     
     /// Animate the extrusion depth of the button.
