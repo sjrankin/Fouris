@@ -24,7 +24,7 @@ extension ThemeManager3
         <Antialiasing Mode="MultiSampling4X"/>
         </Quality>
         <Camera>
-        <FieldOfView Angle="92.5"/>
+        <FieldOfView Angle="96"/>
         <Positions Location="0.0,0.0,15.0" Orientation="0.0,0.0,0.0,0.0"/>
         <Projection IsOrthographic="false" OrthographicScale="20.0"/>
         </Camera>
