@@ -22,6 +22,9 @@ class View3D: SCNView,                          //Our main super class.
     ThemeUpdatedProtocol,                       //Theme properites updated protocol.
     ParentSizeChangedProtocol                   //The parent view of this view had a size change protocol.
 {
+    /// Delegate to the main class.
+    weak var Main: MainDelegate? = nil
+    
     /// The scene that is shown in the 3D view.
     var GameScene: SCNScene!
     
@@ -30,6 +33,9 @@ class View3D: SCNView,                          //Our main super class.
     
     /// Light mask for the controls.
     let ControlLight: Int = 0x1 << 2
+    
+    /// Light mask for the about box.
+    let AboutLight: Int = 0x1 << 3
     
     // MARK: - Initialization.
     
@@ -598,6 +604,16 @@ class View3D: SCNView,                          //Our main super class.
         let Light = SCNLight()
         Light.color = UIColor.white
         Light.type = .omni
+        Light.shadowColor = UIColor.black
+        #if false
+        Light.castsShadow = true
+        Light.automaticallyAdjustsShadowProjection = true
+        Light.shadowSampleCount = 64
+        Light.shadowRadius = 16
+        Light.shadowMode = .deferred
+        Light.shadowMapSize = CGSize(width: 2048, height: 2048)
+        Light.shadowColor = UIColor.black.withAlphaComponent(0.75)
+        #endif
         let Node = SCNNode()
         Node.name = "ControlLight"
         Node.light = Light
@@ -2340,9 +2356,20 @@ class View3D: SCNView,                          //Our main super class.
     
     var ButtonList: [NodeButtons: SCNButtonNode] = [NodeButtons: SCNButtonNode]()
     
+    var ButtonDictionary: [NodeButtons: (Location: SCNVector3, Scale: Double, Color: UIColor, Highlight: UIColor)] =
+    [NodeButtons: (Location: SCNVector3, Scale: Double, Color: UIColor, Highlight: UIColor)]()
+    
     /// Dictionary between node button types and the system image name and location of each node.
-    let ButtonDictionary: [NodeButtons: (Location: SCNVector3, Scale: Double, Color: UIColor, Highlight: UIColor)] =
+    /// Intended for use with devices with reasonable-sized screens.
+    let BigButtonDictionary: [NodeButtons: (Location: SCNVector3, Scale: Double, Color: UIColor, Highlight: UIColor)] =
         [
+            .MainButton: (SCNVector3(-10.5, 13.2, 1.0), 0.08, UIColor.white, UIColor.yellow),
+            .FPSButton: (SCNVector3(-8.5, 12.5, 1.0), 0.04, UIColor.white, UIColor.yellow),
+            .PlayButton: (SCNVector3(3.0, 12.5, 1.0), 0.04, UIColor.white, UIColor.red),
+            .PauseButton: (SCNVector3(6.5, 12.5, 1.0), 0.04, UIColor.white, UIColor.red),
+            .VideoButton: (SCNVector3(-2.8, 12.5, 1.0), 0.03, UIColor.white, UIColor.red),
+            .CameraButton: (SCNVector3(0.0, 12.5, 1.0), 0.03, UIColor.white, UIColor.red),
+            
             .LeftButton: (SCNVector3(-11.2, -12.2, 1.0), 0.08, UIColor.white, UIColor.yellow),
             .RotateLeftButton: (SCNVector3(-11.2, -14.5, 1.0), 0.08, UIColor.white, UIColor.yellow),
             .UpButton: (SCNVector3(-8.5, -14.5, 1.0), 0.08, UIColor.white, UIColor.yellow),
@@ -2358,10 +2385,68 @@ class View3D: SCNView,                          //Our main super class.
             .HeartButton: (SCNVector3(5.0, 11, 1.0), 0.05, UIColor.systemPink, UIColor.red)
     ]
     
+    /// Dictionary between node button types and the system image name and location of each node. Intended for use with
+    /// devices with small screens.
+    let SmallButtonDictionary: [NodeButtons: (Location: SCNVector3, Scale: Double, Color: UIColor, Highlight: UIColor)] =
+        [
+            .MainButton: (SCNVector3(-10.2, 13, 1.0), 0.08, UIColor.white, UIColor.yellow),
+            .FPSButton: (SCNVector3(-8.5, 12.2, 1.0), 0.08, UIColor.white, UIColor.yellow),
+            
+            .LeftButton: (SCNVector3(-11.2, -12.2, 1.0), 0.08, UIColor.white, UIColor.yellow),
+            .RotateLeftButton: (SCNVector3(-11.2, -14.5, 1.0), 0.08, UIColor.white, UIColor.yellow),
+            .UpButton: (SCNVector3(-8.5, -14.5, 1.0), 0.08, UIColor.white, UIColor.yellow),
+            .DownButton:  (SCNVector3(-8.5, -12.2, 1.0), 0.08, UIColor.white, UIColor.yellow),
+            
+            .RightButton:  (SCNVector3(9.2, -12.2, 1.0), 0.08, UIColor.white, UIColor.yellow),
+            .DropDownButton:  (SCNVector3(6.5, -12.2, 1.0), 0.08, UIColor.systemGreen, UIColor.yellow),
+            .FlyAwayButton:  (SCNVector3(6.5, -14.5, 1.0), 0.08, UIColor.systemBlue, UIColor.yellow),
+            .RotateRightButton:  (SCNVector3(9.2, -14.5, 1.0), 0.08, UIColor.white, UIColor.yellow),
+            
+            .FreezeButton: (SCNVector3(-1.0, -13.5, 1.0), 0.08, UIColor.cyan, UIColor.blue),
+            
+            .HeartButton: (SCNVector3(5.0, 11, 1.0), 0.05, UIColor.systemPink, UIColor.red)
+    ]
+    
+    var MainButtonObject: SCNNode? = nil
+    
+    var _DisabledControls: Set<NodeButtons> = Set<NodeButtons>()
+    
+    /// Adjust horizontal values in the passed vector if we're running on a small device.
+    /// - Parameter V: The original vector.
+    /// - Returns: Possibly changed vector. If running on an iPad, the same value is returned.
+    func AdjustForSmallScreens(_ V: SCNVector3) -> SCNVector3
+    {
+        if UIDevice.current.userInterfaceIdiom == .phone
+        {
+            var X = V.x
+            if X <= 1.0 && X >= -1.0
+            {
+                return V
+            }
+            if X < 0.0
+            {
+                X = X + 3.0
+            }
+            else
+            {
+                X = X - 3.0
+            }
+            return SCNVector3(X, V.y, V.z)
+        }
+        return V
+    }
+    
     // MARK: - Renderer variables.
     
     var NodeRemovalList = [String]()
     var ObjectRemovalList = Set<GameViewObjects>()
+    
+    // MARK: - About box variables.
+    
+    var AboutBoxNode: SCNNode? = nil
+    var AboutBoxShowing: Bool = false
+    var AboutBoxHideTimer: Timer? = nil
+    var AboutLightNode: SCNNode? = nil
 }
 
 // MARK: - Global enums related to 3DView.
@@ -2392,6 +2477,18 @@ enum Angles: CGFloat, CaseIterable
 /// - **RotateRightButton**: Button to rotate the piece clockwise by 90°.
 /// - **FreezeButton**: Button to freeze a button in place.
 /// - **HeartButton**: Button used to display the heartbeat.
+/// - **MainButton**: Button for the main menu.
+/// - **FlameButton**: Flame button for miscellaneous debug use.
+/// - **VideoButton**: Video button.
+/// - **CameraButton**: Camera button.
+/// - **StopButton**: Stop/play button.
+/// - **PauseButton**: Pause/resume button.
+/// - **MainButton**: Button for the main menu.
+/// - **FlameButton**: Flame button for miscellaneous debug use.
+/// - **VideoButton**: Video button.
+/// - **CameraButton**: Camera button.
+/// - **StopButton**: Stop/play button.
+/// - **PauseButton**: Pause/resume button.
 enum NodeButtons: String, CaseIterable
 {
     case LeftButton = "LeftButton"
@@ -2404,4 +2501,11 @@ enum NodeButtons: String, CaseIterable
     case RotateRightButton = "RotateRightButton"
     case FreezeButton = "FreezeButton"
     case HeartButton = "HeartButton"
+    case MainButton = "MainButton"
+    case FlameButton = "FlameButton"
+    case VideoButton = "VideoButton"
+    case CameraButton = "CameraButton"
+    case PlayButton = "PlayButton"
+    case PauseButton = "PauseButton"
+    case FPSButton = "FPSButton"
 }
