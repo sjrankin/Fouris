@@ -1112,7 +1112,6 @@
 				17376356230A9C9C0050EB22 /* +BucketCleaner.swift */,
 				17E619A82348495B00C391CF /* +BoardRemoval.swift */,
 				17B112FF232B693E007DFBD4 /* +Renderer.swift */,
-				17E619AA2348569800C391CF /* +TextButtons.swift */,
 				17BADD6C2352D5F3006ADE5E /* +BucketRenderer.swift */,
 				17A9D8AE2359774800DAE024 /* +AboutBox.swift */,
 			);
@@ -1140,6 +1139,7 @@
 			isa = PBXGroup;
 			children = (
 				171A3E662343498C00C92585 /* SCNButtonNode.swift */,
+				17E619AA2348569800C391CF /* +TextButtons.swift */,
 			);
 			path = InViewButtons;
 			sourceTree = "<group>";
