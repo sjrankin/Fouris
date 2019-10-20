@@ -34,7 +34,7 @@ class SCNButtonNode: SCNNode
         super.init()
         self.geometry = geometry
     }
-
+    
     /// Initializer.
     /// - Parameter geometry: The geometry of the node.
     /// - Parameter TypeOfButton: The type of button we are.
@@ -170,7 +170,7 @@ class SCNButtonNode: SCNNode
     {
         self.geometry?.firstMaterial?.diffuse.contents = NewColor
     }
-
+    
     /// Sets the button color to the specified color and resets the color after a specified amount of time.
     /// - Note:
     ///   - The total time from start to finish is `ResetDuration + Delay`.
@@ -252,8 +252,8 @@ class SCNButtonNode: SCNNode
         let RDelta = HighlightColor.r - ButtonColor.r
         let GDelta = HighlightColor.g - ButtonColor.g
         let BDelta = HighlightColor.b - ButtonColor.b
-        print("From=\(ColorServer.MakeHexString(From: HighlightColor)), To=\(ColorServer.MakeHexString(From: ButtonColor))")
-        print("Deltas: red=\(RDelta), green=\(GDelta), blue=\(BDelta)")
+        //print("From=\(ColorServer.MakeHexString(From: HighlightColor)), To=\(ColorServer.MakeHexString(From: ButtonColor))")
+        //print("Deltas: red=\(RDelta), green=\(GDelta), blue=\(BDelta)")
         let ColorChange = SCNAction.customAction(duration: ResetDuration,
                                                  action:
             {
@@ -274,7 +274,7 @@ class SCNButtonNode: SCNNode
                 {
                     Blue = abs(Blue)
                 }
-                print("Red=\(Red), Green=\(Green), Blue=\(Blue)")
+                //print("Red=\(Red), Green=\(Green), Blue=\(Blue)")
                 XNode.geometry?.firstMaterial?.diffuse.contents = UIColor(red: Red, green: Green, blue: Blue, alpha: 1.0)
         })
         let Wait = SCNAction.wait(duration: Delay)
@@ -332,5 +332,185 @@ class SCNButtonNode: SCNNode
                 }
         })
         return FoundNode
+    }
+    
+    /// Sets the color of the background node.
+    /// - Note:
+    ///   - Intended for debug use.
+    ///   - The background node is the node that lets the user press in visual gaps of the button but still have the touch
+    ///     registered as a press.
+    /// - Parameter Diffuse: The diffuse color to use.
+    /// - Parameter Specular: The specular color to use. Defaults to `UIColor.white`.
+    public func SetBackgroundColor(Diffuse: UIColor, Specular: UIColor = UIColor.white)
+    {
+        enumerateChildNodes(
+            {
+                Node, _ in
+                if let ButtonNode = Node as? SCNButtonNode
+                {
+                    if ButtonNode.StringTag == "BackgroundNode"
+                    {
+                        ButtonNode.geometry?.firstMaterial?.diffuse.contents = Diffuse
+                        ButtonNode.geometry?.firstMaterial?.specular.contents = Specular
+                    }
+                }
+            }
+        )
+    }
+    
+    // MARK: Static functions.
+    
+    /// Returns the bounding size of the passed node.
+    /// - Parameter Node: The SCNNode whose bounding size will be returned.
+    /// - Returns: Bounding size of the passed SCNNode.
+    public static func GetNodeBoundingSize(_ Node: SCNNode) -> CGSize
+    {
+        let BoundingSize = Node.boundingBox
+        let XSize = Double(BoundingSize.max.x - BoundingSize.min.x)
+        let YSize = Double(BoundingSize.max.y - BoundingSize.min.y)
+        return CGSize(width: XSize, height: YSize)
+    }
+    
+    /// Create a button node with the passed source node.
+    /// - Parameter ForButton: The butotn type.
+    /// - Parameter SourceNode: The node to add to the button.
+    /// - Parameter Location: Where to place the button.
+    /// - Parameter ScaleFactor: Used to scale the button.
+    /// - Parameter LightMask: The mask to use on the node that determines which light to use.
+    public static func AddObjectButton(ForButton: NodeButtons, SourceNode: SCNNode, Location: SCNVector3,
+                                       ScaleFactor: Double = 0.1, LightMask: Int) -> SCNButtonNode
+    {
+        let Node = SCNButtonNode()
+        Node.name = "ShapeNode"
+        Node.ButtonType = ForButton
+        Node.addChildNode(SourceNode)
+        
+        let SourceSize = GetNodeBoundingSize(SourceNode)
+        let BGBox = SCNBox(width: SourceSize.width, height: SourceSize.height, length: 0.001, chamferRadius: 0.0)
+        BGBox.firstMaterial?.diffuse.contents = UIColor.clear
+        BGBox.firstMaterial?.specular.contents = UIColor.clear
+        let BGNode = SCNButtonNode(geometry: BGBox)
+        let FinalWidth = SourceSize.width * 0.06
+        let FinalHeight = SourceSize.height * 0.1
+        BGNode.position = SCNVector3(FinalWidth, FinalHeight, -0.1)
+        BGNode.scale = SCNVector3(ScaleFactor, ScaleFactor, ScaleFactor)
+        BGNode.name = "\(ForButton)"
+        BGNode.StringTag = "BackgroundNode"
+        BGNode.ButtonType = ForButton
+        BGNode.categoryBitMask = LightMask
+        
+        let FinalNode = SCNButtonNode()
+        FinalNode.position = Location
+        FinalNode.addChildNode(Node)
+        FinalNode.addChildNode(BGNode)
+        FinalNode.categoryBitMask = LightMask
+        FinalNode.StringTag = "ParentNode"
+        FinalNode.ButtonType = ForButton
+        return FinalNode
+    }
+    
+    /// Add a text button with text created from a Unicode code point.
+    /// - Parameter ForButton: The button type.
+    /// - Parameter CodePoint: Unicode code point. This function uses the system font so if the system font does not support
+    ///                        the given code point, an ugly symbol will be displayed instead.
+    /// - Parameter Font: The font to use. This function assumes the font is the system font.
+    /// - Parameter Location: Where to place the button.
+    /// - Parameter Color: The standard button color - used as the diffuse material color.
+    /// - Parameter Highlight: The highlight button color.
+    /// - Parameter ScaleFactor: Used to scale the button.
+    /// - Parameter LightMask: The mask to use on the node that determines which light to use.
+    /// - Parameter Depth: Extrustion depth. Defaults to 2.0.
+    public static func AddUnicodeButton(ForButton: NodeButtons, _ CodePoint: Int, Font: UIFont, Location: SCNVector3,
+                                        Color: UIColor, Highlight: UIColor, ScaleFactor: Double = 0.1, LightMask: Int,
+                                        Depth: CGFloat = 2.0) -> SCNButtonNode
+    {
+        let UnicodeChar = UnicodeScalar(CodePoint)
+        let UnicodeString = "\((UnicodeChar)!)"
+        let SText = SCNText(string: UnicodeString, extrusionDepth: Depth)
+        SText.font = Font
+        SText.flatness = 0
+        SText.firstMaterial?.diffuse.contents = Color
+        SText.firstMaterial?.specular.contents = UIColor.white
+        let Node = SCNButtonNode(geometry: SText)
+        Node.ButtonColor = Color
+        Node.HighlightColor = Highlight
+        Node.name = "\(ForButton)"
+        Node.categoryBitMask = LightMask
+        Node.scale = SCNVector3(ScaleFactor, ScaleFactor, ScaleFactor)
+        Node.StringTag = "ShapeNode"
+        Node.ButtonType = ForButton
+        
+        let SourceSize = GetNodeBoundingSize(Node)
+        let BGBox = SCNBox(width: SourceSize.width, height: SourceSize.height, length: 0.001, chamferRadius: 0.0)
+        BGBox.firstMaterial?.diffuse.contents = UIColor.clear
+        BGBox.firstMaterial?.specular.contents = UIColor.clear
+        let BGNode = SCNButtonNode(geometry: BGBox)
+        let FinalWidth = SourceSize.width * 0.06
+        let FinalHeight = SourceSize.height * 0.1
+        BGNode.position = SCNVector3(FinalWidth, FinalHeight, -0.1)
+        BGNode.scale = SCNVector3(ScaleFactor, ScaleFactor, ScaleFactor)
+        BGNode.name = "\(ForButton)"
+        BGNode.StringTag = "BackgroundNode"
+        BGNode.ButtonType = ForButton
+        
+        let FinalNode = SCNButtonNode()
+        FinalNode.position = Location
+        FinalNode.addChildNode(Node)
+        FinalNode.addChildNode(BGNode)
+        FinalNode.categoryBitMask = LightMask
+        FinalNode.StringTag = "ParentNode"
+        FinalNode.ButtonType = ForButton
+        return FinalNode
+    }
+    
+    /// Add a text button with the passed text.
+    /// - Parameter ForButton: The button type.
+    /// - Parameter CodePoint: The text to use for the button
+    /// - Parameter Font: The font to use. This function assumes the font is the system font.
+    /// - Parameter Location: Where to place the button.
+    /// - Parameter Color: The standard button color - used as the diffuse material color.
+    /// - Parameter Highlight: The highlight button color.
+    /// - Parameter ScaleFactor: Used to scale the button.
+    /// - Parameter LightMask: The mask to use on the node that determines which light to use.
+    /// - Parameter Depth: Extrustion depth. Defaults to 2.0.
+    public static func AddTextButton(ForButton: NodeButtons, _ Text: String, Font: UIFont, Location: SCNVector3,
+                                     Color: UIColor, Highlight: UIColor, ScaleFactor: Double = 0.1, LightMask: Int,
+                                     Depth: CGFloat = 2.0) -> SCNButtonNode
+    {
+        let SText = SCNText(string: Text, extrusionDepth: Depth)
+        SText.font = Font
+        SText.flatness = 0
+        SText.firstMaterial?.diffuse.contents = Color
+        SText.firstMaterial?.specular.contents = UIColor.white
+        let Node = SCNButtonNode(geometry: SText)
+        Node.ButtonColor = Color
+        Node.HighlightColor = Highlight
+        Node.name = "\(ForButton)"
+        Node.categoryBitMask = LightMask
+        Node.scale = SCNVector3(ScaleFactor, ScaleFactor, ScaleFactor)
+        Node.StringTag = "ShapeNode"
+        Node.ButtonType = ForButton
+        
+        let SourceSize = GetNodeBoundingSize(Node)
+        let BGBox = SCNBox(width: SourceSize.width, height: SourceSize.height, length: 0.001, chamferRadius: 0.0)
+        BGBox.firstMaterial?.diffuse.contents = UIColor.clear
+        BGBox.firstMaterial?.specular.contents = UIColor.clear
+        let BGNode = SCNButtonNode(geometry: BGBox)
+        let FinalWidth = SourceSize.width * 0.06
+        let FinalHeight = SourceSize.height * 0.075
+        BGNode.position = SCNVector3(FinalWidth, FinalHeight, -0.1)
+        BGNode.scale = SCNVector3(ScaleFactor, ScaleFactor, ScaleFactor)
+        BGNode.name = "\(ForButton)"
+        BGNode.StringTag = "BackgroundNode"
+        BGNode.ButtonType = ForButton
+        
+        let FinalNode = SCNButtonNode()
+        FinalNode.position = Location
+        FinalNode.addChildNode(Node)
+        FinalNode.addChildNode(BGNode)
+        FinalNode.categoryBitMask = LightMask
+        FinalNode.StringTag = "ParentNode"
+        FinalNode.ButtonType = ForButton
+        return FinalNode
     }
 }
