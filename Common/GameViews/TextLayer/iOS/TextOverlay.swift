@@ -15,7 +15,7 @@ import UIKit
 ///     have the relevant code wrapped in `OperationQueue.main.addOperation` blocks to schedule the operation on the
 ///     main (UI) thread.
 ///   - This version of the source is for iOS.
-class TextOverlay: TextLayerDisplayProtocol
+class TextOverlay: TextLayerDisplayProtocol 
 {
     weak var MainClassDelegate: MainDelegate? = nil
     
@@ -39,8 +39,6 @@ class TextOverlay: TextLayerDisplayProtocol
     /// - Parameter PressPlayLabel: Container for the "Press Play" label.
     /// - Parameter PauseLabel: Container for the "Pause" label.
     /// - Parameter PieceControl: The piece view control.
-    /// - Parameter VersionBox: Box with label to show version information.
-    /// - Parameter VersionLabel: Label to display version information.
     func SetControls(NextLabel: UIView?,
                      ScoreLabel: UIView?,
                      CurrentScoreLabel: UIView?,
@@ -48,12 +46,12 @@ class TextOverlay: TextLayerDisplayProtocol
                      GameOverLabel: UIView?,
                      PressPlayLabel: UIView?,
                      PauseLabel: UIView?,
-                     PieceControl: PieceViewer?,
-                     VersionBox: UIView?,
-                     VersionLabel: UILabel?)
+                     PieceControl: PieceViewer?)
     {
+        #if false
         VersionContainer = VersionBox
         VersionData = VersionLabel
+        #endif
         NextLabelContainer = NextLabel
         ScoreLabelContainer = ScoreLabel
         CurrentScoreContainer = CurrentScoreLabel
@@ -676,11 +674,13 @@ class TextOverlay: TextLayerDisplayProtocol
     /// Flag that indicates the game over label was created.
     private var GameOverLabelCreated = false
     
+    #if false
     /// Shows a simple title and version box. Intended to be shown only for a very short time at the start of the game.
     /// - Parameter WithString: The string to show in the box.
     /// - Parameter HideAfter: The number of seconds to show the version box before hiding it. Default is 5 seconds.
     func ShowVersionBox(WithString: String, HideAfter: Double = 5.0)
     {
+        #if false
         if !VersionBoxIsHidden
         {
             return
@@ -700,6 +700,7 @@ class TextOverlay: TextLayerDisplayProtocol
                                              selector: #selector(self.AutoHideVersionBox), userInfo: nil, repeats: false)
                 }
         })
+        #endif
     }
     
     /// Called by the hide version box timer to hide the version box.
@@ -735,4 +736,5 @@ class TextOverlay: TextLayerDisplayProtocol
     }
     
     public var VersionBoxIsHidden: Bool = true
+    #endif
 }
