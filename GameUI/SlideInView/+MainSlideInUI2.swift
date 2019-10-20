@@ -14,6 +14,6 @@ extension MainViewController
 {
     public func InitializeSlideIn()
     {
-        SlideInSubView.layer.borderColor = ColorServer.CGColorFrom(ColorNames.ReallyDarkGray)
+       // SlideInSubView.layer.borderColor = ColorServer.CGColorFrom(ColorNames.ReallyDarkGray)
     }
 }
