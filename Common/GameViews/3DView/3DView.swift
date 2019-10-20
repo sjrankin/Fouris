@@ -2363,12 +2363,12 @@ class View3D: SCNView,                          //Our main super class.
     /// Intended for use with devices with reasonable-sized screens.
     let BigButtonDictionary: [NodeButtons: (Location: SCNVector3, Scale: Double, Color: UIColor, Highlight: UIColor)] =
         [
-            .MainButton: (SCNVector3(-10.5, 13.2, 1.0), 0.08, UIColor.white, UIColor.yellow),
-            .FPSButton: (SCNVector3(-8.5, 12.5, 1.0), 0.04, UIColor.white, UIColor.yellow),
-            .PlayButton: (SCNVector3(3.0, 12.5, 1.0), 0.04, UIColor.white, UIColor.red),
-            .PauseButton: (SCNVector3(6.5, 12.5, 1.0), 0.04, UIColor.white, UIColor.red),
-            .VideoButton: (SCNVector3(-2.8, 12.5, 1.0), 0.03, UIColor.white, UIColor.red),
-            .CameraButton: (SCNVector3(0.0, 12.5, 1.0), 0.03, UIColor.white, UIColor.red),
+            .MainButton: (SCNVector3(-10.3, 13.7, 1.0), 0.06, UIColor.white, UIColor.yellow),
+            .FPSButton: (SCNVector3(-8.5, 13.0, 1.0), 0.03, UIColor.white, UIColor.yellow),
+            .PlayButton: (SCNVector3(3.0, 13.0, 1.0), 0.03, UIColor.white, UIColor.red),
+            .PauseButton: (SCNVector3(6.5, 13.0, 1.0), 0.03, UIColor.white, UIColor.red),
+            .VideoButton: (SCNVector3(-2.8, 13.0, 1.0), 0.025, UIColor.white, UIColor.red),
+            .CameraButton: (SCNVector3(0.0, 13.0, 1.0), 0.025, UIColor.white, UIColor.red),
             
             .LeftButton: (SCNVector3(-11.2, -12.2, 1.0), 0.08, UIColor.white, UIColor.yellow),
             .RotateLeftButton: (SCNVector3(-11.2, -14.5, 1.0), 0.08, UIColor.white, UIColor.yellow),
@@ -2408,6 +2408,8 @@ class View3D: SCNView,                          //Our main super class.
     ]
     
     var MainButtonObject: SCNNode? = nil
+    
+        var ControlBackground: SCNNode? = nil
     
     var _DisabledControls: Set<NodeButtons> = Set<NodeButtons>()
     
