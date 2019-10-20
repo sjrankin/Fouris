@@ -75,6 +75,24 @@ class MainButtonMenuCode: UIViewController
         }
     }
     
+    @IBAction func HandleCameraPressed(_ sender: Any)
+    {
+        self.dismiss(animated: true)
+        {
+            self.Delegate?.ResetMainButton()
+            self.Delegate?.RunPopOverCommand(.TakePicture)
+        }
+    }
+    
+    @IBAction func HandleVideoPressed(_ sender: Any)
+    {
+        self.dismiss(animated: true)
+        {
+            self.Delegate?.ResetMainButton()
+            self.Delegate?.RunPopOverCommand(.MakeVideo)
+        }
+    }
+    
     @IBAction func HandlePlayPressed(_ sender: Any)
     {
         self.dismiss(animated: true)
