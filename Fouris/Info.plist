@@ -30,6 +30,13 @@
 	<string>Fouris would like to access your photo library for the purpose of saving gradients you select to keep as images.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Fouris would like to access your photo library for the purpose of saving gradients.</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>NotoSansSymbols-Regular.ttf</string>
+		<string>NotoSansSymbols2-Regular.ttf</string>
+		<string>NotoSansSymbols-SemiBold.ttf</string>
+		<string>NotoEmoji-Regular.ttf</string>
+	</array>
 	<key>UIFileSharingEnabled</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
