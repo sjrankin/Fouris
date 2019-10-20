@@ -177,10 +177,18 @@
 		17A45B632271DA98002E705D /* AITestDataUpdatedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A45B612271DA8C002E705D /* AITestDataUpdatedProtocol.swift */; };
 		17A48E422327BC6900510EE6 /* GameSelectorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A48E412327BC6900510EE6 /* GameSelectorProtocol.swift */; };
 		17A946612351B96400A01C17 /* GradientObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A946602351B96400A01C17 /* GradientObserver.swift */; };
+		17A9D8AF2359774800DAE024 /* +AboutBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A9D8AE2359774800DAE024 /* +AboutBox.swift */; };
 		17AA4FB523408FCB0022FF90 /* GameViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AA4FB423408FCB0022FF90 /* GameViewContainer.swift */; };
 		17AA4FB7234090F40022FF90 /* ParentSizeChangedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AA4FB6234090F40022FF90 /* ParentSizeChangedProtocol.swift */; };
 		17AB99D22297DC66003C4674 /* ImageServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AB99D12297DC66003C4674 /* ImageServer.swift */; };
 		17AC98222324AB6B0020FB05 /* FlyingPieces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AC98212324AB6B0020FB05 /* FlyingPieces.swift */; };
+		17AD5D6F235A9B20002D6125 /* NotoSansSymbols-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17AD5D6D235A99EE002D6125 /* NotoSansSymbols-SemiBold.ttf */; };
+		17AD5D70235A9B23002D6125 /* NotoSansSymbols-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17AD5D6C235A99E5002D6125 /* NotoSansSymbols-Regular.ttf */; };
+		17AD5D72235A9B47002D6125 /* NotoSansSymbols2-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17AD5D71235A9B47002D6125 /* NotoSansSymbols2-Regular.ttf */; };
+		17AD5D74235AA854002D6125 /* NotoEmoji-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17AD5D73235AA854002D6125 /* NotoEmoji-Regular.ttf */; };
+		17AD5D76235AD181002D6125 /* TitleTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD5D75235AD181002D6125 /* TitleTableCell.swift */; };
+		17AD5D79235AF84F002D6125 /* MainButtonMenuCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD5D78235AF84F002D6125 /* MainButtonMenuCode.swift */; };
+		17AD5D7B235B2F50002D6125 /* PopOverProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD5D7A235B2F50002D6125 /* PopOverProtocol.swift */; };
 		17AE969F2351F91000412979 /* ActivityLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AE969E2351F91000412979 /* ActivityLog.swift */; };
 		17AE96A22351F93D00412979 /* LogEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AE96A12351F93D00412979 /* LogEntry.swift */; };
 		17AF231F2313981C00921E6C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AF231E2313981C00921E6C /* MainViewController.swift */; };
@@ -444,10 +452,18 @@
 		17A45B612271DA8C002E705D /* AITestDataUpdatedProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AITestDataUpdatedProtocol.swift; sourceTree = "<group>"; };
 		17A48E412327BC6900510EE6 /* GameSelectorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSelectorProtocol.swift; sourceTree = "<group>"; };
 		17A946602351B96400A01C17 /* GradientObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientObserver.swift; sourceTree = "<group>"; };
+		17A9D8AE2359774800DAE024 /* +AboutBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+AboutBox.swift"; sourceTree = "<group>"; };
 		17AA4FB423408FCB0022FF90 /* GameViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewContainer.swift; sourceTree = "<group>"; };
 		17AA4FB6234090F40022FF90 /* ParentSizeChangedProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentSizeChangedProtocol.swift; sourceTree = "<group>"; };
 		17AB99D12297DC66003C4674 /* ImageServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageServer.swift; sourceTree = "<group>"; };
 		17AC98212324AB6B0020FB05 /* FlyingPieces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlyingPieces.swift; sourceTree = "<group>"; };
+		17AD5D6C235A99E5002D6125 /* NotoSansSymbols-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansSymbols-Regular.ttf"; sourceTree = "<group>"; };
+		17AD5D6D235A99EE002D6125 /* NotoSansSymbols-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansSymbols-SemiBold.ttf"; sourceTree = "<group>"; };
+		17AD5D71235A9B47002D6125 /* NotoSansSymbols2-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansSymbols2-Regular.ttf"; sourceTree = "<group>"; };
+		17AD5D73235AA854002D6125 /* NotoEmoji-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoEmoji-Regular.ttf"; sourceTree = "<group>"; };
+		17AD5D75235AD181002D6125 /* TitleTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableCell.swift; sourceTree = "<group>"; };
+		17AD5D78235AF84F002D6125 /* MainButtonMenuCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButtonMenuCode.swift; sourceTree = "<group>"; };
+		17AD5D7A235B2F50002D6125 /* PopOverProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverProtocol.swift; sourceTree = "<group>"; };
 		17AE969E2351F91000412979 /* ActivityLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLog.swift; sourceTree = "<group>"; };
 		17AE96A12351F93D00412979 /* LogEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogEntry.swift; sourceTree = "<group>"; };
 		17AF231E2313981C00921E6C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -970,6 +986,26 @@
 			path = ImageManagement;
 			sourceTree = "<group>";
 		};
+		17AD5D6B235A99CF002D6125 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				17AD5D73235AA854002D6125 /* NotoEmoji-Regular.ttf */,
+				17AD5D71235A9B47002D6125 /* NotoSansSymbols2-Regular.ttf */,
+				17AD5D6D235A99EE002D6125 /* NotoSansSymbols-SemiBold.ttf */,
+				17AD5D6C235A99E5002D6125 /* NotoSansSymbols-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		17AD5D77235AF835002D6125 /* PopOverDialog */ = {
+			isa = PBXGroup;
+			children = (
+				17AD5D78235AF84F002D6125 /* MainButtonMenuCode.swift */,
+				17AD5D7A235B2F50002D6125 /* PopOverProtocol.swift */,
+			);
+			path = PopOverDialog;
+			sourceTree = "<group>";
+		};
 		17AE96A02351F92200412979 /* ActivityLog */ = {
 			isa = PBXGroup;
 			children = (
@@ -995,6 +1031,7 @@
 				17616AC82316497300DFFEFE /* AboutDialogController.swift */,
 				17316503234C85380091A620 /* CreditViewer.swift */,
 				17316505234C865E0091A620 /* AttributionData.swift */,
+				17AD5D75235AD181002D6125 /* TitleTableCell.swift */,
 			);
 			path = About;
 			sourceTree = "<group>";
@@ -1077,6 +1114,7 @@
 				17B112FF232B693E007DFBD4 /* +Renderer.swift */,
 				17E619AA2348569800C391CF /* +TextButtons.swift */,
 				17BADD6C2352D5F3006ADE5E /* +BucketRenderer.swift */,
+				17A9D8AE2359774800DAE024 /* +AboutBox.swift */,
 			);
 			path = 3DViewExtensions;
 			sourceTree = "<group>";
@@ -1226,12 +1264,14 @@
 		17F0B492225CBE730071514E /* GameUI */ = {
 			isa = PBXGroup;
 			children = (
+				17AD5D6B235A99CF002D6125 /* Fonts */,
 				17F0B49A225CBE740071514E /* Assets.xcassets */,
 				17E71A8522AD23EF0081991E /* TDebug Extensions */,
 				179A61B5230FA71A00A202BA /* SlideInView */,
 				17616AC72316496300DFFEFE /* Dialogs */,
 				17AE96A02351F92200412979 /* ActivityLog */,
 				176708F1233A025D000E2216 /* Languages */,
+				17AD5D77235AF835002D6125 /* PopOverDialog */,
 				17F0B493225CBE730071514E /* AppDelegate.swift */,
 				17724AF52352C3F3001A6825 /* Platform.swift */,
 				171D5D462313FC5200043856 /* MainStoryboard.storyboard */,
@@ -1384,15 +1424,19 @@
 			files = (
 				17D015932349AFF50012FFE1 /* UserPieceVisuals.xml in Resources */,
 				1704E2FA2320E19A00D7C158 /* GameThemes.xml in Resources */,
+				17AD5D70235A9B23002D6125 /* NotoSansSymbols-Regular.ttf in Resources */,
+				17AD5D6F235A9B20002D6125 /* NotoSansSymbols-SemiBold.ttf in Resources */,
 				179C5E1C2322282B0003845B /* PieceVisuals.xml in Resources */,
 				17F0B49E225CBE740071514E /* LaunchScreen.storyboard in Resources */,
 				17968AF923549B1E008E6211 /* Boards.xml in Resources */,
+				17AD5D72235A9B47002D6125 /* NotoSansSymbols2-Regular.ttf in Resources */,
 				17FBF711234474A400BB87A6 /* AIGameHistory.xml in Resources */,
 				17404B252345CF4400976DE2 /* GameTheme2.xml in Resources */,
 				17D6B195233DC42400EFCE31 /* UserPieceDescriptions.xml in Resources */,
 				17432905233F4C2C00F98863 /* PieceDescriptions.xml in Resources */,
 				179C5E2123222EAA0003845B /* UserVisuals.xml in Resources */,
 				17D015922349AFF50012FFE1 /* DefaultPieceVisuals.xml in Resources */,
+				17AD5D74235AA854002D6125 /* NotoEmoji-Regular.ttf in Resources */,
 				17477A6F231783C300AAEB14 /* Theming.storyboard in Resources */,
 				17F0B49B225CBE740071514E /* Assets.xcassets in Resources */,
 				1785ED6222FD8C0A000B31C2 /* BoardDescriptions.xml in Resources */,
@@ -1437,6 +1481,7 @@
 				170FC666233DE3E300F9A8F1 /* XMLKVP.swift in Sources */,
 				1753ABF0225E262D00FC7089 /* GameUINotificationProtocol.swift in Sources */,
 				17C1E90F23193E8A004040B6 /* GradientManager.swift in Sources */,
+				17AD5D79235AF84F002D6125 /* MainButtonMenuCode.swift in Sources */,
 				17C2F3AB231A1395001EF200 /* ColorPickerCode.swift in Sources */,
 				1705ADEC225D911B00628268 /* Block.swift in Sources */,
 				17DCD7EA2309436F0072B306 /* +DrawCenterBlock.swift in Sources */,
@@ -1454,6 +1499,7 @@
 				178C0F042338786000A35C62 /* SettingsControllerCode.swift in Sources */,
 				177F4FC6229BD2F500FE72CD /* Send.swift in Sources */,
 				17189FF5233332FD00317BF1 /* +Vector3.swift in Sources */,
+				17AD5D76235AD181002D6125 /* TitleTableCell.swift in Sources */,
 				17C14E1F23066E1600D9CF64 /* TextLayerDisplayProtocol.swift in Sources */,
 				17CE26A0225F5EE00056818E /* Stack.swift in Sources */,
 				1797523822C38A4D00BF539A /* +PeerCommands.swift in Sources */,
@@ -1514,6 +1560,7 @@
 				173762502310E5F10075E1DD /* UITouchImage.swift in Sources */,
 				1797524622C38A4D00BF539A /* +Broadcasting.swift in Sources */,
 				17ECE5B023325416003F4065 /* +Bool.swift in Sources */,
+				17AD5D7B235B2F50002D6125 /* PopOverProtocol.swift in Sources */,
 				1721BA7C2260BECF00DC7AFC /* Coin.swift in Sources */,
 				1797524E22C38A4D00BF539A /* +IdiotLights.swift in Sources */,
 				17D015982349B0B80012FFE1 /* PieceVisuals2.swift in Sources */,
@@ -1544,6 +1591,7 @@
 				17F6ECF02286E1F2000F8E11 /* ControlProtocol.swift in Sources */,
 				179C5E342322533F0003845B /* PieceEditorCode.swift in Sources */,
 				1713735A22EAE6D500C9F9A7 /* SCNTetrahedron.swift in Sources */,
+				17A9D8AF2359774800DAE024 /* +AboutBox.swift in Sources */,
 				17A48E422327BC6900510EE6 /* GameSelectorProtocol.swift in Sources */,
 				179C5E1F23222B510003845B /* VisualDescriptor.swift in Sources */,
 				17D1FB6C2268A09400EDA707 /* GameAI.swift in Sources */,
