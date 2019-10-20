@@ -15,6 +15,7 @@ import ReplayKit
 class MainViewController: UIViewController,
     UINavigationControllerDelegate,                     //Protocol for some system-level kits (such as saving photos).
     RPPreviewViewControllerDelegate,                    //Protocol for screen recording.
+    UIPopoverPresentationControllerDelegate,            //Protocol for popover presentations.
     GameUINotificationProtocol,                         //Protocol for communicating from the game engine (and everything below it) to the UI.
     GameAINotificationProtocol,                         //Protocol for communication from the game AI engine to the UI.
     MainDelegate,                                       //Protocol for exporting some functionality defined in this class.
@@ -24,6 +25,7 @@ class MainViewController: UIViewController,
     SmoothMotionProtocol,                               //Protocol for handling smooth motions.
     TDebugProtocol,                                     //Protocol for the debug client to talk to this class.
     StepperHelper,                                      //Protocol for the stepper to display data for the user.
+    PopOverProtocol,                                    //Protocol for the communication from the pop-over menu to the main UI.
     GameSelectorProtocol,                               //Protocol for selecting games.
     SettingsChangedProtocol,                            //Protocol for receiving settings change notifications.
     ThemeUpdatedProtocol                                //Protocol for receiving updates to the theme.
@@ -72,6 +74,20 @@ class MainViewController: UIViewController,
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        #if false
+        //Used to dump the fonts on the system, including those embedded with this application. The names are used to ensure
+        //the font name is correct in the program. This code is needed only to ensure proper font name and should be commented
+        //out after name verification.
+        for Family in UIFont.familyNames
+        {
+            print(Family)
+            for Names in UIFont.fontNames(forFamilyName: Family)
+            {
+                print("  \(Names)")
+            }
+        }
+        #endif
         
         ActivityLog.Initialize()
         #if targetEnvironment(simulator)
@@ -157,6 +173,7 @@ class MainViewController: UIViewController,
         Stepper.Delegate = self
     }
     
+    #if false
     /// Layout complete. Save certain information.
     override func viewDidLayoutSubviews()
     {
@@ -170,6 +187,7 @@ class MainViewController: UIViewController,
             }
         }
     }
+    #endif
     
     /// Called when the version box disappears.
     func VersionBoxDisappeared()
@@ -196,6 +214,7 @@ class MainViewController: UIViewController,
             if FPSLabel.alpha > 0.0
             {
                 FPSLabel.text = "\(InstanceSeconds)"
+                GameView3D?.SetText(OnButton: .FPSButton, ToNextText: "\(InstanceSeconds)")
             }
         }
     }
@@ -228,6 +247,7 @@ class MainViewController: UIViewController,
         
         //Initialize the 3D game viewer.
         GameView3D = GameUISurface3D
+        GameView3D?.Main = self
         GameView3D?.Initialize(With: Game!.GameBoard!, Theme: Themes, BucketShape: UserTheme!.BucketShape) 
         GameView3D?.Owner = self
         GameView3D?.SmoothMotionDelegate = self
@@ -246,13 +266,14 @@ class MainViewController: UIViewController,
                                      GameOverLabel: GameOverLabelView,
                                      PressPlayLabel: PressPlayLabelView,
                                      PauseLabel: PauseLabelView,
-                                     PieceControl: NextPieceViewControl,
-                                     VersionBox: TextVersionBox,
-                                     VersionLabel: VersionTextLabel)
+                                     PieceControl: NextPieceViewControl)
         NextPieceView.layer.backgroundColor = UIColor.clear.cgColor
         NextPieceView.layer.borderColor = UIColor.clear.cgColor
         GameTextOverlay?.ShowPressPlay(Duration: 0.7)
         GameTextOverlay?.HideNextLabel()
+        
+        VersionBoxShowing = true
+        GameView3D?.ShowAboutBox(FadeInDuration: 0.01, HideAfter: 10.0)
         
         //Initialize view backgrounds.
         GameControlView.layer.backgroundColor = ColorServer.CGColorFrom(ColorNames.ReallyDarkGray)
@@ -265,7 +286,6 @@ class MainViewController: UIViewController,
         InitializeGestures()
         
         #if true
-        HeartbeatGraphic.alpha = 0.0
         if UserTheme!.ShowHeartbeat
         {
             StartHeartbeat()
@@ -300,11 +320,13 @@ class MainViewController: UIViewController,
             FPSLabel.text = ""
             FPSLabel.alpha = 1.0
             FPSLabel.isUserInteractionEnabled = true
+            GameView3D?.SetText(OnButton: .FPSButton, ToNextText: "°")
         }
         else
         {
             FPSLabel.alpha = 0.0
             FPSLabel.isUserInteractionEnabled = false
+            GameView3D?.DisableControl(Which: .FPSButton)
         }
         let Tap = UITapGestureRecognizer(target: self, action: #selector(FPSTapped))
         Tap.numberOfTouchesRequired = 1
@@ -312,13 +334,20 @@ class MainViewController: UIViewController,
         SlideInCameraControlBox.layer.backgroundColor = ColorServer.CGColorFrom(ColorNames.WhiteSmoke)
         SlideInCameraControlBox.layer.borderColor = UIColor.black.cgColor
         ShowCameraControls()
-        #if false
-        HeartbeatGraphic.alpha = 0.0
-        if UserTheme!.ShowHeartbeat
+        if UIDevice.current.userInterfaceIdiom == .phone
         {
-            StartHeartbeat()
+            VideoButton.alpha = 0.0
+            VideoButton.isHidden = true
+            VideoButton.isUserInteractionEnabled = false
+            CameraButton.alpha = 0.0
+            CameraButton.isHidden = true
+            CameraButton.isUserInteractionEnabled = false
+            FlameButton.alpha = 0.0
+            FlameButton.isHidden = true
+            FlameButton.isUserInteractionEnabled = false
+            GameView3D?.RemoveButton(Which: .VideoButton)
+            GameView3D?.RemoveButton(Which: .CameraButton)
         }
-        #endif
     }
     
     /// Handle taps on the FPS text display. This toggles the contents from frames/second to instance seconds.
@@ -393,11 +422,13 @@ class MainViewController: UIViewController,
                     FPSLabel.text = ""
                     FPSLabel.alpha = 1.0
                     FPSLabel.isUserInteractionEnabled = true
+                    GameView3D?.EnableControl(Which: .FPSButton)
                 }
                 else
                 {
                     FPSLabel.alpha = 0.0
                     FPSLabel.isUserInteractionEnabled = false
+                    GameView3D?.DisableControl(Which: .FPSButton)
             }
             case .InterfaceLanguage:
                 break
@@ -427,6 +458,8 @@ class MainViewController: UIViewController,
         GameUISurface3D.addGestureRecognizer(SwipeRightGesture)
     }
     
+    var MenuShowing = false
+    
     /// Handle taps in the game view. Depending on where the tap is, the piece will move in the given direction.
     /// - Note: If the version box is showing (which should happen only when the game starts), tapping will remove the version box
     ///         and immediately return.
@@ -437,7 +470,7 @@ class MainViewController: UIViewController,
         {
             if VersionBoxShowing
             {
-                GameTextOverlay?.HideVersionBox(Duration: 0.2)
+                GameView3D?.HideAboutBox(HideDuration: 0.2)
                 return
             }
             let Location = Recognizer.location(in: GameUISurface3D)
@@ -445,9 +478,20 @@ class MainViewController: UIViewController,
             let HitResults = GameUISurface3D.hitTest(Point, options: [:])
             if HitResults.count > 0
             {
-                let Node = HitResults[0].node
+                var Node = HitResults[0].node
+                if let Parent = Node.parent as? SCNButtonNode
+                {
+                    //If we are here, a button with a raw SCNNode as its lowest child was pressed. The SCNNode's parent
+                    //is an SCNButtonNode so we know it is something we care about. Set the Node to the parent to keep
+                    //the flow simple.
+                    Node = Parent
+                }
                 if let PressedNode = Node as? SCNButtonNode
                 {
+                    if (GameView3D?.IsDisabledButton(PressedNode.ButtonType))!
+                    {
+                        return
+                    }
                     if let ParentNode = GameUISurface3D.GetParentNode(Of: PressedNode)
                     {
                         if let VNode = ParentNode.GetNodeWithTag(Value: "ShapeNode")
@@ -457,6 +501,35 @@ class MainViewController: UIViewController,
                     }
                     switch PressedNode.ButtonType
                     {
+                        case .MainButton:
+                            print("Main button pressed.")
+                            MenuShowing = !MenuShowing
+                            if MenuShowing
+                            {
+                                GameView3D?.ChangeMainButtonTexture(To: UIImage(named: "Checkerboard64BlueYellow")!)
+                                ShowPopOverMenu()
+                            }
+                            else
+                            {
+                                GameView3D?.ChangeMainButtonTexture(To: UIImage(named: "Checkerboard64")!)
+                        }
+                        
+                        case .PlayButton:
+                            HandlePlayStopPressed(self)
+                        
+                        case .PauseButton:
+                            HandlePauseResumePressed(self)
+                        
+                        case .CameraButton:
+                            HandleCameraButtonPressed(self)
+                        
+                        case .VideoButton:
+                            HandleVideoButtonPressed(self)
+                        
+                        case .FPSButton:
+                            let OldShowSeconds = Settings.ShowInstanceSeconds()
+                            Settings.SetShowInstanceSeconds(NewValue: !OldShowSeconds)
+                        
                         case .DownButton:
                             HandleMoveDownPressed()
                         
@@ -485,6 +558,9 @@ class MainViewController: UIViewController,
                             HandleMoveUpPressed()
                         
                         case .HeartButton:
+                            break
+                        
+                        default:
                             break
                     }
                 }
@@ -744,7 +820,9 @@ class MainViewController: UIViewController,
         let MeanVal = AccumulatedFPS / Double(FPSSampleCount)
         if !Settings.ShowInstanceSeconds()
         {
-            FPSLabel.text = "μ \(Convert.RoundToString(MeanVal, ToNearest: 0.001, CharCount: 6))"
+            let MeanFPSText = "μ \(Convert.RoundToString(MeanVal, ToNearest: 0.001, CharCount: 6))"
+            FPSLabel.text = MeanFPSText
+            GameView3D?.SetText(OnButton: .FPSButton, ToNextText: MeanFPSText)
         }
         
         if InAttractMode
@@ -1183,6 +1261,7 @@ class MainViewController: UIViewController,
             if !Settings.ShowInstanceSeconds()
             {
                 FPSLabel.text = FPSS
+                GameView3D?.SetText(OnButton: .FPSButton, ToNextText: FPSS)
             }
         }
     }
@@ -1416,7 +1495,7 @@ class MainViewController: UIViewController,
         let GameCountMsg = MessageHelper.MakeKVPMessage(ID: GameCountID, Key: "Game Count", Value: "\(GameCount)")
         DebugClient.SendPreformattedCommand(GameCountMsg)
         
-        GameTextOverlay?.HideVersionBox(Duration: 0.2)
+        GameView3D?.HideAboutBox(HideDuration: 0.2)
         GameTextOverlay?.HideGameOver(Duration: 0.0)
         GameTextOverlay?.HidePressPlay(Duration: 0.0)
         GameTextOverlay?.ShowNextLabel(Duration: 0.1)
@@ -1766,6 +1845,14 @@ class MainViewController: UIViewController,
         let ImageName = Opened ? "cube" : "cube.fill"
         let ButtonImage = UIImage(systemName: ImageName)
         MainUIButton.setImage(ButtonImage, for: UIControl.State.normal)
+        if Opened
+        {
+            GameView3D?.ChangeMainButtonTexture(To: UIImage(named: "Checkerboard64BlueYellow")!)
+        }
+        else
+        {
+         GameView3D?.ChangeMainButtonTexture(To: UIImage(named: "Checkerboard64")!)
+        }
     }
     
     /// Handle the restart game button in the slide in view.
@@ -2156,8 +2243,6 @@ class MainViewController: UIViewController,
     func StartHeartbeat()
     {
         GameView3D?.SetHeartbeatVisibility(Show: true)
-        //HeartbeatGraphic.isHidden = false
-        //HeartbeatGraphic.alpha = 1.0
         HeartbeatTimer = Timer.scheduledTimer(timeInterval: UserTheme!.HeartbeatInterval,
                                               target: self, selector: #selector(HandleHeartbeat),
                                               userInfo: nil, repeats: true)
@@ -2165,9 +2250,7 @@ class MainViewController: UIViewController,
     
     func StopHeartbeat()
     {
-        //GameView3D?.SetHeartbeatVisibility(Show: false)
-        //HeartbeatGraphic.isHidden = true
-        //HeartbeatGraphic.alpha = 0.0
+        GameView3D?.SetHeartbeatVisibility(Show: false)
         HeartbeatTimer?.invalidate()
         HeartbeatTimer = nil
     }
@@ -2178,25 +2261,19 @@ class MainViewController: UIViewController,
             {
                 if self.HeartbeatCount.isMultiple(of: 2)
                 {
-                    self.GameView3D?.AnimateHeartbeat(IsHighlighted: true, Duration: 0.2,
-                                                      Colors: (Highlighted: UIColor.red, Normal: ColorServer.ColorFrom(ColorNames.Plum)),
+                    self.GameView3D?.AnimateHeartbeat(IsHighlighted: true, Duration: 0.15,
+                                                      Colors: (Highlighted: UIColor.red,
+                                                               Normal: ColorServer.ColorFrom(ColorNames.Plum)),
                                                       Sizes: (Highlighted: 0.053, Normal: 0.05),
                                                       Extrusions: (Highlighted: 4.0, Normal: 2.0))
-                    #if false
-                    self.HeartbeatGraphic.tintColor = ColorServer.ColorFrom(ColorNames.Maroon)
-                    self.HeartbeatGraphic.setImage(UIImage(systemName: "heart"), for: UIControl.State.normal)
-                    #endif
                 }
                 else
                 {
-                    self.GameView3D?.AnimateHeartbeat(IsHighlighted: false, Duration: 0.2,
-                                                      Colors: (Highlighted: UIColor.red, Normal: ColorServer.ColorFrom(ColorNames.Plum)),
+                    self.GameView3D?.AnimateHeartbeat(IsHighlighted: false, Duration: 0.15,
+                                                      Colors: (Highlighted: UIColor.red,
+                                                               Normal: ColorServer.ColorFrom(ColorNames.Plum)),
                                                       Sizes: (Highlighted: 0.053, Normal: 0.05),
                                                       Extrusions: (Highlighted: 4.0, Normal: 2.0))
-                    #if false
-                    self.HeartbeatGraphic.tintColor = ColorServer.ColorFrom(ColorNames.Maraschino)
-                    self.HeartbeatGraphic.setImage(UIImage(systemName: "heart.fill"), for: UIControl.State.normal)
-                    #endif
                 }
                 self.HeartbeatCount = self.HeartbeatCount + 1
         }
@@ -2225,6 +2302,103 @@ class MainViewController: UIViewController,
             Button.tintColor = UIColor.orange
         }
         #endif
+    }
+    
+    // MARK: - Pop-over main menu.
+    
+    /// Shows the pop-over menu. This menu (a pop-over view controller in reality) is invoked by the user pressing the main button
+    /// in the game UI.
+    func ShowPopOverMenu()
+    {
+        if let PopController = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MainButtonMenuUI") as? MainButtonMenuCode
+        {
+            PopController.modalPresentationStyle = UIModalPresentationStyle.popover
+            PopController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.any
+            PopController.popoverPresentationController?.delegate = self
+            PopController.popoverPresentationController?.sourceView = GameView3D!
+            PopController.popoverPresentationController?.sourceRect = CGRect(x: 0, y: 20, width: 20, height: 20)
+            PopController.Delegate = self
+            self.present(PopController, animated: true, completion: nil)
+        }
+    }
+    
+    /// Receives the command the user invoked in the pop-over menu.
+    /// - Parameter Command: The command to run.
+    func RunPopOverCommand(_ Command: PopOverCommands)
+    {
+        switch Command
+        {
+            case .MakeVideo:
+                HandleVideoButtonPressed(self)
+            
+            case .PausePlaying:
+                HandlePauseResumePressed(self)
+            
+            case .ResumePlaying:
+                HandlePauseResumePressed(self)
+            
+            case .RunAbout:
+                if let AboutController = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "AboutDialog") as? AboutDialogController
+                {
+                    ForcePause()
+                    self.present(AboutController, animated: true, completion: nil)
+                }
+            
+            case .RunInAttractMode:
+                if AttractTimer != nil
+                {
+                    //Need to invalidate the attract timer (if it's active) or bad things will happen
+                    //(specifically, pieces will get confused about which board they belong to, causing
+                    //crashes and fatal errors).
+                    AttractTimer?.invalidate()
+                    AttractTimer = nil
+                }
+                InAttractMode = true
+                Stop()
+                ClearAndPlay()
+            
+            case .RunSelectGame:
+                if let SelectController = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "GameSelection") as? SelectGameController
+                {
+                                    ForcePause()
+                    SelectController.SelectorDelegate = self
+                    self.present(SelectController, animated: true, completion: nil)
+                }
+            
+            case .RunSettings:
+                let Storyboard = UIStoryboard(name: "Theming", bundle: nil)
+                if let Controller = Storyboard.instantiateViewController(withIdentifier: "MainThemeEditor") as? ThemeEditorController
+                {
+                    ForcePause()
+                    Controller.EditTheme(Theme: Themes!.UserTheme!)
+                    self.present(Controller, animated: true, completion: nil)
+                }
+            
+            case .StartPlaying:
+                HandlePlayStopPressed(self)
+            
+            case .StopPlaying:
+                HandlePlayStopPressed(self)
+            
+            case .TakePicture:
+                HandleCameraButtonPressed(self)
+            
+            case .PopOverClosed:
+                break
+        }
+    }
+    
+    /// Reset the main button. Intended to be called from the pop-over menu.
+    func ResetMainButton()
+    {
+        UpdateMainButton(false)
+    }
+    
+    /// Needed for the pop-over menu controller.
+    /// - Parameter for: See Apple documentation.
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle
+    {
+        return UIModalPresentationStyle.none
     }
     
     // MARK: - Variables used by +MainSlideInUI from within extensions.
@@ -2274,9 +2448,7 @@ class MainViewController: UIViewController,
     @IBOutlet weak var SlideInCameraControlBox: UIView!
     @IBOutlet weak var SlideInPlayButton: UIButton!
     @IBOutlet weak var SlideInPauseButton: UIButton!
-    @IBOutlet weak var TextVersionBox: UIView!
-    @IBOutlet weak var VersionTextLabel: UILabel!
-    @IBOutlet weak var HeartbeatGraphic: UIButton!
+    @IBOutlet weak var FlameButton: UIButton!
     
     // MARK: - Enum mappings.
     
