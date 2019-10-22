@@ -26,7 +26,7 @@ extension View3D
         AboutBoxShowing = true
         
         let Light = SCNLight()
-        Light.categoryBitMask = AboutLight
+        Light.categoryBitMask = View3D.AboutLight
         Light.color = UIColor.white
         Light.type = .spot
         AboutLightNode = SCNNode()
@@ -54,7 +54,7 @@ extension View3D
         Box.firstMaterial?.diffuse.contents = UIColor.black
         Box.firstMaterial?.specular.contents = UIColor.white
         AboutBoxNode = SCNNode(geometry: Box)
-        AboutBoxNode?.categoryBitMask = AboutLight
+        AboutBoxNode?.categoryBitMask = View3D.AboutLight
         AboutBoxNode?.position = SCNVector3(0.0, 0.0, 1.0)
         self.scene?.rootNode.addChildNode(AboutBoxNode!)
         
@@ -65,7 +65,7 @@ extension View3D
         Title.firstMaterial?.specular.contents = UIColor.white
         let TitleNode = SCNNode(geometry: Title)
         TitleNode.scale = SCNVector3(0.1, 0.1, 0.1)
-        TitleNode.categoryBitMask = AboutLight
+        TitleNode.categoryBitMask = View3D.AboutLight
         TitleNode.position = SCNVector3(-2.0, -0.5, 1.0)
         AboutBoxNode?.addChildNode(TitleNode)
         
@@ -76,7 +76,7 @@ extension View3D
         Ver.firstMaterial?.specular.contents = UIColor.blue
         let VerNode = SCNNode(geometry: Ver)
         VerNode.scale = SCNVector3(0.09, 0.09, 0.09)
-        VerNode.categoryBitMask = AboutLight
+        VerNode.categoryBitMask = View3D.AboutLight
         VerNode.position = SCNVector3(-2.0, -1.5, 1.0)
         AboutBoxNode?.addChildNode(VerNode)
         
