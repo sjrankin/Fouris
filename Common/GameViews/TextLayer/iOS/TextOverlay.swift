@@ -145,7 +145,7 @@ class TextOverlay: TextLayerDisplayProtocol
         let PrettyPauseText = NSAttributedString(string: "Paused", attributes: PauseAttributes)
         StringCache[.Paused] = PrettyPauseText
         
-        let PressPlaySize: CGFloat = Idiom == .pad ? 75.0 : 35.0
+        let PressPlaySize: CGFloat = Idiom == .pad ? 75.0 : 45.0
         let PressPlayFont = UIFont(name: "Avenir-Heavy", size: PressPlaySize)
         let PressPlayAttributes: [NSAttributedString.Key: Any] =
             [
