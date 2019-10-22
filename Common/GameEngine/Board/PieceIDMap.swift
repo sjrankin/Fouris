@@ -202,49 +202,4 @@ class PieceIDMap
         }
         #endif
     }
-    
-    /// Add attributes from a piece.
-    ///
-    /// - Parameters:
-    ///   - PieceID: The ID of the piece whose attributes are being added.
-    ///   - Attrs: The attributes of the piece.
-    public func AddPieceAttributes(_ PieceID: UUID, _ Attrs: PieceAttributes)
-    {
-        if AttributeMap.keys.contains(PieceID)
-        {
-            //print("AttributeMap already contained \(PieceID)")
-            return
-        }
-        AttributeMap[PieceID] = Attrs
-    }
-    
-    /// Get attributes for the piece whose ID is passed.
-    ///
-    /// - Parameter For: ID of the piece whose attributes will be returned.
-    /// - Returns: Attributes of the piece on success, nil if not found.
-    public func GetAttributes(For: UUID) -> PieceAttributes?
-    {
-        return AttributeMap[For]
-    }
-    
-    /// Remove the attributes (because the piece no longer exists) for the piece with the passed ID.
-    ///
-    /// - Parameter For: ID of the piece whose attributes will be removed.
-    public func RemoveAttributes(For: UUID)
-    {
-        AttributeMap.removeValue(forKey: For)
-    }
-    
-    /// Attribute map - contains attributes for pieces keyed by piece IDs.
-    private var AttributeMap = [UUID: PieceAttributes]()
-    
-    /// Returns a clone of the instance piece ID map.
-    ///
-    /// - Returns: Clone of the instance piece ID map this was called against.
-    public func Clone() -> PieceIDMap
-    {
-        let NewMap = PieceIDMap()
-        NewMap.AttributeMap = AttributeMap
-        return NewMap
-    }
 }
