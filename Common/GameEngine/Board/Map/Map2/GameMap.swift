@@ -146,6 +146,17 @@ class GameMap: CustomStringConvertible, MapAccessProtocol
         Delegate?.BucketChanged(X: X, Y: Y, Node: MapNode)
     }
     
+    /// Determines if the specified location within the bucket is empty (meaning the node is `.BucketInterior`).
+    /// - Parameter X: The horizontal coordinate.
+    /// - Parameter Y: The vertical coordinate.
+    /// - Returns: True if the bucket contents at the coordinate are empty, false if something is there.
+    public func BucketIsEmptyAt(X: Int, Y: Int) -> Bool
+    {
+        return _BoardMap[Y + Descriptor!.BucketY][X + Descriptor!.BucketX] == .BucketInterior
+    }
+    
+    // MARK: - Piece management.
+    
     /// Determines if all blocks in the passed piece reside fully within the bucket.
     /// - Parameter TestPiece: The piece to test for bucket inclusion.
     /// - Returns: True if `TestPiece` is fully within the bucket, false if not.
@@ -180,14 +191,21 @@ class GameMap: CustomStringConvertible, MapAccessProtocol
         return (X, Y)
     }
     
-    /// Determines if the specified location within the bucket is empty (meaning the node is `.BucketInterior`).
-    /// - Parameter X: The horizontal coordinate.
-    /// - Parameter Y: The vertical coordinate.
-    /// - Returns: True if the bucket contents at the coordinate are empty, false if something is there.
-    public func BucketIsEmptyAt(X: Int, Y: Int) -> Bool
+    /// Add a new piece to the map that is in motion.
+    /// - Parameter NewPiece: The piece to add.
+    public func AddInPlayPiece(NewPiece: Piece)
     {
-        return _BoardMap[Y + Descriptor!.BucketY][X + Descriptor!.BucketX] == .BucketInterior
+        InPlay.append(NewPiece)
     }
+    
+    public func MergePieceWithMap(Retired: Piece)
+    {
+        
+    }
+    
+    /// Holds the list of pieces in play.
+    /// - Note: Intended to support multiple pieces but for now, probably only one piece at a time is for the best.
+    private var InPlay: [Piece] = [Piece]()
     
     // MARK: - Row deletion code.
     
