@@ -16,7 +16,7 @@ extension View3D
     func ShowControlButtonBackground()
     {
         let Box = SCNBox(width: 30.0, height: 4.0, length: 0.01, chamferRadius: 0.0)
-        Box.firstMaterial?.diffuse.contents = UIColor.black.withAlphaComponent(0.5)
+        Box.firstMaterial?.diffuse.contents = UIColor.black.withAlphaComponent(0.75)
         Box.firstMaterial?.specular.contents = UIColor.white
         ControlBackground = SCNNode(geometry: Box)
         ControlBackground?.position = SCNVector3(0.0, 15.0, 0.5)
