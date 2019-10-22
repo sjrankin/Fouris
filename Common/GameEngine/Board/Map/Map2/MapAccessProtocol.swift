@@ -56,6 +56,10 @@ protocol MapAccessProtocol: class
     ///            coordinate is for the top-most location of the piece, not the center of the piece.**
     func InitialLocation(For NewPiece: Piece) -> (X: Int, Y: Int)
     
+    /// Add a new piece to the map that is in motion.
+    /// - Parameter NewPiece: The piece to add.
+    func AddInPlayPiece(NewPiece: Piece)
+    
     /// Determines if the specified location within the bucket is empty (meaning the node is `.BucketInterior`).
     /// - Parameter X: The horizontal coordinate.
     /// - Parameter Y: The vertical coordinate.
