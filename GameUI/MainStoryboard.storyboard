@@ -538,21 +538,14 @@
                                     <constraint firstItem="2NB-Qq-fGh" firstAttribute="leading" secondItem="ByD-Hc-9hq" secondAttribute="leading" constant="10" id="wBl-Kf-i1R"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4XG-ac-ruN">
-                                <rect key="frame" x="697" y="961.5" width="51" height="40"/>
-                                <state key="normal" image="camera" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="28" scale="large" weight="black"/>
-                                </state>
-                                <connections>
-                                    <action selector="HandleCameraButtonPress:" destination="zoW-Vo-wiW" eventType="primaryActionTriggered" id="ilb-1L-zdD"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ob2-DI-cRb">
-                                <rect key="frame" x="514" y="964" width="52.5" height="35"/>
+                                <rect key="frame" x="536" y="960" width="51" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="SQi-pb-Yrg"/>
                                 </constraints>
-                                <state key="normal" image="video" catalog="system">
+                                <fontDescription key="fontDescription" name="NotoEmoji" family="Noto Emoji" pointSize="40"/>
+                                <state key="normal" title="📹">
+                                    <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="28" scale="large" weight="black"/>
                                 </state>
                                 <connections>
@@ -580,27 +573,38 @@
                                     <segue destination="ZjE-q6-icn" kind="show" id="PKd-A3-aRh"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4XG-ac-ruN">
+                                <rect key="frame" x="691" y="944" width="51" height="67"/>
+                                <fontDescription key="fontDescription" name="NotoEmoji" family="Noto Emoji" pointSize="40"/>
+                                <state key="normal" title="📷">
+                                    <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="28" scale="large" weight="black"/>
+                                </state>
+                                <connections>
+                                    <action selector="HandleCameraButtonPress:" destination="zoW-Vo-wiW" eventType="primaryActionTriggered" id="ilb-1L-zdD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="9Zz-Cb-vXt" firstAttribute="leading" secondItem="AM4-vV-mnG" secondAttribute="leadingMargin" id="32x-dF-Tkq"/>
-                            <constraint firstItem="Ob2-DI-cRb" firstAttribute="leading" secondItem="MOx-Pl-PoY" secondAttribute="leading" constant="494" id="865-O1-2NH"/>
-                            <constraint firstItem="q41-xp-6ex" firstAttribute="leading" secondItem="4XG-ac-ruN" secondAttribute="leading" id="A6J-iy-lom"/>
+                            <constraint firstItem="Ob2-DI-cRb" firstAttribute="leading" secondItem="MOx-Pl-PoY" secondAttribute="leading" constant="516" id="865-O1-2NH"/>
+                            <constraint firstItem="q41-xp-6ex" firstAttribute="leading" secondItem="4XG-ac-ruN" secondAttribute="leading" constant="6" id="A6J-iy-lom"/>
                             <constraint firstItem="q41-xp-6ex" firstAttribute="top" secondItem="9Zz-Cb-vXt" secondAttribute="top" id="Dfg-0K-7dc"/>
                             <constraint firstItem="9sZ-bI-vZX" firstAttribute="bottom" secondItem="T03-6b-fRZ" secondAttribute="bottom" id="FJ7-pc-eNh"/>
-                            <constraint firstItem="4XG-ac-ruN" firstAttribute="centerY" secondItem="T03-6b-fRZ" secondAttribute="centerY" id="Fd9-8L-qQV"/>
+                            <constraint firstItem="4XG-ac-ruN" firstAttribute="centerY" secondItem="T03-6b-fRZ" secondAttribute="centerY" constant="-4" id="Fd9-8L-qQV"/>
                             <constraint firstItem="ByD-Hc-9hq" firstAttribute="top" secondItem="AM4-vV-mnG" secondAttribute="top" constant="94" id="LHw-qc-CBv"/>
                             <constraint firstItem="MOx-Pl-PoY" firstAttribute="leading" secondItem="9Zz-Cb-vXt" secondAttribute="leading" id="W2E-Vm-yKs"/>
                             <constraint firstItem="T03-6b-fRZ" firstAttribute="leading" secondItem="2Ta-Wh-lby" secondAttribute="leading" constant="20" id="YNt-Ec-y3K"/>
                             <constraint firstItem="ByD-Hc-9hq" firstAttribute="leading" secondItem="AM4-vV-mnG" secondAttribute="leading" constant="10" id="aZv-FD-SWH"/>
                             <constraint firstItem="MOx-Pl-PoY" firstAttribute="centerX" secondItem="ByD-Hc-9hq" secondAttribute="centerX" id="h8l-6h-83K"/>
                             <constraint firstItem="MOx-Pl-PoY" firstAttribute="top" secondItem="ByD-Hc-9hq" secondAttribute="bottom" constant="29" id="i7n-kN-nZg"/>
-                            <constraint firstItem="4XG-ac-ruN" firstAttribute="trailing" secondItem="MOx-Pl-PoY" secondAttribute="trailing" id="iPm-BU-9Qw"/>
+                            <constraint firstItem="4XG-ac-ruN" firstAttribute="trailing" secondItem="MOx-Pl-PoY" secondAttribute="trailing" constant="-6" id="iPm-BU-9Qw"/>
                             <constraint firstAttribute="trailing" secondItem="ByD-Hc-9hq" secondAttribute="trailing" constant="10" id="if9-gY-s6d"/>
-                            <constraint firstItem="Ob2-DI-cRb" firstAttribute="top" secondItem="MOx-Pl-PoY" secondAttribute="bottom" constant="32" id="pQ6-0m-TPm"/>
+                            <constraint firstItem="Ob2-DI-cRb" firstAttribute="top" secondItem="MOx-Pl-PoY" secondAttribute="bottom" constant="28" id="pQ6-0m-TPm"/>
                             <constraint firstItem="2Ta-Wh-lby" firstAttribute="bottom" secondItem="T03-6b-fRZ" secondAttribute="bottom" constant="20" id="qyQ-O7-onj"/>
                             <constraint firstItem="T03-6b-fRZ" firstAttribute="top" secondItem="MOx-Pl-PoY" secondAttribute="bottom" constant="27" id="rV7-HC-VB1"/>
-                            <constraint firstItem="Ob2-DI-cRb" firstAttribute="centerY" secondItem="T03-6b-fRZ" secondAttribute="centerY" id="tNV-6T-Rak"/>
+                            <constraint firstItem="Ob2-DI-cRb" firstAttribute="centerY" secondItem="T03-6b-fRZ" secondAttribute="centerY" constant="-4" id="tNV-6T-Rak"/>
                             <constraint firstItem="9sZ-bI-vZX" firstAttribute="top" secondItem="MOx-Pl-PoY" secondAttribute="bottom" constant="19" id="vVD-9l-Nf7"/>
                             <constraint firstItem="9sZ-bI-vZX" firstAttribute="centerX" secondItem="MOx-Pl-PoY" secondAttribute="centerX" id="wgu-ON-gsV"/>
                             <constraint firstItem="9Zz-Cb-vXt" firstAttribute="top" secondItem="2Ta-Wh-lby" secondAttribute="top" constant="28" id="z0M-MK-cqe"/>
@@ -928,10 +932,8 @@
     </scenes>
     <resources>
         <image name="SamplePieceTexture" width="64" height="64"/>
-        <image name="camera" catalog="system" width="64" height="48"/>
         <image name="number.circle" catalog="system" width="64" height="60"/>
         <image name="person.circle" catalog="system" width="64" height="60"/>
-        <image name="video" catalog="system" width="64" height="40"/>
         <image name="xmark.circle.fill" catalog="system" width="64" height="60"/>
     </resources>
 </document>
