@@ -29,13 +29,13 @@ class View3D: SCNView,                          //Our main super class.
     var GameScene: SCNScene!
     
     /// Light mask for the game.
-    let GameLight: Int = 0x1 << 1
+    public static let GameLight: Int = 0x1 << 1
     
     /// Light mask for the controls.
-    let ControlLight: Int = 0x1 << 2
+    public static let ControlLight: Int = 0x1 << 2
     
     /// Light mask for the about box.
-    let AboutLight: Int = 0x1 << 3
+    public static let AboutLight: Int = 0x1 << 3
     
     // MARK: - Initialization.
     
@@ -573,7 +573,7 @@ class View3D: SCNView,                          //Our main super class.
         let Light = SCNLight()
         let LightColor = ColorServer.ColorFrom(CurrentTheme!.LightColor)
         Light.color = LightColor
-        Light.categoryBitMask = GameLight
+        Light.categoryBitMask = View3D.GameLight
         switch CurrentTheme!.LightType
         {
             case .ambient:
@@ -617,7 +617,7 @@ class View3D: SCNView,                          //Our main super class.
         let Node = SCNNode()
         Node.name = "ControlLight"
         Node.light = Light
-        Node.light?.categoryBitMask = ControlLight
+        Node.light?.categoryBitMask = View3D.ControlLight
         Node.position = SCNVector3(-3.0, 15.0, 50.0)
         return Node
     }
@@ -709,7 +709,7 @@ class View3D: SCNView,                          //Our main super class.
                 LeftSide.materials.first?.diffuse.contents = ColorServer.ColorFrom(ColorNames.ReallyDarkGray)
                 LeftSide.materials.first?.specular.contents = ColorServer.ColorFrom(ColorNames.White)
                 let LeftSideNode = SCNNode(geometry: LeftSide)
-                LeftSideNode.categoryBitMask = GameLight
+                LeftSideNode.categoryBitMask = View3D.GameLight
                 LeftSideNode.position = SCNVector3(-6, 0, 0)
                 LocalBucketNode.addChildNode(LeftSideNode)
                 
@@ -717,7 +717,7 @@ class View3D: SCNView,                          //Our main super class.
                 RightSide.materials.first?.diffuse.contents = ColorServer.ColorFrom(ColorNames.ReallyDarkGray)
                 RightSide.materials.first?.specular.contents = ColorServer.ColorFrom(ColorNames.White)
                 let RightSideNode = SCNNode(geometry: RightSide)
-                RightSideNode.categoryBitMask = GameLight
+                RightSideNode.categoryBitMask = View3D.GameLight
                 RightSideNode.position = SCNVector3(5, 0, 0)
                 LocalBucketNode.addChildNode(RightSideNode)
                 
@@ -725,11 +725,11 @@ class View3D: SCNView,                          //Our main super class.
                 Bottom.materials.first?.diffuse.contents = ColorServer.ColorFrom(ColorNames.ReallyDarkGray)
                 Bottom.materials.first?.specular.contents = ColorServer.ColorFrom(ColorNames.White)
                 let BottomNode = SCNNode(geometry: Bottom)
-                BottomNode.categoryBitMask = GameLight
+                BottomNode.categoryBitMask = View3D.GameLight
                 BottomNode.position = SCNVector3(-0.5, -10.5, 0)
                 LocalBucketNode.addChildNode(BottomNode)
                 
-                LocalBucketNode.categoryBitMask = GameLight
+                LocalBucketNode.categoryBitMask = View3D.GameLight
                 LocalBucketNode.opacity = InitialOpacity
             
             case .Rotatable:
@@ -767,8 +767,8 @@ class View3D: SCNView,                          //Our main super class.
             let LineColor = ColorServer.ColorFrom(CurrentTheme!.CenterLineColor)
             CenterLineVertical = MakeLine(From: SCNVector3(0.0, 20.0, 2.0), To: SCNVector3(0.0, -80.0, 2.0), Color: LineColor, LineWidth: Width)
             CenterLineHorizontal = MakeLine(From: SCNVector3(-20.0, 0.0, 2.0), To: SCNVector3(80.0, 0.0, 2.0), Color: LineColor, LineWidth: Width)
-            CenterLineVertical!.categoryBitMask = ControlLight
-            CenterLineHorizontal!.categoryBitMask = ControlLight
+            CenterLineVertical!.categoryBitMask = View3D.ControlLight
+            CenterLineHorizontal!.categoryBitMask = View3D.ControlLight
             self.scene?.rootNode.addChildNode(CenterLineVertical!)
             self.scene?.rootNode.addChildNode(CenterLineHorizontal!)
         }
@@ -803,7 +803,7 @@ class View3D: SCNView,                          //Our main super class.
                           chamferRadius: 0.0)
         Line.materials.first?.diffuse.contents = Color
         let Node = SCNNode(geometry: Line)
-        Node.categoryBitMask = GameLight
+        Node.categoryBitMask = View3D.GameLight
         Node.position = From
         Node.name = "GridNodes"
         return Node
@@ -1070,7 +1070,7 @@ class View3D: SCNView,                          //Our main super class.
                                         RetiredVisuals: PVisual.RetiredVisuals!, IsRetired: IsRetired)
             VBlock.ParentID = ParentID
             VBlock.Marked = true
-            VBlock.categoryBitMask = GameLight
+            VBlock.categoryBitMask = View3D.GameLight
             BlockList.insert(VBlock)
             self.scene?.rootNode.addChildNode(VBlock)
         }
@@ -1096,7 +1096,7 @@ class View3D: SCNView,                          //Our main super class.
                                         RetiredVisuals: PVisual.RetiredVisuals!, IsRetired: IsRetired)
             VBlock.ParentID = ParentID
             VBlock.Marked = true
-            VBlock.categoryBitMask = GameLight
+            VBlock.categoryBitMask = View3D.GameLight
             BlockList.insert(VBlock)
             MasterBlockNode!.addChildNode(VBlock)
         }
@@ -1213,7 +1213,7 @@ class View3D: SCNView,                          //Our main super class.
             }
             let VBlock = VisualBlocks3D(Block.ID, AtX: XOffset, AtY: YOffset, ActiveVisuals: PVisuals!.ActiveVisuals!,
                                         RetiredVisuals: PVisuals!.RetiredVisuals!, IsRetired: false)
-            VBlock.categoryBitMask = GameLight
+            VBlock.categoryBitMask = View3D.GameLight
             MovingPieceBlocks.append(VBlock)
             MovingPieceNode?.addChildNode(VBlock)
         }
@@ -1595,7 +1595,7 @@ class View3D: SCNView,                          //Our main super class.
                         let Start = SCNVector3(-0.5, Y, 0.0)
                         let End = SCNVector3(10.5, Y, 0.0)
                         let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.03)
-                        LineNode.categoryBitMask = GameLight
+                        LineNode.categoryBitMask = View3D.GameLight
                         LineNode.name = "Horizontal,\(Int(Y))"
                         BucketGridNode.addChildNode(LineNode)
                     }
@@ -1605,7 +1605,7 @@ class View3D: SCNView,                          //Our main super class.
                         let Start = SCNVector3(X, 0.0, 0.0)
                         let End = SCNVector3(X, 20.0, 0.0)
                         let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.03)
-                        LineNode.categoryBitMask = GameLight
+                        LineNode.categoryBitMask = View3D.GameLight
                         LineNode.name = "Vertical,\(Int(X))"
                         BucketGridNode.addChildNode(LineNode)
                     }
@@ -1615,7 +1615,7 @@ class View3D: SCNView,                          //Our main super class.
                     let TopStart = SCNVector3(-0.5, 10.0, 0.0)
                     let TopEnd = SCNVector3(10.5, 10.0, 0.0)
                     let TopLine = MakeLine(From: TopStart, To: TopEnd, Color: OutlineColor, LineWidth: 0.08)
-                    TopLine.categoryBitMask = GameLight
+                    TopLine.categoryBitMask = View3D.GameLight
                     TopLine.name = "TopLine"
                     BucketGridNode.addChildNode(TopLine)
                 }
@@ -1635,7 +1635,7 @@ class View3D: SCNView,                          //Our main super class.
                         let Start = SCNVector3(0.0, Y, 0.0)
                         let End = SCNVector3(20.0, Y, 0.0)
                         let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.02)
-                        LineNode.categoryBitMask = GameLight
+                        LineNode.categoryBitMask = View3D.GameLight
                         LineNode.name = "Horizontal,\(Int(Y))"
                         BucketGridNode.addChildNode(LineNode)
                     }
@@ -1645,7 +1645,7 @@ class View3D: SCNView,                          //Our main super class.
                         let Start = SCNVector3(X, 0.0, 0.0)
                         let End = SCNVector3(X, 20.0, 0.0)
                         let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.02)
-                        LineNode.categoryBitMask = GameLight
+                        LineNode.categoryBitMask = View3D.GameLight
                         LineNode.name = "Vertical,\(Int(X))"
                         BucketGridNode.addChildNode(LineNode)
                     }
@@ -1656,25 +1656,25 @@ class View3D: SCNView,                          //Our main super class.
                     let TopStart = SCNVector3(0.0, HalfY, 0.0)
                     let TopEnd = SCNVector3(BucketWidth, HalfY, 0.0)
                     let TopLine = MakeLine(From: TopStart, To: TopEnd, Color: OutlineColor, LineWidth: 0.08)
-                    TopLine.categoryBitMask = GameLight
+                    TopLine.categoryBitMask = View3D.GameLight
                     TopLine.name = "TopLine"
                     OutlineNode.addChildNode(TopLine)
                     let BottomStart = SCNVector3(0.0, -HalfY, 0.0)
                     let BottomEnd = SCNVector3(BucketWidth, -HalfY, 0.0)
                     let BottomLine = MakeLine(From: BottomStart, To: BottomEnd, Color: OutlineColor, LineWidth: 0.08)
-                    BottomLine.categoryBitMask = GameLight
+                    BottomLine.categoryBitMask = View3D.GameLight
                     BottomLine.name = "BottomLine"
                     OutlineNode.addChildNode(BottomLine)
                     let LeftStart = SCNVector3(-HalfX, 0.0, 0.0)
                     let LeftEnd = SCNVector3(-HalfX, BucketHeight, 0.0)
                     let LeftLine = MakeLine(From: LeftStart, To: LeftEnd, Color: OutlineColor, LineWidth: 0.08)
-                    LeftLine.categoryBitMask = GameLight
+                    LeftLine.categoryBitMask = View3D.GameLight
                     LeftLine.name = "LeftLine"
                     OutlineNode.addChildNode(LeftLine)
                     let RightStart = SCNVector3(HalfX, 0.0, 0.0)
                     let RightEnd = SCNVector3(HalfX, BucketHeight, 0.0)
                     let RightLine = MakeLine(From: RightStart, To: RightEnd, Color: OutlineColor, LineWidth: 0.08)
-                    RightLine.categoryBitMask = GameLight
+                    RightLine.categoryBitMask = View3D.GameLight
                     RightLine.name = "RightLine"
                     OutlineNode.addChildNode(RightLine)
                 }
@@ -1695,7 +1695,7 @@ class View3D: SCNView,                          //Our main super class.
                         let Start = SCNVector3(-0.5, Y, 0.0)
                         let End = SCNVector3(10.5, Y, 0.0)
                         let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.03)
-                        LineNode.categoryBitMask = GameLight
+                        LineNode.categoryBitMask = View3D.GameLight
                         LineNode.name = "Horizontal,\(Int(Y))"
                         BucketGridNode.addChildNode(LineNode)
                     }
@@ -1705,7 +1705,7 @@ class View3D: SCNView,                          //Our main super class.
                         let Start = SCNVector3(X, 0.0, 0.0)
                         let End = SCNVector3(X, 20.0, 0.0)
                         let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.03)
-                        LineNode.categoryBitMask = GameLight
+                        LineNode.categoryBitMask = View3D.GameLight
                         LineNode.name = "Vertical,\(Int(X))"
                         BucketGridNode.addChildNode(LineNode)
                     }
@@ -1715,7 +1715,7 @@ class View3D: SCNView,                          //Our main super class.
                     let TopStart = SCNVector3(-0.5, 10.0, 0.0)
                     let TopEnd = SCNVector3(10.5, 10.0, 0.0)
                     let TopLine = MakeLine(From: TopStart, To: TopEnd, Color: OutlineColor, LineWidth: 0.08)
-                    TopLine.categoryBitMask = GameLight
+                    TopLine.categoryBitMask = View3D.GameLight
                     TopLine.name = "TopLine"
                     BucketGridNode.addChildNode(TopLine)
                 }
@@ -1736,7 +1736,7 @@ class View3D: SCNView,                          //Our main super class.
                         let Start = SCNVector3(0.0, Y, 0.0)
                         let End = SCNVector3(20.0, Y, 0.0)
                         let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.02)
-                        LineNode.categoryBitMask = GameLight
+                        LineNode.categoryBitMask = View3D.GameLight
                         LineNode.name = "Horizontal,\(Int(Y))"
                         BucketGridNode.addChildNode(LineNode)
                     }
@@ -1746,7 +1746,7 @@ class View3D: SCNView,                          //Our main super class.
                         let Start = SCNVector3(X, 0.0, 0.0)
                         let End = SCNVector3(X, 20.0, 0.0)
                         let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.02)
-                        LineNode.categoryBitMask = GameLight
+                        LineNode.categoryBitMask = View3D.GameLight
                         LineNode.name = "Vertical,\(Int(X))"
                         BucketGridNode.addChildNode(LineNode)
                     }
@@ -1757,25 +1757,25 @@ class View3D: SCNView,                          //Our main super class.
                     let TopStart = SCNVector3(0.0, HalfY, 0.0)
                     let TopEnd = SCNVector3(BucketWidth, HalfY, 0.0)
                     let TopLine = MakeLine(From: TopStart, To: TopEnd, Color: OutlineColor, LineWidth: 0.08)
-                    TopLine.categoryBitMask = GameLight
+                    TopLine.categoryBitMask = View3D.GameLight
                     TopLine.name = "TopLine"
                     OutlineNode.addChildNode(TopLine)
                     let BottomStart = SCNVector3(0.0, -HalfY, 0.0)
                     let BottomEnd = SCNVector3(BucketWidth, -HalfY, 0.0)
                     let BottomLine = MakeLine(From: BottomStart, To: BottomEnd, Color: OutlineColor, LineWidth: 0.08)
-                    BottomLine.categoryBitMask = GameLight
+                    BottomLine.categoryBitMask = View3D.GameLight
                     BottomLine.name = "BottomLine"
                     OutlineNode.addChildNode(BottomLine)
                     let LeftStart = SCNVector3(-HalfX, 0.0, 0.0)
                     let LeftEnd = SCNVector3(-HalfX, BucketHeight, 0.0)
                     let LeftLine = MakeLine(From: LeftStart, To: LeftEnd, Color: OutlineColor, LineWidth: 0.08)
-                    LeftLine.categoryBitMask = GameLight
+                    LeftLine.categoryBitMask = View3D.GameLight
                     LeftLine.name = "LeftLine"
                     OutlineNode.addChildNode(LeftLine)
                     let RightStart = SCNVector3(HalfX, 0.0, 0.0)
                     let RightEnd = SCNVector3(HalfX, BucketHeight, 0.0)
                     let RightLine = MakeLine(From: RightStart, To: RightEnd, Color: OutlineColor, LineWidth: 0.08)
-                    RightLine.categoryBitMask = GameLight
+                    RightLine.categoryBitMask = View3D.GameLight
                     RightLine.name = "RightLine"
                     OutlineNode.addChildNode(RightLine)
                 }
@@ -1789,7 +1789,7 @@ class View3D: SCNView,                          //Our main super class.
                         let Start = SCNVector3(0.0, Y, 0.0)
                         let End = SCNVector3(20.0, Y, 0.0)
                         let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.02)
-                        LineNode.categoryBitMask = GameLight
+                        LineNode.categoryBitMask = View3D.GameLight
                         LineNode.name = "Horizontal,\(Int(Y))"
                         BucketGridNode.addChildNode(LineNode)
                     }
@@ -1799,7 +1799,7 @@ class View3D: SCNView,                          //Our main super class.
                         let Start = SCNVector3(X, 0.0, 0.0)
                         let End = SCNVector3(X, 20.0, 0.0)
                         let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.02)
-                        LineNode.categoryBitMask = GameLight
+                        LineNode.categoryBitMask = View3D.GameLight
                         LineNode.name = "Vertical,\(Int(X))"
                         BucketGridNode.addChildNode(LineNode)
                     }
@@ -1810,25 +1810,25 @@ class View3D: SCNView,                          //Our main super class.
                     let TopStart = SCNVector3(0.0, 10.0, 0.0)
                     let TopEnd = SCNVector3(20.0, 10.0, 0.0)
                     let TopLine = MakeLine(From: TopStart, To: TopEnd, Color: OutlineColor, LineWidth: 0.08)
-                    TopLine.categoryBitMask = GameLight
+                    TopLine.categoryBitMask = View3D.GameLight
                     TopLine.name = "TopLine"
                     OutlineNode.addChildNode(TopLine)
                     let BottomStart = SCNVector3(0.0, -10.0, 0.0)
                     let BottomEnd = SCNVector3(20.0, -10.0, 0.0)
                     let BottomLine = MakeLine(From: BottomStart, To: BottomEnd, Color: OutlineColor, LineWidth: 0.08)
-                    BottomLine.categoryBitMask = GameLight
+                    BottomLine.categoryBitMask = View3D.GameLight
                     BottomLine.name = "BottomLine"
                     OutlineNode.addChildNode(BottomLine)
                     let LeftStart = SCNVector3(-10.0, 0.0, 0.0)
                     let LeftEnd = SCNVector3(-10.0, 20.0, 0.0)
                     let LeftLine = MakeLine(From: LeftStart, To: LeftEnd, Color: OutlineColor, LineWidth: 0.08)
-                    LeftLine.categoryBitMask = GameLight
+                    LeftLine.categoryBitMask = View3D.GameLight
                     LeftLine.name = "LeftLine"
                     OutlineNode.addChildNode(LeftLine)
                     let RightStart = SCNVector3(10.0, 0.0, 0.0)
                     let RightEnd = SCNVector3(10.0, 20.0, 0.0)
                     let RightLine = MakeLine(From: RightStart, To: RightEnd, Color: OutlineColor, LineWidth: 0.08)
-                    RightLine.categoryBitMask = GameLight
+                    RightLine.categoryBitMask = View3D.GameLight
                     RightLine.name = "RightLine"
                     OutlineNode.addChildNode(RightLine)
                 }
@@ -1841,7 +1841,7 @@ class View3D: SCNView,                          //Our main super class.
                 TopLabel.materials.first!.diffuse.contents = ColorServer.ColorFrom(ColorNames.Cyan)
                 TopLabel.flatness = 0.2
                 let TopNode = SCNNode(geometry: TopLabel)
-                TopNode.categoryBitMask = GameLight
+                TopNode.categoryBitMask = View3D.GameLight
                 TopNode.name = "Top"
                 TopNode.scale = SCNVector3(0.02, 0.02, 0.02)
                 TopNode.position = SCNVector3(-0.5, 10.4, 0.0)
@@ -1852,7 +1852,7 @@ class View3D: SCNView,                          //Our main super class.
                 BottomLabel.materials.first!.diffuse.contents = ColorServer.ColorFrom(ColorNames.Yellow)
                 BottomLabel.flatness = 0.2
                 let BottomNode = SCNNode(geometry: BottomLabel)
-                BottomNode.categoryBitMask = GameLight
+                BottomNode.categoryBitMask = View3D.GameLight
                 BottomNode.name = "Bottom"
                 BottomNode.scale = SCNVector3(0.02, 0.02, 0.02)
                 BottomNode.rotation = SCNVector4(0.0, 0.0, 1.0, CGFloat.pi)
@@ -1864,7 +1864,7 @@ class View3D: SCNView,                          //Our main super class.
                 RightLabel.materials.first!.diffuse.contents = ColorServer.ColorFrom(ColorNames.Magenta)
                 RightLabel.flatness = 0.2
                 let RightNode = SCNNode(geometry: RightLabel)
-                RightNode.categoryBitMask = GameLight
+                RightNode.categoryBitMask = View3D.GameLight
                 RightNode.name = "Right"
                 RightNode.scale = SCNVector3(0.02, 0.02, 0.02)
                 RightNode.rotation = SCNVector4(0.0, 0.0, 1.0, 270.0 * CGFloat.pi / 180.0)
@@ -1876,7 +1876,7 @@ class View3D: SCNView,                          //Our main super class.
                 LeftLabel.materials.first!.diffuse.contents = ColorServer.ColorFrom(ColorNames.Black)
                 RightLabel.flatness = 0.2
                 let LeftNode = SCNNode(geometry: LeftLabel)
-                LeftNode.categoryBitMask = GameLight
+                LeftNode.categoryBitMask = View3D.GameLight
                 LeftNode.name = "Left"
                 LeftNode.scale = SCNVector3(0.02, 0.02, 0.02)
                 LeftNode.rotation = SCNVector4(0.0, 0.0, 1.0, CGFloat.pi * 0.5)
@@ -2370,41 +2370,45 @@ class View3D: SCNView,                          //Our main super class.
             .VideoButton: (SCNVector3(-2.8, 13.0, 1.0), 0.025, UIColor.white, UIColor.red),
             .CameraButton: (SCNVector3(0.0, 13.0, 1.0), 0.025, UIColor.white, UIColor.red),
             
-            .LeftButton: (SCNVector3(-11.2, -12.2, 1.0), 0.08, UIColor.white, UIColor.yellow),
-            .RotateLeftButton: (SCNVector3(-11.2, -14.5, 1.0), 0.08, UIColor.white, UIColor.yellow),
-            .UpButton: (SCNVector3(-8.5, -14.5, 1.0), 0.08, UIColor.white, UIColor.yellow),
-            .DownButton:  (SCNVector3(-8.5, -12.2, 1.0), 0.08, UIColor.white, UIColor.yellow),
+            .LeftButton: (SCNVector3(-11.2, -13.2, 1.0), 0.08, UIColor.white, UIColor.yellow),
+            .RotateLeftButton: (SCNVector3(-11.2, -15.5, 1.0), 0.08, UIColor.white, UIColor.yellow),
+            .UpButton: (SCNVector3(-8.5, -15.5, 1.0), 0.08, UIColor.white, UIColor.yellow),
+            .DownButton:  (SCNVector3(-8.5, -13.2, 1.0), 0.08, UIColor.white, UIColor.yellow),
             
-            .RightButton:  (SCNVector3(9.2, -12.2, 1.0), 0.08, UIColor.white, UIColor.yellow),
-            .DropDownButton:  (SCNVector3(6.5, -12.2, 1.0), 0.08, UIColor.systemGreen, UIColor.yellow),
-            .FlyAwayButton:  (SCNVector3(6.5, -14.5, 1.0), 0.08, UIColor.systemBlue, UIColor.yellow),
-            .RotateRightButton:  (SCNVector3(9.2, -14.5, 1.0), 0.08, UIColor.white, UIColor.yellow),
+            .RightButton:  (SCNVector3(9.2, -13.2, 1.0), 0.08, UIColor.white, UIColor.yellow),
+            .DropDownButton:  (SCNVector3(6.5, -13.2, 1.0), 0.08, UIColor.systemGreen, UIColor.yellow),
+            .FlyAwayButton:  (SCNVector3(6.5, -15.5, 1.0), 0.08, UIColor.systemBlue, UIColor.yellow),
+            .RotateRightButton:  (SCNVector3(9.2, -15.5, 1.0), 0.08, UIColor.white, UIColor.yellow),
             
-            .FreezeButton: (SCNVector3(-1.0, -13.5, 1.0), 0.08, UIColor.cyan, UIColor.blue),
+            .FreezeButton: (SCNVector3(-1.0, -14.5, 1.0), 0.08, UIColor.cyan, UIColor.blue),
             
-            .HeartButton: (SCNVector3(5.0, 11, 1.0), 0.05, UIColor.systemPink, UIColor.red)
+            .HeartButton: (SCNVector3(9.2, 6.5, 1.0), 0.05, UIColor.systemPink, UIColor.red)
     ]
     
     /// Dictionary between node button types and the system image name and location of each node. Intended for use with
     /// devices with small screens.
     let SmallButtonDictionary: [NodeButtons: (Location: SCNVector3, Scale: Double, Color: UIColor, Highlight: UIColor)] =
         [
-            .MainButton: (SCNVector3(-10.2, 13, 1.0), 0.08, UIColor.white, UIColor.yellow),
-            .FPSButton: (SCNVector3(-8.5, 12.2, 1.0), 0.08, UIColor.white, UIColor.yellow),
+            .MainButton: (SCNVector3(-7.2, 13.5, 1.0), 0.08, UIColor.white, UIColor.yellow),
+            .FPSButton: (SCNVector3(-5.5, 13.0, 1.0), 0.03, UIColor.white, UIColor.yellow),
+            .PlayButton: (SCNVector3(0.0, 13.0, 1.0), 0.03, UIColor.white, UIColor.red),
+            .PauseButton: (SCNVector3(4.5, 13.0, 1.0), 0.03, UIColor.white, UIColor.red),
+            .VideoButton: (SCNVector3(-1.8, 13.0, 1.0), 0.025, UIColor.white, UIColor.red),
+            .CameraButton: (SCNVector3(0.0, 13.0, 1.0), 0.025, UIColor.white, UIColor.red),
             
-            .LeftButton: (SCNVector3(-11.2, -12.2, 1.0), 0.08, UIColor.white, UIColor.yellow),
-            .RotateLeftButton: (SCNVector3(-11.2, -14.5, 1.0), 0.08, UIColor.white, UIColor.yellow),
-            .UpButton: (SCNVector3(-8.5, -14.5, 1.0), 0.08, UIColor.white, UIColor.yellow),
-            .DownButton:  (SCNVector3(-8.5, -12.2, 1.0), 0.08, UIColor.white, UIColor.yellow),
+            .LeftButton: (SCNVector3(-8.2, -12.95, 1.0), 0.07, UIColor.white, UIColor.yellow),
+            .RotateLeftButton: (SCNVector3(-8.2, -15.25, 1.0), 0.07, UIColor.white, UIColor.yellow),
+            .UpButton: (SCNVector3(-5.5, -15.25, 1.0), 0.07, UIColor.white, UIColor.yellow),
+            .DownButton:  (SCNVector3(-5.5, -12.95, 1.0), 0.07, UIColor.white, UIColor.yellow),
             
-            .RightButton:  (SCNVector3(9.2, -12.2, 1.0), 0.08, UIColor.white, UIColor.yellow),
-            .DropDownButton:  (SCNVector3(6.5, -12.2, 1.0), 0.08, UIColor.systemGreen, UIColor.yellow),
-            .FlyAwayButton:  (SCNVector3(6.5, -14.5, 1.0), 0.08, UIColor.systemBlue, UIColor.yellow),
-            .RotateRightButton:  (SCNVector3(9.2, -14.5, 1.0), 0.08, UIColor.white, UIColor.yellow),
+            .RightButton:  (SCNVector3(6.2, -12.95, 1.0), 0.07, UIColor.white, UIColor.yellow),
+            .DropDownButton:  (SCNVector3(3.5, -12.95, 1.0), 0.07, UIColor.systemGreen, UIColor.yellow),
+            .FlyAwayButton:  (SCNVector3(3.5, -15.25, 1.0), 0.07, UIColor.systemBlue, UIColor.yellow),
+            .RotateRightButton:  (SCNVector3(6.2, -15.25, 1.0), 0.07, UIColor.white, UIColor.yellow),
             
-            .FreezeButton: (SCNVector3(-1.0, -13.5, 1.0), 0.08, UIColor.cyan, UIColor.blue),
+            .FreezeButton: (SCNVector3(-1.0, -14.0, 1.0), 0.07, UIColor.cyan, UIColor.blue),
             
-            .HeartButton: (SCNVector3(5.0, 11, 1.0), 0.05, UIColor.systemPink, UIColor.red)
+            .HeartButton: (SCNVector3(9.2, 6.5, 1.0), 0.05, UIColor.systemPink, UIColor.red)
     ]
     
     var MainButtonObject: SCNNode? = nil
