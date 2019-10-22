@@ -315,20 +315,6 @@ class View3D: SCNView,                          //Our main super class.
     
     var CenterBlockShape: BucketShapes = .Square
     
-    #if false
-    /// Holds the base game type.
-    private var _BaseGameType: BaseGameTypes = .Standard
-    /// Get the current base game type. You should delete the current instance and call **Initialize** on a new instance to
-    /// change this.
-    public var BaseGameType: BaseGameTypes
-    {
-        get
-        {
-            return _BaseGameType
-        }
-    }
-    #endif
-    
     var PerfTimer: Timer? = nil
     @objc func SendPerformanceData()
     {
@@ -702,6 +688,9 @@ class View3D: SCNView,                          //Our main super class.
         let LocalBucketNode = SCNNode()
         
         let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape)!
+        #if true
+        DrawGameBarriers(Parent: LocalBucketNode, InShape: Shape, InitialOpacity: InitialOpacity)
+        #else
         switch BoardClass
         {
             case .Static:
@@ -733,7 +722,7 @@ class View3D: SCNView,                          //Our main super class.
                 LocalBucketNode.opacity = InitialOpacity
             
             case .Rotatable:
-                DrawCenterBlock(Parent: LocalBucketNode, InShape: Shape, InitialOpacity: InitialOpacity)
+                DrawGameBarriers(Parent: LocalBucketNode, InShape: Shape, InitialOpacity: InitialOpacity)
             
             case .ThreeDimensional:
                 let Center = SCNBox(width: 2.0, height: 2.0, length: 2.0, chamferRadius: 0.0)
@@ -744,6 +733,7 @@ class View3D: SCNView,                          //Our main super class.
                 LocalBucketNode.addChildNode(CentralNode)
                 LocalBucketNode.opacity = InitialOpacity
         }
+        #endif
         
         _BucketAdded = true
         return LocalBucketNode
@@ -1063,7 +1053,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter ShapeID: The ID of the piece.
     func AddBlockNode_Standard(ParentID: UUID, BlockID: UUID, X: Int, Y: Int, IsRetired: Bool, ShapeID: UUID)
     {
-        print("Adding standard block node to \(X),\(Y)")
+        //print("Adding standard block node to \(X),\(Y)")
         if let PVisual = PieceVisualManager2.UserVisuals!.GetVisualWith(ID: ShapeID)
         {
             let VBlock = VisualBlocks3D(BlockID, AtX: CGFloat(X), AtY: CGFloat(Y), ActiveVisuals: PVisual.ActiveVisuals!,
@@ -1129,7 +1119,6 @@ class View3D: SCNView,                          //Our main super class.
     /// - Returns: True if the block should be drawn, false if not.
     func ValidBlockToDraw(BlockType: PieceTypes) -> Bool
     {
-        #if true
         let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape)!
         switch BoardClass
         {
@@ -1142,21 +1131,6 @@ class View3D: SCNView,                          //Our main super class.
             case .ThreeDimensional:
                 return false
         }
-        #else
-        switch BaseGameType
-        {
-            case .Standard:
-                return ![.Visible, .InvisibleBucket, .Bucket].contains(BlockType)
-            
-            case .SemiRotating:
-                fallthrough
-            case .Rotating4:
-                return ![.Visible, .InvisibleBucket, .Bucket, .GamePiece, .BucketExterior].contains(BlockType)
-            
-            case .Cubic:
-                return false
-        }
-        #endif
     }
     
     /// Contains a list of IDs of blocks that have been retired. Used to keep the game from moving them when they are no longer
@@ -1309,7 +1283,6 @@ class View3D: SCNView,                          //Our main super class.
                 //Generate offsets to ensure the block is in the proper position in the 3D scene.
                 var YOffset: CGFloat = 0
                 var XOffset: CGFloat = 0
-                #if true
                 switch BoardClass
                 {
                     case .Rotatable:
@@ -1317,33 +1290,20 @@ class View3D: SCNView,                          //Our main super class.
                         XOffset = CGFloat(X) - 17.5
                     
                     case .Static:
-                         YOffset = 10 - CGFloat(Y) //+ 0.5
-                         XOffset = CGFloat(X) - 6.0
+                        if UIDevice.current.userInterfaceIdiom == .phone
+                        {
+                         YOffset = 9 - CGFloat(Y)
+                        }
+                        else
+                        {
+                            YOffset = 7 - CGFloat(Y)
+                        }
+                         XOffset = CGFloat(X) - 5.5
                     
                     case .ThreeDimensional:
                         XOffset = 0
                         YOffset = 0
                 }
-                #else
-                switch BaseGameType
-                {
-                    case .Standard:
-                        YOffset = (30 - 10 - 1) - CGFloat(Y)
-                        XOffset = CGFloat(X) - 6.0
-                    
-                    case .Rotating4:
-                        YOffset = (30 - 10 - 1) - 1.0 - CGFloat(Y)
-                        XOffset = CGFloat(X) - 17.5
-                    
-                    case .SemiRotating:
-                        XOffset = 0
-                        YOffset = 0
-                    
-                    case .Cubic:
-                        XOffset = 0
-                        YOffset = 0
-                }
-                #endif
                 
                 let IsRetired = ItemType! == .RetiredGamePiece
                 
@@ -1374,18 +1334,10 @@ class View3D: SCNView,                          //Our main super class.
                 else
                 {
                     let PieceTypeID = CurrentMap.RetiredPieceShapes[ItemID]!
-                    #if true
                     if BoardClass == .Rotatable
                     {
                         YOffset = YOffset - 0.5
                     }
-                    #else
-                    if BaseGameType == .Rotating4
-                    {
-                        YOffset = YOffset - 0.5
-                    }
-                    #endif
-                    #if true
                     switch BoardClass
                     {
                         case .Static:
@@ -1399,24 +1351,6 @@ class View3D: SCNView,                          //Our main super class.
                         case .ThreeDimensional:
                             break
                     }
-                    #else
-                    switch BaseGameType
-                    {
-                        case .Standard:
-                            AddBlockNode_Standard(ParentID: ItemID, BlockID: BlockID, X: Int(XOffset), Y: Int(YOffset),
-                                                  IsRetired: IsRetired, ShapeID: PieceTypeID)
-                        
-                        case .Rotating4:
-                            AddBlockNode_Rotating(ParentID: ItemID, BlockID: BlockID, X: XOffset, Y: YOffset,
-                                                  IsRetired: IsRetired, ShapeID: PieceTypeID)
-                        
-                        case .SemiRotating:
-                            break
-                        
-                        case .Cubic:
-                            break
-                    }
-                    #endif
                 }
             }
         }
@@ -1587,13 +1521,19 @@ class View3D: SCNView,                          //Our main super class.
         switch BoardClass
         {
             case .Static:
+                let XOffset = 0.5
+                var YOffset = -3.0
+                if UIDevice.current.userInterfaceIdiom == .phone
+                {
+                    YOffset = -1.0
+                }
                 if ShowGrid
                 {
                     //Horizontal bucket lines.
-                    for Y in stride(from: 10.0, to: -10.5, by: -1.0)
+                    for Y in stride(from: 10.0 + YOffset, to: -10.5 + YOffset, by: -1.0)
                     {
-                        let Start = SCNVector3(-0.5, Y, 0.0)
-                        let End = SCNVector3(10.5, Y, 0.0)
+                        let Start = SCNVector3(-0.5 + XOffset, Y, 0.0)
+                        let End = SCNVector3(10.5 + XOffset, Y, 0.0)
                         let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.03)
                         LineNode.categoryBitMask = View3D.GameLight
                         LineNode.name = "Horizontal,\(Int(Y))"
@@ -1602,8 +1542,8 @@ class View3D: SCNView,                          //Our main super class.
                     //Vertical bucket lines.
                     for X in stride(from: -4.5, to: 5.0, by: 1.0)
                     {
-                        let Start = SCNVector3(X, 0.0, 0.0)
-                        let End = SCNVector3(X, 20.0, 0.0)
+                        let Start = SCNVector3(X + XOffset, 0.0 + YOffset, 0.0)
+                        let End = SCNVector3(X + XOffset, 20.0 + YOffset, 0.0)
                         let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.03)
                         LineNode.categoryBitMask = View3D.GameLight
                         LineNode.name = "Vertical,\(Int(X))"
@@ -1612,8 +1552,8 @@ class View3D: SCNView,                          //Our main super class.
                 }
                 if DrawOutline
                 {
-                    let TopStart = SCNVector3(-0.5, 10.0, 0.0)
-                    let TopEnd = SCNVector3(10.5, 10.0, 0.0)
+                    let TopStart = SCNVector3(-0.5 + XOffset, 10.0 + YOffset, 0.0)
+                    let TopEnd = SCNVector3(10.5 + XOffset, 10.0 + YOffset, 0.0)
                     let TopLine = MakeLine(From: TopStart, To: TopEnd, Color: OutlineColor, LineWidth: 0.08)
                     TopLine.categoryBitMask = View3D.GameLight
                     TopLine.name = "TopLine"
@@ -1943,6 +1883,8 @@ class View3D: SCNView,                          //Our main super class.
         }
     }
     
+    // MARK: - Bucket rotatation routines.
+    
     func MovePiece(_ ThePiece: Piece, ToLocation: CGPoint, Duration: Double,
                    Completion: ((UUID) -> ())? = nil)
     {
@@ -1957,8 +1899,6 @@ class View3D: SCNView,                          //Our main super class.
     func DrawPiece(_ ThePiece: Piece, SurfaceSize: CGSize)
     {
     }
-    
-    // MARK: - Bucket rotatation routines.
     
     /// Lock used when the board is rotating.
     var RotateLock = NSObject()
@@ -2093,7 +2033,6 @@ class View3D: SCNView,                          //Our main super class.
         DebugClient.SendPreformattedCommand(MaxNodeCountKVP)
         
         FinalBlocks = [VisualBlocks3D]()
-        #if true
         let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape)!
         switch BoardClass
         {
@@ -2116,33 +2055,7 @@ class View3D: SCNView,                          //Our main super class.
             case .ThreeDimensional:
                 break
         }
-        #else
-        switch BaseGameType
-        {
-            case .Standard:
-                for Block in BlockList
-                {
-                    if Block.ParentID == ID
-                    {
-                        FinalBlocks.append(Block)
-                    }
-            }
-            case .Rotating4:
-                for Block in MovingPieceBlocks
-                {
-                    FinalBlocks.append(Block)
-                    BlockList.insert(Block)
-            }
-            
-            case .SemiRotating:
-                break
-            
-            case .Cubic:
-                break
-        }
-        #endif
         
-        #if true
         let StartColor = UIColor.yellow
         let EndColor = UIColor.red
         for Block in FinalBlocks
@@ -2183,20 +2096,6 @@ class View3D: SCNView,                          //Our main super class.
         {
             Block.runAction(Forever)
         }
-        #else
-        let Rotate = SCNAction.rotateBy(x: CGFloat.pi * 2.0, y: CGFloat.pi * 2.0, z: CGFloat.pi * 2.0, duration: 0.75)
-        Rotate.timingMode = .easeInEaseOut
-        let ScalingDown = SCNAction.scale(by: 0.75, duration: 0.5)
-        ScalingDown.timingMode = .easeInEaseOut
-        let ScalingUp = SCNAction.scale(by: 1.3333333, duration: 0.5)
-        ScalingUp.timingMode = .easeInEaseOut
-        let ScalingSequence = SCNAction.sequence([ScalingDown, ScalingUp, Rotate])
-        let ScaleLoop = SCNAction.repeatForever(ScalingSequence)
-        for Block in FinalBlocks
-        {
-            Block.runAction(ScaleLoop)
-        }
-        #endif
     }
     
     var FinalBlocks = [VisualBlocks3D]()
@@ -2380,9 +2279,9 @@ class View3D: SCNView,                          //Our main super class.
             .FlyAwayButton:  (SCNVector3(6.5, -15.5, 1.0), 0.08, UIColor.systemBlue, UIColor.yellow),
             .RotateRightButton:  (SCNVector3(9.2, -15.5, 1.0), 0.08, UIColor.white, UIColor.yellow),
             
-            .FreezeButton: (SCNVector3(-1.0, -14.5, 1.0), 0.08, UIColor.cyan, UIColor.blue),
+            .FreezeButton: (SCNVector3(-1.0, -15.5, 1.0), 0.08, UIColor.cyan, UIColor.blue),
             
-            .HeartButton: (SCNVector3(9.2, 6.5, 1.0), 0.05, UIColor.systemPink, UIColor.red)
+            .HeartButton: (SCNVector3(9.0, 6.7, 1.0), 0.05, UIColor.systemPink, UIColor.red)
     ]
     
     /// Dictionary between node button types and the system image name and location of each node. Intended for use with
@@ -2397,16 +2296,16 @@ class View3D: SCNView,                          //Our main super class.
             .CameraButton: (SCNVector3(0.0, 13.0, 1.0), 0.025, UIColor.white, UIColor.red),
             
             .LeftButton: (SCNVector3(-8.2, -12.95, 1.0), 0.07, UIColor.white, UIColor.yellow),
+            .DownButton:  (SCNVector3(-6.0, -12.95, 1.0), 0.07, UIColor.white, UIColor.yellow),
             .RotateLeftButton: (SCNVector3(-8.2, -15.25, 1.0), 0.07, UIColor.white, UIColor.yellow),
-            .UpButton: (SCNVector3(-5.5, -15.25, 1.0), 0.07, UIColor.white, UIColor.yellow),
-            .DownButton:  (SCNVector3(-5.5, -12.95, 1.0), 0.07, UIColor.white, UIColor.yellow),
+            .UpButton: (SCNVector3(-6, -15.25, 1.0), 0.07, UIColor.white, UIColor.yellow),
             
             .RightButton:  (SCNVector3(6.2, -12.95, 1.0), 0.07, UIColor.white, UIColor.yellow),
-            .DropDownButton:  (SCNVector3(3.5, -12.95, 1.0), 0.07, UIColor.systemGreen, UIColor.yellow),
-            .FlyAwayButton:  (SCNVector3(3.5, -15.25, 1.0), 0.07, UIColor.systemBlue, UIColor.yellow),
+            .DropDownButton:  (SCNVector3(4.0, -12.95, 1.0), 0.07, UIColor.systemGreen, UIColor.yellow),
+            .FlyAwayButton:  (SCNVector3(4.0, -15.25, 1.0), 0.07, UIColor.systemBlue, UIColor.yellow),
             .RotateRightButton:  (SCNVector3(6.2, -15.25, 1.0), 0.07, UIColor.white, UIColor.yellow),
             
-            .FreezeButton: (SCNVector3(-1.0, -14.0, 1.0), 0.07, UIColor.cyan, UIColor.blue),
+            .FreezeButton: (SCNVector3(-1.0, -15.25, 1.0), 0.07, UIColor.cyan, UIColor.blue),
             
             .HeartButton: (SCNVector3(9.2, 6.5, 1.0), 0.05, UIColor.systemPink, UIColor.red)
     ]
