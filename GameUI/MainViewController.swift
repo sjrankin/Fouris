@@ -233,11 +233,30 @@ class MainViewController: UIViewController,
         TextLayerView.Initialize(With: UUID.Empty, LayerFrame: TextLayerView.frame)
         GameTextOverlay = TextOverlay(Device: UIDevice.current.userInterfaceIdiom)
         GameTextOverlay?.MainClassDelegate = self
-        let InstanceWidth = self.view.bounds.width
-        PressPlayLabelView.frame = CGRect(x: PressPlayLabelView.frame.minX,
-                                          y: PressPlayLabelView.frame.minY,
-                                          width: InstanceWidth,
-                                          height: PressPlayLabelView.frame.height)
+        if UIDevice.current.userInterfaceIdiom == .phone
+        {
+            let InstanceWidth = self.view.bounds.width
+            PressPlayLabelView.frame = CGRect(x: PressPlayLabelView.frame.minX,
+                                              y: PressPlayLabelView.frame.minY,
+                                              width: InstanceWidth,
+                                              height: PressPlayLabelView.frame.height)
+            NextPieceLabelView.frame = CGRect(x: 20,
+                                              y: NextPieceLabelView.frame.minY,
+                                              width: NextPieceLabelView.frame.width,
+                                              height: NextPieceLabelView.frame.height)
+            NextPieceViewControl.frame = CGRect(x: 20,
+                                                y: NextPieceViewControl.frame.minY,
+                                                width: NextPieceViewControl.frame.width,
+                                                height: NextPieceViewControl.frame.height)
+            CurrentScoreLabelView.frame = CGRect(x: InstanceWidth - CurrentScoreLabelView.frame.width,
+                                                 y: CurrentScoreLabelView.frame.minY,
+                                                 width: CurrentScoreLabelView.frame.width,
+                                                 height: CurrentScoreLabelView.frame.height)
+            HighScoreLabelView.frame = CGRect(x: InstanceWidth - HighScoreLabelView.frame.width,
+                                              y: HighScoreLabelView.frame.minY,
+                                              width: HighScoreLabelView.frame.width,
+                                              height: HighScoreLabelView.frame.height)
+        }
         GameTextOverlay?.SetControls(NextLabel: NextPieceLabelView,
                                      ScoreLabel: ScoreLabelView,
                                      CurrentScoreLabel: CurrentScoreLabelView,
