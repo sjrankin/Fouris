@@ -40,7 +40,7 @@ extension View3D
             Box.materials.first?.diffuse.contents = DiffuseColor
             Box.materials.first?.specular.contents = SpecularColor
             let BoxNode = SCNNode(geometry: Box)
-            BoxNode.categoryBitMask = GameLight
+            BoxNode.categoryBitMask = View3D.GameLight
             let FinalX = Location.x - GWidth2
             //Negate the vertical component because the map has lower vertical values on top and the game view
             //(SceneKit) has lower vertical values on the bottom.
@@ -50,7 +50,7 @@ extension View3D
         }
         BNode.position = SCNVector3(0.0, 0.0, 0.0)
         BNode.opacity = InitialOpacity
-        BNode.categoryBitMask = GameLight
+        BNode.categoryBitMask = View3D.GameLight
         Parent.addChildNode(BNode)
     }
 }
