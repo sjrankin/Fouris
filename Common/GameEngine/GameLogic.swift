@@ -641,16 +641,12 @@ class GameLogic
     }
     
     /// The board notified us we have a new piece. Notify the UI.
-    ///
     /// - Note: If we're in AI mode, find the best fit and start the AI motion timer (which retrieves motions from the AI for
     ///         the new piece periodically.
-    ///
     /// - Parameter NewPiece: The new piece to drop.
     func HaveNewPiece(_ NewPiece: Piece)
     {
-        //let UIStart = CACurrentMediaTime()
         UIDelegate?.NewPieceStarted(NewPiece)
-        //print("UIDelegate?.NewPieceStarted duration: \(CACurrentMediaTime() - UIStart)")
         let AIStart = CACurrentMediaTime()
         if EnableAI
         {
