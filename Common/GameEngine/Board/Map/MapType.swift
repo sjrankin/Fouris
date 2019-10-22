@@ -205,11 +205,12 @@ class MapType: CustomStringConvertible
                 _BucketInteriorBottom = _BucketBottom - 1
                 _BucketTop = RawBucket!.BucketY
                 _BucketInteriorTop = _BucketTop
-                _BucketInteriorLeft = 1
+                _BucketInteriorLeft = RawBucket!.BucketX
                 _BucketInteriorRight = RawBucket!.BucketWidth - 1
+                _BucketInteriorRight = (Width - _BucketInteriorLeft) - 1
                 _BucketInteriorWidth = RawBucket!.BucketWidth - 2
                 _BucketInteriorHeight = RawBucket!.BucketHeight - 1
-                print("_Bucket: Top=\(_BucketTop), Bottom=\(_BucketBottom)")
+                //print("_Bucket: Top=\(_BucketTop), Bottom=\(_BucketBottom), InteriorLeft=\(_BucketInteriorLeft), InteriorRight=\(_BucketInteriorRight)")
                 #else
                 _BucketBottom = Height - 1
                 _BucketInteriorBottom = _BucketBottom - 1
@@ -417,6 +418,14 @@ class MapType: CustomStringConvertible
     public func GetPieceStartingPoint(ForPiece: Piece) -> CGPoint
     {
         let BoardDef = BoardManager.GetBoardFor(_BucketShape)!
+        #if true
+        //Y is always 1 because 0 is occupied by an invisible bucket piece.
+        let Y = 1
+        let X = (BoardDef.GameBoardWidth / 2) - (ForPiece.Width / 2)
+        let InitialPoint = CGPoint(x: X, y: Y)
+        //print("InitialPoint=\(InitialPoint)")
+        return InitialPoint
+        #else
         switch BoardClass
         {
             case .Static:
@@ -434,6 +443,7 @@ class MapType: CustomStringConvertible
             case .ThreeDimensional:
                 return CGPoint(x: 0, y: 0)
         }
+        #endif
     }
     
     /// Replaces the current scorer in the instance with the passed scoring class instance.
@@ -2014,16 +2024,14 @@ class MapType: CustomStringConvertible
     }
     
     /// Clone the passed map.
-    ///
     /// -Note: The ID of the new map will be different from the source map.
-    ///
     /// - Parameter From: The source of the clone.
     /// - Returns: Cloned map.
     public static func Clone(From: MapType) -> MapType
     {
         let NewMap = MapType(Width: From.Width, Height: From.Height, ID: UUID(), BucketShape: From.BucketShape)
         NewMap.Contents = From.Contents
-        NewMap.IDMap = From.IDMap!.Clone()
+        //NewMap.IDMap = From.IDMap!.Clone()
         return NewMap
     }
 }
