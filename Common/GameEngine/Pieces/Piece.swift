@@ -64,7 +64,6 @@ class Piece: CustomStringConvertible
         Locations = Array(repeating: Block(), count: 4)
         Components = [Block]()
         GameBoardID = (GameBoard?.ID)!
-        Attributes = PieceAttributes(ID: PieceID)
     }
     
     /// Initializer.
@@ -717,7 +716,6 @@ class Piece: CustomStringConvertible
     
     /// Determines if the piece (in its current shape and location defined by `Locations`) can be rotated
     /// left (counter-clockwise). If the piece **can** be rotated, it **will** be rotated here.
-    ///
     /// - Returns: True if the piece can be rotated counter-clockwise, false if not.
     @discardableResult func CanRotateLeft() -> Bool
     {
@@ -747,7 +745,6 @@ class Piece: CustomStringConvertible
     
     /// Determines if the piece (in its current shape and location defined by `Locations`) can be rotated
     /// right (clockwise). If the piece **can** be rotated, it **will** be rotated here.
-    ///
     /// - Returns: True if the piece can be rotated clockwise, false if not.
     @discardableResult func CanRotateRight() -> Bool
     {
@@ -777,18 +774,36 @@ class Piece: CustomStringConvertible
     
     /// Sets the initial location of each block in the piece. The passed coordinates are applied
     /// to each block's location in order.
-    ///
     /// - Parameters:
     ///   - X: Starting horizontal position.
     ///   - Y: Starting vertical position.
     func SetStartLocation(X: Int, Y: Int)
     {
+        //print("Piece=\(Shape)")
         var Index = 0
+        var MinY = Int.max
+        for Component in Components
+        {
+            if Component.Y < MinY
+            {
+                MinY = Component.Y
+            }
+        }
+        MinY = abs(MinY) + Y
         for SomeBlock in Components
         {
             Locations[Index] = Block(CopyFrom: SomeBlock)
+            #if true
+            var iX = Locations[Index].X
+            iX = iX + X
+            var iY = Locations[Index].Y
+            iY = iY + MinY
+            Locations[Index].X = iX
+            Locations[Index].Y = iY
+            #else
             Locations[Index].X = Locations[Index].X + X
             Locations[Index].Y = Locations[Index].Y + Y
+            #endif
             Index = Index + 1
         }
     }
@@ -1326,7 +1341,6 @@ class Piece: CustomStringConvertible
         {
             //If the piece stopped out of bounds, the game is over.
             _StoppedOutOfBounds = true
-            Attributes![.Common, .OutOfBounds] = true
             GameBoard?.StoppedOutOfBounds(ID: ID)
         }
     }
@@ -1844,30 +1858,6 @@ class Piece: CustomStringConvertible
             }
         }
         return Result
-    }
-    
-    /// Holds the set of visual attributes for this piece. If required attributes are not present, they are added here.
-    private var _Attributes: PieceAttributes? = nil
-    {
-        didSet
-        {
-            if !(_Attributes?.ContainsKey(.OutOfBounds, InDictionary: .Common))!
-            {
-                _Attributes![.Common, .OutOfBounds] = false
-            }
-        }
-    }
-    /// Get or set the visual attributes for this piece.
-    public var Attributes: PieceAttributes?
-    {
-        get
-        {
-            return _Attributes
-        }
-        set
-        {
-            _Attributes = newValue
-        }
     }
     
     /// Returns a description of the contents of the Piece.
