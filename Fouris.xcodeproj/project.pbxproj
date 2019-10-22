@@ -20,7 +20,6 @@
 		170FC666233DE3E300F9A8F1 /* XMLKVP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170FC665233DE3E300F9A8F1 /* XMLKVP.swift */; };
 		170FC66A233DFA9900F9A8F1 /* XMLSemanticParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170FC669233DFA9900F9A8F1 /* XMLSemanticParser.swift */; };
 		170FC672233E003F00F9A8F1 /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170FC671233E003F00F9A8F1 /* Tree.swift */; };
-		171020F0227D8A91002FAB63 /* PieceAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171020EF227D8A91002FAB63 /* PieceAttributes.swift */; };
 		1710BF7E231E4C9800F566B3 /* GradientStopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1710BF7D231E4C9800F566B3 /* GradientStopCell.swift */; };
 		1710BF82231E829800F566B3 /* PresetGradientListCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1710BF81231E829800F566B3 /* PresetGradientListCode.swift */; };
 		1710BF84231E841500F566B3 /* PresetGradientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1710BF83231E841500F566B3 /* PresetGradientCell.swift */; };
@@ -232,7 +231,7 @@
 		17D48A7B22B202B000DD7C94 /* 3DView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D48A7A22B202B000DD7C94 /* 3DView.swift */; };
 		17D48A8422B2111D00DD7C94 /* ThreeDProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D48A8322B2111D00DD7C94 /* ThreeDProtocol.swift */; };
 		17D6B195233DC42400EFCE31 /* UserPieceDescriptions.xml in Resources */ = {isa = PBXBuildFile; fileRef = 17D6B194233DC42400EFCE31 /* UserPieceDescriptions.xml */; };
-		17DCD7EA2309436F0072B306 /* +DrawCenterBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCD7E92309436F0072B306 /* +DrawCenterBlock.swift */; };
+		17DCD7EA2309436F0072B306 /* +DrawGameBarriers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCD7E92309436F0072B306 /* +DrawGameBarriers.swift */; };
 		17DCD7EE23096E340072B306 /* +MapType_BucketCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCD7ED23096E340072B306 /* +MapType_BucketCreation.swift */; };
 		17DCFD34230291B100A00600 /* ManagedTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCFD33230291B100A00600 /* ManagedTimer.swift */; };
 		17DEE6B623573AFF00099D18 /* BoardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DEE6B523573AFF00099D18 /* BoardData.swift */; };
@@ -292,7 +291,6 @@
 		170FC669233DFA9900F9A8F1 /* XMLSemanticParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLSemanticParser.swift; sourceTree = "<group>"; };
 		170FC671233E003F00F9A8F1 /* Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
 		171020ED227D68A2002FAB63 /* GameViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewProtocol.swift; sourceTree = "<group>"; };
-		171020EF227D8A91002FAB63 /* PieceAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceAttributes.swift; sourceTree = "<group>"; };
 		1710BF7D231E4C9800F566B3 /* GradientStopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientStopCell.swift; sourceTree = "<group>"; };
 		1710BF81231E829800F566B3 /* PresetGradientListCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetGradientListCode.swift; sourceTree = "<group>"; };
 		1710BF83231E841500F566B3 /* PresetGradientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetGradientCell.swift; sourceTree = "<group>"; };
@@ -508,7 +506,7 @@
 		17D48A7A22B202B000DD7C94 /* 3DView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 3DView.swift; sourceTree = "<group>"; };
 		17D48A8322B2111D00DD7C94 /* ThreeDProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDProtocol.swift; sourceTree = "<group>"; };
 		17D6B194233DC42400EFCE31 /* UserPieceDescriptions.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = UserPieceDescriptions.xml; sourceTree = "<group>"; };
-		17DCD7E92309436F0072B306 /* +DrawCenterBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+DrawCenterBlock.swift"; sourceTree = "<group>"; };
+		17DCD7E92309436F0072B306 /* +DrawGameBarriers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+DrawGameBarriers.swift"; sourceTree = "<group>"; };
 		17DCD7ED23096E340072B306 /* +MapType_BucketCreation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+MapType_BucketCreation.swift"; sourceTree = "<group>"; };
 		17DCFD33230291B100A00600 /* ManagedTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedTimer.swift; sourceTree = "<group>"; };
 		17DEE6B523573AFF00099D18 /* BoardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardData.swift; sourceTree = "<group>"; };
@@ -1119,7 +1117,7 @@
 		17DCD7EC230945390072B306 /* 3DViewExtensions */ = {
 			isa = PBXGroup;
 			children = (
-				17DCD7E92309436F0072B306 /* +DrawCenterBlock.swift */,
+				17DCD7E92309436F0072B306 /* +DrawGameBarriers.swift */,
 				17376356230A9C9C0050EB22 /* +BucketCleaner.swift */,
 				17E619A82348495B00C391CF /* +BoardRemoval.swift */,
 				17B112FF232B693E007DFBD4 /* +Renderer.swift */,
@@ -1335,7 +1333,6 @@
 				17F0B4B0225CC22A0071514E /* Piece.swift */,
 				1705ADEB225D911B00628268 /* Block.swift */,
 				1753ABEC225E213200FC7089 /* PieceFactory.swift */,
-				171020EF227D8A91002FAB63 /* PieceAttributes.swift */,
 			);
 			path = Pieces;
 			sourceTree = "<group>";
@@ -1495,7 +1492,7 @@
 				17AD5D79235AF84F002D6125 /* MainButtonMenuCode.swift in Sources */,
 				17C2F3AB231A1395001EF200 /* ColorPickerCode.swift in Sources */,
 				1705ADEC225D911B00628268 /* Block.swift in Sources */,
-				17DCD7EA2309436F0072B306 /* +DrawCenterBlock.swift in Sources */,
+				17DCD7EA2309436F0072B306 /* +DrawGameBarriers.swift in Sources */,
 				17189FFB233346C100317BF1 /* +Gradient.swift in Sources */,
 				17F6ECEE2286E1C7000F8E11 /* MainDelegate.swift in Sources */,
 				1710BF7E231E4C9800F566B3 /* GradientStopCell.swift in Sources */,
@@ -1683,7 +1680,6 @@
 				178F4CA6229131A900FBCFFD /* Board.swift in Sources */,
 				17E71A7D22AD21920081991E /* MultiPeerDelegate.swift in Sources */,
 				175098B32290338400A411DE /* MapType.swift in Sources */,
-				171020F0227D8A91002FAB63 /* PieceAttributes.swift in Sources */,
 				17B8757523236C9A00BD8BBD /* BlockView.swift in Sources */,
 				1704E302232130E900D7C158 /* ThemeEditingProtocol.swift in Sources */,
 				17831EDB232DD73D007FF894 /* FlyingNode.swift in Sources */,
