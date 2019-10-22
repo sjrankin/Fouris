@@ -80,19 +80,19 @@ public class Versioning: CustomStringConvertible
     }
     
     /// Build number.
-    public static let Build: Int = 2740
+    public static let Build: Int = 2790
     
     /// Build increment.
     private static let BuildIncrement = 1
     
     /// Build ID.
-    public static let BuildID: String = "8A9B09E7-4152-4024-B604-1032717AB39C"
+    public static let BuildID: String = "ABA46AB6-020C-41F0-8724-CD5418A554BF"
     
     /// Build date.
     public static let BuildDate: String = "22 October 2019"
     
     /// Build Time.
-    public static let BuildTime: String = "11:08"
+    public static let BuildTime: String = "20:55"
     
     /// Return a standard build string.
     ///
