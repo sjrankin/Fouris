@@ -152,14 +152,8 @@ class MainViewController: UIViewController,
         UserTheme = Themes.UserTheme
         //print("UserTheme=\n\(UserTheme!.ToString())")
         Themes.SubscribeToChanges(Subscriber: "MainViewController", SubscribingObject: self)
-        CurrentBaseGameType = .Rotating4
         PreviousGameShape = UserTheme!.BucketShape
-        //print("CurrentBaseGameType=\(CurrentBaseGameType)")
-        #if true
         PieceVisualManager2.Initialize()
-        #else
-        PieceVisualManager.Initialize()
-        #endif
         RecentlyUsedColors.Initialize(WithLimit: Settings.GetMostRecentlyUsedColorListCapacity())
         HistoryManager.Initialize()
         
@@ -167,27 +161,10 @@ class MainViewController: UIViewController,
         AIData = AITestTable()
         
         InitializeGameUI()
-        //StartHeartbeat()
         setNeedsStatusBarAppearanceUpdate()
         
         Stepper.Delegate = self
     }
-    
-    #if false
-    /// Layout complete. Save certain information.
-    override func viewDidLayoutSubviews()
-    {
-        if !VersionShown
-        {
-            VersionShown = true
-            if Settings.GetShowVersionBox()
-            {
-                VersionBoxShowing = true
-                GameTextOverlay?.ShowVersionBox(WithString: Versioning.MakeSimpleVersionString())
-            }
-        }
-    }
-    #endif
     
     /// Called when the version box disappears.
     func VersionBoxDisappeared()
@@ -211,19 +188,11 @@ class MainViewController: UIViewController,
         InstanceSeconds = InstanceSeconds + 1
         if Settings.ShowInstanceSeconds()
         {
-            #if true
             if (GameView3D?.IsDisabledButton(.FPSButton))!
             {
                 GameView3D?.EnableControl(Which: .FPSButton)
             }
             GameView3D?.SetText(OnButton: .FPSButton, ToNextText: "\(InstanceSeconds)")
-            #else
-            if FPSLabel.alpha > 0.0
-            {
-                FPSLabel.text = "\(InstanceSeconds)"
-                GameView3D?.SetText(OnButton: .FPSButton, ToNextText: "\(InstanceSeconds)")
-            }
-            #endif
         }
     }
     
@@ -243,13 +212,8 @@ class MainViewController: UIViewController,
     {
         //Initialize buttons.
         EnableFreezeInPlaceButton(false)
-        
-        InitializeSlideIn()
-        #if true
+
         Game = GameLogic(UserTheme: UserTheme!, EnableAI: false)
-        #else
-        Game = GameLogic(BaseGame: CurrentBaseGameType, UserTheme: UserTheme!, EnableAI: false)
-        #endif
         Game.UIDelegate = self
         Game.AIDelegate = self
         
@@ -260,13 +224,20 @@ class MainViewController: UIViewController,
         GameView3D?.Owner = self
         GameView3D?.SmoothMotionDelegate = self
         Smooth3D = GameView3D
+        #if false
         GameUISurface3D.layer.borderColor = UIColor.black.cgColor
         GameUISurface3D.layer.borderWidth = 1.0
+        #endif
         
         //Initialize the game text layer.
         TextLayerView.Initialize(With: UUID.Empty, LayerFrame: TextLayerView.frame)
         GameTextOverlay = TextOverlay(Device: UIDevice.current.userInterfaceIdiom)
         GameTextOverlay?.MainClassDelegate = self
+        let InstanceWidth = self.view.bounds.width
+        PressPlayLabelView.frame = CGRect(x: PressPlayLabelView.frame.minX,
+                                          y: PressPlayLabelView.frame.minY,
+                                          width: InstanceWidth,
+                                          height: PressPlayLabelView.frame.height)
         GameTextOverlay?.SetControls(NextLabel: NextPieceLabelView,
                                      ScoreLabel: ScoreLabelView,
                                      CurrentScoreLabel: CurrentScoreLabelView,
@@ -283,11 +254,6 @@ class MainViewController: UIViewController,
         VersionBoxShowing = true
         GameView3D?.ShowAboutBox(FadeInDuration: 0.01, HideAfter: 10.0)
         
-        //Initialize view backgrounds.
-        #if false
-        GameControlView.layer.backgroundColor = ColorServer.CGColorFrom(ColorNames.ReallyDarkGray)
-        #endif
-        
         let AutoStartDuration = UserTheme!.AutoStartDuration
         let _ = Timer.scheduledTimer(timeInterval: AutoStartDuration, target: self,
                                      selector: #selector(AutoStartInAttractMode),
@@ -295,12 +261,10 @@ class MainViewController: UIViewController,
         
         InitializeGestures()
         
-        #if true
         if UserTheme!.ShowHeartbeat
         {
             StartHeartbeat()
         }
-        #endif
         
         if Settings.GetShowCameraControls()
         {
@@ -338,82 +302,12 @@ class MainViewController: UIViewController,
         Settings.AddSubscriber(For: "Main", NewSubscriber: self)
         if Settings.ShowFPSInUI()
         {
-            #if false
-            FPSLabel.text = ""
-            FPSLabel.alpha = 1.0
-            FPSLabel.isUserInteractionEnabled = true
-            #endif
             GameView3D?.SetText(OnButton: .FPSButton, ToNextText: "°")
         }
         else
         {
-            #if false
-            FPSLabel.alpha = 0.0
-            FPSLabel.isUserInteractionEnabled = false
-            #endif
             GameView3D?.DisableControl(Which: .FPSButton)
         }
-        #if true
-
-        #else
-        let Tap = UITapGestureRecognizer(target: self, action: #selector(FPSTapped))
-        Tap.numberOfTouchesRequired = 1
-        FPSLabel.addGestureRecognizer(Tap)
-        SlideInCameraControlBox.layer.backgroundColor = ColorServer.CGColorFrom(ColorNames.WhiteSmoke)
-        SlideInCameraControlBox.layer.borderColor = UIColor.black.cgColor
-        ShowCameraControls()
-        if UIDevice.current.userInterfaceIdiom == .phone
-        {
-            VideoButton.alpha = 0.0
-            VideoButton.isHidden = true
-            VideoButton.isUserInteractionEnabled = false
-            CameraButton.alpha = 0.0
-            CameraButton.isHidden = true
-            CameraButton.isUserInteractionEnabled = false
-            FlameButton.alpha = 0.0
-            FlameButton.isHidden = true
-            FlameButton.isUserInteractionEnabled = false
-            GameView3D?.RemoveButton(Which: .VideoButton)
-            GameView3D?.RemoveButton(Which: .CameraButton)
-        }
-        #endif
-    }
-    
-    /// Handle taps on the FPS text display. This toggles the contents from frames/second to instance seconds.
-    /// - Parameter Recognizer: The tap gesture recognizer.
-    @objc func FPSTapped(Recognizer: UIGestureRecognizer)
-    {
-        if Recognizer.state == .ended
-        {
-            let OldShowSeconds = Settings.ShowInstanceSeconds()
-            Settings.SetShowInstanceSeconds(NewValue: !OldShowSeconds)
-        }
-    }
-    
-    /// Set camera button visibility depending on the settings.
-    func ShowCameraControls()
-    {
-        #if false
-        var NotUsed: String? = nil
-        ActivityLog.AddEntry(Title: "UI", Source: "MainViewController", KVPs: [("ShowCameraControls","\(Settings.GetShowCameraControls())")],
-                             LogFileName: &NotUsed)
-        VideoButton.isHidden = !Settings.GetShowCameraControls()
-        VideoButton.isUserInteractionEnabled = Settings.GetShowCameraControls()
-        CameraButton.isHidden = !Settings.GetShowCameraControls()
-        CameraButton.isUserInteractionEnabled = Settings.GetShowCameraControls()
-        if Settings.GetShowCameraControls()
-        {
-            SlideInCameraControlBox.backgroundColor = ColorServer.ColorFrom(ColorNames.WhiteSmoke)
-            SlideInCameraControlBox.layer.borderColor = UIColor.black.cgColor
-            SlideInCameraControlBox.alpha = 1.0
-            SlideInCameraControlBox.isUserInteractionEnabled = true
-        }
-        else
-        {
-            SlideInCameraControlBox.alpha = 0.0
-            SlideInCameraControlBox.isUserInteractionEnabled = false
-        }
-        #endif
     }
     
     /// Set motion control visibility.
@@ -459,19 +353,10 @@ class MainViewController: UIViewController,
                 let DoShowFPS = NewValue as! Bool
                 if DoShowFPS
                 {
-                    #if false
-                    FPSLabel.text = ""
-                    FPSLabel.alpha = 1.0
-                    FPSLabel.isUserInteractionEnabled = true
-                    #endif
                     GameView3D?.EnableControl(Which: .FPSButton)
                 }
                 else
                 {
-                    #if false
-                    FPSLabel.alpha = 0.0
-                    FPSLabel.isUserInteractionEnabled = false
-                    #endif
                     GameView3D?.DisableControl(Which: .FPSButton)
             }
             case .InterfaceLanguage:
@@ -543,10 +428,10 @@ class MainViewController: UIViewController,
                             break
                         
                         case .PlayButton:
-                            HandlePlayStopPressed(self)
+                            HandlePlayStopPressed()
                         
                         case .PauseButton:
-                            HandlePauseResumePressed(self)
+                            HandlePauseResumePressed()
                         
                         case .CameraButton:
                             SaveGameViewAsImage()
@@ -555,7 +440,6 @@ class MainViewController: UIViewController,
                             HandleScreenRecording()
                         
                         case .FPSButton:
-                            print("FPS Button Pressed")
                             let OldShowSeconds = Settings.ShowInstanceSeconds()
                             Settings.SetShowInstanceSeconds(NewValue: !OldShowSeconds)
                         
@@ -599,7 +483,6 @@ class MainViewController: UIViewController,
                     {
                         if Node.name! == "MainButtonObject"
                         {
-                            print("Main button pressed.")
                             MenuShowing = !MenuShowing
                             if MenuShowing
                             {
@@ -758,11 +641,7 @@ class MainViewController: UIViewController,
         DebugClient.Send("Game \(GameCount) started in attract mode.")
         Game.StartGame(EnableAI: true, PieceCategories: [.Standard], UseFastAI: UseFastAI)
         DumpGameBoard(Game.GameBoard!)
-        #if true
         GameView3D?.SetText(OnButton: .PlayButton, ToNextText: "Stop")
-        #else
-        PlayStopButton.setTitle("Stop", for: .normal)
-        #endif
         ForceResume()
         
         DebugClient.SetIdiotLight(IdiotLights.B2, Title: "Playing", FGColor: ColorNames.WhiteSmoke, BGColor: ColorNames.PineGreen)
@@ -839,15 +718,13 @@ class MainViewController: UIViewController,
                              LogFileName: &NotUsed)
         let GamePlayDuration = CACurrentMediaTime() - GamePlayStart
         let History = HistoryManager.GetHistory(InAttractMode)
+        #if false
         History?.Games![CurrentBaseGameType]!.AddDuration(NewDuration: Int(GamePlayDuration))
         History?.Games![CurrentBaseGameType]!.SetHighScore(NewScore: Game.HighScore)
         History?.Games![CurrentBaseGameType]!.AddScore(NewScore: Game.CurrentGameScore)
-        HistoryManager.Save()
-        #if true
-        GameView3D?.SetText(OnButton: .PlayButton, ToNextText: "Play")
-        #else
-        PlayStopButton?.setTitle("Play", for: .normal)
         #endif
+        HistoryManager.Save()
+        GameView3D?.SetText(OnButton: .PlayButton, ToNextText: "Play")
         var GameDuration = Game.GameDuration()
         GameDuration = round(GameDuration)
         
@@ -878,9 +755,6 @@ class MainViewController: UIViewController,
         if !Settings.ShowInstanceSeconds()
         {
             let MeanFPSText = "μ \(Convert.RoundToString(MeanVal, ToNearest: 0.001, CharCount: 6))"
-            #if false
-            FPSLabel.text = MeanFPSText
-            #endif
             GameView3D?.SetText(OnButton: .FPSButton, ToNextText: MeanFPSText)
         }
         
@@ -956,8 +830,9 @@ class MainViewController: UIViewController,
     func MapUpdated()
     {
         let History = HistoryManager.GetHistory(InAttractMode)
+        #if false
         History?.Games![CurrentBaseGameType]!.IncrementPieceCount()
-        #if true
+        #endif
         let BoardClass = BoardData.GetBoardClass(For: UserTheme!.BucketShape)!
         switch BoardClass
         {
@@ -970,22 +845,6 @@ class MainViewController: UIViewController,
             case .ThreeDimensional:
                 break
         }
-        #else
-        switch CurrentBaseGameType
-        {
-            case .Standard:
-                GameView3D?.DrawMap3D(FromBoard: Game.GameBoard!, CalledFrom: "MapUpdated")
-            
-            case .Rotating4:
-                break
-            
-            case .SemiRotating:
-                break
-            
-            case .Cubic:
-                GameView3D?.DrawMap3D(FromBoard: Game.GameBoard!)
-        }
-        #endif
         DumpGameBoard(Game.GameBoard!)
     }
     
@@ -993,7 +852,6 @@ class MainViewController: UIViewController,
     /// different things.
     func PieceUpdated(_ ThePiece: Piece, X: Int, Y: Int)
     {
-        #if true
         let BoardClass = BoardData.GetBoardClass(For: UserTheme!.BucketShape)!
         switch BoardClass
         {
@@ -1006,17 +864,6 @@ class MainViewController: UIViewController,
             case .ThreeDimensional:
                 break
         }
-        #else
-        switch CurrentBaseGameType
-        {
-            case .Rotating4:
-                GameView3D?.DrawPiece3D(InBoard: Game.GameBoard!, GamePiece: ThePiece)
-            
-            default:
-                break
-        }
-        //GameView3D?.MovePieceSmoothly(ThePiece, ToOffsetX: CGFloat(X), ToOffsetY: CGFloat(Y), Duration: 0.35)
-        #endif
     }
     
     /// The specified piece froze. Draw the new map.
@@ -1031,7 +878,6 @@ class MainViewController: UIViewController,
         var NotUsed: String? = nil
         ActivityLog.AddEntry(Title: "Game", Source: "MainViewController", KVPs: [("Message","Piece finalized."),("PieceID",ThePiece.ID.uuidString)],
                              LogFileName: &NotUsed)
-        #if true
         let BoardClass = BoardData.GetBoardClass(For: UserTheme!.BucketShape)!
         switch BoardClass
         {
@@ -1086,61 +932,6 @@ class MainViewController: UIViewController,
             case .ThreeDimensional:
                 break
         }
-        #else
-        switch CurrentBaseGameType
-        {
-            case .Standard:
-                break
-            
-            case .SemiRotating:
-                fallthrough
-            case .Rotating4:
-                GameView3D?.MergePieceIntoBucket(ThePiece)
-                GameView3D?.DrawMap3D(FromBoard: Game!.GameBoard!, CalledFrom: "PieceFinalized")
-                
-                if UserTheme!.RotateBucket
-                {
-                    switch UserTheme!.RotatingBucketDirection
-                    {
-                        case .Left:
-                            Game!.GameBoard!.Map!.RotateMapLeft()
-                            GameView3D?.RotateContentsLeft(Duration: UserTheme!.RotationDuration, Completed: {self.Nop()})
-                        
-                        case .Right:
-                            Game!.GameBoard!.Map!.RotateMapRight()
-                            GameView3D?.RotateContentsRight(Duration: UserTheme!.RotationDuration, Completed: {self.Nop()})//{self.RotateFinishFinalizing()})
-                        
-                        case .Random:
-                            if Bool.random()
-                            {
-                                Game!.GameBoard!.Map!.RotateMapLeft()
-                                GameView3D?.RotateContentsLeft(Duration: UserTheme!.RotationDuration, Completed: {self.Nop()})
-                            }
-                            else
-                            {
-                                Game!.GameBoard!.Map!.RotateMapRight()
-                                GameView3D?.RotateContentsRight(Duration: UserTheme!.RotationDuration, Completed: {self.Nop()})
-                        }
-                        
-                        case .None:
-                            NoRotateFinishFinalizing()
-                            return
-                    }
-                    //DispatchCalled = CACurrentMediaTime()
-                    //print("RotateFinishFinalized dispatched, Duration=\(UserTheme!.RotationDuration)")
-                    DispatchQueue.main.asyncAfter(deadline: .now() + UserTheme!.RotationDuration,
-                                                  qos: .userInteractive,
-                                                  execute: {self.RotateFinishFinalizing()})
-                }
-                else
-                {
-                    NoRotateFinishFinalizing()
-            }
-            
-            case .Cubic:
-                break
-        }
-        #endif
     }
     
     //var DispatchCalled: Double = 0.0
@@ -1279,6 +1070,8 @@ class MainViewController: UIViewController,
     func NewHighScore(HighScore: Int)
     {
         let ScoreTitle = "High Score\n\(HighScore)"
+        var NotUsed: String? = nil
+        ActivityLog.AddEntry(Title: "Game", Source: "MainView", KVPs: [("HighScore","\(HighScore)")], LogFileName: &NotUsed)
         DebugClient.SetIdiotLight(IdiotLights.C1, Title: ScoreTitle, FGColor: ColorNames.Black, BGColor: ColorNames.WhiteSmoke)
         GameTextOverlay?.ShowHighScore(NewScore: HighScore, Highlight: true,
                                        HighlightColor: ColorNames.Gold, HighlightDuration: 1.0)
@@ -1319,9 +1112,6 @@ class MainViewController: UIViewController,
         {
             if !Settings.ShowInstanceSeconds()
             {
-                #if false
-                FPSLabel.text = FPSS
-                #endif
                 GameView3D?.SetText(OnButton: .FPSButton, ToNextText: FPSS)
             }
         }
@@ -1459,12 +1249,7 @@ class MainViewController: UIViewController,
             ActivityLog.AddEntry(Title: "Game", Source: "MainViewController", KVPs: [("Message","Game resumed.")],
                                  LogFileName: &NotUsed)
             IsPaused = false
-            #if true
             GameView3D?.SetText(OnButton: .PauseButton, ToNextText: "Pause")
-            #else
-            PauseResumeButton?.setTitle("Pause", for: .normal)
-            SlideInPauseButton.setTitle("Pause", for: .normal)
-            #endif
             GameTextOverlay?.HidePause(Duration: 0.1)
             Game.ResumeGame()
             DebugClient.Send("Game resumed.")
@@ -1476,12 +1261,7 @@ class MainViewController: UIViewController,
             ActivityLog.AddEntry(Title: "Game", Source: "MainViewController", KVPs: [("Message","Game paused.")],
                                  LogFileName: &NotUsed)
             IsPaused = true
-            #if true
                         GameView3D?.SetText(OnButton: .PauseButton, ToNextText: "Resume")
-            #else
-            PauseResumeButton?.setTitle("Resume", for: .normal)
-            SlideInPauseButton.setTitle("Resume", for: .normal)
-            #endif
             GameTextOverlay?.ShowPause(Duration: 0.1)
             Game.PauseGame()
             DebugClient.Send("Game paused.")
@@ -1556,7 +1336,9 @@ class MainViewController: UIViewController,
                              LogFileName: &NotUsed)
         GamePlayStart = CACurrentMediaTime()
         let History = HistoryManager.GetHistory(InAttractMode)
+        #if false
         History?.Games![CurrentBaseGameType]!.IncrementGameCount()
+        #endif
         ForceResume()
         StopAccumulating = false
         RotateIndex = 0
@@ -1577,11 +1359,7 @@ class MainViewController: UIViewController,
         GameView3D?.DrawMap3D(FromBoard: Game.GameBoard!, CalledFrom: "Play")
         GameTextOverlay?.ShowCurrentScore(NewScore: 0)
         CurrentlyPlaying = true
-        #if true
         GameView3D?.SetText(OnButton: .PlayButton, ToNextText: "Stop")
-        #else
-        PlayStopButton?.setTitle("Stop", for: .normal)
-        #endif
         if !InAttractMode
         {
             DebugClient.SetIdiotLight(IdiotLights.A2, Title: "Normal Mode", FGColor: ColorNames.Black, BGColor: ColorNames.White)
@@ -1609,6 +1387,9 @@ class MainViewController: UIViewController,
         CurrentlyPlaying = false
         Game.StopGame()
         DebugClient.Send("Game \(GameCount) stopped by user.")
+        var NotUsed: String? = nil
+        ActivityLog.AddEntry(Title: "Game", Source: "MainView", KVPs: [("Message","Game stopped by user."),
+        ("GameCount","\(GameCount)")], LogFileName: &NotUsed)
         NewPieceCount = 0
         GameCount = GameCount + 1
     }
@@ -1677,42 +1458,26 @@ class MainViewController: UIViewController,
     }
     
     /// Handle the play button pressed.
-    ///
     /// - Note: The button's visuals will change depending on whether the game is in play or stopped.
-    ///
-    /// - Parameter sender: Not used.
-    @IBAction func HandlePlayStopPressed(_ sender: Any)
+    func HandlePlayStopPressed()
     {
         if CurrentlyPlaying
         {
             Stop()
             GameTextOverlay?.ShowPressPlay(Duration: 0.5)
-            #if true
             GameView3D?.SetText(OnButton: .PlayButton, ToNextText: "Play")
-            #else
-            PlayStopButton?.setTitle("Play", for: .normal)
-            SlideInPlayButton.setTitle("Play", for: .normal)
-            #endif
         }
         else
         {
             InAttractMode = false
             Play()
-            #if true
             GameView3D?.SetText(OnButton: .PlayButton, ToNextText: "Stop")
-            #else
-            PlayStopButton?.setTitle("Stop", for: .normal)
-            SlideInPlayButton.setTitle("Stop", for: .normal)
-            #endif
         }
     }
     
     /// Handle the pause button pressed.
-    ///
     /// - Note: The button's visuals will change depending on whether the game is in paused or playing.
-    ///
-    /// - Parameter sender: Not used.
-    @IBAction func HandlePauseResumePressed(_ sender: Any)
+    func HandlePauseResumePressed()
     {
         Pause()
     }
@@ -1874,9 +1639,9 @@ class MainViewController: UIViewController,
     
     // MARK: - General-UI interactions.
     
-    var ProposedNewGameType: BaseGameTypes = .Standard
+    //var ProposedNewGameType: BaseGameTypes = .Standard
     
-    var CurrentBaseGameType: BaseGameTypes = .Standard
+    //var CurrentBaseGameType: BaseGameTypes = .Standard
     
     var UsePredeterminedOrder: Bool = false
     
@@ -1893,129 +1658,6 @@ class MainViewController: UIViewController,
     {
         return .lightContent
     }
-    
-    // MARK: - Slide-in view functions.
-    
-    /// Handle the pressing of the main UI button. If the slide in view is already visible, hide it. If the slide in view is
-    /// hidden, show it.
-    /// - Parameter sender: Not used.
-    @IBAction func HandleMainButtonPressed(_ sender: Any)
-    {
-        #if false
-        //Initialize the first use of the slide in view.
-        if FirstSlideIn
-        {
-            FirstSlideIn = false
-            GameViewContainer.bringSubviewToFront(MainSlideIn)
-        }
-        if MainSlideIn!.IsVisible
-        {
-            MainSlideIn?.HideMainSlideIn()
-            UpdateMainButton(false)
-        }
-        else
-        {
-            MainSlideIn?.ShowMainSlideIn()
-            UpdateMainButton(true)
-        }
-        #endif
-    }
-    
-    /// Update the main UI button by rotating it to indicate it has been pressed.
-    /// - Parameter Opened: Determines the icon to show.
-    private func UpdateMainButton(_ Opened: Bool)
-    {
-        #if false
-        let ImageName = Opened ? "cube" : "cube.fill"
-        let ButtonImage = UIImage(systemName: ImageName)
-        MainUIButton.setImage(ButtonImage, for: UIControl.State.normal)
-        #endif
-        if Opened
-        {
-            GameView3D?.ChangeMainButtonTexture(To: UIImage(named: "Checkerboard64BlueYellow")!)
-        }
-        else
-        {
-         GameView3D?.ChangeMainButtonTexture(To: UIImage(named: "Checkerboard64")!)
-        }
-    }
-    
-    #if false
-    /// Handle the restart game button in the slide in view.
-    @IBAction func HandleSlideInRestartGamePressed(_ sender: Any)
-    {
-        MainSlideIn?.HideMainSlideIn()
-        UpdateMainButton(false)
-    }
-    
-    /// Handle the close button in the slide in view pressed by the user by closing the slide in view.
-    /// - Parameter sender: Not used.
-    @IBAction func HandleSlideInCloseButtonPressed(_ sender: Any)
-    {
-        MainSlideIn?.HideMainSlideIn()
-        UpdateMainButton(false)
-    }
-    
-    /// Handle the attract button in the slide in view pressed. Start a new game in attract mode (AI running).
-    /// - Note: It is important the AttractTimer is destroyed or timing issues will cause crashes.
-    /// - Parameter sender: Not used.
-    @IBAction func HandleSlideInAttractButtonPressed(_ sender: Any)
-    {
-        MainSlideIn?.HideMainSlideIn()
-        UpdateMainButton(false)
-        if AttractTimer != nil
-        {
-            //Need to invalidate the attract timer (if it's active) or bad things will happen
-            //(specifically, pieces will get confused about which board they belong to, causing
-            //crashes and fatal errors).
-            AttractTimer?.invalidate()
-            AttractTimer = nil
-        }
-        InAttractMode = true
-        Stop()
-        ClearAndPlay()
-    }
-    
-    /// Show the slide-in menu.
-    /// - Parameter sender: Not used.
-    @IBAction func HandleSettingsSlideInButtonPressed(_ sender: Any)
-    {
-        ForcePause()
-        MainSlideIn.HideMainSlideIn()
-        UpdateMainButton(false)
-        let Storyboard = UIStoryboard(name: "Theming", bundle: nil)
-        if let Controller = Storyboard.instantiateViewController(withIdentifier: "MainThemeEditor") as? ThemeEditorController
-        {
-            Controller.EditTheme(Theme: Themes!.UserTheme!)
-            self.present(Controller, animated: true, completion: nil)
-        }
-    }
-    
-    /// About dialog instantiated. Clean up the slide-in menu.
-    /// - Parameter coder: See Apple documentation.
-    /// - Returns: About dialog controller code.
-    @IBSegueAction func InstantiateAboutDialog(_ coder: NSCoder) -> AboutDialogController?
-    {
-        ForcePause()
-        MainSlideIn.HideMainSlideIn()
-        UpdateMainButton(false)
-        let About = AboutDialogController(coder: coder)
-        return About
-    }
-    
-    /// Game selector dialog instantiated. Clean up the slide-in menu.
-    /// Parameter code: See Apple documentation.
-    /// - Returns: Game selector code.
-    @IBSegueAction func InstantiateGameSelector(_ coder: NSCoder) -> SelectGameController?
-    {
-        ForcePause()
-        MainSlideIn.HideMainSlideIn()
-        UpdateMainButton(false)
-        let Selector = SelectGameController(coder: coder)
-        Selector?.SelectorDelegate = self
-        return Selector
-    }
-    #endif
     
     /// Handle game type changes from the user. Called from the game type selector dialog.
     /// - Note: If the new game shape is the same as the old game shape, no action will be taken.
@@ -2055,30 +1697,6 @@ class MainViewController: UIViewController,
     
     var PreviousGameShape: BucketShapes? = nil
     
-    /// Called when the game selector dialog closes.
-    /// - Parameter DidChange: If true, the game type or sub type or both changed.
-    /// - Parameter NewBaseType: The new base type (or old one if only the `GameSubType` changed). If `DidChange` is false,
-    ///                          this value will be nil.
-    /// - Parameter GameSubType: The new sub type game (or old one if only the `NewBaseType` changed). If `DidChange` is false,
-    ///                          this value will be nil.
-    func GameTypeChangedOld(DidChange: Bool, NewBaseType: BaseGameTypes?, GameSubType: BaseGameSubTypes?)
-    {
-        print("At GameTypeChanged")
-        if !DidChange
-        {
-            return
-        }
-        if let NewGameType = NewBaseType
-        {
-            print("NewGameType is \(NewGameType)")
-            if NewGameType == CurrentBaseGameType
-            {
-                print("Game type is already set. No action taken.")
-                return
-            }
-            SwitchGameTypeOld(BaseType: NewGameType, SubType: GameSubType!)
-        }
-    }
     
     /// Switch the game type here. The current game will be stopped and the UI reinitialized.
     /// - Parameter BaseType: The game base type to use.
@@ -2326,6 +1944,7 @@ class MainViewController: UIViewController,
         }
     }
     
+    /// Start the heartbeat indicator. It indicates the main UI thread and the game view threads are active and responsive.
     func StartHeartbeat()
     {
         GameView3D?.SetHeartbeatVisibility(Show: true)
@@ -2334,6 +1953,7 @@ class MainViewController: UIViewController,
                                               userInfo: nil, repeats: true)
     }
     
+    /// Stop the heartbeat indicate.
     func StopHeartbeat()
     {
         GameView3D?.SetHeartbeatVisibility(Show: false)
@@ -2341,6 +1961,7 @@ class MainViewController: UIViewController,
         HeartbeatTimer = nil
     }
     
+    /// Update the heartbeat indicator to indicate both the UI and the game view threads are active.
     @objc func HandleHeartbeat()
     {
         OperationQueue.main.addOperation
@@ -2418,10 +2039,10 @@ class MainViewController: UIViewController,
                 HandleScreenRecording()
             
             case .PausePlaying:
-                HandlePauseResumePressed(self)
+                HandlePauseResumePressed()
             
             case .ResumePlaying:
-                HandlePauseResumePressed(self)
+                HandlePauseResumePressed()
             
             case .RunAbout:
                 if let AboutController = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "AboutDialog") as? AboutDialogController
@@ -2461,16 +2082,28 @@ class MainViewController: UIViewController,
                 }
             
             case .StartPlaying:
-                HandlePlayStopPressed(self)
+                HandlePlayStopPressed()
             
             case .StopPlaying:
-                HandlePlayStopPressed(self)
+                HandlePlayStopPressed()
             
             case .TakePicture:
                 SaveGameViewAsImage()
             
             case .PopOverClosed:
                 break
+        }
+    }
+    
+    private func UpdateMainButton(_ Opened: Bool)
+    {
+        if Opened
+        {
+            GameView3D?.ChangeMainButtonTexture(To: UIImage(named: "Checkerboard64BlueYellow")!)
+        }
+        else
+        {
+            GameView3D?.ChangeMainButtonTexture(To: UIImage(named: "Checkerboard64")!)
         }
     }
     
@@ -2486,14 +2119,6 @@ class MainViewController: UIViewController,
     {
         return UIModalPresentationStyle.none
     }
-    
-    // MARK: - Variables used by +MainSlideInUI from within extensions.
-    
-    /// Stores the command list for the slide in menu/UI.
-    var CommandList = [SlideInItem]()
-    
-    /// The first time the slider came into view flag. Used in **+MainSliderUI.swift**.
-    var FirstSlideIn: Bool = true
     
     // MARK: - Variables used by TDebug from within extensions.
     
