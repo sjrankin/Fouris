@@ -11,8 +11,33 @@ import UIKit
 
 /// Maintains the board for the game. The board makes heavy use of the `Map` instance to maintain the location of various blocks
 /// on the board. The board sits between the in-play piece(s) and the game instance.
-class Board 
+class Board: GameMapProtocol
 {
+    func BucketChanged(X: Int, Y: Int, Node: MapNodes)
+    {
+        
+    }
+    
+    func MapRotated(Right: Bool)
+    {
+        
+    }
+    
+    func BucketRotated(By180: Bool)
+    {
+        
+    }
+    
+    func RowDeleted(Row: Int)
+    {
+        
+    }
+    
+    func GameMapReset()
+    {
+        
+    }
+    
     /// Reference to the owning game logic.
     weak var Game: GameLogic? = nil
     
@@ -52,6 +77,7 @@ class Board
         BucketInteriorRight = Map!.BucketInteriorRight
         BucketInteriorWidth = Map!.BucketInteriorWidth
         BucketInteriorHeight = Map!.BucketInteriorHeight
+        let BoardDef = BoardManager.GetBoardFor(BucketShape)!
     }
     #else
     /// Initializer.
@@ -431,9 +457,6 @@ class Board
         let AddIDStart = CACurrentMediaTime()
         Map!.IDMap!.AddID(NewPiece.ID, ForPiece: .GamePiece)
         PerformanceData.append(("Add ID", CACurrentMediaTime() - AddIDStart))
-        let AddAttributesStart = CACurrentMediaTime()
-        Map!.IDMap!.AddPieceAttributes(NewPiece.ID, NewPiece.Attributes!)
-        PerformanceData.append(("Add piece attributes", CACurrentMediaTime() - AddAttributesStart))
         let CallOut = CACurrentMediaTime()
         Game?.HaveNewPiece(NewPiece)
         PerformanceData.append(("HaveNewPiece callout",CACurrentMediaTime() - CallOut))
@@ -448,7 +471,6 @@ class Board
         //Now, get the next piece to show to the user.
         let NextPieceStart = CACurrentMediaTime()
         let Next: Piece = (Factory?.GetNextPiece())!
-        Map!.IDMap!.AddPieceAttributes(Next.ID, Next.Attributes!)
         Game?.NextPiece(Next)
         PerformanceData.append(("Get next piece", CACurrentMediaTime() - NextPieceStart))
         
