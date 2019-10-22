@@ -793,7 +793,6 @@ class MapType: CustomStringConvertible
     }
     
     /// Determines if a block can occupy the passed point.
-    ///
     /// - Parameters
     ///   - At: The point to check for emptiness.
     ///   - BlockedBy: Returns the piece that is blocking the block.
@@ -821,10 +820,12 @@ class MapType: CustomStringConvertible
     /// - Returns: True if the piece is fully in bounds (eg, in the bucket), false otherwise.
     func PieceInBounds(_ ThePiece: Piece) -> Bool
     {
+        let BoardDef = BoardManager.GetBoardFor(_BucketShape)
+        let Offset: Int = BoardDef!.BucketY
         var IsInBounds = true
         for Point in ThePiece.Locations
         {
-            if Point.Y < BucketTop
+            if Point.Y < BucketTop - Offset
             {
                 IsInBounds = false
                 break
