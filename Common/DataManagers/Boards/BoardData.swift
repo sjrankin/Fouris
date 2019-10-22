@@ -83,6 +83,7 @@ class BoardData
 /// - **ShortDiagonals**: Small `X`-shaped central block.
 /// - **LongDiagonals**: Large `X`-shaped central block.
 /// - **OneOpening**: Bucket with one opening.
+/// - **InsideOut**: Pieces radiate from the center to surrounding walls.
 /// - **Classic**: Classic Tetris game proportions.
 /// - **TallThin**: Tall and thin bucket.
 /// - **ShortWide**: Short and wide bucket.
@@ -118,6 +119,7 @@ enum BucketShapes: String, CaseIterable
     case LongDiagonals = "LongDiagonals"
     //Semi-rotating games. (Blocks rotate but the bucket does not.)
     case OneOpening = "OneOpening"
+    case InsideOut = "InsideOut"
     //Non-rotating games.
     case Classic = "Classic"
     case TallThin = "TallThin"
