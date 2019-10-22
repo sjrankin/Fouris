@@ -9,13 +9,10 @@
 import Foundation
 import UIKit
 
-/// Provides notifications of events from the abstract game engine to the UI. The game engine
-/// knows very little about the UI (even though it's written in Swift), as there are two UIs
-/// (macOS and iOS) and three interfaces per UI available.
+/// Provides notifications of events from the abstract game engine to the concrete UI.
 protocol GameUINotificationProtocol: class
 {
     /// Called for game state changes.
-    ///
     /// - Parameter NewState: New game state.
     func GameStateChanged(NewState: GameStates)
     
@@ -26,7 +23,6 @@ protocol GameUINotificationProtocol: class
     func PieceUpdated(_ ThePiece: Piece, X: Int, Y: Int)
     
     /// Called when a piece is successfully moved.
-    ///
     /// - Parameters:
     ///   - MovedPiece: The piece that moved.
     ///   - Direction: The direction the piece moved.
@@ -34,7 +30,6 @@ protocol GameUINotificationProtocol: class
     func PieceMoved(_ MovedPiece: Piece, Direction: Directions, Commanded: Bool)
     
     /// Called when a piece is successfully moved when running a 3D game.
-    ///
     /// - Parameters:
     ///   - MovedPiece: The piece that moved.
     ///   - Direction: The direction the piece moved.
@@ -48,7 +43,6 @@ protocol GameUINotificationProtocol: class
     
     /// Called when a piece is fully discarded from the board. (Usually in response to
     /// an up and away command.)
-    ///
     /// - Parameter ID: ID of the discarded piece. By the time this function is called,
     ///                 the piece itself has been deleted and is no longer available. The
     ///                 passed ID is merely for reference purposes **and should not be used
@@ -56,14 +50,12 @@ protocol GameUINotificationProtocol: class
     func PieceDiscarded(_ ID: UUID)
     
     /// Called when the final score is available for the finalized piece.
-    ///
     /// - Parameters:
     ///   - ID: The ID of the piece that was finalized.
     ///   - Score: The current game score after the piece was finalized.
     func FinalizedPieceScore(ID: UUID, Score: Int)
     
     /// Called when a moving (or rotating piece) intersects with a special item in the bucket.
-    ///
     /// - Parameters:
     ///   - Item: The special item that was intersected.
     ///   - At: The location of the special item.
@@ -76,12 +68,10 @@ protocol GameUINotificationProtocol: class
     func GameOver()
     
     /// Called when a piece freezes in place out of bounds.
-    ///
     /// - Parameter ID: The ID of the piece that froze out of bounds.
     func OutOfBounds(_ ID: UUID)
     
     /// Called when a piece starts to freeze but hasn't frozen yet.
-    ///
     /// - Parameter ID: ID of the piece that started to freeze.
     func StartedFreezing(_ ID: UUID)
     
@@ -90,29 +80,24 @@ protocol GameUINotificationProtocol: class
     func StoppedFreezing(_ ID: UUID)
     
     /// Called when a new piece is started and placed on the board.
-    ///
     /// - Parameter NewPiece: The new piece.
     func NewPieceStarted(_ NewPiece: Piece)
     
     /// Called when the board deletes a full row of items.
-    ///
     /// - Parameter Row: The row's index in the bucket.
     func DeletedRow(_ Row: Int)
     
     /// Called when a piece is block from moving (or rotating).
-    ///
     /// - Parameter ID: ID of the blocked piece.
     func PieceBlocked(_ ID: UUID)
     
     /// Called when the piece is rotated.
-    ///
     /// - Parameters:
     ///   - ID: ID of the rotated piece.
     ///   - Direction: Direction the piece rotated in.
     func PieceRotated(ID: UUID, Direction: Directions)
     
     /// Called when a piece tried to rotate but failed.
-    ///
     /// - Parameters:
     ///   - ID: ID of the piece that failed rotation.
     ///   - Direction: The rotational direction that was attempted.
@@ -120,50 +105,40 @@ protocol GameUINotificationProtocol: class
     
     /// Called everytime a piece moves, as that may potentially change the piece's
     /// score.
-    ///
     /// - Note: The score of a piece indicates the potential fit of a piece at the bottom of
     ///         the bucket with frozen, prior blocks in place.
-    ///
     /// - Parameters:
     ///   - For: The ID of the piece.
     ///   - NewScore: The new score for the piece in its current location and orientation.
     func PieceScoreUpdated(For: UUID, NewScore: Int)
     
     /// Notifies the UI when the game score changes. Resets to 0 when new games are started.
-    ///
     /// - Parameter NewScore: New game score.
     func NewGameScore(NewScore: Int)
     
     /// Notifies the UI when the high score changes. Notification occurs at each change,
     /// not at the end of the same.
-    ///
     /// - Parameter HighScore: New high score value.
     func NewHighScore(HighScore: Int)
 
     /// Called when a new next piece is available.
-    ///
     /// - Parameter Next: The next piece after the current piece.
     func NextPiece(_ Next: Piece)
     
     /// Called after the board is done compressing pieces after a row-clearing event. This
     /// is called after all rows have been removed and all columns have been dropped.
-    ///
     /// - Parameter DidCompress: True if the board actually compressed, false if not.
     func BoardDoneCompressing(DidCompress: Bool)
     
     /// Set the opacity of the piece to the supplied value.
-    ///
     /// - Note: This is intended to be used for special effects.
-    ///
     /// - Parameters
     ///   - To: The new opacity/alpha level of the piece.
     ///   - ID: ID of the piece to set.
     func SetPieceOpacity(To: Double, ID: UUID)
     
     /// Set the opacity of the piece to the supplied value.
-    ///
     /// - Note: This is intended to be used for special effects.
-    ///
     /// - Parameters
     ///   - To: The new opacity/alpha level of the piece.
     ///   - ID: ID of the piece to set.
