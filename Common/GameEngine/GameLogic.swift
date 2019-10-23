@@ -407,11 +407,9 @@ class GameLogic
     
     /// Called when a piece has frozen into place. Start dropping a new piece. By this point, the dropped piece
     /// has been merged into the bucket retired piece set and can be removed as an independent object.
-    ///
     /// - Parameter ThePiece: The piece that was frozen into place.
     func DropFinalized(_ ThePiece: Piece)
     {
-        #if true
         if let BoardClass = BoardData.GetBoardClass(For: UserTheme!.BucketShape)
         {
             switch BoardClass
@@ -443,48 +441,13 @@ class GameLogic
                 DoSpawnNewPiece()
             }
         }
-        #else
-        switch BaseGameType
-        {
-            case .Standard:
-                _CurrentGameScore = GameBoard!.Map!.Scorer!.Current
-            
-            case .Rotating4:
-                var BlockCount = ThePiece.Locations.count
-                if BlockCount >= LargestBlockCount
-                {
-                    LargestBlockCount = BlockCount + 1
-                }
-                if BlockCount < 1
-                {
-                    BlockCount = 1
-                }
-                CumulativeBlockCount = CumulativeBlockCount + ThePiece.Locations.count
-                let NewTime = CACurrentMediaTime() - ScoringStartTime
-                let TimeAdder = Int(NewTime / (Double(LargestBlockCount) - Double(BlockCount)))
-                _CurrentGameScore = _CurrentGameScore + ThePiece.Locations.count + TimeAdder
-            
-            case .SemiRotating:
-                _CurrentGameScore = GameBoard!.Map!.Scorer!.Current
-            
-            case .Cubic:
-                _CurrentGameScore = _CurrentGameScore + 1
-        }
-        UIDelegate?.PieceFinalized(ThePiece) 
-        if SpawnNewPiece && BaseGameType != .Rotating4
-        {
-            DoSpawnNewPiece()
-            //GameBoard?.StartNewPiece(CalledFrom: "GameLogic: DropFinalized")
-            //_PiecesInGame = _PiecesInGame + 1
-        }
-        #endif
     }
     
     var CumulativeBlockCount: Int = 0
     var ScoringStartTime: Double = 0
     var LargestBlockCount = 4
     
-    /// Spawn a new piece here. Should be call only when the previous piece has been frozen.
+    /// Spawn a new piece here. Should be call only when the previous piece has been frozen and merged into the board.
     func DoSpawnNewPiece()
     {
         //let Start = CACurrentMediaTime()
@@ -663,7 +626,6 @@ class GameLogic
             ActivityLog.AddEntry(Title: "AI", Source: "GameLogic",
                                  KVPs: [("Message","AI duration too long."),("AIDuration","\(AIDuration)")],
                                  LogFileName: &NotUsed)
-        //print(">>>>>>>>> AI Duration: \(AIDuration)")
         }
     }
     
