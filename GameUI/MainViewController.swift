@@ -212,7 +212,7 @@ class MainViewController: UIViewController,
     {
         //Initialize buttons.
         EnableFreezeInPlaceButton(false)
-
+        
         Game = GameLogic(UserTheme: UserTheme!, EnableAI: false)
         Game.UIDelegate = self
         Game.AIDelegate = self
@@ -505,7 +505,7 @@ class MainViewController: UIViewController,
                             MenuShowing = !MenuShowing
                             if MenuShowing
                             {
-                                GameView3D?.ChangeMainButtonTexture(To: UIImage(named: "Checkerboard64BlueYellow")!)
+                                GameView3D?.ChangeMainButtonTexture(To: UIImage(named: "Checkerboard64RedYellow")!)
                                 ShowPopOverMenu()
                             }
                             else
@@ -1280,7 +1280,7 @@ class MainViewController: UIViewController,
             ActivityLog.AddEntry(Title: "Game", Source: "MainViewController", KVPs: [("Message","Game paused.")],
                                  LogFileName: &NotUsed)
             IsPaused = true
-                        GameView3D?.SetText(OnButton: .PauseButton, ToNextText: "Resume")
+            GameView3D?.SetText(OnButton: .PauseButton, ToNextText: "Resume")
             GameTextOverlay?.ShowPause(Duration: 0.1)
             Game.PauseGame()
             DebugClient.Send("Game paused.")
@@ -1408,7 +1408,7 @@ class MainViewController: UIViewController,
         DebugClient.Send("Game \(GameCount) stopped by user.")
         var NotUsed: String? = nil
         ActivityLog.AddEntry(Title: "Game", Source: "MainView", KVPs: [("Message","Game stopped by user."),
-        ("GameCount","\(GameCount)")], LogFileName: &NotUsed)
+                                                                       ("GameCount","\(GameCount)")], LogFileName: &NotUsed)
         NewPieceCount = 0
         GameCount = GameCount + 1
     }
@@ -1877,7 +1877,7 @@ class MainViewController: UIViewController,
         MakingVideo = !MakingVideo
         if MakingVideo
         {
-                    GameView3D?.SetButtonColorToHighlight(Button: .VideoButton)
+            GameView3D?.SetButtonColorToHighlight(Button: .VideoButton)
             let Recorder = RPScreenRecorder.shared()
             Recorder.startRecording
                 {
@@ -1891,7 +1891,7 @@ class MainViewController: UIViewController,
         }
         else
         {
-                    GameView3D?.SetButtonColorToNormal(Button: .VideoButton)
+            GameView3D?.SetButtonColorToNormal(Button: .VideoButton)
             let Recorder = RPScreenRecorder.shared()
             Recorder.stopRecording(handler:
                 {
@@ -2011,7 +2011,7 @@ class MainViewController: UIViewController,
     
     // MARK: - Flame button handling.
     
-    @IBAction func HandleFlameButtonPressed(_ sender: Any)
+    func HandleFlameButtonPressed()
     {
         #if true
         GameView3D?.SaveAllBucketImages()
@@ -2068,7 +2068,7 @@ class MainViewController: UIViewController,
                 {
                     ForcePause()
                     self.present(AboutController, animated: true, completion: nil)
-                }
+            }
             
             case .RunInAttractMode:
                 if AttractTimer != nil
@@ -2086,10 +2086,10 @@ class MainViewController: UIViewController,
             case .RunSelectGame:
                 if let SelectController = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "GameSelection") as? SelectGameController
                 {
-                                    ForcePause()
+                    ForcePause()
                     SelectController.SelectorDelegate = self
                     self.present(SelectController, animated: true, completion: nil)
-                }
+            }
             
             case .RunSettings:
                 let Storyboard = UIStoryboard(name: "Theming", bundle: nil)
@@ -2098,7 +2098,7 @@ class MainViewController: UIViewController,
                     ForcePause()
                     Controller.EditTheme(Theme: Themes!.UserTheme!)
                     self.present(Controller, animated: true, completion: nil)
-                }
+            }
             
             case .StartPlaying:
                 HandlePlayStopPressed()
@@ -2109,16 +2109,49 @@ class MainViewController: UIViewController,
             case .TakePicture:
                 SaveGameViewAsImage()
             
+            case .CreateBoards:
+                GameView3D?.Debug("Dump Boards")
+            
+            case .ToggleRegions:
+                if ShowingRegions
+                {
+                    ShowingRegions = false
+                    GameView3D?.Debug("Hide Regions")
+                }
+                else
+                {
+                    ShowingRegions = true
+                    GameView3D?.Debug("Show Regions")
+            }
+            
+            case .ToggleGrid:
+                if ShowingDebugGrid
+                {
+                    ShowingDebugGrid = false
+                    GameView3D?.Debug("Hide Grid")
+                }
+                else
+                {
+                    ShowingDebugGrid = true
+                    GameView3D?.Debug("Show Grid")
+            }
+            
+            case .RunFlameAction:
+                break
+            
             case .PopOverClosed:
                 break
         }
     }
     
+    var ShowingDebugGrid: Bool = false
+    var ShowingRegions: Bool = false
+    
     private func UpdateMainButton(_ Opened: Bool)
     {
         if Opened
         {
-            GameView3D?.ChangeMainButtonTexture(To: UIImage(named: "Checkerboard64BlueYellow")!)
+            GameView3D?.ChangeMainButtonTexture(To: UIImage(named: "Checkerboard64RedYellow")!)
         }
         else
         {
