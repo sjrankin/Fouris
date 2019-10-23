@@ -38,8 +38,7 @@ class View3D: SCNView,                          //Our main super class.
     public static let AboutLight: Int = 0x1 << 3
     
     // MARK: - Initialization.
-    
-    #if true
+
     /// Initialize the view.
     /// - Note: Setting 'self.showsStatistics' to true will lead to the scene freezing after a period of time (on the order of
     ///         hours). Likewise, setting `self.allowsCameraControl` will lead to non-responsiveness in the UI after a period
@@ -150,120 +149,6 @@ class View3D: SCNView,                          //Our main super class.
         ObNode.constraints?.append(SCNLookAtConstraint(target: CameraNode))
         #endif
     }
-    #else
-    /// Initialize the view.
-    /// - Note: Setting 'self.showsStatistics' to true will lead to the scene freezing after a period of time (on the order of
-    ///         hours). Likewise, setting `self.allowsCameraControl` will lead to non-responsiveness in the UI after a period
-    ///         of time (on the order of tens of minutes). Therefore, using those two properties should be transient and for
-    ///         debug use only.
-    /// - Parameter With: The board to use for displaying contents.
-    /// - Parameter Theme: The theme manager instance.
-    /// - Parameter BaseType: The base game type. Can only be set via this function.
-    func Initialize(With: Board, Theme: ThemeManager3, BaseType: BaseGameTypes)
-    {
-        print("View3D Frame=\(self.frame)")
-        self.isUserInteractionEnabled = true
-        //MasterBlockNode = SCNNode()
-        CenterBlockShape = .Square
-        self.rendersContinuously = true
-        CreateMasterBlockNode()
-        _BaseGameType = BaseType
-        SetBoard(With)
-        CurrentTheme = Theme.UserTheme
-        Theme.SubscribeToChanges(Subscriber: "View3D", SubscribingObject: self)
-        if CurrentTheme!.ShowStatistics
-        {
-            print("Show statistics is enabled in View3D. This may lead to performance degradation.")
-        }
-        self.showsStatistics = CurrentTheme!.ShowStatistics
-        if CurrentTheme!.CanControlCamera
-        {
-            print("Can control camera is enabled in View3D. This may lead to performance degradation.")
-        }
-        self.allowsCameraControl = CurrentTheme!.CanControlCamera
-        OriginalCameraPosition = CurrentTheme!.CameraPosition
-        OriginalCameraOrientation = CurrentTheme!.CameraOrientation
-        #if false
-        self.debugOptions = [.showBoundingBoxes, .renderAsWireframe]
-        #endif
-        GameScene = SCNScene()
-        self.delegate = self
-        self.isPlaying = true
-        self.scene = GameScene
-        self.autoenablesDefaultLighting = CurrentTheme!.UseDefaultLighting
-        var AAMode: SCNAntialiasingMode = .multisampling2X
-        switch CurrentTheme!.AntialiasingMode
-        {
-            case .None:
-                AAMode = .none
-            
-            case .MultiSampling2X:
-                AAMode = .multisampling2X
-            
-            case .MultiSampling4X:
-                AAMode = .multisampling4X
-            
-            default:
-                AAMode = .multisampling2X
-        }
-        self.antialiasingMode = AAMode
-        self.scene?.rootNode.addChildNode(MakeCamera())
-        
-        #if true
-        if self.allowsCameraControl
-        {
-            //https://stackoverflow.com/questions/24768031/can-i-get-the-scnview-camera-position-when-using-allowscameracontrol
-            CameraObserver = self.observe(\.pointOfView?.position, options: [.new])
-            {
-                (Node, Change) in
-                OperationQueue.current?.addOperation
-                    {
-                        let DPos = Convert.ConvertToString(Node.pointOfView!.position, AddLabels: true, AddParentheses: true)
-                        let DOri = Convert.ConvertToString(Node.pointOfView!.orientation, AddLabels: true, AddParentheses: true)
-                        var KVPMsg = MessageHelper.MakeKVPMessage(ID: self.PositionKVP, Key: "Camera Position", Value: DPos)
-                        DebugClient.SendPreformattedCommand(KVPMsg)
-                        KVPMsg = MessageHelper.MakeKVPMessage(ID: self.OrientationKVP, Key: "Camera Orientation", Value: DOri)
-                        DebugClient.SendPreformattedCommand(KVPMsg)
-                }
-            }
-        }
-        #endif
-        
-        let Node = CreateBucket(InitialOpacity: 1.0, Shape: CenterBlockShape)
-        BucketNode = Node
-        self.scene?.rootNode.addChildNode(BucketNode!)
-        if CurrentTheme!.ShowGrid
-        {
-            CreateGrid()
-        }
-        
-        LightNode = CreateGameLight()
-        self.scene?.rootNode.addChildNode(LightNode)
-        
-        let ControlLightNode = CreateControlLight()
-        self.scene?.rootNode.addChildNode(ControlLightNode)
-        
-        DrawBackground()
-        DrawBucketGrid(ShowLines: CurrentTheme!.ShowBucketGrid, IncludingOutline: true)
-        OrbitCamera()
-        AddPeskyLight()
-        PerfTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(SendPerformanceData),
-                                         userInfo: nil, repeats: true)
-        
-        ShowControls()
-        DrawCenterLines()
-        
-        #if true
-        let Obnoxious = SCNLight()
-        Obnoxious.type = .spot
-        Obnoxious.color = UIColor.white
-        let ObNode = SCNNode()
-        ObNode.light = Obnoxious
-        ObNode.position = SCNVector3(0, 0, -3)
-        ObNode.constraints?.append(SCNLookAtConstraint(target: CameraNode))
-        #endif
-    }
-    #endif
     
     func NewParentSize(Bounds: CGRect, Frame: CGRect)
     {
@@ -2250,6 +2135,95 @@ class View3D: SCNView,                          //Our main super class.
             SetButtonColorToNormal(Button: .HeartButton)
         }
     }
+    
+    // MARK: - Visual debug functions.
+    
+    /// Run a debug command.
+    /// - Note:
+    ///   - Commands are:
+    ///     - `Show`: Show an object or objects. See following list for objects.
+    ///        - `Regions`: Regions of the game board.
+    ///        - `Barriers`: Game board barriers.
+    ///        - `Grid`: Background grid.
+    ///        - `Heart`: Heartbeat indicator.
+    ///        - `Controls`: Motion controls.
+    ///     - `Hide`: Hide an object or objects. See `Show` for objects.
+    ///     - `Dump`: Dump and object to the debug folder. See following list for dumpable objects.
+    ///        - `Boards`: Dumps images of all boards to the debug folder.
+    /// - Parameter Command: The command string to run. Case insensitive.
+    /// - Returns: Depending on the command, there may or may not be a returned value. If there *is* a returned value, the
+    ///            type depends on the context of the command.
+    @discardableResult func Debug(_ Command: String) -> Any?
+    {
+        let Raw = Command.lowercased().trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        let Parts = Raw.split(separator: " ", omittingEmptySubsequences: true)
+        if Parts.count < 2
+        {
+            return nil
+        }
+        switch String(Parts[0])
+        {
+            case "show":
+                switch String(Parts[1])
+                {
+                    case "regions":
+                        ShowRegions(Show: true)
+                    
+                    case "barriers":
+                        break
+                    
+                    case "grid":
+                        break
+                    
+                    case "heart":
+                        break
+                    
+                    case "controls":
+                    break
+                    
+                    default:
+                        print("Unknown show option (\(String(Parts[1]))) encountered.")
+                        return nil
+            }
+            
+            case "hide":
+                switch String(Parts[1])
+                {
+                    case "regions":
+                        ShowRegions(Show: false)
+                    
+                    case "barriers":
+                        break
+                    
+                    case "grid":
+                        break
+                    
+                    case "heart":
+                        break
+                    
+                    case "controls":
+                        break
+                    
+                    default:
+                        print("Unknown show option (\(String(Parts[1]))) encountered.")
+                        return nil
+            }
+            
+            default:
+                print("Unknown Debug command (\(String(Parts[0]))) encountered.")
+                return nil
+        }
+        return nil
+    }
+    
+    let LayerColors: [DebugRegions: UIColor] =
+    [
+        .BucketInterior: UIColor.systemYellow,
+        .Barrier: UIColor.systemIndigo,
+        .InvisibleBarrier: UIColor.systemTeal,
+        .Exterior: UIColor.systemBlue
+    ]
+    var RegionLayers: [DebugRegions: SCNNode] = [DebugRegions: SCNNode]()
     
     // MARK: - Variables for buttons and button state. Button functions are found in +TextButtons.swift.
     
