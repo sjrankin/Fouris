@@ -345,7 +345,7 @@ class MapType: CustomStringConvertible
                 break
         }
         
-        let BucketID = IDMap!.StaticID(For: .Bucket)
+        let BucketID = IDMap!.StaticID(For: .BucketInterior)
         let InvisibleBucketID = IDMap!.StaticID(For: .InvisibleBucket)
         let BucketExteriorID = IDMap!.StaticID(For: .BucketExterior)
         MapType.InitializeMap(Width: Width, Height: Height,
