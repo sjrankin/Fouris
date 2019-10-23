@@ -1221,11 +1221,9 @@ class Piece: CustomStringConvertible
     
     /// Start freezing the block. There is a certain amount of time the user can move the block before
     /// it becomes frozen and a new block drops.
-    ///
     /// - Note: `FastFreeze` controls the speed at which the piece will be frozen into place. However,
     ///         if `StandardDropDown` is false, the piece will freeze into place over the standard amount
     ///         of time, not the fast amount of time. This is used by the AI only.
-    ///
     /// - Parameter FastFreeze: If true, the block will freeze into place quickly (regardless of the
     ///                         current dropping state).
     func StartFreezing(FastFreeze: Bool = false)
@@ -1328,14 +1326,10 @@ class Piece: CustomStringConvertible
         }
         if PieceFullyInBounds()
         {
-            #if true
             OperationQueue.main.addOperation
                 {
                     self.GameBoard?.PieceFroze(ID: self.ID)
             }
-            #else
-            GameBoard?.PieceFroze(ID: ID)
-            #endif
         }
         else
         {
@@ -1777,7 +1771,6 @@ class Piece: CustomStringConvertible
     }
     
     /// Return the points in the piece normalized to the smallest possible non-negative values (eg, moved as close to the origin as possible).
-    ///
     /// - Returns: List of points (in the current orientation) normalized.
     public func NormalizedLocations() -> [CGPoint]
     {
@@ -1803,7 +1796,6 @@ class Piece: CustomStringConvertible
     }
     
     /// Return the original component locations normalized to the smallest possible non-negative values (eg, moved as close to the origin as possible).
-    ///
     /// - Returns: List of points in the original orientation.
     public func NormalizedComponents() -> [CGPoint]
     {
@@ -1831,7 +1823,6 @@ class Piece: CustomStringConvertible
     }
     
     /// Return the piece as a string representing the shape of the piece in its current orientation.
-    ///
     /// - Returns: String of the piece's shape in the current orientation.
     public func PieceAsString() -> String
     {
