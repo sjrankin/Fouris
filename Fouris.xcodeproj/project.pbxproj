@@ -70,6 +70,7 @@
 		17404B2C2345E4B300976DE2 /* ThemeChangeProtocol2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17404B2B2345E4B300976DE2 /* ThemeChangeProtocol2.swift */; };
 		17404B2E234626E700976DE2 /* SCNVector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17404B2D234626E700976DE2 /* SCNVector3.swift */; };
 		17404B30234628CB00976DE2 /* SCNVector4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17404B2F234628CB00976DE2 /* SCNVector4.swift */; };
+		1740ED5D23600F28000EA403 /* +ShowRegions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1740ED5C23600F28000EA403 /* +ShowRegions.swift */; };
 		174328F2233F0F7F00F98863 /* XMLDeserializeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174328F1233F0F7F00F98863 /* XMLDeserializeProtocol.swift */; };
 		174328F4233F111100F98863 /* XMLTreeTraversalProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174328F3233F111100F98863 /* XMLTreeTraversalProtocol.swift */; };
 		174328F7233F1C3F00F98863 /* PieceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174328F6233F1C3F00F98863 /* PieceManager.swift */; };
@@ -344,6 +345,7 @@
 		17404B2B2345E4B300976DE2 /* ThemeChangeProtocol2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeChangeProtocol2.swift; sourceTree = "<group>"; };
 		17404B2D234626E700976DE2 /* SCNVector3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNVector3.swift; sourceTree = "<group>"; };
 		17404B2F234628CB00976DE2 /* SCNVector4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNVector4.swift; sourceTree = "<group>"; };
+		1740ED5C23600F28000EA403 /* +ShowRegions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+ShowRegions.swift"; sourceTree = "<group>"; };
 		174328F1233F0F7F00F98863 /* XMLDeserializeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLDeserializeProtocol.swift; sourceTree = "<group>"; };
 		174328F3233F111100F98863 /* XMLTreeTraversalProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLTreeTraversalProtocol.swift; sourceTree = "<group>"; };
 		174328F6233F1C3F00F98863 /* PieceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceManager.swift; sourceTree = "<group>"; };
@@ -1123,6 +1125,7 @@
 				17B112FF232B693E007DFBD4 /* +Renderer.swift */,
 				17BADD6C2352D5F3006ADE5E /* +BucketRenderer.swift */,
 				17A9D8AE2359774800DAE024 /* +AboutBox.swift */,
+				1740ED5C23600F28000EA403 /* +ShowRegions.swift */,
 			);
 			path = 3DViewExtensions;
 			sourceTree = "<group>";
@@ -1499,6 +1502,7 @@
 				17F0B4BA225CCEE00071514E /* GameLogic.swift in Sources */,
 				17715CB622C74D8E009FD441 /* +Tables.swift in Sources */,
 				178C9FA1233E2E8D00A1FC16 /* XMLEntityParser.swift in Sources */,
+				1740ED5D23600F28000EA403 /* +ShowRegions.swift in Sources */,
 				17477A772317F7E800AAEB14 /* PieceSelectorDialog.swift in Sources */,
 				17FC443C228AB9E50065888F /* Score.swift in Sources */,
 				17404B2C2345E4B300976DE2 /* ThemeChangeProtocol2.swift in Sources */,
