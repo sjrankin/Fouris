@@ -14,7 +14,7 @@ class BoardData
     /// Table of boards that rotate.
     public static var RotatableBoards: [BucketShapes] =
     [
-        .Dot, .Square, .SmallSquare, .BigSquare, .SmallRectangle, .BigRectangle, .Diamond, .BigDiamond, .SmallDiamond,
+        .Dot, .MediumSquare, .SmallSquare, .BigSquare, .SmallRectangle, .BigRectangle, .Diamond, .BigDiamond, .SmallDiamond,
         .Bracket2, .Bracket4, .FourLines, .Corners, .Quadrant, .Plus, .HorizontalLine, .ParallelLines, .Empty,
         .CornerDots, .FourSmallSquares, .ShortDiagonals, .LongDiagonals
     ]
@@ -60,7 +60,7 @@ class BoardData
 /// Possible shapes for center blocks and other blocks.
 /// - Note: This enum contains all possible interior block shapes for non-rotating, rotating, and semi-rotating games.
 /// - **Dot**: 1 x 1 center (or close enough to it) block.
-/// - **Square**: 4 x 4 center square.
+/// - **MediumSquare**: 4 x 4 center square.
 /// - **SmallSquare**: 2 x 2 center square.
 /// - **BigSquare**: 6 x 6 center square.
 /// - **SmallRectangle**: 2 x 1 center (or close enough) rectangle.
@@ -95,7 +95,7 @@ enum BucketShapes: String, CaseIterable
 {
     //Rotating games.
     case Dot = "Dot"
-    case Square = "Square"
+    case MediumSquare = "MediumSquare"
     case SmallSquare = "SmallSquare"
     case BigSquare = "BigSquare"
     case SmallRectangle = "SmallRectangle"
