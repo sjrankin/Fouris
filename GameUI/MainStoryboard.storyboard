@@ -111,7 +111,7 @@
                                 <rect key="frame" x="0.0" y="400" width="300" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HIe-nv-h8C">
-                                        <rect key="frame" x="48" y="7" width="46" height="36"/>
+                                        <rect key="frame" x="16" y="6" width="46" height="36"/>
                                         <fontDescription key="fontDescription" name="NotoEmoji" family="Noto Emoji" pointSize="36"/>
                                         <state key="normal" title="📹">
                                             <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -121,8 +121,19 @@
                                             <action selector="HandleVideoPressed:" destination="k1X-Di-mQn" eventType="primaryActionTriggered" id="3KQ-Qo-QE9"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="keV-Ca-Sac">
+                                        <rect key="frame" x="127" y="-6" width="46" height="62"/>
+                                        <fontDescription key="fontDescription" name="NotoEmoji" family="Noto Emoji" pointSize="36"/>
+                                        <state key="normal" title="🔥">
+                                            <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="bold"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="HandleFlameButton:" destination="k1X-Di-mQn" eventType="primaryActionTriggered" id="DPm-AJ-ChF"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tJM-ou-lN8">
-                                        <rect key="frame" x="186" y="-5" width="53" height="60"/>
+                                        <rect key="frame" x="231" y="-5" width="53" height="60"/>
                                         <fontDescription key="fontDescription" name="NotoEmoji" family="Noto Emoji" pointSize="40"/>
                                         <state key="normal" title="📷">
                                             <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -135,15 +146,16 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="tJM-ou-lN8" firstAttribute="leading" secondItem="HIe-nv-h8C" secondAttribute="trailing" constant="92" id="8I7-DG-s7j"/>
                                     <constraint firstAttribute="height" constant="50" id="8SY-jz-1dD"/>
-                                    <constraint firstItem="tjy-9a-YmF" firstAttribute="trailing" secondItem="tJM-ou-lN8" secondAttribute="trailing" constant="61" id="I0r-zC-5hW"/>
-                                    <constraint firstItem="HIe-nv-h8C" firstAttribute="trailing" secondItem="Fko-HX-K7y" secondAttribute="trailingMargin" constant="-190" id="R47-ZC-yEF"/>
-                                    <constraint firstItem="HIe-nv-h8C" firstAttribute="top" secondItem="tjy-9a-YmF" secondAttribute="top" constant="7" id="RjV-1y-ckA"/>
-                                    <constraint firstItem="tJM-ou-lN8" firstAttribute="top" secondItem="Fko-HX-K7y" secondAttribute="top" constant="-5" id="gyV-il-bRA"/>
-                                    <constraint firstItem="HIe-nv-h8C" firstAttribute="centerY" secondItem="Fko-HX-K7y" secondAttribute="centerY" id="jVk-tB-TAh"/>
-                                    <constraint firstItem="HIe-nv-h8C" firstAttribute="leading" secondItem="tjy-9a-YmF" secondAttribute="leading" constant="48" id="nxL-TP-DhY"/>
-                                    <constraint firstItem="tJM-ou-lN8" firstAttribute="centerY" secondItem="HIe-nv-h8C" secondAttribute="centerY" id="vtz-9c-bKp"/>
+                                    <constraint firstItem="HIe-nv-h8C" firstAttribute="bottom" secondItem="Fko-HX-K7y" secondAttribute="bottomMargin" id="I60-oc-Nh5"/>
+                                    <constraint firstItem="HIe-nv-h8C" firstAttribute="top" secondItem="tjy-9a-YmF" secondAttribute="top" constant="6" id="Wu7-GR-u7z"/>
+                                    <constraint firstItem="tJM-ou-lN8" firstAttribute="top" secondItem="Fko-HX-K7y" secondAttribute="top" constant="-5" id="cUG-Rg-PmM"/>
+                                    <constraint firstItem="tJM-ou-lN8" firstAttribute="leading" secondItem="keV-Ca-Sac" secondAttribute="trailing" constant="58" id="dGO-DJ-3rN"/>
+                                    <constraint firstItem="keV-Ca-Sac" firstAttribute="centerY" secondItem="Fko-HX-K7y" secondAttribute="centerY" id="gCp-cl-vCU"/>
+                                    <constraint firstItem="tJM-ou-lN8" firstAttribute="trailing" secondItem="Fko-HX-K7y" secondAttribute="trailingMargin" id="hID-v7-mpz"/>
+                                    <constraint firstItem="keV-Ca-Sac" firstAttribute="centerY" secondItem="tJM-ou-lN8" secondAttribute="centerY" id="hxJ-7I-Rxg"/>
+                                    <constraint firstItem="HIe-nv-h8C" firstAttribute="leading" secondItem="Fko-HX-K7y" secondAttribute="leadingMargin" id="kbx-EG-wDw"/>
+                                    <constraint firstItem="keV-Ca-Sac" firstAttribute="centerX" secondItem="Fko-HX-K7y" secondAttribute="centerX" id="nEi-Em-FYp"/>
                                 </constraints>
                                 <viewLayoutGuide key="safeArea" id="tjy-9a-YmF"/>
                                 <userDefinedRuntimeAttributes>
@@ -194,6 +206,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="300" height="470"/>
                     <connections>
+                        <outlet property="ButtonStack" destination="9AF-xm-Bys" id="h4q-py-4ZK"/>
                         <outlet property="ControlView" destination="YTR-v0-eWb" id="Cbo-Ro-lav"/>
                         <outlet property="PopOverPauseButton" destination="r3J-5W-YSW" id="8K6-9t-den"/>
                         <outlet property="PopOverPlayButton" destination="bVV-QF-Q2q" id="mrN-zz-hCJ"/>
@@ -541,7 +554,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ob2-DI-cRb">
-                                <rect key="frame" x="536" y="960" width="51" height="35"/>
+                                <rect key="frame" x="536" y="960" width="40" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="SQi-pb-Yrg"/>
                                 </constraints>
@@ -555,7 +568,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q41-xp-6ex">
-                                <rect key="frame" x="697" y="28" width="45" height="44"/>
+                                <rect key="frame" x="708" y="28" width="45" height="44"/>
                                 <state key="normal" image="number.circle" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30" scale="large" weight="bold"/>
                                 </state>
@@ -576,7 +589,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4XG-ac-ruN">
-                                <rect key="frame" x="691" y="944" width="51" height="67"/>
+                                <rect key="frame" x="702" y="948" width="40" height="59"/>
                                 <fontDescription key="fontDescription" name="NotoEmoji" family="Noto Emoji" pointSize="40"/>
                                 <state key="normal" title="📷">
                                     <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -841,13 +854,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For game type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ja-49-CVH">
-                                <rect key="frame" x="20" y="143" width="111" height="21"/>
+                                <rect key="frame" x="20" y="142.5" width="111" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tap-d5-oLU">
-                                <rect key="frame" x="20" y="190" width="672" height="644"/>
+                                <rect key="frame" x="20" y="189.5" width="672" height="644.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -863,7 +876,7 @@
                                 </connections>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="48o-Mh-maS">
-                                <rect key="frame" x="199" y="102" width="154" height="20"/>
+                                <rect key="frame" x="199" y="102" width="154" height="19.5"/>
                                 <viewLayoutGuide key="safeArea" id="VC8-ee-mL6"/>
                                 <segments>
                                     <segment title="User"/>
@@ -880,7 +893,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="e6D-S9-tip">
-                                <rect key="frame" x="199" y="138.5" width="171" height="32"/>
+                                <rect key="frame" x="199" y="138" width="171" height="32"/>
                                 <segments>
                                     <segment title="Standard"/>
                                     <segment title="Rotating"/>
