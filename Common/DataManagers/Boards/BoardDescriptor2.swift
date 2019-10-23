@@ -106,7 +106,7 @@ class BoardDescriptor2
     
     /// Holds the width of teh bucket.
     private var _BucketWidth: Int = 10
-    /// Get the width of the bucket.
+    /// Get the width of the bucket, including barriers.
     public var BucketWidth: Int
     {
         get
@@ -117,7 +117,7 @@ class BoardDescriptor2
     
     /// Holds the height of the bucket.
     private var _BucketHeight: Int = 20
-    /// Get the height of the bucket.
+    /// Get the height of the bucket, including barriers.
     public var BucketHeight: Int
     {
         get
@@ -438,7 +438,7 @@ class BoardDescriptor2
                 fatalError("Invalid map in \(BucketShape), line \(Index) - all lines must have the same length.")
             }
         }
-        var Index = 0
+        var LineIndex = 0
         var LeftMostBucket = Int.max
         var RightMostBucket = -1
         var TopMostBucket = Int.max
@@ -450,7 +450,7 @@ class BoardDescriptor2
             {
                 if !["_", ".", "#"].contains(String(Char))
                 {
-                    fatalError("Invalid character (\(String(Char))) found in map \(BucketShape) on line \(Index).")
+                    fatalError("Invalid character (\(String(Char))) found in map \(BucketShape) on line \(LineIndex).")
                 }
                 if [".", "#"].contains(String(Char))
                 {
@@ -462,18 +462,18 @@ class BoardDescriptor2
                     {
                         RightMostBucket = CharIndex
                     }
-                    if Index < TopMostBucket
+                    if LineIndex < TopMostBucket
                     {
-                        TopMostBucket = Index
+                        TopMostBucket = LineIndex
                     }
-                    if Index > BottomMostBucket
+                    if LineIndex > BottomMostBucket
                     {
-                        BottomMostBucket = Index
+                        BottomMostBucket = LineIndex
                     }
                 }
                 CharIndex = CharIndex + 1
             }
-            Index = Index + 1
+            LineIndex = LineIndex + 1
         }
         _BucketX = LeftMostBucket
         _BucketY = TopMostBucket
