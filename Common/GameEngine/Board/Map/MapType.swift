@@ -194,13 +194,13 @@ class MapType: CustomStringConvertible
         _BlockMap = MapType.CreateMap(Width: Width, Height: Height, FillWith: UUID.Empty)
         #endif
         
+        print("Bucket size: \(RawBucket!.BucketWidth), \(RawBucket!.BucketHeight)")
+        print("Bucket location: \(RawBucket!.BucketX),\(RawBucket!.BucketY)")
+        print("GameBoard size: \(RawBucket!.GameBoardSize())")
         switch BoardClass
         {
             case .Static:
                 #if true
-                print("Bucket size: \(RawBucket!.BucketWidth), \(RawBucket!.BucketHeight)")
-                print("Bucket location: \(RawBucket!.BucketX),\(RawBucket!.BucketY)")
-                print("GameBoard size: \(RawBucket!.GameBoardSize())")
                 _BucketBottom = RawBucket!.BucketHeight - 1
                 _BucketInteriorBottom = _BucketBottom - 1
                 _BucketTop = RawBucket!.BucketY
@@ -223,35 +223,21 @@ class MapType: CustomStringConvertible
                 #endif
             
             case .Rotatable:
-                #if true
-                let BW = RawBucket!.BucketWidth
-                let BH = RawBucket!.BucketHeight
-                _BucketBottom = Height - (BH / 2) + 1
+                let bb = RawBucket!.BucketHeight + RawBucket!.BucketY - 1
+                _BucketBottom = bb
                 _BucketInteriorBottom = _BucketBottom
-                _BucketTop = (Height / 2) - (BH / 2)
+                let bt = RawBucket!.BucketY
+                _BucketTop = bt
                 _BucketInteriorTop = _BucketTop
-                _BucketInteriorLeft = (Width - BW) / 2
-                _BucketInteriorRight = (Width - _BucketInteriorLeft) - 1
-                _BucketInteriorWidth = BW
-                _BucketInteriorHeight = BH
+                let bil = RawBucket!.BucketX
+                _BucketInteriorLeft = bil
+                let bir = RawBucket!.BucketX + RawBucket!.BucketWidth - 1
+                _BucketInteriorRight = bir
+                _BucketInteriorWidth = RawBucket!.BucketWidth
+                _BucketInteriorHeight = RawBucket!.BucketHeight
                 
                 _CenterBlockUpperLeft = CGPoint(x: (Width / 2) - 2, y: (Height / 2) - 2)
                 _CenterBlockLowerRight = CGPoint(x: (Width / 2) - 2 + 3, y: (Height / 2) - 2 + 3)
-                #else
-                let BW = 20
-                let BH = 20
-                _BucketBottom = Height - (BH / 2) + 1
-                _BucketInteriorBottom = _BucketBottom
-                _BucketTop = (Height / 2) - (BH / 2)
-                _BucketInteriorTop = _BucketTop
-                _BucketInteriorLeft = (Width - BW) / 2
-                _BucketInteriorRight = (Width - _BucketInteriorLeft) - 1
-                _BucketInteriorWidth = BW
-                _BucketInteriorHeight = BH
-                
-                _CenterBlockUpperLeft = CGPoint(x: (Width / 2) - 2, y: (Height / 2) - 2)
-                _CenterBlockLowerRight = CGPoint(x: (Width / 2) - 2 + 3, y: (Height / 2) - 2 + 3)
-                #endif
             
             case .ThreeDimensional:
                 break
@@ -831,16 +817,36 @@ class MapType: CustomStringConvertible
     func PieceInBounds(_ ThePiece: Piece) -> Bool
     {
         let BoardDef = BoardManager.GetBoardFor(_BucketShape)
+        #if true
+                var IsInBounds = true
+        for Point in ThePiece.Locations
+        {
+            if Point.X < BoardDef!.BucketX || Point.X > BoardDef!.BucketX + BoardDef!.BucketWidth - 1
+            {
+                IsInBounds = false
+            }
+            if Point.Y < BoardDef!.BucketY || Point.Y > BoardDef!.BucketY + BoardDef!.BucketHeight - 1
+            {
+                IsInBounds = false
+            }
+            if !IsInBounds
+            {
+                break
+            }
+        }
+        #else
         let Offset: Int = BoardDef!.BucketY
         var IsInBounds = true
         for Point in ThePiece.Locations
         {
+            print("Piece in bounds checking Y=\(Point.Y) < BucketTop=\(BucketTop) - Offset=\(Offset) {\(BucketTop - Offset)}")
             if Point.Y < BucketTop - Offset
             {
                 IsInBounds = false
                 break
             }
         }
+        #endif
         Scorer?.ScoreLocations(ThePiece.LocationsAsPoints())
         return IsInBounds
     }
