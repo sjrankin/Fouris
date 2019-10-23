@@ -856,6 +856,7 @@ class MainViewController: UIViewController,
         switch BoardClass
         {
             case .Static:
+                print("At MapUpdated")
                 GameView3D?.DrawMap3D(FromBoard: Game.GameBoard!, CalledFrom: "MapUpdated")
             
             case .Rotatable:
@@ -1063,7 +1064,6 @@ class MainViewController: UIViewController,
     }
     
     /// Notice from the game that the piece has a new score.
-    ///
     /// - Parameters:
     ///   - For: ID of the piece with a new score.
     ///   - NewScore: The new score.
