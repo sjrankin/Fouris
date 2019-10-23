@@ -442,6 +442,7 @@ class Board: GameMapProtocol
         NewPiece.GravityIsEnabled = PiecesUseGravity
         NewPiece.PlayMode = PlayMode
         let StartingPoint = Map!.GetPieceStartingPoint(ForPiece: NewPiece)
+        print("StartingPoint=\(StartingPoint)")
         let StartX = Int(StartingPoint.x)
         let StartY = Int(StartingPoint.y)
         NewPiece.SetStartLocation(X: StartX, Y: StartY)
@@ -464,9 +465,7 @@ class Board: GameMapProtocol
         Map!.IDMap!.RemoveUnusedIDs(BoardMap: Map!.Contents, ButNotThese: [NewPiece.ID])
         PerformanceData.append(("Remove unused IDs", CACurrentMediaTime() - RemoveIDsStart))
         PreGapCount = PostGapCount
-        let AddToRetired = CACurrentMediaTime()
         Map!.RetiredPieceShapes[NewPiece.ID] = NewPiece.ShapeID
-        PerformanceData.append(("Add to retired shapes", CACurrentMediaTime() - AddToRetired))
         
         //Now, get the next piece to show to the user.
         let NextPieceStart = CACurrentMediaTime()
