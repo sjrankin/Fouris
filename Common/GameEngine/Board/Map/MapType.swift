@@ -16,7 +16,6 @@ import UIKit
 ///      The second layer is the block map which is a map of identifies of which individual block occupies which location.
 class MapType: CustomStringConvertible
 {
-    #if true
     /// Initializer.
     /// - Parameters:
     ///   - Width: Width of the map.
@@ -30,28 +29,9 @@ class MapType: CustomStringConvertible
         let Board = BoardManager.GetBoardFor(BucketShape)!
         self.Width = Board.GameBoardWidth
         self.Height = Board.GameBoardHeight
-//        self.Width = Width
-//        self.Height = Height
         Initialize(Width: Width, Height: Height, BoardBucketShape: BucketShape)
     }
-    #else
-    /// Initializer.
-    ///
-    /// - Parameters:
-    ///   - Width: Width of the map.
-    ///   - Height: Height of the map.
-    ///   - ID: ID of the map.
-    ///   - BaseType: Base game type.
-    init(Width: Int, Height: Int, ID: UUID, BaseType: BaseGameTypes)
-    {
-        _MapID = ID
-        self.Width = Width
-        self.Height = Height
-        Initialize(Width: Width, Height: Height, BaseType: BaseType)
-    }
-    #endif
     
-    #if true
     /// Initializer. Uses the standard bucket/map size. The map size is 12x34 and the bucket is 10x20 and
     /// sits on the bottom of the map.
     /// - Parameter ID: ID of the map.
@@ -62,23 +42,8 @@ class MapType: CustomStringConvertible
         _MapID = ID
         self.Width = Board.GameBoardWidth
         self.Height = Board.GameBoardHeight
-//        Width = 12
-//        Height = 34
         Initialize(Width: Width, Height: Height, BoardBucketShape: .Classic)
     }
-    #else
-    /// Initializer. Uses the standard bucket/map size. The map size is 12x34 and the bucket is 10x20 and
-    /// sits on the bottom of the map.
-    ///
-    /// - Parameter ID: ID of the map.
-    init(ID: UUID)
-    {
-        _MapID = ID
-        Width = 12
-        Height = 34
-        Initialize(Width: Width, Height: Height, BaseType: .Standard)
-    }
-    #endif
     
     /// Deinitializer.
     deinit
@@ -146,7 +111,6 @@ class MapType: CustomStringConvertible
         InPlay.removeAll{$0?.ID == ID}
     }
     
-    #if true
     /// Initialize the map contents and related properties.
     /// - Note:
     ///   - If `Scorer` is nil, it is initialized here with standard default values.
@@ -179,7 +143,6 @@ class MapType: CustomStringConvertible
         #endif
         _CurrentRotation = 0
         InPlay = [Piece]()
-        #if true
                 _IDMap = PieceIDMap()
         _CurrentBoardSize = CGSize(width: RawBucket!.GameBoardWidth, height: RawBucket!.GameBoardHeight)
         print("_CurrentBoardSize: \(_CurrentBoardSize)")
@@ -187,12 +150,6 @@ class MapType: CustomStringConvertible
                                       FillWith: IDMap!.StaticID(For: .Visible))
         _BlockMap = MapType.CreateMap(Width: RawBucket!.GameBoardWidth, Height: RawBucket!.GameBoardHeight,
                                       FillWith: UUID.Empty)
-        #else
-        _CurrentBoardSize = CGSize(width: Width, height: Height)
-        _IDMap = PieceIDMap()
-        _Contents = MapType.CreateMap(Width: Width, Height: Height, FillWith: IDMap!.StaticID(For: .Visible))
-        _BlockMap = MapType.CreateMap(Width: Width, Height: Height, FillWith: UUID.Empty)
-        #endif
         
         print("Bucket size: \(RawBucket!.BucketWidth), \(RawBucket!.BucketHeight)")
         print("Bucket location: \(RawBucket!.BucketX),\(RawBucket!.BucketY)")
@@ -200,7 +157,6 @@ class MapType: CustomStringConvertible
         switch BoardClass
         {
             case .Static:
-                #if true
                 _BucketBottom = RawBucket!.BucketHeight - 1
                 _BucketInteriorBottom = _BucketBottom - 1
                 _BucketTop = RawBucket!.BucketY
@@ -210,32 +166,17 @@ class MapType: CustomStringConvertible
                 _BucketInteriorRight = (Width - _BucketInteriorLeft) - 1
                 _BucketInteriorWidth = RawBucket!.BucketWidth - 2
                 _BucketInteriorHeight = RawBucket!.BucketHeight - 1
-                //print("_Bucket: Top=\(_BucketTop), Bottom=\(_BucketBottom), InteriorLeft=\(_BucketInteriorLeft), InteriorRight=\(_BucketInteriorRight)")
-                #else
-                _BucketBottom = Height - 1
-                _BucketInteriorBottom = _BucketBottom - 1
-                _BucketTop = Height - 21
-                _BucketInteriorTop = _BucketTop
-                _BucketInteriorLeft = 1
-                _BucketInteriorRight = Width - 1 - 1
-                _BucketInteriorWidth = (BucketInteriorRight - 1) - (BucketInteriorLeft - 1) - 1
-                _BucketInteriorHeight = (BucketBottom - 1) - (BucketTop - 1) - 1
-                #endif
+
             
             case .Rotatable:
-                let bb = RawBucket!.BucketHeight + RawBucket!.BucketY - 1
-                _BucketBottom = bb
+                _BucketBottom = RawBucket!.BucketHeight + RawBucket!.BucketY - 1
                 _BucketInteriorBottom = _BucketBottom
-                let bt = RawBucket!.BucketY
-                _BucketTop = bt
+                _BucketTop = RawBucket!.BucketY
                 _BucketInteriorTop = _BucketTop
-                let bil = RawBucket!.BucketX
-                _BucketInteriorLeft = bil
-                let bir = RawBucket!.BucketX + RawBucket!.BucketWidth - 1
-                _BucketInteriorRight = bir
+                _BucketInteriorLeft = RawBucket!.BucketX
+                _BucketInteriorRight = RawBucket!.BucketX + RawBucket!.BucketWidth - 1
                 _BucketInteriorWidth = RawBucket!.BucketWidth
                 _BucketInteriorHeight = RawBucket!.BucketHeight
-                
                 _CenterBlockUpperLeft = CGPoint(x: (Width / 2) - 2, y: (Height / 2) - 2)
                 _CenterBlockLowerRight = CGPoint(x: (Width / 2) - 2 + 3, y: (Height / 2) - 2 + 3)
             
@@ -260,98 +201,6 @@ class MapType: CustomStringConvertible
             Scorer!.Annotated = true
         }
     }
-    #else
-    /// Initialize the map contents and related properties.
-    ///
-    /// - Note:
-    ///   - If `Scorer` is nil, it is initialized here with standard default values.
-    ///   - Some **BaseGameTypes** require the dimension of the map to be the same for both **Height** and **Width**.
-    ///     If .Rotating4 or .Cubic is specified and **Height** is not equal to **Width**, a fatal error will be thrown.
-    ///
-    /// - Parameters:
-    ///   - Width: Width of the map.
-    ///   - Height: Height of the map.
-    ///   - BaseType: The base game type.
-    private func Initialize(Width: Int, Height: Int, BaseType: BaseGameTypes)
-    {
-        if BaseType == .Rotating4 || BaseType == .Cubic
-        {
-            if Width != Height
-            {
-                fatalError("Width and Height must be the same for .Rotating4 or .Cubic. Width was \(Width) and Height was \(Height).")
-            }
-        }
-        _CurrentRotation = 0
-        _BaseGameType = BaseType
-        InPlay = [Piece]()
-        _CurrentBoardSize = CGSize(width: Width, height: Height)
-        _IDMap = PieceIDMap()
-        _Contents = MapType.CreateMap(Width: Width, Height: Height, FillWith: IDMap!.StaticID(For: .Visible))
-        _BlockMap = MapType.CreateMap(Width: Width, Height: Height, FillWith: UUID.Empty)
-        
-        switch BaseType
-        {
-            case .Standard:
-                _BucketBottom = Height - 1
-                _BucketInteriorBottom = _BucketBottom - 1
-                _BucketTop = Height - 21
-                _BucketInteriorTop = _BucketTop
-                _BucketInteriorLeft = 1
-                _BucketInteriorRight = Width - 1 - 1
-                _BucketInteriorWidth = (BucketInteriorRight - 1) - (BucketInteriorLeft - 1) - 1
-                _BucketInteriorHeight = (BucketBottom - 1) - (BucketTop - 1) - 1
-            
-            case .Rotating4:
-                let BW = 20
-                let BH = 20
-                _BucketBottom = Height - (BH / 2) + 1
-                _BucketInteriorBottom = _BucketBottom
-                _BucketTop = (Height / 2) - (BH / 2)
-                _BucketInteriorTop = _BucketTop
-                _BucketInteriorLeft = (Width - BW) / 2
-                _BucketInteriorRight = (Width - _BucketInteriorLeft) - 1
-                _BucketInteriorWidth = BW
-                _BucketInteriorHeight = BH
-                
-                _CenterBlockUpperLeft = CGPoint(x: (Width / 2) - 2, y: (Height / 2) - 2)
-                _CenterBlockLowerRight = CGPoint(x: (Width / 2) - 2 + 3, y: (Height / 2) - 2 + 3)
-                
-                #if false
-                DebugClient.Send("_BucketBottom=\(_BucketBottom), _BucketInteriorBottom=\(_BucketInteriorBottom)")
-                DebugClient.Send("_BucketTop=\(_BucketTop), _BucketInteriorTop=\(_BucketInteriorTop)")
-                DebugClient.Send("_BucketInteriorLeft=\(_BucketInteriorLeft)")
-                DebugClient.Send("_BucketInteriorRight=\(_BucketInteriorRight)")
-                DebugClient.Send("_BucketInteriorWidth=\(_BucketInteriorWidth), _BucketInteriorHeight=\(_BucketInteriorHeight)")
-            #endif
-            
-            case .SemiRotating:
-            break
-            
-            case .Cubic:
-                break
-        }
-        
-        let BucketID = IDMap!.StaticID(For: .BucketInterior)
-        let InvisibleBucketID = IDMap!.StaticID(For: .InvisibleBucket)
-        let BucketExteriorID = IDMap!.StaticID(For: .BucketExterior)
-        MapType.InitializeMap(Width: Width, Height: Height,
-                              BucketTop: BucketTop, BucketBottom: _BucketBottom, BucketLeft: _BucketInteriorLeft - 1,
-                              BucketRight: _BucketInteriorRight + 1, Map: &_Contents,
-                              BucketID: BucketID, InvisibleBucketID: InvisibleBucketID, BucketExteriorID: BucketExteriorID,
-                              BaseType: BaseType)
-        #if false
-        print(MapType.PrettyPrint(Map: self))
-        #endif
-        _BucketSize = CGSize(width: _BucketInteriorWidth, height: _BucketInteriorHeight)
-        if Scorer == nil
-        {
-            Scorer = Score(WithID: UUID(), BucketWidth: _BucketInteriorWidth, BucketHeight: _BucketInteriorHeight,
-                           BucketBottom: _BucketInteriorBottom, BucketTop: _BucketInteriorTop,
-                           Mask: [.GapDelta, .GapCount, .MapCondition, .PieceBlockCount, .PieceBlockLocation, .RowCollapse])
-            Scorer!.Annotated = true
-        }
-    }
-    #endif
     
     private var _BoardClass: BoardClasses = .Static
     public var BoardClass: BoardClasses
@@ -404,36 +253,14 @@ class MapType: CustomStringConvertible
     public func GetPieceStartingPoint(ForPiece: Piece) -> CGPoint
     {
         let BoardDef = BoardManager.GetBoardFor(_BucketShape)!
-        #if true
         //Y is always 1 because 0 is occupied by an invisible bucket piece.
         let Y = 1
         let X = (BoardDef.GameBoardWidth / 2) - (ForPiece.Width / 2)
         let InitialPoint = CGPoint(x: X, y: Y)
-        //print("InitialPoint=\(InitialPoint)")
         return InitialPoint
-        #else
-        switch BoardClass
-        {
-            case .Static:
-                let X = GetHorizontalCenter() - ForPiece.Width / 2
-//                let Y = BucketTop - ForPiece.MaxComponentDimension - 2
-                let Y = ForPiece.MaxComponentDimension + 0
-                print(">>>>>> Static start location for \(ForPiece.Shape) is \(X),\(Y)")
-                return CGPoint(x: X, y: Y)
-            
-            case .Rotatable:
-                let X = 16
-                let Y = BucketTop - ForPiece.MaxComponentDimension - 2
-                return CGPoint(x: X, y: Y)
-            
-            case .ThreeDimensional:
-                return CGPoint(x: 0, y: 0)
-        }
-        #endif
     }
     
     /// Replaces the current scorer in the instance with the passed scoring class instance.
-    ///
     /// - Parameter NewScorer: The scoring instance to use in this map class instance.
     func AddScorer(_ NewScorer: Score)
     {
@@ -441,7 +268,6 @@ class MapType: CustomStringConvertible
     }
     
     /// Creates a new scoring class instance set up for the current map configuration.
-    ///
     /// - Parameter WithID: ID to use for the new scoring instance.
     /// - Returns: New scoring class instance.
     func CreateScorer(_ WithID: UUID = UUID()) -> Score
@@ -491,7 +317,7 @@ class MapType: CustomStringConvertible
     }
     
     /// Rotate the contents of the map and the block map 90° left.
-    /// - Note: Throws a fatal error if the **Height** and **Width** are not identical.
+    /// - Warning: Throws a fatal error if the **Height** and **Width** are not identical.
     public func RotateMapLeft()
     {
         if Width != Height
@@ -514,7 +340,7 @@ class MapType: CustomStringConvertible
     }
     
     /// Rotate the contents of the map and the block map 90° right.
-    /// - Note: Throws a fatal error if the **Height** and **Width** are not identical.
+    /// - Warning: Throws a fatal error if the **Height** and **Width** are not identical.
     public func RotateMapRight()
     {
         if Width != Height
@@ -546,7 +372,6 @@ class MapType: CustomStringConvertible
     }
     
     /// Reset the map with a new width and height. The ID map is also reset.
-    ///
     /// - Parameters:
     ///   - NewWidth: New map width.
     ///   - NewHeight: New map height.
@@ -559,7 +384,9 @@ class MapType: CustomStringConvertible
         _RetiredPieceShapes.removeAll()
     }
     
+    /// Holds the piece ID map.
     private var _IDMap: PieceIDMap? = nil
+    /// Get or se the piece ID map.
     public var IDMap: PieceIDMap?
     {
         get
@@ -593,7 +420,7 @@ class MapType: CustomStringConvertible
     /// Holds the contents of the map.
     private var _Contents: ContentsType!
     /// Get or set the map contents.
-    /// - Note: **Setting this directly will lead to undefined behavior.**
+    /// - Warning: **Setting this directly will lead to undefined behavior.**
     public var Contents: ContentsType
     {
         get
@@ -609,7 +436,7 @@ class MapType: CustomStringConvertible
     /// Holds the contents of the block map.
     private var _BlockMap: ContentsType!
     /// Get or set the block map. This is a map of block IDs in the current map.
-    /// - Note: **Setting this directly will lead to undefined behavior.**
+    /// - Warning: **Setting this directly will lead to undefined behavior.**
     public var BlockMap: ContentsType
     {
         get
@@ -769,7 +596,6 @@ class MapType: CustomStringConvertible
     // MARK: Utility functions.
     
     /// Determines if a block can occupy the passed point.
-    ///
     /// - Parameter At: The point to check for emptiness.
     /// - Returns: True if the specified point is empty, false if not.
     func MapIsEmpty(At: CGPoint) -> Bool
@@ -811,13 +637,11 @@ class MapType: CustomStringConvertible
     }
     
     /// Determines if the piece is fully in bounds. Call only after the piece is frozen.
-    ///
     /// - Parameter ThePiece: The piece to check for in-boundedness.
     /// - Returns: True if the piece is fully in bounds (eg, in the bucket), false otherwise.
     func PieceInBounds(_ ThePiece: Piece) -> Bool
     {
         let BoardDef = BoardManager.GetBoardFor(_BucketShape)
-        #if true
                 var IsInBounds = true
         for Point in ThePiece.Locations
         {
@@ -834,19 +658,6 @@ class MapType: CustomStringConvertible
                 break
             }
         }
-        #else
-        let Offset: Int = BoardDef!.BucketY
-        var IsInBounds = true
-        for Point in ThePiece.Locations
-        {
-            print("Piece in bounds checking Y=\(Point.Y) < BucketTop=\(BucketTop) - Offset=\(Offset) {\(BucketTop - Offset)}")
-            if Point.Y < BucketTop - Offset
-            {
-                IsInBounds = false
-                break
-            }
-        }
-        #endif
         Scorer?.ScoreLocations(ThePiece.LocationsAsPoints())
         return IsInBounds
     }
