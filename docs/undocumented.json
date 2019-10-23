@@ -1,0 +1,558 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/+ThemeDescriptorWriter.swift",
+      "line": 36,
+      "symbol": "ThemeDescriptor2.ToString(AppendTerminalReturn:ResetDirtyFlag:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/InViewText/+GameMessages.swift",
+      "line": 15,
+      "symbol": "View3D.PlotText(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 420,
+      "symbol": "Model.simulator",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 421,
+      "symbol": "Model.iPad2",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 422,
+      "symbol": "Model.iPad3",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 423,
+      "symbol": "Model.iPad4",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 424,
+      "symbol": "Model.iPhone4",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 425,
+      "symbol": "Model.iPhone4S",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 426,
+      "symbol": "Model.iPhone5",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 427,
+      "symbol": "Model.iPhone5S",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 428,
+      "symbol": "Model.iPhone5C",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 429,
+      "symbol": "Model.iPadMini1",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 430,
+      "symbol": "Model.iPadMini2",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 431,
+      "symbol": "Model.iPadMini3",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 432,
+      "symbol": "Model.iPadMini4",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 433,
+      "symbol": "Model.iPadAir1",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 434,
+      "symbol": "Model.iPadAir2",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 435,
+      "symbol": "Model.iPadPro9_7",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 436,
+      "symbol": "Model.iPadPro9_7_cell",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 437,
+      "symbol": "Model.iPadPro10_5",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 438,
+      "symbol": "Model.iPadPro10_5_cell",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 439,
+      "symbol": "Model.iPadPro12_9",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 440,
+      "symbol": "Model.iPadPro12_9_cell",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 441,
+      "symbol": "Model.iPadPro11",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 442,
+      "symbol": "Model.iPadPro11_cell",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 443,
+      "symbol": "Model.iPadPro12_9_3g",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 444,
+      "symbol": "Model.iPadPro12_9_3g_cell",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 445,
+      "symbol": "Model.iPhone6",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 446,
+      "symbol": "Model.iPhone6plus",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 447,
+      "symbol": "Model.iPhone6S",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 448,
+      "symbol": "Model.iPhone6Splus",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 449,
+      "symbol": "Model.iPhoneSE",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 450,
+      "symbol": "Model.iPhone7",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 451,
+      "symbol": "Model.iPhone7plus",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 452,
+      "symbol": "Model.iPhone8",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 453,
+      "symbol": "Model.iPhone8plus",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 454,
+      "symbol": "Model.iPhoneX",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 455,
+      "symbol": "Model.iPhoneXS",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 456,
+      "symbol": "Model.iPhoneXSmax",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 457,
+      "symbol": "Model.iPhoneXR",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 458,
+      "symbol": "Model.iPadMini5_cell",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 459,
+      "symbol": "Model.iPadMini5",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 460,
+      "symbol": "Model.iPhone11",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 461,
+      "symbol": "Model.iPhone11Pro",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 462,
+      "symbol": "Model.iPhone11ProMax",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 463,
+      "symbol": "Model.iPad10_2",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 464,
+      "symbol": "Model.iPad10_2_cell",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Platform.swift",
+      "line": 465,
+      "symbol": "Model.unrecognized",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TDebug/Extensions/OSColorExtensions.swift",
+      "line": 161,
+      "symbol": "UIColor.MakeRandomColor(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TDebug/Extensions/OSColorExtensions.swift",
+      "line": 193,
+      "symbol": "UIColor.RandomColorTypes.AnyColor",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TDebug/Extensions/OSColorExtensions.swift",
+      "line": 194,
+      "symbol": "UIColor.RandomColorTypes.Dark",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TDebug/Extensions/OSColorExtensions.swift",
+      "line": 195,
+      "symbol": "UIColor.RandomColorTypes.Light",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TDebug/MessageHelper/+DebuggeeExecution.swift",
+      "line": 18,
+      "symbol": "MessageHelper.MakeExecutionStartedCommand(Prefix:Exclusive:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TDebug/MessageHelper/+DebuggeeExecution.swift",
+      "line": 26,
+      "symbol": "MessageHelper.MakeExecutionTerminatedCommand(Prefix:WasFatalError:LastMessage:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TDebug/MessageHelper/+DebuggeeExecution.swift",
+      "line": 37,
+      "symbol": "MessageHelper.DecodeExecutionStartedCommand(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TDebug/MessageHelper/+DebuggeeExecution.swift",
+      "line": 58,
+      "symbol": "MessageHelper.DecodeExecutionTerminatedCommand(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TDebug/MessageHelper/+EchoCommands.swift",
+      "line": 37,
+      "symbol": "MessageHelper.DecodeEchoMessage(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TDebug/MessageHelper/+Handshake.swift",
+      "line": 30,
+      "symbol": "MessageHelper.DecodeHandShakeCommand(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TDebug/MessageHelper/+Heartbeat.swift",
+      "line": 43,
+      "symbol": "MessageHelper.MakeRequestConnectionHeartbeat(From:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TDebug/MessageHelper/+Heartbeat.swift",
+      "line": 50,
+      "symbol": "MessageHelper.MakeHeartbeatMessage(NextExpectedIn:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TDebug/MessageHelper/+Heartbeat.swift",
+      "line": 57,
+      "symbol": "MessageHelper.MakeHeartbeatMessage(Payload:NextExpectedIn:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TDebug/MessageHelper/+Heartbeat.swift",
+      "line": 135,
+      "symbol": "MessageHelper.DecodeHeartbeat(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TDebug/MessageHelper/+IdiotLights.swift",
+      "line": 19,
+      "symbol": "MessageHelper.MakeIdiotLightMessage(Address:Message:FGColor:BGColor:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TDebug/MessageHelper/+IdiotLights.swift",
+      "line": 31,
+      "symbol": "MessageHelper.MakeIdiotLightMessage(Address:State:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TDebug/MessageHelper/+IdiotLights.swift",
+      "line": 39,
+      "symbol": "MessageHelper.MakeIdiotLightMessage(Address:Text:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TDebug/MessageHelper/+IdiotLights.swift",
+      "line": 47,
+      "symbol": "MessageHelper.MakeIdiotLightMessage(Address:FGColor:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TDebug/MessageHelper/+IdiotLights.swift",
+      "line": 55,
+      "symbol": "MessageHelper.MakeIdiotLightMessage(Address:BGColor:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TDebug/MessageHelper/+IdiotLights.swift",
+      "line": 65,
+      "symbol": "MessageHelper.DecodeIdiotLightCommand(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TDebug/MessageHelper/+IdiotLights.swift",
+      "line": 85,
+      "symbol": "MessageHelper.DecodeIdiotLightMessage(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TDebug/MessageHelper/+IdiotLights.swift",
+      "line": 130,
+      "symbol": "MessageHelper.DecodeIdiotLightMessage2(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TDebug/MessageHelper/+KVPCommands.swift",
+      "line": 37,
+      "symbol": "MessageHelper.DecodeKVPMessage(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TDebug/MessageHelper/+PeerCommands.swift",
+      "line": 43,
+      "symbol": "MessageHelper.DecodePeerTypeCommand(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TDebug/MessageHelper/+SpecialAndOtherCommands.swift",
+      "line": 38,
+      "symbol": "MessageHelper.DecodeSpecialCommand(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TDebug/MessageHelper/+StatusCommands.swift",
+      "line": 17,
+      "symbol": "MessageHelper.MakeDebuggerStateChangeMessage(Prefix:From:NewDebugState:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TDebug/MessageHelper/+StatusCommands.swift",
+      "line": 28,
+      "symbol": "MessageHelper.DecodeDebuggerStateChanged(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TDebug/MessageHelper/+TextMessages.swift",
+      "line": 17,
+      "symbol": "MessageHelper.MakeMessage(WithType:_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TDebug/MessageHelper/+TextMessages.swift",
+      "line": 27,
+      "symbol": "MessageHelper.MakeMessage(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TDebug/MessageHelper/+TextMessages.swift",
+      "line": 39,
+      "symbol": "MessageHelper.DecodeTextMessage(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/TypeExtensions/OtherExtensions.swift",
+      "line": 46,
+      "symbol": "UIImage.init(Color:Size:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/Stuart/Documents/GitHub/Fouris/Fouris"
+}

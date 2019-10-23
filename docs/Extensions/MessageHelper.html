@@ -1,0 +1,2901 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>MessageHelper Extension Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Extension/MessageHelper" class="dashAnchor"></a>
+    <a title="MessageHelper Extension Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a> (54% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        MessageHelper Extension Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/Versioning.html">Versioning</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/Model.html">Model</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/MapType.html">MapType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/MessageHelper.html">MessageHelper</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/SCNVector3.html">SCNVector3</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/SCNVector4.html">SCNVector4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/ThemeDescriptor2.html">ThemeDescriptor2</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/ThemeManager3.html">ThemeManager3</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UIColor.html">UIColor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UIColor/RandomColorTypes.html">– RandomColorTypes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UIDevice.html">UIDevice</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UIImage.html">UIImage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/View3D.html">View3D</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/XMLNode.html">XMLNode</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>MessageHelper</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">MessageHelper</span></code></pre>
+
+                </div>
+              </div>
+            
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Broadcasting%20encoding%20commands."></a>
+                <a name="//apple_ref/swift/Section/Broadcasting encoding commands." class="dashAnchor"></a>
+                <a href="#/Broadcasting%20encoding%20commands.">
+                  <h3 class="section-name">Broadcasting encoding commands.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC013MakeBroadcastB04From0B0SSSo8MCPeerIDC_SStFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeBroadcastMessage(From:Message:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC013MakeBroadcastB04From0B0SSSo8MCPeerIDC_SStFZ">MakeBroadcastMessage(From:Message:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a broadcast text message command.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeBroadcastMessage</span><span class="p">(</span><span class="kt">From</span><span class="p">:</span> <span class="kt">MCPeerID</span><span class="p">,</span> <span class="kt">Message</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>From</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The peer that is broadcasting the message.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Message</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The text message to send.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Command string to broadcast a message.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC013MakeBroadcastB04From0B0S2S_SStFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeBroadcastMessage(From:Message:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC013MakeBroadcastB04From0B0S2S_SStFZ">MakeBroadcastMessage(From:Message:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a broadcast text message command.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeBroadcastMessage</span><span class="p">(</span><span class="kt">From</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">Message</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>From</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The peer that is broadcasting the message.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Message</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The text message to send.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Command string to broadcast a message.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC20MakeBroadcastCommand4From012PreformattedF0SSSo8MCPeerIDC_SStFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeBroadcastCommand(From:PreformattedCommand:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC20MakeBroadcastCommand4From012PreformattedF0SSSo8MCPeerIDC_SStFZ">MakeBroadcastCommand(From:PreformattedCommand:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a broadcast command command.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeBroadcastCommand</span><span class="p">(</span><span class="kt">From</span><span class="p">:</span> <span class="kt">MCPeerID</span><span class="p">,</span> <span class="kt">PreformattedCommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>From</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The peer that is broadcasting the message.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>PreformattedCommand</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pre-formatted command to broadcast.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Command string to broadcast as a command.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC20MakeBroadcastCommand4From012PreformattedF0S2S_SStFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeBroadcastCommand(From:PreformattedCommand:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC20MakeBroadcastCommand4From012PreformattedF0S2S_SStFZ">MakeBroadcastCommand(From:PreformattedCommand:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a broadcast command command.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeBroadcastCommand</span><span class="p">(</span><span class="kt">From</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">PreformattedCommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>From</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The peer that is broadcasting the message.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>PreformattedCommand</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pre-formatted command to broadcast.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Command string to broadcast as a command.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Broadcasting%20command%20decoding."></a>
+                <a name="//apple_ref/swift/Section/Broadcasting command decoding." class="dashAnchor"></a>
+                <a href="#/Broadcasting%20command%20decoding.">
+                  <h3 class="section-name">Broadcasting command decoding.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC015DecodeBroadcastB0ySS_SStSgSSFZ"></a>
+                    <a name="//apple_ref/swift/Method/DecodeBroadcastMessage(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC015DecodeBroadcastB0ySS_SStSgSSFZ">DecodeBroadcastMessage(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Decode a broadcast message.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">DecodeBroadcastMessage</span><span class="p">(</span><span class="n">_</span> <span class="kt">Raw</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="p">)?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Raw</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The raw message that was broadcast.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Tuple in the form (Name of peer that broadcast message, message body). Nil on failure/error.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC22DecodeBroadcastCommandySS_SStSgSSFZ"></a>
+                    <a name="//apple_ref/swift/Method/DecodeBroadcastCommand(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC22DecodeBroadcastCommandySS_SStSgSSFZ">DecodeBroadcastCommand(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Decode a broadcast command.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">DecodeBroadcastCommand</span><span class="p">(</span><span class="n">_</span> <span class="kt">Raw</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="p">)?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Raw</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The raw command message that was broadcast.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Tuple in the form (Name of peer that broadcast message, undecoded command). Nil on failure/error.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Client%20command%20encoding%20commands."></a>
+                <a name="//apple_ref/swift/Section/Client command encoding commands." class="dashAnchor"></a>
+                <a href="#/Client%20command%20encoding%20commands.">
+                  <h3 class="section-name">Client command encoding commands.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC14MakeGetCommand0F5IndexSSSi_tFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeGetCommand(CommandIndex:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC14MakeGetCommand0F5IndexSSSi_tFZ">MakeGetCommand(CommandIndex:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Make a command string that requests a client command at the CommandIndexth position.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeGetCommand</span><span class="p">(</span><span class="kt">CommandIndex</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>CommandIndex</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Determines the client command to return.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Command string for retrieving the CommandIndexth client command.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC24MakeReturnCommandByIndex0H00F00F4Name11Description14ParameterCount10ParametersSSSi_10Foundation4UUIDVS2SSiSaySSGtFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeReturnCommandByIndex(Index:Command:CommandName:Description:ParameterCount:Parameters:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC24MakeReturnCommandByIndex0H00F00F4Name11Description14ParameterCount10ParametersSSSi_10Foundation4UUIDVS2SSiSaySSGtFZ">MakeReturnCommandByIndex(Index:Command:CommandName:Description:ParameterCount:Parameters:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Make a command string returning the Indexth client command. Sent in response to a <code>MakeGetCommand</code> command string.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeReturnCommandByIndex</span><span class="p">(</span><span class="kt">Index</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">Command</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">,</span> <span class="kt">CommandName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+                                            <span class="kt">Description</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">ParameterCount</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">Parameters</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Index</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Index of the returned command - corresonds to the <code>CommandIndex</code> parameter in <code>MakeGetCommand</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Command</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the command.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>CommandName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Name of the command.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Description</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Description of the command.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Parameters</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><ul>
+<li>Index: Index of the returned command - corresonds to the <code>CommandIndex</code> parameter in <code>MakeGetCommand</code>.</li>
+<li>Command: ID of the command.</li>
+<li>CommandName: Name of the command.</li>
+<li>Description: Description of the command.</li>
+</ul></p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>String representing the client command returnable by multi-peer messaging.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC20MakeCommandForClient0E2ID10ParametersSS10Foundation4UUIDV_SaySS_SStGtFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeCommandForClient(CommandID:Parameters:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC20MakeCommandForClient0E2ID10ParametersSS10Foundation4UUIDV_SaySS_SStGtFZ">MakeCommandForClient(CommandID:Parameters:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Make a string command to execute a client command in the client app on the remote system.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeCommandForClient</span><span class="p">(</span><span class="kt">CommandID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">,</span> <span class="kt">Parameters</span><span class="p">:</span> <span class="p">[(</span><span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="p">)])</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>CommandID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Client command ID.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Parameters</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><ul>
+<li>CommandID: Client command ID.</li>
+</ul></p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>String command to execute a client command.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC23MakeClientCommandResult0G011ReturnValueS2S_SStFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeClientCommandResult(Result:ReturnValue:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC23MakeClientCommandResult0G011ReturnValueS2S_SStFZ">MakeClientCommandResult(Result:ReturnValue:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Make a string command to return client command execution results to the caller.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeClientCommandResult</span><span class="p">(</span><span class="kt">Result</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">ReturnValue</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Result</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Result of the client command execution (eg, true, false indicating success or failure of executing
+    the command).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ReturnValue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The return value (if any) from the command execution. Not considered valid if <code>Result</code> in some
+         way indicates a failure to execute the command.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>String to send to the caller with the results of the client command execution.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC21MakeAllClientCommands0G0SSAA0fG0C_tFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeAllClientCommands(Commands:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC21MakeAllClientCommands0G0SSAA0fG0C_tFZ">MakeAllClientCommands(Commands:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Make a command string returning all client commands.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeAllClientCommands</span><span class="p">(</span><span class="kt">Commands</span><span class="p">:</span> <span class="kt">ClientCommands</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Commands</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The client command manager, populated with all supported client commands.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>String with all client commands in the passed client command manager.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Client%20command%20decoding."></a>
+                <a name="//apple_ref/swift/Section/Client command decoding." class="dashAnchor"></a>
+                <a href="#/Client%20command%20decoding.">
+                  <h3 class="section-name">Client command decoding.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC19DecodeClientCommandyAA0eF0CSgSSFZ"></a>
+                    <a name="//apple_ref/swift/Method/DecodeClientCommand(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC19DecodeClientCommandyAA0eF0CSgSSFZ">DecodeClientCommand(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Decode a client command string.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">DecodeClientCommand</span><span class="p">(</span><span class="n">_</span> <span class="kt">Raw</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ClientCommand</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Raw</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The raw message string.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>ClientCommand class with the command ID and parameters (but no other fields populated).</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC25DecodeReturnedCommandListySayAA06ClientF0CGSgSSFZ"></a>
+                    <a name="//apple_ref/swift/Method/DecodeReturnedCommandList(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC25DecodeReturnedCommandListySayAA06ClientF0CGSgSSFZ">DecodeReturnedCommandList(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Decode a returned client command list response.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">DecodeReturnedCommandList</span><span class="p">(</span><span class="n">_</span> <span class="kt">Raw</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">ClientCommand</span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Raw</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The raw response from the client that sent the response.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>List of client command classes. Nil on error.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Debuggee%20execution%20encoding%20commands."></a>
+                <a name="//apple_ref/swift/Section/Debuggee execution encoding commands." class="dashAnchor"></a>
+                <a href="#/Debuggee%20execution%20encoding%20commands.">
+                  <h3 class="section-name">Debuggee execution encoding commands.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC27MakeExecutionStartedCommand6Prefix9ExclusiveSS10Foundation4UUIDV_SbtFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeExecutionStartedCommand(Prefix:Exclusive:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC27MakeExecutionStartedCommand6Prefix9ExclusiveSS10Foundation4UUIDV_SbtFZ">MakeExecutionStartedCommand(Prefix:Exclusive:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeExecutionStartedCommand</span><span class="p">(</span><span class="kt">Prefix</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">,</span> <span class="kt">Exclusive</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC30MakeExecutionTerminatedCommand6Prefix13WasFatalError04LastB0SS10Foundation4UUIDV_SbSStFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeExecutionTerminatedCommand(Prefix:WasFatalError:LastMessage:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC30MakeExecutionTerminatedCommand6Prefix13WasFatalError04LastB0SS10Foundation4UUIDV_SbSStFZ">MakeExecutionTerminatedCommand(Prefix:WasFatalError:LastMessage:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeExecutionTerminatedCommand</span><span class="p">(</span><span class="kt">Prefix</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">,</span> <span class="kt">WasFatalError</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="kt">LastMessage</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Debuggee%20execution%20command%20decoding."></a>
+                <a name="//apple_ref/swift/Section/Debuggee execution command decoding." class="dashAnchor"></a>
+                <a href="#/Debuggee%20execution%20command%20decoding.">
+                  <h3 class="section-name">Debuggee execution command decoding.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC29DecodeExecutionStartedCommandy10Foundation4UUIDV_SbtSgSSFZ"></a>
+                    <a name="//apple_ref/swift/Method/DecodeExecutionStartedCommand(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC29DecodeExecutionStartedCommandy10Foundation4UUIDV_SbtSgSSFZ">DecodeExecutionStartedCommand(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">DecodeExecutionStartedCommand</span><span class="p">(</span><span class="n">_</span> <span class="kt">Raw</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">UUID</span><span class="p">,</span> <span class="kt">Bool</span><span class="p">)?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC32DecodeExecutionTerminatedCommandy10Foundation4UUIDV_SbSStSgSSFZ"></a>
+                    <a name="//apple_ref/swift/Method/DecodeExecutionTerminatedCommand(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC32DecodeExecutionTerminatedCommandy10Foundation4UUIDV_SbSStSgSSFZ">DecodeExecutionTerminatedCommand(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">DecodeExecutionTerminatedCommand</span><span class="p">(</span><span class="n">_</span> <span class="kt">Raw</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">UUID</span><span class="p">,</span> <span class="kt">Bool</span><span class="p">,</span> <span class="kt">String</span><span class="p">)?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Echo%20command%20encoding%20commands."></a>
+                <a name="//apple_ref/swift/Section/Echo command encoding commands." class="dashAnchor"></a>
+                <a href="#/Echo%20command%20encoding%20commands.">
+                  <h3 class="section-name">Echo command encoding commands.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC08MakeEchoB00B05Delay5Count4HostS2S_S2iSStFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeEchoMessage(Message:Delay:Count:Host:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC08MakeEchoB00B05Delay5Count4HostS2S_S2iSStFZ">MakeEchoMessage(Message:Delay:Count:Host:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Make an echo message command.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeEchoMessage</span><span class="p">(</span><span class="kt">Message</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">Delay</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">Count</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">Host</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Message</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The text message to echo.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Delay</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>How long, in seconds, to delay before returning the <code>Message</code> back.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Count</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Not currently used.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Host</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The source of the echo - used by the peer to know where to send the echo.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Command string for echoing a message.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Echo%20command%20decoding."></a>
+                <a name="//apple_ref/swift/Section/Echo command decoding." class="dashAnchor"></a>
+                <a href="#/Echo%20command%20decoding.">
+                  <h3 class="section-name">Echo command decoding.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC010DecodeEchoB0ySS_SSS2itSgSSFZ"></a>
+                    <a name="//apple_ref/swift/Method/DecodeEchoMessage(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC010DecodeEchoB0ySS_SSS2itSgSSFZ">DecodeEchoMessage(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">DecodeEchoMessage</span><span class="p">(</span><span class="n">_</span> <span class="kt">Raw</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Encapsulated%20command%20encoding%20commands."></a>
+                <a name="//apple_ref/swift/Section/Encapsulated command encoding commands." class="dashAnchor"></a>
+                <a href="#/Encapsulated%20command%20encoding%20commands.">
+                  <h3 class="section-name">Encapsulated command encoding commands.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC23MakeEncapsulatedCommand6WithID7PayloadSS10Foundation4UUIDV_SStFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeEncapsulatedCommand(WithID:Payload:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC23MakeEncapsulatedCommand6WithID7PayloadSS10Foundation4UUIDV_SStFZ">MakeEncapsulatedCommand(WithID:Payload:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Make an encapsulated command. Encapsulated commands are used to coordinate asynchronous commands with
+their asynchronous results.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeEncapsulatedCommand</span><span class="p">(</span><span class="kt">WithID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">,</span> <span class="kt">Payload</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>WithID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The asynchronous command ID - each time this is called, a different UIID should be used.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Payload</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The command to encapsulate.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Encpasulated command string.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Encapsulated%20command%20decoding."></a>
+                <a name="//apple_ref/swift/Section/Encapsulated command decoding." class="dashAnchor"></a>
+                <a href="#/Encapsulated%20command%20decoding.">
+                  <h3 class="section-name">Encapsulated command decoding.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC25DecodeEncapsulatedCommandy10Foundation4UUIDV_SStSgSSFZ"></a>
+                    <a name="//apple_ref/swift/Method/DecodeEncapsulatedCommand(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC25DecodeEncapsulatedCommandy10Foundation4UUIDV_SStSgSSFZ">DecodeEncapsulatedCommand(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Decode an encapsulated ID command.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">DecodeEncapsulatedCommand</span><span class="p">(</span><span class="n">_</span> <span class="kt">Raw</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">UUID</span><span class="p">,</span> <span class="kt">String</span><span class="p">)?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Raw</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The raw value to decode.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Tupele in the following order: (ID of the encapsulated command, Raw, encoded command). Nil on error.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Handshake%20command%20encoding%20commands."></a>
+                <a name="//apple_ref/swift/Section/Handshake command encoding commands." class="dashAnchor"></a>
+                <a href="#/Handshake%20command%20encoding%20commands.">
+                  <h3 class="section-name">Handshake command encoding commands.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC13MakeHandShakeySSAA0eF8CommandsOFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeHandShake(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC13MakeHandShakeySSAA0eF8CommandsOFZ">MakeHandShake(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Make a handshake command to negotiate host-client relationships.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeHandShake</span><span class="p">(</span><span class="n">_</span> <span class="kt">Command</span><span class="p">:</span> <span class="kt">HandShakeCommands</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Command</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The command to send.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Command string with the passed handshake command.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Handshake%20command%20decoding."></a>
+                <a name="//apple_ref/swift/Section/Handshake command decoding." class="dashAnchor"></a>
+                <a href="#/Handshake%20command%20decoding.">
+                  <h3 class="section-name">Handshake command decoding.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC22DecodeHandShakeCommandyAA0eF8CommandsOSSFZ"></a>
+                    <a name="//apple_ref/swift/Method/DecodeHandShakeCommand(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC22DecodeHandShakeCommandyAA0eF8CommandsOSSFZ">DecodeHandShakeCommand(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">DecodeHandShakeCommand</span><span class="p">(</span><span class="n">_</span> <span class="kt">Raw</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">HandShakeCommands</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Heartbeat%20command%20encoding%20commands."></a>
+                <a name="//apple_ref/swift/Section/Heartbeat command encoding commands." class="dashAnchor"></a>
+                <a href="#/Heartbeat%20command%20encoding%20commands.">
+                  <h3 class="section-name">Heartbeat command encoding commands.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC23MakeConnectionHeartbeat4From8ReturnIn04LastH09FailAfter12ReceiveCountSSSo8MCPeerIDC_S4itFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeConnectionHeartbeat(From:ReturnIn:LastReturn:FailAfter:ReceiveCount:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC23MakeConnectionHeartbeat4From8ReturnIn04LastH09FailAfter12ReceiveCountSSSo8MCPeerIDC_S4itFZ">MakeConnectionHeartbeat(From:ReturnIn:LastReturn:FailAfter:ReceiveCount:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Make a connection heartbeat message.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeConnectionHeartbeat</span><span class="p">(</span><span class="kt">From</span><span class="p">:</span> <span class="kt">MCPeerID</span><span class="p">,</span> <span class="kt">ReturnIn</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span>
+                                           <span class="kt">LastReturn</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">FailAfter</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span>
+                                           <span class="kt">ReceiveCount</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>From</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the peer that is sending the connection heartbeat message.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ReturnIn</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Number of seconds to wait before returning a reciprocol connection heartbeat.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>LastReturn</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The number of seconds the sender had to wait for the previous connection
+        heartbeat message.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>FailAfter</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Number of seconds to wait before declaring a communication failure. If this
+       value is less than <code>ReturnIn</code>, this value is added to <code>ReturnIn</code> to create
+       the resolved fail after time.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ReceiveCount</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Cumulative count of received connection heartbeat messages.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Connection heartbeat command message.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC30MakeRequestConnectionHeartbeat4FromSSSo8MCPeerIDC_tFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeRequestConnectionHeartbeat(From:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC30MakeRequestConnectionHeartbeat4FromSSSo8MCPeerIDC_tFZ">MakeRequestConnectionHeartbeat(From:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeRequestConnectionHeartbeat</span><span class="p">(</span><span class="kt">From</span><span class="p">:</span> <span class="kt">MCPeerID</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC013MakeHeartbeatB014NextExpectedIn_SSSi_SStFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeHeartbeatMessage(NextExpectedIn:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC013MakeHeartbeatB014NextExpectedIn_SSSi_SStFZ">MakeHeartbeatMessage(NextExpectedIn:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeHeartbeatMessage</span><span class="p">(</span><span class="kt">NextExpectedIn</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">_</span> <span class="kt">HostName</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC013MakeHeartbeatB07Payload14NextExpectedIn_S2S_SiSStFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeHeartbeatMessage(Payload:NextExpectedIn:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC013MakeHeartbeatB07Payload14NextExpectedIn_S2S_SiSStFZ">MakeHeartbeatMessage(Payload:NextExpectedIn:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeHeartbeatMessage</span><span class="p">(</span><span class="kt">Payload</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">NextExpectedIn</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">_</span> <span class="kt">HostName</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Hearbeat%20command%20decoding."></a>
+                <a name="//apple_ref/swift/Section/Hearbeat command decoding." class="dashAnchor"></a>
+                <a href="#/Hearbeat%20command%20decoding.">
+                  <h3 class="section-name">Hearbeat command decoding.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC25DecodeConnectionHeartbeatySS_S4itSSFZ"></a>
+                    <a name="//apple_ref/swift/Method/DecodeConnectionHeartbeat(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC25DecodeConnectionHeartbeatySS_S4itSSFZ">DecodeConnectionHeartbeat(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Decode a connection heartbeat message.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">DecodeConnectionHeartbeat</span><span class="p">(</span><span class="n">_</span> <span class="kt">Raw</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">String</span><span class="p">,</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Raw</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Raw command string to decode.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Tuple of information from the connection heartbeat command in the form
+       (Sending Peer Name, Return Reciprocol Message in Seconds, Time the Sender
+        Waited for the Pervious Message, Fail After Seconds, Cumulative Recieved Count).</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC15DecodeHeartbeatySi_SSSgtSgSSFZ"></a>
+                    <a name="//apple_ref/swift/Method/DecodeHeartbeat(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC15DecodeHeartbeatySi_SSSgtSgSSFZ">DecodeHeartbeat(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">DecodeHeartbeat</span><span class="p">(</span><span class="n">_</span> <span class="kt">Raw</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">String</span><span class="p">?)?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Idiot%20light%20encoding%20commands."></a>
+                <a name="//apple_ref/swift/Section/Idiot light encoding commands." class="dashAnchor"></a>
+                <a href="#/Idiot%20light%20encoding%20commands.">
+                  <h3 class="section-name">Idiot light encoding commands.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC014MakeIdiotLightB07Address0B07FGColor7BGColorS2S_SSAA10ColorNamesOAJtFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeIdiotLightMessage(Address:Message:FGColor:BGColor:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC014MakeIdiotLightB07Address0B07FGColor7BGColorS2S_SSAA10ColorNamesOAJtFZ">MakeIdiotLightMessage(Address:Message:FGColor:BGColor:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeIdiotLightMessage</span><span class="p">(</span><span class="kt">Address</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">Message</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+                                        <span class="kt">FGColor</span><span class="p">:</span> <span class="kt">ColorNames</span><span class="p">,</span>
+                                        <span class="kt">BGColor</span><span class="p">:</span> <span class="kt">ColorNames</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC014MakeIdiotLightB07Address5StateS2S_AA15UIFeatureStatesOtFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeIdiotLightMessage(Address:State:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC014MakeIdiotLightB07Address5StateS2S_AA15UIFeatureStatesOtFZ">MakeIdiotLightMessage(Address:State:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeIdiotLightMessage</span><span class="p">(</span><span class="kt">Address</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">State</span><span class="p">:</span> <span class="kt">UIFeatureStates</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC014MakeIdiotLightB07Address4TextS2S_SStFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeIdiotLightMessage(Address:Text:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC014MakeIdiotLightB07Address4TextS2S_SStFZ">MakeIdiotLightMessage(Address:Text:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeIdiotLightMessage</span><span class="p">(</span><span class="kt">Address</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">Text</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC014MakeIdiotLightB07Address7FGColorS2S_AA10ColorNamesOtFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeIdiotLightMessage(Address:FGColor:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC014MakeIdiotLightB07Address7FGColorS2S_AA10ColorNamesOtFZ">MakeIdiotLightMessage(Address:FGColor:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeIdiotLightMessage</span><span class="p">(</span><span class="kt">Address</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">FGColor</span><span class="p">:</span> <span class="kt">ColorNames</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC014MakeIdiotLightB07Address7BGColorS2S_AA10ColorNamesOtFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeIdiotLightMessage(Address:BGColor:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC014MakeIdiotLightB07Address7BGColorS2S_AA10ColorNamesOtFZ">MakeIdiotLightMessage(Address:BGColor:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeIdiotLightMessage</span><span class="p">(</span><span class="kt">Address</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">BGColor</span><span class="p">:</span> <span class="kt">ColorNames</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Idiot%20light%20command%20decoding."></a>
+                <a name="//apple_ref/swift/Section/Idiot light command decoding." class="dashAnchor"></a>
+                <a href="#/Idiot%20light%20command%20decoding.">
+                  <h3 class="section-name">Idiot light command decoding.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC23DecodeIdiotLightCommandyAA0B5TypesO_S3StSSFZ"></a>
+                    <a name="//apple_ref/swift/Method/DecodeIdiotLightCommand(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC23DecodeIdiotLightCommandyAA0B5TypesO_S3StSSFZ">DecodeIdiotLightCommand(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">DecodeIdiotLightCommand</span><span class="p">(</span><span class="n">_</span> <span class="kt">Raw</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">MessageTypes</span><span class="p">,</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC016DecodeIdiotLightB0yAA0eF8CommandsO_S2SSgSo7UIColorCSgAJtSSFZ"></a>
+                    <a name="//apple_ref/swift/Method/DecodeIdiotLightMessage(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC016DecodeIdiotLightB0yAA0eF8CommandsO_S2SSgSo7UIColorCSgAJtSSFZ">DecodeIdiotLightMessage(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">DecodeIdiotLightMessage</span><span class="p">(</span><span class="n">_</span> <span class="kt">Raw</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">IdiotLightCommands</span><span class="p">,</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="p">?,</span> <span class="kt">UIColor</span><span class="p">?,</span> <span class="kt">UIColor</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC24DecodeIdiotLightMessage2yAA0efB0CSgSSFZ"></a>
+                    <a name="//apple_ref/swift/Method/DecodeIdiotLightMessage2(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC24DecodeIdiotLightMessage2yAA0efB0CSgSSFZ">DecodeIdiotLightMessage2(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">DecodeIdiotLightMessage2</span><span class="p">(</span><span class="n">_</span> <span class="kt">Raw</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">IdiotLightMessage</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/KVP%20command%20encoding%20commands."></a>
+                <a name="//apple_ref/swift/Section/KVP command encoding commands." class="dashAnchor"></a>
+                <a href="#/KVP%20command%20encoding%20commands.">
+                  <h3 class="section-name">KVP command encoding commands.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC14MakeKVPMessage2ID3Key5ValueSS10Foundation4UUIDV_S2StFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeKVPMessage(ID:Key:Value:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC14MakeKVPMessage2ID3Key5ValueSS10Foundation4UUIDV_S2StFZ">MakeKVPMessage(ID:Key:Value:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Make a message to send a key-value pair to a peer. Key-value pairs are display in the peer&rsquo;s KVPTable. Use the
+same <code>ID</code> to edit an existing key-value pair on the host.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeKVPMessage</span><span class="p">(</span><span class="kt">ID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">,</span> <span class="kt">Key</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">Value</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the key-value pair. This is how values can be edited in the peer&rsquo;s KVPTable in place.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Key</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The key name.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The value of the key.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Command string to set (or edit) a key-value pair.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/KVP%20command%20decoding."></a>
+                <a name="//apple_ref/swift/Section/KVP command decoding." class="dashAnchor"></a>
+                <a href="#/KVP%20command%20decoding.">
+                  <h3 class="section-name">KVP command decoding.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC16DecodeKVPMessagey10Foundation4UUIDVSg_S2StSgSSFZ"></a>
+                    <a name="//apple_ref/swift/Method/DecodeKVPMessage(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC16DecodeKVPMessagey10Foundation4UUIDVSg_S2StSgSSFZ">DecodeKVPMessage(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">DecodeKVPMessage</span><span class="p">(</span><span class="n">_</span> <span class="kt">Raw</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">UUID</span><span class="p">?,</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="p">)?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Peer%20handling%20command%20encoding%20commands."></a>
+                <a name="//apple_ref/swift/Section/Peer handling command encoding commands." class="dashAnchor"></a>
+                <a href="#/Peer%20handling%20command%20encoding%20commands.">
+                  <h3 class="section-name">Peer handling command encoding commands.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC22MakeGetPeerInformationSSyFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeGetPeerInformation()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC22MakeGetPeerInformationSSyFZ">MakeGetPeerInformation()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Make a command to have a client return the peer&rsquo;s information.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeGetPeerInformation</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Command string for retrieving the peer&rsquo;s information.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC21MakeGetPeerTypeReturn10IsDebugger10PrefixCode0F4NameSSSb_10Foundation4UUIDVSStFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeGetPeerTypeReturn(IsDebugger:PrefixCode:PeerName:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC21MakeGetPeerTypeReturn10IsDebugger10PrefixCode0F4NameSSSb_10Foundation4UUIDVSStFZ">MakeGetPeerTypeReturn(IsDebugger:PrefixCode:PeerName:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates and returns a command that returns peer data.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeGetPeerTypeReturn</span><span class="p">(</span><span class="kt">IsDebugger</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="kt">PrefixCode</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">,</span> <span class="kt">PeerName</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>IsDebugger</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The peer-is-acting-as-a-debugger flag.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>PrefixCode</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The peer instance prefix code.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>PeerName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the peer.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>String to send to the caller.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Peer%20handling%20command%20decoding."></a>
+                <a name="//apple_ref/swift/Section/Peer handling command decoding." class="dashAnchor"></a>
+                <a href="#/Peer%20handling%20command%20decoding.">
+                  <h3 class="section-name">Peer handling command decoding.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC21DecodePeerTypeCommandyAA0eF0CSgSSFZ"></a>
+                    <a name="//apple_ref/swift/Method/DecodePeerTypeCommand(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC21DecodePeerTypeCommandyAA0eF0CSgSSFZ">DecodePeerTypeCommand(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">DecodePeerTypeCommand</span><span class="p">(</span><span class="n">_</span> <span class="kt">Raw</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">PeerType</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Special%20and%20other%20command%20encoding%20commands."></a>
+                <a name="//apple_ref/swift/Section/Special and other command encoding commands." class="dashAnchor"></a>
+                <a href="#/Special%20and%20other%20command%20encoding%20commands.">
+                  <h3 class="section-name">Special and other command encoding commands.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC18MakeSpecialCommandySSAA0E8CommandsOFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeSpecialCommand(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC18MakeSpecialCommandySSAA0E8CommandsOFZ">MakeSpecialCommand(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Make a special command. (Special commands are used to control the UI of the host.)</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeSpecialCommand</span><span class="p">(</span><span class="n">_</span> <span class="kt">Command</span><span class="p">:</span> <span class="kt">SpecialCommands</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Command</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The special command to send.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Command string with the special command embedded in it.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC24MakeResetTDebugUICommandSSyFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeResetTDebugUICommand()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC24MakeResetTDebugUICommandSSyFZ">MakeResetTDebugUICommand()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Make a command that resets the debug UI.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeResetTDebugUICommand</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Command string to reset the remote debug UI.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Special%20and%20other%20command%20decoding."></a>
+                <a name="//apple_ref/swift/Section/Special and other command decoding." class="dashAnchor"></a>
+                <a href="#/Special%20and%20other%20command%20decoding.">
+                  <h3 class="section-name">Special and other command decoding.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC20DecodeSpecialCommandyAA0E8CommandsOSSFZ"></a>
+                    <a name="//apple_ref/swift/Method/DecodeSpecialCommand(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC20DecodeSpecialCommandyAA0E8CommandsOSSFZ">DecodeSpecialCommand(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">DecodeSpecialCommand</span><span class="p">(</span><span class="n">_</span> <span class="kt">Raw</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">SpecialCommands</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Status%20command%20encoding%20commands."></a>
+                <a name="//apple_ref/swift/Section/Status command encoding commands." class="dashAnchor"></a>
+                <a href="#/Status%20command%20encoding%20commands.">
+                  <h3 class="section-name">Status command encoding commands.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC023MakeDebuggerStateChangeB06Prefix4From08NewDebugF0SS10Foundation4UUIDV_So8MCPeerIDCSbtFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeDebuggerStateChangeMessage(Prefix:From:NewDebugState:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC023MakeDebuggerStateChangeB06Prefix4From08NewDebugF0SS10Foundation4UUIDV_So8MCPeerIDCSbtFZ">MakeDebuggerStateChangeMessage(Prefix:From:NewDebugState:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeDebuggerStateChangeMessage</span><span class="p">(</span><span class="kt">Prefix</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">,</span> <span class="kt">From</span><span class="p">:</span> <span class="kt">MCPeerID</span><span class="p">,</span> <span class="kt">NewDebugState</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Status%20command%20decoding."></a>
+                <a name="//apple_ref/swift/Section/Status command decoding." class="dashAnchor"></a>
+                <a href="#/Status%20command%20decoding.">
+                  <h3 class="section-name">Status command decoding.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC26DecodeDebuggerStateChangedy10Foundation4UUIDV_SSSbtSgSSFZ"></a>
+                    <a name="//apple_ref/swift/Method/DecodeDebuggerStateChanged(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC26DecodeDebuggerStateChangedy10Foundation4UUIDV_SSSbtSgSSFZ">DecodeDebuggerStateChanged(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">DecodeDebuggerStateChanged</span><span class="p">(</span><span class="n">_</span> <span class="kt">Raw</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">UUID</span><span class="p">,</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">Bool</span><span class="p">)?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Table%20encoding%20commands."></a>
+                <a name="//apple_ref/swift/Section/Table encoding commands." class="dashAnchor"></a>
+                <a href="#/Table%20encoding%20commands.">
+                  <h3 class="section-name">Table encoding commands.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC16MakeTableCommand03SubF00E2ID10ParametersSSAA0E8CommandsO_10Foundation4UUIDVSDyS2SGtFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeTableCommand(SubCommand:TableID:Parameters:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC16MakeTableCommand03SubF00E2ID10ParametersSSAA0E8CommandsO_10Foundation4UUIDVSDyS2SGtFZ">MakeTableCommand(SubCommand:TableID:Parameters:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a table command.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeTableCommand</span><span class="p">(</span><span class="kt">SubCommand</span><span class="p">:</span> <span class="kt">TableCommands</span><span class="p">,</span> <span class="kt">TableID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">,</span>
+                                    <span class="kt">Parameters</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>SubCommand</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The table sub-command.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>TableID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the table.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Parameters</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Parameters for the sub-command. Context sensitive.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Command string to send to a remote peer.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Table%20decoding%20commands."></a>
+                <a name="//apple_ref/swift/Section/Table decoding commands." class="dashAnchor"></a>
+                <a href="#/Table%20decoding%20commands.">
+                  <h3 class="section-name">Table decoding commands.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/DecodeTableCommand(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">DecodeTableCommand(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Decode a received table command.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Text%20message%20command%20encoding%20commands."></a>
+                <a name="//apple_ref/swift/Section/Text message command encoding commands." class="dashAnchor"></a>
+                <a href="#/Text%20message%20command%20encoding%20commands.">
+                  <h3 class="section-name">Text message command encoding commands.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC04MakeB08WithType__SSAA0B5TypesO_S2StFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeMessage(WithType:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC04MakeB08WithType__SSAA0B5TypesO_S2StFZ">MakeMessage(WithType:_:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeMessage</span><span class="p">(</span><span class="kt">WithType</span><span class="p">:</span> <span class="kt">MessageTypes</span><span class="p">,</span> <span class="n">_</span> <span class="kt">WithText</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="kt">HostName</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC04MakeB0yS2S_SStFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeMessage(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC04MakeB0yS2S_SStFZ">MakeMessage(_:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeMessage</span><span class="p">(</span><span class="n">_</span> <span class="kt">WithText</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="kt">HostName</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Text%20message%20command%20decoding."></a>
+                <a name="//apple_ref/swift/Section/Text message command decoding." class="dashAnchor"></a>
+                <a href="#/Text%20message%20command%20decoding.">
+                  <h3 class="section-name">Text message command decoding.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC010DecodeTextB0ySS_S2StSSFZ"></a>
+                    <a name="//apple_ref/swift/Method/DecodeTextMessage(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC010DecodeTextB0ySS_S2StSSFZ">DecodeTextMessage(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">DecodeTextMessage</span><span class="p">(</span><span class="n">_</span> <span class="kt">Raw</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Versioning%20command%20encoding%20commands."></a>
+                <a name="//apple_ref/swift/Section/Versioning command encoding commands." class="dashAnchor"></a>
+                <a href="#/Versioning%20command%20encoding%20commands.">
+                  <h3 class="section-name">Versioning command encoding commands.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC19MakeSendVersionInfo4Name2OS0F05Build0J9TimeStamp9Copyright0J2ID07ProgramN0S2S_S6S10Foundation4UUIDVtFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeSendVersionInfo(Name:OS:Version:Build:BuildTimeStamp:Copyright:BuildID:ProgramID:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC19MakeSendVersionInfo4Name2OS0F05Build0J9TimeStamp9Copyright0J2ID07ProgramN0S2S_S6S10Foundation4UUIDVtFZ">MakeSendVersionInfo(Name:OS:Version:Build:BuildTimeStamp:Copyright:BuildID:ProgramID:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Make a version push command string.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeSendVersionInfo</span><span class="p">(</span><span class="kt">Name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">OS</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">Version</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">Build</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">BuildTimeStamp</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+                                       <span class="kt">Copyright</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">BuildID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">ProgramID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Name of the program.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>OS</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>OS under which the program runs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Version</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Version number.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Build</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Build number.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>BuildTimeStamp</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Build time-stamp.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Copyright</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Copyright string.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>BuildID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Build ID.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ProgramID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID that identifies a program.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Command string that pushes program information to a peer.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC19MakeSendVersionInfoSSyFZ"></a>
+                    <a name="//apple_ref/swift/Method/MakeSendVersionInfo()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC19MakeSendVersionInfoSSyFZ">MakeSendVersionInfo()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Make a version push command string from the static Versioning class.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">MakeSendVersionInfo</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Command string that pushes program information to a peer.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Version%20command%20decoding."></a>
+                <a name="//apple_ref/swift/Section/Version command decoding." class="dashAnchor"></a>
+                <a href="#/Version%20command%20decoding.">
+                  <h3 class="section-name">Version command decoding.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris13MessageHelperC17DecodeVersionInfoySS_S7StSSFZ"></a>
+                    <a name="//apple_ref/swift/Method/DecodeVersionInfo(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris13MessageHelperC17DecodeVersionInfoySS_S7StSSFZ">DecodeVersionInfo(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Decode a pushed version message.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">DecodeVersionInfo</span><span class="p">(</span><span class="n">_</span> <span class="kt">Raw</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Raw</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Raw message text.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Decoded version information in the order: (Program Name, Host OS, Version, Build, Build Time Stamp, Copyright, Build ID, Program ID).</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-10-23)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
