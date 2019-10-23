@@ -113,6 +113,101 @@ class MainButtonMenuCode: UIViewController
         }
     }
     
+    //https://stackoverflow.com/questions/29449998/how-do-i-adjust-my-popover-to-the-size-of-the-content-in-my-tableview-in-swift
+    @IBAction func HandleFlameButton(_ sender: Any)
+    {
+        if ShowingDebug
+        {
+            if ToggleRegionButton != nil
+            {
+                ButtonStack.removeArrangedSubview(ToggleRegionButton!)
+                ToggleRegionButton?.removeFromSuperview()
+                ToggleRegionButton = nil
+            }
+            if ToggleGridButton != nil
+            {
+                ButtonStack.removeArrangedSubview(ToggleGridButton!)
+                ToggleGridButton?.removeFromSuperview()
+                ToggleGridButton = nil
+            }
+            if GenerateBoardsButton != nil
+            {
+                ButtonStack.removeArrangedSubview(GenerateBoardsButton!)
+                GenerateBoardsButton?.removeFromSuperview()
+                GenerateBoardsButton = nil
+            }
+            self.preferredContentSize = CGSize(width: 300, height: 470)
+            ShowingDebug = false
+        }
+        else
+        {
+            self.preferredContentSize = CGSize(width: 300, height: 600)
+            ShowingDebug = true
+            ToggleRegionButton = UIButton()
+            ToggleRegionButton?.contentHorizontalAlignment = .left
+            ToggleRegionButton?.setTitleColor(UIColor.systemRed, for: UIControl.State.normal)
+            ToggleRegionButton?.titleLabel?.textColor = UIColor.systemRed
+            ToggleRegionButton?.setTitle("Toggle Region", for: UIControl.State.normal)
+            ToggleRegionButton?.titleLabel?.font = UIFont.boldSystemFont(ofSize: 30.0)
+            ToggleRegionButton?.addTarget(self, action: #selector(HandleRegionButton(_:)), for: UIControl.Event.touchUpInside)
+            var Index = ButtonStack.arrangedSubviews.count
+            ButtonStack.insertArrangedSubview(ToggleRegionButton!, at: Index)
+            
+            ToggleGridButton = UIButton()
+            ToggleGridButton?.contentHorizontalAlignment = .left
+            ToggleGridButton?.setTitleColor(UIColor.systemRed, for: UIControl.State.normal)
+            ToggleGridButton?.titleLabel?.textColor = UIColor.systemRed
+            ToggleGridButton?.setTitle("Toggle Grid", for: UIControl.State.normal)
+            ToggleGridButton?.titleLabel?.font = UIFont.boldSystemFont(ofSize: 30.0)
+            ToggleGridButton?.addTarget(self, action: #selector(HandleGridButton(_:)), for: UIControl.Event.touchUpInside)
+            Index = Index + 1
+            ButtonStack.insertArrangedSubview(ToggleGridButton!, at: Index)
+            
+            GenerateBoardsButton = UIButton()
+            GenerateBoardsButton?.contentHorizontalAlignment = .left
+            GenerateBoardsButton?.setTitleColor(UIColor.systemRed, for: UIControl.State.normal)
+            GenerateBoardsButton?.titleLabel?.textColor = UIColor.systemRed
+            GenerateBoardsButton?.setTitle("Create Boards", for: UIControl.State.normal)
+            GenerateBoardsButton?.titleLabel?.font = UIFont.boldSystemFont(ofSize: 30.0)
+            GenerateBoardsButton?.addTarget(self, action: #selector(HandleBoardsButton(_:)), for: UIControl.Event.touchUpInside)
+            Index = Index + 1
+            ButtonStack.insertArrangedSubview(GenerateBoardsButton!, at: Index)
+        }
+    }
+    
+    var ToggleRegionButton: UIButton? = nil
+    var ToggleGridButton: UIButton? = nil
+    var GenerateBoardsButton: UIButton? = nil
+    
+    @objc func HandleRegionButton(_ sender: Any)
+    {
+        self.dismiss(animated: true)
+        {
+            self.Delegate?.ResetMainButton()
+            self.Delegate?.RunPopOverCommand(.ToggleRegions)
+        }
+    }
+    
+    @objc func HandleGridButton(_ sender: Any)
+    {
+        self.dismiss(animated: true)
+        {
+            self.Delegate?.ResetMainButton()
+            self.Delegate?.RunPopOverCommand(.ToggleGrid)
+        }
+    }
+    
+    @objc func HandleBoardsButton(_ sender: Any)
+    {
+        self.dismiss(animated: true)
+        {
+            self.Delegate?.ResetMainButton()
+            self.Delegate?.RunPopOverCommand(.CreateBoards)
+        }
+    }
+    
+    var ShowingDebug = false
+    
     @IBAction func HandleCloseMainMenu(_ sender: Any)
     {
         self.dismiss(animated: true)
@@ -125,6 +220,7 @@ class MainButtonMenuCode: UIViewController
         super.viewWillDisappear(animated)
     }
     
+    @IBOutlet weak var ButtonStack: UIStackView!
     @IBOutlet weak var PopOverPauseButton: UIButton!
     @IBOutlet weak var PopOverPlayButton: UIButton!
     @IBOutlet weak var ControlView: UIView!
@@ -143,4 +239,8 @@ enum PopOverCommands: String, CaseIterable
     case ResumePlaying = "ResumePlaying"
     case TakePicture = "TakePicture"
     case MakeVideo = "MakeVideo"
+    case RunFlameAction = "RunFlameAction"
+    case CreateBoards = "CreateBoards"
+    case ToggleRegions = "ToggleRegions"
+    case ToggleGrid = "ToggleGrid"
 }
