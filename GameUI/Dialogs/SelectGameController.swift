@@ -39,7 +39,7 @@ class SelectGameController: UIViewController, UITableViewDelegate, UITableViewDa
         
         RotatingGames.append(("Center Dot", "Dot", .Dot))
         RotatingGames.append(("Small Central Block", "SmallSquare", .SmallSquare))
-        RotatingGames.append(("Medium Central Block", "Square", .Square))
+        RotatingGames.append(("Medium Central Block", "Square", .MediumSquare))
         RotatingGames.append(("Large Central Block", "BigSquare", .BigSquare))
         RotatingGames.append(("Four Small Squares", "FourSmallSquares", .FourSmallSquares))
         RotatingGames.append(("Small Central Rectangel", "SmallRectangle", .SmallRectangle))
