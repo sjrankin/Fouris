@@ -54,7 +54,8 @@ extension MapType
             }
             
             case .Rotatable:
-                CreateRotatingBucket(Width: Width, Height: Height, BucketTop: BucketTop, BucketBottom: BucketBottom,
+                let BoardDef = BoardManager.GetBoardFor(BucketShape)!
+                CreateRotatingBucket(Width: BoardDef.GameBoardWidth, Height: BoardDef.GameBoardHeight, BucketTop: BucketTop, BucketBottom: BucketBottom,
                                      BucketLeft: BucketLeft, BucketRight: BucketRight, Map: &Map, BucketID: BucketID,
                                      InvisibleBucketID: InvisibleBucketID, BucketExteriorID: BucketExteriorID)
             
@@ -133,7 +134,7 @@ extension MapType
     ///   - RotatingCenter: The center block shape.
     private static func CreateRotatingBucket(Width: Int, Height: Int, BucketTop: Int, BucketBottom: Int, BucketLeft: Int, BucketRight: Int,
                                              Map: inout ContentsType, BucketID: UUID, InvisibleBucketID: UUID, BucketExteriorID: UUID,
-                                             RotatingCenter: BucketShapes = .Square)
+                                             RotatingCenter: BucketShapes = .MediumSquare)
     {
         //Fill the map with bucket exteriors.
         for Y in 0 ..< BucketTop
