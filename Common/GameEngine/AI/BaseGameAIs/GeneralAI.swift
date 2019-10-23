@@ -142,7 +142,7 @@ class GeneralAI
             for Point in Working
             {
                 #if false
-                var BlockingItem: PieceTypes = .Bucket
+                var BlockingItem: PieceTypes = .BucketInterior
                 #endif
                 let LocationOK: Bool = GameBoard.MapIsEmpty(At: CGPoint(x: Point.x, y: Point.y))
                 if !LocationOK
