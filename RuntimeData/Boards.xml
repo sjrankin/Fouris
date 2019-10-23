@@ -890,7 +890,7 @@
             <Freeze Action="Invisible"/>
         </Buttons>
     </Board>
-    <Board Type="Square" GameType="Rotating4">
+    <Board Type="MediumSquare" GameType="Rotating4">
         <Description Text="Board with a square central block."/>
         <Map>
             012345678901234567890123456789012345$
