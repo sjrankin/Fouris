@@ -198,7 +198,7 @@ class View3D: SCNView,                          //Our main super class.
         }
     }
     
-    var CenterBlockShape: BucketShapes = .Square
+    var CenterBlockShape: BucketShapes = .MediumSquare
     
     var PerfTimer: Timer? = nil
     @objc func SendPerformanceData()
