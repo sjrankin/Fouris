@@ -1663,6 +1663,7 @@
     </Board>
     <Board Type="InsideOut" GameType="SemiRotating">
         <Description Text="Pieces start in the middle and head outwards."/>
+        <PiecePlacement Location="(27,17)"/>
         <Map BucketClearRectangle="(0,0),(19,19)">
             012345678901234567890123456789012345$
             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,00$
