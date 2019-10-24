@@ -21,7 +21,7 @@ extension View3D
             Node.removeFromParentNode()
         }
         RegionLayers.removeAll()
-        let BoardDef = BoardManager.GetBoardFor(CenterBlockShape)!
+        let BoardDef = BoardManager.GetBoardFor(CenterBlockShape!)!
         if Show
         {
             RegionLayers[.Barrier] = SCNNode()
