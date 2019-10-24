@@ -837,6 +837,74 @@ class MapType: CustomStringConvertible
     
     // MARK: - AI-related routines.
     
+    /// Returns the bucket entry window. This is needed for those sneaky buckets that cover part of the top of the bucket. Only
+    /// the current map orientation is checked.
+    /// - Note: The returned window is the largest gap between barriers.
+    /// - Returns: The left side of the entry window and the right side of the entry window. If nil, no entry window
+    ///            is available.
+    func TopRowEntry() -> (Left: Int, Right: Int)?
+    {
+        if !TopRowHasBarrier()
+        {
+            //If there is no barrier, the entire top of the bucket is open.
+            return (BucketInteriorLeft, BucketInteriorRight)
+        }
+        var GapLists: [[Int]] = [[Int]]()
+        var Working = [Int]()
+        for X in BucketInteriorLeft ... BucketInteriorRight
+        {
+            let MapObject = IDMap!.IDtoPiece(Contents[BucketInteriorTop][X])
+            if [.Bucket, .InvisibleBucket].contains(MapObject)
+            {
+                if Working.count > 0
+                {
+                    GapLists.append(Working)
+                    Working.removeAll()
+                }
+                continue
+            }
+            Working.append(X)
+        }
+        if Working.count > 0
+        {
+            GapLists.append(Working)
+        }
+        var Count = -1
+        var BigIndex = -1
+        var Index = 0
+        for Gap in GapLists
+        {
+            if Gap.count > Count
+            {
+                Count = Gap.count
+                BigIndex = Index
+            }
+            Index = Index + 1
+        }
+        if BigIndex < 0
+        {
+            return nil
+        }
+        let BiggestGap = GapLists[BigIndex]
+        return (Left: BiggestGap.first!, Right: BiggestGap.last!)
+    }
+    
+    /// Determines if the top-most row of the bucket contains a barrier or invisible barrier block. Only the map's current
+    /// orientation is checked.
+    /// - Returns: True if the top-most row has at least one barrier (visible or invisible), false if not.
+    func TopRowHasBarrier() -> Bool
+    {
+        for X in BucketInteriorLeft ... BucketInteriorRight
+        {
+            let MapObject = IDMap!.IDtoPiece(Contents[BucketInteriorTop][X])
+            if [.Bucket, .InvisibleBucket].contains(MapObject)
+            {
+                return true
+            }
+        }
+        return false
+    }
+    
     /// Determines if there are any objects in the map that can stop a piece from moving in a given column.
     /// - Note:
     ///   - Determination starts at the top of the bucket and continues to the bottom of the bucket.
@@ -878,7 +946,6 @@ class MapType: CustomStringConvertible
     ///
     /// - Note: For use **only** by the AI. This function does **not** manage the currently playing piece list or the
     ///         piece ID map. **Unless you are the AI code, do not call this function.**
-    ///
     /// - Parameters:
     ///   - Points: List of points to merge with the map.
     ///   - WithTypeID: The value of the point to set.
@@ -1081,17 +1148,10 @@ class MapType: CustomStringConvertible
     {
         var WasCompressed = false
         var BottomStart = BucketInteriorBottom
-        #if true
         if BoardClass == .Rotatable
         {
             BottomStart = BucketInteriorHeight / 2//Int(CenterBlockUpperLeft.y) + 1
         }
-        #else
-        if BaseGameType == .Rotating4
-        {
-            BottomStart = Int(CenterBlockUpperLeft.y) + 1
-        }
-        #endif
         for Row in stride(from: BottomStart, to: BucketInteriorTop, by: -1)
         {
             var FoundGap = false
