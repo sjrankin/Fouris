@@ -237,38 +237,10 @@
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HLT-X8-fph">
                                                 <rect key="frame" x="20" y="60" width="120" height="120"/>
-                                                <subviews>
-                                                    <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oa2-Xf-LKb" customClass="PieceViewer" customModule="Fouris" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <viewLayoutGuide key="safeArea" id="LLG-Nd-Tlb"/>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="AutoAdjustBlockSize" value="NO"/>
-                                                            <userDefinedRuntimeAttribute type="color" keyPath="SpecularColor">
-                                                                <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="color" keyPath="DiffuseColor">
-                                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="EnableTextures" value="YES"/>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="BlockSize">
-                                                                <real key="value" value="3"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="ShowWireFrame" value="NO"/>
-                                                            <userDefinedRuntimeAttribute type="image" keyPath="PieceTexture" value="SamplePieceTexture"/>
-                                                        </userDefinedRuntimeAttributes>
-                                                    </sceneKitView>
-                                                </subviews>
                                                 <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="120" id="A4s-0I-sNx"/>
-                                                    <constraint firstItem="oa2-Xf-LKb" firstAttribute="top" secondItem="HLT-X8-fph" secondAttribute="top" id="b4p-aR-H6D"/>
-                                                    <constraint firstAttribute="trailing" secondItem="oa2-Xf-LKb" secondAttribute="trailing" id="b7p-IC-gMw"/>
                                                     <constraint firstAttribute="height" constant="120" id="jMH-2h-Fv2"/>
-                                                    <constraint firstItem="oa2-Xf-LKb" firstAttribute="top" secondItem="HLT-X8-fph" secondAttribute="top" id="kt6-oE-5e5"/>
-                                                    <constraint firstAttribute="bottom" secondItem="oa2-Xf-LKb" secondAttribute="bottom" id="lJ0-9E-ZHm"/>
-                                                    <constraint firstItem="oa2-Xf-LKb" firstAttribute="leading" secondItem="HLT-X8-fph" secondAttribute="leading" id="tvM-Fk-1CI"/>
-                                                    <constraint firstItem="oa2-Xf-LKb" firstAttribute="leading" secondItem="HLT-X8-fph" secondAttribute="leading" id="z5j-vQ-Oib"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -279,19 +251,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wuk-RO-4f2">
-                                                <rect key="frame" x="20" y="8" width="118" height="48"/>
-                                                <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="118" id="K2b-9S-PnG"/>
-                                                </constraints>
-                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dht-P4-rIC">
-                                                <rect key="frame" x="630" y="8" width="138" height="48"/>
-                                                <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wd8-a3-tR0">
-                                                <rect key="frame" x="506" y="8" width="118" height="48"/>
+                                                <rect key="frame" x="476" y="8" width="138" height="53"/>
                                                 <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cDM-w8-UEc">
@@ -313,43 +274,61 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yrA-tS-iWf">
-                                                <rect key="frame" x="630" y="64" width="138" height="53"/>
+                                                <rect key="frame" x="630" y="8" width="138" height="53"/>
                                                 <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </view>
+                                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oa2-Xf-LKb" customClass="PieceViewer" customModule="Fouris" customModuleProvider="target">
+                                                <rect key="frame" x="20" y="8" width="120" height="120"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="120" id="0HL-TK-daA"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="safeArea" id="LLG-Nd-Tlb"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="AutoAdjustBlockSize" value="NO"/>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="SpecularColor">
+                                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="DiffuseColor">
+                                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="EnableTextures" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="BlockSize">
+                                                        <real key="value" value="3"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="ShowWireFrame" value="NO"/>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="PieceTexture" value="SamplePieceTexture"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </sceneKitView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="Wd8-a3-tR0" firstAttribute="leading" secondItem="IgA-6X-lkh" secondAttribute="leading" constant="506" id="01x-A8-UTH"/>
+                                            <constraint firstItem="oa2-Xf-LKb" firstAttribute="trailing" secondItem="HLT-X8-fph" secondAttribute="trailing" id="08a-Gg-F90"/>
                                             <constraint firstAttribute="trailing" secondItem="fG3-c2-56a" secondAttribute="trailing" id="0KE-n2-F5r"/>
                                             <constraint firstItem="ZLG-3V-NE0" firstAttribute="top" secondItem="IgA-6X-lkh" secondAttribute="top" constant="250" id="15v-kI-ZK2"/>
                                             <constraint firstItem="cDM-w8-UEc" firstAttribute="leading" secondItem="ZLG-3V-NE0" secondAttribute="leading" id="1yy-pX-r5M"/>
+                                            <constraint firstItem="oa2-Xf-LKb" firstAttribute="top" secondItem="IgA-6X-lkh" secondAttribute="topMargin" id="2Gk-fM-cwh"/>
+                                            <constraint firstItem="yrA-tS-iWf" firstAttribute="leading" secondItem="dht-P4-rIC" secondAttribute="trailing" constant="16" id="4Ys-PJ-E3D"/>
                                             <constraint firstItem="fG3-c2-56a" firstAttribute="top" secondItem="IgA-6X-lkh" secondAttribute="top" constant="250" id="4i0-je-Wb8"/>
-                                            <constraint firstItem="wuk-RO-4f2" firstAttribute="bottom" secondItem="Wd8-a3-tR0" secondAttribute="bottom" id="79H-2E-vHi"/>
+                                            <constraint firstItem="cDM-w8-UEc" firstAttribute="top" secondItem="yrA-tS-iWf" secondAttribute="bottom" constant="36" id="6eS-qq-Jpu"/>
                                             <constraint firstItem="fG3-c2-56a" firstAttribute="leading" secondItem="IgA-6X-lkh" secondAttribute="leading" id="7RZ-uO-ERi"/>
                                             <constraint firstAttribute="bottom" secondItem="HLT-X8-fph" secondAttribute="bottom" constant="627" id="8KI-Tb-YbR"/>
-                                            <constraint firstItem="wuk-RO-4f2" firstAttribute="top" secondItem="IgA-6X-lkh" secondAttribute="topMargin" id="AcN-8Q-8Y7"/>
                                             <constraint firstItem="HLT-X8-fph" firstAttribute="top" secondItem="IgA-6X-lkh" secondAttribute="top" constant="60" id="CjI-hf-eOz"/>
-                                            <constraint firstItem="cDM-w8-UEc" firstAttribute="trailing" secondItem="yrA-tS-iWf" secondAttribute="trailing" id="FH2-HE-ozB"/>
                                             <constraint firstAttribute="trailing" secondItem="cDM-w8-UEc" secondAttribute="trailing" id="G8c-NB-JK2"/>
-                                            <constraint firstItem="dht-P4-rIC" firstAttribute="leading" secondItem="yrA-tS-iWf" secondAttribute="leading" id="JSx-yu-zMh"/>
-                                            <constraint firstItem="dht-P4-rIC" firstAttribute="leading" secondItem="IgA-6X-lkh" secondAttribute="leading" constant="630" id="PwA-Ic-D5y"/>
+                                            <constraint firstItem="oa2-Xf-LKb" firstAttribute="leading" secondItem="HLT-X8-fph" secondAttribute="leading" id="J9Z-hJ-D7s"/>
+                                            <constraint firstItem="dht-P4-rIC" firstAttribute="leading" secondItem="IgA-6X-lkh" secondAttribute="leading" constant="476" id="M7N-Z1-Y8X"/>
+                                            <constraint firstItem="yrA-tS-iWf" firstAttribute="trailing" secondItem="ZLG-3V-NE0" secondAttribute="trailing" id="NIx-tI-cra"/>
                                             <constraint firstItem="cDM-w8-UEc" firstAttribute="leading" secondItem="IgA-6X-lkh" secondAttribute="leading" id="Qcj-pY-g4Z"/>
-                                            <constraint firstItem="HLT-X8-fph" firstAttribute="top" secondItem="yrA-tS-iWf" secondAttribute="top" constant="-4" id="UEp-dM-j8T"/>
+                                            <constraint firstItem="dht-P4-rIC" firstAttribute="bottom" secondItem="yrA-tS-iWf" secondAttribute="bottom" id="W6m-2l-LY9"/>
                                             <constraint firstItem="NoE-EQ-eHw" firstAttribute="bottom" secondItem="cDM-w8-UEc" secondAttribute="bottom" constant="154" id="Yi1-sC-8RI"/>
-                                            <constraint firstItem="Wd8-a3-tR0" firstAttribute="bottom" secondItem="dht-P4-rIC" secondAttribute="bottom" id="apH-zf-9C2"/>
-                                            <constraint firstItem="dht-P4-rIC" firstAttribute="trailing" secondItem="yrA-tS-iWf" secondAttribute="trailing" id="bhL-IN-bss"/>
+                                            <constraint firstItem="oa2-Xf-LKb" firstAttribute="top" secondItem="dht-P4-rIC" secondAttribute="top" id="avZ-c2-Vqv"/>
                                             <constraint firstAttribute="trailing" secondItem="HLT-X8-fph" secondAttribute="trailing" constant="628" id="c7p-H9-x51"/>
-                                            <constraint firstAttribute="bottom" secondItem="yrA-tS-iWf" secondAttribute="bottom" constant="690" id="caJ-eh-GnF"/>
-                                            <constraint firstItem="dht-P4-rIC" firstAttribute="leading" secondItem="Wd8-a3-tR0" secondAttribute="trailing" constant="6" id="eg0-cV-dyD"/>
+                                            <constraint firstItem="yrA-tS-iWf" firstAttribute="leading" secondItem="IgA-6X-lkh" secondAttribute="leading" constant="630" id="dIS-Ng-D7g"/>
                                             <constraint firstAttribute="trailing" secondItem="ZLG-3V-NE0" secondAttribute="trailing" id="fAt-KQ-aZw"/>
+                                            <constraint firstAttribute="bottom" secondItem="dht-P4-rIC" secondAttribute="bottom" constant="746" id="g4n-sj-aLP"/>
                                             <constraint firstItem="cDM-w8-UEc" firstAttribute="trailing" secondItem="ZLG-3V-NE0" secondAttribute="trailing" id="k1G-q0-BLg"/>
-                                            <constraint firstItem="wuk-RO-4f2" firstAttribute="top" secondItem="Wd8-a3-tR0" secondAttribute="top" id="nfR-so-JW7"/>
-                                            <constraint firstItem="Wd8-a3-tR0" firstAttribute="top" secondItem="dht-P4-rIC" secondAttribute="top" id="oke-BG-uzE"/>
-                                            <constraint firstItem="HLT-X8-fph" firstAttribute="top" secondItem="wuk-RO-4f2" secondAttribute="bottom" constant="4" id="p3O-21-2zI"/>
                                             <constraint firstItem="ZLG-3V-NE0" firstAttribute="leading" secondItem="IgA-6X-lkh" secondAttribute="leading" id="pPs-l1-fnV"/>
-                                            <constraint firstItem="wuk-RO-4f2" firstAttribute="leading" secondItem="HLT-X8-fph" secondAttribute="leading" id="q5F-0p-kRs"/>
-                                            <constraint firstItem="wuk-RO-4f2" firstAttribute="leading" secondItem="NoE-EQ-eHw" secondAttribute="leading" constant="20" id="tg4-iX-9t4"/>
-                                            <constraint firstItem="cDM-w8-UEc" firstAttribute="top" secondItem="wuk-RO-4f2" secondAttribute="bottom" constant="41" id="zhj-qX-qqp"/>
+                                            <constraint firstItem="dht-P4-rIC" firstAttribute="top" secondItem="yrA-tS-iWf" secondAttribute="top" id="wMP-y7-qYA"/>
                                         </constraints>
                                         <viewLayoutGuide key="safeArea" id="NoE-EQ-eHw"/>
                                     </view>
@@ -386,12 +365,10 @@
                         <outlet property="GameUISurface3D" destination="vct-Mh-0Vi" id="Naq-c6-d6M"/>
                         <outlet property="GameViewContainer" destination="tQ9-Ul-CQv" id="mbb-L8-9vo"/>
                         <outlet property="HighScoreLabelView" destination="yrA-tS-iWf" id="CSj-CV-On6"/>
-                        <outlet property="NextPieceLabelView" destination="wuk-RO-4f2" id="bTV-r3-EfJ"/>
                         <outlet property="NextPieceView" destination="HLT-X8-fph" id="aEg-ti-SFU"/>
                         <outlet property="NextPieceViewControl" destination="oa2-Xf-LKb" id="6bR-jx-mEr"/>
                         <outlet property="PauseLabelView" destination="ZLG-3V-NE0" id="AlK-Mq-0le"/>
                         <outlet property="PressPlayLabelView" destination="cDM-w8-UEc" id="Nhr-wc-yUq"/>
-                        <outlet property="ScoreLabelView" destination="Wd8-a3-tR0" id="5Pz-wg-nXf"/>
                         <outlet property="TextLayerView" destination="IgA-6X-lkh" id="nAc-g9-w7P"/>
                         <segue destination="k1X-Di-mQn" kind="popoverPresentation" identifier="MainMenuSegue" popoverAnchorView="vct-Mh-0Vi" id="LkY-bf-J2S">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
@@ -554,7 +531,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ob2-DI-cRb">
-                                <rect key="frame" x="536" y="960" width="40" height="35"/>
+                                <rect key="frame" x="536" y="960" width="51" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="SQi-pb-Yrg"/>
                                 </constraints>
@@ -568,7 +545,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q41-xp-6ex">
-                                <rect key="frame" x="708" y="28" width="45" height="44"/>
+                                <rect key="frame" x="697" y="28" width="45" height="44"/>
                                 <state key="normal" image="number.circle" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30" scale="large" weight="bold"/>
                                 </state>
@@ -589,7 +566,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4XG-ac-ruN">
-                                <rect key="frame" x="702" y="948" width="40" height="59"/>
+                                <rect key="frame" x="691" y="944" width="51" height="67"/>
                                 <fontDescription key="fontDescription" name="NotoEmoji" family="Noto Emoji" pointSize="40"/>
                                 <state key="normal" title="📷">
                                     <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -845,7 +822,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show statistics for" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gHB-eD-zOm">
-                                <rect key="frame" x="20" y="100.5" width="141" height="21.5"/>
+                                <rect key="frame" x="20" y="100" width="141" height="21.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21.5" id="pne-l1-oLO"/>
                                 </constraints>
@@ -854,13 +831,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For game type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ja-49-CVH">
-                                <rect key="frame" x="20" y="142.5" width="111" height="21"/>
+                                <rect key="frame" x="20" y="142" width="111" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tap-d5-oLU">
-                                <rect key="frame" x="20" y="189.5" width="672" height="644.5"/>
+                                <rect key="frame" x="20" y="189" width="672" height="645"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -876,7 +853,7 @@
                                 </connections>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="48o-Mh-maS">
-                                <rect key="frame" x="199" y="102" width="154" height="19.5"/>
+                                <rect key="frame" x="199" y="102" width="154" height="19"/>
                                 <viewLayoutGuide key="safeArea" id="VC8-ee-mL6"/>
                                 <segments>
                                     <segment title="User"/>
@@ -893,7 +870,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="e6D-S9-tip">
-                                <rect key="frame" x="199" y="138" width="171" height="32"/>
+                                <rect key="frame" x="199" y="137.5" width="171" height="32"/>
                                 <segments>
                                     <segment title="Standard"/>
                                     <segment title="Rotating"/>
