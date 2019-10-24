@@ -2,33 +2,45 @@
 <PieceVisuals Name="Default" UserVisuals="false" ID="cd0585e3-7e0c-4279-952d-04d40ba1f9dc" Updated="Not Updated">
     <PieceVisual PieceID="f4510cca-262a-4018-bf29-04d703702d65" UserPiece="false" Name="Bar">
         <Active Type="Color" Shape="Cubic">
-            <Colors Diffuse="Red" Specular="White"/>
+            <Colors Diffuse="#ed4c67" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Active>
         <Retired Type="Color" Shape="Cubic">
-            <Colors Diffuse="MacMaroon" Specular="White"/>
+            <Colors Diffuse="#833471" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
     <PieceVisual PieceID="b5bb59a5-b006-487b-a7b1-e0daf4a48810" UserPiece="false" Name="Square">
         <Active Type="Color" Shape="Cubic">
-            <Colors Diffuse="Green" Specular="White"/>
+            <Colors Diffuse="#c4e538" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Active>
         <Retired Type="Color" Shape="Cubic">
-            <Colors Diffuse="Asparagus" Specular="White"/>
+            <Colors Diffuse="#009432" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
     <PieceVisual PieceID="05463ade-1996-49e0-aae9-55cad6f8f605" UserPiece="false" Name="S">
         <Active Type="Color" Shape="Cubic">
-            <Colors Diffuse="Blue" Specular="White"/>
+            <Colors Diffuse="#6989cc" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Active>
         <Retired Type="Color" Shape="Cubic">
-            <Colors Diffuse="PrussianBlue" Specular="White"/>
+            <Colors Diffuse="#1e3799" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
     <PieceVisual PieceID="0f2709f0-b5ed-4ed9-b8c5-d65a1e1d69e8" UserPiece="false" Name="Z">
         <Active Type="Color" Shape="Cubic">
@@ -39,6 +51,10 @@
             <Colors Diffuse="Cerulean" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
     <PieceVisual PieceID="26e5dee4-0cc5-492f-ab31-b5b810863bf4" UserPiece="false" Name="T">
         <Active Type="Color" Shape="Cubic">
@@ -49,6 +65,10 @@
             <Colors Diffuse="MagentaHaze" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
     <PieceVisual PieceID="69cc6259-93f2-438d-8a9f-e0e65ad6c841" UserPiece="false" Name="L">
         <Active Type="Color" Shape="Cubic">
@@ -59,6 +79,10 @@
             <Colors Diffuse="YellowMunsell" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
     <PieceVisual PieceID="7c73c10c-86b3-406d-964e-f12abbf914cc" UserPiece="false" Name="BackL">
         <Active Type="Color" Shape="Cubic">
@@ -69,6 +93,10 @@
             <Colors Diffuse="CarrotOrange" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
     <PieceVisual PieceID="70b8f7ab-cd14-4f1a-a709-91bcfe24f3ab" UserPiece="false" Name="Zig">
         <Active Type="Color" Shape="Cubic">
@@ -79,6 +107,10 @@
             <Colors Diffuse="Hajizome" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
     <PieceVisual PieceID="85041a61-7d17-4434-a990-a033f38f34e0" UserPiece="false" Name="Zag">
         <Active Type="Color" Shape="Cubic">
@@ -89,6 +121,10 @@
             <Colors Diffuse="Carnation" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
     <PieceVisual PieceID="3ff7a6e9-21b4-4afc-b5ee-0ed4e6a63f1e" UserPiece="false" Name="ShortL">
         <Active Type="Color" Shape="Cubic">
@@ -99,6 +135,10 @@
             <Colors Diffuse="Honeydew" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
     <PieceVisual PieceID="35d6b1f9-b921-4d7f-8448-66b179b2ab7f" UserPiece="false" Name="ShortBackL">
         <Active Type="Color" Shape="Cubic">
@@ -109,6 +149,10 @@
             <Colors Diffuse="Moss" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
     <PieceVisual PieceID="49bf8a5b-6570-4456-90c8-2924811a6e59" UserPiece="false" Name="C">
         <Active Type="Color" Shape="Cubic">
@@ -119,6 +163,10 @@
             <Colors Diffuse="Mocha" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
     <PieceVisual PieceID="dec6e2c4-ff38-454a-ac56-dbe789267060" UserPiece="false" Name="Plus">
         <Active Type="Color" Shape="Cubic">
@@ -129,6 +177,10 @@
             <Colors Diffuse="MacLavender" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
     <PieceVisual PieceID="09cbb902-d875-4337-8756-3e58bf408491" UserPiece="false" Name="Corner">
         <Active Type="Color" Shape="Cubic">
@@ -139,6 +191,10 @@
             <Colors Diffuse="Silver" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
     <PieceVisual PieceID="2284f6ce-34c3-49de-b187-ba1220a0ac6f" UserPiece="false" Name="Joined Squares">
         <Active Type="Color" Shape="Cubic">
@@ -149,6 +205,10 @@
             <Colors Diffuse="Salmon" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
     <PieceVisual PieceID="88312d0c-73c1-4220-b91c-4d77e05236b1" UserPiece="false" Name="Empty Box">
         <Active Type="Color" Shape="Cubic">
@@ -159,6 +219,10 @@
             <Colors Diffuse="MellowYellow" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
     <PieceVisual PieceID="b69d3279-2e29-4eb1-924a-2e09187c21f9" UserPiece="false" Name="Lower i">
         <Active Type="Color" Shape="Cubic">
@@ -169,6 +233,10 @@
             <Colors Diffuse="SpanishOrange" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
     <PieceVisual PieceID="99d6c473-36b5-4504-b6e4-faece29fbe28" UserPiece="false" Name="Empty Diamond">
         <Active Type="Color" Shape="Cubic">
@@ -179,6 +247,10 @@
             <Colors Diffuse="DullRed" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
     <PieceVisual PieceID="1b9fe0f0-9157-46da-b462-5222643bb1f7" UserPiece="false" Name="Parallel Lines">
         <Active Type="Color" Shape="Cubic">
@@ -189,6 +261,10 @@
             <Colors Diffuse="DullYellow" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
     <PieceVisual PieceID="97b5a353-acfa-43dc-9deb-7c8aa0f32000" UserPiece="false" Name="Sweeper">
         <Active Type="Color" Shape="Cubic">
@@ -199,6 +275,10 @@
             <Colors Diffuse="DullPink" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
     <PieceVisual PieceID="c540885c-1b60-4577-af7b-f5d309e73d84" UserPiece="false" Name="Capital I">
         <Active Type="Color" Shape="Cubic">
@@ -209,6 +289,10 @@
             <Colors Diffuse="青2号" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
     <PieceVisual PieceID="0e7135e2-6bf7-457d-add4-63a0f1b57560" UserPiece="false" Name="Capital O">
         <Active Type="Color" Shape="Cubic">
@@ -219,6 +303,10 @@
             <Colors Diffuse="薄茶色17号" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
     <PieceVisual PieceID="936170f5-1300-4553-ada8-141bdfb4d85f" UserPiece="false" Name="3x3 Block">
         <Active Type="Color" Shape="Cubic">
@@ -229,6 +317,10 @@
             <Colors Diffuse="クリーム1号" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
     <PieceVisual PieceID="494c7a96-060d-4c81-8f9a-609ae0e71a5e" UserPiece="false" Name="4x4 Block">
         <Active Type="Color" Shape="Cubic">
@@ -239,6 +331,10 @@
             <Colors Diffuse="朱色4号" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
     <PieceVisual PieceID="63285186-a589-4185-acd6-1e6e8c1368ed" UserPiece="false" Name="Diagonal">
         <Active Type="Color" Shape="Cubic">
@@ -249,6 +345,10 @@
             <Colors Diffuse="赤3号" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
     <PieceVisual PieceID="8ef520af-17e0-4011-8579-a92a9d520c5a" UserPiece="false" Name="X">
         <Active Type="Color" Shape="Cubic">
@@ -259,6 +359,10 @@
             <Colors Diffuse="ReallyDarkGray" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
     <PieceVisual PieceID="007c0348-e287-43cc-8901-bfce604f796b" UserPiece="false" Name="Big Gap">
         <Active Type="Color" Shape="Cubic">
@@ -269,6 +373,10 @@
             <Colors Diffuse="Dobunezumi" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
     <PieceVisual PieceID="742b73be-56ad-4f36-903c-dbd160428d96" UserPiece="false" Name="Long Gap">
         <Active Type="Color" Shape="Cubic">
@@ -279,6 +387,10 @@
             <Colors Diffuse="Metsushi" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
     <PieceVisual PieceID="5d87accc-3edf-4c7f-b226-d83254d499ad" UserPiece="false" Name="Long Diagonal">
         <Active Type="Color" Shape="Cubic">
@@ -289,6 +401,10 @@
             <Colors Diffuse="Kakitsubata" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
     <PieceVisual PieceID="4dbea417-4654-459b-9aaf-9bcde56720be" UserPiece="false" Name="V">
         <Active Type="Color" Shape="Cubic">
@@ -299,6 +415,10 @@
             <Colors Diffuse="SoraIro" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
     <PieceVisual PieceID="6a2b5de2-4336-4927-affa-980a89c061a6" UserPiece="false" Name="Far Apart">
         <Active Type="Color" Shape="Cubic">
@@ -309,5 +429,9 @@
             <Colors Diffuse="Citrine" Specular="White"/>
             <Textures Diffuse="Not Used" Specular="Not Used"/>
         </Retired>
+        <Next Type="Texture" Shape="Cubic">
+            <Colors Diffuse="Black" Specular="White"/>
+            <Textures Diffuse="SamplePieceTexture" Specular="SamplePieceTexture"/>
+        </Next>
     </PieceVisual>
 </PieceVisuals>
