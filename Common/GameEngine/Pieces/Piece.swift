@@ -51,12 +51,9 @@ class Piece: CustomStringConvertible
     ///   - PieceID: The ID of the piece.
     ///   - TheBoard: The board where the piece will be played.
     ///   - RotationallySymmetric: Flag that says the piece is rotationally symmetric.
-    ///   - BaseGameType: The type of base game. This is not changeable during the lifetime of the piece.
-    init(_ TheType: PieceTypes, PieceID: UUID, _ TheBoard: Board, _ RotationallySymmetric: Bool = false,
-         BaseGameType: BaseGameTypes)
+    init(_ TheType: PieceTypes, PieceID: UUID, _ TheBoard: Board, _ RotationallySymmetric: Bool = false)
     {
         IsEphemeral = false
-        _BaseGameType = BaseGameType
         GameBoard = TheBoard
         BoardGameCount = GameBoard!.GameCount
         _PieceType = TheType
@@ -76,12 +73,13 @@ class Piece: CustomStringConvertible
     init(_ TheType: PieceTypes)
     {
         IsEphemeral = true
-        _BaseGameType = .Standard
+        //_BaseGameType = .Standard
         _PieceType = TheType
         Locations = Array(repeating: Block(), count: 4)
         Components = [Block]()
     }
     
+    #if false
     /// Holds the base game type.
     private var _BaseGameType: BaseGameTypes = .Standard
     /// Get the base game type. Cannot be changed during the lifetime of the piece.
@@ -92,6 +90,7 @@ class Piece: CustomStringConvertible
             return _BaseGameType
         }
     }
+    #endif
     
     /// Returns the bottom-most (eg, closest to the bottom of the bucket) point for each column the piece occupies.
     ///
