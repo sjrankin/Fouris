@@ -16,12 +16,12 @@ class RunHistory: CustomStringConvertible, XMLDeserializeProtocol
     /// Initializer.
     init()
     {
-        _Games = [BaseGameTypes: GameHistory]()
-        _Games![.Standard] = GameHistory()
-        _Games![.Rotating4] = GameHistory()
-        _Games![.Cubic] = GameHistory()
+        //_Games = [BaseGameTypes: GameHistory]()
+        //_Games![.Standard] = GameHistory()
+        //_Games![.Rotating4] = GameHistory()
+        //_Games![.Cubic] = GameHistory()
     }
-    
+    #if false
     /// Get the dirty flag.
     /// - Note: The dirty flag is from individual game statistic collections.
     public var Dirty: Bool
@@ -192,7 +192,15 @@ class RunHistory: CustomStringConvertible, XMLDeserializeProtocol
         
         return Working
     }
-    
+    #endif
+         func DeserializedNode(_ Node: XMLNode)
+    {
+        
+    }
+    func ToString()->String
+    {
+        return ""
+    }
     /// Returns a string description of the contents of this class.
     /// - Note: Calls `ToString()`.
     var description: String
