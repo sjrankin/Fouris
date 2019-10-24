@@ -23,7 +23,7 @@ class GameStyleTableViewCell: UITableViewCell
     override init(style Style: UITableViewCell.CellStyle, reuseIdentifier ReuseIdentifier: String?)
     {
         super.init(style: Style, reuseIdentifier: ReuseIdentifier)
-        GameTitle = UILabel(frame: CGRect(x: 160, y: GameStyleTableViewCell.CellHeight / 2, width: 300, height: 20))
+        GameTitle = UILabel(frame: CGRect(x: 160, y: GameStyleTableViewCell.CellHeight / 2, width: 300, height: 30))
         GameTitle.font = UIFont.systemFont(ofSize: 20.0, weight: UIFont.Weight.medium)
         GameTitle.textAlignment = .left
         GameTitle.text = "Game Title"
