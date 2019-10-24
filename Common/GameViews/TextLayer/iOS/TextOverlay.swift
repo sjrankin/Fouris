@@ -31,7 +31,6 @@ class TextOverlay: TextLayerDisplayProtocol
     
     /// Sets the controls to use to display text. Text is an attributed string displayed in a CATextLayer, so each text object
     /// needs to reside in a view (abstracted by the typealias **TextContainerType**). Those views are passed in this function.
-    /// - Parameter NextLabel: Container for the "Next" label.
     /// - Parameter ScoreLabel: Container for the "Score" label.
     /// - Parameter CurrentScoreLabel: Container for the current score label.
     /// - Parameter HighScoreLabel: Container for the high score label.
@@ -39,9 +38,7 @@ class TextOverlay: TextLayerDisplayProtocol
     /// - Parameter PressPlayLabel: Container for the "Press Play" label.
     /// - Parameter PauseLabel: Container for the "Pause" label.
     /// - Parameter PieceControl: The piece view control.
-    func SetControls(NextLabel: UIView?,
-                     ScoreLabel: UIView?,
-                     CurrentScoreLabel: UIView?,
+    func SetControls(CurrentScoreLabel: UIView?,
                      HighScoreLabel: UIView?,
                      GameOverLabel: UIView?,
                      PressPlayLabel: UIView?,
@@ -52,8 +49,6 @@ class TextOverlay: TextLayerDisplayProtocol
         VersionContainer = VersionBox
         VersionData = VersionLabel
         #endif
-        NextLabelContainer = NextLabel
-        ScoreLabelContainer = ScoreLabel
         CurrentScoreContainer = CurrentScoreLabel
         HighScoreContainer = HighScoreLabel
         GameOverContainer = GameOverLabel
@@ -61,8 +56,6 @@ class TextOverlay: TextLayerDisplayProtocol
         PauseContainer = PauseLabel
         PieceViewControl = PieceControl
         //The views all have background colors in the interface builder so set everything to transparent here.
-        NextLabelContainer?.layer.backgroundColor = UIColor.clear.cgColor
-        ScoreLabelContainer?.layer.backgroundColor = UIColor.clear.cgColor
         CurrentScoreContainer?.layer.backgroundColor = UIColor.clear.cgColor
         HighScoreContainer?.layer.backgroundColor = UIColor.clear.cgColor
         GameOverContainer?.layer.backgroundColor = UIColor.clear.cgColor
@@ -71,8 +64,6 @@ class TextOverlay: TextLayerDisplayProtocol
         VersionContainer?.layer.backgroundColor = UIColor.black.cgColor
         VersionContainer?.layer.borderColor = UIColor.white.cgColor
         VersionContainer?.alpha = 0.0
-        NextLabelContainer?.layer.zPosition = 10000
-        ScoreLabelContainer?.layer.zPosition = 10000
         CurrentScoreContainer?.layer.zPosition = 10000
         HighScoreContainer?.layer.zPosition = 10000
         GameOverContainer?.layer.zPosition = 10000
@@ -89,8 +80,6 @@ class TextOverlay: TextLayerDisplayProtocol
     
     var VersionContainer: UIView? = nil
     var VersionData: UILabel? = nil
-    var NextLabelContainer: UIView? = nil
-    var ScoreLabelContainer: UIView? = nil
     var CurrentScoreContainer: UIView? = nil
     var HighScoreContainer: UIView? = nil
     var GameOverContainer: UIView? = nil
@@ -101,37 +90,12 @@ class TextOverlay: TextLayerDisplayProtocol
     private func InitializeLabels()
     {
         PopulateStringCache()
-        ShowNextLabel()
-        ShowScoreLabel()
     }
     
     /// Populate the cache of attributed strings for text that does not change.
     private func PopulateStringCache()
     {
         StringCache.removeAll()
-        let NextFontSize: CGFloat = Idiom == .pad ? 40.0 : 30.0
-        let NextFont = UIFont(name: "Avenir-Heavy", size: NextFontSize)
-        let NextAttributes: [NSAttributedString.Key: Any] =
-            [
-                .font: NextFont as Any,
-                .foregroundColor: ColorServer.ColorFrom(ColorNames.White) as Any,
-                .strokeColor: ColorServer.ColorFrom(ColorNames.Black) as Any,
-                .strokeWidth: -2 as Any
-        ]
-        let PrettyNextText = NSAttributedString(string: "Next", attributes: NextAttributes)
-        StringCache[.NextLabel] = PrettyNextText
-        
-        let ScoreFontSize: CGFloat = Idiom == .pad ? 40.0 : 30.0
-        let ScoreFont = UIFont(name: "Avenir-Heavy", size: ScoreFontSize)
-        let ScoreAttributes: [NSAttributedString.Key: Any] =
-            [
-                .font: ScoreFont as Any,
-                .foregroundColor: ColorServer.ColorFrom(ColorNames.White) as Any,
-                .strokeColor: ColorServer.ColorFrom(ColorNames.Black) as Any,
-                .strokeWidth: -2 as Any
-        ]
-        let PrettyScoreText = NSAttributedString(string: "Score", attributes: ScoreAttributes)
-        StringCache[.ScoreLabel] = PrettyScoreText
         
         let PauseFontSize: CGFloat = Idiom == .pad ? 130.0 : 80.0
         let PauseFont = UIFont(name: "Avenir-Black", size: PauseFontSize)
@@ -339,58 +303,6 @@ class TextOverlay: TextLayerDisplayProtocol
         var Layer: CALayer? = nil
         From.layer.sublayers?.forEach({if $0.name == ContainerType.rawValue {Layer = $0}})
         return Layer
-    }
-    
-    /// Show the next label. This is the "Next" string over the view of the next piece.
-    /// - Parameter Duration: The number of seconds to fade in the text.
-    func ShowNextLabel(Duration: Double? = nil)
-    {
-        let FinalDuration = Duration == nil ? 0.0 : Duration!
-        let NextString = GetString(ForType: .NextLabel)
-        if !NextLabelCreated
-        {
-            NextLabelCreated = true
-            CreateObject(NextLabelContainer!, AttributedText: NextString!, ContainerType: .NextLabel,
-                         HorizontalAlignment: .left)
-        }
-        ShowObject(NextLabelContainer!, ContainerType: .NextLabel, Duration: FinalDuration)
-    }
-    
-    /// Next label created flag.
-    var NextLabelCreated = false
-    
-    /// Hide the next label. This is the "Next" string over the view of the next piece.
-    /// - Parameter Duration: The number of seconds to fade out the text.
-    func HideNextLabel(Duration: Double? = nil)
-    {
-        let FinalDuration = Duration == nil ? 0.3 : Duration!
-        HideObject(NextLabelContainer!, Duration: FinalDuration, ContainerType: .NextLabel)
-    }
-    
-    /// Show the score label. This is the "Score" string next to the actual score values.
-    /// - Parameter Duration: The number of seconds to fade in the text.
-    func ShowScoreLabel(Duration: Double? = nil)
-    {
-        let FinalDuration = Duration == nil ? 0.0 : Duration!
-        let ScoreString = GetString(ForType: .ScoreLabel)
-        if !ScoreLabelCreated
-        {
-            ScoreLabelCreated = true
-            CreateObject(ScoreLabelContainer!, AttributedText: ScoreString!, ContainerType: .ScoreLabel,
-                         HorizontalAlignment: .right)
-        }
-        ShowObject(ScoreLabelContainer!, ContainerType: .ScoreLabel, Duration: FinalDuration)
-    }
-    
-    /// Score label created flag.
-    var ScoreLabelCreated = false
-    
-    /// Hide the score label. This is the "Score" string next to the actual score values.
-    /// - Parameter Duration: The number of seconds to fade out the text.
-    func HideScoreLabel(Duration: Double? = nil)
-    {
-        let FinalDuration = Duration == nil ? 0.3 : Duration!
-        HideObject(ScoreLabelContainer!, Duration: FinalDuration, ContainerType: .ScoreLabel)
     }
     
     /// Show the next piece (after the current piece).
