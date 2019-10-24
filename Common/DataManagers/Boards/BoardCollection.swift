@@ -44,8 +44,8 @@ class BoardCollection: XMLDeserializeProtocol
                     BoardList.append(Board)
                     let BucketS = XMLNode.GetAttributeNamed("Type", InNode: Child)!
                     Board._BucketShape = BucketShapes(rawValue: BucketS)!
-                    let GameS = XMLNode.GetAttributeNamed("GameType", InNode: Child)!
-                    Board._GameType = BaseGameTypes(rawValue: GameS)!
+                    //let GameS = XMLNode.GetAttributeNamed("GameType", InNode: Child)!
+                    //Board._GameType = BaseGameTypes(rawValue: GameS)!
                     for BoardChild in Child.Children
                     {
                         switch BoardChild.Name
@@ -53,6 +53,11 @@ class BoardCollection: XMLDeserializeProtocol
                             case "Description":
                                 let TextR = XMLNode.GetAttributeNamed("Text", InNode: BoardChild)!
                                 Board._TextDescription = TextR
+                            
+                            case "PiecePlacement":
+                                //This node is optional.
+                                let Where = XMLNode.GetAttributeNamed("Location", InNode: BoardChild)!
+                                Board._InitialPieceLocation = CreatePoint(From: Where)
                             
                             case "Map":
                                 Board._BoardMap = BoardChild.Value
@@ -126,6 +131,37 @@ class BoardCollection: XMLDeserializeProtocol
             default:
                 break
         }
+    }
+    
+    /// Converts a string in the format `"(x,y)"` into a CGPoint.
+    /// - Parameter From: The source string.
+    /// - Returns: CGPoint based on the contents of `From` on success, `CGPoint.zero` if the string
+    ///            cannot be successfully parsed.
+    func CreatePoint(From: String) -> CGPoint
+    {
+        if From.isEmpty
+        {
+            return CGPoint.zero
+        }
+        var Raw = From.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        Raw = Raw.replacingOccurrences(of: "(", with: "")
+        Raw = Raw.replacingOccurrences(of: ")", with: "")
+        let Parts = Raw.split(separator: ",", omittingEmptySubsequences: true)
+        if Parts.count != 2
+        {
+            return CGPoint.zero
+        }
+        let XS = String(Parts[0])
+        let YS = String(Parts[1])
+        guard let X = Int(XS) else
+        {
+            return CGPoint.zero
+        }
+        guard let Y = Int(YS) else
+        {
+            return CGPoint.zero
+        }
+        return CGPoint(x: X, y: Y)
     }
     
     /// Parses a string in the form `(X1,Y1),(X2,Y2)` into two CGPoint structures.
