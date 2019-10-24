@@ -13,6 +13,7 @@ import SceneKit
 /// Contains functions for the creation and manipulation of text node buttons in the game view.
 extension View3D
 {
+    /// Adds a background "layer" behind the top control buttons to clarify where the control region is.
     func ShowControlButtonBackground()
     {
         let Box = SCNBox(width: 30.0, height: 4.0, length: 0.01, chamferRadius: 0.0)
@@ -31,7 +32,7 @@ extension View3D
     {
         if UIDevice.current.userInterfaceIdiom == .phone
         {
-           ButtonDictionary = SmallButtonDictionary
+            ButtonDictionary = SmallButtonDictionary
         }
         else
         {
@@ -66,7 +67,7 @@ extension View3D
                 Box.firstMaterial?.diffuse.contents = UIImage(named: "Checkerboard64")
                 Box.firstMaterial?.specular.contents = UIColor.white
                 MainButtonObject = SCNNode(geometry: Box)
-                                MainButtonObject?.name = "MainButtonObject"
+                MainButtonObject?.name = "MainButtonObject"
                 #endif
                 MainButtonObject?.categoryBitMask = View3D.ControlLight
                 let Around = CGFloat.pi / 180.0 * 360.0
@@ -89,7 +90,7 @@ extension View3D
                 FinalNode.castsShadow = true
                 #endif
                 self.scene?.rootNode.addChildNode(FinalNode)
-            return
+                return
             
             case .FPSButton:
                 let ButtonText = NodeText == nil ? "60.000" : NodeText!
@@ -111,13 +112,13 @@ extension View3D
                                                      Font: ButtonFont, LightMask: View3D.ControlLight)
             
             case .PauseButton:
-                                let ButtonText = NodeText == nil ? "Pause" : NodeText!
-                                FinalNode = SCNButtonNode.MakeButton(ButtonType: .PauseButton, Text: ButtonText, CodePoint: 0, TextType: .String,
-                                                                     Location: ButtonDictionary[ForButton]!.Location, Depth: 1.0,
-                                                                     ScaleFactor: ButtonDictionary[ForButton]!.Scale,
-                                                                     Color: ButtonDictionary[ForButton]!.Color,
-                                                                     Highlight: ButtonDictionary[ForButton]!.Highlight,
-                                                                     Font: ButtonFont, LightMask: View3D.ControlLight)
+                let ButtonText = NodeText == nil ? "Pause" : NodeText!
+                FinalNode = SCNButtonNode.MakeButton(ButtonType: .PauseButton, Text: ButtonText, CodePoint: 0, TextType: .String,
+                                                     Location: ButtonDictionary[ForButton]!.Location, Depth: 1.0,
+                                                     ScaleFactor: ButtonDictionary[ForButton]!.Scale,
+                                                     Color: ButtonDictionary[ForButton]!.Color,
+                                                     Highlight: ButtonDictionary[ForButton]!.Highlight,
+                                                     Font: ButtonFont, LightMask: View3D.ControlLight)
             
             case .VideoButton:
                 let OverrideFont = UIFont(name: "NotoEmoji", size: 40.0)!
@@ -218,7 +219,7 @@ extension View3D
                                                      Font: ButtonFont, LightMask: View3D.ControlLight)
             
             default:
-            return
+                return
         }
         
         ButtonList[ForButton] = FinalNode
@@ -322,10 +323,26 @@ extension View3D
     func ShowControls(With: [NodeButtons]? = nil)
     {
         //Add the background if necessary.
-        if ControlBackground == nil
+        #if true
+        var FoundBackground = false
+        self.scene?.rootNode.enumerateChildNodes
+            {
+                Node, _ in
+                if Node == ControlBackground
+                {
+                    FoundBackground = true
+                }
+        }
+        if !FoundBackground
         {
         ShowControlButtonBackground()
         }
+        #else
+        if ControlBackground == nil
+        {
+            ShowControlButtonBackground()
+        }
+        #endif
         
         //Remove some of the buttons.
         for (_, Button) in ButtonList
@@ -346,8 +363,8 @@ extension View3D
             MakeButton(ForButton: .PauseButton)
             if UIDevice.current.userInterfaceIdiom == .pad
             {
-            MakeButton(ForButton: .VideoButton)
-            MakeButton(ForButton: .CameraButton)
+                MakeButton(ForButton: .VideoButton)
+                MakeButton(ForButton: .CameraButton)
             }
             MakeButton(ForButton: .LeftButton)
             MakeButton(ForButton: .DownButton)
