@@ -19,7 +19,6 @@ class PieceIDMap
     }
     
     /// Return the piece type given an ID of the piece.
-    ///
     /// - Parameter ID: ID of the piece whose type will be returned.
     /// - Returns: The piece type associated with the ID. Nil if not found.
     public func IDtoPiece(_ ID: UUID) -> PieceTypes?
