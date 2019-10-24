@@ -144,6 +144,7 @@ class Board: GameMapProtocol
         PreGapCount = 0
     }
     
+    #if false
     /// Holds the current game type.
     private var _GameType: BaseGameTypes = .Standard
     /// Get the current game type. The only way to set this is during initialization.
@@ -154,6 +155,7 @@ class Board: GameMapProtocol
             return _GameType
         }
     }
+    #endif
     
     /// Enables or disables fast AI dropping.
     /// - Parameter Enable: Determines whether fast dropping is used.
@@ -435,7 +437,7 @@ class Board: GameMapProtocol
         
         var NewPiece: Piece!
         let QueueStart = CACurrentMediaTime()
-        NewPiece = (Factory?.GetQueuedPiece(ForBoard: self, BaseGame: GameType))!
+        NewPiece = (Factory?.GetQueuedPiece(ForBoard: self))!
         PerformanceData.append(("GetQueuedPiece duration", CACurrentMediaTime() - QueueStart))
         
         let PieceInit = CACurrentMediaTime()
