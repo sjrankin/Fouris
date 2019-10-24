@@ -22,7 +22,7 @@ class GameHistory: CustomStringConvertible
             return _Dirty
         }
     }
-    
+    #if false
     /// Holds the game type.
     public var _GameType: BaseGameTypes = .Standard
     /// Get or set the game type.
@@ -38,7 +38,7 @@ class GameHistory: CustomStringConvertible
             _Dirty = true
         }
     }
-    
+    #endif
     /// Holds the game count.
     public var _GameCount: Int = 0
     /// Get or set the cumulative game count.
@@ -200,7 +200,7 @@ class GameHistory: CustomStringConvertible
         }
         
         var Working = ""
-        Working.append(Spaces(Indent) + "<GameType Name=" + Quoted(GameType.rawValue) + ">\n")
+        //Working.append(Spaces(Indent) + "<GameType Name=" + Quoted(GameType.rawValue) + ">\n")
         
         Working.append(Spaces(Indent + 4) + "<GameCount Started=" + Quoted("\(GameCount)") + "/>\n")
         Working.append(Spaces(Indent + 4) + "<Score Cumulative=" + Quoted("\(CumulativeScore)") +
