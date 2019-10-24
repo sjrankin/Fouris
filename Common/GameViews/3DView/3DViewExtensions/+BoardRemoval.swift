@@ -40,7 +40,7 @@ extension View3D
                 self.OutlineNode = NewOutline
                 self.scene?.rootNode.addChildNode(self.BucketGridNode!)
                 self.scene?.rootNode.addChildNode(self.OutlineNode!)
-                let NewBucket = self.CreateBucket(InitialOpacity: 1.0, Shape: self.CenterBlockShape)
+                let NewBucket = self.CreateBucket(InitialOpacity: 1.0, Shape: self.CenterBlockShape!)
                 self.BucketNode = NewBucket
                 self.scene?.rootNode.addChildNode(self.BucketNode!)
         }
@@ -91,7 +91,7 @@ extension View3D
     func CreateGameBoard()
     {
         BucketNode?.removeFromParentNode()
-        let Bucket = CreateBucket(InitialOpacity: 1.0, Shape: CenterBlockShape)
+        let Bucket = CreateBucket(InitialOpacity: 1.0, Shape: CenterBlockShape!)
         BucketNode = Bucket
         self.scene?.rootNode.addChildNode(BucketNode!)
         BucketGridNode?.removeFromParentNode()
