@@ -28,6 +28,9 @@ public class Versioning: CustomStringConvertible
     /// Name of the application.
     public static let ApplicationName = "Fouris"
     
+    /// Tag for the application.
+    public static let Tag = "Alpha"
+    
     /// ID of the application.
     public static let ProgramID = "9c49a210-40f0-4f8a-89cf-4f88bc2430c6"
     
@@ -80,19 +83,19 @@ public class Versioning: CustomStringConvertible
     }
     
     /// Build number.
-    public static let Build: Int = 2881
+    public static let Build: Int = 2918
     
     /// Build increment.
     private static let BuildIncrement = 1
     
     /// Build ID.
-    public static let BuildID: String = "D3514974-775B-4057-A1E2-A3AC04890078"
+    public static let BuildID: String = "CAAE3A0D-5D99-4992-8DBB-1294840E1C95"
     
     /// Build date.
     public static let BuildDate: String = "24 October 2019"
     
     /// Build Time.
-    public static let BuildTime: String = "14:06"
+    public static let BuildTime: String = "21:58"
     
     /// Return a standard build string.
     ///
@@ -157,6 +160,7 @@ public class Versioning: CustomStringConvertible
         Parts.append(("Build ID", BuildID))
         Parts.append(("Copyright", CopyrightText()))
         Parts.append(("Program ID", ProgramID))
+        Parts.append(("Tag", Tag))
         return Parts
     }
     
@@ -174,7 +178,8 @@ public class Versioning: CustomStringConvertible
         Block = Block + Prefix + MakeBuildString() + "\n"
         Block = Block + Prefix + "Build ID " + BuildID + "\n"
         Block = Block + Prefix + CopyrightText() + "\n"
-        Block = Block + Prefix + "Program ID " + ProgramID
+        Block = Block + Prefix + "Program ID " + ProgramID + "\n"
+        Block = Block + Prefix + Tag
         return Block
     }
     
@@ -309,6 +314,7 @@ public class Versioning: CustomStringConvertible
         Emit = Emit + MakeKVP("Build", String(describing: Build)) + " "
         Emit = Emit + MakeKVP("BuildDate", BuildDate + ", " + BuildTime) + " "
         Emit = Emit + MakeKVP("BuildID", BuildID)
+        Emit = Emit + MakeKVP("Tag", Tag)
         Emit = Emit + ">\n"
         Emit = Emit + Spaces + "  " + CopyrightText() + "\n"
         Emit = Emit + Spaces + "</Version>"
@@ -326,6 +332,7 @@ public class Versioning: CustomStringConvertible
         KVP.append(("BuildDate", BuildDate + ", " + BuildTime))
         KVP.append(("BuildID", BuildID))
         KVP.append(("Copyright", CopyrightText()))
+        KVP.append(("Tag", Tag))
         return KVP
     }
     
