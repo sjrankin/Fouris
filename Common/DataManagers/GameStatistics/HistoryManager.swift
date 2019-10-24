@@ -111,6 +111,7 @@ class HistoryManager
     /// Save history files. Files are saved only if they contain dirty data.
     public static func Save()
     {
+        #if false
         if GameHistory!.Dirty
         {
             let Serialized = GameHistory?.ToString()
@@ -121,5 +122,6 @@ class HistoryManager
             let Serialized = AIGameHistory?.ToString()
             let _ = FileIO.SaveHistoryFile(Name: "AIGameHistory.xml", Contents: Serialized!)
         }
+        #endif
     }
 }
