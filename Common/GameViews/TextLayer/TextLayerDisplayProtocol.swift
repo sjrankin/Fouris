@@ -13,38 +13,18 @@ protocol TextLayerDisplayProtocol: class
 {
     /// Sets the controls to use to display text. Text is an attributed string displayed in a CATextLayer, so each text object
     /// needs to reside in a view Those views are passed in this function.
-    /// - Parameter NextLabel: Container for the "Next" label.
-    /// - Parameter ScoreLabel: Container for the "Score" label.
     /// - Parameter CurrentScoreLabel: Container for the current score label.
     /// - Parameter HighScoreLabel: Container for the high score label.
     /// - Parameter GameOverLabel: Container for the "Game Over" label.
     /// - Parameter PressPlayLabel: Container for the "Press Play" label.
     /// - Parameter PauseLabel: Container for the "Pause" label.
     /// - Parameter PieceControl: Piece viewer control for the next piece.
-    func SetControls(NextLabel: UIView?,
-                     ScoreLabel: UIView?,
-                     CurrentScoreLabel: UIView?,
+    func SetControls(CurrentScoreLabel: UIView?,
                      HighScoreLabel: UIView?,
                      GameOverLabel: UIView?,
                      PressPlayLabel: UIView?,
                      PauseLabel: UIView?,
                      PieceControl: PieceViewer?)
-    
-    /// Show the next label. This is the "Next" string over the view of the next piece.
-    /// - Parameter Duration: The number of seconds to fade in the text.
-    func ShowNextLabel(Duration: Double?)
-    
-    /// Hide the next label. This is the "Next" string over the view of the next piece.
-    /// - Parameter Duration: The number of seconds to fade out the text.
-    func HideNextLabel(Duration: Double?)
-    
-    /// Show the score label. This is the "Score" string next to the actual score values.
-    /// - Parameter Duration: The number of seconds to fade in the text.
-    func ShowScoreLabel(Duration: Double?)
-    
-    /// Hide the score label. This is the "Score" string next to the actual score values.
-    /// - Parameter Duration: The number of seconds to fade out the text.
-    func HideScoreLabel(Duration: Double?)
     
     /// Show the next piece (after the current piece).
     /// - Parameter NextPiece: The next piece to show. Visualized by **PieceFactory**.
