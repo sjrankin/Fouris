@@ -112,6 +112,21 @@ class PieceVisual2: CustomStringConvertible
         }
     }
     
+    /// Holds the "next up" visuals.
+    public var _NextVisuals: StateVisual? = nil
+    /// Get or set the visuals to use on "next up" pieces.
+    public var NextVisuals: StateVisual?
+    {
+        get
+        {
+            return _NextVisuals
+        }
+        set
+        {
+            _NextVisuals = newValue
+        }
+    }
+    
     // MARK: Serialization.
     
     /// Returns a string with the passed number of spaces in it.
@@ -160,4 +175,45 @@ class PieceVisual2: CustomStringConvertible
             return ToString()
         }
     }
+}
+
+
+/// Block shapes for 3D rendered tiles/blocks.
+///
+/// - **Cubic**: Block is a cube.
+/// - **Spherical**: Block is a sphere.
+/// - **RoundedCube**: Block is a rounded cube.
+/// - **Cone**: Block is cone shaped.
+/// - **Pyramid**: Block is pyramid shaped.
+/// - **Torus**: Block is toroidal shaped.
+/// - **Capsule**: Block is capsule shaped.
+/// - **Cylinder**: Block is cylinder shaped.
+/// - **Tube**: Block is tube shaped.
+/// - **Dodecahedron**: Block is dodecahedron shaped.
+/// - **Tetrahedron**: Block is tetrahedron shaped.
+/// - **Hexagon**: Block is hexagonal and flat shaped.
+enum TileShapes3D: String, CaseIterable
+{
+    case Cubic = "Cubic"
+    case Spherical = "Spherical"
+    case RoundedCube = "RoundedCube"
+    case Cone = "Cone"
+    case Pyramid = "Pyramid"
+    case Torus = "Torus"
+    case Capsule = "Capsule"
+    case Cylinder = "Cylinder"
+    case Tube = "Tube"
+    case Dodecahedron = "Dodecahedron"
+    case Tetrahedron = "Tetrahedron"
+    case Hexagon = "Hexagon"
+}
+
+/// Texture types for rendered 3D blocks.
+///
+/// - **Color**: Surface is rendered in color.
+/// - **Image**: Surface is rendered with an image.
+enum RenderedTextureTypes: String, CaseIterable
+{
+    case Color = "Color"
+    case Image = "Image"
 }
