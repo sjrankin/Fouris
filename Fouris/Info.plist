@@ -37,6 +37,29 @@
 		<string>NotoSansSymbols-SemiBold.ttf</string>
 		<string>NotoEmoji-Regular.ttf</string>
 	</array>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeUpdate</string>
+			<key>UIApplicationShortcutItemSubtitle</key>
+			<string>Reset to factory state</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Reset</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>UpdateAction</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeTask</string>
+			<key>UIApplicationShortcutItemSubtitle</key>
+			<string>Start in attact mode</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Attract</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>TaskAction</string>
+		</dict>
+	</array>
 	<key>UIFileSharingEnabled</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
