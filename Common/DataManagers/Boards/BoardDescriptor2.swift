@@ -312,6 +312,32 @@ class BoardDescriptor2
         }
     }
     
+    public var _ClearUpperLeft: CGPoint = CGPoint.zero
+    public var ClearUpperLeft: CGPoint
+    {
+        get
+        {
+            return _ClearUpperLeft
+        }
+        set
+        {
+            _ClearUpperLeft = newValue
+        }
+    }
+    
+    public var _ClearLowerRight: CGPoint = CGPoint.zero
+    public var ClearLowerRight: CGPoint
+    {
+        get
+        {
+            return _ClearLowerRight
+        }
+        set
+        {
+            _ClearLowerRight = newValue
+        }
+    }
+    
     /// Holds the raw board map.
     public var _BoardMap: String = ""
     {
@@ -343,7 +369,8 @@ class BoardDescriptor2
     ///   - Maps may consist of one of the following characters:
     ///     - **_** The game board outside of the bucket.
     ///     - **.** The interior of the bucket.
-    ///     - **#** Bucket blocks - all blocks must be in the interior of the bucket.
+    ///     - **#** Bucket blocks.
+    ///     - **!** Invisible blocks
     public var MapLines: [String]
     {
         get
@@ -361,7 +388,8 @@ class BoardDescriptor2
     [
         "_": MapNodeTypes.BucketExterior,
         ".": MapNodeTypes.BucketInterior,
-        "#": MapNodeTypes.BucketBlock
+        "#": MapNodeTypes.BucketBlock,
+        "!": MapNodeTypes.InvisibleBlock
     ]
     
     /// Get the map node type at the specified location in the map.
@@ -448,7 +476,7 @@ class BoardDescriptor2
             var CharIndex = 0
             for Char in Line
             {
-                if !["_", ".", "#"].contains(String(Char))
+                if !["_", ".", "#", "!"].contains(String(Char))
                 {
                     fatalError("Invalid character (\(String(Char))) found in map \(BucketShape) on line \(LineIndex).")
                 }
@@ -488,16 +516,35 @@ class BoardDescriptor2
     /// - Returns: List of bucket block locations.
     public func BucketBlockList() -> [(CGPoint)]
     {
-        if let CachedList = BlockList
-        {
-            return CachedList
-        }
+        //if let CachedList = BlockList
+       // {
+        //    return CachedList
+        //}
         BlockList = [(CGPoint)]()
         for Y in 0 ..< GameBoardHeight
         {
             for X in 0 ..< GameBoardWidth
             {
                 if MapDataAt(X: X, Y: Y) == .BucketBlock
+                {
+                    BlockList!.append(CGPoint(x: X, y: Y))
+                }
+            }
+        }
+        return BlockList!
+    }
+    
+    /// Returns a list of points in the game board where invisible blocks are placed. Usually, this type of block
+    /// forms the perimeter of the game board but may be placed anywhere.
+    /// - Returns: List of invisible block locations.
+    public func InvisibleBucketBlockList() -> [(CGPoint)]
+    {
+        BlockList = [(CGPoint)]()
+        for Y in 0 ..< GameBoardHeight
+        {
+            for X in 0 ..< GameBoardWidth
+            {
+                if MapDataAt(X: X, Y: Y) == .InvisibleBlock
                 {
                     BlockList!.append(CGPoint(x: X, y: Y))
                 }
@@ -530,9 +577,11 @@ enum FreezeButtonActions: String, CaseIterable
 /// - **BucketExterior**: Outside of the bucket.
 /// - **BucketInterior**: Inside the bucket.
 /// - **BucketBlock**: Block that makes up a bucket wall.
+/// - **InvisibleBlock**: Block that is invisible.
 enum MapNodeTypes: String, CaseIterable
 {
     case BucketExterior = "BucketExterior"
     case BucketInterior = "BucketInterior"
     case BucketBlock = "BucketBlock"
+    case InvisibleBlock = "InvisibleBlock"
 }
