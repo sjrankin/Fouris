@@ -197,7 +197,7 @@ class PieceVisuals2: CustomStringConvertible, XMLDeserializeProtocol
                                             default:
                                                 break
                                         }
-                                }
+                                    }
                                     NewVisual._ActiveVisuals = NewStateVisual
                                 
                                 case "Retired":
@@ -221,11 +221,35 @@ class PieceVisuals2: CustomStringConvertible, XMLDeserializeProtocol
                                             default:
                                                 break
                                         }
-                                }
+                                    }
                                     NewVisual._RetiredVisuals = NewStateVisual
                                 
+                                case "Next":
+                                    NewStateVisual._VisualType = .Next
+                                    for VChild in GrandChild.Children
+                                    {
+                                        switch VChild.Name
+                                        {
+                                            case "Colors":
+                                                let DiffuseName = XMLNode.GetAttributeNamed("Diffuse", InNode: VChild)!
+                                                NewStateVisual._DiffuseColor = DiffuseName
+                                                let SpecularName = XMLNode.GetAttributeNamed("Specular", InNode: VChild)!
+                                                NewStateVisual._SpecularColor = SpecularName
+                                            
+                                            case "Textures":
+                                                let DiffuseName = XMLNode.GetAttributeNamed("Diffuse", InNode: VChild)!
+                                                NewStateVisual._DiffuseTexture = DiffuseName
+                                                let SpecularName = XMLNode.GetAttributeNamed("Specular", InNode: VChild)!
+                                                NewStateVisual._SpecularTexture = SpecularName
+                                            
+                                            default:
+                                                break
+                                        }
+                                    }
+                                    NewVisual._NextVisuals = NewStateVisual 
+                                
                                 default:
-                                break
+                                    break
                             }
                         }
                         Visuals.append(NewVisual)
