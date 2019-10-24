@@ -56,7 +56,8 @@ extension MapType
                 let BoardDef = BoardManager.GetBoardFor(BucketShape)!
                 CreateRotatingBucket(Width: BoardDef.GameBoardWidth, Height: BoardDef.GameBoardHeight, BucketTop: BucketTop, BucketBottom: BucketBottom,
                                      BucketLeft: BucketLeft, BucketRight: BucketRight, Map: &Map, BucketID: BucketID,
-                                     InvisibleBucketID: InvisibleBucketID, BucketExteriorID: BucketExteriorID)
+                                     InvisibleBucketID: InvisibleBucketID, BucketExteriorID: BucketExteriorID,
+                                     GameShape: BucketShape)
             
             case .ThreeDimensional:
                 break
@@ -78,7 +79,7 @@ extension MapType
     ///   - GameShape: The shape of the game.
     private static func CreateRotatingBucket(Width: Int, Height: Int, BucketTop: Int, BucketBottom: Int, BucketLeft: Int, BucketRight: Int,
                                              Map: inout ContentsType, BucketID: UUID, InvisibleBucketID: UUID, BucketExteriorID: UUID,
-                                             GameShape: BucketShapes = .MediumSquare)
+                                             GameShape: BucketShapes)
     {
         //Fill the map with bucket exteriors.
         for Y in 0 ..< BucketTop
