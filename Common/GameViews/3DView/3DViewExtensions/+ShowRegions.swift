@@ -52,6 +52,10 @@ extension View3D
                         case .BucketInterior:
                             Node.geometry?.firstMaterial?.diffuse.contents = LayerColors[.BucketInterior]?.withAlphaComponent(0.25)
                             RegionLayers[.BucketInterior]?.addChildNode(Node)
+                        
+                        case .InvisibleBlock:
+                            Node.geometry?.firstMaterial?.diffuse.contents = LayerColors[.InvisibleBarrier]?.withAlphaComponent(0.25)
+                            RegionLayers[.InvisibleBarrier]?.addChildNode(Node)
                     }
                 }
             }
