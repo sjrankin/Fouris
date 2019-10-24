@@ -183,8 +183,9 @@ class Rotating4GameAI: AIProtocol
     /// - Returns: True if the left side has no bottomless columns, false if it does.
     func LeftSideIsComplete(_ InBoard: Board) -> Bool
     {
-        let CenterUpperLeft = InBoard.Map?.CenterBlockUpperLeft
-        for X in InBoard.BucketInteriorLeft ... Int(CenterUpperLeft!.x)
+//        let CenterUpperLeft = InBoard.Map?.CenterBlockUpperLeft
+        let CenterUpperLeft = CGPoint(x: InBoard.BucketInteriorWidth / 2, y: 0)
+        for X in InBoard.BucketInteriorLeft ... Int(CenterUpperLeft.x)
         {
             if (InBoard.Map?.ColumnIsBottomless(X))!
             {
@@ -201,8 +202,9 @@ class Rotating4GameAI: AIProtocol
     ///            found, `-1` is returned.
     func ClosestBottomlessLeft(_ InBoard: Board) -> Int
     {
-        let CenterUpperLeft = InBoard.Map?.CenterBlockUpperLeft
-        for X in stride(from: Int(CenterUpperLeft!.x - 1.0), to: InBoard.BucketInteriorLeft, by: -1)
+//        let CenterUpperLeft = InBoard.Map?.CenterBlockUpperLeft
+        let CenterUpperLeft = CGPoint(x: InBoard.BucketInteriorWidth / 2, y: 0)
+        for X in stride(from: Int(CenterUpperLeft.x - 1.0), to: InBoard.BucketInteriorLeft, by: -1)
         {
             if (InBoard.Map?.ColumnIsBottomless(X))!
             {
@@ -217,8 +219,9 @@ class Rotating4GameAI: AIProtocol
     /// - Returns: True if the right side has no bottomless columns, false if it does.
     func RightSideIsComplete(_ InBoard: Board) -> Bool
     {
-        let CenterLowerRight = InBoard.Map?.CenterBlockLowerRight
-        for X in Int(CenterLowerRight!.x) ... InBoard.BucketInteriorRight
+//        let CenterLowerRight = InBoard.Map?.CenterBlockLowerRight
+                let CenterLowerRight = CGPoint(x: InBoard.BucketInteriorWidth / 2, y: 0)
+        for X in Int(CenterLowerRight.x) ... InBoard.BucketInteriorRight
         {
             if (InBoard.Map?.ColumnIsBottomless(X))!
             {
@@ -235,8 +238,9 @@ class Rotating4GameAI: AIProtocol
     ///            found, `-1` is returned.
     func ClosestBottomlessRight(_ InBoard: Board) -> Int
     {
-        let CenterLowerRight = InBoard.Map?.CenterBlockLowerRight
-        for X in Int(CenterLowerRight!.x + 1.0) ... InBoard.BucketInteriorRight
+        let CenterLowerRight = CGPoint(x: InBoard.BucketInteriorWidth / 2, y: 0)
+//        let CenterLowerRight = InBoard.Map?.CenterBlockLowerRight
+        for X in Int(CenterLowerRight.x + 1.0) ... InBoard.BucketInteriorRight
         {
             if (InBoard.Map?.ColumnIsBottomless(X))!
             {
@@ -253,7 +257,9 @@ class Rotating4GameAI: AIProtocol
     ///            the center block. Will return -1 if there are no bottomless columns.
     func NextLeftSideFloorColumn(_ InBoard: Board) -> Int
     {
-        for X in InBoard.BucketInteriorLeft ... Int((InBoard.Map?.CenterBlockUpperLeft.x)!)
+        let ToColumn = Int(InBoard.BucketInteriorWidth / 2)
+//        for X in InBoard.BucketInteriorLeft ... Int((InBoard.Map?.CenterBlockUpperLeft.x)!)
+                    for X in InBoard.BucketInteriorLeft ... ToColumn
         {
             if !(InBoard.Map?.ColumnIsBottomless(X))!
             {
@@ -272,7 +278,9 @@ class Rotating4GameAI: AIProtocol
     ///            the center block. Will return -1 if there are no bottomless columns.
     func NextRightSideFloorColumn(_ InBoard: Board) -> Int
     {
-        for X in Int((InBoard.Map?.CenterBlockLowerRight.x)!) ... InBoard.BucketInteriorRight
+        let ToColumn = Int(InBoard.BucketInteriorWidth / 2)
+//        for X in Int((InBoard.Map?.CenterBlockLowerRight.x)!) ... InBoard.BucketInteriorRight
+        for X in ToColumn ... InBoard.BucketInteriorRight
         {
             if !(InBoard.Map?.ColumnIsBottomless(X))!
             {
@@ -414,35 +422,33 @@ class Rotating4GameAI: AIProtocol
     /// Return the number of bottomless columns on either side of the central block in the current board orientation.
     /// - Parameter InBoard: The board to use to calculate bottomless columns.
     /// - Returns: Tuple in the form (Number of left-side bottomless columns, Number of right-side bottomless columns).
-    func EmptyColumnCounts(_ InBoard: Board) -> (Int, Int)
+    func EmptyColumnCounts(_ InBoard: Board) -> (Left: Int, Right: Int)
     {
         var LeftCount = 0
         var RightCount = 0
-        
-        let CenterUpperLeft = InBoard.Map?.CenterBlockUpperLeft
-        for X in InBoard.BucketInteriorLeft ... Int(CenterUpperLeft!.x) - 1
+
+        guard let Left = InBoard.Map?.LeftMostFloor else
         {
-            if (InBoard.Map?.ColumnIsBottomless(X))!
-            {
-                LeftCount = LeftCount + 1
-            }
+            return (Left: InBoard.BucketInteriorWidth, Right: InBoard.BucketInteriorWidth)
         }
-        let CenterLowerRight = InBoard.Map?.CenterBlockLowerRight
-        for X in Int(CenterLowerRight!.x) + 1 ... InBoard.BucketInteriorRight
+        guard let Right = InBoard.Map?.RightMostFloor else
         {
-            if (InBoard.Map?.ColumnIsBottomless(X))!
-            {
-                RightCount = RightCount + 1
-            }
+            //Theoretically, we should never reach this code becaue the assignment to Left above checks for the same
+            //condition that would lead to Right being nil.
+                        return (Left: InBoard.BucketInteriorWidth, Right: InBoard.BucketInteriorWidth)
         }
-        
+        LeftCount = Left - InBoard.BucketInteriorLeft
+        RightCount = InBoard.BucketInteriorRight - Right
         return (LeftCount, RightCount)
     }
     
+    /// Move the passed set of points left by the passed number, but not farther than the constraint.
+    /// - Parameter Points: The set of points to move to the left.
+    /// - Parameter By: Constant to move points by.
+    /// - Parameter LeftConstraint: Maximum distance to the left to move any given point.
     func MovePointsLeft(_ Points: inout [CGPoint], By: Int, LeftConstraint: Int) -> Int
     {
         let LeftMost = CGFloat(LeftConstraint)
-        //print("MovePointsLeft By=\(By), LeftConstraint=\(LeftConstraint)")
         var Actual = 0
         for _ in 0 ..< abs(By)
         {
@@ -451,17 +457,19 @@ class Rotating4GameAI: AIProtocol
                 let NewX = Point.x - 1.0
                 if NewX < LeftMost
                 {
-                    //print("MovePointsLeft: Actual=\(Actual)")
                     return Actual
                 }
                 Point.x = NewX
             }
             Actual = Actual + 1
         }
-        //print("MovePointsLeft - No change.")
         return By
     }
     
+    /// Move the passed set of points right by the passed number, but not farther than the constraint.
+    /// - Parameter Points: The set of points to move to the right.
+    /// - Parameter By: Constant to move points by.
+    /// - Parameter LeftConstraint: Maximum distance to the right to move any given point.
     func MovePointsRight(_ Points: inout [CGPoint], By: Int, RightConstraint: Int) -> Int
     {
         let RightMost = CGFloat(RightConstraint)
@@ -528,29 +536,27 @@ class Rotating4GameAI: AIProtocol
                 {
                     MotionQueue.Enqueue(.RotateRight)
                 }
-                //print("Rotate piece right \(WideCount) times.")
             }
             var XOffset: Int = 0
             if !LeftSideComplete && !RightSideComplete
             {
                 //Neither side is complete - build on the side with the greatest number of bottomless columns.
                 let (LeftCount, RightCount) = EmptyColumnCounts(InBoard)
-                //print("Empty columns=(\(LeftCount),\(RightCount))")
                 if LeftCount >= RightCount
                 {
-                    //print("Building left calculated.")
-                    let FloorColumn = NextLeftSideFloorColumn(InBoard)
+                    if let FloorColumn = InBoard.Map?.LeftMostFloor
+                    {
                     XOffset = GetLeftOverlapMotionCount(ToColumn: FloorColumn, Points: Points,
                                                         LeftMostValid: InBoard.BucketInteriorLeft)
-                    //XOffset = MovePointsLeft(&Points, By: XOffset, LeftConstraint: InBoard.BucketInteriorLeft)
+                    }
                 }
                 else
                 {
-                    //print("Building right calculated.")
-                    let FloorColumn = NextRightSideFloorColumn(InBoard)
+                    if let FloorColumn = InBoard.Map?.RightMostFloor
+                    {
                     XOffset = GetRightOverlapMotionCount(ToColumn: FloorColumn, Points: Points,
                                                          RightMostValid: InBoard.BucketInteriorRight)
-                    //XOffset = MovePointsRight(&Points, By: XOffset, RightConstraint: InBoard.BucketInteriorRight)
+                    }
                 }
             }
             if LeftSideComplete
@@ -610,19 +616,25 @@ extension Array where Element == CGPoint
     }
     
     /// Return a new set of `CGPoint`s with the supplied offset applied to each point.
-    /// - Parameter XOffset: The offset to apply to each `x` field.
-    /// - Parameter YOffset: The offset to apply to each `y` field.
+    /// - Parameter XOffset: The offset to apply to each `x` field. CGFloat type.
+    /// - Parameter YOffset: The offset to apply to each `y` field. CGFloat type.
     /// - Returns: New array of `CGPoint`s with the supplied offset applied to each point.
     func WithOffset(_ XOffset: CGFloat, _ YOffset: CGFloat) -> [CGPoint]
     {
         return self.WithOffset(CGPoint(x: XOffset, y: YOffset))
     }
     
+    /// Return a new set of `CGPoint`s with the supplied offset applied to each point.
+    /// - Parameter XOffset: The offset to apply to each `x` field. Int type.
+    /// - Parameter YOffset: The offset to apply to each `y` field. Int type.
+    /// - Returns: New array of `CGPoint`s with the supplied offset applied to each point.
     func WithOffset(_ XOffset: Int = 0, _ YOffset: Int = 0) -> [CGPoint]
     {
         return self.WithOffset(CGPoint(x: XOffset, y: YOffset))
     }
     
+    /// Returns the horizontal extent of the set of points.
+    /// - Returns: Horizontal extent.
     func HorizontalExtent() -> Int
     {
         var MinX = Int.max
@@ -642,6 +654,8 @@ extension Array where Element == CGPoint
         return abs(MaxX - MinX) + 1
     }
     
+    /// Returns the vertical extent of the set of points.
+    /// - Returns: Vertical extent.
     func VerticalExtent() -> Int
     {
         var MinY = Int.max
@@ -661,6 +675,9 @@ extension Array where Element == CGPoint
         return abs(MaxY - MinY) + 1
     }
     
+    /// Returns the left-most point.
+    /// - Note: If more than one point has the same lowest `x` value, the last point encountered will be returned.
+    /// - Returns: The point with the lowest `x` value.
     func LeftMost() -> CGPoint
     {
         var LeftPoint = CGPoint.zero
@@ -676,6 +693,9 @@ extension Array where Element == CGPoint
         return LeftPoint
     }
     
+    /// Returns the right-most point.
+    /// - Note: If more than one point has the same greatest `x` value, the last point encountered will be returned.
+    /// - Returns: The point with the greatest `x` value.
     func RightMost() -> CGPoint
     {
         var RightPoint = CGPoint.zero
@@ -691,6 +711,9 @@ extension Array where Element == CGPoint
         return RightPoint
     }
     
+    /// Returns the top-most point.
+    /// - Note: If more than one point has the same lowest `y` value, the last point encountered will be returned.
+    /// - Returns: The point with the lowest `y` value.
     func TopMost() -> CGPoint
     {
         var TopPoint = CGPoint.zero
@@ -706,6 +729,9 @@ extension Array where Element == CGPoint
         return TopPoint
     }
     
+    /// Returns the bottom-most point.
+    /// - Note: If more than one point has the same greatest `y` value, the last point encountered will be returned.
+    /// - Returns: The point with the greatest `y` value.
     func BottomMost() -> CGPoint
     {
         var BottomPoint = CGPoint.zero
