@@ -49,7 +49,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter BucketShape: The shape of the game's bucket.
     func Initialize(With: Board, Theme: ThemeManager3, BucketShape: BucketShapes)
     {
-        print("View3D Frame=\(self.frame)")
+        //print("View3D Frame=\(self.frame)")
         self.isUserInteractionEnabled = true
         CenterBlockShape = BucketShape
         self.rendersContinuously = true
@@ -160,7 +160,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter Field: The field that changed.
     func ThemeUpdated(ThemeName: String, Field: ThemeFields)
     {
-        print("Theme \(ThemeName) updated field \(Field)")
+        //print("Theme \(ThemeName) updated field \(Field)")
         if Field == .BackgroundSolidColor || Field == .BackgroundSolidColorCycleTime
         {
             NewBackgroundSolidColor()
@@ -190,7 +190,7 @@ class View3D: SCNView,                          //Our main super class.
                 
                 case .CameraFieldOfView:
                     CameraNode.camera?.fieldOfView = CGFloat(CurrentTheme!.CameraFieldOfView)
-                    print("Camera field of view changed to \(CurrentTheme!.CameraFieldOfView)")
+                    //print("Camera field of view changed to \(CurrentTheme!.CameraFieldOfView)")
                 
                 default:
                     break
@@ -520,7 +520,7 @@ class View3D: SCNView,                          //Our main super class.
                     KillList.append(Node)
                 }
         }
-        print("RemoveNodes(\(WithName) started.)")
+        //print("RemoveNodes(\(WithName) started.)")
         for Node in KillList
         {
             Node.geometry!.firstMaterial!.specular.contents = nil
@@ -529,7 +529,7 @@ class View3D: SCNView,                          //Our main super class.
             Node.removeFromParentNode()
         }
         BlockList = BlockList.filter({$0.name != WithName})
-        print("  RemoveNodes completed.")
+        //print("  RemoveNodes completed.")
         #endif
     }
     
@@ -566,9 +566,9 @@ class View3D: SCNView,                          //Our main super class.
     {
         if BucketNode != nil
         {
-            print("Removing bucket from parent.")
+            //print("Removing bucket from parent.")
             BucketNode?.removeFromParentNode()
-            print("  Done removing bucket from parent.")
+            //print("  Done removing bucket from parent.")
         }
         let LocalBucketNode = SCNNode()
         
@@ -632,10 +632,10 @@ class View3D: SCNView,                          //Our main super class.
     /// - Note: Center lines are intended to be used for debugging only.
     func DrawCenterLines()
     {
-        print("Removing center lines.")
+        //print("Removing center lines.")
         CenterLineVertical?.removeFromParentNode()
         CenterLineHorizontal?.removeFromParentNode()
-        print("  Done removing center lines.")
+        //print("  Done removing center lines.")
         if CurrentTheme!.ShowCenterLines
         {
             let Width: CGFloat = CGFloat(CurrentTheme!.CenterLineWidth)
@@ -986,14 +986,14 @@ class View3D: SCNView,                          //Our main super class.
     {
         if MasterBlockNode != nil
         {
-            print("Removing nodes from the MasterBlockNode")
+            //print("Removing nodes from the MasterBlockNode")
             MasterBlockNode?.childNodes.forEach({
                 if !($0 as! VisualBlocks3D).IsRetired
                 {
                     $0.removeFromParentNode()
                 }
             })
-            print("  Done removing nodes from the MasterBlockNode")
+            //print("  Done removing nodes from the MasterBlockNode")
         }
     }
     
@@ -1038,12 +1038,12 @@ class View3D: SCNView,                          //Our main super class.
         {
             return
         }
-        print("Removing moving piece node.")
+        //print("Removing moving piece node.")
         if MovingPieceNode != nil
         {
             MovingPieceNode?.removeFromParentNode()
         }
-        print("  Done removing moving piece node.")
+        //print("  Done removing moving piece node.")
         MovingPieceBlocks = [VisualBlocks3D]()
         MovingPieceNode = SCNNode()
         MovingPieceNode?.name = "Moving Piece"
@@ -1076,9 +1076,9 @@ class View3D: SCNView,                          //Our main super class.
             MovingPieceBlocks.append(VBlock)
             MovingPieceNode?.addChildNode(VBlock)
         }
-        print("Adding moving piece blocks to root node.")
+        //print("Adding moving piece blocks to root node.")
         self.scene?.rootNode.addChildNode(MovingPieceNode!)
-        print("  Done moving piece blocks to root node.")
+        //print("  Done moving piece blocks to root node.")
     }
     
     var MovingPieceBlocks = [VisualBlocks3D]()
@@ -1090,26 +1090,26 @@ class View3D: SCNView,                          //Our main super class.
         #if true
         if BoardClass == .Rotatable
         {
-            print("Removing moving piece in rotating game.")
+            //print("Removing moving piece in rotating game.")
             if MovingPieceNode != nil
             {
                 MovingPieceNode!.removeFromParentNode()
                 MovingPieceNode = nil
                 UpdateMasterBlockNode()
             }
-            print("  Done removing piece from rotating game.")
+            //print("  Done removing piece from rotating game.")
         }
         #else
         if BaseGameType == .Rotating4
         {
-            print("Removing moving piece in rotating game.")
+            //print("Removing moving piece in rotating game.")
             if MovingPieceNode != nil
             {
                 MovingPieceNode!.removeFromParentNode()
                 MovingPieceNode = nil
                 UpdateMasterBlockNode()
             }
-            print("  Done removing piece from rotating game.")
+            //print("  Done removing piece from rotating game.")
         }
         #endif
     }
@@ -1290,11 +1290,11 @@ class View3D: SCNView,                          //Our main super class.
     {
         if MasterBlockNode != nil
         {
-            print("Removing everything from master block node.")
+            //print("Removing everything from master block node.")
             MasterBlockNode!.removeAllActions()
             MasterBlockNode!.removeFromParentNode()
             MasterBlockNode = nil
-            print("  Done removing everything from master block node.")
+            //print("  Done removing everything from master block node.")
         }
         MasterBlockNode = SCNNode()
         MasterBlockNode!.name = "Master Block Node"
@@ -1308,17 +1308,17 @@ class View3D: SCNView,                          //Our main super class.
         objc_sync_enter(RotateLock)
         defer{objc_sync_exit(RotateLock)}
         CreateMasterBlockNode()
-        print("Clearing the bucket.")
+        //print("Clearing the bucket.")
         for Node in BlockList
         {
             Node.removeAllActions()
             Node.removeFromParentNode()
         }
-        print("  Done clearing the bucket.")
+        //print("  Done clearing the bucket.")
         #if true
-        print("Removing all blocks from BlockList.")
+        //print("Removing all blocks from BlockList.")
         BlockList.removeAll()
-        print("  Done removing all blocks from BlockList.")
+        //print("  Done removing all blocks from BlockList.")
         #else
         OperationQueue.main.addOperation
             {
@@ -1331,7 +1331,7 @@ class View3D: SCNView,                          //Our main super class.
     /// Empty the map of all block nodes.
     func EmptyMap()
     {
-        print("Emptying the map.")
+        //print("Emptying the map.")
         self.scene?.rootNode.enumerateChildNodes
             {
                 (Node, _) in
@@ -1343,7 +1343,7 @@ class View3D: SCNView,                          //Our main super class.
                     Node.removeFromParentNode()
                 }
         }
-        print("  Done emptying the map.")
+        //print("  Done emptying the map.")
     }
     
     func LayoutCompleted()
@@ -1380,12 +1380,12 @@ class View3D: SCNView,                          //Our main super class.
     {
         objc_sync_enter(CanUseBucket)
         defer{objc_sync_exit(CanUseBucket)}
-        print("Removing bucket grid node.")
+        //print("Removing bucket grid node.")
         if BucketGridNode != nil
         {
             BucketGridNode?.removeFromParentNode()
         }
-        print("  Done removing bucket grid node.")
+        //print("  Done removing bucket grid node.")
         let BucketGridNode = SCNNode()
         let OutlineNode = SCNNode()
         
@@ -1725,7 +1725,7 @@ class View3D: SCNView,                          //Our main super class.
     func FadeBucketGrid(Duration: Double = 1.0)
     {
         let FadeAction = SCNAction.fadeOut(duration: Duration)
-        print("Removing bucket grid node in FadeBucketGrid")
+        //print("Removing bucket grid node in FadeBucketGrid")
         BucketGridNode?.runAction(FadeAction, completionHandler:
             {
                 self.BucketGridNode?.removeAllActions()
@@ -1733,7 +1733,7 @@ class View3D: SCNView,                          //Our main super class.
                 self.BucketGridNode = nil
         }
         )
-        print("  Done removing bucket grid node in FadeBucketGrid")
+        //print("  Done removing bucket grid node in FadeBucketGrid")
     }
     
     /// Show or hide a buck grid. The bucket grid is unit sized (according to the block size) that fills the
