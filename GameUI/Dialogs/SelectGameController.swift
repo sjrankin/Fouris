@@ -60,6 +60,7 @@ class SelectGameController: UIViewController, UITableViewDelegate, UITableViewDa
         RotatingGames.append(("Two Perpendicular Lines", "Quadrant", .Quadrant))
         RotatingGames.append(("Central Plus", "Plus", .Plus))
         RotatingGames.append(("Empty", "Empty", .Empty))
+        RotatingGames.append(("Inside Out", "InsideOut", .InsideOut))
         
         SemiRotatingGames.append(("One Opening with rotating pieces", "OneOpening", .OneOpening))
         
