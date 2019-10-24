@@ -224,10 +224,6 @@ class MainViewController: UIViewController,
         GameView3D?.Owner = self
         GameView3D?.SmoothMotionDelegate = self
         Smooth3D = GameView3D
-        #if false
-        GameUISurface3D.layer.borderColor = UIColor.black.cgColor
-        GameUISurface3D.layer.borderWidth = 1.0
-        #endif
         
         //Initialize the game text layer.
         TextLayerView.Initialize(With: UUID.Empty, LayerFrame: TextLayerView.frame)
@@ -240,10 +236,6 @@ class MainViewController: UIViewController,
                                               y: PressPlayLabelView.frame.minY,
                                               width: InstanceWidth,
                                               height: PressPlayLabelView.frame.height)
-            NextPieceLabelView.frame = CGRect(x: 20,
-                                              y: NextPieceLabelView.frame.minY,
-                                              width: NextPieceLabelView.frame.width,
-                                              height: NextPieceLabelView.frame.height)
             NextPieceViewControl.frame = CGRect(x: 20,
                                                 y: NextPieceViewControl.frame.minY,
                                                 width: NextPieceViewControl.frame.width,
@@ -257,9 +249,7 @@ class MainViewController: UIViewController,
                                               width: HighScoreLabelView.frame.width,
                                               height: HighScoreLabelView.frame.height)
         }
-        GameTextOverlay?.SetControls(NextLabel: NextPieceLabelView,
-                                     ScoreLabel: ScoreLabelView,
-                                     CurrentScoreLabel: CurrentScoreLabelView,
+        GameTextOverlay?.SetControls(CurrentScoreLabel: CurrentScoreLabelView,
                                      HighScoreLabel: HighScoreLabelView,
                                      GameOverLabel: GameOverLabelView,
                                      PressPlayLabel: PressPlayLabelView,
@@ -268,10 +258,14 @@ class MainViewController: UIViewController,
         NextPieceView.layer.backgroundColor = UIColor.clear.cgColor
         NextPieceView.layer.borderColor = UIColor.clear.cgColor
         GameTextOverlay?.ShowPressPlay(Duration: 0.7)
-        GameTextOverlay?.HideNextLabel()
         
-        VersionBoxShowing = true
-        GameView3D?.ShowAboutBox(FadeInDuration: 0.01, HideAfter: 10.0)
+        if VersionBoxNotYetShown
+        {
+            //Only show the version box once.
+            VersionBoxNotYetShown = false
+            VersionBoxShowing = true
+            GameView3D?.ShowAboutBox(FadeInDuration: 0.02, HideAfter: 10.0)
+        }
         
         let AutoStartDuration = UserTheme!.AutoStartDuration
         let _ = Timer.scheduledTimer(timeInterval: AutoStartDuration, target: self,
@@ -296,6 +290,8 @@ class MainViewController: UIViewController,
             GameView3D?.DisableControl(Which: .CameraButton)
         }
     }
+    
+    var VersionBoxNotYetShown: Bool = true
     
     /// Sets the enable state of the freeze in place action button.
     /// - Note: This button is provided for certain games that need a way to freeze a piece in place that may not be near
@@ -765,7 +761,6 @@ class MainViewController: UIViewController,
         GameTextOverlay?.ShowGameOver(Duration: 0.4, HideAfter: 10.0)
         GameTextOverlay?.ShowCurrentScore(NewScore: Game.CurrentGameScore)
         GameTextOverlay?.ShowHighScore(NewScore: Game.HighScore)
-        GameTextOverlay?.HideNextLabel(Duration: 0.1)
         GameTextOverlay?.HideNextPiece(Duration: 0.1)
         GameTextOverlay?.ShowPressPlay(Duration: 0.5)
         
@@ -1368,7 +1363,6 @@ class MainViewController: UIViewController,
         GameView3D?.HideAboutBox(HideDuration: 0.2)
         GameTextOverlay?.HideGameOver(Duration: 0.0)
         GameTextOverlay?.HidePressPlay(Duration: 0.0)
-        GameTextOverlay?.ShowNextLabel(Duration: 0.1)
         
         Game!.SetPredeterminedOrder(UsePredeterminedOrder, FirstIs: .T)
         
@@ -1703,6 +1697,8 @@ class MainViewController: UIViewController,
         SwitchGameType(NewGameType: NewGameShape!)
     }
     
+    /// Change to a new game type.
+    /// - Parameter NewGameType: The new game/bucket type.
     func SwitchGameType(NewGameType: BucketShapes)
     {
         var NotUsed: String? = nil
@@ -1716,7 +1712,7 @@ class MainViewController: UIViewController,
     
     var PreviousGameShape: BucketShapes? = nil
     
-    
+    #if false
     /// Switch the game type here. The current game will be stopped and the UI reinitialized.
     /// - Parameter BaseType: The game base type to use.
     /// - Parameter SubType: The game sub type to use.
@@ -1730,6 +1726,7 @@ class MainViewController: UIViewController,
         Stop()
         InitializeGameUI()
     }
+    #endif
     
     // MARK: - Debug delegate functions and other debug code.
     
@@ -2186,16 +2183,14 @@ class MainViewController: UIViewController,
     @IBOutlet weak var GameUISurface3D: View3D!
     @IBOutlet weak var GameViewContainer: UIView!
     @IBOutlet weak var TextLayerView: TextLayerManager!
-    @IBOutlet weak var NextPieceLabelView: UIView!
     @IBOutlet weak var NextPieceView: UIView!
     @IBOutlet weak var NextPieceViewControl: PieceViewer!
-    @IBOutlet weak var ScoreLabelView: UIView!
     @IBOutlet weak var CurrentScoreLabelView: UIView!
     @IBOutlet weak var HighScoreLabelView: UIView!
     @IBOutlet weak var PressPlayLabelView: UIView!
     @IBOutlet weak var GameOverLabelView: UIView!
     @IBOutlet weak var PauseLabelView: UIView!
-    
+    #if false
     // MARK: - Enum mappings.
     
     let BaseGameToInt: [BaseGameTypes: Int] =
@@ -2211,8 +2206,10 @@ class MainViewController: UIViewController,
             1: .Rotating4,
             2: .Cubic
     ]
+    #endif
 }
 
+#if false
 /// Defines the base games available. Each base game may have one or more variants. For example, a .Standard game may
 /// have various bucket sizes or obstructions.
 /// - **Standard**: Standard Tetris game.
@@ -2248,6 +2245,7 @@ enum BaseGameSubTypes: String, CaseIterable
     case CentralBrackets2 = "2CentralBrackets"
     case Empty = "Empty"
 }
+#endif
 
 extension UIView
 {
