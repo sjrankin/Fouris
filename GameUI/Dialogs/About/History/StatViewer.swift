@@ -14,12 +14,13 @@ class StatViewer: UIViewController, UITableViewDelegate, UITableViewDataSource
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        StatTable.layer.borderColor = UIColor.black.cgColor
-        ShowSegments.selectedSegmentIndex = 0
-        GameTypeSegment.selectedSegmentIndex = 0
-        PopulateTable(WithUser: true)
+        //StatTable.layer.borderColor = UIColor.black.cgColor
+        //ShowSegments.selectedSegmentIndex = 0
+        //GameTypeSegment.selectedSegmentIndex = 0
+        //PopulateTable(WithUser: true)
     }
     
+    #if false
     var StatData = [(String, Double?, Int?, String?)]()
     //Cubic isn't supported yet.
     let StatIndex =
@@ -121,7 +122,16 @@ class StatViewer: UIViewController, UITableViewDelegate, UITableViewDataSource
     {
         self.dismiss(animated: true, completion: nil)
     }
+    #endif
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return 0
+    }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
+        return UITableViewCell()
+    }
     @IBOutlet weak var StatTable: UITableView!
     @IBOutlet weak var ShowSegments: UISegmentedControl!
     @IBOutlet weak var GameTypeSegment: UISegmentedControl!
