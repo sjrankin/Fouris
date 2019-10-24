@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-/// Encapsulates a visual state for drawing blocks.
+/// Encapsulates a visual state for drawing blocks. Currently there are two states: Active and Retired.
 class StateVisual: CustomStringConvertible
 {
     /// Holds the dirty flag.
@@ -194,10 +194,12 @@ class StateVisual: CustomStringConvertible
 /// Types of visual states.
 /// - **Active**: For active (eg, falling or moveable) blocks.
 /// - **Retired**: For inactive (eg, frozen) blocks.
+/// - **Next**: For showing pieces when they are in the next state, meaning they are queued up to be the next piece.
 enum StateVisualTypes: String, CaseIterable
 {
     case Active = "Active"
     case Retired = "Retired"
+    case Next = "Next"
 }
 
 /// How to render the surface of the block.
