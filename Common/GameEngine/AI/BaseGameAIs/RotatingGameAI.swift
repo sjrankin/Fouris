@@ -1,5 +1,5 @@
 //
-//  Rotating4GameAI.swift
+//  RotatingGameAI.swift
 //  Fouris
 //
 //  Created by Stuart Rankin on 8/3/19.
@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-/// AI to find the best fit/score for a game piece in a .Rotating4 base game.
-class Rotating4GameAI: AIProtocol
+/// AI to find the best fit/score for a game piece in a rotating game
+class RotatingGameAI: AIProtocol
 {
     /// Initialize the AI with the specified board. Call after each rotation.
     /// - Parameter WithBoard: The board board to use.
@@ -183,7 +183,6 @@ class Rotating4GameAI: AIProtocol
     /// - Returns: True if the left side has no bottomless columns, false if it does.
     func LeftSideIsComplete(_ InBoard: Board) -> Bool
     {
-//        let CenterUpperLeft = InBoard.Map?.CenterBlockUpperLeft
         let CenterUpperLeft = CGPoint(x: InBoard.BucketInteriorWidth / 2, y: 0)
         for X in InBoard.BucketInteriorLeft ... Int(CenterUpperLeft.x)
         {
@@ -202,7 +201,6 @@ class Rotating4GameAI: AIProtocol
     ///            found, `-1` is returned.
     func ClosestBottomlessLeft(_ InBoard: Board) -> Int
     {
-//        let CenterUpperLeft = InBoard.Map?.CenterBlockUpperLeft
         let CenterUpperLeft = CGPoint(x: InBoard.BucketInteriorWidth / 2, y: 0)
         for X in stride(from: Int(CenterUpperLeft.x - 1.0), to: InBoard.BucketInteriorLeft, by: -1)
         {
@@ -219,8 +217,7 @@ class Rotating4GameAI: AIProtocol
     /// - Returns: True if the right side has no bottomless columns, false if it does.
     func RightSideIsComplete(_ InBoard: Board) -> Bool
     {
-//        let CenterLowerRight = InBoard.Map?.CenterBlockLowerRight
-                let CenterLowerRight = CGPoint(x: InBoard.BucketInteriorWidth / 2, y: 0)
+        let CenterLowerRight = CGPoint(x: InBoard.BucketInteriorWidth / 2, y: 0)
         for X in Int(CenterLowerRight.x) ... InBoard.BucketInteriorRight
         {
             if (InBoard.Map?.ColumnIsBottomless(X))!
@@ -239,7 +236,6 @@ class Rotating4GameAI: AIProtocol
     func ClosestBottomlessRight(_ InBoard: Board) -> Int
     {
         let CenterLowerRight = CGPoint(x: InBoard.BucketInteriorWidth / 2, y: 0)
-//        let CenterLowerRight = InBoard.Map?.CenterBlockLowerRight
         for X in Int(CenterLowerRight.x + 1.0) ... InBoard.BucketInteriorRight
         {
             if (InBoard.Map?.ColumnIsBottomless(X))!
@@ -258,16 +254,13 @@ class Rotating4GameAI: AIProtocol
     func NextLeftSideFloorColumn(_ InBoard: Board) -> Int
     {
         let ToColumn = Int(InBoard.BucketInteriorWidth / 2)
-//        for X in InBoard.BucketInteriorLeft ... Int((InBoard.Map?.CenterBlockUpperLeft.x)!)
-                    for X in InBoard.BucketInteriorLeft ... ToColumn
+        for X in InBoard.BucketInteriorLeft ... ToColumn
         {
             if !(InBoard.Map?.ColumnIsBottomless(X))!
             {
-                //print("Left-side floor column: \(X)")
                 return X
             }
         }
-        //print("No left-side floor column found.")
         return -1
     }
     
@@ -279,16 +272,13 @@ class Rotating4GameAI: AIProtocol
     func NextRightSideFloorColumn(_ InBoard: Board) -> Int
     {
         let ToColumn = Int(InBoard.BucketInteriorWidth / 2)
-//        for X in Int((InBoard.Map?.CenterBlockLowerRight.x)!) ... InBoard.BucketInteriorRight
         for X in ToColumn ... InBoard.BucketInteriorRight
         {
             if !(InBoard.Map?.ColumnIsBottomless(X))!
             {
-                //print("Right-side floor column: \(X)")
                 return X
             }
         }
-        //print("No right-side floor column found.")
         return -1
     }
     
@@ -335,15 +325,10 @@ class Rotating4GameAI: AIProtocol
     {
         let RightMost = Int(RightMostPiecePoint(Points).x)
         let MoveLeft = RightMost - ToColumn
-        //let Adjust = LeftMotionAdjust(ProposedMotion: MoveLeft, Points: Points, LeftMostValid: LeftMostValid)
-        //print("RightMost=\(RightMost), MoveLeft=\(MoveLeft), LeftMostValid=\(LeftMostValid), Adjustment=\(Adjust)")
         let LeftMost = Int(Points.LeftMost().x)
-        //print("Left overlap motion: \(MoveLeft), PieceWidth=\(PieceWidth), Point{LeftMost}=\(LeftMost)")
         let OverGap = (LeftMost - MoveLeft) - LeftMostValid
-        //print("OverGap=\(OverGap)")
         if OverGap < 0
         {
-            //print("Predicted out-of-bounds left.")
             return MoveLeft - abs(OverGap)
         }
         return MoveLeft
@@ -378,7 +363,6 @@ class Rotating4GameAI: AIProtocol
     {
         let LeftMost = Int(LeftMostPiecePoint(Points).x)
         let MoveRight = LeftMost - ToColumn
-        //print("Right overlap motion: \(MoveRight), LeftMost=\(LeftMost)")
         return MoveRight
     }
     
@@ -426,7 +410,7 @@ class Rotating4GameAI: AIProtocol
     {
         var LeftCount = 0
         var RightCount = 0
-
+        
         guard let Left = InBoard.Map?.LeftMostFloor else
         {
             return (Left: InBoard.BucketInteriorWidth, Right: InBoard.BucketInteriorWidth)
@@ -435,7 +419,7 @@ class Rotating4GameAI: AIProtocol
         {
             //Theoretically, we should never reach this code becaue the assignment to Left above checks for the same
             //condition that would lead to Right being nil.
-                        return (Left: InBoard.BucketInteriorWidth, Right: InBoard.BucketInteriorWidth)
+            return (Left: InBoard.BucketInteriorWidth, Right: InBoard.BucketInteriorWidth)
         }
         LeftCount = Left - InBoard.BucketInteriorLeft
         RightCount = InBoard.BucketInteriorRight - Right
@@ -507,18 +491,14 @@ class Rotating4GameAI: AIProtocol
         let LeftSideComplete = LeftSideIsComplete(InBoard)
         let RightSideComplete = RightSideIsComplete(InBoard)
         let FloorCompleted = LeftSideComplete && RightSideComplete
+        let EntryWindow = InBoard.Map?.TopRowEntry()
+        print("EntryWindow = \(EntryWindow!.Left) to \(EntryWindow!.Right)")
         if FloorCompleted
         {
             //If the floor is completed (eg, no bottomless columns), use a offset matching algorithm.
-            //print("Floor completed.")
-            #if false
-            GameBoard = InBoard
-            return BestFit(GamePiece, CurrentScore: CurrentScore)
-            #else
             let Final = GeneralAI.BestFit(GamePiece, CurrentScore: CurrentScore, GameBoard: InBoard)
             MotionQueue = Queue(GeneralAI.MotionQueue)
             return Final
-            #endif
         }
         else
         {
@@ -546,23 +526,22 @@ class Rotating4GameAI: AIProtocol
                 {
                     if let FloorColumn = InBoard.Map?.LeftMostFloor
                     {
-                    XOffset = GetLeftOverlapMotionCount(ToColumn: FloorColumn, Points: Points,
-                                                        LeftMostValid: InBoard.BucketInteriorLeft)
+                        XOffset = GetLeftOverlapMotionCount(ToColumn: FloorColumn, Points: Points,
+                                                            LeftMostValid: InBoard.BucketInteriorLeft)
                     }
                 }
                 else
                 {
                     if let FloorColumn = InBoard.Map?.RightMostFloor
                     {
-                    XOffset = GetRightOverlapMotionCount(ToColumn: FloorColumn, Points: Points,
-                                                         RightMostValid: InBoard.BucketInteriorRight)
+                        XOffset = GetRightOverlapMotionCount(ToColumn: FloorColumn, Points: Points,
+                                                             RightMostValid: InBoard.BucketInteriorRight)
                     }
                 }
             }
             if LeftSideComplete
             {
                 //Build on the right side.
-                //print("Building right.")
                 let FloorColumn = NextRightSideFloorColumn(InBoard)
                 XOffset = GetRightOverlapMotionCount(ToColumn: FloorColumn, Points: Points,
                                                      RightMostValid: InBoard.BucketInteriorRight)
@@ -570,7 +549,6 @@ class Rotating4GameAI: AIProtocol
             if RightSideComplete
             {
                 //Build on the left side.
-                //print("Building left.")
                 let FloorColumn = NextLeftSideFloorColumn(InBoard)
                 XOffset = GetLeftOverlapMotionCount(ToColumn: FloorColumn, Points: Points,
                                                     LeftMostValid: InBoard.BucketInteriorLeft)
