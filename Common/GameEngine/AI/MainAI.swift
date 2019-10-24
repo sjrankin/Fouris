@@ -17,7 +17,7 @@ class MainAI
     {
         GameAIs = [AITypes: AIProtocol]()
         GameAIs[.Standard] = StandardGameAI()
-        GameAIs[.Rotating4] = Rotating4GameAI()
+        GameAIs[.Rotating4] = RotatingGameAI()
         GameAIs[.Cubic] = CubicGameAI()
         CurrentAI = GameAIs[.Standard]
     }
