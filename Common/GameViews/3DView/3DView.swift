@@ -115,7 +115,7 @@ class View3D: SCNView,                          //Our main super class.
         }
         #endif
         
-        let Node = CreateBucket(InitialOpacity: 1.0, Shape: CenterBlockShape)
+        let Node = CreateBucket(InitialOpacity: 1.0, Shape: CenterBlockShape!)
         BucketNode = Node
         self.scene?.rootNode.addChildNode(BucketNode!)
         if CurrentTheme!.ShowGrid
@@ -198,7 +198,7 @@ class View3D: SCNView,                          //Our main super class.
         }
     }
     
-    var CenterBlockShape: BucketShapes = .MediumSquare
+    var CenterBlockShape: BucketShapes? = nil
     
     var PerfTimer: Timer? = nil
     @objc func SendPerformanceData()
@@ -572,7 +572,7 @@ class View3D: SCNView,                          //Our main super class.
         }
         let LocalBucketNode = SCNNode()
         
-        let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape)!
+        let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape!)!
         #if true
         DrawGameBarriers(Parent: LocalBucketNode, InShape: Shape, InitialOpacity: InitialOpacity)
         #else
@@ -1004,7 +1004,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Returns: True if the block should be drawn, false if not.
     func ValidBlockToDraw(BlockType: PieceTypes) -> Bool
     {
-        let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape)!
+        let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape!)!
         switch BoardClass
         {
             case .Static:
@@ -1086,7 +1086,7 @@ class View3D: SCNView,                          //Our main super class.
     /// Remove the moving piece, if it exists.
     func RemoveMovingPiece()
     {
-        let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape)!
+        let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape!)!
         #if true
         if BoardClass == .Rotatable
         {
@@ -1146,7 +1146,7 @@ class View3D: SCNView,                          //Our main super class.
         #endif
         objc_sync_enter(RotateLock)
         defer{ objc_sync_exit(RotateLock) }
-        let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape)!
+        let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape!)!
         
         BlockList.forEach({$0.Marked = false})
         
@@ -1400,7 +1400,7 @@ class View3D: SCNView,                          //Our main super class.
             OutlineColor = OutlineColorOverride!
         }
         
-        let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape)!
+        let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape!)!
         
         #if true
         switch BoardClass
@@ -1447,7 +1447,7 @@ class View3D: SCNView,                          //Our main super class.
                 BucketGridNode.opacity = InitialOpacity
             
             case .Rotatable:
-                let GameBoard = BoardManager.GetBoardFor(CenterBlockShape)!
+                let GameBoard = BoardManager.GetBoardFor(CenterBlockShape!)!
                 let BucketWidth = Double(GameBoard.BucketWidth)
                 let BucketHeight = Double(GameBoard.BucketHeight)
                 let HalfY = BucketHeight / 2.0
@@ -1918,7 +1918,7 @@ class View3D: SCNView,                          //Our main super class.
         DebugClient.SendPreformattedCommand(MaxNodeCountKVP)
         
         FinalBlocks = [VisualBlocks3D]()
-        let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape)!
+        let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape!)!
         switch BoardClass
         {
             case .Static:
@@ -2163,6 +2163,16 @@ class View3D: SCNView,                          //Our main super class.
         }
         switch String(Parts[0])
         {
+            case "dump":
+            switch String(Parts[1])
+            {
+                case "boards":
+                SaveAllBucketImages()
+                
+                default:
+                break
+            }
+            
             case "show":
                 switch String(Parts[1])
                 {
@@ -2255,7 +2265,7 @@ class View3D: SCNView,                          //Our main super class.
             
             .FreezeButton: (SCNVector3(-1.0, -15.5, 1.0), 0.08, UIColor.cyan, UIColor.blue),
             
-            .HeartButton: (SCNVector3(9.0, 6.7, 1.0), 0.05, UIColor.systemPink, UIColor.red)
+            .HeartButton: (SCNVector3(9.7, 7.7, 1.0), 0.05, UIColor.systemPink, UIColor.red)
     ]
     
     /// Dictionary between node button types and the system image name and location of each node. Intended for use with
