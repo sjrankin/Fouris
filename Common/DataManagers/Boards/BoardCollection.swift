@@ -56,6 +56,14 @@ class BoardCollection: XMLDeserializeProtocol
                             
                             case "Map":
                                 Board._BoardMap = BoardChild.Value
+                                if let ClearR = XMLNode.GetAttributeNamed("BucketClearRectangle", InNode: BoardChild)
+                                {
+                                if let ClearPoints = CreateRectangle(From: ClearR)
+                                {
+                                    Board._ClearUpperLeft = ClearPoints.0
+                                    Board._ClearLowerRight = ClearPoints.1
+                            }
+                            }
                             
                             case "Rotations":
                                 let BucketR = XMLNode.GetAttributeNamed("BucketRotates", InNode: BoardChild)!
@@ -118,6 +126,47 @@ class BoardCollection: XMLDeserializeProtocol
             default:
                 break
         }
+    }
+    
+    /// Parses a string in the form `(X1,Y1),(X2,Y2)` into two CGPoint structures.
+    /// - Parameter From: The raw string to parse.
+    /// - Returns: Tuple of CGPoint structures with data from the parsed string. Nil returned if the
+    ///            string cannot be parsed.
+    func CreateRectangle(From: String) -> (CGPoint, CGPoint)?
+    {
+        if From.isEmpty
+        {
+            return nil
+        }
+        var Raw = From.replacingOccurrences(of: "(", with: "")
+                 Raw = From.replacingOccurrences(of: ")", with: "")
+        Raw = Raw.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        let Parts = Raw.split(separator: ",", omittingEmptySubsequences: true)
+        if Parts.count != 4
+        {
+            return nil
+        }
+        let X1S = String(Parts[0])
+        let Y1S = String(Parts[1])
+        let X2S = String(Parts[2])
+        let Y2S = String(Parts[3])
+        guard let X1 = Int(X1S) else
+        {
+            return nil
+        }
+        guard let Y1 = Int(Y1S) else
+        {
+            return nil
+        }
+        guard let X2 = Int(X2S) else
+        {
+            return nil
+        }
+        guard let Y2 = Int(Y2S) else
+        {
+            return nil
+        }
+        return (CGPoint(x: X1, y: Y1), CGPoint(x: X2, y: Y2))
     }
     
     /// Returns the specified number of spaces in a string.
