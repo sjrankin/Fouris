@@ -27,6 +27,7 @@ class BoardDescriptor2
         }
     }
     
+    #if false
     /// Holds the game type.
     public var _GameType: BaseGameTypes = .Standard
     /// Get or set the description of the game type.
@@ -41,6 +42,7 @@ class BoardDescriptor2
             _GameType = newValue
         }
     }
+    #endif
     
     /// Holds the text description of the board.
     public var _TextDescription: String = ""
@@ -335,6 +337,21 @@ class BoardDescriptor2
         set
         {
             _ClearLowerRight = newValue
+        }
+    }
+    
+    /// Holds the piece's initial location.
+    public var _InitialPieceLocation: CGPoint? = nil
+    /// Get or set the piece's initial location. If nil, use the board default.
+    public var InitialPieceLocation: CGPoint?
+    {
+        get
+        {
+            return _InitialPieceLocation
+        }
+        set
+        {
+            _InitialPieceLocation = newValue
         }
     }
     
