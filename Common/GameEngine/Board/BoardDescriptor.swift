@@ -49,9 +49,11 @@ class BoardDescriptor: Serializable
                 //Bool
                 _BaseDefault = Bool(Sanitized)!
             
+            #if false
             case "_BaseGame":
                 //BaseGameTypes
                 _BaseGame = BaseGameTypes(rawValue: Sanitized)!
+            #endif
             
             case "_BoardSize":
                 //Two comma-separated numbers.
@@ -126,6 +128,7 @@ class BoardDescriptor: Serializable
         }
     }
     
+    #if false
     /// Holds the board's base game type.
     private var _BaseGame: BaseGameTypes = .Standard
     /// Get or set the board's base game type.
@@ -140,6 +143,7 @@ class BoardDescriptor: Serializable
             _BaseGame = newValue
         }
     }
+    #endif
     
     /// Holds the rotational flag.
     private var _CanRotate: Bool = false
