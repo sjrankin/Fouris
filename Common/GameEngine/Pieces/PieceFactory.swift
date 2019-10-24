@@ -207,9 +207,8 @@ class PieceFactory
     /// - Parameter NewCapacity: If supplied, sets a new capacity for the queue. If the new capacity is less than the
     ///                          current capacity, nothing is done and the queue is naturally reduced in size. If the new capacity
     ///                          is larger than the current capacity, new pieces are added before the oldest is dequeued.
-    /// - Parameter BaseGame: The base game type.
     /// - Returns: A new, randomly selected (when it was generated) piece.
-    public func GetQueuedPiece(ForBoard: Board, NewCapacity: Int? = nil, BaseGame: BaseGameTypes) -> Piece
+    public func GetQueuedPiece(ForBoard: Board, NewCapacity: Int? = nil) -> Piece
     {
         if let Capacity = NewCapacity
         {
@@ -233,12 +232,12 @@ class PieceFactory
                 var NewPiece: Piece!
                 if UsePredeterminedOrder
                 {
-                    NewPiece = Create(PredeterminedFirst, WithID: UUID(), ForBoard: ForBoard, BaseGame: BaseGame)
+                    NewPiece = Create(PredeterminedFirst, WithID: UUID(), ForBoard: ForBoard)
                     UsePredeterminedOrder = false
                 }
                 else
                 {
-                    NewPiece = CreateRandom(ForBoard: ForBoard, WithID: UUID(), ButNotShape: NotShape, BaseGame: BaseGame)
+                    NewPiece = CreateRandom(ForBoard: ForBoard, WithID: UUID(), ButNotShape: NotShape)
                 }
                 #if false
                 AssignAttributes(ToPiece: NewPiece)
@@ -256,7 +255,7 @@ class PieceFactory
                 NotShape = SameShape
             }
         }
-        let Replacement = CreateRandom(ForBoard: ForBoard, WithID: UUID(), ButNotShape: NotShape, BaseGame: BaseGame)
+        let Replacement = CreateRandom(ForBoard: ForBoard, WithID: UUID(), ButNotShape: NotShape)
         #if false
         AssignAttributes(ToPiece: Replacement)
         #endif
@@ -353,9 +352,8 @@ class PieceFactory
     ///   - WithID: ID to assign to the new piece.
     ///   - ButNotShape: If present, if the randomly selected shape is this value, it is rejected and another shape
     ///                  is randomly selected until a shape that is not `ButNotShape` is selected.
-    ///
     /// - Returns: The piece with the randomly selected shape.
-    public func CreateRandom(ForBoard: Board, WithID: UUID, ButNotShape: PieceShapes? = nil, BaseGame: BaseGameTypes) -> Piece
+    public func CreateRandom(ForBoard: Board, WithID: UUID, ButNotShape: PieceShapes? = nil) -> Piece
     {
         var Shape: PieceShapes!
         while true
@@ -375,7 +373,7 @@ class PieceFactory
                 break
             }
         }
-        return Create(Shape!, WithID: WithID, ForBoard: ForBoard, BaseGame: BaseGame)
+        return Create(Shape!, WithID: WithID, ForBoard: ForBoard)
     }
     
     /// Create and return a game piece.
@@ -387,15 +385,13 @@ class PieceFactory
     ///   - PieceShape: The shape of the piece.
     ///   - WithID: The ID to give to the piece.
     ///   - ForBoard: The board where the block will live.
-    ///   - BaseGame: The base game type. Passed to the new **Piece** instance at initialization time.
     ///   - Ephemeral: If true, the piece is not intended for use in a game.
     /// - Returns: The newly created piece.
-    public func Create(_ PieceShape: PieceShapes, WithID: UUID, ForBoard: Board, BaseGame: BaseGameTypes, Ephemeral: Bool = false) -> Piece
+    public func Create(_ PieceShape: PieceShapes, WithID: UUID, ForBoard: Board, Ephemeral: Bool = false) -> Piece
     {
-        let SomePiece = Piece(.GamePiece, PieceID: WithID, ForBoard, BaseGameType: BaseGame)
+        let SomePiece = Piece(.GamePiece, PieceID: WithID, ForBoard)
         SomePiece.Shape = PieceShape
         SomePiece.ShapeID = PieceFactory.ShapeIDMap[PieceShape]!
-//        if let Definition = MasterPieceList.GetPieceDefinitionFor(ID: SomePiece.ShapeID)
         if let Definition = PieceManager.GetPieceDefinitionFor(ID: SomePiece.ShapeID)
         {
             SomePiece.Components = [Block]()
