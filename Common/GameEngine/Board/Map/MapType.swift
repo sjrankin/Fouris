@@ -124,7 +124,6 @@ class MapType: CustomStringConvertible
         _BucketShape = BoardBucketShape
         let RawBucket = BoardManager.GetBoardFor(BoardBucketShape)
         _BoardClass = BoardData.GetBoardClass(For: BucketShape)!
-        #if true
         if BoardClass == .Rotatable || BoardClass == .ThreeDimensional
         {
             if Width != Height
@@ -132,18 +131,9 @@ class MapType: CustomStringConvertible
                 fatalError("Width and Height must be the same for .Rotating4 or .Cubic. Width was \(Width) and Height was \(Height).")
             }
         }
-        #else
-        if BaseType == .Rotating4 || BaseType == .Cubic
-        {
-            if Width != Height
-            {
-                fatalError("Width and Height must be the same for .Rotating4 or .Cubic. Width was \(Width) and Height was \(Height).")
-            }
-        }
-        #endif
         _CurrentRotation = 0
         InPlay = [Piece]()
-                _IDMap = PieceIDMap()
+        _IDMap = PieceIDMap()
         _CurrentBoardSize = CGSize(width: RawBucket!.GameBoardWidth, height: RawBucket!.GameBoardHeight)
         print("_CurrentBoardSize: \(_CurrentBoardSize)")
         _Contents = MapType.CreateMap(Width: RawBucket!.GameBoardWidth, Height: RawBucket!.GameBoardHeight,
@@ -166,7 +156,6 @@ class MapType: CustomStringConvertible
                 _BucketInteriorRight = (Width - _BucketInteriorLeft) - 1
                 _BucketInteriorWidth = RawBucket!.BucketWidth - 2
                 _BucketInteriorHeight = RawBucket!.BucketHeight - 1
-
             
             case .Rotatable:
                 _BucketBottom = RawBucket!.BucketHeight + RawBucket!.BucketY - 1
@@ -177,8 +166,6 @@ class MapType: CustomStringConvertible
                 _BucketInteriorRight = RawBucket!.BucketX + RawBucket!.BucketWidth - 1
                 _BucketInteriorWidth = RawBucket!.BucketWidth
                 _BucketInteriorHeight = RawBucket!.BucketHeight
-                _CenterBlockUpperLeft = CGPoint(x: (Width / 2) - 2, y: (Height / 2) - 2)
-                _CenterBlockLowerRight = CGPoint(x: (Width / 2) - 2 + 3, y: (Height / 2) - 2 + 3)
             
             case .ThreeDimensional:
                 break
@@ -242,7 +229,7 @@ class MapType: CustomStringConvertible
             }
             
             case .ThreeDimensional:
-            return false
+                return false
         }
     }
     
@@ -569,6 +556,7 @@ class MapType: CustomStringConvertible
         }
     }
     
+    #if false
     /// Holds the upper-left point of the center block in bucket units.
     private var _CenterBlockUpperLeft: CGPoint = CGPoint.zero
     /// Get the upper-left point of the center block in bucket units.
@@ -590,6 +578,75 @@ class MapType: CustomStringConvertible
         get
         {
             return _CenterBlockLowerRight
+        }
+    }
+    #endif
+    
+    /// Returns the left-most bottomless column.
+    public var LeftMostBottomlessColumn: Int
+    {
+        get
+        {
+            if let LeftFloor = LeftMostFloor
+            {
+                if LeftFloor <= 1
+                {
+                    return -1
+                }
+                return LeftFloor - 1
+            }
+            return -1
+        }
+    }
+    
+    /// Returns the right-most bottomless column.
+    public var RightMostBottomlessColumn: Int
+    {
+        get
+        {
+            if let RightFloor = RightMostFloor
+            {
+                if RightFloor >= BucketInteriorRight
+                {
+                    return -1
+                }
+                return RightFloor + 1
+            }
+            return -1
+        }
+    }
+    
+    /// Returns the left-most column with a floor. Nil returned if no column has a floor.
+    /// - Note: Scans the bucket from left to right returning the first column with a floor.
+    public var LeftMostFloor: Int?
+    {
+        get
+        {
+            for X in BucketInteriorLeft ... BucketInteriorRight
+            {
+                if !ColumnIsBottomless(X)
+                {
+                    return X
+                }
+            }
+            return nil
+        }
+    }
+    
+    /// Returns the right-most column with a floor. Nil returned if no column has a floor.
+    /// - Note: Scans the bucket from right to left returning the first column with a floor.
+    public var RightMostFloor: Int?
+    {
+        get
+        {
+            for X in stride(from: BucketInteriorRight, through: BucketInteriorLeft, by: -1)
+            {
+                if !ColumnIsBottomless(X)
+                {
+                    return X
+                }
+            }
+            return nil
         }
     }
     
@@ -642,7 +699,7 @@ class MapType: CustomStringConvertible
     func PieceInBounds(_ ThePiece: Piece) -> Bool
     {
         let BoardDef = BoardManager.GetBoardFor(_BucketShape)
-                var IsInBounds = true
+        var IsInBounds = true
         for Point in ThePiece.Locations
         {
             if Point.X < BoardDef!.BucketX || Point.X > BoardDef!.BucketX + BoardDef!.BucketWidth - 1
@@ -952,7 +1009,6 @@ class MapType: CustomStringConvertible
     
     /// Populate the map with the list of special items. If something already exists in the special item's location, don't
     /// populate it.
-    ///
     /// - Parameter ItemList: List of items to populate.
     func ReplaceSpecialItems(ItemList: [(UUID, CGPoint)])
     {
@@ -969,13 +1025,10 @@ class MapType: CustomStringConvertible
     }
     
     /// Determines if the bucket has any rows that can be eliminated because they are full.
-    ///
     /// - Returns: True if the bucket has full rows, false if not.
     func CanCompress() -> Bool
     {
-        #if true
         var FullRowCount = 0
-        #if true
         switch BoardClass
         {
             case .Static:
@@ -995,7 +1048,7 @@ class MapType: CustomStringConvertible
             }
             
             case .Rotatable:
-                let BlockTop = Int(CenterBlockUpperLeft.y)
+                let BlockTop = BucketInteriorHeight / 2 //Int(CenterBlockUpperLeft.y)
                 for Row in stride(from: BlockTop + 1, to: BucketTop, by: -1)
                 {
                     var CanCollapseRow = true
@@ -1013,69 +1066,8 @@ class MapType: CustomStringConvertible
             case .ThreeDimensional:
                 return false
         }
-        #else
-        switch BaseGameType
-        {
-            case .Standard:
-                for Row in stride(from: BucketBottom, to: BucketTop, by: -1)
-                {
-                    var CanCollapseRow = true
-                    for X in BucketInteriorLeft ... BucketInteriorRight
-                    {
-                        if !IDMap!.IsCollapsibleType(Contents[Row][X])
-                        {
-                            CanCollapseRow = false
-                            break
-                        }
-                        
-                    }
-                    FullRowCount = FullRowCount + Int(CanCollapseRow ? 1 : 0)
-            }
-            
-            case .Rotating4:
-                let BlockTop = Int(CenterBlockUpperLeft.y)
-                for Row in stride(from: BlockTop + 1, to: BucketTop, by: -1)
-                {
-                    var CanCollapseRow = true
-                    for X in BucketInteriorLeft ... BucketInteriorRight
-                    {
-                        if !IDMap!.IsCollapsibleType(Contents[Row][X])
-                        {
-                            CanCollapseRow = false
-                            break
-                        }
-                    }
-                    FullRowCount = FullRowCount + Int(CanCollapseRow ? 1 : 0)
-            }
-            
-            case .SemiRotating:
-            return false
-            
-            case .Cubic:
-                return false
-        }
-        #endif
         
         return FullRowCount > 0
-        #else
-        var FullRowCount = 0
-        for Row in stride(from: BucketBottom, to: BucketTop, by: -1)
-        {
-            var FoundGap = false
-            for X in BucketInteriorLeft ... BucketInteriorRight
-            {
-                if IDMap!.IsOccupiedType(Contents[Row][X])
-                {
-                    FoundGap = true
-                }
-            }
-            if !FoundGap
-            {
-                FullRowCount = FullRowCount + 1
-            }
-        }
-        return FullRowCount > 0
-        #endif
     }
     
     /// Finds and deletes the bottom-most full row in the bucket. Upon each deletion, this function is recursively called
@@ -1092,7 +1084,7 @@ class MapType: CustomStringConvertible
         #if true
         if BoardClass == .Rotatable
         {
-            BottomStart = Int(CenterBlockUpperLeft.y) + 1
+            BottomStart = BucketInteriorHeight / 2//Int(CenterBlockUpperLeft.y) + 1
         }
         #else
         if BaseGameType == .Rotating4
@@ -1734,15 +1726,15 @@ class MapType: CustomStringConvertible
                 switch MapTypePiece
                 {
                     case .Bucket:
-                    stemp = "∏"
+                        stemp = "∏"
                     case .InvisibleBucket:
-                    stemp = "•"
+                        stemp = "•"
                     case .BucketExterior:
-                    stemp = "·"
+                        stemp = "·"
                     case .Visible:
-                    stemp = " "
+                        stemp = " "
                     default:
-                    stemp = ""
+                        stemp = ""
                 }
                 PrettyMap = PrettyMap + stemp
                 #else
