@@ -17,7 +17,6 @@ class Platform
 {
     /// Break a number (presumably the string sent is a number) into groups of three digits separated by a
     /// specified separator.
-    ///
     /// - Parameters:
     ///   - Raw: The number (in string format) to separate.
     ///   - Separator: The string to use separate groups.
@@ -50,7 +49,6 @@ class Platform
     }
     
     /// Convert the passed UInt64 value into a string, separated into groups of three.
-    ///
     /// - Parameters:
     ///   - Raw: The UInt64 to convert and format.
     ///   - Separator: The string to separate the groups of digits.
@@ -62,7 +60,6 @@ class Platform
     }
     
     /// Convert the passed UInt value into a string, separated into groups of three.
-    ///
     /// - Parameters:
     ///   - Raw: The UInt to convert and format.
     ///   - Separator: The string to separate the groups of digits.
@@ -74,7 +71,6 @@ class Platform
     }
     
     /// Convert the passed Int value into a string, separated into groups of three.
-    ///
     /// - Parameters:
     ///   - Raw: The Int to convert and format.
     ///   - Separator: The string to separate the groups of digits.
@@ -86,7 +82,6 @@ class Platform
     }
     
     /// Returns the type of processor architecture we're running on.
-    ///
     /// - Returns: String description of the processor's architecture.
     public static func MachineType() -> String
     {
@@ -101,7 +96,6 @@ class Platform
     }
     
     /// Returns the user's name for the device.
-    ///
     /// - Returns: Name of the device as given by the user.
     public static func SystemName() -> String
     {
@@ -117,7 +111,6 @@ class Platform
     }
     
     /// Returns the Kernel name and version.
-    ///
     /// - Returns: OS kernel name and version.
     public static func KernelInfo() -> String
     {
@@ -133,7 +126,6 @@ class Platform
     }
     
     /// Return the iOS version.
-    ///
     /// - Returns: iOS version we're running on.
     public static func iOSVersion() -> String
     {
@@ -142,7 +134,6 @@ class Platform
     }
     
     /// Name of the OS.
-    ///
     /// - Returns: OS name.
     public static func SystemOSName() -> String
     {
@@ -152,9 +143,7 @@ class Platform
     /// Return a string indicating the system pressure. System pressure is essentially a thermal measurement - the hotter the
     /// device, the more pressure is being applied to the system. Once the device reaches .shutdown, the system will turn itself
     /// off to protect itself from damage.
-    ///
     /// - Note: "Pressure" in this case has nothing to do with barametric pressure.
-    ///
     /// - Returns: String indicating thermal system pressure. One of: Nominal, Fair, Serious, Critical, Catastrophic, and Unknown.
     public static func GetSystemPressure() -> String
     {
@@ -187,9 +176,7 @@ class Platform
     }
     
     /// Return the amount of RAM (used and unused) on the system.
-    ///
     /// - Note: [Determining the Available Amount of RAM on an iOS Device](https://stackoverflow.com/questions/5012886/determining-the-available-amount-of-ram-on-an-ios-device)
-    ///
     /// - Returns: Tuple with the values (Used memory, free memory).
     public static func RAMSize() -> (Int64, Int64)
     {
@@ -215,7 +202,6 @@ class Platform
     }
     
     /// Return the battery level percent.
-    ///
     /// - Returns: Percent full the battery is. If monitoring not enabled, nil is returned.
     public static func BatteryLevel() -> Float?
     {
@@ -230,7 +216,6 @@ class Platform
     }
     
     /// Enable or disable battery monitoring.
-    ///
     /// - Parameter Enabled: Value to control battery monitoring.
     public static func MonitorBatteryLevel(_ Enabled: Bool)
     {
@@ -238,9 +223,7 @@ class Platform
     }
     
     /// Return a string of the name of the device.
-    ///
     /// - Note: [How to determine the current iPhone device model](https://stackoverflow.com/questions/26028918/how-to-determine-the-current-iphone-device-model)
-    ///
     /// - Returns: String describing the current device.
     public static func NiceModelName() -> String
     {
@@ -250,7 +233,6 @@ class Platform
     }
     
     /// Return the name of the processor and its nominal operating frequency. Derived from static tables.
-    ///
     /// - Returns: Tuple of the name of the processor and nominal operating frequency (in string format).
     public static func GetProcessorInfo() -> (String, String)
     {
@@ -259,7 +241,6 @@ class Platform
     }
     
     /// Determines if the back camera has true depth capabilities.
-    ///
     /// - Returns: True if the back camera supports true depth, false if not.
     public static func HasTrueDepthCamera() -> Bool
     {
@@ -267,7 +248,6 @@ class Platform
     }
     
     /// Determines if the back camera has a built-in telephoto lens.
-    ///
     /// - Returns: True if the back camera has a telephoto lens, false if not.
     public static func HasTelephotoCamera() -> Bool
     {
@@ -275,7 +255,6 @@ class Platform
     }
     
     /// Return the native resolution of the specified camera in the specified position.
-    ///
     /// - Parameters:
     ///   - CameraType: The camera type to check.
     ///   - Position: The position of the camera.
@@ -297,7 +276,6 @@ class Platform
     }
     
     /// Return a string that describes the Metal GPU.
-    ///
     /// - Returns: Metal GPU description.
     public static func MetalGPU() -> String
     {
@@ -321,7 +299,6 @@ class Platform
     }
     
     /// Return a string that describes the Metal device name.
-    ///
     /// - Returns: Metal device name.
     public static func MetalDeviceName() -> String
     {
@@ -330,7 +307,6 @@ class Platform
     }
     
     /// Return a string of the amount of space currently allocated by Metal.
-    ///
     /// - Returns: Number of bytes (in string format) allocated by Metal.
     public static func MetalAllocatedSpace() -> String
     {
