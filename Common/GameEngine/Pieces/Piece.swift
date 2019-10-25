@@ -79,19 +79,6 @@ class Piece: CustomStringConvertible
         Components = [Block]()
     }
     
-    #if false
-    /// Holds the base game type.
-    private var _BaseGameType: BaseGameTypes = .Standard
-    /// Get the base game type. Cannot be changed during the lifetime of the piece.
-    public var BaseGameType: BaseGameTypes
-    {
-        get
-        {
-            return _BaseGameType
-        }
-    }
-    #endif
-    
     /// Returns the bottom-most (eg, closest to the bottom of the bucket) point for each column the piece occupies.
     ///
     /// - Returns: List of points, one for each column of the piece, of the bottom-most point in the piece.
@@ -439,6 +426,28 @@ class Piece: CustomStringConvertible
             }
             return Bottomish
         }
+    }
+    
+    /// Returns the bottom-most point of each column of the piece in its current orientation.
+    /// - Returns: List of points, one point for each column the piece occupies, with the `y` value the bottom-most value
+    ///            (eg, closest to the bottom of the bucket).
+    public func Bottom() -> [CGPoint]
+    {
+        var Results = [CGPoint]()
+        var PointDict = [Int: [Int]]()
+        for Block in Locations
+        {
+            if PointDict[Block.X] == nil
+            {
+                PointDict[Block.X] = [Int]()
+            }
+            PointDict[Block.X]!.append(Block.Y)
+        }
+        for (X, YList) in PointDict
+        {
+            Results.append(CGPoint(x: X, y: YList.max()!))
+        }
+        return Results
     }
     
     /// Determines if the piece (in its current location and orientation) has a block in the specified column.
@@ -839,7 +848,6 @@ class Piece: CustomStringConvertible
     /// Handle the gravitational timer tick. Applies gravity (at whatever vector is current) to the falling block.
     /// Restarts the gravitational timer afterwards, with a potentially different gravitational interval. This timer
     /// will be stopped once a block starts freezing.
-    ///
     /// - Note: All gravitational timer calls and references need to be in an `OperationQueue.main.addOperation`
     ///         block to ensure all calls are made on the same thread.
     @objc func HandleGravityTimer()
@@ -907,9 +915,11 @@ class Piece: CustomStringConvertible
         }
         if !GravityIsEnabled
         {
+            print("Gravity isn't enabled.")
             return
         }
         OperationQueue.main.addOperation {
+            print("Dropping updated: \(self.GravitationalInterval)")
             self.GravitationalTimer = Timer.scheduledTimer(timeInterval: self.GravitationalInterval, target: self,
                                                            selector: #selector(self.HandleGravityTimer), userInfo: nil,
                                                            repeats: false)
@@ -917,7 +927,6 @@ class Piece: CustomStringConvertible
     }
     
     /// Enable or disable gravity.
-    ///
     /// - Parameter Enable: Value that enables or disables gravity.
     func EnableGravity(_ Enable: Bool)
     {
@@ -974,7 +983,6 @@ class Piece: CustomStringConvertible
     
     /// Drop the piece to the bottom of the bucket (or as close as possible). Once at the bottom, does a fast
     /// freeze (but see `AndFreeze`).
-    ///
     /// - Parameter AndFreeze: If true, the piece will do a fast freeze as the user expected. If false, the
     ///                        piece will still drop to the bottom quickly but it won't freeze quickly - it will
     ///                        freeze in the normal amount of time. This is for AI uses only.
@@ -1002,10 +1010,8 @@ class Piece: CustomStringConvertible
     public var PieceDroppedTooFar: Bool = false
     
     /// Drop the piece to the bottom-most available location.
-    ///
     /// - Note: Once called, the piece is no longer manuverable. Gravity is changed to make this a very fast
     ///         operation.
-    ///
     /// - Parameter AndFreeze: If true, the drop down behaves as expected with the piece falling quickly to the
     ///                        bottom-most available location in the bucket then freezing immediately. If false,
     ///                        the piece still drops quickly, but doesn't immediately freeze - it will freeze over
@@ -1018,11 +1024,36 @@ class Piece: CustomStringConvertible
             DropToBottom()
             return
         }
+        print("At DropDown")
         DroppingPiece = true
         StandardDropDown = AndFreeze
+        #if false
+        GravitationalTimer?.invalidate()
+        GravitationalTimer = nil
+        let Bottoms = Bottom()
+        
+        var Distance = Int.max
+        for BottomNode in Bottoms
+        {
+            let NodeDistance = GameBoard!.DistanceToBottom(From: BottomNode)
+            if NodeDistance < Distance
+            {
+                Distance = NodeDistance
+            }
+        }
+        GameBoard?.ExecuteDropDown(By: Distance, WithPiece: self)
+        
+        #else
         StopGravity()
-        GravitationalInterval = 0.04
+        GravitationalInterval = 0.03
         StartDropping()
+        #endif
+    }
+    
+    /// Performs a fast freeze after a drop down command has finished.
+    func FreezeAfterDropDown()
+    {
+        StartFreezing(FastFreeze: true)
     }
     
     /// Dropping a piece flag.
@@ -1034,9 +1065,7 @@ class Piece: CustomStringConvertible
     
     /// Update the location of the piece. Called by both the gravitational timer and by user inputs. If the piece
     /// cannot move downwards, it starts freezing and will finalize after a certain amount of time.
-    ///
     /// -Note: Freezing occurs only when the block cannot move downwards (or along the path of gravity).
-    ///
     /// - Parameters:
     ///   - XDelta: Horizontal delta to apply to the piece's location.
     ///   - YDelta: Vertical delta to apply to the piece's location.
@@ -1080,17 +1109,15 @@ class Piece: CustomStringConvertible
         if FinalLocS.count > 6
         {
             FinalLocS = String(FinalLocS.prefix(6))
+            print("FinalLocS=\(FinalLocS)")
         }
-        //DebugClient.Send("NewLocation2 duration: \(FinalLocS)")
         return true
     }
     
     /// Update the location of the piece. Called by both the gravitational timer and by user inputs. If the piece
     /// cannot move downwards, it starts freezing and will finalize after a certain amount of time.
-    ///
     /// - Note: Freezing occurs only when the block cannot move downwards (along the path of gravity).
     /// - Note: If the block is dropping, all input is ignored.
-    ///
     /// - Parameters:
     ///   - XDelta: Horizontal delta to apply to the piece's location.
     ///   - YDelta: Vertical delta to apply to the piece's location.
@@ -1150,7 +1177,8 @@ class Piece: CustomStringConvertible
     }
     
     /// Determines if the piece can move to the location provided by the passed offset.
-    ///
+    /// - Warning: Generates a fatal error if `GameBoard` is nil. This is an abnormal occurrence and should not happen but some
+    ///            unusual timing scenarios have caused this issue to occur in the past.
     /// - Parameters:
     ///   - ByX: Horizontal offset.
     ///   - ByY: Vertical offset.
@@ -1357,9 +1385,7 @@ class Piece: CustomStringConvertible
     }
     
     /// Handle random rotations.
-    ///
     /// - Note: If the randomly selected rotation is not valid (see `ValidMotions`) then no random rotation will occur for this instance.
-    ///
     /// - Note: This function is exited before any motions occur a random number of times.
     @objc func HandleRandomRotation()
     {
@@ -1382,10 +1408,9 @@ class Piece: CustomStringConvertible
     }
     
     /// Handle random motions.
-    ///
-    /// - Note: If the randomly selected motion is not valid (see `ValidMotions`) then no random motion will occur for this instance.
-    ///
-    /// - Note: This function is exited before any motions occur a random number of times.
+    /// - Note:
+    ///    - If the randomly selected motion is not valid (see `ValidMotions`) then no random motion will occur for this instance.
+    ///    - This function is exited before any motions occur a random number of times.
     @objc func HandleRandomMotion()
     {
         if Coin.Flip() == .Heads
@@ -1523,7 +1548,6 @@ class Piece: CustomStringConvertible
     }
     
     /// Determines if the passed motion is valid compared to the `ValidMotions` property.
-    ///
     /// - Parameter Motion: Motion to validated against the `ValidMotions` list.
     /// - Returns: True if the passed motion is valid, false if not.
     public func IsValidMotion(_ Motion: Directions) -> Bool
@@ -1532,10 +1556,8 @@ class Piece: CustomStringConvertible
     }
     
     /// Implements subscripting for the piece. Blocks are the object returned/set.
-    ///
     /// - Note: Passing an invalid index (less than 0, greater than the number of blocks) will result in a
     ///         fatal error.
-    ///
     /// - Parameter Index: The index of the block to access. Invalid indicies result in fatal errors.
     public subscript(Index: Int) -> Block
     {
@@ -1559,7 +1581,6 @@ class Piece: CustomStringConvertible
     
     /// Converts all points in the list of passed blocks to the origin, as determined by the block flag `.IsOrigin`. Used
     /// to rotate pieces.
-    ///
     /// - Parameter Blocks: List of blocks. One block must have `.IsOrigin` set to true - if not, nil is returned.
     /// - Returns: List of points (in the same order as the list of blocks) translated to the origin, as defined
     ///            by the block marked by `.IsOrigin`. If no block was marked as the origin block, nil is returned.
@@ -1591,7 +1612,6 @@ class Piece: CustomStringConvertible
     }
     
     /// Returns the origin point in the list of blocks.
-    ///
     /// - Parameter Blocks: Blocks whose origin block's point will be returned.
     /// - Returns: The current point of the origin block in the passed list of blocks. Nil if no block
     ///            marked as the origin.
@@ -1608,9 +1628,7 @@ class Piece: CustomStringConvertible
     }
     
     /// Rotates the passed point by the specified angle.
-    ///
     /// - Note: This function assumes the point has been translated to its local origin.
-    ///
     /// - Parameters:
     ///   - Angle: The angle, in degrees, to rotate the point by.
     ///   - Point: The point to rotate.
@@ -1624,7 +1642,6 @@ class Piece: CustomStringConvertible
     }
     
     /// Rotate all blocks in the list of passed blocks 90° counter-clockwise (left).
-    ///
     /// - Parameter Blocks: List of blocks that supply the points to rotate.
     /// - Returns: List of rotated points in the same order as the original, passed list of blocks.
     static func LeftRotate(_ Blocks: [Block]) -> [CGPoint]?
@@ -1645,9 +1662,7 @@ class Piece: CustomStringConvertible
     }
     
     /// Rotates the list of points left (counter-clockwise) around the passed origin point.
-    ///
     /// - Note: If Times is less than 1, a fatal error will occur.
-    ///
     /// - Parameters:
     ///   - Points: The list of points to rotate.
     ///   - AboutOrigin: The origin of the points (not necessarily (0,0)).
@@ -1675,7 +1690,6 @@ class Piece: CustomStringConvertible
     }
     
     /// Rotate all blocks in the list of passed blocks 90° clockwise (right).
-    ///
     /// - Parameter Blocks: List of blocks that supply the points to rotate.
     /// - Returns: List of rotated points in the same order as the original, passed list of blocks.
     static func RightRotate(_ Blocks: [Block]) -> [CGPoint]?
@@ -1696,9 +1710,7 @@ class Piece: CustomStringConvertible
     }
     
     /// Rotates the list of points right (clockwise) around the passed origin point.
-    ///
     /// - Note: If Times is less than 1, a fatal error will occur.
-    ///
     /// - Parameters:
     ///   - Points: The list of points to rotate.
     ///   - AboutOrigin: The origin of the points (not necessarily (0,0)).
@@ -1873,7 +1885,6 @@ class Piece: CustomStringConvertible
 }
 
 /// Describes how often to randomly move or rotate the block. The actual values are in the table `RandomTimes`.
-///
 /// - Never: Never - same as disabling random motion/rotation.
 /// - Seldom: Rarely.
 /// - Sometimes: More than rarely.
