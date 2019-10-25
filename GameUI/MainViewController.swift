@@ -131,6 +131,7 @@ class MainViewController: UIViewController,
         
         #if false
         //Initialize the link with TDebug.
+        //Right now, iOS 13 has a but with multi-peer networking so we need to comment this out.
         State.Initialize(WithDelegate: self)
         TDebugPrefix = UUID()
         MPMgr = MultiPeerManager()
@@ -150,7 +151,6 @@ class MainViewController: UIViewController,
         Themes = ThemeManager3()
         Themes.Initialize()
         UserTheme = Themes.UserTheme
-        //print("UserTheme=\n\(UserTheme!.ToString())")
         Themes.SubscribeToChanges(Subscriber: "MainViewController", SubscribingObject: self)
         PreviousGameShape = UserTheme!.BucketShape
         PieceVisualManager2.Initialize()
@@ -651,7 +651,6 @@ class MainViewController: UIViewController,
         InAttractMode = true
         Game.AIScoringMethod = .OffsetMapping
         GameView3D?.DrawMap3D(FromBoard: Game.GameBoard!, CalledFrom: "HandleStartInAIMode")
-        //Game!.SetPredeterminedOrder(UsePredeterminedOrder, FirstIs: .T)
         
         DebugClient.Send("Game \(GameCount) started in attract mode.")
         Game.StartGame(EnableAI: true, PieceCategories: [.Standard], UseFastAI: UseFastAI)
@@ -951,9 +950,10 @@ class MainViewController: UIViewController,
     
     //var DispatchCalled: Double = 0.0
     
+    /// Do nothing. Place holder for completion handler for rotating contents.
     func Nop()
     {
-        
+        //Nothing here...
     }
     
     private var CRotateIndex = 0
@@ -1712,22 +1712,6 @@ class MainViewController: UIViewController,
     
     var PreviousGameShape: BucketShapes? = nil
     
-    #if false
-    /// Switch the game type here. The current game will be stopped and the UI reinitialized.
-    /// - Parameter BaseType: The game base type to use.
-    /// - Parameter SubType: The game sub type to use.
-    func SwitchGameTypeOld(BaseType: BaseGameTypes, SubType: BaseGameSubTypes)
-    {
-        var NotUsed: String? = nil
-        ActivityLog.AddEntry(Title: "GameType", Source: "MainViewController", KVPs: [("GameType","\(BaseType)"),("SubType","\(SubType)")],
-                             LogFileName: &NotUsed)
-        print("Switching game type to \(BaseType), \(SubType)")
-        Themes.SaveUserTheme()
-        Stop()
-        InitializeGameUI()
-    }
-    #endif
-    
     // MARK: - Debug delegate functions and other debug code.
     
     /// Dump the game board as a text object.
@@ -2006,27 +1990,6 @@ class MainViewController: UIViewController,
     
     var HeartbeatTimer: Timer? = nil
     
-    // MARK: - Flame button handling.
-    
-    func HandleFlameButtonPressed()
-    {
-        #if true
-        GameView3D?.SaveAllBucketImages()
-        #else
-        let Button = sender as! UIButton
-        if Settings.GetShowMotionControls()
-        {
-            Settings.SetShowMotionControls(NewValue: false)
-            Button.tintColor = UIColor.red
-        }
-        else
-        {
-            Settings.SetShowMotionControls(NewValue: true)
-            Button.tintColor = UIColor.orange
-        }
-        #endif
-    }
-    
     // MARK: - Pop-over main menu.
     
     /// Shows the pop-over menu. This menu (a pop-over view controller in reality) is invoked by the user pressing the main button
@@ -2046,6 +2009,7 @@ class MainViewController: UIViewController,
     }
     
     /// Receives the command the user invoked in the pop-over menu.
+    /// - Note: Some commands may be sent from main menu sub-menus and passed through the main menu before it reaches us.
     /// - Parameter Command: The command to run.
     func RunPopOverCommand(_ Command: PopOverCommands)
     {
@@ -2144,6 +2108,9 @@ class MainViewController: UIViewController,
     var ShowingDebugGrid: Bool = false
     var ShowingRegions: Bool = false
     
+    /// Updates the main menu button to indicate whether it has been pressed or not.
+    /// - Note: This functionality is not really needed but it was fun to change the texture on the node.
+    /// - Parameter Opened: Determines the state of the the open indicator for the main menu button.
     private func UpdateMainButton(_ Opened: Bool)
     {
         if Opened
@@ -2190,62 +2157,8 @@ class MainViewController: UIViewController,
     @IBOutlet weak var PressPlayLabelView: UIView!
     @IBOutlet weak var GameOverLabelView: UIView!
     @IBOutlet weak var PauseLabelView: UIView!
-    #if false
-    // MARK: - Enum mappings.
-    
-    let BaseGameToInt: [BaseGameTypes: Int] =
-        [
-            .Standard: 0,
-            .Rotating4: 1,
-            .Cubic: 2
-    ]
-    
-    let IntToBaseGame: [Int: BaseGameTypes] =
-        [
-            0: .Standard,
-            1: .Rotating4,
-            2: .Cubic
-    ]
-    #endif
-}
 
-#if false
-/// Defines the base games available. Each base game may have one or more variants. For example, a .Standard game may
-/// have various bucket sizes or obstructions.
-/// - **Standard**: Standard Tetris game.
-/// - **Rotating4**: Rotating square with falling pieces.
-/// - **SemiRotating**: Either board rotates and pieces do not, or pieces rotate and board does not.
-/// - **Cubic**: Three dimensional falling piece game.
-enum BaseGameTypes: String, CaseIterable
-{
-    case Standard = "Standard"
-    case Rotating4 = "Rotating4"
-    case SemiRotating = "SemiRotating"
-    case Cubic = "Cubic"
 }
-
-enum BaseGameSubTypes: String, CaseIterable
-{
-    //Standard games
-    case Classic = "Classic"
-    case TallThin = "TallThin"
-    case ShortWide = "ShortWide"
-    case Big = "Big"
-    case Small = "Small"
-    
-    //Rotating games
-    case SmallCentralBlock = "SmallCentralBlock"
-    case MediumCentralBlock = "MediumCentralBlock"
-    case LargeCentralBlock = "LargeCentralBlock"
-    case SmallCentralDiamond = "SmallCentralDiamond"
-    case MediumCentralDiamond = "MediumCentralDiamond"
-    case LargeCentralDiamond = "LargeCentralDiamond"
-    case Corners = "Corners"
-    case CentralBrackets4 = "4CentralBrackets"
-    case CentralBrackets2 = "2CentralBrackets"
-    case Empty = "Empty"
-}
-#endif
 
 extension UIView
 {
