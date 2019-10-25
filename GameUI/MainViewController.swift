@@ -186,6 +186,10 @@ class MainViewController: UIViewController,
     @objc func IncrementSeconds()
     {
         InstanceSeconds = InstanceSeconds + 1
+         if !Settings.ShowFPSInUI()
+         {
+            return
+        }
         if Settings.ShowInstanceSeconds()
         {
             if (GameView3D?.IsDisabledButton(.FPSButton))!
@@ -456,6 +460,7 @@ class MainViewController: UIViewController,
                         
                         case .FPSButton:
                             let OldShowSeconds = Settings.ShowInstanceSeconds()
+                            print("FPS shows seconds: \(!OldShowSeconds)")
                             Settings.SetShowInstanceSeconds(NewValue: !OldShowSeconds)
                         
                         case .DownButton:
@@ -880,6 +885,19 @@ class MainViewController: UIViewController,
         }
     }
     
+    /// Start a fast drop motion.
+    /// - Parameter DeltaY: How far to drop the piece.
+    func StartFastDrop(DeltaY: Int, WithPiece: Piece)
+    {
+        print("Started fast drop by \(DeltaY) points.")
+        GameView3D?.MovePieceRelative(WithPiece: WithPiece, DeltaX: 0, DeltaY: -DeltaY, TotalDuration: 0.1,
+                                      Completed:
+            {
+                MovedPiece in
+                MovedPiece.FreezeAfterDropDown()
+        })
+    }
+    
     /// The specified piece froze. Draw the new map.
     /// - Note: The `.Rotating4` game rotation is finalized via a `DispatchQueue.main.asyncAfter` call to `RotateFinishFinalizing` and
     ///         not a completion handler on the `SCNAction.rotateBy` call in the game view because if the completion handler is slow
@@ -1195,6 +1213,7 @@ class MainViewController: UIViewController,
     {
         if let PieceID = Game.CurrentPiece
         {
+            print("At DropDown in MainViewController")
             Game.HandleInputFor(ID: PieceID, Input: .DropDown)
         }
     }
