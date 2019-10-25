@@ -156,4 +156,12 @@ protocol GameUINotificationProtocol: class
     /// - Parameter Degrees: Number of degrees to rotate the piece by.
     /// - Parameter OnAxis: The axis to rotate the piece on. 2D games use the .X axis.
     func SmoothRotate(_ GamePiece: Piece, Degrees: CGFloat, OnAxis: RotationalAxes)
+    
+    /// Tells the receiver to start dropping down the piece very quickly by the provided
+    /// number of units.
+    /// - Note: It is expected that the receiver call `Piece.FreezeAfterDropDown` after motion is
+    ///         completed.
+    /// - Parameter DeltaY: Number of units to drop.
+    /// - Parameter WithPiece: The piece to drop.
+    func StartFastDrop(DeltaY: Int, WithPiece: Piece)
 }
