@@ -667,6 +667,27 @@ class MapType: CustomStringConvertible
         return IDMap!.IsEmptyType(ID)
     }
     
+    /// Returns the number of game grid spaces from the `Source` point to the last empty location before being blocked.
+    /// - Parameter Source: The source of the point for obtaining the distance. Intended to be the bottom point of a piece.
+    /// - Returns: Number of spaces from `Source` to the last empty space in the bucket directly under `Source`. A negative
+    ///            number is returned if the last empty space is under the bucket (useful for rotating games with gaps in the
+    ///            side of the bucket). The value returned is relative to the `Source` and not absolute.
+    func DistanceToBottomFrom(_ Source: CGPoint) -> Int
+    {
+        let BoardDef = BoardManager.GetBoardFor(_BucketShape)
+        var Count = 0
+        for Y in Int(Source.y) + 1 ..< BoardDef!.GameBoardHeight
+        {
+            let ID = Contents[Y][Int(Source.x)]
+            if !(IDMap?.IsEmptyType(ID))!
+            {
+                return Count
+            }
+            Count = Count + 1
+        }
+        return -Int.max
+    }
+    
     /// Determines if the piece is fully in bounds. Call only after the piece is frozen.
     /// - Parameter ThePiece: The piece to check for in-boundedness.
     /// - Returns: True if the piece is fully in bounds (eg, in the bucket), false otherwise.
