@@ -14,7 +14,7 @@ import SceneKit
 extension SCNGeometry
 {
     /// Create SCNGeometry in the shape of a line between two vectors.
-    /// - Note: See [Drawing a line between two points using SceneKit](//https://stackoverflow.com/questions/21886224/drawing-a-line-between-two-points-using-scenekit)
+    /// - Note: See [Drawing a line between two points using SceneKit](https://stackoverflow.com/questions/21886224/drawing-a-line-between-two-points-using-scenekit)
     /// - Parameter From: Starting vector.
     /// - Parameter To: Ending vector.
     /// - Returns: An SCNGeometry instance as a line between the two specified points.
