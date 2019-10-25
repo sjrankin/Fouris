@@ -556,32 +556,6 @@ class MapType: CustomStringConvertible
         }
     }
     
-    #if false
-    /// Holds the upper-left point of the center block in bucket units.
-    private var _CenterBlockUpperLeft: CGPoint = CGPoint.zero
-    /// Get the upper-left point of the center block in bucket units.
-    /// - Note: This is valid only when the base game is **.Rotating4**.
-    public var CenterBlockUpperLeft: CGPoint
-    {
-        get
-        {
-            return _CenterBlockUpperLeft
-        }
-    }
-    
-    /// Holds the lower-right point of the center block in bucket units.
-    private var _CenterBlockLowerRight: CGPoint = CGPoint.zero
-    /// Get the lower-right point of the center block in bucket units.
-    /// - Note: This is valid only when the base game is **.Rotating4**.
-    public var CenterBlockLowerRight: CGPoint
-    {
-        get
-        {
-            return _CenterBlockLowerRight
-        }
-    }
-    #endif
-    
     /// Returns the left-most bottomless column.
     public var LeftMostBottomlessColumn: Int
     {
@@ -1229,28 +1203,6 @@ class MapType: CustomStringConvertible
         return WasCompressed
     }
     
-    #if false
-    /// Remove all specified items from the map.
-    ///
-    /// - Parameters:
-    ///   - Items: List of types of items to remove.
-    ///   - ReplaceWith: What the removed items will be replaced with. Must be a type that `PieceIDMap.StaticID` comprehends.
-    func RemoveFromMap(_ Items: [PieceTypes], ReplaceWith: PieceTypes = .Visible)
-    {
-        for Y in 0 ..< Height
-        {
-            for X in 0 ..< Width
-            {
-                let TheType = IDMap!.IDtoPiece(Contents[Y][X])!
-                if Items.contains(TheType)
-                {
-                    Contents[Y][X] = IDMap!.StaticID(For: ReplaceWith)
-                }
-            }
-        }
-    }
-    #endif
-    
     /// Remove the item at the specified location.
     ///
     /// - Parameters:
@@ -1743,7 +1695,7 @@ class MapType: CustomStringConvertible
     
     /// Create a string representation of the passed map. Useful for debugging (or running on text-only terminals, should any still
     /// exist).
-    ///
+    /// - Note: With iPadOS 13.2 beta, there appear to be spurious characters inserted into the returned string.
     /// - Parameters:
     ///   - Map: The base map that will be dumped as a string.
     ///   - WithInPlayPieces: If true, the in-play pieces will be included in the result.
