@@ -822,7 +822,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show statistics for" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gHB-eD-zOm">
-                                <rect key="frame" x="20" y="100" width="141" height="21.5"/>
+                                <rect key="frame" x="20" y="99.5" width="141" height="21.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21.5" id="pne-l1-oLO"/>
                                 </constraints>
@@ -831,13 +831,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For game type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ja-49-CVH">
-                                <rect key="frame" x="20" y="142" width="111" height="21"/>
+                                <rect key="frame" x="20" y="140.5" width="111" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tap-d5-oLU">
-                                <rect key="frame" x="20" y="189" width="672" height="645"/>
+                                <rect key="frame" x="20" y="187.5" width="672" height="646.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -853,7 +853,7 @@
                                 </connections>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="48o-Mh-maS">
-                                <rect key="frame" x="199" y="102" width="154" height="19"/>
+                                <rect key="frame" x="199" y="102" width="154" height="17.5"/>
                                 <viewLayoutGuide key="safeArea" id="VC8-ee-mL6"/>
                                 <segments>
                                     <segment title="User"/>
@@ -870,7 +870,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="e6D-S9-tip">
-                                <rect key="frame" x="199" y="137.5" width="171" height="32"/>
+                                <rect key="frame" x="199" y="136" width="171" height="32"/>
                                 <segments>
                                     <segment title="Standard"/>
                                     <segment title="Rotating"/>
