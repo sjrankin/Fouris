@@ -398,6 +398,22 @@ class Board: GameMapProtocol
         return Map!.MapIsEmpty(At: At)
     }
     
+    /// Returns the distance to the last empty spot in the map before reaching a blocking node, from the passed point.
+    /// - Parameter From: Origin where to start calculating distance.
+    /// - Returns: Distance (in units of game grid squares) from the origin in `From` to the last empty spot under `From`.
+    func DistanceToBottom(From: CGPoint) -> Int
+    {
+        return Map!.DistanceToBottomFrom(From)
+    }
+    
+    /// Execute a drop down motion.
+    /// - Parameter By: Number of units to drop.
+    /// - Parameter WithPiece: The piece to drop.
+    func ExecuteDropDown(By: Int, WithPiece: Piece)
+    {
+        Game?.FastDropDown(By: By, WithPiece: WithPiece)  
+    }
+    
     /// Determines if a piece is fully in the bucket or not. Outside the bucket is determined by having at least one
     /// piece having a vertical value less than (eg, higher than) the top of the bucket.
     ///
