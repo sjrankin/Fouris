@@ -1081,13 +1081,33 @@ class View3D: SCNView,                          //Our main super class.
         //print("  Done moving piece blocks to root node.")
     }
     
+    /// Perform a fast drop execution on the supplied piece.
+    /// - Parameter WithPiece: The piece to drop quickly.
+    /// - Parameter DeltaX: The relative number of grid points to move horizontally.
+    /// - Parameter DeltaY: The relative number of grid points to move vertically.
+    /// - Parameter TotalDuration: The amount of time to take to drop.
+    /// - Parameter Completed: Completion block.
+    func MovePieceRelative(WithPiece: Piece, DeltaX: Int, DeltaY: Int, TotalDuration Duration: Double, Completed: ((Piece)->())?)
+    {
+        print("At MovePieceRelative: DeltaX=\(DeltaX), DeltaY=\(DeltaY), TotalDuration=\(Duration)")
+        MovingPieceNode?.enumerateChildNodes
+            {
+                Node, _ in
+                let NewLocation = SCNVector3(Node.position.x + Float(DeltaX), Node.position.y + Float(DeltaY), Node.position.z)
+                let Move = SCNAction.move(to: NewLocation, duration: Duration)
+                Node.runAction(Move, completionHandler:
+                    {
+                        Completed?(WithPiece)
+                })
+        }
+    }
+    
     var MovingPieceBlocks = [VisualBlocks3D]()
     
     /// Remove the moving piece, if it exists.
     func RemoveMovingPiece()
     {
         let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape!)!
-        #if true
         if BoardClass == .Rotatable
         {
             //print("Removing moving piece in rotating game.")
@@ -1099,19 +1119,6 @@ class View3D: SCNView,                          //Our main super class.
             }
             //print("  Done removing piece from rotating game.")
         }
-        #else
-        if BaseGameType == .Rotating4
-        {
-            //print("Removing moving piece in rotating game.")
-            if MovingPieceNode != nil
-            {
-                MovingPieceNode!.removeFromParentNode()
-                MovingPieceNode = nil
-                UpdateMasterBlockNode()
-            }
-            //print("  Done removing piece from rotating game.")
-        }
-        #endif
     }
     
     var MovingPieceNode: SCNNode? = nil
@@ -1380,12 +1387,10 @@ class View3D: SCNView,                          //Our main super class.
     {
         objc_sync_enter(CanUseBucket)
         defer{objc_sync_exit(CanUseBucket)}
-        //print("Removing bucket grid node.")
         if BucketGridNode != nil
         {
             BucketGridNode?.removeFromParentNode()
         }
-        //print("  Done removing bucket grid node.")
         let BucketGridNode = SCNNode()
         let OutlineNode = SCNNode()
         
@@ -1402,7 +1407,6 @@ class View3D: SCNView,                          //Our main super class.
         
         let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape!)!
         
-        #if true
         switch BoardClass
         {
             case .Static:
@@ -1508,214 +1512,6 @@ class View3D: SCNView,                          //Our main super class.
             case .ThreeDimensional:
                 break
         }
-        #else
-        switch BaseGameType
-        {
-            case .Standard:
-                if ShowGrid
-                {
-                    //Horizontal bucket lines.
-                    for Y in stride(from: 10.0, to: -10.5, by: -1.0)
-                    {
-                        let Start = SCNVector3(-0.5, Y, 0.0)
-                        let End = SCNVector3(10.5, Y, 0.0)
-                        let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.03)
-                        LineNode.categoryBitMask = View3D.GameLight
-                        LineNode.name = "Horizontal,\(Int(Y))"
-                        BucketGridNode.addChildNode(LineNode)
-                    }
-                    //Vertical bucket lines.
-                    for X in stride(from: -4.5, to: 5.0, by: 1.0)
-                    {
-                        let Start = SCNVector3(X, 0.0, 0.0)
-                        let End = SCNVector3(X, 20.0, 0.0)
-                        let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.03)
-                        LineNode.categoryBitMask = View3D.GameLight
-                        LineNode.name = "Vertical,\(Int(X))"
-                        BucketGridNode.addChildNode(LineNode)
-                    }
-                }
-                if DrawOutline
-                {
-                    let TopStart = SCNVector3(-0.5, 10.0, 0.0)
-                    let TopEnd = SCNVector3(10.5, 10.0, 0.0)
-                    let TopLine = MakeLine(From: TopStart, To: TopEnd, Color: OutlineColor, LineWidth: 0.08)
-                    TopLine.categoryBitMask = View3D.GameLight
-                    TopLine.name = "TopLine"
-                    BucketGridNode.addChildNode(TopLine)
-                }
-                BucketGridNode.opacity = InitialOpacity
-            
-            case .Rotating4:
-                let GameBoard = BoardManager.GetBoardFor(.Square)!
-                let BucketWidth = Double(GameBoard.BucketWidth)
-                let BucketHeight = Double(GameBoard.BucketHeight)
-                let HalfY = BucketHeight / 2.0
-                let HalfX = BucketWidth / 2.0
-                #if true
-                if ShowGrid
-                {
-                    // Horizontal lines.
-                    for Y in stride(from: HalfY, to: -HalfY - 0.5, by: -1.0)
-                    {
-                        let Start = SCNVector3(0.0, Y, 0.0)
-                        let End = SCNVector3(20.0, Y, 0.0)
-                        let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.02)
-                        LineNode.categoryBitMask = View3D.GameLight
-                        LineNode.name = "Horizontal,\(Int(Y))"
-                        BucketGridNode.addChildNode(LineNode)
-                    }
-                    //Vertical lines.
-                    for X in stride(from: -HalfX, to: HalfX + 0.5, by: 1.0)
-                    {
-                        let Start = SCNVector3(X, 0.0, 0.0)
-                        let End = SCNVector3(X, 20.0, 0.0)
-                        let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.02)
-                        LineNode.categoryBitMask = View3D.GameLight
-                        LineNode.name = "Vertical,\(Int(X))"
-                        BucketGridNode.addChildNode(LineNode)
-                    }
-                }
-                //Outline.
-                if DrawOutline
-                {
-                    let TopStart = SCNVector3(0.0, HalfY, 0.0)
-                    let TopEnd = SCNVector3(BucketWidth, HalfY, 0.0)
-                    let TopLine = MakeLine(From: TopStart, To: TopEnd, Color: OutlineColor, LineWidth: 0.08)
-                    TopLine.categoryBitMask = View3D.GameLight
-                    TopLine.name = "TopLine"
-                    OutlineNode.addChildNode(TopLine)
-                    let BottomStart = SCNVector3(0.0, -HalfY, 0.0)
-                    let BottomEnd = SCNVector3(BucketWidth, -HalfY, 0.0)
-                    let BottomLine = MakeLine(From: BottomStart, To: BottomEnd, Color: OutlineColor, LineWidth: 0.08)
-                    BottomLine.categoryBitMask = View3D.GameLight
-                    BottomLine.name = "BottomLine"
-                    OutlineNode.addChildNode(BottomLine)
-                    let LeftStart = SCNVector3(-HalfX, 0.0, 0.0)
-                    let LeftEnd = SCNVector3(-HalfX, BucketHeight, 0.0)
-                    let LeftLine = MakeLine(From: LeftStart, To: LeftEnd, Color: OutlineColor, LineWidth: 0.08)
-                    LeftLine.categoryBitMask = View3D.GameLight
-                    LeftLine.name = "LeftLine"
-                    OutlineNode.addChildNode(LeftLine)
-                    let RightStart = SCNVector3(HalfX, 0.0, 0.0)
-                    let RightEnd = SCNVector3(HalfX, BucketHeight, 0.0)
-                    let RightLine = MakeLine(From: RightStart, To: RightEnd, Color: OutlineColor, LineWidth: 0.08)
-                    RightLine.categoryBitMask = View3D.GameLight
-                    RightLine.name = "RightLine"
-                    OutlineNode.addChildNode(RightLine)
-                }
-                BucketGridNode.opacity = InitialOpacity
-                #else
-                if ShowGrid
-                {
-                    //Horizontal bucket lines.
-                    for Y in stride(from: 10.0, to: -10.5, by: -1.0)
-                    {
-                        let Start = SCNVector3(0.0, Y, 0.0)
-                        let End = SCNVector3(20.0, Y, 0.0)
-                        let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.02)
-                        LineNode.categoryBitMask = View3D.GameLight
-                        LineNode.name = "Horizontal,\(Int(Y))"
-                        BucketGridNode.addChildNode(LineNode)
-                    }
-                    //Vertical bucket lines.
-                    for X in stride(from: -10.0, to: 10.5, by: 1.0)
-                    {
-                        let Start = SCNVector3(X, 0.0, 0.0)
-                        let End = SCNVector3(X, 20.0, 0.0)
-                        let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.02)
-                        LineNode.categoryBitMask = View3D.GameLight
-                        LineNode.name = "Vertical,\(Int(X))"
-                        BucketGridNode.addChildNode(LineNode)
-                    }
-                }
-                //Outline.
-                if DrawOutline
-                {
-                    let TopStart = SCNVector3(0.0, 10.0, 0.0)
-                    let TopEnd = SCNVector3(20.0, 10.0, 0.0)
-                    let TopLine = MakeLine(From: TopStart, To: TopEnd, Color: OutlineColor, LineWidth: 0.08)
-                    TopLine.categoryBitMask = View3D.GameLight
-                    TopLine.name = "TopLine"
-                    OutlineNode.addChildNode(TopLine)
-                    let BottomStart = SCNVector3(0.0, -10.0, 0.0)
-                    let BottomEnd = SCNVector3(20.0, -10.0, 0.0)
-                    let BottomLine = MakeLine(From: BottomStart, To: BottomEnd, Color: OutlineColor, LineWidth: 0.08)
-                    BottomLine.categoryBitMask = View3D.GameLight
-                    BottomLine.name = "BottomLine"
-                    OutlineNode.addChildNode(BottomLine)
-                    let LeftStart = SCNVector3(-10.0, 0.0, 0.0)
-                    let LeftEnd = SCNVector3(-10.0, 20.0, 0.0)
-                    let LeftLine = MakeLine(From: LeftStart, To: LeftEnd, Color: OutlineColor, LineWidth: 0.08)
-                    LeftLine.categoryBitMask = View3D.GameLight
-                    LeftLine.name = "LeftLine"
-                    OutlineNode.addChildNode(LeftLine)
-                    let RightStart = SCNVector3(10.0, 0.0, 0.0)
-                    let RightEnd = SCNVector3(10.0, 20.0, 0.0)
-                    let RightLine = MakeLine(From: RightStart, To: RightEnd, Color: OutlineColor, LineWidth: 0.08)
-                    RightLine.categoryBitMask = View3D.GameLight
-                    RightLine.name = "RightLine"
-                    OutlineNode.addChildNode(RightLine)
-                }
-                BucketGridNode.opacity = InitialOpacity
-                #endif
-                
-                #if false
-                let TopLabel = SCNText(string: "Top", extrusionDepth: 0.5)
-                TopLabel.materials.first!.specular.contents = ColorServer.ColorFrom(ColorNames.Black)
-                TopLabel.materials.first!.diffuse.contents = ColorServer.ColorFrom(ColorNames.Cyan)
-                TopLabel.flatness = 0.2
-                let TopNode = SCNNode(geometry: TopLabel)
-                TopNode.categoryBitMask = View3D.GameLight
-                TopNode.name = "Top"
-                TopNode.scale = SCNVector3(0.02, 0.02, 0.02)
-                TopNode.position = SCNVector3(-0.5, 10.4, 0.0)
-                BucketGridNode.addChildNode(TopNode)
-                
-                let BottomLabel = SCNText(string: "Bottom", extrusionDepth: 0.5)
-                BottomLabel.materials.first!.specular.contents = ColorServer.ColorFrom(ColorNames.Black)
-                BottomLabel.materials.first!.diffuse.contents = ColorServer.ColorFrom(ColorNames.Yellow)
-                BottomLabel.flatness = 0.2
-                let BottomNode = SCNNode(geometry: BottomLabel)
-                BottomNode.categoryBitMask = View3D.GameLight
-                BottomNode.name = "Bottom"
-                BottomNode.scale = SCNVector3(0.02, 0.02, 0.02)
-                BottomNode.rotation = SCNVector4(0.0, 0.0, 1.0, CGFloat.pi)
-                BottomNode.position = SCNVector3(0.5, -10.5, 0.0)
-                BucketGridNode.addChildNode(BottomNode)
-                
-                let RightLabel = SCNText(string: "Right", extrusionDepth: 0.5)
-                RightLabel.materials.first!.specular.contents = ColorServer.ColorFrom(ColorNames.Black)
-                RightLabel.materials.first!.diffuse.contents = ColorServer.ColorFrom(ColorNames.Magenta)
-                RightLabel.flatness = 0.2
-                let RightNode = SCNNode(geometry: RightLabel)
-                RightNode.categoryBitMask = View3D.GameLight
-                RightNode.name = "Right"
-                RightNode.scale = SCNVector3(0.02, 0.02, 0.02)
-                RightNode.rotation = SCNVector4(0.0, 0.0, 1.0, 270.0 * CGFloat.pi / 180.0)
-                RightNode.position = SCNVector3(10.5, 1.0, 0.0)
-                BucketGridNode.addChildNode(RightNode)
-                
-                let LeftLabel = SCNText(string: "Left", extrusionDepth: 0.5)
-                LeftLabel.materials.first!.specular.contents = ColorServer.ColorFrom(ColorNames.Gray)
-                LeftLabel.materials.first!.diffuse.contents = ColorServer.ColorFrom(ColorNames.Black)
-                RightLabel.flatness = 0.2
-                let LeftNode = SCNNode(geometry: LeftLabel)
-                LeftNode.categoryBitMask = View3D.GameLight
-                LeftNode.name = "Left"
-                LeftNode.scale = SCNVector3(0.02, 0.02, 0.02)
-                LeftNode.rotation = SCNVector4(0.0, 0.0, 1.0, CGFloat.pi * 0.5)
-                LeftNode.position = SCNVector3(-10.5, 0.0, 0.0)
-                BucketGridNode.addChildNode(LeftNode)
-            #endif
-            
-            case .SemiRotating:
-                break
-            
-            case .Cubic:
-                break
-        }
-        #endif
         
         return (Grid: BucketGridNode, Outline: OutlineNode)
     }
