@@ -133,7 +133,6 @@ class GameLogic
     }
     
     /// Start the game. The game board is created in the initializer.
-    ///
     /// - Parameters:
     ///   - EnableAI: Enable AI flag. Set to true to run the game in attract mode.
     ///   - PieceCategories: Valid pieces for the game. Cannot change once the game starts until a new game starts.
@@ -173,10 +172,8 @@ class GameLogic
     var GameEndTime: Double? = nil
     
     /// Returns the duration of the game.
-    ///
     /// - Note: If the game is ongoing, the duration returned is from the start of the game to the call time. If the game hasn't
     ///         started, 0.0 is returned.
-    ///
     /// - Returns: The duration of the game.
     func GameDuration() -> Double
     {
@@ -192,7 +189,6 @@ class GameLogic
     }
     
     /// Start a game in stepping mode.
-    ///
     /// - Parameter MakeNewBoard: If true a new game board will be created. If false, the current board will be used.
     func StepGame(MakeNewBoard: Bool)
     {
@@ -219,9 +215,7 @@ class GameLogic
     }
     
     /// Sets a list of valid motions for the piece.
-    ///
     /// - Note: Will be superceded by Level management.
-    ///
     /// - Parameter Valid: List of valid motions.
     func SetValidBlockMotions(_ Valid: [Directions])
     {
@@ -289,46 +283,20 @@ class GameLogic
     // TODO: - Change MakeBoard to use the BoardManager
     
     /// Create a game board.
-    ///
     /// - Parameters:
     ///   - Categories: Valid piece categories.
     ///   - Level: Describes the level to use.
     func MakeBoard(_ Categories: [MetaPieces] = [MetaPieces.Standard])
     {
-        #if true
         if let BoardDescription = BoardManager.GetBoardFor((UserTheme?.BucketShape)!)
-       {
-        let BWidth = BoardDescription.BucketWidth
-        let BHeight = BoardDescription.BucketHeight
-        GameCount = GameCount + 1
-        GameBoard = Board(BoardID: UUID(), Sequence: GameCount, TheGame: self,
-                          BucketShape: UserTheme!.BucketShape, BoardWidth: BWidth,
-                          BoardHeight: BHeight)
-        }
-        #else
-        var BWidth = 12
-        var BHeight = 30
-        switch BaseGameType
         {
-            case .Standard:
-                BWidth = 12
-                BHeight = 30
-            
-            case .Rotating4:
-                BWidth = 36
-                BHeight = 36
-            
-            case .SemiRotating:
-            BWidth = 36
-            BHeight = 36
-            
-            case .Cubic:
-                break
+            let BWidth = BoardDescription.BucketWidth
+            let BHeight = BoardDescription.BucketHeight
+            GameCount = GameCount + 1
+            GameBoard = Board(BoardID: UUID(), Sequence: GameCount, TheGame: self,
+                              BucketShape: UserTheme!.BucketShape, BoardWidth: BWidth,
+                              BoardHeight: BHeight)
         }
-        GameCount = GameCount + 1
-        GameBoard = Board(BoardID: UUID(), Sequence: GameCount, TheGame: self,
-                          BaseGame: BaseGameType, BoardWidth: BWidth, BoardHeight: BHeight)
-        #endif
     }
     
     /// Get or set the game board.
@@ -365,14 +333,12 @@ class GameLogic
     // MARK: - Game logic protocol implementations
     
     /// Called when a piece is successfully moved.
-    ///
     /// - Parameters:
     ///   - MovedPiece: The piece that moved.
     ///   - Direction: The direction the piece moved.
     ///   - Commanded: True if the piece was commanded to move, false if gravity caused the movement.
     func PieceMoved(_ MovedPiece: Piece, Direction: Directions, Commanded: Bool)
     {
-        #if true
         if let PieceClass = BoardData.GetBoardClass(For: UserTheme!.BucketShape)
         {
             switch PieceClass
@@ -381,28 +347,12 @@ class GameLogic
                     UIDelegate?.PieceMoved3D(MovedPiece, Direction: Direction, Commanded: Commanded)
                 
                 case .Static:
-                UIDelegate?.PieceMoved(MovedPiece, Direction: Direction, Commanded: Commanded)
+                    UIDelegate?.PieceMoved(MovedPiece, Direction: Direction, Commanded: Commanded)
                 
                 case .ThreeDimensional:
-                UIDelegate?.PieceMoved(MovedPiece, Direction: Direction, Commanded: Commanded)
+                    UIDelegate?.PieceMoved(MovedPiece, Direction: Direction, Commanded: Commanded)
             }
         }
-        #else
-        switch BaseGameType
-        {
-            case .Standard:
-                UIDelegate?.PieceMoved(MovedPiece, Direction: Direction, Commanded: Commanded)
-            
-            case .Rotating4:
-                UIDelegate?.PieceMoved3D(MovedPiece, Direction: Direction, Commanded: Commanded)
-            
-            case .SemiRotating:
-                UIDelegate?.PieceMoved3D(MovedPiece, Direction: Direction, Commanded: Commanded)
-            
-            case .Cubic:
-                UIDelegate?.PieceMoved(MovedPiece, Direction: Direction, Commanded: Commanded)
-        }
-        #endif
     }
     
     /// Called when a piece has frozen into place. Start dropping a new piece. By this point, the dropped piece
@@ -478,10 +428,8 @@ class GameLogic
     }
     
     /// Called by child classes to set the opacity level of the current piece.
-    ///
     /// - Note: This is probably better changed to something higher-level, such as
     ///         "VisuallyRemovePiece" or the like.
-    ///
     /// - Parameters:
     ///   - To: New opacity level.
     ///   - ID: ID of the piece whose opacity will be changed.
@@ -496,7 +444,6 @@ class GameLogic
     }
     
     /// Event for after a piece has been discarded and is no longer available.
-    ///
     /// - Parameter OfPiece: The ID of the piece that was discarded.
     func CompletedDiscard(OfPiece: UUID)
     {
@@ -509,7 +456,6 @@ class GameLogic
     }
     
     /// Called when a new score is available after a piece is finalized.
-    ///
     /// - Parameters:
     ///   - ID: ID of the finalized piece.
     ///   - Score: New game score.
@@ -531,7 +477,6 @@ class GameLogic
     
     /// Called when a piece is frozen with at least part of it out of bounds. Indicates a game over
     /// condition.
-    ///
     /// - Parameter ID: ID of the frozen piece.
     func StoppedOutOfBounds(ID: UUID)
     {
@@ -543,7 +488,6 @@ class GameLogic
     }
     
     /// Called when a piece has started freezing (but not yet frozen).
-    ///
     /// - Parameter ID: ID of the piece that started freezing.
     func StartedFreezing(_ ID: UUID)
     {
@@ -737,7 +681,6 @@ class GameLogic
     
     /// Turns on or off gravity. Mainly used for debugging but can also be used for special game effects. Control flows
     /// from the UI to the game (here), board, then piece (which is where gravity actually takes place).
-    ///
     /// - Parameter Enabled: Determines if the gravity is on or off.
     func SetGravitation(_ Enabled: Bool)
     {
@@ -745,7 +688,6 @@ class GameLogic
     }
     
     /// Called when a piece is blocked (either in motion or rotation). Pass the notification to the UI.
-    ///
     /// - Parameter ID: ID of the piece that cannot move.
     func PieceCannotMove(ID: UUID)
     {
@@ -753,7 +695,6 @@ class GameLogic
     }
     
     /// Called when a piece was successfully rotated. Pass the notification to the UI.
-    ///
     /// - Parameters:
     ///   - ID: ID of the rotated piece.
     ///   - Direction: The direction the piece rotated.
@@ -763,7 +704,6 @@ class GameLogic
     }
     
     /// Called when a piece tried to rotate but failed.
-    ///
     /// - Parameters:
     ///   - ID: ID of the piece that failed rotation.
     ///   - Direction: The rotational direction that was attempted.
@@ -773,9 +713,7 @@ class GameLogic
     }
     
     /// Pass input from the UI to the game board.
-    ///
     /// - Note: If AI is enabled, input from the UI is ignored.
-    ///
     /// - Parameters:
     ///   - ID: ID of the piece the input is intended for.
     ///   - Input: Type of input.
@@ -803,8 +741,15 @@ class GameLogic
         }
     }
     
+    /// Passes the fast drop down command (with relative distance) to the UI delegate.
+    /// - Parameter By: Number of relative units to drop.
+    /// - Parameter WithPiece: The piece to drop.
+    public func FastDropDown(By: Int, WithPiece: Piece)
+    {
+        UIDelegate?.StartFastDrop(DeltaY: By, WithPiece: WithPiece)
+    }
+    
     /// Called when a row was deleted by the board. Pass the notification to the UI.
-    ///
     /// - Parameter Row: Index of the row that was deleted.
     func RowDeleted(_ Row: Int)
     {
@@ -815,7 +760,6 @@ class GameLogic
     var RowDeletionCount: Int = 0
     
     /// Received board done compressing message. Pass to UI.
-    ///
     /// - Parameter DidCompress: If true, the board actually compressed (meaning there were blocks removed). If
     ///                          false, the board's contents are the same (other than for game pieces in play).
     func BoardDoneCompressing(DidCompress: Bool)
@@ -836,7 +780,6 @@ class GameLogic
     var InAutoPlay: Bool = false
     
     /// Pass along the piece-ran-over-a-special-button event to the UI.
-    ///
     /// - Parameters:
     ///   - ID: ID of the item that ran over the speical button.
     ///   - Item: Description of the special item.
@@ -848,7 +791,6 @@ class GameLogic
     }
     
     /// Pass along the piece-ran-over-a-special-button event to the UI.
-    ///
     /// - Parameters:
     ///   - ID: ID of the item that ran over the speical button.
     ///   - Item: ID of the special item.
@@ -874,7 +816,6 @@ class GameLogic
     }
     
     /// Return the current value of the game map as a string.
-    ///
     /// - Parameter WithPieces: If true, all pieces (falling or otherwise) are included in the returned map.
     /// - Returns: String representation of the game map. Column and row headers are included.
     func DumpMap(WithPieces: Bool = false) -> String
@@ -884,7 +825,6 @@ class GameLogic
     }
     
     /// Called when a piece moves or is rotated. Used to indicate potentially different scores of the piece.
-    ///
     /// - Parameters:
     ///   - ForPiece: The piece to update the score for.
     func UpdatePieceScore(ForPiece: Piece)
@@ -896,7 +836,6 @@ class GameLogic
     }
     
     /// Pass the name of the next piece to the UI.
-    ///
     /// - Parameter Next: Name of the next piece after the current piece.
     func NextPiece(_ Next: Piece)
     {
@@ -904,7 +843,6 @@ class GameLogic
     }
     
     /// Returns the current board game scorer class.
-    ///
     /// - Returns: Current board game scorer class.
     func GetScorer() -> Score
     {
@@ -913,7 +851,6 @@ class GameLogic
 }
 
 /// Possible game states.
-///
 /// - Stopped: Stopped. Game over or haven't started yet.
 /// - Playing: Currently playing.
 /// - Paused: Paused.
