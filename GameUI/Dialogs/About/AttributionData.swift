@@ -12,6 +12,30 @@ class AttributeData
 {
     public static var Table: [String: String] =
     [
+        "Convert UIView to UIImage": "https://stackoverflow.com/questions/30696307/how-to-convert-a-uiview-to-an-image",
+        "Device Specifications": "https://www.devicespecifications.com/en/brand/cefa26",
+        "Name of iOS Device": "https://stackoverflow.com/questions/26028918/how-to-determine-the-current-iphone-device-model",
+        "Available RAM on iOS Device": "https://stackoverflow.com/questions/5012886/determining-the-available-amount-of-ram-on-an-ios-device",
+        "iOS Language Codes (ISO-639)": "https://www.ibabbleon.com/iOS-Language-Codes-ISO-639.html",
+        "Export UIImage Array": "https://stackoverflow.com/questions/3741323/how-do-i-export-uiimage-array-as-a-movie",
+        "How to use ReplayKit": "https://www.hackingwithswift.com/example-code/media/how-to-record-user-videos-using-replaykit",
+        "UITapGestureRecognizer Single & Double Tap": "https://stackoverflow.com/questions/8876202/uitapgesturerecognizer-single-tap-and-double-tap",
+        "Scale UIButton Animation": "https://stackoverflow.com/questions/31320819/scale-uibutton-animation-swift",
+        "Determine Device Model": "https://stackoverflow.com/questions/26028918/how-to-determine-the-current-iphone-device-model",
+        "Draw a Line in SceneKit": "https://stackoverflow.com/questions/21886224/drawing-a-line-between-two-points-using-scenekit",
+        "Animate SCNNode Forever": "https://stackoverflow.com/questions/29658772/animate-scnnode-forever-scenekit-swift",
+        "Animate SCNNode Color": "https://stackoverflow.com/questions/40472524/how-to-add-animations-to-change-sncnodes-color-scenekit",
+        "Vertically Align Text": "https://stackoverflow.com/questions/4765461/vertically-align-text-in-a-catextlayer",
+        "Better iOS Animations with CATransition": "https://medium.com/@joncardasis/better-ios-animations-with-catransaction-72a7425673a6",
+        "Timer.scheduledTimer Issue": "https://stackoverflow.com/questions/40613556/timer-scheduledtimer-does-not-work-in-swift-3",
+        "Convert RGB to YUV": "https://www.codeproject.com/Articles/402391/RGB-to-YUV-conversion-with-different-chroma-sampli",
+        "Convert RGB to CMYK": "https://www.rapidtables.com/convert/color/rgb-to-cmyk.html",
+        "Calculating Color Contrast": "https://24ways.org/2010/calculating-color-contrast/",
+        "Resize NSImage": "https://stackoverflow.com/questions/11949250/how-to-resize-nsimage/30422317#30422317",
+        "MD5 Hash": "https://stackoverflow.com/questions/32163848/how-can-i-convert-a-string-to-an-md5-hash-in-ios-using-swift",
+        "Swift Reflection Dump Code": "https://gist.github.com/natecook1000/4ee3ee560000062b1ace",
+        "Swift Reflection Dump": "http://ericasadun.com/2014/06/24/swift-reflection-dump/",
+        "Multipeer Connectivity": "https://www.ralfebert.de/ios/tutorials/multipeer-connectivity/",
         "Noto Emoji Font":
          """
 This Font Software is licensed under the SIL Open Font License,
