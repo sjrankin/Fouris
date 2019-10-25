@@ -176,9 +176,22 @@ protocol GameViewProtocol: class
     /// - Parameter Duration: How long to flash the button in seconds.
     func FlashButton(_ Button: NodeButtons, Duration: Double)
     
+    /// Sets the heartbeat indicator visibility.
+    /// - Parameter Show: Determines whether the heartbeat indicator is highlighted or not.
     func SetHeartbeatVisibility(Show: Bool)
     
+    /// Changes the highlight state of the heartbeat indicator. Ignored if the heartbeat
+    /// indicator is disabled.
     func ToggleHeartState()
+    
+    /// Perform a fast drop execution on the supplied piece.
+    /// - Parameter WithPiece: The piece to drop quickly.
+    /// - Parameter DeltaX: The relative number of grid points to move horizontally.
+    /// - Parameter DeltaY: The relative number of grid points to move vertically.
+    /// - Parameter TotalDuration: The amount of time to take to drop.
+    /// - Parameter Completed: Completion block.
+    func MovePieceRelative(WithPiece: Piece, DeltaX: Int, DeltaY: Int, TotalDuration: Double,
+                           Completed: ((Piece)->())?)
 }
 
 
