@@ -9,11 +9,16 @@
 import Foundation
 import UIKit
 
+/// Runs the color picker UI. This dialog allows the user to manually create colors via sliders. There is one slider for each color
+/// channel in a colorspace. Most color spaces have three channels, but four channels are supported.
+/// Supported color spaces are: RGB, HSB, YUV, and CMYK.
 class ColorPickerCode: UIViewController, ColorPickerProtocol
 {
-    weak var ColorDelegate: ColorPickerProtocol? = nil
+    /// Delegate to receive color picker messages.
+    weak public var ColorDelegate: ColorPickerProtocol? = nil
     
-    override func viewDidLoad()
+    /// UI initialization.
+    override public func viewDidLoad()
     {
         super.viewDidLoad()
         
@@ -58,7 +63,8 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         UpdateColorspace()
     }
     
-    func InitializeSliders()
+    /// Initialize the color channel sliders.
+    private func InitializeSliders()
     {
         ChannelAContainer.clipsToBounds = true
         let ChannelAGradient = GradientManager.GetGradient(.BlackRed)
@@ -97,16 +103,22 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
     }
     
     /// Contains the current colorspace.
-    var WorkingColorspace = WorkingColorspaces.RGB
+    private var WorkingColorspace = WorkingColorspaces.RGB
     
-    var SampleColorLayer: CALayer!
+    /// Layer used to display the color sample.
+    private var SampleColorLayer: CALayer!
     
-    var ChannelALayer: CAGradientLayer!
-    var ChannelBLayer: CAGradientLayer!
-    var ChannelCLayer: CAGradientLayer!
-    var ChannelDLayer: CAGradientLayer!
+    /// Channel A color sample.
+    private var ChannelALayer: CAGradientLayer!
+    /// Channel B color sample.
+    private var ChannelBLayer: CAGradientLayer!
+    /// Channel C color sample.
+    private var ChannelCLayer: CAGradientLayer!
+    /// Channel D color sample.
+    private var ChannelDLayer: CAGradientLayer!
     
-    func InitializeWithColor()
+    /// Initialize the current color and color space.
+    public func InitializeWithColor()
     {
         if SourceColor == nil
         {
@@ -124,7 +136,7 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
     
     /// Handle the cancel button press. Tell the color delegate nothing of interest happened.
     /// - Parameter sender: Not used.
-    @IBAction func HandleCancelPressed(_ sender: Any)
+    @IBAction public func HandleCancelPressed(_ sender: Any)
     {
         ColorDelegate?.EditedColor(nil, Tag: DelegateTag)
         self.dismiss(animated: true, completion: nil)
@@ -132,7 +144,7 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
     
     /// Handle the OK button press. Tell the color delegate the newly selected (or old if nothing changed) color.
     /// - Parameter sender: Not used.
-    @IBAction func HandleOKPressed(_ sender: Any)
+    @IBAction public func HandleOKPressed(_ sender: Any)
     {
         ColorDelegate?.EditedColor(CurrentColor, Tag: DelegateTag)
         self.dismiss(animated: true, completion: nil)
@@ -141,16 +153,19 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
     /// Called by the color delegate implementing class to tell use what color to edit.
     /// - Parameter Color: The color to edit.
     /// - Parameter Tag: The tag to return to the caller. Unchanged by the color picker.
-    func ColorToEdit(_ Color: UIColor, Tag: Any?)
+    public func ColorToEdit(_ Color: UIColor, Tag: Any?)
     {
         DelegateTag = Tag
         SourceColor = Color
     }
     
+    /// Original, source color. Made available internally for potential undo operations.
     private var SourceColor: UIColor? = nil
     
+    /// Current color.
     private var CurrentColor: UIColor? = nil
     
+    /// Tag passed to us by the delegate. Used solely by the delegate to keep calls to the color picker straight.
     private var DelegateTag: Any? = nil
     
     /// The user used another way to select a color and that particular view is letting us know the user is done.
@@ -160,7 +175,7 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
     /// - Parameter Color: If non-nil, the color the user selected. If nil, the user canceled selection.
     /// - Parameter Tag: The tag sent to the other view controller and returned to us (with the expectation that no
     ///                  changes were made to it).
-    func EditedColor(_ Color: UIColor?, Tag: Any?)
+    public func EditedColor(_ Color: UIColor?, Tag: Any?)
     {
         if let SomeColor = Color
         {
@@ -181,7 +196,7 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
     }
     
     /// Update the UI for the current working colorspace (set elsewhere by the user).
-    func UpdateColorspace()
+    public func UpdateColorspace()
     {
         switch WorkingColorspace
         {
@@ -200,7 +215,7 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
     }
     
     /// Set the UI for RGB (and possibly A). Channel values are all between 0 and 255.
-    func SetRGB()
+    public func SetRGB()
     {
         if ChannelALayer != nil
         {
@@ -282,7 +297,8 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
     }
     
     /// Set the UI for HSB. H channel values vary between 0 and 360 and S and B between 0.0 and 1.0.
-    func SetHSB()
+    /// - Note: Internally, the hue will be normalized to what UIKit expects.
+    public func SetHSB()
     {
         if ChannelALayer != nil
         {
@@ -346,7 +362,7 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
     }
     
         /// Set the UI for YUV. All channel values vary between 0.0 and 1.0.
-    func SetYUV()
+    public func SetYUV()
     {
         if ChannelALayer != nil
         {
@@ -410,7 +426,7 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
     }
     
     /// Set the UI for CMYK. All channel values vary between 0.0 and 1.0.
-    func SetCMYK()
+    public func SetCMYK()
     {
         if ChannelALayer != nil
         {
@@ -484,7 +500,10 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         EnableRGBAlphaSwitch.isEnabled = false
     }
     
-    func NewSliderValue(Name: String, NewValue: Double)
+    /// Handle new slider values from the UI.
+    /// - Parameter Name: Not currently used.
+    /// - Parameter NewValue: New raw slider value.
+    public func NewSliderValue(Name: String, NewValue: Double)
     {
         let rvalue: CGFloat = CGFloat(ChannelASlider.value)
         let gvalue: CGFloat = CGFloat(ChannelBSlider.value)
@@ -522,7 +541,9 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         UpdateColor(WithColor: SampleColor)
     }
     
-    @IBAction func HandleColorspaceChanged(_ sender: Any)
+    /// Handle UI changes to the color space.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleColorspaceChanged(_ sender: Any)
     {
         Settings.SetColorPickerColorSpace(NewValue: ColorspaceSegment.selectedSegmentIndex)
         WorkingColorspace = WorkingColorspaces(rawValue: ColorspaceSegment.selectedSegmentIndex)!
@@ -530,7 +551,10 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         UpdateColor(WithColor: CurrentColor!)
     }
     
-    func UpdateColor(WithColor: UIColor)
+    /// Update the UI with a new color. Updating in this case means show the new color itself as well as redraw the UI elements
+    /// to reflect the new color.
+    /// - Parameter WithColor: The new color to display in the UI.
+    public func UpdateColor(WithColor: UIColor)
     {
         CurrentColor = WithColor
         SampleColorView.backgroundColor = WithColor
@@ -582,7 +606,7 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
     
     /// Set the slider positions with the specified color.
     /// - Parameter WithColor: The color to use that determine the slider positions.
-    func SetSliderPositions(WithColor: UIColor)
+    public func SetSliderPositions(WithColor: UIColor)
     {
         ChannelASlider.value = Float(WithColor.r)
         ChannelBSlider.value = Float(WithColor.g)
@@ -600,7 +624,10 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         }
     }
     
-    func UpdateChannelsUI(WithColor: UIColor, From: String)
+    /// Update the channels-related portion of the UI.
+    /// - Parameter WithColor: The color to use to update the UI.
+    /// - Parameter From: Not currently used.
+    public func UpdateChannelsUI(WithColor: UIColor, From: String)
     {
         switch WorkingColorspace
         {
@@ -647,7 +674,9 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         SampleColorLayer.backgroundColor = WithColor.cgColor
     }
     
-    @IBAction func HandleChannelASliderChanged(_ sender: Any)
+    /// Handle channel A slider value changed. Updates the color and the UI as appropriate.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleChannelASliderChanged(_ sender: Any)
     {
         let SliderValue: Double = Double(ChannelASlider.value)
         switch WorkingColorspace
@@ -673,7 +702,9 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         UpdateColor(WithColor: CurrentColor!)
     }
     
-    @IBAction func HandleChannelBSliderChanged(_ sender: Any)
+    /// Handle channel B slider value changed. Updates the color and the UI as appropriate.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleChannelBSliderChanged(_ sender: Any)
     {
         let SliderValue: Double = Double(ChannelBSlider.value)
         switch WorkingColorspace
@@ -699,7 +730,9 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         UpdateColor(WithColor: CurrentColor!)
     }
     
-    @IBAction func HandleChannelCSliderChanged(_ sender: Any)
+    /// Handle channel C slider value changed. Updates the color and the UI as appropriate.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleChannelCSliderChanged(_ sender: Any)
     {
         let SliderValue: Double = Double(ChannelCSlider.value)
         switch WorkingColorspace
@@ -725,7 +758,9 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         UpdateColor(WithColor: CurrentColor!)
     }
     
-    @IBAction func HandleChannelDSliderChanged(_ sender: Any)
+    /// Handle channel D slider value changed. Updates the color and the UI as appropriate.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleChannelDSliderChanged(_ sender: Any)
     {
         let SliderValue: Double = Double(ChannelDSlider.value)
         switch WorkingColorspace
@@ -751,7 +786,7 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
     /// - Parameter Max: Maximum integer allowed.
     /// - Returns: Tuple in the form (converted integer value, forced string for errors). On error, the converted integer value
     ///            is set to the same as the force string value.
-    func ValidateTextInput(_ Raw: String?, Max: Int = 255) -> (Int, String?)
+    public func ValidateTextInput(_ Raw: String?, Max: Int = 255) -> (Int, String?)
     {
         if let TestValue = Raw
         {
@@ -786,7 +821,7 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
     /// - Parameter Raw: Raw string (which may be nullable) from a text box.
     /// - Returns: Tuple in the form (converted double value, forced string for errors). On error, the converted double value
     ///            is set to the same as the force string value.
-    func ValidateNormalTextInput(_ Raw: String?) -> (Double, String?)
+    public func ValidateNormalTextInput(_ Raw: String?) -> (Double, String?)
     {
         if let TestValue = Raw
         {
@@ -817,7 +852,9 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         }
     }
     
-    @IBAction func HandleChannelATextChanged(_ sender: Any)
+    /// Handle changes to the text value of channel A. Update the color and UI as appropriate.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleChannelATextChanged(_ sender: Any)
     {
         switch WorkingColorspace
         {
@@ -876,7 +913,9 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
 
     }
     
-    @IBAction func HandleChannelBTextChanged(_ sender: Any)
+    /// Handle changes to the text value of channel B. Update the color and UI as appropriate.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleChannelBTextChanged(_ sender: Any)
     {
         switch WorkingColorspace
         {
@@ -934,7 +973,9 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         }
     }
     
-    @IBAction func HandleChannelCTextChanged(_ sender: Any)
+    /// Handle changes to the text value of channel C. Update the color and UI as appropriate.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleChannelCTextChanged(_ sender: Any)
     {
         switch WorkingColorspace
         {
@@ -992,7 +1033,9 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         }
     }
     
-    @IBAction func HandleChannelDTextChanged(_ sender: Any)
+    /// Handle changes to the text value of channel D. Update the color and UI as appropriate.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleChannelDTextChanged(_ sender: Any)
     {
         switch WorkingColorspace
         {
@@ -1027,7 +1070,11 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         }
     }
     
-    func ShowChannelD(_ DoShow: Bool, Fast: Bool)
+    /// Show or hide channel D UI elements. Channel D is for those color spaces that require four channels.
+    /// - Parameter DoShow: If true, channel D is shown. If false, channel D is hidden.
+    /// - Parameter Fast: If true, there is no transition to showing or hiding channel D. If false, a 1/4 second
+    ///                   transition occurs.
+    public func ShowChannelD(_ DoShow: Bool, Fast: Bool)
     {
         let Duration = Fast ? 0.0 : 0.25
         UIView.animate(withDuration: Duration, animations:
@@ -1050,7 +1097,7 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
     
     /// Handle changes to the Enable RGB switch.
     /// - Parameter sender: Not used.
-    @IBAction func HandleEnableRGBAlphaChanged(_ sender: Any)
+    @IBAction public func HandleEnableRGBAlphaChanged(_ sender: Any)
     {
         Settings.SetShowAlpha(NewValue: EnableRGBAlphaSwitch.isOn)
         if WorkingColorspace == .RGB
@@ -1060,9 +1107,13 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         }
     }
     
+    /// Holds the enable alpha flag.
     private var EnableAlpha = false
     
-    @IBSegueAction func ColorNamePickerSegue(_ coder: NSCoder) -> ColorNamePickerCode?
+    /// Handle the instantiation of the color name picker.
+    /// - Parameter coder: The NSCoder object used to create the code for the color name picker.
+    /// - Returns: `ColorNamePickerCode` instance used to run the color name picker.
+    @IBSegueAction public func ColorNamePickerSegue(_ coder: NSCoder) -> ColorNamePickerCode?
     {
         let Picker = ColorNamePickerCode(coder: coder)
         Picker?.ColorDelegate = self
@@ -1070,7 +1121,10 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         return Picker
     }
     
-    @IBSegueAction func ColorChipSelectorSegue(_ coder: NSCoder) -> ColorChipSelectorCode?
+    /// Handle the instantiation of the color chip selector.
+    /// - Parameter coder: The NSCoder object used to create the code for the color chip selector.
+    /// - Returns: `ColorChipSelectorCode` instance used to run the color chip selector.
+    @IBSegueAction public func ColorChipSelectorSegue(_ coder: NSCoder) -> ColorChipSelectorCode?
     {
         let Selector = ColorChipSelectorCode(coder: coder)
         Selector?.ColorDelegate = self
@@ -1078,7 +1132,10 @@ class ColorPickerCode: UIViewController, ColorPickerProtocol
         return Selector
     }
     
-    @IBSegueAction func RecentColorsSegue(_ coder: NSCoder) -> RecentColorListCode?
+    /// Handle the instantiation of the recent color list.
+    /// - Parameter coder: The NSCoder object used to create the code for the recent color list.
+    /// - Returns: `RecentColorListCode` instance used to run the recent color list.
+    @IBSegueAction public func RecentColorsSegue(_ coder: NSCoder) -> RecentColorListCode?
     {
         let RecentColor = RecentColorListCode(coder: coder)
         RecentColor?.ColorDelegate = self
