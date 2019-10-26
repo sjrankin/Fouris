@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+/// The code to run the recent color list (which isn't really implemented yet).
 class RecentColorListCode: UIViewController, UITableViewDelegate, UITableViewDataSource, ColorPickerProtocol
 {
     public weak var ColorDelegate: ColorPickerProtocol? = nil
