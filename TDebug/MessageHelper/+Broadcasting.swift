@@ -12,10 +12,9 @@ import MultipeerConnectivity
 
 extension MessageHelper
 {
-    // MARK: Broadcasting encoding commands.
+    // MARK: - Broadcasting encoding commands.
     
     /// Create a broadcast text message command.
-    ///
     /// - Parameters:
     ///   - From: The peer that is broadcasting the message.
     ///   - Message: The text message to send.
@@ -26,7 +25,6 @@ extension MessageHelper
     }
     
     /// Create a broadcast text message command.
-    ///
     /// - Parameters:
     ///   - From: The peer that is broadcasting the message.
     ///   - Message: The text message to send.
@@ -40,7 +38,6 @@ extension MessageHelper
     }
     
     /// Create a broadcast command command.
-    ///
     /// - Parameters:
     ///   - From: The peer that is broadcasting the message.
     ///   - PreformattedCommand: The pre-formatted command to broadcast.
@@ -51,7 +48,6 @@ extension MessageHelper
     }
     
     /// Create a broadcast command command.
-    ///
     /// - Parameters:
     ///   - From: The peer that is broadcasting the message.
     ///   - PreformattedCommand: The pre-formatted command to broadcast.
@@ -64,10 +60,9 @@ extension MessageHelper
         return Final
     }
     
-    // MARK: Broadcasting command decoding.
+    // MARK: - Broadcasting command decoding.
     
     /// Decode a broadcast message.
-    ///
     /// - Parameter Raw: The raw message that was broadcast.
     /// - Returns: Tuple in the form (Name of peer that broadcast message, message body). Nil on failure/error.
     public static func DecodeBroadcastMessage(_ Raw: String) -> (String, String)?
@@ -97,7 +92,6 @@ extension MessageHelper
     }
     
     /// Decode a broadcast command.
-    ///
     /// - Parameter Raw: The raw command message that was broadcast.
     /// - Returns: Tuple in the form (Name of peer that broadcast message, undecoded command). Nil on failure/error.
     public static func DecodeBroadcastCommand(_ Raw: String) -> (String, String)?
