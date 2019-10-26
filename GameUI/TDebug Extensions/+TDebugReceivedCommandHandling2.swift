@@ -12,7 +12,9 @@ import UIKit
 
 extension MainViewController
 {
-    func HandlePushedVersionInformation(_ RawData: String)
+    /// Push version information from a peer. Version information is displayed in the debug console.
+    /// - Parameter RawData: Raw data that contains version information from the peer.
+    public func HandlePushedVersionInformation(_ RawData: String)
     {
         let (Name, OS, Version, Build, BuildTimeStamp, Copyright, BuildID, ProgramID) = MessageHelper.DecodeVersionInfo(RawData)
         print("Client name=\(Name), \(ProgramID), Intended OS: \(OS)")
@@ -20,7 +22,10 @@ extension MainViewController
         print("Build time-stamp: \(BuildTimeStamp), Copyright: \(Copyright)")
     }
     
-    func HandleDebuggerHandshake(_ RawData: String, Peer: MCPeerID)
+    /// Handle handshake events with the remote debugger/logger.
+    /// - Parameter RawData: Raw data from the other peer.
+    /// - Parameter Peer: The debugger/logger peer.
+    public func HandleDebuggerHandshake(_ RawData: String, Peer: MCPeerID)
     {
         let Command = MessageHelper.DecodeHandShakeCommand(RawData)
         var PostConnect1 = ""
@@ -72,14 +77,19 @@ extension MainViewController
         }
     }
     
-    func SendClientCommandList(Peer: MCPeerID, CommandID: UUID)
+    /// Sends a list of commands this program can execute to the remote peer.
+    /// - Parameter Peer: The peer that will receive the list of commands.
+    /// - Parameter CommandID: The command ID for sending command lists.
+    public func SendClientCommandList(Peer: MCPeerID, CommandID: UUID)
     {
         let AllCommands = MessageHelper.MakeAllClientCommands(Commands: LocalCommands)
         let EncapsulatedReturn = MessageHelper.MakeEncapsulatedCommand(WithID: CommandID, Payload: AllCommands)
         MPMgr.SendPreformatted(Message: EncapsulatedReturn, To: Peer)
     }
     
-    func GetDeviceName() -> String
+    /// Returns the name of the device.
+    /// - Returns: Name of the device this code is running on.
+    public func GetDeviceName() -> String
     {
         var SysInfo = utsname()
         uname(&SysInfo)
@@ -92,7 +102,10 @@ extension MainViewController
         return String(Parts[0])
     }
     
-    func DoEcho(Delay: Int, Message: String)
+    /// Handles echoing a message.
+    /// - Parameter Delay: Delay between echos.
+    /// - Parameter Message: The message to echo.
+    public func DoEcho(Delay: Int, Message: String)
     {
         if EchoTimer != nil
         {
@@ -105,14 +118,19 @@ extension MainViewController
                                          repeats: false)
     }
     
-    @objc func EchoSomething(_ Info: Any?)
+    /// Sends a message to a peer as part of the echoing command.
+    /// - Parameter Info: Not used.
+    @objc public func EchoSomething(_ Info: Any?)
     {
         let ReturnToSender = MessageToEcho
         let Message = MessageHelper.MakeMessage(WithType: .EchoReturn, ReturnToSender!, GetDeviceName())
         MPMgr.SendPreformatted(Message: Message, To: EchoBackTo)
     }
     
-    func HandleEchoMessage(_ RawData: String, Peer: MCPeerID)
+    /// Handle received echo messages.
+    /// - Parameter RawData: Raw data from the peer.
+    /// - Parameter Peer: The peer that sent an echo to us.
+    public func HandleEchoMessage(_ RawData: String, Peer: MCPeerID)
     {
         let (EchoMessage, _, Delay, _) = MessageHelper.DecodeEchoMessage(RawData)!
         let REchoMessage = String(EchoMessage.reversed())
@@ -122,7 +140,10 @@ extension MainViewController
         }
     }
     
-    func ExecuteCommandFromPeer(_ Command: ClientCommand, Peer: MCPeerID)
+    /// Execute a client command as requested by a peer.
+    /// - Parameter Command: The command to execute.
+    /// - Parameter Peer: The peer that wants us to run a command.
+    public func ExecuteCommandFromPeer(_ Command: ClientCommand, Peer: MCPeerID)
     {
         let SentCommand: ClientCommandIDs = Command.GetCommandType()!
         switch SentCommand
@@ -142,6 +163,9 @@ extension MainViewController
         }
     }
     
+    /// Handle receive client command.
+    /// - Parameter RawData: Raw data from the peer that wants us to execute something.
+    /// - Parameter Peer: The peer that sent the command.
     func HandleRecievedClientCommand(_ RawData: String, Peer: MCPeerID)
     {
         if let ExecuteMe = MessageHelper.DecodeClientCommand(RawData)
@@ -153,7 +177,10 @@ extension MainViewController
         }
     }
     
-    func HandleBroadcastMessage(_ RawData: String, Peer: MCPeerID)
+    /// Handle received broadcast messages.
+    /// - Parameter RawData: Raw data that was broadcast.
+    /// - Parameter Peer: The peer that sent the boardcast command.
+    public func HandleBroadcastMessage(_ RawData: String, Peer: MCPeerID)
     {
         var ItemSource = "TDebug"
         var ItemMessage = ""
