@@ -11,6 +11,9 @@ import UIKit
 
 class XMLAttributeListParser
 {
+    /// A raw string into XML attributes.
+    /// - Parameter From: The raw sting to parse.
+    /// - Returns: Array of XML key-value pairs.
     public static func ParseAttributes(From Raw: String) -> [XMLKVP]
     {
         let Working = Raw.trimmingCharacters(in: CharacterSet.whitespaces)
