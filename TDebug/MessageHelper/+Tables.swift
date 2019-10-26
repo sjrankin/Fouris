@@ -12,7 +12,7 @@ import MultipeerConnectivity
 
 extension MessageHelper
 {
-    // MARK: Table encoding commands.
+    // MARK: - Table encoding commands.
     
     /// Create a table command.
     /// - Parameter SubCommand: The table sub-command.
@@ -35,7 +35,7 @@ extension MessageHelper
         return Final
     }
     
-    // MARK: Table decoding commands.
+    // MARK: - Table decoding commands.
     
     #if false
     /// Decode a received table command.
