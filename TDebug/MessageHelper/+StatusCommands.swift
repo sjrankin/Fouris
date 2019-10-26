@@ -12,8 +12,13 @@ import MultipeerConnectivity
 
 extension MessageHelper
 {
-    // MARK: Status command encoding commands.
+    // MARK: - Status command encoding commands.
     
+    /// Make a debugger state change message.
+    /// - Parameter Prefix: Prefix of the debugger.
+    /// - Parameter From: ID of the sender.
+    /// - Parameter NewDebugState: New state of the debugger.
+    /// - Returns: Command to send to indicate a new debug state.
     public static func MakeDebuggerStateChangeMessage(Prefix: UUID, From: MCPeerID, NewDebugState: Bool) -> String
     {
         let P1 = "Prefix=\(Prefix)"
@@ -23,8 +28,11 @@ extension MessageHelper
         return Final
     }
     
-    // MARK: Status command decoding.
+    // MARK: - Status command decoding.
     
+    /// Decode a debugger state change message.
+    /// - Parameter Raw: Raw data from a remote peer.
+    /// - Returns: Tuple with the remote peer's ID, name, and new debug state.
     public static func DecodeDebuggerStateChanged(_ Raw: String) -> (UUID, String, Bool)?
     {
         let Params = GetParameters(From: Raw, ["Prefix", "Peer", "NewDebugState"])
