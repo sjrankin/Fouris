@@ -13,10 +13,8 @@ import Foundation
 class State
 {
     /// Initialize the state.
-    ///
     /// - Note: This function **must** be called prior to calling other functions in this
     ///         class. If this function is not called, a fatal error will result.
-    ///
     /// - Parameter WithDelegate: Delegate that will receive state change notifications.
     public static func Initialize(WithDelegate: StateProtocol)
     {
@@ -25,15 +23,15 @@ class State
         Delegate = WithDelegate
     }
     
+    /// Holds the delegate for the state.
     private static weak var Delegate: StateProtocol? = nil
     
+    /// Holds the initialized flag.
     private static var IsInitialized = false
     
     /// Attempts to transition to the new state.
-    ///
     /// - Note: If `Initialize` is not called sometime prior to this call, this function will result in
     ///         a fatal error.
-    ///
     /// - Parameter NewState: The new state to transition to.
     /// - Returns: The result of the transition request.
     @discardableResult public static func TransitionTo(NewState: HandShakeCommands) -> HandShakeCommands
@@ -74,11 +72,12 @@ class State
         return .Unknown
     }
     
+    /// Holds the last handshake command.
     private static var LastHandShake: HandShakeCommands = .Unknown
     
+    /// Holds the current state.
     private static var _CurrentState: States = .Available
     /// Returns the current state.
-    ///
     /// - Note: If `Initialize` is not called when at sometime prior to this property,
     ///         a fatal error will occur.
     public static var CurrentState: States
@@ -94,6 +93,9 @@ class State
     }
 }
 
+/// States supported.
+/// - **Available**: State is available.
+/// - **Unavilable**: State is unavailable.
 enum States
 {
     case Available
