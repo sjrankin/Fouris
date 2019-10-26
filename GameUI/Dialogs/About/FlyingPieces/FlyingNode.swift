@@ -62,13 +62,13 @@ class FlyingNode: SCNNode
     }
     
     /// Specular color to use for the piece's surface material.
-    var MainSpecularColor = UIColor.white
+    public var MainSpecularColor = UIColor.white
     
     /// Diffuse color to use for the piece's surface material.
-    var MainDiffuseColor = UIColor.blue
+    public var MainDiffuseColor = UIColor.blue
     
     /// Dictionary of bounds for the piece.
-    var UniverseBounds: [UDirs: (Double, Double)] =
+    public var UniverseBounds: [UDirs: (Double, Double)] =
         [
             .X: (-100.0, 100.0),
             .Y: (-100.0, 100.0),
