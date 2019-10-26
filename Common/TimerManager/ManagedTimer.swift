@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+/// Managed timer.
+/// - Note: Not currently implemented.
 class ManagedTimer
 {
     #if false
