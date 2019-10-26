@@ -13,8 +13,12 @@ import MultipeerConnectivity
 /// Extensions for idiot light message encoding and decoding.
 extension MessageHelper
 {
-    // MARK: Debuggee execution encoding commands.
+    // MARK: - Debuggee execution encoding commands.
     
+    /// Make a command that indicates execution has started.
+    /// - Parameter Prefix: The prefix for the command.
+    /// - Parameter Exclusive: Exclusive flag.
+    /// - Returns: Command to send that indicates execution has started.
     public static func MakeExecutionStartedCommand(Prefix: UUID, Exclusive: Bool) -> String
     {
         let P1 = "Prefix=\(Prefix.uuidString)"
@@ -23,6 +27,11 @@ extension MessageHelper
         return Final
     }
     
+    /// Make a command that indicates execution has terminated.
+    /// - Parameter Prefix: The prefix for the command.
+    /// - Parameter WasFatalError: Indicates if execution terminated due to a fatal error.
+    /// - Parameter LastMessage: The last message to send.
+    /// - Returns: Command to send that indicates execution has terminated.
     public static func MakeExecutionTerminatedCommand(Prefix: UUID, WasFatalError: Bool, LastMessage: String) -> String
     {
         let P1 = "Prefix=\(Prefix.uuidString)"
@@ -32,8 +41,11 @@ extension MessageHelper
         return Final
     }
     
-    // MARK: Debuggee execution command decoding.
+    // MARK: - Debuggee execution command decoding.
     
+    /// Decode an execution started command from a peer.
+    /// - Parameter Raw: The raw data received from the peer.
+    /// - Returns: Tuple with the prefix of the remote peer as well as the exclusive flag.
     public static func DecodeExecutionStartedCommand(_ Raw: String) -> (UUID, Bool)?
     {
         let Results = GetParameters(From: Raw, ["Prefix", "RequestExclusive"])
@@ -55,6 +67,9 @@ extension MessageHelper
         return (PrefixCd, Exclusive)
     }
     
+    /// Decode an execution terminated command from a peer.
+    /// - Parameter Raw: Raw data from the peer.
+    /// - Returns: Tuple with the remote prefix ID, fatal error flag, and last message.
     public static func DecodeExecutionTerminatedCommand(_ Raw: String) -> (UUID, Bool, String)?
     {
         let Results = GetParameters(From: Raw, ["Prefix", "FatalError", "LastMessage"])
