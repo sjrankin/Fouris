@@ -14,7 +14,7 @@ import Photos
 extension PHAsset
 {
     /// Returns the original file name from the instance asset.
-    var OriginalFileName: String?
+    public var OriginalFileName: String?
     {
         return PHAssetResource.assetResources(for: self).first?.originalFilename
     }
