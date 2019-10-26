@@ -10,7 +10,7 @@
 import Foundation
 import UIKit
 
-/// Holds an array of pre-defined, named colors.
+/// Holds an array of pre-defined, named colors and values.
 class PredefinedColorTable
 {
     /// List of pre-defined, named colors.
