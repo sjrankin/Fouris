@@ -53,6 +53,7 @@ extension ThemeManager3
         <Outline Show="true" Color="Red" Fade="false"/>
         <Rotation Enable="true" Direction="Right" Duration="0.3"/>
         <Destruction Method="Shrink" Duration="1.25"/>
+        <GameOver ShowOff="true"/>
         </Bucket>
         <Board>
         <Show Method="FadeIn" Duration="0.25"/>
@@ -87,9 +88,9 @@ extension ThemeManager3
         <BackgroundGrid Show="false" Color="#e0e0e0" Width="0.5"/>
         <CenterLines Show="false" Color="#ffffff" Width="2.0"/>
         </GridLines>
-        <Rotating4>
+        <Rotating>
         <Center ChangeColorAfterRotation="true"/>
-        </Rotating4>
+        </Rotating>
         </Debug>
         <Pieces>
         <Piece ID="f4510cca-262a-4018-bf29-04d703702d65"/>
