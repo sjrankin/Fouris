@@ -10,8 +10,8 @@ import Foundation
 import SceneKit
 import UIKit
 
-//https://medium.com/@zxlee618/custom-geometry-in-scenekit-f91464297fd1
 /// Creates an n-gon shape as the SCNNode.
+/// - Note: See [Custom Geometry in SceneKit](https://medium.com/@zxlee618/custom-geometry-in-scenekit-f91464297fd1)
 class SCNnGon: SCNNode
 {
     /// Default initializer. Sets the radius to 1.0, vertex count to 6, and depth to 0.5.
@@ -102,7 +102,7 @@ class SCNnGon: SCNNode
     /// Creates an SCNShape with the specified number of regularly arranged vertices and extrusion depth and sets the `self.geometry`
     /// property to the new SCNShape object.
     /// - Note: This class uses internal fields and not the public properties.
-    func CommonInitialization()
+    private func CommonInitialization()
     {
         self.geometry = SCNnGon.Geometry(VertexCount: _VertexCount, Radius: _Radius, Depth: _Depth)
     }
