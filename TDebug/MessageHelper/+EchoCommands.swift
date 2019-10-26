@@ -12,10 +12,9 @@ import MultipeerConnectivity
 
 extension MessageHelper
 {
-    // MARK: Echo command encoding commands.
+    // MARK: - Echo command encoding commands.
     
     /// Make an echo message command.
-    ///
     /// - Parameters:
     ///   - Message: The text message to echo.
     ///   - Delay: How long, in seconds, to delay before returning the `Message` back.
@@ -32,8 +31,12 @@ extension MessageHelper
         return Final
     }
     
-    // MARK: Echo command decoding.
+    // MARK: - Echo command decoding.
     
+    /// Decode an echo message.
+    /// - Parameter Raw: Raw message from peer.
+    /// - Returns: Tuple with the name of the peer to echo back to, the number of times to echo, the delay between echoes, and
+    ///            the message to echo.
     public static func DecodeEchoMessage(_ Raw: String) -> (String, String, Int, Int)?
     {
         let Params = GetParameters(From: Raw, ["EchoBackTo", "Count", "Delay", "Message"])
