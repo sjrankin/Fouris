@@ -12,9 +12,10 @@ import SceneKit
 
 extension View3D
 {
-    /// Show or hide regions. This is intended for debug use only.
+    /// Show or hide regions.
+    /// - Note: This is intended for debug use only.
     /// - Parameter Show: Determines whether the debug regions are shown (`true`) or hidden (`false`).
-    func ShowRegions(Show: Bool)
+    public func ShowRegions(Show: Bool)
     {
         for (_, Node) in RegionLayers
         {
