@@ -26,7 +26,7 @@ class StatViewer: UIViewController, UITableViewDelegate, UITableViewDataSource
     let StatIndex =
         [
             BaseGameTypes.Standard: 0,
-            BaseGameTypes.Rotating4: 1
+            BaseGameTypes.Rotating: 1
     ]
     
     var CurrentGameTypeView: BaseGameTypes = .Standard
@@ -83,7 +83,7 @@ class StatViewer: UIViewController, UITableViewDelegate, UITableViewDataSource
         return Cell
     }
     
-    @IBAction func HandleStatSourceChanged(_ sender: Any)
+    @IBAction public func HandleStatSourceChanged(_ sender: Any)
     {
         PopulateTable(WithUser: ShowSegments.selectedSegmentIndex == 0)
         StatTable.reloadData()
@@ -97,7 +97,7 @@ class StatViewer: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
         else
         {
-            CurrentGameTypeView = .Rotating4
+            CurrentGameTypeView = .Rotating
         }
         PopulateTable(WithUser: ShowSegments.selectedSegmentIndex == 0)
         StatTable.reloadData()
