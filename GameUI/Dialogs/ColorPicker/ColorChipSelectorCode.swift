@@ -9,34 +9,35 @@
 import Foundation
 import UIKit
 
+/// Not implemented yet.
 class ColorChipSelectorCode: UIViewController, ColorPickerProtocol
 {
     public weak var ColorDelegate: ColorPickerProtocol? = nil
     
-    override func viewDidLoad()
+    override public func viewDidLoad()
     {
         super.viewDidLoad()
     }
     
-    @IBAction func HandleOKPressed(_ sender: Any)
+    @IBAction public func HandleOKPressed(_ sender: Any)
     {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func HandleCancelPressed(_ sender: Any)
+    @IBAction public func HandleCancelPressed(_ sender: Any)
     {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func HandleSortPressed(_ sender: Any)
+    @IBAction public func HandleSortPressed(_ sender: Any)
     {
     }
     
-    func ColorToEdit(_ Color: UIColor, Tag: Any?)
+    public func ColorToEdit(_ Color: UIColor, Tag: Any?)
     {
     }
     
-    func EditedColor(_ Edited: UIColor?, Tag: Any?)
+    public func EditedColor(_ Edited: UIColor?, Tag: Any?)
     {
     }
 }
