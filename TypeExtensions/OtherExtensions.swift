@@ -15,7 +15,7 @@ extension Double
     /// Round a value to the supplied precision.
     /// - Parameter To: Precision of the returned value.
     /// - Returns: Rounded double value.
-    func Round(To: Int) -> Double
+    public func Round(To: Int) -> Double
     {
         let Div = pow(10.0, Double(To))
         return (self * Div).rounded() / Div
@@ -25,7 +25,7 @@ extension Double
     /// - Parameter From: Low end of the valid range.
     /// - Parameter To: High end of the valid range.
     /// - Returns: Vale of the double clamped to the supplied range.
-    func Clamp(_ From: Double, _ To: Double) -> Double
+    public func Clamp(_ From: Double, _ To: Double) -> Double
     {
         if self < From
         {
@@ -40,7 +40,7 @@ extension Double
     
     /// Returns the size of a double instance value in memory.
     /// - Returns: Size of the double in memory.
-    func SizeOf() -> Int
+    public func SizeOf() -> Int
     {
         return MemoryLayout.size(ofValue: self)
     }
@@ -48,7 +48,7 @@ extension Double
     /// Returns the size of a double value in memory.
     /// - Note: This is a static version of the function and supplies its own Double.
     /// - Returns: Size of the double in memory.
-    static func SizeOf() -> Int
+    static public func SizeOf() -> Int
     {
         return MemoryLayout.size(ofValue: Double(0.0))
     }
