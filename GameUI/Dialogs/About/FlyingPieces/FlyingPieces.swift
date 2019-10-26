@@ -64,7 +64,7 @@ class FlyingPieces: SCNView, SCNSceneRendererDelegate, RPPreviewViewControllerDe
     ///   - Switching to or from a live view takes an appreciable amount of time and is quite slow.
     ///   - This functionality isn't available when running on a simulator.
     /// - Parameter Recognizer: The gesture recognizer.
-    @objc func ToggleLiveView(Recognizer: UIGestureRecognizer)
+    @objc public func ToggleLiveView(Recognizer: UIGestureRecognizer)
     {
         if UserDefaults.standard.bool(forKey: "RunningOnSimulator")
         {
@@ -88,12 +88,12 @@ class FlyingPieces: SCNView, SCNSceneRendererDelegate, RPPreviewViewControllerDe
     }
     
     /// Holds the showing-live-view flag.
-    var ShowLiveView: Bool = false
+    public var ShowLiveView: Bool = false
     
     /// Handles the tap that determines the speed of rotation of the pieces about the visual Z axis.
     /// - Note: Initially, the scene does not rotate around the Z axis.
     /// - Parameter Recognizer: The gesture recognizer.
-    @objc func HandleFlyingTap(Recognizer: UIGestureRecognizer)
+    @objc public func HandleFlyingTap(Recognizer: UIGestureRecognizer)
     {
         if Recognizer.state == .ended
         {
@@ -115,9 +115,9 @@ class FlyingPieces: SCNView, SCNSceneRendererDelegate, RPPreviewViewControllerDe
     }
     
     /// Current rotation index that determines how fast to rotate objects in the scene around the Z axis.
-    var CurrentRotationDurationIndex = 0
+    private var CurrentRotationDurationIndex = 0
     /// Speeds of rotation around the Z axis.
-    let SceneRotationDurations = [0.0, 60.0, 30.0, 20.0, 10.0, 3.0]
+    private let SceneRotationDurations = [0.0, 60.0, 30.0, 20.0, 10.0, 3.0]
     
     /// Adds lighting to the scene.
     private func AddLights()
@@ -160,7 +160,7 @@ class FlyingPieces: SCNView, SCNSceneRendererDelegate, RPPreviewViewControllerDe
     
     /// Enter the steady state in which for each piece that disappears, a new one is added.
     /// - Parameter Count: Number of simultaneous pieces to show.
-    func EnterSteadyState(Count: Int)
+    public func EnterSteadyState(Count: Int)
     {
         MakePieces(Count: Count)
     }
@@ -183,7 +183,7 @@ class FlyingPieces: SCNView, SCNSceneRendererDelegate, RPPreviewViewControllerDe
     /// Make a certain number of pieces.
     /// - Note: All existing pieces are removed first.
     /// - Parameter Count: Number of pieces to create and add to the scene.
-    func MakePieces(Count: Int)
+    public func MakePieces(Count: Int)
     {
         Stop()
         for _ in 0 ..< Count
@@ -193,13 +193,13 @@ class FlyingPieces: SCNView, SCNSceneRendererDelegate, RPPreviewViewControllerDe
     }
     
     /// List of piece shapes that can be displayed in the scene.
-    let PieceList: [PieceShapes] = [.Bar, .S, .Z, .T, .L, .backL, .Zig, .Zag, .ShortL, .ShortBackL, .C, .Plus, .Corner, .JoinedSquares,
+    private let PieceList: [PieceShapes] = [.Bar, .S, .Z, .T, .L, .backL, .Zig, .Zag, .ShortL, .ShortBackL, .C, .Plus, .Corner, .JoinedSquares,
                                     .EmptyBox, .lowerI, .EmptyDiamond, .ParallelLines, .Sweeper, .CapitalI, .CapitalO, .Diagonal,
                                     .X, .BigGap, .LongGap, .LongDiagonal, .V, .FarApart, .BigBlock3x3, .BigBlock4x4]
     
     /// Returns a random piece shape.
     /// - Returns: Random piece shape from `PieceList`.
-    func RandomPiece() -> PieceShapes
+    public func RandomPiece() -> PieceShapes
     {
         return PieceList.randomElement()!
     }
@@ -207,7 +207,7 @@ class FlyingPieces: SCNView, SCNSceneRendererDelegate, RPPreviewViewControllerDe
     /// Make a piece shape and return it.
     /// - Parameter Shape: The shape of the piece to create.
     /// - Returns: A SCNNode overridden as a `FlyingNode` that contain the object to display in the scene. Nil returned on error.
-    func MakePiece(_ Shape: PieceShapes) -> FlyingNode?
+    public func MakePiece(_ Shape: PieceShapes) -> FlyingNode?
     {
         var PieceNode: FlyingNode? = nil
         let ShapeID = PieceFactory.ShapeIDMap[Shape]!
@@ -228,7 +228,7 @@ class FlyingPieces: SCNView, SCNSceneRendererDelegate, RPPreviewViewControllerDe
     }
     
     /// Makes one random piece to display in the scene.
-    func MakeOnePiece()
+    public func MakeOnePiece()
     {
         if let NewPiece = MakePiece(RandomPiece())
         {
@@ -248,12 +248,12 @@ class FlyingPieces: SCNView, SCNSceneRendererDelegate, RPPreviewViewControllerDe
     /// The primary node. All flying pieces are contained in this node.
     /// - Note: By rotating this single node, we can simulate camera rotation about the Z axis (something that is probably possible
     ///         using SceneKit APIs but not really documented).
-    var PrimaryNode: SCNNode? = nil
+    private var PrimaryNode: SCNNode? = nil
     
     /// Called by a piece when its motion is completed.
     /// - Parameter Node: The node that completed motion.
     /// - Parameter Replace: If true, a new piece is created to keep steady state going.
-    func MotionCompleted(Node: SCNNode, Replace: Bool)
+    public func MotionCompleted(Node: SCNNode, Replace: Bool)
     {
         OperationQueue.main.addOperation
             {
@@ -277,7 +277,7 @@ class FlyingPieces: SCNView, SCNSceneRendererDelegate, RPPreviewViewControllerDe
     /// - Parameter renderer: Not used.
     /// - Parameter didRenderScene: Not used.
     /// - Parameter atTime: Not used.
-    func renderer(_ renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval)
+    public func renderer(_ renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval)
     {
         if CreatingVideo
         {
@@ -287,7 +287,7 @@ class FlyingPieces: SCNView, SCNSceneRendererDelegate, RPPreviewViewControllerDe
     }
     
     /// Holds an array of images created for each frame for the intent of creating a video.
-    var ImageArray: [UIImage] = [UIImage]()
+    private var ImageArray: [UIImage] = [UIImage]()
     
     /// Start saving frames for video creation.
     /// - Note: See [How to record user videos using ReplayKit](https://www.hackingwithswift.com/example-code/media/how-to-record-user-videos-using-replaykit)
@@ -342,7 +342,9 @@ class FlyingPieces: SCNView, SCNSceneRendererDelegate, RPPreviewViewControllerDe
         })
     }
     
-    func previewControllerDidFinish(_ previewController: RPPreviewViewController)
+    /// Handle preview generation finished.
+    /// - Parameter previewController: Not used.
+    public func previewControllerDidFinish(_ previewController: RPPreviewViewController)
     {
         previewController.dismiss(animated: true)
     }
@@ -358,6 +360,8 @@ class FlyingPieces: SCNView, SCNSceneRendererDelegate, RPPreviewViewControllerDe
 
 extension UIView
 {
+    /// Find and returns the parent `UIViewController` of a `UIView`. Operates on the instance `UIView`.
+    /// - Returns: The parent `UIViewController` of the instance `UIView` on success, nil if not found.
     func FindViewController() -> UIViewController?
     {
         if let NextResponder = self.next as? UIViewController
