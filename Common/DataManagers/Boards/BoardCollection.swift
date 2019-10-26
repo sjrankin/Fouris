@@ -29,7 +29,7 @@ class BoardCollection: XMLDeserializeProtocol
     
     /// Deserialize a node from the file that contains game boards.
     /// - Parameter Node: Node to deserialize.
-    func DeserializedNode(_ Node: XMLNode)
+    public func DeserializedNode(_ Node: XMLNode)
     {
         switch Node.Name
         {
@@ -44,8 +44,6 @@ class BoardCollection: XMLDeserializeProtocol
                     BoardList.append(Board)
                     let BucketS = XMLNode.GetAttributeNamed("Type", InNode: Child)!
                     Board._BucketShape = BucketShapes(rawValue: BucketS)!
-                    //let GameS = XMLNode.GetAttributeNamed("GameType", InNode: Child)!
-                    //Board._GameType = BaseGameTypes(rawValue: GameS)!
                     for BoardChild in Child.Children
                     {
                         switch BoardChild.Name
@@ -137,7 +135,7 @@ class BoardCollection: XMLDeserializeProtocol
     /// - Parameter From: The source string.
     /// - Returns: CGPoint based on the contents of `From` on success, `CGPoint.zero` if the string
     ///            cannot be successfully parsed.
-    func CreatePoint(From: String) -> CGPoint
+    private func CreatePoint(From: String) -> CGPoint
     {
         if From.isEmpty
         {
@@ -168,7 +166,7 @@ class BoardCollection: XMLDeserializeProtocol
     /// - Parameter From: The raw string to parse.
     /// - Returns: Tuple of CGPoint structures with data from the parsed string. Nil returned if the
     ///            string cannot be parsed.
-    func CreateRectangle(From: String) -> (CGPoint, CGPoint)?
+    private func CreateRectangle(From: String) -> (CGPoint, CGPoint)?
     {
         if From.isEmpty
         {
