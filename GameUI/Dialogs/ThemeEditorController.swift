@@ -48,7 +48,7 @@ class ThemeEditorController: UIViewController, ThemeEditingProtocol
         //do something here
     }
     
-    // MARK: Dialog instantiations.
+    // MARK: - Dialog instantiations.
     
     @IBSegueAction func InstantiateGameBackground(_ coder: NSCoder) -> GameBackgroundDialog?
     {
@@ -86,7 +86,7 @@ class ThemeEditorController: UIViewController, ThemeEditingProtocol
         return Exporter
     }
     
-    // MARK: Bucket grid controls.
+    // MARK: - Bucket grid controls.
     
     @IBAction func HandleShowBucketGridChanged(_ sender: Any)
     {
@@ -98,7 +98,7 @@ class ThemeEditorController: UIViewController, ThemeEditingProtocol
         UserTheme!.ShowBucketGridOutline = ShowBucketBoundsSwitch.isOn
     }
     
-    // MARK: UI control handling.
+    // MARK: - UI control handling.
     
     @IBAction func HandleCloseButtonPressed(_ sender: Any)
     {
