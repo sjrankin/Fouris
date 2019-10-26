@@ -12,11 +12,10 @@ import UIKit
 
 /// Factory responsible for creating game pieces. A game piece is made of one or more (not necessarily contiguous) blocks.
 /// Pieces are defined in an externally-stored file that is read at start-up time. If there is an error reading that file,
-/// the game will fail catastropically.
+/// the game will fail catastrophically.
 class PieceFactory
 {
     /// Initialize the factory. Pre-load the queue with pieces.
-    ///
     /// - Parameter: ToEnqueueCount: The number of pieces to initially enqueue. This is also the number of pieces to
     ///              keep enqueued.
     /// - Parameter: Sequence: Game sequence (eg, sequential game number). Used for debugging.
@@ -154,11 +153,12 @@ class PieceFactory
         CleanUp()
     }
     
+    /// Holds the pre-determined first piece. Used for debugging purposes.
     private var PredeterminedFirst: PieceShapes = .T
+    /// Holds the use-a-pre-determined-first-piece flag. Used for debugging purposes.
     private var UsePredeterminedOrder = false
     
     /// Return the contents of the queue as a list. The queue is unchanged.
-    ///
     /// - Returns: List of pieces in the queue.
     public func QueueAsList() -> [Piece]
     {
@@ -172,7 +172,6 @@ class PieceFactory
     }
     
     /// Determines if the top of the queue has a certain number of pieces that are all the same.
-    ///
     /// - Parameters:
     ///   - MaxSame: The number of pieces that must be the same before triggering the process to remove excess same pieces.
     ///   - SameShape: The piece that was repeated too many times.
@@ -266,7 +265,6 @@ class PieceFactory
     
     /// Returns but does not dequeue the next piece. Used to show the user the next piece after the
     /// current piece.
-    ///
     /// - Returns: The next piece to dequeue (but not dequeued).
     public func GetNextPiece() -> Piece
     {
@@ -346,7 +344,6 @@ class PieceFactory
     }
     
     /// Create and return a piece with a randomly selected shape.
-    ///
     /// - Parameters
     ///    - ForBoard: The board where the block will live.
     ///   - WithID: ID to assign to the new piece.
@@ -570,7 +567,6 @@ class PieceFactory
     }
     
     /// Given a shape from any group, return its group.
-    ///
     /// - Parameter From: The raw value of the enum whose group will be returned.
     /// - Returns: The group associated with the enum whose raw value is passed to us. Nil if not found.
     public static func GetPieceGroup(From: String) -> MetaPieces?
@@ -606,6 +602,7 @@ class PieceFactory
         return nil
     }
     
+    /// Map between piece shapes and names.
     public static let PieceNameMap: [PieceShapes: String] =
         [
             //Standard
@@ -656,7 +653,6 @@ class PieceFactory
     ]
     
     /// Return the human-readable name for a specified piece.
-    ///
     /// - Parameters:
     ///   - MetaPiece: The meta-piece group.
     ///   - PieceRawValue: The raw value of the piece.
@@ -907,7 +903,6 @@ class PieceFactory
 }
 
 /// Piece categories.
-///
 /// - Standard: Standard Tetris pieces.
 /// - NonStandard: Non-standard but contiguous pieces.
 /// - PiecesWithGaps: Pieces with gaps.
@@ -924,7 +919,6 @@ enum MetaPieces: Int, CaseIterable
 }
 
 /// Standard Tetris pieces.
-///
 /// - Bar: Bar, four blocks long.
 /// - Square: 2x2 square.
 /// - S: Vaguely "S" shaped.
@@ -944,7 +938,6 @@ enum StandardPieces: String, CaseIterable
 }
 
 /// Pieces with gaps and holes.
-///
 /// - EmptyBox: Empty box.
 /// - LowerI: Lower-case "i".
 /// - O: Capital "O".
@@ -958,7 +951,6 @@ enum PiecesWithGaps: String, CaseIterable
 }
 
 /// Somewhat reasonable, non-standard pieces.
-///
 /// - Zig: Larger "Z" shaped piece.
 /// - Zag: Backwards `Zig` piece.
 /// - ShortL: Short "L" shaped.
@@ -980,7 +972,6 @@ enum NonStandardPieces: String, CaseIterable
 }
 
 /// Unreasonable large pieces.
-///
 /// - Sweeper: Very long bar.
 /// - CapitalI: Capital I with serifs.
 /// - BigBlock3x3: 3x3 solid block.
@@ -995,7 +986,6 @@ enum BigPieces: String, CaseIterable
 }
 
 /// Randomly created pieces.
-///
 /// - Random4x4: Randomly assigned blocks in a 4x4 matrix.
 /// - Random3x3: Randomly assigned blocks in a 3x3 matrix.
 /// - Random2x2: Randomly assigned blocks in a 2x2 matrix.
@@ -1007,7 +997,6 @@ enum RandomPieces: String, CaseIterable
 }
 
 /// Malicious pieces designed to be mean.
-///
 /// - Diagonal: Long diagonal.
 /// - X: Capital "X"
 /// - BigGap: Piece with a very large gap.
@@ -1027,7 +1016,6 @@ enum MaliciousPieces: String, CaseIterable
 }
 
 /// Test pieces.
-///
 /// - Test1x1: 1x1 block, eg, single block.
 /// - Test2x2: 2x2 block.
 /// - Test3x3: 3x3 block.
@@ -1039,7 +1027,6 @@ enum TestPieces: String, CaseIterable
 }
 
 /// Piece classes.
-///
 /// - **Standard**: Standard game pieces.
 /// - **TestPieces**: Pieces used for AI testing. Should not be selectable by the user.
 /// - **Malicious**: Malicously-shaped pieces.
@@ -1061,7 +1048,6 @@ enum PieceClasses: String, CaseIterable
 }
 
 /// All valid shapes for the game.
-///
 /// - **Bar**: 3x1 bar.
 /// - **Square**: 2x2 square.
 /// - **S**: Square S
