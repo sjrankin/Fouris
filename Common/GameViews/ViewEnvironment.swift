@@ -16,7 +16,7 @@ class Environment
     /// - Note: If running on a Mac (eg, AppKit), `.Desktop` is always returned.
     /// - Returns: The type of device the program is running on. Returns `ExecutingDevice.Unknown` if the device type
     ///            is not comprehended.
-    static func DeviceType() -> ExecutingDevice
+    static public func DeviceType() -> ExecutingDevice
     {
         switch UIDevice.current.userInterfaceIdiom
         {
@@ -32,11 +32,9 @@ class Environment
      }
     
     /// Returns the model name (eg, iPhone8,2).
-    ///
     /// - Note: [How to determine the current iPhone device model.](https://stackoverflow.com/questions/26028918/how-to-determine-the-current-iphone-device-model)
-    ///
     /// - Returns: Model name.
-    static func ModelName() -> String
+    static public func ModelName() -> String
     {
         var SystemInfo = utsname()
         uname(&SystemInfo)
@@ -88,9 +86,8 @@ class Environment
     
     /// Returns the type of phone we're running on. If not running on a phone, the type returned
     /// will reflect that.
-    ///
     /// - Returns: Phone type if on a phone. If not on a phone, either `.Simulator` or `.NotOnPhone` will be returned.
-    static func PhoneType() -> PhoneTypes
+    static public func PhoneType() -> PhoneTypes
     {
         let MachineName = ModelName()
         if let CurrentMachine = PhoneMap[MachineName]
@@ -101,16 +98,14 @@ class Environment
     }
     
     /// Determines if the current phone is on a "plus"-sized phone.
-    ///
     /// - Returns: True if on a plus (large) phone, false if not (or if on the simulator or non-phone device).
-    static func OnPlusPhone() -> Bool
+    static public func OnPlusPhone() -> Bool
     {
         return [.iPhone6Plus, .iPhone6sPlus, .iPhone7Plus, .iPhone8Plus, .iPhoneX, .iPhoneXSMax, .iPhoneXR].contains(PhoneType())
     }
 }
 
 /// Types of known and/or supported phones.
-///
 /// - iPhone4: iPhone 4 (not supported)
 /// - iPhone4s: iPhone 4s (not supported)
 /// - iPhone5: iPhone 5 (not supported)
