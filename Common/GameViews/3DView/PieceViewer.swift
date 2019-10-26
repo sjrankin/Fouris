@@ -14,7 +14,7 @@ import SceneKit
 @IBDesignable class PieceViewer: SCNView
 {
     /// The scene that is shown in the viewer
-    var PieceScene: SCNScene!
+    public var PieceScene: SCNScene!
     
     /// Required by framework.
     /// - Parameter coder: See Apple documentation.
@@ -44,7 +44,7 @@ import SceneKit
     }
     
     /// Adds the camera and light to the scene.
-    func AddCameraAndLight()
+    public func AddCameraAndLight()
     {
         if InfrastructureAdded
         {
@@ -103,7 +103,7 @@ import SceneKit
     
     /// Returns the extent of the piece.
     /// - Returns: Tuple with the first term as the horizontal extent, and the second term as the vertical extent.
-    func GetExtents() -> (Int, Int)
+    public func GetExtents() -> (Int, Int)
     {
         var MinX: Int = 10000
         var MaxX: Int = -10000
@@ -279,7 +279,7 @@ import SceneKit
         PieceNode?.removeAllActions()
     }
     
-    // MARK: Interface builder-related functions.
+    // MARK: - Interface builder-related functions.
     
     /// Holds the the texture to use for each block.
     private var _PieceTexture: UIImage? = nil
@@ -488,13 +488,13 @@ import SceneKit
         }
     }
     
-    // MARK: Visual piece creation.
+    // MARK: - Visual piece creation.
     
     /// Node that holds the blocks that make up the piece.
-    var PieceNode: SCNNode? = nil
+    public var PieceNode: SCNNode? = nil
     
     /// Removes all blocks from the piece to view.
-    func Clear()
+    public func Clear()
     {
         for BlockNode in PieceNode!.childNodes
         {
@@ -510,7 +510,7 @@ import SceneKit
     /// Add a block at the specified coordinate. If a block is already in that coordinate, no action is taken.
     /// - Parameter X: Horizontal coordinate.
     /// - Parameter Y: Vertical coordinate.
-    func DoAddBlock(_ X: Int, _ Y: Int)
+    public func DoAddBlock(_ X: Int, _ Y: Int)
     {
         for (AtX, AtY) in BlockList
         {
@@ -527,7 +527,7 @@ import SceneKit
     /// no action is taken.
     /// - Parameter X: Horizontal coordinate.
     /// - Parameter Y: Vertical coordinate.
-    func DoRemoveBlock(_ X: Int, _ Y: Int)
+    public func DoRemoveBlock(_ X: Int, _ Y: Int)
     {
         BlockList = BlockList.filter({!($0.0 == X && $0.1 == Y)})
         DrawPiece()
@@ -535,14 +535,14 @@ import SceneKit
     
     /// Add a block at the specified coordinate.
     /// - Parameter Location: Blook coordinate class.
-    func AddBlockAt(_ Location: BlockCoordinates<Int>)
+    public func AddBlockAt(_ Location: BlockCoordinates<Int>)
     {
         DoAddBlock(Location.X, Location.Y)
     }
     
     /// Add a block at the specified coordinate.
     /// - Parameter Location: Block logical location.
-    func AddBlockAt(_ Location: PieceBlockLocation)
+    public func AddBlockAt(_ Location: PieceBlockLocation)
     {
         DoAddBlock(Location.Coordinates.X!, Location.Coordinates.Y!)
     }
@@ -550,21 +550,21 @@ import SceneKit
     /// Add a block at the specified coordinate.
     /// - Parameter X: Horizontal coordinate.
     /// - Parameter Y: Vertical coordinate.
-    func AddBlockAt(_ X: Int, _ Y: Int)
+    public func AddBlockAt(_ X: Int, _ Y: Int)
     {
         DoAddBlock(X, Y)
     }
     
     /// Remove a block from the specified coordinate.
     /// - Parameter Location: The coordinate of the block to remove.
-    func RemoveBlockAt(_ Location: BlockCoordinates<Int>)
+    public func RemoveBlockAt(_ Location: BlockCoordinates<Int>)
     {
         DoRemoveBlock(Location.X, Location.Y)
     }
     
     /// Remove a block from the specified coordinate.
     /// - Parameter Location: The logical location of the block to remove.
-    func RemoveBlockAt(_ Location: PieceBlockLocation)
+    public func RemoveBlockAt(_ Location: PieceBlockLocation)
     {
         DoRemoveBlock(Location.Coordinates.X!, Location.Coordinates.Y!)
     }
@@ -572,7 +572,7 @@ import SceneKit
     /// Add a piece to display in the view.
     /// - Note: Existing blocks will be removed.
     /// - Parameter ThePiece: A piece definition that will be displayed.
-    func AddPiece(_ ThePiece: PieceDefinition)
+    public func AddPiece(_ ThePiece: PieceDefinition)
     {
         BlockList.removeAll()
         for Location in ThePiece.Locations
@@ -585,7 +585,7 @@ import SceneKit
     /// - Note: Existing blocks will be removed.
     /// - Parameter ThePiece: A piece that will be displayed. This piece will most likely be an ephemeral piece,
     ///                       not a piece in the game.
-    func AddPiece(_ ThePiece: Piece)
+    public func AddPiece(_ ThePiece: Piece)
     {
         BlockList.removeAll()
         for SomeBlock in ThePiece.Components
