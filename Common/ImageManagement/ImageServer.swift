@@ -24,7 +24,6 @@ class ImageServer
     }
     
     /// Return a named image at the requested size.
-    ///
     /// - Parameters:
     ///   - ImageName: Name of the image.
     ///   - WithSize: Size of the image.
@@ -55,7 +54,6 @@ class ImageServer
     }
     
     /// Returns the size of a pre-rendered image.
-    ///
     /// - Parameter ImageType: The type of image whose size is returned.
     /// - Returns: The size of the image (in pixels) of the image type.
     public static func GetRenderedImageSize(_ ImageType: GameImageTypes) -> CGSize
@@ -89,7 +87,6 @@ class ImageServer
     }
     
     /// Return the size of a pre-rendered image modified by the target view size and percent.
-    ///
     /// - Parameters:
     ///   - ImageType: The type of image whose size is returned.
     ///   - TargetWidth: The width of the target view controller.
@@ -104,7 +101,6 @@ class ImageServer
     }
 
     /// Return a named image.
-    ///
     /// - Parameter named: Name of the image.
     /// - Returns: UIImage with the named image.
     public static func GetNamedImage(named: String) -> UIImage
@@ -114,7 +110,6 @@ class ImageServer
 }
 
 /// Types of in-game images.
-///
 /// - PlayButton: The play button text image.
 /// - StopButton: The stop button text image.
 /// - PauseButton: The pause button text image.
