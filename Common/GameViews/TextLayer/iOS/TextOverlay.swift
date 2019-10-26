@@ -45,10 +45,6 @@ class TextOverlay: TextLayerDisplayProtocol
                      PauseLabel: UIView?,
                      PieceControl: PieceViewer?)
     {
-        #if false
-        VersionContainer = VersionBox
-        VersionData = VersionLabel
-        #endif
         CurrentScoreContainer = CurrentScoreLabel
         HighScoreContainer = HighScoreLabel
         GameOverContainer = GameOverLabel
@@ -61,9 +57,6 @@ class TextOverlay: TextLayerDisplayProtocol
         GameOverContainer?.layer.backgroundColor = UIColor.clear.cgColor
         PressPlayContainer?.layer.backgroundColor = UIColor.clear.cgColor
         PauseContainer?.layer.backgroundColor = UIColor.clear.cgColor
-        VersionContainer?.layer.backgroundColor = UIColor.black.cgColor
-        VersionContainer?.layer.borderColor = UIColor.white.cgColor
-        VersionContainer?.alpha = 0.0
         CurrentScoreContainer?.layer.zPosition = 10000
         HighScoreContainer?.layer.zPosition = 10000
         GameOverContainer?.layer.zPosition = 10000
@@ -78,15 +71,20 @@ class TextOverlay: TextLayerDisplayProtocol
         InitializeLabels()
     }
     
-    var VersionContainer: UIView? = nil
-    var VersionData: UILabel? = nil
-    var CurrentScoreContainer: UIView? = nil
-    var HighScoreContainer: UIView? = nil
-    var GameOverContainer: UIView? = nil
-    var PressPlayContainer: UIView? = nil
-    var PauseContainer: UIView? = nil
-    var PieceViewControl: PieceViewer? = nil
+    /// Holds the current score.
+    private var CurrentScoreContainer: UIView? = nil
+    /// Holds the high score.
+    private var HighScoreContainer: UIView? = nil
+    /// Holds the game over text.
+    private var GameOverContainer: UIView? = nil
+    /// Holds the press play text.
+    private var PressPlayContainer: UIView? = nil
+    /// Holds the pause text.
+    private var PauseContainer: UIView? = nil
+    /// Holds the piece view.
+    private var PieceViewControl: PieceViewer? = nil
     
+    /// Initialize the labels.
     private func InitializeLabels()
     {
         PopulateStringCache()
@@ -297,7 +295,8 @@ class TextOverlay: TextLayerDisplayProtocol
     
     /// Find and return the specified layer in the passed view.
     /// - Parameter From: The view searched for the specified layer.
-    /// -
+    /// - Parameter ContainerType: The type of container to return.
+    /// - Returns: Layer with the specified container.
     private func GetContainerLayer(From: UIView, ContainerType: ContainerTypes) -> CALayer?
     {
         var Layer: CALayer? = nil
@@ -309,7 +308,7 @@ class TextOverlay: TextLayerDisplayProtocol
     /// - Parameter NextPiece: The next piece to show. Visualized by **PieceFactory**.
     /// - Parameter Duration: The number of seconds to fade in the image of the next piece.
     /// - Parameter AddShadow: If true, a shadow is added to the next piece. Defaults to true.
-    func ShowNextPiece(_ NextPiece: Piece, Duration: Double? = nil, AddShadow: Bool = true)
+    public func ShowNextPiece(_ NextPiece: Piece, Duration: Double? = nil, AddShadow: Bool = true)
     {
         OperationQueue.main.addOperation
             {
@@ -331,7 +330,7 @@ class TextOverlay: TextLayerDisplayProtocol
     
     /// Hide the next piece.
     /// - Parameter Duration: The number of seconds to fade out the image of the next piece.
-    func HideNextPiece(Duration: Double? = nil)
+    public func HideNextPiece(Duration: Double? = nil)
     {
         OperationQueue.main.addOperation
             {
@@ -353,7 +352,7 @@ class TextOverlay: TextLayerDisplayProtocol
     /// - Note: Score text layers are generated each time this function is called (because it doesn't make sense to cache
     ///         changeable text).
     /// - Parameter NewScore: Score to display.
-    func ShowCurrentScore(NewScore: Int)
+    public func ShowCurrentScore(NewScore: Int)
     {
         OperationQueue.main.addOperation
             {
@@ -380,7 +379,7 @@ class TextOverlay: TextLayerDisplayProtocol
     }
     
     /// Hide the current score value.
-    func HideCurrentScore()
+    public func HideCurrentScore()
     {
         OperationQueue.main.addOperation
             {
@@ -395,7 +394,7 @@ class TextOverlay: TextLayerDisplayProtocol
     /// - Parameter Highlight: Determines if the text color is highlighted. Default is false.
     /// - Parameter HighlightColor: The color to use to highlight the text.
     /// - Parameter HighlightDuration: The duration of the highlight.
-    func ShowHighScore(NewScore: Int, Highlight: Bool = false, HighlightColor: ColorNames = .Gold, HighlightDuration: Double = 1.0)
+    public func ShowHighScore(NewScore: Int, Highlight: Bool = false, HighlightColor: ColorNames = .Gold, HighlightDuration: Double = 1.0)
     {
         LastHighScore = NewScore
         OperationQueue.main.addOperation
@@ -429,13 +428,13 @@ class TextOverlay: TextLayerDisplayProtocol
     }
     
     /// Holds the most recent high score value.
-    var LastHighScore = -1
+    private var LastHighScore = -1
     
-    /// The color
-    var HighScoreResetColor = ColorNames.Cyan
+    /// The color for the high score.
+    public var HighScoreResetColor = ColorNames.Cyan
     
     /// Resets the high score color to the value in **HighScoreResetColor**.
-    @objc func ResetHighScoreColor()
+    @objc public func ResetHighScoreColor()
     {
         OperationQueue.main.addOperation
             {
@@ -460,7 +459,7 @@ class TextOverlay: TextLayerDisplayProtocol
     }
     
     /// Hide the high score.
-    func HideHighScore()
+    public func HideHighScore()
     {
         OperationQueue.main.addOperation
             {
@@ -470,7 +469,7 @@ class TextOverlay: TextLayerDisplayProtocol
     
     /// Show the "Pause" text.
     /// - Parameter Duration: The number of seconds to fade in the "Pause" text.
-    func ShowPause(Duration: Double? = nil)
+    public func ShowPause(Duration: Double? = nil)
     {
         let FinalDuration = Duration == nil ? 0.0 : Duration!
         let PauseText = GetString(ForType: .Paused)
@@ -484,11 +483,11 @@ class TextOverlay: TextLayerDisplayProtocol
     }
     
     /// Flag that indicates the pause label was created.
-    var PauseLabelCreated = false
+    private var PauseLabelCreated = false
     
     /// Hide the "Pause" text.
     /// - Parameter Duration: The number of seconds to fade out the "Pause" text.
-    func HidePause(Duration: Double? = nil)
+    public func HidePause(Duration: Double? = nil)
     {
         let FinalDuration = Duration == nil ? 0.3 : Duration!
         HideObject(PauseContainer!, Duration: FinalDuration, ContainerType: .Paused)
@@ -496,7 +495,7 @@ class TextOverlay: TextLayerDisplayProtocol
     
     /// Show the "Press Play to Start" text.
     /// - Parameter Duration: The number of seconds to fade in the text.
-    func ShowPressPlay(Duration: Double? = nil)
+    public func ShowPressPlay(Duration: Double? = nil)
     {
         let FinalDuration = Duration == nil ? 0.0 : Duration!
         let PressPlayText = GetString(ForType: .PressPlay)
@@ -521,11 +520,11 @@ class TextOverlay: TextLayerDisplayProtocol
     }
     
     /// Flag that indicates the press play text layer was created.
-    var PressPlayLabelCreated = false
+    private var PressPlayLabelCreated = false
     
     /// Hide the "Pres Play to Start" text.
     /// - Parameter Duration: The number of seconds to fade out the text.
-    func HidePressPlay(Duration: Double? = nil)
+    public func HidePressPlay(Duration: Double? = nil)
     {
         let FinalDuration = Duration == nil ? 0.3 : Duration!
         HideObject(PressPlayContainer!, Duration: FinalDuration, ContainerType: .PressPlay)
@@ -551,7 +550,7 @@ class TextOverlay: TextLayerDisplayProtocol
     /// - Parameter Duration: Number of seconds to fade in the text.
     /// - Parameter HideAfter: Number of seconds to wait before automatically hiding the text. If nil, the text will not be
     ///                        automatically hidden. Default is nil.
-    func ShowGameOver(Duration: Double?, HideAfter: Double? = nil)
+    public func ShowGameOver(Duration: Double?, HideAfter: Double? = nil)
     {
         let FinalDuration = Duration == nil ? 0.0 : Duration!
         let GameOverString = GetString(ForType: .GameOver)
@@ -567,7 +566,7 @@ class TextOverlay: TextLayerDisplayProtocol
     /// Hide the "Game Over" text.
     /// - Parameter Duration: Number of seconds to fade out the "Game Over" text.
     /// - Parameter MovePressPlay: If true, the press play container is moved to its original location.
-    func HideGameOver(Duration: Double? = nil, MovePressPlay: Bool = true)
+    public func HideGameOver(Duration: Double? = nil, MovePressPlay: Bool = true)
     {
         let FinalDuration = Duration == nil ? 0.1 : Duration!
         if MovePressPlay
@@ -585,68 +584,4 @@ class TextOverlay: TextLayerDisplayProtocol
     
     /// Flag that indicates the game over label was created.
     private var GameOverLabelCreated = false
-    
-    #if false
-    /// Shows a simple title and version box. Intended to be shown only for a very short time at the start of the game.
-    /// - Parameter WithString: The string to show in the box.
-    /// - Parameter HideAfter: The number of seconds to show the version box before hiding it. Default is 5 seconds.
-    func ShowVersionBox(WithString: String, HideAfter: Double = 5.0)
-    {
-        #if false
-        if !VersionBoxIsHidden
-        {
-            return
-        }
-        VersionBoxIsHidden = false
-        VersionData?.text = WithString
-        UIView.animate(withDuration: 0.5, animations:
-            {
-                self.VersionContainer!.alpha = 1.0
-        }, completion:
-            {
-                _ in
-                self.VersionContainer!.alpha = 1.0
-                if HideAfter > 0.0
-                {
-                let _ = Timer.scheduledTimer(timeInterval: HideAfter, target: self,
-                                             selector: #selector(self.AutoHideVersionBox), userInfo: nil, repeats: false)
-                }
-        })
-        #endif
-    }
-    
-    /// Called by the hide version box timer to hide the version box.
-    @objc func AutoHideVersionBox()
-    {
-        OperationQueue.main.addOperation
-            {
-            self.HideVersionBox()
-        }
-    }
-    
-    /// Hides the version box.
-    /// - Parameter Duration: Number of seconds to take to hide the version box.
-    func HideVersionBox(Duration: Double = 1.0)
-    {
-        if VersionBoxIsHidden
-        {
-            return
-        }
-        VersionBoxIsHidden = true
-        VersionContainer!.isUserInteractionEnabled = false
-        UIView.animate(withDuration: Duration,
-                       animations:
-            {
-                self.VersionContainer!.alpha = 0.0
-        },
-                       completion:
-            {
-                _ in
-                self.VersionContainer!.alpha = 0.0
-                self.MainClassDelegate?.VersionBoxDisappeared()
-        })
-    }
-    
-    public var VersionBoxIsHidden: Bool = true
-    #endif
 }
