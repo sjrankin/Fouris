@@ -13,11 +13,10 @@ import MultipeerConnectivity
 /// Functions related to key/value displays.
 extension MessageHelper
 {
-    // MARK: KVP command encoding commands.
+    // MARK: - KVP command encoding commands.
     
     /// Make a message to send a key-value pair to a peer. Key-value pairs are display in the peer's KVPTable. Use the
     /// same `ID` to edit an existing key-value pair on the host.
-    ///
     /// - Parameters:
     ///   - ID: ID of the key-value pair. This is how values can be edited in the peer's KVPTable in place.
     ///   - Key: The key name.
@@ -32,8 +31,11 @@ extension MessageHelper
         return Final
     }
     
-    // MARK: KVP command decoding.
+    // MARK: - KVP command decoding.
     
+    /// Decode a KVP message from a remote peer.
+    /// - Parameter Raw: Raw data from a peer.
+    /// - Returns: Tuple with an optional ID, a Key, and a Value.
     public static func DecodeKVPMessage(_ Raw: String) -> (UUID?, String, String)?
     {
         let Params = GetParameters(From: Raw, ["ID", "Key", "Value"])
