@@ -25,7 +25,7 @@ class Languages
     }
     
     /// Languages to language code map. Supported languages only.
-    static let LanguageCodes: [SupportedLanguages: String] =
+    public static let LanguageCodes: [SupportedLanguages: String] =
         [
             .EnglishUS: "en-US",
             .Japanese: "ja-JP"
