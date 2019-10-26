@@ -746,6 +746,23 @@ class ThemeDescriptor2: CustomStringConvertible, XMLDeserializeProtocol
         }
     }
     
+    /// Holds the show off flag.
+    public var _ShowOffAfterGameOver: Bool = true
+    /// Get or set the show off after game over flag.
+    public var ShowOffAfterGameOver: Bool
+    {
+        get
+        {
+            return _ShowOffAfterGameOver
+        }
+        set
+        {
+            _ShowOffAfterGameOver = newValue
+            _Dirty = true
+            ChangeNotice(Field: .ShowOffAfterGameOver)
+        }
+    }
+    
     /// Holds the length of time to clear the bucket of blocks.
     public var _DestructionDuration: Double = 1.25
     /// Get or set the length of time to clear the blocks in the bucket, in seconds.
@@ -1615,4 +1632,5 @@ enum ThemeFields: String, CaseIterable
     case HeartbeatInterval = "HeartbeatInterval"
     case ChangeColorAfterRotation = "ChangeColorAfterRotation"
     case BucketShape = "BucketShape"
+    case ShowOffAfterGameOver = "ShowOffAfterGameOver"
 }
