@@ -21,7 +21,7 @@ extension View3D
     ///         frame rate.
     /// - Parameter renderer: Not used.
     /// - Parameter time: The time interval between calls.
-    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval)
+    public func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval)
     {
         let DeltaTime = time - LastUpdateTime
         let CurrentFPS = 1 / DeltaTime
@@ -30,13 +30,13 @@ extension View3D
     }
     
     /// Called after animations are applied.
-    func renderer(_ renderer: SCNSceneRenderer, didApplyAnimationsAtTime time: TimeInterval)
+    public func renderer(_ renderer: SCNSceneRenderer, didApplyAnimationsAtTime time: TimeInterval)
     {
     }
     
     /// Called after the scene is rendered.
     /// - Note: Nodes that need to be deleted are deleted here.
-    func renderer(_ renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval)
+    public func renderer(_ renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval)
     {
 //        print("renderer:didRenderScene started.")
         let StartTime = CACurrentMediaTime()
@@ -96,7 +96,7 @@ extension View3D
     
     /// Return the number of top-level nodes in the scene's root node.
     /// - Returns: Number of nodes in the scene's `rootNode`.
-    func GetNodeCount() -> Int
+    public func GetNodeCount() -> Int
     {
         var Count = 0
         self.scene?.rootNode.enumerateChildNodes
