@@ -23,10 +23,10 @@ class View3D: SCNView,                          //Our main super class.
     ParentSizeChangedProtocol                   //The parent view of this view had a size change protocol.
 {
     /// Delegate to the main class.
-    weak var Main: MainDelegate? = nil
+    weak public var Main: MainDelegate? = nil
     
     /// The scene that is shown in the 3D view.
-    var GameScene: SCNScene!
+    public var GameScene: SCNScene!
     
     /// Light mask for the game.
     public static let GameLight: Int = 0x1 << 1
@@ -38,7 +38,7 @@ class View3D: SCNView,                          //Our main super class.
     public static let AboutLight: Int = 0x1 << 3
     
     // MARK: - Initialization.
-
+    
     /// Initialize the view.
     /// - Note: Setting 'self.showsStatistics' to true will lead to the scene freezing after a period of time (on the order of
     ///         hours). Likewise, setting `self.allowsCameraControl` will lead to non-responsiveness in the UI after a period
@@ -150,7 +150,8 @@ class View3D: SCNView,                          //Our main super class.
         #endif
     }
     
-    func NewParentSize(Bounds: CGRect, Frame: CGRect)
+    /// Not currently used.
+    public func NewParentSize(Bounds: CGRect, Frame: CGRect)
     {
         
     }
@@ -158,7 +159,7 @@ class View3D: SCNView,                          //Our main super class.
     /// The theme was updated. See what changed and take the appropriate action.
     /// - Parameter ThemeName: The name of the theme that changed.
     /// - Parameter Field: The field that changed.
-    func ThemeUpdated(ThemeName: String, Field: ThemeFields)
+    public func ThemeUpdated(ThemeName: String, Field: ThemeFields)
     {
         //print("Theme \(ThemeName) updated field \(Field)")
         if Field == .BackgroundSolidColor || Field == .BackgroundSolidColorCycleTime
@@ -190,7 +191,7 @@ class View3D: SCNView,                          //Our main super class.
                 
                 case .CameraFieldOfView:
                     CameraNode.camera?.fieldOfView = CGFloat(CurrentTheme!.CameraFieldOfView)
-                    //print("Camera field of view changed to \(CurrentTheme!.CameraFieldOfView)")
+                //print("Camera field of view changed to \(CurrentTheme!.CameraFieldOfView)")
                 
                 default:
                     break
@@ -198,21 +199,30 @@ class View3D: SCNView,                          //Our main super class.
         }
     }
     
-    var CenterBlockShape: BucketShapes? = nil
+    /// Holds the bucket shape.
+    public var CenterBlockShape: BucketShapes? = nil
     
+    /// Performance timer.
     var PerfTimer: Timer? = nil
-    @objc func SendPerformanceData()
+    
+    /// Send performance data to the owner periodically.
+    @objc public func SendPerformanceData()
     {
         let CurrentFPS = FrameRate()!
         Owner?.PerformanceSample(FPS: CurrentFPS)
     }
     
-    let OrientationKVP = UUID()
-    let PositionKVP = UUID()
-    var OriginalCameraOrientation: SCNVector4? = nil
-    var OriginalCameraPosition: SCNVector3? = nil
+    /// Orientation KVP.
+    private let OrientationKVP = UUID()
+    /// Position KVP.
+    private let PositionKVP = UUID()
+    /// Original camera orientation. Used in debug for resetting the camera after the user moves it around.
+    public var OriginalCameraOrientation: SCNVector4? = nil
+    /// Original camera position. Used in debug for resetting the camera after the user moves it around.
+    public var OriginalCameraPosition: SCNVector3? = nil
     
-    func OrbitCamera()
+    /// Orbit the camera around the scene.
+    public func OrbitCamera()
     {
         #if false
         let RAnim = CABasicAnimation(keyPath: "rotation")
@@ -224,7 +234,7 @@ class View3D: SCNView,                          //Our main super class.
     }
     
     /// Used by the value observer for the user-controllable camera.
-    var CameraObserver: NSKeyValueObservation? = nil
+    public var CameraObserver: NSKeyValueObservation? = nil
     
     /// Required by framework.
     /// - Parameter coder: See Apple documentation.
@@ -234,21 +244,21 @@ class View3D: SCNView,                          //Our main super class.
     }
     
     /// Reference back to the game UI.
-    weak var Owner: GameViewRequestProtocol? = nil
+    weak public var Owner: GameViewRequestProtocol? = nil
     
     /// Use default lighting flag.
     /// - Note: In the future, we won't need this as each theme will contain this flag instead.
-    var UseDefaultLighting: Bool = true
+    public var UseDefaultLighting: Bool = true
     
     /// Holds the camera node.
-    var CameraNode: SCNNode!
+    public var CameraNode: SCNNode!
     
     /// Holds the light node.
-    var LightNode: SCNNode!
+    public var LightNode: SCNNode!
     
     /// Create the camera using current theme data.
     /// - Returns: Scene node with camera data.
-    func MakeCamera() -> SCNNode
+    public func MakeCamera() -> SCNNode
     {
         CameraNode = SCNNode()
         CameraNode.name = "GameCamera"
@@ -283,7 +293,7 @@ class View3D: SCNView,                          //Our main super class.
     }
     
     /// Shift the solid color background by (1/360)°.
-    @objc func UpdateSolidColorBackground()
+    @objc private func UpdateSolidColorBackground()
     {
         var Hue = WorkingColor.Hue
         let Saturation = WorkingColor.Saturation
@@ -306,15 +316,15 @@ class View3D: SCNView,                          //Our main super class.
     }
     
     /// Holds the solid color hue shifting working value.
-    var WorkingColor: UIColor = UIColor.white
+    private var WorkingColor: UIColor = UIColor.white
     
     /// Timer for shifting the color of the background.
-    var HueTimer: Timer? = nil
+    private var HueTimer: Timer? = nil
     
     /// Should be called when solid color parameters change.
     /// - Note: This function takes care of any currently shifting colors by immediately terminating the timer and resetting things
     ///         to a known value.
-    func NewBackgroundSolidColor()
+    private func NewBackgroundSolidColor()
     {
         UpdateHueShifting(Duration: 0.0)
         DrawBackground()
@@ -323,7 +333,7 @@ class View3D: SCNView,                          //Our main super class.
     /// Updates gradient color shifting.
     /// - Note: Set `Duration` to `0.0` to turn off gradient color shifting.
     /// - Parameter Duration: Duration of the color shifts in the background gradient, in seconds.
-    func UpdateGradientShifting(Duration: Double)
+    public func UpdateGradientShifting(Duration: Double)
     {
         if Duration <= 0.0
         {
@@ -340,19 +350,19 @@ class View3D: SCNView,                          //Our main super class.
     }
     
     /// Holds the working set of color stops when shifting gradient colors.
-    var ShiftingStops: [(UIColor, CGFloat)] = [(UIColor, CGFloat)]()
+    private var ShiftingStops: [(UIColor, CGFloat)] = [(UIColor, CGFloat)]()
     
     /// Holds the original vertical flag in order to reassemble the gradient later.
-    var ShiftVertical: Bool = false
+    private var ShiftVertical: Bool = false
     
     /// Holds the original reverse flag in order to reassemble the gradient later.
-    var ShiftReversed: Bool = false
+    private var ShiftReversed: Bool = false
     
     /// The timer for shifting colors in the gradient.
-    var GradientTimer: Timer? = nil
+    private var GradientTimer: Timer? = nil
     
     /// Shift the each color in the gradient by (1/360)° then update the background.
-    @objc func UpdateShiftGradient()
+    @objc private func UpdateShiftGradient()
     {
         var NewStops = [(UIColor, CGFloat)]()
         for (Working, Stop) in ShiftingStops
@@ -383,7 +393,7 @@ class View3D: SCNView,                          //Our main super class.
     }
     
     /// Handle changes in the gradient background. Sets the color shifting to a known state (off).
-    func NewGradientColorBackground()
+    public func NewGradientColorBackground()
     {
         UpdateGradientShifting(Duration: 0.0)
         DrawBackground()
@@ -391,7 +401,7 @@ class View3D: SCNView,                          //Our main super class.
     
     /// Draw the background according to the current theme.
     /// - Note: If we're running on the simulator, live view is ignored.
-    func DrawBackground()
+    public func DrawBackground()
     {
         switch CurrentTheme?.BackgroundType
         {
@@ -439,7 +449,7 @@ class View3D: SCNView,                          //Our main super class.
     
     /// Create the standard light using current theme data.
     /// - Returns: Scene node with light data.
-    func CreateGameLight() -> SCNNode
+    private func CreateGameLight() -> SCNNode
     {
         let Light = SCNLight()
         let LightColor = ColorServer.ColorFrom(CurrentTheme!.LightColor)
@@ -470,7 +480,7 @@ class View3D: SCNView,                          //Our main super class.
     /// Create the control light. This light is used for those nodes in the scene that are not directly game related, eg,
     /// motion buttons.
     /// - Returns: Node with the control light.
-    func CreateControlLight() -> SCNNode
+    private func CreateControlLight() -> SCNNode
     {
         let Light = SCNLight()
         Light.color = UIColor.white
@@ -493,7 +503,7 @@ class View3D: SCNView,                          //Our main super class.
         return Node
     }
     
-    func AddPeskyLight()
+    public func AddPeskyLight()
     {
         let Pesky = SCNLight()
         Pesky.color = ColorServer.ColorFrom(ColorNames.YellowNCS)
@@ -506,63 +516,33 @@ class View3D: SCNView,                          //Our main super class.
     
     /// Remove specified nodes from the scene. Nodes are removed from `BlockList` as well.
     /// - Parameter WithName: All nodes with this name will be removed.
-    func RemoveNodes(WithName: String)
+    public func RemoveNodes(WithName: String)
     {
-        #if true
         NodeRemovalList.append(WithName)
-        #else
-        var KillList = [SCNNode]()
-        self.scene?.rootNode.enumerateChildNodes
-            {
-                (Node, _) in
-                if Node.name == WithName
-                {
-                    KillList.append(Node)
-                }
-        }
-        //print("RemoveNodes(\(WithName) started.)")
-        for Node in KillList
-        {
-            Node.geometry!.firstMaterial!.specular.contents = nil
-            Node.geometry!.firstMaterial!.diffuse.contents = nil
-            Node.removeAllActions()
-            Node.removeFromParentNode()
-        }
-        BlockList = BlockList.filter({$0.name != WithName})
-        //print("  RemoveNodes completed.")
-        #endif
     }
     
     /// Remove all nodes whose names are in the passed list.
     /// - Note:
     ///   - Any node whose name can be found in **WithNames** will be removed.
-    ///   - Calls **RemoveNodes(String)** for each string in **WithNames**.
     /// - Parameter WithNames: The list of names for nodes to be removed.
-    func RemoveNodes(WithNames: [String])
+    public func RemoveNodes(WithNames: [String])
     {
         if WithNames.isEmpty
         {
             return
         }
-        #if true
         NodeRemovalList.append(contentsOf: WithNames)
-        #else
-        for Name in WithNames
-        {
-            RemoveNodes(WithName: Name)
-        }
-        #endif
     }
     
     // MARK: Bucket-related functions.
     
-    var BucketNode: SCNNode? = nil
+    public var BucketNode: SCNNode? = nil
     
     /// Create a 3D bucket and add it to the scene. Attributes are from the current theme.
     /// - Parameter InitialOpacity: The initial opacity of the bucket. Defaults to 1.0.
     /// - Parameter Shape: The bucket's shape.
     /// - Returns: The bucket node.
-    func CreateBucket(InitialOpacity: CGFloat = 1.0, Shape: BucketShapes) -> SCNNode
+    public func CreateBucket(InitialOpacity: CGFloat = 1.0, Shape: BucketShapes) -> SCNNode
     {
         if BucketNode != nil
         {
@@ -571,66 +551,18 @@ class View3D: SCNView,                          //Our main super class.
             //print("  Done removing bucket from parent.")
         }
         let LocalBucketNode = SCNNode()
-        
-        let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape!)!
-        #if true
         DrawGameBarriers(Parent: LocalBucketNode, InShape: Shape, InitialOpacity: InitialOpacity)
-        #else
-        switch BoardClass
-        {
-            case .Static:
-                let LeftSide = SCNBox(width: 1.0, height: 20.0, length: 1.0, chamferRadius: 0.0)
-                LeftSide.materials.first?.diffuse.contents = ColorServer.ColorFrom(ColorNames.ReallyDarkGray)
-                LeftSide.materials.first?.specular.contents = ColorServer.ColorFrom(ColorNames.White)
-                let LeftSideNode = SCNNode(geometry: LeftSide)
-                LeftSideNode.categoryBitMask = View3D.GameLight
-                LeftSideNode.position = SCNVector3(-6, 0, 0)
-                LocalBucketNode.addChildNode(LeftSideNode)
-                
-                let RightSide = SCNBox(width: 1.0, height: 20.0, length: 1.0, chamferRadius: 0.0)
-                RightSide.materials.first?.diffuse.contents = ColorServer.ColorFrom(ColorNames.ReallyDarkGray)
-                RightSide.materials.first?.specular.contents = ColorServer.ColorFrom(ColorNames.White)
-                let RightSideNode = SCNNode(geometry: RightSide)
-                RightSideNode.categoryBitMask = View3D.GameLight
-                RightSideNode.position = SCNVector3(5, 0, 0)
-                LocalBucketNode.addChildNode(RightSideNode)
-                
-                let Bottom = SCNBox(width: 12.0, height: 1.0, length: 1.0, chamferRadius: 0.0)
-                Bottom.materials.first?.diffuse.contents = ColorServer.ColorFrom(ColorNames.ReallyDarkGray)
-                Bottom.materials.first?.specular.contents = ColorServer.ColorFrom(ColorNames.White)
-                let BottomNode = SCNNode(geometry: Bottom)
-                BottomNode.categoryBitMask = View3D.GameLight
-                BottomNode.position = SCNVector3(-0.5, -10.5, 0)
-                LocalBucketNode.addChildNode(BottomNode)
-                
-                LocalBucketNode.categoryBitMask = View3D.GameLight
-                LocalBucketNode.opacity = InitialOpacity
-            
-            case .Rotatable:
-                DrawGameBarriers(Parent: LocalBucketNode, InShape: Shape, InitialOpacity: InitialOpacity)
-            
-            case .ThreeDimensional:
-                let Center = SCNBox(width: 2.0, height: 2.0, length: 2.0, chamferRadius: 0.0)
-                Center.materials.first?.diffuse.contents = ColorServer.ColorFrom(ColorNames.ReallyDarkGray)
-                Center.materials.first?.specular.contents = ColorServer.ColorFrom(ColorNames.White)
-                let CentralNode = SCNNode(geometry: Center)
-                CentralNode.position = SCNVector3(0.0, 0.0, 0.0)
-                LocalBucketNode.addChildNode(CentralNode)
-                LocalBucketNode.opacity = InitialOpacity
-        }
-        #endif
-        
         _BucketAdded = true
         return LocalBucketNode
     }
     
     /// Flag indicating the bucket was added. Do we need this in this class?
-    var _BucketAdded: Bool = false
+    private var _BucketAdded: Bool = false
     
     /// Draw a vertical and horizontal line passing through the origin.
     /// - Note: Whether or not center lines are drawn is determined by the settings in the current theme.
     /// - Note: Center lines are intended to be used for debugging only.
-    func DrawCenterLines()
+    public func DrawCenterLines()
     {
         //print("Removing center lines.")
         CenterLineVertical?.removeFromParentNode()
@@ -649,7 +581,9 @@ class View3D: SCNView,                          //Our main super class.
         }
     }
     
+    /// Holds the center vertical line.
     private var CenterLineVertical: SCNNode? = nil
+    /// Holds the center horizontal line.
     private var CenterLineHorizontal: SCNNode? = nil
     
     /// Create a "line" and return it in a scene node.
@@ -659,7 +593,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter Color: The color of the line.
     /// - Parameter LineWidth: Width of the line - defaults to 0.01.
     /// - Returns: Node with the specified line. The node has the name "GridNodes".
-    func MakeLine(From: SCNVector3, To: SCNVector3, Color: UIColor, LineWidth: CGFloat = 0.01) -> SCNNode
+    public func MakeLine(From: SCNVector3, To: SCNVector3, Color: UIColor, LineWidth: CGFloat = 0.01) -> SCNNode
     {
         var Width: Float = 0.01
         var Height: Float = 0.01
@@ -685,7 +619,7 @@ class View3D: SCNView,                          //Our main super class.
     }
     
     /// Create a grid and place it into the scene.
-    func CreateGrid()
+    public func CreateGrid()
     {
         RemoveNodes(WithName: "GridNodes")
         for Y in stride(from: -64.0, to: 128.0, by: 1.0)
@@ -705,18 +639,18 @@ class View3D: SCNView,                          //Our main super class.
     }
     
     /// Remove the grid from the scene.
-    func RemoveGrid()
+    public func RemoveGrid()
     {
         RemoveNodes(WithName: "GridNodes")
     }
     
     /// Holds a set of all visual blocks being displayed.
-    var BlockList = Set<VisualBlocks3D>()
+    public var BlockList = Set<VisualBlocks3D>()
     
     /// Determines if a block with the specified ID exists in the block list.
     /// - Parameter ID: The ID of the block to determine existences.
     /// - Returns: True if the block exists in the block list, false if not.
-    func BlockExistsInList(_ ID: UUID) -> Bool
+    public func BlockExistsInList(_ ID: UUID) -> Bool
     {
         for VBlock in BlockList
         {
@@ -731,7 +665,7 @@ class View3D: SCNView,                          //Our main super class.
     /// Returns the specified block from the block list.
     /// Parameter ID: The ID of the block to return.
     /// - Returns: The visual block on success, nil if not found.
-    func GetBlock(_ ID: UUID) -> VisualBlocks3D?
+    public func GetBlock(_ ID: UUID) -> VisualBlocks3D?
     {
         for VBlock in BlockList
         {
@@ -744,22 +678,22 @@ class View3D: SCNView,                          //Our main super class.
     }
     
     /// The delegate for the caller of moving/rotating pieces smoothly.
-    weak var SmoothMotionDelegate: SmoothMotionProtocol? = nil
+    weak public var SmoothMotionDelegate: SmoothMotionProtocol? = nil
     
-    func SmoothMoveCompleted(For: UUID)
+    public func SmoothMoveCompleted(For: UUID)
     {
         //Not used in this class.
         fatalError("I told you this function shouldn't be called here!")
     }
     
-    func SmoothRotationCompleted(For: UUID)
+    public func SmoothRotationCompleted(For: UUID)
     {
         //Not used in this class.
         fatalError("I told you this function shouldn't be called here!")
     }
     
     /// Called when the game is done moving a piece smoothly, eg, when it freezes into place.
-    func DoneWithSmoothPiece(_ ID: UUID)
+    public func DoneWithSmoothPiece(_ ID: UUID)
     {
         if ID != SmoothPieceID
         {
@@ -774,12 +708,14 @@ class View3D: SCNView,                          //Our main super class.
         }
     }
     
-    var SmoothPiece: SCNNode? = nil
-    var SmoothPieceID: UUID = UUID.Empty
+    /// Holds the piece being moved smoothly.
+    public var SmoothPiece: SCNNode? = nil
+    /// Holds the ID of the piece being moved smoothly.
+    public var SmoothPieceID: UUID = UUID.Empty
     
     /// Creates a new piece to move smoothly. If a piece already exists, it is deleted first.
     /// - Returns: The ID of the smoothly moving piece.
-    func CreateSmoothPiece() -> UUID
+    public func CreateSmoothPiece() -> UUID
     {
         if SmoothPiece != nil
         {
@@ -794,7 +730,9 @@ class View3D: SCNView,                          //Our main super class.
         return SmoothPieceID
     }
     
-    func MovePieceSmoothly(_ GamePiece: Piece, ToOffsetX: CGFloat, ToOffsetY: CGFloat, Duration: Double)
+    /// Move a piece smoothly.
+    /// - Note: Not currently implemented.
+    public func MovePieceSmoothly(_ GamePiece: Piece, ToOffsetX: CGFloat, ToOffsetY: CGFloat, Duration: Double)
     {
         #if false
         if SmoothPiece == nil
@@ -817,7 +755,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter ToOffsetX: Offset horizontal value
     /// - Parameter ToOffsetY: Offset vertical value.
     /// - Parameter Duration: How long to take to move the piece.
-    func MovePieceSmoothlyX(_ GamePiece: Piece, ToOffsetX: CGFloat, ToOffsetY: CGFloat, Duration: Double)
+    public func MovePieceSmoothlyX(_ GamePiece: Piece, ToOffsetX: CGFloat, ToOffsetY: CGFloat, Duration: Double)
     {
         SmoothPieceID = GamePiece.ID
         var BlockIDs = [UUID]()
@@ -850,17 +788,17 @@ class View3D: SCNView,                          //Our main super class.
     }
     
     /// Number of expected blocks to move.
-    var ExpectedAnimatedBlockCount: Int = 0
+    public var ExpectedAnimatedBlockCount: Int = 0
     
     /// Number of times the smooth move completion handler is called.
-    var AnimatedBlockCount: Int = 0
+    public var AnimatedBlockCount: Int = 0
     
     /// Lock to prevent miscounting animation block completion handler calls.
-    var AnimatedBlockLock = NSObject()
+    public var AnimatedBlockLock = NSObject()
     
     /// Called upon from each completion block of a smoothly moving piece. Once the number of calls matches the number of blocks
     /// being moved, the appropriate delegate function is called.
-    func AccumulateAnimatedBlocks()
+    public func AccumulateAnimatedBlocks()
     {
         objc_sync_enter(AnimatedBlockLock)
         defer{ objc_sync_exit(AnimatedBlockLock) }
@@ -877,8 +815,8 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter ByDegrees: Angle offset to rotate to.
     /// - Parameter Duration: The amount of time to rotate the piece.
     /// - Parameter OnAxis: The axis to rotate by. Default value is .X. This parameter is ignored for non-3D game views.
-    func RotatePieceSmoothly(_ GamePiece: Piece, ByDegrees: CGFloat, Duration: Double,
-                             OnAxis: RotationalAxes = .X)
+    public func RotatePieceSmoothly(_ GamePiece: Piece, ByDegrees: CGFloat, Duration: Double,
+                                    OnAxis: RotationalAxes = .X)
     {
         #if false
         let Radians = ByDegrees * CGFloat.pi / 180.0
@@ -887,7 +825,7 @@ class View3D: SCNView,                          //Our main super class.
     
     /// The moving piece is in its final location. Add its ID to the list of retired IDs and remove the moving blocks.
     /// - Parameter Finalized: The piece that was finalized.
-    func MergePieceIntoBucket(_ Finalized: Piece)
+    public func MergePieceIntoBucket(_ Finalized: Piece)
     {
         #if false
         VisuallyRetirePiece(Finalized, Completion:
@@ -905,7 +843,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Note: [How to add animations to change SCNNode's color](https://stackoverflow.com/questions/40472524/how-to-add-animations-to-change-sncnodes-color-scenekit)
     /// - Parameter Finalized: The piece that is freezing but not yet frozen.
     /// - Parameter Completion: Completion block.
-    func VisuallyRetirePiece(_ Finalized: Piece, Completion: (() -> ())?)
+    public func VisuallyRetirePiece(_ Finalized: Piece, Completion: (() -> ())?)
     {
         if MovingPieceNode != nil
         {
@@ -936,7 +874,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter Y: The initial Y location of the node.
     /// - Parameter IsRetired: Initial retired status of the node.
     /// - Parameter ShapeID: The ID of the piece.
-    func AddBlockNode_Standard(ParentID: UUID, BlockID: UUID, X: Int, Y: Int, IsRetired: Bool, ShapeID: UUID)
+    public func AddBlockNode_Standard(ParentID: UUID, BlockID: UUID, X: Int, Y: Int, IsRetired: Bool, ShapeID: UUID)
     {
         //print("Adding standard block node to \(X),\(Y)")
         if let PVisual = PieceVisualManager2.UserVisuals!.GetVisualWith(ID: ShapeID)
@@ -963,7 +901,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter Y: The initial Y location of the node.
     /// - Parameter IsRetired: Initial retired status of the node.
     /// - Parameter ShapeID: The ID of the piece.
-    func AddBlockNode_Rotating(ParentID: UUID, BlockID: UUID, X: CGFloat, Y: CGFloat, IsRetired: Bool, ShapeID: UUID)
+    public func AddBlockNode_Rotating(ParentID: UUID, BlockID: UUID, X: CGFloat, Y: CGFloat, IsRetired: Bool, ShapeID: UUID)
     {
         if let PVisual = PieceVisualManager2.UserVisuals!.GetVisualWith(ID: ShapeID)
         {
@@ -982,7 +920,7 @@ class View3D: SCNView,                          //Our main super class.
     }
     
     /// Remove all moving piece blocks from the master block node.
-    func UpdateMasterBlockNode()
+    public func UpdateMasterBlockNode()
     {
         if MasterBlockNode != nil
         {
@@ -997,12 +935,12 @@ class View3D: SCNView,                          //Our main super class.
         }
     }
     
-    var MasterBlockNode: SCNNode? = nil
+    public var MasterBlockNode: SCNNode? = nil
     
     /// Determines if a block should be drawn in **DrawMap3D**. Valid block types depend on the type of base game.
     /// - Parameter BlockType: The block to check to see if it can be drawn or not.
     /// - Returns: True if the block should be drawn, false if not.
-    func ValidBlockToDraw(BlockType: PieceTypes) -> Bool
+    private func ValidBlockToDraw(BlockType: PieceTypes) -> Bool
     {
         let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape!)!
         switch BoardClass
@@ -1020,7 +958,7 @@ class View3D: SCNView,                          //Our main super class.
     
     /// Contains a list of IDs of blocks that have been retired. Used to keep the game from moving them when they are no longer
     /// moveable.
-    var RetiredPieceIDs = [UUID]()
+    public var RetiredPieceIDs = [UUID]()
     
     /// Draw the individual piece. Intended to be used for the **.Rotating4** base game type.
     /// - Note:
@@ -1032,7 +970,7 @@ class View3D: SCNView,                          //Our main super class.
     ///      when it should be frozen, and the piece doesn't move when the board is rotated.
     /// - Parameter InBoard: The current game board.
     /// - Parameter GamePiece: The piece to draw.
-    func DrawPiece3D(InBoard: Board, GamePiece: Piece)
+    public func DrawPiece3D(InBoard: Board, GamePiece: Piece)
     {
         if RetiredPieceIDs.contains(GamePiece.ID)
         {
@@ -1087,7 +1025,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter DeltaY: The relative number of grid points to move vertically.
     /// - Parameter TotalDuration: The amount of time to take to drop.
     /// - Parameter Completed: Completion block.
-    func MovePieceRelative(WithPiece: Piece, DeltaX: Int, DeltaY: Int, TotalDuration Duration: Double, Completed: ((Piece)->())?)
+    public func MovePieceRelative(WithPiece: Piece, DeltaX: Int, DeltaY: Int, TotalDuration Duration: Double, Completed: ((Piece)->())?)
     {
         print("At MovePieceRelative: DeltaX=\(DeltaX), DeltaY=\(DeltaY), TotalDuration=\(Duration)")
         MovingPieceNode?.enumerateChildNodes
@@ -1102,10 +1040,11 @@ class View3D: SCNView,                          //Our main super class.
         }
     }
     
-    var MovingPieceBlocks = [VisualBlocks3D]()
+    /// Array of visual blocks that represent the moving piece.
+    public var MovingPieceBlocks = [VisualBlocks3D]()
     
     /// Remove the moving piece, if it exists.
-    func RemoveMovingPiece()
+    public func RemoveMovingPiece()
     {
         let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape!)!
         if BoardClass == .Rotatable
@@ -1121,7 +1060,8 @@ class View3D: SCNView,                          //Our main super class.
         }
     }
     
-    var MovingPieceNode: SCNNode? = nil
+    /// The SceneKit representation of the moving piece.
+    public var MovingPieceNode: SCNNode? = nil
     
     /// Visually clear the bucket of pieces.
     /// - Note:
@@ -1130,7 +1070,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter FromBoard: The board that contains the map to draw. *Not currently used.*
     /// - Parameter DestroyBy: Determines how to empty the bucket.
     /// - Parameter MaxDuration: Maximum amount of time (in seconds) to take to clear the board.
-    func DestroyMap3D(FromBoard: Board, DestroyBy: DestructionMethods, MaxDuration: Double)
+    public func DestroyMap3D(FromBoard: Board, DestroyBy: DestructionMethods, MaxDuration: Double)
     {
         objc_sync_enter(RotateLock)
         defer{objc_sync_exit(RotateLock)}
@@ -1143,14 +1083,8 @@ class View3D: SCNView,                          //Our main super class.
     ///      Once there, they are moved as needed rather than creating new ones in new locations.
     ///    - This function assumes the board changes between each piece.
     /// - Parameter FromBoard: The board that contains the map to draw.
-    func DrawMap3D(FromBoard: Board, CalledFrom: String = "")
+    public func DrawMap3D(FromBoard: Board, CalledFrom: String = "")
     {
-        #if false
-        if BaseGameType == .Rotating4
-        {
-            print("DrawMap3D called from \(CalledFrom)")
-        }
-        #endif
         objc_sync_enter(RotateLock)
         defer{ objc_sync_exit(RotateLock) }
         let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape!)!
@@ -1184,13 +1118,13 @@ class View3D: SCNView,                          //Our main super class.
                     case .Static:
                         if UIDevice.current.userInterfaceIdiom == .phone
                         {
-                         YOffset = 9 - CGFloat(Y)
+                            YOffset = 9 - CGFloat(Y)
                         }
                         else
                         {
                             YOffset = 7 - CGFloat(Y)
                         }
-                         XOffset = CGFloat(X) - 5.5
+                        XOffset = CGFloat(X) - 5.5
                     
                     case .ThreeDimensional:
                         XOffset = 0
@@ -1264,7 +1198,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Note: **Note used in 3DView.**
     /// - Parameter FromBoard: The board to use as a source for the map.
     /// - Parameter ForEntireMap: If true, the entire map is drawn.
-    func DrawMap(FromBoard: Board, ForEntireMap: Bool)
+    public func DrawMap(FromBoard: Board, ForEntireMap: Bool)
     {
         //Not used in the 3D game view.
     }
@@ -1272,28 +1206,28 @@ class View3D: SCNView,                          //Our main super class.
     /// Draw a text map.
     /// - Note: **Not used in 3DView.**
     /// - Parameter WithText: The contents to draw.
-    func DrawTextMap(WithText: String)
+    public func DrawTextMap(WithText: String)
     {
         //Not used in the 3D game view.
     }
     
     /// Sets the board to use by the view (and indirectly sets the map as well).
     /// - Parameter TheBoard: The board to use when drawing the game.
-    func SetBoard(_ TheBoard: Board)
+    public func SetBoard(_ TheBoard: Board)
     {
         CurrentBoard = TheBoard
         CurrentMap = TheBoard.Map
     }
     
     /// Holds the board in which we are working.
-    var CurrentBoard: Board? = nil
+    public var CurrentBoard: Board? = nil
     
     /// Holds the map for the current board.
-    var CurrentMap: MapType? = nil
+    public var CurrentMap: MapType? = nil
     
     /// Creates the master block node. This is the node in which all blocks are placed. This is done to allow for
     /// easy rotation of blocks when needed.
-    func CreateMasterBlockNode()
+    public func CreateMasterBlockNode()
     {
         if MasterBlockNode != nil
         {
@@ -1310,7 +1244,7 @@ class View3D: SCNView,                          //Our main super class.
     
     /// Clear the bucket of all pieces.
     /// - Note: The bucket will not be cleared if the view is rotating.
-    func ClearBucket()
+    public func ClearBucket()
     {
         objc_sync_enter(RotateLock)
         defer{objc_sync_exit(RotateLock)}
@@ -1336,7 +1270,7 @@ class View3D: SCNView,                          //Our main super class.
     }
     
     /// Empty the map of all block nodes.
-    func EmptyMap()
+    public func EmptyMap()
     {
         //print("Emptying the map.")
         self.scene?.rootNode.enumerateChildNodes
@@ -1353,24 +1287,28 @@ class View3D: SCNView,                          //Our main super class.
         //print("  Done emptying the map.")
     }
     
-    func LayoutCompleted()
+    /// Not currently implemented.
+    public func LayoutCompleted()
     {
     }
     
-    func Resized()
+    /// Not currently implemented.
+    public func Resized()
     {
         CurrentSize = frame
     }
     
-    var CurrentSize: CGRect? = nil
+    /// Holds the current size.
+    public var CurrentSize: CGRect? = nil
     
     /// The node that holds the set of bucket grid lines.
-    var BucketGridNode: SCNNode? = nil
+    public var BucketGridNode: SCNNode? = nil
     
     /// The node that holds the outline.
-    var OutlineNode: SCNNode? = nil
+    public var OutlineNode: SCNNode? = nil
     
-    var CanUseBucket: NSObject = NSObject()
+    /// Synchronization object that defines access to the bucket.
+    public var CanUseBucket: NSObject = NSObject()
     
     /// Function that does the actual "line" drawing of the bucket grid.
     /// - Note: The lines are really very thin boxes; SceneKit doesn't support lines as graphical objects.
@@ -1382,8 +1320,8 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter OutlineColorOverride: If provided, this is the color of the lines of the outline. If not provided, the color specified
     ///                                   in the current theme will be used. Default is nil, which means use the theme's color.
     /// - Returns: Tuple with Grid being the bucket interior grid, and Outline the grid outline node.
-    func DrawGridInBucket(ShowGrid: Bool = true, DrawOutline: Bool, InitialOpacity: CGFloat = 1.0,
-                          LineColorOverride: UIColor? = nil, OutlineColorOverride: UIColor? = nil) -> (Grid: SCNNode, Outline: SCNNode)
+    public func DrawGridInBucket(ShowGrid: Bool = true, DrawOutline: Bool, InitialOpacity: CGFloat = 1.0,
+                                 LineColorOverride: UIColor? = nil, OutlineColorOverride: UIColor? = nil) -> (Grid: SCNNode, Outline: SCNNode)
     {
         objc_sync_enter(CanUseBucket)
         defer{objc_sync_exit(CanUseBucket)}
@@ -1518,7 +1456,7 @@ class View3D: SCNView,                          //Our main super class.
     
     /// Fades the bucket grid to an alpha of 0.0 then removes the lines from the scene.
     /// - Parameter Duration: Number of seconds for the fade effect to take place. Default is 1.0 seconds.
-    func FadeBucketGrid(Duration: Double = 1.0)
+    public func FadeBucketGrid(Duration: Double = 1.0)
     {
         let FadeAction = SCNAction.fadeOut(duration: Duration)
         //print("Removing bucket grid node in FadeBucketGrid")
@@ -1536,7 +1474,7 @@ class View3D: SCNView,                          //Our main super class.
     /// interior of the bucket.
     /// - Parameter ShowLines: Determines if the grid is shown or hidden.
     /// - Parameter IncludingOutline: If true, the outline is drawn as well.
-    func DrawBucketGrid(ShowLines: Bool, IncludingOutline: Bool = true)
+    public func DrawBucketGrid(ShowLines: Bool, IncludingOutline: Bool = true)
     {
         let (Grid, Outline) = DrawGridInBucket(ShowGrid: ShowLines, DrawOutline: IncludingOutline)
         BucketGridNode = Grid
@@ -1546,13 +1484,16 @@ class View3D: SCNView,                          //Our main super class.
     }
     
     /// Hide the bucket grid by removing all grid nodes from the scene.
-    func ClearBucketGrid()
+    public func ClearBucketGrid()
     {
         RemoveNodes(WithNames: ["BucketGrid", "TopLine", "LeftLine", "BottomLine", "RightLine",
                                 "Top", "Left", "Bottom", "Right"])
     }
     
-    func DrawGridLines(_ Show: Bool, WithUnitSize: CGFloat?)
+    /// Draw background grid lines.
+    /// - Parameter Show: Determines visibility of the grid.
+    /// - Parameter WithUnitSize: Defines the gap between grid lines.
+    public func DrawGridLines(_ Show: Bool, WithUnitSize: CGFloat?)
     {
         if Show
         {
@@ -1566,23 +1507,26 @@ class View3D: SCNView,                          //Our main super class.
     
     // MARK: - Bucket rotatation routines.
     
-    func MovePiece(_ ThePiece: Piece, ToLocation: CGPoint, Duration: Double,
-                   Completion: ((UUID) -> ())? = nil)
+    /// Not implemented.
+    public func MovePiece(_ ThePiece: Piece, ToLocation: CGPoint, Duration: Double,
+                          Completion: ((UUID) -> ())? = nil)
     {
     }
     
-    func RotatePiece(_ ThePiece: Piece, Degrees: Double, Duration: Double,
-                     Completion: ((UUID) -> ())? = nil)
+    /// Not implemented.
+    public func RotatePiece(_ ThePiece: Piece, Degrees: Double, Duration: Double,
+                            Completion: ((UUID) -> ())? = nil)
     {
         
     }
     
-    func DrawPiece(_ ThePiece: Piece, SurfaceSize: CGSize)
+    /// Not implemented.
+    public func DrawPiece(_ ThePiece: Piece, SurfaceSize: CGSize)
     {
     }
     
     /// Lock used when the board is rotating.
-    var RotateLock = NSObject()
+    public var RotateLock = NSObject()
     
     /// Rotates the contents of the game (but not UI or falling piece) by the specified number of degrees.
     /// - Note:
@@ -1592,7 +1536,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter Right: If true, the contents are rotated clockwise. If false, counter-clockwise.
     /// - Parameter Duration: Duration in seconds the rotation should take.
     /// - Parameter Completed: Completion handler called at the end of the rotation.
-    func RotateContents(Right: Bool, Duration: Double = 0.33, Completed: @escaping (() -> Void))
+    public func RotateContents(Right: Bool, Duration: Double = 0.33, Completed: @escaping (() -> Void))
     {
         objc_sync_enter(RotateLock)
         defer{objc_sync_exit(RotateLock)}
@@ -1630,7 +1574,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Note:
     ///   - Intended for use for debugging.
     ///   - `BucketNode` and all of its children (if any) have the diffuse surface set.
-    func ChangeBucketColor()
+    public func ChangeBucketColor()
     {
         let NewColor = ColorServer.DarkRandomColor()
         BucketNode?.geometry?.firstMaterial?.diffuse.contents = NewColor
@@ -1642,15 +1586,15 @@ class View3D: SCNView,                          //Our main super class.
     }
     
     /// Indicates which cardinal direction a rotation is.
-    var RotationCardinalIndex = 0
+    private var RotationCardinalIndex = 0
     
     /// 90° expressed in radians.
-    let HalfPi = CGFloat.pi / 2.0
+    private let HalfPi = CGFloat.pi / 2.0
     
     /// Rotates the contents of the game (but not UI or falling piece) by 90° right (clockwise).
     /// - Parameter Duration: Duration in seconds the rotation should take.
     /// - Parameter Completed: Completion handler called at the end of the rotation.
-    func RotateContentsRight(Duration: Double = 0.33, Completed: @escaping (() -> Void))
+    public func RotateContentsRight(Duration: Double = 0.33, Completed: @escaping (() -> Void))
     {
         RotateContents(Right: true, Duration: Duration, Completed: Completed)
     }
@@ -1658,7 +1602,7 @@ class View3D: SCNView,                          //Our main super class.
     /// Rotates the contents of the game (but not UI or falling piece) by 90° left (counter-clockwise).
     /// - Parameter Duration: Duration in seconds the rotation should take.
     /// - Parameter Completed: Completion handler called at the end of the rotation.
-    func RotateContentsLeft(Duration: Double = 0.33, Completed: @escaping (() -> Void))
+    public func RotateContentsLeft(Duration: Double = 0.33, Completed: @escaping (() -> Void))
     {
         RotateContents(Right: false, Duration: Duration, Completed: Completed)
     }
@@ -1667,7 +1611,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter To: The new alpha/opacity level.
     /// - Parameter Duration: The duration of the opacity change.
     /// - Parameter Completed: Completion block.
-    func SetBoardOpacity(To: Double, Duration: Double, Completed: (() -> ())? = nil)
+    public func SetBoardOpacity(To: Double, Duration: Double, Completed: (() -> ())? = nil)
     {
         var FadeAction: SCNAction!
         if To == 1.0
@@ -1690,14 +1634,17 @@ class View3D: SCNView,                          //Our main super class.
         )
     }
     
-    var SceneNodeID = UUID()
-    var MaxSceneNodeID = UUID()
-    var MaxSceneNodes: Int = 0
+    /// Holds the scene node ID.
+    public var SceneNodeID = UUID()
+    /// Holds the max scene node ID.
+    public var MaxSceneNodeID = UUID()
+    /// Holds the max scene node count.
+    public var MaxSceneNodes: Int = 0
     
     /// Handle the piece out of bounds state (which indicates game over).
     /// - Note: [Animated SCNNode Forever](https://stackoverflow.com/questions/29658772/animate-scnnode-forever-scenekit-swift)
     /// - Parameter ID: The ID of the node that froze out of bounds.
-    func PieceOutOfBounds(_ ID: UUID)
+    public func PieceOutOfBounds(_ ID: UUID)
     {
         var NotUsed: String? = nil
         ActivityLog.AddEntry(Title: "Game", Source: "View3D", KVPs: [("Message","Piece out of bounds. Freezing in place."),("PieceID",ID.uuidString)],
@@ -1779,25 +1726,30 @@ class View3D: SCNView,                          //Our main super class.
         }
     }
     
-    var FinalBlocks = [VisualBlocks3D]()
-    var FrozenTimer: Timer!
+    /// Holds a list of blocks to finalize.
+    public var FinalBlocks = [VisualBlocks3D]()
+    /// Timer to visually indicate freezing.
+    public var FrozenTimer: Timer!
     
-    @objc func HighlightFrozenBlocks()
+    /// Not currently implemented.
+    @objc public func HighlightFrozenBlocks()
     {
         
     }
     
-    func StartedFreezing(_ ID: UUID)
+    /// Not currently implemented.
+    public func StartedFreezing(_ ID: UUID)
     {
     }
     
-    func StoppedFreezing(_ ID: UUID)
+    /// Not currently implemented.
+    public func StoppedFreezing(_ ID: UUID)
     {
     }
     
     /// Return the current frame rate.
     /// - Returns: Current frame rate.
-    func FrameRate() -> Double?
+    public func FrameRate() -> Double?
     {
         #if true
         return LastFrameRate
@@ -1810,12 +1762,13 @@ class View3D: SCNView,                          //Our main super class.
     }
     
     /// Used to keep track of when the renderer was called.
-    var LastUpdateTime: TimeInterval = 0.0
+    public var LastUpdateTime: TimeInterval = 0.0
     
     /// The last calculated framerate.
-    var LastFrameRate: Double = 0.0
+    public var LastFrameRate: Double = 0.0
     
-    func SetOpacity(OfID: UUID, To: Double)
+    /// Not currently implemented.
+    public func SetOpacity(OfID: UUID, To: Double)
     {
     }
     
@@ -1823,7 +1776,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter OfID: The ID of the block whose opacity will be set.
     /// - Parameter To: The new opacity level.
     /// - Parameter Duration: The amount of time to run the opacity change action.
-    func SetOpacity(OfID: UUID, To: Double, Duration: Double)
+    public func SetOpacity(OfID: UUID, To: Double, Duration: Double)
     {
         for Block in BlockList
         {
@@ -1836,9 +1789,10 @@ class View3D: SCNView,                          //Our main super class.
     }
     
     /// Holds the current theme.
-    var CurrentTheme: ThemeDescriptor2? = nil
+    public var CurrentTheme: ThemeDescriptor2? = nil
     
-    func Refresh()
+    /// Not currently implemented.
+    public func Refresh()
     {
     }
     
@@ -1848,7 +1802,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter FOV: The FOV (field of view) parameter for the camera.
     /// - Parameter Position: The position of the camera node.
     /// - Parameter Orientation: The orientation of the camera node.
-    func SetCameraData(FOV: CGFloat, Position: SCNVector3, Orientation: SCNVector4)
+    public func SetCameraData(FOV: CGFloat, Position: SCNVector3, Orientation: SCNVector4)
     {
         CameraNode!.camera!.fieldOfView = FOV
         CameraNode!.position = Position
@@ -1857,7 +1811,7 @@ class View3D: SCNView,                          //Our main super class.
     
     /// Returns current camera data (mostly for debugging purposes).
     /// - Returns: Tuple in the order (camera field of view, camera node position, camera node orientation).
-    func GetCameraData() -> (CGFloat, SCNVector3, SCNVector4)
+    public func GetCameraData() -> (CGFloat, SCNVector3, SCNVector4)
     {
         return (CameraNode!.camera!.fieldOfView, CameraNode!.position, CameraNode!.orientation)
     }
@@ -1867,8 +1821,8 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter LightingType: The type of light.
     /// - Parameter ColorName: The name of the color the light emits.
     /// - Parameter UseDefault: If true, default lighting is used.
-    func SetLightData(Position: SCNVector3, LightingType: SCNLight.LightType, ColorName: String,
-                      UseDefault: Bool)
+    public func SetLightData(Position: SCNVector3, LightingType: SCNLight.LightType, ColorName: String,
+                             UseDefault: Bool)
     {
         self.autoenablesDefaultLighting = UseDefault
         LightNode.position = Position
@@ -1879,7 +1833,7 @@ class View3D: SCNView,                          //Our main super class.
     
     /// Returns current lighting data (mostly for debugging purposes)
     /// - Returns: Tuple in the order (camera node position, light type, light color, use default lighting).
-    func GetLightData() -> (SCNVector3, SCNLight.LightType, String, Bool)
+    public func GetLightData() -> (SCNVector3, SCNLight.LightType, String, Bool)
     {
         let TheColor: UIColor = (LightNode.light?.color as? UIColor)!
         let ColorName = ColorServer.MakeColorName(From: TheColor)
@@ -1890,7 +1844,7 @@ class View3D: SCNView,                          //Our main super class.
     
     /// Handle double click events relayed to us by the text layer. Double click events will cause the camera to be reset
     /// to it's theme-appropriate values.
-    func MouseDoubleClick(At: CGPoint)
+    public func MouseDoubleClick(At: CGPoint)
     {
         self.pointOfView?.position = OriginalCameraPosition!
         self.pointOfView?.orientation = OriginalCameraOrientation!
@@ -1898,9 +1852,12 @@ class View3D: SCNView,                          //Our main super class.
     
     // MARK: - Heartbeat functions.
     
-    var ShowingHeart = false
+    /// Flag that indicates visibility of the heartbeat indicator.
+    public var ShowingHeart = false
     
-    func SetHeartbeatVisibility(Show: Bool)
+    /// Set the heartbeat visibility flag.
+    /// - Parameter Show: If true, the indicator is shown. If false, the indicator is hidden.
+    public func SetHeartbeatVisibility(Show: Bool)
     {
         if Show == ShowingHeart
         {
@@ -1917,9 +1874,11 @@ class View3D: SCNView,                          //Our main super class.
         }
     }
     
-    var HeartHighlighted = false
+    /// Holds the heartbeat indicator highlighted flag.
+    private var HeartHighlighted = false
     
-    func ToggleHeartState()
+    /// Toggle the heartbeat highlight state.
+    public func ToggleHeartState()
     {
         HeartHighlighted = !HeartHighlighted
         if HeartHighlighted
@@ -1949,7 +1908,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter Command: The command string to run. Case insensitive.
     /// - Returns: Depending on the command, there may or may not be a returned value. If there *is* a returned value, the
     ///            type depends on the context of the command.
-    @discardableResult func Debug(_ Command: String) -> Any?
+    @discardableResult public func Debug(_ Command: String) -> Any?
     {
         let Raw = Command.lowercased().trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         let Parts = Raw.split(separator: " ", omittingEmptySubsequences: true)
@@ -1960,13 +1919,13 @@ class View3D: SCNView,                          //Our main super class.
         switch String(Parts[0])
         {
             case "dump":
-            switch String(Parts[1])
-            {
-                case "boards":
-                SaveAllBucketImages()
-                
-                default:
-                break
+                switch String(Parts[1])
+                {
+                    case "boards":
+                        SaveAllBucketImages()
+                    
+                    default:
+                        break
             }
             
             case "show":
@@ -1985,7 +1944,7 @@ class View3D: SCNView,                          //Our main super class.
                         break
                     
                     case "controls":
-                    break
+                        break
                     
                     default:
                         print("Unknown show option (\(String(Parts[1]))) encountered.")
@@ -2022,25 +1981,30 @@ class View3D: SCNView,                          //Our main super class.
         return nil
     }
     
-    let LayerColors: [DebugRegions: UIColor] =
-    [
-        .BucketInterior: UIColor.systemYellow,
-        .Barrier: UIColor.systemIndigo,
-        .InvisibleBarrier: UIColor.systemTeal,
-        .Exterior: UIColor.systemBlue
+    /// Colors to use for debug layers.
+    public let LayerColors: [DebugRegions: UIColor] =
+        [
+            .BucketInterior: UIColor.systemYellow,
+            .Barrier: UIColor.systemIndigo,
+            .InvisibleBarrier: UIColor.systemTeal,
+            .Exterior: UIColor.systemBlue
     ]
-    var RegionLayers: [DebugRegions: SCNNode] = [DebugRegions: SCNNode]()
+    
+    /// Dictionary of layers.
+    public var RegionLayers: [DebugRegions: SCNNode] = [DebugRegions: SCNNode]()
     
     // MARK: - Variables for buttons and button state. Button functions are found in +TextButtons.swift.
     
-    var ButtonList: [NodeButtons: SCNButtonNode] = [NodeButtons: SCNButtonNode]()
+    /// Map of button types to button nodes.
+    public var ButtonList: [NodeButtons: SCNButtonNode] = [NodeButtons: SCNButtonNode]()
     
-    var ButtonDictionary: [NodeButtons: (Location: SCNVector3, Scale: Double, Color: UIColor, Highlight: UIColor)] =
-    [NodeButtons: (Location: SCNVector3, Scale: Double, Color: UIColor, Highlight: UIColor)]()
+    /// Map of button node information.
+    public var ButtonDictionary: [NodeButtons: (Location: SCNVector3, Scale: Double, Color: UIColor, Highlight: UIColor)] =
+        [NodeButtons: (Location: SCNVector3, Scale: Double, Color: UIColor, Highlight: UIColor)]()
     
     /// Dictionary between node button types and the system image name and location of each node.
     /// Intended for use with devices with reasonable-sized screens.
-    let BigButtonDictionary: [NodeButtons: (Location: SCNVector3, Scale: Double, Color: UIColor, Highlight: UIColor)] =
+    public let BigButtonDictionary: [NodeButtons: (Location: SCNVector3, Scale: Double, Color: UIColor, Highlight: UIColor)] =
         [
             .MainButton: (SCNVector3(-10.3, 13.7, 1.0), 0.06, UIColor.white, UIColor.yellow),
             .FPSButton: (SCNVector3(-8.5, 13.0, 1.0), 0.03, UIColor.white, UIColor.yellow),
@@ -2066,7 +2030,7 @@ class View3D: SCNView,                          //Our main super class.
     
     /// Dictionary between node button types and the system image name and location of each node. Intended for use with
     /// devices with small screens.
-    let SmallButtonDictionary: [NodeButtons: (Location: SCNVector3, Scale: Double, Color: UIColor, Highlight: UIColor)] =
+    public let SmallButtonDictionary: [NodeButtons: (Location: SCNVector3, Scale: Double, Color: UIColor, Highlight: UIColor)] =
         [
             .MainButton: (SCNVector3(-7.2, 13.5, 1.0), 0.08, UIColor.white, UIColor.yellow),
             .FPSButton: (SCNVector3(-5.5, 13.0, 1.0), 0.03, UIColor.white, UIColor.yellow),
@@ -2090,16 +2054,19 @@ class View3D: SCNView,                          //Our main super class.
             .HeartButton: (SCNVector3(9.2, 6.5, 1.0), 0.05, UIColor.systemPink, UIColor.red)
     ]
     
-    var MainButtonObject: SCNNode? = nil
+    /// Holds the main button.
+    public var MainButtonObject: SCNNode? = nil
     
-        var ControlBackground: SCNNode? = nil
+    /// Holds the top button set background node.
+    public var ControlBackground: SCNNode? = nil
     
-    var _DisabledControls: Set<NodeButtons> = Set<NodeButtons>()
+    /// Holds the set of disabled controls.
+    public var _DisabledControls: Set<NodeButtons> = Set<NodeButtons>()
     
     /// Adjust horizontal values in the passed vector if we're running on a small device.
     /// - Parameter V: The original vector.
     /// - Returns: Possibly changed vector. If running on an iPad, the same value is returned.
-    func AdjustForSmallScreens(_ V: SCNVector3) -> SCNVector3
+    public func AdjustForSmallScreens(_ V: SCNVector3) -> SCNVector3
     {
         if UIDevice.current.userInterfaceIdiom == .phone
         {
@@ -2123,15 +2090,21 @@ class View3D: SCNView,                          //Our main super class.
     
     // MARK: - Renderer variables.
     
-    var NodeRemovalList = [String]()
-    var ObjectRemovalList = Set<GameViewObjects>()
+    /// Nodes to remove.
+    public var NodeRemovalList = [String]()
+    /// Objects to remove.
+    public var ObjectRemovalList = Set<GameViewObjects>()
     
     // MARK: - About box variables.
     
-    var AboutBoxNode: SCNNode? = nil
-    var AboutBoxShowing: Bool = false
-    var AboutBoxHideTimer: Timer? = nil
-    var AboutLightNode: SCNNode? = nil
+    /// Main about/version box node.
+    public var AboutBoxNode: SCNNode? = nil
+    /// Flag that indicates the about box is showing.
+    public var AboutBoxShowing: Bool = false
+    /// Timer to hide the about box node.
+    public var AboutBoxHideTimer: Timer? = nil
+    /// The light for the about box.
+    public var AboutLightNode: SCNNode? = nil
 }
 
 // MARK: - Global enums related to 3DView.
