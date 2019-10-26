@@ -107,6 +107,7 @@ extension ThemeDescriptor2
             " Duration=" + Quoted("\(RotationDuration)") + "/>\n")
         Working.append(Spaces(8) + "<Destruction Method=" + Quoted(DestructionMethod.rawValue) +
             " Duration=" + Quoted("\(DestructionDuration)") + "/>\n")
+        Working.append(Spaces(8) + "<GameOver ShowOff=" + Quoted("\(ShowOffAfterGameOver)") + "/>\n")
         Working.append(Spaces(4) + "</Bucket>\n")
         
         Working.append(Spaces(4) + "<Board>\n")
