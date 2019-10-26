@@ -17,19 +17,19 @@ import UIKit
 class GameLogic
 {
     /// Delegate to the game UI. Used to let the UI know of game state changes.
-    weak var UIDelegate: GameUINotificationProtocol? = nil
+    public weak var UIDelegate: GameUINotificationProtocol? = nil
     
     /// Delegate to the game AI. Used to let the UI know of AI actions.
-    weak var AIDelegate: GameAINotificationProtocol? = nil
+    public weak var AIDelegate: GameAINotificationProtocol? = nil
     
     /// Reference to the game board.
-    var _GameBoard: Board? = nil
+    private var _GameBoard: Board? = nil
     
     /// The "AI" to run in attract mode (or perhaps in "play against the computer" mode).
-    var AI: MainAI? = nil
+    public var AI: MainAI? = nil
     
     /// The user theme.
-    var UserTheme: ThemeDescriptor2? = nil
+    public var UserTheme: ThemeDescriptor2? = nil
     
     // MARK: - Initialization
     
@@ -137,7 +137,7 @@ class GameLogic
     ///   - EnableAI: Enable AI flag. Set to true to run the game in attract mode.
     ///   - PieceCategories: Valid pieces for the game. Cannot change once the game starts until a new game starts.
     ///   - UseFastAI: Determines if a fast drop time is used when running in AI mode.
-    func StartGame(EnableAI: Bool = false, PieceCategories: [MetaPieces] = [MetaPieces.Standard],
+    public func StartGame(EnableAI: Bool = false, PieceCategories: [MetaPieces] = [MetaPieces.Standard],
                    UseFastAI: Bool = false)
     {
         GameBoard?.ResetMap()
@@ -166,16 +166,16 @@ class GameLogic
     }
     
     /// Game start time.
-    var GameStartTime: Double = 0.0
+    public var GameStartTime: Double = 0.0
     
     /// Game end time. If nil, the game hasn't ended yet.
-    var GameEndTime: Double? = nil
+    public var GameEndTime: Double? = nil
     
     /// Returns the duration of the game.
     /// - Note: If the game is ongoing, the duration returned is from the start of the game to the call time. If the game hasn't
     ///         started, 0.0 is returned.
     /// - Returns: The duration of the game.
-    func GameDuration() -> Double
+    public func GameDuration() -> Double
     {
         if GameStartTime == 0.0
         {
@@ -190,7 +190,7 @@ class GameLogic
     
     /// Start a game in stepping mode.
     /// - Parameter MakeNewBoard: If true a new game board will be created. If false, the current board will be used.
-    func StepGame(MakeNewBoard: Bool)
+    public func StepGame(MakeNewBoard: Bool)
     {
         if MakeNewBoard
         {
@@ -202,13 +202,13 @@ class GameLogic
     }
     
     /// Execute one step in the game. Not currently implemented.
-    func ExecuteGameStep()
+    public func ExecuteGameStep()
     {
         
     }
     
     /// Stop the game.
-    func StopGame()
+    public func StopGame()
     {
         _GameState = .Stopped
         GameBoard?.Stop()
@@ -217,7 +217,7 @@ class GameLogic
     /// Sets a list of valid motions for the piece.
     /// - Note: Will be superceded by Level management.
     /// - Parameter Valid: List of valid motions.
-    func SetValidBlockMotions(_ Valid: [Directions])
+    public func SetValidBlockMotions(_ Valid: [Directions])
     {
         GameBoard?.SetValidMotions(Valid)
     }
@@ -238,7 +238,7 @@ class GameLogic
     }
     
     /// Pause the game.
-    func PauseGame()
+    public func PauseGame()
     {
         DebugClient.Send("Game paused.")
         _GameState = .Paused
@@ -247,7 +247,7 @@ class GameLogic
     }
     
     /// Resume the game from where it was paused.
-    func ResumeGame()
+    public func ResumeGame()
     {
         DebugClient.Send("Game resumed")
         _GameState = .Playing
@@ -256,7 +256,7 @@ class GameLogic
     }
     
     /// Returns true if a board is in place, false if not.
-    var HaveBoard: Bool
+    public var HaveBoard: Bool
     {
         get
         {
@@ -265,14 +265,14 @@ class GameLogic
     }
     
     /// Remove the board.
-    func RemoveBoard(_ CalledFrom: String)
+    public func RemoveBoard(_ CalledFrom: String)
     {
         //print("Setting GameBoard to nil in RemoveBoard - called from \(CalledFrom)")
         GameBoard = nil
     }
     
     /// Resets the board and removes all pieces. Sets game state to stopped.
-    func ResetBoard()
+    public func ResetBoard()
     {
         InAutoPlay = false
         MakeBoard()
@@ -280,13 +280,11 @@ class GameLogic
         _GameState = .Stopped
     }
     
-    // TODO: - Change MakeBoard to use the BoardManager
-    
     /// Create a game board.
     /// - Parameters:
     ///   - Categories: Valid piece categories.
     ///   - Level: Describes the level to use.
-    func MakeBoard(_ Categories: [MetaPieces] = [MetaPieces.Standard])
+    public func MakeBoard(_ Categories: [MetaPieces] = [MetaPieces.Standard])
     {
         if let BoardDescription = BoardManager.GetBoardFor((UserTheme?.BucketShape)!)
         {
@@ -315,7 +313,7 @@ class GameLogic
     /// Called when a game piece is frozen.
     ///
     /// - Parameter ID: ID of the frozen piece.
-    func PieceUpdated(ID: UUID)
+    public func PieceUpdated(ID: UUID)
     {
         UIDelegate?.MapUpdated()
     }
@@ -324,7 +322,7 @@ class GameLogic
     /// - Parameter WithPiece: The piece that moved.
     /// - Parameter XOffset: The delta horizontal motion value.
     /// - Parameter YOffset: The delta vertical motion value.
-    func PieceUpdated2(_ WithPiece: Piece, _ XOffset: Int, _ YOffset: Int)
+    public func PieceUpdated2(_ WithPiece: Piece, _ XOffset: Int, _ YOffset: Int)
     {
         UIDelegate?.MapUpdated()
         UIDelegate?.PieceUpdated(WithPiece, X: XOffset, Y: YOffset)
@@ -337,7 +335,7 @@ class GameLogic
     ///   - MovedPiece: The piece that moved.
     ///   - Direction: The direction the piece moved.
     ///   - Commanded: True if the piece was commanded to move, false if gravity caused the movement.
-    func PieceMoved(_ MovedPiece: Piece, Direction: Directions, Commanded: Bool)
+    public func PieceMoved(_ MovedPiece: Piece, Direction: Directions, Commanded: Bool)
     {
         if let PieceClass = BoardData.GetBoardClass(For: UserTheme!.BucketShape)
         {
@@ -358,7 +356,7 @@ class GameLogic
     /// Called when a piece has frozen into place. Start dropping a new piece. By this point, the dropped piece
     /// has been merged into the bucket retired piece set and can be removed as an independent object.
     /// - Parameter ThePiece: The piece that was frozen into place.
-    func DropFinalized(_ ThePiece: Piece)
+    public func DropFinalized(_ ThePiece: Piece)
     {
         if let BoardClass = BoardData.GetBoardClass(For: UserTheme!.BucketShape)
         {
@@ -393,12 +391,15 @@ class GameLogic
         }
     }
     
-    var CumulativeBlockCount: Int = 0
-    var ScoringStartTime: Double = 0
-    var LargestBlockCount = 4
+    /// Cumulative block count.
+    public var CumulativeBlockCount: Int = 0
+    /// Start time for scoring.
+    public var ScoringStartTime: Double = 0
+    /// Largest number of blocks in a piece.
+    public var LargestBlockCount = 4
     
     /// Spawn a new piece here. Should be call only when the previous piece has been frozen and merged into the board.
-    func DoSpawnNewPiece()
+    public func DoSpawnNewPiece()
     {
         //let Start = CACurrentMediaTime()
         GameBoard?.StartNewPiece2()
@@ -411,7 +412,6 @@ class GameLogic
                 for (Label, Value) in GameBoard!.PerformanceData
                 {
                     KVP.append((Label,"\(Value)"))
-//                    print(">*>*>*> \(Label): \(Value)")
                 }
                 var NotUsed: String? = nil
                 ActivityLog.AddEntry(Title: "Performance", Source: "GameLogic",
@@ -422,7 +422,7 @@ class GameLogic
     }
     
     /// Called to discard a piece.
-    func DiscardPiece(_ ThePiece: Piece)
+    public func DiscardPiece(_ ThePiece: Piece)
     {
         /// Not currently implemented.
     }
@@ -433,19 +433,23 @@ class GameLogic
     /// - Parameters:
     ///   - To: New opacity level.
     ///   - ID: ID of the piece whose opacity will be changed.
-    func SetPieceOpacity(To: Double, ID: UUID)
+    public func SetPieceOpacity(To: Double, ID: UUID)
     {
         UIDelegate?.SetPieceOpacity(To: To, ID: ID)
     }
     
-    func SetPieceOpacity(To: Double, ID: UUID, Duration: Double)
+    /// Tell the UI to change the opacity of a piece.
+    /// - Parameter To: The new opacity value.
+    /// - Parameter ID: The ID of the piece whose opacity will be changed.
+    /// - Parameter Duration: Number of seconds to take to change the opacity.
+    public func SetPieceOpacity(To: Double, ID: UUID, Duration: Double)
     {
         UIDelegate?.SetPieceOpacity(To: To, ID: ID, Duration: Duration)
     }
     
     /// Event for after a piece has been discarded and is no longer available.
     /// - Parameter OfPiece: The ID of the piece that was discarded.
-    func CompletedDiscard(OfPiece: UUID)
+    public func CompletedDiscard(OfPiece: UUID)
     {
         UIDelegate?.PieceDiscarded(OfPiece)
         if SpawnNewPiece
@@ -459,7 +463,7 @@ class GameLogic
     /// - Parameters:
     ///   - ID: ID of the finalized piece.
     ///   - Score: New game score.
-    func ScoreWithPiece(ID: UUID, Score: Int)
+    public func ScoreWithPiece(ID: UUID, Score: Int)
     {
         UIDelegate?.FinalizedPieceScore(ID: ID, Score: Score)
     }
@@ -478,7 +482,7 @@ class GameLogic
     /// Called when a piece is frozen with at least part of it out of bounds. Indicates a game over
     /// condition.
     /// - Parameter ID: ID of the frozen piece.
-    func StoppedOutOfBounds(ID: UUID)
+    public func StoppedOutOfBounds(ID: UUID)
     {
         //Game over...
         _CurrentGameScore = GameBoard!.Map!.Scorer!.Current
@@ -489,14 +493,14 @@ class GameLogic
     
     /// Called when a piece has started freezing (but not yet frozen).
     /// - Parameter ID: ID of the piece that started freezing.
-    func StartedFreezing(_ ID: UUID)
+    public func StartedFreezing(_ ID: UUID)
     {
         UIDelegate?.StartedFreezing(ID)
     }
     
     /// Called when a piece that had started to freeze was moved and is no longer frozen.
     /// - Parameter ID: ID of the piece that is no longer freezing.
-    func StoppedFreezing(_ ID: UUID)
+    public func StoppedFreezing(_ ID: UUID)
     {
         UIDelegate?.StoppedFreezing(ID)
     }
@@ -551,7 +555,7 @@ class GameLogic
     /// - Note: If we're in AI mode, find the best fit and start the AI motion timer (which retrieves motions from the AI for
     ///         the new piece periodically.
     /// - Parameter NewPiece: The new piece to drop.
-    func HaveNewPiece(_ NewPiece: Piece)
+    public func HaveNewPiece(_ NewPiece: Piece)
     {
         UIDelegate?.NewPieceStarted(NewPiece)
         let AIStart = CACurrentMediaTime()
@@ -578,7 +582,7 @@ class GameLogic
     ///   - In some games, the AI timer was not called on the main run loop. This caused the AI to appear to be non-responsive
     ///     (when in fact it was working correctly). Putting the call in a **DisplatchQueue.main.async** solved the problem.
     ///   - [Timer.scheduledTimer does not work in Swift 3](https://stackoverflow.com/questions/40613556/timer-scheduledtimer-does-not-work-in-swift-3)
-    func StartAIMotionTimer()
+    public func StartAIMotionTimer()
     {
         if EnableAI
         {
@@ -597,7 +601,7 @@ class GameLogic
     }
     
     /// Stops the AI motion timer.
-    func StopAIMotionTimer()
+    public func StopAIMotionTimer()
     {
         if EnableAI
         {
@@ -610,10 +614,10 @@ class GameLogic
     }
     
     /// The score for the piece as per the AI.
-    var AIScoreForPiece: Double = 0
+    public var AIScoreForPiece: Double = 0
     
     /// Get an AI motion to execute. Motions are in the AI motion queue.
-    @objc func GetAIMotion()
+    @objc public func GetAIMotion()
     {
         let StartTime = CACurrentMediaTime()
         let NextMotion = AI?.GetNextMotion()
@@ -643,7 +647,7 @@ class GameLogic
     
     /// Use the UI to show the commands from the AI for moving a block.
     /// - Parameter Motion: The command motion from the AI.
-    func ShowAICommandsOnUI(Motion: Directions)
+    public func ShowAICommandsOnUI(Motion: Directions)
     {
         switch Motion
         {
@@ -677,19 +681,19 @@ class GameLogic
     }
     
     /// Timer that controls how often to retrieve a motion from the AI when the game is under the control of the AI.
-    var AITimer: Timer? = nil
+    public var AITimer: Timer? = nil
     
     /// Turns on or off gravity. Mainly used for debugging but can also be used for special game effects. Control flows
     /// from the UI to the game (here), board, then piece (which is where gravity actually takes place).
     /// - Parameter Enabled: Determines if the gravity is on or off.
-    func SetGravitation(_ Enabled: Bool)
+    public func SetGravitation(_ Enabled: Bool)
     {
         GameBoard!.SetGravitation(Enabled)
     }
     
     /// Called when a piece is blocked (either in motion or rotation). Pass the notification to the UI.
     /// - Parameter ID: ID of the piece that cannot move.
-    func PieceCannotMove(ID: UUID)
+    public func PieceCannotMove(ID: UUID)
     {
         UIDelegate?.PieceBlocked(ID)
     }
@@ -698,7 +702,7 @@ class GameLogic
     /// - Parameters:
     ///   - ID: ID of the rotated piece.
     ///   - Direction: The direction the piece rotated.
-    func PieceRotated(ID: UUID, Direction: Directions)
+    public func PieceRotated(ID: UUID, Direction: Directions)
     {
         UIDelegate?.PieceRotated(ID: ID, Direction: Direction)
     }
@@ -707,7 +711,7 @@ class GameLogic
     /// - Parameters:
     ///   - ID: ID of the piece that failed rotation.
     ///   - Direction: The rotational direction that was attempted.
-    func RotationFailure(ID: UUID, Direction: Directions)
+    public func RotationFailure(ID: UUID, Direction: Directions)
     {
         UIDelegate?.PieceRotationFailure(ID: ID, Direction: Direction)
     }
@@ -717,7 +721,7 @@ class GameLogic
     /// - Parameters:
     ///   - ID: ID of the piece the input is intended for.
     ///   - Input: Type of input.
-    func HandleInputFor(ID: UUID, Input: Directions)
+    public func HandleInputFor(ID: UUID, Input: Directions)
     {
         if EnableAI
         {
@@ -751,18 +755,18 @@ class GameLogic
     
     /// Called when a row was deleted by the board. Pass the notification to the UI.
     /// - Parameter Row: Index of the row that was deleted.
-    func RowDeleted(_ Row: Int)
+    public func RowDeleted(_ Row: Int)
     {
         UIDelegate?.DeletedRow(Row)
         RowDeletionCount = RowDeletionCount + 1
     }
     
-    var RowDeletionCount: Int = 0
+    public var RowDeletionCount: Int = 0
     
     /// Received board done compressing message. Pass to UI.
     /// - Parameter DidCompress: If true, the board actually compressed (meaning there were blocks removed). If
     ///                          false, the board's contents are the same (other than for game pieces in play).
-    func BoardDoneCompressing(DidCompress: Bool)
+    public func BoardDoneCompressing(DidCompress: Bool)
     {
         UIDelegate?.BoardDoneCompressing(DidCompress: DidCompress)
         //_CurrentGameScore = _CurrentGameScore + (RowDeletionCount * 500)
@@ -770,21 +774,21 @@ class GameLogic
     }
     
     /// Play the game by ourself using little or no intelligence and lots of randomness.
-    func AutoPlay()
+    public func AutoPlay()
     {
         ResetBoard()
         InAutoPlay = true
     }
     
     /// Holds the in auto play flag.
-    var InAutoPlay: Bool = false
+    public var InAutoPlay: Bool = false
     
     /// Pass along the piece-ran-over-a-special-button event to the UI.
     /// - Parameters:
     ///   - ID: ID of the item that ran over the speical button.
     ///   - Item: Description of the special item.
     ///   - At: Location of the special item.
-    func PieceIntersectedItem(ID: UUID, Item: PieceTypes, At: CGPoint)
+    public func PieceIntersectedItem(ID: UUID, Item: PieceTypes, At: CGPoint)
     {
         UIDelegate?.PieceIntersectedWith(Item: Item, At: At, ID: ID)
         GameBoard!.Map!.RemoveItemAt(Location: At)
@@ -795,14 +799,14 @@ class GameLogic
     ///   - ID: ID of the item that ran over the speical button.
     ///   - Item: ID of the special item.
     ///   - At: Location of the special item.
-    func PieceIntersectedItemX(ID: UUID, Item: UUID, At: CGPoint)
+    public func PieceIntersectedItemX(ID: UUID, Item: UUID, At: CGPoint)
     {
         UIDelegate?.PieceIntersectedWithX(Item: Item, At: At, ID: ID)
         GameBoard!.Map!.RemoveItemAt(Location: At)
     }
     
     /// Pass general board contents changed event to the UI.
-    func BoardContentsChanged()
+    public func BoardContentsChanged()
     {
         UIDelegate?.MapUpdated()
     }
@@ -810,7 +814,7 @@ class GameLogic
     /// Set the piece factory queue to have the first shape each game.
     /// - Parameter ToOn: Determines whether the predetermined first shape will be used or not.
     /// - Parameter FirstIs: The first shape to use if **ToOn** is true.
-    func SetPredeterminedOrder(_ ToOn: Bool, FirstIs: PieceShapes)
+    public func SetPredeterminedOrder(_ ToOn: Bool, FirstIs: PieceShapes)
     {
         GameBoard?.Factory?.SetPredeterminedOrder(ToOn, WithFirst: FirstIs)
     }
@@ -818,7 +822,7 @@ class GameLogic
     /// Return the current value of the game map as a string.
     /// - Parameter WithPieces: If true, all pieces (falling or otherwise) are included in the returned map.
     /// - Returns: String representation of the game map. Column and row headers are included.
-    func DumpMap(WithPieces: Bool = false) -> String
+    public func DumpMap(WithPieces: Bool = false) -> String
     {
         let MapString = MapType.PrettyPrint(Map: GameBoard!.Map!)
         return MapString
@@ -827,7 +831,7 @@ class GameLogic
     /// Called when a piece moves or is rotated. Used to indicate potentially different scores of the piece.
     /// - Parameters:
     ///   - ForPiece: The piece to update the score for.
-    func UpdatePieceScore(ForPiece: Piece)
+    public func UpdatePieceScore(ForPiece: Piece)
     {
         #if false
         let End = CACurrentMediaTime() - Start
@@ -837,14 +841,14 @@ class GameLogic
     
     /// Pass the name of the next piece to the UI.
     /// - Parameter Next: Name of the next piece after the current piece.
-    func NextPiece(_ Next: Piece)
+    public func NextPiece(_ Next: Piece)
     {
         UIDelegate?.NextPiece(Next)
     }
     
     /// Returns the current board game scorer class.
     /// - Returns: Current board game scorer class.
-    func GetScorer() -> Score
+    public func GetScorer() -> Score
     {
         return GameBoard!.GetScorer()
     }
