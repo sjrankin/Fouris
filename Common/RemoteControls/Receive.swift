@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-/// Class to receive data from another instance of Wacky Tetris somewhere over the network.
+/// Class to receive data from another instance of Fouris somewhere over the network.
 class Receive
 {
     
