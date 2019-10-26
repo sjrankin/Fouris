@@ -12,10 +12,9 @@ import MultipeerConnectivity
 
 extension MessageHelper
 {
-    // MARK: Heartbeat command encoding commands.
+    // MARK: - Heartbeat command encoding commands.
     
     /// Make a connection heartbeat message.
-    ///
     /// - Parameters:
     ///   - From: The name of the peer that is sending the connection heartbeat message.
     ///   - ReturnIn: Number of seconds to wait before returning a reciprocol connection heartbeat.
@@ -40,6 +39,9 @@ extension MessageHelper
         return Final
     }
     
+    /// Create a request heartbeat connection.
+    /// - Parameter From: ID of the peer that wants to receive the heartbeat.
+    /// - Returns: Command to send to request a heartbeat.
     public static func MakeRequestConnectionHeartbeat(From: MCPeerID) -> String
     {
         let FromS = "From=\(From.displayName)"
@@ -47,6 +49,10 @@ extension MessageHelper
         return Final
     }
     
+    /// Create a heartbeat message command.
+    /// - Parameter NextExpectedIn: When the next heartbeat message is expected.
+    /// - Parameter HostName: Not currently used.
+    /// - Returns: Heartbeat command to send.
     public static func MakeHeartbeatMessage(NextExpectedIn: Int, _ HostName: String) -> String
     {
         let Expected = "Next=\(NextExpectedIn)"
@@ -54,6 +60,11 @@ extension MessageHelper
         return Final
     }
     
+    /// Create a heartbeat message command.
+    /// - Parameter Payload: A string to send along with the heartbeat.
+    /// - Parameter NextExpectedIn: When the next heartbeat message is expected.
+    /// - Parameter HostName: Not currently used.
+    /// - Returns: Heartbeat command to send.
     public static func MakeHeartbeatMessage(Payload: String, NextExpectedIn: Int, _ HostName: String) -> String
     {
         let Message = "Next=\(NextExpectedIn)"
@@ -62,7 +73,7 @@ extension MessageHelper
         return Final
     }
     
-    // MARK: Hearbeat command decoding.
+    // MARK: - Hearbeat command decoding.
     
     /// Decode a connection heartbeat message.
     ///
@@ -132,6 +143,9 @@ extension MessageHelper
         return (FS, RI, LR, FA, RC)
     }
     
+    /// Decode a heartbeat message.
+    /// - Parameter Raw: Raw heartbeat message.
+    /// - Returns: Tuple with the next expected duration and optional text message.
     public static func DecodeHeartbeat(_ Raw: String) -> (Int, String?)?
     {
         let Params = GetParameters(From: Raw, ["Next", "Payload"])
