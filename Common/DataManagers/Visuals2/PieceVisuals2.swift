@@ -75,7 +75,9 @@ class PieceVisuals2: CustomStringConvertible, XMLDeserializeProtocol
         }
     }
     
+    /// Holds the updated value.
     private var _Updated: String = ""
+    /// Get or set the updated string (expected to be time-stamp in string format).
     public var Updated: String
     {
         get
