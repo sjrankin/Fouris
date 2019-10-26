@@ -52,10 +52,14 @@ class PieceManager
         let _ = UserPieceDocument?.DeserializeTo(Caller: _UserPieces!)
     }
     
+    /// Holds the default piece XML document.
     static var DefaultPieceDocument: XMLDocument? = nil
+    /// Holds the user piece XML document.
     static var UserPieceDocument: XMLDocument? = nil
     
+    /// Holds the default piece collection.
     private static var _DefaultPieces: PieceCollection? = nil
+    /// Holds the user piece collection.
     private static var _UserPieces: PieceCollection? = nil
     
     /// Get or set the collection of default pieces.
