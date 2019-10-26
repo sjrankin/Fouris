@@ -30,6 +30,7 @@ class ClientCommands
             ClientCommand(ClientCommandIDList[.ClientVersion]!, "Version", "Get client version info", 0)
     }
     
+    /// Holds list of basic commands.
     private var _Basic: [UUID: ClientCommand] = [UUID: ClientCommand]()
     /// Get a list of basic, common commands. To remove all basic/common commands, call `ClearAllBasicCommands`.
     public var Basic: [UUID: ClientCommand]
@@ -46,6 +47,7 @@ class ClientCommands
         _Basic.removeAll()
     }
     
+    /// Holds list of user commands.
     private var _User: [UUID: ClientCommand] = [UUID: ClientCommand]()
     /// Get or set user-level client commands (eg, commands specific to the app).
     public var User: [UUID: ClientCommand]
@@ -62,7 +64,6 @@ class ClientCommands
     
     /// Returns all (Basic + User) commands in the class. Sort order may change between function calls and order is not
     /// guarenteed.
-    ///
     /// - Returns: List of all client commands.
     public func GetAllCommands() -> [(UUID, ClientCommand)]
     {
@@ -82,7 +83,7 @@ class ClientCommands
     }
     
     /// IDs for basic/command commands.
-    let ClientCommandIDList: [ClientCommandIDs: UUID] =
+    public let ClientCommandIDList: [ClientCommandIDs: UUID] =
         [
             .SendText: UUID(uuidString: ClientCommandIDs.SendText.rawValue)!,
             .Reset: UUID(uuidString: ClientCommandIDs.Reset.rawValue)!,
@@ -91,19 +92,17 @@ class ClientCommands
     ]
     
     /// Determines if the passed command ID is within the current set of all commands.
-    ///
     /// - Parameter Command: The command ID to verify against the current set of all commands.
     /// - Returns: True if the command ID is present, false if not.
-    func IsKnownCommand(_ Command: UUID) -> Bool
+    public func IsKnownCommand(_ Command: UUID) -> Bool
     {
         return GetCommand(Command) != nil
     }
     
     /// Returns the command for the specified command ID.
-    ///
     /// - Parameter CommandID: The command ID whose client command will be returned.
     /// - Returns: The client command on success, nil if not found.
-    func GetCommand(_ CommandID: UUID) -> ClientCommand?
+    public func GetCommand(_ CommandID: UUID) -> ClientCommand?
     {
         let AllCommands = GetAllCommands()
         for (CmdID, Cmd) in AllCommands
@@ -117,9 +116,8 @@ class ClientCommands
     }
     
     /// Returns a list of string ready to send over multi-peer communications based on all client commands.
-    ///
     /// - Returns: List of client command strings.
-    func MakeCommandList() -> [String]
+    public func MakeCommandList() -> [String]
     {
         let AllCommands = GetAllCommands()
         var Results = [String]()
@@ -135,7 +133,6 @@ class ClientCommands
 }
 
 /// Client commands. The raw value is the string representation of a UUID and is used to send commands.
-///
 /// - SendText: Send text to the client.
 /// - Reset: Reset the client to a known state.
 /// - ShutDown: Shut down the client.
