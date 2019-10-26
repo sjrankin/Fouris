@@ -12,7 +12,7 @@ import MultipeerConnectivity
 
 extension MessageHelper
 {
-    // MARK: Special and other command encoding commands.
+    // MARK: - Special and other command encoding commands.
     
     /// Make a special command. (Special commands are used to control the UI of the host.)
     ///
@@ -33,8 +33,11 @@ extension MessageHelper
         return Final
     }
     
-    // MARK: Special and other command decoding.
+    // MARK: - Special and other command decoding.
     
+    /// Decode a special command.
+    /// - Parameter Raw: Raw data from a peer.
+    /// - Returns: Special command data.
     public static func DecodeSpecialCommand(_ Raw: String) -> SpecialCommands
     {
         let Params = GetParameters(From: Raw, ["SpecialCommand"])
