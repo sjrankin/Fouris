@@ -1,6 +1,6 @@
 //
 //  Versioning.swift
-//  WackyDesktopTetris
+//  Fouris
 //
 //  Created by Stuart Rankin on 4/10/19.
 //  Copyright © 2019 Stuart Rankin. All rights reserved.
@@ -83,19 +83,19 @@ public class Versioning: CustomStringConvertible
     }
     
     /// Build number.
-    public static let Build: Int = 2950
+    public static let Build: Int = 2973
     
     /// Build increment.
     private static let BuildIncrement = 1
     
     /// Build ID.
-    public static let BuildID: String = "3D4873E5-B52D-4AFF-8DDD-BE12FAA6DE5F"
+    public static let BuildID: String = "DDF3E7FD-64C8-4CF9-BDF5-0197023A94E3"
     
     /// Build date.
-    public static let BuildDate: String = "25 October 2019"
+    public static let BuildDate: String = "26 October 2019"
     
     /// Build Time.
-    public static let BuildTime: String = "22:23"
+    public static let BuildTime: String = "18:21"
     
     /// Return a standard build string.
     ///
