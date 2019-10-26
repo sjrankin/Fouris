@@ -11,6 +11,7 @@ import Foundation
 /// Standard Tetris game AI. Uses the `GeneralAI` class.
 class StandardGameAI: AIProtocol
 {
+    /// The piece that was tested.
     var FoundBestFitFor: Piece?
     
     /// Initialize the AI class.
@@ -20,6 +21,11 @@ class StandardGameAI: AIProtocol
         GameBoard = WithBoard
     }
     
+    /// Returns a value indicating a best fit score.
+    /// - Parameter GamePiece: The piece used to determine best fit.
+    /// - Parameter CurrentScore: The current game score.
+    /// - Parameter InBoard: The populated board.
+    /// - Returns: Value indicating best fit.
     func BestFit(_ GamePiece: Piece, CurrentScore: Int, InBoard: Board) -> Double
     {
         let Result = GeneralAI.BestFit(GamePiece, CurrentScore: CurrentScore, GameBoard: InBoard)
@@ -27,6 +33,11 @@ class StandardGameAI: AIProtocol
         return Result
     }
     
+    /// Returns a value indicating a best fit score.
+    /// - Notes: Not currently implemented.
+    /// - Parameter GamePiece: The piece used to determine best fit.
+    /// - Parameter CurrentScore: The current game score.
+    /// - Returns: Value indicating best fit.
     public func BestFit(_ GamePiece: Piece, CurrentScore: Int) -> Double
     {
         return 0.0
