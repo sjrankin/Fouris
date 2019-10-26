@@ -9,9 +9,12 @@
 import Foundation
 import UIKit
 
+/// Code to handle the UI for exporting various objects.
+/// - Note: Not fully implemented yet.
 class ExportCode: UIViewController, ThemeEditingProtocol
 {
-    override func viewDidLoad()
+    /// Initialize the UI.
+    override public func viewDidLoad()
     {
         super.viewDidLoad()
         ContentsViewer.text = ""
@@ -20,24 +23,33 @@ class ExportCode: UIViewController, ThemeEditingProtocol
         HistoryTypeSegment.selectedSegmentIndex = 0
     }
     
-    func EditTheme(Theme: ThemeDescriptor2)
+    /// The Current theme.
+    /// - Parameter Theme: The theme that the user has an option to export.
+    public func EditTheme(Theme: ThemeDescriptor2)
+    {
+        UserTheme = Theme
+    }
+
+    /// The Current theme.
+    /// - Parameter Theme: The theme that the user has an option to export.
+    /// - Parameter PieceID: Not used.
+    public func EditTheme(Theme: ThemeDescriptor2, PieceID: UUID)
     {
         UserTheme = Theme
     }
     
-    func EditTheme(Theme: ThemeDescriptor2, PieceID: UUID)
-    {
-        UserTheme = Theme
-    }
-    
-    func EditResults(_ Edited: Bool, ThemeID: UUID, PieceID: UUID?)
+    /// Not used in this class.
+    public func EditResults(_ Edited: Bool, ThemeID: UUID, PieceID: UUID?)
     {
         //Not used in this class.
     }
     
-    var UserTheme: ThemeDescriptor2? = nil
+    /// Holds the theme to export.
+    private var UserTheme: ThemeDescriptor2? = nil
     
-    @IBAction func HandleViewThemePressed(_ sender: Any)
+    /// Dump the theme in xml format to a view.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleViewThemePressed(_ sender: Any)
     {
         ShowingVisuals = false
         ShowingHistory = false
@@ -47,7 +59,9 @@ class ExportCode: UIViewController, ThemeEditingProtocol
         ContentsTitle.isHidden = false
     }
     
-    @IBAction func HandleViewVisualsPressed(_ sender: Any)
+    /// Dump piece visuals in xml format to a view.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleViewVisualsPressed(_ sender: Any)
     {
         ShowingHistory = false
         ShowingVisuals = true
@@ -69,7 +83,9 @@ class ExportCode: UIViewController, ThemeEditingProtocol
         ContentsTitle.isHidden = false
     }
     
-    @IBAction func HandleViewHistoryPressed(_ sender: Any)
+    /// Dump history in xml format to a view.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleViewHistoryPressed(_ sender: Any)
     {
         ShowingVisuals = false
         ShowingHistory = true
@@ -91,22 +107,32 @@ class ExportCode: UIViewController, ThemeEditingProtocol
         ContentsTitle.isHidden = false
     }
     
-    var ShowingHistory = false
-    var ShowingVisuals = false
+    /// Showing history flag.
+    private var ShowingHistory = false
+    /// Showing visuals flag.
+    private var ShowingVisuals = false
     
-    @IBAction func HandleExportThemeButton(_ sender: Any)
+    /// Export the current theme.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleExportThemeButton(_ sender: Any)
     {
     }
     
-    @IBAction func HandleExportHistoryButton(_ sender: Any)
+    /// Export the history data.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleExportHistoryButton(_ sender: Any)
     {
     }
     
-    @IBAction func HandleExportVisualsButton(_ sender: Any)
+    /// Export the visual theme.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleExportVisualsButton(_ sender: Any)
     {
     }
     
-    @IBAction func HandleHistoryViewChanged(_ sender: Any)
+    /// Update which history is being viewed.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleHistoryViewChanged(_ sender: Any)
     {
         if ShowingHistory
         {
@@ -114,6 +140,8 @@ class ExportCode: UIViewController, ThemeEditingProtocol
         }
     }
     
+    /// Update which visuals are being viewed.
+    /// - Parameter sender: Not used.
     @IBAction func HandleVisualViewChanged(_ sender: Any)
     {
         if ShowingVisuals
@@ -122,6 +150,8 @@ class ExportCode: UIViewController, ThemeEditingProtocol
         }
     }
     
+    /// Close the dialog.
+    /// - Parameter sender: Not used.
     @IBAction func HandleCloseButton(_ sender: Any)
     {
         self.dismiss(animated: true, completion: nil)
