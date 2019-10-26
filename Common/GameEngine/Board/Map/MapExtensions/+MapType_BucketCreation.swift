@@ -110,7 +110,7 @@ extension MapType
                 Map[Y][X] = BucketExteriorID
             }
         }
-                let GameBoard = BoardManager.GetBoardFor(GameShape)!
+        let GameBoard = BoardManager.GetBoardFor(GameShape)!
         let InvisibleBlocks = GameBoard.InvisibleBucketBlockList()
         for Location in InvisibleBlocks
         {
