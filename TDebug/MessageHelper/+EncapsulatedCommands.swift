@@ -12,11 +12,10 @@ import MultipeerConnectivity
 
 extension MessageHelper
 {
-    // MARK: Encapsulated command encoding commands.
+    // MARK: - Encapsulated command encoding commands.
 
     /// Make an encapsulated command. Encapsulated commands are used to coordinate asynchronous commands with
     /// their asynchronous results.
-    ///
     /// - Parameters:
     ///   - WithID: The asynchronous command ID - each time this is called, a different UIID should be used.
     ///   - Payload: The command to encapsulate.
@@ -29,10 +28,9 @@ extension MessageHelper
         return Final
     }
     
-    // MARK: Encapsulated command decoding.
+    // MARK: - Encapsulated command decoding.
     
     /// Decode an encapsulated ID command.
-    ///
     /// - Parameter Raw: The raw value to decode.
     /// - Returns: Tupele in the following order: (ID of the encapsulated command, Raw, encoded command). Nil on error.
     public static func DecodeEncapsulatedCommand(_ Raw: String) -> (UUID, String)?
