@@ -93,7 +93,7 @@ class BlockCoordinates<T> where T: Numeric
     
     /// Add an offset value to `X`, `Y`, and `Z`.
     /// - Parameter ToAll: Value to add to this instance.
-    func AddOffset(_ ToAll: T)
+    public func AddOffset(_ ToAll: T)
     {
         _X = _X + ToAll
         _Y = _Y + ToAll
@@ -103,7 +103,7 @@ class BlockCoordinates<T> where T: Numeric
     /// Add the supplied values to the values in the instance.
     /// - Parameter X: The value to add to the instance value of X.
     /// - Parameter Y: The value to add to the instance value of Y.
-    func AddOffset(_ X: T, _ Y: T)
+    public func AddOffset(_ X: T, _ Y: T)
     {
         _X = _X + X
         _Y = _Y + Y
@@ -113,7 +113,7 @@ class BlockCoordinates<T> where T: Numeric
     /// - Parameter X: The value to add to the instance value of X.
     /// - Parameter Y: The value to add to the instance value of Y.
     /// - Parameter Z: The value to add to the instance value of Z.
-    func AddOffset(_ X: T, _ Y: T, _ Z: T)
+    public func AddOffset(_ X: T, _ Y: T, _ Z: T)
     {
         _X = _X + X
         _Y = _Y + Y
@@ -122,7 +122,7 @@ class BlockCoordinates<T> where T: Numeric
     
     /// Add the values in **Other** to the instance values here.
     /// - Parameter Other: The source of the values to add.
-    func AddOffset(_ Other: BlockCoordinates<T>)
+    public func AddOffset(_ Other: BlockCoordinates<T>)
     {
         _X = _X + Other.X
         _Y = _Y + Other.Y
