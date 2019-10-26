@@ -14,7 +14,7 @@ import SceneKit
 extension View3D
 {
     /// Adds a background "layer" behind the top control buttons to clarify where the control region is.
-    func ShowControlButtonBackground()
+    public func ShowControlButtonBackground()
     {
         let Box = SCNBox(width: 30.0, height: 4.0, length: 0.01, chamferRadius: 0.0)
         Box.firstMaterial?.diffuse.contents = UIColor.black.withAlphaComponent(0.75)
@@ -28,7 +28,7 @@ extension View3D
     /// - Note: Depending on the device type, different button sizes and locations are used. This is determined at run time.
     /// - Parameter ForButton: Determines the button to create and add to the scene.
     /// - Parameter NodeText: If supplied the text to use for the node. If not supplied, default values are used.
-    func MakeButton(ForButton: NodeButtons, NodeText: String? = nil)
+    public func MakeButton(ForButton: NodeButtons, NodeText: String? = nil)
     {
         if UIDevice.current.userInterfaceIdiom == .phone
         {
@@ -229,7 +229,7 @@ extension View3D
     /// Returns the parent node of the passed button node.
     /// - Parameter Of: The node whose parent will be returned.
     /// - Returns: The parent of the passed node. Nil if not found.
-    func GetParentNode(Of Node: SCNButtonNode) -> SCNButtonNode?
+    public func GetParentNode(Of Node: SCNButtonNode) -> SCNButtonNode?
     {
         if Node.parent == nil
         {
@@ -255,7 +255,7 @@ extension View3D
     ///         button press by the AI.
     /// - Parameter Button: The button to flash.
     /// - Parameter Duration: How long to flash the button in seconds. Defaults to 0.15 seconds.
-    func FlashButton(_ Button: NodeButtons, Duration: Double = 0.15)
+    public func FlashButton(_ Button: NodeButtons, Duration: Double = 0.15)
     {
         if let Node = ButtonList[Button]
         {
@@ -272,7 +272,7 @@ extension View3D
     
     /// Unconditionally sets the button color to its normal color.
     /// - Parameter Button: The button whose color will be reset to normal.
-    func SetButtonColorToNormal(Button: NodeButtons)
+    public func SetButtonColorToNormal(Button: NodeButtons)
     {
         if let TheButton = ButtonList[Button]
         {
@@ -291,7 +291,7 @@ extension View3D
     
     /// Unconditionally sets the button color to its highlight color.
     /// - Paraemter Button: The button whose color will be set to highlight.
-    func SetButtonColorToHighlight(Button: NodeButtons)
+    public func SetButtonColorToHighlight(Button: NodeButtons)
     {
         if let TheButton = ButtonList[Button]
         {
@@ -308,7 +308,10 @@ extension View3D
         }
     }
     
-    func SetText(OnButton: NodeButtons, ToNextText: String)
+    /// Sets/changes the text on the specified button.
+    /// - Parameter OnButton: The button whose text will change.
+    /// - Parameter ToNextText: New text for the button.
+    public func SetText(OnButton: NodeButtons, ToNextText: String)
     {
         if let TheButton = ButtonList[OnButton]
         {
@@ -320,7 +323,7 @@ extension View3D
     /// Show game view controls.
     /// - Parameter Which: Array of buttons to show. If nil, all buttons are shown. Default is nil. Passing an empty array will
     ///                    remove all buttons.
-    func ShowControls(With: [NodeButtons]? = nil)
+    public func ShowControls(With: [NodeButtons]? = nil)
     {
         //Add the background if necessary.
         #if true
@@ -335,7 +338,7 @@ extension View3D
         }
         if !FoundBackground
         {
-        ShowControlButtonBackground()
+            ShowControlButtonBackground()
         }
         #else
         if ControlBackground == nil
@@ -387,7 +390,7 @@ extension View3D
     
     /// Adds the specified button to the set of motion controls. If the button is already present, no action is taken.
     /// - Parameter Which: The button to add.
-    func AppendButton(Which: NodeButtons)
+    public func AppendButton(Which: NodeButtons)
     {
         if ButtonList.keys.contains(Which)
         {
@@ -398,7 +401,7 @@ extension View3D
     
     /// Removes the specified button from the set of motion controls. If the button is not present, no action is taken.
     /// - Parameter Which: The button to remove.
-    func RemoveButton(Which: NodeButtons)
+    public func RemoveButton(Which: NodeButtons)
     {
         if ButtonList.keys.contains(Which)
         {
@@ -411,7 +414,7 @@ extension View3D
     /// is set to `0.0`. The main class should call `IsDisabled` on each hit test success to see if the user pressed a disabled
     /// button.
     /// - Parameter Which: The node to disable.
-    func DisableControl(Which: NodeButtons)
+    public func DisableControl(Which: NodeButtons)
     {
         if ButtonList.keys.contains(Which)
         {
@@ -423,7 +426,7 @@ extension View3D
     /// Enables a disabled. This means the control is removed from the `DisabledControls` set and its opacity
     /// is set to `1.0`.
     /// - Parameter Which: The node to enable.
-    func EnableControl(Which: NodeButtons)
+    public func EnableControl(Which: NodeButtons)
     {
         if ButtonList.keys.contains(Which)
         {
@@ -450,7 +453,7 @@ extension View3D
     
     /// Hides all motion controls in the game surface and may optionally change the visual size
     /// of the bucket.
-    func HideControls()
+    public func HideControls()
     {
         ShowControls(With: [])
     }
@@ -458,7 +461,7 @@ extension View3D
     /// Given a button type, return the button itself.
     /// - Parameter Which: The button type to return.
     /// - Returns: The button associated with the passed type on success, nil if not found (or not created for use yet).
-    func GetButton(_ Which: NodeButtons) -> SCNButtonNode?
+    public func GetButton(_ Which: NodeButtons) -> SCNButtonNode?
     {
         if let ButtonNode = ButtonList[Which]
         {
@@ -472,7 +475,7 @@ extension View3D
     
     /// Change the main button's texture to the supplied image.
     /// - Parameter To: The new image to use for the texture.
-    func ChangeMainButtonTexture(To: UIImage)
+    public func ChangeMainButtonTexture(To: UIImage)
     {
         MainButtonObject?.geometry?.firstMaterial?.diffuse.contents = To
     }
@@ -481,7 +484,7 @@ extension View3D
     /// - Parameter Which: The button whose extrusion depth will be animated.
     /// - Parameter ToHeight: The new height of the node.
     /// - Paremeter Duration: The duration of the animation.
-    func AnimateExtrusion(_ Which: NodeButtons, ToHeight: CGFloat, Duration: Double = 0.25)
+    public func AnimateExtrusion(_ Which: NodeButtons, ToHeight: CGFloat, Duration: Double = 0.25)
     {
         #if true
         if let ButtonNode = ButtonList[Which]
@@ -518,10 +521,10 @@ extension View3D
     /// - Parameter Sizes: Set of scale values for the highlight size and the normal size.
     /// - Parameter Extrusions: Set of extrusion values for the highlight extrusion depth and the normal
     ///                         extrusion depth.
-    func AnimateHeartbeat(IsHighlighted: Bool, Duration: Double,
-                          Colors: (Highlighted: UIColor, Normal: UIColor),
-                          Sizes: (Highlighted: CGFloat, Normal: CGFloat),
-                          Extrusions: (Highlighted: CGFloat, Normal: CGFloat))
+    public func AnimateHeartbeat(IsHighlighted: Bool, Duration: Double,
+                                 Colors: (Highlighted: UIColor, Normal: UIColor),
+                                 Sizes: (Highlighted: CGFloat, Normal: CGFloat),
+                                 Extrusions: (Highlighted: CGFloat, Normal: CGFloat))
     {
         if let ButtonNode = ButtonList[.HeartButton]
         {
