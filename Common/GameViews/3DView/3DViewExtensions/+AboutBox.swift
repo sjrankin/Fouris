@@ -17,7 +17,7 @@ extension View3D
     /// - Parameter FadeInduration: The amount of time in seconds to fade-in the box when it is initially shown.
     /// - Parameter HideAfter: If the user does not intervene, this is the number of seconds to wait before automatically
     ///                        hiding the about box.
-    func ShowAboutBox(FadeInDuration: Double, HideAfter: Double)
+    public func ShowAboutBox(FadeInDuration: Double, HideAfter: Double)
     {
         if AboutBoxShowing
         {
@@ -91,7 +91,7 @@ extension View3D
     }
     
     /// Hide the about box. Called by `ShowAboutBox` after a certain amount of time.
-    @objc func AutoHideAboutBox()
+    @objc public func AutoHideAboutBox()
     {
         HideAboutBox()
     }
@@ -99,7 +99,7 @@ extension View3D
     /// Hide the about box.
     /// - Note: If the about box is not visible, this function takes no action.
     /// - Parameter HideDuration: The number of seconds to take for the hide animation.
-    func HideAboutBox(HideDuration: Double = 1.0)
+    public func HideAboutBox(HideDuration: Double = 1.0)
     {
         if !AboutBoxShowing
         {
