@@ -1,6 +1,6 @@
 //
 //  ControlProtocol.swift
-//  WackyDesktopTetris
+//  Fouris
 //
 //  Created by Stuart Rankin on 4/28/19.
 //  Copyright © 2019 Stuart Rankin. All rights reserved.
@@ -9,7 +9,6 @@
 import Foundation
 
 /// Control commands from the controller window.
-///
 /// - Note: Just because a command is sent does not mean the command can be executed.
 protocol ControlProtocol: class
 {
