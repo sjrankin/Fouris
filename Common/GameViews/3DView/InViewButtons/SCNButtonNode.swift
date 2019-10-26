@@ -35,6 +35,8 @@ class SCNButtonNode: SCNNode
         self.geometry = geometry
     }
     
+    /// Initializer.
+    /// - Parameter Node: The node to use as the object to display.
     init(Node: SCNNode)
     {
         super.init()
@@ -51,6 +53,9 @@ class SCNButtonNode: SCNNode
         _ButtonType = TypeOfButton
     }
     
+    /// Initializer.
+        /// - Parameter Node: The node to use as the object to display.
+    /// - Parameter TypeOfButton: The type of button we are.
     init(Node: SCNNode, _ TypeOfButton: NodeButtons)
     {
         super.init()
@@ -71,6 +76,10 @@ class SCNButtonNode: SCNNode
         _ButtonColor = ButtonColor
     }
     
+    /// Initializer.
+    /// - Parameter Node: The node to use as the object to display.
+    /// - Parameter TypeOfButton: The type of button we are.
+    /// - Parameter ButtonColor: The color of the diffuse surface of the button.
     init(Node: SCNNode, _ TypeOfButton: NodeButtons, ButtonColor: UIColor = UIColor.white)
     {
         super.init()
@@ -96,6 +105,12 @@ class SCNButtonNode: SCNNode
         _HighlightColor = HighlightColor
     }
     
+    /// Initializer.
+    /// - Parameter Node: The node to use as the object to display.
+    /// - Parameter TypeOfButton: The type of button we are.
+    /// - Parameter ButtonColor: The color of the diffuse surface of the button.
+    /// - Parameter HighlightColor: The color of a highlighted button (set to the diffuse surface). Not used until one of the
+    ///                             highlight functions is called.
     init(Node: SCNNode, _ TypeOfButton: NodeButtons, ButtonColor: UIColor = UIColor.white, HighlightColor: UIColor = UIColor.yellow)
     {
         super.init()
@@ -428,7 +443,8 @@ class SCNButtonNode: SCNNode
         )
     }
     
-    // MARK: Static functions.
+    // MARK: - Static functions.
+    
     #if false
     /// Returns the bounding size of the passed node.
     /// - Parameter Node: The SCNNode whose bounding size will be returned.
@@ -520,6 +536,9 @@ class SCNButtonNode: SCNNode
 
 }
 
+/// Types of text to display.
+/// - **String**: Source is from a Swift **String**.
+/// - **UnicodeCodePoint**: Source is an **Int** that points to a Unicode code point.
 enum TextTypes: String, CaseIterable
 {
     case String = "String"
