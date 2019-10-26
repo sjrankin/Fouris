@@ -277,7 +277,8 @@ class XMLNode: CustomStringConvertible
     
     // MARK: Protocol function/attribute implementations.
     
-    var description: String
+    /// Returns the contents of the class as a string.
+    public var description: String
     {
         get
         {
