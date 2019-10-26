@@ -12,6 +12,8 @@ import SceneKit
 
 extension View3D
 {
+    /// Draw text.
+    /// - Note: Not currently implemented.
     public func PlotText(_ TextNode: SCNGameText)
     {
         self.scene?.rootNode.addChildNode(TextNode)
