@@ -76,6 +76,9 @@ class Coin
     }
 }
 
+/// Sides of a virtual coin.
+/// - **Heads**: The portrait side.
+/// - **Tails**: The non-portrait side.
 enum CoinFaces: Int, CaseIterable
 {
     case Heads = 0
