@@ -13,24 +13,9 @@ import UIKit
 /// Maintains predefined colors and color groups.
 class PredefinedColors
 {
-    /// Ways to order predefined colors.
-    ///
-    /// - Name: Alphabetical by name.
-    /// - NameList: Alphabetical by name but ungrouped.
-    /// - Hue: By hue group.
-    /// - Brightness: By brightness level.
-    /// - Palette: Alphabetical by palette.
-    public enum ColorOrders
-    {
-        case Name
-        case NameList
-        case Hue
-        case Brightness
-        case Palette
-    }
+
     
     /// Return a list of color groups defined and ordered by the passed color order.
-    ///
     /// - Parameter Order: Order of the colors. Also defines the type of color groups returned.
     /// - Returns: List of color groups.
     public static func ColorsInOrder(_ Order: ColorOrders) -> [PredefinedColorGroup]
@@ -58,7 +43,6 @@ class PredefinedColors
     private static var ColorGroupNames: [String]? = nil
     
     /// Return a list of all group/palette names in the predefined list of colors.
-    ///
     /// - Returns: Sorted list of color group/palette names.
     public static func GetColorGroupNames() -> [String]
     {
@@ -83,7 +67,6 @@ class PredefinedColors
     private static var CachedColors: [String: [PredefinedColor]]? = nil
     
     /// Return a list of all colors in the specified color group.
-    ///
     /// - Parameter Group: Name of the color group (AKA palette name) whose colors will be returned. If
     ///                    the specified name is undefined (eg, not in the list of colors palettes), an
     ///                    empty list is returned.
@@ -106,7 +89,6 @@ class PredefinedColors
     /// Determines the distance between two three-dimensional points. Specifically used to determine
     /// how far away colors are from each other. The semantics of the passed values are not of
     /// importance here.
-    ///
     /// - Parameters:
     ///   - First: First point, tuple of three dimensions.
     ///   - Second: Second point, tuple of three dimensions.
@@ -126,7 +108,6 @@ class PredefinedColors
     /// passed in ToColor. This function uses a brute-force method that determines the distance between
     /// the passed color and each color in the color group. The color in the specified group with the
     /// shortest distance from the passed color is the closest color.
-    ///
     /// - Parameters:
     ///   - Group: Name of the color palette/group to compare against ToColor.
     ///   - ToColor: The color to test against the colors in the group specified by Group.
@@ -146,7 +127,6 @@ class PredefinedColors
     /// in ToColor. This function uses a brute-force method that determines the distance between
     /// the passed color and each color in the list. The color in the list with the shortest
     /// distance from the passed color is the closest color.
-    ///
     /// - Parameters:
     ///   - Group: List of colors to search for the closest color.
     ///   - ToColor: The color to test against the passed list of colors.
@@ -169,7 +149,6 @@ class PredefinedColors
     /// in ToColor. This function uses a brute-force method that determines the distance between
     /// the passed color and each color in the list. The color in the list with the shortest
     /// distance from the passed color is the closest color.
-    ///
     /// - Parameters:
     ///   - Group: List of colors to search for the closest color.
     ///   - ToColor: The color to test against the passed list of colors.
@@ -200,7 +179,6 @@ class PredefinedColors
     }
     
     /// Return the color at the specified index in the specified color group.
-    ///
     /// - Parameters:
     ///   - Group: The group from with the color will be returned.
     ///   - At: The index of the color in the specified group.
@@ -221,7 +199,6 @@ class PredefinedColors
     }
     
     /// Sorts a list of predefined colors by the pass sort type.
-    ///
     /// - Parameters:
     ///   - List: List of predefined colors to sort. Unaltered by this function.
     ///   - By: How to sort the list. .NameList and .Palette are not supported. If specified, the
@@ -249,7 +226,6 @@ class PredefinedColors
     }
     
     /// Return a color with the specified ID.
-    ///
     /// - Parameter ID: ID of the color to return.
     /// - Returns: The color with the specified ID if found, nil if no color with the ID found.
     public static func ColorByID(_ ID: UUID) -> PredefinedColor?
@@ -264,7 +240,7 @@ class PredefinedColors
         return nil
     }
     
-    /// Holds the range for hue descriptions.
+    /// Holds the ranges for hue descriptions.
     static let HueRanges =
         [
             (355, 360, "Red", "355° - 10°"),
@@ -287,7 +263,6 @@ class PredefinedColors
     ]
     
     /// Return the largest delta in the list of passed numbers.
-    ///
     /// - Parameter Numbers: List of integers.
     /// - Returns: Largest delta in the list.
     private static func MaxDelta(_ Numbers: [CGFloat]) -> CGFloat
@@ -309,7 +284,6 @@ class PredefinedColors
     }
     
     /// Return the largest delta in the list of passed numbers.
-    ///
     /// - Parameter Numbers: List of integers.
     /// - Returns: Largest delta in the list.
     private static func MaxDelta(_ Numbers: [Int]) -> Int
@@ -331,7 +305,6 @@ class PredefinedColors
     }
     
     /// Determines if the passed color is monochromatic.
-    ///
     /// - Parameter TheColor: The color to test.
     /// - Returns: True if the color is monochromatic, false if not.
     private static func IsMonochromatic(_ TheColor: UIColor) -> Bool
@@ -342,7 +315,6 @@ class PredefinedColors
     }
     
     /// Returns the starting range value for a given hue.
-    ///
     /// - Parameter HueValue: The hue whose starting range value will be returned. Assumed to be normalized.
     /// - Returns: Starting hue range for the hue (see also HueRanges).
     private static func HueStartingRange(_ HueValue: Double) -> Double
@@ -360,7 +332,6 @@ class PredefinedColors
     }
     
     /// Return the name and range (as a string) of the hue passed to us.
-    ///
     /// - Parameter HueValue: The hue value (normalized).
     /// - Returns: Tuple in the order name, range. If not found, "??","??" is returned.
     private static func GetHueGroupName(_ HueValue: Double) -> (String, String)
@@ -378,7 +349,6 @@ class PredefinedColors
     }
     
     /// Return a list of sorted color groups. Sorted by hue.
-    ///
     /// - Returns: List of predefined color groups, sorted by hue.
     private static func GetHueSortedColors() -> [PredefinedColorGroup]
     {
@@ -449,7 +419,6 @@ class PredefinedColors
     }
     
     /// Create a brightness group name.
-    ///
     /// - Parameter Value: Value of the brightness.
     /// - Returns: Name of a brightness group.
     private static func MakeBrightnessGroupName(_ Value: Double) -> String
@@ -499,7 +468,6 @@ class PredefinedColors
     }
     
     /// Return a list of sorted color groups. Sorted by brightness.
-    ///
     /// - Returns: List of predefined color groups, sorted by brightness.
     private static func GetBrightnessSortedColors() -> [PredefinedColorGroup]
     {
@@ -537,7 +505,6 @@ class PredefinedColors
     }
     
     /// Determines if the list of groups contains the passed color name.
-    ///
     /// - Parameters:
     ///   - Name: Name of the color to search for.
     ///   - Groups: List of groups to search for the passed name.
@@ -555,7 +522,6 @@ class PredefinedColors
     }
     
     /// Returns a predefined color group that contains a color with the passed name.
-    ///
     /// - Parameters:
     ///   - Name: Name of the color to search for.
     ///   - Groups: List of pre-defined color groups to search.
@@ -573,7 +539,6 @@ class PredefinedColors
     }
     
     /// Return a list of sorted color groups. Sorted by palette name.
-    ///
     /// - Returns: List of predefined color groups, sorted by palette name.
     private static func GetPaletteSortedColors() -> [PredefinedColorGroup]
     {
@@ -608,7 +573,6 @@ class PredefinedColors
     
     /// Return a list of sorted color groups. Sorted by color name. (Returned list of pre-defined colors is sorted by
     /// pre-defined color group name.)
-    ///
     /// - Returns: List of predefined color groups, sorted by color name.
     private static func GetNameSortedColors() -> [PredefinedColorGroup]
     {
@@ -652,7 +616,6 @@ class PredefinedColors
     }
     
     /// Return all colors sorted by name. All colors are in one color group in the returned array.
-    ///
     /// - Returns: Array with one entry with all color names, sorted by primary name.
     private static func GetNameSortedColorsUngrouped() -> [PredefinedColorGroup]
     {
@@ -672,7 +635,6 @@ class PredefinedColors
     
     /// Given a color, return the name of the color, if any. If more than one color matches the passed color, the first color
     /// found will have its name returned.
-    ///
     /// - Parameter Color: The color whose name will be returned.
     /// - Returns: The name of the passed color if found, nil if no name for the passed color is available.
     public static func NameFrom(Color: UIColor) -> String?
@@ -689,7 +651,6 @@ class PredefinedColors
     
     /// Return all names for the passed color, if any. If more than on color matches the passed color, the first color
     /// found will be used as the source for the returned names.
-    ///
     /// - Parameter FindColor: The color whose names will be returned.
     /// - Returns: Array of names for the color. If the returned array is empty, no colors were found that matched the passed
     ///            color. The first name is the primary name and subsquent names are alternative names.
@@ -713,7 +674,6 @@ class PredefinedColors
     }
     
     /// Given a color name, return its color value.
-    ///
     /// - Parameters:
     ///   - Name: The name of the color. Spaces are relevant. Case sensitive search.
     ///   - SearchAlternativeNames: If true, alternative names are searched as well as the primary name.
@@ -738,7 +698,6 @@ class PredefinedColors
     }
     
     /// Determines if the passed name exists as a color name (or optionally, an alternative name) in the set of predefined colors.
-    ///
     /// - Parameters:
     ///   - Name: Name of the color to search for. Spaces are relevant.
     ///   - SearchAlternativeNames: If true, alternative names are searched as well as the primary name.
@@ -782,4 +741,19 @@ class PredefinedColors
         }
         return false
     }
+}
+
+/// Ways to order predefined colors.
+public enum ColorOrders
+{
+    /// Alphabetical by name.
+    case Name
+    /// Alphabetcial by name but ungrouped.
+    case NameList
+    /// By hue group.
+    case Hue
+    /// By brightness level.
+    case Brightness
+    /// Alphabetical by palette name.
+    case Palette
 }
