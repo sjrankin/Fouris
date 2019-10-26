@@ -9,15 +9,22 @@
 import Foundation
 import UIKit
 
+/// Table view cell for the recent color list UI.
 class RecentColorCell: UITableViewCell
 {
+    /// Height of each cell.
     public static let CellHeight: CGFloat = 50.0
-    
+
+    /// Initializer.
+    /// - Parameter coder: See Apple documentation.
     required init?(coder: NSCoder)
     {
         super.init(coder: coder)
     }
     
+    /// Initializer.
+    /// - Parameter style: Style of the cell.
+    /// - Parameter reuseIdentifier: Identifier for reusing table cell views.
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?)
     {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -47,10 +54,18 @@ class RecentColorCell: UITableViewCell
         contentView.addSubview(ColorName)
     }
     
-    var ColorSample: UIView!
-    var ColorValue: UILabel!
-    var ColorName: UILabel!
+    /// The color sample view.
+    public var ColorSample: UIView!
+    /// The color value view.
+    public var ColorValue: UILabel!
+    /// The color name view.
+    public var ColorName: UILabel!
     
+    /// Load the cell with data to display.
+    /// - Parameter Color: The color to display.
+    /// - Parameter Name: The color name.
+    /// - Parameter Value: The color's numeric value.
+    /// - Parameter Width: The width of the table.
     public func LoadData(Color: UIColor, Name: String, Value: String, Width: CGFloat)
     {
         CellColorName = Name
@@ -61,6 +76,8 @@ class RecentColorCell: UITableViewCell
         ColorValue.text = Value
     }
     
+    /// The name of the color.
     public var CellColorName: String? = nil
+    /// The color.
     public var CellColor: UIColor? = nil
 }
