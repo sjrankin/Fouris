@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-/// Class that encapsulates a dropping piece. The shape of the piece is defined by the PieceFactory setting
-/// the component array.
+/// Class that encapsulates a dropping piece. The shape of the piece is defined in the appropriate piece .XML file read at
+/// start-up time.
 /// - Note: It is critical that all references to timers, whether setting, reading, or invalidating, are enclosed
 ///         in `OperationQueue.main.addOperation` or `DispatchQueue.main.async` blocks. This is to ensure all timers
 ///         are used on the same thread.
@@ -42,7 +42,8 @@ class Piece: CustomStringConvertible
         }
     }
     
-    /// If true, the piece is not intended to be used in a game.
+    /// If true, the piece is not intended to be used in a game but used to display a piece for selection, decoration, or
+    /// other such purpose.
     public var IsEphemeral: Bool = true
     
     /// Initializer.
@@ -80,7 +81,6 @@ class Piece: CustomStringConvertible
     }
     
     /// Returns the bottom-most (eg, closest to the bottom of the bucket) point for each column the piece occupies.
-    ///
     /// - Returns: List of points, one for each column of the piece, of the bottom-most point in the piece.
     public func BottomMostHorizontalPoints() -> [CGPoint]
     {
@@ -109,7 +109,6 @@ class Piece: CustomStringConvertible
     
     /// Returns a list of offsets of the bottom-most block in the piece, relative to the piece(s) closest to the bottom
     /// of the bucket.
-    ///
     /// - Returns: List of height offsets along the bottom of the piece.
     public func BottomOffsets() -> [Int]
     {
@@ -132,9 +131,7 @@ class Piece: CustomStringConvertible
     }
     
     /// Return the bottom-most absolute points for each column used by the piece in its current location and orientation.
-    ///
     /// - Note: Points are returned sorted in column order.
-    ///
     /// - Returns: List of bottom most points for each used column in the piece in its current location and orientation.
     public func BottomMostPoints() -> [CGPoint]
     {
@@ -163,9 +160,7 @@ class Piece: CustomStringConvertible
     }
     
     /// Return the bottom-most absolute point for each column in the set of passed points.
-    ///
     /// - Note: Points are returned sorted in column order.
-    ///
     /// - Parameter Points: List of points to find the bottom-most of each column for.
     /// - Returns: List of bottom-most points in the set of passed points.
     public func BottomMostPoints(_ Points: [CGPoint]) -> [CGPoint]
@@ -451,10 +446,8 @@ class Piece: CustomStringConvertible
     }
     
     /// Determines if the piece (in its current location and orientation) has a block in the specified column.
-    ///
     /// - Note: This function searches the current locations so the value the caller passes must be an absolute
     ///         coordinate, not an offset.
-    ///
     /// - Parameter X: The column to check.
     /// - Returns: True if the piece has a block somewhere in the specified column, false if not.
     func HasBlockInColumn(_ X: Int) -> Bool
@@ -470,10 +463,8 @@ class Piece: CustomStringConvertible
     }
     
     /// Determines if the piece (in its current location and orientation) has a block in the specified row.
-    ///
     /// - Note: This function searches the current locations so the value the caller passes must be an absolute
     ///         coordinate, not an offset.
-    ///
     /// - Parameter Y: The row to check.
     /// - Returns: True if the piece has a block somewhere in the specified row, false if not.
     func HasBlockInRow(_ Y: Int) -> Bool
@@ -489,7 +480,6 @@ class Piece: CustomStringConvertible
     }
     
     /// Return all points at the specified horizontal coordinate.
-    ///
     /// - Parameter X: The horizontal coordinate whose points will be returned.
     /// - Returns: List of points at the specified horizontal coordinate.
     private func GetAllPointsAt(X: Int) -> [CGPoint]
@@ -508,10 +498,8 @@ class Piece: CustomStringConvertible
     /// Return a list of points in the piece, one point for each unique horizontal coordinate. If there is more
     /// than one point for a unique horizontal coordinate, the point that is closest to the bottom of the bucket
     /// is returned.
-    ///
     /// - Note: The list of pieces returned are current as of the call to this function. The points returned
     ///         are dependent on the current location and orientation of the piece.
-    ///
     /// - Returns: List of points, one each for each unique horizontal location in the set of points for the
     ///            piece.
     public func GetHorizontalPointsClosestToBucketBottom() -> [CGPoint]
@@ -547,7 +535,6 @@ class Piece: CustomStringConvertible
     }
     
     /// Return a set of unique horizontal locations occupied by the piece.
-    ///
     /// - Returns: Set of horizontal coordinates for the piece in its current orientation and location.
     public func GetUniqueHorizontalLocations() -> Set<Int>
     {
@@ -588,7 +575,6 @@ class Piece: CustomStringConvertible
         {
             fatalError("Piece: deinit attempted but Terminate not called ahead of time.")
         }
-        //print("Piece \(ID.uuidString) deleted.")
     }
     
     /// Terminates timers and the like to allow for a clean deletion.
@@ -599,7 +585,6 @@ class Piece: CustomStringConvertible
     ///         if it is not called, deinit will generated a fatal error.
     func Terminate()
     {
-        //print("Terminating piece \(ID.uuidString)")
         OperationQueue.main.addOperation
             {
                 //Terminate all timers first to make sure they do not refer to something that does not exist due to being
@@ -689,7 +674,6 @@ class Piece: CustomStringConvertible
     public var Components: [Block]!
     
     /// Return the locations of each block in the piece as a list of points, in block order.
-    ///
     /// - Returns: List of points, in block order.
     func LocationsAsPoints() -> [CGPoint]
     {
@@ -702,7 +686,6 @@ class Piece: CustomStringConvertible
     }
     
     /// Returns the current set of locations.
-    ///
     /// - Returns: List of blocks that define the piece.
     func CurrentLocations() -> [Block]
     {
@@ -710,7 +693,6 @@ class Piece: CustomStringConvertible
     }
     
     /// Apply the passed set of points to the blocks of the piece.
-    ///
     /// - Parameter With: New points for each block. Assumed to be a set of rotated coordinates. Also assumed
     ///                   to be in the same order as the Blocks list in `Locations`.
     func DoRotate(With: [CGPoint])
@@ -1162,8 +1144,11 @@ class Piece: CustomStringConvertible
         StartDropping()
     }
     
+    /// Holds the throwing away flag. If this is true, the piece is being thrown away out the top of the bucket.
     var ThrowingAway: Bool = false
     
+    /// Determines if any block in the piece is below the bottom of the bucket/game board.
+    /// - Returns: True if any block is too low, false if not.
     func BelowBottom() -> Bool
     {
         for Block in Locations
@@ -1331,7 +1316,6 @@ class Piece: CustomStringConvertible
             }
             var NotUsed: String? = nil
             ActivityLog.AddEntry(Title: "Game", Source: "Piece", KVPs: [("Message","Encountered nil GameBoard in Frozen - killed the Freeze Timer.")], LogFileName: &NotUsed)
-//            print(">>>>> Encountered nil GameBoard in Frozen - killed the Freeze timer.")
             return
         }
         if !Thread.isMainThread
