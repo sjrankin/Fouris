@@ -10,8 +10,13 @@
 import Foundation
 import UIKit
 
+/// Various utility functions.
 class Utility
 {
+    /// Return a normalized RGB value.
+    /// - Note: This is a fast way to return all channels of a color.
+    /// - Parameter Color: The color to normalize.
+    /// - Returns: Tuple of normalized values.
     public static func NormalizeRGB(_ Color: UIColor) -> (Double, Double, Double, Double)
     {
         let (A, R, G, B) = GetARGB(SourceColor: Color)
@@ -19,7 +24,6 @@ class Utility
     }
     
     /// Force the test value to conform to the passed range.
-    ///
     /// - Parameters:
     ///   - TestValue: The value to force to the passed range.
     ///   - ValidRange: Range to compare against the test value.
@@ -41,7 +45,6 @@ class Utility
     /// Convert a color to a human-readable string. For RGB, the value returned is in the format
     /// (alpha, red, green, blue) (the caller can control whether alpha is returned or not). For HSB,
     /// the format is (hue, saturation, brightness).
-    ///
     /// - Parameters:
     ///   - Color: The color to convert.
     ///   - AsRGB: If true, ARGB is returned. If false, HSB is returned.
@@ -159,7 +162,6 @@ class Utility
     }
     
     /// Converts the passed color to a tuple of RGB values (as integers).
-    ///
     /// - Parameter Source: Source color to convert.
     /// - Returns: Tuple in the order (Red, Green, Blue) with each value an integer.
     public static func GetRGB(_ Source: UIColor) -> (Int, Int, Int)
@@ -172,7 +174,6 @@ class Utility
     }
     
     /// Convert a string representation of a color (in hex format) to a color. For 24- or 32-bit colors.
-    ///
     /// - Parameter HexString: The string representation of a color (in hex format).
     /// - Returns: Actual color. Nil on error or otherwise unable to convert.
     public static func FromHex2(HexString: String) -> UIColor?
@@ -251,7 +252,6 @@ class Utility
     }
     
     /// Truncate a double value to the number of places.
-    ///
     /// - Parameters:
     ///   - Value: Value to truncate.
     ///   - ToPlaces: Where to truncate the value.
@@ -267,7 +267,6 @@ class Utility
     }
     
     /// Round a double value to the specified number of places.
-    ///
     /// - Parameters:
     ///   - Value: Value to round.
     ///   - ToPlaces: Number of places to round to.
@@ -288,6 +287,11 @@ class Utility
         return Final
     }
     
+    /// Round a CGFloat value to the specified number of places.
+    /// - Parameters:
+    ///   - Value: Value to round.
+    ///   - ToPlaces: Number of places to round to.
+    /// - Returns: Rounded value.
     public static func Round(_ Value: CGFloat, ToPlaces: Int) -> CGFloat
     {
         let D: Decimal = 10.0
@@ -304,6 +308,11 @@ class Utility
         return Final
     }
     
+    /// Round a Float value to the specified number of places.
+    /// - Parameters:
+    ///   - Value: Value to round.
+    ///   - ToPlaces: Number of places to round to.
+    /// - Returns: Rounded value.
     public static func Round(_ Value: Float, ToPlaces: Int) -> Float
     {
         let D: Decimal = 10.0
