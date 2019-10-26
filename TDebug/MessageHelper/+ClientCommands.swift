@@ -12,10 +12,9 @@ import MultipeerConnectivity
 
 extension MessageHelper
 {
-    // MARK: Client command encoding commands.
+    // MARK: - Client command encoding commands.
     
     /// Make a command string that requests a client command at the CommandIndexth position.
-    ///
     /// - Parameter CommandIndex: Determines the client command to return.
     /// - Returns: Command string for retrieving the CommandIndexth client command.
     public static func MakeGetCommand(CommandIndex: Int) -> String
@@ -26,7 +25,6 @@ extension MessageHelper
     }
     
     /// Make a command string returning the Indexth client command. Sent in response to a `MakeGetCommand` command string.
-    ///
     /// - Parameters:
     ///   - Index: Index of the returned command - corresonds to the `CommandIndex` parameter in `MakeGetCommand`.
     ///   - Command: ID of the command.
@@ -57,7 +55,6 @@ extension MessageHelper
     }
     
     /// Make a string command to execute a client command in the client app on the remote system.
-    ///
     /// - Parameters:
     ///   - CommandID: Client command ID.
     ///   - Parameters: List of tuples in the format (Parameter Name, Parameter Value).
@@ -77,7 +74,6 @@ extension MessageHelper
     }
     
     /// Make a string command to return client command execution results to the caller.
-    ///
     /// - Parameters:
     ///   - Result: Result of the client command execution (eg, true, false indicating success or failure of executing
     ///             the command).
@@ -93,7 +89,6 @@ extension MessageHelper
     }
     
     /// Make a command string returning all client commands.
-    ///
     /// - Parameter Commands: The client command manager, populated with all supported client commands.
     /// - Returns: String with all client commands in the passed client command manager.
     public static func MakeAllClientCommands(Commands: ClientCommands) -> String
@@ -113,10 +108,9 @@ extension MessageHelper
         return Final
     }
     
-    // MARK: Client command decoding.
+    // MARK: - Client command decoding.
     
     /// Decode a client command string.
-    ///
     /// - Parameter Raw: The raw message string.
     /// - Returns: ClientCommand class with the command ID and parameters (but no other fields populated).
     public static func DecodeClientCommand(_ Raw: String) -> ClientCommand?
@@ -159,7 +153,6 @@ extension MessageHelper
     }
     
     /// Decode a returned client command list response.
-    ///
     /// - Parameter Raw: The raw response from the client that sent the response.
     /// - Returns: List of client command classes. Nil on error.
     public static func DecodeReturnedCommandList(_ Raw: String) -> [ClientCommand]?
