@@ -9,7 +9,10 @@
 import Foundation
 import UIKit
 
+/// Protocol for traversing an in-memory XML document.
 protocol XMLTreeTraversalProtocol
 {
+    /// Called when the traversal code reaches a given node.
+    /// - Parameter Node: The node the traversal code reached.
     func AtNode(Node: XMLNode)
 }
