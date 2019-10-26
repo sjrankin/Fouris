@@ -326,7 +326,9 @@ class ThemeDescriptor2: CustomStringConvertible, XMLDeserializeProtocol
         }
     }
     
+    /// Holds the show heartbeat flag.
     public var _ShowHeartbeat: Bool = false
+    /// Get or set the show heartbeat indicator flag.
     public var ShowHeartbeat: Bool
     {
         get
@@ -341,7 +343,9 @@ class ThemeDescriptor2: CustomStringConvertible, XMLDeserializeProtocol
         }
     }
     
+    /// Holds the heartbeat indicator update interval.
     public var _HeartbeatInterval: Double = 1.0
+    /// Get or set the interval (in seconds) of how often to update the heartbeat indicator.
     public var HeartbeatInterval: Double
     {
         get
@@ -778,7 +782,9 @@ class ThemeDescriptor2: CustomStringConvertible, XMLDeserializeProtocol
         }
     }
     
+    /// Holds the start with AI flag.
     public var _StartWithAI: Bool = false
+    /// Get or set the flag that indicates the game starts in attract mode.
     public var StartWithAI: Bool
     {
         get
@@ -949,7 +955,9 @@ class ThemeDescriptor2: CustomStringConvertible, XMLDeserializeProtocol
         }
     }
     
+    /// Holds the rotate next piece display flag.
     public var _RotateNextPiece: Bool = true
+    /// Get or set the flag that indicates the next piece should rotate for visual interest.
     public var RotateNextPiece: Bool
     {
         get
@@ -966,7 +974,9 @@ class ThemeDescriptor2: CustomStringConvertible, XMLDeserializeProtocol
     
     // MARK: Button properites.
     
+    /// Holds the hide all motion buttons flag.
     public var _HideAllButtons: Bool = false
+    /// Get or set the hide all motion buttons flag.
     public var HideAllButtons: Bool
     {
         get
@@ -1051,7 +1061,9 @@ class ThemeDescriptor2: CustomStringConvertible, XMLDeserializeProtocol
     
     // MARK: Debug properties.
     
+    /// Holds the master debug flag.
     public var _EnableDebug: Bool = false
+    /// Get or set the master debug flag.
     public var EnableDebug: Bool
     {
         get
@@ -1066,7 +1078,9 @@ class ThemeDescriptor2: CustomStringConvertible, XMLDeserializeProtocol
         }
     }
     
+    /// Holds the width of the background grid.
     public var _BackgroundGridWidth: Double = 2.0
+    /// Get or set the width of the background grid.
     public var BackgroundGridWidth: Double
     {
         get
@@ -1081,7 +1095,9 @@ class ThemeDescriptor2: CustomStringConvertible, XMLDeserializeProtocol
         }
     }
     
+    /// Holds the background grid color.
     public var _BackgroundGridColor: String = "ReallyDarkGray"
+    /// Get or set the background grid color.
     public var BackgroundGridColor: String
     {
         get
@@ -1096,7 +1112,9 @@ class ThemeDescriptor2: CustomStringConvertible, XMLDeserializeProtocol
         }
     }
     
+    /// Holds the center line flag.
     public var _ShowCenterLines: Bool = false
+    /// Get or set the show center lines flag.
     public var ShowCenterLines: Bool
     {
         get
@@ -1111,7 +1129,9 @@ class ThemeDescriptor2: CustomStringConvertible, XMLDeserializeProtocol
         }
     }
     
+    /// Holds the center line color.
     public var _CenterLineColor: String = "Yellow"
+    /// Get or set the center line color.
     public var CenterLineColor: String
     {
         get
@@ -1126,7 +1146,9 @@ class ThemeDescriptor2: CustomStringConvertible, XMLDeserializeProtocol
         }
     }
     
+    /// Holds the center line width.
     public var _CenterLineWidth: Double = 2.0
+    /// Get or set the center line width.
     public var CenterLineWidth: Double
     {
         get
@@ -1143,7 +1165,9 @@ class ThemeDescriptor2: CustomStringConvertible, XMLDeserializeProtocol
     
     // MARK: Piece list.
     
+    /// Holds the list of pieces.
     public var _PieceList: [UUID] = [UUID]()
+    /// Get or set the list of pieces (by ID) contained in the theme.
     public var PieceList: [UUID]
     {
         get
@@ -1158,7 +1182,9 @@ class ThemeDescriptor2: CustomStringConvertible, XMLDeserializeProtocol
         }
     }
     
+    /// Holds the change barrier color after rotation flag.
     public var _ChangeColorAfterRotation: Bool = false
+    /// Get or set the change barrier color after rotating the board flag.
     public var ChangeColorAfterRotation: Bool
     {
         get
@@ -1175,7 +1201,9 @@ class ThemeDescriptor2: CustomStringConvertible, XMLDeserializeProtocol
     
     // MARK: Board properties.
     
+    /// Holds the show board method.
     public var _ShowBoardMethod: ShowBoardMethods = .Appear
+    /// Get or set the method used to visually show a board when it appears.
     public var ShowBoardMethod: ShowBoardMethods
     {
         get
@@ -1190,7 +1218,9 @@ class ThemeDescriptor2: CustomStringConvertible, XMLDeserializeProtocol
         }
     }
     
+    /// Holds the duration of the visual effect to show the board.
     public var _ShowBoardDuration: Double = 0.25
+    /// Get or set the duration of the visual effect to show the board. Units are seconds.
     public var ShowBoardDuration: Double
     {
         get
@@ -1205,7 +1235,9 @@ class ThemeDescriptor2: CustomStringConvertible, XMLDeserializeProtocol
         }
     }
     
+    /// Holds the method to hide th board.
     public var _HideBoardMethod: HideBoardMethods = .Disappear
+    /// Get or set the method to hide the board.
     public var HideBoardMethod: HideBoardMethods
     {
         get
@@ -1220,7 +1252,9 @@ class ThemeDescriptor2: CustomStringConvertible, XMLDeserializeProtocol
         }
     }
     
+    /// Holds the duration of the visual effect to hide the board.
     public var _HideBoardDuration: Double = 0.25
+    /// Get or set the duration of the visual effect to hide the board. Units are seconds.
     public var HideBoardDuration: Double
     {
         get
@@ -1480,6 +1514,11 @@ enum BucketRotationTypes: String, CaseIterable
     case Random = "Random"
 }
 
+/// Types of lights. Mirrors Apple's SDK but more restrictive.
+/// - **Ambient**: Ambient light.
+/// - **Directional**: Directional light.
+/// - **Omni**: Omni light.
+/// - **Spot**: Spot light.
 enum LightTypes: String, CaseIterable
 {
     case Ambient = "Ambient"
@@ -1488,6 +1527,9 @@ enum LightTypes: String, CaseIterable
     case Spot = "Spot"
 }
 
+/// Locations of cameras on devices that have them.
+/// - **Rear**: The rear camera (facing away from the screen).
+/// - **Front**: The front camera (selfie camera).
 enum CameraLocations: String, CaseIterable
 {
     case Rear = "Rear"
