@@ -222,6 +222,10 @@ extension ThemeDescriptor2
                                         let DestDur = XMLNode.GetAttributeNamed("Duration", InNode: BChild)!
                                         _DestructionDuration = Double(DestDur)!
                                     
+                                    case "GameOver":
+                                        let ShowOffS = XMLNode.GetAttributeNamed("ShowOff", InNode: BChild)!
+                                        _ShowOffAfterGameOver = Bool(ShowOffS)! 
+                                    
                                     default:
                                         break
                                 }
@@ -366,7 +370,7 @@ extension ThemeDescriptor2
                                         let BeatInterval = XMLNode.GetAttributeNamed("Interval", InNode: DChild)!
                                     _HeartbeatInterval = Double(BeatInterval)!
                                     
-                                    case "Rotating4":
+                                    case "Rotating":
                                         for RChild in DChild.Children
                                         {
                                             switch RChild.Name
