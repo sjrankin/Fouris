@@ -9,12 +9,18 @@
 import Foundation
 import UIKit
 
+/// Runs the UI for the color name picker. Color names are in a shallow heirerachy of a set of groups - each group has its own
+/// set of colors. The user can select the group, then a color from the group.
 class ColorNamePickerCode: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, ColorPickerProtocol
 {
+    /// The delegate to receive color-related messages.
     public weak var ColorDelegate: ColorPickerProtocol? = nil
-    var SelectedColor: UIColor!
     
-    override func viewDidLoad()
+    /// Current selected color.
+    public var SelectedColor: UIColor!
+    
+    /// Initialize the UI.
+    override public func viewDidLoad()
     {
         super.viewDidLoad()
         
@@ -40,10 +46,18 @@ class ColorNamePickerCode: UIViewController, UIPickerViewDelegate, UIPickerViewD
         }
     }
     
-    var ColorGroups: [String]!
-    var ColorGroupColors: [PredefinedColor]!
+    /// List of color group names.
+    private var ColorGroups: [String]!
     
-    func SelectClosestColor(_ Color: UIColor)
+    /// List of color group colors.
+    public var ColorGroupColors: [PredefinedColor]!
+    
+    /// Select the closet color in the set of colors we are working with to the passed color. The UI will be updated to show the
+    /// selected color.
+    /// - Note: Close is defined by distantce in a three-dimensional color space. All colors here are in RGB colorspace regardless
+    ///         of how they are defined.
+    /// - Parameter Color: The color to search for.
+    public func SelectClosestColor(_ Color: UIColor)
     {
         var GroupCloseness = [String: (Int, Double)]()
         for GroupName in ColorGroups
@@ -87,7 +101,9 @@ class ColorNamePickerCode: UIViewController, UIPickerViewDelegate, UIPickerViewD
         }
     }
     
-    func UpdateSelectedColor(WithColor: UIColor)
+    /// Update the selected color UI with the passed color.
+    /// - Parameter WithColor: The color to select.
+    public func UpdateSelectedColor(WithColor: UIColor)
     {
         SelectedColor = WithColor
         ColorSample.backgroundColor = SelectedColor
@@ -95,7 +111,9 @@ class ColorNamePickerCode: UIViewController, UIPickerViewDelegate, UIPickerViewD
         UpdateColorValues(WithColor)
     }
     
-    func UpdateSelectedColor(WithColor: PredefinedColor)
+    /// Update the selected color UI with the passed color.
+    /// - Parameter WithColor: The predefined color to select.
+    public func UpdateSelectedColor(WithColor: PredefinedColor)
     {
         SelectedColor = WithColor.Color
         ColorSample.backgroundColor = SelectedColor
@@ -103,7 +121,9 @@ class ColorNamePickerCode: UIViewController, UIPickerViewDelegate, UIPickerViewD
         UpdateColorValues(WithColor.Color)
     }
     
-    func UpdateColorValues(_ Color: UIColor)
+    /// Update text representations of the color.
+    /// - Parameter Color: The color to display.
+    public func UpdateColorValues(_ Color: UIColor)
     {
         var Red: CGFloat = 0.0
         var Green: CGFloat = 0.0
@@ -122,12 +142,19 @@ class ColorNamePickerCode: UIViewController, UIPickerViewDelegate, UIPickerViewD
         HexOut.text = HexString
     }
     
-    func numberOfComponents(in pickerView: UIPickerView) -> Int
+    /// Returns the number of components in the picker view.
+    /// - Returns: Two - one for the group and one for colors within the group.
+    public func numberOfComponents(in pickerView: UIPickerView) -> Int
     {
         return 2
     }
     
-    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat
+    /// Returns the width for each component in the picker view.
+    /// - Parameter pickerView: Not used.
+    /// - Parameter widthForComponent: Indicates which component needs a width.
+    /// - Returns: Value for the width of a component. The group component is 35% of the full picker width, and the color
+    ///            component is 65% of the full picker width.
+    public func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat
     {
         let FullWidth = ColorPickerView.frame.width
         if component == 0
@@ -140,7 +167,11 @@ class ColorNamePickerCode: UIViewController, UIPickerViewDelegate, UIPickerViewD
         }
     }
     
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
+    /// Returns the number of rows in a component in the picker view.
+    /// - Parameter pickerView: Not used.
+    /// - Parameter numberOfRowsInComponent: Which component needs the number of rows.
+    /// - Returns: The number of rows for the specified component.
+    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
     {
         if component == 0
         {
@@ -149,7 +180,12 @@ class ColorNamePickerCode: UIViewController, UIPickerViewDelegate, UIPickerViewD
         return ColorGroupColors.count
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
+    /// Returns the contents of a row for a given component in the picker view.
+    /// - Parameter pickerView: Not used.
+    /// - Parameter titleForRow: The string for the component row.
+    /// - Parameter forComponent: The component whose row we are returning a title.
+    /// - Returns: Title for the given component and row.
+    public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
     {
         if component == 0
         {
@@ -161,7 +197,12 @@ class ColorNamePickerCode: UIViewController, UIPickerViewDelegate, UIPickerViewD
         }
     }
     
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+    /// Called when the user selects a row in the picker view. This is called when the user selects a new color group or
+    /// new color within a group.
+    /// - Parameter pickerView: Not used.
+    /// - Parameter didSelectRow: The selected row.
+    /// - Parameter inComponent: The selected component.
+    public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
         if component == 0
         {
@@ -182,30 +223,41 @@ class ColorNamePickerCode: UIViewController, UIPickerViewDelegate, UIPickerViewD
         }
     }
     
+    /// Tag sent by the caller.
     private var ParentTag: Any? = nil
     
-    func ColorToEdit(_ Color: UIColor, Tag: Any?)
+    /// Called by the parent to set the color to edit.
+    /// - Parameter Color: The original color.
+    /// - Parameter Tag: The tag which this class will return to the caller when the dialog closes.
+    public func ColorToEdit(_ Color: UIColor, Tag: Any?)
     {
         ParentTag = Tag
     }
     
-    func EditedColor(_ Edited: UIColor?, Tag: Any?)
+    /// Not used in this class.
+    public func EditedColor(_ Edited: UIColor?, Tag: Any?)
     {
         //Not used here.
     }
     
-    @IBAction func HandleOKPressed(_ sender: Any)
+    /// Handle the OK button pressed. Notify the caller of a (possibly) new color. Close the dialog.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleOKPressed(_ sender: Any)
     {
         ColorDelegate?.EditedColor(SelectedColor, Tag: ParentTag)
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func HandleCancelPressed(_ sender: Any)
+    /// Handle the Cancel button pressed. Tell the caller the dialog was canceled. Close the dialog.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleCancelPressed(_ sender: Any)
     {
         ColorDelegate?.EditedColor(nil, Tag: ParentTag)
         self.dismiss(animated: true, completion: nil)
     }
     
+    /// Handle changes to the nearest color switch.
+    /// - Parameter sender: Not used.
     @IBAction func HandleNearestColorSwitchChanged(_ sender: Any)
     {
         Settings.SetShowClosestColor(NewValue: NearestColorSwitch.isOn)
