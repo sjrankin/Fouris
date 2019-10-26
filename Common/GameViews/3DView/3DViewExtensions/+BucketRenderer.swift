@@ -13,9 +13,6 @@ import SceneKit
 extension View3D
 {
     /// Renders an empty board with the specified bucket shape.
-    /// - Note:
-    ///    - Intended for use only for the `.Rotating4` game type.
-    ///    - Intended for use for generating game assets using the graphics engine rather than an external program.
     /// - Parameter WithShape: The shape of the bucket to render.
     /// - Returns: An image of the rendered empty board.
     public func RenderBucket(WithShape: BucketShapes) -> UIImage
@@ -50,7 +47,7 @@ extension View3D
         return BoardImage
     }
     
-    /// Renders all buckets for the `.Rotating4` game and returns all images in an array.
+    /// Renders all buckets in the board definition file.
     /// - Returns: Array of tuples with the shape and the shape's image.
     public func RenderAllBuckets() -> [(BucketShapes, UIImage)]
     {
@@ -63,7 +60,7 @@ extension View3D
         return Results
     }
     
-    /// Renders and saves all `.Rotating4` game boards. Images are saved to Fouris' debug directory.
+    /// Renders and saves all images for buckets in the board definition file.
    public func SaveAllBucketImages()
     {
         let AllBuckets = RenderAllBuckets()
