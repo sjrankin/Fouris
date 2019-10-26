@@ -27,23 +27,6 @@ class BoardDescriptor2
         }
     }
     
-    #if false
-    /// Holds the game type.
-    public var _GameType: BaseGameTypes = .Standard
-    /// Get or set the description of the game type.
-    public var GameType: BaseGameTypes
-    {
-        get
-        {
-            return _GameType
-        }
-        set
-        {
-            _GameType = newValue
-        }
-    }
-    #endif
-    
     /// Holds the text description of the board.
     public var _TextDescription: String = ""
     /// Get or set the text description of the board.
@@ -527,7 +510,7 @@ class BoardDescriptor2
     }
     
     /// Holds a list of all bucket block locations in the map. Not populated until `BucketBlockList` is called.
-    var BlockList: [(CGPoint)]? = nil
+    private var BlockList: [(CGPoint)]? = nil
     
     /// Returns a list of points in the game board where bucket blocks are placed.
     /// - Returns: List of bucket block locations.
