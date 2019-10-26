@@ -14,7 +14,6 @@ import UIKit
 class PredefinedColor
 {
     /// Initializer.
-    ///
     /// - Parameters:
     ///   - Name: Name of the color.
     ///   - PaletteName: Name of the palette.
@@ -32,7 +31,6 @@ class PredefinedColor
     }
     
     /// Initializer.
-    ///
     /// - Parameters:
     ///   - Name: Name of the color.
     ///   - AltName: Alternative name.
@@ -52,7 +50,6 @@ class PredefinedColor
     }
     
     /// Initializer.
-    ///
     /// - Parameters:
     ///   - Name: Name of the color.
     ///   - PaletteName: Name of the palette.
@@ -70,7 +67,6 @@ class PredefinedColor
     }
     
     /// Initializer.
-    ///
     /// - Parameters:
     ///   - Name: Name of the color.
     ///   - AltName: Alternative name.
@@ -90,10 +86,9 @@ class PredefinedColor
     }
     
     /// Gets the value to sort the color by.
-    ///
     /// - Parameter Order: The order by which to sort.
     /// - Returns: String value of the value to sort the color by.
-    public func SortKey(_ Order: PredefinedColors.ColorOrders) -> String
+    public func SortKey(_ Order: ColorOrders) -> String 
     {
         switch Order
         {
@@ -127,7 +122,6 @@ class PredefinedColor
     
     /// Determines if another color is the same as this color. Colors are compared in RGB colorspace and must
     /// be exact.
-    ///
     /// - Parameter OtherColor: The color to compare to this color.
     /// - Returns: True if the other color is the same as this color, false if not.
     public func SameColor(_ OtherColor: UIColor) -> Bool
@@ -248,7 +242,6 @@ class PredefinedColor
     }
     
     /// Which name was used for sorting if sorted by names.
-    ///
     /// - PrimaryName: Used the primary name.
     /// - AlternativeName: Used the alternative name.
     enum SortedNames
