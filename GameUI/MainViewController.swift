@@ -33,45 +33,45 @@ class MainViewController: UIViewController,
     // MARK: - Globals.
     
     /// 3D game view instance.
-    var GameView3D: View3D? = nil
+    public var GameView3D: View3D? = nil
     
     /// Game logic instance.
-    var Game: GameLogic!
+    public var Game: GameLogic!
     
     /// Theme manager.
-    var Themes: ThemeManager3!
+    public var Themes: ThemeManager3!
     
     /// AI test data table.
-    var AIData: AITestTable? = nil
+    public var AIData: AITestTable? = nil
     
     /// Currently playing flag.
-    var CurrentlyPlaying: Bool = false
+    public var CurrentlyPlaying: Bool = false
     
     /// Paused flag.
-    var IsPaused: Bool = false
+    public var IsPaused: Bool = false
     
     /// In attract (eg, AI) mode.
-    var InAttractMode: Bool = true
+    public var InAttractMode: Bool = true
     
     /// The set of pieces to use.
-    var GamePieces = [MetaPieces.Standard]
+    public var GamePieces = [MetaPieces.Standard]
     
     /// Multi-peer manager for debugging.
-    var MPMgr: MultiPeerManager!
+    public var MPMgr: MultiPeerManager!
     
     /// Local commands for debugging.
-    var LocalCommands: ClientCommands!
+    public var LocalCommands: ClientCommands!
     
     /// Message handler for debugging.
-    var MsgHandler: MessageHandler!
+    public var MsgHandler: MessageHandler!
     
     /// Prefix for use with the TDebug program.
-    var TDebugPrefix: UUID!
+    public var TDebugPrefix: UUID!
     
     // MARK: - UI-required initialization functions.
     
     /// Handle the viewDidLoad event.
-    override func viewDidLoad()
+    override public func viewDidLoad()
     {
         super.viewDidLoad()
         
@@ -167,23 +167,23 @@ class MainViewController: UIViewController,
     }
     
     /// Called when the version box disappears.
-    func VersionBoxDisappeared()
+    public func VersionBoxDisappeared()
     {
         VersionBoxShowing = false
     }
     
     /// Version box is showing flag.
-    var VersionBoxShowing = true
+    private var VersionBoxShowing = true
     
     /// Prevents `viewDidLayoutSubviews` from showing more than one version box.
-    var VersionShown = false
+    public var VersionShown = false
     
     /// Number of seconds the instance has been running.
-    var InstanceSeconds: Int = 0
+    public var InstanceSeconds: Int = 0
     
     /// Game instance second counter. Used to keep track of how long the program (not necessarily game) is running. If the proper
     /// settings are in place, the seconds are displayed in the UI.
-    @objc func IncrementSeconds()
+    @objc public func IncrementSeconds()
     {
         InstanceSeconds = InstanceSeconds + 1
          if !Settings.ShowFPSInUI()
@@ -201,18 +201,18 @@ class MainViewController: UIViewController,
     }
     
     /// User theme.
-    var UserTheme: ThemeDescriptor2? = nil
+    public var UserTheme: ThemeDescriptor2? = nil
     
     /// If the view is disappearing, save data as it may not come back.
     /// - Parameter animated: Passed to the super class.
-    override func viewDidDisappear(_ animated: Bool)
+    override public func viewDidDisappear(_ animated: Bool)
     {
         Themes.SaveUserTheme()
         super.viewDidDisappear(animated)
     }
     
     /// Initialize the game view and game UI.
-    func InitializeGameUI()
+   public func InitializeGameUI()
     {
         //Initialize buttons.
         EnableFreezeInPlaceButton(false)
@@ -295,13 +295,13 @@ class MainViewController: UIViewController,
         }
     }
     
-    var VersionBoxNotYetShown: Bool = true
+    private var VersionBoxNotYetShown: Bool = true
     
     /// Sets the enable state of the freeze in place action button.
     /// - Note: This button is provided for certain games that need a way to freeze a piece in place that may not be near
     ///         near any other piece.
     /// - Parameter DoEnable: The enable flag for the button.
-    func EnableFreezeInPlaceButton(_ DoEnable: Bool)
+    public func EnableFreezeInPlaceButton(_ DoEnable: Bool)
     {
         if DoEnable
         {
@@ -313,10 +313,11 @@ class MainViewController: UIViewController,
         }
     }
     
-    var GameTextOverlay: TextOverlay? = nil
+    /// Holds the text overlay.
+    public var GameTextOverlay: TextOverlay? = nil
     
     /// Initialize the non-game UI (things that are not directly related to the game board).
-    func InitializeUI()
+    public func InitializeUI()
     {
         Settings.AddSubscriber(For: "Main", NewSubscriber: self)
         if Settings.ShowFPSInUI()
@@ -330,7 +331,7 @@ class MainViewController: UIViewController,
     }
     
     /// Set motion control visibility.
-    func ShowMotionControls()
+    public func ShowMotionControls()
     {
         let DoShow = Settings.GetShowMotionControls()
         var NotUsed: String? = nil
@@ -349,7 +350,7 @@ class MainViewController: UIViewController,
     /// Handle changed settings.
     /// - Parameter Field: The settings field that changed.
     /// - Parameter NewValue: The new value for the specified field.
-    func SettingChanged(Field: SettingsFields, NewValue: Any)
+    public func SettingChanged(Field: SettingsFields, NewValue: Any)
     {
         switch Field
         {
@@ -387,7 +388,7 @@ class MainViewController: UIViewController,
     }
     
     /// Initialize gesture recognizers for piece motions.
-    func InitializeGestures()
+    public func InitializeGestures()
     {
         let TapGesture = UITapGestureRecognizer(target: self, action: #selector(HandleTap))
         TapGesture.numberOfTouchesRequired = 1
@@ -406,14 +407,15 @@ class MainViewController: UIViewController,
         GameUISurface3D.addGestureRecognizer(SwipeRightGesture)
     }
     
-    var MenuShowing = false
+    /// Holds the menu showing flag.
+    public var MenuShowing = false
     
     /// Handle taps in the game view. Depending on where the tap is, the piece will move in the given direction.
     /// - Note: If the version box is showing (which should happen only when the game starts), tapping will remove the version box.
     ///         In this case, if the user taps on a control (such as Play), the control will be executed as well after removing
     ///         the version box.
     /// - Parameter Recognizer: The tap gesture.
-    @objc func HandleTap(Recognizer: UITapGestureRecognizer)
+    @objc public func HandleTap(Recognizer: UITapGestureRecognizer)
     {
         if Recognizer.state == .ended
         {
@@ -548,7 +550,7 @@ class MainViewController: UIViewController,
     /// - Parameter TapLocation: The location of the tap.
     /// - Parameter SurfaceSize: The size of the surface where taps are recognized.
     /// - Returns: The direction corresponding to the location of the tap.
-    func TranslateTapToMotion(TapLocation: CGPoint, SurfaceSize: CGSize) -> Directions
+    public func TranslateTapToMotion(TapLocation: CGPoint, SurfaceSize: CGSize) -> Directions
     {
         let Offset: CGFloat = 0.15
         //Check left.
@@ -587,9 +589,8 @@ class MainViewController: UIViewController,
     }
     
     /// Handle swipe up gestures in the game view. This is the same as an up and away event.
-    ///
     /// - Parameter sender: The swipe gesture.
-    @objc func HandleSwipeUp(sender: UISwipeGestureRecognizer)
+    @objc public func HandleSwipeUp(sender: UISwipeGestureRecognizer)
     {
         if sender.state == .ended
         {
@@ -599,9 +600,8 @@ class MainViewController: UIViewController,
     }
     
     /// Handle swipe down gestures in the game view. This is the same as a drop piece event.
-    ///
     /// - Parameter sender: The swipe gesture.
-    @objc func HandleSwipeDown(sender: UISwipeGestureRecognizer)
+    @objc public func HandleSwipeDown(sender: UISwipeGestureRecognizer)
     {
         if sender.state == .ended
         {
@@ -611,9 +611,8 @@ class MainViewController: UIViewController,
     }
     
     /// Handle swipe left gestures in the game view. This is the same as a rotate left event.
-    ///
     /// - Parameter sender: The swipe gesture.
-    @objc func HandleSwipeLeft(sender: UISwipeGestureRecognizer)
+    @objc public func HandleSwipeLeft(sender: UISwipeGestureRecognizer)
     {
         if sender.state == .ended
         {
@@ -623,9 +622,8 @@ class MainViewController: UIViewController,
     }
     
     /// Handle swipe right gestures in the game view. This is the same as a rotate right event.
-    ///
     /// - Parameter sender: The swipe gesture.
-    @objc func HandleSwipeRight(sender: UISwipeGestureRecognizer)
+    @objc public  func HandleSwipeRight(sender: UISwipeGestureRecognizer)
     {
         if sender.state == .ended
         {
@@ -637,7 +635,7 @@ class MainViewController: UIViewController,
     // MARK: - Functions related to AI/attract mode and debugging.
     
     /// Clears the board and starts in AI mode.
-    func ClearAndStartAI()
+    public func ClearAndStartAI()
     {
         DispatchQueue.main.sync
             {
@@ -647,7 +645,7 @@ class MainViewController: UIViewController,
     }
     
     /// Start playing in AI mode.
-    func HandleStartInAIMode()
+    public func HandleStartInAIMode()
     {
         var NotUsed: String? = nil
         ActivityLog.AddEntry(Title: "Game", Source: "MainViewController", KVPs: [("Message","Starting game in AI mode.")],
@@ -676,7 +674,7 @@ class MainViewController: UIViewController,
     /// - Parameters:
     ///   - To: The new opacity/alpha level.
     ///   - ID: The ID of the piece whose alpha/opacity level will be set.
-    func SetPieceOpacity(To: Double, ID: UUID)
+    public func SetPieceOpacity(To: Double, ID: UUID)
     {
     }
     
@@ -684,7 +682,7 @@ class MainViewController: UIViewController,
     /// - Parameter To: The new opacity/alpha level.
     /// - Parameter ID: The ID of the piece whose alpha/opacity level will be set.
     /// - Parameter Duration: Length of time to change the opacity.
-    func SetPieceOpacity(To: Double, ID: UUID, Duration: Double)
+    public func SetPieceOpacity(To: Double, ID: UUID, Duration: Double)
     {
         GameView3D?.SetOpacity(OfID: ID, To: To, Duration: Duration)
     }
@@ -695,7 +693,7 @@ class MainViewController: UIViewController,
     ///   - MovedPiece: The piece that moved.
     ///   - Direction: The direction the piece moved.
     ///   - Commanded: True if the piece was commanded to move, false if gravity caused the movement.
-    func PieceMoved(_ MovedPiece: Piece, Direction: Directions, Commanded: Bool)
+    public func PieceMoved(_ MovedPiece: Piece, Direction: Directions, Commanded: Bool)
     {
     }
     
@@ -705,20 +703,30 @@ class MainViewController: UIViewController,
     ///   - MovedPiece: The piece that moved.
     ///   - Direction: The direction the piece moved.
     ///   - Commanded: True if the piece was commanded to move, false if gravity caused the movement.
-    func PieceMoved3D(_ MovedPiece: Piece, Direction: Directions, Commanded: Bool)
+    public func PieceMoved3D(_ MovedPiece: Piece, Direction: Directions, Commanded: Bool)
     {
         GameView3D?.DrawPiece3D(InBoard: Game!.GameBoard!, GamePiece: MovedPiece)
     }
     
     /// Number of games run in the current instance.
-    var GameCount: Int = 1
+    public var GameCount: Int = 1
     
-    let LastGameDurationID = UUID()
-    let LastGamePieceCountID = UUID()
-    let MeanGameDurationID = UUID()
-    let MeanGamePieceCountID = UUID()
-    var CumulativePieceCount = 0
-    var CumulativeGameDuration = 0.0
+    /// ID of the last game duration.
+    public let LastGameDurationID = UUID()
+    /// ID of the last game piece count.
+    public let LastGamePieceCountID = UUID()
+    /// ID of the mean game duration.
+    public let MeanGameDurationID = UUID()
+    /// ID of the mean game piece count.
+    public let MeanGamePieceCountID = UUID()
+    /// Cumulative piece count.
+    public var CumulativePieceCount = 0
+    /// Cumulative game duration.
+    public var CumulativeGameDuration = 0.0
+    /// Cumulative duration.
+    public var CumulativeDuration: Double = 0.0
+    /// Cumulative pieces.
+    public var CumulativePieces: Double = 0.0
     
     /// The game has notified us that the game is over.
     ///
@@ -730,7 +738,7 @@ class MainViewController: UIViewController,
     ///   - If the game was started in attract mode/AI mode, after a set amount of time, the game will restart in AI mode again.
     ///   - If the game was started in normal user mode, after a longer set amount of time with no action on the user's part,
     ///     the game will start in AI mode.
-    func GameOver()
+    public func GameOver()
     {
         var NotUsed: String? = nil
         ActivityLog.AddEntry(Title: "Game", Source: "MainViewController", KVPs: [("Message","Game over condition reached.")],
@@ -791,12 +799,9 @@ class MainViewController: UIViewController,
         let _ = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(HideGameOverText), userInfo: nil,
                                      repeats: false)
     }
-    
-    var CumulativeDuration: Double = 0.0
-    var CumulativePieces: Double = 0.0
-    
+        
     /// Hides the game over text in the game view.
-    @objc func HideGameOverText()
+    @objc public func HideGameOverText()
     {
         GameTextOverlay?.HideGameOver(Duration: 1.0)
     }
@@ -804,7 +809,7 @@ class MainViewController: UIViewController,
     /// Notice by the game that a piece stopped out of bounds (eg, sticking out the entrance of the bucket).
     ///
     /// - Parameter ID: ID of the piece that is out-of-bounds.
-    func OutOfBounds(_ ID: UUID)
+    public func OutOfBounds(_ ID: UUID)
     {
         GameView3D?.PieceOutOfBounds(ID)
     }
@@ -813,18 +818,18 @@ class MainViewController: UIViewController,
     /// move again.
     ///
     /// - Parameter ID: The ID of the piece that started freezing.
-    func StartedFreezing(_ ID: UUID)
+    public func StartedFreezing(_ ID: UUID)
     {
     }
     
     /// Notice by the game that a piece that had started to freeze was moved and is no longer frozen.
     /// - Parameter ID: The ID of the piece that is no longer frozen.
-    func StoppedFreezing(_ ID: UUID)
+    public func StoppedFreezing(_ ID: UUID)
     {
     }
     
     /// Start playing in attract mode.
-    @objc func AutoStartInAttractMode()
+    @objc public func AutoStartInAttractMode()
     {
         if Game.GameState == .Stopped
         {
@@ -840,12 +845,12 @@ class MainViewController: UIViewController,
     /// Notice from the game that its state changed.
     ///
     /// - Parameter NewState: The new game state.
-    func GameStateChanged(NewState: GameStates)
+    public func GameStateChanged(NewState: GameStates)
     {
     }
     
     /// The contents of the map were updated. Update the views. Update game statistics.
-    func MapUpdated()
+    public func MapUpdated()
     {
         let History = HistoryManager.GetHistory(InAttractMode)
         #if false
@@ -869,7 +874,7 @@ class MainViewController: UIViewController,
     
     /// The active piece moved. Depending on whether we are in smooth mode or not, we do
     /// different things.
-    func PieceUpdated(_ ThePiece: Piece, X: Int, Y: Int)
+    public func PieceUpdated(_ ThePiece: Piece, X: Int, Y: Int)
     {
         let BoardClass = BoardData.GetBoardClass(For: UserTheme!.BucketShape)!
         switch BoardClass
@@ -887,7 +892,7 @@ class MainViewController: UIViewController,
     
     /// Start a fast drop motion.
     /// - Parameter DeltaY: How far to drop the piece.
-    func StartFastDrop(DeltaY: Int, WithPiece: Piece)
+    public func StartFastDrop(DeltaY: Int, WithPiece: Piece)
     {
         print("Started fast drop by \(DeltaY) points.")
         GameView3D?.MovePieceRelative(WithPiece: WithPiece, DeltaX: 0, DeltaY: -DeltaY, TotalDuration: 0.1,
@@ -905,7 +910,7 @@ class MainViewController: UIViewController,
     ///         a few seconds for a new piece to appear rather than stalling animation. Another benefit of doing things this way is
     ///         it makes it a lot easier to debug code issues in the game and not in the SDK.
     /// - Parameter ThePiece: The finalized piece.
-    func PieceFinalized(_ ThePiece: Piece)
+    public func PieceFinalized(_ ThePiece: Piece)
     {
         var NotUsed: String? = nil
         ActivityLog.AddEntry(Title: "Game", Source: "MainViewController", KVPs: [("Message","Piece finalized."),("PieceID",ThePiece.ID.uuidString)],
@@ -969,25 +974,29 @@ class MainViewController: UIViewController,
     //var DispatchCalled: Double = 0.0
     
     /// Do nothing. Place holder for completion handler for rotating contents.
-    func Nop()
+    public func Nop()
     {
         //Nothing here...
     }
     
+    /// Not currently used.
     private var CRotateIndex = 0
+    /// Not currently used.
     private var RotateIndex = 0
+    /// Not currently used.
     private let RightRotations: [Angles] = [.Angle270, .Angle180, .Angle90, .Angle0]
+    /// Not currently used.
     private let LeftRotations: [Angles] = [.Angle90, .Angle180, .Angle270, .Angle0]
     
     /// Finish finalizing a piece when no rotation occurs.
-    func NoRotateFinishFinalizing()
+    public func NoRotateFinishFinalizing()
     {
         GameView3D?.DrawMap3D(FromBoard: Game!.GameBoard!, CalledFrom: "NoRotateFinishFinalizing")
         Game!.DoSpawnNewPiece()
     }
     
     /// Finish finalizing a piece when rotation occurs.
-    func RotateFinishFinalizing()
+    public func RotateFinishFinalizing()
     {
         GameView3D?.ClearBucket()
         GameView3D?.DrawMap3D(FromBoard: Game!.GameBoard!, CalledFrom: "RotateFinishFinalizing")
@@ -999,14 +1008,14 @@ class MainViewController: UIViewController,
     /// - Parameters:
     ///   - ID: The ID of the piece.
     ///   - Score: The new score for the piece.
-    func FinalizedPieceScore(ID: UUID, Score: Int)
+    public func FinalizedPieceScore(ID: UUID, Score: Int)
     {
     }
     
     /// Notice from the game that a piece was discarded.
     ///
     /// - Parameter ID: ID of the piece that was discarded.
-    func PieceDiscarded(_ ID: UUID)
+    public func PieceDiscarded(_ ID: UUID)
     {
     }
     
@@ -1016,7 +1025,7 @@ class MainViewController: UIViewController,
     ///   - Item: The type of item the piece intersected with.
     ///   - At: The location of the intersected item.
     ///   - ID: The ID of the piece.
-    func PieceIntersectedWith(Item: PieceTypes, At: CGPoint, ID: UUID)
+    public func PieceIntersectedWith(Item: PieceTypes, At: CGPoint, ID: UUID)
     {
     }
     
@@ -1028,51 +1037,46 @@ class MainViewController: UIViewController,
     ///   - Item: The type of item the piece intersected with.
     ///   - At: The location of the intersected item.
     ///   - ID: The ID of the piece.
-    func PieceIntersectedWithX(Item: UUID, At: CGPoint, ID: UUID)
+    public func PieceIntersectedWithX(Item: UUID, At: CGPoint, ID: UUID)
     {
     }
     
-    var NewPieceCount: Int = 0
+    /// New piece count.
+    public var NewPieceCount: Int = 0
     
     /// Notice from the game that a new piece started.
-    ///
     /// - Parameter NewPiece: The new piece.
-    func NewPieceStarted(_ NewPiece: Piece)
+    public func NewPieceStarted(_ NewPiece: Piece)
     {
         NewPieceCount = NewPieceCount + 1
     }
     
     /// Notice from the game that a row was deleted.
-    ///
     /// - Parameter Row: The index of the deleted row.
-    func DeletedRow(_ Row: Int)
+    public func DeletedRow(_ Row: Int)
     {
     }
     
     /// Notice from the game that a piece was block going in some direction.
-    ///
     /// - Parameter ID: The ID of the block piece.
-    func PieceBlocked(_ ID: UUID)
+    public func PieceBlocked(_ ID: UUID)
     {
     }
     
     /// Notice from the game that the piece successfully rotated.
-    ///
     /// - Note: Not called for pieces that are rotationally symmetric.
-    ///
     /// - Parameters:
     ///   - ID: ID of the piece that rotated.
     ///   - Direction: The direction the piece rotated.
-    func PieceRotated(ID: UUID, Direction: Directions)
+    public func PieceRotated(ID: UUID, Direction: Directions)
     {
     }
     
     /// Notice from the game that a piece was unable to rotate because it was blocked.
-    ///
     /// - Parameters:
     ///   - ID: ID of the piece that failed rotation.
     ///   - Direction: The direction the piece tried to rotate.
-    func PieceRotationFailure(ID: UUID, Direction: Directions)
+    public func PieceRotationFailure(ID: UUID, Direction: Directions)
     {
     }
     
@@ -1080,16 +1084,14 @@ class MainViewController: UIViewController,
     /// - Parameters:
     ///   - For: ID of the piece with a new score.
     ///   - NewScore: The new score.
-    func PieceScoreUpdated(For: UUID, NewScore: Int)
+    public func PieceScoreUpdated(For: UUID, NewScore: Int)
     {
     }
     
     /// Notice from the game that a new game score is available.
-    ///
     /// - Note: The game score is shown in the game view, not the UI.
-    ///
     /// - Parameter NewScore: The new game score.
-    func NewGameScore(NewScore: Int)
+    public func NewGameScore(NewScore: Int)
     {
         let ScoreTitle = "Game Score\n\(NewScore)"
         DebugClient.SetIdiotLight(IdiotLights.B1, Title: ScoreTitle, FGColor: ColorNames.Black, BGColor: ColorNames.WhiteSmoke)
@@ -1099,7 +1101,7 @@ class MainViewController: UIViewController,
     /// Notice from the game that a new high score is available.
     /// - Note: The high score is shown in the game view, not the UI.
     /// - Parameter HighScore: The new high score.
-    func NewHighScore(HighScore: Int)
+    public func NewHighScore(HighScore: Int)
     {
         let ScoreTitle = "High Score\n\(HighScore)"
         var NotUsed: String? = nil
@@ -1110,11 +1112,12 @@ class MainViewController: UIViewController,
         PreviousHighScore = HighScore
     }
     
-    var PreviousHighScore = -1
+    /// Previous high score value.
+    public var PreviousHighScore = -1
     
     /// Notice from the game what the new next piece is.
     /// - Parameter Next: The next piece after the current piece.
-    func NextPiece(_ Next: Piece)
+    public func NextPiece(_ Next: Piece)
     {
         //print("Next piece is \(Next.Shape)")
         GameTextOverlay?.ShowNextPiece(Next, Duration: 0.1)
@@ -1122,7 +1125,7 @@ class MainViewController: UIViewController,
     
     /// Received a performance sample (eg, frames per second for the most recent second) from the game view.
     /// - Parameter FPS: Most recent frames per second (eg, the last second) from the game view.
-    func PerformanceSample(FPS: Double)
+    public func PerformanceSample(FPS: Double)
     {
         if StopAccumulating
         {
@@ -1149,16 +1152,19 @@ class MainViewController: UIViewController,
         }
     }
     
-    var StopAccumulating: Bool = false
-    var AccumulatedFPS: Double = 0.0
-    var FPSSampleCount: Int = 0
+    /// Stop accumulating FPS values flag.
+    private var StopAccumulating: Bool = false
+    /// Accumulated FPS values.
+    private var AccumulatedFPS: Double = 0.0
+    /// Number of accumulated FPS values.
+    private var FPSSampleCount: Int = 0
     
     //var PieceFPS = [Double]()
     
     /// Notice from the game that it is done compressing the board.
     /// - Note: The board is compressed when the game (the map, actually) sees full rows and removes them.
     /// - Parameter DidCompress: True if the board was actually compressed or false if there was nothing to compress.
-    func BoardDoneCompressing(DidCompress: Bool)
+    public func BoardDoneCompressing(DidCompress: Bool)
     {
         if DidCompress
         {
@@ -1173,7 +1179,7 @@ class MainViewController: UIViewController,
     // MARK: - Control protocol functions.
     
     /// Freeze the piece in place.
-    func FreezeInPlace()
+    public func FreezeInPlace()
     {
         if let PieceID = Game.CurrentPiece
         {
@@ -1182,7 +1188,7 @@ class MainViewController: UIViewController,
     }
     
     /// Move the piece left.
-    func MoveLeft()
+    public func MoveLeft()
     {
         if let PieceID = Game.CurrentPiece
         {
@@ -1191,7 +1197,7 @@ class MainViewController: UIViewController,
     }
     
     /// Move the piece right.
-    func MoveRight()
+   public func MoveRight()
     {
         if let PieceID = Game.CurrentPiece
         {
@@ -1200,7 +1206,7 @@ class MainViewController: UIViewController,
     }
     
     /// Move the piece down.
-    func MoveDown()
+    public func MoveDown()
     {
         if let PieceID = Game.CurrentPiece
         {
@@ -1209,7 +1215,7 @@ class MainViewController: UIViewController,
     }
     
     /// Drop the piece down.
-    func DropDown()
+    public func DropDown()
     {
         if let PieceID = Game.CurrentPiece
         {
@@ -1219,7 +1225,7 @@ class MainViewController: UIViewController,
     }
     
     /// Move the piece up.
-    func MoveUp()
+    public func MoveUp()
     {
         if let PieceID = Game.CurrentPiece
         {
@@ -1228,7 +1234,7 @@ class MainViewController: UIViewController,
     }
     
     /// Move the piece up and away (eg, discard it).
-    func MoveUpAndAway()
+    public func MoveUpAndAway()
     {
         if let PieceID = Game.CurrentPiece
         {
@@ -1237,7 +1243,7 @@ class MainViewController: UIViewController,
     }
     
     /// Rotate the piece left.
-    func RotateLeft()
+    public func RotateLeft()
     {
         if let PieceID = Game.CurrentPiece
         {
@@ -1246,7 +1252,7 @@ class MainViewController: UIViewController,
     }
     
     /// Rotate the piece right.
-    func RotateRight()
+    public func RotateRight()
     {
         if let PieceID = Game.CurrentPiece
         {
@@ -1274,7 +1280,7 @@ class MainViewController: UIViewController,
     }
     
     /// Pause the game.
-    func Pause()
+    public func Pause()
     {
         if IsPaused
         {
@@ -1303,15 +1309,16 @@ class MainViewController: UIViewController,
     }
     
     /// Resume the game.
-    ///
     /// - Note: Nothing is done here because `Pause` is used as a toggle for game state.
-    func Resume()
+    public func Resume()
     {
     }
     
-    let GameCountID = UUID()
+    /// Game count ID.
+    public let GameCountID = UUID()
     
-    var FirstPlay = true
+    /// Holds the first play of the instance.
+    private var FirstPlay = true
     
     /// Clears the game board then starts a new game.
     /// - Note:
@@ -1321,7 +1328,7 @@ class MainViewController: UIViewController,
     ///     delay to allow for the visuals to occur. Otherwise, **Play** is called immediately.
     ///   - If this is the first time this function is called in a given isntance, nothing is cleared and **Play** is called
     ///     immediately.
-    func ClearAndPlay()
+    public func ClearAndPlay()
     {
         if FirstPlay
         {
@@ -1359,10 +1366,11 @@ class MainViewController: UIViewController,
         }
     }
     
-    var GamePlayStart: Double = 0.0
+    //When game play first started.
+    public var GamePlayStart: Double = 0.0
     
     /// Play the game, eg, start in normal user mode.
-    @objc func Play()
+    @objc public func Play()
     {
         var NotUsed: String? = nil
         ActivityLog.AddEntry(Title: "Game", Source: "MainViewController", KVPs: [("Message","Starting game.")],
@@ -1398,10 +1406,11 @@ class MainViewController: UIViewController,
         }
     }
     
-    var GameDuration: Double = 0.0
+    /// Duration of the game.
+    public var GameDuration: Double = 0.0
     
     /// Show or hide the "Press Play to Start" (or equivalent) message in the game view.
-    func ShowPressPlay(_ DoShow: Bool)
+    public func ShowPressPlay(_ DoShow: Bool)
     {
         if DoShow
         {
@@ -1414,7 +1423,7 @@ class MainViewController: UIViewController,
     }
     
     /// Stop the game. The user cannot resume once it the game is stopped.
-    func Stop()
+    public func Stop()
     {
         CurrentlyPlaying = false
         Game.StopGame()
@@ -1430,7 +1439,7 @@ class MainViewController: UIViewController,
     private var _Controller: ControlUIProtocol? = nil
     
     /// Not currently used.
-    var Controller: ControlUIProtocol?
+    public var Controller: ControlUIProtocol?
     {
         get
         {
@@ -1444,54 +1453,54 @@ class MainViewController: UIViewController,
     
     // MARK: - Game-control related functions.
     
-    func HandleMoveLeftPressed()
+    public func HandleMoveLeftPressed()
     {
         MoveLeft()
     }
     
-    func HandleMoveRightPressed()
+    public func HandleMoveRightPressed()
     {
         MoveRight()
     }
     
-    func HandleMoveUpPressed()
+    public func HandleMoveUpPressed()
     {
         MoveUp()
     }
     
-    func HandleMoveDownPressed()
+    public func HandleMoveDownPressed()
     {
         MoveDown()
     }
     
-    func HandleUpAndAwayPressed()
+    public func HandleUpAndAwayPressed()
     {
         MoveUpAndAway()
     }
     
-    func HandleDropDownPressed()
+    public func HandleDropDownPressed()
     {
         DropDown()
     }
     
-    func HandleRotateLeftPressed()
+    public func HandleRotateLeftPressed()
     {
         RotateRight()
     }
     
-    func HandleRotateRightPressed()
+    public func HandleRotateRightPressed()
     {
         RotateLeft()
     }
     
-    func HandleFreezeInPlacePressed()
+    public func HandleFreezeInPlacePressed()
     {
         FreezeInPlace()
     }
     
     /// Handle the play button pressed.
     /// - Note: The button's visuals will change depending on whether the game is in play or stopped.
-    func HandlePlayStopPressed()
+    public func HandlePlayStopPressed()
     {
         if CurrentlyPlaying
         {
@@ -1509,7 +1518,7 @@ class MainViewController: UIViewController,
     
     /// Handle the pause button pressed.
     /// - Note: The button's visuals will change depending on whether the game is in paused or playing.
-    func HandlePauseResumePressed()
+    public func HandlePauseResumePressed()
     {
         Pause()
     }
@@ -1518,7 +1527,7 @@ class MainViewController: UIViewController,
     
     /// Someone wants a reference to the user theme.
     /// - Returns: Current user theme instance.
-    func GetUserTheme() -> ThemeDescriptor2?
+    public func GetUserTheme() -> ThemeDescriptor2?
     {
         return Themes.UserTheme
     }
@@ -1526,7 +1535,7 @@ class MainViewController: UIViewController,
     /// The AI delegate wants AI data.
     ///
     /// - Returns: A populated `AITestTable`.
-    func GetAIData() -> AITestTable?
+    public func GetAIData() -> AITestTable?
     {
         return AIData
     }
@@ -1534,62 +1543,62 @@ class MainViewController: UIViewController,
     /// Set a new user.
     ///
     /// - Parameter UserID: ID of the new user.
-    func SetNewUser(_ UserID: UUID)
+    public func SetNewUser(_ UserID: UUID)
     {
     }
     
     // Mark: Game AI event protocol functions.
     
     /// AI is moving a piece upwards.
-    func AI_MoveUp()
+    public func AI_MoveUp()
     {
         GameUISurface3D?.FlashButton(.UpButton)
     }
     
     /// AI is throwing a piece away.
-    func AI_MoveUpAndAway()
+    public func AI_MoveUpAndAway()
     {
         GameUISurface3D?.FlashButton(.FlyAwayButton)
     }
     
     /// AI is moving a piece downwards.
-    func AI_MoveDown()
+    public func AI_MoveDown()
     {
         GameUISurface3D?.FlashButton(.DownButton)
     }
     
     /// AI is dropping a piece downwards.
-    func AI_DropDown()
+    public func AI_DropDown()
     {
         GameUISurface3D?.FlashButton(.DropDownButton)
     }
     
     /// AI is moving a piece to the left.
-    func AI_MoveLeft()
+    public func AI_MoveLeft()
     {
         GameUISurface3D?.FlashButton(.LeftButton)
     }
     
     /// AI is moving a piece to the right.
-    func AI_MoveRight()
+    public func AI_MoveRight()
     {
         GameUISurface3D?.FlashButton(.RightButton)
     }
     
     /// AI is rotating a piece clockwise.
-    func AI_RotateRight()
+    public func AI_RotateRight()
     {
         GameUISurface3D?.FlashButton(.RotateRightButton)
     }
     
     /// AI is rotating a piece counter-clockwise.
-    func AI_RotateLeft()
+    public func AI_RotateLeft()
     {
         GameUISurface3D?.FlashButton(.RotateLeftButton)
     }
     
     /// AI is freezing a piece into place.
-    func AI_FreezeInPlace()
+    public func AI_FreezeInPlace()
     {
         GameUISurface3D?.FlashButton(.FreezeButton)
     }
@@ -1597,25 +1606,26 @@ class MainViewController: UIViewController,
     // MARK: - Game view request functions.
     
     /// The game view wants us to redraw the board.
-    func NeedRedraw()
+    public func NeedRedraw()
     {
         GameView3D?.DrawMap3D(FromBoard: Game.GameBoard!, CalledFrom: "NeedRedraw")
     }
     
-    func SendKVP(Name: String, Value: String, ID: UUID)
+    public func SendKVP(Name: String, Value: String, ID: UUID)
     {
     }
     
     // MARK: - Smooth motion protocol function implementations.
     
-    weak var Smooth3D: SmoothMotionProtocol? = nil
-    weak var Smooth2D: SmoothMotionProtocol? = nil
+    /// Delegate for smooth motion protocol.
+    weak public var Smooth3D: SmoothMotionProtocol? = nil
+//    weak public var Smooth2D: SmoothMotionProtocol? = nil
     
     /// Move a piece smoothly to the specified location.
     /// - Parameter GamePiece: The piece to move.
     /// - Parameter ToOffsetX: Horizontal destination offset.
     /// - Parameter ToOffsetY: Vertical destination offset.
-    func SmoothMove(_ GamePiece: Piece, ToOffsetX: Int, ToOffsetY: Int)
+    public func SmoothMove(_ GamePiece: Piece, ToOffsetX: Int, ToOffsetY: Int)
     {
         Smooth3D?.MovePieceSmoothly(GamePiece, ToOffsetX: CGFloat(ToOffsetX), ToOffsetY: CGFloat(ToOffsetY), Duration: 0.35)
     }
@@ -1624,12 +1634,14 @@ class MainViewController: UIViewController,
     /// - Paramater GamePiece: The piece to rotate.
     /// - Parameter Degrees: Number of degrees to rotate the piece by.
     /// - Parameter OnAxis: The axis to rotate the piece on. 2D games use the .X axis.
-    func SmoothRotate(_ GamePiece: Piece, Degrees: CGFloat, OnAxis: RotationalAxes)
+    public func SmoothRotate(_ GamePiece: Piece, Degrees: CGFloat, OnAxis: RotationalAxes)
     {
         RotatePieceSmoothly(GamePiece, ByDegrees: Degrees, Duration: 0.35, OnAxis: OnAxis)
     }
     
-    func MovePieceSmoothly(_ GamePiece: Piece, ToOffsetX: CGFloat, ToOffsetY: CGFloat, Duration: Double)
+    /// Move a piece smoothing.
+    /// - Warning: If called, this function will generate a fatal error.
+    public func MovePieceSmoothly(_ GamePiece: Piece, ToOffsetX: CGFloat, ToOffsetY: CGFloat, Duration: Double)
     {
         //Not used in this class.
         fatalError("I told you this function shouldn't be called here!")
@@ -1637,12 +1649,14 @@ class MainViewController: UIViewController,
     
     /// Called when a smooth motion is completed.
     /// - Parameter For: The ID of the piece that moved smoothly.
-    func SmoothMoveCompleted(For: UUID)
+    public func SmoothMoveCompleted(For: UUID)
     {
         
     }
     
-    func RotatePieceSmoothly(_ GamePiece: Piece, ByDegrees: CGFloat, Duration: Double, OnAxis: RotationalAxes)
+    /// Rotate a piece smoothly.
+    /// - Warning: If called, this function will generate a fatal error.
+    public func RotatePieceSmoothly(_ GamePiece: Piece, ByDegrees: CGFloat, Duration: Double, OnAxis: RotationalAxes)
     {
         //Not used in this class.
         fatalError("I told you this function shouldn't be called here!")
@@ -1650,38 +1664,38 @@ class MainViewController: UIViewController,
     
     /// Called when a smooth rotation is completed.
     /// - Parameter For: The ID of the piece that rotated smoothly.
-    func SmoothRotationCompleted(For: UUID)
+    public func SmoothRotationCompleted(For: UUID)
     {
         
     }
     
     /// Called to create a game piece that can move smoothly.
     /// - Returns: ID of the piece to move smoothly.
-    func CreateSmoothPiece() -> UUID
+    public func CreateSmoothPiece() -> UUID
     {
         return UUID.Empty
     }
     
     /// Called when the game is done moving a piece smoothly, eg, when it freezes into place.
     /// - Parameter ID: The ID of the piece to clean up.
-    func DoneWithSmoothPiece(_ ID: UUID)
+    public func DoneWithSmoothPiece(_ ID: UUID)
     {
         
     }
     
     // MARK: - General-UI interactions.
     
-    //var ProposedNewGameType: BaseGameTypes = .Standard
+    /// Determines if a predetermined order of pieces will be used.
+    private var UsePredeterminedOrder: Bool = false
     
-    //var CurrentBaseGameType: BaseGameTypes = .Standard
+    /// Determines if we are in distraction mode.
+    public var InDistractMode: Bool = false
     
-    var UsePredeterminedOrder: Bool = false
+    /// Determiens if fast AI motions are used.
+    public var UseFastAI: Bool = false
     
-    var InDistractMode: Bool = false
-    
-    var UseFastAI: Bool = false
-    
-    var AttractTimer: Timer? = nil
+    /// The attract mode timer.
+    private var AttractTimer: Timer? = nil
     
     // MARK: - General UI functions
     
@@ -1696,7 +1710,7 @@ class MainViewController: UIViewController,
     /// - Parameter DidChange: If true, the game type changed. We still need to see if it is different from the current game
     ///                        type. If false, the user canceled the game selection dialog.
     /// - Parameter NewGameShape: The new shape of the game. If nil, the user canceled the game selection dialog.
-    func GameTypeChanged(DidChange: Bool, NewGameShape: BucketShapes?)
+    public func GameTypeChanged(DidChange: Bool, NewGameShape: BucketShapes?)
     {
         if !DidChange
         {
@@ -1718,7 +1732,7 @@ class MainViewController: UIViewController,
     
     /// Change to a new game type.
     /// - Parameter NewGameType: The new game/bucket type.
-    func SwitchGameType(NewGameType: BucketShapes)
+    public func SwitchGameType(NewGameType: BucketShapes)
     {
         var NotUsed: String? = nil
         ActivityLog.AddEntry(Title: "GameType", Source: "MainViewController", KVPs: [("GameType","\(NewGameType)")],
@@ -1738,7 +1752,7 @@ class MainViewController: UIViewController,
     /// - Parameters:
     ///   - Board: The board to dump.
     ///   - ShowGaps: If true, gaps are shown.
-    func DumpGameBoard(_ Board: Board, ShowGaps: Bool = false)
+    public func DumpGameBoard(_ Board: Board, ShowGaps: Bool = false)
     {
     }
     
@@ -1747,7 +1761,7 @@ class MainViewController: UIViewController,
     /// Set AI scoring method.
     /// - Note: Not current in use.
     /// - Parameter Method: The method to use to score with the AI.
-    func SetAIScoring(Method: AIScoringMethods)
+    public func SetAIScoring(Method: AIScoringMethods)
     {
         //Not used here.
     }
@@ -1755,7 +1769,7 @@ class MainViewController: UIViewController,
     /// Determines if the default scoring method should be used.
     /// - Note: Not current in use.
     /// - Parameter IsDefault: If true, use the default method.
-    func SetAIDefaultScoring(IsDefault: Bool)
+    public func SetAIDefaultScoring(IsDefault: Bool)
     {
         //Not used here.
     }
@@ -1763,7 +1777,7 @@ class MainViewController: UIViewController,
     /// Sets the valid piece groups to use by the AI.
     /// - Note: Not current in use.
     /// - Parameter PieceGroups: The piece groups to use.
-    func SetPieceGroups(PieceGroups: MetaPieces)
+    public func SetPieceGroups(PieceGroups: MetaPieces)
     {
         //Not used here.
     }
@@ -1771,7 +1785,7 @@ class MainViewController: UIViewController,
     /// How to select pices.
     /// - Note: Not current in use.
     /// - Parameter Method: The method to use to select pieces.
-    func SetPieceSelection(Method: PieceSelectionMethods)
+    public func SetPieceSelection(Method: PieceSelectionMethods)
     {
         //Not used here.
     }
@@ -1779,7 +1793,7 @@ class MainViewController: UIViewController,
     /// Returns the AI scoring to use.
     /// - Note: Defaults to `.OffsetMapping`.
     /// - Returns: The AI scoring to use.
-    func GetAIScoring() -> AIScoringMethods
+    public func GetAIScoring() -> AIScoringMethods
     {
         return .OffsetMapping
     }
@@ -1787,7 +1801,7 @@ class MainViewController: UIViewController,
     /// Return use the default scoring method flag.
     /// - Note: Always returns false.
     /// - Returns: Value indicating whether to use the default method or not.
-    func GetAIDefaultScoring() -> Bool
+    public func GetAIDefaultScoring() -> Bool
     {
         return false
     }
@@ -1795,7 +1809,7 @@ class MainViewController: UIViewController,
     /// Returns the group of pieces to use by the AI.
     /// - Note: Always returns `.Standard`.
     /// - Returns: Piece group to use.
-    func GetPieceGroups() -> MetaPieces
+    public func GetPieceGroups() -> MetaPieces
     {
         return .Standard
     }
@@ -1804,7 +1818,7 @@ class MainViewController: UIViewController,
     
     /// Called when the connection state between us and the remote TDebug instance changes.
     /// - Parameter Connected: Will contain the connection state.
-    func RemoteConnectionStateChanged(Connected: Bool)
+    public func RemoteConnectionStateChanged(Connected: Bool)
     {
         print("Remote connection state: \(Connected)")
         if Connected
@@ -1819,7 +1833,7 @@ class MainViewController: UIViewController,
     /// - Parameter From: String describing where the step occurred.
     /// - Parameter Message: String from the step caller.
     /// - Parameter Stepped: Catagory of the step.
-    func DisplayStep(From: String, Message: String, Stepped: Steps)
+    public func DisplayStep(From: String, Message: String, Stepped: Steps)
     {
         
     }
@@ -1827,7 +1841,7 @@ class MainViewController: UIViewController,
     // MARK: - Media button handling.
     
     /// Handle the camera button press - save the current game view as an image (but not the entire screen).
-    func SaveGameViewAsImage()
+    public func SaveGameViewAsImage()
     {
         if let GameImage = GameViewContainer.AsImage()
         {
@@ -1846,7 +1860,7 @@ class MainViewController: UIViewController,
     /// - Parameter image: Not used.
     /// - Parameter didFinishSavingWithError: Error message (if nil, no error).
     /// - Parameter contextInfo: Not used.
-    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer)
+    @objc public func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer)
     {
         if let SomeError = error
         {
@@ -1872,7 +1886,7 @@ class MainViewController: UIViewController,
     ///   - The video button acts as a toggle with the tint color of the button changing to show whether the screen is
     ///     being recorded (red in that case) or not (white when not recording).
     ///   - The entire screen is recorded as per standard ReplayKit functionality.
-    func HandleScreenRecording()
+    public func HandleScreenRecording()
     {
         MakingVideo = !MakingVideo
         if MakingVideo
@@ -1917,7 +1931,7 @@ class MainViewController: UIViewController,
     
     /// The ReplayKit view controller is done. Dismiss it.
     /// - Parameter previewController: The controller to dismiss.
-    func previewControllerDidFinish(_ previewController: RPPreviewViewController)
+    public func previewControllerDidFinish(_ previewController: RPPreviewViewController)
     {
         var NotUsed: String? = nil
         ActivityLog.AddEntry(Title: "UI", Source: "MainViewController", KVPs: [("Message","Video saved to camera roll.")],
@@ -1925,6 +1939,7 @@ class MainViewController: UIViewController,
         previewController.dismiss(animated: true)
     }
     
+    /// Holds the currently-making-a-video flag.
     public var MakingVideo: Bool = false
     
     // MARK: - Theme update protocol functions.
@@ -1935,7 +1950,7 @@ class MainViewController: UIViewController,
     ///    - By the time control gets here, the changed property can be accessed to get its new value.
     /// - Parameter ThemeName: The name of the theme in which a field changed.
     /// - Parameter Field: The field that changed
-    func ThemeUpdated(ThemeName: String, Field: ThemeFields)
+    public func ThemeUpdated(ThemeName: String, Field: ThemeFields)
     {
         switch Field
         {
@@ -1964,7 +1979,7 @@ class MainViewController: UIViewController,
     }
     
     /// Start the heartbeat indicator. It indicates the main UI thread and the game view threads are active and responsive.
-    func StartHeartbeat()
+    public func StartHeartbeat()
     {
         GameView3D?.SetHeartbeatVisibility(Show: true)
         HeartbeatTimer = Timer.scheduledTimer(timeInterval: UserTheme!.HeartbeatInterval,
@@ -1973,7 +1988,7 @@ class MainViewController: UIViewController,
     }
     
     /// Stop the heartbeat indicate.
-    func StopHeartbeat()
+    public func StopHeartbeat()
     {
         GameView3D?.SetHeartbeatVisibility(Show: false)
         HeartbeatTimer?.invalidate()
@@ -1981,7 +1996,7 @@ class MainViewController: UIViewController,
     }
     
     /// Update the heartbeat indicator to indicate both the UI and the game view threads are active.
-    @objc func HandleHeartbeat()
+    @objc public func HandleHeartbeat()
     {
         OperationQueue.main.addOperation
             {
@@ -2005,15 +2020,17 @@ class MainViewController: UIViewController,
         }
     }
     
-    var HeartbeatCount: Int = 0
+    /// Number of heartbeat counts.
+    private var HeartbeatCount: Int = 0
     
-    var HeartbeatTimer: Timer? = nil
+    /// The heartbeat timer.
+    private var HeartbeatTimer: Timer? = nil
     
     // MARK: - Pop-over main menu.
     
     /// Shows the pop-over menu. This menu (a pop-over view controller in reality) is invoked by the user pressing the main button
     /// in the game UI.
-    func ShowPopOverMenu()
+    public func ShowPopOverMenu()
     {
         if let PopController = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MainButtonMenuUI") as? MainButtonMenuCode
         {
@@ -2030,7 +2047,7 @@ class MainViewController: UIViewController,
     /// Receives the command the user invoked in the pop-over menu.
     /// - Note: Some commands may be sent from main menu sub-menus and passed through the main menu before it reaches us.
     /// - Parameter Command: The command to run.
-    func RunPopOverCommand(_ Command: PopOverCommands)
+    public func RunPopOverCommand(_ Command: PopOverCommands)
     {
         switch Command
         {
@@ -2124,8 +2141,10 @@ class MainViewController: UIViewController,
         }
     }
     
-    var ShowingDebugGrid: Bool = false
-    var ShowingRegions: Bool = false
+    /// Holds the showing debug grid flag.
+    public var ShowingDebugGrid: Bool = false
+    /// Holds the showing debug regions flag.
+    public var ShowingRegions: Bool = false
     
     /// Updates the main menu button to indicate whether it has been pressed or not.
     /// - Note: This functionality is not really needed but it was fun to change the texture on the node.
@@ -2143,7 +2162,7 @@ class MainViewController: UIViewController,
     }
     
     /// Reset the main button. Intended to be called from the pop-over menu.
-    func ResetMainButton()
+    public func ResetMainButton()
     {
         UpdateMainButton(false)
     }
@@ -2157,12 +2176,18 @@ class MainViewController: UIViewController,
     
     // MARK: - Variables used by TDebug from within extensions.
     
-    var EchoTimer: Timer!
-    var EchoBackTo: MCPeerID!
-    var MessageToEcho: String!
-    var WaitingFor = [(UUID, MessageTypes)]()
-    var DebugPeerID: MCPeerID? = nil
-    var DebugPeerPrefix: UUID? = nil
+    /// Timer for echoing messages to other peers.
+    public var EchoTimer: Timer!
+    /// The peer to echo to.
+    public var EchoBackTo: MCPeerID!
+    /// The message to echo.
+    public var MessageToEcho: String!
+    /// Array of what TDebug is waiting for.
+    public var WaitingFor = [(UUID, MessageTypes)]()
+    /// ID of the debug/logging peer.
+    public var DebugPeerID: MCPeerID? = nil
+    /// Prefix of the debug/logging peer.
+    public var DebugPeerPrefix: UUID? = nil
     
     // MARK: - Interface builder outlets.
     
@@ -2184,7 +2209,7 @@ extension UIView
     /// Return the view (and its sub-views) as an image.
     /// - Note: See [How to Convert a UIView to an Image](https://stackoverflow.com/questions/30696307/how-to-convert-a-uiview-to-an-image)
     /// - Returns: UIImage of the instance UIView. Nil on error.
-    func AsImage() -> UIImage?
+    public func AsImage() -> UIImage?
     {
         UIGraphicsBeginImageContextWithOptions(self.frame.size, false, 0.0)
         self.drawHierarchy(in: self.bounds, afterScreenUpdates: false)
