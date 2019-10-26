@@ -59,10 +59,10 @@ class PredefinedColorGroup
     }
     
     /// Holds the current ordered by value.
-    private var _OrderedBy: PredefinedColors.ColorOrders = .Name
+    private var _OrderedBy: ColorOrders = .Name
     /// Get or set the ordered by value. This is purely for storage and convenience - setting this
     /// property causes no sorting to be done.
-    public var OrderedBy: PredefinedColors.ColorOrders
+    public var OrderedBy: ColorOrders
     {
         get
         {
