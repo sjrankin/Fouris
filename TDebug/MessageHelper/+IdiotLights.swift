@@ -13,9 +13,14 @@ import MultipeerConnectivity
 /// Extensions for idiot light message encoding and decoding.
 extension MessageHelper
 {
-    // MARK: Idiot light encoding commands.
+    // MARK: - Idiot light encoding commands.
     
-    //public static func MakeIdiotLightMessage(Address: String, Message: String, FGColor: OSColor, BGColor: OSColor) -> String
+    /// Make an idiot light message to send.
+    /// - Parameter Address: Address of the the idiot light.
+    /// - Parameter Message: Text to display in the idiot light.
+    /// - Parameter FGColor: Name of the color for the text.
+    /// - Parameter BGColor: Name of the color for the background.
+    /// - Returns: Command string to send.
     public static func MakeIdiotLightMessage(Address: String, Message: String,
                                             FGColor: ColorNames,
                                             BGColor: ColorNames) -> String
@@ -28,6 +33,10 @@ extension MessageHelper
         return Final
     }
     
+    /// Make an idiot light message to send.
+    /// - Parameter Address: Address of the idiot light.
+    /// - Parameter State: Idiot light state.
+    /// - Returns: Command string to send.
     public static func MakeIdiotLightMessage(Address: String, State: UIFeatureStates) -> String
     {
         let Addr = "Address=\(Address)"
@@ -36,6 +45,10 @@ extension MessageHelper
         return Final
     }
     
+    /// Make an idiot light message to send.
+    /// - Parameter Address: Address of the idiot light.
+    /// - Parameter Text: Idiot light text.
+    /// - Returns: Command string to send.
     public static func MakeIdiotLightMessage(Address: String, Text: String) -> String
     {
         let Addr = "Address=\(Address)"
@@ -44,6 +57,10 @@ extension MessageHelper
         return Final
     }
     
+    /// Make an idiot light message to send.
+    /// - Parameter Address: Address of the idiot light.
+    /// - Parameter FGColor: Idiot light text color.
+    /// - Returns: Command string to send.
     public static func MakeIdiotLightMessage(Address: String, FGColor: ColorNames) -> String
     {
         let Addr = "Address=\(Address)"
@@ -52,6 +69,10 @@ extension MessageHelper
         return Final
     }
     
+    /// Make an idiot light message to send.
+    /// - Parameter Address: Address of the idiot light.
+    /// - Parameter BGColor: Idiot background color.
+    /// - Returns: Command string to send.
     public static func MakeIdiotLightMessage(Address: String, BGColor: ColorNames) -> String
     {
         let Addr = "Address=\(Address)"
@@ -60,8 +81,9 @@ extension MessageHelper
         return Final
     }
     
-    // MARK: Idiot light command decoding.
+    // MARK: - Idiot light command decoding.
     
+    /// Not currently used (no idiot lights in Fouris).
     public static func DecodeIdiotLightCommand(_ Raw: String) -> (MessageTypes, String, String, String)
     {
         if Raw.isEmpty
@@ -82,6 +104,7 @@ extension MessageHelper
     
     //Format of command: command,address{,data}
     //returns command, address, text, fg color, bg color
+    /// Not currently used (no idiot lights in Fouris).
     public static func DecodeIdiotLightMessage(_ Raw: String) ->(IdiotLightCommands, String, String?, UIColor?, UIColor?)
     {
         let Params = GetParameters(From: Raw, ["Address", "Enable", "Text", "BGColor", "FGColor"])
@@ -127,10 +150,11 @@ extension MessageHelper
         return (Command, Address, Text, FGColor, BGColor)
     }
     
+    /// Not currently used (no idiot lights in Fouris).
     public static func DecodeIdiotLightMessage2(_ Raw: String) -> IdiotLightMessage?
     {
         #if true
-        //This function is not needed in Wacky Tetris as it doesn't have idiot lights.
+        //This function is not needed in Fouris as it doesn't have idiot lights.
         return nil
         #else
         let Params = GetParameters(From: Raw, ["Address", "Message", "BGColor", "FGColor"])
