@@ -28,7 +28,6 @@ class PieceIDMap
     }
     
     /// Add a piece's ID to the piece ID map.
-    ///
     /// - Parameters:
     ///   - ID: ID to add.
     ///   - ForPiece: Piece type associated with the ID.
@@ -38,7 +37,6 @@ class PieceIDMap
     }
     
     /// Changes the type of the piece an ID points to.
-    ///
     /// - Parameters:
     ///   - For: The ID whose type will change.
     ///   - ToType: The new piece type for the ID.
@@ -58,10 +56,9 @@ class PieceIDMap
     }
     
     /// Holds the ID to piece type map.
-    var PieceMap = [UUID: PieceTypes]()
+    public var PieceMap = [UUID: PieceTypes]()
     
     /// Remove the specified ID from the piece ID map.
-    ///
     /// - Parameter ID: The ID to remove. If the ID is not in the map, no action is taken.
     public func RemoveID(_ ID: UUID)
     {
@@ -74,7 +71,6 @@ class PieceIDMap
     
     /// Determines if the piece type pointed to by ID is "empty" in the context of moving the user's piece (eg,
     /// can the user move a piece into the location?).
-    ///
     /// - Parameter ID: The ID of the piece to check.
     /// - Returns: True if the piece represents a location that is "empty", false if not.
     public func IsEmptyType(_ ID: UUID) -> Bool
@@ -85,7 +81,6 @@ class PieceIDMap
     
     /// Determines if the piece type pointed to by ID is "occupied" in the context of moving the user's piece (eg, the location
     /// is blocked so the user cannot move there).
-    ///
     /// - Parameter ID: The ID of the piece to check.
     /// - Returns: True if the piece represents a location that is "occupied", false if not.
     public func IsOccupiedType(_ ID: UUID) -> Bool
@@ -104,7 +99,6 @@ class PieceIDMap
     }
     
     /// Determines if the piece type pointed to by ID is a valid neighbor. Used by the AI.
-    ///
     /// - Parameter ID: The ID of the piece to check.
     /// - Returns: True if the piece represents a location that is a valid neighbor (in terms of the AI), false if not.
     public func IsValidNeighborType(_ ID: UUID) -> Bool
@@ -114,7 +108,6 @@ class PieceIDMap
     }
     
     /// Determines if the piece type pointed to by ID is a special type (eg, action or danger button).
-    ///
     /// - Parameter ID: The ID of the piece to check.
     /// - Returns: True if the piece represents a location that is a special type, false if not.
     public func IsSpecialType(_ ID: UUID) -> Bool
@@ -125,11 +118,8 @@ class PieceIDMap
     
     /// Returns a "static" ID for the given piece type. Not all piece types have associated "static" IDs. ("Static" means unchanging
     /// for the duration of the instance.)
-    ///
-    /// - Note:
-    ///   - Piece types with static IDs are: `.Visible`, `.Bucket`, `.InvisibleBucket`.
-    ///   - **If a piece type is passed that does not have a static ID, a fatal error is generated.**
-    ///
+    /// - Note: Piece types with static IDs are: `.Visible`, `.Bucket`, `.InvisibleBucket`.
+    /// - Warning: **If a piece type is passed that does not have a static ID, a fatal error is generated.**
     /// - Parameter For: The Piece type whose ID will be returned.
     /// - Returns: ID for the piece type. This ID will not change for the instance of the program.
     public func StaticID(For: PieceTypes) -> UUID
@@ -151,7 +141,6 @@ class PieceIDMap
     ]
     
     /// Returns a set of unique IDs found in the board.
-    ///
     /// - Parameter BoardMap: The board used as source for unique IDs.
     /// - Returns: Set of unique IDs in the board.
     public func UniqueIDs(BoardMap: MapType.ContentsType) -> Set<UUID>
@@ -161,9 +150,7 @@ class PieceIDMap
     }
     
     /// Returns the number of unique IDs in the passed board.
-    ///
     /// - Note: This is merely a thin wrapper around `UniqueIDs`.
-    ///
     /// - Parameter BoardMap: The board used as source for unique IDs.
     /// - Returns: Number of unique IDs in the board.
     public func UniqueIDCount(BoardMap: MapType.ContentsType) -> Int
@@ -172,15 +159,11 @@ class PieceIDMap
     }
     
     /// Remove IDs from the piece ID map that are no longer in the passed board.
-    ///
     /// - Parameter BoardMap: The board used to determine which IDs in the piece ID map are no longer present and can be
     ///                       removed.
     /// - Parameter ButNotThese: List of IDs to not remove even if they are not in the UniqueID list.
     public func RemoveUnusedIDs(BoardMap: MapType.ContentsType, ButNotThese: [UUID])
     {
-        #if false
-        PieceMap = PieceMap.filter({!ButNotThese.contains($0.0)})
-        #else
         let Unique = UniqueIDs(BoardMap: BoardMap)
         var DeleteList = [UUID]()
         for (ID, _) in PieceMap
@@ -199,6 +182,5 @@ class PieceIDMap
         {
             RemoveID(DeleteID)
         }
-        #endif
     }
 }
