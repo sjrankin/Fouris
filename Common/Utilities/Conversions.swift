@@ -29,6 +29,10 @@ class Convert
         return round(value / ToNearest) * ToNearest
     }
     
+    /// Rounds a Double value and converts it to a string.
+    /// - Parameter value: The value to convert.
+    /// - Parameter ToNearest: The value to round to.
+    /// - Parameter CharCount: Truncation value.
     public static func RoundToString(_ value: Double, ToNearest: Double, CharCount: Int = 5) -> String
     {
         let RoundTo = ToNearest > 1.0 ? 1.0 : ToNearest
@@ -37,6 +41,10 @@ class Convert
         return String(stemp.prefix(CharCount))
     }
     
+    /// Rounds a CGFloat value and converts it to a string.
+    /// - Parameter value: The value to convert.
+    /// - Parameter ToNearest: The value to round to.
+    /// - Parameter CharCount: Truncation value.
     public static func RoundToString(_ value: CGFloat, ToNearest: CGFloat, CharCount: Int = 5) -> String
     {
         let RoundTo = ToNearest > 1.0 ? 1.0 : ToNearest
@@ -71,7 +79,6 @@ class Convert
         }
         return Results
     }
-
     
     /// Convert an SCNVector4 to a string.
     /// - Parameter Raw: The value to convert.
