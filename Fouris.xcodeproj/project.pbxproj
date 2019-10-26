@@ -133,7 +133,6 @@
 		17831EDB232DD73D007FF894 /* FlyingNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17831EDA232DD73D007FF894 /* FlyingNode.swift */; };
 		17831EDD232DFB54007FF894 /* FlyingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17831EDC232DFB54007FF894 /* FlyingProtocol.swift */; };
 		1785ED6222FD8C0A000B31C2 /* BoardDescriptions.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1785ED6122FD8C09000B31C2 /* BoardDescriptions.xml */; };
-		1785ED6522FD9BB2000B31C2 /* BoardDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1785ED6422FD9BB2000B31C2 /* BoardDescriptor.swift */; };
 		178C0F042338786000A35C62 /* SettingsControllerCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178C0F032338786000A35C62 /* SettingsControllerCode.swift */; };
 		178C0F062338882100A35C62 /* SettingsChangedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178C0F052338882100A35C62 /* SettingsChangedProtocol.swift */; };
 		178C0F0B2338970400A35C62 /* +Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178C0F0A2338970400A35C62 /* +Action.swift */; };
@@ -402,7 +401,6 @@
 		17831EDA232DD73D007FF894 /* FlyingNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlyingNode.swift; sourceTree = "<group>"; };
 		17831EDC232DFB54007FF894 /* FlyingProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlyingProtocol.swift; sourceTree = "<group>"; };
 		1785ED6122FD8C09000B31C2 /* BoardDescriptions.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = BoardDescriptions.xml; sourceTree = "<group>"; };
-		1785ED6422FD9BB2000B31C2 /* BoardDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDescriptor.swift; sourceTree = "<group>"; };
 		178C0F032338786000A35C62 /* SettingsControllerCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsControllerCode.swift; sourceTree = "<group>"; };
 		178C0F052338882100A35C62 /* SettingsChangedProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsChangedProtocol.swift; sourceTree = "<group>"; };
 		178C0F0A2338970400A35C62 /* +Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Action.swift"; sourceTree = "<group>"; };
@@ -1345,7 +1343,6 @@
 				178F4CA5229131A900FBCFFD /* Board.swift */,
 				17BC04D7229127E1002A6F90 /* PieceIDMap.swift */,
 				17FC443B228AB9E50065888F /* Score.swift */,
-				1785ED6422FD9BB2000B31C2 /* BoardDescriptor.swift */,
 			);
 			path = Board;
 			sourceTree = "<group>";
@@ -1591,7 +1588,6 @@
 				1749B6E422BB3F68003DC65D /* TextLayerProtocol.swift in Sources */,
 				17316506234C865E0091A620 /* AttributionData.swift in Sources */,
 				17E71A7422AD21410081991E /* MessageHandler.swift in Sources */,
-				1785ED6522FD9BB2000B31C2 /* BoardDescriptor.swift in Sources */,
 				17A45B582271A59F002E705D /* AITestTable.swift in Sources */,
 				1797524822C38A4D00BF539A /* +DebuggeeExecution.swift in Sources */,
 				1759F6B522AB7F5D00574A01 /* TColor.swift in Sources */,
