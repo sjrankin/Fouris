@@ -22,7 +22,7 @@ extension View3D
     /// - Parameter HideDuration: The length of time to hide the board.
     /// - Parameter ShowMethod: The method to use to show the board.
     /// - Parameter ShowDuration: The length of time to show the board.
-    func ResetBoard(HideMethod: HideBoardMethods, HideDuration: Double,
+    public func ResetBoard(HideMethod: HideBoardMethods, HideDuration: Double,
                     ShowMethod: ShowBoardMethods, ShowDuration: Double)
     {
         #if true
@@ -88,7 +88,7 @@ extension View3D
     }
     
     /// Create nodes for the visual game board.
-    func CreateGameBoard()
+    public func CreateGameBoard()
     {
         BucketNode?.removeFromParentNode()
         let Bucket = CreateBucket(InitialOpacity: 1.0, Shape: CenterBlockShape!)
@@ -105,7 +105,7 @@ extension View3D
     }
     
     /// Remove nodes containing the visual game board.
-    func RemoveGameBoard()
+    public func RemoveGameBoard()
     {
         BucketNode?.removeFromParentNode()
         BucketNode = nil
@@ -118,7 +118,7 @@ extension View3D
     /// Selects a random enum in `HideBoardMethods` excluding any value in `Exluding`.
     /// - Parameter Excluding: List of value to not return - eg, not in the pool of random values to select.
     /// - Returns: Randomly selected `HideBoardMethods` enum value that is not in `Excluding`.
-    func RandomHideMethod(Excluding: [HideBoardMethods]) -> HideBoardMethods
+    public func RandomHideMethod(Excluding: [HideBoardMethods]) -> HideBoardMethods
     {
         while true
         {
@@ -136,7 +136,7 @@ extension View3D
     ///                     If this value is `.Random`, a randomly select method is used.
     /// - Parameter Duration: The amount of time from start to finish of the visual effect to hide
     ///                       the board, in seconds.
-    func HideBoard(Method: HideBoardMethods, Duration: Double)
+    public func HideBoard(Method: HideBoardMethods, Duration: Double)
     {
         objc_sync_enter(CanUseBucket)
         var HideMethod = Method
@@ -280,7 +280,7 @@ extension View3D
     /// Selects a random enum in `ShowBoardMethods` excluding any value in `Exluding`.
     /// - Parameter Excluding: List of value to not return - eg, not in the pool of random values to select.
     /// - Returns: Randomly selected `ShowBoardMethods` enum value that is not in `Excluding`.
-    func RandomShowMethod(Excluding: [ShowBoardMethods]) -> ShowBoardMethods
+    public func RandomShowMethod(Excluding: [ShowBoardMethods]) -> ShowBoardMethods
     {
         while true
         {
@@ -297,7 +297,7 @@ extension View3D
     /// - Parameter Method: The method to use to show the board.
     /// - Parameter Duration: The amount of time from start to finish of the visual effect to show
     ///                       the board, in seconds.
-    func ShowBoard(Method: ShowBoardMethods, Duration: Double)
+    public func ShowBoard(Method: ShowBoardMethods, Duration: Double)
     {
         var ShowMethod = Method
         if ShowMethod == .Random
