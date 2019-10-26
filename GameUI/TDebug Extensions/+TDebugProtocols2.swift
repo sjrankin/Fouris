@@ -15,73 +15,78 @@ extension MainViewController: MultiPeerDelegate, StateProtocol, MessageHandlerDe
 {
     // MARK: Message handler delegate functions. (Not currently used.)
     
-    func Message(_ Handler: MessageHandler, From Peer: MCPeerID, Command Broadcast: String)
+    public func Message(_ Handler: MessageHandler, From Peer: MCPeerID, Command Broadcast: String)
     {
     }
     
-    func Message(_ Handler: MessageHandler, From Peer: MCPeerID, Message Broadcast: String)
+    public func Message(_ Handler: MessageHandler, From Peer: MCPeerID, Message Broadcast: String)
     {
     }
     
-    func Message(_ Handler: MessageHandler, From Peer: MCPeerID, Log Message: String)
+    public func Message(_ Handler: MessageHandler, From Peer: MCPeerID, Log Message: String)
     {
     }
     
-    func Message(_ Handler: MessageHandler, From Peer: MCPeerID, VersionInformation: [(String, String)])
+    public func Message(_ Handler: MessageHandler, From Peer: MCPeerID, VersionInformation: [(String, String)])
     {
     }
     
-    func Message(_ Handler: MessageHandler, From Peer: MCPeerID, EchoReturned Message: String)
+    public func Message(_ Handler: MessageHandler, From Peer: MCPeerID, EchoReturned Message: String)
     {
     }
     
-    func Message(_ Handler: MessageHandler, From Peer: MCPeerID, EchoMessage: String, In Seconds: Double)
+    public func Message(_ Handler: MessageHandler, From Peer: MCPeerID, EchoMessage: String, In Seconds: Double)
     {
     }
     
-    func Message(_ Handler: MessageHandler, From Peer: MCPeerID, SpecialCommand: SpecialCommands)
+    public func Message(_ Handler: MessageHandler, From Peer: MCPeerID, SpecialCommand: SpecialCommands)
     {
     }
     
-    func Message(_ Handler: MessageHandler, From Peer: MCPeerID, KVPData: (UUID, String, String))
+    public func Message(_ Handler: MessageHandler, From Peer: MCPeerID, KVPData: (UUID, String, String))
     {
     }
     
-    func Message(_ Handler: MessageHandler, From Peer: MCPeerID, Execute: ClientCommand)
+    public func Message(_ Handler: MessageHandler, From Peer: MCPeerID, Execute: ClientCommand)
     {
     }
     
-    func Message(_ Handler: MessageHandler, From Peer: MCPeerID, IdiotLightCommand: IdiotLightCommands, Address: String,
-                 Text: String?, FGColor: UIColor?, BGColor: UIColor?)
+    public func Message(_ Handler: MessageHandler, From Peer: MCPeerID, IdiotLightCommand: IdiotLightCommands, Address: String,
+                        Text: String?, FGColor: UIColor?, BGColor: UIColor?)
     {
     }
     
-    func Message(_ Handler: MessageHandler, From Peer: MCPeerID, RespondToHeartBeat InSeconds: Double, Fail After: Double,
-                 SenderCumulativeCount: Int)
+    public func Message(_ Handler: MessageHandler, From Peer: MCPeerID, RespondToHeartBeat InSeconds: Double, Fail After: Double,
+                        SenderCumulativeCount: Int)
     {
     }
     
-    func Message(_ Handler: MessageHandler, From Peer: MCPeerID, ReturnClientCommands: Any?)
+    public func Message(_ Handler: MessageHandler, From Peer: MCPeerID, ReturnClientCommands: Any?)
     {
     }
     
-    func Message(_ Handler: MessageHandler, From Peer: MCPeerID, AsyncResultID: UUID, MessageType: MessageTypes, RawCommand: String)
+    public func Message(_ Handler: MessageHandler, From Peer: MCPeerID, AsyncResultID: UUID, MessageType: MessageTypes, RawCommand: String)
     {
     }
     
-    func Message(_ Handler: MessageHandler, From Peer: MCPeerID, EncapsulatedID: UUID, RawCommand: String)
+    public func Message(_ Handler: MessageHandler, From Peer: MCPeerID, EncapsulatedID: UUID, RawCommand: String)
     {
     }
     
     // MARK: State protocol delegate functions.
     
-    func StateChanged(NewState: States, HandShake: HandShakeCommands)
+    public func StateChanged(NewState: States, HandShake: HandShakeCommands)
     {
     }
     
     // MARK: Multi-peer delegate functions.
     
-    func ConnectedDeviceChanged(Manager: MultiPeerManager, ConnectedDevices: [MCPeerID], Changed: MCPeerID, NewState: MCSessionState)
+    /// A connected device changed state.
+    /// - Parameter Manager: The MultiPeerManager instance.
+    /// - Parameter ConnectedDevices: List of connected devices.
+    /// - Parameter Changed: The ID of the changed device.
+    /// - Parameter Newstate: The new state of the changed device.
+    public func ConnectedDeviceChanged(Manager: MultiPeerManager, ConnectedDevices: [MCPeerID], Changed: MCPeerID, NewState: MCSessionState)
     {
         let ChangedPeerName = Changed.displayName
         var NewStateName = ""
@@ -117,9 +122,9 @@ extension MainViewController: MultiPeerDelegate, StateProtocol, MessageHandlerDe
     /// Send our instance data to a remote peer.
     /// - Parameter RawData: Not used.
     /// - Parameter Peer: The peer that wants our data.
-    func SendInstanceDataToPeer(_ RawData: String, Peer: MCPeerID)
+    public func SendInstanceDataToPeer(_ RawData: String, Peer: MCPeerID)
     {
-        let ReturnToPeer = MessageHelper.MakeGetPeerTypeReturn(IsDebugger: false, PrefixCode: TDebugPrefix, PeerName: "Wacky Tetris")
+        let ReturnToPeer = MessageHelper.MakeGetPeerTypeReturn(IsDebugger: false, PrefixCode: TDebugPrefix, PeerName: "Fouris")
         MPMgr.SendPreformatted(Message: ReturnToPeer, To: Peer)
     }
     
@@ -127,7 +132,7 @@ extension MainViewController: MultiPeerDelegate, StateProtocol, MessageHandlerDe
     /// is a debug sink, save the information for debugging use.
     /// - Parameter RawData: The raw data to decode.
     /// - Parameter Peer: The source of the raw data.
-    func HandleRemotePeerData(_ RawData: String, Peer: MCPeerID)
+    public func HandleRemotePeerData(_ RawData: String, Peer: MCPeerID)
     {
         let PeerData: PeerType = MessageHelper.DecodePeerTypeCommand(RawData)!
         if PeerData.PeerIsDebugger
@@ -141,7 +146,10 @@ extension MainViewController: MultiPeerDelegate, StateProtocol, MessageHandlerDe
         }
     }
     
-    func HandleDebuggerStateChanged(_ RawData: String, Peer: MCPeerID)
+    /// Handle debugger state changed events.
+    /// - Parameter RawData: Raw data from the debugger.
+    /// - Parameter Peer: The debugger peer ID.
+    public func HandleDebuggerStateChanged(_ RawData: String, Peer: MCPeerID)
     {
         if let (DebuggerPrefix, DebuggerName, DebuggerState) = MessageHelper.DecodeDebuggerStateChanged(RawData)
         {
@@ -149,8 +157,14 @@ extension MainViewController: MultiPeerDelegate, StateProtocol, MessageHandlerDe
         }
     }
     
-    func ReceivedData(Manager: MultiPeerManager, Peer: MCPeerID, RawData: String, OverrideMessageType: MessageTypes? = nil,
-                      EncapsulatedID: UUID? = nil)
+    /// Received data from a peer.
+    /// - Parameter Manager: The MultiPeerManager instance.
+    /// - Parameter Peer: The source of the message.
+    /// - Parameter RawData: The raw message from the peer.
+    /// - Parameter OverrideMessageType: If specified an overriden message type to be used.
+    /// - Parameter EncapsulatedID: If specified, the ID of the encapsulated message.
+    public func ReceivedData(Manager: MultiPeerManager, Peer: MCPeerID, RawData: String, OverrideMessageType: MessageTypes? = nil,
+                             EncapsulatedID: UUID? = nil)
     {
         var MessageType: MessageTypes = .Unknown
         var Payload = ""
@@ -198,13 +212,23 @@ extension MainViewController: MultiPeerDelegate, StateProtocol, MessageHandlerDe
         }
     }
     
-    func ProcessAsyncResult(CommandID: UUID, Peer: MCPeerID, MessageType: MessageTypes, RawData: String)
+    /// Process an ansynchronous result of a command sent to another peer.
+    /// - Parameter CommandID: ID of the command.
+    /// - Parameter Peer: The peer that sent the result.
+    /// - Parameter MessageType: The message type returned by the peer.
+    /// - Parameter RawData: Raw data from the peer.
+    public func ProcessAsyncResult(CommandID: UUID, Peer: MCPeerID, MessageType: MessageTypes, RawData: String)
     {
         WaitingFor.removeAll(where: {$0.0 == CommandID})
         print("RawData=\(RawData)")
     }
     
-    func ReceivedAsyncData(Manager: MultiPeerManager, Peer: MCPeerID, CommandID: UUID, RawData: String)
+    /// Handle data received asynchronously from a peer.
+    /// - Parameter Manager: The MultiPeerManager instance.
+    /// - Parameter Peer: The ID of the peer.
+    /// - Parameter CommandID: The ID of the command.
+    /// - Parameter RawData: The raw data sent by the peer.
+    public func ReceivedAsyncData(Manager: MultiPeerManager, Peer: MCPeerID, CommandID: UUID, RawData: String)
     {
         print("Received async response from ID: \(CommandID).")
         for (ID, MessageType) in WaitingFor
