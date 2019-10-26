@@ -19,24 +19,24 @@ protocol UITouchImageDelegate: class
 }
 
 /// Logical UI motion buttons implemented with **UITouchImage**.
-/// - **Unknown**: Unknown button. Ignore or throw a fatal error.
-/// - **MoveLeft**: The move left button.
-/// - **MOveRight**: The move right button.
-/// - **MoveUp**: The move up button.
-/// - **MoveDown**: The move down button.
-/// - **DropDown**: The drop down button.
-/// - **FlyAway**: The fly away (move rapidly upwards) button.
-/// - **RotateLeft**: The rotate left button.
-/// - **RotateRight**: the rotate right button.
 enum UIMotionButtons: Int, CaseIterable
 {
+    /// Unknown motion button.
     case Unknown = 0
+    /// Move piece left button.
     case MoveLeft = 1
+    /// Move piece right button.
     case MoveRight = 2
+    /// Move piece up button.
     case MoveUp = 3
+    /// Move piece down button.
     case MoveDown = 4
+    /// Drop piece to bottom button.
     case DropDown = 5
+    /// Discard piece button.
     case FlyAway = 6
+    /// Rotate piece left button.
     case RotateLeft = 7
+    /// Rotate piece right button.
     case RotateRight = 8
 }
