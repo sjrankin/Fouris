@@ -11,6 +11,8 @@ import Foundation
 extension ThemeManager3
 {
     /// Returns an XML document string for the default game theme.
+    /// - Note: This is used due to a bug in saving data to the file store. Once that bug is resolved,
+    ///         this data can be removed.
     public static func RawTheme() -> String
     {
         return
