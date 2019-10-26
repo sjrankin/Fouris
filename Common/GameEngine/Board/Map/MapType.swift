@@ -135,15 +135,15 @@ class MapType: CustomStringConvertible
         InPlay = [Piece]()
         _IDMap = PieceIDMap()
         _CurrentBoardSize = CGSize(width: RawBucket!.GameBoardWidth, height: RawBucket!.GameBoardHeight)
-        print("_CurrentBoardSize: \(_CurrentBoardSize)")
+        //print("_CurrentBoardSize: \(_CurrentBoardSize)")
         _Contents = MapType.CreateMap(Width: RawBucket!.GameBoardWidth, Height: RawBucket!.GameBoardHeight,
                                       FillWith: IDMap!.StaticID(For: .Visible))
         _BlockMap = MapType.CreateMap(Width: RawBucket!.GameBoardWidth, Height: RawBucket!.GameBoardHeight,
                                       FillWith: UUID.Empty)
         
-        print("Bucket size: \(RawBucket!.BucketWidth), \(RawBucket!.BucketHeight)")
-        print("Bucket location: \(RawBucket!.BucketX),\(RawBucket!.BucketY)")
-        print("GameBoard size: \(RawBucket!.GameBoardSize())")
+        //print("Bucket size: \(RawBucket!.BucketWidth), \(RawBucket!.BucketHeight)")
+        //print("Bucket location: \(RawBucket!.BucketX),\(RawBucket!.BucketY)")
+        //print("GameBoard size: \(RawBucket!.GameBoardSize())")
         switch BoardClass
         {
             case .Static:
@@ -189,7 +189,9 @@ class MapType: CustomStringConvertible
         }
     }
     
+    /// Holds the board class.
     private var _BoardClass: BoardClasses = .Static
+    /// Get or set the board class.
     public var BoardClass: BoardClasses
     {
         get
@@ -197,8 +199,10 @@ class MapType: CustomStringConvertible
             return _BoardClass
         }
     }
-    
+
+    /// Holds the shape of the bucket.
     private var _BucketShape: BucketShapes = .Classic
+    /// Get or set the shape of the bucket.
     public var BucketShape: BucketShapes
     {
         get
@@ -249,7 +253,7 @@ class MapType: CustomStringConvertible
     
     /// Replaces the current scorer in the instance with the passed scoring class instance.
     /// - Parameter NewScorer: The scoring instance to use in this map class instance.
-    func AddScorer(_ NewScorer: Score)
+    public func AddScorer(_ NewScorer: Score)
     {
         Scorer = NewScorer
     }
@@ -257,7 +261,7 @@ class MapType: CustomStringConvertible
     /// Creates a new scoring class instance set up for the current map configuration.
     /// - Parameter WithID: ID to use for the new scoring instance.
     /// - Returns: New scoring class instance.
-    func CreateScorer(_ WithID: UUID = UUID()) -> Score
+    public func CreateScorer(_ WithID: UUID = UUID()) -> Score
     {
         let NewScorer = Score(WithID: WithID, BucketWidth: _BucketInteriorWidth,
                               BucketHeight: _BucketInteriorHeight, BucketBottom: _BucketInteriorBottom,
@@ -624,12 +628,12 @@ class MapType: CustomStringConvertible
         }
     }
     
-    // MARK: Utility functions.
+    // MARK: - Utility functions.
     
     /// Determines if a block can occupy the passed point.
     /// - Parameter At: The point to check for emptiness.
     /// - Returns: True if the specified point is empty, false if not.
-    func MapIsEmpty(At: CGPoint) -> Bool
+    public func MapIsEmpty(At: CGPoint) -> Bool
     {
         if At.x < 0.0 || At.y < 0.0
         {
@@ -650,7 +654,7 @@ class MapType: CustomStringConvertible
     ///   - At: The point to check for emptiness.
     ///   - BlockedBy: Returns the piece that is blocking the block.
     /// - Returns: True if the specified point is empty, false if not.
-    func MapIsEmpty(At: CGPoint, BlockedBy: inout PieceTypes) -> Bool
+    public func MapIsEmpty(At: CGPoint, BlockedBy: inout PieceTypes) -> Bool
     {
         if At.x < 0.0 || At.y < 0.0
         {
@@ -672,7 +676,7 @@ class MapType: CustomStringConvertible
     /// - Returns: Number of spaces from `Source` to the last empty space in the bucket directly under `Source`. A negative
     ///            number is returned if the last empty space is under the bucket (useful for rotating games with gaps in the
     ///            side of the bucket). The value returned is relative to the `Source` and not absolute.
-    func DistanceToBottomFrom(_ Source: CGPoint) -> Int
+    public func DistanceToBottomFrom(_ Source: CGPoint) -> Int
     {
         let BoardDef = BoardManager.GetBoardFor(_BucketShape)
         var Count = 0
@@ -691,7 +695,7 @@ class MapType: CustomStringConvertible
     /// Determines if the piece is fully in bounds. Call only after the piece is frozen.
     /// - Parameter ThePiece: The piece to check for in-boundedness.
     /// - Returns: True if the piece is fully in bounds (eg, in the bucket), false otherwise.
-    func PieceInBounds(_ ThePiece: Piece) -> Bool
+    public func PieceInBounds(_ ThePiece: Piece) -> Bool
     {
         let BoardDef = BoardManager.GetBoardFor(_BucketShape)
         var IsInBounds = true
@@ -737,11 +741,10 @@ class MapType: CustomStringConvertible
     }
     
     /// Combines the list of in-play pieces with the current map contents and returns the result.
-    ///
     /// - Parameters:
     ///   - Excluding: If specified, the in-play piece to exclude from being combined into the result.
     /// - Returns: New `ContentsType` combining the existing contents of this instance with the passed set of in-play pieces.
-    func MergeMap(Excluding: UUID? = nil) -> ContentsType
+    public func MergeMap(Excluding: UUID? = nil) -> ContentsType
     {
         var Merged = MapType.CreateMap(Width: Width, Height: Height, FillWith: IDMap!.StaticID(For: .Visible))
         for Y in 0 ..< Merged.count
@@ -770,7 +773,7 @@ class MapType: CustomStringConvertible
     
     /// Combines all in-play pieces with the block map and returns the result.
     /// - Returns: Current block map merged with in-play pieces.
-    func MergedBlockMap() -> ContentsType
+    public func MergedBlockMap() -> ContentsType
     {
         var Merged = MapType.CreateMap(Width: Width, Height: Height, FillWith: UUID.Empty)
         for Y in 0 ..< Merged.count
@@ -793,7 +796,7 @@ class MapType: CustomStringConvertible
     /// Merge a piece in its final location to the contents of the map.
     /// - Parameters:
     ///   - Retired: The piece to merge.
-    func MergePieceWithMap(Retired: Piece)
+    public func MergePieceWithMap(Retired: Piece)
     {
         IDMap!.ChangeType(For: Retired.ID, ToType: .RetiredGamePiece)
         for Block in Retired.CurrentLocations()
@@ -807,7 +810,7 @@ class MapType: CustomStringConvertible
     
     /// Delete the piece from the map. Used basically when pieces go too far out of bounds in certain game types.
     /// - Parameter: DeleteMe: The peice to delete.
-    func DeletePiece(_ DeleteMe: Piece)
+    public func DeletePiece(_ DeleteMe: Piece)
     {
         IDMap!.RemoveID(DeleteMe.ID)
         let PieceID = DeleteMe.ID
@@ -837,7 +840,7 @@ class MapType: CustomStringConvertible
     /// - Note: The returned window is the largest gap between barriers.
     /// - Returns: The left side of the entry window and the right side of the entry window. If nil, no entry window
     ///            is available.
-    func TopRowEntry() -> (Left: Int, Right: Int)?
+    public func TopRowEntry() -> (Left: Int, Right: Int)?
     {
         if !TopRowHasBarrier()
         {
@@ -887,7 +890,7 @@ class MapType: CustomStringConvertible
     /// Determines if the top-most row of the bucket contains a barrier or invisible barrier block. Only the map's current
     /// orientation is checked.
     /// - Returns: True if the top-most row has at least one barrier (visible or invisible), false if not.
-    func TopRowHasBarrier() -> Bool
+    public func TopRowHasBarrier() -> Bool
     {
         for X in BucketInteriorLeft ... BucketInteriorRight
         {
@@ -908,7 +911,7 @@ class MapType: CustomStringConvertible
     /// - Parameter Column: The column to check.
     /// - Returns: True if the specified column is bottomless (eg, empty), false if something is in the column that
     ///            can stop a piece from moving (such as a retired block or a bucket).
-    func ColumnIsBottomless(_ Column: Int) -> Bool
+    public func ColumnIsBottomless(_ Column: Int) -> Bool
     {
         for Y in BucketInteriorTop ... BucketInteriorBottom
         {
@@ -925,7 +928,7 @@ class MapType: CustomStringConvertible
     /// bottomless columns.
     /// - Note: This value may change depending on the orientation/rotation of the map.
     /// - Returns: True if the entire span of the bucket is blocked, false if not.
-    func BucketSpanIsBlocked() -> Bool
+    public func BucketSpanIsBlocked() -> Bool
     {
         for X in 0 ... BucketInteriorWidth - 1
         {
@@ -938,13 +941,12 @@ class MapType: CustomStringConvertible
     }
     
     /// Merges a set of points into the map.
-    ///
     /// - Note: For use **only** by the AI. This function does **not** manage the currently playing piece list or the
     ///         piece ID map. **Unless you are the AI code, do not call this function.**
     /// - Parameters:
     ///   - Points: List of points to merge with the map.
     ///   - WithTypeID: The value of the point to set.
-    func MergePointsWithMap(Points: [CGPoint], WithTypeID: UUID)
+    public func MergePointsWithMap(Points: [CGPoint], WithTypeID: UUID)
     {
         for Point in Points
         {
@@ -964,7 +966,7 @@ class MapType: CustomStringConvertible
     ///   - ToY: To Y location.
     ///   - ReplaceWith: What the source location will hold after the move. Ths is the replacement
     ///                  for the Contents map, **not** the block map.
-    func MoveItem(FromX: Int, FromY: Int, ToX: Int, ToY: Int, ReplaceWith: UUID)
+    public func MoveItem(FromX: Int, FromY: Int, ToX: Int, ToY: Int, ReplaceWith: UUID)
     {
         Contents[ToY][ToX] = Contents[FromY][FromX]
         Contents[FromY][FromX] = ReplaceWith
@@ -976,7 +978,7 @@ class MapType: CustomStringConvertible
     /// blocks that have previously frozen into the bucket.
     ///
     /// - Parameter At: Where the row was removed (eg, the row index).
-    func SlideBlocksDown(_ At: Int)
+    public func SlideBlocksDown(_ At: Int)
     {
         for X in BucketInteriorLeft ... BucketInteriorRight
         {
@@ -1014,7 +1016,7 @@ class MapType: CustomStringConvertible
     /// - Parameter At: The index of the row to delete.
     /// - Parameter WasHomogeneous: If true, the cleared row was made up of the same type of block. If false
     ///                             the row was made up of various block types.
-    func ClearRow(_ At: Int, WasHomogeneous: inout Bool)
+    public func ClearRow(_ At: Int, WasHomogeneous: inout Bool)
     {
         WasHomogeneous = true
         let PieceType = Contents[At][0]
@@ -1035,7 +1037,7 @@ class MapType: CustomStringConvertible
     /// - Parameter Row: The row index to delete.
     /// - Parameter WasHomogeneous: If true, the cleared row was made up of the same type of block. If false
     ///                             the row was made up of various block types.
-    func DeleteFullRowAt(_ Row: Int, WasHomogeneous: inout Bool)
+    public func DeleteFullRowAt(_ Row: Int, WasHomogeneous: inout Bool)
     {
         ClearRow(Row, WasHomogeneous: &WasHomogeneous)
         SlideBlocksDown(Row)
@@ -1044,7 +1046,7 @@ class MapType: CustomStringConvertible
     /// Get a list of all special items in the map and their locations. All special items are reset to .Visible spaces.
     ///
     /// - Returns: List of special items and their locations.
-    func GetSpecialItems() -> [(UUID, CGPoint)]
+    public func GetSpecialItems() -> [(UUID, CGPoint)]
     {
         var ItemList = [(UUID, CGPoint)]()
         for Y in BucketInteriorTop ... BucketInteriorBottom
@@ -1072,7 +1074,7 @@ class MapType: CustomStringConvertible
     /// Populate the map with the list of special items. If something already exists in the special item's location, don't
     /// populate it.
     /// - Parameter ItemList: List of items to populate.
-    func ReplaceSpecialItems(ItemList: [(UUID, CGPoint)])
+    public func ReplaceSpecialItems(ItemList: [(UUID, CGPoint)])
     {
         for (PieceTypeID, Point) in ItemList
         {
@@ -1088,7 +1090,7 @@ class MapType: CustomStringConvertible
     
     /// Determines if the bucket has any rows that can be eliminated because they are full.
     /// - Returns: True if the bucket has full rows, false if not.
-    func CanCompress() -> Bool
+    public func CanCompress() -> Bool
     {
         var FullRowCount = 0
         switch BoardClass
@@ -1139,7 +1141,7 @@ class MapType: CustomStringConvertible
     ///     orientation.
     ///   - Some game types only delete from a position in the middle of the board (such as **.Rotating4**).
     /// - Returns: True if the board was compressed (due to full rows) or false if no change was made.
-    @discardableResult func DoDropBottomMostFullRow() -> Bool
+    @discardableResult public func DoDropBottomMostFullRow() -> Bool
     {
         var WasCompressed = false
         var BottomStart = BucketInteriorBottom
@@ -1175,7 +1177,7 @@ class MapType: CustomStringConvertible
     }
     
     /// Holds the number of homogeneous rows deleted.
-    var HomogeneousCount = 0
+    public var HomogeneousCount = 0
     
     /// Holds a list of locations of full rows in the map.
     private var _FullRowMap = [Int]()
@@ -1209,7 +1211,7 @@ class MapType: CustomStringConvertible
     /// - Note: The which row is the bottom-most row depends on the type of base game. For some games, the bottom-most
     ///         row is actually above the middle of the bucket.
     /// - Returns: True if the board was compressed, false if not.
-    func DropBottomMostFullRow() -> Bool
+    public func DropBottomMostFullRow() -> Bool
     {
         FullRowMap.removeAll()
         let SpecialItems = GetSpecialItems()
@@ -1225,30 +1227,27 @@ class MapType: CustomStringConvertible
     }
     
     /// Remove the item at the specified location.
-    ///
     /// - Parameters:
     ///   - Location: The location of the item to remove.
     ///   - ReplaceWith: The new item at the location. Must be a type that `PieceIDMap.StaticID` comprehends.
-    func RemoveItemAt(Location: CGPoint, ReplaceWith: PieceTypes = .Visible)
+    public func RemoveItemAt(Location: CGPoint, ReplaceWith: PieceTypes = .Visible)
     {
         Contents[Int(Location.y)][Int(Location.x)] = IDMap!.StaticID(For: ReplaceWith)
     }
     
     /// Add the passed item ID to a random location in the contents of the map. Items will be added only to `.Visible` locations.
-    ///
     /// - Note:
     ///   - `ItemIDToAdd` is assumed to be a valid ID. No checking is done here.
     ///   - Given the nature of randomness, it's possible no valid location will be found. This function provides a looping mechanism
     ///     to try several times (see `TryCount`). Bear in mind that maps full of retired game pieces will take more tries to find
     ///     an empty location than emptier maps...
-    ///
     /// - Parameters:
     ///   - ItemIDToAdd: ID of the item to add. Will be added as is.
     ///   - Pieces: List of in-play pieces (needed so the item isn't placed underneath a running piece).
     ///   - TryCount: Retry count. The function will retry this many times to find a valid (eg, empty) random location.
     /// - Returns: True if the item ID was successfully placed, false if not (because the function tried `TryCount` times without
     ///            randomly selecting an empty location).
-    func AddInRandomLocation(ItemIDToAdd: UUID, Pieces: [Piece?], TryCount: Int = 10) -> Bool
+    public func AddInRandomLocation(ItemIDToAdd: UUID, Pieces: [Piece?], TryCount: Int = 10) -> Bool
     {
         var Merged = MergeMap()
         var Tried = 0
@@ -1272,23 +1271,21 @@ class MapType: CustomStringConvertible
     }
     
     /// Returns the horizontal center of the visible part of the board.
-    ///
     /// - Returns: Horizontal center of the visible part of the board.
-    func GetHorizontalCenter() -> Int
+    public func GetHorizontalCenter() -> Int
     {
         return (Width / 2) + 1
     }
     
-    /// MARK: Gap finding and related functions. Used mostly by the AI.
+    // MARK: - Gap finding and related functions. Used mostly by the AI.
     
     /// Returns the shape of a specified region. The shape is the set of offsets along the specified width of the top of the
     /// bucket - this information is used to help with AI scoring.
-    ///
     /// - Parameters:
     ///   - StartX: Start of the region. Inclusive.
     ///   - EndX: End of the region. Inclusive.
     /// - Returns: Region offset values for the top-most piece in each column in the region.
-    func RegionShape(StartX: Int, EndX: Int) -> [Int]
+    public func RegionShape(StartX: Int, EndX: Int) -> [Int]
     {
         var Tops = [Int]()
         var Greatest = -1000
@@ -1310,17 +1307,15 @@ class MapType: CustomStringConvertible
     }
     
     /// Returns the number of neighbors a point in the bucket has.
-    ///
     /// - Note:
     ///   - This function is valid **only** when used on points in the bucket because offsets are used to find the neighbor and
     ///     if a point outside the bucket is specified, it's possible the offset will be outside of the map.
     ///   - Refer to `ValidNeighors` for what is considered a neighbor.
-    ///
     /// - Parameters:
     ///   - X: Horizontal location of where to check.
     ///   - Y: Vertical location of where to check.
     /// - Returns: Number of neighbors of the specified point.
-    func NeighborCount(_ X: Int, _ Y: Int) -> Int
+    public func NeighborCount(_ X: Int, _ Y: Int) -> Int
     {
         var Count = 0
         if IDMap!.IsValidNeighborType(Contents[Y][X - 1])
@@ -1344,11 +1339,10 @@ class MapType: CustomStringConvertible
     
     /// Returns the first row in the specified column that is occupied by a bucket piece (visible or invisible) or retired
     /// game piece.
-    ///
     /// - Parameter X: The column whose top-most occupied row is returned.
     /// - Returns: The vertical position of the top-most occupied row. Returned value is in the range of `BucketTop` to
     ///            `BucketBottom`, inclusive.
-    func TopOfColumn(_ X: Int) -> Int
+    public func TopOfColumn(_ X: Int) -> Int
     {
         for Y in BucketTop ... BucketBottom
         {
@@ -1362,11 +1356,10 @@ class MapType: CustomStringConvertible
     
     /// Return the number of full rows (ready to be removed) with the set of points added to a "test" bucket to see if
     /// the additional points fill up any rows.
-    ///
     /// - Parameter WithPoints: Points to "add" to see if any rows fill up as a result.
     /// - Parameter InRows: Will return a list of rows that are full.
     /// - Returns: Number of full rows ready to be removed if the points in `WithPoints` are added.
-    func FullRowCount(WithPoints: [CGPoint], InRows: inout [Int]) -> Int
+    public func FullRowCount(WithPoints: [CGPoint], InRows: inout [Int]) -> Int
     {
         var TestBucketX = [[PieceTypes]]()
         for Y in 0 ..< Height
@@ -1406,17 +1399,15 @@ class MapType: CustomStringConvertible
     }
     
     /// Return the number of unreachable points in the map.
-    ///
     /// - Note: An unreachable point is a point not occupied by any retired (or active) game piece but not reachable from the top
     ///         of the bucket due to being blocked at each cardinal point, or having one or more of its neighbors being blocked
     ///         the same way.
-    ///
     /// - Parameter TestPoints: If present, points to add to the reachability map - use for hypothetical piece placement
     ///                         by the AI.
     /// - Parameter Reachable: Number of reachable points in the bucket.
     /// - Parameter Blocked: Number of blocked (eg, something is in it) points in the bucket.
     /// - Returns: Number of unreachable points in the current map.
-    func UnreachablePointCount(TestPoints: [CGPoint]? = nil, Reachable: inout Int, Blocked: inout Int) -> Int
+    public func UnreachablePointCount(TestPoints: [CGPoint]? = nil, Reachable: inout Int, Blocked: inout Int) -> Int
     {
         var GapList = [[CGPoint]]()
         ReachableMap(TestPoints: TestPoints, UnreachablePoints: &GapList)
@@ -1432,10 +1423,9 @@ class MapType: CustomStringConvertible
     }
     
     /// Return a list of groups of points that are unreachable.
-    ///
     /// - Parameter TestPoints: If present, points to add to the reachability map.
     /// - Returns: List of unreachable point groups.
-    func UnreachablePointList(TestPoints: [CGPoint]? = nil) -> [[CGPoint]]
+    public func UnreachablePointList(TestPoints: [CGPoint]? = nil) -> [[CGPoint]]
     {
         var PointList = [[CGPoint]]()
         ReachableMap(TestPoints: TestPoints, UnreachablePoints: &PointList)
@@ -1443,11 +1433,10 @@ class MapType: CustomStringConvertible
     }
     
     /// Return a map of reachable locations (eg, not fully surrounded).
-    ///
     /// - Parameter TestPoints: If present, points to prepopulate the reachability map with.
     /// - Parameter UnreachablePoints: List of list of unreachable points.
     /// - Returns: Reachability map.
-    @discardableResult func ReachableMap(TestPoints: [CGPoint]? = nil, UnreachablePoints: inout [[CGPoint]]) -> [[ReachableStates]]
+    @discardableResult public func ReachableMap(TestPoints: [CGPoint]? = nil, UnreachablePoints: inout [[CGPoint]]) -> [[ReachableStates]]
     {
         ReachabilityMap = Array(repeating: Array(repeating: ReachableStates.Outside, count: Width), count: Height)
         let Highest = ScanForBlocks(TestPoints)
@@ -1480,13 +1469,12 @@ class MapType: CustomStringConvertible
     }
     
     /// Scan the current map for blocks and bucket bits and populate the reachability map as appropriate.
-    ///
     /// - Parameter TestPoints: If present, a list of points to populate in the reachability map as occupied. This can be
     ///                         used by the AI to see what the effect of placing a piece is in relation to how many gaps
     ///                         are generated as a result of the placement.
     /// - Returns: The point closest to the top of the bucket that is occupied. This value is used to reduce the amount
     ///            of work that needs to be done by ReachableMap and the flood fill algorithms.
-    func ScanForBlocks(_ TestPoints: [CGPoint]? = nil) -> Int
+    public func ScanForBlocks(_ TestPoints: [CGPoint]? = nil) -> Int
     {
         var HighestY = 10000
         for Y in BucketInteriorTop ... BucketInteriorBottom
@@ -1514,18 +1502,17 @@ class MapType: CustomStringConvertible
     }
     
     /// Hold the reachability map to determine where the gaps are.
-    var ReachabilityMap: [[ReachableStates]]? = nil
+    public var ReachabilityMap: [[ReachableStates]]? = nil
     
     /// Total duration of the various flood fill operations. Used for debugging and optimization.
-    var TotalFloodFillDuration: Double = 0
+    public var TotalFloodFillDuration: Double = 0
     
     /// Total number of flood fill calls. Used for debugging and optimization.
-    var TotalFloodFillCalls: Int = 0
+    public var TotalFloodFillCalls: Int = 0
     
     /// Performs a flood fill of a special copy of the current map in order to find gaps in the
     /// map that are reachable from the top and not fully enclosed by retired blocks or bits of
     /// the bucket.
-    ///
     /// - Parameters:
     ///   - X: Horizontal coordinate of where to start the flood fill.
     ///   - Y: Vertical coordinate of where to start the floor fill.
@@ -1533,7 +1520,7 @@ class MapType: CustomStringConvertible
     ///               This value is used to reduce the amount of flood filling if there are no areas of interest
     ///               higher up in the bucket.
     ///   - With: Value to fill gaps with.
-    func DoFloodFillFrom(_ X: Int, _ Y: Int, HighestY: Int, With: ReachableStates)
+    public func DoFloodFillFrom(_ X: Int, _ Y: Int, HighestY: Int, With: ReachableStates)
     {
         if X < BucketInteriorLeft || X > BucketInteriorRight
         {
@@ -1566,9 +1553,7 @@ class MapType: CustomStringConvertible
     /// Performs a flood fill of a special copy of the current map in order to find gaps in the
     /// map that are reachable from the top and not fully enclosed by retired blocks or bits of
     /// the bucket. Calls the actual function that does the flood fill.
-    ///
     /// - Notes: This function measures the amount of time for each flood fill call.
-    ///
     /// - Parameters:
     ///   - X: Horizontal coordinate of where to start the flood fill.
     ///   - Y: Vertical coordinate of where to start the floor fill.
@@ -1577,7 +1562,7 @@ class MapType: CustomStringConvertible
     ///               higher up in the bucket.
     ///   - With: Value to fill gaps with.
     /// - Returns: The duration of the flood fill (for optimization purposes).
-    func FloodFillFrom(_ X: Int, _ Y : Int, HighestY: Int, With: ReachableStates) -> Double
+    public func FloodFillFrom(_ X: Int, _ Y : Int, HighestY: Int, With: ReachableStates) -> Double
     {
         let Start = CACurrentMediaTime()
         DoFloodFillFrom(X, Y, HighestY: HighestY, With: With)
@@ -1586,15 +1571,15 @@ class MapType: CustomStringConvertible
     }
     
     /// Holds a list of points in a flood fill region.
-    var GapPoints: [CGPoint]? = nil
+    public var GapPoints: [CGPoint]? = nil
     
     /// Used to determine how close to the bucket top the flood fill resulted.
-    var HighestFloodFillY: Int = Int.max
+    public var HighestFloodFillY: Int = Int.max
     
     /// Return the total number of blocked (retired game piece, bucket, invisible bucket) in the bucket region of the map.
     ///
     /// - Returns: Number of blocked pieces in the bucket.
-    func BlockedPointCount() -> Int
+    public func BlockedPointCount() -> Int
     {
         var Count = 0
         for Y in BucketInteriorTop ... BucketInteriorBottom
@@ -1609,19 +1594,17 @@ class MapType: CustomStringConvertible
     
     /// Returns the percent the bucket is full of retired pieces.
     /// - Returns: The percent full for the bucket.
-    func PercentFull() -> Double
+    public func PercentFull() -> Double
     {
         let Total = (BucketInteriorRight - BucketInteriorLeft + 1) * (BucketInteriorBottom - BucketInteriorTop + 1)
         let Occupied = BlockedPointCount()
         return Double(Occupied) / Double(Total)
     }
     
-    // MARK: Subscripting.
+    // MARK: - Subscripting.
     
     /// Subscript operator for access into the map contents. Returns nil if parameters out of range.
-    ///
     /// - Note: The order of subscript values is Y, X.
-    ///
     /// - Parameters:
     ///   - Y: Vertical location.
     ///   - X: Horizontal location.
@@ -1655,10 +1638,9 @@ class MapType: CustomStringConvertible
         }
     }
     
-    // MARK: Static functions.
+    // MARK: - Static functions.
     
     /// Create a map.
-    ///
     /// - Parameters:
     ///   - Width: Width of the map.
     ///   - Height: Height of the map.
@@ -1794,7 +1776,6 @@ class MapType: CustomStringConvertible
     }
     
     /// Create a string representation of the block map.
-    ///
     /// - Parameters:
     ///   - Map: The base map that will be dumped as a string.
     ///   - WithInPlayPieces: If true, the in-play pieces will be included in the result.
@@ -1857,6 +1838,7 @@ class MapType: CustomStringConvertible
         return PrettyMap
     }
     
+    /// Returns a string description of the contents of the map.
     public var description: String
     {
         get
