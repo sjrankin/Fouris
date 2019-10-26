@@ -1528,13 +1528,88 @@ class View3D: SCNView,                          //Our main super class.
     /// Lock used when the board is rotating.
     public var RotateLock = NSObject()
     
+    /// Rotates the contents of the game (but not UI or falling piece) on the specified axis.
+    /// - Note:
+    ///   - This function uses a synchronous lock to make sure that when the board is rotating, no one else can access it.
+    ///   - This function will rotate frozen pieces, bucket barriers, and bucket grids and outlines but no other objects.
+    ///   - When rotating on the X or Y axis, the caller will most likely want to rotate by 180° otherwise the board will end
+    ///     up edge-on to the viewer, making it difficult to see the pieces.
+    /// - Parameter OnAxis: Determines the axis to rotate about. Use `.ZAxis` for a face-on rotation.
+    /// - Parameter By: Number of degrees to rotate by. Specify negative values for clockwise rotations and positive values for
+    ///                 counterclockwise rotations.
+    /// - Parameter Duration: Duration of the rotation. Defaults to 0.33 seconds.
+    public func RotateContents(OnAxis: Axes, By Degrees: CGFloat, Duration: Double = 0.33)
+    {
+        objc_sync_enter(RotateLock)
+        defer{objc_sync_exit(RotateLock)}
+        let Radians = CGFloat.pi / 180.0 * Degrees
+        var XRotationalValue: CGFloat = 0.0
+        var YRotationalValue: CGFloat = 0.0
+        var ZRotationalValue: CGFloat = 0.0
+        switch OnAxis
+        {
+            case .XAxis:
+            XRotationalValue = Radians
+            
+            case .YAxis:
+            YRotationalValue = Radians
+            
+            case .ZAxis:
+            ZRotationalValue = Radians
+        }
+        RemoveMovingPiece()
+        let RotateBy = SCNAction.rotateBy(x: XRotationalValue, y: YRotationalValue, z: ZRotationalValue, duration: Duration)
+        let RotateTo = SCNAction.rotateTo(x: XRotationalValue, y: YRotationalValue, z: ZRotationalValue, duration: Duration)
+        if CurrentTheme!.RotateBucketGrid
+        {
+            BucketGridNode?.runAction(RotateTo)
+            OutlineNode?.runAction(RotateTo)
+        }
+        MasterBlockNode?.runAction(RotateBy)
+        BucketNode?.runAction(RotateBy)
+    }
+    
+    /// Stop showing off rotations.
+    public func StopShowingOff()
+    {
+        ShowOffTimer?.invalidate()
+        ShowOffTimer = nil
+        BucketGridNode?.removeAllActions()
+        OutlineNode?.removeAllActions()
+        MasterBlockNode?.removeAllActions()
+        BucketNode?.removeAllActions()
+    }
+    
+    /// Show off rotations. Intended for use by the game after game over to provide visual interest.
+    /// - Note: Rotations are selected randomly
+    /// - Parameter Duration: Time for one rotation.
+    /// - Parameter Delay: Time between rotations.
+    public func ShowOffRotations(Duration: Double, Delay: Double)
+    {
+        ExecutionRotation()
+        ShowOffTimer = Timer.scheduledTimer(timeInterval: Delay, target: self, selector: #selector(ExecutionRotation),
+                                            userInfo: nil, repeats: true)
+    }
+    
+    /// Timer that controls showing off rotations.
+    var ShowOffTimer: Timer? = nil
+    
+    /// Execution a rotation of the board game to show off after game over.
+    @objc func ExecutionRotation()
+    {
+        let Axis = Axes.allCases.randomElement()!
+        let Angle: CGFloat = Axis == .ZAxis ? 90.0 : 180.0
+        let RotationalDuration: Double = Axis == .ZAxis ? 0.35 : 0.6
+        RotateContents(OnAxis: Axis, By: Angle, Duration: RotationalDuration)
+    }
+    
     /// Rotates the contents of the game (but not UI or falling piece) by the specified number of degrees.
     /// - Note:
     ///   - This function uses a synchronous lock to make sure that when the board is rotating, other things don't happen to it.
     ///   - This function uses two rotational actions because for some reason, using the same action on different SCNNodes
     ///     results in unpredictable and undesired behavior.
     /// - Parameter Right: If true, the contents are rotated clockwise. If false, counter-clockwise.
-    /// - Parameter Duration: Duration in seconds the rotation should take.
+    /// - Parameter Duration: Duration in seconds the rotation should take. Defaults to 0.33 seconds.
     /// - Parameter Completed: Completion handler called at the end of the rotation.
     public func RotateContents(Right: Bool, Duration: Double = 0.33, Completed: @escaping (() -> Void))
     {
@@ -1547,18 +1622,18 @@ class View3D: SCNView,                          //Our main super class.
             RotationCardinalIndex = 0
         }
         let Radian = CGFloat((RotationCardinalIndex * 90)) * CGFloat.pi / 180.0
-        let ZRotation = DirectionalSign * Radian
-        let ZRotationTo = DirectionalSign * HalfPi
-        let RotateToAction = SCNAction.rotateBy(x: 0.0, y: 0.0, z: ZRotationTo, duration: Duration)
-        let RotateByAction = SCNAction.rotateTo(x: 0.0, y: 0.0, z: ZRotation, duration: Duration, usesShortestUnitArc: true)
+        let ZRotationTo = DirectionalSign * Radian
+        let ZRotationBy = DirectionalSign * HalfPi
+        let RotateBy = SCNAction.rotateBy(x: 0.0, y: 0.0, z: ZRotationBy, duration: Duration)
+        let RotateTo = SCNAction.rotateTo(x: 0.0, y: 0.0, z: ZRotationTo, duration: Duration, usesShortestUnitArc: true)
         RemoveMovingPiece()
         if CurrentTheme!.RotateBucketGrid
         {
-            BucketGridNode?.runAction(RotateByAction)
-            OutlineNode?.runAction(RotateByAction)
+            BucketGridNode?.runAction(RotateTo)
+            OutlineNode?.runAction(RotateTo)
         }
-        MasterBlockNode?.runAction(RotateToAction)
-        BucketNode?.runAction(RotateToAction)
+        MasterBlockNode?.runAction(RotateBy)
+        BucketNode?.runAction(RotateBy)
         #if false
         if CurrentTheme!.EnableDebug
         {
@@ -2109,61 +2184,76 @@ class View3D: SCNView,                          //Our main super class.
 
 // MARK: - Global enums related to 3DView.
 
+/// Game view objects.
 enum GameViewObjects: String, CaseIterable
 {
+    /// The bucket.
     case Bucket = "Bucket"
+    /// The bucket background grid.
     case BucketGrid = "BucketGrid"
+    /// Bucket grid outline.
     case BucketGridOutline = "BucketGridOutline"
 }
 
+/// Ordinal angles in degrees.
 enum Angles: CGFloat, CaseIterable
 {
+    /// 0°
     case Angle0 = 0.0
+    /// 90°
     case Angle90 = 90.0
+    /// 180°
     case Angle180 = 180.0
+    /// 270°
     case Angle270 = 270.0
 }
 
 /// Set of motion control buttons built in to the game surface.
-/// - **LeftButton**: Button to move the piece to the left.
-/// - **UpButton**: Button to move the piece up.
-/// - **DownButton**: Button to move the piece down.
-/// - **RightButton**: Button to move the piece to the right.
-/// - **DropDownButton**: Button to drop the piece.
-/// - **FlyAwayButton**: Button to fly the piece away.
-/// - **RotateLeftButton**: Button to rotate the piece counterclockwise by 90°.
-/// - **RotateRightButton**: Button to rotate the piece clockwise by 90°.
-/// - **FreezeButton**: Button to freeze a button in place.
-/// - **HeartButton**: Button used to display the heartbeat.
-/// - **MainButton**: Button for the main menu.
-/// - **FlameButton**: Flame button for miscellaneous debug use.
-/// - **VideoButton**: Video button.
-/// - **CameraButton**: Camera button.
-/// - **StopButton**: Stop/play button.
-/// - **PauseButton**: Pause/resume button.
-/// - **MainButton**: Button for the main menu.
-/// - **FlameButton**: Flame button for miscellaneous debug use.
-/// - **VideoButton**: Video button.
-/// - **CameraButton**: Camera button.
-/// - **StopButton**: Stop/play button.
-/// - **PauseButton**: Pause/resume button.
 enum NodeButtons: String, CaseIterable
 {
+    /// Button to move the piece to the left.
     case LeftButton = "LeftButton"
+    /// Button to the the piece up.
     case UpButton = "UpButton"
+    /// Button to move the button down.
     case DownButton = "DownButton"
+    /// Button to move the piece to the right.
     case RightButton = "RightButton"
+    /// Button to drop the button down.
     case DropDownButton = "DropDownButton"
+    /// Button to discard the button.
     case FlyAwayButton = "FlyAwayButton"
+    /// Button to rotate the piece counter-clockwise.
     case RotateLeftButton = "RotateLeftButton"
+    /// Button to rotate the piece clockwise.
     case RotateRightButton = "RotateRightButton"
+    /// Button to freeze the piece in its tracks.
     case FreezeButton = "FreezeButton"
+    /// Heartbeat button indicator.
     case HeartButton = "HeartButton"
+    /// Main menu button.
     case MainButton = "MainButton"
+    /// Flame button - *no longer used*.
     case FlameButton = "FlameButton"
+    /// Video button.
     case VideoButton = "VideoButton"
+    /// Camera button.
     case CameraButton = "CameraButton"
+    /// Play button.
     case PlayButton = "PlayButton"
+    /// Pause button.
     case PauseButton = "PauseButton"
+    /// FPS "button" - more of a text label.
     case FPSButton = "FPSButton"
+}
+
+/// Enumeration of the three 3D axes.
+enum Axes: String, CaseIterable
+{
+    /// The X axis.
+    case XAxis = "X"
+    /// The Y axis.
+    case YAxis = "Y"
+    /// The Z axis.
+    case ZAxis = "Z"
 }
