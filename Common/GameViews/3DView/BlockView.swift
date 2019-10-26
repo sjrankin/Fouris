@@ -11,7 +11,7 @@ import UIKit
 import SceneKit
 
 /// This class is designed to show one block of a piece for the sole purpose of setting themes and showing examples. It is not
-/// used directly in game play. To use this class, the caller must call `Initialize` first. And, if the caller didn't set the
+/// used directly in game play. To use this class, the caller must call `Initialize` first. And, if the caller did not set the
 /// `AndStart` parameter to true, `Start` must be called as well.
 @IBDesignable class BlockView: SCNView
 {
@@ -64,7 +64,7 @@ import SceneKit
     }
     
     /// The view scene.
-    var ViewScene: SCNScene!
+    public var ViewScene: SCNScene!
     
     /// Starts the block view. All current properties are used to draw th view.
     public func Start()
@@ -73,10 +73,10 @@ import SceneKit
     }
     
     /// Used by the value observer for the user-controllable camera.
-    var CameraObserver: NSKeyValueObservation? = nil
+    public var CameraObserver: NSKeyValueObservation? = nil
     
     /// Adds the camera and light to the scene.
-    func AddCameraAndLight()
+    public func AddCameraAndLight()
     {
         if InfrastructureAdded
         {
@@ -109,7 +109,7 @@ import SceneKit
     /// Holds the infrastructure (camera and light) added flag.
     private var InfrastructureAdded: Bool = false
     
-    // MARK: Debug attributes.
+    // MARK: - Debug attributes.
     
     /// Holds the show statistics flag.
     private var _ShowStatistics: Bool = false
@@ -151,7 +151,7 @@ import SceneKit
         }
     }
     /// Get or set the color to use to draw the border.
-    @IBInspectable var BorderColor: UIColor
+    @IBInspectable public var BorderColor: UIColor
         {
         get
         {
@@ -172,7 +172,7 @@ import SceneKit
         }
     }
     /// Get or set the width of the view's border.
-    @IBInspectable var BorderWidth: CGFloat
+    @IBInspectable public var BorderWidth: CGFloat
         {
         get
         {
@@ -193,7 +193,7 @@ import SceneKit
         }
     }
     /// Get or set the corner radius of the border.
-    @IBInspectable var CornerRadius: CGFloat
+    @IBInspectable public var CornerRadius: CGFloat
         {
         get
         {
@@ -363,7 +363,7 @@ import SceneKit
             if !_UseTexture
             {
                 ViewNode?.geometry?.materials.first?.specular.contents = _SpecularColor
-//                UpdateViewNode()
+                //                UpdateViewNode()
             }
         }
     }
@@ -415,7 +415,7 @@ import SceneKit
         }
     }
     /// Get or set the shape name.
-    /// - Note: Due to the way Swift interacts with Objective-C runtimes and the Interface Builder, we can't use enums
+    /// - Note: Due to the way Swift interacts with Objective-C runtimes and the Interface Builder, we cannot use enums
     ///         for `@IBInspectable` properties. To get around that, the caller can set this property to a string value.
     ///         If the string value is recognized as one of the raw values for the `TileShapes3D` enum, it will be converted
     ///         and the shape will change as appropriate. If the string contains an unrecognizable value, no change will occur.
@@ -489,7 +489,7 @@ import SceneKit
         ViewNode?.removeAllActions()
     }
     
-    // MARK: Drawing functions.
+    // MARK: - Drawing functions.
     
     /// Create the block with the properties previously specified.
     /// - Note: If the `UseTexture` flag is true but no texture has been specified, no action is taken.
@@ -529,7 +529,7 @@ import SceneKit
     /// - Parameter Width: The width of the block.
     /// - Parameter Height: The height of the block.
     /// - Parameter Depth: The depth of the block.
-    func MakeShape(Width: CGFloat, Height: CGFloat, Depth: CGFloat) -> SCNGeometry
+    public func MakeShape(Width: CGFloat, Height: CGFloat, Depth: CGFloat) -> SCNGeometry
     {
         var Geometry: SCNGeometry!
         switch _Shape
@@ -573,5 +573,6 @@ import SceneKit
         return Geometry
     }
     
+    /// The node to use to display the block.
     private var ViewNode: SCNNode? = nil
 }
