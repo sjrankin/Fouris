@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import CoreGraphics
-import AppKit
+import UIKit
 
+#if false
 /// Extensions to NSImage.
 extension NSImage
 {
@@ -31,3 +31,4 @@ extension NSImage
         return Image
     }
 }
+#endif
