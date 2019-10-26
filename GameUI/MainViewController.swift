@@ -798,6 +798,10 @@ class MainViewController: UIViewController,
         }
         let _ = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(HideGameOverText), userInfo: nil,
                                      repeats: false)
+        if UserTheme!.ShowOffAfterGameOver
+        {
+            GameView3D?.ShowOffRotations(Duration: 0.35, Delay: 1.0)
+        }
     }
         
     /// Hides the game over text in the game view.
@@ -1345,6 +1349,10 @@ class MainViewController: UIViewController,
             if Thread.isMainThread
             {
                 //If we're on the same thread as the UI, just call the function to clear the bucket.
+                if UserTheme!.ShowOffAfterGameOver
+                {
+                    GameView3D?.StopShowingOff()
+                }
                 GameView3D?.DestroyMap3D(FromBoard: Game.GameBoard!, DestroyBy: UserTheme!.DestructionMethod, MaxDuration: Duration)
                 perform(#selector(Play), with: nil, afterDelay: PlayDelay)
             }
