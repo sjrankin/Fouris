@@ -119,6 +119,7 @@ class VisualBlocks3D: SCNNode
         Marked = false
     }
     
+    /// Holds the number of blocks.
     private static var BlockCount = 0
     
     /// Holds the ID of the current piece. This is the ID of the piece's shape, not the individual piece.
@@ -187,7 +188,9 @@ class VisualBlocks3D: SCNNode
         }
     }
     
-    var VACount = 0
+    /// Holds the visual attribute count.
+    private var VACount = 0
+    
     /// Sets the passed tile's visual attributes to the block.
     /// - Parameter WithTile: The tile whose visual attributes will be used to draw the block.
     /// - Parameter IsRetired: Determines which set of visual attributes to use.
@@ -328,8 +331,11 @@ class VisualBlocks3D: SCNNode
         SetVisualAttributes(Visual)
     }
     
+    /// Holds the original width.
     private var OriginalWidth: CGFloat = 1.0
+    /// Holds the original height.
     private var OriginalHeight: CGFloat = 1.0
+    /// Holds the original depth.
     private var OriginalDepth: CGFloat = 1.0
     
     /// Create the geometry with default sizes and apply visual attributes.
