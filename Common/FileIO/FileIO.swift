@@ -1,6 +1,7 @@
 //
 //  FileIO.swift
-//  WackyDesktopTetris
+//  Fouris
+//  Adpated from BumpCamera.
 //
 //  Created by Stuart Rankin on 5/2/19.
 //  Copyright © 2019 Stuart Rankin. All rights reserved.
@@ -68,15 +69,13 @@ class FileIO
         }
         catch
         {
-                        print("Error \(error.localizedDescription) when writing \(To.path)")
+            print("Error \(error.localizedDescription) when writing \(To.path)")
             return false
         }
     }
     
     /// Returns the contents of a file (in string format) that resides in the bundle's resource directory.
-    ///
     /// - Note: A fatal error will be generated if either `FileName` or `WithExtension` is empty.
-    ///
     /// - Parameters:
     ///   - FileName: Name of the file.
     ///   - WithExtension: Extension of the file.
@@ -100,9 +99,7 @@ class FileIO
     }
     
     /// Write the contents of the string to a file in the app's resource directory.
-    ///
     /// - Note: A fatal error will be generated if either `FileName` or `WithExtension` is empty.
-    ///
     /// - Parameters:
     ///   - WithContents: The string to write.
     ///   - FileName: The name of the file.
@@ -132,7 +129,6 @@ class FileIO
     }
     
     /// Returns the URL of the user's document directory.
-    ///
     /// - Returns: URL of the user's document directory.
     public static func DocumentDirectory() -> URL
     {
@@ -142,13 +138,11 @@ class FileIO
     
     /// Return the directory where we can read and write data. This is assumed to be a sub-directory off of the user's
     /// Documents directory.
-    ///
     /// - Note: If nil is returned, there is something very wrong going on and the caller should most likely report an error
     ///         to the user and stop execution.
-    ///
-    /// - Parameter CreateIfDoesntExist: If true, the directory will be created if it doesn't exist.
+    /// - Parameter CreateIfDoesNotExist: If true, the directory will be created if it doesn't exist.
     /// - Returns: The name and URL of the requested directory if it exists, nil if it does not.
-    public static func GetStorageDirectory(CreateIfDoesntExist: Bool = true) -> (String, URL)?
+    public static func GetStorageDirectory(CreateIfDoesNotExist: Bool = true) -> (String, URL)?
     {
         if let SubDirectories = GetDocumentSubDirectories()
         {
@@ -165,7 +159,7 @@ class FileIO
             return nil
         }
         //If we're here, the app directory doesn't exist. If necessary, create it.
-        if CreateIfDoesntExist
+        if CreateIfDoesNotExist
         {
             do
             {
@@ -183,7 +177,6 @@ class FileIO
     }
     
     /// Returns the list of sub-directories in the user's Documents directory.
-    ///
     /// - Returns: List of sub-directory names and URLs off of the Documents directory.
     public static func GetDocumentSubDirectories() -> [(String, URL)]?
     {
@@ -243,7 +236,6 @@ class FileIO
     }
     
     /// Write a string to a file. The file's old contents are overwritten by the string passed here.
-    ///
     /// - Parameters:
     ///   - InDirectory: Directory of the file.
     ///   - ToFile: Name of the file.
@@ -265,7 +257,6 @@ class FileIO
     }
     
     /// Delete the specified file in the specified directory.
-    ///
     /// - Parameters:
     ///   - InDirectory: The directory in which the file to delete resides.
     ///   - WithName: Name of the file to delete.
@@ -287,7 +278,6 @@ class FileIO
     
     /// Determines if the passed directory exists. The document directory is used as the root directory (eg,
     /// the directory name is appended to the document directory).
-    ///
     /// - Parameter DirectoryName: The directory to check for existence. The name of the directory is searched
     ///                            from the document directory.
     /// - Returns: True if the directory exists, false if not.
@@ -302,7 +292,6 @@ class FileIO
     }
     
     /// Create a directory in the document directory.
-    ///
     /// - Parameter DirectoryName: Name of the directory to create.
     /// - Returns: URL of the newly created directory on success, nil on error.
     @discardableResult public static func CreateDirectory(DirectoryName: String) -> URL?
@@ -435,7 +424,6 @@ class FileIO
     }
     
     /// Save an image to the specified directory.
-    ///
     /// - Parameters:
     ///   - Image: The UIImage to save.
     ///   - WithName: The name to use when saving the image.
@@ -453,7 +441,6 @@ class FileIO
     }
     
     /// Save an image the user has selected as a sample image for filter settings.
-    ///
     /// - Parameter SampleImage: The sample image in UIImage format.
     /// - Returns: True on success, false on failure.
     public static func SaveImage(_ SampleImage: UIImage) -> Bool
@@ -462,7 +449,6 @@ class FileIO
     }
     
     /// Return an image from the passed URL.
-    ///
     /// - Parameter From: URL of the image (including all directory parts).
     /// - Returns: UIImage form of the image at the passed URL. Nil on error or file not found.
     public static func LoadImage(_ From: URL) -> UIImage?
@@ -481,7 +467,6 @@ class FileIO
     }
     
     /// Return a list of all files (in URL form) in the passed directory.
-    ///
     /// - Parameters:
     ///   - Directory: URL of the directory whose contents will be returned.
     ///   - FilterBy: How to filter the results. This is assumed to be a list of file extensions.
@@ -510,7 +495,6 @@ class FileIO
     }
     
     /// Return the user-selected sample image previously stored in the sample image directory.
-    ///
     /// - Returns: The sample image as a UIImage on success, nil if not found or on failure.
     public static func GetSampleImage() -> UIImage?
     {
@@ -543,7 +527,6 @@ class FileIO
     }
     
     /// Return the name of the user-selected sample image previously stored in the sample image directory.
-    ///
     /// - Returns: The name of the sample image on success, nil on failure.
     public static func GetSampleImageName() -> String?
     {
@@ -710,7 +693,6 @@ class FileIO
             CreateDirectory(DirectoryName: SettingsDirectory)
         }
         let SaveDirectory = GetDirectoryURL(DirectoryName: SettingsDirectory)
-        //print("SaveSettingsFile(\((SaveDirectory?.path)!))")
         let FinalName = SaveDirectory?.appendingPathComponent(Name)
         do
         {
@@ -770,10 +752,9 @@ class FileIO
     }
     
     /// Read a binary file and return it as an array of `Int`s.
-    /// - Note:
-    ///   - This function assumes the contents of the file are only `Int`s - no other decoding is done here.
-    ///   - This function uses a deprecated API call whose warning is obscure at best. For now, we will continue to use
-    ///     the deprecated function until Apple documents its replacement.
+    /// - Note: This function assumes the contents of the file are only `Int`s - no other decoding is done here.
+    /// - Warning: This function uses a deprecated API call (`Data.withUnsafeBytes`) whose warning is obscure at best. For now, we will continue to use
+    ///            the deprecated function until Apple documents its replacement.
     /// - Parameter Name: The name of the file to read.
     /// - Parameter Directory: The directory where the file lives.
     /// - Returns: Array of `Int`s from the file. Nil on error.
