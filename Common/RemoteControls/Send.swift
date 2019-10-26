@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-/// Class to send to another instance of Wacky Tetris somewhere over the network.
+/// Class to send to another instance of Fouris somewhere over the network.
 class Send
 {
     
