@@ -55,6 +55,7 @@ From what I learned, I would do the following differently:
 7. Better icons and start-up image.
 8. Move all UI elements into the game view and use SceneKit for all text rather than using a CALayer on top of a SCNView. (However, SCNText doesn't respect NSAttributedStrings very well so most visual attributes are lost.)
 9. Get the activity log working such that a huge number of log files aren't generated as they are now (perhaps this is more of an "issue"...).
+10. Add rotations to more than just the z-axis...
 ## Game Play
 Game play consists of the user moving a dropping block into a bucket, trying to fit pieces together the best possible. When a row in a bucket is full of pieces, it is removed and all rows above it are dropped down.
 
