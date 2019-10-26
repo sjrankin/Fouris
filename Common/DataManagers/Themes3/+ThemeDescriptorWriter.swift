@@ -33,6 +33,11 @@ extension ThemeDescriptor2
         return "\"\(Raw)\""
     }
     
+    /// Returns the contents of the class as an XML document.
+    /// - Parameter AppendTerminalReturn: If true, the last line will have a return charactyer appended. Defaults
+    ///                                   to true.
+    /// - Parameter ResetDirtyFlag: If true, the dirty flag is reset once the XML document is generated on the
+    ///                             assumption changes will be saved. Defaults to true.
     public func ToString(AppendTerminalReturn: Bool = true, ResetDirtyFlag: Bool = true) -> String
     {
         if ResetDirtyFlag
