@@ -11,6 +11,9 @@ import UIKit
 
 class XMLEntityParser
 {
+    /// Break apart the passed string into XML-type entities.
+    /// - Parameter Raw: The raw string to parse.
+    /// - Returns: Array of string entities.
     public static func ParseToEntities(Raw: String) -> [String]
     {
         var Results = [String]()
