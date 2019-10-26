@@ -1,6 +1,6 @@
 //
 //  Settings.swift
-//  WackyDesktopTetris
+//  Fouris
 //
 //  Created by Stuart Rankin on 5/1/19.
 //  Copyright © 2019 Stuart Rankin. All rights reserved.
@@ -9,9 +9,7 @@
 import Foundation
 import UIKit
 
-/// Manages settings for Tetris.
-/// Settings include levels (stored as .json files in the appropriate directory for the platform) and native
-/// settings in UserDefaults. Settings are exposed via functions and not native API calls.
+/// Manages settings for Fouris. Allows for consumers to subscribe to settings to be notified of changes.
 class Settings
 {
     private static let _Settings = UserDefaults.standard
