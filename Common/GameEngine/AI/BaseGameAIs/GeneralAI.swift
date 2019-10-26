@@ -53,7 +53,6 @@ class GeneralAI
     
     /// Given a block of directions to find the best fit for the piece, generate a queue of motions to
     /// actually drive the block there.
-    ///
     /// - Parameter Motions: Block of data that describes how to move the piece to the best location.
     static func GenerateMotionCommands(Motions: MotionCommandBlock2)
     {
@@ -91,7 +90,6 @@ class GeneralAI
     }
     
     /// Find the right-most point in the set of passed points and return it.
-    ///
     /// - Parameter Points: The list of points to examine to find the right-most point.
     /// - Returns: The right-most point of the set of passed points.
     static func FindRightMost(_ Points: [CGPoint]) -> CGPoint
@@ -110,7 +108,6 @@ class GeneralAI
     }
     
     /// Find the left-most point in the set of passed points and return it.
-    ///
     /// - Parameter Points: The list of points to examine to find the left-most point.
     /// - Returns: The left-most point of the set of passed points.
     static func FindLeftMost(_ Points: [CGPoint]) -> CGPoint
@@ -129,7 +126,6 @@ class GeneralAI
     }
     
     /// Virtually drop the set of passed points to the bottom-most valid location in the bucket.
-    ///
     /// - Parameter Points: Points to drop to the bottom of the bucket.
     /// - Parameter GameBoard: The game board for the game.
     /// - Returns: Set of points adjusted such that they are at the bottom-most valid location in the bucket.
@@ -159,7 +155,6 @@ class GeneralAI
     }
     
     /// Returns the bottom most points in each column of the set of points.
-    ///
     /// - Parameter Points: List of points.
     /// - Returns: List of points, one for each column of data, the bottom-most (closest to the bucket bottom) for each column.
     public static func BottomMostPoints(_ Points: [CGPoint]) -> [CGPoint]
@@ -189,7 +184,6 @@ class GeneralAI
     }
     
     /// Return the shape of the top of the bucket (occupied spaces) in the specified horizontal range.
-    ///
     /// - Parameters:
     ///   - From: A set of points whose horizontal coordinate will be used to find the proper columns to check for tops.
     ///   - GameBoard: The game board.
@@ -220,7 +214,6 @@ class GeneralAI
     
     /// Calculate a piece score based on offset mapping - the shape of the bottom of the piece in its current location and orientation
     /// is compared to the top of the contents of the bucket in the same horizontal range.
-    ///
     /// - Parameters:
     ///   - Points: The points of the piece, virtually dropped to the bottom of the bucket.
     ///   - ThePiece: The piece being scored.
@@ -262,26 +255,36 @@ class GeneralAI
         return MeanGap
     }
     
+    /// Creates a score value.
+    /// - Parameter ForPoints: The piece (in location format) to create the score for.
+    /// - Parameter CurrentPiece: The piece itself.
+    /// - Parameter GameBoard: The board as currently populated.
+    /// - Returns: Score for the piece in the board.
     static func MakeScore(ForPoints: [CGPoint], CurrentPiece: Piece? = nil, GameBoard: Board) -> Double
     {
         return OffsetMappingScore(Points: ForPoints, GameBoard: GameBoard)
     }
     
+    /// Holds the piece that was tested.
     public static weak var FoundBestFitFor: Piece? = nil
     
     /// Holds the gap count before the best fit calculations.
     static var OriginalGapCount: Int = 0
     
+    /// Returns a best fit score.
+    /// - Note: Not currently implemented.
+    /// - Parameter GamePiece: The piece used to generate a best fit score.
+    /// - Parameter CurrentScore: The current score.
+    /// - InBoard: The board to find the best fit.
+    /// - Returns: Best fit score.
     static func BestFit(_ GamePiece: Piece, CurrentScore: Int, InBoard: Board) -> Double
     {
         return 0.0
     }
     
     /// Find the best fit for the passed game piece. Returns the best fit score. This function also populates the `MotionQueue`.
-    ///
     /// - Note: This is a monolithic function that won't return until the best fit is determined. You can use
     ///         `StepAI` to step through best fit calculations one offset/rotation combination at a time.
-    ///
     /// - Parameters:
     ///   - GamePiece: The piece to find the best fit for.
     ///   - CurrentScore: The current score of the game.
