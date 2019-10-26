@@ -68,7 +68,7 @@ class RotatingGameAI: AIProtocol
     /// - Returns: AI type - the game type the AI can operate on.
     func GetAIType() -> AITypes
     {
-        return .Rotating4
+        return .Rotating
     }
     
     /// Given a block of directions to find the best fit for the piece, generate a queue of motions to
