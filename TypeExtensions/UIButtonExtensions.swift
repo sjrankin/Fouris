@@ -16,7 +16,7 @@ extension UIButton
     /// - Parameters:
     ///   - Duration: The duration of the flash in seconds.
     ///   - Color: The color of the flash.
-    func Flash(Duration: Double = 0.5, Color: UIColor = UIColor.gray)
+    public func Flash(Duration: Double = 0.5, Color: UIColor = UIColor.gray)
     {
         let OldColor = self.backgroundColor
         self.backgroundColor = Color
@@ -33,7 +33,7 @@ extension UIButton
     ///   - ForSeconds: Number of seconds to show the highlight image.
     ///   - OriginalName: Name of the original image (for restoration) image. Must be in
     ///                   the assets folder.
-    func Highlight(WithImage: String, ForSeconds: Double, OriginalName: String)
+    public func Highlight(WithImage: String, ForSeconds: Double, OriginalName: String)
     {
         self.setImage(UIImage(named: WithImage), for: UIControl.State.normal)
         let _ = Timer.scheduledTimer(withTimeInterval: ForSeconds, repeats: false)
@@ -51,7 +51,7 @@ extension UIButton
     /// - Parameter Duration: The amount of time in seconds for the entire animation.
     /// - Parameter From: Starting scale factor (where 1.0 is the original size).
     /// - Parameter To: Ending scale factor (where 1.0 is the original size).
-    func StartPulsation(Duration: Double = 0.5, From: Double = 0.75, To: Double = 1.25)
+    public func StartPulsation(Duration: Double = 0.5, From: Double = 0.75, To: Double = 1.25)
     {
         let Pulse = CASpringAnimation(keyPath: "transform.scale")
         Pulse.duration = Duration
@@ -67,7 +67,7 @@ extension UIButton
     /// Scales the instance button to the given scaling factor.
     /// - Parameter Duration: The amount of time in seconds for the scaling animation to take effect.
     /// - Parameter To: The destination scaling factor (where 1.0 is the original size).
-    func Scale(Duration: Double = 0.0, To: Double = 1.0)
+    public func Scale(Duration: Double = 0.0, To: Double = 1.0)
     {
         let Scale = CASpringAnimation(keyPath: "transform.scale")
         Scale.duration = Duration
@@ -82,7 +82,7 @@ extension UIButton
     /// `tintColor` will cycle through the original color to `To`.
     /// - Parameter Duration: Number of seconds for one cycle of animation.
     /// - Parameter To: The color to cycle the `tintColor` to.
-    func StartColorCycling(Duration: Double = 0.61, To: UIColor = UIColor.red)
+    public func StartColorCycling(Duration: Double = 0.61, To: UIColor = UIColor.red)
     {
         UIView.animate(withDuration: Duration, delay: 0.0,
                        options: [.autoreverse, .repeat],
@@ -93,7 +93,7 @@ extension UIButton
     }
     
     /// Remove all animations from the instance button.
-    func StopAnimations()
+    public func StopAnimations()
     {
         layer.removeAllAnimations()
     }
