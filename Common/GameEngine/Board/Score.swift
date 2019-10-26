@@ -23,7 +23,6 @@ import UIKit
 class Score
 {
     /// Initializer.
-    ///
     /// - Parameters:
     ///   - WithID: ID for the score instance.
     ///   - BucketWidth: Width of the bucket.
@@ -42,7 +41,6 @@ class Score
     }
     
     /// Initializer.
-    ///
     /// - Parameters:
     ///   - WithID: ID for the score instance.
     ///   - BucketWidth: Width of the bucket.
@@ -62,7 +60,6 @@ class Score
     }
     
     /// Initializer. Use passed instance to initialize this instance.
-    ///
     /// - Parameter From: Other instance of a Score whose values will be used to initialize this instance.
     /// - Parameter WithID: ID for the new score instance.
     init(From: Score, WithID: UUID)
@@ -94,12 +91,6 @@ class Score
     
     /// Holds the annotation flag.
     private var _Annotated: Bool = false
-    {
-        didSet
-        {
-            //print("_Annotated set to \(_Annotated)")
-        }
-    }
     /// Get or set the Annotated flag. If true, this class uses `print` statements to show the score as it accumulates.
     public var Annotated: Bool
     {
@@ -115,9 +106,8 @@ class Score
     }
     
     /// Copy relevant values from the passed instance.
-    ///
     /// - Parameter From: Other instance of a Score from which values will be copied.
-    func CopySettings(From: Score)
+    public func CopySettings(From: Score)
     {
         _Current = From._Current
         Width = From.Width
@@ -129,19 +119,18 @@ class Score
     }
     
     /// Resets the score to 0.
-    func Reset()
+    public func Reset()
     {
         _Current = 0
     }
     
     /// Update the bucket size.
-    ///
     /// - Parameters:
     ///   - BucketWidth: New bucket width.
     ///   - BucketHeight: New bucket height.
     ///   - BucketBottom: The vertical coordinate of the bottom of the bucket.
     ///   - BucketTop: The vertical coordinate of the top of the bucket.
-    func BucketChanged(BucketWidth: Int, BucketHeight: Int, BucketBottom: Int, BucketTop: Int)
+    public func BucketChanged(BucketWidth: Int, BucketHeight: Int, BucketBottom: Int, BucketTop: Int)
     {
         Width = BucketWidth
         Height = BucketHeight
@@ -197,9 +186,8 @@ class Score
     }
     
     /// General purpose score adjuster function.
-    ///
     /// - Parameter ScoreOffset: Value by which to adjust the score (whether positive or negative).
-    func AdjustScore(ScoreOffset: Int)
+    public func AdjustScore(ScoreOffset: Int)
     {
         _Current = Current + ScoreOffset
         if Annotated
@@ -209,9 +197,8 @@ class Score
     }
     
     /// Add the number of blocks to the score.
-    ///
     /// - Parameter BlockCount: Number of block int he finalized piece.
-    func AddPieceBlockCount(BlockCount: Int)
+    public func AddPieceBlockCount(BlockCount: Int)
     {
         
         if !ScoringMask.contains(.PieceBlockCount)
@@ -228,9 +215,8 @@ class Score
     /// Accumulate the score based on how close to the bottom of the bucket each block in the piece is. Extra
     /// points for touching the bottom of the bucket. Also checks for out-of-bounds conditions (for the AI) and
     /// subtracts a value for that.
-    ///
     /// - Parameter Points: One point for each block.
-    func ScoreLocations(_ Points: [CGPoint])
+    public func ScoreLocations(_ Points: [CGPoint])
     {
         if ScoringMask.contains(.PieceOutOfBounds)
         {
@@ -275,11 +261,10 @@ class Score
     
     /// Add score for gap deltas. Reducing the delta adds more and increasing the delta decreases the score. It's
     /// entirely possible to end up with a negative score if you try hard enough.
-    ///
     /// - Parameters:
     ///   - OldCount: Old gap count.
     ///   - NewCount: New gap count.
-    func GapDelta(OldCount: Int, NewCount: Int)
+    public func GapDelta(OldCount: Int, NewCount: Int)
     {
         if ScoringMask.contains(.GapDelta)
         {
@@ -317,11 +302,10 @@ class Score
     }
     
     /// Add scores for cleared rows. Clearing more than one row at a time increases the score.
-    ///
     ///   - Cleared: List of rows that were cleared. Each entry in the list is the Y coordinate of the cleared row.
     ///   - HomogeneousRowCount: Number of rows that had homogeneous parts (eg, all from one type of piece). This adds a big
     ///                          bonus to the score.
-    func ScoreClearedRows(Cleared: [Int], HomogeneousRowCount: Int = 0)
+    public func ScoreClearedRows(Cleared: [Int], HomogeneousRowCount: Int = 0)
     {
         if !ScoringMask.contains(.RowCollapse)
         {
@@ -355,11 +339,9 @@ class Score
     }
     
     /// Score for the overall map condition.
-    ///
     /// - Note: Remember that the board's Y coordinates start at the bottom...
-    ///
     /// - Parameter Map: The board map to examine.
-    func ScoreMapCondition(Map: MapType)
+    public func ScoreMapCondition(Map: MapType)
     {
         if !ScoringMask.contains(.MapCondition)
         {
@@ -402,7 +384,6 @@ class Score
     }
     
     /// Set the masks that tell the class how to score the game.
-    ///
     /// - Parameter Masks: List of "masks" that enable various types of scoring.
     public func SetScoringMasks(Masks: [ScoringMasks])
     {
@@ -410,7 +391,6 @@ class Score
     }
     
     /// Returns the current scoring masks.
-    ///
     /// - Returns: List of current scoring masks.
     public func GetScoringMasks() -> [ScoringMasks]
     {
@@ -437,7 +417,6 @@ class Score
     }
     
     /// Return a description of the passed scoring mask.
-    ///
     /// - Parameter For: The scoring mask whose description will be returned.
     /// - Returns: Description of the passed scoring mask.
     public static func MaskDescription(For: ScoringMasks) -> String
