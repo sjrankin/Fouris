@@ -201,7 +201,9 @@ class PieceDefinition: CustomStringConvertible
         }
     }
     
+    /// Holds the payload of the location.
     private var _LocationPayload: String = ""
+    /// Get or set the location payload.
     public var LocationPayload: String
     {
         get
@@ -214,7 +216,9 @@ class PieceDefinition: CustomStringConvertible
         }
     }
     
+    /// Holds the comments from the location node.
     private var _LocationComments: [String] = [String]()
+    /// Get or set location comments.
     public var LocationComments: [String]
     {
         get
@@ -250,10 +254,8 @@ class PieceDefinition: CustomStringConvertible
     private var CachedNormalizedLocations = [(CGPoint)]()
     
     /// Return a set of normalized coordinates where no coordinate value is less than 0.
-    ///
     /// - Note: Normalized locations are cached (mainly because once read, the definition doesn't change) for
     ///         performance purposes.
-    ///
     /// - Parameter ResetCache: If true, the cache is reset and regenerated.
     /// - Returns: Set or normalized coordinates.
     public func NormalizedLocations(ResetCache: Bool = false) -> [(CGPoint)]
