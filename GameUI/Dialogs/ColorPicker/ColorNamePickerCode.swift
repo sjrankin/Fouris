@@ -36,7 +36,7 @@ class ColorNamePickerCode: UIViewController, UIPickerViewDelegate, UIPickerViewD
         UpdateSelectedColor(WithColor: UIColor.yellow)
         ColorGroups = PredefinedColors.GetColorGroupNames()
         ColorGroupColors = PredefinedColors.GetColorsIn(Group: ColorGroups[0])
-        ColorGroupColors = PredefinedColors.SortColorList(ColorGroupColors, By: PredefinedColors.ColorOrders.Name)
+        ColorGroupColors = PredefinedColors.SortColorList(ColorGroupColors, By: ColorOrders.Name)
         ColorPickerView.delegate = self
         ColorPickerView.dataSource = self
         ColorPickerView.reloadAllComponents()
@@ -86,7 +86,7 @@ class ColorNamePickerCode: UIViewController, UIPickerViewDelegate, UIPickerViewD
             let GroupIndex = ColorGroups.firstIndex(of: ShortestName)
             ColorPickerView.selectRow(GroupIndex!, inComponent: 0, animated: true)
             ColorGroupColors = PredefinedColors.GetColorsIn(Group: ColorGroups[GroupIndex!])
-            ColorGroupColors = PredefinedColors.SortColorList(ColorGroupColors, By: PredefinedColors.ColorOrders.Name)
+            ColorGroupColors = PredefinedColors.SortColorList(ColorGroupColors, By: ColorOrders.Name)
             ColorPickerView.reloadComponent(1)
             var Index = 0
             for SomeColor in ColorGroupColors
@@ -207,7 +207,7 @@ class ColorNamePickerCode: UIViewController, UIPickerViewDelegate, UIPickerViewD
         if component == 0
         {
             ColorGroupColors = PredefinedColors.GetColorsIn(Group: ColorGroups[row])
-            ColorGroupColors = PredefinedColors.SortColorList(ColorGroupColors, By: PredefinedColors.ColorOrders.Name)
+            ColorGroupColors = PredefinedColors.SortColorList(ColorGroupColors, By: ColorOrders.Name)
             pickerView.reloadComponent(1)
             if Settings.GetShowClosestColor()
             {
