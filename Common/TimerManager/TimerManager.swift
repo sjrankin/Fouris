@@ -9,8 +9,11 @@
 import Foundation
 import UIKit
 
+/// Manages timers.
 class TimerManager
 {
+    /// Create a timer.
+    /// - Returns: ID of a timer.
     func CreateTimer() -> UUID
     {
         let TimerID = UUID()
