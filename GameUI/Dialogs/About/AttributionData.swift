@@ -14,6 +14,8 @@ class AttributeData
     /// Dictionary of attribute/credit data.
     public static var Table: [String: String] =
     [
+        "Adjust Pop-Over Size": "https://stackoverflow.com/questions/29449998/how-do-i-adjust-my-popover-to-the-size-of-the-content-in-my-tableview-in-swift",
+        "Popup Menu": "https://stackoverflow.com/questions/4769169/iphone-popup-menu-like-ipad-popover/32295907#32295907",
         "Diffuse SCNGeometry Not Displayed": "https://stackoverflow.com/questions/48728060/custom-scngeometry-not-displaying-diffuse-contents-as-texture?rq=1",
         "Custom SceneKit Geometry": "https://medium.com/@zxlee618/custom-geometry-in-scenekit-f91464297fd1",
         "Convert UIView to UIImage": "https://stackoverflow.com/questions/30696307/how-to-convert-a-uiview-to-an-image",
