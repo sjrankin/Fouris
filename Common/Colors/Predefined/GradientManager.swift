@@ -351,27 +351,27 @@ class GradientManager
             switch Key
             {
                 case "VERTICAL":
-                if let VFlag = Bool(String(PartsList[1]))
-                {
-                    VerticalFlag = VFlag
-                }
-                else
-                {
-                    fatalError("Error converting value for Vertical: \(String(PartsList[1]))")
+                    if let VFlag = Bool(String(PartsList[1]))
+                    {
+                        VerticalFlag = VFlag
+                    }
+                    else
+                    {
+                        fatalError("Error converting value for Vertical: \(String(PartsList[1]))")
                 }
                 
                 case "REVERSE":
-                if let RFlag = Bool(String(PartsList[1]))
-                {
-                    ReverseFlag = RFlag
-                }
-                else
-                {
-                    fatalError("Error converting value for Reverse: \(String(PartsList[1]))")
+                    if let RFlag = Bool(String(PartsList[1]))
+                    {
+                        ReverseFlag = RFlag
+                    }
+                    else
+                    {
+                        fatalError("Error converting value for Reverse: \(String(PartsList[1]))")
                 }
                 
                 default:
-                fatalError("Found unexpected key (\(Key)) in metadata: \(Raw)")
+                    fatalError("Found unexpected key (\(Key)) in metadata: \(Raw)")
             }
         }
         return (VerticalFlag, ReverseFlag)
@@ -1212,62 +1212,120 @@ class GradientManager
 /// Predefined gradient types.
 enum Gradients: String, CaseIterable
 {
+    /// Default gradient (white-red-black).
     case DefaultGradient = "Default-Gradient"
+    /// White-red gradient.
     case WhiteRed = "White-Red"
+    /// White-green gradient.
     case WhiteGreen = "White-Green"
+    /// White-blue gradient.
     case WhiteBlue = "White-Blue"
+    /// White-cyan gradient.
     case WhiteCyan = "White-Cyan"
+    /// White-magenta gradient.
     case WhiteMagenta = "White-Magenta"
+    /// White-yellow gradient.
     case WhiteYellow = "White-Yellow"
+    /// White-black gradient.
     case WhiteBlack = "White-Black"
+    /// Red-black gradient.
     case RedBlack = "Red-Black"
+    /// Green-black gradient.
     case GreenBlack = "Green-Black"
+    /// Blue-black gradient.
     case BlueBlack = "Blue-Black"
+    /// Cyan-black gradient.
     case CyanBlack = "Cyan-Black"
+    /// Magenta-black gradient.
     case MagentaBlack = "Magenta-Black"
+    /// Yellow-black gradient.
     case YellowBlack = "Yellow-Black"
+    /// Cyan-blue gradient.
     case CyanBlue = "Cyan-Blue"
+    /// Cyan-blue-black gradient.
     case CyanBlueBlack = "Cyan-Blue-Black"
+    /// Red-orange gradient.
     case RedOrange = "Red-Orange"
+    /// Yellow-read gradient.
     case YellowRed = "Yellow-Red"
+    /// Pistachio-green gradient.
     case PistachioGreen = "Pistachio-Green"
+    /// Pistachio-black gradient.
     case PistachioBlack = "Pistachio-Black"
+    /// White-tomato gradient.
     case WhiteTomato = "White-Tomato"
+    /// Tomato-red gradient.
     case TomatoRed = "Tomato-Red"
+    /// Tomato-black gradient.
     case TomatoBlack = "Tomato-Black"
+    /// Red-green-blue gradient.
     case RedGreenBlue = "Red-Green-Blue"
+    /// Cyan-magenta-yellow-black gradient.
     case CyanMagentaYellowBlack = "Cyan-Magenta-Yellow-Black"
+    /// Metallic-like gradient.
     case Metallic = "Metallic"
+    /// Hue color cycle gradient.
     case Hue = "Hue"
+    /// Traditional rainbow colors gradient.
     case Rainbow = "Rainbow"
+    /// Pastel colors gradient.
     case Pastel1 = "Pastel 1"
+    /// Stripes gradient 1.
     case Stripes1 = "Stripes 1"
+    /// Stripes gradient 2.
     case Stripes2 = "Stripes 2"
+    /// Stripes gradient 3.
     case Stripes3 = "Stripes 3"
+    /// Stripes gradient 4.
     case Stripes4 = "Stripes 4"
+    /// Stripes gradient 5.
     case Stripes5 = "Stripes 5"
+    /// Blue stripes that resemble a blue-print gradient.
     case Blueprint = "Blueprint"
+    /// Black-red gradient.
     case BlackRed = "Black-Red"
+    /// Black-green gradient.
     case BlackGreen = "Black-Green"
+    /// Black-blue gradient.
     case BlackBlue = "Black-Blue"
+    /// Black-white gradient.
     case BlackWhite = "Black-White"
+    /// Black-yellow gradient.
     case BlackYellow = "Black-Yellow"
+    /// Black-cyan gradient.
     case BlackCyan = "Black-Cyan"
+    /// Black-magenta gradient.
     case BlackMagenta = "Black-Magenta"
+    /// Clear-white gradient.
     case ClearWhite = "Clear-White"
+    /// Clear-black gradient.
     case ClearBlack = "Clear-Black"
+    /// White-clear gradient.
     case WhiteClear = "White-Clear"
+    /// Black-clear gradient.
     case BlackClear = "Black-Clear"
+    /// Red-clear gradient.
     case RedClear = "Red-Clear"
+    /// Green-clear gradient.
     case GreenClear = "Green-Clear"
+    /// Blue-clear gradient.
     case BlueClear = "Blue-Clear"
+    /// Cyan-clear Gradient.
     case CyanClear = "Cyan-Clear"
+    /// Magenta-clear gradient.
     case MagentaClear = "Magenta-Clear"
+    /// Yellow-clear gradient.
     case YellowClear = "Yellow-Clear"
+    /// Black-clear-black gradient.
     case BlackClearBlack = "Black-Clear-Black"
+    /// White-clear-white gradient.
     case WhiteClearWhite = "White-Clear-White"
+    /// Black-clear-black gradient.
     case BlackClearWhite = "Black-Clear-White"
+    /// Black-gray gradient.
     case BlackGray = "Black-Gray"
+    /// Hue-range gradient.
     case HueRange = "Hue-Range"
+    /// Use the user-specified gradient.
     case User = "User"
 }
