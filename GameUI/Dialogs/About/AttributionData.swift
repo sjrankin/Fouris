@@ -8,10 +8,14 @@
 
 import Foundation
 
+/// Holds a table of attribution data.
 class AttributeData
 {
+    /// Dictionary of attribute/credit data.
     public static var Table: [String: String] =
     [
+        "Diffuse SCNGeometry Not Displayed": "https://stackoverflow.com/questions/48728060/custom-scngeometry-not-displaying-diffuse-contents-as-texture?rq=1",
+        "Custom SceneKit Geometry": "https://medium.com/@zxlee618/custom-geometry-in-scenekit-f91464297fd1",
         "Convert UIView to UIImage": "https://stackoverflow.com/questions/30696307/how-to-convert-a-uiview-to-an-image",
         "Device Specifications": "https://www.devicespecifications.com/en/brand/cefa26",
         "Name of iOS Device": "https://stackoverflow.com/questions/26028918/how-to-determine-the-current-iphone-device-model",
