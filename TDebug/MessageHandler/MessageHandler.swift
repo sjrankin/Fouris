@@ -11,18 +11,23 @@ import MultipeerConnectivity
 import UIKit
 
 
-/// Class that handles messages from the MultiPeer manager. Source code compatible with iOS and macOS.
+/// Class that handles messages from the MultiPeer manager.
 /// Programs that use this class must implement the functions in the `MessageHandlerDelegate`.
 class MessageHandler
 {
+    /// Initializer.
+    /// - Parameter WithDelegate: The delegate that recieves events from this class.
     init(_ WithDelegate: MessageHandlerDelegate?)
     {
         Delegate = WithDelegate
     }
+
+    /// The delegate to receive data and commands from this class.
+    weak public var Delegate: MessageHandlerDelegate? = nil
     
-    weak var Delegate: MessageHandlerDelegate? = nil
-    
-    func ControlIdiotLight(_ Raw: String)
+    /// Controls a remote idiot light.
+    /// - Parameter Raw: Data that controls an idiot list.
+    public func ControlIdiotLight(_ Raw: String)
     {
         let (Command, Address, Text, FGColor, BGColor) = MessageHelper.DecodeIdiotLightMessage(Raw)
         let FinalAddress = Address.uppercased()
@@ -58,7 +63,9 @@ class MessageHandler
         #endif
     }
     
-    func Process(ReceivedData: String, Peer: MCPeerID, Manager: MultiPeerManager,
+    /// Process received data.
+    /// - Note: Not currently used.
+    public func Process(ReceivedData: String, Peer: MCPeerID, Manager: MultiPeerManager,
                  OverrideMessageType: MessageTypes? = nil, EncapsulatedID: UUID? = nil)
     {
         
