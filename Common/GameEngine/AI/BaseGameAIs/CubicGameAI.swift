@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// AI for cubic (3D) games. Not currently implemented or documented.
 class CubicGameAI: AIProtocol
 {
     func Initialize(WithBoard: Board)
