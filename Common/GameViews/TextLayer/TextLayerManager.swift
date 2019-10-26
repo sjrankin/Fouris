@@ -32,7 +32,7 @@ class TextLayerManager: UIView, ParentSizeChangedProtocol
     /// Initializer.
     /// - Parameter ID: ID of the theme to use to draw the text.
     /// - Parameter LayerFrame: Frame to use for the text layer.
-    func Initialize(With ID: UUID, LayerFrame: CGRect)
+    public func Initialize(With ID: UUID, LayerFrame: CGRect)
     {
         self.layer.backgroundColor = UIColor.clear.cgColor
         ThemeID = ID
@@ -45,7 +45,7 @@ class TextLayerManager: UIView, ParentSizeChangedProtocol
     
     /// Handle size changes at run-time.
     /// - Parameter Frame: The new frame to use for the layer.
-    func NewSize(Frame: CGRect)
+    public func NewSize(Frame: CGRect)
     {
         self.frame = Frame
         self.bounds = Frame
@@ -53,7 +53,8 @@ class TextLayerManager: UIView, ParentSizeChangedProtocol
         Redraw()
     }
     
-    func NewParentSize(Bounds: CGRect, Frame: CGRect)
+    /// Not currently used.
+    public func NewParentSize(Bounds: CGRect, Frame: CGRect)
     {
         
     }
