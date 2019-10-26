@@ -15,8 +15,11 @@ import UIKit
 /// maintainable.
 enum ColorNames: UInt, CaseIterable
 {
+    /// Special case handled in code.
     case Clear = 0x010101                           //Special case handled in code.
+    /// Special case handled in code.
     case Random = 0x000101                          //Special case handled in code.
+    /// Standard red.
     case Red = 0xff0000
     case Green = 0x00ff00
     case Blue = 0x0000ff
