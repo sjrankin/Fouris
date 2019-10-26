@@ -9,18 +9,24 @@
 import Foundation
 import UIKit
 
-//https://stackoverflow.com/questions/4769169/iphone-popup-menu-like-ipad-popover/32295907#32295907
+/// Code to run the pop over dialog that functions as the main menu.
+/// - Note: See [Popup Menu](https://stackoverflow.com/questions/4769169/iphone-popup-menu-like-ipad-popover/32295907#32295907)
 class MainButtonMenuCode: UIViewController
 {
-    weak var Delegate: PopOverProtocol? = nil
+    /// Delegate that gets the commands from the user.
+    public weak var Delegate: PopOverProtocol? = nil
     
-    override func viewDidLoad()
+    /// UI initialization.
+    override public func viewDidLoad()
     {
         super.viewDidLoad()
         ControlView.layer.borderColor = UIColor.black.cgColor
         ControlView.layer.backgroundColor = UIColor.white.cgColor
     }
     
+    /// Sets the play state for the Stop/Play and Resume/Pause buttons.
+    /// - Parameter IsPlaying: The playing state.
+    /// - Parameter IsPaused: The paused state.
     public func SetPlayState(IsPlaying: Bool, IsPaused: Bool)
     {
         _IsPlaying = IsPlaying
@@ -30,16 +36,23 @@ class MainButtonMenuCode: UIViewController
         SetLabels(ForPlay: PlayTitle, ForPause: PauseTitle)
     }
     
+    /// Holds the playing state.
     private var _IsPlaying: Bool = false
+    /// Holds the paused state.
     private var _IsPaused: Bool = false
     
+    /// Set label titles for the play and pause buttons.
+    /// - Parameter ForPlay: The text for the play menu.
+    /// - Parameter ForPause: The text for the pause menu.
     public func SetLabels(ForPlay: String, ForPause: String)
     {
         PopOverPlayButton.setTitle(ForPlay, for: UIControl.State.normal)
         PopOverPauseButton.setTitle(ForPause, for: UIControl.State.normal)
     }
     
-    @IBAction func HandleAboutPressed(_ sender: Any)
+    /// Handle the about button pressed. Closes the dialog, resets the main button, and sends the appropriate command.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleAboutPressed(_ sender: Any)
     {
         self.dismiss(animated: true)
         {
@@ -48,7 +61,9 @@ class MainButtonMenuCode: UIViewController
         }
     }
     
-    @IBAction func HandleSelectGamePressed(_ sender: Any)
+    /// Handle the select game button pressed. Closes the dialog, resets the main button, and sends the appropriate command.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleSelectGamePressed(_ sender: Any)
     {
         self.dismiss(animated: true)
         {
@@ -57,7 +72,9 @@ class MainButtonMenuCode: UIViewController
         }
     }
     
-    @IBAction func HandleSettingsPressed(_ sender: Any)
+    /// Handle the settings button pressed. Closes the dialog, resets the main button, and sends the appropriate command.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleSettingsPressed(_ sender: Any)
     {
         self.dismiss(animated: true)
         {
@@ -66,7 +83,9 @@ class MainButtonMenuCode: UIViewController
         }
     }
     
-    @IBAction func HandleAttractPressed(_ sender: Any)
+    /// Handle the attract button pressed. Closes the dialog, resets the main button, and sends the appropriate command.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleAttractPressed(_ sender: Any)
     {
         self.dismiss(animated: true)
         {
@@ -75,7 +94,9 @@ class MainButtonMenuCode: UIViewController
         }
     }
     
-    @IBAction func HandleCameraPressed(_ sender: Any)
+    /// Handle the about camera pressed. Closes the dialog, resets the main button, and sends the appropriate command.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleCameraPressed(_ sender: Any)
     {
         self.dismiss(animated: true)
         {
@@ -84,7 +105,11 @@ class MainButtonMenuCode: UIViewController
         }
     }
     
-    @IBAction func HandleVideoPressed(_ sender: Any)
+    /// Handle the video button pressed. Closes the dialog, resets the main button, and sends the appropriate command.
+    /// - Note: The receiver treats this button as a toggle button - the first press starts the video and the second
+    ///         press stops the video.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleVideoPressed(_ sender: Any)
     {
         self.dismiss(animated: true)
         {
@@ -93,7 +118,9 @@ class MainButtonMenuCode: UIViewController
         }
     }
     
-    @IBAction func HandlePlayPressed(_ sender: Any)
+    /// Handle the play button pressed. Closes the dialog, resets the main button, and sends the appropriate command.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandlePlayPressed(_ sender: Any)
     {
         self.dismiss(animated: true)
         {
@@ -103,7 +130,9 @@ class MainButtonMenuCode: UIViewController
         }
     }
     
-    @IBAction func HandlePausePressed(_ sender: Any)
+    /// Handle the pause button pressed. Closes the dialog, resets the main button, and sends the appropriate command.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandlePausePressed(_ sender: Any)
     {
         self.dismiss(animated: true)
         {
@@ -113,8 +142,10 @@ class MainButtonMenuCode: UIViewController
         }
     }
     
-    //https://stackoverflow.com/questions/29449998/how-do-i-adjust-my-popover-to-the-size-of-the-content-in-my-tableview-in-swift
-    @IBAction func HandleFlameButton(_ sender: Any)
+    /// Handle the flame button pressed. Opens a debug menu. Adjusts the size of the main pop-over menu and adds new buttons.
+    /// - Note: [Adjust Pop-Over Size](https://stackoverflow.com/questions/29449998/how-do-i-adjust-my-popover-to-the-size-of-the-content-in-my-tableview-in-swift)
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleFlameButton(_ sender: Any)
     {
         if ShowingDebug
         {
@@ -175,11 +206,16 @@ class MainButtonMenuCode: UIViewController
         }
     }
     
-    var ToggleRegionButton: UIButton? = nil
-    var ToggleGridButton: UIButton? = nil
-    var GenerateBoardsButton: UIButton? = nil
+    /// The region button - created on the fly as needed.
+    private var ToggleRegionButton: UIButton? = nil
+    /// The toggle grid button - created on the fly as needed.
+    private var ToggleGridButton: UIButton? = nil
+    /// The create boards button - created on the fly as needed.
+    private var GenerateBoardsButton: UIButton? = nil
     
-    @objc func HandleRegionButton(_ sender: Any)
+    /// Handle the show debug region button pressed. Closes the dialog, resets the main button, and sends the appropriate command.
+    /// - Parameter sender: Not used.
+    @objc public func HandleRegionButton(_ sender: Any)
     {
         self.dismiss(animated: true)
         {
@@ -188,7 +224,9 @@ class MainButtonMenuCode: UIViewController
         }
     }
     
-    @objc func HandleGridButton(_ sender: Any)
+    /// Handle the debug grid button pressed. Closes the dialog, resets the main button, and sends the appropriate command.
+    /// - Parameter sender: Not used.
+    @objc public func HandleGridButton(_ sender: Any)
     {
         self.dismiss(animated: true)
         {
@@ -197,7 +235,9 @@ class MainButtonMenuCode: UIViewController
         }
     }
     
-    @objc func HandleBoardsButton(_ sender: Any)
+    /// Handle the generate boards button pressed. Closes the dialog, resets the main button, and sends the appropriate command.
+    /// - Parameter sender: Not used.
+    @objc public func HandleBoardsButton(_ sender: Any)
     {
         self.dismiss(animated: true)
         {
@@ -206,14 +246,17 @@ class MainButtonMenuCode: UIViewController
         }
     }
     
-    var ShowingDebug = false
+    /// Holds the show debug flag.
+    private var ShowingDebug = false
     
-    @IBAction func HandleCloseMainMenu(_ sender: Any)
+    /// Handle the close menu button.
+    @IBAction public func HandleCloseMainMenu(_ sender: Any)
     {
         self.dismiss(animated: true)
     }
     
-    override func viewWillDisappear(_ animated: Bool)
+    /// Handle the view will disappear message. If we got this far, send a `.PopOverClosed` message.
+    override public func viewWillDisappear(_ animated: Bool)
     {
         Delegate?.ResetMainButton()
         Delegate?.RunPopOverCommand(.PopOverClosed)
@@ -226,21 +269,38 @@ class MainButtonMenuCode: UIViewController
     @IBOutlet weak var ControlView: UIView!
 }
 
+/// Commands that may be sent from the pop-over menu to the main program.
 enum PopOverCommands: String, CaseIterable
 {
+    /// Pop-over closed - usually sent because the user canceled the menu.
     case PopOverClosed = "PopOverClosed"
+    /// Run the select game dialog.
     case RunSelectGame = "RunSelectGame"
+    /// Run the about dialog.
     case RunAbout = "RunAbout"
+    /// Run the settings dialog.
     case RunSettings = "RunSettings"
+    /// Run Fouris in attract mode.
     case RunInAttractMode = "RunInAttractMode"
+    /// Start playing Fouris.
     case StartPlaying = "StartPlaying"
+    /// Stop playing Fouris.
     case StopPlaying = "StopPlaying"
+    /// Pause playing Fouris.
     case PausePlaying = "PausePlaying"
+    /// Resume playing Fouris.
     case ResumePlaying = "ResumePlaying"
+    /// Take a picture of the game board.
     case TakePicture = "TakePicture"
+    /// Make a video of the screen. (Command is a toggle so the first instance will start the video and the second instance
+    /// will stop the video.)
     case MakeVideo = "MakeVideo"
+    /// Run the flame action button (for one-off debug actions).
     case RunFlameAction = "RunFlameAction"
+    /// Generate board images.
     case CreateBoards = "CreateBoards"
+    /// Toggle debug region visibility.
     case ToggleRegions = "ToggleRegions"
+    /// Toggle the background debug grid.
     case ToggleGrid = "ToggleGrid"
 }
