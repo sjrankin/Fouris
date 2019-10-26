@@ -10,13 +10,17 @@ import Foundation
 import UIKit
 
 /// Class that encompasses a color or a gradient color.
+/// Not fully implemented yet - intended for future use.
 class TColor: Serializable
 {
+    /// Not currently used.
     func Populate(Key: String, Value: String)
     {
     }
     
+    /// Holds the name of a color.
     private var _Name: String = ""
+    /// Get or set the name of the color.
     public var Name: String
     {
         get
@@ -30,7 +34,9 @@ class TColor: Serializable
         }
     }
     
+    /// Holds the dirty flag.
     private var _Dirty: Bool = false
+    /// Get the dirty flag.
     public var Dirty: Bool
     {
         get
@@ -39,7 +45,9 @@ class TColor: Serializable
         }
     }
     
+    /// Holds the gradient flag.
     private var _IsGradient: Bool = false
+    /// Get or set the is gradient flag.
     public var IsGradient: Bool
     {
         get
@@ -53,7 +61,9 @@ class TColor: Serializable
         }
     }
     
+    /// Holds the gradient direction.
     private var _GradientDirection: GradientDirections = .Vertical
+    /// Get or set the direction of the gradient.
     public var GradientDirection: GradientDirections
     {
         get
@@ -67,7 +77,9 @@ class TColor: Serializable
         }
     }
     
+    /// Holds the gradient normal.
     private var _GradientNormal: Double = 0.0
+    /// Get or set the gradient normal.
     public var GradientNormal: Double
     {
         get
@@ -81,6 +93,9 @@ class TColor: Serializable
     }
 }
 
+/// Gradient directions.
+/// - **Vertical**: Gradient is vertical.
+/// - **Horizontal**: Gradient is horizontal.
 enum GradientDirections: String, CaseIterable
 {
     case Vertical = "Vertical"
