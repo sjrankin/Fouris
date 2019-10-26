@@ -83,7 +83,6 @@ class MessageHelper
     }
     
     /// Decode a key-value pair with the specified delimiter. The format is assumed to be: key=value.
-    ///
     /// - Parameters:
     ///   - Raw: The string with the value to decode.
     ///   - Delimiter: The delimiter between the key and value.
@@ -210,7 +209,6 @@ class MessageHelper
     }
     
     /// Create a time-stamp string from the passed date.
-    ///
     /// - Parameters:
     ///   - FromDate: The date from which a string will be created.
     ///   - TimeSeparator: Separator to use for the time part.
@@ -288,7 +286,6 @@ class MessageHelper
     
     /// Delimeter strings. Used to find an unused character.
     private static let Delimiters = [",", ";", ".", "/", ":", "-", "_", "`", "~", "\"", "'", "$", "!", "\\", "¥", "°", "^", "·", "€", "‹", "›", "@"]
-    
 
     /// Make a command to have a client return the number of commands.
     ///
@@ -306,15 +303,13 @@ class MessageHelper
     
     /// Assemble the list of string into a command that can be sent to another TDebug instance or other app that implements
     /// at least the MultiPeerManager.
-    ///
     /// - Note: The format of the returned string is Delimiter Part {Delimiter Part}. This is so the parsing code can easily
     ///         determine what the delimiter is to seperate the parts of the raw string into coherent parts.
-    ///
     /// - Parameters:
     ///   - FromParts: List of parts of the command to assemble. Order is presevered.
     ///   - WithDelimiter: The delimiter to use to separate the parts from each other.
     /// - Returns: Command string that can be sent to another TDebug instance.
-    static func AssembleCommand(FromParts: [String], WithDelimiter: String) -> String
+    static public func AssembleCommand(FromParts: [String], WithDelimiter: String) -> String
     {
         var Final = ""
         for Part in FromParts
@@ -333,7 +328,7 @@ class MessageHelper
     /// - Parameter Prefix: The prefix of the sender.
     /// - Parameter Parts: The parts of the command (eg, parameters, terms, whatever).
     /// - Returns: Formatted command string to send.
-    static func GenerateCommand(Command: String, Prefix: String, Parts: [String]) -> String
+    static public func GenerateCommand(Command: String, Prefix: String, Parts: [String]) -> String
     {
         let PrefixTerm = "SourcePrefix=\(Prefix)"
         let Delimiter = GetUnusedDelimiter(From: [[Command, PrefixTerm], Parts])
@@ -362,7 +357,7 @@ class MessageHelper
     /// - Parameter Prefix: The prefix of the sender.
     /// - Parameter Parts: The parts of the command (eg, parameters, terms, whatever).
     /// - Returns: Formatted command string to send.
-    static func GenerateCommand(Command: MessageTypes, Prefix: UUID, Parts: [String]) -> String
+    static public func GenerateCommand(Command: MessageTypes, Prefix: UUID, Parts: [String]) -> String
     {
         //print("GenerateCommand(\(Command))")
         return GenerateCommand(Command: Command.rawValue, Prefix: Prefix.uuidString, Parts: Parts)
@@ -374,7 +369,7 @@ class MessageHelper
     /// - Parameter Parts: The parts of the command (eg, parameters, terms, whatever). This particular version
     ///                    of this function accepts an array of arrays.
     /// - Returns: Formatted command string to send.
-    static func GenerateCommand(Command: MessageTypes, Prefix: UUID, Parts: [[String]]) -> String
+    static public func GenerateCommand(Command: MessageTypes, Prefix: UUID, Parts: [[String]]) -> String
     {
         let Final = Parts.flatMap{$0}
         return GenerateCommand(Command: Command, Prefix: Prefix, Parts: Final)
@@ -382,15 +377,13 @@ class MessageHelper
     
     /// Assemble the list of string into a command that can be sent to another TDebug instance or other app that implements
     /// at least the MultiPeerManager.
-    ///
     /// - Note: The format of the returned string is Delimiter Part {Delimiter Part}. This is so the parsing code can easily
     ///         determine what the delimiter is to seperate the parts of the raw string into coherent parts.
-    ///
     /// - Parameters:
     ///   - FromParts: List of list of parts of the command to assemble. Order is presevered.
     ///   - WithDelimiter: The delimiter to use to separate the parts from each other.
     /// - Returns: Command string that can be sent to another TDebug instance.
-    static func AssembleCommandsEx(FromParts: [[String]], WithDelimiter: String) -> String
+    static public func AssembleCommandsEx(FromParts: [[String]], WithDelimiter: String) -> String
     {
         let FinalList = FromParts.flatMap{$0}
         return AssembleCommand(FromParts: FinalList, WithDelimiter: WithDelimiter)
@@ -476,9 +469,7 @@ class MessageHelper
     
     /// Given a formatted command string, return it in symbolic form, meaning, UUIDs are converted to human-
     /// readable strings.
-    ///
     /// - Note: Do **not** send the returned result to a peer as it is not decodable.
-    ///
     /// - Parameter Raw: Raw, formatted command string.
     /// - Returns: Command string with symbols, not values. The return value is intended only for display use.
     public static func MakeSymbolic(Command: String) -> String
@@ -511,7 +502,6 @@ class MessageHelper
 }
 
 /// Special UI-infrastructure commands.
-///
 /// - ClearKVPList: Clear the contents of the KVP list.
 /// - ClearLogList: Clear the contents of the log item list.
 /// - ClearIdiotLights: Reset all idiot lights (except for A1, which is reserved for the local instance).
@@ -525,7 +515,6 @@ enum SpecialCommands: String, CaseIterable
 }
 
 /// Sub-commands related to handshakes between two peers when netogiating who is the server and who is the client.
-///
 /// - RequestConnection: Peer requests the target to be the server.
 /// - ConnectionGranted: Sent when an instance becomes the server - sent to the peer that requested a connection.
 /// - ConnectionRefused: Sent when the instance is not able to be the server.
@@ -545,7 +534,6 @@ enum HandShakeCommands: String, CaseIterable
 }
 
 /// Types of messages that may be sent or received from other peers.
-///
 /// - TextMessage: Send a text message.
 /// - CommandMessage: Send a command message.
 /// - ControlIdiotLight: Control an idiot light.
@@ -615,7 +603,6 @@ enum MessageTypes: String, CaseIterable
 }
 
 /// Describes states of UI features.
-///
 /// - **Disabled**: Disabled state.
 /// - **Enabled**: Enabled state.
 enum UIFeatureStates: Int
@@ -625,7 +612,6 @@ enum UIFeatureStates: Int
 }
 
 /// Commands for idiot lights.
-///
 /// - **Disable**: Disable the specified idiot light. This resets all attributes so you will need to set them again if
 ///                you re-enable the same idiot light.
 /// - **Enable**: Enable the specified idiot light.
