@@ -133,6 +133,7 @@
 		17831EDB232DD73D007FF894 /* FlyingNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17831EDA232DD73D007FF894 /* FlyingNode.swift */; };
 		17831EDD232DFB54007FF894 /* FlyingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17831EDC232DFB54007FF894 /* FlyingProtocol.swift */; };
 		1785ED6222FD8C0A000B31C2 /* BoardDescriptions.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1785ED6122FD8C09000B31C2 /* BoardDescriptions.xml */; };
+		1787FBC623646C3700162363 /* NSImage+ResizeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F9A30722A7BF2F00581594 /* NSImage+ResizeImage.swift */; };
 		178C0F042338786000A35C62 /* SettingsControllerCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178C0F032338786000A35C62 /* SettingsControllerCode.swift */; };
 		178C0F062338882100A35C62 /* SettingsChangedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178C0F052338882100A35C62 /* SettingsChangedProtocol.swift */; };
 		178C0F0B2338970400A35C62 /* +Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178C0F0A2338970400A35C62 /* +Action.swift */; };
@@ -178,7 +179,6 @@
 		17A9D8AF2359774800DAE024 /* +AboutBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A9D8AE2359774800DAE024 /* +AboutBox.swift */; };
 		17AA4FB523408FCB0022FF90 /* GameViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AA4FB423408FCB0022FF90 /* GameViewContainer.swift */; };
 		17AA4FB7234090F40022FF90 /* ParentSizeChangedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AA4FB6234090F40022FF90 /* ParentSizeChangedProtocol.swift */; };
-		17AB99D22297DC66003C4674 /* ImageServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AB99D12297DC66003C4674 /* ImageServer.swift */; };
 		17AC98222324AB6B0020FB05 /* FlyingPieces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AC98212324AB6B0020FB05 /* FlyingPieces.swift */; };
 		17AD5D6F235A9B20002D6125 /* NotoSansSymbols-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17AD5D6D235A99EE002D6125 /* NotoSansSymbols-SemiBold.ttf */; };
 		17AD5D70235A9B23002D6125 /* NotoSansSymbols-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17AD5D6C235A99E5002D6125 /* NotoSansSymbols-Regular.ttf */; };
@@ -448,7 +448,6 @@
 		17A9D8AE2359774800DAE024 /* +AboutBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+AboutBox.swift"; sourceTree = "<group>"; };
 		17AA4FB423408FCB0022FF90 /* GameViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewContainer.swift; sourceTree = "<group>"; };
 		17AA4FB6234090F40022FF90 /* ParentSizeChangedProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentSizeChangedProtocol.swift; sourceTree = "<group>"; };
-		17AB99D12297DC66003C4674 /* ImageServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageServer.swift; sourceTree = "<group>"; };
 		17AC98212324AB6B0020FB05 /* FlyingPieces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlyingPieces.swift; sourceTree = "<group>"; };
 		17AD5D6C235A99E5002D6125 /* NotoSansSymbols-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansSymbols-Regular.ttf"; sourceTree = "<group>"; };
 		17AD5D6D235A99EE002D6125 /* NotoSansSymbols-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansSymbols-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -852,6 +851,8 @@
 		178054BB2331D4B400916512 /* TypeExtensions */ = {
 			isa = PBXGroup;
 			children = (
+				17F9A30722A7BF2F00581594 /* NSImage+ResizeImage.swift */,
+				1705ADE8225D804400628268 /* Extensions.swift */,
 				17660BE722892B1E00082E23 /* UIButtonExtensions.swift */,
 				1737624F2310E5F10075E1DD /* UITouchImage.swift */,
 				173762512310E7400075E1DD /* UITouchImageDelegate.swift */,
@@ -961,15 +962,6 @@
 				17A45B612271DA8C002E705D /* AITestDataUpdatedProtocol.swift */,
 			);
 			path = Testing;
-			sourceTree = "<group>";
-		};
-		17AB99D02297DC4E003C4674 /* ImageManagement */ = {
-			isa = PBXGroup;
-			children = (
-				17AB99D12297DC66003C4674 /* ImageServer.swift */,
-				17F9A30722A7BF2F00581594 /* NSImage+ResizeImage.swift */,
-			);
-			path = ImageManagement;
 			sourceTree = "<group>";
 		};
 		17AD5D6B235A99CF002D6125 /* Fonts */ = {
@@ -1280,7 +1272,6 @@
 				174BEFDE22881941003A43E5 /* GameAINotificationProtocol.swift */,
 				1753ABEF225E262D00FC7089 /* GameUINotificationProtocol.swift */,
 				17F0B4B9225CCEE00071514E /* GameLogic.swift */,
-				1705ADE8225D804400628268 /* Extensions.swift */,
 				1721BA7B2260BECF00DC7AFC /* Coin.swift */,
 			);
 			path = GameEngine;
@@ -1293,7 +1284,6 @@
 				17432908233F77F400F98863 /* DataManagers */,
 				1749B6DF22BB2687003DC65D /* Utilities */,
 				177F4FC4229BD2D200FE72CD /* RemoteControls */,
-				17AB99D02297DC4E003C4674 /* ImageManagement */,
 				17F6ECEF2286E1DE000F8E11 /* Protocols */,
 				176F1B6B227AD3BD00681CDE /* FileIO */,
 				1798FE5C22797354008B26E9 /* Customization */,
@@ -1516,6 +1506,7 @@
 				17180B8F235D43EF006E56ED /* GameMap.swift in Sources */,
 				17316504234C85380091A620 /* CreditViewer.swift in Sources */,
 				1713735722EAE67700C9F9A7 /* SCNDodecahedron.swift in Sources */,
+				1787FBC623646C3700162363 /* NSImage+ResizeImage.swift in Sources */,
 				170FC672233E003F00F9A8F1 /* Tree.swift in Sources */,
 				17ECE5A923321EE3003F4065 /* +StringList.swift in Sources */,
 				17E71A6E22AD20F40081991E /* StateProtocol.swift in Sources */,
@@ -1626,7 +1617,6 @@
 				17776ECE2355B40500D4DDD9 /* ConstrainedQueue.swift in Sources */,
 				1737635A230AC6AD0050EB22 /* MiscellaneousExtensions.swift in Sources */,
 				175A9BB42333735D00F463BF /* PHAssetExtension.swift in Sources */,
-				17AB99D22297DC66003C4674 /* ImageServer.swift in Sources */,
 				1797523A22C38A4D00BF539A /* MessageHelper.swift in Sources */,
 				1750A6FE232A69300006CF39 /* SCNGeometryExtensions.swift in Sources */,
 				17AF232723139B8B00921E6C /* +TDebugReceivedCommandHandling2.swift in Sources */,
