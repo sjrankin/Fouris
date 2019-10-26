@@ -12,10 +12,9 @@ import MultipeerConnectivity
 
 extension MessageHelper
 {
-    // MARK: Handshake command encoding commands.
+    // MARK: - Handshake command encoding commands.
     
     /// Make a handshake command to negotiate host-client relationships.
-    ///
     /// - Parameter Command: The command to send.
     /// - Returns: Command string with the passed handshake command.
     public static func MakeHandShake(_ Command: HandShakeCommands) -> String
@@ -25,8 +24,11 @@ extension MessageHelper
         return Final
     }
     
-    // MARK: Handshake command decoding.
+    // MARK: - Handshake command decoding.
     
+    /// Decode a handshake command.
+    /// - Parameter Raw: Raw data from the remote peer.
+    /// - Returns: The handshake command sent from the peer.
     public static func DecodeHandShakeCommand(_ Raw: String) -> HandShakeCommands
     {
         let Results = GetParameters(From: Raw, ["Command"])
