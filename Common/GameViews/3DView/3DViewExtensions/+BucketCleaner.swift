@@ -18,7 +18,7 @@ extension View3D
     /// Creates a rotation matrix for rotating about the Z axis.
     /// - Parameter By: The angle (in radians) to rotate.
     /// - Returns: Rotation matrix to rotate about the Z axis on the passed angle.
-    func RotateVectorOnZ(By: Float) -> simd_float3x3
+    public func RotateVectorOnZ(By: Float) -> simd_float3x3
     {
         let Rows =
             [
@@ -34,7 +34,7 @@ extension View3D
     /// - Parameter Vector: The vector to rotate.
     /// - Parameter By: The angle (in radians) to rotate the vector by.
     /// - Returns: Rotated vector.
-    func RotateVector(Vector: SCNVector3, By Angle: Float) -> SCNVector3
+    public func RotateVector(Vector: SCNVector3, By Angle: Float) -> SCNVector3
     {
         let SVector = simd_float3(x: Vector.x, y: Vector.y, z: Vector.z)
         let RotationMatrix = RotateVectorOnZ(By: Angle)
@@ -47,7 +47,7 @@ extension View3D
     /// - Parameter UseZ: If present, the Z value to use.
     /// - Parameter DoNotRandomizeZ: If true, Z is not selected as a wall value (in other words, randomness is for X and Y only).
     /// - Returns: Randomized vector.
-    func RandomVector(ToRange: Float, UseZ: Float? = nil, DoNotRandomizeZ: Bool = false) -> SCNVector3
+    public func RandomVector(ToRange: Float, UseZ: Float? = nil, DoNotRandomizeZ: Bool = false) -> SCNVector3
     {
         let RangeMultiplier: Float = Float([-1.0, 1.0].randomElement()!)
         var Vector: SCNVector3!
@@ -81,7 +81,7 @@ extension View3D
     /// Returns the length of the passed vector.
     /// - Parameter OfVector: The vector whose length will be returned.
     /// - Returns: The length of the vector.
-    func Length(OfVector: SCNVector3) -> Float
+    public func Length(OfVector: SCNVector3) -> Float
     {
         return (OfVector.x * OfVector.x) + (OfVector.y * OfVector.y) + (OfVector.z * OfVector.z)
     }
@@ -90,7 +90,7 @@ extension View3D
     /// - Parameter From: Source vector.
     /// - Parameter TargetDistance: The new distance for the returned vector.
     /// - Returns: Vector based on `From` but with a length of `TargetDistance`.
-    func RadialVector(From: SCNVector3, TargetDistance: Float) -> SCNVector3
+    public func RadialVector(From: SCNVector3, TargetDistance: Float) -> SCNVector3
     {
         let VectorLength = Length(OfVector: From)
         var NewLength = TargetDistance - VectorLength
@@ -105,7 +105,7 @@ extension View3D
     /// Rough simulation of gravity over time for dropping blocks in `BucketCleaner`.
     /// - Parameter Source: Source value.
     /// - Returns: New value.
-    func Gravity(Source: Float) -> Float
+    private func Gravity(Source: Float) -> Float
     {
         return 1.0 - Source * Source
     }
@@ -114,7 +114,7 @@ extension View3D
     /// - Parameter From: The base method to clear the bucket. If this value is **.Random**, the returned value will be a randomly
     ///                   selected method.
     /// - Returns: The same value as in **From** unless **From** was **.Random**, in which case a random method will be returned.
-    func GetVisualMethod(From: DestructionMethods) -> DestructionMethods
+    public func GetVisualMethod(From: DestructionMethods) -> DestructionMethods
     {
         if From != .Random
         {
@@ -135,7 +135,7 @@ extension View3D
     /// - Parameter Value: Base, source value.
     /// - Parameter Range: Determines the range of the random number. The low range is `-Range` and the high range is `Range`.
     /// - Returns: The value with a random value in the range added to it.
-    func SlightlyRandomize(_ Value: Double, Range: Double) -> Double
+    public func SlightlyRandomize(_ Value: Double, Range: Double) -> Double
     {
         let Offset = Double.random(in: -Range ... Range)
         return Value + Offset
@@ -150,7 +150,7 @@ extension View3D
     /// - Parameter Method: The visual method to use to remove the blocks. If this value is **.Random**, a visual method will be
     ///                     selected at random (and not treated as **.None**.)
     /// - Parameter MaxDuration: The maximum amount of time to take to remove all of the blocks.
-    func BucketCleaner(_ Method: DestructionMethods, MaxDuration: Double)
+    public func BucketCleaner(_ Method: DestructionMethods, MaxDuration: Double)
     {
         let BlockCount = self.BlockList.count
         if BlockCount < 1
