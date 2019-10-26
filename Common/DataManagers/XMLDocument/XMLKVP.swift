@@ -78,7 +78,7 @@ class XMLKVP: CustomStringConvertible
     }
     
     /// Returns the contents of the class as a string in the format: `Key="Value"`.
-    var description: String
+    public var description: String
     {
         return ToString()
     }
