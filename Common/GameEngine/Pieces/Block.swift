@@ -141,7 +141,6 @@ class Block: CustomStringConvertible
     }
     
     /// Calculates (but does not save) the location of the block with the passed offset value.
-    ///
     /// - Parameter Offset: Offset to apply to the block's location and return (but **not** save)
     /// - Returns: The location of the block combined with the passed offset. The block's location
     ///            itself is **not** changed.
