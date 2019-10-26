@@ -132,7 +132,7 @@ class UITouchImage: UIImageView
     
     /// Handles press gesture recognition actions.
     /// - Parameter sender: The press gesture recognizer.
-    @objc func WasPressed(sender: UILongPressGestureRecognizer)
+    @objc public func WasPressed(sender: UILongPressGestureRecognizer)
     {
         if sender.state == .began
         {
