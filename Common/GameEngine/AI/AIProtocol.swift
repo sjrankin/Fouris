@@ -19,7 +19,7 @@ protocol AIProtocol: class
     /// - Parameter WithBoard: The board to use for AI calculations.
     func Initialize(WithBoard: Board)
     
-    /// The motion queue.
+    /// The motion queue. Used by the game to actually move the piece.
     var MotionQueue: Queue<Directions> {get set}
     
     /// Get the contents of the motion queue but don't change the queue.
@@ -52,13 +52,13 @@ protocol AIProtocol: class
 
 /// AI types.
 /// - **Standard**: AI for standard games.
-/// - **Rotating4**: AI for rotating square games.
+/// - **Rotating**: AI for rotating square games.
 /// - **SemiRotating**: AI for semi-rotating games.
 /// - **Cubic**: AI for cubic games.
 enum AITypes: Int, CaseIterable
 {
     case Standard = 0
-    case Rotating4 = 1
+    case Rotating = 1
     case SemiRotating = 2
     case Cubic = 3
 }
