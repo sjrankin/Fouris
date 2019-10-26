@@ -13,7 +13,7 @@ import UIKit
 extension UUID
 {
     /// Returns an empty UUID (all zero values for all fields).
-    static var Empty: UUID
+    public static var Empty: UUID
     {
         get
         {
@@ -31,7 +31,7 @@ extension CGPoint
     ///   - X: Horizontal coordinate to add to the instance `x` coordinate.
     ///   - Y: Vertical coordinate to add to the instance `y` coordinate.
     /// - Returns: New CGPoint created from the instance and offset values.
-    func WithOffset(_ X: Int, _ Y: Int) -> CGPoint
+    public func WithOffset(_ X: Int, _ Y: Int) -> CGPoint
     {
         return CGPoint(x: Int(self.x) + X, y: Int(self.y) + Y)
     }
@@ -41,7 +41,7 @@ extension CGPoint
     /// - Parameter OtherPoint: The other point that will be added, on a field-by-field
     ///                         basis, to the instance point.
     /// - Returns: New CGPoint created from the instance and offset points.
-    func WithOffset(_ OtherPoint: CGPoint) -> CGPoint
+    public func WithOffset(_ OtherPoint: CGPoint) -> CGPoint
     {
         return CGPoint(x: Int(self.x) + Int(OtherPoint.x),
                        y: Int(self.y) + Int(OtherPoint.y))
@@ -52,7 +52,7 @@ extension CGPoint
     /// - Parameter OtherPoint: The other point that will be subtracted, on a field-by-field
     ///                         basis, to the instance point.
     /// - Returns: New CGPoint created from the instance and offset points.
-    func WithNegativeOffset(_ OtherPoint: CGPoint) -> CGPoint
+    public func WithNegativeOffset(_ OtherPoint: CGPoint) -> CGPoint
     {
         return CGPoint(x: Int(self.x) - Int(OtherPoint.x),
                        y: Int(self.y) - Int(OtherPoint.y))
