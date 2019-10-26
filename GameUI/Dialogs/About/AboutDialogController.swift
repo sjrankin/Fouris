@@ -10,9 +10,11 @@ import Foundation
 import UIKit
 import SceneKit
 
+/// Code to control the about dialog.
 class AboutDialogController: UIViewController, UINavigationControllerDelegate
 {
-    override func viewDidLoad()
+    /// Initialization of the UI.
+    override public func viewDidLoad()
     {
         super.viewDidLoad()
         AboutBox.layer.borderColor = UIColor.black.cgColor
@@ -37,7 +39,8 @@ class AboutDialogController: UIViewController, UINavigationControllerDelegate
         VideoButton.alpha = 0.0
     }
     
-    @objc func TitleTap(Recognizer: UIGestureRecognizer)
+    /// Handle taps on the title. This is a not very hidden easter egg to display shapes flying around.
+    @objc public func TitleTap(Recognizer: UIGestureRecognizer)
     {
         if Recognizer.state == .ended
         {
@@ -81,17 +84,24 @@ class AboutDialogController: UIViewController, UINavigationControllerDelegate
         }
     }
     
-    var ShowingDisplay: Bool = false
+    /// Flag that determines if the easter egg is being shown.
+    private var ShowingDisplay: Bool = false
     
-    @IBOutlet weak var AboutBox: UIView!
-    @IBOutlet weak var AboutData: UILabel!
+    /// Reference to the about box.
+    @IBOutlet public weak var AboutBox: UIView!
+    /// Reference to the about data label.
+    @IBOutlet public weak var AboutData: UILabel!
     
-    @IBAction func HandleCloseButton(_ sender: Any)
+    /// Handle the close button. Close the dialog.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleCloseButton(_ sender: Any)
     {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func HandleCameraButtonPress(_ sender: Any)
+    /// Handle the camera button. Take a picture of the easter egg.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleCameraButtonPress(_ sender: Any)
     {
         let PieceImage = PieceDisplay.snapshot()
         UIImageWriteToSavedPhotosAlbum(PieceImage,
@@ -100,7 +110,9 @@ class AboutDialogController: UIViewController, UINavigationControllerDelegate
                                        nil)
     }
     
-    @IBAction func HandleVideoButtonPress(_ sender: Any)
+    /// Handle the video button. Take a video of the screen.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleVideoButtonPress(_ sender: Any)
     {
         CreatingVideo = !CreatingVideo
         if CreatingVideo
@@ -116,9 +128,14 @@ class AboutDialogController: UIViewController, UINavigationControllerDelegate
         }
     }
     
+    /// Holds the creating video flag.
     private var CreatingVideo: Bool = false
     
-    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer)
+    /// Delegate handler for saving an image.
+    /// - Parameter image: The image that was saved.
+    /// - Parameter didFinishSavingWithError: Error message if appropriate.
+    /// - Parameter contextInfo: Not used.
+    @objc public func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer)
     {
         if let SomeError = error
         {
