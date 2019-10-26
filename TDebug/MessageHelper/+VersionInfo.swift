@@ -12,7 +12,7 @@ import MultipeerConnectivity
 
 extension MessageHelper
 {
-    // MARK: Versioning command encoding commands.
+    // MARK: - Versioning command encoding commands.
     
     /// Make a version push command string.
     ///
@@ -56,7 +56,7 @@ extension MessageHelper
             ProgramID: Versioning.ProgramIDAsUUID())
     }
     
-    // MARK: Version command decoding.
+    // MARK: - Version command decoding.
     
     /// Decode a pushed version message.
     ///
