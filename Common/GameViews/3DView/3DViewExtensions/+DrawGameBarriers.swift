@@ -18,7 +18,7 @@ extension View3D
     /// - Parameter Parent: The parent bucket node.
     /// - Parameter InShape: Determines the shape of the bucket.
     /// - Parameter InitialOpacity: Determines the opacity of the center block.
-    func DrawGameBarriers(Parent: SCNNode, InShape: BucketShapes, InitialOpacity: CGFloat = 1.0)
+    public func DrawGameBarriers(Parent: SCNNode, InShape: BucketShapes, InitialOpacity: CGFloat = 1.0)
     {
         let DiffuseColor = ColorServer.ColorFrom(CurrentTheme!.BucketDiffuseColor)
         let SpecularColor = ColorServer.ColorFrom(CurrentTheme!.BucketSpecularColor)
