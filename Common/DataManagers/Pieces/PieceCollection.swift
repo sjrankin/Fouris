@@ -57,6 +57,7 @@ class PieceCollection: CustomStringConvertible, XMLDeserializeProtocol
     
     /// Holds the group/collection name.
     private var _GroupName: String = ""
+    /// Holds the group name ID.
     private var _GroupNameID: UUID = UUID.Empty
     /// Get or set the group/collection name.
     public var GroupName: String
