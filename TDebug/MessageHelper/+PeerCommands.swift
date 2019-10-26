@@ -12,7 +12,7 @@ import MultipeerConnectivity
 
 extension MessageHelper
 {
-    // MARK: Peer handling command encoding commands.
+    // MARK: - Peer handling command encoding commands.
     
     /// Make a command to have a client return the peer's information.
     ///
@@ -38,8 +38,11 @@ extension MessageHelper
         return Final
     }
     
-    // MARK: Peer handling command decoding.
+    // MARK: - Peer handling command decoding.
     
+    /// Decode a peer command.
+    /// - Parameter Raw: Raw data from a peer.
+    /// - Returns: Peer type data.
     public static func DecodePeerTypeCommand(_ Raw: String) -> PeerType?
     {
         if Raw.isEmpty
