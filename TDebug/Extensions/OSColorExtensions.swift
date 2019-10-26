@@ -106,12 +106,11 @@ extension UIColor
     }
     
     /// Return the value of the instance UIColor as a hex string.
-    ///
     /// - Parameters:
     ///   - Order: The order of the channels. This also determines whether alpha is included or not.
     ///   - Prefix: The prefix string.
     /// - Returns: String with the hex values of each channel in the specified order.
-    func AsHexString(Order: ChannelOrders = .RGB, Prefix: String = "#") -> String
+    public func AsHexString(Order: ChannelOrders = .RGB, Prefix: String = "#") -> String
     {
         var Red: CGFloat = 0.0
         var Green: CGFloat = 0.0
@@ -147,18 +146,7 @@ extension UIColor
         return Final
     }
     
-    /// Order of the channels to return for hex strings.
-    enum ChannelOrders
-    {
-        case RGB
-        case BGR
-        case ARGB
-        case BGRA
-        case RGBA
-        case ABGR
-    }
-    
-    public static func MakeRandomColor(_ ColorType: RandomColorTypes = .AnyColor) -> UIColor
+    public static func MakeRandomColor(_ ColorType: RandomColorTypes = .AnyColor) -> UIColor 
     {
         var RRed: Double = 0.0
         var RGreen: Double = 0.0
@@ -182,16 +170,27 @@ extension UIColor
         }
         return UIColor(red: CGFloat(RRed), green: CGFloat(RGreen), blue: CGFloat(RBlue), alpha: 1.0)
     }
-    
-    /// Type of random color returned by `MakeRandomColor`.
-    ///
-    /// - AnyColor: Any random color - all channels are in the range 0.0 - 1.0.
-    /// - Dark: Dark random color - all channels are in the range 0.0 - 0.3.
-    /// - Light: Light random color - all channels are in the range 0.7 - 1.0.
-    public enum RandomColorTypes
-    {
-        case AnyColor
-        case Dark
-        case Light
-    }
+}
+
+/// Order of the channels to return for hex strings.
+public enum ChannelOrders
+{
+    case RGB
+    case BGR
+    case ARGB
+    case BGRA
+    case RGBA
+    case ABGR
+}
+
+/// Type of random color returned by `MakeRandomColor`.
+///
+/// - AnyColor: Any random color - all channels are in the range 0.0 - 1.0.
+/// - Dark: Dark random color - all channels are in the range 0.0 - 0.3.
+/// - Light: Light random color - all channels are in the range 0.7 - 1.0.
+public enum RandomColorTypes
+{
+    case AnyColor
+    case Dark
+    case Light
 }
