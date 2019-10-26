@@ -17,7 +17,7 @@ class MainAI
     {
         GameAIs = [AITypes: AIProtocol]()
         GameAIs[.Standard] = StandardGameAI()
-        GameAIs[.Rotating4] = RotatingGameAI()
+        GameAIs[.Rotating] = RotatingGameAI()
         GameAIs[.Cubic] = CubicGameAI()
         CurrentAI = GameAIs[.Standard]
     }
@@ -33,6 +33,7 @@ class MainAI
         BucketShape = BoardShape
     }
     
+    /// Holds the bucket shape. Sets the AI based on the shape.
     private var _BucketShape: BucketShapes = .Classic
     {
         didSet
@@ -40,6 +41,7 @@ class MainAI
             SetGameAI(_BucketShape)
         }
     }
+    /// Get or set the bucket shape. The AI used internally depends on the shape of the bucket set here.
     public var BucketShape: BucketShapes
     {
         get
@@ -62,7 +64,7 @@ class MainAI
         switch BucketClass
         {
             case .Rotatable:
-                CurrentAI = GameAIs[.Rotating4]
+                CurrentAI = GameAIs[.Rotating]
             
             case .Static:
                 CurrentAI = GameAIs[.Standard]
@@ -130,10 +132,8 @@ class MainAI
     }
     
     /// Find the best fit for the passed game piece. Returns the best fit score. This function also populates the `MotionQueue`.
-    ///
     /// - Note: This is a monolithic function that won't return until the best fit is determined. You can use
     ///         `StepAI` to step through best fit calculations one offset/rotation combination at a time.
-    ///
     /// - Parameters:
     ///   - GamePiece: The piece to find the best fit for.
     ///   - CurrentScore: The current score of the game.
