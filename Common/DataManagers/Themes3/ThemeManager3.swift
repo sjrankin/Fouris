@@ -43,6 +43,8 @@ class ThemeManager3: ThemeChangeProtocol2
         }
     }
   
+    /// Place-holder to generate a theme file from raw data.
+    /// - Returns: Default theme.
     private func Preinitialize2() -> String
     {
         if let GameTheme = UserDefaults.standard.string(forKey: "GameTheme")
