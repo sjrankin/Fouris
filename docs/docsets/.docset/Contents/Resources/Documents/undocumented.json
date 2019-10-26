@@ -7975,770 +7975,378 @@
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorChipSelectorCode.swift",
-      "line": 12,
-      "symbol": "ColorChipSelectorCode",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorChipSelectorCode.swift",
-      "line": 14,
+      "line": 15,
       "symbol": "ColorChipSelectorCode.ColorDelegate",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorChipSelectorCode.swift",
-      "line": 16,
+      "line": 17,
       "symbol": "ColorChipSelectorCode.viewDidLoad()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorChipSelectorCode.swift",
-      "line": 21,
+      "line": 22,
       "symbol": "ColorChipSelectorCode.HandleOKPressed(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorChipSelectorCode.swift",
-      "line": 26,
+      "line": 27,
       "symbol": "ColorChipSelectorCode.HandleCancelPressed(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorChipSelectorCode.swift",
-      "line": 31,
+      "line": 32,
       "symbol": "ColorChipSelectorCode.HandleSortPressed(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorNamePickerCode.swift",
-      "line": 12,
-      "symbol": "ColorNamePickerCode",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorNamePickerCode.swift",
-      "line": 14,
-      "symbol": "ColorNamePickerCode.ColorDelegate",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorNamePickerCode.swift",
-      "line": 15,
-      "symbol": "ColorNamePickerCode.SelectedColor",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorNamePickerCode.swift",
-      "line": 17,
-      "symbol": "ColorNamePickerCode.viewDidLoad()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorNamePickerCode.swift",
-      "line": 43,
-      "symbol": "ColorNamePickerCode.ColorGroups",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorNamePickerCode.swift",
-      "line": 44,
-      "symbol": "ColorNamePickerCode.ColorGroupColors",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorNamePickerCode.swift",
-      "line": 46,
-      "symbol": "ColorNamePickerCode.SelectClosestColor(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorNamePickerCode.swift",
-      "line": 90,
-      "symbol": "ColorNamePickerCode.UpdateSelectedColor(WithColor:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorNamePickerCode.swift",
-      "line": 98,
-      "symbol": "ColorNamePickerCode.UpdateSelectedColor(WithColor:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorNamePickerCode.swift",
-      "line": 106,
-      "symbol": "ColorNamePickerCode.UpdateColorValues(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorNamePickerCode.swift",
-      "line": 125,
-      "symbol": "ColorNamePickerCode.numberOfComponents(in:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorNamePickerCode.swift",
-      "line": 130,
-      "symbol": "ColorNamePickerCode.pickerView(_:widthForComponent:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorNamePickerCode.swift",
-      "line": 143,
-      "symbol": "ColorNamePickerCode.pickerView(_:numberOfRowsInComponent:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorNamePickerCode.swift",
-      "line": 152,
-      "symbol": "ColorNamePickerCode.pickerView(_:titleForRow:forComponent:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorNamePickerCode.swift",
-      "line": 164,
-      "symbol": "ColorNamePickerCode.pickerView(_:didSelectRow:inComponent:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorNamePickerCode.swift",
-      "line": 197,
-      "symbol": "ColorNamePickerCode.HandleOKPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorNamePickerCode.swift",
-      "line": 203,
-      "symbol": "ColorNamePickerCode.HandleCancelPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorNamePickerCode.swift",
-      "line": 209,
-      "symbol": "ColorNamePickerCode.HandleNearestColorSwitchChanged(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorNamePickerCode.swift",
-      "line": 214,
+      "line": 266,
       "symbol": "ColorNamePickerCode.ButtonView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorNamePickerCode.swift",
-      "line": 215,
+      "line": 267,
       "symbol": "ColorNamePickerCode.ValueView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorNamePickerCode.swift",
-      "line": 216,
+      "line": 268,
       "symbol": "ColorNamePickerCode.TopView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorNamePickerCode.swift",
-      "line": 217,
+      "line": 269,
       "symbol": "ColorNamePickerCode.ColorPickerView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorNamePickerCode.swift",
-      "line": 218,
+      "line": 270,
       "symbol": "ColorNamePickerCode.NearestColorSwitch",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorNamePickerCode.swift",
-      "line": 219,
+      "line": 271,
       "symbol": "ColorNamePickerCode.RGBout",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorNamePickerCode.swift",
-      "line": 220,
+      "line": 272,
       "symbol": "ColorNamePickerCode.HexOut",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorNamePickerCode.swift",
-      "line": 221,
+      "line": 273,
       "symbol": "ColorNamePickerCode.ColorSampleName",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorNamePickerCode.swift",
-      "line": 222,
+      "line": 274,
       "symbol": "ColorNamePickerCode.ColorSample",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 12,
-      "symbol": "ColorPickerCode",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 14,
-      "symbol": "ColorPickerCode.ColorDelegate",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 16,
-      "symbol": "ColorPickerCode.viewDidLoad()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 61,
-      "symbol": "ColorPickerCode.InitializeSliders()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 102,
-      "symbol": "ColorPickerCode.SampleColorLayer",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 104,
-      "symbol": "ColorPickerCode.ChannelALayer",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 105,
-      "symbol": "ColorPickerCode.ChannelBLayer",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 106,
-      "symbol": "ColorPickerCode.ChannelCLayer",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 107,
-      "symbol": "ColorPickerCode.ChannelDLayer",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 109,
-      "symbol": "ColorPickerCode.InitializeWithColor()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 487,
-      "symbol": "ColorPickerCode.NewSliderValue(Name:NewValue:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 525,
-      "symbol": "ColorPickerCode.HandleColorspaceChanged(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 533,
-      "symbol": "ColorPickerCode.UpdateColor(WithColor:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 603,
-      "symbol": "ColorPickerCode.UpdateChannelsUI(WithColor:From:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 650,
-      "symbol": "ColorPickerCode.HandleChannelASliderChanged(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 676,
-      "symbol": "ColorPickerCode.HandleChannelBSliderChanged(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 702,
-      "symbol": "ColorPickerCode.HandleChannelCSliderChanged(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 728,
-      "symbol": "ColorPickerCode.HandleChannelDSliderChanged(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 820,
-      "symbol": "ColorPickerCode.HandleChannelATextChanged(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 879,
-      "symbol": "ColorPickerCode.HandleChannelBTextChanged(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 937,
-      "symbol": "ColorPickerCode.HandleChannelCTextChanged(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 995,
-      "symbol": "ColorPickerCode.HandleChannelDTextChanged(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1030,
-      "symbol": "ColorPickerCode.ShowChannelD(_:Fast:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1065,
-      "symbol": "ColorPickerCode.ColorNamePickerSegue(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1073,
-      "symbol": "ColorPickerCode.ColorChipSelectorSegue(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1081,
-      "symbol": "ColorPickerCode.RecentColorsSegue(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1089,
+      "line": 1146,
       "symbol": "ColorPickerCode.TitleBar",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1090,
+      "line": 1147,
       "symbol": "ColorPickerCode.ChannelALabel",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1091,
+      "line": 1148,
       "symbol": "ColorPickerCode.ChannelAContainer",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1092,
+      "line": 1149,
       "symbol": "ColorPickerCode.ChannelASlider",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1093,
+      "line": 1150,
       "symbol": "ColorPickerCode.ChannelATextBox",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1094,
+      "line": 1151,
       "symbol": "ColorPickerCode.ChannelBLabel",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1095,
+      "line": 1152,
       "symbol": "ColorPickerCode.ChannelBContainer",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1096,
+      "line": 1153,
       "symbol": "ColorPickerCode.ChannelBSlider",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1097,
+      "line": 1154,
       "symbol": "ColorPickerCode.ChannelBTextBox",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1098,
+      "line": 1155,
       "symbol": "ColorPickerCode.ChannelCLabel",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1099,
+      "line": 1156,
       "symbol": "ColorPickerCode.ChannelCContainer",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1100,
+      "line": 1157,
       "symbol": "ColorPickerCode.ChannelCSlider",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1101,
+      "line": 1158,
       "symbol": "ColorPickerCode.ChannelCTextBox",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1102,
+      "line": 1159,
       "symbol": "ColorPickerCode.ChannelDLabel",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1103,
+      "line": 1160,
       "symbol": "ColorPickerCode.ChannelDContainer",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1104,
+      "line": 1161,
       "symbol": "ColorPickerCode.ChannelDSlider",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1105,
+      "line": 1162,
       "symbol": "ColorPickerCode.ChannelDTextBox",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1107,
+      "line": 1164,
       "symbol": "ColorPickerCode.EnableAlphaText",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1108,
+      "line": 1165,
       "symbol": "ColorPickerCode.EnableRGBAlphaSwitch",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1109,
+      "line": 1166,
       "symbol": "ColorPickerCode.ButtonView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1110,
+      "line": 1167,
       "symbol": "ColorPickerCode.ColorspaceView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1111,
+      "line": 1168,
       "symbol": "ColorPickerCode.SampleView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1112,
+      "line": 1169,
       "symbol": "ColorPickerCode.TopView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1113,
+      "line": 1170,
       "symbol": "ColorPickerCode.SampleColorView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1114,
+      "line": 1171,
       "symbol": "ColorPickerCode.ColorNameLabel",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1115,
+      "line": 1172,
       "symbol": "ColorPickerCode.ColorValueLabel",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1116,
+      "line": 1173,
       "symbol": "ColorPickerCode.ColorspaceSegment",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1126,
+      "line": 1183,
       "symbol": "WorkingColorspaces.RGB",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1127,
+      "line": 1184,
       "symbol": "WorkingColorspaces.HSB",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1128,
+      "line": 1185,
       "symbol": "WorkingColorspaces.YUV",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/ColorPickerCode.swift",
-      "line": 1129,
+      "line": 1186,
       "symbol": "WorkingColorspaces.CMYK",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/RecentColorCell.swift",
-      "line": 12,
-      "symbol": "RecentColorCell",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/RecentColorCell.swift",
-      "line": 14,
-      "symbol": "RecentColorCell.CellHeight",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/RecentColorCell.swift",
-      "line": 16,
-      "symbol": "RecentColorCell.init(coder:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/RecentColorCell.swift",
-      "line": 21,
-      "symbol": "RecentColorCell.init(style:reuseIdentifier:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/RecentColorCell.swift",
-      "line": 50,
-      "symbol": "RecentColorCell.ColorSample",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/RecentColorCell.swift",
-      "line": 51,
-      "symbol": "RecentColorCell.ColorValue",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/RecentColorCell.swift",
-      "line": 52,
-      "symbol": "RecentColorCell.ColorName",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/RecentColorCell.swift",
-      "line": 54,
-      "symbol": "RecentColorCell.LoadData(Color:Name:Value:Width:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/RecentColorCell.swift",
-      "line": 64,
-      "symbol": "RecentColorCell.CellColorName",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/RecentColorCell.swift",
-      "line": 65,
-      "symbol": "RecentColorCell.CellColor",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/RecentColorListCode.swift",
-      "line": 12,
-      "symbol": "RecentColorListCode",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/RecentColorListCode.swift",
-      "line": 14,
+      "line": 15,
       "symbol": "RecentColorListCode.ColorDelegate",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/RecentColorListCode.swift",
-      "line": 16,
+      "line": 17,
       "symbol": "RecentColorListCode.viewDidLoad()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/RecentColorListCode.swift",
-      "line": 36,
+      "line": 37,
       "symbol": "RecentColorListCode.HandleOKPressed(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/RecentColorListCode.swift",
-      "line": 41,
+      "line": 42,
       "symbol": "RecentColorListCode.HandleCancelPressed(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/RecentColorListCode.swift",
-      "line": 46,
+      "line": 47,
       "symbol": "RecentColorListCode.HandleClearList(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/RecentColorListCode.swift",
-      "line": 53,
+      "line": 54,
       "symbol": "RecentColorListCode.tableView(_:heightForRowAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/RecentColorListCode.swift",
-      "line": 58,
+      "line": 59,
       "symbol": "RecentColorListCode.tableView(_:numberOfRowsInSection:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/RecentColorListCode.swift",
-      "line": 63,
+      "line": 64,
       "symbol": "RecentColorListCode.tableView(_:cellForRowAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/RecentColorListCode.swift",
-      "line": 80,
+      "line": 81,
       "symbol": "RecentColorListCode.RecentTable",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
