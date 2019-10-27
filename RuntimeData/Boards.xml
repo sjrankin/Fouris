@@ -40,7 +40,7 @@
             !!!!!!!!!!!!!!,31$
             01234567890123$
         </Map>
-        <Rotations BucketRotates="false" PiecesRotate="false"/>
+        <Rotations BucketRotates="false" PiecesRotate="false" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -94,7 +94,7 @@
             !!!!!!!!!!!,34$
             01234567890$
         </Map>
-        <Rotations BucketRotates="false" PiecesRotate="false"/>
+        <Rotations BucketRotates="false" PiecesRotate="false" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -138,7 +138,7 @@
             !!!!!!!!!!!,24$
             01234567890$
         </Map>
-        <Rotations BucketRotates="false" PiecesRotate="false"/>
+        <Rotations BucketRotates="false" PiecesRotate="false" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -184,7 +184,7 @@
             !!!!!!!!!!!!!!!!!!!,26$
             0123456789012345678$
         </Map>
-        <Rotations BucketRotates="false" PiecesRotate="false"/>
+        <Rotations BucketRotates="false" PiecesRotate="false" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -227,7 +227,7 @@
             !!!!!!!!!!!!!!!!!!!!!!,23$
             01234567890123456789012$
         </Map>
-        <Rotations BucketRotates="false" PiecesRotate="false"/>
+        <Rotations BucketRotates="false" PiecesRotate="false" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -273,7 +273,7 @@
             !!!!!!!!!!!!!!!!!!!!!!!!,26$
             0123456789012345678901234$
         </Map>
-        <Rotations BucketRotates="false" PiecesRotate="false"/>
+        <Rotations BucketRotates="false" PiecesRotate="false" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -328,7 +328,7 @@
             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,35$
             012345678901234567890123456789012345$
         </Map>
-        <Rotations BucketRotates="true" PiecesRotate="true"/>
+        <Rotations BucketRotates="true" PiecesRotate="true" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -383,7 +383,7 @@
             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,35$
             012345678901234567890123456789012345$
         </Map>
-        <Rotations BucketRotates="true" PiecesRotate="true"/>
+        <Rotations BucketRotates="true" PiecesRotate="true" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -438,7 +438,7 @@
             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,35$
             012345678901234567890123456789012345$
         </Map>
-        <Rotations BucketRotates="true" PiecesRotate="true"/>
+        <Rotations BucketRotates="true" PiecesRotate="true" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -493,7 +493,7 @@
             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,35$
             012345678901234567890123456789012345$
         </Map>
-        <Rotations BucketRotates="true" PiecesRotate="true"/>
+        <Rotations BucketRotates="true" PiecesRotate="true" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -548,7 +548,7 @@
             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,35$
             012345678901234567890123456789012345$
         </Map>
-        <Rotations BucketRotates="true" PiecesRotate="true"/>
+        <Rotations BucketRotates="true" PiecesRotate="true" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -603,7 +603,7 @@
             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,35$
             012345678901234567890123456789012345$
         </Map>
-        <Rotations BucketRotates="true" PiecesRotate="true"/>
+        <Rotations BucketRotates="true" PiecesRotate="true" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -658,7 +658,7 @@
             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,35$
             012345678901234567890123456789012345$
         </Map>
-        <Rotations BucketRotates="true" PiecesRotate="true"/>
+        <Rotations BucketRotates="true" PiecesRotate="true" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -713,7 +713,7 @@
             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,35$
             012345678901234567890123456789012345$
         </Map>
-        <Rotations BucketRotates="true" PiecesRotate="true"/>
+        <Rotations BucketRotates="true" PiecesRotate="true" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -768,7 +768,7 @@
             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,35$
             012345678901234567890123456789012345$
         </Map>
-        <Rotations BucketRotates="true" PiecesRotate="true"/>
+        <Rotations BucketRotates="true" PiecesRotate="true" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -823,7 +823,7 @@
             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,35$
             012345678901234567890123456789012345$
         </Map>
-        <Rotations BucketRotates="true" PiecesRotate="true"/>
+        <Rotations BucketRotates="true" PiecesRotate="true" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -878,7 +878,7 @@
             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,35$
             012345678901234567890123456789012345$
         </Map>
-        <Rotations BucketRotates="true" PiecesRotate="true"/>
+        <Rotations BucketRotates="true" PiecesRotate="true" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -933,7 +933,7 @@
             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,35$
             012345678901234567890123456789012345$
         </Map>
-        <Rotations BucketRotates="true" PiecesRotate="true"/>
+        <Rotations BucketRotates="true" PiecesRotate="true" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -988,7 +988,7 @@
             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,35$
             012345678901234567890123456789012345$
         </Map>
-        <Rotations BucketRotates="true" PiecesRotate="true"/>
+        <Rotations BucketRotates="true" PiecesRotate="true" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -1043,7 +1043,7 @@
             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,35$
             012345678901234567890123456789012345$
         </Map>
-        <Rotations BucketRotates="true" PiecesRotate="true"/>
+        <Rotations BucketRotates="true" PiecesRotate="true" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -1098,7 +1098,7 @@
             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,35$
             012345678901234567890123456789012345$
         </Map>
-        <Rotations BucketRotates="true" PiecesRotate="true"/>
+        <Rotations BucketRotates="true" PiecesRotate="true" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -1153,7 +1153,7 @@
             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,35$
             012345678901234567890123456789012345$
         </Map>
-        <Rotations BucketRotates="true" PiecesRotate="true"/>
+        <Rotations BucketRotates="true" PiecesRotate="true" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -1208,7 +1208,7 @@
             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,35$
             012345678901234567890123456789012345$
         </Map>
-        <Rotations BucketRotates="true" PiecesRotate="true"/>
+        <Rotations BucketRotates="true" PiecesRotate="true" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -1263,7 +1263,7 @@
             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,35$
             012345678901234567890123456789012345$
         </Map>
-        <Rotations BucketRotates="true" PiecesRotate="true"/>
+        <Rotations BucketRotates="true" PiecesRotate="true" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -1318,7 +1318,7 @@
             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,35$
             012345678901234567890123456789012345$
         </Map>
-        <Rotations BucketRotates="true" PiecesRotate="true"/>
+        <Rotations BucketRotates="true" PiecesRotate="true" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -1373,7 +1373,7 @@
             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,35$
             012345678901234567890123456789012345$
         </Map>
-        <Rotations BucketRotates="true" PiecesRotate="true"/>
+        <Rotations BucketRotates="true" PiecesRotate="true" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -1428,7 +1428,7 @@
             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,35$
             012345678901234567890123456789012345$
         </Map>
-        <Rotations BucketRotates="true" PiecesRotate="true"/>
+        <Rotations BucketRotates="true" PiecesRotate="true" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -1483,7 +1483,7 @@
             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,35$
             012345678901234567890123456789012345$
         </Map>
-        <Rotations BucketRotates="true" PiecesRotate="true"/>
+        <Rotations BucketRotates="true" PiecesRotate="true" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -1538,7 +1538,7 @@
             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,35$
             012345678901234567890123456789012345$
         </Map>
-        <Rotations BucketRotates="true" PiecesRotate="true"/>
+        <Rotations BucketRotates="true" PiecesRotate="true" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -1593,7 +1593,7 @@
             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,35$
             012345678901234567890123456789012345$
         </Map>
-        <Rotations BucketRotates="false" PiecesRotate="true"/>
+        <Rotations BucketRotates="false" PiecesRotate="true" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -1648,7 +1648,7 @@
             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,35$
             012345678901234567890123456789012345$
         </Map>
-        <Rotations BucketRotates="false" PiecesRotate="true"/>
+        <Rotations BucketRotates="false" PiecesRotate="true" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -1704,7 +1704,7 @@
             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,35$
             012345678901234567890123456789012345$
         </Map>
-        <Rotations BucketRotates="false" PiecesRotate="true"/>
+        <Rotations BucketRotates="false" PiecesRotate="true" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
@@ -1724,7 +1724,7 @@
         <Barriers>
             <Center Dimensions="3x3x3"/>
         </Barriers>
-        <Rotations BucketRotates="true" PiecesRotate="true"/>
+        <Rotations BucketRotates="true" PiecesRotate="true" FlipHorizontal="true" FlipVertical="true"/>
         <Buttons>
             <Left Visible="true"/>
             <Right Visible="true"/>
