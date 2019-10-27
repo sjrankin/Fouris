@@ -293,6 +293,15 @@ class MainViewController: UIViewController,
             GameView3D?.DisableControl(Which: .VideoButton)
             GameView3D?.DisableControl(Which: .CameraButton)
         }
+        
+        if Settings.ShowFPSInUI()
+        {
+            GameView3D?.SetText(OnButton: .FPSButton, ToNextText: "°")
+        }
+        else
+        {
+            GameView3D?.DisableControl(Which: .FPSButton)
+        }
     }
     
     private var VersionBoxNotYetShown: Bool = true
@@ -320,14 +329,7 @@ class MainViewController: UIViewController,
     public func InitializeUI()
     {
         Settings.AddSubscriber(For: "Main", NewSubscriber: self)
-        if Settings.ShowFPSInUI()
-        {
-            GameView3D?.SetText(OnButton: .FPSButton, ToNextText: "°")
-        }
-        else
-        {
-            GameView3D?.DisableControl(Which: .FPSButton)
-        }
+
     }
     
     /// Set motion control visibility.
@@ -800,7 +802,7 @@ class MainViewController: UIViewController,
                                      repeats: false)
         if UserTheme!.ShowOffAfterGameOver
         {
-            GameView3D?.ShowOffRotations(Duration: 0.35, Delay: 1.0)
+            GameView3D?.ShowOffRotations(Duration: 0.35, Delay: 0.75)
         }
     }
         
