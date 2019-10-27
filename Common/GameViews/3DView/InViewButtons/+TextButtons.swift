@@ -78,8 +78,6 @@ extension View3D
                 let FinalNode = SCNButtonNode.MakeButton(ButtonType: .MainButton, SourceNode: MainButtonObject!,
                                                          Location: ButtonDictionary[ForButton]!.Location,
                                                          ScaleFactor: 1.0, LightMask: View3D.ControlLight)
-                let BB = FinalNode.boundingBox
-                print("Main button bounding: \(BB.min) to \(BB.max)")
                 #else
                 let FinalNode = SCNButtonNode.AddObjectButton(ForButton: .MainButton, SourceNode: MainButtonObject!,
                                                               Location: ButtonDictionary[ForButton]!.Location,
@@ -259,14 +257,7 @@ extension View3D
     {
         if let Node = ButtonList[Button]
         {
-            #if true
             Node.Flash()
-            #else
-            if let ShapeNode = Node.GetNodeWithTag(Value: "ShapeNode")
-            {
-                ShapeNode.Flash()
-            }
-            #endif
         }
     }
     
@@ -276,16 +267,8 @@ extension View3D
     {
         if let TheButton = ButtonList[Button]
         {
-            #if true
             let NormalColor = ButtonDictionary[Button]!.Color
             TheButton.SetButtonColor(NewColor: NormalColor)
-            #else
-            if let ShapeNode = TheButton.GetNodeWithTag(Value: "ShapeNode")
-            {
-                let NormalColor = ButtonDictionary[Button]!.Color
-                ShapeNode.SetButtonColor(NewColor: NormalColor)
-            }
-            #endif
         }
     }
     
@@ -295,16 +278,8 @@ extension View3D
     {
         if let TheButton = ButtonList[Button]
         {
-            #if true
             let HighlightColor = ButtonDictionary[Button]!.Highlight
             TheButton.SetButtonColor(NewColor: HighlightColor)
-            #else
-            if let ShapeNode = TheButton.GetNodeWithTag(Value: "ShapeNode")
-            {
-                let HighlightColor = ButtonDictionary[Button]!.Highlight
-                ShapeNode.SetButtonColor(NewColor: HighlightColor)
-            }
-            #endif
         }
     }
     
@@ -326,7 +301,6 @@ extension View3D
     public func ShowControls(With: [NodeButtons]? = nil)
     {
         //Add the background if necessary.
-        #if true
         var FoundBackground = false
         self.scene?.rootNode.enumerateChildNodes
             {
@@ -340,12 +314,6 @@ extension View3D
         {
             ShowControlButtonBackground()
         }
-        #else
-        if ControlBackground == nil
-        {
-            ShowControlButtonBackground()
-        }
-        #endif
         
         //Remove some of the buttons.
         for (_, Button) in ButtonList
@@ -421,6 +389,10 @@ extension View3D
             ButtonList[Which]?.opacity = 0.0
             _DisabledControls.insert(Which)
         }
+        else
+        {
+            print("Did not find \(Which) to disable.")
+        }
     }
     
     /// Enables a disabled. This means the control is removed from the `DisabledControls` set and its opacity
@@ -486,7 +458,6 @@ extension View3D
     /// - Paremeter Duration: The duration of the animation.
     public func AnimateExtrusion(_ Which: NodeButtons, ToHeight: CGFloat, Duration: Double = 0.25)
     {
-        #if true
         if let ButtonNode = ButtonList[Which]
         {
             if let STextGeo = ButtonNode.geometry as? SCNText
@@ -497,21 +468,6 @@ extension View3D
                 })
             }
         }
-        #else
-        if let ButtonNode = ButtonList[Which]
-        {
-            if let ShapeNode = ButtonNode.GetNodeWithTag(Value: "ShapeNode")
-            {
-                if let STextGeo = ShapeNode.geometry as? SCNText
-                {
-                    UIView.animate(withDuration: Duration, animations:
-                        {
-                            STextGeo.extrusionDepth = ToHeight
-                    })
-                }
-            }
-        }
-        #endif
     }
     
     /// Sets the visual state of the heart button to indicate a regular heartbeat on the main UI thread.
@@ -528,7 +484,6 @@ extension View3D
     {
         if let ButtonNode = ButtonList[.HeartButton]
         {
-            #if true
             let NewColor = IsHighlighted ? Colors.Highlighted : Colors.Normal
             let NewSize = IsHighlighted ? Sizes.Highlighted : Sizes.Normal
             let NewExtrusion = IsHighlighted ? Extrusions.Highlighted : Extrusions.Normal
@@ -542,24 +497,6 @@ extension View3D
                 let ScaleAction = SCNAction.scale(to: NewSize, duration: Duration)
                 ButtonNode.runAction(ScaleAction)
             }
-            #else
-            if let ShapeNode = ButtonNode.GetNodeWithTag(Value: "ShapeNode")
-            {
-                let NewColor = IsHighlighted ? Colors.Highlighted : Colors.Normal
-                let NewSize = IsHighlighted ? Sizes.Highlighted : Sizes.Normal
-                let NewExtrusion = IsHighlighted ? Extrusions.Highlighted : Extrusions.Normal
-                if let TextNode = ShapeNode.geometry as? SCNText
-                {
-                    TextNode.firstMaterial?.diffuse.contents = NewColor
-                    UIView.animate(withDuration: Duration, animations:
-                        {
-                            TextNode.extrusionDepth = NewExtrusion
-                    })
-                    let ScaleAction = SCNAction.scale(to: NewSize, duration: Duration)
-                    ShapeNode.runAction(ScaleAction)
-                }
-            }
-            #endif
         }
     }
 }
