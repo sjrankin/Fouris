@@ -20,16 +20,30 @@ import MetricKit
     /// Application launch tasks. Capture launch tasks from the home screen menu.
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     {
+        var Host: HostPlatforms = .iOS
         #if targetEnvironment(simulator)
-        UserDefaults.standard.set(true, forKey: "RunningOnSimulator")
-        #else
-        UserDefaults.standard.set(false, forKey: "RunningOnSimulator")
+        Host = .Simulator
         #endif
+        #if targetEnvironment(macCatalyst)
+        Host = .Catalyst
+        #endif
+        
         print("Fouris launched: \(MessageHelper.MakeTimeStamp(FromDate: Date()))")
-        if UserDefaults.standard.bool(forKey: "RunningOnSimulator")
+        switch Host
         {
-            print("Running on simulator.")
+            case .iOS:
+                UserDefaults.standard.set(false, forKey: "RunningOnSimulator")
+                print("Running on iOS.")
+            
+            case .Simulator:
+                UserDefaults.standard.set(true, forKey: "RunningOnSimulator")
+                print("Running on simulator.")
+            
+            case .Catalyst:
+                UserDefaults.standard.set(false, forKey: "RunningOnSimulator")
+                print("Running on Mac.")
         }
+        
         UIApplication.shared.isIdleTimerDisabled = true
         if let ShortcutItem = launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem
         {
@@ -45,7 +59,7 @@ import MetricKit
     {
         StartupShortcut = shortcutItem
     }
-   
+    
     /// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions
     /// (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     /// Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -132,3 +146,13 @@ extension AppDelegate: MXMetricManagerSubscriber
     }
 }
 
+/// Host platforms where Fouris may find itself running.
+enum HostPlatforms: String, CaseIterable
+{
+    /// Running on a Mac under Catalyst.
+    case Catalyst = "Catalyst"
+    /// Running on an iOS/iPadOS device.
+    case iOS = "iOS"
+    /// Running on a simulator.
+    case Simulator = "Simulator"
+}
