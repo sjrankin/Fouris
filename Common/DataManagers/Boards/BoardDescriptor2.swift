@@ -338,6 +338,77 @@ class BoardDescriptor2
         }
     }
     
+    /// Holds the 3D width.
+    public var _Width3D: Int = 0
+    /// Get or set the width of the bucket when in .Cubic mode.
+    public var Width3D: Int
+    {
+        get
+        {
+            return _Width3D
+        }
+        set
+        {
+            _Width3D = newValue
+        }
+    }
+    
+    /// Holds the 3D height.
+    public var _Height3D: Int = 0
+    /// Get or set the height of the bucket when in .Cubic mode.
+    public var Height3D: Int
+    {
+        get
+        {
+            return _Height3D
+        }
+        set
+        {
+            _Height3D = newValue
+        }
+    }
+    
+    /// Holds the 3D depth.
+    public var _Depth3D: Int = 0
+    /// Get or set the depth of the bucket when in .Cubic mode.
+    public var Depth3D: Int
+    {
+        get
+        {
+            return _Depth3D
+        }
+        set
+        {
+            _Depth3D = newValue
+        }
+    }
+    
+    public var _CenterBlockDefinition: Volume? = nil
+    public var CenterBlockDefinition: Volume?
+    {
+        get
+        {
+            return _CenterBlockDefinition
+        }
+        set
+        {
+            _CenterBlockDefinition = newValue
+        }
+    }
+    
+    /// Returns the volume of the bucket of a cubic game. If the game is not cubic, nil is returned.
+    public var BucketVolume: Volume?
+    {
+        get
+        {
+            if [.Simple3D].contains(_BucketShape)
+            {
+                return Volume(Width: _Width3D, Height: _Height3D, Depth: _Depth3D)
+            }
+            return nil
+        }
+    }
+    
     /// Holds the raw board map.
     public var _BoardMap: String = ""
     {
