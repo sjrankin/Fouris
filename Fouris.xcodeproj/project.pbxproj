@@ -369,6 +369,7 @@
 		1756715B2302695800D0824D /* StepperHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperHelper.swift; sourceTree = "<group>"; };
 		175671682302852C00D0824D /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		1759D9EB236532DE00F0DFC2 /* Volume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Volume.swift; sourceTree = "<group>"; };
+		1759D9ED23656EDD00F0DFC2 /* Fouris.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Fouris.entitlements; path = Fouris/Fouris.entitlements; sourceTree = "<group>"; };
 		1759F6B422AB7F5C00574A01 /* TColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TColor.swift; sourceTree = "<group>"; };
 		175A9BB32333735D00F463BF /* PHAssetExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetExtension.swift; sourceTree = "<group>"; };
 		175B26AF235C348B0012030D /* SCNGameText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNGameText.swift; sourceTree = "<group>"; };
@@ -1211,6 +1212,7 @@
 		17F0B487225CBE730071514E = {
 			isa = PBXGroup;
 			children = (
+				1759D9ED23656EDD00F0DFC2 /* Fouris.entitlements */,
 				1763492C2312667A000BDF24 /* Default-568h@2x.png */,
 				17E71A6122AD20350081991E /* TDebug */,
 				17567154230264D000D0824D /* Stepping */,
@@ -1816,7 +1818,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Fouris/Fouris.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 4BB235M4GL;
 				INFOPLIST_FILE = Fouris/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1826,6 +1830,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Iroiro.Fouris;
 				PRODUCT_NAME = Fouris;
+				SUPPORTS_MACCATALYST = YES;
 				"SWIFT_ACTIVE_COMPILATION_CONDITIONS[arch=*]" = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1838,7 +1843,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Fouris/Fouris.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 4BB235M4GL;
 				INFOPLIST_FILE = Fouris/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1848,6 +1855,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Iroiro.Fouris;
 				PRODUCT_NAME = Fouris;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
