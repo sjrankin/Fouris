@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+import MetricKit
 
 @UIApplicationMain class AppDelegate: UIResponder, UIApplicationDelegate
 {
@@ -34,6 +35,7 @@ import Foundation
         {
             StartupShortcut = ShortcutItem
         }
+        MXMetricManager.shared.add(self)
         return true
     }
     
@@ -58,7 +60,7 @@ import Foundation
         }
         var NotUsed: String? = nil
         ActivityLog.AddEntry(Title: "System", Source: "AppDelegate", KVPs: [("Message","Fouris resigned active.")], LogFileName: &NotUsed)
-        ActivityLog.SaveLog()
+        let _ = ActivityLog.SaveLog()
         UIApplication.shared.isIdleTimerDisabled = false
     }
     
@@ -69,7 +71,7 @@ import Foundation
     {
         var NotUsed: String? = nil
         ActivityLog.AddEntry(Title: "System", Source: "AppDelegate", KVPs: [("Message","Fouris entered background.")], LogFileName: &NotUsed)
-        ActivityLog.SaveLog()
+        let _ = ActivityLog.SaveLog()
         UIApplication.shared.isIdleTimerDisabled = false
     }
     
@@ -104,8 +106,29 @@ import Foundation
     {
         var NotUsed: String? = nil
         ActivityLog.AddEntry(Title: "System", Source: "AppDelegate", KVPs: [("Message","Fouris terminated.")], LogFileName: &NotUsed)
-        ActivityLog.SaveLog()
+        let _ = ActivityLog.SaveLog()
         UIApplication.shared.isIdleTimerDisabled = false
+        MXMetricManager.shared.remove(self)
+    }
+}
+
+extension AppDelegate: MXMetricManagerSubscriber
+{
+    /// Handle received metrics payloads. Not currently implemented.
+    public func didReceive(_ payloads: [MXMetricPayload])
+    {
+        #if false
+        for Payload in payloads
+        {
+            let url = URL(string: "")!
+            var Request = URLRequest(url: url)
+            Request.httpMethod = "POST"
+            Request.httpBody = Payload.jsonRepresentation()
+            let Task = URLSession.shared.dataTask(with: Request)
+            Task.priority = URLSessionTask.lowPriority
+            Task.resume()
+        }
+        #endif
     }
 }
 
