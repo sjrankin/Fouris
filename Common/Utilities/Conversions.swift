@@ -9,6 +9,7 @@
 import Foundation
 import SceneKit
 
+/// Contains a set of conversion routines for types.
 class Convert
 {
     /// Round a CFGloat to the nearest passed value.
