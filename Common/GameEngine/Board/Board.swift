@@ -572,7 +572,11 @@ class Board: GameMapProtocol
     /// - Parameter ID: ID of the block that froze.
     public func PieceFroze(ID: UUID)
     {
-        let SomePiece: Piece = GetPiece(ID: ID)!
+        guard let SomePiece: Piece = GetPiece(ID: ID) else
+        {
+            print("Did not find piece \(ID)")
+            return
+        }
         if SomePiece.PieceDroppedTooFar
         {
             Map!.DeletePiece(SomePiece)
