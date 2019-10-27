@@ -9,18 +9,22 @@
 import Foundation
 import UIKit
 
+/// Export gradients via the sharing activity sheet. Gradients are converted to images then exported.
 class GradientExport2: UIViewController, GradientPickerProtocol, UIActivityItemSource
 {
-    weak var GradientDelegate: GradientPickerProtocol? = nil
+    /// Not currently used.
+    public weak var GradientDelegate: GradientPickerProtocol? = nil
     
-    override func viewDidLoad()
+    /// Initialize the UI.
+    override public func viewDidLoad()
     {
         super.viewDidLoad()
         GradientSample.layer.borderColor = UIColor.black.cgColor
         DrawSample()
     }
     
-    func DrawSample()
+    /// Draw a sample to show the user what will be exported.
+    public func DrawSample()
     {
         let IsVertical = OrientationSegment.selectedSegmentIndex == 0
         let ImageFrame = CGRect(x: 0, y: 0, width: GradientSample.frame.width, height: GradientSample.frame.height)
@@ -29,12 +33,17 @@ class GradientExport2: UIViewController, GradientPickerProtocol, UIActivityItemS
         GradientSample.image = Sample
     }
     
+    /// Not used in this class.
     func EditedGradient(_ Edited: String?, Tag: Any?)
     {
         //Not used.
     }
     
-    func GradientToEdit(_ Edited: String?, Tag: Any?)
+    /// Sets the gradient to export.
+    /// - Warning: If `Edited` is nil, a fatal error is generated.
+    /// - Parameter Edited: The gradient to export.
+    /// - Parameter Tag: Not used.
+    public func GradientToEdit(_ Edited: String?, Tag: Any?)
     {
         if let ExportMe = Edited
         {
@@ -46,24 +55,31 @@ class GradientExport2: UIViewController, GradientPickerProtocol, UIActivityItemS
         }
     }
     
-    var GradientToExport: String = ""
+    /// Holds the gradient to export.
+    public var GradientToExport: String = ""
     
-    func SetStop(StopColorIndex: Int)
+    /// Not used in this class.
+    public func SetStop(StopColorIndex: Int)
     {
         //Not used.
     }
     
-    @IBAction func HandleGradientOrientationChanged(_ sender: Any)
+    /// Handle changes to the orientation switch. The switch is read in `DrawSample` so all we need to do is call
+    /// `DrawSample` from here.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleGradientOrientationChanged(_ sender: Any)
     {
         DrawSample()
     }
     
-    @IBAction func HandleExportPressed(_ sender: Any)
+    /// Handle the user press of the export button by generating an image from the gradient and then running the activity view
+    /// to have the user decide what to do with the resultant image.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleExportPressed(_ sender: Any)
     {
         let IsVertical = OrientationSegment.selectedSegmentIndex == 0
         let Width = Int(Double(pow(Double(2.0), Double(WidthSegment.selectedSegmentIndex + 8))))
         let Height = Int(Double(pow(Double(2.0), Double(HeightSegment.selectedSegmentIndex + 8))))
-        print("Exporting image of size \(Width)x\(Height)")
         let ImageFrame = CGRect(x: 0, y: 0, width: Width, height: Height)
         SaveMe = GradientManager.CreateGradientImage(From: GradientToExport, WithFrame: ImageFrame,
                                                      IsVertical: IsVertical)
@@ -76,19 +92,33 @@ class GradientExport2: UIViewController, GradientPickerProtocol, UIActivityItemS
         self.present(ACV, animated: true, completion: nil)
     }
     
-    var SaveMe: UIImage? = nil
+    /// The image to export/save.
+    public var SaveMe: UIImage? = nil
     
-    func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.Type?) -> String
+    /// Returns the subject line for possible use when exporting the gradient image.
+    /// - Parameter activityViewController: Not used.
+    /// - Parameter subjectForActivityType: Not used.
+    /// - Returns: Subject line.
+    public func activityViewController(_ activityViewController: UIActivityViewController,
+                                       subjectForActivityType activityType: UIActivity.Type?) -> String
     {
         return "Fouris Exported Background Gradient"
     }
     
-    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any
+    /// Determines the type of object to export.
+    /// - Parameter activityViewController: Not used.
+    /// - Returns: Instance of the type to export. In our case, a `UIImage`.
+    public func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any
     {
         return UIImage()
     }
     
-    func activityViewController(_ activityViewController: UIActivityViewController,
+    /// Returns the object to export (the type of which is determined in `activityViewControllerPlaceholderItem`.
+    /// - Parameter activityViewController: Not used.
+    /// - Parameter itemForActivityType: Determines how the user wants to export the image. In our case, we support
+    ///                                  anything that accepts an image.
+    /// - Returns: The image of the gradient.
+    public func activityViewController(_ activityViewController: UIActivityViewController,
                                 itemForActivityType activityType: UIActivity.ActivityType?) -> Any?
     {
         let Generated: UIImage = SaveMe!
@@ -139,7 +169,9 @@ class GradientExport2: UIViewController, GradientPickerProtocol, UIActivityItemS
         }
     }
     
-    @IBAction func HandleClosePressed(_ sender: Any)
+    /// Handle the close button.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleClosePressed(_ sender: Any)
     {
         self.dismiss(animated: true, completion: nil)
     }
