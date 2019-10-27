@@ -25,6 +25,7 @@
 		1710BF84231E841500F566B3 /* PresetGradientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1710BF83231E841500F566B3 /* PresetGradientCell.swift */; };
 		1713735722EAE67700C9F9A7 /* SCNDodecahedron.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1713735622EAE67700C9F9A7 /* SCNDodecahedron.swift */; };
 		1713735A22EAE6D500C9F9A7 /* SCNTetrahedron.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1713735922EAE6D500C9F9A7 /* SCNTetrahedron.swift */; };
+		1718076A2365B95300921403 /* MapPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171807692365B95300921403 /* MapPoint.swift */; };
 		17180B8F235D43EF006E56ED /* GameMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17180B8E235D43EF006E56ED /* GameMap.swift */; };
 		17180B91235D5130006E56ED /* GameMapProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17180B90235D5130006E56ED /* GameMapProtocol.swift */; };
 		17189FF32333262300317BF1 /* +Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17189FF22333262300317BF1 /* +Color.swift */; };
@@ -291,6 +292,7 @@
 		1713735622EAE67700C9F9A7 /* SCNDodecahedron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNDodecahedron.swift; sourceTree = "<group>"; };
 		1713735922EAE6D500C9F9A7 /* SCNTetrahedron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNTetrahedron.swift; sourceTree = "<group>"; };
 		1717BA6B2275CC2C008747D1 /* ControlProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlProtocol.swift; sourceTree = "<group>"; };
+		171807692365B95300921403 /* MapPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPoint.swift; sourceTree = "<group>"; };
 		17180B8E235D43EF006E56ED /* GameMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMap.swift; sourceTree = "<group>"; };
 		17180B90235D5130006E56ED /* GameMapProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMapProtocol.swift; sourceTree = "<group>"; };
 		17189FF22333262300317BF1 /* +Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Color.swift"; sourceTree = "<group>"; };
@@ -1093,6 +1095,7 @@
 				17180B8D235D43DD006E56ED /* Map2 */,
 				17DCD7F123096FD20072B306 /* MapExtensions */,
 				175098B22290338400A411DE /* MapType.swift */,
+				171807692365B95300921403 /* MapPoint.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -1461,6 +1464,7 @@
 				17404B2C2345E4B300976DE2 /* ThemeChangeProtocol2.swift in Sources */,
 				172C73C0234DCB0700418D6A /* GradientExport2.swift in Sources */,
 				17ECE5AC23322540003F4065 /* +PopulateFields.swift in Sources */,
+				1718076A2365B95300921403 /* MapPoint.swift in Sources */,
 				178C0F042338786000A35C62 /* SettingsControllerCode.swift in Sources */,
 				177F4FC6229BD2F500FE72CD /* Send.swift in Sources */,
 				17189FF5233332FD00317BF1 /* +Vector3.swift in Sources */,
