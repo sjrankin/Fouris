@@ -11,8 +11,7 @@ import UIKit
 
 extension MapType
 {
-    /// Initialize the contents of the map with the bucket. Depending on the contents of **BaseType**, the shape of the
-    /// bucket will vary.
+    /// Initialize the contents of the map with the bucket.
     /// - Parameters:
     ///   - Width: Width of the map.
     ///   - Height: Height of the map.
@@ -61,6 +60,42 @@ extension MapType
             
             case .ThreeDimensional:
                 break
+        }
+    }
+    
+    /// Initialize the contents of the map with the bucket.
+    /// - Parameters:
+    ///   - Width: Width of the map.
+    ///   - Height: Height of the map.
+    ///   - Depth: Depth of the map.
+    ///   - BucketTop: Top of the bucket.
+    ///   - BucketBottom: Bottom of the bucket.
+    ///   - BucketLeft: Left location of the bucket.
+    ///   - BucketRight: Right location of the bucket.
+    ///   - Map: The map to initialize.
+    ///   - BucketID: ID of the bucket piece.
+    ///   - InvisibleBucketID: ID of the invisible bucket ID.
+    ///   - BucketExteriorID: ID of the exterior location (eg, on the board but out of the bucket).
+    ///   - BucketShape: The shape of the bucket.
+    public static func InitializeMap(Width: Int, Height: Int, Depth: Int, BucketTop: Int, BucketBottom: Int, BucketLeft: Int,
+                                     BucketRight: Int, Map: inout ContentsType, BucketID: UUID, InvisibleBucketID: UUID,
+                                     BucketExteriorID: UUID, BucketShape: BucketShapes)
+    {
+        let BoardClass = BoardData.GetBoardClass(For: BucketShape)!
+        switch BoardClass
+        {
+            case .Static:
+                break
+            
+            case .Rotatable:
+                let BoardDef = BoardManager.GetBoardFor(BucketShape)!
+                CreateRotatingBucket(Width: BoardDef.GameBoardWidth, Height: BoardDef.GameBoardHeight, BucketTop: BucketTop, BucketBottom: BucketBottom,
+                                     BucketLeft: BucketLeft, BucketRight: BucketRight, Map: &Map, BucketID: BucketID,
+                                     InvisibleBucketID: InvisibleBucketID, BucketExteriorID: BucketExteriorID,
+                                     GameShape: BucketShape)
+            
+            case .ThreeDimensional:
+                let BoardDef = BoardManager.GetBoardFor(BucketShape)!
         }
     }
     
