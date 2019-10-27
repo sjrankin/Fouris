@@ -13,29 +13,30 @@ class BoardData
 {
     /// Table of boards that rotate.
     public static var RotatableBoards: [BucketShapes] =
-    [
-        .Dot, .MediumSquare, .SmallSquare, .BigSquare, .SmallRectangle, .BigRectangle, .Diamond, .BigDiamond, .SmallDiamond,
-        .Bracket2, .Bracket4, .FourLines, .Corners, .Quadrant, .Plus, .HorizontalLine, .ParallelLines, .Empty,
-        .CornerDots, .FourSmallSquares, .ShortDiagonals, .LongDiagonals
+        [
+            .Dot, .MediumSquare, .SmallSquare, .BigSquare, .SmallRectangle, .BigRectangle, .Diamond, .BigDiamond, .SmallDiamond,
+            .Bracket2, .Bracket4, .FourLines, .Corners, .Quadrant, .Plus, .HorizontalLine, .ParallelLines, .Empty,
+            .CornerDots, .FourSmallSquares, .ShortDiagonals, .LongDiagonals
     ]
     
     /// Table of boards that do not rotate (or more accurately, the *buckets* do not rotate - the pieces may actually rotate).
     public static var StaticBoards: [BucketShapes] =
-    [
-        .Classic, .TallThin, .ShortWide, .Big, .Small, .SquareBucket, .Giant, .OneOpening
+        [
+            .Classic, .TallThin, .ShortWide, .Big, .Small, .SquareBucket, .Giant, .OneOpening
     ]
     
     /// Table of three-dimensional boards.
     public static var CubicBoards: [BucketShapes] =
-    [
+        [
+            .Simple3D
     ]
     
     /// Table of board classes to their respective boards.
     public static var BoardGroups: [BoardClasses: [BucketShapes]] =
-    [
-        .Rotatable: RotatableBoards,
-        .Static: StaticBoards,
-        .ThreeDimensional: CubicBoards
+        [
+            .Rotatable: RotatableBoards,
+            .Static: StaticBoards,
+            .ThreeDimensional: CubicBoards
     ]
     
     /// Given a bucket shape, return its general class.
@@ -91,6 +92,7 @@ class BoardData
 /// - **Small**: Small bucket.
 /// - **SquareBucket**: Square, non-rotating bucket.
 /// - **Giant**: Huge bucket.
+/// - **Simple3D**: Simple 3D game with a center block.
 enum BucketShapes: String, CaseIterable
 {
     //Rotating games.
@@ -128,6 +130,8 @@ enum BucketShapes: String, CaseIterable
     case Small = "Small"
     case SquareBucket = "SquareBucket"
     case Giant = "Giant"
+    //Three dimensional games.
+    case Simple3D = "Simple3D"
 }
 
 /// Board classes.
