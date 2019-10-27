@@ -24,7 +24,6 @@ class AITestTable
     var TestData = [(AIScoringMethods, AITestNode)]()
     
     /// Subscript operator to get the specified test data.
-    ///
     /// - Parameter Index: Index of the test data to return. Nil return if the index if out of range.
     subscript(Index: Int) -> AITestNode?
     {
@@ -48,16 +47,14 @@ class AITestTable
     }
     
     /// Add a test node to the table.
-    ///
     /// - Parameter Node: Test data node to add.
-    func AddTest(_ Node: AITestNode)
+    public func AddTest(_ Node: AITestNode)
     {
         TestData.append((Node.ScoringType, Node))
         Delegate?.DataUpdated()
     }
     
     /// Add test data to the table.
-    ///
     /// - Parameters:
     ///   - Method: The AI scoring method.
     ///   - Duration: Duration of the game in seconds.
@@ -66,18 +63,17 @@ class AITestTable
     ///   - BucketSize: The size of the game bucket.
     ///   - Unreachable: The number of unreachable gaps at the end of the game.
     ///   - Reachable: The number of reachable gaps at the end of the game.
-    func AddTest(_ Method: AIScoringMethods, Duration: Double, Score: Double, Pieces: Int, BucketSize: CGSize,
-                 Unreachable: Int, Reachable: Int)
+    public func AddTest(_ Method: AIScoringMethods, Duration: Double, Score: Double, Pieces: Int, BucketSize: CGSize,
+                        Unreachable: Int, Reachable: Int)
     {
         AddTest(AITestNode(Method, Duration: Duration, Score: Score, Pieces: Pieces,
                            BucketSize: BucketSize, Unreachable: Unreachable, Reachable: Reachable))
     }
     
     /// Return all test nodes for the given AI scoring method.
-    ///
     /// - Parameter Method: AI scoring method to return nodes for.
     /// - Returns: List of test nodes for the specified AI scoring method.
-    func GetNodesFor(Method: AIScoringMethods) -> [AITestNode]
+    public func GetNodesFor(Method: AIScoringMethods) -> [AITestNode]
     {
         var Results = [AITestNode]()
         for Test in TestData
@@ -91,10 +87,9 @@ class AITestTable
     }
     
     /// Return mean data for the specified AI scoring method.
-    ///
     /// - Parameter Method: Determines which means are returned.
     /// - Returns: Structure with the mean results. If no test nodes are available, nil is returned.
-    func MeanDataFor(Method: AIScoringMethods) -> MeanResults?
+    public func MeanDataFor(Method: AIScoringMethods) -> MeanResults?
     {
         let Nodes = GetNodesFor(Method: Method)
         if Nodes.count < 1
@@ -127,7 +122,7 @@ class AITestTable
 }
 
 /// Holds mean test results on a per AI test scoring method basis.
-struct MeanResults
+public struct MeanResults
 {
     /// Total test nodes/runs.
     let TotalCount: Int
