@@ -1613,12 +1613,26 @@ class View3D: SCNView,                          //Our main super class.
     /// Stop showing off rotations.
     public func StopShowingOff()
     {
+        //Destroy the show off timer.
         ShowOffTimer?.invalidate()
         ShowOffTimer = nil
-        BucketGridNode?.removeAllActions()
-        OutlineNode?.removeAllActions()
+        //Remove node actions.
+        if CurrentTheme!.RotateBucketGrid
+        {
+            BucketGridNode?.removeAllActions()
+            OutlineNode?.removeAllActions()
+        }
         MasterBlockNode?.removeAllActions()
         BucketNode?.removeAllActions()
+        //Move to an ordinal position.
+        let Reset = SCNAction.rotateTo(x: 0.0, y: 0.0, z: 0.0, duration: 0.05)
+        if CurrentTheme!.RotateBucketGrid
+        {
+            BucketGridNode?.runAction(Reset)
+            OutlineNode?.runAction(Reset)
+        }
+        MasterBlockNode?.runAction(Reset)
+        BucketNode?.runAction(Reset)
     }
     
     /// Show off rotations. Intended for use by the game after game over to provide visual interest.
@@ -1627,6 +1641,15 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter Delay: Time between rotations.
     public func ShowOffRotations(Duration: Double, Delay: Double)
     {
+        //Reset rotatable objects to a known rotation to keep things in sync with each other.
+        let Reset = SCNAction.rotateTo(x: 0.0, y: 0.0, z: 0.0, duration: 0.01)
+        MasterBlockNode?.runAction(Reset)
+        BucketNode?.runAction(Reset)
+        if CurrentTheme!.RotateBucketGrid
+        {
+            BucketGridNode?.runAction(Reset)
+            OutlineNode?.runAction(Reset)
+        }
         ExecutionRotation()
         ShowOffTimer = Timer.scheduledTimer(timeInterval: Delay, target: self, selector: #selector(ExecutionRotation),
                                             userInfo: nil, repeats: true)
