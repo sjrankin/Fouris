@@ -14,7 +14,7 @@
     <a title="MapType Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html"> Docs</a> (63% documented)</p>
+        <p><a href="../index.html"> Docs</a> (64% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -221,6 +221,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/ManagedTimer.html">ManagedTimer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MapPoint.html">MapPoint</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/MapType.html">MapType</a>
@@ -571,6 +574,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/HideBoardMethods.html">HideBoardMethods</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/HostPlatforms.html">HostPlatforms</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/IdiotLightCommands.html">IdiotLightCommands</a>
@@ -986,6 +992,100 @@ The second layer is the block map which is a map of identifies of which individu
                               <td>
                                 <div>
                                   <p>Height of the map.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the map.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>BucketShape</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Shape of the game&rsquo;s bucket.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris7MapTypeC5Width6Height5Depth2ID11BucketShapeACSi_S2i10Foundation4UUIDVAA0H6ShapesOtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(Width:Height:Depth:ID:BucketShape:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris7MapTypeC5Width6Height5Depth2ID11BucketShapeACSi_S2i10Foundation4UUIDVAA0H6ShapesOtcfc">init(Width:Height:Depth:ID:BucketShape:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializer.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="kt"><a href="../Classes/MapType.html#/s:6Fouris7MapTypeC5WidthSivp">Width</a></span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt"><a href="../Classes/MapType.html#/s:6Fouris7MapTypeC6HeightSivp">Height</a></span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt"><a href="../Classes/MapType.html#/s:6Fouris7MapTypeC5DepthSivp">Depth</a></span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">ID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">,</span> <span class="kt"><a href="../Classes/MapType.html#/s:6Fouris7MapTypeC11BucketShapeAA0D6ShapesOvp">BucketShape</a></span><span class="p">:</span> <span class="kt"><a href="../Enums/BucketShapes.html">BucketShapes</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Width</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Width of the map.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Height</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Height of the map.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Depth</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Depth of the map.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1801,6 +1901,34 @@ sits on the bottom of the map.</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:6Fouris7MapTypeC08ContentsC1Xa"></a>
+                    <a name="//apple_ref/swift/Alias/ContentsTypeX" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris7MapTypeC08ContentsC1Xa">ContentsTypeX</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Type alias for the map in 3D. Access is in row/column/depth order (<code>[Y][X][Z]</code>). Two dimensional maps all have
+a <code>Z</code> value of <code>0</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">typealias</span> <span class="kt">ContentsTypeX</span> <span class="o">=</span> <span class="p">[[[</span><span class="kt">UUID</span><span class="p">]]]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:6Fouris7MapTypeC8ContentsSaySay10Foundation4UUIDVGGvp"></a>
                     <a name="//apple_ref/swift/Property/Contents" class="dashAnchor"></a>
                     <a class="token" href="#/s:6Fouris7MapTypeC8ContentsSaySay10Foundation4UUIDVGGvp">Contents</a>
@@ -1833,6 +1961,38 @@ sits on the bottom of the map.</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:6Fouris7MapTypeC9ContentsXSaySaySay10Foundation4UUIDVGGGvp"></a>
+                    <a name="//apple_ref/swift/Property/ContentsX" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris7MapTypeC9ContentsXSaySaySay10Foundation4UUIDVGGGvp">ContentsX</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get or set the 3D map contents.</p>
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    <strong>Setting this directly will lead to undefined behavior.</strong>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">ContentsX</span><span class="p">:</span> <span class="kt"><a href="../Classes/MapType.html#/s:6Fouris7MapTypeC08ContentsC1Xa">ContentsTypeX</a></span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:6Fouris7MapTypeC05BlockB0SaySay10Foundation4UUIDVGGvp"></a>
                     <a name="//apple_ref/swift/Property/BlockMap" class="dashAnchor"></a>
                     <a class="token" href="#/s:6Fouris7MapTypeC05BlockB0SaySay10Foundation4UUIDVGGvp">BlockMap</a>
@@ -1856,6 +2016,38 @@ sits on the bottom of the map.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">BlockMap</span><span class="p">:</span> <span class="kt"><a href="../Classes/MapType.html#/s:6Fouris7MapTypeC08ContentsC0a">ContentsType</a></span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris7MapTypeC05BlockB1XSaySaySay10Foundation4UUIDVGGGvp"></a>
+                    <a name="//apple_ref/swift/Property/BlockMapX" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris7MapTypeC05BlockB1XSaySaySay10Foundation4UUIDVGGGvp">BlockMapX</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get or set the block map. This is a 3D map of block IDs in the current map.</p>
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    <strong>Setting this directly will lead to undefined behavior.</strong>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">BlockMapX</span><span class="p">:</span> <span class="kt"><a href="../Classes/MapType.html#/s:6Fouris7MapTypeC08ContentsC1Xa">ContentsTypeX</a></span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -1910,6 +2102,33 @@ sits on the bottom of the map.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">Height</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris7MapTypeC5DepthSivp"></a>
+                    <a name="//apple_ref/swift/Property/Depth" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris7MapTypeC5DepthSivp">Depth</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get or set the depth of the map. Settings this property directly will result in undefined behavior.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">Depth</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -2316,6 +2535,56 @@ in the bucket.</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:6Fouris7MapTypeC0B8IsEmptyX2AtSbAA0B5PointC_tF"></a>
+                    <a name="//apple_ref/swift/Method/MapIsEmptyX(At:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris7MapTypeC0B8IsEmptyX2AtSbAA0B5PointC_tF">MapIsEmptyX(At:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Determines if a block can occupy the passed point.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">MapIsEmptyX</span><span class="p">(</span><span class="kt">At</span><span class="p">:</span> <span class="kt"><a href="../Classes/MapPoint.html">MapPoint</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>At</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The point to check for emptiness.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>True if the specified point is empty, false if not.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:6Fouris7MapTypeC0B7IsEmpty2At9BlockedBySbSo7CGPointV_AA10PieceTypesOztF"></a>
                     <a name="//apple_ref/swift/Method/MapIsEmpty(At:BlockedBy:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:6Fouris7MapTypeC0B7IsEmpty2At9BlockedBySbSo7CGPointV_AA10PieceTypesOztF">MapIsEmpty(At:BlockedBy:)</a>
@@ -2347,6 +2616,37 @@ in the bucket.</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:6Fouris7MapTypeC0B8IsEmptyX2At9BlockedBySbAA0B5PointC_AA10PieceTypesOztF"></a>
+                    <a name="//apple_ref/swift/Method/MapIsEmptyX(At:BlockedBy:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris7MapTypeC0B8IsEmptyX2At9BlockedBySbAA0B5PointC_AA10PieceTypesOztF">MapIsEmptyX(At:BlockedBy:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Determines if a block can occupy the passed point.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">MapIsEmptyX</span><span class="p">(</span><span class="kt">At</span><span class="p">:</span> <span class="kt"><a href="../Classes/MapPoint.html">MapPoint</a></span><span class="p">,</span> <span class="kt">BlockedBy</span><span class="p">:</span> <span class="k">inout</span> <span class="kt"><a href="../Enums/PieceTypes.html">PieceTypes</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>True if the specified point is empty, false if not.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:6Fouris7MapTypeC20DistanceToBottomFromySiSo7CGPointVF"></a>
                     <a name="//apple_ref/swift/Method/DistanceToBottomFrom(_:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:6Fouris7MapTypeC20DistanceToBottomFromySiSo7CGPointVF">DistanceToBottomFrom(_:)</a>
@@ -2365,6 +2665,58 @@ in the bucket.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">DistanceToBottomFrom</span><span class="p">(</span><span class="n">_</span> <span class="kt">Source</span><span class="p">:</span> <span class="kt">CGPoint</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Source</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The source of the point for obtaining the distance. Intended to be the bottom point of a piece.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Number of spaces from <code>Source</code> to the last empty space in the bucket directly under <code>Source</code>. A negative
+       number is returned if the last empty space is under the bucket (useful for rotating games with gaps in the
+       side of the bucket). The value returned is relative to the <code>Source</code> and not absolute.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris7MapTypeC21DistanceToBottomFromXySiAA0B5PointCF"></a>
+                    <a name="//apple_ref/swift/Method/DistanceToBottomFromX(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris7MapTypeC21DistanceToBottomFromXySiAA0B5PointCF">DistanceToBottomFromX(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the number of game grid spaces from the <code>Source</code> point to the last empty location before being blocked.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">DistanceToBottomFromX</span><span class="p">(</span><span class="n">_</span> <span class="kt">Source</span><span class="p">:</span> <span class="kt"><a href="../Classes/MapPoint.html">MapPoint</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
 
                         </div>
                       </div>
@@ -2449,6 +2801,56 @@ in the bucket.</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:6Fouris7MapTypeC13PieceInBounds2X_SbAA0D0C_tF"></a>
+                    <a name="//apple_ref/swift/Method/PieceInBounds(X_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris7MapTypeC13PieceInBounds2X_SbAA0D0C_tF">PieceInBounds(X_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Determines if the piece is fully in bounds. Call only after the piece is frozen.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">PieceInBounds</span><span class="p">(</span><span class="kt">X_</span> <span class="kt">ThePiece</span><span class="p">:</span> <span class="kt"><a href="../Classes/Piece.html">Piece</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ThePiece</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The piece to check for in-boundedness.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>True if the piece is fully in bounds (eg, in the bucket), false otherwise.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:6Fouris7MapTypeC24HighestOccupiedLocationsSDyS2iGyF"></a>
                     <a name="//apple_ref/swift/Method/HighestOccupiedLocations()" class="dashAnchor"></a>
                     <a class="token" href="#/s:6Fouris7MapTypeC24HighestOccupiedLocationsSDyS2iGyF">HighestOccupiedLocations()</a>
@@ -2473,6 +2875,43 @@ in the bucket.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">HighestOccupiedLocations</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Int</span> <span class="p">:</span> <span class="kt">Int</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Dictionary of columns and highest occupied locations, eg, [Column: Row].</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris7MapTypeC25HighestOccupiedLocationsX3AtZSDyS2iGSi_tF"></a>
+                    <a name="//apple_ref/swift/Method/HighestOccupiedLocationsX(AtZ:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris7MapTypeC25HighestOccupiedLocationsX3AtZSDyS2iGSi_tF">HighestOccupiedLocationsX(AtZ:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the Y value closest to the top of the bucket (eg, bucket entrance) for each column in the bucket.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    If there are no retired game pieces (or bucket parts) in a given column, the column&rsquo;s returned
+    value will be -1.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">HighestOccupiedLocationsX</span><span class="p">(</span><span class="kt">AtZ</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Int</span> <span class="p">:</span> <span class="kt">Int</span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
@@ -4665,6 +5104,80 @@ the bucket. Calls the actual function that does the flood fill.</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:6Fouris7MapTypeC06CreateB05Width6Height5Depth8FillWithSaySaySay10Foundation4UUIDVGGGSi_S2iAKtFZ"></a>
+                    <a name="//apple_ref/swift/Method/CreateMap(Width:Height:Depth:FillWith:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris7MapTypeC06CreateB05Width6Height5Depth8FillWithSaySaySay10Foundation4UUIDVGGGSi_S2iAKtFZ">CreateMap(Width:Height:Depth:FillWith:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a map.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">CreateMap</span><span class="p">(</span><span class="kt"><a href="../Classes/MapType.html#/s:6Fouris7MapTypeC5WidthSivp">Width</a></span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt"><a href="../Classes/MapType.html#/s:6Fouris7MapTypeC6HeightSivp">Height</a></span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt"><a href="../Classes/MapType.html#/s:6Fouris7MapTypeC5DepthSivp">Depth</a></span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">FillWith</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/MapType.html#/s:6Fouris7MapTypeC08ContentsC1Xa">ContentsTypeX</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Width</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Width of the map.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Height</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Height of the map.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Depth</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Depth of the map.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>New map, all locations initialized to <code>.Visible.</code></p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:6Fouris7MapTypeC011CreateBlockB05Width6Height8FillWithSaySay10Foundation4UUIDVGGSi_SiAJtFZ"></a>
                     <a name="//apple_ref/swift/Method/CreateBlockMap(Width:Height:FillWith:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:6Fouris7MapTypeC011CreateBlockB05Width6Height8FillWithSaySay10Foundation4UUIDVGGSi_SiAJtFZ">CreateBlockMap(Width:Height:FillWith:)</a>
@@ -4711,6 +5224,92 @@ the bucket. Calls the actual function that does the flood fill.</p>
                               <td>
                                 <div>
                                   <p>Height of the map.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>FillWith</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID to fill the map with.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>New, empty block map.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris7MapTypeC011CreateBlockB05Width6Height5Depth8FillWithSaySaySay10Foundation4UUIDVGGGSi_S2iAKtFZ"></a>
+                    <a name="//apple_ref/swift/Method/CreateBlockMap(Width:Height:Depth:FillWith:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris7MapTypeC011CreateBlockB05Width6Height5Depth8FillWithSaySaySay10Foundation4UUIDVGGGSi_S2iAKtFZ">CreateBlockMap(Width:Height:Depth:FillWith:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a block map.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">CreateBlockMap</span><span class="p">(</span><span class="kt"><a href="../Classes/MapType.html#/s:6Fouris7MapTypeC5WidthSivp">Width</a></span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt"><a href="../Classes/MapType.html#/s:6Fouris7MapTypeC6HeightSivp">Height</a></span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt"><a href="../Classes/MapType.html#/s:6Fouris7MapTypeC5DepthSivp">Depth</a></span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">FillWith</span><span class="p">:</span> <span class="kt">UUID</span> <span class="o">=</span> <span class="kt">UUID</span><span class="o">.</span><span class="kt">Empty</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/MapType.html#/s:6Fouris7MapTypeC08ContentsC1Xa">ContentsTypeX</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Width</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Width of the map.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Height</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Height of the map.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Depth</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Depth of the map.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4985,8 +5584,7 @@ exist).</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Initialize the contents of the map with the bucket. Depending on the contents of <strong>BaseType</strong>, the shape of the
-bucket will vary.</p>
+                        <p>Initialize the contents of the map with the bucket.</p>
 
                       </div>
                       <div class="declaration">
@@ -5024,6 +5622,186 @@ bucket will vary.</p>
                               <td>
                                 <div>
                                   <p>Height of the map.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>BucketTop</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Top of the bucket.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>BucketBottom</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Bottom of the bucket.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>BucketLeft</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Left location of the bucket.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>BucketRight</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Right location of the bucket.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Map</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The map to initialize.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>BucketID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the bucket piece.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>InvisibleBucketID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the invisible bucket ID.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>BucketExteriorID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the exterior location (eg, on the board but out of the bucket).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>BucketShape</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The shape of the bucket.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris7MapTypeC010InitializeB05Width6Height5Depth9BucketTop0H6Bottom0H4Left0H5Right0B00H2ID09InvisiblehM00h8ExteriorM00H5ShapeySi_S6iSaySay10Foundation4UUIDVGGzA3sA0H6ShapesOtFZ"></a>
+                    <a name="//apple_ref/swift/Method/InitializeMap(Width:Height:Depth:BucketTop:BucketBottom:BucketLeft:BucketRight:Map:BucketID:InvisibleBucketID:BucketExteriorID:BucketShape:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris7MapTypeC010InitializeB05Width6Height5Depth9BucketTop0H6Bottom0H4Left0H5Right0B00H2ID09InvisiblehM00h8ExteriorM00H5ShapeySi_S6iSaySay10Foundation4UUIDVGGzA3sA0H6ShapesOtFZ">InitializeMap(Width:Height:Depth:BucketTop:BucketBottom:BucketLeft:BucketRight:Map:BucketID:InvisibleBucketID:BucketExteriorID:BucketShape:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initialize the contents of the map with the bucket.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="kt">InitializeMap</span><span class="p">(</span><span class="kt"><a href="../Classes/MapType.html#/s:6Fouris7MapTypeC5WidthSivp">Width</a></span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt"><a href="../Classes/MapType.html#/s:6Fouris7MapTypeC6HeightSivp">Height</a></span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt"><a href="../Classes/MapType.html#/s:6Fouris7MapTypeC5DepthSivp">Depth</a></span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt"><a href="../Classes/MapType.html#/s:6Fouris7MapTypeC9BucketTopSivp">BucketTop</a></span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt"><a href="../Classes/MapType.html#/s:6Fouris7MapTypeC12BucketBottomSivp">BucketBottom</a></span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">BucketLeft</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span>
+                                 <span class="kt">BucketRight</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">Map</span><span class="p">:</span> <span class="k">inout</span> <span class="kt"><a href="../Classes/MapType.html#/s:6Fouris7MapTypeC08ContentsC0a">ContentsType</a></span><span class="p">,</span> <span class="kt">BucketID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">,</span> <span class="kt">InvisibleBucketID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">,</span>
+                                 <span class="kt">BucketExteriorID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">,</span> <span class="kt"><a href="../Classes/MapType.html#/s:6Fouris7MapTypeC11BucketShapeAA0D6ShapesOvp">BucketShape</a></span><span class="p">:</span> <span class="kt"><a href="../Enums/BucketShapes.html">BucketShapes</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Width</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Width of the map.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Height</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Height of the map.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Depth</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Depth of the map.</p>
                                 </div>
                               </td>
                             </tr>

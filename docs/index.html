@@ -13,7 +13,7 @@
     <a title="  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html"> Docs</a> (63% documented)</p>
+        <p><a href="index.html"> Docs</a> (64% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -220,6 +220,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Classes/ManagedTimer.html">ManagedTimer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/MapPoint.html">MapPoint</a>
               </li>
               <li class="nav-group-task">
                 <a href="Classes/MapType.html">MapType</a>
@@ -572,6 +575,9 @@
                 <a href="Enums/HideBoardMethods.html">HideBoardMethods</a>
               </li>
               <li class="nav-group-task">
+                <a href="Enums/HostPlatforms.html">HostPlatforms</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Enums/IdiotLightCommands.html">IdiotLightCommands</a>
               </li>
               <li class="nav-group-task">
@@ -919,7 +925,7 @@
 
 <p>Fouris is a dropping block game popularized by Tetris. However, Fouris rotates the board after each piece is frozen, making stategy more important than with one-dimensional block dropping games - what may be a good place for a piece in one orientation may cause trouble when the board rotates.</p>
 
-<p>Fouris was originally written to be cross-compilable for both macOS and iOS using lots of conditional compilation and multiple storyboards. While successful, this approach used up a lot of time and was ultimately abandoned in favor of an iOS/iPadOS-only version. Perhaps new Xcode tools will let me run this on my Mac again in the future&hellip;</p>
+<p>Fouris was originally written to be cross-compilable for both macOS and iOS using lots of conditional compilation and multiple storyboards. While successful, this approach used up a lot of time and was ultimately abandoned in favor of an iOS/iPadOS-only version. Perhaps new Xcode/macOS tools will let me run this on my Mac again in the future&hellip;</p>
 <h2 id='author-and-copyright' class='heading'>Author and Copyright</h2>
 
 <p>Fouris was written by Stuart Rankin.</p>
@@ -935,14 +941,23 @@
 <p>Versioning for Fouris is maintained in the Versioning.swift file and is updated with a program prior to each build to increment the build number and update the date and time. The nice thing about this is I don&rsquo;t have to remember to update build numbers or insert the current time. The bad thing is every time I build the identical code (perhaps for various devices), I get different build numbers&hellip;</p>
 
 <p>Also, this versioning does not utilize Xcode&rsquo;s built-in versioning so I&rsquo;ll have to update that manually.</p>
+
+<p>Most recent build: <strong>Version a.b Build xyz, Date: When</strong></p>
+
+<blockquote>
+<p>This documentation and the Jazzy-created documentation do not necessarily reflect the build shown above.</p>
 <h2 id='implementation-and-requirements' class='heading'>Implementation and Requirements</h2>
 
-<p>Fouris is written in Swift (5.2 as of time of writing) and intended for iOS/iPadOS 13 or higher. <em>Fouris explicitly requires iOS/iPadOS 13 or higher or it will not load/run.</em></p>
+<p>Fouris is written in Swift (5.2 as of time of writing) and intended for iOS/iPadOS 13 or higher. <em>Fouris explicitly requires iOS/iPadOS 13 or higher or it will not load/run.</em> Eventually Fouris may take advantage of a Metal program that uses a flood fill algolrithm for gap counting. This code, written in C, exists but is not debugged or used at this time.</p>
+</blockquote>
 
-<p>Fouris is implemented mostly with SceneKit. SceneKit is used to draw the game view and most controls on the screen.</p>
+<p>Fouris is implemented mostly with SceneKit. SceneKit is used to draw the game view and most controls on the screen. The main menu (the rotating cube) and its child windows all use UIKit. Currently, Fouris uses a text overlay for some UI elements (see also <a href="#Planned">Planned</a>).</p>
 <h3 id='toolchain' class='heading'>Toolchain</h3>
 
 <p>Fouris was compiled with Xcode 11.2 Beta 2 (11B44). Fouris requires a minimum Xcode version of 11.</p>
+<h3 id='simulator' class='heading'>Simulator</h3>
+
+<p>With Xcode 11.2 and macOS 10.15, running Fouris in a simulator is faster than running on native hardware. Given the changes Apple made to how the simulator works, Fouris has access to desktop-class (assuming you are running on a desktop) processors and GPUs. It makes debugging graphics a <em>lot</em> easier&hellip;</p>
 <h3 id='testing' class='heading'>Testing</h3>
 
 <p>Fouris runs with good graphics performance on iPhone 6Ss and above, as well as iPad Mini 4s and newer. The frame rate is a consistent 60 frames per second (+/- 1 FPS).</p>
@@ -950,10 +965,16 @@
 <p>Fouris has run on a simulator for over 99 hours (and would have continued for a longer period except my iMac had a forced restart).</p>
 
 <p>No battery testing has been done although I suspect given the intensive 3D graphics involved, battery life would be an issue.</p>
-<h3 id='issues' class='heading'>Issues</h3>
+
+<p>Fouris has been tested on the following hardware:</p>
 
 <ul>
-<li>Gravity slow-down. For some reason, gravity gets weaker the longer the game plays. This doesn&rsquo;t seem to happen on the simulator until about 180,000 seconds of game time have elapsed, but on an actual device, it happens almost immediately (especially in non-classic game modes).</li>
+<li>iPhone 6S+</li>
+<li>iPhone 8</li>
+<li>iPad Mini 4</li>
+<li>iPad Pro 9.7
+### Issues</li>
+<li>Gravity slow-down. For some reason, gravity gets weaker the longer the game plays. This doesn&rsquo;t seem to happen on the simulator until about 180,000 seconds of game time have elapsed, but on an actual device, it happens almost immediately (especially in non-classic game modes). This also seems to happen over the duration of the instantiation of the game.</li>
 <li>Better AI - the AI is essentially a brute-force method of looking for a place to drop pieces that do the least amount of damage. The AI can&rsquo;t see around corners and is very slow in some circumstances.
 
 <ul>
@@ -984,7 +1005,9 @@ From what I learned, I would do the following differently:</li>
 <li>Better icons and start-up image.</li>
 <li>Move all UI elements into the game view and use SceneKit for all text rather than using a CALayer on top of a SCNView. (However, SCNText doesn&rsquo;t respect NSAttributedStrings very well so most visual attributes are lost.)</li>
 <li>Get the activity log working such that a huge number of log files aren&rsquo;t generated as they are now (perhaps this is more of an <q>issue</q>&hellip;).</li>
-<li><del>Add rotations to more than just the z-axis.</del> Done.
+<li><del>Add rotations to more than just the z-axis.</del> Done (mostly).</li>
+<li>Finish Metal program for gap counting.</li>
+<li>Enable running on macOS. This is sort of done - I enabled macCatalyst and Fouris runs on my Mac, but it looks not terribly good and needs a lot of work&hellip;
 ## Game Play
 Game play consists of the user moving a dropping block into a bucket, trying to fit pieces together the best possible. When a row in a bucket is full of pieces, it is removed and all rows above it are dropped down.</li>
 </ul>
