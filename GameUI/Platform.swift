@@ -315,10 +315,12 @@ class Platform
         return MakeSeparatedNumber(Allocated!, Separator: ",")
     }
     
-    /// Table of GPU families for Metal.
+
     #if targetEnvironment(macCatalyst)
+    /// Table of GPU families for Metal. Not supported on macCatalyst.
     static let MetalFeatureTable: [MTLFeatureSet: String] = [MTLFeatureSet: String]()
     #else
+    /// Table of GPU families for Metal.
     static let MetalFeatureTable: [MTLFeatureSet: String] =
         [
             MTLFeatureSet.iOS_GPUFamily1_v1: "GPU 1, v1",
