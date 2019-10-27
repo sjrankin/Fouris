@@ -18,7 +18,6 @@ class AITestNode
     }
     
     /// Initializer.
-    ///
     /// - Parameters:
     ///   - Method: The AI scoring method.
     ///   - Duration: Duration of the game in seconds.
