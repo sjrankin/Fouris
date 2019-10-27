@@ -9,12 +9,16 @@
 import Foundation
 import UIKit
 
+/// The code that runs the game background selection dialog.
 class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPickerProtocol, ThemeEditingProtocol
 {
-    weak var ThemeDelegate: ThemeEditingProtocol? = nil
-    weak var ColorDelegate: ColorPickerProtocol? = nil
+    /// Delegate that receives results of the dialog.
+    public weak var ThemeDelegate: ThemeEditingProtocol? = nil
+    /// Delegate that allows us to edit colors.
+    public weak var ColorDelegate: ColorPickerProtocol? = nil
     
-    override func viewDidLoad()
+    /// UI initialization.
+    override public func viewDidLoad()
     {
         super.viewDidLoad()
         ImageBox.layer.borderColor = ColorServer.CGColorFrom(ColorNames.Black)
@@ -72,7 +76,11 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
         #endif
     }
     
-    func CycleTimeToUI(CycleTime: Double) -> Int
+    /// Converts an integer cycle time for colors or gradients into an index value for a segmented control.
+    /// - Parameter CycleTime: The value to convert.
+    /// - Returns: Index to use with a segmented control. Assumes all segmented controls used for cycle times have the same
+    ///            number of segments.
+    public func CycleTimeToUI(CycleTime: Double) -> Int
     {
         let ITime = Int(CycleTime)
         switch ITime
@@ -103,7 +111,10 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
         }
     }
     
-    func UICycleTimeToSeconds(Index: Int) -> Double
+    /// Converts a cycle time specified in the UI (via a segmented control) to an actual value the UI can use.
+    /// - Parameter Index: The selected index from a segmented control.
+    /// - Returns: Cycle time value for cycling through colors or gradients.
+    public func UICycleTimeToSeconds(Index: Int) -> Double
     {
         switch Index
         {
@@ -133,7 +144,9 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
         }
     }
     
-    @IBAction func HandleColorCycleTimeChanged(_ sender: Any)
+    /// Handle changes to color cycle times segmented control.
+    /// - Parameter sender: not used.
+    @IBAction public func HandleColorCycleTimeChanged(_ sender: Any)
     {
         let Index = ColorCycleDuration.selectedSegmentIndex
         UserTheme!.BackgroundSolidColorCycleTime = UICycleTimeToSeconds(Index: Index)
@@ -148,7 +161,9 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
         }
     }
     
-    @IBAction func HandleGradientCycleTimeChanged(_ sender: Any)
+    /// Handle changes to gradient cycle times segmented control.
+    /// - Parameter sender: not used.
+    @IBAction public func HandleGradientCycleTimeChanged(_ sender: Any)
     {
         let Index = GradientCycleDuration.selectedSegmentIndex
         UserTheme!.BackgroundGradientCycleTime = UICycleTimeToSeconds(Index: Index)
@@ -163,25 +178,34 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
         }
     }
     
-    func EditTheme(Theme: ThemeDescriptor2)
+    /// Called by the parent.
+    /// - Parameter Theme: The theme being edited.
+    public func EditTheme(Theme: ThemeDescriptor2)
+    {
+        UserTheme = Theme
+    }
+
+    /// Called by the parent.
+    /// - Parameter Theme: The theme being edited.
+    /// - Parameter PieceID: Not used.
+    public func EditTheme(Theme: ThemeDescriptor2, PieceID: UUID)
     {
         UserTheme = Theme
     }
     
-    func EditTheme(Theme: ThemeDescriptor2, PieceID: UUID)
-    {
-        UserTheme = Theme
-    }
-    
-    func UpdateBackgroundType(_ BGType: BackgroundTypes3D) -> BackgroundTypes3D
+    /// Update the UI based on the selected background type.
+    /// - Parameter BGType: The background type selected by the user.
+    /// - Returns: A background type.
+    public func UpdateBackgroundType(_ BGType: BackgroundTypes3D) -> BackgroundTypes3D
     {
         switch BGType
         {
             case .LiveView:
                 #if targetEnvironment(simulator)
                 return .Color
-                #endif
+                #else
                 return .LiveView
+                #endif
             
             case .CALayer:
                 return .Color
@@ -194,6 +218,7 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
         }
     }
     
+    /// Map from background types to UI segmented control indices. -1 indicates unimplemented types.
     private let BackgroundTypeToIndexMap: [BackgroundTypes3D: Int] =
         [
             .CALayer: -1,
@@ -204,14 +229,17 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
             .LiveView: 3
     ]
     
-    var UserTheme: ThemeDescriptor2? = nil
+    /// Holds the current theme to edit.
+    public var UserTheme: ThemeDescriptor2? = nil
     
-    func EditResults(_ Edited: Bool, ThemeID: UUID, PieceID: UUID?)  
+    /// Not currently used.
+    public func EditResults(_ Edited: Bool, ThemeID: UUID, PieceID: UUID?)
     {
         //Do something...
     }
     
-    @IBAction func HandleBackgroundTypeChanged(_ sender: Any)
+    /// Handle changes in the UI segmented control that determines the background type.
+    @IBAction public func HandleBackgroundTypeChanged(_ sender: Any)
     {
         let BGType = BackgroundTypeSegment.selectedSegmentIndex
         switch BGType
@@ -235,8 +263,11 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
         HandleBGChange(ToType: BackgroundType)
     }
     
-    var BackgroundType: BackgroundTypes3D = .Color
+    /// Working background type.
+    private var BackgroundType: BackgroundTypes3D = .Color
     
+    /// Update the UI to reflect the currently selected background type.
+    /// - Parameter ToType: The background type the UI will be set for.
     func HandleBGChange(ToType: BackgroundTypes3D)
     {
         switch ToType
@@ -321,7 +352,9 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
     @IBOutlet weak var LiveViewCameraSegment: UISegmentedControl!
     @IBOutlet weak var BackgroundTypeSegment: UISegmentedControl!
     
-    @IBAction func HandleSelectColorPressed(_ sender: Any)
+    /// Run the color editor for changing the background color.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleSelectColorPressed(_ sender: Any)
     {
         let Storyboard = UIStoryboard(name: "Theming", bundle: nil)
         if let Controller = Storyboard.instantiateViewController(withIdentifier: "ColorPicker") as? ColorPickerCode
@@ -332,7 +365,10 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
         }
     }
     
-    @IBSegueAction func InstantiateImagePicker(_ coder: NSCoder) -> SelectBackgroundImageCode?
+    /// Run the image selector for changing the background image.
+    /// - Parameter coder: The `NSCoder` value used to instantiate the image selector.
+    /// - Returns: Code to run the image selector.
+    @IBSegueAction public func InstantiateImagePicker(_ coder: NSCoder) -> SelectBackgroundImageCode?
     {
         let Picker = SelectBackgroundImageCode(coder: coder)
         Picker?.ThemeDelegate = self
@@ -340,7 +376,10 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
         return Picker
     }
     
-    @IBSegueAction func InstantiateColorPicker(_ coder: NSCoder) -> ColorPickerCode?
+    /// Run the color picker.
+    /// - Parameter coder: The `NSCoder` value used to instantiate the color picker.
+    /// - Returns: Code to run the color picker.
+    @IBSegueAction public func InstantiateColorPicker(_ coder: NSCoder) -> ColorPickerCode?
     {
         let ColorPicker = ColorPickerCode(coder: coder)
         ColorPicker?.ColorDelegate = self
@@ -349,7 +388,10 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
         return ColorPicker
     }
     
-    @IBSegueAction func InstantiateGradientEditor(_ coder: NSCoder) -> GradientEditorCode?
+    /// Run the gradient editor.
+    /// - Parameter coder: The `NSCoder` value used to instantiate the gradient editor.
+    /// - Returns: Code to run the gradient editor.
+    @IBSegueAction public func InstantiateGradientEditor(_ coder: NSCoder) -> GradientEditorCode?
     {
         let GradientEditor = GradientEditorCode(coder: coder)
         GradientEditor?.GradientDelegate = self
@@ -357,12 +399,16 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
         return GradientEditor
     }
     
-    func ColorToEdit(_ Color: UIColor, Tag: Any?)
+    /// Not implemented and not expected to be called.
+    public func ColorToEdit(_ Color: UIColor, Tag: Any?)
     {
         //Should not be called.
     }
     
-    func EditedColor(_ Edited: UIColor?, Tag: Any?)
+    /// Called by the color picker once the picker is closed.
+    /// - Parameter Edited: If not nil, the new color selected by the user. If nil, the user canceled the color picker.
+    /// - Parameter Tag: The tag value sent to the color picker by this instance.
+    public func EditedColor(_ Edited: UIColor?, Tag: Any?)
     {
         if let RawTag = Tag as? String
         {
@@ -379,7 +425,10 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
     
     // MARK: Gradient protocol functions.
     
-    func EditedGradient(_ Edited: String?, Tag: Any?)
+    /// Called by the gradient editor once the editor is closed.
+    /// - Parameter Edited: If not nil, the new gradiented selected/editor by the user. If nil, the editor was canceled by the user.
+    /// - Parameter Tag: The tag value sent to the gradient editor by this instance.
+    public func EditedGradient(_ Edited: String?, Tag: Any?)
     {
         if let RawTag = Tag as? String
         {
@@ -394,7 +443,12 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
         }
     }
     
-    func ForceVerticalGradient(_ RawGradient: String, VerticalFlag: Bool) -> String
+    /// Forces a gradient to the passed vertical flag.
+    /// - Parameter RawGradient: The gradient whose vertical flag is forced to the passed value.
+    /// - Parameter VerticalFlag: The vertical flag the passed gradient will take on. True for vertical gradients, false for
+    ///                           horizontal gradients.
+    /// - Returns: Edited gradient.
+    public func ForceVerticalGradient(_ RawGradient: String, VerticalFlag: Bool) -> String
     {
         var NotUsed: Bool = false
         var Reversed: Bool = false
@@ -403,17 +457,21 @@ class GameBackgroundDialog: UIViewController, ColorPickerProtocol, GradientPicke
         return Final
     }
     
-    func GradientToEdit(_ Edited: String?, Tag: Any?)
+    /// Not used. Required by protocol.
+    public func GradientToEdit(_ Edited: String?, Tag: Any?)
     {
         //Not used in this class.
     }
     
-    func SetStop(StopColorIndex: Int)
+    /// Not used. Required by protocol.
+    public func SetStop(StopColorIndex: Int)
     {
         //Not used in this class.
     }
     
-    @IBAction func HandleClosePressed(_ sender: Any)
+    /// Handle the close button pressed. Update the caller with changes. Close the dialog.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleClosePressed(_ sender: Any)
     {
         ThemeDelegate?.EditResults(true, ThemeID: UserTheme!.ID, PieceID: nil)
         self.dismiss(animated: true, completion: nil)
