@@ -69,6 +69,7 @@ From what I learned, I would do the following differently:
 9. Get the activity log working such that a huge number of log files aren't generated as they are now (perhaps this is more of an "issue"...).
 10. ~~Add rotations to more than just the z-axis.~~ Done (mostly).
 11. Finish Metal program for gap counting.
+12. Enable running on macOS. This is sort of done - I enabled macCatalyst and Fouris runs on my Mac, but it looks not terribly good and needs a lot of work...
 ## Game Play
 Game play consists of the user moving a dropping block into a bucket, trying to fit pieces together the best possible. When a row in a bucket is full of pieces, it is removed and all rows above it are dropped down.
 
