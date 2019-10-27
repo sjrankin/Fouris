@@ -26,7 +26,7 @@ class ColorButton: UIButton
     /// Holds the color of the button. Defaults to white.
     private var _ButtonColor: UIColor = UIColor.white
     /// Get or set the color of the button.
-    @IBInspectable var ButtonColor: UIColor
+    @IBInspectable public var ButtonColor: UIColor
         {
         get
         {
@@ -44,7 +44,7 @@ class ColorButton: UIButton
     /// Set the color of the button. A checkerboard pattern is displayed under the color for
     /// colors with an alpha less than 1.0.
     /// -Parameter To: The new color.
-    func SetButtonColor(To: UIColor)
+    public func SetButtonColor(To: UIColor)
     {
         self.layer.cornerRadius = 5.0
         self.layer.borderWidth = 0.5
@@ -57,7 +57,8 @@ class ColorButton: UIButton
         self.setImage(MakeColorImage(WithColor: To), for: .normal)
     }
     
-    func MakeColorImage(WithColor: UIColor) -> UIImage
+    /// Creates an image of the color with a checkerboard background to show transparency.
+    public func MakeColorImage(WithColor: UIColor) -> UIImage
     {
         let CheckerLayer = CALayer()
         CheckerLayer.isOpaque = false
