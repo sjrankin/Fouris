@@ -14,7 +14,7 @@ import UIKit
 @IBDesignable class GradientSwatch: UIView
 {
     /// Holds the delegate to the observer, if any.
-    weak var ObserverDelegate: GradientObserver? = nil
+    public weak var ObserverDelegate: GradientObserver? = nil
     
     /// Initializer.
     /// - Parameter frame: Frame of the control.
@@ -47,7 +47,7 @@ import UIKit
     private var GradientImage: UIImageView!
     
     /// Every time the bounds change, we need to redraw the gradient.
-    override var bounds: CGRect
+    override public var bounds: CGRect
         {
         didSet
         {
@@ -58,7 +58,7 @@ import UIKit
     /// Draw the gradient.
     /// - Parameter WithOverride: If present, the gradient description to use. Otherwise, the backing value of `GradientDescriptor`
     ///                           is used.
-    func DrawGradient(WithOverride: String? = nil)
+    public func DrawGradient(WithOverride: String? = nil)
     {
         let Descriptor: String = WithOverride == nil ? _GradientDescriptor : WithOverride!
         let GradientAsImage = GradientManager.CreateGradientImageWithMetadata(From: Descriptor,
@@ -132,6 +132,7 @@ import UIKit
         }
     }
     
+    /// Update the sample image for hue shifting.
     private func UpdateHueShifting()
     {
         if _HueShiftDuration <= 0.0 || !_EnableHueShifting
@@ -148,14 +149,19 @@ import UIKit
                                         userInfo: nil, repeats: true)
     }
     
-    var ShiftVertical: Bool = false
-    var ShiftReversed: Bool = false
+    /// Shift the hue vertically.
+    private var ShiftVertical: Bool = false
+    /// Reverse the hue shift.
+    private var ShiftReversed: Bool = false
     
-    var ShiftingStops: [(UIColor, CGFloat)] = [(UIColor, CGFloat)]()
+    /// Contains a list of color stops for shifting hues.
+    private var ShiftingStops: [(UIColor, CGFloat)] = [(UIColor, CGFloat)]()
     
+    /// Timer for shifting hues.
     private var HueTimer: Timer? = nil
     
-    @objc func UpdateShiftGradient()
+    /// Function that does the actual hue shifting on the gradient.
+    @objc private func UpdateShiftGradient()
     {
         var NewStops = [(UIColor, CGFloat)]()
         for (Working, Stop) in ShiftingStops
@@ -182,6 +188,7 @@ import UIKit
         ObserverDelegate?.GradientChanged(NewGradient: NewGradient)
     }
     
+    /// Holds the enable hue shifting flag.
     private var _EnableHueShifting: Bool = false
     {
         didSet
@@ -189,6 +196,7 @@ import UIKit
             UpdateHueShifting()
         }
     }
+    /// Get or set the enable hue shifting flag.
     @IBInspectable public var EnableHueShifting: Bool
         {
         get
@@ -201,6 +209,7 @@ import UIKit
         }
     }
     
+    /// Holds the duration of the hue shift.
     private var _HueShiftDuration: Double = 60.0
     {
         didSet
@@ -208,6 +217,7 @@ import UIKit
             UpdateHueShifting()
         }
     }
+    /// Get or set the number of seconds to shift each hue in the gradient by 360°.
     @IBInspectable public var HueShiftDuration: Double
         {
         get
