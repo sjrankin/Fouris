@@ -537,10 +537,10 @@ class SCNButtonNode: SCNNode
 }
 
 /// Types of text to display.
-/// - **String**: Source is from a Swift **String**.
-/// - **UnicodeCodePoint**: Source is an **Int** that points to a Unicode code point.
 enum TextTypes: String, CaseIterable
 {
+    /// Text source is a string.
     case String = "String"
+    /// Text source is a Unicode code point from a passed integer.
     case UnicodeCodePoint = "UnicodeCodePoint"
 }
