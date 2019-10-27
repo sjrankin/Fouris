@@ -14,6 +14,8 @@ Please refer to [Fouris Documentation Index](https://github.com/sjrankin/Fouris/
 Versioning for Fouris is maintained in the Versioning.swift file and is updated with a program prior to each build to increment the build number and update the date and time. The nice thing about this is I don't have to remember to update build numbers or insert the current time. The bad thing is every time I build the identical code (perhaps for various devices), I get different build numbers...
 
 Also, this versioning does not utilize Xcode's built-in versioning so I'll have to update that manually.
+
+Most recent build information: **Version a.b Build xyz, Date: When**
 ## Implementation and Requirements
 Fouris is written in Swift (5.2 as of time of writing) and intended for iOS/iPadOS 13 or higher. *Fouris explicitly requires iOS/iPadOS 13 or higher or it will not load/run.*
 
