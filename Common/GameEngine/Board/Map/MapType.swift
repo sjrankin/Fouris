@@ -24,12 +24,28 @@ class MapType: CustomStringConvertible
     ///   - BucketShape: Shape of the game's bucket.
     init(Width: Int, Height: Int, ID: UUID, BucketShape: BucketShapes)
     {
-        print("init(Width: \(Width), Height: \(Height), ID: \(ID.uuidString), BucketShape: \(BucketShape))")
+        print("init(Width: \(Width), Height: \(Height), BucketShape: \(BucketShape))")
         _MapID = ID
         let Board = BoardManager.GetBoardFor(BucketShape)!
         self.Width = Board.GameBoardWidth
         self.Height = Board.GameBoardHeight
         Initialize(Width: Width, Height: Height, BoardBucketShape: BucketShape)
+    }
+    
+    /// Initializer.
+    /// - Parameters:
+    ///   - Width: Width of the map.
+    ///   - Height: Height of the map.
+    ///   - Depth: Depth of the map.
+    ///   - ID: ID of the map.
+    ///   - BucketShape: Shape of the game's bucket.
+    init(Width: Int, Height: Int, Depth: Int, ID: UUID, BucketShape: BucketShapes)
+    {
+                print("init(Width: \(Width), Height: \(Height), BucketShape: \(BucketShape))")
+        let Board = BoardManager.GetBoardFor(BucketShape)!
+        self.Width = Board.GameBoardWidth
+        self.Height = Board.GameBoardHeight
+        Initialize(Width: Width, Height: Height, Depth: Depth, BoardBucketShape: BucketShape)
     }
     
     /// Initializer. Uses the standard bucket/map size. The map size is 12x34 and the bucket is 10x20 and
@@ -135,15 +151,11 @@ class MapType: CustomStringConvertible
         InPlay = [Piece]()
         _IDMap = PieceIDMap()
         _CurrentBoardSize = CGSize(width: RawBucket!.GameBoardWidth, height: RawBucket!.GameBoardHeight)
-        //print("_CurrentBoardSize: \(_CurrentBoardSize)")
         _Contents = MapType.CreateMap(Width: RawBucket!.GameBoardWidth, Height: RawBucket!.GameBoardHeight,
                                       FillWith: IDMap!.StaticID(For: .Visible))
         _BlockMap = MapType.CreateMap(Width: RawBucket!.GameBoardWidth, Height: RawBucket!.GameBoardHeight,
                                       FillWith: UUID.Empty)
         
-        //print("Bucket size: \(RawBucket!.BucketWidth), \(RawBucket!.BucketHeight)")
-        //print("Bucket location: \(RawBucket!.BucketX),\(RawBucket!.BucketY)")
-        //print("GameBoard size: \(RawBucket!.GameBoardSize())")
         switch BoardClass
         {
             case .Static:
@@ -179,6 +191,81 @@ class MapType: CustomStringConvertible
                               BucketRight: _BucketInteriorRight + 1, Map: &_Contents,
                               BucketID: BucketID, InvisibleBucketID: InvisibleBucketID, BucketExteriorID: BucketExteriorID,
                               BucketShape: BucketShape) 
+        _BucketSize = CGSize(width: _BucketInteriorWidth, height: _BucketInteriorHeight)
+        if Scorer == nil
+        {
+            Scorer = Score(WithID: UUID(), BucketWidth: _BucketInteriorWidth, BucketHeight: _BucketInteriorHeight,
+                           BucketBottom: _BucketInteriorBottom, BucketTop: _BucketInteriorTop,
+                           Mask: [.GapDelta, .GapCount, .MapCondition, .PieceBlockCount, .PieceBlockLocation, .RowCollapse])
+            Scorer!.Annotated = true
+        }
+    }
+    
+    /// Initialize the map contents and related properties.
+    /// - Note:
+    ///   - If `Scorer` is nil, it is initialized here with standard default values.
+    /// - Parameters:
+    ///   - Width: Width of the map.
+    ///   - Height: Height of the map.
+    ///   - Depth: Depth of the map.
+    ///   - BucketShape: The shape of the bucket in the map.
+    private func Initialize(Width: Int, Height: Int, Depth: Int, BoardBucketShape: BucketShapes)
+    {
+        print("Initialize(Width: \(Width), Height: \(Height), Depth: \(Depth), BoardBucketShape: \(BoardBucketShape)")
+        _BucketShape = BoardBucketShape
+        let RawBucket = BoardManager.GetBoardFor(BoardBucketShape)
+        _BoardClass = BoardData.GetBoardClass(For: BucketShape)!
+        if BoardClass == .Rotatable || BoardClass == .ThreeDimensional
+        {
+            if Width != Height
+            {
+                fatalError("Width and Height must be the same for .Rotating4 or .Cubic. Width was \(Width) and Height was \(Height).")
+            }
+        }
+        _CurrentRotation = 0
+        InPlay = [Piece]()
+        _IDMap = PieceIDMap()
+        _CurrentBoardSize = CGSize(width: RawBucket!.GameBoardWidth, height: RawBucket!.GameBoardHeight)
+        _ContentsX = MapType.CreateMap(Width: RawBucket!.GameBoardWidth, Height: RawBucket!.GameBoardHeight,
+                                       Depth: 1, FillWith: IDMap!.StaticID(For: .Visible))
+        _BlockMapX = MapType.CreateMap(Width: RawBucket!.GameBoardWidth, Height: RawBucket!.GameBoardHeight,
+                                       Depth: 1, FillWith: UUID.Empty)
+        
+        switch BoardClass
+        {
+            case .Static:
+                _BucketBottom = RawBucket!.BucketHeight - 1
+                _BucketInteriorBottom = _BucketBottom - 1
+                _BucketTop = RawBucket!.BucketY
+                _BucketInteriorTop = _BucketTop
+                _BucketInteriorLeft = RawBucket!.BucketX
+                _BucketInteriorRight = RawBucket!.BucketWidth - 1
+                _BucketInteriorRight = (Width - _BucketInteriorLeft) - 1
+                _BucketInteriorWidth = RawBucket!.BucketWidth - 2
+                _BucketInteriorHeight = RawBucket!.BucketHeight - 1
+            
+            case .Rotatable:
+                _BucketBottom = RawBucket!.BucketHeight + RawBucket!.BucketY - 1
+                _BucketInteriorBottom = _BucketBottom
+                _BucketTop = RawBucket!.BucketY
+                _BucketInteriorTop = _BucketTop
+                _BucketInteriorLeft = RawBucket!.BucketX
+                _BucketInteriorRight = RawBucket!.BucketX + RawBucket!.BucketWidth - 1
+                _BucketInteriorWidth = RawBucket!.BucketWidth
+                _BucketInteriorHeight = RawBucket!.BucketHeight
+            
+            case .ThreeDimensional:
+                break
+        }
+        
+        let BucketID = IDMap!.StaticID(For: .Bucket)
+        let InvisibleBucketID = IDMap!.StaticID(For: .InvisibleBucket)
+        let BucketExteriorID = IDMap!.StaticID(For: .BucketExterior)
+        MapType.InitializeMap(Width: Width, Height: Height, Depth: Depth, 
+                              BucketTop: BucketTop, BucketBottom: _BucketBottom, BucketLeft: _BucketInteriorLeft - 1,
+                              BucketRight: _BucketInteriorRight + 1, Map: &_Contents,
+                              BucketID: BucketID, InvisibleBucketID: InvisibleBucketID, BucketExteriorID: BucketExteriorID,
+                              BucketShape: BucketShape)
         _BucketSize = CGSize(width: _BucketInteriorWidth, height: _BucketInteriorHeight)
         if Scorer == nil
         {
@@ -407,6 +494,9 @@ class MapType: CustomStringConvertible
     
     /// Type alias for the map. Given how it is constructed, access needs to be on row/column order (eg, [Y][X]).
     typealias ContentsType = [[UUID]]
+    /// Type alias for the map in 3D. Access is in row/column/depth order (`[Y][X][Z]`). Two dimensional maps all have
+    /// a `Z` value of `0`.
+    typealias ContentsTypeX = [[[UUID]]]
     
     /// Holds the contents of the map.
     private var _Contents: ContentsType!
@@ -424,6 +514,22 @@ class MapType: CustomStringConvertible
         }
     }
     
+    /// Holds the contents of the 3D map.
+    private var _ContentsX: ContentsTypeX!
+    /// Get or set the 3D map contents.
+    /// - Warning: **Setting this directly will lead to undefined behavior.**
+    public var ContentsX: ContentsTypeX
+    {
+        get
+        {
+            return _ContentsX
+        }
+        set
+        {
+            _ContentsX = newValue
+        }
+    }
+    
     /// Holds the contents of the block map.
     private var _BlockMap: ContentsType!
     /// Get or set the block map. This is a map of block IDs in the current map.
@@ -437,6 +543,22 @@ class MapType: CustomStringConvertible
         set
         {
             _BlockMap = newValue
+        }
+    }
+    
+    /// Holds the contents of the 3d block map.
+    private var _BlockMapX: ContentsTypeX!
+    /// Get or set the block map. This is a 3D map of block IDs in the current map.
+    /// - Warning: **Setting this directly will lead to undefined behavior.**
+    public var BlockMapX: ContentsTypeX
+    {
+        get
+        {
+            return _BlockMapX
+        }
+        set
+        {
+            _BlockMapX = newValue
         }
     }
     
@@ -467,6 +589,21 @@ class MapType: CustomStringConvertible
         set
         {
             _Height = newValue
+        }
+    }
+    
+    /// Holds the depth of the map.
+    private var _Depth: Int = 0
+    /// Get or set the depth of the map. Settings this property directly will result in undefined behavior.
+    public var Depth: Int
+    {
+        get
+        {
+            return _Depth
+        }
+        set
+        {
+            _Depth = newValue
         }
     }
     
@@ -650,6 +787,26 @@ class MapType: CustomStringConvertible
     }
     
     /// Determines if a block can occupy the passed point.
+    /// - Parameter At: The point to check for emptiness.
+    /// - Returns: True if the specified point is empty, false if not.
+    public func MapIsEmptyX(At: MapPoint) -> Bool
+    {
+        if At.X < 0 || At.Y < 0 || At.Z < 0
+        {
+            return false
+        }
+        let YCount = ContentsX.count
+        let XCount = ContentsX[0].count
+        let ZCount = ContentsX[0][0].count
+        if At.X >= XCount || At.Y >= YCount || At.Z >= ZCount
+        {
+            return false
+        }
+        let ID = ContentsX[At.Y][At.X][At.Z]
+        return IDMap!.IsEmptyType(ID)
+    }
+    
+    /// Determines if a block can occupy the passed point.
     /// - Parameters
     ///   - At: The point to check for emptiness.
     ///   - BlockedBy: Returns the piece that is blocking the block.
@@ -671,6 +828,29 @@ class MapType: CustomStringConvertible
         return IDMap!.IsEmptyType(ID)
     }
     
+    /// Determines if a block can occupy the passed point.
+    /// - Parameters
+    ///   - At: The point to check for emptiness.
+    ///   - BlockedBy: Returns the piece that is blocking the block.
+    /// - Returns: True if the specified point is empty, false if not.
+    public func MapIsEmptyX(At: MapPoint, BlockedBy: inout PieceTypes) -> Bool
+    {
+        if At.X < 0 || At.Y < 0 || At.Z < 0
+        {
+            return false
+        }
+        let YCount = ContentsX.count
+        let XCount = ContentsX[0].count
+        let ZCount = ContentsX[0][0].count
+        if At.X >= XCount || At.Y >= YCount || At.Z >= ZCount
+        {
+            return false
+        }
+        let ID = ContentsX[At.Y][At.X][At.Z]
+        BlockedBy = IDMap!.IDtoPiece(ID)!
+        return IDMap!.IsEmptyType(ID)
+    }
+    
     /// Returns the number of game grid spaces from the `Source` point to the last empty location before being blocked.
     /// - Parameter Source: The source of the point for obtaining the distance. Intended to be the bottom point of a piece.
     /// - Returns: Number of spaces from `Source` to the last empty space in the bucket directly under `Source`. A negative
@@ -683,6 +863,27 @@ class MapType: CustomStringConvertible
         for Y in Int(Source.y) + 1 ..< BoardDef!.GameBoardHeight
         {
             let ID = Contents[Y][Int(Source.x)]
+            if !(IDMap?.IsEmptyType(ID))!
+            {
+                return Count
+            }
+            Count = Count + 1
+        }
+        return -Int.max
+    }
+    
+    /// Returns the number of game grid spaces from the `Source` point to the last empty location before being blocked.
+    /// - Parameter Source: The source of the point for obtaining the distance. Intended to be the bottom point of a piece.
+    /// - Returns: Number of spaces from `Source` to the last empty space in the bucket directly under `Source`. A negative
+    ///            number is returned if the last empty space is under the bucket (useful for rotating games with gaps in the
+    ///            side of the bucket). The value returned is relative to the `Source` and not absolute.
+    public func DistanceToBottomFromX(_ Source: MapPoint) -> Int
+    {
+        let BoardDef = BoardManager.GetBoardFor(_BucketShape)
+        var Count = 0
+        for Y in Int(Source.Y) + 1 ..< BoardDef!.GameBoardHeight
+        {
+            let ID = ContentsX[Y][Source.X][Source.Z]
             if !(IDMap?.IsEmptyType(ID))!
             {
                 return Count
@@ -718,6 +919,32 @@ class MapType: CustomStringConvertible
         return IsInBounds
     }
     
+    /// Determines if the piece is fully in bounds. Call only after the piece is frozen.
+    /// - Parameter ThePiece: The piece to check for in-boundedness.
+    /// - Returns: True if the piece is fully in bounds (eg, in the bucket), false otherwise.
+    public func PieceInBounds(X_ ThePiece: Piece) -> Bool
+    {
+        let BoardDef = BoardManager.GetBoardFor(_BucketShape)
+        var IsInBounds = true
+        for Point in ThePiece.Locations
+        {
+            if Point.X < BoardDef!.BucketX || Point.X > BoardDef!.BucketX + BoardDef!.BucketWidth - 1
+            {
+                IsInBounds = false
+            }
+            if Point.Y < BoardDef!.BucketY || Point.Y > BoardDef!.BucketY + BoardDef!.BucketHeight - 1
+            {
+                IsInBounds = false
+            }
+            if !IsInBounds
+            {
+                break
+            }
+        }
+        Scorer?.ScoreLocations(ThePiece.LocationsAsPoints())
+        return IsInBounds
+    }
+    
     /// Returns the Y value closest to the top of the bucket (eg, bucket entrance) for each column in the bucket.
     /// - Note: If there are no retired game pieces (or bucket parts) in a given column, the column's returned
     ///         value will be -1.
@@ -731,6 +958,28 @@ class MapType: CustomStringConvertible
             for Y in BucketTop ... BucketBottom
             {
                 if IDMap!.IsOccupiedType(Contents[Y][X])
+                {
+                    Results[X] = Y
+                    break
+                }
+            }
+        }
+        return Results
+    }
+    
+    /// Returns the Y value closest to the top of the bucket (eg, bucket entrance) for each column in the bucket.
+    /// - Note: If there are no retired game pieces (or bucket parts) in a given column, the column's returned
+    ///         value will be -1.
+    /// - Returns: Dictionary of columns and highest occupied locations, eg, [Column: Row].
+    public func HighestOccupiedLocationsX(AtZ: Int) -> [Int: Int]
+    {
+        var Results = [Int: Int]()
+        for X in BucketInteriorLeft ... BucketInteriorRight
+        {
+            Results[X] = -1
+            for Y in BucketTop ... BucketBottom
+            {
+                if IDMap!.IsOccupiedType(ContentsX[Y][X][AtZ])
                 {
                     Results[X] = Y
                     break
@@ -1658,6 +1907,28 @@ class MapType: CustomStringConvertible
         return Map
     }
     
+    /// Create a map.
+    /// - Parameters:
+    ///   - Width: Width of the map.
+    ///   - Height: Height of the map.
+    ///   - Depth: Depth of the map.
+    /// - Returns: New map, all locations initialized to `.Visible.`
+    public static func CreateMap(Width: Int, Height: Int, Depth: Int, FillWith: UUID) -> ContentsTypeX
+    {
+        var Map = Array(repeating: Array(repeating: Array(repeating: UUID(), count: Depth), count: Width), count: Height)
+        for Y in 0 ..< Height
+        {
+            for X in 0 ..< Width
+            {
+                for Z in 0 ..< Depth
+                {
+                Map[Y][X][Z] = FillWith
+                }
+            }
+        }
+        return Map
+    }
+    
     /// Create a block map.
     /// - Parameter Width: Width of the map.
     /// - Parameter Height: Height of the map.
@@ -1671,6 +1942,28 @@ class MapType: CustomStringConvertible
             for X in 0 ..< Width
             {
                 Map[Y][X] = FillWith
+            }
+        }
+        return Map
+    }
+    
+    /// Create a block map.
+    /// - Parameter Width: Width of the map.
+    /// - Parameter Height: Height of the map.
+    /// - Parameter Depth: Depth of the map.
+    /// - Parameter FillWith: The ID to fill the map with.
+    /// - Returns: New, empty block map.
+    public static func CreateBlockMap(Width: Int, Height: Int, Depth: Int, FillWith: UUID = UUID.Empty) -> ContentsTypeX
+    {
+        var Map = Array(repeating: Array(repeating: Array(repeating: UUID(), count: Depth), count: Width), count: Height)
+        for Y in 0 ..< Height
+        {
+            for X in 0 ..< Width
+            {
+                for Z in 0 ..< Depth
+                {
+                Map[Y][X][Z] = FillWith
+                }
             }
         }
         return Map
@@ -1855,6 +2148,7 @@ class MapType: CustomStringConvertible
     {
         let NewMap = MapType(Width: From.Width, Height: From.Height, ID: UUID(), BucketShape: From.BucketShape)
         NewMap.Contents = From.Contents
+        NewMap.ContentsX = From.ContentsX
         //NewMap.IDMap = From.IDMap!.Clone()
         return NewMap
     }
