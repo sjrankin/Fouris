@@ -1528,7 +1528,8 @@ class View3D: SCNView,                          //Our main super class.
     /// Lock used when the board is rotating.
     public var RotateLock = NSObject()
     
-    /// Rotates the contents of the game (but not UI or falling piece) on the specified axis.
+    /// Rotates the contents of the game (but not UI or falling piece) on the specified axis. The contents are rotated to an
+    /// absolute angle.
     /// - Note:
     ///   - This function uses a synchronous lock to make sure that when the board is rotating, no one else can access it.
     ///   - This function will rotate frozen pieces, bucket barriers, and bucket grids and outlines but no other objects.
@@ -1538,7 +1539,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter By: Number of degrees to rotate by. Specify negative values for clockwise rotations and positive values for
     ///                 counterclockwise rotations.
     /// - Parameter Duration: Duration of the rotation. Defaults to 0.33 seconds.
-    public func RotateContents(OnAxis: Axes, By Degrees: CGFloat, Duration: Double = 0.33)
+    public func RotateContentsTo(OnAxis: Axes, By Degrees: CGFloat, Duration: Double = 0.33)
     {
         objc_sync_enter(RotateLock)
         defer{objc_sync_exit(RotateLock)}
@@ -1558,12 +1559,52 @@ class View3D: SCNView,                          //Our main super class.
             ZRotationalValue = Radians
         }
         RemoveMovingPiece()
-        let RotateBy = SCNAction.rotateBy(x: XRotationalValue, y: YRotationalValue, z: ZRotationalValue, duration: Duration)
         let RotateTo = SCNAction.rotateTo(x: XRotationalValue, y: YRotationalValue, z: ZRotationalValue, duration: Duration)
         if CurrentTheme!.RotateBucketGrid
         {
             BucketGridNode?.runAction(RotateTo)
             OutlineNode?.runAction(RotateTo)
+        }
+        MasterBlockNode?.runAction(RotateTo)
+        BucketNode?.runAction(RotateTo)
+    }
+    
+    /// Rotates the contents of the game (but not UI or falling piece) on the specified axis. The contents are rotated by a
+    /// relative angle.
+    /// - Note:
+    ///   - This function uses a synchronous lock to make sure that when the board is rotating, no one else can access it.
+    ///   - This function will rotate frozen pieces, bucket barriers, and bucket grids and outlines but no other objects.
+    ///   - When rotating on the X or Y axis, the caller will most likely want to rotate by 180° otherwise the board will end
+    ///     up edge-on to the viewer, making it difficult to see the pieces.
+    /// - Parameter OnAxis: Determines the axis to rotate about. Use `.ZAxis` for a face-on rotation.
+    /// - Parameter By: Number of degrees to rotate by. Specify negative values for clockwise rotations and positive values for
+    ///                 counterclockwise rotations.
+    /// - Parameter Duration: Duration of the rotation. Defaults to 0.33 seconds.
+    public func RotateContentsBy(OnAxis: Axes, By Degrees: CGFloat, Duration: Double = 0.33)
+    {
+        objc_sync_enter(RotateLock)
+        defer{objc_sync_exit(RotateLock)}
+        let Radians = CGFloat.pi / 180.0 * Degrees
+        var XRotationalValue: CGFloat = 0.0
+        var YRotationalValue: CGFloat = 0.0
+        var ZRotationalValue: CGFloat = 0.0
+        switch OnAxis
+        {
+            case .XAxis:
+                XRotationalValue = Radians
+            
+            case .YAxis:
+                YRotationalValue = Radians
+            
+            case .ZAxis:
+                ZRotationalValue = Radians
+        }
+        RemoveMovingPiece()
+        let RotateBy = SCNAction.rotateBy(x: XRotationalValue, y: YRotationalValue, z: ZRotationalValue, duration: Duration)
+        if CurrentTheme!.RotateBucketGrid
+        {
+            BucketGridNode?.runAction(RotateBy)
+            OutlineNode?.runAction(RotateBy)
         }
         MasterBlockNode?.runAction(RotateBy)
         BucketNode?.runAction(RotateBy)
@@ -1598,9 +1639,9 @@ class View3D: SCNView,                          //Our main super class.
     @objc func ExecutionRotation()
     {
         let Axis = Axes.allCases.randomElement()!
-        let Angle: CGFloat = Axis == .ZAxis ? 90.0 : 180.0
-        let RotationalDuration: Double = Axis == .ZAxis ? 0.35 : 0.6
-        RotateContents(OnAxis: Axis, By: Angle, Duration: RotationalDuration)
+        let Angle: CGFloat = (Axis == .ZAxis ? 90.0 : 180.0) * CGFloat([1.0, -1.0].randomElement()!)
+        let RotationalDuration: Double = Axis == .ZAxis ? 0.3 : 0.6
+        RotateContentsBy(OnAxis: Axis, By: Angle, Duration: RotationalDuration)
     }
     
     /// Rotates the contents of the game (but not UI or falling piece) by the specified number of degrees.
