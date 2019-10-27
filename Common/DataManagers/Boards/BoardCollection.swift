@@ -109,6 +109,10 @@ class BoardCollection: XMLDeserializeProtocol
                                 Board._BucketRotates = Bool(BucketR)!
                                 let PieceR = XMLNode.GetAttributeNamed("PiecesRotate", InNode: BoardChild)!
                                 Board._PiecesRotate = Bool(PieceR)!
+                                let FlipH = XMLNode.GetAttributeNamed("FlipHorizontal", InNode: BoardChild)!
+                                Board._CanFlipHorizontally = Bool(FlipH)!
+                                let FlipV = XMLNode.GetAttributeNamed("FlipVertical", InNode: BoardChild)!
+                                Board._CanFlipVertically = Bool(FlipV)!
                             
                             case "Buttons":
                                 for ButtonNode in BoardChild.Children
