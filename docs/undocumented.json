@@ -3530,245 +3530,252 @@
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 97,
+      "line": 99,
       "symbol": "BucketShapes.Dot",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 98,
+      "line": 100,
       "symbol": "BucketShapes.MediumSquare",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 99,
+      "line": 101,
       "symbol": "BucketShapes.SmallSquare",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 100,
+      "line": 102,
       "symbol": "BucketShapes.BigSquare",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 101,
+      "line": 103,
       "symbol": "BucketShapes.SmallRectangle",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 102,
+      "line": 104,
       "symbol": "BucketShapes.Rectangle",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 103,
+      "line": 105,
       "symbol": "BucketShapes.BigRectangle",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 104,
+      "line": 106,
       "symbol": "BucketShapes.SmallDiamond",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 105,
+      "line": 107,
       "symbol": "BucketShapes.Diamond",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 106,
+      "line": 108,
       "symbol": "BucketShapes.BigDiamond",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 107,
+      "line": 109,
       "symbol": "BucketShapes.Bracket2",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 108,
+      "line": 110,
       "symbol": "BucketShapes.Bracket4",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 109,
+      "line": 111,
       "symbol": "BucketShapes.FourLines",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 110,
+      "line": 112,
       "symbol": "BucketShapes.Corners",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 111,
+      "line": 113,
       "symbol": "BucketShapes.Quadrant",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 112,
+      "line": 114,
       "symbol": "BucketShapes.Plus",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 113,
+      "line": 115,
       "symbol": "BucketShapes.HorizontalLine",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 114,
+      "line": 116,
       "symbol": "BucketShapes.ParallelLines",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 115,
+      "line": 117,
       "symbol": "BucketShapes.Empty",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 116,
+      "line": 118,
       "symbol": "BucketShapes.CornerDots",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 117,
+      "line": 119,
       "symbol": "BucketShapes.FourSmallSquares",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 118,
+      "line": 120,
       "symbol": "BucketShapes.ShortDiagonals",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 119,
+      "line": 121,
       "symbol": "BucketShapes.LongDiagonals",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 121,
+      "line": 123,
       "symbol": "BucketShapes.OneOpening",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 122,
+      "line": 124,
       "symbol": "BucketShapes.InsideOut",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 124,
+      "line": 126,
       "symbol": "BucketShapes.Classic",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 125,
+      "line": 127,
       "symbol": "BucketShapes.TallThin",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 126,
+      "line": 128,
       "symbol": "BucketShapes.ShortWide",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 127,
+      "line": 129,
       "symbol": "BucketShapes.Big",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 128,
+      "line": 130,
       "symbol": "BucketShapes.Small",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 129,
+      "line": 131,
       "symbol": "BucketShapes.SquareBucket",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 130,
+      "line": 132,
       "symbol": "BucketShapes.Giant",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 139,
+      "line": 134,
+      "symbol": "BucketShapes.Simple3D",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
+      "line": 143,
       "symbol": "BoardClasses.Rotatable",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 140,
+      "line": 144,
       "symbol": "BoardClasses.Static",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 141,
+      "line": 145,
       "symbol": "BoardClasses.ThreeDimensional",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
@@ -3803,77 +3810,91 @@
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardDescriptor2.swift",
-      "line": 567,
+      "line": 386,
+      "symbol": "BoardDescriptor2._CenterBlockDefinition",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardDescriptor2.swift",
+      "line": 387,
+      "symbol": "BoardDescriptor2.CenterBlockDefinition",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardDescriptor2.swift",
+      "line": 638,
       "symbol": "FreezeButtonActions.Visible",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardDescriptor2.swift",
-      "line": 568,
+      "line": 639,
       "symbol": "FreezeButtonActions.Invisible",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardDescriptor2.swift",
-      "line": 569,
+      "line": 640,
       "symbol": "FreezeButtonActions.Once",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardDescriptor2.swift",
-      "line": 570,
+      "line": 641,
       "symbol": "FreezeButtonActions.Rotations1",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardDescriptor2.swift",
-      "line": 571,
+      "line": 642,
       "symbol": "FreezeButtonActions.Rotations2",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardDescriptor2.swift",
-      "line": 572,
+      "line": 643,
       "symbol": "FreezeButtonActions.Rotations3",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardDescriptor2.swift",
-      "line": 573,
+      "line": 644,
       "symbol": "FreezeButtonActions.Rotations4",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardDescriptor2.swift",
-      "line": 583,
+      "line": 654,
       "symbol": "MapNodeTypes.BucketExterior",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardDescriptor2.swift",
-      "line": 584,
+      "line": 655,
       "symbol": "MapNodeTypes.BucketInterior",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardDescriptor2.swift",
-      "line": 585,
+      "line": 656,
       "symbol": "MapNodeTypes.BucketBlock",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardDescriptor2.swift",
-      "line": 586,
+      "line": 657,
       "symbol": "MapNodeTypes.InvisibleBlock",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
@@ -3908,694 +3929,701 @@
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1468,
+      "line": 1485,
       "symbol": "BackgroundTypes3D.Color",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1469,
+      "line": 1486,
       "symbol": "BackgroundTypes3D.Gradient",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1470,
+      "line": 1487,
       "symbol": "BackgroundTypes3D.Image",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1471,
+      "line": 1488,
       "symbol": "BackgroundTypes3D.Texture",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1472,
+      "line": 1489,
       "symbol": "BackgroundTypes3D.CALayer",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1473,
+      "line": 1490,
       "symbol": "BackgroundTypes3D.LiveView",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1484,
+      "line": 1501,
       "symbol": "AntialiasingModes.None",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1485,
+      "line": 1502,
       "symbol": "AntialiasingModes.MultiSampling2X",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1486,
+      "line": 1503,
       "symbol": "AntialiasingModes.MultiSampling4X",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1487,
+      "line": 1504,
       "symbol": "AntialiasingModes.MultiSampling8X",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1488,
+      "line": 1505,
       "symbol": "AntialiasingModes.MultiSampling16X",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1498,
+      "line": 1515,
       "symbol": "GameLights.omni",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1499,
+      "line": 1516,
       "symbol": "GameLights.spot",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1500,
+      "line": 1517,
       "symbol": "GameLights.directional",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1501,
+      "line": 1518,
       "symbol": "GameLights.ambient",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1511,
+      "line": 1528,
       "symbol": "BucketRotationTypes.None",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1512,
+      "line": 1529,
       "symbol": "BucketRotationTypes.Right",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1513,
+      "line": 1530,
       "symbol": "BucketRotationTypes.Left",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1514,
+      "line": 1531,
       "symbol": "BucketRotationTypes.Random",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1524,
+      "line": 1541,
       "symbol": "LightTypes.Ambient",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1525,
+      "line": 1542,
       "symbol": "LightTypes.Directional",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1526,
+      "line": 1543,
       "symbol": "LightTypes.Omni",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1527,
+      "line": 1544,
       "symbol": "LightTypes.Spot",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1535,
+      "line": 1552,
       "symbol": "CameraLocations.Rear",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1536,
+      "line": 1553,
       "symbol": "CameraLocations.Front",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1544,
+      "line": 1561,
       "symbol": "ThemeFields.ShowBucketGrid",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1545,
+      "line": 1562,
       "symbol": "ThemeFields.ShowGrid",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1546,
+      "line": 1563,
       "symbol": "ThemeFields.ShowBucketGridOutline",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1547,
+      "line": 1564,
       "symbol": "ThemeFields.BucketGridColor",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1548,
+      "line": 1565,
       "symbol": "ThemeFields.BucketGridOutlineColor",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1549,
+      "line": 1566,
       "symbol": "ThemeFields.BucketSpecularColor",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1550,
+      "line": 1567,
       "symbol": "ThemeFields.BucketDiffuseColor",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1551,
+      "line": 1568,
       "symbol": "ThemeFields.IsOrthographic",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1552,
+      "line": 1569,
       "symbol": "ThemeFields.OrthographicScale",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1553,
+      "line": 1570,
       "symbol": "ThemeFields.CameraFieldOfView",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1554,
+      "line": 1571,
       "symbol": "ThemeFields.UseDefaultCamera",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1555,
+      "line": 1572,
       "symbol": "ThemeFields.CameraPosition",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1556,
+      "line": 1573,
       "symbol": "ThemeFields.CameraOrientation",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1557,
+      "line": 1574,
       "symbol": "ThemeFields.ShowStatistics",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1558,
+      "line": 1575,
       "symbol": "ThemeFields.ShowBackgroundGrid",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1559,
+      "line": 1576,
       "symbol": "ThemeFields.CanControlCamera",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1560,
+      "line": 1577,
       "symbol": "ThemeFields.LightColor",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1561,
+      "line": 1578,
       "symbol": "ThemeFields.LightType",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1562,
+      "line": 1579,
       "symbol": "ThemeFields.LightPosition",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1563,
+      "line": 1580,
       "symbol": "ThemeFields.LightIntensity",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1564,
+      "line": 1581,
       "symbol": "ThemeFields.ControlLightType",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1565,
+      "line": 1582,
       "symbol": "ThemeFields.ControlLightColor",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1566,
+      "line": 1583,
       "symbol": "ThemeFields.ControlLightPosition",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1567,
+      "line": 1584,
       "symbol": "ThemeFields.ControlLightIntensity",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1568,
+      "line": 1585,
       "symbol": "ThemeFields.UseDefaultLighting",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1569,
+      "line": 1586,
       "symbol": "ThemeFields.AntialiasingMode",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1570,
+      "line": 1587,
       "symbol": "ThemeFields.BackgroundType",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1571,
+      "line": 1588,
       "symbol": "ThemeFields.BackgroundSolidColor",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1572,
+      "line": 1589,
       "symbol": "ThemeFields.BackgroundSolidColorCycleTime",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1573,
+      "line": 1590,
       "symbol": "ThemeFields.BackgroundGradientColor",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1574,
+      "line": 1591,
       "symbol": "ThemeFields.BackgroundGradientColorCycleTime",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1575,
+      "line": 1592,
       "symbol": "ThemeFields.BackgroundImageName",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1576,
+      "line": 1593,
       "symbol": "ThemeFields.BackgroundImageFromCameraRoll",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1577,
+      "line": 1594,
       "symbol": "ThemeFields.BackgroundLiveImageCamera",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1578,
+      "line": 1595,
       "symbol": "ThemeFields.UseHapticFeedback",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1579,
+      "line": 1596,
       "symbol": "ThemeFields.AfterGameWaitDuration",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1580,
+      "line": 1597,
       "symbol": "ThemeFields.DestructionMethod",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1581,
+      "line": 1598,
       "symbol": "ThemeFields.DestructionDuration",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1582,
+      "line": 1599,
       "symbol": "ThemeFields.ShowAIActionsOnControls",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1583,
+      "line": 1600,
       "symbol": "ThemeFields.StartWithAI",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1584,
+      "line": 1601,
       "symbol": "ThemeFields.AISneakPeakCount",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1585,
+      "line": 1602,
       "symbol": "ThemeFields.GameType",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1586,
+      "line": 1603,
       "symbol": "ThemeFields.SubGameType",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1587,
+      "line": 1604,
       "symbol": "ThemeFields.RotatingBucketDirection",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1588,
+      "line": 1605,
       "symbol": "ThemeFields.RotateBucket",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1589,
+      "line": 1606,
       "symbol": "ThemeFields.RotationDuration",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1590,
+      "line": 1607,
       "symbol": "ThemeFields.RotateBucketGrid",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1591,
+      "line": 1608,
       "symbol": "ThemeFields.FadeBucketGrid",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1592,
+      "line": 1609,
       "symbol": "ThemeFields.FadeBucketOutline",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1593,
+      "line": 1610,
       "symbol": "ThemeFields.ShowNextPiece",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1594,
+      "line": 1611,
       "symbol": "ThemeFields.MinimumVersion",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1595,
+      "line": 1612,
       "symbol": "ThemeFields.MinimumBuild",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1596,
+      "line": 1613,
       "symbol": "ThemeFields.AutoStartDuration",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1597,
+      "line": 1614,
       "symbol": "ThemeFields.ShowUpButton",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1598,
+      "line": 1615,
       "symbol": "ThemeFields.ShowFlyAwayButton",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1599,
+      "line": 1616,
       "symbol": "ThemeFields.ShowDropDownButton",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1600,
+      "line": 1617,
       "symbol": "ThemeFields.ShowFreezeButton",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1601,
+      "line": 1618,
       "symbol": "ThemeFields.HideAllButtons",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1602,
+      "line": 1619,
       "symbol": "ThemeFields.RotateNextPiece",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1603,
+      "line": 1620,
       "symbol": "ThemeFields.EnableDebug",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1604,
+      "line": 1621,
       "symbol": "ThemeFields.BackgroundGridWidth",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1605,
+      "line": 1622,
       "symbol": "ThemeFields.BackgroundGridColor",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1606,
+      "line": 1623,
       "symbol": "ThemeFields.ShowCenterLines",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1607,
+      "line": 1624,
       "symbol": "ThemeFields.CenterLineColor",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1608,
+      "line": 1625,
       "symbol": "ThemeFields.CenterLineWidth",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1609,
+      "line": 1626,
       "symbol": "ThemeFields.PieceList",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1610,
+      "line": 1627,
       "symbol": "ThemeFields.ShowBoardMethod",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1611,
+      "line": 1628,
       "symbol": "ThemeFields.ShowBoardDuration",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1612,
+      "line": 1629,
       "symbol": "ThemeFields.HideBoardMethod",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1613,
+      "line": 1630,
       "symbol": "ThemeFields.HideBoardDuration",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1614,
+      "line": 1631,
       "symbol": "ThemeFields.ShowHeartbeat",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1615,
+      "line": 1632,
       "symbol": "ThemeFields.HeartbeatInterval",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1616,
+      "line": 1633,
       "symbol": "ThemeFields.ChangeColorAfterRotation",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
-      "line": 1617,
+      "line": 1634,
       "symbol": "ThemeFields.BucketShape",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Themes3/ThemeDescriptor2.swift",
+      "line": 1635,
+      "symbol": "ThemeFields.ShowOffAfterGameOver",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
@@ -4817,34 +4845,6 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/AIProtocol.swift",
-      "line": 60,
-      "symbol": "AITypes.Standard",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/AIProtocol.swift",
-      "line": 61,
-      "symbol": "AITypes.Rotating",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/AIProtocol.swift",
-      "line": 62,
-      "symbol": "AITypes.SemiRotating",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/AIProtocol.swift",
-      "line": 63,
-      "symbol": "AITypes.Cubic",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/BaseGameAIs/RotatingGameAI.swift",
       "line": 151,
       "symbol": "RotatingGameAI.GetWidth(_:)",
@@ -4855,209 +4855,6 @@
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/BaseGameAIs/RotatingGameAI.swift",
       "line": 304,
       "symbol": "RotatingGameAI.LeftMotionAdjust(ProposedMotion:Points:LeftMostValid:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/MainAI.swift",
-      "line": 175,
-      "symbol": "AIScoringMethods.MeanLocation",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/MainAI.swift",
-      "line": 176,
-      "symbol": "AIScoringMethods.ClosestToBottom",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/MainAI.swift",
-      "line": 177,
-      "symbol": "AIScoringMethods.UniqueClosestToBottom",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/MainAI.swift",
-      "line": 178,
-      "symbol": "AIScoringMethods.NeighborCount",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/MainAI.swift",
-      "line": 179,
-      "symbol": "AIScoringMethods.WeightedBottom",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/MainAI.swift",
-      "line": 180,
-      "symbol": "AIScoringMethods.MeanWithMinimalGap",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/MainAI.swift",
-      "line": 181,
-      "symbol": "AIScoringMethods.OffsetMapping",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/MainAI.swift",
-      "line": 182,
-      "symbol": "AIScoringMethods.NeighborCount2",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/Old/GameAI.swift",
-      "line": 687,
-      "symbol": "GameAI.StepPiece",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/Old/GameAI.swift",
-      "line": 688,
-      "symbol": "GameAI.StepInitialized",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/Old/GameAI.swift",
-      "line": 689,
-      "symbol": "GameAI.StepOriginIndex",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/Old/GameAI.swift",
-      "line": 690,
-      "symbol": "GameAI.StepAngle",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/Old/GameAI.swift",
-      "line": 691,
-      "symbol": "GameAI.StepGapCount",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/Old/GameAI.swift",
-      "line": 692,
-      "symbol": "GameAI.StepPoints",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/Old/GameAI.swift",
-      "line": 693,
-      "symbol": "GameAI.StepXOffset",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/Old/GameAI.swift",
-      "line": 694,
-      "symbol": "GameAI.StepBestScore",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/Old/GameAI.swift",
-      "line": 695,
-      "symbol": "GameAI.StepBestAngle",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/Old/GameAI.swift",
-      "line": 696,
-      "symbol": "GameAI.StepBestOffset",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/Old/GameAI.swift",
-      "line": 697,
-      "symbol": "GameAI.StepMoveDownFirst",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/Old/GameAI.swift",
-      "line": 698,
-      "symbol": "GameAI.StepAllTested",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/Old/GameAI.swift",
-      "line": 980,
-      "symbol": "GameAI.FoundBestFitFor",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/Old/GameAI2.swift",
-      "line": 117,
-      "symbol": "GameAI2.FitResults",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/Old/GameAI2.swift",
-      "line": 119,
-      "symbol": "GameAI2.FitResults.init()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/Old/GameAI2.swift",
-      "line": 123,
-      "symbol": "GameAI2.FitResults.Angle",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/Old/GameAI2.swift",
-      "line": 124,
-      "symbol": "GameAI2.FitResults.XLocation",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/Old/GameAI2.swift",
-      "line": 125,
-      "symbol": "GameAI2.FitResults.PieceID",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/Old/GameAI2.swift",
-      "line": 126,
-      "symbol": "GameAI2.FitResults.GameScore",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/Old/GameAI2.swift",
-      "line": 127,
-      "symbol": "GameAI2.FitResults.NextResults",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/AI/Old/GameAI2.swift",
-      "line": 206,
-      "symbol": "GameAI2.BestFit(Factory:SneakPeakCount:StartingMap:CurrentScore:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
@@ -6147,188 +5944,6 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DView.swift",
-      "line": 2112,
-      "symbol": "GameViewObjects",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DView.swift",
-      "line": 2114,
-      "symbol": "GameViewObjects.Bucket",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DView.swift",
-      "line": 2115,
-      "symbol": "GameViewObjects.BucketGrid",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DView.swift",
-      "line": 2116,
-      "symbol": "GameViewObjects.BucketGridOutline",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DView.swift",
-      "line": 2119,
-      "symbol": "Angles",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DView.swift",
-      "line": 2121,
-      "symbol": "Angles.Angle0",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DView.swift",
-      "line": 2122,
-      "symbol": "Angles.Angle90",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DView.swift",
-      "line": 2123,
-      "symbol": "Angles.Angle180",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DView.swift",
-      "line": 2124,
-      "symbol": "Angles.Angle270",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DView.swift",
-      "line": 2152,
-      "symbol": "NodeButtons.LeftButton",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DView.swift",
-      "line": 2153,
-      "symbol": "NodeButtons.UpButton",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DView.swift",
-      "line": 2154,
-      "symbol": "NodeButtons.DownButton",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DView.swift",
-      "line": 2155,
-      "symbol": "NodeButtons.RightButton",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DView.swift",
-      "line": 2156,
-      "symbol": "NodeButtons.DropDownButton",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DView.swift",
-      "line": 2157,
-      "symbol": "NodeButtons.FlyAwayButton",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DView.swift",
-      "line": 2158,
-      "symbol": "NodeButtons.RotateLeftButton",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DView.swift",
-      "line": 2159,
-      "symbol": "NodeButtons.RotateRightButton",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DView.swift",
-      "line": 2160,
-      "symbol": "NodeButtons.FreezeButton",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DView.swift",
-      "line": 2161,
-      "symbol": "NodeButtons.HeartButton",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DView.swift",
-      "line": 2162,
-      "symbol": "NodeButtons.MainButton",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DView.swift",
-      "line": 2163,
-      "symbol": "NodeButtons.FlameButton",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DView.swift",
-      "line": 2164,
-      "symbol": "NodeButtons.VideoButton",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DView.swift",
-      "line": 2165,
-      "symbol": "NodeButtons.CameraButton",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DView.swift",
-      "line": 2166,
-      "symbol": "NodeButtons.PlayButton",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DView.swift",
-      "line": 2167,
-      "symbol": "NodeButtons.PauseButton",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DView.swift",
-      "line": 2168,
-      "symbol": "NodeButtons.FPSButton",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BoardRemoval.swift",
       "line": 397,
       "symbol": "HideBoardMethods.Random",
@@ -7114,366 +6729,170 @@
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 12,
-      "symbol": "GameBackgroundDialog",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 14,
-      "symbol": "GameBackgroundDialog.ThemeDelegate",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 15,
-      "symbol": "GameBackgroundDialog.ColorDelegate",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 17,
-      "symbol": "GameBackgroundDialog.viewDidLoad()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 75,
-      "symbol": "GameBackgroundDialog.CycleTimeToUI(CycleTime:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 106,
-      "symbol": "GameBackgroundDialog.UICycleTimeToSeconds(Index:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 136,
-      "symbol": "GameBackgroundDialog.HandleColorCycleTimeChanged(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 151,
-      "symbol": "GameBackgroundDialog.HandleGradientCycleTimeChanged(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 176,
-      "symbol": "GameBackgroundDialog.UpdateBackgroundType(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 207,
-      "symbol": "GameBackgroundDialog.UserTheme",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 214,
-      "symbol": "GameBackgroundDialog.HandleBackgroundTypeChanged(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 238,
-      "symbol": "GameBackgroundDialog.BackgroundType",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 240,
-      "symbol": "GameBackgroundDialog.HandleBGChange(ToType:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 321,
+      "line": 352,
       "symbol": "GameBackgroundDialog.LiveViewCameraSegment",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 322,
+      "line": 353,
       "symbol": "GameBackgroundDialog.BackgroundTypeSegment",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 324,
-      "symbol": "GameBackgroundDialog.HandleSelectColorPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 335,
-      "symbol": "GameBackgroundDialog.InstantiateImagePicker(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 343,
-      "symbol": "GameBackgroundDialog.InstantiateColorPicker(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 352,
-      "symbol": "GameBackgroundDialog.InstantiateGradientEditor(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 397,
-      "symbol": "GameBackgroundDialog.ForceVerticalGradient(_:VerticalFlag:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 416,
-      "symbol": "GameBackgroundDialog.HandleClosePressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 422,
+      "line": 480,
       "symbol": "GameBackgroundDialog.NotAvailableText",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 423,
+      "line": 481,
       "symbol": "GameBackgroundDialog.CameraText",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 424,
+      "line": 482,
       "symbol": "GameBackgroundDialog.ImageViewer",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 425,
+      "line": 483,
       "symbol": "GameBackgroundDialog.LiveViewTitle",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 426,
+      "line": 484,
       "symbol": "GameBackgroundDialog.ImageTitle",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 427,
+      "line": 485,
       "symbol": "GameBackgroundDialog.GradientColorTitle",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 428,
+      "line": 486,
       "symbol": "GameBackgroundDialog.SolidColorTitle",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 429,
+      "line": 487,
       "symbol": "GameBackgroundDialog.SelectImageButton",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 430,
+      "line": 488,
       "symbol": "GameBackgroundDialog.SelectGradientButton",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 431,
+      "line": 489,
       "symbol": "GameBackgroundDialog.SelectColorButton",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 432,
+      "line": 490,
       "symbol": "GameBackgroundDialog.ColorSample",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 433,
+      "line": 491,
       "symbol": "GameBackgroundDialog.GradientSample",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 434,
+      "line": 492,
       "symbol": "GameBackgroundDialog.ImageSample",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 435,
+      "line": 493,
       "symbol": "GameBackgroundDialog.ImageBox",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 436,
+      "line": 494,
       "symbol": "GameBackgroundDialog.LiveViewBox",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 437,
+      "line": 495,
       "symbol": "GameBackgroundDialog.GradientColorBox",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 438,
+      "line": 496,
       "symbol": "GameBackgroundDialog.SolidColorBox",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 439,
+      "line": 497,
       "symbol": "GameBackgroundDialog.ColorCycleLabel",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 440,
+      "line": 498,
       "symbol": "GameBackgroundDialog.GradientCycleLabel",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 441,
+      "line": 499,
       "symbol": "GameBackgroundDialog.ColorCycleDuration",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/GameBackgroundDialog.swift",
-      "line": 442,
+      "line": 500,
       "symbol": "GameBackgroundDialog.GradientCycleDuration",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/SelectBackgroundImageCode.swift",
-      "line": 12,
-      "symbol": "SelectBackgroundImageCode",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/SelectBackgroundImageCode.swift",
-      "line": 15,
-      "symbol": "SelectBackgroundImageCode.ThemeDelegate",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/SelectBackgroundImageCode.swift",
-      "line": 16,
-      "symbol": "SelectBackgroundImageCode.ImagePicker",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/SelectBackgroundImageCode.swift",
-      "line": 18,
-      "symbol": "SelectBackgroundImageCode.viewDidLoad()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/SelectBackgroundImageCode.swift",
-      "line": 41,
-      "symbol": "SelectBackgroundImageCode.UserTheme",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/SelectBackgroundImageCode.swift",
-      "line": 48,
+      "line": 59,
       "symbol": "SelectBackgroundImageCode.ImageDisplay",
       "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/SelectBackgroundImageCode.swift",
-      "line": 50,
-      "symbol": "SelectBackgroundImageCode.HandleOKPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/SelectBackgroundImageCode.swift",
-      "line": 56,
-      "symbol": "SelectBackgroundImageCode.HandleCancelPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/SelectBackgroundImageCode.swift",
-      "line": 62,
-      "symbol": "SelectBackgroundImageCode.HandleSetDefaultImage(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/Background/SelectBackgroundImageCode.swift",
-      "line": 67,
-      "symbol": "SelectBackgroundImageCode.HandleSelectFromPhotoRoll(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
@@ -11622,147 +11041,147 @@
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1370,
+      "line": 1378,
       "symbol": "MainViewController.GamePlayStart",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1456,
+      "line": 1464,
       "symbol": "MainViewController.HandleMoveLeftPressed()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1461,
+      "line": 1469,
       "symbol": "MainViewController.HandleMoveRightPressed()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1466,
+      "line": 1474,
       "symbol": "MainViewController.HandleMoveUpPressed()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1471,
+      "line": 1479,
       "symbol": "MainViewController.HandleMoveDownPressed()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1476,
+      "line": 1484,
       "symbol": "MainViewController.HandleUpAndAwayPressed()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1481,
+      "line": 1489,
       "symbol": "MainViewController.HandleDropDownPressed()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1486,
+      "line": 1494,
       "symbol": "MainViewController.HandleRotateLeftPressed()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1491,
+      "line": 1499,
       "symbol": "MainViewController.HandleRotateRightPressed()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1496,
+      "line": 1504,
       "symbol": "MainViewController.HandleFreezeInPlacePressed()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1746,
+      "line": 1754,
       "symbol": "MainViewController.PreviousGameShape",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 2194,
+      "line": 2202,
       "symbol": "MainViewController.GameUISurface3D",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 2195,
+      "line": 2203,
       "symbol": "MainViewController.GameViewContainer",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 2196,
+      "line": 2204,
       "symbol": "MainViewController.TextLayerView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 2197,
+      "line": 2205,
       "symbol": "MainViewController.NextPieceView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 2198,
+      "line": 2206,
       "symbol": "MainViewController.NextPieceViewControl",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 2199,
+      "line": 2207,
       "symbol": "MainViewController.CurrentScoreLabelView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 2200,
+      "line": 2208,
       "symbol": "MainViewController.HighScoreLabelView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 2201,
+      "line": 2209,
       "symbol": "MainViewController.PressPlayLabelView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 2202,
+      "line": 2210,
       "symbol": "MainViewController.GameOverLabelView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 2203,
+      "line": 2211,
       "symbol": "MainViewController.PauseLabelView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"

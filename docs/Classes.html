@@ -14,7 +14,7 @@
     <a title="Classes  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html"> Docs</a> (62% documented)</p>
+        <p><a href="index.html"> Docs</a> (63% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -143,18 +143,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="Classes/FlyingPieces.html">FlyingPieces</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/GameAI.html">GameAI</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/GameAI/MotionCommandBlock.html">– MotionCommandBlock</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/GameAI2.html">GameAI2</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/GameAI2/FitResults.html">– FitResults</a>
               </li>
               <li class="nav-group-task">
                 <a href="Classes/GameBackgroundDialog.html">GameBackgroundDialog</a>
@@ -460,6 +448,9 @@
                 <a href="Classes/VisualBlocks3D.html">VisualBlocks3D</a>
               </li>
               <li class="nav-group-task">
+                <a href="Classes/Volume.html">Volume</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Classes/XMLAttributeListParser.html">XMLAttributeListParser</a>
               </li>
               <li class="nav-group-task">
@@ -496,6 +487,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Enums/AntialiasingModes.html">AntialiasingModes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/Axes.html">Axes</a>
               </li>
               <li class="nav-group-task">
                 <a href="Enums/BackgroundTypes3D.html">BackgroundTypes3D</a>
@@ -1524,6 +1518,44 @@ Not fully implemented yet - intended for future use.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">BoardManager</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris6VolumeC"></a>
+                    <a name="//apple_ref/swift/Class/Volume" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris6VolumeC">Volume</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Encapsulates a volume. This class does <em>not</em> check for negative dimensions so it is entirely possible to have
+negative volumes.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    If the parameterless initializer is called, all dimensions have a value of <code>0.0</code>.
+
+</div>
+
+                        <a href="Classes/Volume.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">Volume</span> <span class="p">:</span> <span class="kt">CustomStringConvertible</span><span class="p">,</span> <span class="kt">Comparable</span></code></pre>
 
                         </div>
                       </div>
@@ -2698,70 +2730,6 @@ part of users.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">MainAI</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6Fouris6GameAIC"></a>
-                    <a name="//apple_ref/swift/Class/GameAI" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Fouris6GameAIC">GameAI</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Class that controls pieces during attract mode. Works without human itervention.</p>
-
-                        <a href="Classes/GameAI.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">GameAI</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6Fouris7GameAI2C"></a>
-                    <a name="//apple_ref/swift/Class/GameAI2" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Fouris7GameAI2C">GameAI2</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Class that calculates the best fit for a randomly selected piece and generates the motions for the block to get there.</p>
-
-                        <a href="Classes/GameAI2.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">GameAI2</span></code></pre>
 
                         </div>
                       </div>
@@ -4305,7 +4273,7 @@ a bit and using up the battery faster. Switching from a solid color to a live vi
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The code that runs the game background selection dialog.</p>
 
                         <a href="Classes/GameBackgroundDialog.html" class="slightly-smaller">See more</a>
                       </div>
@@ -4337,7 +4305,7 @@ a bit and using up the battery faster. Switching from a solid color to a live vi
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Code to run the select background image UI.</p>
 
                         <a href="Classes/SelectBackgroundImageCode.html" class="slightly-smaller">See more</a>
                       </div>
@@ -5878,7 +5846,7 @@ the tools and UIButton, I wrote this class.</li>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external">Stuart Rankin</a>. All rights reserved. (Last updated: 2019-10-26)</p>
+          <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external">Stuart Rankin</a>. All rights reserved. (Last updated: 2019-10-27)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

@@ -14,7 +14,7 @@
     <a title="Enumerations  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html"> Docs</a> (62% documented)</p>
+        <p><a href="index.html"> Docs</a> (63% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -143,18 +143,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="Classes/FlyingPieces.html">FlyingPieces</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/GameAI.html">GameAI</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/GameAI/MotionCommandBlock.html">– MotionCommandBlock</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/GameAI2.html">GameAI2</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/GameAI2/FitResults.html">– FitResults</a>
               </li>
               <li class="nav-group-task">
                 <a href="Classes/GameBackgroundDialog.html">GameBackgroundDialog</a>
@@ -460,6 +448,9 @@
                 <a href="Classes/VisualBlocks3D.html">VisualBlocks3D</a>
               </li>
               <li class="nav-group-task">
+                <a href="Classes/Volume.html">Volume</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Classes/XMLAttributeListParser.html">XMLAttributeListParser</a>
               </li>
               <li class="nav-group-task">
@@ -496,6 +487,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Enums/AntialiasingModes.html">AntialiasingModes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/Axes.html">Axes</a>
               </li>
               <li class="nav-group-task">
                 <a href="Enums/BackgroundTypes3D.html">BackgroundTypes3D</a>
@@ -1195,6 +1189,7 @@ maintainable.</p>
 <li><strong>Small</strong>: Small bucket.</li>
 <li><strong>SquareBucket</strong>: Square, non-rotating bucket.</li>
 <li><strong>Giant</strong>: Huge bucket.</li>
+<li><strong>Simple3D</strong>: Simple 3D game with a center block.</li>
 
                         <a href="Enums/BucketShapes.html" class="slightly-smaller">See more</a>
                       </div>
@@ -1776,14 +1771,7 @@ maintainable.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>AI types.</p>
-
-<ul>
-<li><strong>Standard</strong>: AI for standard games.</li>
-<li><strong>Rotating</strong>: AI for rotating square games.</li>
-<li><strong>SemiRotating</strong>: AI for semi-rotating games.</li>
-<li><strong>Cubic</strong>: AI for cubic games.</li>
-</ul>
+                        <p>AI types for various games.</p>
 
                         <a href="Enums/AITypes.html" class="slightly-smaller">See more</a>
                       </div>
@@ -1816,14 +1804,6 @@ maintainable.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Scoring methods available to the AI.</p>
-
-<ul>
-<li>MeanLocation: Calculate the mean location of the locations of the points. Higher mean values are better than lower mean values.</li>
-<li>ClosestToBottom: The score is essentially the Y position of the block (or blocks) closest to the bottom of the bucket.</li>
-<li>UniqueClosestToBottom: Mean of unique Y positions where larger means are better than smaller means.</li>
-<li>NeighborCount: Number of neighbors each piece has (including shared neighbors).</li>
-<li>WeightedBottom: Method by which blocks in pieces closer to the bottom generate a higher score.</li>
-</ul>
 
                         <a href="Enums/AIScoringMethods.html" class="slightly-smaller">See more</a>
                       </div>
@@ -2653,7 +2633,7 @@ maintainable.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Game view objects.</p>
 
                         <a href="Enums/GameViewObjects.html" class="slightly-smaller">See more</a>
                       </div>
@@ -2681,7 +2661,7 @@ maintainable.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Ordinal angles in degrees.</p>
 
                         <a href="Enums/Angles.html" class="slightly-smaller">See more</a>
                       </div>
@@ -2711,31 +2691,6 @@ maintainable.</p>
                       <div class="abstract">
                         <p>Set of motion control buttons built in to the game surface.</p>
 
-<ul>
-<li><strong>LeftButton</strong>: Button to move the piece to the left.</li>
-<li><strong>UpButton</strong>: Button to move the piece up.</li>
-<li><strong>DownButton</strong>: Button to move the piece down.</li>
-<li><strong>RightButton</strong>: Button to move the piece to the right.</li>
-<li><strong>DropDownButton</strong>: Button to drop the piece.</li>
-<li><strong>FlyAwayButton</strong>: Button to fly the piece away.</li>
-<li><strong>RotateLeftButton</strong>: Button to rotate the piece counterclockwise by 90°.</li>
-<li><strong>RotateRightButton</strong>: Button to rotate the piece clockwise by 90°.</li>
-<li><strong>FreezeButton</strong>: Button to freeze a button in place.</li>
-<li><strong>HeartButton</strong>: Button used to display the heartbeat.</li>
-<li><strong>MainButton</strong>: Button for the main menu.</li>
-<li><strong>FlameButton</strong>: Flame button for miscellaneous debug use.</li>
-<li><strong>VideoButton</strong>: Video button.</li>
-<li><strong>CameraButton</strong>: Camera button.</li>
-<li><strong>StopButton</strong>: Stop/play button.</li>
-<li><strong>PauseButton</strong>: Pause/resume button.</li>
-<li><strong>MainButton</strong>: Button for the main menu.</li>
-<li><strong>FlameButton</strong>: Flame button for miscellaneous debug use.</li>
-<li><strong>VideoButton</strong>: Video button.</li>
-<li><strong>CameraButton</strong>: Camera button.</li>
-<li><strong>StopButton</strong>: Stop/play button.</li>
-<li><strong>PauseButton</strong>: Pause/resume button.</li>
-</ul>
-
                         <a href="Enums/NodeButtons.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
@@ -2743,6 +2698,34 @@ maintainable.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">NodeButtons</span> <span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">CaseIterable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris4AxesO"></a>
+                    <a name="//apple_ref/swift/Enum/Axes" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris4AxesO">Axes</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Enumeration of the three 3D axes.</p>
+
+                        <a href="Enums/Axes.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">Axes</span> <span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">CaseIterable</span></code></pre>
 
                         </div>
                       </div>
@@ -3995,7 +3978,7 @@ device name.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external">Stuart Rankin</a>. All rights reserved. (Last updated: 2019-10-26)</p>
+          <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external">Stuart Rankin</a>. All rights reserved. (Last updated: 2019-10-27)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

@@ -14,7 +14,7 @@
     <a title="View3D Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html"> Docs</a> (62% documented)</p>
+        <p><a href="../index.html"> Docs</a> (63% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -143,18 +143,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/FlyingPieces.html">FlyingPieces</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Classes/GameAI.html">GameAI</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Classes/GameAI/MotionCommandBlock.html">– MotionCommandBlock</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Classes/GameAI2.html">GameAI2</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Classes/GameAI2/FitResults.html">– FitResults</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/GameBackgroundDialog.html">GameBackgroundDialog</a>
@@ -460,6 +448,9 @@
                 <a href="../Classes/VisualBlocks3D.html">VisualBlocks3D</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/Volume.html">Volume</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/XMLAttributeListParser.html">XMLAttributeListParser</a>
               </li>
               <li class="nav-group-task">
@@ -496,6 +487,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/AntialiasingModes.html">AntialiasingModes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Axes.html">Axes</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/BackgroundTypes3D.html">BackgroundTypes3D</a>
@@ -4449,6 +4443,315 @@ interior of the bucket.</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:6Fouris6View3DC16RotateContentsTo6OnAxis2By8DurationyAA4AxesO_12CoreGraphics7CGFloatVSdtF"></a>
+                    <a name="//apple_ref/swift/Method/RotateContentsTo(OnAxis:By:Duration:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris6View3DC16RotateContentsTo6OnAxis2By8DurationyAA4AxesO_12CoreGraphics7CGFloatVSdtF">RotateContentsTo(OnAxis:By:Duration:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Rotates the contents of the game (but not UI or falling piece) on the specified axis. The contents are rotated to an
+absolute angle.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <ul>
+<li>This function uses a synchronous lock to make sure that when the board is rotating, no one else can access it.</li>
+<li>This function will rotate frozen pieces, bucket barriers, and bucket grids and outlines but no other objects.</li>
+<li>When rotating on the X or Y axis, the caller will most likely want to rotate by 180° otherwise the board will end
+up edge-on to the viewer, making it difficult to see the pieces.</li>
+</ul>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">RotateContentsTo</span><span class="p">(</span><span class="kt">OnAxis</span><span class="p">:</span> <span class="kt"><a href="../Enums/Axes.html">Axes</a></span><span class="p">,</span> <span class="kt">By</span> <span class="kt">Degrees</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="kt">Duration</span><span class="p">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="mf">0.33</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>OnAxis</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Determines the axis to rotate about. Use <code>.ZAxis</code> for a face-on rotation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>By</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Number of degrees to rotate by. Specify negative values for clockwise rotations and positive values for
+            counterclockwise rotations.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Duration</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Duration of the rotation. Defaults to 0.33 seconds.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris6View3DC16RotateContentsBy6OnAxis0E08DurationyAA4AxesO_12CoreGraphics7CGFloatVSdtF"></a>
+                    <a name="//apple_ref/swift/Method/RotateContentsBy(OnAxis:By:Duration:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris6View3DC16RotateContentsBy6OnAxis0E08DurationyAA4AxesO_12CoreGraphics7CGFloatVSdtF">RotateContentsBy(OnAxis:By:Duration:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Rotates the contents of the game (but not UI or falling piece) on the specified axis. The contents are rotated by a
+relative angle.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <ul>
+<li>This function uses a synchronous lock to make sure that when the board is rotating, no one else can access it.</li>
+<li>This function will rotate frozen pieces, bucket barriers, and bucket grids and outlines but no other objects.</li>
+<li>When rotating on the X or Y axis, the caller will most likely want to rotate by 180° otherwise the board will end
+up edge-on to the viewer, making it difficult to see the pieces.</li>
+</ul>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">RotateContentsBy</span><span class="p">(</span><span class="kt">OnAxis</span><span class="p">:</span> <span class="kt"><a href="../Enums/Axes.html">Axes</a></span><span class="p">,</span> <span class="kt">By</span> <span class="kt">Degrees</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="kt">Duration</span><span class="p">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="mf">0.33</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>OnAxis</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Determines the axis to rotate about. Use <code>.ZAxis</code> for a face-on rotation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>By</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Number of degrees to rotate by. Specify negative values for clockwise rotations and positive values for
+            counterclockwise rotations.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Duration</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Duration of the rotation. Defaults to 0.33 seconds.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris6View3DC14StopShowingOffyyF"></a>
+                    <a name="//apple_ref/swift/Method/StopShowingOff()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris6View3DC14StopShowingOffyyF">StopShowingOff()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Stop showing off rotations.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">StopShowingOff</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris6View3DC16ShowOffRotations8Duration5DelayySd_SdtF"></a>
+                    <a name="//apple_ref/swift/Method/ShowOffRotations(Duration:Delay:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris6View3DC16ShowOffRotations8Duration5DelayySd_SdtF">ShowOffRotations(Duration:Delay:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Show off rotations. Intended for use by the game after game over to provide visual interest.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    Rotations are selected randomly
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">ShowOffRotations</span><span class="p">(</span><span class="kt">Duration</span><span class="p">:</span> <span class="kt">Double</span><span class="p">,</span> <span class="kt">Delay</span><span class="p">:</span> <span class="kt">Double</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Duration</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Time for one rotation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Delay</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Time between rotations.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Fouris6View3DC12ShowOffTimerSo7NSTimerCSgvp"></a>
+                    <a name="//apple_ref/swift/Property/ShowOffTimer" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Fouris6View3DC12ShowOffTimerSo7NSTimerCSgvp">ShowOffTimer</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Timer that controls showing off rotations.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">ShowOffTimer</span><span class="p">:</span> <span class="kt">Timer</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Fouris@objc(cs)View3D(im)ExecutionRotation"></a>
+                    <a name="//apple_ref/swift/Method/ExecutionRotation()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Fouris@objc(cs)View3D(im)ExecutionRotation">ExecutionRotation()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Execution a rotation of the board game to show off after game over.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">func</span> <span class="kt">ExecutionRotation</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:6Fouris6View3DC14RotateContents5Right8Duration9CompletedySb_SdyyctF"></a>
                     <a name="//apple_ref/swift/Method/RotateContents(Right:Duration:Completed:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:6Fouris6View3DC14RotateContents5Right8Duration9CompletedySb_SdyyctF">RotateContents(Right:Duration:Completed:)</a>
@@ -4503,7 +4806,7 @@ results in unpredictable and undesired behavior.</li>
                               </td>
                               <td>
                                 <div>
-                                  <p>Duration in seconds the rotation should take.</p>
+                                  <p>Duration in seconds the rotation should take. Defaults to 0.33 seconds.</p>
                                 </div>
                               </td>
                             </tr>
@@ -8594,7 +8897,7 @@ of the bucket.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external">Stuart Rankin</a>. All rights reserved. (Last updated: 2019-10-26)</p>
+          <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external">Stuart Rankin</a>. All rights reserved. (Last updated: 2019-10-27)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
