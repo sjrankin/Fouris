@@ -58,14 +58,50 @@ class BoardCollection: XMLDeserializeProtocol
                                 Board._InitialPieceLocation = CreatePoint(From: Where)
                             
                             case "Map":
-                                Board._BoardMap = BoardChild.Value
+                                if ![.Simple3D].contains(Board._BucketShape)
+                                {
+                                    //.Cubic boards don't have a map in the board description file.
+                                    Board._BoardMap = BoardChild.Value
+                                }
                                 if let ClearR = XMLNode.GetAttributeNamed("BucketClearRectangle", InNode: BoardChild)
                                 {
-                                if let ClearPoints = CreateRectangle(From: ClearR)
-                                {
-                                    Board._ClearUpperLeft = ClearPoints.0
-                                    Board._ClearLowerRight = ClearPoints.1
+                                    if let ClearPoints = CreateRectangle(From: ClearR)
+                                    {
+                                        Board._ClearUpperLeft = ClearPoints.0
+                                        Board._ClearLowerRight = ClearPoints.1
+                                    }
                             }
+                                if let MapVS = XMLNode.GetAttributeNamed("Volume", InNode: BoardChild)
+                                {
+                                    if let V = Volume.ParseSimple(MapVS)
+                                    {
+                                        Board._Width3D = Int(V.Width)
+                                        Board._Height3D = Int(V.Height)
+                                        Board._Depth3D = Int(V.Depth)
+                                    }
+                            }
+                            
+                            case "Barriers":
+                                //This is for .Cubic games. Non-.Cubic games should not have this node.
+                                for BarrierChild in BoardChild.Children
+                                {
+                                    switch BarrierChild.Name
+                                    {
+                                        case "Center":
+                                            let DimS = XMLNode.GetAttributeNamed("Dimensions", InNode: BarrierChild)
+                                            if let V = Volume.ParseSimple(DimS!)
+                                            {
+                                                Board._CenterBlockDefinition = V
+                                            }
+                                            else
+                                            {
+                                                fatalError("Bad center block dimension string found: \((DimS)!)")
+                                        }
+                                        
+                                        default:
+                                            print("Unexpected node \(BarrierChild.Name) encountered in Barriers node.")
+                                            break
+                                    }
                             }
                             
                             case "Rotations":
@@ -173,7 +209,7 @@ class BoardCollection: XMLDeserializeProtocol
             return nil
         }
         var Raw = From.replacingOccurrences(of: "(", with: "")
-                 Raw = From.replacingOccurrences(of: ")", with: "")
+        Raw = From.replacingOccurrences(of: ")", with: "")
         Raw = Raw.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         let Parts = Raw.split(separator: ",", omittingEmptySubsequences: true)
         if Parts.count != 4
