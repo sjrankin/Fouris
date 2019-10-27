@@ -132,6 +132,36 @@ class BoardDescriptor2
         return CGRect(origin: BucketCorner(), size: BucketSize())
     }
     
+    /// Holds the can flip horizontally flag.
+    public var _CanFlipHorizontally: Bool = false
+    /// Get or set the can flip horizontally capability flag.
+    public var CanFlipHorizontally: Bool
+    {
+        get
+        {
+            return _CanFlipHorizontally
+        }
+        set
+        {
+            _CanFlipHorizontally = newValue
+        }
+    }
+    
+    /// Holds the can flip vertically flag.
+    public var _CanFlipVertically: Bool = false
+    /// Get or set the can flip vertically capability flag.
+    public var CanFlipVertically: Bool
+    {
+        get
+        {
+            return _CanFlipVertically
+        }
+        set
+        {
+            _CanFlipVertically = newValue
+        }
+    }
+    
     /// Holds the bucket rotates flag.
     public var _BucketRotates: Bool = false
     /// Get or set the bucket rotates flag.
