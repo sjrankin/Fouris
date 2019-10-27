@@ -1717,4 +1717,24 @@
             <Freeze Action="Invisible"/>
         </Buttons>
     </Board>
+    <Board Type="Simple3D" GameType="Cubic">
+        <Description Text="Rotating board in three dimensions."/>
+        <PiecePlacement Location="(27,17)"/>
+        <Map BucketClearRectangle="(0,0),(19,19)" Volume="37x37x37"/>
+        <Barriers>
+            <Center Dimensions="3x3x3"/>
+        </Barriers>
+        <Rotations BucketRotates="true" PiecesRotate="true"/>
+        <Buttons>
+            <Left Visible="true"/>
+            <Right Visible="true"/>
+            <Up Visible="true"/>
+            <Down Visible="true"/>
+            <DropDown Visible="true"/>
+            <FlyAway Visible="true"/>
+            <RotateLeft Visible="true"/>
+            <RotateRight Visible="true"/>
+            <Freeze Action="Invisible"/>
+        </Buttons>
+    </Board>
 </Boards>
