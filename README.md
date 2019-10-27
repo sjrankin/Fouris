@@ -1,7 +1,7 @@
 # Fouris
  Fouris is a dropping block game popularized by Tetris. However, Fouris rotates the board after each piece is frozen, making stategy more important than with one-dimensional block dropping games - what may be a good place for a piece in one orientation may cause trouble when the board rotates.
 
-Fouris was originally written to be cross-compilable for both macOS and iOS using lots of conditional compilation and multiple storyboards. While successful, this approach used up a lot of time and was ultimately abandoned in favor of an iOS/iPadOS-only version. Perhaps new Xcode tools will let me run this on my Mac again in the future...
+Fouris was originally written to be cross-compilable for both macOS and iOS using lots of conditional compilation and multiple storyboards. While successful, this approach used up a lot of time and was ultimately abandoned in favor of an iOS/iPadOS-only version. Perhaps new Xcode/macOS tools will let me run this on my Mac again in the future...
 ## Author and Copyright
 Fouris was written by Stuart Rankin.
 
@@ -15,21 +15,31 @@ Versioning for Fouris is maintained in the Versioning.swift file and is updated 
 
 Also, this versioning does not utilize Xcode's built-in versioning so I'll have to update that manually.
 
-Most recent build information: **Version a.b Build xyz, Date: When**
-## Implementation and Requirements
-Fouris is written in Swift (5.2 as of time of writing) and intended for iOS/iPadOS 13 or higher. *Fouris explicitly requires iOS/iPadOS 13 or higher or it will not load/run.*
+Most recent build: **Version a.b Build xyz, Date: When**
 
-Fouris is implemented mostly with SceneKit. SceneKit is used to draw the game view and most controls on the screen.
+> This documentation and the Jazzy-created documentation do not necessarily reflect the build shown above.
+## Implementation and Requirements
+Fouris is written in Swift (5.2 as of time of writing) and intended for iOS/iPadOS 13 or higher. *Fouris explicitly requires iOS/iPadOS 13 or higher or it will not load/run.* Eventually Fouris may take advantage of a Metal program that uses a flood fill algolrithm for gap counting. This code, written in C, exists but is not debugged or used at this time.
+
+Fouris is implemented mostly with SceneKit. SceneKit is used to draw the game view and most controls on the screen. The main menu (the rotating cube) and its child windows all use UIKit. Currently, Fouris uses a text overlay for some UI elements (see also [Planned](#Planned)).
 ### Toolchain
 Fouris was compiled with Xcode 11.2 Beta 2 (11B44). Fouris requires a minimum Xcode version of 11.
+### Simulator
+With Xcode 11.2 and macOS 10.15, running Fouris in a simulator is faster than running on native hardware. Given the changes Apple made to how the simulator works, Fouris has access to desktop-class (assuming you are running on a desktop) processors and GPUs. It makes debugging graphics a *lot* easier...
 ### Testing
 Fouris runs with good graphics performance on iPhone 6Ss and above, as well as iPad Mini 4s and newer. The frame rate is a consistent 60 frames per second (+/- 1 FPS).
 
 Fouris has run on a simulator for over 99 hours (and would have continued for a longer period except my iMac had a forced restart).
 
 No battery testing has been done although I suspect given the intensive 3D graphics involved, battery life would be an issue.
+
+Fouris has been tested on the following hardware:
+- iPhone 6S+
+- iPhone 8
+- iPad Mini 4
+- iPad Pro 9.7
 ### Issues
-- Gravity slow-down. For some reason, gravity gets weaker the longer the game plays. This doesn't seem to happen on the simulator until about 180,000 seconds of game time have elapsed, but on an actual device, it happens almost immediately (especially in non-classic game modes).
+- Gravity slow-down. For some reason, gravity gets weaker the longer the game plays. This doesn't seem to happen on the simulator until about 180,000 seconds of game time have elapsed, but on an actual device, it happens almost immediately (especially in non-classic game modes). This also seems to happen over the duration of the instantiation of the game.
 - Better AI - the AI is essentially a brute-force method of looking for a place to drop pieces that do the least amount of damage. The AI can't see around corners and is very slow in some circumstances.
   - The AI for rotating games with bottomless columns needs to be smarter and not move things to locations just because there's a way to plug a bottomless location at the expense of leaving a piece above the top of the bucket.
 - Scoring is mixed up. Scores go up and down seemingly randomly.
@@ -57,7 +67,8 @@ From what I learned, I would do the following differently:
 7. Better icons and start-up image.
 8. Move all UI elements into the game view and use SceneKit for all text rather than using a CALayer on top of a SCNView. (However, SCNText doesn't respect NSAttributedStrings very well so most visual attributes are lost.)
 9. Get the activity log working such that a huge number of log files aren't generated as they are now (perhaps this is more of an "issue"...).
-10. ~~Add rotations to more than just the z-axis.~~ Done.
+10. ~~Add rotations to more than just the z-axis.~~ Done (mostly).
+11. Finish Metal program for gap counting.
 ## Game Play
 Game play consists of the user moving a dropping block into a bucket, trying to fit pieces together the best possible. When a row in a bucket is full of pieces, it is removed and all rows above it are dropped down.
 
