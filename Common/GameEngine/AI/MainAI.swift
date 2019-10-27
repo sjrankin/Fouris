@@ -164,20 +164,22 @@ class MainAI
 }
 
 /// Scoring methods available to the AI.
-///
-/// - MeanLocation: Calculate the mean location of the locations of the points. Higher mean values are better than lower mean values.
-/// - ClosestToBottom: The score is essentially the Y position of the block (or blocks) closest to the bottom of the bucket.
-/// - UniqueClosestToBottom: Mean of unique Y positions where larger means are better than smaller means.
-/// - NeighborCount: Number of neighbors each piece has (including shared neighbors).
-/// - WeightedBottom: Method by which blocks in pieces closer to the bottom generate a higher score.
 enum AIScoringMethods: Int, CaseIterable
 {
+    /// Calculate the mean location of the locations of the points. Higher mean values are better than lower mean values.
     case MeanLocation = 0
+    /// The score is essentially the Y position of the block (or blocks) closest to the bottom of the bucket.
     case ClosestToBottom = 1
+    /// Mean of unique Y positions where larger means are better than smaller means.
     case UniqueClosestToBottom = 2
+    /// Number of neighbors each piece has (including shared neighbors).
     case NeighborCount = 3
+    /// Method by which blocks in pieces closer to the bottom generate a higher score.
     case WeightedBottom = 4
+    /// Combination of mean block locations and gap count with small gap counts adding a greater score.
     case MeanWithMinimalGap = 5
+    /// Mapping of the surface of the contents of the bucket to the shape of the falling piece.
     case OffsetMapping = 6
+    /// Second version of neighbor count that ignores the sides of the bucket.
     case NeighborCount2 = 7
 }
