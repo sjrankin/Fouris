@@ -8,7 +8,10 @@
 
 import Foundation
 
+/// Protocol to observe changes in gradients.
 protocol GradientObserver: class
 {
+    /// Called when a gradient is changed.
+    /// - Parameter NewGradient: The new gradient definition.
     func GradientChanged(NewGradient: String)
 }
