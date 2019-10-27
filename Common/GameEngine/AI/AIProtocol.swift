@@ -38,7 +38,7 @@ protocol AIProtocol: class
     func BestFit(_ GamePiece: Piece, CurrentScore: Int) -> Double
     
     /// Determines the best fit for the specified game piece. Intended for use for
-    /// board that change between pieces (such as **.Rotating4**).
+    /// board that change between pieces (such as **.Rotating**).
     /// - Parameter GamePiece: The piece to determine best fit for.
     /// - Parameter CurrentScore: The current score of the game.
     /// - Parameter InBoard: The board to use to find the best fit.
@@ -47,19 +47,19 @@ protocol AIProtocol: class
     func BestFit(_ GamePiece: Piece, CurrentScore: Int, InBoard: Board) -> Double
     
     /// Get the piece whose best fit was generated in **BestFit**.
-    var FoundBestFitFor: Piece? {get}
+    var FoundBestFitFor: Piece? { get }
 }
 
-/// AI types.
-/// - **Standard**: AI for standard games.
-/// - **Rotating**: AI for rotating square games.
-/// - **SemiRotating**: AI for semi-rotating games.
-/// - **Cubic**: AI for cubic games.
+/// AI types for various games.
 enum AITypes: Int, CaseIterable
 {
+    /// Standard game - assumes no bottomless columns.
     case Standard = 0
+    /// Rotating game - assumes there may be bottomless columns.
     case Rotating = 1
+    /// Semi-rotating game in which the pieces rotate but the bucket does not.
     case SemiRotating = 2
+    /// Three-dimensional games.
     case Cubic = 3
 }
 
