@@ -9,14 +9,19 @@
 import Foundation
 import UIKit
 
+/// Code for the piece selection dialog.
 class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDataSource, ThemeEditingProtocol
-{    
-    weak var ThemeDelegate: ThemeEditingProtocol? = nil
+{
+    /// Delegate that receives messages from this class.
+    public weak var ThemeDelegate: ThemeEditingProtocol? = nil
+
+    /// Currently selected table tag value.
+    private let CurrentTable = 100
+    /// Available pieces table tag value.
+    private let AvailableTable = 200
     
-    let CurrentTable = 100
-    let AvailableTable = 200
-    
-    override func viewDidLoad()
+    /// Initialize the UI.
+    override public func viewDidLoad()
     {
         super.viewDidLoad()
         PieceSourceTable.layer.borderColor = UIColor.black.cgColor
@@ -31,7 +36,8 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
         UpdateWarning(WithCount: 0)
     }
     
-    func LoadAllPieces()
+    /// Load all pieces into the `AllPieces` array.
+    public func LoadAllPieces()
     {
         AllPieces.removeAll()
         AllPieces[.Standard] = [UUID]()
@@ -52,10 +58,14 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-    var AllPieces = [MetaPieces: [UUID]]()
-    var CurrentPieces = [UUID]()
-    var AllSections: [MetaPieces] = [.Standard, .NonStandard, .PiecesWithGaps, .Malicious, .Big]
-    let SectionMap: [Int: MetaPieces] =
+    /// Holds all pieces.
+    private var AllPieces = [MetaPieces: [UUID]]()
+    /// Holds the set of currently selected pieces.
+    private var CurrentPieces = [UUID]()
+    /// Table of piece categories arranged for sections in the table view.
+    private var AllSections: [MetaPieces] = [.Standard, .NonStandard, .PiecesWithGaps, .Malicious, .Big]
+    /// Map from sequence to piece group.
+    private let SectionMap: [Int: MetaPieces] =
         [
             0: .Standard,
             1: .NonStandard,
@@ -64,28 +74,43 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
             4: .Big
     ]
     
-    func EditTheme(Theme: ThemeDescriptor2)
+    /// Called by the class owner to set the theme to edit.
+    /// - Parameter Theme: Theme to edit.
+    public func EditTheme(Theme: ThemeDescriptor2)
+    {
+        UserTheme = Theme
+    }
+
+    /// Called by the class owner to set the theme to edit.
+    /// - Parameter Theme: Theme to edit.
+    /// - Parameter PieceID: Not used.
+    public func EditTheme(Theme: ThemeDescriptor2, PieceID: UUID)
     {
         UserTheme = Theme
     }
     
-    func EditTheme(Theme: ThemeDescriptor2, PieceID: UUID)
-    {
-        UserTheme = Theme
-    }
+    /// Holds the current user theme.
+    private var UserTheme: ThemeDescriptor2? = nil
     
-    var UserTheme: ThemeDescriptor2? = nil
-    
-    func EditResults(_ Edited: Bool, ThemeID: UUID, PieceID: UUID?)
+    /// Not used in this class.
+    public func EditResults(_ Edited: Bool, ThemeID: UUID, PieceID: UUID?)
     {
         //Do nothing here in this class.
     }
     
+    /// Returns the height of the cell view.
+    /// - Parameter tableView: Not used.
+    /// - Parameter heightForRowAt: Not used.
+    /// - Returns: Height of all table cell views.
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
         return GamePieceCell.CellHeight
     }
     
+    /// Returns section title values for the available piece table.
+    /// - Parameter tableView: The table that wants section titles.
+    /// - Parameter titleForHeaderInSection: The section index the returned title is for.
+    /// - Returns: The section title for the specified section for the available piece table, nil for the user piece table.
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
     {
         if tableView.tag == AvailableTable
@@ -117,6 +142,9 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
+    /// Returns the number of sections for the specified table.
+    /// - Parameter in: The table whose number of sections is returned.
+    /// - Returns: Number of sections for the specified table.
     func numberOfSections(in tableView: UITableView) -> Int
     {
         switch tableView.tag
@@ -132,6 +160,10 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
+    /// Returns the number of rows in each section of the passed table.
+    /// - Parameter tableView: The table view that wants to know the number of rows in a section.
+    /// - Parameter numberOfRowsInSection: The section whose number of rows will be returned.
+    /// - Returns: Number of rows for the specified section in the passed table.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         switch tableView.tag
@@ -149,7 +181,10 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-    func GetSectionMetaPiece(AtIndex: Int) -> MetaPieces?
+    /// Returns a section metapiece.
+    /// - Parameter AtIndex: The index of the meta piece to return.
+    /// - Returns: Metapiece for the specified index. Nil if not found.
+    private func GetSectionMetaPiece(AtIndex: Int) -> MetaPieces?
     {
         var Index = 0
         for (Meta, _) in AllPieces
@@ -163,7 +198,8 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
         return nil
     }
     
-    let FillMap: [MetaPieces: UIColor] =
+    /// Map from metapieces to color for pieces.
+    private let FillMap: [MetaPieces: UIColor] =
         [
             MetaPieces.Standard: UIColor.green,
             MetaPieces.NonStandard: UIColor.cyan,
@@ -172,9 +208,13 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
             MetaPieces.PiecesWithGaps: UIColor.magenta
     ]
     
-    var LastSelectedShape: UUID = UUID.Empty
+    /// The last selected piece.
+    private var LastSelectedShape: UUID = UUID.Empty
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    /// Handle table selection events. Updates UI elements.
+    /// - Parameter tableView: The table where the selection occurred.
+    /// - Parameter didSelectRowAt: The index of the selected item.
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         switch tableView.tag
         {
@@ -197,7 +237,10 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath)
+    /// Handle table deselection events. Updates UI elements.
+    /// - Parameter tableView: The table where the deselection occurred.
+    /// - Parameter didSelectRowAt: The index of the deselected item.
+    public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath)
     {
         switch tableView.tag
         {
@@ -216,7 +259,11 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    /// Returns a table cell view for the specified table, section, and row.
+    /// - Parameter tableView: The table that wants a table cell.
+    /// - Parameter cellForRowAt: Indicates which section/row to return a table view cell for.
+    /// - Returns: Populated table view cell.
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let Cell = GamePieceCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "GamePieceCell")
         var ID = UUID.Empty
@@ -258,7 +305,10 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
         return Cell
     }
     
-    func UpdateWarning(WithCount: Int)
+    /// Update the warning message to let the user know more pieces are needed (or not, if a sufficient number of pieces have
+    /// been added).
+    /// - Parameter WithCount: Number of selected pieces.
+    public func UpdateWarning(WithCount: Int)
     {
         if WithCount < 4
         {
@@ -272,7 +322,9 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-    @IBAction func HandleMoveToCurrent(_ sender: Any)
+    /// Handle moving the selected piece in the available pieces table to the current pieces table.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleMoveToCurrent(_ sender: Any)
     {
         if let SelectedRow = PieceSourceTable.indexPathForSelectedRow
         {
@@ -291,7 +343,9 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-    @IBAction func HandleMoveToAvailable(_ sender: Any)
+    /// Handle moving a piece from the current table to the available pieces table.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleMoveToAvailable(_ sender: Any)
     {
         if let SelectedRow = CurrentPieceTable.indexPathForSelectedRow
         {
@@ -308,7 +362,9 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-    @IBAction func ClearCurrentPieceSet(_ sender: Any)
+    /// Clear all pieces in the current piece table.
+    /// - Parameter sender: Not used.
+    @IBAction public func ClearCurrentPieceSet(_ sender: Any)
     {
         CurrentPieces.removeAll()
         CurrentPieceTable.reloadData()
@@ -317,7 +373,10 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
         UpdateWarning(WithCount: 0)
     }
     
-    @IBSegueAction func InstanstiateVisualEditor(_ coder: NSCoder) -> PieceEditorCode?
+    /// Instantiate the visuals editor to set the visual attributes of a piece.
+    /// - Parameter coder: `NSCoder` instance.
+    /// - Returns: `PieceEditorCode` instance.
+    @IBSegueAction public func InstanstiateVisualEditor(_ coder: NSCoder) -> PieceEditorCode?
     {
         let Editor = PieceEditorCode(coder: coder)
         Editor?.ThemeDelegate = self
@@ -331,7 +390,10 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
         return Editor
     }
     
-    @IBSegueAction func InstantiateVisualEditorForAvailable(_ coder: NSCoder) -> PieceEditorCode?
+    /// Instantiate the visuals editor to set the visual attributes of a piece.
+    /// - Parameter coder: `NSCoder` instance.
+    /// - Returns: `PieceEditorCode` instance.
+    @IBSegueAction public func InstantiateVisualEditorForAvailable(_ coder: NSCoder) -> PieceEditorCode?
     {
         let Editor = PieceEditorCode(coder: coder)
         Editor?.ThemeDelegate = self
@@ -346,13 +408,16 @@ class PieceSelectorDialog: UIViewController, UITableViewDelegate, UITableViewDat
         return Editor
     }
     
-    
-    @IBAction func HandleOKPressed(_ sender: Any)
+    /// Handle the OK button pressed. Notify the caller and close the dialog.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleOKPressed(_ sender: Any)
     {
         ThemeDelegate?.EditResults(true, ThemeID: UserTheme!.ID, PieceID: nil)
         self.dismiss(animated: true, completion: nil)
     }
-    
+
+    /// Handle the cancel button pressed. Notify the caller and close the dialog.
+    /// - Parameter sender: Not used.
     @IBAction func HandleCancelPressed(_ sender: Any)
     {
         ThemeDelegate?.EditResults(false, ThemeID: UserTheme!.ID, PieceID: nil)
