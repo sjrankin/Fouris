@@ -869,6 +869,8 @@ class MainViewController: UIViewController,
                 print("At MapUpdated")
                 GameView3D?.DrawMap3D(FromBoard: Game.GameBoard!, CalledFrom: "MapUpdated")
             
+            case .SemiRotatable:
+            fallthrough
             case .Rotatable:
                 break
             
@@ -888,6 +890,8 @@ class MainViewController: UIViewController,
             case .Static:
                 break
             
+            case .SemiRotatable:
+            fallthrough
             case .Rotatable:
                 GameView3D?.DrawPiece3D(InBoard: Game.GameBoard!, GamePiece: ThePiece)
             
@@ -929,31 +933,35 @@ class MainViewController: UIViewController,
                 GameView3D?.DrawMap3D(FromBoard: Game!.GameBoard!, CalledFrom: "PieceFinalized")
                 break
             
+            case .SemiRotatable:
+            fallthrough
             case .Rotatable:
                 GameView3D?.MergePieceIntoBucket(ThePiece)
-                GameView3D?.DrawMap3D(FromBoard: Game!.GameBoard!, CalledFrom: "PieceFinalized")
+                //GameView3D?.DrawMap3D(FromBoard: Game!.GameBoard!, CalledFrom: "PieceFinalized")
                 
                 if UserTheme!.RotateBucket
                 {
                     switch UserTheme!.RotatingBucketDirection
                     {
                         case .Left:
-                            Game!.GameBoard!.Map!.RotateMapLeft()
+                            Game!.GameBoard!.Map!.RotateMap(Right: false)
+                            //GameView3D?.RotateContentsBy(OnAxis: .ZAxis, By: 90.0)
                             GameView3D?.RotateContentsLeft(Duration: UserTheme!.RotationDuration, Completed: {self.Nop()})
                         
                         case .Right:
-                            Game!.GameBoard!.Map!.RotateMapRight()
-                            GameView3D?.RotateContentsRight(Duration: UserTheme!.RotationDuration, Completed: {self.Nop()})//{self.RotateFinishFinalizing()})
+                            Game!.GameBoard!.Map!.RotateMap(Right: true)
+                            //GameView3D?.RotateContentsBy(OnAxis: .ZAxis, By: -90.0)
+                            GameView3D?.RotateContentsRight(Duration: UserTheme!.RotationDuration, Completed: {self.Nop()})
                         
                         case .Random:
                             if Bool.random()
                             {
-                                Game!.GameBoard!.Map!.RotateMapLeft()
+                                Game!.GameBoard!.Map!.RotateMap(Right: false)
                                 GameView3D?.RotateContentsLeft(Duration: UserTheme!.RotationDuration, Completed: {self.Nop()})
                             }
                             else
                             {
-                                Game!.GameBoard!.Map!.RotateMapRight()
+                                Game!.GameBoard!.Map!.RotateMap(Right: true)
                                 GameView3D?.RotateContentsRight(Duration: UserTheme!.RotationDuration, Completed: {self.Nop()})
                         }
                         
@@ -961,8 +969,6 @@ class MainViewController: UIViewController,
                             NoRotateFinishFinalizing()
                             return
                     }
-                    //DispatchCalled = CACurrentMediaTime()
-                    //print("RotateFinishFinalized dispatched, Duration=\(UserTheme!.RotationDuration)")
                     DispatchQueue.main.asyncAfter(deadline: .now() + UserTheme!.RotationDuration,
                                                   qos: .userInteractive,
                                                   execute: {self.RotateFinishFinalizing()})
@@ -976,8 +982,6 @@ class MainViewController: UIViewController,
                 break
         }
     }
-    
-    //var DispatchCalled: Double = 0.0
     
     /// Do nothing. Place holder for completion handler for rotating contents.
     public func Nop()
@@ -1401,7 +1405,7 @@ class MainViewController: UIViewController,
         GameTextOverlay?.HideGameOver(Duration: 0.0)
         GameTextOverlay?.HidePressPlay(Duration: 0.0)
         
-        Game!.SetPredeterminedOrder(UsePredeterminedOrder, FirstIs: .T)
+        //Game!.SetPredeterminedOrder(UsePredeterminedOrder, FirstIs: .T)
         
         GameDuration = CACurrentMediaTime()
         Game.StartGame(EnableAI: InAttractMode, PieceCategories: GamePieces, UseFastAI: UseFastAI)
