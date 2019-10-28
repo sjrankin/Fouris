@@ -9,18 +9,27 @@
 import Foundation
 import UIKit
 
+/// Code to run the gradient editor.
 class GradientEditorCode: UIViewController, GradientPickerProtocol,
     UITableViewDelegate, UITableViewDataSource 
 {
-    let _Settings = UserDefaults.standard
-    var OriginalGradient: String = ""
-    var CurrentGradient: String = ""
-    var CallerTag: Any? = nil
-    var IsVertical = true
-    var GradientStopList = [(UIColor, CGFloat)]()
-    weak var GradientDelegate: GradientPickerProtocol? = nil
+    /// Local reference to user settings.
+    private let _Settings = UserDefaults.standard
+    /// Holds the original gradient.
+    private var OriginalGradient: String = ""
+    /// Holds the current gradient.
+    private var CurrentGradient: String = ""
+    /// Holds the caller's tag value.
+    private var CallerTag: Any? = nil
+    /// Holds the gradient orientation flag.
+    private var IsVertical = true
+    /// Holds the gradient color stop list.
+    private var GradientStopList = [(UIColor, CGFloat)]()
+    /// Delegate the receives messages from this class.
+    public weak var GradientDelegate: GradientPickerProtocol? = nil
     
-    override func viewDidLoad()
+    /// Initialize the UI.
+    override public func viewDidLoad()
     {
         super.viewDidLoad()
         
@@ -45,7 +54,9 @@ class GradientEditorCode: UIViewController, GradientPickerProtocol,
         ShowSample(WithGradient: CurrentGradient)
     }
     
-    @objc func HandleSampleTap(TapGesture: UITapGestureRecognizer)
+    /// Handle taps in the sample gradient. When the user taps in the sample, the orientation of the gradient changes.
+    /// - Parameter TapGesture: Gesture information.
+    @objc public func HandleSampleTap(TapGesture: UITapGestureRecognizer)
     {
         if TapGesture.state == .ended
         {
@@ -54,7 +65,9 @@ class GradientEditorCode: UIViewController, GradientPickerProtocol,
         }
     }
     
-    func ShowSample(WithGradient: String)
+    /// Draw the sample gradient.
+    /// - Parameter WithGradient: The gradient to draw.
+    private func ShowSample(WithGradient: String)
     {
         if WithGradient.isEmpty
         {
@@ -74,12 +87,16 @@ class GradientEditorCode: UIViewController, GradientPickerProtocol,
         GradientStopTable.reloadData()
     }
     
-    func SetStop(StopColorIndex StopIndex: Int)
+    /// Not used in this class.
+    public func SetStop(StopColorIndex StopIndex: Int)
     {
         //Not used in this class.
     }
     
-    func EditedGradient(_ Edited: String?, Tag: Any?)
+    /// Returned value from the color stop editor.
+    /// - Parameter Edited: If true, a new color stop value. If false, the user canceled the color stop editor.
+    /// - Parameter Tag: Tag value we sent to the editor.
+    public func EditedGradient(_ Edited: String?, Tag: Any?)
     {
         //From the color stop editor.
         if let NewGradient = Edited
@@ -103,7 +120,10 @@ class GradientEditorCode: UIViewController, GradientPickerProtocol,
         }
     }
     
-    func GradientToEdit(_ EditMe: String?, Tag: Any?)
+    /// Sets the gradient to edit. Called by the UI parent of this class (eg, the class that wants to edit a gradient).
+    /// - Parameter EditMe: The gradient to edit. If nil, an empty gradient will be used.
+    /// - Parameter Tag: The caller's tag value.
+    public func GradientToEdit(_ EditMe: String?, Tag: Any?)
     {
         if let HasGradient = EditMe
         {
@@ -116,25 +136,33 @@ class GradientEditorCode: UIViewController, GradientPickerProtocol,
         CallerTag = Tag
     }
     
-    @IBAction func HandleReverseGradientButton(_ sender: Any)
+    /// Handle the reverse gradient colors button. Colors are reversed but not color stop locations.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleReverseGradientButton(_ sender: Any)
     {
         CurrentGradient = GradientManager.ReverseColorLocations(CurrentGradient)
         ShowSample(WithGradient: CurrentGradient)
     }
     
-    @IBAction func HandleClearButton(_ sender: Any)
+    /// Handle the clear gradient button. The gradient is reset to empty.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleClearButton(_ sender: Any)
     {
         CurrentGradient = ""
         ShowSample(WithGradient: CurrentGradient)
     }
     
-    @IBAction func HandleResetButton(_ sender: Any)
+    /// Handle the reset gradient button. The gradient is reset to the original gradient sent to the editor.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleResetButton(_ sender: Any)
     {
         CurrentGradient = OriginalGradient
         ShowSample(WithGradient: CurrentGradient)
     }
     
-    @IBAction func HandleEditButton(_ sender: Any)
+    /// Handle the edit button. Used to manage iOS's built-in table view editing.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleEditButton(_ sender: Any)
     {
         GradientStopTable.setEditing(!GradientStopTable.isEditing, animated: true)
         if GradientStopTable.isEditing
@@ -151,7 +179,10 @@ class GradientEditorCode: UIViewController, GradientPickerProtocol,
         ClearButton.isEnabled = !GradientStopTable.isEditing
     }
     
-    @IBSegueAction func InstantiatePresetsDialog(_ coder: NSCoder) -> PresetGradientListCode?
+    /// Run the preset gradient list dialog.
+    /// - Parameter coder: `NSCoder` instance used to create the code to run the preset gradient UI.
+    /// - Returns: `PresetGradientListCode` instance.
+    @IBSegueAction public func InstantiatePresetsDialog(_ coder: NSCoder) -> PresetGradientListCode?
     {
         let Presets = PresetGradientListCode(coder: coder)
         Presets?.GradientDelegate = self
@@ -159,19 +190,29 @@ class GradientEditorCode: UIViewController, GradientPickerProtocol,
         return Presets
     }
     
-    @IBAction func HandleAddButton(_ sender: Any)
+    /// Handle the add button. Adds a new color stop.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleAddButton(_ sender: Any)
     {
         CurrentGradient = GradientManager.AddGradientStop(CurrentGradient, Color: UIColor.red, Location: 1.0)
         ShowSample(WithGradient: CurrentGradient)
         GradientStopTable.reloadData()
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    /// Returns the current number of gradient color stops in the current gradient.
+    /// - Parameter tableView: Not used.
+    /// - Parameter numberOfRowsInSection: Not used.
+    /// - Returns: The number of color stops.
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return GradientStopList.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    /// Returns a table view cell populated with a gradient stop.
+    /// - Parameter tableView: Not used.
+    /// - Parameter cellForRowAt: The index of the gradient stop to return.
+    /// - Returns: Populated table view cell.
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let (Color, Location) = GradientStopList[indexPath.row]
         let Cell = GradientStopCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "GradientCell")
@@ -179,17 +220,29 @@ class GradientEditorCode: UIViewController, GradientPickerProtocol,
         return Cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    /// Return the height of each table view cell.
+    /// - Parameter tableView: Not used.
+    /// - Parameter heightForRowAt: Not used.
+    /// - Returns: The height of each row in the color stop table.
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
         return GradientStopCell.CellHeight
     }
     
-    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool
+    /// Returns **true** to let the OS know the table view cell can be moved. Appled to all table view cells.
+    /// - Parameter tableView: Not used.
+    /// - Parameter canMoveRowAt: Not used.
+    /// - Returns: Flag to tell OS whether the cell can be moved.
+    public func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool
     {
         return true
     }
     
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath)
+    /// Handle the move row notification from the table view. In our case, we merely swap the two gradients.
+    /// - Parameter tableView: Not used.
+    /// - Parameter moveRowAt: Source row. The row that is being moved.
+    /// - Parameter to: Destination row. Where the row will be placed.
+    public func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath)
     {
         if let NewGradient = GradientManager.SwapGradientStops(CurrentGradient, Index1: sourceIndexPath.row,
                                                                Index2: destinationIndexPath.row)
@@ -199,7 +252,11 @@ class GradientEditorCode: UIViewController, GradientPickerProtocol,
         }
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
+    /// Handle editing commits. This function is used only for deletions of color gradient stops.
+    /// - Parameter tableView: Not used.
+    /// - Parameter commit: The action to take on the data.
+    /// - Parameter forRowAt: The row to take the action on.
+    public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
     {
         if editingStyle == .delete
         {
@@ -208,7 +265,10 @@ class GradientEditorCode: UIViewController, GradientPickerProtocol,
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    /// Handle row selections for gradient color stops. When selected, run the gradient stop editor dialog.
+    /// - Parameter tableView: Not used.
+    /// - Parameter didSelectRowAt: The row index that was selected.
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         if let Cell = GradientStopTable.cellForRow(at: indexPath) as? GradientStopCell
         {
@@ -221,7 +281,10 @@ class GradientEditorCode: UIViewController, GradientPickerProtocol,
         }
     }
     
-    @IBSegueAction func HandleInstantiateGradientStopEditor(_ coder: NSCoder) -> GradientStopEditorCode?
+    /// Handle instantiation of the gradient stop editor.
+    /// - Parameter coder: `NSCoder` instance used to create a `GradientStopEditorCode` instance.
+    /// - Returns: `GradientStopEditorCode` instance.
+    @IBSegueAction public func HandleInstantiateGradientStopEditor(_ coder: NSCoder) -> GradientStopEditorCode?
     {
         let GSEditor = GradientStopEditorCode(coder: coder)
         GSEditor?.GradientDelegate = self
@@ -230,7 +293,10 @@ class GradientEditorCode: UIViewController, GradientPickerProtocol,
         return GSEditor
     }
     
-    @IBSegueAction func HandleExportGradient2Instantiation(_ coder: NSCoder) -> GradientExport2?
+    /// Handle instantiation of the gradient export code.
+    /// - Parameter coder: `NSCoder` instance used to create a `GradientExport2` instance.
+    /// - Returns: `GradientExport2` instance.
+    @IBSegueAction public func HandleExportGradient2Instantiation(_ coder: NSCoder) -> GradientExport2?
     {
         let Export = GradientExport2(coder: coder)
         Export?.GradientDelegate = self
@@ -238,17 +304,24 @@ class GradientEditorCode: UIViewController, GradientPickerProtocol,
         return Export
     }
     
-    var ColorToEdit: UIColor = UIColor.black
-    var LocationToEdit: Double = 0.0
-    var SelectedIndex: Int = -1
+    /// Color to edit.
+    private var ColorToEdit: UIColor = UIColor.black
+    /// Location to edit.
+    private var LocationToEdit: Double = 0.0
+    /// Current selected color stop index.
+    private var SelectedIndex: Int = -1
     
-    @IBAction func HandleOKPressed(_ sender: Any)
+    /// Handle the OK button pressed. Send the new gradient to the caller and close this window.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleOKPressed(_ sender: Any)
     {
         GradientDelegate?.EditedGradient(CurrentGradient, Tag: CallerTag)
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func HandleCancelPressed(_ sender: Any)
+    /// Handle the cancel button pressed. Notify the caller of the cancellation and close this window.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleCancelPressed(_ sender: Any)
     {
         GradientDelegate?.EditedGradient(nil, Tag: CallerTag)
         self.dismiss(animated: true, completion: nil)
