@@ -9,13 +9,17 @@
 import Foundation
 import UIKit
 
+/// Code to run the UI for editing a color stop.
 class GradientStopEditorCode: UIViewController, ColorPickerProtocol, GradientPickerProtocol
 {
-    weak var GradientDelegate: GradientPickerProtocol? = nil
+    /// Delegate that receives messages from this class.
+    public weak var GradientDelegate: GradientPickerProtocol? = nil
     
-    var IsVertical: Bool = false
+    /// Holds the vertical gradient flag.
+    private var IsVertical: Bool = false
     
-    override func viewDidLoad()
+    /// Initialize the UI.
+    override public func viewDidLoad()
     {
         super.viewDidLoad()
         
@@ -42,12 +46,15 @@ class GradientStopEditorCode: UIViewController, ColorPickerProtocol, GradientPic
         UpdateUI()
     }
     
-    override func viewDidLayoutSubviews()
+    /// Update the UI when the layout changes.
+    override public func viewDidLayoutSubviews()
     {
         UpdateUI()
     }
     
-    @objc func HandleTapOnSample(TapGesture: UITapGestureRecognizer)
+    /// Handle taps on the sample. When the user taps on the sample, the orientation of the gradient will change.
+    /// - Parameter TapGesture: Tap information.
+    @objc public func HandleTapOnSample(TapGesture: UITapGestureRecognizer)
     {
         if TapGesture.state == .ended
         {
@@ -56,7 +63,8 @@ class GradientStopEditorCode: UIViewController, ColorPickerProtocol, GradientPic
         }
     }
     
-    func UpdateUI()
+    /// Update the UI with new gradient information.
+    private func UpdateUI()
     {
         CurrentColorSample.backgroundColor = StopColorToEdit
         let SampleGradient = GradientManager.ReplaceGradientStop(OriginalGradient, Color: StopColorToEdit, Location: CGFloat(StopLocationToEdit), AtIndex: StopIndex)
@@ -66,7 +74,10 @@ class GradientStopEditorCode: UIViewController, ColorPickerProtocol, GradientPic
         SampleImage.image = GradientImage
     }
     
-    @IBSegueAction func HandleColorPickerInstantiation(_ coder: NSCoder) -> ColorPickerCode?
+    /// Run the color picker.
+    /// - Parameter coder: `NSCoder` instance used to create the color picker code instance.
+    /// - Returns: `ColorPickerCode` instance.
+    @IBSegueAction public func HandleColorPickerInstantiation(_ coder: NSCoder) -> ColorPickerCode?
     {
         let ColorPicker = ColorPickerCode(coder: coder)
         ColorPicker?.ColorDelegate = self
@@ -74,11 +85,15 @@ class GradientStopEditorCode: UIViewController, ColorPickerProtocol, GradientPic
         return ColorPicker
     }
     
-    func ColorToEdit(_ Color: UIColor, Tag: Any?)
+    /// Not used in this class.
+    public func ColorToEdit(_ Color: UIColor, Tag: Any?)
     {
         //Not used in this class.
     }
     
+    /// Called by the color picker when it closes.
+    /// - Parameter Color: If not nil, the new color from the color picker. If nil, the user canceled the color picker.
+    /// - Parameter Tag: Tag value we sent to the color picker when it was invoked.
     func EditedColor(_ Color: UIColor?, Tag: Any?)
     {
         if let NewColor = Color
@@ -95,40 +110,55 @@ class GradientStopEditorCode: UIViewController, ColorPickerProtocol, GradientPic
         }
     }
     
-    func EditedGradient(_ Edited: String?, Tag: Any?)
+    /// Not used in this class.
+    public func EditedGradient(_ Edited: String?, Tag: Any?)
     {
         //Not used in this class.
     }
     
-    func GradientToEdit(_ EditMe: String?, Tag: Any?)
+    /// Called by the parent UI. Used to tell us the gradient to edit.
+    /// - Parameter EditMe: The gradient to edit.
+    /// - Parameter Tag: Arbitrary value sent by the caller.
+    public func GradientToEdit(_ EditMe: String?, Tag: Any?)
     {
         OriginalGradient = EditMe == nil ? "" : EditMe!
         ParentTag = Tag
     }
     
-    var OriginalGradient: String = ""
-    var ParentTag: Any?
+    /// The original gradient from the caller.
+    private var OriginalGradient: String = ""
+    /// The tag value from the caller.
+    private var ParentTag: Any?
     
-    func SetStop(StopColorIndex: Int)
+    /// Sets the stop index of the color stop.
+    /// - Parameter StopColorIndex: The index of the color stop in the full set of color stops.
+    public func SetStop(StopColorIndex: Int)
     {
         StopIndex = StopColorIndex
     }
     
-    var StopIndex = -1
+    /// Holds the color stop index.
+    private var StopIndex = -1
     
-    func UpdateGradient(WithLocation: Double)
+    /// Update the gradient with a new color stop location.
+    /// - Parameter WithLocation: The new location.
+    private func UpdateGradient(WithLocation: Double)
     {
         StopLocationToEdit = WithLocation
         UpdateUI()
     }
     
-    func UpdateGradient(WithColor: UIColor)
+    /// Update the gradient with a new color for the color stop.
+    /// - Parameter WithColor: New color.
+    private func UpdateGradient(WithColor: UIColor)
     {
         StopColorToEdit = WithColor
         UpdateUI()
     }
     
-    @IBAction func HandleNewTextLocation(_ sender: Any)
+    /// Handle new text events from the text box. In this case, we have a new location value. Parse the value and apply it.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleNewTextLocation(_ sender: Any)
     {
         guard let Value = Double(LocationText.text!) else
         {
@@ -144,26 +174,36 @@ class GradientStopEditorCode: UIViewController, ColorPickerProtocol, GradientPic
         UpdateUI()
     }
     
-    @IBAction func HandleLocationSliderChanged(_ sender: Any)
+    /// Handle new slider location values. Apply the new value to the color stop.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleLocationSliderChanged(_ sender: Any)
     {
         let SliderValue = Double(LocationSlider.value / 1000.0)
         UpdateGradient(WithLocation: SliderValue)
         LocationText.text = "\(SliderValue.Round(To: 3))"
     }
     
-    var OriginalColor: UIColor = UIColor.black
-    var StopColorToEdit: UIColor = UIColor.black
-    var OriginalLocation: Double = 0.0
-    var StopLocationToEdit: Double = 0.0
+    /// The original color stop color.
+    private var OriginalColor: UIColor = UIColor.black
+    /// The color stop color to edit.
+    private var StopColorToEdit: UIColor = UIColor.black
+    /// The original color stop location.
+    private var OriginalLocation: Double = 0.0
+    /// The color stop location to edit.
+    private var StopLocationToEdit: Double = 0.0
     
-    @IBAction func HandleResetPressed(_ sender: Any)
+    /// Handle the reset button. Reset the color and location to original values.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleResetPressed(_ sender: Any)
     {
         StopLocationToEdit = OriginalLocation
         StopColorToEdit = OriginalColor
         UpdateUI()
     }
     
-    @IBAction func HandleOKPressed(_ sender: Any)
+    /// Handle the OK button pressed. Notify the caller of new values. Close the dialog.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleOKPressed(_ sender: Any)
     {
         let Final = GradientManager.ReplaceGradientStop(OriginalGradient, Color: StopColorToEdit,
                                                         Location: CGFloat(StopLocationToEdit),
@@ -172,7 +212,9 @@ class GradientStopEditorCode: UIViewController, ColorPickerProtocol, GradientPic
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func HandleCancelPressed(_ sender: Any)
+    /// Handle the cancel button pressed. Notify the caller of the cancellation. Close the dialog.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleCancelPressed(_ sender: Any)
     {
         GradientDelegate?.EditedGradient(nil, Tag: ParentTag)
         self.dismiss(animated: true, completion: nil)
