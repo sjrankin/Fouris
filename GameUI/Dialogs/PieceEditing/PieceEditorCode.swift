@@ -9,12 +9,18 @@
 import Foundation
 import UIKit
 
+/// Code to run the UI for editing visuals of a piece.
 class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtocol
 {
-    weak var ThemeDelegate: ThemeEditingProtocol? = nil
-    weak var ColorDelegate: ColorPickerProtocol? = nil
+    /// Delegate that receives messages related to theme changes.
+    public weak var ThemeDelegate: ThemeEditingProtocol? = nil
+    /// Delegate that receives messages related to color changes.
+    public weak var ColorDelegate: ColorPickerProtocol? = nil
     
-    override func viewDidLoad()
+    // MARK: - Initialization.
+    
+    /// Initialize the UI.
+    override public func viewDidLoad()
     {
         super.viewDidLoad()
         StyleVisuals()
@@ -22,7 +28,8 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
         ScaleValueLabel.text = "90°"
     }
     
-    func StyleVisuals()
+    /// Apply default attributes to the buttons and samples.
+    private func StyleVisuals()
     {
         ActiveDiffuseColorButton.ButtonColor = UIColor.orange
         ActiveSpecularColorButton.ButtonColor = UIColor.yellow
@@ -91,35 +98,47 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
         TitleBarTitle.text = "Visual Piece Editor: \(PieceShape)"
     }
     
-    func EditTheme(Theme: ThemeDescriptor2)
+    /// Called by the parent to set the theme.
+    /// - Warning: The `EditTheme(ThemeDescriptor2:UUID)` variant *must* be called or a fatal error will be generated.
+    public func EditTheme(Theme: ThemeDescriptor2)
     {
         fatalError("Caller needs to call EditTheme(ThemeDescriptor, UUID, ThemeDescriptor) instead.")
     }
     
-    func EditTheme(Theme: ThemeDescriptor2, PieceID: UUID)
+    /// Called by the parent to set the theme and piece to edit.
+    /// - Parameter Theme: The theme to edit.
+    /// - Parameter PieceID: The ID to edit.
+    public func EditTheme(Theme: ThemeDescriptor2, PieceID: UUID)
     {
         UserTheme = Theme
         self.PieceID = PieceID
     }
     
-    var ThemeID: UUID = UUID.Empty
+    /// Holds the ID of the theme.
+    private var ThemeID: UUID = UUID.Empty
     
-    var PieceID: UUID = UUID.Empty
+    /// Holds the ID of the piece.
+    private var PieceID: UUID = UUID.Empty
     
-    func EditResults(_ Edited: Bool, ThemeID: UUID, PieceID: UUID?)
+    /// Not used in this class.
+    public func EditResults(_ Edited: Bool, ThemeID: UUID, PieceID: UUID?)
     {
         
     }
     
-    var UserTheme: ThemeDescriptor2? = nil
+    /// Holds the user theme.
+    private var UserTheme: ThemeDescriptor2? = nil
     
+    /// Not used in this class.
     func ColorToEdit(_ Color: UIColor, Tag: Any?)
     {
         //Not used in this class.
     }
     
     /// Handle Color changes. Update both the piece sample and the block sample.
-    func EditedColor(_ Edited: UIColor?, Tag: Any?)
+    /// - Parameter Edited: If not nil, the edited color. If nil, take no action.
+    /// - Parameter Tag: Returned tag value.
+    public func EditedColor(_ Edited: UIColor?, Tag: Any?)
     {
         if let EditedColor = Edited
         {
@@ -156,7 +175,9 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
     
     // MARK: Visual editing buttons.
     
-    @objc func HandleActiveShapeTap(Recognizer: UIGestureRecognizer)
+    /// Handle the active shape tap. Show a list of available block shapes. Handle shape changes.
+    /// - Parameter Recognizer: The gesture recognizer.
+    @objc public func HandleActiveShapeTap(Recognizer: UIGestureRecognizer)
     {
         if Recognizer.state != .ended
         {
@@ -180,7 +201,9 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
         self.present(Alert, animated: true, completion: nil)
     }
     
-    @objc func HandleActiveBlockShapeSelection(Action: UIAlertAction)
+    /// Handle the selection of a new active shape.
+    /// - Parameter Action: Determines which shape was selected.
+    @objc public func HandleActiveBlockShapeSelection(Action: UIAlertAction)
     {
         for (Name, Shape) in ShapeMap
         {
@@ -195,7 +218,7 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
     
     /// Map between tile shape ID type and its title. This was converted from a dictionary to an array because Swift dictionaries
     /// are non-deterministic for order and order is important in this case.
-    let ShapeMap: [(String, TileShapes3D)] =
+    private let ShapeMap: [(String, TileShapes3D)] =
         [
             ("Cube", .Cubic),
             ("Rounded Cube", .RoundedCube),
@@ -210,11 +233,14 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
             ("Hexagon", .Hexagon)
     ]
     
+    /// Not currently implemented.
     @IBAction func HandleActiveTextureButtonPressed(_ sender: Any)
     {
     }
     
-    @objc func HandleRetiredShapeTap(Recognizer: UIGestureRecognizer)
+    /// Handle the retired shape tap. Show a list of available block shapes. Handle shape changes.
+    /// - Parameter Recognizer: The gesture recognizer.
+    @objc public func HandleRetiredShapeTap(Recognizer: UIGestureRecognizer)
     {
         if Recognizer.state != .ended
         {
@@ -238,7 +264,9 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
         self.present(Alert, animated: true, completion: nil)
     }
     
-    @objc func HandleRetiredBlockShapeSelection(Action: UIAlertAction)
+    /// Handle the selection of a new retired shape.
+    /// - Parameter Action: Determines which shape was selected.
+    @objc public func HandleRetiredBlockShapeSelection(Action: UIAlertAction)
     {
         for (Name, Shape) in ShapeMap
         {
@@ -251,11 +279,14 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
         }
     }
     
-    @IBAction func HandleRetiredTextureButtonPressed(_ sender: Any)
+    /// Not currently implemented.
+    @IBAction public func HandleRetiredTextureButtonPressed(_ sender: Any)
     {
     }
     
-    @IBAction func HandleActiveSurfaceTypeChanged(_ sender: Any)
+    /// Handle surface type change for active blocks.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleActiveSurfaceTypeChanged(_ sender: Any)
     {
         let Index = ActiveSurfaceTypeSegment.selectedSegmentIndex
         let IsColor = Index == 0
@@ -267,7 +298,9 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
         ActiveTextureText.isEnabled = !IsColor
     }
     
-    @IBAction func HandleRetiredSurfaceTypeChanged(_ sender: Any)
+    /// Handle surface type change for retired blocks.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleRetiredSurfaceTypeChanged(_ sender: Any)
     {
         let Index = RetiredSurfaceTypeSegment.selectedSegmentIndex
         let IsColor = Index == 0
@@ -281,7 +314,9 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
     
     // MARK: Flow control UI and button handling.
     
-    @IBAction func HandleRotatePieceSegmentChanged(_ sender: Any)
+    /// Handle the rotate sample style changed.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleRotatePieceSegmentChanged(_ sender: Any)
     {
         let RotationIndex = RotationSegment.selectedSegmentIndex
         switch RotationIndex
@@ -307,19 +342,25 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
         }
     }
     
-    @IBAction func HandleOKPressed(_ sender: Any)
+    /// Handle the OK button. Notify the user and close the dialog.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleOKPressed(_ sender: Any)
     {
         ThemeDelegate?.EditResults(true, ThemeID: ThemeID, PieceID: PieceID)
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func HandleCancelPressed(_ sender: Any)
+    /// Handle the cancel button. Notify the user and close the dialog.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleCancelPressed(_ sender: Any)
     {
         ThemeDelegate?.EditResults(false, ThemeID: ThemeID, PieceID: nil)
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func HandleScaleSliderChanged(_ sender: Any)
+    /// Handle the scale slider changed. Update the views.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleScaleSliderChanged(_ sender: Any)
     {
         let NewScale = ScaleSlider.value
         let DisplayValue: Int = Int(NewScale)
@@ -336,10 +377,14 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
         RetiredSamplePiece.SetFOV(CGFloat(DisplayValue))
     }
     
-    var PreviousScaleValue: Int? = nil
+    /// Holds the previous scale value.
+    private var PreviousScaleValue: Int? = nil
     
     // MARK: Instantiations.
     
+    /// Instantiate the color picker for the active diffuse color.
+    /// - Parameter coder: `NSColor` instance used to create a `ColorPickerCode` instance.
+    /// - Returns: `ColorPickerCode` instance.
     @IBSegueAction func InstantiateColorPickerForActiveDiffuseColor(_ coder: NSCoder) -> ColorPickerCode?
     {
         let Picker = ColorPickerCode(coder: coder)
@@ -348,6 +393,9 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
         return Picker
     }
     
+    /// Instantiate the color picker for the active specular color.
+    /// - Parameter coder: `NSColor` instance used to create a `ColorPickerCode` instance.
+    /// - Returns: `ColorPickerCode` instance.
     @IBSegueAction func InstantiateColorPickerForActiveSpecularColor(_ coder: NSCoder) -> ColorPickerCode?
     {
         let Picker = ColorPickerCode(coder: coder)
@@ -356,6 +404,9 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
         return Picker
     }
     
+    /// Instantiate the color picker for the retired diffuse color.
+    /// - Parameter coder: `NSColor` instance used to create a `ColorPickerCode` instance.
+    /// - Returns: `ColorPickerCode` instance.
     @IBSegueAction func InstantiateColorPickerForRetiredDiffuseColor(_ coder: NSCoder) -> ColorPickerCode?
     {
         let Picker = ColorPickerCode(coder: coder)
@@ -364,6 +415,9 @@ class PieceEditorCode: UIViewController, ThemeEditingProtocol, ColorPickerProtoc
         return Picker
     }
     
+    /// Instantiate the color picker for the retired specular color.
+    /// - Parameter coder: `NSColor` instance used to create a `ColorPickerCode` instance.
+    /// - Returns: `ColorPickerCode` instance.
     @IBSegueAction func InstantiateColorPickerForRetiredSpecularColor(_ coder: NSCoder) -> ColorPickerCode?
     {
         let Picker = ColorPickerCode(coder: coder)
