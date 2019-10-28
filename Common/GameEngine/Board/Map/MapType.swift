@@ -169,6 +169,8 @@ class MapType: CustomStringConvertible
                 _BucketInteriorWidth = RawBucket!.BucketWidth - 2
                 _BucketInteriorHeight = RawBucket!.BucketHeight - 1
             
+            case .SemiRotatable:
+            fallthrough
             case .Rotatable:
                 _BucketBottom = RawBucket!.BucketHeight + RawBucket!.BucketY - 1
                 _BucketInteriorBottom = _BucketBottom
@@ -244,6 +246,8 @@ class MapType: CustomStringConvertible
                 _BucketInteriorWidth = RawBucket!.BucketWidth - 2
                 _BucketInteriorHeight = RawBucket!.BucketHeight - 1
             
+            case .SemiRotatable:
+            fallthrough
             case .Rotatable:
                 _BucketBottom = RawBucket!.BucketHeight + RawBucket!.BucketY - 1
                 _BucketInteriorBottom = _BucketBottom
@@ -309,6 +313,8 @@ class MapType: CustomStringConvertible
             case .Static:
                 return false
             
+            case .SemiRotatable:
+            fallthrough
             case .Rotatable:
                 if Y > BucketBottom
                 {
@@ -394,6 +400,7 @@ class MapType: CustomStringConvertible
         }
     }
     
+    #if false
     /// Rotate the contents of the map and the block map 90° left.
     /// - Warning: Throws a fatal error if the **Height** and **Width** are not identical.
     public func RotateMapLeft()
@@ -434,6 +441,65 @@ class MapType: CustomStringConvertible
             {
                 ScratchContents[Y][X] = _Contents![Width - X - 1][Y]
                 ScratchBlockMap[Y][X] = _BlockMap![Width - X - 1][Y]
+            }
+        }
+        _Contents = ScratchContents
+        _BlockMap = ScratchBlockMap
+    }
+    #endif
+    
+    /// Rotate the contents of the map and block map by 90° in the specified direction.
+    /// - Warning: Throws a fatal error if the **Height** and **Width** are not identical.
+    /// - Parameter Right: If true, the map rotates to the right (clockwise). If false, the map rotates to the left (counterclockwise).
+    public func RotateMap(Right: Bool)
+    {
+        if Width != Height
+        {
+            fatalError("Unable to rotate map right because dimensions are not identical.")
+        }
+        CurrentRotation = CurrentRotation + Int(Right ? 1 : -1)
+        var ScratchContents = MapType.CreateMap(Width: Width, Height: Height, FillWith: IDMap!.StaticID(For: .Visible))
+        var ScratchBlockMap = MapType.CreateMap(Width: Width, Height: Height, FillWith: UUID.Empty)
+        for Y in 0 ..< Height
+        {
+            for X in 0 ..< Width
+            {
+                if Right
+                {
+                    ScratchContents[Y][X] = _Contents![Width - X - 1][Y]
+                    ScratchBlockMap[Y][X] = _BlockMap![Width - X - 1][Y]
+                }
+                else
+                {
+                    ScratchContents[X][Y] = _Contents![Y][Width - X - 1]
+                    ScratchBlockMap[X][Y] = _BlockMap![Y][Width - X - 1]
+                }
+            }
+        }
+        _Contents = ScratchContents
+        _BlockMap = ScratchBlockMap
+    }
+    
+    /// Mirror flip the map and block map the specified location.
+    /// - Parameter Horizontally: If true, the map is flipped horizontally. Otherwise, the map is flipped vertically.
+    public func FlipMap(Horizontally: Bool)
+    {
+        var ScratchContents = MapType.CreateMap(Width: Width, Height: Height, FillWith: IDMap!.StaticID(For: .Visible))
+        var ScratchBlockMap = MapType.CreateMap(Width: Width, Height: Height, FillWith: UUID.Empty)
+        for Y in 0 ..< Height
+        {
+            for X in 0 ..< Width
+            {
+                if Horizontally
+                {
+                    ScratchContents[Y][X] = _Contents![Y][Width - X - 1]
+                    ScratchBlockMap[Y][X] = _BlockMap![Y][Width - X - 1]
+                }
+                else
+                {
+                    ScratchContents[Y][X] = _Contents![Y - Height - 1][X]
+                    ScratchBlockMap[Y][X] = _BlockMap![Y - Height - 1][X]
+                }
             }
         }
         _Contents = ScratchContents
@@ -1360,6 +1426,8 @@ class MapType: CustomStringConvertible
                     FullRowCount = FullRowCount + Int(CanCollapseRow ? 1 : 0)
             }
             
+            case .SemiRotatable:
+            fallthrough
             case .Rotatable:
                 let BlockTop = BucketInteriorHeight / 2 //Int(CenterBlockUpperLeft.y)
                 for Row in stride(from: BlockTop + 1, to: BucketTop, by: -1)
