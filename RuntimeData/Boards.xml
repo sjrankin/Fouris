@@ -341,7 +341,7 @@
             <Freeze Action="Rotations4"/>
         </Buttons>
     </Board>
-    <Board Type="HorizontalLine" GameType="Rotating4">
+    <Board Type="HorizontalLine" GameType="Rotating">
         <Description Text="Board with a bisecting horizontal line."/>
         <Map BucketClearRectangle="(0,0),(19,9)">
             012345678901234567890123456789012345$
@@ -396,7 +396,7 @@
             <Freeze Action="Rotations4"/>
         </Buttons>
     </Board>
-    <Board Type="ShortDiagonals" GameType="Rotating4">
+    <Board Type="ShortDiagonals" GameType="Rotating">
         <Description Text="Board with two short, diagonal lines."/>
         <Map BucketClearRectangle="(0,0),(19,9)">
             012345678901234567890123456789012345$
@@ -451,7 +451,7 @@
             <Freeze Action="Invisible"/>
         </Buttons>
     </Board>
-    <Board Type="LongDiagonals" GameType="Rotating4">
+    <Board Type="LongDiagonals" GameType="Rotating">
         <Description Text="Board with two long, diagonal lines."/>
         <Map BucketClearRectangle="(0,0),(19,9)">
             012345678901234567890123456789012345$
@@ -506,7 +506,7 @@
             <Freeze Action="Invisible"/>
         </Buttons>
     </Board>
-    <Board Type="FourLines" GameType="Rotating4">
+    <Board Type="FourLines" GameType="Rotating">
         <Description Text="Board with lines on each side of the bucket."/>
         <Map BucketClearRectangle="(0,0),(19,9)">
             012345678901234567890123456789012345$
@@ -561,7 +561,7 @@
             <Freeze Action="Invisible"/>
         </Buttons>
     </Board>
-    <Board Type="Bracket2" GameType="Rotating4">
+    <Board Type="Bracket2" GameType="Rotating">
         <Description Text="Board with two brackets in the middle."/>
         <Map BucketClearRectangle="(0,0),(19,9)">
             012345678901234567890123456789012345$
@@ -616,7 +616,7 @@
             <Freeze Action="Invisible"/>
         </Buttons>
     </Board>
-    <Board Type="Bracket4" GameType="Rotating4">
+    <Board Type="Bracket4" GameType="Rotating">
         <Description Text="Board with four brackets in the middle."/>
         <Map BucketClearRectangle="(0,0),(19,9)">
             012345678901234567890123456789012345$
@@ -671,7 +671,7 @@
             <Freeze Action="Invisible"/>
         </Buttons>
     </Board>
-    <Board Type="FourSmallSquares" GameType="Rotating4">
+    <Board Type="FourSmallSquares" GameType="Rotating">
         <Description Text="Board with small squares near each corner."/>
         <Map BucketClearRectangle="(0,0),(19,9)">
             012345678901234567890123456789012345$
@@ -726,7 +726,7 @@
             <Freeze Action="Invisible"/>
         </Buttons>
     </Board>
-    <Board Type="ParallelLines" GameType="Rotating4">
+    <Board Type="ParallelLines" GameType="Rotating">
         <Description Text="Board with two parallel lines."/>
         <Map BucketClearRectangle="(0,0),(19,9)">
             012345678901234567890123456789012345$
@@ -781,46 +781,47 @@
             <Freeze Action="Invisible"/>
         </Buttons>
     </Board>
-    <Board Type="Quadrant" GameType="Rotating4">
+    <Board Type="Quadrant" GameType="Rotating">
         <Description Text="Board with bisecting horizontal and vertical lines."/>
-        <Map BucketClearRectangle="(0,0),(19,9)">
-            012345678901234567890123456789012345$
-            !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,00$
-            !__________________________________!,01$
-            !__________________________________!,02$
-            !__________________________________!,03$
-            !__________________________________!,04$
-            !__________________________________!,05$
-            !__________________________________!,06$
-            !__________________________________!,07$
-            !_______..........#........._______!,08$
-            !_______..........#........._______!,09$
-            !_______..........#........._______!,10$
-            !_______..........#........._______!,11$
-            !_______..........#........._______!,12$
-            !_______..........#........._______!,13$
-            !_______..........#........._______!,14$
-            !_______..........#........._______!,15$
-            !_______..........#........._______!,16$
-            !_______####################_______!,17$
-            !_______..........#........._______!,18$
-            !_______..........#........._______!,19$
-            !_______..........#........._______!,20$
-            !_______..........#........._______!,21$
-            !_______..........#........._______!,22$
-            !_______..........#........._______!,23$
-            !_______..........#........._______!,24$
-            !_______..........#........._______!,25$
-            !_______..........#........._______!,26$
-            !_______..........#........._______!,27$
-            !__________________________________!,28$
-            !__________________________________!,29$
-            !__________________________________!,30$
-            !__________________________________!,31$
-            !__________________________________!,32$
-            !__________________________________!,33$
-            !__________________________________!,34$
-            !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,35$
+        <Map BucketClearRectangle="(0,0),(17,8)">
+            0123456789012345678901234567890123456$
+            !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,00$
+            !___________________________________!,01$
+            !___________________________________!,02$
+            !___________________________________!,03$
+            !___________________________________!,04$
+            !___________________________________!,05$
+            !___________________________________!,06$
+            !___________________________________!,07$
+            !_______..........#.........._______!,08$
+            !_______..........#.........._______!,09$
+            !_______..........#.........._______!,10$
+            !_______..........#.........._______!,11$
+            !_______..........#.........._______!,12$
+            !_______..........#.........._______!,13$
+            !_______..........#.........._______!,14$
+            !_______..........#.........._______!,15$
+            !_______..........#.........._______!,16$
+            !_______..........#.........._______!,17$
+            !_______#####################_______!,18$
+            !_______..........#.........._______!,19$
+            !_______..........#.........._______!,20$
+            !_______..........#.........._______!,21$
+            !_______..........#.........._______!,22$
+            !_______..........#.........._______!,23$
+            !_______..........#.........._______!,24$
+            !_______..........#.........._______!,25$
+            !_______..........#.........._______!,26$
+            !_______..........#.........._______!,27$
+            !_______..........#.........._______!,28$
+            !___________________________________!,29$
+            !___________________________________!,30$
+            !___________________________________!,31$
+            !___________________________________!,32$
+            !___________________________________!,33$
+            !___________________________________!,34$
+            !___________________________________!,35$
+            !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,36$
             012345678901234567890123456789012345$
         </Map>
         <Rotations BucketRotates="true" PiecesRotate="true" FlipHorizontal="true" FlipVertical="true"/>
@@ -836,7 +837,7 @@
             <Freeze Action="Invisible"/>
         </Buttons>
     </Board>
-    <Board Type="SmallSquare" GameType="Rotating4">
+    <Board Type="SmallSquare" GameType="Rotating">
         <Description Text="Board with a small square central block."/>
         <Map BucketClearRectangle="(0,0),(19,9)">
             012345678901234567890123456789012345$
@@ -891,7 +892,7 @@
             <Freeze Action="Invisible"/>
         </Buttons>
     </Board>
-    <Board Type="MediumSquare" GameType="Rotating4">
+    <Board Type="MediumSquare" GameType="Rotating">
         <Description Text="Board with a square central block."/>
         <Map BucketClearRectangle="(0,0),(19,9)">
             012345678901234567890123456789012345$
@@ -946,7 +947,7 @@
             <Freeze Action="Invisible"/>
         </Buttons>
     </Board>
-    <Board Type="BigSquare" GameType="Rotating4">
+    <Board Type="BigSquare" GameType="Rotating">
         <Description Text="Board with a large square central block."/>
         <Map BucketClearRectangle="(0,0),(19,9)">
             012345678901234567890123456789012345$
@@ -1001,7 +1002,7 @@
             <Freeze Action="Invisible"/>
         </Buttons>
     </Board>
-    <Board Type="SmallRectangle" GameType="Rotating4">
+    <Board Type="SmallRectangle" GameType="Rotating">
         <Description Text="Board with a small rectangular central block."/>
         <Map BucketClearRectangle="(0,0),(19,9)">
             012345678901234567890123456789012345$
@@ -1056,7 +1057,7 @@
             <Freeze Action="Invisible"/>
         </Buttons>
     </Board>
-    <Board Type="Rectangle" GameType="Rotating4">
+    <Board Type="Rectangle" GameType="Rotating">
         <Description Text="Board with a rectangular central block."/>
         <Map BucketClearRectangle="(0,0),(19,9)">
             012345678901234567890123456789012345$
@@ -1111,7 +1112,7 @@
             <Freeze Action="Invisible"/>
         </Buttons>
     </Board>
-    <Board Type="BigRectangle" GameType="Rotating4">
+    <Board Type="BigRectangle" GameType="Rotating">
         <Description Text="Board with a big rectangular central block."/>
         <Map BucketClearRectangle="(0,0),(19,9)">
             012345678901234567890123456789012345$
@@ -1166,7 +1167,7 @@
             <Freeze Action="Invisible"/>
         </Buttons>
     </Board>
-    <Board Type="SmallDiamond" GameType="Rotating4">
+    <Board Type="SmallDiamond" GameType="Rotating">
         <Description Text="Board with small diamond-shaped central block."/>
         <Map BucketClearRectangle="(0,0),(19,9)">
             012345678901234567890123456789012345$
@@ -1221,7 +1222,7 @@
             <Freeze Action="Invisible"/>
         </Buttons>
     </Board>
-    <Board Type="Diamond" GameType="Rotating4">
+    <Board Type="Diamond" GameType="Rotating">
         <Description Text="Board with diamond-shaped central block."/>
         <Map BucketClearRectangle="(0,0),(19,9)">
             012345678901234567890123456789012345$
@@ -1276,7 +1277,7 @@
             <Freeze Action="Invisible"/>
         </Buttons>
     </Board>
-    <Board Type="BigDiamond" GameType="Rotating4">
+    <Board Type="BigDiamond" GameType="Rotating">
         <Description Text="Board with large diamond-shaped central block."/>
         <Map BucketClearRectangle="(0,0),(19,9)">
             012345678901234567890123456789012345$
@@ -1331,7 +1332,7 @@
             <Freeze Action="Invisible"/>
         </Buttons>
     </Board>
-    <Board Type="Plus" GameType="Rotating4">
+    <Board Type="Plus" GameType="Rotating">
         <Description Text="Empty board with a plus-shaped block in the middle."/>
         <Map BucketClearRectangle="(0,0),(19,9)">
             012345678901234567890123456789012345$
@@ -1386,7 +1387,7 @@
             <Freeze Action="Invisible"/>
         </Buttons>
     </Board>
-    <Board Type="Dot" GameType="Rotating4">
+    <Board Type="Dot" GameType="Rotating">
         <Description Text="Empty board with single block in the middle."/>
         <Map BucketClearRectangle="(0,0),(19,9)">
             012345678901234567890123456789012345$
@@ -1441,7 +1442,7 @@
             <Freeze Action="Invisible"/>
         </Buttons>
     </Board>
-    <Board Type="CornerDots" GameType="Rotating4">
+    <Board Type="CornerDots" GameType="Rotating">
         <Description Text="Blocks in each corner."/>
         <Map BucketClearRectangle="(0,0),(19,9)">
             012345678901234567890123456789012345$
@@ -1496,7 +1497,7 @@
             <Freeze Action="Invisible"/>
         </Buttons>
     </Board>
-    <Board Type="Corners" GameType="Rotating4">
+    <Board Type="Corners" GameType="Rotating">
         <Description Text="Corner brackets."/>
         <Map BucketClearRectangle="(0,0),(19,9)">
             012345678901234567890123456789012345$
@@ -1551,7 +1552,7 @@
             <Freeze Action="Invisible"/>
         </Buttons>
     </Board>
-    <Board Type="Empty" GameType="Rotating4">
+    <Board Type="Empty" GameType="Rotating">
         <Description Text="Empty board."/>
         <Map BucketClearRectangle="(0,0),(19,19)">
             012345678901234567890123456789012345$

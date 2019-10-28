@@ -14,7 +14,7 @@
     <a title="GradientStopEditorCode Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html"> Docs</a> (64% documented)</p>
+        <p><a href="../index.html"> Docs</a> (66% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -928,7 +928,7 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>Code to run the UI for editing a color stop.</p>
 
           </section>
           <section class="section task-group-section">
@@ -947,41 +947,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Delegate that receives messages from this class.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">weak</span> <span class="k">var</span> <span class="nv">GradientDelegate</span><span class="p">:</span> <span class="kt"><a href="../Protocols/GradientPickerProtocol.html">GradientPickerProtocol</a></span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6Fouris22GradientStopEditorCodeC10IsVerticalSbvp"></a>
-                    <a name="//apple_ref/swift/Property/IsVertical" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Fouris22GradientStopEditorCodeC10IsVerticalSbvp">IsVertical</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">IsVertical</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">GradientDelegate</span><span class="p">:</span> <span class="kt"><a href="../Protocols/GradientPickerProtocol.html">GradientPickerProtocol</a></span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -1001,14 +974,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Initialize the UI.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
@@ -1028,14 +1001,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Update the UI when the layout changes.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidLayoutSubviews</span><span class="p">()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">viewDidLayoutSubviews</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
@@ -1055,7 +1028,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Handle taps on the sample. When the user taps on the sample, the orientation of the gradient will change.</p>
 
                       </div>
                       <div class="declaration">
@@ -1063,36 +1036,28 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@objc</span>
-<span class="kd">func</span> <span class="kt">HandleTapOnSample</span><span class="p">(</span><span class="kt">TapGesture</span><span class="p">:</span> <span class="kt">UITapGestureRecognizer</span><span class="p">)</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="kt">HandleTapOnSample</span><span class="p">(</span><span class="kt">TapGesture</span><span class="p">:</span> <span class="kt">UITapGestureRecognizer</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6Fouris22GradientStopEditorCodeC8UpdateUIyyF"></a>
-                    <a name="//apple_ref/swift/Method/UpdateUI()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Fouris22GradientStopEditorCodeC8UpdateUIyyF">UpdateUI()</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">UpdateUI</span><span class="p">()</span></code></pre>
-
-                        </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>TapGesture</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Tap information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -1110,7 +1075,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Run the color picker.</p>
 
                       </div>
                       <div class="declaration">
@@ -1118,9 +1083,32 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBSegueAction</span>
-<span class="kd">func</span> <span class="kt">HandleColorPickerInstantiation</span><span class="p">(</span><span class="n">_</span> <span class="nv">coder</span><span class="p">:</span> <span class="kt">NSCoder</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/ColorPickerCode.html">ColorPickerCode</a></span><span class="p">?</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="kt">HandleColorPickerInstantiation</span><span class="p">(</span><span class="n">_</span> <span class="nv">coder</span><span class="p">:</span> <span class="kt">NSCoder</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/ColorPickerCode.html">ColorPickerCode</a></span><span class="p">?</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>coder</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>NSCoder</code> instance used to create the color picker code instance.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code><a href="../Classes/ColorPickerCode.html">ColorPickerCode</a></code> instance.</p>
                       </div>
                     </section>
                   </div>
@@ -1128,9 +1116,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6Fouris19ColorPickerProtocolP0B6ToEdit_3TagySo7UIColorC_ypSgtF"></a>
+                    <a name="/s:6Fouris22GradientStopEditorCodeC11ColorToEdit_3TagySo7UIColorC_ypSgtF"></a>
                     <a name="//apple_ref/swift/Method/ColorToEdit(_:Tag:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Fouris19ColorPickerProtocolP0B6ToEdit_3TagySo7UIColorC_ypSgtF">ColorToEdit(_:Tag:)</a>
+                    <a class="token" href="#/s:6Fouris22GradientStopEditorCodeC11ColorToEdit_3TagySo7UIColorC_ypSgtF">ColorToEdit(_:Tag:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1138,13 +1126,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Not used in this class.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">ColorToEdit</span><span class="p">(</span><span class="n">_</span> <span class="kt">Color</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">,</span> <span class="kt">Tag</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">ColorToEdit</span><span class="p">(</span><span class="n">_</span> <span class="kt">Color</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">,</span> <span class="kt">Tag</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span></code></pre>
 
                         </div>
                       </div>
@@ -1154,9 +1143,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6Fouris19ColorPickerProtocolP06EditedB0_3TagySo7UIColorCSg_ypSgtF"></a>
+                    <a name="/s:6Fouris22GradientStopEditorCodeC11EditedColor_3TagySo7UIColorCSg_ypSgtF"></a>
                     <a name="//apple_ref/swift/Method/EditedColor(_:Tag:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Fouris19ColorPickerProtocolP06EditedB0_3TagySo7UIColorCSg_ypSgtF">EditedColor(_:Tag:)</a>
+                    <a class="token" href="#/s:6Fouris22GradientStopEditorCodeC11EditedColor_3TagySo7UIColorCSg_ypSgtF">EditedColor(_:Tag:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1164,7 +1153,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Called by the color picker when it closes.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -1174,15 +1164,46 @@
 
                         </div>
                       </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Color</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If not nil, the new color from the color picker. If nil, the user canceled the color picker.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Tag</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Tag value we sent to the color picker when it was invoked.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                     </section>
                   </div>
                 </li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6Fouris22GradientPickerProtocolP06EditedB0_3TagySSSg_ypSgtF"></a>
+                    <a name="/s:6Fouris22GradientStopEditorCodeC06EditedB0_3TagySSSg_ypSgtF"></a>
                     <a name="//apple_ref/swift/Method/EditedGradient(_:Tag:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Fouris22GradientPickerProtocolP06EditedB0_3TagySSSg_ypSgtF">EditedGradient(_:Tag:)</a>
+                    <a class="token" href="#/s:6Fouris22GradientStopEditorCodeC06EditedB0_3TagySSSg_ypSgtF">EditedGradient(_:Tag:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1190,13 +1211,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Not used in this class.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">EditedGradient</span><span class="p">(</span><span class="n">_</span> <span class="kt">Edited</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="kt">Tag</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">EditedGradient</span><span class="p">(</span><span class="n">_</span> <span class="kt">Edited</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="kt">Tag</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span></code></pre>
 
                         </div>
                       </div>
@@ -1206,9 +1228,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6Fouris22GradientPickerProtocolP0B6ToEdit_3TagySSSg_ypSgtF"></a>
+                    <a name="/s:6Fouris22GradientStopEditorCodeC0B6ToEdit_3TagySSSg_ypSgtF"></a>
                     <a name="//apple_ref/swift/Method/GradientToEdit(_:Tag:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Fouris22GradientPickerProtocolP0B6ToEdit_3TagySSSg_ypSgtF">GradientToEdit(_:Tag:)</a>
+                    <a class="token" href="#/s:6Fouris22GradientStopEditorCodeC0B6ToEdit_3TagySSSg_ypSgtF">GradientToEdit(_:Tag:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1216,15 +1238,47 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Called by the parent UI. Used to tell us the gradient to edit.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">GradientToEdit</span><span class="p">(</span><span class="n">_</span> <span class="kt">EditMe</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="kt">Tag</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">GradientToEdit</span><span class="p">(</span><span class="n">_</span> <span class="kt">EditMe</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="kt">Tag</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>EditMe</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The gradient to edit.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Tag</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Arbitrary value sent by the caller.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -1232,63 +1286,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6Fouris22GradientStopEditorCodeC08OriginalB0SSvp"></a>
-                    <a name="//apple_ref/swift/Property/OriginalGradient" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Fouris22GradientStopEditorCodeC08OriginalB0SSvp">OriginalGradient</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">OriginalGradient</span><span class="p">:</span> <span class="kt">String</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6Fouris22GradientStopEditorCodeC9ParentTagypSgvp"></a>
-                    <a name="//apple_ref/swift/Property/ParentTag" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Fouris22GradientStopEditorCodeC9ParentTagypSgvp">ParentTag</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">ParentTag</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6Fouris22GradientPickerProtocolP7SetStop0F10ColorIndexySi_tF"></a>
+                    <a name="/s:6Fouris22GradientStopEditorCodeC03SetC00C10ColorIndexySi_tF"></a>
                     <a name="//apple_ref/swift/Method/SetStop(StopColorIndex:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Fouris22GradientPickerProtocolP7SetStop0F10ColorIndexySi_tF">SetStop(StopColorIndex:)</a>
+                    <a class="token" href="#/s:6Fouris22GradientStopEditorCodeC03SetC00C10ColorIndexySi_tF">SetStop(StopColorIndex:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1296,96 +1296,35 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">SetStop</span><span class="p">(</span><span class="kt">StopColorIndex</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6Fouris22GradientStopEditorCodeC0C5IndexSivp"></a>
-                    <a name="//apple_ref/swift/Property/StopIndex" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Fouris22GradientStopEditorCodeC0C5IndexSivp">StopIndex</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Sets the stop index of the color stop.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">StopIndex</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">SetStop</span><span class="p">(</span><span class="kt">StopColorIndex</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6Fouris22GradientStopEditorCodeC06UpdateB012WithLocationySd_tF"></a>
-                    <a name="//apple_ref/swift/Method/UpdateGradient(WithLocation:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Fouris22GradientStopEditorCodeC06UpdateB012WithLocationySd_tF">UpdateGradient(WithLocation:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">UpdateGradient</span><span class="p">(</span><span class="kt">WithLocation</span><span class="p">:</span> <span class="kt">Double</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6Fouris22GradientStopEditorCodeC06UpdateB09WithColorySo7UIColorC_tF"></a>
-                    <a name="//apple_ref/swift/Method/UpdateGradient(WithColor:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Fouris22GradientStopEditorCodeC06UpdateB09WithColorySo7UIColorC_tF">UpdateGradient(WithColor:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">UpdateGradient</span><span class="p">(</span><span class="kt">WithColor</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">)</span></code></pre>
-
-                        </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>StopColorIndex</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The index of the color stop in the full set of color stops.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -1403,7 +1342,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Handle new text events from the text box. In this case, we have a new location value. Parse the value and apply it.</p>
 
                       </div>
                       <div class="declaration">
@@ -1411,9 +1350,28 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBAction</span>
-<span class="kd">func</span> <span class="kt">HandleNewTextLocation</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="kt">HandleNewTextLocation</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Not used.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -1431,7 +1389,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Handle new slider location values. Apply the new value to the color stop.</p>
 
                       </div>
                       <div class="declaration">
@@ -1439,117 +1397,28 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBAction</span>
-<span class="kd">func</span> <span class="kt">HandleLocationSliderChanged</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="kt">HandleLocationSliderChanged</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6Fouris22GradientStopEditorCodeC13OriginalColorSo7UIColorCvp"></a>
-                    <a name="//apple_ref/swift/Property/OriginalColor" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Fouris22GradientStopEditorCodeC13OriginalColorSo7UIColorCvp">OriginalColor</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">OriginalColor</span><span class="p">:</span> <span class="kt">UIColor</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6Fouris22GradientStopEditorCodeC0C11ColorToEditSo7UIColorCvp"></a>
-                    <a name="//apple_ref/swift/Property/StopColorToEdit" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Fouris22GradientStopEditorCodeC0C11ColorToEditSo7UIColorCvp">StopColorToEdit</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">StopColorToEdit</span><span class="p">:</span> <span class="kt">UIColor</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6Fouris22GradientStopEditorCodeC16OriginalLocationSdvp"></a>
-                    <a name="//apple_ref/swift/Property/OriginalLocation" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Fouris22GradientStopEditorCodeC16OriginalLocationSdvp">OriginalLocation</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">OriginalLocation</span><span class="p">:</span> <span class="kt">Double</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6Fouris22GradientStopEditorCodeC0C14LocationToEditSdvp"></a>
-                    <a name="//apple_ref/swift/Property/StopLocationToEdit" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Fouris22GradientStopEditorCodeC0C14LocationToEditSdvp">StopLocationToEdit</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">StopLocationToEdit</span><span class="p">:</span> <span class="kt">Double</span></code></pre>
-
-                        </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Not used.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -1567,7 +1436,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Handle the reset button. Reset the color and location to original values.</p>
 
                       </div>
                       <div class="declaration">
@@ -1575,9 +1444,28 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBAction</span>
-<span class="kd">func</span> <span class="kt">HandleResetPressed</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="kt">HandleResetPressed</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Not used.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -1595,7 +1483,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Handle the OK button pressed. Notify the caller of new values. Close the dialog.</p>
 
                       </div>
                       <div class="declaration">
@@ -1603,9 +1491,28 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBAction</span>
-<span class="kd">func</span> <span class="kt">HandleOKPressed</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="kt">HandleOKPressed</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Not used.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -1623,7 +1530,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Handle the cancel button pressed. Notify the caller of the cancellation. Close the dialog.</p>
 
                       </div>
                       <div class="declaration">
@@ -1631,9 +1538,28 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBAction</span>
-<span class="kd">func</span> <span class="kt">HandleCancelPressed</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="kt">HandleCancelPressed</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Not used.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -1783,7 +1709,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external">Stuart Rankin</a>. All rights reserved. (Last updated: 2019-10-27)</p>
+          <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external">Stuart Rankin</a>. All rights reserved. (Last updated: 2019-10-28)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
