@@ -10,11 +10,14 @@ import Foundation
 import UIKit
 import SceneKit
 
+/// Code to run the UI that allows users to create their own pieces.
 class PieceCreator: UIViewController, ThemeEditingProtocol, GridProtocol
 {
-    weak var ThemeDelegate: ThemeEditingProtocol? = nil
+    /// Delegate that receives messages from this class.
+    public weak var ThemeDelegate: ThemeEditingProtocol? = nil
     
-    override func viewDidLoad()
+    /// Initialize the UI.
+    override public func viewDidLoad()
     {
         super.viewDidLoad()
         NewTheme = UUID()
@@ -31,37 +34,51 @@ class PieceCreator: UIViewController, ThemeEditingProtocol, GridProtocol
         RotateZSwitch.isOn = false
     }
     
-    var RotateX: Bool = false
-    var RotateY: Bool = false
-    var RotateZ: Bool = false
+    /// Holds the rotate the sample on the X axis flag.
+    private var RotateX: Bool = false
+        /// Holds the rotate the sample on the Y axis flag.
+    private var RotateY: Bool = false
+        /// Holds the rotate the sample on the Z axis flag.
+    private var RotateZ: Bool = false
     
-    func EditTheme(Theme: ThemeDescriptor2)
+    /// Called by the parent class.
+    /// - Parameter Theme: The current theme.
+    public func EditTheme(Theme: ThemeDescriptor2)
     {
         UserTheme = Theme
     }
     
-    var ThemeID = UUID.Empty
+    /// ID of the theme.
+    private var ThemeID = UUID.Empty
     
-    var NewTheme = UUID.Empty
+    /// ID of the new theme.
+    private var NewTheme = UUID.Empty
     
-    func EditTheme(Theme: ThemeDescriptor2, PieceID: UUID)
-    {
-        UserTheme = Theme
-    }
-    
-    func EditResults(_ Edited: Bool, ThemeID: UUID, PieceID: UUID?)
-    {
-        //Not used in this class.
-    }
-    
+    /// User theme.
     var UserTheme: ThemeDescriptor2? = nil
     
-    func ResetAllCells(ToSelection: Bool)
+    /// Called by the parent class.
+    /// - Parameter Theme: The current theme.
+    /// - PieceID: Not used.
+    public func EditTheme(Theme: ThemeDescriptor2, PieceID: UUID)
+    {
+        UserTheme = Theme
+    }
+    
+    /// Not used in this class.
+    public func EditResults(_ Edited: Bool, ThemeID: UUID, PieceID: UUID?)
     {
         //Not used in this class.
     }
     
-    func ResetAllPivotPoints()
+    /// Not used in this class.
+    public func ResetAllCells(ToSelection: Bool)
+    {
+        //Not used in this class.
+    }
+    
+    /// Not used in this class.
+    public func ResetAllPivotPoints()
     {
         //Not used in this class.
     }
@@ -72,19 +89,25 @@ class PieceCreator: UIViewController, ThemeEditingProtocol, GridProtocol
         return nil
     }
     
-    @IBAction func HandleOKPressed(_ sender: Any)
+    /// Handle the OK button pressed. Notify the caller of the change.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleOKPressed(_ sender: Any)
     {
         ThemeDelegate?.EditResults(true, ThemeID: ThemeID, PieceID: NewTheme)
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func HandleCancelPressed(_ sender: Any)
+    /// Handle the cancel button pressed. Notify the caller that nothing was changed.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleCancelPressed(_ sender: Any)
     {
         ThemeDelegate?.EditResults(false, ThemeID: ThemeID, PieceID: nil)
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func HandleResetGrid(_ sender: Any)
+    /// Handle the reset grid button press. All currently selected/added cells are removed.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleResetGrid(_ sender: Any)
     {
         PieceGrid.ResetAllCells(ToSelection: false)
         PieceGrid.ResetAllPivotPoints()
@@ -93,25 +116,33 @@ class PieceCreator: UIViewController, ThemeEditingProtocol, GridProtocol
         HandleResetRotationsPressed(self)
     }
     
-    @IBAction func HandleRotateXChanged(_ sender: Any)
+    /// Handle changes to the rotate sample on the X axis switch.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleRotateXChanged(_ sender: Any)
     {
         RotateX = !RotateX
         SampleView.RotatePiece(OnX: RotateX, OnY: RotateY, OnZ: RotateZ)
     }
     
-    @IBAction func HandleRotateYChanged(_ sender: Any)
+    /// Handle changes to the rotate sample on the Y axis switch.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleRotateYChanged(_ sender: Any)
     {
         RotateY = !RotateY
         SampleView.RotatePiece(OnX: RotateX, OnY: RotateY, OnZ: RotateZ)
     }
     
-    @IBAction func HandleRotateZChanged(_ sender: Any)
+    /// Handle changes to the rotate sample on the Z axis switch.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleRotateZChanged(_ sender: Any)
     {
         RotateZ = !RotateZ
         SampleView.RotatePiece(OnX: RotateX, OnY: RotateY, OnZ: RotateZ)
     }
     
-    @IBAction func HandleResetRotationsPressed(_ sender: Any)
+    /// Handle the reset sample rotations.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleResetRotationsPressed(_ sender: Any)
     {
         RotateXSwitch.isOn = false
         RotateYSwitch.isOn = false
@@ -123,7 +154,8 @@ class PieceCreator: UIViewController, ThemeEditingProtocol, GridProtocol
         SampleView.ResetRotations()
     }
     
-    func UpdateSample()
+    /// Update the sample.
+    public func UpdateSample()
     {
         SampleView.Clear()
         for (X, Y) in SelectedCells
@@ -134,9 +166,14 @@ class PieceCreator: UIViewController, ThemeEditingProtocol, GridProtocol
     
     // MARK: Grid protocol function implementations.
     
-    var SelectedCells = [(Int, Int)]()
+    /// Holds a set of selected cells.
+    public var SelectedCells = [(Int, Int)]()
     
-    func IsSelectedAt(_ X: Int, _ Y: Int) -> Bool
+    /// Determines if a cell at the specified coordinate is selected.
+    /// - Parameter X: The X coordinate to check.
+    /// - Parameter Y: The Y coordinate to check.
+    /// - Returns: True if the cell is selected, false if not.
+    public func IsSelectedAt(_ X: Int, _ Y: Int) -> Bool
     {
         for (AtX, AtY) in SelectedCells
         {
@@ -148,6 +185,10 @@ class PieceCreator: UIViewController, ThemeEditingProtocol, GridProtocol
         return false
     }
     
+    /// Handle selection state changes in the grid.
+    /// - Parameter Column: The horizontal location of the changed cell.
+    /// - Parameter Row: The vertical location of the changed cell.
+    /// - Parameter IsSelected: The new selection state.
     func CellSelectionStateChanged(Column: Int, Row: Int, IsSelected: Bool)
     {
         if let (PlotX, PlotY) = PieceGrid.GetPlotCoordinates(ForX: Column, ForY: Row)
@@ -172,11 +213,13 @@ class PieceCreator: UIViewController, ThemeEditingProtocol, GridProtocol
         UpdateSample()
     }
     
+    /// Not currently used.
     func CellTapped(Column: Int, Row: Int, TapCount: Int)
     {
         //print("Cell at \(Column),\(Row) was tapped \(TapCount) times")
     }
     
+    /// Not currently used.
     func CellCountChanged(ColumnCount: Int, RowCount: Int)
     {
         //print("New cell count: \(ColumnCount) columns, \(RowCount) rows.")
