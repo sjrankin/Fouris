@@ -51,6 +51,8 @@ extension MapType
                     Map[0][X] = InvisibleBucketID
             }
             
+            case .SemiRotatable:
+            fallthrough
             case .Rotatable:
                 let BoardDef = BoardManager.GetBoardFor(BucketShape)!
                 CreateRotatingBucket(Width: BoardDef.GameBoardWidth, Height: BoardDef.GameBoardHeight, BucketTop: BucketTop, BucketBottom: BucketBottom,
@@ -87,6 +89,8 @@ extension MapType
             case .Static:
                 break
             
+            case .SemiRotatable:
+            fallthrough
             case .Rotatable:
                 let BoardDef = BoardManager.GetBoardFor(BucketShape)!
                 CreateRotatingBucket(Width: BoardDef.GameBoardWidth, Height: BoardDef.GameBoardHeight, BucketTop: BucketTop, BucketBottom: BucketBottom,
