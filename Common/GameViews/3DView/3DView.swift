@@ -823,22 +823,6 @@ class View3D: SCNView,                          //Our main super class.
         #endif
     }
     
-    /// The moving piece is in its final location. Add its ID to the list of retired IDs and remove the moving blocks.
-    /// - Parameter Finalized: The piece that was finalized.
-    public func MergePieceIntoBucket(_ Finalized: Piece)
-    {
-        #if false
-        VisuallyRetirePiece(Finalized, Completion:
-            {
-                self.RetiredPieceIDs.append(Finalized.ID)
-                self.RemoveMovingPiece()
-        })
-        #else
-        RetiredPieceIDs.append(Finalized.ID)
-        RemoveMovingPiece()
-        #endif
-    }
-    
     /// Show a piece such that the user knows it is being retired (eg, frozen).
     /// - Note: [How to add animations to change SCNNode's color](https://stackoverflow.com/questions/40472524/how-to-add-animations-to-change-sncnodes-color-scenekit)
     /// - Parameter Finalized: The piece that is freezing but not yet frozen.
@@ -948,6 +932,8 @@ class View3D: SCNView,                          //Our main super class.
             case .Static:
                 return ![.Visible, .InvisibleBucket, .Bucket].contains(BlockType)
             
+            case .SemiRotatable:
+            fallthrough
             case .Rotatable:
                 return ![.Visible, .InvisibleBucket, .Bucket, .GamePiece, .BucketExterior].contains(BlockType)
             
@@ -960,6 +946,8 @@ class View3D: SCNView,                          //Our main super class.
     /// moveable.
     public var RetiredPieceIDs = [UUID]()
     
+    // MARK: - Draw 3D piece.
+    
     /// Draw the individual piece. Intended to be used for the **.Rotating4** base game type.
     /// - Note:
     ///    - If the piece type ID cannot be retrieved, control is returned immediately.
@@ -970,7 +958,8 @@ class View3D: SCNView,                          //Our main super class.
     ///      when it should be frozen, and the piece doesn't move when the board is rotated.
     /// - Parameter InBoard: The current game board.
     /// - Parameter GamePiece: The piece to draw.
-    public func DrawPiece3D(InBoard: Board, GamePiece: Piece)
+    /// - Parameter AsRetired: Determines if the piece is drawn as retired or active.
+    public func DrawPiece3D(InBoard: Board, GamePiece: Piece, AsRetired: Bool = false)
     {
         if RetiredPieceIDs.contains(GamePiece.ID)
         {
@@ -982,6 +971,12 @@ class View3D: SCNView,                          //Our main super class.
             MovingPieceNode?.removeFromParentNode()
         }
         //print("  Done removing moving piece node.")
+        
+        let BoardDef = BoardManager.GetBoardFor(CenterBlockShape!)
+        let IsOddlyShaped = !BoardDef!.GameBoardWidth.IsEven
+        let XAdjustment: CGFloat = IsOddlyShaped ? -18.0 : -17.5
+        let YAdjustment: CGFloat = IsOddlyShaped ? 0.0 : -1.0
+        
         MovingPieceBlocks = [VisualBlocks3D]()
         MovingPieceNode = SCNNode()
         MovingPieceNode?.name = "Moving Piece"
@@ -995,13 +990,15 @@ class View3D: SCNView,                          //Our main super class.
                 print("Block.ID is not set in DrawPiece3D")
                 return
             }
+            
             #if false
-            let YOffset = 10 - CGFloat(Block.Y) - 0.5
-            let XOffset = CGFloat(Block.X) - 6.0
-            #else
             let YOffset = (30 - 10 - 1) - 1.5 - CGFloat(Block.Y)
             let XOffset = CGFloat(Block.X) - 17.5
+            #else
+            let YOffset = (30 - 10 - 1) + YAdjustment - CGFloat(Block.Y)
+            let XOffset = CGFloat(Block.X) + XAdjustment// - 17.5
             #endif
+            
             let PieceTypeID = CurrentMap.RetiredPieceShapes[ItemID]
             if PieceTypeID == nil
             {
@@ -1009,7 +1006,7 @@ class View3D: SCNView,                          //Our main super class.
                 return
             }
             let VBlock = VisualBlocks3D(Block.ID, AtX: XOffset, AtY: YOffset, ActiveVisuals: PVisuals!.ActiveVisuals!,
-                                        RetiredVisuals: PVisuals!.RetiredVisuals!, IsRetired: false)
+                                        RetiredVisuals: PVisuals!.RetiredVisuals!, IsRetired: AsRetired)
             VBlock.categoryBitMask = View3D.GameLight
             MovingPieceBlocks.append(VBlock)
             MovingPieceNode?.addChildNode(VBlock)
@@ -1017,6 +1014,58 @@ class View3D: SCNView,                          //Our main super class.
         //print("Adding moving piece blocks to root node.")
         self.scene?.rootNode.addChildNode(MovingPieceNode!)
         //print("  Done moving piece blocks to root node.")
+    }
+    
+    /// The moving piece is in its final location. Add its ID to the list of retired IDs and remove the moving blocks.
+    /// - Note: This class also adds the finalized piece into the master bucket node, drawn as retired piece.
+    /// - Parameter Finalized: The piece that was finalized.
+    public func MergePieceIntoBucket(_ Finalized: Piece)
+    {
+        RetiredPieceIDs.append(Finalized.ID)
+        let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape!)!
+        var XOffset: CGFloat = 0.0
+        var YOffset: CGFloat = 0.0
+        let BoardDef = BoardManager.GetBoardFor(CenterBlockShape!)
+        let IsOddlyShaped = !BoardDef!.GameBoardWidth.IsEven
+        let XAdjustment: CGFloat = IsOddlyShaped ? -18.0 : -17.5
+        let YAdjustment: CGFloat = IsOddlyShaped ? -1.0 : -1.5//-2.0
+        let BlockMap = CurrentBoard!.Map!.MergedBlockMap()
+        let MergedMap = CurrentBoard!.Map!.MergeMap(Excluding: nil)
+        
+        for Block in Finalized.Locations
+        {
+            let ItemID = MergedMap[Block.Y][Block.X]
+            let BlockID = BlockMap[Block.Y][Block.X]
+            let PieceTypeID = CurrentBoard!.Map!.RetiredPieceShapes[ItemID]!
+            switch BoardClass
+            {
+                case .Static:
+                    if UIDevice.current.userInterfaceIdiom == .phone
+                    {
+                        YOffset = 9 - CGFloat(Block.Y)
+                    }
+                    else
+                    {
+                        YOffset = 7 - CGFloat(Block.Y)
+                    }
+                    XOffset = CGFloat(Block.X) - 5.5
+                    AddBlockNode_Standard(ParentID: ItemID, BlockID: BlockID, X: Int(XOffset), Y: Int(YOffset),
+                                          IsRetired: true, ShapeID: PieceTypeID)
+                
+                case .SemiRotatable:
+                fallthrough
+                case .Rotatable:
+                    YOffset = (30 - 10 - 1) + YAdjustment - CGFloat(Block.Y)
+                    XOffset = CGFloat(Block.X) + XAdjustment
+                    AddBlockNode_Rotating(ParentID: ItemID, BlockID: BlockID, X: XOffset, Y: YOffset,
+                                          IsRetired: true, ShapeID: PieceTypeID)
+                
+                case .ThreeDimensional:
+                    break
+            }
+        }
+
+        RemoveMovingPiece()
     }
     
     /// Perform a fast drop execution on the supplied piece.
@@ -1077,6 +1126,8 @@ class View3D: SCNView,                          //Our main super class.
         BucketCleaner(DestroyBy, MaxDuration: MaxDuration)
     }
     
+    // MARK: - Board map drawing.
+    
     /// Draw the 3D game view map. Includes moving pieces.
     /// - Note:
     ///    - To keep things semi-efficient, 3D objects are only created when they first appear in the game board.
@@ -1087,7 +1138,15 @@ class View3D: SCNView,                          //Our main super class.
     {
         objc_sync_enter(RotateLock)
         defer{ objc_sync_exit(RotateLock) }
+        
         let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape!)!
+        let BoardDef = BoardManager.GetBoardFor(CenterBlockShape!)
+        let IsOddlyShaped = !BoardDef!.GameBoardWidth.IsEven
+        let XAdjustment: CGFloat = IsOddlyShaped ? -18.0 : -17.5
+        let YAdjustment: CGFloat = IsOddlyShaped ? 0.0 : -1.0
+        let ExistingBlockYOffset: CGFloat = IsOddlyShaped ? 0.0 : -0.5
+        let XFinalAdjustment: CGFloat = IsOddlyShaped ? 0.0 : 0.0
+        let YFinalAdjustment: CGFloat = IsOddlyShaped ? -1.0 : -0.5
         
         BlockList.forEach({$0.Marked = false})
         
@@ -1111,9 +1170,15 @@ class View3D: SCNView,                          //Our main super class.
                 var XOffset: CGFloat = 0
                 switch BoardClass
                 {
+                    case .SemiRotatable:
+                    fallthrough
                     case .Rotatable:
+                        #if true
+                        YOffset = (30 - 10 - 1) + YAdjustment - CGFloat(Y)
+                        #else
                         YOffset = (30 - 10 - 1) - 1.0 - CGFloat(Y)
-                        XOffset = CGFloat(X) - 17.5
+                        #endif
+                        XOffset = CGFloat(X) + XAdjustment// - 17.5
                     
                     case .Static:
                         if UIDevice.current.userInterfaceIdiom == .phone
@@ -1143,7 +1208,7 @@ class View3D: SCNView,                          //Our main super class.
                     if let VBlock = GetBlock(BlockID)
                     {
                         let NewX = CGFloat(XOffset)
-                        let NewY = CGFloat(YOffset) - 0.5
+                        let NewY = CGFloat(YOffset) + ExistingBlockYOffset//- 0.5
                         if NewX == VBlock.X && NewY == VBlock.Y
                         {
                             //Nothing to do...
@@ -1159,10 +1224,12 @@ class View3D: SCNView,                          //Our main super class.
                 }
                 else
                 {
+                    //Add blocks not in the block list to the list here.
                     let PieceTypeID = CurrentMap.RetiredPieceShapes[ItemID]!
                     if BoardClass == .Rotatable
                     {
-                        YOffset = YOffset - 0.5
+                        XOffset = XOffset + XFinalAdjustment
+                        YOffset = YOffset + YFinalAdjustment//- 0.5
                     }
                     switch BoardClass
                     {
@@ -1170,6 +1237,8 @@ class View3D: SCNView,                          //Our main super class.
                             AddBlockNode_Standard(ParentID: ItemID, BlockID: BlockID, X: Int(XOffset), Y: Int(YOffset),
                                                   IsRetired: IsRetired, ShapeID: PieceTypeID)
                         
+                        case .SemiRotatable:
+                        fallthrough
                         case .Rotatable:
                             AddBlockNode_Rotating(ParentID: ItemID, BlockID: BlockID, X: XOffset, Y: YOffset,
                                                   IsRetired: IsRetired, ShapeID: PieceTypeID)
@@ -1301,6 +1370,8 @@ class View3D: SCNView,                          //Our main super class.
     /// Holds the current size.
     public var CurrentSize: CGRect? = nil
     
+    // MARK: - Bucket grid.
+    
     /// The node that holds the set of bucket grid lines.
     public var BucketGridNode: SCNNode? = nil
     
@@ -1388,29 +1459,38 @@ class View3D: SCNView,                          //Our main super class.
                 }
                 BucketGridNode.opacity = InitialOpacity
             
+            case .SemiRotatable:
+            fallthrough
             case .Rotatable:
                 let GameBoard = BoardManager.GetBoardFor(CenterBlockShape!)!
                 let BucketWidth = Double(GameBoard.BucketWidth)
                 let BucketHeight = Double(GameBoard.BucketHeight)
+                var BucketOffset = 0.0
+                let EndingPointX = BucketWidth
+                let EndingPointY = BucketHeight
+                if GameBoard.BucketWidth.isMultiple(of: 2)
+                {
+                    BucketOffset = 0.5
+                }
                 let HalfY = BucketHeight / 2.0
                 let HalfX = BucketWidth / 2.0
                 if ShowGrid
                 {
                     // Horizontal lines.
-                    for Y in stride(from: HalfY, to: -HalfY - 0.5, by: -1.0)
+                    for Y in stride(from: HalfY, to: -HalfY - BucketOffset, by: -1.0)
                     {
                         let Start = SCNVector3(0.0, Y, 0.0)
-                        let End = SCNVector3(20.0, Y, 0.0)
+                        let End = SCNVector3(EndingPointX, Y, 0.0)
                         let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.02)
                         LineNode.categoryBitMask = View3D.GameLight
                         LineNode.name = "Horizontal,\(Int(Y))"
                         BucketGridNode.addChildNode(LineNode)
                     }
                     //Vertical lines.
-                    for X in stride(from: -HalfX, to: HalfX + 0.5, by: 1.0)
+                    for X in stride(from: -HalfX, to: HalfX + BucketOffset, by: 1.0)
                     {
                         let Start = SCNVector3(X, 0.0, 0.0)
-                        let End = SCNVector3(X, 20.0, 0.0)
+                        let End = SCNVector3(X, EndingPointY, 0.0)
                         let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.02)
                         LineNode.categoryBitMask = View3D.GameLight
                         LineNode.name = "Vertical,\(Int(X))"
@@ -1453,6 +1533,8 @@ class View3D: SCNView,                          //Our main super class.
         
         return (Grid: BucketGridNode, Outline: OutlineNode)
     }
+    
+    
     
     /// Fades the bucket grid to an alpha of 0.0 then removes the lines from the scene.
     /// - Parameter Duration: Number of seconds for the fade effect to take place. Default is 1.0 seconds.
@@ -1550,13 +1632,13 @@ class View3D: SCNView,                          //Our main super class.
         switch OnAxis
         {
             case .XAxis:
-            XRotationalValue = Radians
+                XRotationalValue = Radians
             
             case .YAxis:
-            YRotationalValue = Radians
+                YRotationalValue = Radians
             
             case .ZAxis:
-            ZRotationalValue = Radians
+                ZRotationalValue = Radians
         }
         RemoveMovingPiece()
         let RotateTo = SCNAction.rotateTo(x: XRotationalValue, y: YRotationalValue, z: ZRotationalValue, duration: Duration)
@@ -1584,6 +1666,7 @@ class View3D: SCNView,                          //Our main super class.
     {
         objc_sync_enter(RotateLock)
         defer{objc_sync_exit(RotateLock)}
+        
         let Radians = CGFloat.pi / 180.0 * Degrees
         var XRotationalValue: CGFloat = 0.0
         var YRotationalValue: CGFloat = 0.0
@@ -1613,6 +1696,12 @@ class View3D: SCNView,                          //Our main super class.
     /// Stop showing off rotations.
     public func StopShowingOff()
     {
+        let BoardDef = BoardManager.GetBoardFor(CenterBlockShape!)
+        if !BoardDef!.BucketRotates
+        {
+            // Do not waste time if the bucket doesn't rotate.
+            return
+        }
         //Destroy the show off timer.
         ShowOffTimer?.invalidate()
         ShowOffTimer = nil
@@ -1641,6 +1730,12 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter Delay: Time between rotations.
     public func ShowOffRotations(Duration: Double, Delay: Double)
     {
+        let BoardDef = BoardManager.GetBoardFor(CenterBlockShape!)
+        if !BoardDef!.BucketRotates
+        {
+            // Do not waste time if the bucket doesn't rotate.
+            return
+        }
         //Reset rotatable objects to a known rotation to keep things in sync with each other.
         let Reset = SCNAction.rotateTo(x: 0.0, y: 0.0, z: 0.0, duration: 0.01)
         MasterBlockNode?.runAction(Reset)
@@ -1679,6 +1774,9 @@ class View3D: SCNView,                          //Our main super class.
     {
         objc_sync_enter(RotateLock)
         defer{objc_sync_exit(RotateLock)}
+        
+        let BoardDef = BoardManager.GetBoardFor(CenterBlockShape!)
+        
         let DirectionalSign = CGFloat(Right ? -1.0 : 1.0)
         RotationCardinalIndex = RotationCardinalIndex + 1
         if RotationCardinalIndex > 3
@@ -1812,6 +1910,8 @@ class View3D: SCNView,                          //Our main super class.
                     }
             }
             
+            case .SemiRotatable:
+            fallthrough
             case .Rotatable:
                 for Block in MovingPieceBlocks
                 {
