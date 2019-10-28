@@ -9,17 +9,26 @@
 import Foundation
 import UIKit
 
+/// Game piece selection cell. Holds pieces to be selected.
 class GamePieceCell: UITableViewCell
 {
+    /// Holds the height of all `GamePieceCell`s.
     public static let CellHeight: CGFloat = 60.0
+    /// Width of the piece image.
     public static let ImageWidth: CGFloat = 50.0
+    /// Height of the piece image.
     public static let ImageHeight: CGFloat = 50.0
     
+    /// Required initializer.
+    /// - Parameter coder: See Apple documentation.
     required init?(coder: NSCoder)
     {
         super.init(coder: coder)
     }
     
+    /// Initializer. Create the UI.
+    /// - Parameter style: Table view cell style.
+    /// - Parameter reuseIdentifier: Identifier for caching and reusing table view cells.
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?)
     {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -32,10 +41,16 @@ class GamePieceCell: UITableViewCell
         contentView.addSubview(PieceLabel)
     }
     
-    var PieceView: UIImageView!
-    var PieceLabel: UILabel!
+    /// Holds the image in the cell view.
+    private var PieceView: UIImageView!
+    /// Holds the piece's name in the cell view.
+    private var PieceLabel: UILabel!
     
-    func LoadData(PieceImage: UIImage, Name: String, ID: UUID)
+    /// Load piece data into the view.
+    /// - Parameter PieceImage: Image of the piece.
+    /// - Parameter Name: Name of the piece.
+    /// - Parameter ID: ID of the piece.
+    public func LoadData(PieceImage: UIImage, Name: String, ID: UUID)
     {
         PieceLabel.text = Name
         PieceName = Name
@@ -43,6 +58,8 @@ class GamePieceCell: UITableViewCell
         PieceView.image = PieceImage
     }
     
+    /// Holds the name of the piece.
     public var PieceName: String = ""
+    /// Holds the ID of the piece.
     public var PieceID: UUID = UUID.Empty
 }
