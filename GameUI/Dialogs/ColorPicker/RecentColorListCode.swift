@@ -12,9 +12,11 @@ import UIKit
 /// The code to run the recent color list (which isn't really implemented yet).
 class RecentColorListCode: UIViewController, UITableViewDelegate, UITableViewDataSource, ColorPickerProtocol
 {
+    /// Delegate that receives messages from this class.
     public weak var ColorDelegate: ColorPickerProtocol? = nil
     
-    override func viewDidLoad()
+    /// Initialize the UI.
+    override public func viewDidLoad()
     {
         super.viewDidLoad()
         RecentTable.layer.borderColor = UIColor.black.cgColor
@@ -22,6 +24,7 @@ class RecentColorListCode: UIViewController, UITableViewDelegate, UITableViewDat
         RecentTable.reloadData()
     }
     
+    /// Populate the color list.
     private func PopulateColorList()
     {
         ColorList.removeAll()
@@ -32,36 +35,55 @@ class RecentColorListCode: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
+    /// Holds a list of colors to display.
     private var ColorList = [(UIColor, String, String)]()
     
-    @IBAction func HandleOKPressed(_ sender: Any)
+    /// Handle the OK button pressed. Close the window.
+        /// - Parameter sender: Not used.
+    @IBAction public func HandleOKPressed(_ sender: Any)
     {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func HandleCancelPressed(_ sender: Any)
+    /// Handle the cancel button pressed. Close the window.
+        /// - Parameter sender: Not used.
+    @IBAction public func HandleCancelPressed(_ sender: Any)
     {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func HandleClearList(_ sender: Any)
+    /// Handle the clear recent colors list button pressed.
+    /// - Parameter sender: Not used.
+    @IBAction public func HandleClearList(_ sender: Any)
     {
         RecentlyUsedColors.Clear()
         PopulateColorList()
         RecentTable.reloadData()
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    /// Returns the height of each cell in the table.
+    /// - Parameter tableView: Not used.
+    /// - Parameter heightForRowAt: Not used.
+    /// - Returns: The height of each cell in the table.
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
         return RecentColorCell.CellHeight
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    /// Returns the number of colors in the recent color list.
+    /// - Parameter tableView: Not used.
+    /// - Parameter numberOfRowsInSection: Not used.
+    /// - Returns: Number of colors in the recent color list.
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return ColorList.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    /// Returns a populated table view cell with a recent color.
+    /// - Parameter tableView: Not used.
+    /// - Parameter cellForRowAt: Index of the recent color to use to populate the table view cell.
+    /// - Returns: Table view cell with a recent color.
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let Width = tableView.bounds.size.width
         let Cell = RecentColorCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "Cell")
@@ -70,11 +92,13 @@ class RecentColorListCode: UIViewController, UITableViewDelegate, UITableViewDat
         return Cell
     }
     
-    func ColorToEdit(_ Color: UIColor, Tag: Any?)
+    /// Not currently used.
+    public func ColorToEdit(_ Color: UIColor, Tag: Any?)
     {
     }
     
-    func EditedColor(_ Edited: UIColor?, Tag: Any?)
+    /// Not currently used.
+    public func EditedColor(_ Edited: UIColor?, Tag: Any?)
     {
     }
     
