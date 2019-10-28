@@ -344,6 +344,9 @@ class GameLogic
                 case .Rotatable:
                     UIDelegate?.PieceMoved3D(MovedPiece, Direction: Direction, Commanded: Commanded)
                 
+                case .SemiRotatable:
+                    UIDelegate?.PieceMoved3D(MovedPiece, Direction: Direction, Commanded: Commanded)
+                
                 case .Static:
                     UIDelegate?.PieceMoved(MovedPiece, Direction: Direction, Commanded: Commanded)
                 
@@ -363,6 +366,8 @@ class GameLogic
             switch BoardClass
             {
                 case .Rotatable:
+                fallthrough
+                case .SemiRotatable:
                     var BlockCount = ThePiece.Locations.count
                     if BlockCount >= LargestBlockCount
                     {
