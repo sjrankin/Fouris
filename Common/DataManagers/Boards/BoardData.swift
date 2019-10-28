@@ -16,13 +16,18 @@ class BoardData
         [
             .Dot, .MediumSquare, .SmallSquare, .BigSquare, .SmallRectangle, .BigRectangle, .Diamond, .BigDiamond, .SmallDiamond,
             .Bracket2, .Bracket4, .FourLines, .Corners, .Quadrant, .Plus, .HorizontalLine, .ParallelLines, .Empty,
-            .CornerDots, .FourSmallSquares, .ShortDiagonals, .LongDiagonals
+            .CornerDots, .FourSmallSquares, .ShortDiagonals, .LongDiagonals, .SpanningDiagonal
     ]
     
     /// Table of boards that do not rotate (or more accurately, the *buckets* do not rotate - the pieces may actually rotate).
     public static var StaticBoards: [BucketShapes] =
         [
-            .Classic, .TallThin, .ShortWide, .Big, .Small, .SquareBucket, .Giant, .OneOpening
+            .Classic, .TallThin, .ShortWide, .Big, .Small, .SquareBucket, .Giant
+    ]
+    
+    public static var SemiRotatingBoards: [BucketShapes] =
+    [
+        .OneOpening, .InsideOut
     ]
     
     /// Table of three-dimensional boards.
@@ -35,6 +40,7 @@ class BoardData
     public static var BoardGroups: [BoardClasses: [BucketShapes]] =
         [
             .Rotatable: RotatableBoards,
+            .SemiRotatable: SemiRotatingBoards,
             .Static: StaticBoards,
             .ThreeDimensional: CubicBoards
     ]
@@ -119,6 +125,7 @@ enum BucketShapes: String, CaseIterable
     case FourSmallSquares = "FourSmallSquares"
     case ShortDiagonals = "ShortDiagonals"
     case LongDiagonals = "LongDiagonals"
+    case SpanningDiagonal = "SpanningDiagonal"
     //Semi-rotating games. (Blocks rotate but the bucket does not.)
     case OneOpening = "OneOpening"
     case InsideOut = "InsideOut"
@@ -135,12 +142,14 @@ enum BucketShapes: String, CaseIterable
 }
 
 /// Board classes.
-/// - **Rotatable**: Boards that can be rotated (the bucket portion can rotate).
-/// - **Static**: Boards whose buckets are static and do not rotate.
-/// - **ThreeDimensional**: Boards that are in three dimensions and may rotate.
 enum BoardClasses: String, CaseIterable
 {
+    /// Boards that can be rotated (the bucket portion can rotate).
     case Rotatable = "Rotatable"
+    /// Boards whose contents (eg, the pieces) rotate but not the bucket.
+    case SemiRotatable = "SemiRotatable"
+    /// Boards whose buckets are static and do not rotate.
     case Static = "Static"
+    /// Boards that are in three dimensions and may rotate.
     case ThreeDimensional = "3D"
 }
