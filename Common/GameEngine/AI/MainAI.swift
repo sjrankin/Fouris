@@ -63,6 +63,8 @@ class MainAI
        {
         switch BucketClass
         {
+            case .SemiRotatable:
+            fallthrough
             case .Rotatable:
                 CurrentAI = GameAIs[.Rotating]
             
