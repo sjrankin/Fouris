@@ -11,7 +11,9 @@ import UIKit
 
 extension RawThemeViewerCode
 {
-    func PopulateColorView(WithField: GroupField)
+    /// Populate the color selection view.
+    /// - Parameter WithField: The group field to populate the view with.
+    public func PopulateColorView(WithField: GroupField)
     {
         ColorSwatch.isUserInteractionEnabled = !WithField.DisableControl
         ColorDescription.layer.cornerRadius = 4.0
