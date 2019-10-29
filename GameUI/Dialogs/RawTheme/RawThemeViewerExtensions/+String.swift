@@ -11,7 +11,9 @@ import UIKit
 
 extension RawThemeViewerCode
 {
-    func PopulateStringView(WithField: GroupField)
+    /// Populate the string editing view.
+    /// - Parameter WithField: The group field to populate the view with.
+    public func PopulateStringView(WithField: GroupField)
     {
         StringTextBox.isEnabled = !WithField.DisableControl
         StringDescription.layer.cornerRadius = 4.0
