@@ -12,7 +12,9 @@ import Photos
 
 extension RawThemeViewerCode
 {
-    func PopulateImageView(WithField: GroupField)
+    /// Populate the image selection view.
+    /// - Parameter WithField: The group field to populate the view with.
+    public func PopulateImageView(WithField: GroupField)
     {
         ImagePhotoRollButton.isEnabled = !WithField.DisableControl
         ImageProgramImagesButton.isEnabled = !WithField.DisableControl
@@ -39,7 +41,10 @@ extension RawThemeViewerCode
         IntViewDirty.alpha = 0.0
     }
     
-    //https://stackoverflow.com/questions/27854937/ios8-photos-framework-how-to-get-the-nameor-filename-of-a-phasset
+    /// Get the specified image from the photo roll.
+    /// - Note: See [Get name from PHAsset](https://stackoverflow.com/questions/27854937/ios8-photos-framework-how-to-get-the-nameor-filename-of-a-phasset)
+    /// - Parameter: Name of the image in the photo roll.
+    /// - Returns: The named image on success, nil if the image was not found.
     func GetNamedImage(_ Name: String) -> UIImage?
     {
         let ImageAssets = PHAsset.fetchAssets(with: .image, options: nil)
