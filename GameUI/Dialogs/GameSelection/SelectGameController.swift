@@ -92,13 +92,13 @@ class SelectGameController: UIViewController, UITableViewDelegate, UITableViewDa
     {
         switch section
         {
-            case 0:
+            case 2:
                 return "Standard"
             
-            case 1:
+            case 0:
                 return "Rotating"
             
-            case 2:
+            case 1:
                 return "Semi-Rotating"
             
             case 3:
@@ -125,13 +125,13 @@ class SelectGameController: UIViewController, UITableViewDelegate, UITableViewDa
     {
         switch section
         {
-            case 0:
+            case 2:
                 return StandardGames.count
             
-            case 1:
+            case 0:
                 return RotatingGames.count
             
-            case 2:
+            case 1:
                 return SemiRotatingGames.count
             
             case 3:
@@ -153,19 +153,19 @@ class SelectGameController: UIViewController, UITableViewDelegate, UITableViewDa
         var BucketType: BucketShapes = .Classic
         switch indexPath.section
         {
-            case 0:
+            case 2:
                 let (STitle, SImageName, SBucketType) = StandardGames[indexPath.row]
                 Title = STitle
                 ImageName = SImageName
                 BucketType = SBucketType
             
-            case 1:
+            case 0:
                 let (STitle, SImageName, SBucketType) = RotatingGames[indexPath.row]
                 Title = STitle
                 ImageName = SImageName
                 BucketType = SBucketType
             
-            case 2:
+            case 1:
                 let (STitle, SImageName, SBucketType) = SemiRotatingGames[indexPath.row]
                 Title = STitle
                 ImageName = SImageName
@@ -211,21 +211,23 @@ class SelectGameController: UIViewController, UITableViewDelegate, UITableViewDa
     private var CubicGames = [(String, String, BucketShapes)]()
     
     /// Handle the OK button pressed. Send the new game type to the caller.
+    /// - Warning: A fatal error is generated if an unexpected section is returned.
     /// - Parameter sender: Not used.
     @IBAction public func HandleOKPressed(_ sender: Any)
     {
         if let Index = GameStyleTableView.indexPathForSelectedRow
         {
+            print("Selected game index: section: \(Index.section), row: \(Index.row)")
             var NewShape = BucketShapes.Classic
             switch Index.section
             {
-                case 0:
+                case 2:
                     NewShape = StandardGames[Index.row].2
                 
-                case 1:
+                case 0:
                     NewShape = RotatingGames[Index.row].2
                 
-                case 2:
+                case 1:
                     NewShape = SemiRotatingGames[Index.row].2
                 
                 case 3:
