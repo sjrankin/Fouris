@@ -65,6 +65,7 @@ extension View3D
                 #else
                 let Box = SCNBox(width: 0.85, height: 0.85, length: 0.85, chamferRadius: 0.0)
                 Box.firstMaterial?.diffuse.contents = UIImage(named: "Checkerboard64")
+                //Box.firstMaterial?.diffuse.contents = UIImage(named: "CircleArrayBlackWhite144")
                 Box.firstMaterial?.specular.contents = UIColor.white
                 MainButtonObject = SCNNode(geometry: Box)
                 MainButtonObject?.name = "MainButtonObject"
