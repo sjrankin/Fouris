@@ -11,7 +11,9 @@ import UIKit
 
 extension RawThemeViewerCode
 {
-    func PopulateActionView(WithField: GroupField)
+    /// Populate the action view.
+    /// - Parameter WithField: The group field to populate the view with.
+    public func PopulateActionView(WithField: GroupField)
     {
         ActionDescription.layer.cornerRadius = 4.0
         ActionDescription.clipsToBounds = true
@@ -29,6 +31,6 @@ extension RawThemeViewerCode
         ActionButton.tintColor = WithField.ActionButtonTextColor
         ActionButton.backgroundColor = WithField.ActionButtonBackgroundColor
         CurrentField = WithField
-        ShowViewType(WithField.FieldType)
+        ShowViewType(WithField.FieldType) 
     }
 }
