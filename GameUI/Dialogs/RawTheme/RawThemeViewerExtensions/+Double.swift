@@ -11,7 +11,9 @@ import UIKit
 
 extension RawThemeViewerCode
 {
-    func PopulateDoubleView(WithField: GroupField)
+    /// Populate the double editing view.
+    /// - Parameter WithField: The group field to populate the view with.
+    public func PopulateDoubleView(WithField: GroupField)
     {
         DoubleTextBox.isEnabled = !WithField.DisableControl
         DoubleDescription.layer.cornerRadius = 4.0
