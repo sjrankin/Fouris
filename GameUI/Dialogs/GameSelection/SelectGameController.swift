@@ -63,7 +63,10 @@ class SelectGameController: UIViewController, UITableViewDelegate, UITableViewDa
         RotatingGames.append(("Horizontal Line", "HorizontalLine", .HorizontalLine))
         RotatingGames.append(("Two Perpendicular Lines", "Quadrant", .Quadrant))
         RotatingGames.append(("Central Plus", "Plus", .Plus))
-        RotatingGames.append(("Spanning Diagonal", "", .SpanningDiagonal))
+        RotatingGames.append(("Spanning Diagonal", "SpanningDiagonal", .SpanningDiagonal))
+        RotatingGames.append(("Empty Center", "EmptyCenter", .EmptyCenter))
+        RotatingGames.append(("Perpendicular Lines", "PerpendicularLines", .PerpendicularLines))
+        RotatingGames.append(("Alternating Lines", "AlternatingDirections", .AlternatingDirections))
         RotatingGames.append(("Empty", "Empty", .Empty))
         RotatingGames.append(("Inside Out", "InsideOut", .InsideOut))
         
