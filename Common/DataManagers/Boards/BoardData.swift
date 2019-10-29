@@ -16,7 +16,8 @@ class BoardData
         [
             .Dot, .MediumSquare, .SmallSquare, .BigSquare, .SmallRectangle, .BigRectangle, .Diamond, .BigDiamond, .SmallDiamond,
             .Bracket2, .Bracket4, .FourLines, .Corners, .Quadrant, .Plus, .HorizontalLine, .ParallelLines, .Empty,
-            .CornerDots, .FourSmallSquares, .ShortDiagonals, .LongDiagonals, .SpanningDiagonal
+            .CornerDots, .FourSmallSquares, .ShortDiagonals, .LongDiagonals, .SpanningDiagonal, .EmptyCenter,
+            .AlternatingDirections, .PerpendicularLines
     ]
     
     /// Table of boards that do not rotate (or more accurately, the *buckets* do not rotate - the pieces may actually rotate).
@@ -99,6 +100,9 @@ class BoardData
 /// - **SquareBucket**: Square, non-rotating bucket.
 /// - **Giant**: Huge bucket.
 /// - **Simple3D**: Simple 3D game with a center block.
+/// - **EmptyCenter**: Ordinal lines with an empty center.
+/// - **AlternatingDirections**: Short, perpendicular lines.
+/// - **PerpendicularLines**: Two perpendicular lines.
 enum BucketShapes: String, CaseIterable
 {
     //Rotating games.
@@ -126,6 +130,9 @@ enum BucketShapes: String, CaseIterable
     case ShortDiagonals = "ShortDiagonals"
     case LongDiagonals = "LongDiagonals"
     case SpanningDiagonal = "SpanningDiagonal"
+    case EmptyCenter = "EmptyCenter"
+    case AlternatingDirections = "AlternatingDirections"
+    case PerpendicularLines = "PerpendicularLines"
     //Semi-rotating games. (Blocks rotate but the bucket does not.)
     case OneOpening = "OneOpening"
     case InsideOut = "InsideOut"
