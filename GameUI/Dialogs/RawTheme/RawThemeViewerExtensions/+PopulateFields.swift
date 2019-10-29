@@ -12,7 +12,8 @@ import SceneKit
 
 extension RawThemeViewerCode
 {
-    func PopulateFields()
+    /// Populates all fields in a very long, ugly series of steps.
+    public func PopulateFields()
     {
         //Debug
         let DebugGroup = GroupData("Debug")
