@@ -7198,63 +7198,7 @@
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/RecentColorListCode.swift",
-      "line": 15,
-      "symbol": "RecentColorListCode.ColorDelegate",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/RecentColorListCode.swift",
-      "line": 17,
-      "symbol": "RecentColorListCode.viewDidLoad()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/RecentColorListCode.swift",
-      "line": 37,
-      "symbol": "RecentColorListCode.HandleOKPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/RecentColorListCode.swift",
-      "line": 42,
-      "symbol": "RecentColorListCode.HandleCancelPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/RecentColorListCode.swift",
-      "line": 47,
-      "symbol": "RecentColorListCode.HandleClearList(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/RecentColorListCode.swift",
-      "line": 54,
-      "symbol": "RecentColorListCode.tableView(_:heightForRowAt:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/RecentColorListCode.swift",
-      "line": 59,
-      "symbol": "RecentColorListCode.tableView(_:numberOfRowsInSection:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/RecentColorListCode.swift",
-      "line": 64,
-      "symbol": "RecentColorListCode.tableView(_:cellForRowAt:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/ColorPicker/RecentColorListCode.swift",
-      "line": 81,
+      "line": 105,
       "symbol": "RecentColorListCode.RecentTable",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -7394,280 +7338,63 @@
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 12,
-      "symbol": "GradientEditorCode",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 15,
-      "symbol": "GradientEditorCode._Settings",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 16,
-      "symbol": "GradientEditorCode.OriginalGradient",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 17,
-      "symbol": "GradientEditorCode.CurrentGradient",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 18,
-      "symbol": "GradientEditorCode.CallerTag",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 19,
-      "symbol": "GradientEditorCode.IsVertical",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 20,
-      "symbol": "GradientEditorCode.GradientStopList",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 21,
-      "symbol": "GradientEditorCode.GradientDelegate",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 23,
-      "symbol": "GradientEditorCode.viewDidLoad()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 48,
-      "symbol": "GradientEditorCode.HandleSampleTap(TapGesture:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 57,
-      "symbol": "GradientEditorCode.ShowSample(WithGradient:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 119,
-      "symbol": "GradientEditorCode.HandleReverseGradientButton(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 125,
-      "symbol": "GradientEditorCode.HandleClearButton(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 131,
-      "symbol": "GradientEditorCode.HandleResetButton(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 137,
-      "symbol": "GradientEditorCode.HandleEditButton(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 154,
-      "symbol": "GradientEditorCode.InstantiatePresetsDialog(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 162,
-      "symbol": "GradientEditorCode.HandleAddButton(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 169,
-      "symbol": "GradientEditorCode.tableView(_:numberOfRowsInSection:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 174,
-      "symbol": "GradientEditorCode.tableView(_:cellForRowAt:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 182,
-      "symbol": "GradientEditorCode.tableView(_:heightForRowAt:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 187,
-      "symbol": "GradientEditorCode.tableView(_:canMoveRowAt:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 192,
-      "symbol": "GradientEditorCode.tableView(_:moveRowAt:to:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 202,
-      "symbol": "GradientEditorCode.tableView(_:commit:forRowAt:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 211,
-      "symbol": "GradientEditorCode.tableView(_:didSelectRowAt:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 224,
-      "symbol": "GradientEditorCode.HandleInstantiateGradientStopEditor(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 233,
-      "symbol": "GradientEditorCode.HandleExportGradient2Instantiation(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 241,
-      "symbol": "GradientEditorCode.ColorToEdit",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 242,
-      "symbol": "GradientEditorCode.LocationToEdit",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 243,
-      "symbol": "GradientEditorCode.SelectedIndex",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 245,
-      "symbol": "GradientEditorCode.HandleOKPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 251,
-      "symbol": "GradientEditorCode.HandleCancelPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 257,
+      "line": 330,
       "symbol": "GradientEditorCode.ControlView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 258,
+      "line": 331,
       "symbol": "GradientEditorCode.PresetsButton",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 259,
+      "line": 332,
       "symbol": "GradientEditorCode.ClearButton",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 260,
+      "line": 333,
       "symbol": "GradientEditorCode.ResetButton",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 261,
+      "line": 334,
       "symbol": "GradientEditorCode.ReverseColorButton",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 262,
+      "line": 335,
       "symbol": "GradientEditorCode.AddGradientStopButton",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 263,
+      "line": 336,
       "symbol": "GradientEditorCode.EditButton",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 264,
+      "line": 337,
       "symbol": "GradientEditorCode.GradientStopTable",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientEditorCode.swift",
-      "line": 265,
+      "line": 338,
       "symbol": "GradientEditorCode.GradientView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -7701,386 +7428,50 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopCell.swift",
-      "line": 13,
-      "symbol": "GradientStopCell",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopCell.swift",
-      "line": 15,
-      "symbol": "GradientStopCell.CellHeight",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopCell.swift",
-      "line": 17,
-      "symbol": "GradientStopCell.init(coder:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopCell.swift",
-      "line": 22,
-      "symbol": "GradientStopCell.ColorSample",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopCell.swift",
-      "line": 23,
-      "symbol": "GradientStopCell.LocationLabel",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopCell.swift",
-      "line": 25,
-      "symbol": "GradientStopCell.init(style:reuseIdentifier:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopCell.swift",
-      "line": 48,
-      "symbol": "GradientStopCell.SetData(StopColor:StopLocation:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopCell.swift",
-      "line": 56,
-      "symbol": "GradientStopCell._CellColor",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopCell.swift",
-      "line": 57,
-      "symbol": "GradientStopCell._CellLocation",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopCell.swift",
-      "line": 59,
-      "symbol": "GradientStopCell.CellData()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopEditorCode.swift",
-      "line": 12,
-      "symbol": "GradientStopEditorCode",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopEditorCode.swift",
-      "line": 14,
-      "symbol": "GradientStopEditorCode.GradientDelegate",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopEditorCode.swift",
-      "line": 16,
-      "symbol": "GradientStopEditorCode.IsVertical",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopEditorCode.swift",
-      "line": 18,
-      "symbol": "GradientStopEditorCode.viewDidLoad()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopEditorCode.swift",
-      "line": 45,
-      "symbol": "GradientStopEditorCode.viewDidLayoutSubviews()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopEditorCode.swift",
-      "line": 50,
-      "symbol": "GradientStopEditorCode.HandleTapOnSample(TapGesture:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopEditorCode.swift",
-      "line": 59,
-      "symbol": "GradientStopEditorCode.UpdateUI()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopEditorCode.swift",
-      "line": 69,
-      "symbol": "GradientStopEditorCode.HandleColorPickerInstantiation(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopEditorCode.swift",
-      "line": 109,
-      "symbol": "GradientStopEditorCode.OriginalGradient",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopEditorCode.swift",
-      "line": 110,
-      "symbol": "GradientStopEditorCode.ParentTag",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopEditorCode.swift",
-      "line": 117,
-      "symbol": "GradientStopEditorCode.StopIndex",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopEditorCode.swift",
-      "line": 119,
-      "symbol": "GradientStopEditorCode.UpdateGradient(WithLocation:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopEditorCode.swift",
-      "line": 125,
-      "symbol": "GradientStopEditorCode.UpdateGradient(WithColor:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopEditorCode.swift",
-      "line": 131,
-      "symbol": "GradientStopEditorCode.HandleNewTextLocation(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopEditorCode.swift",
-      "line": 147,
-      "symbol": "GradientStopEditorCode.HandleLocationSliderChanged(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopEditorCode.swift",
-      "line": 154,
-      "symbol": "GradientStopEditorCode.OriginalColor",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopEditorCode.swift",
-      "line": 155,
-      "symbol": "GradientStopEditorCode.StopColorToEdit",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopEditorCode.swift",
-      "line": 156,
-      "symbol": "GradientStopEditorCode.OriginalLocation",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopEditorCode.swift",
-      "line": 157,
-      "symbol": "GradientStopEditorCode.StopLocationToEdit",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopEditorCode.swift",
-      "line": 159,
-      "symbol": "GradientStopEditorCode.HandleResetPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopEditorCode.swift",
-      "line": 166,
-      "symbol": "GradientStopEditorCode.HandleOKPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopEditorCode.swift",
-      "line": 175,
-      "symbol": "GradientStopEditorCode.HandleCancelPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopEditorCode.swift",
-      "line": 181,
+      "line": 223,
       "symbol": "GradientStopEditorCode.LocationSlider",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopEditorCode.swift",
-      "line": 182,
+      "line": 224,
       "symbol": "GradientStopEditorCode.LocationText",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopEditorCode.swift",
-      "line": 183,
+      "line": 225,
       "symbol": "GradientStopEditorCode.SampleView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopEditorCode.swift",
-      "line": 184,
+      "line": 226,
       "symbol": "GradientStopEditorCode.SampleImage",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/GradientStopEditorCode.swift",
-      "line": 185,
+      "line": 227,
       "symbol": "GradientStopEditorCode.CurrentColorSample",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/PresetGradientListCode.swift",
-      "line": 12,
-      "symbol": "PresetGradientListCode",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/PresetGradientListCode.swift",
-      "line": 15,
-      "symbol": "PresetGradientListCode.GradientDelegate",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/PresetGradientListCode.swift",
-      "line": 17,
-      "symbol": "PresetGradientListCode.viewDidLoad()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/PresetGradientListCode.swift",
-      "line": 25,
-      "symbol": "PresetGradientListCode.LoadPresetGradients()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/PresetGradientListCode.swift",
-      "line": 34,
-      "symbol": "PresetGradientListCode.PresetList",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/PresetGradientListCode.swift",
-      "line": 36,
-      "symbol": "PresetGradientListCode.tableView(_:numberOfRowsInSection:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/PresetGradientListCode.swift",
-      "line": 41,
-      "symbol": "PresetGradientListCode.tableView(_:heightForRowAt:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/PresetGradientListCode.swift",
-      "line": 46,
-      "symbol": "PresetGradientListCode.tableView(_:cellForRowAt:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/PresetGradientListCode.swift",
-      "line": 53,
-      "symbol": "PresetGradientListCode.tableView(_:didSelectRowAt:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/PresetGradientListCode.swift",
-      "line": 59,
-      "symbol": "PresetGradientListCode.SelectedGradient",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/PresetGradientListCode.swift",
-      "line": 71,
-      "symbol": "PresetGradientListCode.GradientTag",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/PresetGradientListCode.swift",
-      "line": 78,
-      "symbol": "PresetGradientListCode.HandleOKPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/PresetGradientListCode.swift",
-      "line": 84,
-      "symbol": "PresetGradientListCode.HandleCancelPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/PresetGradientListCode.swift",
-      "line": 90,
-      "symbol": "PresetGradientListCode.HandleGradientOrientationChanged(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/PresetGradientListCode.swift",
-      "line": 95,
-      "symbol": "PresetGradientListCode.HandleSortGradientList(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/PresetGradientListCode.swift",
-      "line": 109,
-      "symbol": "PresetGradientListCode.SortDirection",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/PresetGradientListCode.swift",
-      "line": 111,
+      "line": 147,
       "symbol": "PresetGradientListCode.VerticalGradientSwitch",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GradientPicker/PresetGradientListCode.swift",
-      "line": 112,
+      "line": 148,
       "symbol": "PresetGradientListCode.GradientTable",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"

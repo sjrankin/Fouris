@@ -14,7 +14,7 @@
     <a title="PieceEditorCode Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html"> Docs</a> (66% documented)</p>
+        <p><a href="../index.html"> Docs</a> (68% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -928,7 +928,7 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>Code to run the UI for editing visuals of a piece.</p>
 
           </section>
           <section class="section task-group-section">
@@ -947,14 +947,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Delegate that receives messages related to theme changes.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">weak</span> <span class="k">var</span> <span class="nv">ThemeDelegate</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ThemeEditingProtocol.html">ThemeEditingProtocol</a></span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">ThemeDelegate</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ThemeEditingProtocol.html">ThemeEditingProtocol</a></span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -974,20 +974,31 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Delegate that receives messages related to color changes.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">weak</span> <span class="k">var</span> <span class="nv">ColorDelegate</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ColorPickerProtocol.html">ColorPickerProtocol</a></span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">ColorDelegate</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ColorPickerProtocol.html">ColorPickerProtocol</a></span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Initialization."></a>
+                <a name="//apple_ref/swift/Section/Initialization." class="dashAnchor"></a>
+                <a href="#/Initialization.">
+                  <h3 class="section-name">Initialization.</h3>
+                </a>
+              </div>
+              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1001,14 +1012,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Initialize the UI.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
@@ -1018,36 +1029,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6Fouris15PieceEditorCodeC12StyleVisualsyyF"></a>
-                    <a name="//apple_ref/swift/Method/StyleVisuals()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Fouris15PieceEditorCodeC12StyleVisualsyyF">StyleVisuals()</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">StyleVisuals</span><span class="p">()</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6Fouris20ThemeEditingProtocolP04EditB00B0yAA0B11Descriptor2C_tF"></a>
+                    <a name="/s:6Fouris15PieceEditorCodeC9EditTheme0F0yAA0F11Descriptor2C_tF"></a>
                     <a name="//apple_ref/swift/Method/EditTheme(Theme:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Fouris20ThemeEditingProtocolP04EditB00B0yAA0B11Descriptor2C_tF">EditTheme(Theme:)</a>
+                    <a class="token" href="#/s:6Fouris15PieceEditorCodeC9EditTheme0F0yAA0F11Descriptor2C_tF">EditTheme(Theme:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1055,13 +1039,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Called by the parent to set the theme.</p>
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    The <code>EditTheme(ThemeDescriptor2:UUID)</code> variant <em>must</em> be called or a fatal error will be generated.
+
+</div>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">EditTheme</span><span class="p">(</span><span class="kt">Theme</span><span class="p">:</span> <span class="kt"><a href="../Classes/ThemeDescriptor2.html">ThemeDescriptor2</a></span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">EditTheme</span><span class="p">(</span><span class="kt">Theme</span><span class="p">:</span> <span class="kt"><a href="../Classes/ThemeDescriptor2.html">ThemeDescriptor2</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1071,9 +1061,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6Fouris20ThemeEditingProtocolP04EditB00B07PieceIDyAA0B11Descriptor2C_10Foundation4UUIDVtF"></a>
+                    <a name="/s:6Fouris15PieceEditorCodeC9EditTheme0F00B2IDyAA0F11Descriptor2C_10Foundation4UUIDVtF"></a>
                     <a name="//apple_ref/swift/Method/EditTheme(Theme:PieceID:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Fouris20ThemeEditingProtocolP04EditB00B07PieceIDyAA0B11Descriptor2C_10Foundation4UUIDVtF">EditTheme(Theme:PieceID:)</a>
+                    <a class="token" href="#/s:6Fouris15PieceEditorCodeC9EditTheme0F00B2IDyAA0F11Descriptor2C_10Foundation4UUIDVtF">EditTheme(Theme:PieceID:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1081,15 +1071,47 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Called by the parent to set the theme and piece to edit.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">EditTheme</span><span class="p">(</span><span class="kt">Theme</span><span class="p">:</span> <span class="kt"><a href="../Classes/ThemeDescriptor2.html">ThemeDescriptor2</a></span><span class="p">,</span> <span class="kt"><a href="../Classes/PieceEditorCode.html#/s:6Fouris15PieceEditorCodeC0B2ID10Foundation4UUIDVvp">PieceID</a></span><span class="p">:</span> <span class="kt">UUID</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">EditTheme</span><span class="p">(</span><span class="kt">Theme</span><span class="p">:</span> <span class="kt"><a href="../Classes/ThemeDescriptor2.html">ThemeDescriptor2</a></span><span class="p">,</span> <span class="kt">PieceID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Theme</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The theme to edit.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>PieceID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID to edit.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -1097,63 +1119,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6Fouris15PieceEditorCodeC7ThemeID10Foundation4UUIDVvp"></a>
-                    <a name="//apple_ref/swift/Property/ThemeID" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Fouris15PieceEditorCodeC7ThemeID10Foundation4UUIDVvp">ThemeID</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">ThemeID</span><span class="p">:</span> <span class="kt">UUID</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6Fouris15PieceEditorCodeC0B2ID10Foundation4UUIDVvp"></a>
-                    <a name="//apple_ref/swift/Property/PieceID" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Fouris15PieceEditorCodeC0B2ID10Foundation4UUIDVvp">PieceID</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">PieceID</span><span class="p">:</span> <span class="kt">UUID</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6Fouris20ThemeEditingProtocolP11EditResults_0B2ID05PieceG0ySb_10Foundation4UUIDVAISgtF"></a>
+                    <a name="/s:6Fouris15PieceEditorCodeC11EditResults_7ThemeID0bH0ySb_10Foundation4UUIDVAISgtF"></a>
                     <a name="//apple_ref/swift/Method/EditResults(_:ThemeID:PieceID:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Fouris20ThemeEditingProtocolP11EditResults_0B2ID05PieceG0ySb_10Foundation4UUIDVAISgtF">EditResults(_:ThemeID:PieceID:)</a>
+                    <a class="token" href="#/s:6Fouris15PieceEditorCodeC11EditResults_7ThemeID0bH0ySb_10Foundation4UUIDVAISgtF">EditResults(_:ThemeID:PieceID:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1161,13 +1129,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Not used in this class.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">EditResults</span><span class="p">(</span><span class="n">_</span> <span class="kt">Edited</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="kt"><a href="../Classes/PieceEditorCode.html#/s:6Fouris15PieceEditorCodeC7ThemeID10Foundation4UUIDVvp">ThemeID</a></span><span class="p">:</span> <span class="kt">UUID</span><span class="p">,</span> <span class="kt"><a href="../Classes/PieceEditorCode.html#/s:6Fouris15PieceEditorCodeC0B2ID10Foundation4UUIDVvp">PieceID</a></span><span class="p">:</span> <span class="kt">UUID</span><span class="p">?)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">EditResults</span><span class="p">(</span><span class="n">_</span> <span class="kt">Edited</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="kt">ThemeID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">,</span> <span class="kt">PieceID</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">?)</span></code></pre>
 
                         </div>
                       </div>
@@ -1177,36 +1146,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6Fouris15PieceEditorCodeC9UserThemeAA0F11Descriptor2CSgvp"></a>
-                    <a name="//apple_ref/swift/Property/UserTheme" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Fouris15PieceEditorCodeC9UserThemeAA0F11Descriptor2CSgvp">UserTheme</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">UserTheme</span><span class="p">:</span> <span class="kt"><a href="../Classes/ThemeDescriptor2.html">ThemeDescriptor2</a></span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6Fouris19ColorPickerProtocolP0B6ToEdit_3TagySo7UIColorC_ypSgtF"></a>
+                    <a name="/s:6Fouris15PieceEditorCodeC11ColorToEdit_3TagySo7UIColorC_ypSgtF"></a>
                     <a name="//apple_ref/swift/Method/ColorToEdit(_:Tag:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Fouris19ColorPickerProtocolP0B6ToEdit_3TagySo7UIColorC_ypSgtF">ColorToEdit(_:Tag:)</a>
+                    <a class="token" href="#/s:6Fouris15PieceEditorCodeC11ColorToEdit_3TagySo7UIColorC_ypSgtF">ColorToEdit(_:Tag:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1214,7 +1156,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Not used in this class.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -1247,9 +1190,40 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">EditedColor</span><span class="p">(</span><span class="n">_</span> <span class="kt">Edited</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?,</span> <span class="kt">Tag</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">EditedColor</span><span class="p">(</span><span class="n">_</span> <span class="kt">Edited</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?,</span> <span class="kt">Tag</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Edited</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If not nil, the edited color. If nil, take no action.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Tag</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Returned tag value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -1278,7 +1252,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Handle the active shape tap. Show a list of available block shapes. Handle shape changes.</p>
 
                       </div>
                       <div class="declaration">
@@ -1286,9 +1260,28 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@objc</span>
-<span class="kd">func</span> <span class="kt">HandleActiveShapeTap</span><span class="p">(</span><span class="kt">Recognizer</span><span class="p">:</span> <span class="kt">UIGestureRecognizer</span><span class="p">)</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="kt">HandleActiveShapeTap</span><span class="p">(</span><span class="kt">Recognizer</span><span class="p">:</span> <span class="kt">UIGestureRecognizer</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Recognizer</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The gesture recognizer.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -1306,7 +1299,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Handle the selection of a new active shape.</p>
 
                       </div>
                       <div class="declaration">
@@ -1314,37 +1307,28 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@objc</span>
-<span class="kd">func</span> <span class="kt">HandleActiveBlockShapeSelection</span><span class="p">(</span><span class="kt">Action</span><span class="p">:</span> <span class="kt">UIAlertAction</span><span class="p">)</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="kt">HandleActiveBlockShapeSelection</span><span class="p">(</span><span class="kt">Action</span><span class="p">:</span> <span class="kt">UIAlertAction</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6Fouris15PieceEditorCodeC8ShapeMapSaySS_AA12TileShapes3DOtGvp"></a>
-                    <a name="//apple_ref/swift/Property/ShapeMap" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Fouris15PieceEditorCodeC8ShapeMapSaySS_AA12TileShapes3DOtGvp">ShapeMap</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Map between tile shape ID type and its title. This was converted from a dictionary to an array because Swift dictionaries
-are non-deterministic for order and order is important in this case.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">ShapeMap</span><span class="p">:</span> <span class="p">[(</span><span class="kt">String</span><span class="p">,</span> <span class="kt"><a href="../Enums/TileShapes3D.html">TileShapes3D</a></span><span class="p">)]</span></code></pre>
-
-                        </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Determines which shape was selected.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -1362,7 +1346,7 @@ are non-deterministic for order and order is important in this case.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Not currently implemented.</p>
 
                       </div>
                       <div class="declaration">
@@ -1390,7 +1374,7 @@ are non-deterministic for order and order is important in this case.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Handle the retired shape tap. Show a list of available block shapes. Handle shape changes.</p>
 
                       </div>
                       <div class="declaration">
@@ -1398,9 +1382,28 @@ are non-deterministic for order and order is important in this case.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@objc</span>
-<span class="kd">func</span> <span class="kt">HandleRetiredShapeTap</span><span class="p">(</span><span class="kt">Recognizer</span><span class="p">:</span> <span class="kt">UIGestureRecognizer</span><span class="p">)</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="kt">HandleRetiredShapeTap</span><span class="p">(</span><span class="kt">Recognizer</span><span class="p">:</span> <span class="kt">UIGestureRecognizer</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Recognizer</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The gesture recognizer.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -1418,7 +1421,7 @@ are non-deterministic for order and order is important in this case.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Handle the selection of a new retired shape.</p>
 
                       </div>
                       <div class="declaration">
@@ -1426,9 +1429,28 @@ are non-deterministic for order and order is important in this case.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@objc</span>
-<span class="kd">func</span> <span class="kt">HandleRetiredBlockShapeSelection</span><span class="p">(</span><span class="kt">Action</span><span class="p">:</span> <span class="kt">UIAlertAction</span><span class="p">)</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="kt">HandleRetiredBlockShapeSelection</span><span class="p">(</span><span class="kt">Action</span><span class="p">:</span> <span class="kt">UIAlertAction</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>Action</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Determines which shape was selected.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -1446,7 +1468,7 @@ are non-deterministic for order and order is important in this case.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Not currently implemented.</p>
 
                       </div>
                       <div class="declaration">
@@ -1454,7 +1476,7 @@ are non-deterministic for order and order is important in this case.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBAction</span>
-<span class="kd">func</span> <span class="kt">HandleRetiredTextureButtonPressed</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="kt">HandleRetiredTextureButtonPressed</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1474,7 +1496,7 @@ are non-deterministic for order and order is important in this case.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Handle surface type change for active blocks.</p>
 
                       </div>
                       <div class="declaration">
@@ -1482,9 +1504,28 @@ are non-deterministic for order and order is important in this case.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBAction</span>
-<span class="kd">func</span> <span class="kt">HandleActiveSurfaceTypeChanged</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="kt">HandleActiveSurfaceTypeChanged</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Not used.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -1502,7 +1543,7 @@ are non-deterministic for order and order is important in this case.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Handle surface type change for retired blocks.</p>
 
                       </div>
                       <div class="declaration">
@@ -1510,9 +1551,28 @@ are non-deterministic for order and order is important in this case.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBAction</span>
-<span class="kd">func</span> <span class="kt">HandleRetiredSurfaceTypeChanged</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="kt">HandleRetiredSurfaceTypeChanged</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Not used.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -1541,7 +1601,7 @@ are non-deterministic for order and order is important in this case.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Handle the rotate sample style changed.</p>
 
                       </div>
                       <div class="declaration">
@@ -1549,9 +1609,28 @@ are non-deterministic for order and order is important in this case.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBAction</span>
-<span class="kd">func</span> <span class="kt">HandleRotatePieceSegmentChanged</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="kt">HandleRotatePieceSegmentChanged</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Not used.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -1569,7 +1648,7 @@ are non-deterministic for order and order is important in this case.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Handle the OK button. Notify the user and close the dialog.</p>
 
                       </div>
                       <div class="declaration">
@@ -1577,9 +1656,28 @@ are non-deterministic for order and order is important in this case.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBAction</span>
-<span class="kd">func</span> <span class="kt">HandleOKPressed</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="kt">HandleOKPressed</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Not used.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -1597,7 +1695,7 @@ are non-deterministic for order and order is important in this case.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Handle the cancel button. Notify the user and close the dialog.</p>
 
                       </div>
                       <div class="declaration">
@@ -1605,9 +1703,28 @@ are non-deterministic for order and order is important in this case.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBAction</span>
-<span class="kd">func</span> <span class="kt">HandleCancelPressed</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="kt">HandleCancelPressed</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Not used.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -1625,7 +1742,7 @@ are non-deterministic for order and order is important in this case.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Handle the scale slider changed. Update the views.</p>
 
                       </div>
                       <div class="declaration">
@@ -1633,36 +1750,28 @@ are non-deterministic for order and order is important in this case.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@IBAction</span>
-<span class="kd">func</span> <span class="kt">HandleScaleSliderChanged</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="kt">HandleScaleSliderChanged</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6Fouris15PieceEditorCodeC18PreviousScaleValueSiSgvp"></a>
-                    <a name="//apple_ref/swift/Property/PreviousScaleValue" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Fouris15PieceEditorCodeC18PreviousScaleValueSiSgvp">PreviousScaleValue</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">PreviousScaleValue</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span></code></pre>
-
-                        </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Not used.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -1691,7 +1800,7 @@ are non-deterministic for order and order is important in this case.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Instantiate the color picker for the active diffuse color.</p>
 
                       </div>
                       <div class="declaration">
@@ -1702,6 +1811,29 @@ are non-deterministic for order and order is important in this case.</p>
 <span class="kd">func</span> <span class="kt">InstantiateColorPickerForActiveDiffuseColor</span><span class="p">(</span><span class="n">_</span> <span class="nv">coder</span><span class="p">:</span> <span class="kt">NSCoder</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/ColorPickerCode.html">ColorPickerCode</a></span><span class="p">?</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>coder</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>NSColor</code> instance used to create a <code><a href="../Classes/ColorPickerCode.html">ColorPickerCode</a></code> instance.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code><a href="../Classes/ColorPickerCode.html">ColorPickerCode</a></code> instance.</p>
                       </div>
                     </section>
                   </div>
@@ -1719,7 +1851,7 @@ are non-deterministic for order and order is important in this case.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Instantiate the color picker for the active specular color.</p>
 
                       </div>
                       <div class="declaration">
@@ -1730,6 +1862,29 @@ are non-deterministic for order and order is important in this case.</p>
 <span class="kd">func</span> <span class="kt">InstantiateColorPickerForActiveSpecularColor</span><span class="p">(</span><span class="n">_</span> <span class="nv">coder</span><span class="p">:</span> <span class="kt">NSCoder</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/ColorPickerCode.html">ColorPickerCode</a></span><span class="p">?</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>coder</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>NSColor</code> instance used to create a <code><a href="../Classes/ColorPickerCode.html">ColorPickerCode</a></code> instance.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code><a href="../Classes/ColorPickerCode.html">ColorPickerCode</a></code> instance.</p>
                       </div>
                     </section>
                   </div>
@@ -1747,7 +1902,7 @@ are non-deterministic for order and order is important in this case.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Instantiate the color picker for the retired diffuse color.</p>
 
                       </div>
                       <div class="declaration">
@@ -1758,6 +1913,29 @@ are non-deterministic for order and order is important in this case.</p>
 <span class="kd">func</span> <span class="kt">InstantiateColorPickerForRetiredDiffuseColor</span><span class="p">(</span><span class="n">_</span> <span class="nv">coder</span><span class="p">:</span> <span class="kt">NSCoder</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/ColorPickerCode.html">ColorPickerCode</a></span><span class="p">?</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>coder</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>NSColor</code> instance used to create a <code><a href="../Classes/ColorPickerCode.html">ColorPickerCode</a></code> instance.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code><a href="../Classes/ColorPickerCode.html">ColorPickerCode</a></code> instance.</p>
                       </div>
                     </section>
                   </div>
@@ -1775,7 +1953,7 @@ are non-deterministic for order and order is important in this case.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Instantiate the color picker for the retired specular color.</p>
 
                       </div>
                       <div class="declaration">
@@ -1786,6 +1964,29 @@ are non-deterministic for order and order is important in this case.</p>
 <span class="kd">func</span> <span class="kt">InstantiateColorPickerForRetiredSpecularColor</span><span class="p">(</span><span class="n">_</span> <span class="nv">coder</span><span class="p">:</span> <span class="kt">NSCoder</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/ColorPickerCode.html">ColorPickerCode</a></span><span class="p">?</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>coder</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>NSColor</code> instance used to create a <code><a href="../Classes/ColorPickerCode.html">ColorPickerCode</a></code> instance.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code><a href="../Classes/ColorPickerCode.html">ColorPickerCode</a></code> instance.</p>
                       </div>
                     </section>
                   </div>

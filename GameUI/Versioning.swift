@@ -12,8 +12,21 @@ import UIKit
 /// Contains versioning and copyright information. The contents of this file are automatically updated with each
 /// build by the VersionUpdater utility. This file also contains functions to return versioning information in various
 /// formats.
-/// - Note: Depending on when the automatic update to this file happens, the build times and numbers may be one off; this will
-///         happen if this file is updated as a post-build step. To avoid this, use a pre-build step instead.
+/// - Important:
+///     - Depending on when the automatic update to this file happens, the build times and numbers may be one off; this will
+///       happen if this file is updated as a post-build step. To avoid this, use a pre-build step instead.
+///     - The formation of the static delcarations is important. All must be in the form `public static let Variable: Type = "string"`
+///       with no trailing comments.
+///     - The **VersionUpdater** program requires the following variables to be in place in order to update both this file and
+///       and the README.md file:
+///       - `BuildTime`
+///       - `BuildDate`
+///       - `BuildIncrement`
+///       - `Build`
+///       - `BuildID`
+///       - `MajorVersion`
+///       - `MinorVersion`
+///       - `Tag`
 public class Versioning: CustomStringConvertible
 {
     /// Major version number.
@@ -29,13 +42,13 @@ public class Versioning: CustomStringConvertible
     public static let ApplicationName = "Fouris"
     
     /// Tag for the application.
-    public static let Tag = "Alpha"
+    public static let Tag: String = "Alpha"
     
     /// ID of the application.
     public static let ProgramID = "9c49a210-40f0-4f8a-89cf-4f88bc2430c6"
     
     /// The intended OS for the program.
-    public static let IntendedOS = "iOS"
+    public static let IntendedOS: String = "iOS"
     
     /// Returns a standard-formatted version string in the form of "Major.Minor" with optional
     /// version suffix.
@@ -83,19 +96,19 @@ public class Versioning: CustomStringConvertible
     }
     
     /// Build number.
-    public static let Build: Int = 3089
+    public static let Build: Int = 3094
     
     /// Build increment.
     private static let BuildIncrement = 1
     
     /// Build ID.
-    public static let BuildID: String = "442ABF00-3725-4931-9C79-70C78994A5A1"
+    public static let BuildID: String = "2E70ADDF-0F50-4798-8ED5-E6AF8401D375"
     
     /// Build date.
-    public static let BuildDate: String = "28 October 2019"
+    public static let BuildDate: String = "29 October 2019"
     
     /// Build Time.
-    public static let BuildTime: String = "22:11"
+    public static let BuildTime: String = "10:58"
     
     /// Return a standard build string.
     ///

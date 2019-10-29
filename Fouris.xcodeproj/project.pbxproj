@@ -1447,7 +1447,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/Users/Stuart/Documents/GitHub/Fouris/Fouris/VersionUpdater/VersionUpdater /Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Versioning.swift\n";
+			shellScript = "/Users/Stuart/Documents/GitHub/Fouris/Fouris/VersionUpdater/VersionUpdater /Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Versioning.swift /Users/Stuart/Documents/GitHub/Fouris/Fouris/README.md\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
