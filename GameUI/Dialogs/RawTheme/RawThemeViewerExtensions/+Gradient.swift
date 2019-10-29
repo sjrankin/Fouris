@@ -11,7 +11,9 @@ import UIKit
 
 extension RawThemeViewerCode
 {
-    func PopulateGradientView(WithField: GroupField)
+    /// Populate the gradient field view.
+    /// - Parameter WithField: The group field to populate the view with.
+    public func PopulateGradientView(WithField: GroupField)
     {
         GradientViewer.isUserInteractionEnabled = !WithField.DisableControl
         VerticalGradientSwitch.isEnabled = !WithField.DisableControl
