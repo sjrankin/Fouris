@@ -54,6 +54,11 @@ extension View3D
         var Results = [(BucketShapes, UIImage)]()
         for Shape in BucketShapes.allCases
         {
+            if BoardData.CubicBoards.contains(Shape)
+            {
+                //We cannot render 3D boards yet...
+                continue
+            }
             let BucketImage = RenderBucket(WithShape: Shape)
             Results.append((Shape, BucketImage))
         }
