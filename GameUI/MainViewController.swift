@@ -511,11 +511,13 @@ class MainViewController: UIViewController,
                             if MenuShowing
                             {
                                 GameView3D?.ChangeMainButtonTexture(To: UIImage(named: "Checkerboard64RedYellow")!)
+                                //GameView3D?.ChangeMainButtonTexture(To: UIImage(named: "CircleArrayRGB144")!)
                                 ShowPopOverMenu()
                             }
                             else
                             {
                                 GameView3D?.ChangeMainButtonTexture(To: UIImage(named: "Checkerboard64")!)
+                                //GameView3D?.ChangeMainButtonTexture(To: UIImage(named: "CircleArrayBlackWhite144")!)
                             }
                         }
                     }
@@ -2171,10 +2173,12 @@ class MainViewController: UIViewController,
         if Opened
         {
             GameView3D?.ChangeMainButtonTexture(To: UIImage(named: "Checkerboard64RedYellow")!)
+            //GameView3D?.ChangeMainButtonTexture(To: UIImage(named: "CircleArrayRGB144")!)
         }
         else
         {
             GameView3D?.ChangeMainButtonTexture(To: UIImage(named: "Checkerboard64")!)
+            //GameView3D?.ChangeMainButtonTexture(To: UIImage(named: "CircleArrayBlackWhite144")!)
         }
     }
     
