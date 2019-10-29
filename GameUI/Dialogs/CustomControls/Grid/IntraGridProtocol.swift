@@ -12,7 +12,7 @@ import UIKit
 /// Protocol for communications between instances of grid cells and their `Grid` instance parent.
 protocol IntraGridProtocol: class
 {
-    // MARK: User interactions.
+    // MARK: - User interactions.
     
     /// Notification from a grid cell to the `Grid` that a grid cell was tapped.
     /// - Parameter Column: The column address of the tapped grid cell.
@@ -32,7 +32,7 @@ protocol IntraGridProtocol: class
     /// - Parameter PivotState: The new pivot state.
     func GridCellPivotChanged(Column: Int, Row: Int, PivotState: Bool)
     
-    // MARK: Cell customization.
+    // MARK: - Cell customization.
 
     /// Request by a grid cell to get the base grid cell background color from the `Grid` instance.
     /// - Returns: Color to be used as the unselected, base background color.
@@ -54,7 +54,7 @@ protocol IntraGridProtocol: class
     /// - Returns: Value to be used as the border width.
     func GetBorderWidth() -> CGFloat
     
-    //MARK: Messages from the parent.
+    //MARK: - Messages from the parent.
     
     /// Request by the `Grid` instance to redraw the grid cell.
     func Redraw()
