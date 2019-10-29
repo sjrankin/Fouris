@@ -1714,7 +1714,7 @@ class View3D: SCNView,                          //Our main super class.
         MasterBlockNode?.removeAllActions()
         BucketNode?.removeAllActions()
         //Move to an ordinal position.
-        let Reset = SCNAction.rotateTo(x: 0.0, y: 0.0, z: 0.0, duration: 0.2)
+        let Reset = SCNAction.rotateTo(x: 0.0, y: 0.0, z: 0.0, duration: 0.4)
         if CurrentTheme!.RotateBucketGrid
         {
             BucketGridNode?.runAction(Reset)
