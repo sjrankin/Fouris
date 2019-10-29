@@ -12,10 +12,10 @@ import UIKit
 /// Contains a single cell for the `Grid` control.
 class GridCell: UIView, IntraGridProtocol
 {
-
-    
     /// Used for communicating with the `Grid` parent control.
     weak var CellParentDelegate: IntraGridProtocol? = nil
+    
+    // MARK: - Initialization
     
     /// Initializer.
     /// - Parameter frame: Frame of the cell.
@@ -35,7 +35,7 @@ class GridCell: UIView, IntraGridProtocol
     
     /// Initialize the grid cell.
     /// - Note: See [UITapGestureRecognizer Single Tap and Double Tap](https://stackoverflow.com/questions/8876202/uitapgesturerecognizer-single-tap-and-double-tap)
-    func Initialize()
+    public func Initialize()
     {
         Tag = nil
         let SingleTap = UITapGestureRecognizer(target: self, action: #selector(SingleTapHandler))
@@ -53,9 +53,43 @@ class GridCell: UIView, IntraGridProtocol
         DrawCell()
     }
     
+    // MARK: - Drawing functions.
+    
+    /// Redraw the grid cell. Can be called by the parent `Grid`.
+    public func Redraw()
+    {
+        DrawCell()
+    }
+    
+    /// Draw the grid cell.
+    private func DrawCell()
+    {
+        var BGColor = UIColor.white
+        if _IsPivot
+        {
+            BGColor = (CellParentDelegate?.GetPivotBackgroundColor())!
+        }
+        else
+        {
+            if _IsSelected
+            {
+                BGColor = (CellParentDelegate?.GetSelectedBackgroundColor())!
+            }
+            else
+            {
+                BGColor = (CellParentDelegate?.GetBaseBackgroundColor())!
+            }
+        }
+        self.backgroundColor = BGColor
+        self.layer.borderWidth = (CellParentDelegate?.GetBorderWidth())!
+        self.layer.borderColor = (CellParentDelegate?.GetBaseBorderColor())!.cgColor
+    }
+    
+    // MARK: - User interaction.
+    
     /// Handle single taps. Two notifications are sent to the parent - one for the tap and one for the selection station.
     /// - Parameter Recognizer: The gesture recognizer.
-    @objc func SingleTapHandler(Recognizer: UIGestureRecognizer)
+    @objc public func SingleTapHandler(Recognizer: UIGestureRecognizer)
     {
         if !_AllowsInteraction
         {
@@ -93,6 +127,8 @@ class GridCell: UIView, IntraGridProtocol
             CellParentDelegate?.GridCellPivotChanged(Column: Column, Row: Row, PivotState: IsPivot)
         }
     }
+    
+    // MARK: - Properities
     
     /// Holds the allows user interaction flag
     private var _AllowsInteraction: Bool = true
@@ -155,36 +191,6 @@ class GridCell: UIView, IntraGridProtocol
         {
             _IsPivot = newValue
         }
-    }
-    
-    /// Draw the grid cell.
-    func DrawCell()
-    {
-        var BGColor = UIColor.white
-        if _IsPivot
-        {
-            BGColor = (CellParentDelegate?.GetPivotBackgroundColor())!
-        }
-        else
-        {
-            if _IsSelected
-            {
-                BGColor = (CellParentDelegate?.GetSelectedBackgroundColor())!
-            }
-            else
-            {
-                BGColor = (CellParentDelegate?.GetBaseBackgroundColor())!
-            }
-        }
-        self.backgroundColor = BGColor
-        self.layer.borderWidth = (CellParentDelegate?.GetBorderWidth())!
-        self.layer.borderColor = (CellParentDelegate?.GetBaseBorderColor())!.cgColor
-    }
-    
-    /// Redraw the grid cell. Can be called by the parent `Grid`.
-    func Redraw()
-    {
-        DrawCell()
     }
     
     /// Holds the tag value.
