@@ -325,7 +325,7 @@ class GameLogic
     public func PieceUpdated2(_ WithPiece: Piece, _ XOffset: Int, _ YOffset: Int)
     {
         UIDelegate?.MapUpdated()
-        UIDelegate?.PieceUpdated(WithPiece, X: XOffset, Y: YOffset)
+        UIDelegate?.PieceUpdated(WithPiece)
     }
     
     // MARK: - Game logic protocol implementations
@@ -348,7 +348,11 @@ class GameLogic
                     UIDelegate?.PieceMoved3D(MovedPiece, Direction: Direction, Commanded: Commanded)
                 
                 case .Static:
+                    #if true
+                    UIDelegate?.PieceMoved3D(MovedPiece, Direction: Direction, Commanded: Commanded)
+                    #else
                     UIDelegate?.PieceMoved(MovedPiece, Direction: Direction, Commanded: Commanded)
+                    #endif
                 
                 case .ThreeDimensional:
                     UIDelegate?.PieceMoved(MovedPiece, Direction: Direction, Commanded: Commanded)
