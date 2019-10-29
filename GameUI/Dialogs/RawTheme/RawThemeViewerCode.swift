@@ -11,18 +11,18 @@ import UIKit
 import Photos
 
 /// Runs the UI to allow the user to edit settings and themes directly.
-class RawThemeViewerCode: UIViewController,
-    UITableViewDelegate,
-    UITableViewDataSource,
-    UIPickerViewDelegate,
-    UIPickerViewDataSource,
-    UIImagePickerControllerDelegate,
-    UINavigationControllerDelegate,
-    PHPhotoLibraryChangeObserver,
-    ThemeEditingProtocol,
-    RawThemeFieldEditProtocol,
-    GradientPickerProtocol,
-    ColorPickerProtocol
+class RawThemeViewerCode: UIViewController,             //Main base class.
+    UITableViewDelegate,                                //Table view delegate.
+    UITableViewDataSource,                              //Table view data source.
+    UIPickerViewDelegate,                               //Picker view delegate.
+    UIPickerViewDataSource,                             //Picker view data source.
+    UIImagePickerControllerDelegate,                    //Image picker delegate.
+    UINavigationControllerDelegate,                     //Navigation controller delegate.
+    PHPhotoLibraryChangeObserver,                       //Photo library observer.
+    ThemeEditingProtocol,                               //Theme editing protocol.
+    RawThemeFieldEditProtocol,                          //Raw theme field editing protocol.
+    GradientPickerProtocol,                             //Gradient picker protocol.
+    ColorPickerProtocol                                 //Color picker protocol.
 {
     /// Delegate that lets us edit colors.
     public weak var ColorDelegate: ColorPickerProtocol? = nil
