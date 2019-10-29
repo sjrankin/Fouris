@@ -14,6 +14,7 @@ class AttributeData
     /// Dictionary of attribute/credit data.
     public static var Table: [String: String] =
     [
+        "Get Name from PHAsset": "https://stackoverflow.com/questions/27854937/ios8-photos-framework-how-to-get-the-nameor-filename-of-a-phasset",
         "Catalyst Conditional Compilation": "https://appventure.me/guides/catalyst/how/conditional_code.html",
         "Adjust Pop-Over Size": "https://stackoverflow.com/questions/29449998/how-do-i-adjust-my-popover-to-the-size-of-the-content-in-my-tableview-in-swift",
         "Popup Menu": "https://stackoverflow.com/questions/4769169/iphone-popup-menu-like-ipad-popover/32295907#32295907",
