@@ -862,6 +862,7 @@ class MainViewController: UIViewController,
         #if false
         History?.Games![CurrentBaseGameType]!.IncrementPieceCount()
         #endif
+        #if false
         let BoardClass = BoardData.GetBoardClass(For: UserTheme!.BucketShape)!
         switch BoardClass
         {
@@ -877,13 +878,17 @@ class MainViewController: UIViewController,
             case .ThreeDimensional:
                 break
         }
+        #endif
         DumpGameBoard(Game.GameBoard!)
     }
     
     /// The active piece moved. Depending on whether we are in smooth mode or not, we do
     /// different things.
-    public func PieceUpdated(_ ThePiece: Piece, X: Int, Y: Int)
+    public func PieceUpdated(_ ThePiece: Piece)
     {
+        #if true
+        GameView3D?.DrawPiece3D(InBoard: Game.GameBoard!, GamePiece: ThePiece)
+        #else
         let BoardClass = BoardData.GetBoardClass(For: UserTheme!.BucketShape)!
         switch BoardClass
         {
@@ -898,6 +903,7 @@ class MainViewController: UIViewController,
             case .ThreeDimensional:
                 break
         }
+        #endif
     }
     
     /// Start a fast drop motion.
@@ -937,7 +943,6 @@ class MainViewController: UIViewController,
             fallthrough
             case .Rotatable:
                 GameView3D?.MergePieceIntoBucket(ThePiece)
-                //GameView3D?.DrawMap3D(FromBoard: Game!.GameBoard!, CalledFrom: "PieceFinalized")
                 
                 if UserTheme!.RotateBucket
                 {
@@ -945,12 +950,10 @@ class MainViewController: UIViewController,
                     {
                         case .Left:
                             Game!.GameBoard!.Map!.RotateMap(Right: false)
-                            //GameView3D?.RotateContentsBy(OnAxis: .ZAxis, By: 90.0)
                             GameView3D?.RotateContentsLeft(Duration: UserTheme!.RotationDuration, Completed: {self.Nop()})
                         
                         case .Right:
                             Game!.GameBoard!.Map!.RotateMap(Right: true)
-                            //GameView3D?.RotateContentsBy(OnAxis: .ZAxis, By: -90.0)
                             GameView3D?.RotateContentsRight(Duration: UserTheme!.RotationDuration, Completed: {self.Nop()})
                         
                         case .Random:
