@@ -11,7 +11,9 @@ import UIKit
 
 extension RawThemeViewerCode
 {
-    func PopulateBooleanView(WithField: GroupField)
+    /// Populate the Bool editin view.
+    /// - Parameter WithField: The group field to populate the view with.
+    public func PopulateBooleanView(WithField: GroupField)
     {
         BoolSwitch.isEnabled = !WithField.DisableControl
         BoolDescription.layer.cornerRadius = 4.0
