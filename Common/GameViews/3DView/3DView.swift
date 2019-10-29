@@ -948,7 +948,31 @@ class View3D: SCNView,                          //Our main super class.
     
     // MARK: - Draw 3D piece.
     
-    /// Draw the individual piece. Intended to be used for the **.Rotating4** base game type.
+    public func MapBlockToView(_ GameBlock: Block, BoardDef: BoardDescriptor2) -> (X: CGFloat, Y: CGFloat)
+    {
+        var BlockX = CGFloat(GameBlock.X)
+        var BlockY = CGFloat(GameBlock.Y)
+        
+        var HalfWidth = CGFloat(Int(BoardDef.BucketWidth / 2))
+        if BoardDef.BucketWidth.IsEven
+        {
+            HalfWidth = HalfWidth - 0.5
+        }
+        print("HalfWidth=\(HalfWidth), BlockX=\(BlockX), BucketWidth=\(BoardDef.BucketWidth)")
+        BlockX = -HalfWidth + BlockX
+        
+        var HalfHeight = CGFloat(Int(BoardDef.BucketHeight / 2))
+        if !BoardDef.BucketHeight.IsEven
+        {
+            HalfHeight = HalfHeight + 1.0 - 0.5
+        }
+        BlockY = -(-HalfHeight + BlockY)
+        print("HalfHeight=\(HalfHeight), BlockY=\(BlockY), BucketHeight=\(BoardDef.BucketHeight)")
+        
+        return (BlockX, BlockY)
+    }
+    
+    /// Draw the individual piece.
     /// - Note:
     ///    - If the piece type ID cannot be retrieved, control is returned immediately.
     ///    - If `GamePiece` has an ID that is in `RetiredPieceIDs`, control will be returned immeidately to prevent spurious
@@ -980,8 +1004,9 @@ class View3D: SCNView,                          //Our main super class.
         MovingPieceBlocks = [VisualBlocks3D]()
         MovingPieceNode = SCNNode()
         MovingPieceNode?.name = "Moving Piece"
-        let CurrentMap = InBoard.Map!
-        let ItemID = GamePiece.ID
+        //let CurrentMap = InBoard.Map!
+        //let ItemID = GamePiece.ID
+        let BoardType = BoardData.GetBoardClass(For: CenterBlockShape!)
         let PVisuals = PieceVisualManager2.UserVisuals!.GetVisualWith(ID: GamePiece.ShapeID)
         for Block in GamePiece.Locations!
         {
@@ -990,26 +1015,35 @@ class View3D: SCNView,                          //Our main super class.
                 print("Block.ID is not set in DrawPiece3D")
                 return
             }
-            
-            #if false
-            let YOffset = (30 - 10 - 1) - 1.5 - CGFloat(Block.Y)
-            let XOffset = CGFloat(Block.X) - 17.5
-            #else
-            let YOffset = (30 - 10 - 1) + YAdjustment - CGFloat(Block.Y)
-            let XOffset = CGFloat(Block.X) + XAdjustment// - 17.5
-            #endif
-            
-            let PieceTypeID = CurrentMap.RetiredPieceShapes[ItemID]
-            if PieceTypeID == nil
+            if BoardType == .Static
             {
-                print("Could not find ItemID in RetiredPieceShapes.")
-                return
+                let (VX, VY) = MapBlockToView(Block, BoardDef: BoardDef!)
+                print("Block at \(Block.X),\(Block.Y) => \(VX),\(VY)\n")
+                let VBlock = VisualBlocks3D(Block.ID, AtX: VX, AtY: VY, ActiveVisuals: PVisuals!.ActiveVisuals!,
+                                            RetiredVisuals: PVisuals!.RetiredVisuals!, IsRetired: AsRetired)
+                VBlock.categoryBitMask = View3D.GameLight
+                MovingPieceBlocks.append(VBlock)
+                MovingPieceNode?.addChildNode(VBlock)
             }
-            let VBlock = VisualBlocks3D(Block.ID, AtX: XOffset, AtY: YOffset, ActiveVisuals: PVisuals!.ActiveVisuals!,
-                                        RetiredVisuals: PVisuals!.RetiredVisuals!, IsRetired: AsRetired)
-            VBlock.categoryBitMask = View3D.GameLight
-            MovingPieceBlocks.append(VBlock)
-            MovingPieceNode?.addChildNode(VBlock)
+            else
+            {
+                let YOffset = (30 - 10 - 1) + YAdjustment - CGFloat(Block.Y)
+                let XOffset = CGFloat(Block.X) + XAdjustment
+                
+                //let PieceTypeID = CurrentMap.RetiredPieceShapes[ItemID]
+                //if PieceTypeID == nil
+                //{
+                //    print("Could not find ItemID in RetiredPieceShapes.")
+                //    return
+                //}
+                
+                let VBlock = VisualBlocks3D(Block.ID, AtX: XOffset, AtY: YOffset, ActiveVisuals: PVisuals!.ActiveVisuals!,
+                                            RetiredVisuals: PVisuals!.RetiredVisuals!, IsRetired: AsRetired)
+                VBlock.categoryBitMask = View3D.GameLight
+                MovingPieceBlocks.append(VBlock)
+                MovingPieceNode?.addChildNode(VBlock)
+            }
+            
         }
         //print("Adding moving piece blocks to root node.")
         self.scene?.rootNode.addChildNode(MovingPieceNode!)
@@ -1037,6 +1071,12 @@ class View3D: SCNView,                          //Our main super class.
             let ItemID = MergedMap[Block.Y][Block.X]
             let BlockID = BlockMap[Block.Y][Block.X]
             let PieceTypeID = CurrentBoard!.Map!.RetiredPieceShapes[ItemID]!
+            #if false
+            YOffset = (30 - 10 - 1) + YAdjustment - CGFloat(Block.Y)
+            XOffset = CGFloat(Block.X) + XAdjustment
+            AddBlockNode_Rotating(ParentID: ItemID, BlockID: BlockID, X: XOffset, Y: YOffset,
+                                  IsRetired: true, ShapeID: PieceTypeID)
+            #else
             switch BoardClass
             {
                 case .Static:
@@ -1063,6 +1103,7 @@ class View3D: SCNView,                          //Our main super class.
                 case .ThreeDimensional:
                     break
             }
+            #endif
         }
 
         RemoveMovingPiece()
