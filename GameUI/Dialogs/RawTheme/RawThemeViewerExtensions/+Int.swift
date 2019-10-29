@@ -11,7 +11,9 @@ import UIKit
 
 extension RawThemeViewerCode
 {
-    func PopulateIntView(WithField: GroupField)
+    /// Populate the Int editing view.
+    /// - Parameter WithField: The group field to populate the view with.
+    public func PopulateIntView(WithField: GroupField)
     {
         IntTextBox.isEnabled = !WithField.DisableControl
         IntDescription.layer.cornerRadius = 4.0
