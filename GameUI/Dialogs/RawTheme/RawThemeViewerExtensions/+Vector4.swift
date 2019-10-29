@@ -12,7 +12,9 @@ import SceneKit
 
 extension RawThemeViewerCode
 {
-    func PopulateVector4View(WithField: GroupField)
+    /// Populate the vector 4 view.
+    /// - Parameter WithField: The group field to populate the view with.
+    public func PopulateVector4View(WithField: GroupField)
     {
         Vector4XBox.isEnabled = !WithField.DisableControl
         Vector4YBox.isEnabled = !WithField.DisableControl
