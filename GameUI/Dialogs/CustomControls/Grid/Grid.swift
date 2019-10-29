@@ -9,11 +9,13 @@
 import Foundation
 import UIKit
 
-/// Implements a regular grid.
+/// Implements a regular grid control that the user can configure by pressing rectangles.
 @IBDesignable class Grid: UIView, GridProtocol, IntraGridProtocol
 {
     /// Delegate for owners of the instance to communicate to this class.
     weak var GridDelegate: GridProtocol? = nil
+    
+    // MARK: - Initialization.
     
     /// Initializer.
     /// - Parameter frame: Original frame for the grid.
@@ -32,16 +34,18 @@ import UIKit
     }
     
     /// Used to initialize the class when running in the Interface Builder.
-    override func prepareForInterfaceBuilder()
+    override public func prepareForInterfaceBuilder()
     {
         Initialize()
     }
     
     /// Initialize the instance.
-    func Initialize()
+    private func Initialize()
     {
         DrawGrid()
     }
+    
+    // MARK: - Drawing and related functions.
     
     /// Holds the bounds for the `Grid` instance. When the bounds changes, the instance will redraw the grid.
     override var bounds: CGRect
@@ -55,7 +59,7 @@ import UIKit
     /// Draw the grid. Each time the grid is drawn, all existing grid cells are deleted then recreated.
     /// - Note: If the number of columns or the number of rows is 0, any previously existing grid cells are deleted then control
     ///         is returned.
-    func DrawGrid()
+    public func DrawGrid()
     {
         if _Columns == 0 || _Rows == 0
         {
@@ -88,7 +92,7 @@ import UIKit
     /// - Parameter ForY: The Y coordinate of the cell.
     /// - Returns: Tuple of the plot coordinates for the cell. Nil is returned
     ///            if the specified coordinates are invalid.
-    func GetPlotCoordinates(ForX: Int, ForY: Int) -> (Int, Int)?
+    public func GetPlotCoordinates(ForX: Int, ForY: Int) -> (Int, Int)?
     {
         for Cell in GridCells
         {
@@ -109,7 +113,7 @@ import UIKit
     
     /// Reset all cells in the grid to the specified selection state.
     /// - Parameter ToSelection: The new selection state.
-    func ResetAllCells(ToSelection: Bool)
+    public func ResetAllCells(ToSelection: Bool)
     {
         for Cell in GridCells
         {
@@ -128,6 +132,120 @@ import UIKit
     
     /// Holds the list of all current grid cells.
     private var GridCells = [GridCell]()
+    
+    // MARK: Protocol functions not used in this class
+    
+    /// Not used in this class.
+    func CellTapped(Column: Int, Row: Int, TapCount: Int)
+    {
+        //Not used in this class.
+    }
+    
+    /// Not used in this class.
+    func CellCountChanged(ColumnCount: Int, RowCount: Int)
+    {
+        //Not used in this class.
+    }
+    
+    /// Not used in this class.
+    func CellSelectionStateChanged(Column: Int, Row: Int, IsSelected: Bool)
+    {
+        //Not used in this class.
+    }
+    
+    /// Not used in this class.
+    func Redraw()
+    {
+        //Not used in this class.
+    }
+    
+    /// Not used in this class.
+    func Start()
+    {
+        //Not used in this class.
+    }
+    
+    // MARK: Protocol implementations and supporting functions and properties.
+    
+    /// Called when a grid cell is tapped. Passed along to the `GridDelegate`.
+    /// - Parameter Column: The column address of the grid cell that was tapped.
+    /// - Parameter Row: The row address of the grid cell that was tapped.
+    /// - Parameter TapCount: The number of times the grid cell was tapped.
+    public func GridCellTapped(Column: Int, Row: Int, TapCount: Int)
+    {
+        GridDelegate?.CellTapped(Column: Column, Row: Row, TapCount: TapCount)
+    }
+    
+    /// Called when a grid cell's selection state changed. Passed along to the `GridDelegate`.
+    /// - Parameter Column: The column address of the grid cell that was tapped.
+    /// - Parameter Row: The row address of the grid cell that was tapped.
+    /// - Parameter IsInSelectedState: The grid cell's new selection state.
+    public func GridCellSelected(Column: Int, Row: Int, IsInSelectedState: Bool)
+    {
+        GridDelegate?.CellSelectionStateChanged(Column: Column, Row: Row, IsSelected: IsInSelectedState)
+    }
+    
+    /// Counts and returns the number of pivot cells in the grid.
+    /// -  Returns: Number of pivot cells in the grid.
+    public func PivotCellCount() -> Int
+    {
+        var Count = 0
+        for Cell in GridCells
+        {
+            Count = Count + Int(Cell.IsPivot ? 1 : 0)
+        }
+        return Count
+    }
+    
+    /// Returns a list of all pivot cells in the grid.
+    /// - Returns: List of tuples. The first element of each tuple is the column and the second element is the row.
+    public func PivotCellCoordinates() -> [(Int, Int)]
+    {
+        var Locations = [(Int, Int)]()
+        for Cell in GridCells
+        {
+            if Cell.IsPivot
+            {
+                Locations.append((Cell.Column, Cell.Row))
+            }
+        }
+        return Locations
+    }
+    
+    /// Clears all pivot points.
+    public func ResetAllPivotPoints()
+    {
+        for Cell in GridCells
+        {
+            Cell.IsPivot = false
+        }
+    }
+    
+    /// Called when a grid cell's pivot state is changed due to user interaction.
+    /// - Note: We only care about **PivotState** in the true state.
+    /// - Parameter Column: The column address of the grid cell whose pivot state changed.
+    /// - Parameter Row: The row address of the grid cell whose pivot state changed.
+    /// - Parameter PivotState: New pivot state.
+    public func GridCellPivotChanged(Column: Int, Row: Int, PivotState: Bool)
+    {
+        if PivotState
+        {
+            if PivotCellCount() > MaximumPivotCells
+            {
+                for Cell in GridCells
+                {
+                    if Cell.Column == Column && Cell.Row == Row
+                    {
+                        continue
+                    }
+                    Cell.IsPivot = false
+                }
+            }
+            //print("Pivot cell at \(Column),\(Row)")
+        }
+    }
+    
+    // MARK: - IBInspectable properties.
     
     /// Holds the number of columns in the grid.
     private var _Columns: Int = 5
@@ -168,118 +286,6 @@ import UIKit
         set
         {
             _Rows = newValue
-        }
-    }
-    
-    // MARK: Protocol functions not used in this class
-    
-    /// Not used in this class.
-    func CellTapped(Column: Int, Row: Int, TapCount: Int)
-    {
-        //Not used in this class.
-    }
-    
-    /// Not used in this class.
-    func CellCountChanged(ColumnCount: Int, RowCount: Int)
-    {
-        //Not used in this class.
-    }
-    
-    /// Not used in this class.
-    func CellSelectionStateChanged(Column: Int, Row: Int, IsSelected: Bool)
-    {
-        //Not used in this class.
-    }
-    
-    /// Not used in this class.
-    func Redraw()
-    {
-        //Not used in this class.
-    }
-    
-    /// Not used in this class.
-    func Start()
-    {
-        //Not used in this class.
-    }
-    
-    // MARK: Protocol implementations and supporting functions and properties.
-    
-    /// Called when a grid cell is tapped. Passed along to the `GridDelegate`.
-    /// - Parameter Column: The column address of the grid cell that was tapped.
-    /// - Parameter Row: The row address of the grid cell that was tapped.
-    /// - Parameter TapCount: The number of times the grid cell was tapped.
-    func GridCellTapped(Column: Int, Row: Int, TapCount: Int)
-    {
-        GridDelegate?.CellTapped(Column: Column, Row: Row, TapCount: TapCount)
-    }
-    
-    /// Called when a grid cell's selection state changed. Passed along to the `GridDelegate`.
-    /// - Parameter Column: The column address of the grid cell that was tapped.
-    /// - Parameter Row: The row address of the grid cell that was tapped.
-    /// - Parameter IsInSelectedState: The grid cell's new selection state.
-    func GridCellSelected(Column: Int, Row: Int, IsInSelectedState: Bool)
-    {
-        GridDelegate?.CellSelectionStateChanged(Column: Column, Row: Row, IsSelected: IsInSelectedState)
-    }
-    
-    /// Counts and returns the number of pivot cells in the grid.
-    /// -  Returns: Number of pivot cells in the grid.
-    func PivotCellCount() -> Int
-    {
-        var Count = 0
-        for Cell in GridCells
-        {
-            Count = Count + Int(Cell.IsPivot ? 1 : 0)
-        }
-        return Count
-    }
-    
-    /// Returns a list of all pivot cells in the grid.
-    /// - Returns: List of tuples. The first element of each tuple is the column and the second element is the row.
-    func PivotCellCoordinates() -> [(Int, Int)]
-    {
-        var Locations = [(Int, Int)]()
-        for Cell in GridCells
-        {
-            if Cell.IsPivot
-            {
-                Locations.append((Cell.Column, Cell.Row))
-            }
-        }
-        return Locations
-    }
-    
-    /// Clears all pivot points.
-    func ResetAllPivotPoints()
-    {
-        for Cell in GridCells
-        {
-            Cell.IsPivot = false
-        }
-    }
-    
-    /// Called when a grid cell's pivot state is changed due to user interaction.
-    /// - Note: We only care about **PivotState** in the true state.
-    /// - Parameter Column: The column address of the grid cell whose pivot state changed.
-    /// - Parameter Row: The row address of the grid cell whose pivot state changed.
-    /// - Parameter PivotState: New pivot state.
-    func GridCellPivotChanged(Column: Int, Row: Int, PivotState: Bool)
-    {
-        if PivotState
-        {
-            if PivotCellCount() > MaximumPivotCells
-            {
-                for Cell in GridCells
-                {
-                    if Cell.Column == Column && Cell.Row == Row
-                    {
-                        continue
-                    }
-                    Cell.IsPivot = false
-                }
-            }
-            //print("Pivot cell at \(Column),\(Row)")
         }
     }
     
@@ -390,7 +396,7 @@ import UIKit
     
     /// Returns the border color for grid cells.
     /// - Returns: Color to use for grid cell borders.
-    func GetBaseBorderColor() -> UIColor
+    public func GetBaseBorderColor() -> UIColor
     {
         return _BorderColor
     }
