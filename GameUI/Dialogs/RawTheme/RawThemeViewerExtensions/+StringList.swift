@@ -11,7 +11,10 @@ import UIKit
 
 extension RawThemeViewerCode
 {
-    func PopulateStringListView(WithField: GroupField)
+    /// Populate the string list editing view.
+    /// - Note: The source of string lists is usually a `CaseIterable` enum backed by `Strings`.
+    /// - Parameter WithField: The group field to populate the view with.
+    public func PopulateStringListView(WithField: GroupField)
     {
         CurrentPickedString = nil
         WarningBox.alpha = 0.0
