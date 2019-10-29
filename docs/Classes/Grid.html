@@ -14,7 +14,7 @@
     <a title="Grid Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html"> Docs</a> (68% documented)</p>
+        <p><a href="../index.html"> Docs</a> (70% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -929,7 +929,7 @@
 
                 </div>
               </div>
-            <p>Implements a regular grid.</p>
+            <p>Implements a regular grid control that the user can configure by pressing rectangles.</p>
 
           </section>
           <section class="section task-group-section">
@@ -962,6 +962,17 @@
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Initialization."></a>
+                <a name="//apple_ref/swift/Section/Initialization." class="dashAnchor"></a>
+                <a href="#/Initialization.">
+                  <h3 class="section-name">Initialization.</h3>
+                </a>
+              </div>
+              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1074,40 +1085,24 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">prepareForInterfaceBuilder</span><span class="p">()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">prepareForInterfaceBuilder</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6Fouris4GridC10InitializeyyF"></a>
-                    <a name="//apple_ref/swift/Method/Initialize()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6Fouris4GridC10InitializeyyF">Initialize()</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Initialize the instance.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">Initialize</span><span class="p">()</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Drawing%20and%20related%20functions."></a>
+                <a name="//apple_ref/swift/Section/Drawing and related functions." class="dashAnchor"></a>
+                <a href="#/Drawing%20and%20related%20functions.">
+                  <h3 class="section-name">Drawing and related functions.</h3>
+                </a>
+              </div>
+              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -1161,7 +1156,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">DrawGrid</span><span class="p">()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">DrawGrid</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
@@ -1188,7 +1183,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">GetPlotCoordinates</span><span class="p">(</span><span class="kt">ForX</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">ForY</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">GetPlotCoordinates</span><span class="p">(</span><span class="kt">ForX</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">ForY</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)?</span></code></pre>
 
                         </div>
                       </div>
@@ -1278,7 +1273,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">ResetAllCells</span><span class="p">(</span><span class="kt">ToSelection</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">ResetAllCells</span><span class="p">(</span><span class="kt">ToSelection</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1300,62 +1295,6 @@
                             </tr>
                           </tbody>
                         </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@Fouris@objc(cs)Grid(py)Columns"></a>
-                    <a name="//apple_ref/swift/Property/Columns" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@Fouris@objc(cs)Grid(py)Columns">Columns</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Get or set the number of columns in the grid. Setting this value will immediately recreate the grid.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
-<span class="kd">public</span> <span class="k">var</span> <span class="nv">Columns</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@Fouris@objc(cs)Grid(py)Rows"></a>
-                    <a name="//apple_ref/swift/Property/Rows" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@Fouris@objc(cs)Grid(py)Rows">Rows</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Get or set the number of rows in the grid. Setting this value will immediately recreate the grid.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
-<span class="kd">public</span> <span class="k">var</span> <span class="nv">Rows</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
-
-                        </div>
                       </div>
                     </section>
                   </div>
@@ -1537,7 +1476,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">GridCellTapped</span><span class="p">(</span><span class="kt">Column</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">Row</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">TapCount</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">GridCellTapped</span><span class="p">(</span><span class="kt">Column</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">Row</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">TapCount</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1607,7 +1546,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">GridCellSelected</span><span class="p">(</span><span class="kt">Column</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">Row</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">IsInSelectedState</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">GridCellSelected</span><span class="p">(</span><span class="kt">Column</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">Row</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">IsInSelectedState</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1677,7 +1616,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">PivotCellCount</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">PivotCellCount</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
 
                         </div>
                       </div>
@@ -1708,7 +1647,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">PivotCellCoordinates</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)]</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">PivotCellCoordinates</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)]</span></code></pre>
 
                         </div>
                       </div>
@@ -1739,7 +1678,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">ResetAllPivotPoints</span><span class="p">()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">ResetAllPivotPoints</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
@@ -1771,7 +1710,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">GridCellPivotChanged</span><span class="p">(</span><span class="kt">Column</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">Row</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">PivotState</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">GridCellPivotChanged</span><span class="p">(</span><span class="kt">Column</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">Row</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="kt">PivotState</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1817,6 +1756,73 @@
                             </tr>
                           </tbody>
                         </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/IBInspectable%20properties."></a>
+                <a name="//apple_ref/swift/Section/IBInspectable properties." class="dashAnchor"></a>
+                <a href="#/IBInspectable%20properties.">
+                  <h3 class="section-name">IBInspectable properties.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Fouris@objc(cs)Grid(py)Columns"></a>
+                    <a name="//apple_ref/swift/Property/Columns" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Fouris@objc(cs)Grid(py)Columns">Columns</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get or set the number of columns in the grid. Setting this value will immediately recreate the grid.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">Columns</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Fouris@objc(cs)Grid(py)Rows"></a>
+                    <a name="//apple_ref/swift/Property/Rows" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Fouris@objc(cs)Grid(py)Rows">Rows</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get or set the number of rows in the grid. Setting this value will immediately recreate the grid.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">Rows</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -2046,7 +2052,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="kt">GetBaseBorderColor</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">UIColor</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">GetBaseBorderColor</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">UIColor</span></code></pre>
 
                         </div>
                       </div>
@@ -2149,7 +2155,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external">Stuart Rankin</a>. All rights reserved. (Last updated: 2019-10-28)</p>
+          <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external">Stuart Rankin</a>. All rights reserved. (Last updated: 2019-10-29)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

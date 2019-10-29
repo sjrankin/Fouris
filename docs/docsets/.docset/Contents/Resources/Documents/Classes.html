@@ -14,7 +14,7 @@
     <a title="Classes  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html"> Docs</a> (68% documented)</p>
+        <p><a href="index.html"> Docs</a> (70% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -4576,7 +4576,7 @@ Supported color spaces are: RGB, HSB, YUV, and CMYK.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Implements a regular grid.</p>
+                        <p>Implements a regular grid control that the user can configure by pressing rectangles.</p>
 
                         <a href="Classes/Grid.html" class="slightly-smaller">See more</a>
                       </div>
@@ -5166,7 +5166,7 @@ Supported color spaces are: RGB, HSB, YUV, and CMYK.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Runs the UI to allow the user to edit settings and themes directly.</p>
 
                         <a href="Classes/RawThemeViewerCode.html" class="slightly-smaller">See more</a>
                       </div>
@@ -5174,12 +5174,18 @@ Supported color spaces are: RGB, HSB, YUV, and CMYK.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">RawThemeViewerCode</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span> <span class="kt">UITableViewDelegate</span><span class="p">,</span> <span class="kt">UITableViewDataSource</span><span class="p">,</span>
-    <span class="kt">UIPickerViewDelegate</span><span class="p">,</span> <span class="kt">UIPickerViewDataSource</span><span class="p">,</span>
-    <span class="kt">UIImagePickerControllerDelegate</span><span class="p">,</span> <span class="kt">UINavigationControllerDelegate</span><span class="p">,</span>
-    <span class="kt">PHPhotoLibraryChangeObserver</span><span class="p">,</span>
-    <span class="kt"><a href="Protocols/ThemeEditingProtocol.html">ThemeEditingProtocol</a></span><span class="p">,</span> <span class="kt"><a href="Protocols/RawThemeFieldEditProtocol.html">RawThemeFieldEditProtocol</a></span><span class="p">,</span>
-    <span class="kt"><a href="Protocols/GradientPickerProtocol.html">GradientPickerProtocol</a></span><span class="p">,</span> <span class="kt"><a href="Protocols/ColorPickerProtocol.html">ColorPickerProtocol</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">RawThemeViewerCode</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span>             <span class="c1">//Main base class.</span>
+    <span class="kt">UITableViewDelegate</span><span class="p">,</span>                                <span class="c1">//Table view delegate.</span>
+    <span class="kt">UITableViewDataSource</span><span class="p">,</span>                              <span class="c1">//Table view data source.</span>
+    <span class="kt">UIPickerViewDelegate</span><span class="p">,</span>                               <span class="c1">//Picker view delegate.</span>
+    <span class="kt">UIPickerViewDataSource</span><span class="p">,</span>                             <span class="c1">//Picker view data source.</span>
+    <span class="kt">UIImagePickerControllerDelegate</span><span class="p">,</span>                    <span class="c1">//Image picker delegate.</span>
+    <span class="kt">UINavigationControllerDelegate</span><span class="p">,</span>                     <span class="c1">//Navigation controller delegate.</span>
+    <span class="kt">PHPhotoLibraryChangeObserver</span><span class="p">,</span>                       <span class="c1">//Photo library observer.</span>
+    <span class="kt"><a href="Protocols/ThemeEditingProtocol.html">ThemeEditingProtocol</a></span><span class="p">,</span>                               <span class="c1">//Theme editing protocol.</span>
+    <span class="kt"><a href="Protocols/RawThemeFieldEditProtocol.html">RawThemeFieldEditProtocol</a></span><span class="p">,</span>                          <span class="c1">//Raw theme field editing protocol.</span>
+    <span class="kt"><a href="Protocols/GradientPickerProtocol.html">GradientPickerProtocol</a></span><span class="p">,</span>                             <span class="c1">//Gradient picker protocol.</span>
+    <span class="kt"><a href="Protocols/ColorPickerProtocol.html">ColorPickerProtocol</a></span>                                 <span class="c1">//Color picker protocol.</span></code></pre>
 
                         </div>
                       </div>
@@ -5203,7 +5209,7 @@ Supported color spaces are: RGB, HSB, YUV, and CMYK.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Table view cell for theme/setting fields.</p>
 
                         <a href="Classes/RawThemeViewerTitleCell.html" class="slightly-smaller">See more</a>
                       </div>
@@ -5483,10 +5489,27 @@ Supported color spaces are: RGB, HSB, YUV, and CMYK.</p>
                         <p>Contains versioning and copyright information. The contents of this file are automatically updated with each
 build by the VersionUpdater utility. This file also contains functions to return versioning information in various
 formats.</p>
-<div class="aside aside-note">
-    <p class="aside-title">Note</p>
-    Depending on when the automatic update to this file happens, the build times and numbers may be one off; this will
-    happen if this file is updated as a post-build step. To avoid this, use a pre-build step instead.
+<div class="aside aside-important">
+    <p class="aside-title">Important</p>
+    <ul>
+<li>Depending on when the automatic update to this file happens, the build times and numbers may be one off; this will
+happen if this file is updated as a post-build step. To avoid this, use a pre-build step instead.</li>
+<li>The formation of the static delcarations is important. All must be in the form <code>public static let Variable: Type = &quot;string&quot;</code>
+with no trailing comments.</li>
+<li>The <strong>VersionUpdater</strong> program requires the following variables to be in place in order to update both this file and
+and the README.md file:
+
+<ul>
+<li><code>BuildTime</code></li>
+<li><code>BuildDate</code></li>
+<li><code>BuildIncrement</code></li>
+<li><code>Build</code></li>
+<li><code>BuildID</code></li>
+<li><code>MajorVersion</code></li>
+<li><code>MinorVersion</code></li>
+<li><code>Tag</code></li>
+</ul></li>
+</ul>
 
 </div>
 
@@ -5884,7 +5907,7 @@ the tools and UIButton, I wrote this class.</li>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external">Stuart Rankin</a>. All rights reserved. (Last updated: 2019-10-28)</p>
+          <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external">Stuart Rankin</a>. All rights reserved. (Last updated: 2019-10-29)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
