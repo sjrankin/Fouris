@@ -20,7 +20,7 @@ protocol GameUINotificationProtocol: class
     func MapUpdated()
     
     /// Called every time an active piece's location changes.
-    func PieceUpdated(_ ThePiece: Piece, X: Int, Y: Int)
+    func PieceUpdated(_ ThePiece: Piece)
     
     /// Called when a piece is successfully moved.
     /// - Parameters:
