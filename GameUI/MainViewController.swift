@@ -424,6 +424,7 @@ class MainViewController: UIViewController,
             if VersionBoxShowing
             {
                 GameView3D?.HideAboutBox(HideDuration: 0.2)
+                VersionBoxShowing = false
                 //Do not return here but just drop through. This is because if the version box is showing and the user taps a
                 //control, if we return here, the control tap will be ignored, frustrating the user. This way, we still close
                 //the version box early when the user taps on the screen and execute the command as well, as the user expects.
@@ -444,6 +445,7 @@ class MainViewController: UIViewController,
                     {
                         PressedNode.HighlightButton(ResetDuration: 1.0, Delay: 0.1)
                     }
+                    print("Button pressed: \(PressedNode.ButtonType)")
                     switch PressedNode.ButtonType
                     {
                         case .MainButton:
@@ -699,13 +701,13 @@ class MainViewController: UIViewController,
     }
     
     /// Called when a piece is successfully moved.
+    /// - Note: This function is also the implicit initial call to place the piece on the game board.
     /// - Parameters:
     ///   - MovedPiece: The piece that moved.
     ///   - Direction: The direction the piece moved.
     ///   - Commanded: True if the piece was commanded to move, false if gravity caused the movement.
     public func PieceMoved3D(_ MovedPiece: Piece, Direction: Directions, Commanded: Bool)
     {
-        print("At PieceMoved3D(\(MovedPiece.Shape),\(Direction),\(Commanded))")
         GameView3D?.DrawPiece3D(InBoard: Game!.GameBoard!, GamePiece: MovedPiece)
     }
     
@@ -1469,46 +1471,57 @@ class MainViewController: UIViewController,
     
     // MARK: - Game-control related functions.
     
+    /// Move the piece left by one unit.
     public func HandleMoveLeftPressed()
     {
         MoveLeft()
     }
     
+    /// Move the piece right by one unit.
     public func HandleMoveRightPressed()
     {
         MoveRight()
     }
     
+    /// Move the piece up by one unit.
     public func HandleMoveUpPressed()
     {
         MoveUp()
     }
     
+    /// Move the piece down by one unit.
     public func HandleMoveDownPressed()
     {
         MoveDown()
     }
     
+    /// Throw the piece away - have it zoom upwards quickly.
     public func HandleUpAndAwayPressed()
     {
         MoveUpAndAway()
     }
     
+    /// Drop the piece to the bottom-most available position quicky.
     public func HandleDropDownPressed()
     {
         DropDown()
     }
     
+    /// Rotate the piece counterclockwise.
+    /// - Note: This function calls `RotateRight` for historical (not necessarily correct) reasons.
     public func HandleRotateLeftPressed()
     {
         RotateRight()
     }
     
+    /// Rotate the piece clockwise.
+    /// - Note: This function calls `RotateLeft` for historical (not necessarily correct) reasons.
     public func HandleRotateRightPressed()
     {
         RotateLeft()
     }
     
+    /// Freeze the piece into place in its current location.
     public func HandleFreezeInPlacePressed()
     {
         FreezeInPlace()
