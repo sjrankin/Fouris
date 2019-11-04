@@ -1382,7 +1382,7 @@ class View3D: SCNView,                          //Our main super class.
     /// Holds the current size.
     public var CurrentSize: CGRect? = nil
     
-    // MARK: - Bucket grid.
+    // MARK: - Bucket grid variables.
     
     /// The node that holds the set of bucket grid lines.
     public var BucketGridNode: SCNNode? = nil
@@ -1393,213 +1393,7 @@ class View3D: SCNView,                          //Our main super class.
     /// Synchronization object that defines access to the bucket.
     public var CanUseBucket: NSObject = NSObject()
     
-    /// Function that does the actual "line" drawing of the bucket grid.
-    /// - Note: The lines are really very thin boxes; SceneKit doesn't support lines as graphical objects.
-    /// - Parameter ShowGrid: If true, the grid is drawn. If false, no grid is drawn, but see **DrawOutline**.
-    /// - Parameter DrawOutline: If true, a perimeter outline is drawn.
-    /// - Parameter InitialOpacity: The initial opacity of the grids.
-    /// - Parameter LineColorOverride: If provided, this is the color of the lines of the grid. If not provided, the color specified
-    ///                                in the current theme will be used. Default is nil, which means use the theme's color.
-    /// - Parameter OutlineColorOverride: If provided, this is the color of the lines of the outline. If not provided, the color specified
-    ///                                   in the current theme will be used. Default is nil, which means use the theme's color.
-    /// - Returns: Tuple with Grid being the bucket interior grid, and Outline the grid outline node.
-    public func DrawGridInBucket(ShowGrid: Bool = true, DrawOutline: Bool, InitialOpacity: CGFloat = 1.0,
-                                 LineColorOverride: UIColor? = nil, OutlineColorOverride: UIColor? = nil) -> (Grid: SCNNode, Outline: SCNNode)
-    {
-        objc_sync_enter(CanUseBucket)
-        defer{objc_sync_exit(CanUseBucket)}
-        if BucketGridNode != nil
-        {
-            BucketGridNode?.removeFromParentNode()
-        }
-        let BucketGridNode = SCNNode()
-        let OutlineNode = SCNNode()
-        
-        var LineColor = UIColor.white
-        var OutlineColor = UIColor.red
-        if LineColorOverride != nil
-        {
-            LineColor = LineColorOverride!
-        }
-        if OutlineColorOverride != nil
-        {
-            OutlineColor = OutlineColorOverride!
-        }
-        
-        let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape!)!
-        
-        switch BoardClass
-        {
-            case .Static:
-                let XOffset = 0.5
-                var YOffset = -3.0
-                if UIDevice.current.userInterfaceIdiom == .phone
-                {
-                    YOffset = -1.0
-                }
-                if ShowGrid
-                {
-                    //Horizontal bucket lines.
-                    for Y in stride(from: 10.0 + YOffset, to: -10.5 + YOffset, by: -1.0)
-                    {
-                        let Start = SCNVector3(-0.5 + XOffset, Y, 0.0)
-                        let End = SCNVector3(10.5 + XOffset, Y, 0.0)
-                        let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.03)
-                        LineNode.categoryBitMask = View3D.GameLight
-                        LineNode.name = "Horizontal,\(Int(Y))"
-                        BucketGridNode.addChildNode(LineNode)
-                    }
-                    //Vertical bucket lines.
-                    for X in stride(from: -4.5, to: 5.0, by: 1.0)
-                    {
-                        let Start = SCNVector3(X + XOffset, 0.0 + YOffset, 0.0)
-                        let End = SCNVector3(X + XOffset, 20.0 + YOffset, 0.0)
-                        let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.03)
-                        LineNode.categoryBitMask = View3D.GameLight
-                        LineNode.name = "Vertical,\(Int(X))"
-                        BucketGridNode.addChildNode(LineNode)
-                    }
-                }
-                if DrawOutline
-                {
-                    let TopStart = SCNVector3(-0.5 + XOffset, 10.0 + YOffset, 0.0)
-                    let TopEnd = SCNVector3(10.5 + XOffset, 10.0 + YOffset, 0.0)
-                    let TopLine = MakeLine(From: TopStart, To: TopEnd, Color: OutlineColor, LineWidth: 0.08)
-                    TopLine.categoryBitMask = View3D.GameLight
-                    TopLine.name = "TopLine"
-                    BucketGridNode.addChildNode(TopLine)
-                }
-                BucketGridNode.opacity = InitialOpacity
-            
-            case .SemiRotatable:
-            fallthrough
-            case .Rotatable:
-                let GameBoard = BoardManager.GetBoardFor(CenterBlockShape!)!
-                let BucketWidth = Double(GameBoard.BucketWidth)
-                let BucketHeight = Double(GameBoard.BucketHeight)
-                var BucketOffset = 0.0
-                let EndingPointX = BucketWidth
-                let EndingPointY = BucketHeight
-                if GameBoard.BucketWidth.isMultiple(of: 2)
-                {
-                    BucketOffset = 0.5
-                }
-                let HalfY = BucketHeight / 2.0
-                let HalfX = BucketWidth / 2.0
-                if ShowGrid
-                {
-                    // Horizontal lines.
-                    for Y in stride(from: HalfY, to: -HalfY - BucketOffset, by: -1.0)
-                    {
-                        let Start = SCNVector3(0.0, Y, 0.0)
-                        let End = SCNVector3(EndingPointX, Y, 0.0)
-                        let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.02)
-                        LineNode.categoryBitMask = View3D.GameLight
-                        LineNode.name = "Horizontal,\(Int(Y))"
-                        BucketGridNode.addChildNode(LineNode)
-                    }
-                    //Vertical lines.
-                    for X in stride(from: -HalfX, to: HalfX + BucketOffset, by: 1.0)
-                    {
-                        let Start = SCNVector3(X, 0.0, 0.0)
-                        let End = SCNVector3(X, EndingPointY, 0.0)
-                        let LineNode = MakeLine(From: Start, To: End, Color: LineColor, LineWidth: 0.02)
-                        LineNode.categoryBitMask = View3D.GameLight
-                        LineNode.name = "Vertical,\(Int(X))"
-                        BucketGridNode.addChildNode(LineNode)
-                    }
-                }
-                //Outline.
-                if DrawOutline
-                {
-                    let TopStart = SCNVector3(0.0, HalfY, 0.0)
-                    let TopEnd = SCNVector3(BucketWidth, HalfY, 0.0)
-                    let TopLine = MakeLine(From: TopStart, To: TopEnd, Color: OutlineColor, LineWidth: 0.08)
-                    TopLine.categoryBitMask = View3D.GameLight
-                    TopLine.name = "TopLine"
-                    OutlineNode.addChildNode(TopLine)
-                    let BottomStart = SCNVector3(0.0, -HalfY, 0.0)
-                    let BottomEnd = SCNVector3(BucketWidth, -HalfY, 0.0)
-                    let BottomLine = MakeLine(From: BottomStart, To: BottomEnd, Color: OutlineColor, LineWidth: 0.08)
-                    BottomLine.categoryBitMask = View3D.GameLight
-                    BottomLine.name = "BottomLine"
-                    OutlineNode.addChildNode(BottomLine)
-                    let LeftStart = SCNVector3(-HalfX, 0.0, 0.0)
-                    let LeftEnd = SCNVector3(-HalfX, BucketHeight, 0.0)
-                    let LeftLine = MakeLine(From: LeftStart, To: LeftEnd, Color: OutlineColor, LineWidth: 0.08)
-                    LeftLine.categoryBitMask = View3D.GameLight
-                    LeftLine.name = "LeftLine"
-                    OutlineNode.addChildNode(LeftLine)
-                    let RightStart = SCNVector3(HalfX, 0.0, 0.0)
-                    let RightEnd = SCNVector3(HalfX, BucketHeight, 0.0)
-                    let RightLine = MakeLine(From: RightStart, To: RightEnd, Color: OutlineColor, LineWidth: 0.08)
-                    RightLine.categoryBitMask = View3D.GameLight
-                    RightLine.name = "RightLine"
-                    OutlineNode.addChildNode(RightLine)
-                }
-                BucketGridNode.opacity = InitialOpacity
-            
-            case .ThreeDimensional:
-                break
-        }
-        
-        return (Grid: BucketGridNode, Outline: OutlineNode)
-    }
-    
-    
-    
-    /// Fades the bucket grid to an alpha of 0.0 then removes the lines from the scene.
-    /// - Parameter Duration: Number of seconds for the fade effect to take place. Default is 1.0 seconds.
-    public func FadeBucketGrid(Duration: Double = 1.0)
-    {
-        let FadeAction = SCNAction.fadeOut(duration: Duration)
-        //print("Removing bucket grid node in FadeBucketGrid")
-        BucketGridNode?.runAction(FadeAction, completionHandler:
-            {
-                self.BucketGridNode?.removeAllActions()
-                self.BucketGridNode?.removeFromParentNode()
-                self.BucketGridNode = nil
-        }
-        )
-        //print("  Done removing bucket grid node in FadeBucketGrid")
-    }
-    
-    /// Show or hide a buck grid. The bucket grid is unit sized (according to the block size) that fills the
-    /// interior of the bucket.
-    /// - Parameter ShowLines: Determines if the grid is shown or hidden.
-    /// - Parameter IncludingOutline: If true, the outline is drawn as well.
-    public func DrawBucketGrid(ShowLines: Bool, IncludingOutline: Bool = true)
-    {
-        let (Grid, Outline) = DrawGridInBucket(ShowGrid: ShowLines, DrawOutline: IncludingOutline)
-        BucketGridNode = Grid
-        OutlineNode = Outline
-        self.scene?.rootNode.addChildNode(BucketGridNode!)
-        self.scene?.rootNode.addChildNode(OutlineNode!)
-    }
-    
-    /// Hide the bucket grid by removing all grid nodes from the scene.
-    public func ClearBucketGrid()
-    {
-        RemoveNodes(WithNames: ["BucketGrid", "TopLine", "LeftLine", "BottomLine", "RightLine",
-                                "Top", "Left", "Bottom", "Right"])
-    }
-    
-    /// Draw background grid lines.
-    /// - Parameter Show: Determines visibility of the grid.
-    /// - Parameter WithUnitSize: Defines the gap between grid lines.
-    public func DrawGridLines(_ Show: Bool, WithUnitSize: CGFloat?)
-    {
-        if Show
-        {
-            CreateGrid()
-        }
-        else
-        {
-            RemoveNodes(WithName: "BucketNode")
-        }
-    }
-    
-    // MARK: - Bucket rotatation routines.
+    // MARK: - Bucket rotatation variables.
     
     /// Not implemented.
     public func MovePiece(_ ThePiece: Piece, ToLocation: CGPoint, Duration: Double,
@@ -1611,7 +1405,6 @@ class View3D: SCNView,                          //Our main super class.
     public func RotatePiece(_ ThePiece: Piece, Degrees: Double, Duration: Double,
                             Completion: ((UUID) -> ())? = nil)
     {
-        
     }
     
     /// Not implemented.
@@ -1622,202 +1415,8 @@ class View3D: SCNView,                          //Our main super class.
     /// Lock used when the board is rotating.
     public var RotateLock = NSObject()
     
-    /// Rotates the contents of the game (but not UI or falling piece) on the specified axis. The contents are rotated to an
-    /// absolute angle.
-    /// - Note:
-    ///   - This function uses a synchronous lock to make sure that when the board is rotating, no one else can access it.
-    ///   - This function will rotate frozen pieces, bucket barriers, and bucket grids and outlines but no other objects.
-    ///   - When rotating on the X or Y axis, the caller will most likely want to rotate by 180° otherwise the board will end
-    ///     up edge-on to the viewer, making it difficult to see the pieces.
-    /// - Parameter OnAxis: Determines the axis to rotate about. Use `.ZAxis` for a face-on rotation.
-    /// - Parameter By: Number of degrees to rotate by. Specify negative values for clockwise rotations and positive values for
-    ///                 counterclockwise rotations.
-    /// - Parameter Duration: Duration of the rotation. Defaults to 0.33 seconds.
-    public func RotateContentsTo(OnAxis: Axes, By Degrees: CGFloat, Duration: Double = 0.33)
-    {
-        objc_sync_enter(RotateLock)
-        defer{objc_sync_exit(RotateLock)}
-        let Radians = CGFloat.pi / 180.0 * Degrees
-        var XRotationalValue: CGFloat = 0.0
-        var YRotationalValue: CGFloat = 0.0
-        var ZRotationalValue: CGFloat = 0.0
-        switch OnAxis
-        {
-            case .XAxis:
-                XRotationalValue = Radians
-            
-            case .YAxis:
-                YRotationalValue = Radians
-            
-            case .ZAxis:
-                ZRotationalValue = Radians
-        }
-        RemoveMovingPiece()
-        let RotateTo = SCNAction.rotateTo(x: XRotationalValue, y: YRotationalValue, z: ZRotationalValue, duration: Duration)
-        if CurrentTheme!.RotateBucketGrid
-        {
-            BucketGridNode?.runAction(RotateTo)
-            OutlineNode?.runAction(RotateTo)
-        }
-        MasterBlockNode?.runAction(RotateTo)
-        BucketNode?.runAction(RotateTo)
-    }
-    
-    /// Rotates the contents of the game (but not UI or falling piece) on the specified axis. The contents are rotated by a
-    /// relative angle.
-    /// - Note:
-    ///   - This function uses a synchronous lock to make sure that when the board is rotating, no one else can access it.
-    ///   - This function will rotate frozen pieces, bucket barriers, and bucket grids and outlines but no other objects.
-    ///   - When rotating on the X or Y axis, the caller will most likely want to rotate by 180° otherwise the board will end
-    ///     up edge-on to the viewer, making it difficult to see the pieces.
-    /// - Parameter OnAxis: Determines the axis to rotate about. Use `.ZAxis` for a face-on rotation.
-    /// - Parameter By: Number of degrees to rotate by. Specify negative values for clockwise rotations and positive values for
-    ///                 counterclockwise rotations.
-    /// - Parameter Duration: Duration of the rotation. Defaults to 0.33 seconds.
-    public func RotateContentsBy(OnAxis: Axes, By Degrees: CGFloat, Duration: Double = 0.33)
-    {
-        objc_sync_enter(RotateLock)
-        defer{objc_sync_exit(RotateLock)}
-        
-        let Radians = CGFloat.pi / 180.0 * Degrees
-        var XRotationalValue: CGFloat = 0.0
-        var YRotationalValue: CGFloat = 0.0
-        var ZRotationalValue: CGFloat = 0.0
-        switch OnAxis
-        {
-            case .XAxis:
-                XRotationalValue = Radians
-            
-            case .YAxis:
-                YRotationalValue = Radians
-            
-            case .ZAxis:
-                ZRotationalValue = Radians
-        }
-        RemoveMovingPiece()
-        let RotateBy = SCNAction.rotateBy(x: XRotationalValue, y: YRotationalValue, z: ZRotationalValue, duration: Duration)
-        if CurrentTheme!.RotateBucketGrid
-        {
-            BucketGridNode?.runAction(RotateBy)
-            OutlineNode?.runAction(RotateBy)
-        }
-        MasterBlockNode?.runAction(RotateBy)
-        BucketNode?.runAction(RotateBy)
-    }
-    
-    /// Stop showing off rotations.
-    public func StopShowingOff()
-    {
-        let BoardDef = BoardManager.GetBoardFor(CenterBlockShape!)
-        if !BoardDef!.BucketRotates
-        {
-            // Do not waste time if the bucket doesn't rotate.
-            return
-        }
-        //Destroy the show off timer.
-        ShowOffTimer?.invalidate()
-        ShowOffTimer = nil
-        //Remove node actions.
-        if CurrentTheme!.RotateBucketGrid
-        {
-            BucketGridNode?.removeAllActions()
-            OutlineNode?.removeAllActions()
-        }
-        MasterBlockNode?.removeAllActions()
-        BucketNode?.removeAllActions()
-        //Move to an ordinal position.
-        let Reset = SCNAction.rotateTo(x: 0.0, y: 0.0, z: 0.0, duration: 0.4)
-        if CurrentTheme!.RotateBucketGrid
-        {
-            BucketGridNode?.runAction(Reset)
-            OutlineNode?.runAction(Reset)
-        }
-        MasterBlockNode?.runAction(Reset)
-        BucketNode?.runAction(Reset)
-    }
-    
-    /// Show off rotations. Intended for use by the game after game over to provide visual interest.
-    /// - Note: Rotations are selected randomly
-    /// - Parameter Duration: Time for one rotation.
-    /// - Parameter Delay: Time between rotations.
-    public func ShowOffRotations(Duration: Double, Delay: Double)
-    {
-        let BoardDef = BoardManager.GetBoardFor(CenterBlockShape!)
-        if !BoardDef!.BucketRotates
-        {
-            // Do not waste time if the bucket doesn't rotate.
-            return
-        }
-        //Reset rotatable objects to a known rotation to keep things in sync with each other.
-        let Reset = SCNAction.rotateTo(x: 0.0, y: 0.0, z: 0.0, duration: 0.01)
-        MasterBlockNode?.runAction(Reset)
-        BucketNode?.runAction(Reset)
-        if CurrentTheme!.RotateBucketGrid
-        {
-            BucketGridNode?.runAction(Reset)
-            OutlineNode?.runAction(Reset)
-        }
-        ExecutionRotation()
-        ShowOffTimer = Timer.scheduledTimer(timeInterval: Delay, target: self, selector: #selector(ExecutionRotation),
-                                            userInfo: nil, repeats: true)
-    }
-    
     /// Timer that controls showing off rotations.
     var ShowOffTimer: Timer? = nil
-    
-    /// Execution a rotation of the board game to show off after game over.
-    @objc func ExecutionRotation()
-    {
-        let Axis = Axes.allCases.randomElement()!
-        let Angle: CGFloat = (Axis == .ZAxis ? 90.0 : 180.0) * CGFloat([1.0, -1.0].randomElement()!)
-        let RotationalDuration: Double = Axis == .ZAxis ? 0.3 : 0.6
-        RotateContentsBy(OnAxis: Axis, By: Angle, Duration: RotationalDuration)
-    }
-    
-    /// Rotates the contents of the game (but not UI or falling piece) by the specified number of degrees.
-    /// - Note:
-    ///   - This function uses a synchronous lock to make sure that when the board is rotating, other things don't happen to it.
-    ///   - This function uses two rotational actions because for some reason, using the same action on different SCNNodes
-    ///     results in unpredictable and undesired behavior.
-    /// - Parameter Right: If true, the contents are rotated clockwise. If false, counter-clockwise.
-    /// - Parameter Duration: Duration in seconds the rotation should take. Defaults to 0.33 seconds.
-    /// - Parameter Completed: Completion handler called at the end of the rotation.
-    public func RotateContents(Right: Bool, Duration: Double = 0.33, Completed: @escaping (() -> Void))
-    {
-        objc_sync_enter(RotateLock)
-        defer{objc_sync_exit(RotateLock)}
-        
-        let BoardDef = BoardManager.GetBoardFor(CenterBlockShape!)
-        
-        let DirectionalSign = CGFloat(Right ? -1.0 : 1.0)
-        RotationCardinalIndex = RotationCardinalIndex + 1
-        if RotationCardinalIndex > 3
-        {
-            RotationCardinalIndex = 0
-        }
-        let Radian = CGFloat((RotationCardinalIndex * 90)) * CGFloat.pi / 180.0
-        let ZRotationTo = DirectionalSign * Radian
-        let ZRotationBy = DirectionalSign * HalfPi
-        let RotateBy = SCNAction.rotateBy(x: 0.0, y: 0.0, z: ZRotationBy, duration: Duration)
-        let RotateTo = SCNAction.rotateTo(x: 0.0, y: 0.0, z: ZRotationTo, duration: Duration, usesShortestUnitArc: true)
-        RemoveMovingPiece()
-        if CurrentTheme!.RotateBucketGrid
-        {
-            BucketGridNode?.runAction(RotateTo)
-            OutlineNode?.runAction(RotateTo)
-        }
-        MasterBlockNode?.runAction(RotateBy)
-        BucketNode?.runAction(RotateBy)
-        #if false
-        if CurrentTheme!.EnableDebug
-        {
-            if CurrentTheme!.ChangeColorAfterRotation
-            {
-                ChangeBucketColor()
-            }
-        }
-        #endif
-    }
     
     /// Change the color of the bucket.
     /// - Note:
@@ -1835,26 +1434,10 @@ class View3D: SCNView,                          //Our main super class.
     }
     
     /// Indicates which cardinal direction a rotation is.
-    private var RotationCardinalIndex = 0
+    public var RotationCardinalIndex = 0
     
     /// 90° expressed in radians.
-    private let HalfPi = CGFloat.pi / 2.0
-    
-    /// Rotates the contents of the game (but not UI or falling piece) by 90° right (clockwise).
-    /// - Parameter Duration: Duration in seconds the rotation should take.
-    /// - Parameter Completed: Completion handler called at the end of the rotation.
-    public func RotateContentsRight(Duration: Double = 0.33, Completed: @escaping (() -> Void))
-    {
-        RotateContents(Right: true, Duration: Duration, Completed: Completed)
-    }
-    
-    /// Rotates the contents of the game (but not UI or falling piece) by 90° left (counter-clockwise).
-    /// - Parameter Duration: Duration in seconds the rotation should take.
-    /// - Parameter Completed: Completion handler called at the end of the rotation.
-    public func RotateContentsLeft(Duration: Double = 0.33, Completed: @escaping (() -> Void))
-    {
-        RotateContents(Right: false, Duration: Duration, Completed: Completed)
-    }
+    public let HalfPi = CGFloat.pi / 2.0
     
     /// Sets the opacity level of the entire board to the specified value.
     /// - Parameter To: The new alpha/opacity level.
@@ -1885,8 +1468,10 @@ class View3D: SCNView,                          //Our main super class.
     
     /// Holds the scene node ID.
     public var SceneNodeID = UUID()
+    
     /// Holds the max scene node ID.
     public var MaxSceneNodeID = UUID()
+    
     /// Holds the max scene node count.
     public var MaxSceneNodes: Int = 0
     
