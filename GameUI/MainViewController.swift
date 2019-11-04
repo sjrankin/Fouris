@@ -1360,12 +1360,17 @@ class MainViewController: UIViewController,
             if Thread.isMainThread
             {
                 //If we're on the same thread as the UI, just call the function to clear the bucket.
+                var CleaningStartDelay = 0.0
                 if UserTheme!.ShowOffAfterGameOver
                 {
                     print("Stopping showing off from ClearAndPlay on main thread")
-                    GameView3D?.StopShowingOff()
+                    GameView3D?.StopShowingOff(Duration: 0.25)
+                    CleaningStartDelay = 0.25
                 }
-                GameView3D?.DestroyMap3D(FromBoard: Game.GameBoard!, DestroyBy: UserTheme!.DestructionMethod, MaxDuration: Duration)
+                GameView3D?.DestroyMap3D(FromBoard: Game.GameBoard!,
+                                         DestroyBy: UserTheme!.DestructionMethod,
+                                         MaxDuration: Duration,
+                                         DelayStartBy: CleaningStartDelay)
                 perform(#selector(Play), with: nil, afterDelay: PlayDelay)
             }
             else
@@ -1375,12 +1380,17 @@ class MainViewController: UIViewController,
                 DispatchQueue.main.sync
                     {
                         print("MainViewController.ClearAndPlay called from background thread.")
+                        var CleaningStartDelay = 0.0
                         if UserTheme!.ShowOffAfterGameOver
                         {
                             print("Stopping showing off from ClearAndPlay on main thread")
-                            GameView3D?.StopShowingOff()
+                            GameView3D?.StopShowingOff(Duration: 0.25)
+                            CleaningStartDelay = 0.25
                         }
-                        GameView3D?.DestroyMap3D(FromBoard: Game.GameBoard!, DestroyBy: UserTheme!.DestructionMethod, MaxDuration: Duration)
+                        GameView3D?.DestroyMap3D(FromBoard: Game.GameBoard!,
+                                                 DestroyBy: UserTheme!.DestructionMethod,
+                                                 MaxDuration: Duration,
+                                                 DelayStartBy: CleaningStartDelay)
                         perform(#selector(self.Play), with: nil, afterDelay: PlayDelay)
                 }
             }
