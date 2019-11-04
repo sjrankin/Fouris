@@ -30,12 +30,20 @@ extension View3D
         ActivityLog.AddEntry(Title: "CleanUp", Source: "View3D", KVPs: [("Message","Resetting game board objects.")], LogFileName: &NotUsed)
         OperationQueue.main.addOperation
             {
+                //Remove any lingering actions.
+                self.MasterBlockNode?.removeAllActions()
+                self.BucketGridNode?.removeAllActions()
+                self.OutlineNode?.removeAllActions()
+                self.BucketNode?.removeAllActions()
+                //Remove the nodes from the scene
+                self.MasterBlockNode?.removeFromParentNode()
                 self.BucketGridNode?.removeFromParentNode()
                 self.OutlineNode?.removeFromParentNode()
                 self.BucketNode?.removeFromParentNode()
+                //Recreate the board.
                 let (NewGrid, NewOutline) = self.DrawGridInBucket(ShowGrid: self.CurrentTheme!.ShowBucketGrid,
-                                                             DrawOutline: self.CurrentTheme!.ShowBucketGridOutline,
-                                                     InitialOpacity: 1.0)
+                                                                  DrawOutline: self.CurrentTheme!.ShowBucketGridOutline,
+                                                                  InitialOpacity: 1.0)
                 self.BucketGridNode = NewGrid
                 self.OutlineNode = NewOutline
                 self.scene?.rootNode.addChildNode(self.BucketGridNode!)
@@ -43,6 +51,8 @@ extension View3D
                 let NewBucket = self.CreateBucket(InitialOpacity: 1.0, Shape: self.CenterBlockShape!)
                 self.BucketNode = NewBucket
                 self.scene?.rootNode.addChildNode(self.BucketNode!)
+                self.MasterBlockNode = SCNNode()
+                self.scene?.rootNode.addChildNode(self.MasterBlockNode!)
         }
         #else
         //objc_sync_enter(CanUseBucket)
