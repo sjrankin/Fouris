@@ -66,6 +66,8 @@
 		173B4B19231BA165007B22F6 /* RecentlyUsedColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173B4B18231BA165007B22F6 /* RecentlyUsedColors.swift */; };
 		173BB7C9235E94A80057ECA7 /* MapAccessProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173BB7C8235E94A80057ECA7 /* MapAccessProtocol.swift */; };
 		173EF49923252FF600343302 /* IntraGridProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173EF49823252FF600343302 /* IntraGridProtocol.swift */; };
+		173F400E236FCCD0001ECE48 /* +Grids.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173F400D236FCCD0001ECE48 /* +Grids.swift */; };
+		173F4010236FD09B001ECE48 /* +Rotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173F400F236FD09B001ECE48 /* +Rotations.swift */; };
 		17404B232345C75C00976DE2 /* UserGameTheme2.xml in Resources */ = {isa = PBXBuildFile; fileRef = 17404B222345C75C00976DE2 /* UserGameTheme2.xml */; };
 		17404B252345CF4400976DE2 /* GameTheme2.xml in Resources */ = {isa = PBXBuildFile; fileRef = 17404B242345CF4300976DE2 /* GameTheme2.xml */; };
 		17404B282345E0D600976DE2 /* ThemeManager3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17404B272345E0D600976DE2 /* ThemeManager3.swift */; };
@@ -337,6 +339,8 @@
 		173B4B18231BA165007B22F6 /* RecentlyUsedColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyUsedColors.swift; sourceTree = "<group>"; };
 		173BB7C8235E94A80057ECA7 /* MapAccessProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAccessProtocol.swift; sourceTree = "<group>"; };
 		173EF49823252FF600343302 /* IntraGridProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntraGridProtocol.swift; sourceTree = "<group>"; };
+		173F400D236FCCD0001ECE48 /* +Grids.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Grids.swift"; sourceTree = "<group>"; };
+		173F400F236FD09B001ECE48 /* +Rotations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Rotations.swift"; sourceTree = "<group>"; };
 		17404B222345C75C00976DE2 /* UserGameTheme2.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = UserGameTheme2.xml; sourceTree = "<group>"; };
 		17404B242345CF4300976DE2 /* GameTheme2.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = GameTheme2.xml; sourceTree = "<group>"; };
 		17404B272345E0D600976DE2 /* ThemeManager3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager3.swift; sourceTree = "<group>"; };
@@ -1096,6 +1100,8 @@
 				17E619A82348495B00C391CF /* +BoardRemoval.swift */,
 				17B112FF232B693E007DFBD4 /* +Renderer.swift */,
 				17BADD6C2352D5F3006ADE5E /* +BucketRenderer.swift */,
+				173F400F236FD09B001ECE48 /* +Rotations.swift */,
+				173F400D236FCCD0001ECE48 /* +Grids.swift */,
 				17A9D8AE2359774800DAE024 /* +AboutBox.swift */,
 				1740ED5C23600F28000EA403 /* +ShowRegions.swift */,
 				171C60332366D2EA00550DBB /* +Pause.swift */,
@@ -1515,6 +1521,7 @@
 				17E71A8322AD21D40081991E /* ClientCommands.swift in Sources */,
 				17376354230A87EE0050EB22 /* CATextLayer2.swift in Sources */,
 				17180B8F235D43EF006E56ED /* GameMap.swift in Sources */,
+				173F400E236FCCD0001ECE48 /* +Grids.swift in Sources */,
 				17316504234C85380091A620 /* CreditViewer.swift in Sources */,
 				1713735722EAE67700C9F9A7 /* SCNDodecahedron.swift in Sources */,
 				1787FBC623646C3700162363 /* NSImage+ResizeImage.swift in Sources */,
@@ -1614,6 +1621,7 @@
 				17F0B4B1225CC22A0071514E /* Piece.swift in Sources */,
 				17432903233F411E00F98863 /* XMLNode+Other.swift in Sources */,
 				17381F422334B683003ED0A3 /* GroupField.swift in Sources */,
+				173F4010236FD09B001ECE48 /* +Rotations.swift in Sources */,
 				17ECE5B62332579F003F4065 /* +Double.swift in Sources */,
 				1797524222C38A4D00BF539A /* +VersionInfo.swift in Sources */,
 				174328F9233F1E0E00F98863 /* PieceDefinition.swift in Sources */,
