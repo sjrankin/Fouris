@@ -111,6 +111,22 @@ class BoardDescriptor2
         }
     }
     
+    /// Get the depth of the bucket. Valid only for three-dimensional games. Uses the depth from
+    /// the board's `BucketVolume` property.
+    /// - Note: If `BucketVolume` is undefined (most likely due to this property being called on a non-three-
+    ///         dimensional game), `0` is returned.
+    public var BucketDepth: Int
+    {
+        get
+        {
+            if BucketVolume == nil
+            {
+                return 0
+            }
+            return Int(BucketVolume!.Depth)
+        }
+    }
+    
     /// Returns the upper-left corner of the bucket.
     /// - Returns: CGPoint populated with the upper-left corner of the bucket.
     public func BucketCorner() -> CGPoint
