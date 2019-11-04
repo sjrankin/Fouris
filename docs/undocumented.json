@@ -3796,119 +3796,119 @@
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardDescriptor2.swift",
-      "line": 330,
+      "line": 346,
       "symbol": "BoardDescriptor2._ClearUpperLeft",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardDescriptor2.swift",
-      "line": 331,
+      "line": 347,
       "symbol": "BoardDescriptor2.ClearUpperLeft",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardDescriptor2.swift",
-      "line": 343,
+      "line": 359,
       "symbol": "BoardDescriptor2._ClearLowerRight",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardDescriptor2.swift",
-      "line": 344,
+      "line": 360,
       "symbol": "BoardDescriptor2.ClearLowerRight",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardDescriptor2.swift",
-      "line": 416,
+      "line": 432,
       "symbol": "BoardDescriptor2._CenterBlockDefinition",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardDescriptor2.swift",
-      "line": 417,
+      "line": 433,
       "symbol": "BoardDescriptor2.CenterBlockDefinition",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardDescriptor2.swift",
-      "line": 668,
+      "line": 684,
       "symbol": "FreezeButtonActions.Visible",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardDescriptor2.swift",
-      "line": 669,
+      "line": 685,
       "symbol": "FreezeButtonActions.Invisible",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardDescriptor2.swift",
-      "line": 670,
+      "line": 686,
       "symbol": "FreezeButtonActions.Once",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardDescriptor2.swift",
-      "line": 671,
+      "line": 687,
       "symbol": "FreezeButtonActions.Rotations1",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardDescriptor2.swift",
-      "line": 672,
+      "line": 688,
       "symbol": "FreezeButtonActions.Rotations2",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardDescriptor2.swift",
-      "line": 673,
+      "line": 689,
       "symbol": "FreezeButtonActions.Rotations3",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardDescriptor2.swift",
-      "line": 674,
+      "line": 690,
       "symbol": "FreezeButtonActions.Rotations4",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardDescriptor2.swift",
-      "line": 684,
+      "line": 700,
       "symbol": "MapNodeTypes.BucketExterior",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardDescriptor2.swift",
-      "line": 685,
+      "line": 701,
       "symbol": "MapNodeTypes.BucketInterior",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardDescriptor2.swift",
-      "line": 686,
+      "line": 702,
       "symbol": "MapNodeTypes.BucketBlock",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardDescriptor2.swift",
-      "line": 687,
+      "line": 703,
       "symbol": "MapNodeTypes.InvisibleBlock",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
@@ -5966,224 +5966,224 @@
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BoardRemoval.swift",
-      "line": 397,
+      "line": 407,
       "symbol": "HideBoardMethods.Random",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BoardRemoval.swift",
-      "line": 398,
+      "line": 408,
       "symbol": "HideBoardMethods.Disappear",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BoardRemoval.swift",
-      "line": 399,
+      "line": 409,
       "symbol": "HideBoardMethods.Shrink",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BoardRemoval.swift",
-      "line": 400,
+      "line": 410,
       "symbol": "HideBoardMethods.FadeOut",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BoardRemoval.swift",
-      "line": 401,
+      "line": 411,
       "symbol": "HideBoardMethods.Grow",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BoardRemoval.swift",
-      "line": 402,
+      "line": 412,
       "symbol": "HideBoardMethods.SpinLarger",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BoardRemoval.swift",
-      "line": 403,
+      "line": 413,
       "symbol": "HideBoardMethods.SpinSmaller",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BoardRemoval.swift",
-      "line": 416,
+      "line": 426,
       "symbol": "ShowBoardMethods.Random",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BoardRemoval.swift",
-      "line": 417,
+      "line": 427,
       "symbol": "ShowBoardMethods.Appear",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BoardRemoval.swift",
-      "line": 418,
+      "line": 428,
       "symbol": "ShowBoardMethods.ShrinkToView",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BoardRemoval.swift",
-      "line": 419,
+      "line": 429,
       "symbol": "ShowBoardMethods.GrowToView",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BoardRemoval.swift",
-      "line": 420,
+      "line": 430,
       "symbol": "ShowBoardMethods.FadeIn",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BoardRemoval.swift",
-      "line": 421,
+      "line": 431,
       "symbol": "ShowBoardMethods.SpinDown",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BoardRemoval.swift",
-      "line": 422,
+      "line": 432,
       "symbol": "ShowBoardMethods.SpinUp",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BucketCleaner.swift",
-      "line": 410,
+      "line": 442,
       "symbol": "DestructionMethods.None",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BucketCleaner.swift",
-      "line": 411,
+      "line": 443,
       "symbol": "DestructionMethods.Fast",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BucketCleaner.swift",
-      "line": 412,
+      "line": 444,
       "symbol": "DestructionMethods.Scatter",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BucketCleaner.swift",
-      "line": 413,
+      "line": 445,
       "symbol": "DestructionMethods.ScatterSpin",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BucketCleaner.swift",
-      "line": 414,
+      "line": 446,
       "symbol": "DestructionMethods.Explode",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BucketCleaner.swift",
-      "line": 415,
+      "line": 447,
       "symbol": "DestructionMethods.FadeAway",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BucketCleaner.swift",
-      "line": 416,
+      "line": 448,
       "symbol": "DestructionMethods.ExplodingBlocks",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BucketCleaner.swift",
-      "line": 417,
+      "line": 449,
       "symbol": "DestructionMethods.Drop",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BucketCleaner.swift",
-      "line": 418,
+      "line": 450,
       "symbol": "DestructionMethods.FlyUpwards",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BucketCleaner.swift",
-      "line": 419,
+      "line": 451,
       "symbol": "DestructionMethods.ScatterHorizontally",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BucketCleaner.swift",
-      "line": 420,
+      "line": 452,
       "symbol": "DestructionMethods.ScatterVertically",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BucketCleaner.swift",
-      "line": 421,
+      "line": 453,
       "symbol": "DestructionMethods.ScatterDirectionally",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BucketCleaner.swift",
-      "line": 422,
+      "line": 454,
       "symbol": "DestructionMethods.ScatterRadially",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BucketCleaner.swift",
-      "line": 423,
+      "line": 455,
       "symbol": "DestructionMethods.SpinDown",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BucketCleaner.swift",
-      "line": 424,
+      "line": 456,
       "symbol": "DestructionMethods.SpinAway",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BucketCleaner.swift",
-      "line": 425,
+      "line": 457,
       "symbol": "DestructionMethods.Shrink",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BucketCleaner.swift",
-      "line": 426,
+      "line": 458,
       "symbol": "DestructionMethods.Grow",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DViewExtensions/+BucketCleaner.swift",
-      "line": 427,
+      "line": 459,
       "symbol": "DestructionMethods.Random",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
@@ -8647,147 +8647,84 @@
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1389,
+      "line": 1405,
       "symbol": "MainViewController.GamePlayStart",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1475,
-      "symbol": "MainViewController.HandleMoveLeftPressed()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1480,
-      "symbol": "MainViewController.HandleMoveRightPressed()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1485,
-      "symbol": "MainViewController.HandleMoveUpPressed()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1490,
-      "symbol": "MainViewController.HandleMoveDownPressed()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1495,
-      "symbol": "MainViewController.HandleUpAndAwayPressed()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1500,
-      "symbol": "MainViewController.HandleDropDownPressed()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1505,
-      "symbol": "MainViewController.HandleRotateLeftPressed()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1510,
-      "symbol": "MainViewController.HandleRotateRightPressed()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1515,
-      "symbol": "MainViewController.HandleFreezeInPlacePressed()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1765,
+      "line": 1791,
       "symbol": "MainViewController.PreviousGameShape",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 2215,
+      "line": 2241,
       "symbol": "MainViewController.GameUISurface3D",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 2216,
+      "line": 2242,
       "symbol": "MainViewController.GameViewContainer",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 2217,
+      "line": 2243,
       "symbol": "MainViewController.TextLayerView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 2218,
+      "line": 2244,
       "symbol": "MainViewController.NextPieceView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 2219,
+      "line": 2245,
       "symbol": "MainViewController.NextPieceViewControl",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 2220,
+      "line": 2246,
       "symbol": "MainViewController.CurrentScoreLabelView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 2221,
+      "line": 2247,
       "symbol": "MainViewController.HighScoreLabelView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 2222,
+      "line": 2248,
       "symbol": "MainViewController.PressPlayLabelView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 2223,
+      "line": 2249,
       "symbol": "MainViewController.GameOverLabelView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 2224,
+      "line": 2250,
       "symbol": "MainViewController.PauseLabelView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"

@@ -3530,245 +3530,266 @@
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 28,
+      "line": 29,
       "symbol": "BoardData.SemiRotatingBoards",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 105,
+      "line": 109,
       "symbol": "BucketShapes.Dot",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 106,
+      "line": 110,
       "symbol": "BucketShapes.MediumSquare",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 107,
+      "line": 111,
       "symbol": "BucketShapes.SmallSquare",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 108,
+      "line": 112,
       "symbol": "BucketShapes.BigSquare",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 109,
+      "line": 113,
       "symbol": "BucketShapes.SmallRectangle",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 110,
+      "line": 114,
       "symbol": "BucketShapes.Rectangle",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 111,
+      "line": 115,
       "symbol": "BucketShapes.BigRectangle",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 112,
+      "line": 116,
       "symbol": "BucketShapes.SmallDiamond",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 113,
+      "line": 117,
       "symbol": "BucketShapes.Diamond",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 114,
+      "line": 118,
       "symbol": "BucketShapes.BigDiamond",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 115,
+      "line": 119,
       "symbol": "BucketShapes.Bracket2",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 116,
+      "line": 120,
       "symbol": "BucketShapes.Bracket4",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 117,
+      "line": 121,
       "symbol": "BucketShapes.FourLines",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 118,
+      "line": 122,
       "symbol": "BucketShapes.Corners",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 119,
+      "line": 123,
       "symbol": "BucketShapes.Quadrant",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 120,
+      "line": 124,
       "symbol": "BucketShapes.Plus",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 121,
+      "line": 125,
       "symbol": "BucketShapes.HorizontalLine",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 122,
+      "line": 126,
       "symbol": "BucketShapes.ParallelLines",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 123,
+      "line": 127,
       "symbol": "BucketShapes.Empty",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 124,
+      "line": 128,
       "symbol": "BucketShapes.CornerDots",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 125,
+      "line": 129,
       "symbol": "BucketShapes.FourSmallSquares",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 126,
+      "line": 130,
       "symbol": "BucketShapes.ShortDiagonals",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 127,
+      "line": 131,
       "symbol": "BucketShapes.LongDiagonals",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 128,
+      "line": 132,
       "symbol": "BucketShapes.SpanningDiagonal",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 130,
-      "symbol": "BucketShapes.OneOpening",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 131,
-      "symbol": "BucketShapes.InsideOut",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
       "line": 133,
-      "symbol": "BucketShapes.Classic",
+      "symbol": "BucketShapes.EmptyCenter",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
       "line": 134,
-      "symbol": "BucketShapes.TallThin",
+      "symbol": "BucketShapes.AlternatingDirections",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
       "line": 135,
-      "symbol": "BucketShapes.ShortWide",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 136,
-      "symbol": "BucketShapes.Big",
+      "symbol": "BucketShapes.PerpendicularLines",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
       "line": 137,
-      "symbol": "BucketShapes.Small",
+      "symbol": "BucketShapes.OneOpening",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
       "line": 138,
-      "symbol": "BucketShapes.SquareBucket",
+      "symbol": "BucketShapes.InsideOut",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
-      "line": 139,
-      "symbol": "BucketShapes.Giant",
+      "line": 140,
+      "symbol": "BucketShapes.Classic",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
       "line": 141,
+      "symbol": "BucketShapes.TallThin",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
+      "line": 142,
+      "symbol": "BucketShapes.ShortWide",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
+      "line": 143,
+      "symbol": "BucketShapes.Big",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
+      "line": 144,
+      "symbol": "BucketShapes.Small",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
+      "line": 145,
+      "symbol": "BucketShapes.SquareBucket",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
+      "line": 146,
+      "symbol": "BucketShapes.Giant",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/DataManagers/Boards/BoardData.swift",
+      "line": 148,
       "symbol": "BucketShapes.Simple3D",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
@@ -5224,28 +5245,28 @@
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/GameLogic.swift",
-      "line": 769,
+      "line": 773,
       "symbol": "GameLogic.RowDeletionCount",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/GameLogic.swift",
-      "line": 868,
+      "line": 872,
       "symbol": "GameStates.Stopped",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/GameLogic.swift",
-      "line": 869,
+      "line": 873,
       "symbol": "GameStates.Playing",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameEngine/GameLogic.swift",
-      "line": 870,
+      "line": 874,
       "symbol": "GameStates.Paused",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
@@ -5934,6 +5955,13 @@
       "line": 922,
       "symbol": "View3D.MasterBlockNode",
       "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/Common/GameViews/3DView/3DView.swift",
+      "line": 951,
+      "symbol": "View3D.MapBlockToView(_:BoardDef:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
@@ -7240,7 +7268,7 @@
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/GameSelection/SelectGameController.swift",
-      "line": 251,
+      "line": 256,
       "symbol": "SelectGameController.GameStyleTableView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -7702,1360 +7730,590 @@
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 12,
-      "symbol": "RawThemeViewerCode",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 12,
-      "symbol": "RawThemeViewerCode",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 12,
-      "symbol": "RawThemeViewerCode",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 12,
-      "symbol": "RawThemeViewerCode",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 12,
-      "symbol": "RawThemeViewerCode",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 12,
-      "symbol": "RawThemeViewerCode",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 12,
-      "symbol": "RawThemeViewerCode",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 12,
-      "symbol": "RawThemeViewerCode",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 13,
-      "symbol": "RawThemeViewerCode",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 13,
-      "symbol": "RawThemeViewerCode",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 13,
-      "symbol": "RawThemeViewerCode",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 13,
-      "symbol": "RawThemeViewerCode",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 13,
-      "symbol": "RawThemeViewerCode",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 20,
-      "symbol": "RawThemeViewerCode.ColorDelegate",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 21,
-      "symbol": "RawThemeViewerCode.ThemeDelegate",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 23,
-      "symbol": "RawThemeViewerCode.viewDidLoad()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 53,
-      "symbol": "RawThemeViewerCode.deinit",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 58,
-      "symbol": "RawThemeViewerCode.CurrentField",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 72,
-      "symbol": "RawThemeViewerCode.InitializeColorSwatch()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 79,
-      "symbol": "RawThemeViewerCode.InitializeGradientPicker()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 86,
-      "symbol": "RawThemeViewerCode.InitializeImagePicker()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 93,
-      "symbol": "RawThemeViewerCode.ShowViewType(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 143,
-      "symbol": "RawThemeViewerCode.FieldTables",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 145,
-      "symbol": "RawThemeViewerCode.GetFieldFrom(ID:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 160,
-      "symbol": "RawThemeViewerCode.GetViewForType(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 199,
-      "symbol": "RawThemeViewerCode.PopulateFieldView(With:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 246,
-      "symbol": "RawThemeViewerCode.numberOfComponents(in:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 251,
-      "symbol": "RawThemeViewerCode.pickerView(_:numberOfRowsInComponent:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 256,
-      "symbol": "RawThemeViewerCode.pickerView(_:titleForRow:forComponent:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 261,
-      "symbol": "RawThemeViewerCode.pickerView(_:didSelectRow:inComponent:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 270,
-      "symbol": "RawThemeViewerCode.LastSelectedPickerViewItem",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 274,
-      "symbol": "RawThemeViewerCode.tableView(_:viewForHeaderInSection:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 294,
-      "symbol": "RawThemeViewerCode.tableView(_:heightForHeaderInSection:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 299,
-      "symbol": "RawThemeViewerCode.tableView(_:heightForFooterInSection:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 304,
-      "symbol": "RawThemeViewerCode.tableView(_:titleForHeaderInSection:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 309,
-      "symbol": "RawThemeViewerCode.tableView(_:didSelectRowAt:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 319,
-      "symbol": "RawThemeViewerCode.tableView(_:heightForRowAt:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 324,
-      "symbol": "RawThemeViewerCode.tableView(_:numberOfRowsInSection:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 329,
-      "symbol": "RawThemeViewerCode.numberOfSections(in:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 334,
-      "symbol": "RawThemeViewerCode.tableView(_:cellForRowAt:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 345,
-      "symbol": "RawThemeViewerCode.HandleGradientTapped(Recognizer:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 366,
-      "symbol": "RawThemeViewerCode.InstantiateGradientEditor(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 401,
-      "symbol": "RawThemeViewerCode.HandleReverseGradientColorsChanged(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 413,
-      "symbol": "RawThemeViewerCode.HandleVerticalGradientChanged(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 462,
-      "symbol": "RawThemeViewerCode.HandleColorTapped(Recognizer:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 486,
-      "symbol": "RawThemeViewerCode.UserTheme",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 502,
-      "symbol": "RawThemeViewerCode.WasEdited",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 504,
-      "symbol": "RawThemeViewerCode.HandleClosePressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 512,
-      "symbol": "RawThemeViewerCode.BoolDefaultPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 517,
-      "symbol": "RawThemeViewerCode.BoolApplyPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 524,
-      "symbol": "RawThemeViewerCode.BoolSwitchChanged(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 533,
-      "symbol": "RawThemeViewerCode.StringListDefaultPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 538,
-      "symbol": "RawThemeViewerCode.StringListApplyPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 549,
-      "symbol": "RawThemeViewerCode.pickerView(_:didSelectRow:forComponent:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 565,
-      "symbol": "RawThemeViewerCode.CurrentPickedString",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 567,
-      "symbol": "RawThemeViewerCode.StringListData",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 571,
-      "symbol": "RawThemeViewerCode.photoLibraryDidChange(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 576,
-      "symbol": "RawThemeViewerCode.ImageApplyPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 583,
-      "symbol": "RawThemeViewerCode.ImageDefaultPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 588,
-      "symbol": "RawThemeViewerCode.ImageProgramImagePressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 595,
-      "symbol": "RawThemeViewerCode.ImagePhotoRollPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 604,
-      "symbol": "RawThemeViewerCode.ImagePicker",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 605,
-      "symbol": "RawThemeViewerCode.ImageName",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 607,
-      "symbol": "RawThemeViewerCode.imagePickerController(_:didFinishPickingMediaWithInfo:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 624,
-      "symbol": "RawThemeViewerCode.HandleActionButtonPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 629,
-      "symbol": "RawThemeViewerCode.HandleResetButtonPressed()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 639,
-      "symbol": "RawThemeViewerCode.DoResetAllSettings(Action:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 647,
-      "symbol": "RawThemeViewerCode.GradientApplyPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 654,
-      "symbol": "RawThemeViewerCode.GradientDefaultPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 661,
-      "symbol": "RawThemeViewerCode.ColorApplyPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 670,
-      "symbol": "RawThemeViewerCode.ColorDefaultPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 677,
-      "symbol": "RawThemeViewerCode.DoubleApplyPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 690,
-      "symbol": "RawThemeViewerCode.DoubleDefaultPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 695,
-      "symbol": "RawThemeViewerCode.DoubleValueChanged(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 704,
-      "symbol": "RawThemeViewerCode.IntApplyPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 717,
-      "symbol": "RawThemeViewerCode.IntDefaultPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 722,
-      "symbol": "RawThemeViewerCode.IntValueChanged(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 731,
-      "symbol": "RawThemeViewerCode.StringApplyPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 738,
-      "symbol": "RawThemeViewerCode.StringDefaultPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 743,
-      "symbol": "RawThemeViewerCode.StringValueChanged(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 752,
-      "symbol": "RawThemeViewerCode.Vector3ApplyPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 762,
-      "symbol": "RawThemeViewerCode.Vector3DefaultPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 767,
-      "symbol": "RawThemeViewerCode.Vector3ComponentChanged(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 776,
-      "symbol": "RawThemeViewerCode.Vector4ApplyPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 786,
-      "symbol": "RawThemeViewerCode.Vector4DefaultPressed(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 791,
-      "symbol": "RawThemeViewerCode.Vector4ComponentChanged(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 800,
-      "symbol": "RawThemeViewerCode.ThrobApplyButton(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 806,
-      "symbol": "RawThemeViewerCode.ResetApplyButton(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 814,
+      "line": 1012,
       "symbol": "RawThemeViewerCode.DetailContainer",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 815,
+      "line": 1013,
       "symbol": "RawThemeViewerCode.ThemeDataTable",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 818,
+      "line": 1016,
       "symbol": "RawThemeViewerCode.ColorView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 819,
+      "line": 1017,
       "symbol": "RawThemeViewerCode.GradientView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 820,
+      "line": 1018,
       "symbol": "RawThemeViewerCode.ImageView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 821,
+      "line": 1019,
       "symbol": "RawThemeViewerCode.StringListView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 822,
+      "line": 1020,
       "symbol": "RawThemeViewerCode.Vector4View",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 823,
+      "line": 1021,
       "symbol": "RawThemeViewerCode.Vector3View",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 824,
+      "line": 1022,
       "symbol": "RawThemeViewerCode.DoubleView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 825,
+      "line": 1023,
       "symbol": "RawThemeViewerCode.IntView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 826,
+      "line": 1024,
       "symbol": "RawThemeViewerCode.StringView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 827,
+      "line": 1025,
       "symbol": "RawThemeViewerCode.BoolView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 828,
+      "line": 1026,
       "symbol": "RawThemeViewerCode.StartingView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 829,
+      "line": 1027,
       "symbol": "RawThemeViewerCode.ActionView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 832,
+      "line": 1030,
       "symbol": "RawThemeViewerCode.ColorSwatch",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 833,
+      "line": 1031,
       "symbol": "RawThemeViewerCode.ColorTitle",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 834,
+      "line": 1032,
       "symbol": "RawThemeViewerCode.ColorDescription",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 835,
+      "line": 1033,
       "symbol": "RawThemeViewerCode.ColorViewDirty",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 836,
+      "line": 1034,
       "symbol": "RawThemeViewerCode.ColorControlTitle",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 837,
+      "line": 1035,
       "symbol": "RawThemeViewerCode.ColorApplyButton",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 840,
+      "line": 1038,
       "symbol": "RawThemeViewerCode.GradientTitle",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 841,
+      "line": 1039,
       "symbol": "RawThemeViewerCode.GradientDescription",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 842,
+      "line": 1040,
       "symbol": "RawThemeViewerCode.GradientViewer",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 843,
+      "line": 1041,
       "symbol": "RawThemeViewerCode.GradientViewDirty",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 844,
+      "line": 1042,
       "symbol": "RawThemeViewerCode.VerticalGradientSwitch",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 845,
+      "line": 1043,
       "symbol": "RawThemeViewerCode.ReverseGradientSwitch",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 846,
+      "line": 1044,
       "symbol": "RawThemeViewerCode.WarningBox",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 847,
+      "line": 1045,
       "symbol": "RawThemeViewerCode.WarningLabel",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 848,
+      "line": 1046,
       "symbol": "RawThemeViewerCode.GradientApplyButton",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 851,
+      "line": 1049,
       "symbol": "RawThemeViewerCode.ImageTitle",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 852,
+      "line": 1050,
       "symbol": "RawThemeViewerCode.ImageDescription",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 853,
+      "line": 1051,
       "symbol": "RawThemeViewerCode.ImageViewer",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 854,
+      "line": 1052,
       "symbol": "RawThemeViewerCode.ImageViewDirty",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 855,
+      "line": 1053,
       "symbol": "RawThemeViewerCode.ImagePhotoRollButton",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 856,
+      "line": 1054,
       "symbol": "RawThemeViewerCode.ImageProgramImagesButton",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 857,
+      "line": 1055,
       "symbol": "RawThemeViewerCode.ImageApplyButton",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 860,
+      "line": 1058,
       "symbol": "RawThemeViewerCode.StringListTitle",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 861,
+      "line": 1059,
       "symbol": "RawThemeViewerCode.StringListDescription",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 862,
+      "line": 1060,
       "symbol": "RawThemeViewerCode.StringListPicker",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 863,
+      "line": 1061,
       "symbol": "RawThemeViewerCode.StringListViewDirty",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 864,
+      "line": 1062,
       "symbol": "RawThemeViewerCode.StringListApplyButton",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 867,
+      "line": 1065,
       "symbol": "RawThemeViewerCode.Vector3Title",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 868,
+      "line": 1066,
       "symbol": "RawThemeViewerCode.Vector3Description",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 869,
+      "line": 1067,
       "symbol": "RawThemeViewerCode.Vector3XBox",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 870,
+      "line": 1068,
       "symbol": "RawThemeViewerCode.Vector3YBox",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 871,
+      "line": 1069,
       "symbol": "RawThemeViewerCode.Vector3ZBox",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 872,
+      "line": 1070,
       "symbol": "RawThemeViewerCode.Vector3ViewDirty",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 873,
+      "line": 1071,
       "symbol": "RawThemeViewerCode.Vector3ApplyButton",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 876,
+      "line": 1074,
       "symbol": "RawThemeViewerCode.Vector4Title",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 877,
+      "line": 1075,
       "symbol": "RawThemeViewerCode.Vector4Description",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 878,
+      "line": 1076,
       "symbol": "RawThemeViewerCode.Vector4XBox",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 879,
+      "line": 1077,
       "symbol": "RawThemeViewerCode.Vector4YBox",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 880,
+      "line": 1078,
       "symbol": "RawThemeViewerCode.Vector4ZBox",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 881,
+      "line": 1079,
       "symbol": "RawThemeViewerCode.Vector4WBox",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 882,
+      "line": 1080,
       "symbol": "RawThemeViewerCode.Vector4ViewDirty",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 883,
+      "line": 1081,
       "symbol": "RawThemeViewerCode.Vector4ApplyButton",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 886,
+      "line": 1084,
       "symbol": "RawThemeViewerCode.DoubleTitle",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 887,
+      "line": 1085,
       "symbol": "RawThemeViewerCode.DoubleDescription",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 888,
+      "line": 1086,
       "symbol": "RawThemeViewerCode.DoubleControlTitle",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 889,
+      "line": 1087,
       "symbol": "RawThemeViewerCode.DoubleTextBox",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 890,
+      "line": 1088,
       "symbol": "RawThemeViewerCode.DoubleViewDirty",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 891,
+      "line": 1089,
       "symbol": "RawThemeViewerCode.DoubleApplyButton",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 894,
+      "line": 1092,
       "symbol": "RawThemeViewerCode.IntTitle",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 895,
+      "line": 1093,
       "symbol": "RawThemeViewerCode.IntDescription",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 896,
+      "line": 1094,
       "symbol": "RawThemeViewerCode.IntControlTitle",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 897,
+      "line": 1095,
       "symbol": "RawThemeViewerCode.IntTextBox",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 898,
+      "line": 1096,
       "symbol": "RawThemeViewerCode.IntViewDirty",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 899,
+      "line": 1097,
       "symbol": "RawThemeViewerCode.IntApplyButton",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 902,
+      "line": 1100,
       "symbol": "RawThemeViewerCode.StringTitle",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 903,
+      "line": 1101,
       "symbol": "RawThemeViewerCode.StringDescription",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 904,
+      "line": 1102,
       "symbol": "RawThemeViewerCode.StringTextBox",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 905,
+      "line": 1103,
       "symbol": "RawThemeViewerCode.StringViewDirty",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 906,
+      "line": 1104,
       "symbol": "RawThemeViewerCode.StringApplyButton",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 909,
+      "line": 1107,
       "symbol": "RawThemeViewerCode.BoolTitle",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 910,
+      "line": 1108,
       "symbol": "RawThemeViewerCode.BoolDescription",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 911,
+      "line": 1109,
       "symbol": "RawThemeViewerCode.BoolControlTitle",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 912,
+      "line": 1110,
       "symbol": "RawThemeViewerCode.BoolSwitch",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 913,
+      "line": 1111,
       "symbol": "RawThemeViewerCode.BoolViewDirty",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 914,
+      "line": 1112,
       "symbol": "RawThemeViewerCode.BoolApplyButton",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 917,
+      "line": 1115,
       "symbol": "RawThemeViewerCode.ActionResults",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 918,
+      "line": 1116,
       "symbol": "RawThemeViewerCode.ActionButton",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 919,
+      "line": 1117,
       "symbol": "RawThemeViewerCode.ActionDescription",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerCode.swift",
-      "line": 920,
+      "line": 1118,
       "symbol": "RawThemeViewerCode.ActionTitle",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerExtensions/+Action.swift",
-      "line": 14,
-      "symbol": "RawThemeViewerCode.PopulateActionView(WithField:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerExtensions/+Bool.swift",
-      "line": 14,
-      "symbol": "RawThemeViewerCode.PopulateBooleanView(WithField:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerExtensions/+Color.swift",
-      "line": 14,
-      "symbol": "RawThemeViewerCode.PopulateColorView(WithField:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerExtensions/+Double.swift",
-      "line": 14,
-      "symbol": "RawThemeViewerCode.PopulateDoubleView(WithField:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerExtensions/+Gradient.swift",
-      "line": 14,
-      "symbol": "RawThemeViewerCode.PopulateGradientView(WithField:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerExtensions/+Image.swift",
-      "line": 15,
-      "symbol": "RawThemeViewerCode.PopulateImageView(WithField:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerExtensions/+Image.swift",
-      "line": 43,
-      "symbol": "RawThemeViewerCode.GetNamedImage(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerExtensions/+Int.swift",
-      "line": 14,
-      "symbol": "RawThemeViewerCode.PopulateIntView(WithField:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerExtensions/+PopulateFields.swift",
-      "line": 15,
-      "symbol": "RawThemeViewerCode.PopulateFields()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerExtensions/+String.swift",
-      "line": 14,
-      "symbol": "RawThemeViewerCode.PopulateStringView(WithField:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerExtensions/+StringList.swift",
-      "line": 14,
-      "symbol": "RawThemeViewerCode.PopulateStringListView(WithField:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerExtensions/+Vector3.swift",
-      "line": 15,
-      "symbol": "RawThemeViewerCode.PopulateVector3View(WithField:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerExtensions/+Vector4.swift",
-      "line": 15,
-      "symbol": "RawThemeViewerCode.PopulateVector4View(WithField:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerTitleCell.swift",
-      "line": 12,
-      "symbol": "RawThemeViewerTitleCell",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerTitleCell.swift",
-      "line": 14,
-      "symbol": "RawThemeViewerTitleCell.CellHeight",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerTitleCell.swift",
       "line": 16,
-      "symbol": "RawThemeViewerTitleCell.init(style:reuseIdentifier:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerTitleCell.swift",
-      "line": 21,
-      "symbol": "RawThemeViewerTitleCell.DrawUI(WithWidth:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerTitleCell.swift",
-      "line": 29,
-      "symbol": "RawThemeViewerTitleCell.TitleLabel",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerTitleCell.swift",
-      "line": 31,
-      "symbol": "RawThemeViewerTitleCell.init(coder:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerTitleCell.swift",
-      "line": 36,
-      "symbol": "RawThemeViewerTitleCell.Initialize(Title:ID:ParentWidth:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerTitleCell.swift",
-      "line": 44,
-      "symbol": "RawThemeViewerTitleCell.ParentWidth",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerTitleCell.swift",
-      "line": 45,
-      "symbol": "RawThemeViewerTitleCell.CellID",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Dialogs/RawTheme/RawThemeViewerTitleCell.swift",
-      "line": 46,
-      "symbol": "RawThemeViewerTitleCell.CellTitle",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "symbol": "RawThemeViewerTitleCell.CellHeight",
+      "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
@@ -9389,147 +8647,147 @@
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1384,
+      "line": 1389,
       "symbol": "MainViewController.GamePlayStart",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1470,
+      "line": 1475,
       "symbol": "MainViewController.HandleMoveLeftPressed()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1475,
+      "line": 1480,
       "symbol": "MainViewController.HandleMoveRightPressed()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1480,
+      "line": 1485,
       "symbol": "MainViewController.HandleMoveUpPressed()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1485,
+      "line": 1490,
       "symbol": "MainViewController.HandleMoveDownPressed()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1490,
+      "line": 1495,
       "symbol": "MainViewController.HandleUpAndAwayPressed()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1495,
+      "line": 1500,
       "symbol": "MainViewController.HandleDropDownPressed()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1500,
+      "line": 1505,
       "symbol": "MainViewController.HandleRotateLeftPressed()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1505,
+      "line": 1510,
       "symbol": "MainViewController.HandleRotateRightPressed()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1510,
+      "line": 1515,
       "symbol": "MainViewController.HandleFreezeInPlacePressed()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 1760,
+      "line": 1765,
       "symbol": "MainViewController.PreviousGameShape",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 2208,
+      "line": 2215,
       "symbol": "MainViewController.GameUISurface3D",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 2209,
+      "line": 2216,
       "symbol": "MainViewController.GameViewContainer",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 2210,
+      "line": 2217,
       "symbol": "MainViewController.TextLayerView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 2211,
+      "line": 2218,
       "symbol": "MainViewController.NextPieceView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 2212,
+      "line": 2219,
       "symbol": "MainViewController.NextPieceViewControl",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 2213,
+      "line": 2220,
       "symbol": "MainViewController.CurrentScoreLabelView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 2214,
+      "line": 2221,
       "symbol": "MainViewController.HighScoreLabelView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 2215,
+      "line": 2222,
       "symbol": "MainViewController.PressPlayLabelView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 2216,
+      "line": 2223,
       "symbol": "MainViewController.GameOverLabelView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/MainViewController.swift",
-      "line": 2217,
+      "line": 2224,
       "symbol": "MainViewController.PauseLabelView",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
