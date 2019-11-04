@@ -997,7 +997,7 @@ class View3D: SCNView,                          //Our main super class.
         let BoardDef = BoardManager.GetBoardFor(CenterBlockShape!)
         let IsOddlyShaped = !BoardDef!.GameBoardWidth.IsEven
         let XAdjustment: CGFloat = IsOddlyShaped ? -18.0 : -17.5
-        let YAdjustment: CGFloat = IsOddlyShaped ? -1.0 : -1.0
+        let YAdjustment: CGFloat = IsOddlyShaped ? -1.0 : -1.5
         
         MovingPieceBlocks = [VisualBlocks3D]()
         MovingPieceNode = SCNNode()
