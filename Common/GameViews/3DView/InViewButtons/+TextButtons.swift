@@ -121,7 +121,7 @@ extension View3D
             
             case .VideoButton:
                 let OverrideFont = UIFont(name: "NotoEmoji", size: 40.0)!
-                FinalNode = SCNButtonNode.MakeButton(ButtonType: ForButton, Text: "", CodePoint: 0x1f4f9, TextType: .UnicodeCodePoint,
+                FinalNode = SCNButtonNode.MakeButton(ButtonType: .VideoButton, Text: "", CodePoint: 0x1f4f9, TextType: .UnicodeCodePoint,
                                                      Location: ButtonDictionary[ForButton]!.Location, Depth: 1.0,
                                                      ScaleFactor: ButtonDictionary[ForButton]!.Scale,
                                                      Color: ButtonDictionary[ForButton]!.Color,
@@ -130,7 +130,7 @@ extension View3D
             
             case .CameraButton:
                 let OverrideFont = UIFont(name: "NotoEmoji", size: 40.0)!
-                FinalNode = SCNButtonNode.MakeButton(ButtonType: ForButton, Text: "", CodePoint: 0x1f4f7, TextType: .UnicodeCodePoint,
+                FinalNode = SCNButtonNode.MakeButton(ButtonType: .CameraButton, Text: "", CodePoint: 0x1f4f7, TextType: .UnicodeCodePoint,
                                                      Location: ButtonDictionary[ForButton]!.Location, Depth: 1.0,
                                                      ScaleFactor: ButtonDictionary[ForButton]!.Scale,
                                                      Color: ButtonDictionary[ForButton]!.Color,
@@ -138,7 +138,7 @@ extension View3D
                                                      Font: OverrideFont, LightMask: View3D.ControlLight)
             
             case .DownButton:
-                FinalNode = SCNButtonNode.MakeButton(ButtonType: ForButton, Text: "", CodePoint: 0x25bc, TextType: .UnicodeCodePoint,
+                FinalNode = SCNButtonNode.MakeButton(ButtonType: .DownButton, Text: "", CodePoint: 0x25bc, TextType: .UnicodeCodePoint,
                                                      Location: ButtonDictionary[ForButton]!.Location,
                                                      ScaleFactor: ButtonDictionary[ForButton]!.Scale,
                                                      Color: ButtonDictionary[ForButton]!.Color,
@@ -146,7 +146,7 @@ extension View3D
                                                      Font: ButtonFont, LightMask: View3D.ControlLight)
             
             case .DropDownButton:
-                FinalNode = SCNButtonNode.MakeButton(ButtonType: ForButton, Text: "", CodePoint: 0x25bc, TextType: .UnicodeCodePoint,
+                FinalNode = SCNButtonNode.MakeButton(ButtonType: .DropDownButton, Text: "", CodePoint: 0x25bc, TextType: .UnicodeCodePoint,
                                                      Location: ButtonDictionary[ForButton]!.Location,
                                                      ScaleFactor: ButtonDictionary[ForButton]!.Scale,
                                                      Color: ButtonDictionary[ForButton]!.Color,
@@ -154,7 +154,7 @@ extension View3D
                                                      Font: ButtonFont, LightMask: View3D.ControlLight)
             
             case .FlyAwayButton:
-                FinalNode = SCNButtonNode.MakeButton(ButtonType: ForButton, Text: "", CodePoint: 0x25b2, TextType: .UnicodeCodePoint,
+                FinalNode = SCNButtonNode.MakeButton(ButtonType: .FlyAwayButton, Text: "", CodePoint: 0x25b2, TextType: .UnicodeCodePoint,
                                                      Location: ButtonDictionary[ForButton]!.Location,
                                                      ScaleFactor: ButtonDictionary[ForButton]!.Scale,
                                                      Color: ButtonDictionary[ForButton]!.Color,
@@ -162,7 +162,7 @@ extension View3D
                                                      Font: ButtonFont, LightMask: View3D.ControlLight)
             
             case .FreezeButton:
-                FinalNode = SCNButtonNode.MakeButton(ButtonType: .PauseButton, Text: "❄︎", CodePoint: 0, TextType: .String,
+                FinalNode = SCNButtonNode.MakeButton(ButtonType: .FreezeButton, Text: "❄︎", CodePoint: 0, TextType: .String,
                                                      Location: ButtonDictionary[ForButton]!.Location,
                                                      ScaleFactor: ButtonDictionary[ForButton]!.Scale,
                                                      Color: ButtonDictionary[ForButton]!.Color,
@@ -170,7 +170,7 @@ extension View3D
                                                      Font: ButtonFont, LightMask: View3D.ControlLight)
             
             case .LeftButton:
-                FinalNode = SCNButtonNode.MakeButton(ButtonType: ForButton, Text: "", CodePoint: 0x25c0, TextType: .UnicodeCodePoint,
+                FinalNode = SCNButtonNode.MakeButton(ButtonType: .LeftButton, Text: "", CodePoint: 0x25c0, TextType: .UnicodeCodePoint,
                                                      Location: ButtonDictionary[ForButton]!.Location,
                                                      ScaleFactor: ButtonDictionary[ForButton]!.Scale,
                                                      Color: ButtonDictionary[ForButton]!.Color,
@@ -178,7 +178,7 @@ extension View3D
                                                      Font: ButtonFont, LightMask: View3D.ControlLight)
             
             case .RightButton:
-                FinalNode = SCNButtonNode.MakeButton(ButtonType: ForButton, Text: "", CodePoint: 0x25b6, TextType: .UnicodeCodePoint,
+                FinalNode = SCNButtonNode.MakeButton(ButtonType: .RightButton, Text: "", CodePoint: 0x25b6, TextType: .UnicodeCodePoint,
                                                      Location: ButtonDictionary[ForButton]!.Location,
                                                      ScaleFactor: ButtonDictionary[ForButton]!.Scale,
                                                      Color: ButtonDictionary[ForButton]!.Color,
@@ -186,7 +186,7 @@ extension View3D
                                                      Font: ButtonFont, LightMask: View3D.ControlLight)
             
             case .RotateLeftButton:
-                FinalNode = SCNButtonNode.MakeButton(ButtonType: .PauseButton, Text: "↺", CodePoint: 0, TextType: .String,
+                FinalNode = SCNButtonNode.MakeButton(ButtonType: .RotateLeftButton, Text: "↺", CodePoint: 0, TextType: .String,
                                                      Location: ButtonDictionary[ForButton]!.Location,
                                                      ScaleFactor: ButtonDictionary[ForButton]!.Scale,
                                                      Color: ButtonDictionary[ForButton]!.Color,
@@ -194,7 +194,7 @@ extension View3D
                                                      Font: ButtonFont, LightMask: View3D.ControlLight)
             
             case .RotateRightButton:
-                FinalNode = SCNButtonNode.MakeButton(ButtonType: .PauseButton, Text: "↻", CodePoint: 0, TextType: .String,
+                FinalNode = SCNButtonNode.MakeButton(ButtonType: .RotateRightButton, Text: "↻", CodePoint: 0, TextType: .String,
                                                      Location: ButtonDictionary[ForButton]!.Location,
                                                      ScaleFactor: ButtonDictionary[ForButton]!.Scale,
                                                      Color: ButtonDictionary[ForButton]!.Color,
@@ -202,7 +202,7 @@ extension View3D
                                                      Font: ButtonFont, LightMask: View3D.ControlLight)
             
             case .UpButton:
-                FinalNode = SCNButtonNode.MakeButton(ButtonType: ForButton, Text: "", CodePoint: 0x25b2, TextType: .UnicodeCodePoint,
+                FinalNode = SCNButtonNode.MakeButton(ButtonType: .UpButton, Text: "", CodePoint: 0x25b2, TextType: .UnicodeCodePoint,
                                                      Location: ButtonDictionary[ForButton]!.Location,
                                                      ScaleFactor: ButtonDictionary[ForButton]!.Scale,
                                                      Color: ButtonDictionary[ForButton]!.Color,
@@ -210,7 +210,7 @@ extension View3D
                                                      Font: ButtonFont, LightMask: View3D.ControlLight)
             
             case .HeartButton:
-                FinalNode = SCNButtonNode.MakeButton(ButtonType: .PauseButton, Text: "♥︎", CodePoint: 0, TextType: .String,
+                FinalNode = SCNButtonNode.MakeButton(ButtonType: .HeartButton, Text: "♥︎", CodePoint: 0, TextType: .String,
                                                      Location: ButtonDictionary[ForButton]!.Location,
                                                      ScaleFactor: ButtonDictionary[ForButton]!.Scale,
                                                      Color: ButtonDictionary[ForButton]!.Color,
