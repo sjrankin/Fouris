@@ -23,8 +23,10 @@ protocol GameViewProtocol: class
     /// Visually clear the bucket of pieces.
     /// - Parameter FromBoard: *Not currently used*.
     /// - Parameter DestroyBy: Determines how to visually empty the bucket.
-    /// - Parameter MaxDuration: Maxium length of time to empty the bucket.
-    func DestroyMap3D(FromBoard: Board, DestroyBy: DestructionMethods, MaxDuration: Double)
+    /// - Parameter MaxDuration: Maximum length of time to empty the bucket.
+    /// - Parameter DelayStartBy: Number of seconds to delay the start of cleaning the board.
+    func DestroyMap3D(FromBoard: Board, DestroyBy: DestructionMethods, MaxDuration: Double,
+                      DelayStartBy: Double)
     
     /// Hides the board with specified visual effects.
     /// - Parameter Method: The method to use to hide the board.
