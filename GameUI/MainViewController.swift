@@ -464,7 +464,6 @@ class MainViewController: UIViewController,
                         
                         case .FPSButton:
                             let OldShowSeconds = Settings.ShowInstanceSeconds()
-                            print("FPS shows seconds: \(!OldShowSeconds)")
                             Settings.SetShowInstanceSeconds(NewValue: !OldShowSeconds)
                         
                         case .DownButton:
@@ -495,6 +494,7 @@ class MainViewController: UIViewController,
                             HandleMoveUpPressed()
                         
                         case .HeartButton:
+                            //The heartbeat button is purely for display for debug purposes.
                             break
                         
                         default:
@@ -511,13 +511,11 @@ class MainViewController: UIViewController,
                             if MenuShowing
                             {
                                 GameView3D?.ChangeMainButtonTexture(To: UIImage(named: "Checkerboard64RedYellow")!)
-                                //GameView3D?.ChangeMainButtonTexture(To: UIImage(named: "CircleArrayRGB144")!)
                                 ShowPopOverMenu()
                             }
                             else
                             {
                                 GameView3D?.ChangeMainButtonTexture(To: UIImage(named: "Checkerboard64")!)
-                                //GameView3D?.ChangeMainButtonTexture(To: UIImage(named: "CircleArrayBlackWhite144")!)
                             }
                         }
                     }
@@ -692,7 +690,6 @@ class MainViewController: UIViewController,
     }
     
     /// Called when a piece is successfully moved.
-    ///
     /// - Parameters:
     ///   - MovedPiece: The piece that moved.
     ///   - Direction: The direction the piece moved.
@@ -701,14 +698,14 @@ class MainViewController: UIViewController,
     {
     }
     
-    /// Called when a piece is successfully moved in a 3D game.
-    ///
+    /// Called when a piece is successfully moved.
     /// - Parameters:
     ///   - MovedPiece: The piece that moved.
     ///   - Direction: The direction the piece moved.
     ///   - Commanded: True if the piece was commanded to move, false if gravity caused the movement.
     public func PieceMoved3D(_ MovedPiece: Piece, Direction: Directions, Commanded: Bool)
     {
+        print("At PieceMoved3D(\(MovedPiece.Shape),\(Direction),\(Commanded))")
         GameView3D?.DrawPiece3D(InBoard: Game!.GameBoard!, GamePiece: MovedPiece)
     }
     
@@ -1638,7 +1635,6 @@ class MainViewController: UIViewController,
     
     /// Delegate for smooth motion protocol.
     weak public var Smooth3D: SmoothMotionProtocol? = nil
-//    weak public var Smooth2D: SmoothMotionProtocol? = nil
     
     /// Move a piece smoothly to the specified location.
     /// - Parameter GamePiece: The piece to move.
