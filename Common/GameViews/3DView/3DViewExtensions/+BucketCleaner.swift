@@ -147,10 +147,42 @@ extension View3D
     ///   - The list of blocks in **Blocks** is *not* modified.
     ///   - Control is not returned until all blocks' actions have been completed.
     ///   - `.Fast` and `.None` have the save effect.
+    ///   - If `DelayStartBy` is 0.0 or less, the bucket is cleaned immediately. Otherwise, a delay is set for the number of seconds
+    ///     in `DelayStartBy` - once the delay expires, the selector method is called which calls the actual bucket cleaning function.
     /// - Parameter Method: The visual method to use to remove the blocks. If this value is **.Random**, a visual method will be
     ///                     selected at random (and not treated as **.None**.)
     /// - Parameter MaxDuration: The maximum amount of time to take to remove all of the blocks.
-    public func BucketCleaner(_ Method: DestructionMethods, MaxDuration: Double)
+    /// - Parameter DelayStartBy: Number of seconds to wait before starting to clean the bucket. Defaults to 0.0.
+    public func BucketCleaner(_ Method: DestructionMethods, MaxDuration: Double, DelayStartBy: Double = 0.0)
+    {
+        if DelayStartBy <= 0.0
+        {
+            CleanTheBucket(Method, MaxDuration: MaxDuration)
+        }
+        else
+        {
+            CleaningMethod = Method
+            CleaningDuration = MaxDuration
+            perform(#selector(CleanBucket), with: nil, afterDelay: DelayStartBy)
+        }
+    }
+    
+    /// Function that calls the function that does the actual bucket cleaning. Uses class-globals for parameters.
+    @objc func CleanBucket()
+    {
+        CleanTheBucket(CleaningMethod, MaxDuration: CleaningDuration)
+    }
+    
+    /// Visually cleans the bucket by removing all retired blocks/pieces.
+    /// - Note:
+    ///   - Should be called only after the game ends.
+    ///   - The list of blocks in **Blocks** is *not* modified.
+    ///   - Control is not returned until all blocks' actions have been completed.
+    ///   - `.Fast` and `.None` have the save effect.
+    /// - Parameter Method: The visual method to use to remove the blocks. If this value is **.Random**, a visual method will be
+    ///                     selected at random (and not treated as **.None**.)
+    /// - Parameter MaxDuration: The maximum amount of time to take to remove all of the blocks.
+    private func CleanTheBucket(_ Method: DestructionMethods, MaxDuration: Double)
     {
         let BlockCount = self.BlockList.count
         if BlockCount < 1
