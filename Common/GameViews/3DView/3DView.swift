@@ -989,17 +989,15 @@ class View3D: SCNView,                          //Our main super class.
         {
             return
         }
-        //print("Removing moving piece node.")
         if MovingPieceNode != nil
         {
             MovingPieceNode?.removeFromParentNode()
         }
-        //print("  Done removing moving piece node.")
         
         let BoardDef = BoardManager.GetBoardFor(CenterBlockShape!)
         let IsOddlyShaped = !BoardDef!.GameBoardWidth.IsEven
         let XAdjustment: CGFloat = IsOddlyShaped ? -18.0 : -17.5
-        let YAdjustment: CGFloat = IsOddlyShaped ? 0.0 : -1.0
+        let YAdjustment: CGFloat = IsOddlyShaped ? -1.0 : -1.0
         
         MovingPieceBlocks = [VisualBlocks3D]()
         MovingPieceNode = SCNNode()
@@ -1029,14 +1027,6 @@ class View3D: SCNView,                          //Our main super class.
             {
                 let YOffset = (30 - 10 - 1) + YAdjustment - CGFloat(Block.Y)
                 let XOffset = CGFloat(Block.X) + XAdjustment
-                
-                //let PieceTypeID = CurrentMap.RetiredPieceShapes[ItemID]
-                //if PieceTypeID == nil
-                //{
-                //    print("Could not find ItemID in RetiredPieceShapes.")
-                //    return
-                //}
-                
                 let VBlock = VisualBlocks3D(Block.ID, AtX: XOffset, AtY: YOffset, ActiveVisuals: PVisuals!.ActiveVisuals!,
                                             RetiredVisuals: PVisuals!.RetiredVisuals!, IsRetired: AsRetired)
                 VBlock.categoryBitMask = View3D.GameLight
@@ -1045,9 +1035,7 @@ class View3D: SCNView,                          //Our main super class.
             }
             
         }
-        //print("Adding moving piece blocks to root node.")
         self.scene?.rootNode.addChildNode(MovingPieceNode!)
-        //print("  Done moving piece blocks to root node.")
     }
     
     /// The moving piece is in its final location. Add its ID to the list of retired IDs and remove the moving blocks.
@@ -1302,23 +1290,6 @@ class View3D: SCNView,                          //Our main super class.
             }
         }
         BlockList = BlockList.filter{$0.Marked}
-    }
-    
-    /// Draw the map.
-    /// - Note: **Not used in 3DView.**
-    /// - Parameter FromBoard: The board to use as a source for the map.
-    /// - Parameter ForEntireMap: If true, the entire map is drawn.
-    public func DrawMap(FromBoard: Board, ForEntireMap: Bool)
-    {
-        //Not used in the 3D game view.
-    }
-    
-    /// Draw a text map.
-    /// - Note: **Not used in 3DView.**
-    /// - Parameter WithText: The contents to draw.
-    public func DrawTextMap(WithText: String)
-    {
-        //Not used in the 3D game view.
     }
     
     /// Sets the board to use by the view (and indirectly sets the map as well).
