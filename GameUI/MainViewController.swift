@@ -752,8 +752,8 @@ class MainViewController: UIViewController,
         History?.Games![CurrentBaseGameType]!.AddDuration(NewDuration: Int(GamePlayDuration))
         History?.Games![CurrentBaseGameType]!.SetHighScore(NewScore: Game.HighScore)
         History?.Games![CurrentBaseGameType]!.AddScore(NewScore: Game.CurrentGameScore)
-        #endif
         HistoryManager.Save()
+        #endif
         GameView3D?.SetText(OnButton: .PlayButton, ToNextText: "Play")
         var GameDuration = Game.GameDuration()
         GameDuration = round(GameDuration)
@@ -803,6 +803,7 @@ class MainViewController: UIViewController,
                                      repeats: false)
         if UserTheme!.ShowOffAfterGameOver
         {
+            print("Starting to show off from GameOver.")
             GameView3D?.ShowOffRotations(Duration: 0.35, Delay: 0.75)
         }
     }
@@ -1361,6 +1362,7 @@ class MainViewController: UIViewController,
                 //If we're on the same thread as the UI, just call the function to clear the bucket.
                 if UserTheme!.ShowOffAfterGameOver
                 {
+                    print("Stopping showing off from ClearAndPlay on main thread")
                     GameView3D?.StopShowingOff()
                 }
                 GameView3D?.DestroyMap3D(FromBoard: Game.GameBoard!, DestroyBy: UserTheme!.DestructionMethod, MaxDuration: Duration)
@@ -1373,6 +1375,11 @@ class MainViewController: UIViewController,
                 DispatchQueue.main.sync
                     {
                         print("MainViewController.ClearAndPlay called from background thread.")
+                        if UserTheme!.ShowOffAfterGameOver
+                        {
+                            print("Stopping showing off from ClearAndPlay on main thread")
+                            GameView3D?.StopShowingOff()
+                        }
                         GameView3D?.DestroyMap3D(FromBoard: Game.GameBoard!, DestroyBy: UserTheme!.DestructionMethod, MaxDuration: Duration)
                         perform(#selector(self.Play), with: nil, afterDelay: PlayDelay)
                 }
