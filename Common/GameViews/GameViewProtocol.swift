@@ -14,17 +14,8 @@ protocol GameViewProtocol: class
 {
     /// Draw the background.
     func DrawBackground()
-    
-    /// Draw the 2D game view map. Includes moving pieces.
-    /// - Note: This is for the **2D** game view only.
-    /// - Parameters:
-    ///   - FromBoard: The board that contains the map to draw.
-    ///   - ForEntireMap: If true, the entire map should be redrawn. Otherwise, only
-    ///                   the current piece is drawn.
-    func DrawMap(FromBoard: Board, ForEntireMap: Bool)
-    
+      
     /// Draw the 3D game view map. Includes moving pieces.
-    /// - Note: This is for the **3D** game view only.
     /// - Parameter FromBoard: The board that contains the map to draw.
     /// - Parameter CalledFrom: Name of the caller. Used for debugging purposes only.
     func DrawMap3D(FromBoard: Board, CalledFrom: String)
@@ -46,12 +37,7 @@ protocol GameViewProtocol: class
     /// - Parameter Duration: The amount of time from start to finish of the visual effect to show
     ///                       the board, in seconds.
     func ShowBoard(Method: ShowBoardMethods, Duration: Double)
-    
-    /// Draw a textural game view map. Includes moving pieces.
-    /// - Note: This is for the **textual** game view only.
-    /// - Parameter WithText: Contains the textual version of the game board.
-    func DrawTextMap(WithText: String)
-    
+
     /// Sets the current board.
     ///
     /// - Parameter TheBoard: The currently playing board.
@@ -67,7 +53,6 @@ protocol GameViewProtocol: class
     func Resized()
     
     /// Show or hide grid lines.
-    ///
     /// - Parameter Show: Determines whether grid lines are shown or hidden.
     /// - Parameter WithUnitSize: Unit size to override the normally-calculated unit size.
     func DrawGridLines(_ Show: Bool, WithUnitSize: CGFloat?)
@@ -89,19 +74,16 @@ protocol GameViewProtocol: class
                      Completion: ((UUID) -> ())?)
     
     /// Draw the passed piece on a surface with the passed size.
-    ///
     /// - Parameters:
     ///   - ThePiece: The piece to draw.
     ///   - SurfaceSize: The size of the surface where the drawing will be placed.
     func DrawPiece(_ ThePiece: Piece, SurfaceSize: CGSize)
     
     /// Called when the piece whose ID is passed freezes out of bounds.
-    ///
     /// - Parameter ID: ID of the piece that froze out of bounds.
     func PieceOutOfBounds(_ ID: UUID)
     
     /// Called when a piece starts to freeze but isn't frozen.
-    ///
     /// - Parameter ID: The piece that started to freeze.
     func StartedFreezing(_ ID: UUID)
     
@@ -110,7 +92,6 @@ protocol GameViewProtocol: class
     func StoppedFreezing(_ ID: UUID)
     
     /// Sets the opacity of the passed block type to the passed value.
-    ///
     /// - Parameters:
     ///   - OfID: ID of the block type whose opacity will be set.
     ///   - To: The new opacity level.
