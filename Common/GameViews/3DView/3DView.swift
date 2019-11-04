@@ -1148,11 +1148,12 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter FromBoard: The board that contains the map to draw. *Not currently used.*
     /// - Parameter DestroyBy: Determines how to empty the bucket.
     /// - Parameter MaxDuration: Maximum amount of time (in seconds) to take to clear the board.
-    public func DestroyMap3D(FromBoard: Board, DestroyBy: DestructionMethods, MaxDuration: Double)
+    /// - Parameter DelayStartBy: Number of seconds to wait before starting to clean the bucket. Defaults to 0.0.
+    public func DestroyMap3D(FromBoard: Board, DestroyBy: DestructionMethods, MaxDuration: Double, DelayStartBy: Double = 0.0)
     {
         objc_sync_enter(RotateLock)
         defer{objc_sync_exit(RotateLock)}
-        BucketCleaner(DestroyBy, MaxDuration: MaxDuration)
+        BucketCleaner(DestroyBy, MaxDuration: MaxDuration, DelayStartBy: DelayStartBy)
     }
     
     // MARK: - Board map drawing.
@@ -1924,10 +1925,19 @@ class View3D: SCNView,                          //Our main super class.
         return V
     }
     
+    // MARK: - Bucket cleaning variables.
+    
+    /// Holds the cleaning method. Used when `BucketCleaner` is called with a non-zero `DelayStartBy` value.
+    public var CleaningMethod: DestructionMethods = .None
+    
+    /// Holds the amount of time to take to clean the bucket. Used when `BucketCleaner` is called with a non-zero `DelayStartBy` value.
+    public var CleaningDuration: Double = 0.01
+    
     // MARK: - Renderer variables.
     
     /// Nodes to remove.
     public var NodeRemovalList = [String]()
+    
     /// Objects to remove.
     public var ObjectRemovalList = Set<GameViewObjects>()
     
@@ -1935,10 +1945,13 @@ class View3D: SCNView,                          //Our main super class.
     
     /// Main about/version box node.
     public var AboutBoxNode: SCNNode? = nil
+    
     /// Flag that indicates the about box is showing.
     public var AboutBoxShowing: Bool = false
+    
     /// Timer to hide the about box node.
     public var AboutBoxHideTimer: Timer? = nil
+    
     /// The light for the about box.
     public var AboutLightNode: SCNNode? = nil
 }
