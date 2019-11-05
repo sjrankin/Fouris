@@ -23,7 +23,7 @@ class AboutDialogController: UIViewController, UINavigationControllerDelegate
         AboutBox.backgroundColor = UIColor.clear
         AboutData.attributedText = Versioning.MakeAttributedVersionBlockEx(TextColor: UIColor.black, HeaderColor: UIColor(red: 0.1, green: 0.1, blue: 0.3),
                                                                            FontName: "Avenir-Medium", HeaderFontName: "Avenir",
-                                                                           FontSize: 24.0)
+                                                                           FontSize: 22.0)
         AboutData.backgroundColor = UIColor.clear
         PieceDisplay.layer.borderColor = UIColor.black.cgColor
         PieceDisplay.layer.borderWidth = 0.5
