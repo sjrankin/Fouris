@@ -870,30 +870,6 @@ class View3D: SCNView,                          //Our main super class.
     
     // MARK: - Draw 3D piece.
     
-    public func MapBlockToView(_ GameBlock: Block, BoardDef: BoardDescriptor2) -> (X: CGFloat, Y: CGFloat)
-    {
-        var BlockX = CGFloat(GameBlock.X)
-        var BlockY = CGFloat(GameBlock.Y)
-        
-        var HalfWidth = CGFloat(Int(BoardDef.BucketWidth / 2))
-        if BoardDef.BucketWidth.IsEven
-        {
-            HalfWidth = HalfWidth - 0.5
-        }
-        print("HalfWidth=\(HalfWidth), BlockX=\(BlockX), BucketWidth=\(BoardDef.BucketWidth)")
-        BlockX = -HalfWidth + BlockX
-        
-        var HalfHeight = CGFloat(Int(BoardDef.BucketHeight / 2))
-        if !BoardDef.BucketHeight.IsEven
-        {
-            HalfHeight = HalfHeight + 1.0 - 0.5
-        }
-        BlockY = -(-HalfHeight + BlockY)
-        print("HalfHeight=\(HalfHeight), BlockY=\(BlockY), BucketHeight=\(BoardDef.BucketHeight)")
-        
-        return (BlockX, BlockY)
-    }
-    
     /// Draw the individual piece.
     /// - Note:
     ///    - If the piece type ID cannot be retrieved, control is returned immediately.
@@ -902,6 +878,7 @@ class View3D: SCNView,                          //Our main super class.
     ///      will keep on trying to move the piece even after it is frozen into place. When that happens, the board will call
     ///      this function, adding a new moving piece even after it is frozen. When that happens, the piece appears to be unfrozen
     ///      when it should be frozen, and the piece doesn't move when the board is rotated.
+    ///    - Depending on the map type, offset values are different, making the code a little more complex than I'd like.
     /// - Parameter InBoard: The current game board.
     /// - Parameter GamePiece: The piece to draw.
     /// - Parameter AsRetired: Determines if the piece is drawn as retired or active.
@@ -920,6 +897,7 @@ class View3D: SCNView,                          //Our main super class.
         let IsOddlyShaped = !BoardDef!.GameBoardWidth.IsEven
         let XAdjustment: CGFloat = IsOddlyShaped ? -18.0 : -17.5
         let YAdjustment: CGFloat = IsOddlyShaped ? -1.0 : -1.5
+        let YStaticAdjustment: CGFloat = IsOddlyShaped ? 0.0 : -0.5
         
         MovingPieceBlocks = [VisualBlocks3D]()
         MovingPieceNode = SCNNode()
@@ -937,10 +915,19 @@ class View3D: SCNView,                          //Our main super class.
             }
             if BoardType == .Static
             {
-                let (VX, VY) = MapBlockToView(Block, BoardDef: BoardDef!)
-                print("Block at \(Block.X),\(Block.Y) => \(VX),\(VY)\n")
-                let VBlock = VisualBlocks3D(Block.ID, AtX: VX, AtY: VY, ActiveVisuals: PVisuals!.ActiveVisuals!,
+                var YOffset: CGFloat = 0.0
+                if UIDevice.current.userInterfaceIdiom == .phone
+                {
+                    YOffset = 9 - CGFloat(Block.Y) + YStaticAdjustment
+                }
+                else
+                {
+                    YOffset = 7 - CGFloat(Block.Y) + YStaticAdjustment
+                }
+                let XOffset = CGFloat(Block.X) - 5.5
+                let VBlock = VisualBlocks3D(Block.ID, AtX: XOffset, AtY: YOffset, ActiveVisuals: PVisuals!.ActiveVisuals!,
                                             RetiredVisuals: PVisuals!.RetiredVisuals!, IsRetired: AsRetired)
+                
                 VBlock.categoryBitMask = View3D.GameLight
                 MovingPieceBlocks.append(VBlock)
                 MovingPieceNode?.addChildNode(VBlock)
@@ -955,7 +942,6 @@ class View3D: SCNView,                          //Our main super class.
                 MovingPieceBlocks.append(VBlock)
                 MovingPieceNode?.addChildNode(VBlock)
             }
-            
         }
         self.scene?.rootNode.addChildNode(MovingPieceNode!)
     }
