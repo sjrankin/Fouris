@@ -53,6 +53,8 @@ extension View3D
                 self.scene?.rootNode.addChildNode(self.BucketNode!)
                 self.MasterBlockNode = SCNNode()
                 self.scene?.rootNode.addChildNode(self.MasterBlockNode!)
+                
+                self.BlockList.removeAll()
         }
         #else
         //objc_sync_enter(CanUseBucket)
