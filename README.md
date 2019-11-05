@@ -15,7 +15,7 @@ Versioning for Fouris is maintained in the Versioning.swift file and is updated 
 
 Also, this versioning does not utilize Xcode's built-in versioning so I'll have to update that manually.
 
-Most recent build: **Version 1.0 Alpha, Build 3176, Build date: 4 November 2019, 14:30**
+Most recent build: **Version 1.0 Alpha, Build 3203, Build date: 5 November 2019, 14:18**
 
 > This documentation and the Jazzy-created documentation do not necessarily reflect the build shown above.
 ## Implementation and Requirements
@@ -84,6 +84,41 @@ Inside-out mode is when the piece originates in the middle of a fully-enclosed b
 When the game first starts, it waits a certain amount of time before starting playing in attract mode. (The amount of time is determined by a value in user settings.) (Attract mode is the same as using the AI.) The user can start playing at any time, aborting the attract mode.
 
 If started in attract mode, game play will continue until the AI makes a mistake (which happens all too often) and the game is over. Fouris will wait a certain amount of time (about ten seconds), and if the user hasn't started a game, will start playing another game in attact mode (and continue the loop until the user starts playing or the game is exited).
+### Data Files
+Fouris makes heavy use of data files to define various objects of the game, such as piece shapes, visual attributes, boards, and the like.
+
+All data files are .xml format and are read with a home-grown XML deserializer. Those files that need to stay up-to-date are written with XML serializers, also home-gown.
+
+| File      | Description  | Read/Write |
+|:----------|:----------|:----------|
+| `Boards.xml`    | Defines all boards for all modes of the game.    | No |
+| `DefaultPieceVisuals.xml`    | Default visual information for pieces.    | No |
+| `UserPieceVisuals.xml` | User-defined visual information for pieces. | Yes |
+| `GameTheme2.xml` | Default game theming information. | No |
+| `UserGameTheme2.xml` | User-defined game theming information. | Yes |
+| `PieceDescriptions.xml` | Game-defined piece descriptions. | No |
+| `UserPieceDescriptions.xml` | User-defined piece descriptions. | Yes |
+| `GameHistory.xml` | General statistics for game play. | Yes |
+| `AIGameHistory.xml` | AI-related statistics for game play. | Yes |
+
+
+### Logical Structures
+#### Game Board
+The game board consists of the following atomic-level items:
+- Visible barriers - these form the bucket.
+- Invisible barriers - these surround the game board stopping pieces from going outside of the playing field.
+- Internal clear locations - these are places inside of the bucket that are free of barriers and retired pieces.
+- External clear locations - these are places outside of the bucket that are free of barriers. If a piece freezes with any block in an external location, the game is over.
+- Retired pieces - pieces that have successfully frozen.
+
+The game board is managed by the `Map` and `Board` classes.
+#### Game Piece
+A game piece is the shape that the user tries to move into the best spot for the best score. Each piece consists of one or more blocks that are fixed in place in relation to other blocks of the same piece. Once the piece is frozen, each block is "separated" from the piece so it can be manipulated separately for visual effects later on.
+
+Pieces are defined in the `PieceDescriptions.xml` file and are create and instantiated by the `PieceFactory`.
+
+Pieces are responsible for their own motion, including ambient gravity.
+
 ## Documentation
 This documentation was generated with Jazzy using the command:
 
