@@ -341,18 +341,8 @@ class GameLogic
         {
             switch PieceClass
             {
-                case .Rotatable:
+                case .SemiRotatable, .Static, .Rotatable:
                     UIDelegate?.PieceMoved3D(MovedPiece, Direction: Direction, Commanded: Commanded)
-                
-                case .SemiRotatable:
-                    UIDelegate?.PieceMoved3D(MovedPiece, Direction: Direction, Commanded: Commanded)
-                
-                case .Static:
-                    #if true
-                    UIDelegate?.PieceMoved3D(MovedPiece, Direction: Direction, Commanded: Commanded)
-                    #else
-                    UIDelegate?.PieceMoved(MovedPiece, Direction: Direction, Commanded: Commanded)
-                    #endif
                 
                 case .ThreeDimensional:
                     UIDelegate?.PieceMoved(MovedPiece, Direction: Direction, Commanded: Commanded)
@@ -402,8 +392,10 @@ class GameLogic
     
     /// Cumulative block count.
     public var CumulativeBlockCount: Int = 0
+    
     /// Start time for scoring.
     public var ScoringStartTime: Double = 0
+    
     /// Largest number of blocks in a piece.
     public var LargestBlockCount = 4
     
