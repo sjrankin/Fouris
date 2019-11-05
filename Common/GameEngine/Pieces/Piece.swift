@@ -818,8 +818,8 @@ class Piece: CustomStringConvertible
     {
         didSet
         {
-            #if false
-            DebugClient.Send("Piece: Gravity changed to \(GravitationalInterval)")
+            #if true
+            DebugClient.Send("!>>> Piece: Gravity changed to \(GravitationalInterval)")
             #endif
         }
     }
@@ -831,7 +831,7 @@ class Piece: CustomStringConvertible
     /// Restarts the gravitational timer afterwards, with a potentially different gravitational interval. This timer
     /// will be stopped once a block starts freezing.
     /// - Note: All gravitational timer calls and references need to be in an `OperationQueue.main.addOperation`
-    ///         block to ensure all calls are made on the same thread.
+    ///         block to ensure all calls are made on the main UI thread.
     @objc func HandleGravityTimer()
     {
         let Start = CACurrentMediaTime()
@@ -874,6 +874,7 @@ class Piece: CustomStringConvertible
             {
                 FinalUpdate = String(FinalUpdate.prefix(6))
             }
+            print(">>> Gravity timer handler duration: \(FinalUpdate)")
         }
     }
     
@@ -901,7 +902,7 @@ class Piece: CustomStringConvertible
             return
         }
         OperationQueue.main.addOperation {
-            print("Dropping updated: \(self.GravitationalInterval)")
+            print("Single gravitational increment at \(self.GravitationalInterval)s")
             self.GravitationalTimer = Timer.scheduledTimer(timeInterval: self.GravitationalInterval, target: self,
                                                            selector: #selector(self.HandleGravityTimer), userInfo: nil,
                                                            repeats: false)
@@ -1056,6 +1057,7 @@ class Piece: CustomStringConvertible
     ///            no room to the left. Freezing only occurs when the piece cannot move down.
     @discardableResult func DoUpdateLocation(XDelta: Int, YDelta: Int) -> Bool
     {
+        let NewLocStart = CACurrentMediaTime()
         let AbleToMove = CanMove(ByX: XDelta, ByY: YDelta)
         if !AbleToMove
         {
@@ -1083,15 +1085,20 @@ class Piece: CustomStringConvertible
         }
         //If we're here, we can move.
         StopFreezing()
-        let NewLocStart = CACurrentMediaTime()
+        let NewStart = CACurrentMediaTime()
         GameBoard?.NewLocation2(ForPiece: self, XOffset: XDelta, YOffset: YDelta)
+        let FinalStart = CACurrentMediaTime() - NewStart
+        if FinalStart > 0.01
+        {
+            print(" **! NewLocation2 duration=\(FinalStart)")
+        }
         let NewLocEnd = CACurrentMediaTime() - NewLocStart
         let FinalLoc = Convert.Round(NewLocEnd, ToNearest: 0.0001)
         var FinalLocS = "\(FinalLoc)"
-        if FinalLocS.count > 6
+        if FinalLoc > 0.01
         {
             FinalLocS = String(FinalLocS.prefix(6))
-            print("FinalLocS=\(FinalLocS)")
+            print("FinalLoc=\(FinalLocS)")
         }
         return true
     }
@@ -1173,12 +1180,6 @@ class Piece: CustomStringConvertible
         var Index = -1
         for Block in Locations
         {
-            #if false
-            if !(GameBoard?.PointInBucket(Point: CGPoint(x: Block.X, y: Block.Y)))!
-            {
-                print("Point (\(Block.X),\(Block.Y)) is out of bucket.")
-            }
-            #endif
             if Block.X < GameBoard!.BucketInteriorLeft || Block.X > GameBoard!.BucketInteriorRight
             {
                 //The block is too far right or too far left.
@@ -1203,7 +1204,10 @@ class Piece: CustomStringConvertible
             {
                 MapCheck = String(MapCheck.prefix(6))
             }
-            //DebugClient.Send("MapCheck duration: \(MapCheck)")
+            if MapCheckEnd > 0.01
+            {
+            DebugClient.Send("MapCheck duration: \(MapCheck)")
+            }
             if !MapIsEmpty
             {
                 return false
