@@ -510,10 +510,10 @@
                                 <viewLayoutGuide key="safeArea" id="ZYT-Bx-SUZ"/>
                             </sceneKitView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ByD-Hc-9hq">
-                                <rect key="frame" x="10" y="94" width="748" height="245"/>
+                                <rect key="frame" x="10" y="80" width="748" height="280"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2NB-Qq-fGh">
-                                        <rect key="frame" x="10" y="10" width="728" height="227"/>
+                                        <rect key="frame" x="10" y="10" width="728" height="262"/>
                                         <color key="backgroundColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <viewLayoutGuide key="safeArea" id="A0q-mY-u7Q"/>
                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
@@ -525,7 +525,7 @@
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="2NB-Qq-fGh" secondAttribute="bottom" constant="8" id="2Rg-cM-mUk"/>
                                     <constraint firstAttribute="trailing" secondItem="2NB-Qq-fGh" secondAttribute="trailing" constant="10" id="6pY-sy-HSX"/>
-                                    <constraint firstAttribute="height" constant="245" id="EdW-wx-f4I"/>
+                                    <constraint firstAttribute="height" constant="280" id="EdW-wx-f4I"/>
                                     <constraint firstItem="2NB-Qq-fGh" firstAttribute="top" secondItem="ByD-Hc-9hq" secondAttribute="top" constant="10" id="UMe-RV-PgJ"/>
                                     <constraint firstItem="2NB-Qq-fGh" firstAttribute="leading" secondItem="ByD-Hc-9hq" secondAttribute="leading" constant="10" id="wBl-Kf-i1R"/>
                                 </constraints>
@@ -585,12 +585,12 @@
                             <constraint firstItem="q41-xp-6ex" firstAttribute="top" secondItem="9Zz-Cb-vXt" secondAttribute="top" id="Dfg-0K-7dc"/>
                             <constraint firstItem="9sZ-bI-vZX" firstAttribute="bottom" secondItem="T03-6b-fRZ" secondAttribute="bottom" id="FJ7-pc-eNh"/>
                             <constraint firstItem="4XG-ac-ruN" firstAttribute="centerY" secondItem="T03-6b-fRZ" secondAttribute="centerY" constant="-4" id="Fd9-8L-qQV"/>
-                            <constraint firstItem="ByD-Hc-9hq" firstAttribute="top" secondItem="AM4-vV-mnG" secondAttribute="top" constant="94" id="LHw-qc-CBv"/>
+                            <constraint firstItem="ByD-Hc-9hq" firstAttribute="top" secondItem="AM4-vV-mnG" secondAttribute="top" constant="80" id="LHw-qc-CBv"/>
                             <constraint firstItem="MOx-Pl-PoY" firstAttribute="leading" secondItem="9Zz-Cb-vXt" secondAttribute="leading" id="W2E-Vm-yKs"/>
                             <constraint firstItem="T03-6b-fRZ" firstAttribute="leading" secondItem="2Ta-Wh-lby" secondAttribute="leading" constant="20" id="YNt-Ec-y3K"/>
                             <constraint firstItem="ByD-Hc-9hq" firstAttribute="leading" secondItem="AM4-vV-mnG" secondAttribute="leading" constant="10" id="aZv-FD-SWH"/>
                             <constraint firstItem="MOx-Pl-PoY" firstAttribute="centerX" secondItem="ByD-Hc-9hq" secondAttribute="centerX" id="h8l-6h-83K"/>
-                            <constraint firstItem="MOx-Pl-PoY" firstAttribute="top" secondItem="ByD-Hc-9hq" secondAttribute="bottom" constant="29" id="i7n-kN-nZg"/>
+                            <constraint firstItem="MOx-Pl-PoY" firstAttribute="top" secondItem="ByD-Hc-9hq" secondAttribute="bottom" constant="8" id="i7n-kN-nZg"/>
                             <constraint firstItem="4XG-ac-ruN" firstAttribute="trailing" secondItem="MOx-Pl-PoY" secondAttribute="trailing" constant="-6" id="iPm-BU-9Qw"/>
                             <constraint firstAttribute="trailing" secondItem="ByD-Hc-9hq" secondAttribute="trailing" constant="10" id="if9-gY-s6d"/>
                             <constraint firstItem="Ob2-DI-cRb" firstAttribute="top" secondItem="MOx-Pl-PoY" secondAttribute="bottom" constant="28" id="pQ6-0m-TPm"/>
@@ -831,13 +831,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For game type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ja-49-CVH">
-                                <rect key="frame" x="20" y="140" width="111" height="21"/>
+                                <rect key="frame" x="20" y="139.5" width="111" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tap-d5-oLU">
-                                <rect key="frame" x="20" y="187" width="672" height="647"/>
+                                <rect key="frame" x="20" y="186.5" width="672" height="647.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -853,7 +853,7 @@
                                 </connections>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="48o-Mh-maS">
-                                <rect key="frame" x="199" y="102" width="154" height="17"/>
+                                <rect key="frame" x="199" y="102" width="154" height="16.5"/>
                                 <viewLayoutGuide key="safeArea" id="VC8-ee-mL6"/>
                                 <segments>
                                     <segment title="User"/>
@@ -870,7 +870,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="e6D-S9-tip">
-                                <rect key="frame" x="199" y="135.5" width="171" height="32"/>
+                                <rect key="frame" x="199" y="135" width="171" height="32"/>
                                 <segments>
                                     <segment title="Standard"/>
                                     <segment title="Rotating"/>
