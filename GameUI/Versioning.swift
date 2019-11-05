@@ -96,19 +96,34 @@ public class Versioning: CustomStringConvertible
     }
     
     /// Build number.
-    public static let Build: Int = 3176
+    public static let Build: Int = 3203
     
     /// Build increment.
     private static let BuildIncrement = 1
     
     /// Build ID.
-    public static let BuildID: String = "E1718D66-3AFA-4B7B-B154-C3E23CEC9756"
+    public static let BuildID: String = "1054ED49-D6F1-4C81-9F4C-97B515713F89"
     
     /// Build date.
-    public static let BuildDate: String = "4 November 2019"
+    public static let BuildDate: String = "5 November 2019"
     
     /// Build Time.
-    public static let BuildTime: String = "14:30"
+    public static let BuildTime: String = "14:18"
+    
+    /// Holds the release build flag.
+    private static var _IsReleaseBuild: Bool = false
+    /// Get or set the release build flag. This is set at run-time by the calling program. Defaults to `false`.
+    public static var IsReleaseBuild: Bool
+    {
+        get
+        {
+            return _IsReleaseBuild
+        }
+        set
+        {
+            _IsReleaseBuild = newValue
+        }
+    }
     
     /// Return a standard build string.
     ///
@@ -174,6 +189,7 @@ public class Versioning: CustomStringConvertible
         Parts.append(("Copyright", CopyrightText()))
         Parts.append(("Program ID", ProgramID))
         Parts.append(("Tag", Tag))
+        Parts.append(("IsReleased", "\(IsReleaseBuild)"))
         return Parts
     }
     
@@ -192,7 +208,7 @@ public class Versioning: CustomStringConvertible
         Block = Block + Prefix + "Build ID " + BuildID + "\n"
         Block = Block + Prefix + CopyrightText() + "\n"
         Block = Block + Prefix + "Program ID " + ProgramID + "\n"
-        Block = Block + Prefix + Tag
+        Block = Block + Prefix + Tag + ", Build Type: " + String(IsReleaseBuild ? "Release" : "Debug")
         return Block
     }
     
@@ -233,6 +249,9 @@ public class Versioning: CustomStringConvertible
         let Line3T = NSMutableAttributedString(string: MakeBuildString(IncludeBuildPrefix: false) + "\n", attributes: StandardLineAttributes)
         let Line4H = NSMutableAttributedString(string: Parts[3].0 + " ", attributes: HeaderAttributes)
         let Line4T = NSMutableAttributedString(string: Parts[3].1 + "\n", attributes: StandardLineAttributes)
+        let Line4xH = NSMutableAttributedString(string: "Build type ", attributes: HeaderAttributes)
+        let IsRelease = Bool(Parts[7].1)!
+        let Line4xT = NSMutableAttributedString(string: String(IsRelease ? "Release\n" : "Debug\n"), attributes: StandardLineAttributes)
         let Line5H = NSMutableAttributedString(string: "Copyright © ", attributes: HeaderAttributes)
         let Line5T = NSMutableAttributedString(string: CopyrightText(ExcludeCopyrightString: true) + "\n", attributes: StandardLineAttributes)
         let Line6H = NSMutableAttributedString(string: Parts[5].0 + " ", attributes: HeaderAttributes)
@@ -245,6 +264,8 @@ public class Versioning: CustomStringConvertible
         Working.append(Line3T)
         Working.append(Line4H)
         Working.append(Line4T)
+        Working.append(Line4xH)
+        Working.append(Line4xT)
         Working.append(Line5H)
         Working.append(Line5T)
         Working.append(Line6H)
@@ -287,6 +308,9 @@ public class Versioning: CustomStringConvertible
         let Line3 = NSMutableAttributedString(string: Parts[2].1 + "\n", attributes: StandardLineAttributes)
         let Line4H = NSMutableAttributedString(string: Parts[3].0 + " ", attributes: HeaderAttributes)
         let Line4T = NSMutableAttributedString(string: Parts[3].1 + "\n", attributes: StandardLineAttributes)
+        let Line4xH = NSMutableAttributedString(string: "Build type ", attributes: HeaderAttributes)
+        let IsRelease = Bool(Parts[7].1)!
+        let Line4xT = NSMutableAttributedString(string: String(IsRelease ? "Release\n" : "Debug\n"), attributes: StandardLineAttributes)
         let Line5 = NSMutableAttributedString(string: Parts[4].1 + "\n", attributes: StandardLineAttributes)
         let Line6H = NSMutableAttributedString(string: Parts[5].0 + " ", attributes: HeaderAttributes)
         let Line6T = NSMutableAttributedString(string: Parts[5].1, attributes: StandardLineAttributes)
@@ -296,6 +320,8 @@ public class Versioning: CustomStringConvertible
         Working.append(Line3)
         Working.append(Line4H)
         Working.append(Line4T)
+        Working.append(Line4xH)
+        Working.append(Line4xT)
         Working.append(Line5)
         Working.append(Line6H)
         Working.append(Line6T)
@@ -328,6 +354,7 @@ public class Versioning: CustomStringConvertible
         Emit = Emit + MakeKVP("BuildDate", BuildDate + ", " + BuildTime) + " "
         Emit = Emit + MakeKVP("BuildID", BuildID)
         Emit = Emit + MakeKVP("Tag", Tag)
+        Emit = Emit + MakeKVP("IsReleased", "\(IsReleaseBuild)")
         Emit = Emit + ">\n"
         Emit = Emit + Spaces + "  " + CopyrightText() + "\n"
         Emit = Emit + Spaces + "</Version>"
@@ -346,6 +373,7 @@ public class Versioning: CustomStringConvertible
         KVP.append(("BuildID", BuildID))
         KVP.append(("Copyright", CopyrightText()))
         KVP.append(("Tag", Tag))
+        KVP.append(("IsReleased", "\(IsReleaseBuild)"))
         return KVP
     }
     
