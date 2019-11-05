@@ -20,29 +20,29 @@ import MetricKit
     /// Application launch tasks. Capture launch tasks from the home screen menu.
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     {
-        var Host: HostPlatforms = .iOS
-        #if targetEnvironment(simulator)
-        Host = .Simulator
-        #endif
-        #if targetEnvironment(macCatalyst)
-        Host = .Catalyst
-        #endif
-        
         print("Fouris launched: \(MessageHelper.MakeTimeStamp(FromDate: Date()))")
-        switch Host
-        {
-            case .iOS:
-                UserDefaults.standard.set(false, forKey: "RunningOnSimulator")
-                print("Running on iOS.")
-            
-            case .Simulator:
-                UserDefaults.standard.set(true, forKey: "RunningOnSimulator")
-                print("Running on simulator.")
-            
-            case .Catalyst:
-                UserDefaults.standard.set(false, forKey: "RunningOnSimulator")
-                print("Running on Mac.")
-        }
+        
+        //Set the running environment.
+        #if targetEnvironment(simulator)
+        UserDefaults.standard.set(true, forKey: "RunningOnSimulator")
+        print("Running on simulator.")
+        #else
+        #if targetEnvironment(macCatalyst)
+        UserDefaults.standard.set(false, forKey: "RunningOnSimulator")
+        print("Running on Mac.")
+        #else
+        UserDefaults.standard.set(false, forKey: "RunningOnSimulator")
+        print("Running on iOS.")
+        #endif
+        #endif
+        #if RELEASE
+        print("Release version.")
+        Versioning.IsReleaseBuild = true
+        #endif
+        #if DEBUG
+        print("Debug version.")
+        Versioning.IsReleaseBuild = false
+        #endif
         
         UIApplication.shared.isIdleTimerDisabled = true
         if let ShortcutItem = launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem
