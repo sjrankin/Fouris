@@ -49,7 +49,6 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter BucketShape: The shape of the game's bucket.
     func Initialize(With: Board, Theme: ThemeManager3, BucketShape: BucketShapes)
     {
-        //print("View3D Frame=\(self.frame)")
         self.isUserInteractionEnabled = true
         CenterBlockShape = BucketShape
         self.rendersContinuously = true
@@ -153,7 +152,6 @@ class View3D: SCNView,                          //Our main super class.
     /// Not currently used.
     public func NewParentSize(Bounds: CGRect, Frame: CGRect)
     {
-        
     }
     
     /// The theme was updated. See what changed and take the appropriate action.
@@ -214,10 +212,13 @@ class View3D: SCNView,                          //Our main super class.
     
     /// Orientation KVP.
     private let OrientationKVP = UUID()
+    
     /// Position KVP.
     private let PositionKVP = UUID()
+    
     /// Original camera orientation. Used in debug for resetting the camera after the user moves it around.
     public var OriginalCameraOrientation: SCNVector4? = nil
+    
     /// Original camera position. Used in debug for resetting the camera after the user moves it around.
     public var OriginalCameraPosition: SCNVector3? = nil
     
@@ -559,90 +560,11 @@ class View3D: SCNView,                          //Our main super class.
     /// Flag indicating the bucket was added. Do we need this in this class?
     private var _BucketAdded: Bool = false
     
-    /// Draw a vertical and horizontal line passing through the origin.
-    /// - Note: Whether or not center lines are drawn is determined by the settings in the current theme.
-    /// - Note: Center lines are intended to be used for debugging only.
-    public func DrawCenterLines()
-    {
-        //print("Removing center lines.")
-        CenterLineVertical?.removeFromParentNode()
-        CenterLineHorizontal?.removeFromParentNode()
-        //print("  Done removing center lines.")
-        if CurrentTheme!.ShowCenterLines
-        {
-            let Width: CGFloat = CGFloat(CurrentTheme!.CenterLineWidth)
-            let LineColor = ColorServer.ColorFrom(CurrentTheme!.CenterLineColor)
-            CenterLineVertical = MakeLine(From: SCNVector3(0.0, 20.0, 2.0), To: SCNVector3(0.0, -80.0, 2.0), Color: LineColor, LineWidth: Width)
-            CenterLineHorizontal = MakeLine(From: SCNVector3(-20.0, 0.0, 2.0), To: SCNVector3(80.0, 0.0, 2.0), Color: LineColor, LineWidth: Width)
-            CenterLineVertical!.categoryBitMask = View3D.ControlLight
-            CenterLineHorizontal!.categoryBitMask = View3D.ControlLight
-            self.scene?.rootNode.addChildNode(CenterLineVertical!)
-            self.scene?.rootNode.addChildNode(CenterLineHorizontal!)
-        }
-    }
-    
     /// Holds the center vertical line.
-    private var CenterLineVertical: SCNNode? = nil
+    public var CenterLineVertical: SCNNode? = nil
+    
     /// Holds the center horizontal line.
-    private var CenterLineHorizontal: SCNNode? = nil
-    
-    /// Create a "line" and return it in a scene node.
-    /// - Note: The line is really a very thin box. This makes lines a rather heavy operation.
-    /// - Parameter From: Starting point of the line.
-    /// - Parameter To: Ending point of the line.
-    /// - Parameter Color: The color of the line.
-    /// - Parameter LineWidth: Width of the line - defaults to 0.01.
-    /// - Returns: Node with the specified line. The node has the name "GridNodes".
-    public func MakeLine(From: SCNVector3, To: SCNVector3, Color: UIColor, LineWidth: CGFloat = 0.01) -> SCNNode
-    {
-        var Width: Float = 0.01
-        var Height: Float = 0.01
-        let FinalLineWidth = Float(LineWidth)
-        if From.y == To.y
-        {
-            Width = abs(From.x - To.x)
-            Height = FinalLineWidth
-        }
-        else
-        {
-            Height = abs(From.y - To.y)
-            Width = FinalLineWidth
-        }
-        let Line = SCNBox(width: CGFloat(Width), height: CGFloat(Height), length: 0.01,
-                          chamferRadius: 0.0)
-        Line.materials.first?.diffuse.contents = Color
-        let Node = SCNNode(geometry: Line)
-        Node.categoryBitMask = View3D.GameLight
-        Node.position = From
-        Node.name = "GridNodes"
-        return Node
-    }
-    
-    /// Create a grid and place it into the scene.
-    public func CreateGrid()
-    {
-        RemoveNodes(WithName: "GridNodes")
-        for Y in stride(from: -64.0, to: 128.0, by: 1.0)
-        {
-            let Start = SCNVector3(-64.5, Y, 0.0)
-            let End = SCNVector3(128.5, Y, 0.0)
-            let LineNode = MakeLine(From: Start, To: End, Color: UIColor.white)
-            self.scene?.rootNode.addChildNode(LineNode)
-        }
-        for X in stride(from: -64.5, to: 128.5, by: 1.0)
-        {
-            let Start = SCNVector3(X, -64.0, 0.0)
-            let End = SCNVector3(X, 128.0, 0.0)
-            let LineNode = MakeLine(From: Start, To: End, Color: UIColor.white)
-            self.scene?.rootNode.addChildNode(LineNode)
-        }
-    }
-    
-    /// Remove the grid from the scene.
-    public func RemoveGrid()
-    {
-        RemoveNodes(WithName: "GridNodes")
-    }
+    public var CenterLineHorizontal: SCNNode? = nil
     
     /// Holds a set of all visual blocks being displayed.
     public var BlockList = Set<VisualBlocks3D>()
