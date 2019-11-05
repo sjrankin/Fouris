@@ -145,7 +145,8 @@ extension View3D
     /// - Note:
     ///   - Should be called only after the game ends.
     ///   - The list of blocks in **Blocks** is *not* modified.
-    ///   - Control is not returned until all blocks' actions have been completed.
+    ///   - Control is not returned until all blocks' actions have been completed. However, if `DelayStartBy` is greater than 0.0,
+    ///     control is returned immediately.
     ///   - `.Fast` and `.None` have the save effect.
     ///   - If `DelayStartBy` is 0.0 or less, the bucket is cleaned immediately. Otherwise, a delay is set for the number of seconds
     ///     in `DelayStartBy` - once the delay expires, the selector method is called which calls the actual bucket cleaning function.
