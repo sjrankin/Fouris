@@ -17,6 +17,7 @@ import UIKit
 class MapType: CustomStringConvertible
 {
     /// Initializer.
+    /// - Note: Intended for use for 2D games (rendered with 3D blocks, but played on a 2D board).
     /// - Parameters:
     ///   - Width: Width of the map.
     ///   - Height: Height of the map.
@@ -33,6 +34,7 @@ class MapType: CustomStringConvertible
     }
     
     /// Initializer.
+    /// - Note: Intended for use for true 3D games.
     /// - Parameters:
     ///   - Width: Width of the map.
     ///   - Height: Height of the map.
@@ -41,7 +43,7 @@ class MapType: CustomStringConvertible
     ///   - BucketShape: Shape of the game's bucket.
     init(Width: Int, Height: Int, Depth: Int, ID: UUID, BucketShape: BucketShapes)
     {
-                print("init(Width: \(Width), Height: \(Height), BucketShape: \(BucketShape))")
+        print("init(Width: \(Width), Height: \(Height), Depth: \(Depth), BucketShape: \(BucketShape))")
         let Board = BoardManager.GetBoardFor(BucketShape)!
         self.Width = Board.GameBoardWidth
         self.Height = Board.GameBoardHeight
@@ -331,7 +333,9 @@ class MapType: CustomStringConvertible
     }
     
     /// Returns the starting point for the specified piece. This is where the piece will be placed in the map.
-    /// - Note: The piece's location may vary depending on the base game type.
+    /// - Note:
+    ///   - The piece's location may vary depending on the base game type.
+    ///   - The coordinates returned are in terms of the board definition, not the game view coordinate space.
     /// - Parameter ForPiece: The piece that will be dropped.
     /// - Returns: The point where the piece will be placed in the map.
     public func GetPieceStartingPoint(ForPiece: Piece) -> CGPoint
@@ -960,6 +964,7 @@ class MapType: CustomStringConvertible
     }
     
     /// Determines if the piece is fully in bounds. Call only after the piece is frozen.
+    /// - Note: Depending on the board class, offsets may be applied to adjust for variances.
     /// - Parameter ThePiece: The piece to check for in-boundedness.
     /// - Returns: True if the piece is fully in bounds (eg, in the bucket), false otherwise.
     public func PieceInBounds(_ ThePiece: Piece) -> Bool
@@ -968,37 +973,18 @@ class MapType: CustomStringConvertible
         var IsInBounds = true
         for Point in ThePiece.Locations
         {
-            if Point.X < BoardDef!.BucketX || Point.X > BoardDef!.BucketX + BoardDef!.BucketWidth - 1
+            let XTest = Point.X
+            if XTest < BoardDef!.BucketX || XTest > BoardDef!.BucketX + BoardDef!.BucketWidth - 1
             {
                 IsInBounds = false
             }
-            if Point.Y < BoardDef!.BucketY || Point.Y > BoardDef!.BucketY + BoardDef!.BucketHeight - 1
+            var YOffset = 0
+            if _BoardClass == .Static
             {
-                IsInBounds = false
+                YOffset = BoardDef!.BucketY
             }
-            if !IsInBounds
-            {
-                break
-            }
-        }
-        Scorer?.ScoreLocations(ThePiece.LocationsAsPoints())
-        return IsInBounds
-    }
-    
-    /// Determines if the piece is fully in bounds. Call only after the piece is frozen.
-    /// - Parameter ThePiece: The piece to check for in-boundedness.
-    /// - Returns: True if the piece is fully in bounds (eg, in the bucket), false otherwise.
-    public func PieceInBounds(X_ ThePiece: Piece) -> Bool
-    {
-        let BoardDef = BoardManager.GetBoardFor(_BucketShape)
-        var IsInBounds = true
-        for Point in ThePiece.Locations
-        {
-            if Point.X < BoardDef!.BucketX || Point.X > BoardDef!.BucketX + BoardDef!.BucketWidth - 1
-            {
-                IsInBounds = false
-            }
-            if Point.Y < BoardDef!.BucketY || Point.Y > BoardDef!.BucketY + BoardDef!.BucketHeight - 1
+            let YTest = Point.Y + YOffset
+            if YTest < BoardDef!.BucketY || YTest > BoardDef!.BucketY + BoardDef!.BucketHeight - 1
             {
                 IsInBounds = false
             }
