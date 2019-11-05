@@ -381,6 +381,8 @@ class Board: GameMapProtocol
         let QueueStart = CACurrentMediaTime()
         NewPiece = (Factory?.GetQueuedPiece(ForBoard: self))!
         PerformanceData.append(("GetQueuedPiece duration", CACurrentMediaTime() - QueueStart))
+        //print("» StartNewPiece2")
+         //       print("»» GetQueuedPiece duration: \(CACurrentMediaTime() - QueueStart)")
         
         let PieceInit = CACurrentMediaTime()
         NewPiece.GravityIsEnabled = PiecesUseGravity
@@ -398,16 +400,20 @@ class Board: GameMapProtocol
             NewPiece.UpdateLocation(XDelta: 0, YDelta: 0)
         }
         PerformanceData.append(("New piece initialization", CACurrentMediaTime() - PieceInit))
+        //print("»» New piece initialization: \(CACurrentMediaTime() - PieceInit)")
         
         let AddIDStart = CACurrentMediaTime()
         Map!.IDMap!.AddID(NewPiece.ID, ForPiece: .GamePiece)
         PerformanceData.append(("Add ID", CACurrentMediaTime() - AddIDStart))
+        //print("»» New piece added to ID map: \(CACurrentMediaTime() - AddIDStart)")
         let CallOut = CACurrentMediaTime()
         Game?.HaveNewPiece(NewPiece)
         PerformanceData.append(("HaveNewPiece callout",CACurrentMediaTime() - CallOut))
+        //print("»» HaveNewPiece callout duration: \(CACurrentMediaTime() - CallOut)")
         let RemoveIDsStart = CACurrentMediaTime()
         Map!.IDMap!.RemoveUnusedIDs(BoardMap: Map!.Contents, ButNotThese: [NewPiece.ID])
         PerformanceData.append(("Remove unused IDs", CACurrentMediaTime() - RemoveIDsStart))
+        //print("»» Removed unused IDs duration: \(CACurrentMediaTime() - RemoveIDsStart)")
         PreGapCount = PostGapCount
         Map!.RetiredPieceShapes[NewPiece.ID] = NewPiece.ShapeID
         
@@ -416,8 +422,10 @@ class Board: GameMapProtocol
         let Next: Piece = (Factory?.GetNextPiece())!
         Game?.NextPiece(Next)
         PerformanceData.append(("Get next piece", CACurrentMediaTime() - NextPieceStart))
+        //print("»» Get next piece: \(CACurrentMediaTime() - NextPieceStart)")
         
         PerformanceData.insert(("StartNewPiece2 Duration", CACurrentMediaTime() - StartingTime), at: 0)
+        print("»» StartNewPiece2 duration: \(CACurrentMediaTime() - StartingTime)")
         
         return NewPiece.ID
     }
