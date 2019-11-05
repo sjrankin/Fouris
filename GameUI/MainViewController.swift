@@ -708,8 +708,25 @@ class MainViewController: UIViewController,
     ///   - Commanded: True if the piece was commanded to move, false if gravity caused the movement.
     public func PieceMoved3D(_ MovedPiece: Piece, Direction: Directions, Commanded: Bool)
     {
+        let Start = CACurrentMediaTime()
+        if let Previous = PreviousDrawCall
+        {
+            print(" ›››› PieceMoved3D interval: \(Start - Previous)")
+            PreviousDrawCall = Start
+        }
+        else
+        {
+            PreviousDrawCall = Start
+        }
         GameView3D?.DrawPiece3D(InBoard: Game!.GameBoard!, GamePiece: MovedPiece)
+        let DrawTime = CACurrentMediaTime() - Start
+        if DrawTime > 0.01
+        {
+            print(" **** GameView3D?.DrawPiece3D duration: \(DrawTime)")
+        }
     }
+    
+    var PreviousDrawCall: Double? = nil
     
     /// Number of games run in the current instance.
     public var GameCount: Int = 1
@@ -864,23 +881,6 @@ class MainViewController: UIViewController,
         #if false
         History?.Games![CurrentBaseGameType]!.IncrementPieceCount()
         #endif
-        #if false
-        let BoardClass = BoardData.GetBoardClass(For: UserTheme!.BucketShape)!
-        switch BoardClass
-        {
-            case .Static:
-                print("At MapUpdated")
-                GameView3D?.DrawMap3D(FromBoard: Game.GameBoard!, CalledFrom: "MapUpdated")
-            
-            case .SemiRotatable:
-            fallthrough
-            case .Rotatable:
-                break
-            
-            case .ThreeDimensional:
-                break
-        }
-        #endif
         DumpGameBoard(Game.GameBoard!)
     }
     
@@ -996,26 +996,53 @@ class MainViewController: UIViewController,
     
     /// Not currently used.
     private var CRotateIndex = 0
+    
     /// Not currently used.
     private var RotateIndex = 0
+    
     /// Not currently used.
     private let RightRotations: [Angles] = [.Angle270, .Angle180, .Angle90, .Angle0]
+    
     /// Not currently used.
     private let LeftRotations: [Angles] = [.Angle90, .Angle180, .Angle270, .Angle0]
     
     /// Finish finalizing a piece when no rotation occurs.
     public func NoRotateFinishFinalizing()
     {
+        var Start = CACurrentMediaTime()
         GameView3D?.DrawMap3D(FromBoard: Game!.GameBoard!, CalledFrom: "NoRotateFinishFinalizing")
+        let DrawDuration = CACurrentMediaTime() - Start
+        if DrawDuration > 0.01
+        {
+            print(" *** NoRotateFinishFinalizing: DrawDuration=\(DrawDuration)")
+        }
+        Start = CACurrentMediaTime()
         Game!.DoSpawnNewPiece()
+        let SpawnDuration = CACurrentMediaTime() - Start
+        if SpawnDuration > 0.01
+        {
+            print(" *** NoRotateFinishFinalizing: SpawnDuration=\(SpawnDuration)")
+        }
     }
     
     /// Finish finalizing a piece when rotation occurs.
     public func RotateFinishFinalizing()
     {
+        var Start = CACurrentMediaTime()
         GameView3D?.ClearBucket()
         GameView3D?.DrawMap3D(FromBoard: Game!.GameBoard!, CalledFrom: "RotateFinishFinalizing")
+        let DrawDuration = CACurrentMediaTime() - Start
+        if DrawDuration > 0.01
+        {
+            print(" *** RotateFinishFinalizing: DrawDuration=\(DrawDuration)")
+        }
+        Start = CACurrentMediaTime()
         Game!.DoSpawnNewPiece()
+        let SpawnDuration = CACurrentMediaTime() - Start
+        if SpawnDuration > 0.01
+        {
+            print(" *** RotateFinishFinalizing: SpawnDuration=\(SpawnDuration)")
+        }
     }
     
     /// Notice from the game that it has a new piece score.
@@ -1654,6 +1681,7 @@ class MainViewController: UIViewController,
     /// The game view wants us to redraw the board.
     public func NeedRedraw()
     {
+        print("Map drawn from NeedRedraw.")
         GameView3D?.DrawMap3D(FromBoard: Game.GameBoard!, CalledFrom: "NeedRedraw")
     }
     
