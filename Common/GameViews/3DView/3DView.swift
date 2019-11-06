@@ -844,10 +844,14 @@ class View3D: SCNView,                          //Our main super class.
     public var MasterBlockNode: SCNNode? = nil
     
     /// Determines if a block should be drawn in **DrawMap3D**. Valid block types depend on the type of base game.
+    /// - Note: This only determines if this class should draw the passed block - not whether it is valid or not.
     /// - Parameter BlockType: The block to check to see if it can be drawn or not.
     /// - Returns: True if the block should be drawn, false if not.
     private func ValidBlockToDraw(BlockType: PieceTypes) -> Bool
     {
+        #if true
+        return ![.Visible, .InvisibleBucket, .Bucket, .GamePiece, .BucketExterior].contains(BlockType)
+        #else
         let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape!)!
         switch BoardClass
         {
@@ -862,6 +866,7 @@ class View3D: SCNView,                          //Our main super class.
             case .ThreeDimensional:
                 return false
         }
+        #endif
     }
     
     /// Contains a list of IDs of blocks that have been retired. Used to keep the game from moving them when they are no longer
@@ -897,13 +902,11 @@ class View3D: SCNView,                          //Our main super class.
         let IsOddlyShaped = !BoardDef!.GameBoardWidth.IsEven
         let XAdjustment: CGFloat = IsOddlyShaped ? -18.0 : -17.5
         let YAdjustment: CGFloat = IsOddlyShaped ? -1.0 : -1.5
-        let YStaticAdjustment: CGFloat = IsOddlyShaped ? 0.0 : -0.5
+        //let YStaticAdjustment: CGFloat = IsOddlyShaped ? 0.0 : -0.5
         
         MovingPieceBlocks = [VisualBlocks3D]()
         MovingPieceNode = SCNNode()
         MovingPieceNode?.name = "Moving Piece"
-        //let CurrentMap = InBoard.Map!
-        //let ItemID = GamePiece.ID
         let BoardType = BoardData.GetBoardClass(For: CenterBlockShape!)
         let PVisuals = PieceVisualManager2.UserVisuals!.GetVisualWith(ID: GamePiece.ShapeID)
         for Block in GamePiece.Locations!
@@ -913,9 +916,21 @@ class View3D: SCNView,                          //Our main super class.
                 print("Block.ID is not set in DrawPiece3D")
                 return
             }
+            #if true
+            let YOffset = (30 - 10 - 1) + YAdjustment - CGFloat(Block.Y)
+            let XOffset = CGFloat(Block.X) + XAdjustment
+            let VBlock = VisualBlocks3D(Block.ID, AtX: XOffset, AtY: YOffset, ActiveVisuals: PVisuals!.ActiveVisuals!,
+                                        RetiredVisuals: PVisuals!.RetiredVisuals!, IsRetired: AsRetired)
+            VBlock.categoryBitMask = View3D.GameLight
+            MovingPieceBlocks.append(VBlock)
+            MovingPieceNode?.addChildNode(VBlock)
+            #else
             if BoardType == .Static
             {
                 var YOffset: CGFloat = 0.0
+                #if true
+                YOffset = (30 - 10 - 1) - CGFloat(Block.Y) + YStaticAdjustment
+                #else
                 if UIDevice.current.userInterfaceIdiom == .phone
                 {
                     YOffset = 9 - CGFloat(Block.Y) + YStaticAdjustment
@@ -924,6 +939,7 @@ class View3D: SCNView,                          //Our main super class.
                 {
                     YOffset = 7 - CGFloat(Block.Y) + YStaticAdjustment
                 }
+                #endif
                 let XOffset = CGFloat(Block.X) - 5.5
                 let VBlock = VisualBlocks3D(Block.ID, AtX: XOffset, AtY: YOffset, ActiveVisuals: PVisuals!.ActiveVisuals!,
                                             RetiredVisuals: PVisuals!.RetiredVisuals!, IsRetired: AsRetired)
@@ -942,6 +958,7 @@ class View3D: SCNView,                          //Our main super class.
                 MovingPieceBlocks.append(VBlock)
                 MovingPieceNode?.addChildNode(VBlock)
             }
+            #endif
         }
         self.scene?.rootNode.addChildNode(MovingPieceNode!)
     }
@@ -951,6 +968,8 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter Finalized: The piece that was finalized.
     public func MergePieceIntoBucket(_ Finalized: Piece)
     {
+        let Pretty = MapType.PrettyPrint(Map: CurrentBoard!.Map!)
+        print("Merged map:\n\(Pretty)")
         RetiredPieceIDs.append(Finalized.ID)
         let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape!)!
         var XOffset: CGFloat = 0.0
@@ -958,7 +977,7 @@ class View3D: SCNView,                          //Our main super class.
         let BoardDef = BoardManager.GetBoardFor(CenterBlockShape!)
         let IsOddlyShaped = !BoardDef!.GameBoardWidth.IsEven
         let XAdjustment: CGFloat = IsOddlyShaped ? -18.0 : -17.5
-        let YAdjustment: CGFloat = IsOddlyShaped ? -1.0 : -1.5//-2.0
+        let YAdjustment: CGFloat = IsOddlyShaped ? -1.0 : -1.5
         let BlockMap = CurrentBoard!.Map!.MergedBlockMap()
         let MergedMap = CurrentBoard!.Map!.MergeMap(Excluding: nil)
         
@@ -967,7 +986,7 @@ class View3D: SCNView,                          //Our main super class.
             let ItemID = MergedMap[Block.Y][Block.X]
             let BlockID = BlockMap[Block.Y][Block.X]
             let PieceTypeID = CurrentBoard!.Map!.RetiredPieceShapes[ItemID]!
-            #if false
+            #if true
             YOffset = (30 - 10 - 1) + YAdjustment - CGFloat(Block.Y)
             XOffset = CGFloat(Block.X) + XAdjustment
             AddBlockNode_Rotating(ParentID: ItemID, BlockID: BlockID, X: XOffset, Y: YOffset,
@@ -1098,14 +1117,24 @@ class View3D: SCNView,                          //Our main super class.
             {
                 let ItemID = MergedMap[Y][X]
                 let ItemType = CurrentMap.IDMap?.IDtoPiece(ItemID)
+                if ItemType == nil
+                {
+                    print(">>>>>>>>>>>>> Unexpected ID found: \(ItemID.uuidString)")
+                    continue
+                }
                 if !ValidBlockToDraw(BlockType: ItemType!)
                 {
+                    //The block type isn't drawable so there is nothing to do...
                     continue
                 }
                 
                 //Generate offsets to ensure the block is in the proper position in the 3D scene.
                 var YOffset: CGFloat = 0
                 var XOffset: CGFloat = 0
+                #if true
+                YOffset = (30 - 10 - 1) + YAdjustment - CGFloat(Y)
+                XOffset = CGFloat(X) + XAdjustment
+                #else
                 switch BoardClass
                 {
                     case .SemiRotatable:
@@ -1133,6 +1162,7 @@ class View3D: SCNView,                          //Our main super class.
                         XOffset = 0
                         YOffset = 0
                 }
+                #endif
                 
                 let IsRetired = ItemType! == .RetiredGamePiece
                 
@@ -1169,6 +1199,10 @@ class View3D: SCNView,                          //Our main super class.
                         XOffset = XOffset + XFinalAdjustment
                         YOffset = YOffset + YFinalAdjustment//- 0.5
                     }
+                    #if true
+                    AddBlockNode_Rotating(ParentID: ItemID, BlockID: BlockID, X: XOffset, Y: YOffset,
+                                          IsRetired: IsRetired, ShapeID: PieceTypeID)
+                    #else
                     switch BoardClass
                     {
                         case .Static:
@@ -1184,6 +1218,7 @@ class View3D: SCNView,                          //Our main super class.
                         case .ThreeDimensional:
                             break
                     }
+                    #endif
                 }
             }
         }
@@ -1405,6 +1440,13 @@ class View3D: SCNView,                          //Our main super class.
         
         FinalBlocks = [VisualBlocks3D]()
         let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape!)!
+        #if true
+        for Block in MovingPieceBlocks
+        {
+            FinalBlocks.append(Block)
+            BlockList.insert(Block)
+        }
+        #else
         switch BoardClass
         {
             case .Static:
@@ -1428,6 +1470,7 @@ class View3D: SCNView,                          //Our main super class.
             case .ThreeDimensional:
                 break
         }
+        #endif
         
         let StartColor = UIColor.yellow
         let EndColor = UIColor.red
