@@ -798,10 +798,13 @@ class MainViewController: UIViewController,
         
         StopAccumulating = true
         let MeanVal = AccumulatedFPS / Double(FPSSampleCount)
+        if Settings.ShowFPSInUI()
+        {
         if !Settings.ShowInstanceSeconds()
         {
             let MeanFPSText = "μ \(Convert.RoundToString(MeanVal, ToNearest: 0.001, CharCount: 6))"
             GameView3D?.SetText(OnButton: .FPSButton, ToNextText: MeanFPSText)
+        }
         }
         
         if InAttractMode
