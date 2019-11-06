@@ -17,7 +17,7 @@ class BoardData
             .Dot, .MediumSquare, .SmallSquare, .BigSquare, .SmallRectangle, .BigRectangle, .Diamond, .BigDiamond, .SmallDiamond,
             .Bracket2, .Bracket4, .FourLines, .Corners, .Quadrant, .Plus, .HorizontalLine, .ParallelLines, .Empty,
             .CornerDots, .FourSmallSquares, .ShortDiagonals, .LongDiagonals, .SpanningDiagonal, .EmptyCenter,
-            .AlternatingDirections, .PerpendicularLines
+            .AlternatingDirections, .PerpendicularLines, .Giant
     ]
     
     /// Table of boards that do not rotate (or more accurately, the *buckets* do not rotate - the pieces may actually rotate).
