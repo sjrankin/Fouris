@@ -31,6 +31,8 @@ class MapType: CustomStringConvertible
         self.Width = Board.GameBoardWidth
         self.Height = Board.GameBoardHeight
         Initialize(Width: Width, Height: Height, BoardBucketShape: BucketShape)
+        let pretty = MapType.PrettyPrint(Map: self)
+        print("Map:\n\(pretty)")
     }
     
     /// Initializer.
@@ -48,19 +50,6 @@ class MapType: CustomStringConvertible
         self.Width = Board.GameBoardWidth
         self.Height = Board.GameBoardHeight
         Initialize(Width: Width, Height: Height, Depth: Depth, BoardBucketShape: BucketShape)
-    }
-    
-    /// Initializer. Uses the standard bucket/map size. The map size is 12x34 and the bucket is 10x20 and
-    /// sits on the bottom of the map.
-    /// - Parameter ID: ID of the map.
-    init(ID: UUID)
-    {
-        print("init(ID: \(ID.uuidString))")
-        let Board = BoardManager.GetBoardFor(.Classic)!
-        _MapID = ID
-        self.Width = Board.GameBoardWidth
-        self.Height = Board.GameBoardHeight
-        Initialize(Width: Width, Height: Height, BoardBucketShape: .Classic)
     }
     
     /// Deinitializer.
@@ -158,6 +147,16 @@ class MapType: CustomStringConvertible
         _BlockMap = MapType.CreateMap(Width: RawBucket!.GameBoardWidth, Height: RawBucket!.GameBoardHeight,
                                       FillWith: UUID.Empty)
         
+        #if true
+        _BucketBottom = RawBucket!.BucketHeight + RawBucket!.BucketY - 1
+        _BucketInteriorBottom = _BucketBottom
+        _BucketTop = RawBucket!.BucketY
+        _BucketInteriorTop = _BucketTop
+        _BucketInteriorLeft = RawBucket!.BucketX
+        _BucketInteriorRight = RawBucket!.BucketX + RawBucket!.BucketWidth - 1
+        _BucketInteriorWidth = RawBucket!.BucketWidth
+        _BucketInteriorHeight = RawBucket!.BucketHeight
+        #else
         switch BoardClass
         {
             case .Static:
@@ -186,6 +185,7 @@ class MapType: CustomStringConvertible
             case .ThreeDimensional:
                 break
         }
+        #endif
         
         let BucketID = IDMap!.StaticID(For: .Bucket)
         let InvisibleBucketID = IDMap!.StaticID(For: .InvisibleBucket)
@@ -235,6 +235,16 @@ class MapType: CustomStringConvertible
         _BlockMapX = MapType.CreateMap(Width: RawBucket!.GameBoardWidth, Height: RawBucket!.GameBoardHeight,
                                        Depth: 1, FillWith: UUID.Empty)
         
+        #if true
+        _BucketBottom = RawBucket!.BucketHeight + RawBucket!.BucketY - 1
+        _BucketInteriorBottom = _BucketBottom
+        _BucketTop = RawBucket!.BucketY
+        _BucketInteriorTop = _BucketTop
+        _BucketInteriorLeft = RawBucket!.BucketX
+        _BucketInteriorRight = RawBucket!.BucketX + RawBucket!.BucketWidth - 1
+        _BucketInteriorWidth = RawBucket!.BucketWidth
+        _BucketInteriorHeight = RawBucket!.BucketHeight
+        #else
         switch BoardClass
         {
             case .Static:
@@ -263,6 +273,7 @@ class MapType: CustomStringConvertible
             case .ThreeDimensional:
                 break
         }
+        #endif
         
         let BucketID = IDMap!.StaticID(For: .Bucket)
         let InvisibleBucketID = IDMap!.StaticID(For: .InvisibleBucket)
@@ -283,7 +294,7 @@ class MapType: CustomStringConvertible
     }
     
     /// Holds the board class.
-    private var _BoardClass: BoardClasses = .Static
+    private var _BoardClass: BoardClasses = .Rotatable
     /// Get or set the board class.
     public var BoardClass: BoardClasses
     {
@@ -310,6 +321,16 @@ class MapType: CustomStringConvertible
     /// - Returns: True if the coordinate is below the bounds of the bucket/board, false if not.
     public func OutOfBoundsLow(_ X: Int, _ Y: Int) -> Bool
     {
+        #if true
+        if Y > BucketBottom
+        {
+            return true
+        }
+        else
+        {
+            return false
+        }
+        #else
         switch BoardClass
         {
             case .Static:
@@ -330,6 +351,7 @@ class MapType: CustomStringConvertible
             case .ThreeDimensional:
                 return false
         }
+        #endif
     }
     
     /// Returns the starting point for the specified piece. This is where the piece will be placed in the map.
@@ -979,10 +1001,12 @@ class MapType: CustomStringConvertible
                 IsInBounds = false
             }
             var YOffset = 0
+            #if false
             if _BoardClass == .Static
             {
                 YOffset = BoardDef!.BucketY
             }
+            #endif
             let YTest = Point.Y + YOffset
             if YTest < BoardDef!.BucketY || YTest > BoardDef!.BucketY + BoardDef!.BucketHeight - 1
             {
@@ -2081,20 +2105,30 @@ class MapType: CustomStringConvertible
             }
             for X in 0 ..< Map.Width
             {
-                let MapTypeID = Final![Y][X]
+                let MapTypeID: UUID = Final![Y][X]
                 let MapTypePiece = Map.IDMap!.IDtoPiece(MapTypeID)!
                 #if true
                 var stemp = ""
                 switch MapTypePiece
                 {
                     case .Bucket:
-                        stemp = "∏"
+                        stemp = "█"
+                    
                     case .InvisibleBucket:
                         stemp = "•"
+                    
                     case .BucketExterior:
                         stemp = "·"
+                    
                     case .Visible:
                         stemp = " "
+                    
+                    case .GamePiece:
+                        stemp = "⌘"
+                    
+                    case .RetiredGamePiece:
+                        stemp = "▤"
+                    
                     default:
                         stemp = ""
                 }
