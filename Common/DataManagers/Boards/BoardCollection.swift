@@ -44,6 +44,9 @@ class BoardCollection: XMLDeserializeProtocol
                     BoardList.append(Board)
                     let BucketS = XMLNode.GetAttributeNamed("Type", InNode: Child)!
                     Board._BucketShape = BucketShapes(rawValue: BucketS)!
+                    let AITypeS = XMLNode.GetAttributeNamed("AIType", InNode: Child)!
+                    Board._AIType = AITypes(rawValue: AITypeS)!
+                    
                     for BoardChild in Child.Children
                     {
                         switch BoardChild.Name
