@@ -48,9 +48,9 @@ extension View3D
         }
         
         let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape!)!
-        
         switch BoardClass
         {
+            #if false
             case .Static:
                 let XOffset = 0.5
                 var YOffset = -3.0
@@ -92,7 +92,10 @@ extension View3D
                     BucketGridNode.addChildNode(TopLine)
                 }
                 BucketGridNode.opacity = InitialOpacity
+            #endif
             
+            case .Static:
+            fallthrough
             case .SemiRotatable:
                 fallthrough
             case .Rotatable:
@@ -270,6 +273,9 @@ extension View3D
                     OutlineNode.addChildNode(RightLine)
                 }
                 BucketGridNode.opacity = InitialOpacity
+            
+            default:
+            break
         }
         
         return (Grid: BucketGridNode, Outline: OutlineNode)
