@@ -42,6 +42,21 @@ class BoardDescriptor2
         }
     }
     
+    /// Holds the type of AI to use.
+    public var _AIType: AITypes = .Rotating
+    /// Get or set the AI type for the board.
+    public var AIType: AITypes
+    {
+        get
+        {
+            return _AIType
+        }
+        set
+        {
+            _AIType = newValue
+        }
+    }
+    
     /// Get the width of the game board.
     public var GameBoardWidth: Int
     {
