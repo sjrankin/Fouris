@@ -28,6 +28,13 @@ extension MapType
                                      Map: inout ContentsType, BucketID: UUID, InvisibleBucketID: UUID, BucketExteriorID: UUID,
                                      BucketShape: BucketShapes)
     {
+        #if true
+        let BoardDef = BoardManager.GetBoardFor(BucketShape)!
+        CreateRotatingBucket(Width: BoardDef.GameBoardWidth, Height: BoardDef.GameBoardHeight, BucketTop: BucketTop, BucketBottom: BucketBottom,
+                             BucketLeft: BucketLeft, BucketRight: BucketRight, Map: &Map, BucketID: BucketID,
+                             InvisibleBucketID: InvisibleBucketID, BucketExteriorID: BucketExteriorID,
+                             GameShape: BucketShape)
+        #else
         let BoardClass = BoardData.GetBoardClass(For: BucketShape)!
         switch BoardClass
         {
@@ -63,6 +70,7 @@ extension MapType
             case .ThreeDimensional:
                 break
         }
+        #endif
     }
     
     /// Initialize the contents of the map with the bucket.
@@ -83,6 +91,13 @@ extension MapType
                                      BucketRight: Int, Map: inout ContentsType, BucketID: UUID, InvisibleBucketID: UUID,
                                      BucketExteriorID: UUID, BucketShape: BucketShapes)
     {
+        #if true
+        let BoardDef = BoardManager.GetBoardFor(BucketShape)!
+        CreateRotatingBucket(Width: BoardDef.GameBoardWidth, Height: BoardDef.GameBoardHeight, BucketTop: BucketTop, BucketBottom: BucketBottom,
+                             BucketLeft: BucketLeft, BucketRight: BucketRight, Map: &Map, BucketID: BucketID,
+                             InvisibleBucketID: InvisibleBucketID, BucketExteriorID: BucketExteriorID,
+                             GameShape: BucketShape)
+        #else
         let BoardClass = BoardData.GetBoardClass(For: BucketShape)!
         switch BoardClass
         {
@@ -101,6 +116,7 @@ extension MapType
             case .ThreeDimensional:
                 let BoardDef = BoardManager.GetBoardFor(BucketShape)!
         }
+        #endif
     }
     
     /// Initialize the contents of the map with the bucket for rotating games.
