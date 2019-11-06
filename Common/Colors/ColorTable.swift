@@ -28,6 +28,9 @@ enum ColorNames: UInt, CaseIterable
     case Yellow = 0xffff00
     case Black = 0x000000
     case White = 0xffffff
+    case DarkRed = 0x8b0000
+    case Vermillion = 0xe44d2e
+    case BloodRed = 0x660000
     case AtomicTangerine = 0xff9966
     case BabyBlue = 0x89cff0
     case BlizzardBlue = 0xace5ee
