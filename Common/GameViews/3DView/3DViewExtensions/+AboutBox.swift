@@ -51,7 +51,11 @@ extension View3D
         AboutLightNode?.runAction(CircleForever)
         
         let Box = SCNBox(width: 10.0, height: 4.0, length: 1.0, chamferRadius: 0.25)
+        #if RELEASED
         Box.firstMaterial?.diffuse.contents = UIColor.black
+        #else
+        Box.firstMaterial?.diffuse.contents = ColorServer.ColorFrom(ColorNames.DarkRed)
+        #endif
         Box.firstMaterial?.specular.contents = UIColor.white
         AboutBoxNode = SCNNode(geometry: Box)
         AboutBoxNode?.categoryBitMask = View3D.AboutLight
