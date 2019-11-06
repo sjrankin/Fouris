@@ -106,7 +106,7 @@ class MainViewController: UIViewController,
         
         let _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(IncrementSeconds), userInfo: nil, repeats: true)
         
-        #if true
+        #if DEBUG
         let BadgeCount = Versioning.Build
         let App = UIApplication.shared
         let NotCen = UNUserNotificationCenter.current()
@@ -934,18 +934,28 @@ class MainViewController: UIViewController,
         ActivityLog.AddEntry(Title: "Game", Source: "MainViewController", KVPs: [("Message","Piece finalized."),("PieceID",ThePiece.ID.uuidString)],
                              LogFileName: &NotUsed)
         let BoardClass = BoardData.GetBoardClass(For: UserTheme!.BucketShape)!
+        let BoardDef = BoardManager.GetBoardFor(UserTheme!.BucketShape)
         switch BoardClass
         {
+            #if false
             case .Static:
                 GameView3D?.MergePieceIntoBucket(ThePiece)
                 GameView3D?.DrawMap3D(FromBoard: Game!.GameBoard!, CalledFrom: "PieceFinalized")
                 break
+            #endif
             
+            case .Static:
+            fallthrough
             case .SemiRotatable:
             fallthrough
             case .Rotatable:
                 GameView3D?.MergePieceIntoBucket(ThePiece)
                 
+                if !BoardDef!.BucketRotates
+                {
+                    NoRotateFinishFinalizing()
+                    return
+                }
                 if UserTheme!.RotateBucket
                 {
                     switch UserTheme!.RotatingBucketDirection
