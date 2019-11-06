@@ -39,7 +39,6 @@ class SelectGameController: UIViewController, UITableViewDelegate, UITableViewDa
         StandardGames.append(("Big", "Standard_Big", .Big))
         StandardGames.append(("Small", "Standard_Small", .Small))
         StandardGames.append(("Square", "", .SquareBucket))
-        StandardGames.append(("Giant", "Giant", .Giant))
         
         RotatingGames.append(("Center Dot", "Dot", .Dot))
         RotatingGames.append(("Small Central Block", "SmallSquare", .SmallSquare))
@@ -52,6 +51,7 @@ class SelectGameController: UIViewController, UITableViewDelegate, UITableViewDa
         RotatingGames.append(("Small Central Diamond", "SmallDiamond", .SmallDiamond))
         RotatingGames.append(("Medium Central Diamond", "Diamond", .Diamond))
         RotatingGames.append(("Large Central Diamond", "BigDiamond", .BigDiamond))
+        RotatingGames.append(("Giant", "Giant", .Giant))
         RotatingGames.append(("Corner Brackets", "Corners", .Corners))
         RotatingGames.append(("Corner Dots", "CornerDots", .CornerDots))
         RotatingGames.append(("4 Central Brackets", "Bracket4", .Bracket4))
@@ -67,6 +67,7 @@ class SelectGameController: UIViewController, UITableViewDelegate, UITableViewDa
         RotatingGames.append(("Empty Center", "EmptyCenter", .EmptyCenter))
         RotatingGames.append(("Perpendicular Lines", "PerpendicularLines", .PerpendicularLines))
         RotatingGames.append(("Alternating Lines", "AlternatingDirections", .AlternatingDirections))
+        RotatingGames.append(("Offset Edges", "", .OffsetEdges))
         RotatingGames.append(("Empty", "Empty", .Empty))
         RotatingGames.append(("Inside Out", "InsideOut", .InsideOut))
         
