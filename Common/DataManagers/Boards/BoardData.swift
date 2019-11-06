@@ -17,7 +17,7 @@ class BoardData
             .Dot, .MediumSquare, .SmallSquare, .BigSquare, .SmallRectangle, .BigRectangle, .Diamond, .BigDiamond, .SmallDiamond,
             .Bracket2, .Bracket4, .FourLines, .Corners, .Quadrant, .Plus, .HorizontalLine, .ParallelLines, .Empty,
             .CornerDots, .FourSmallSquares, .ShortDiagonals, .LongDiagonals, .SpanningDiagonal, .EmptyCenter,
-            .AlternatingDirections, .PerpendicularLines, .Giant
+            .AlternatingDirections, .PerpendicularLines, .Giant, .OffsetEdges
     ]
     
     /// Table of boards that do not rotate (or more accurately, the *buckets* do not rotate - the pieces may actually rotate).
@@ -103,6 +103,7 @@ class BoardData
 /// - **EmptyCenter**: Ordinal lines with an empty center.
 /// - **AlternatingDirections**: Short, perpendicular lines.
 /// - **PerpendicularLines**: Two perpendicular lines.
+/// - **OffsetEdges**: Offset-edged board.
 enum BucketShapes: String, CaseIterable
 {
     //Rotating games.
@@ -133,6 +134,7 @@ enum BucketShapes: String, CaseIterable
     case EmptyCenter = "EmptyCenter"
     case AlternatingDirections = "AlternatingDirections"
     case PerpendicularLines = "PerpendicularLines"
+    case OffsetEdges = "OffsetEdges"
     //Semi-rotating games. (Blocks rotate but the bucket does not.)
     case OneOpening = "OneOpening"
     case InsideOut = "InsideOut"
