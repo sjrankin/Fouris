@@ -118,7 +118,7 @@ class PieceIDMap
     
     /// Returns a "static" ID for the given piece type. Not all piece types have associated "static" IDs. ("Static" means unchanging
     /// for the duration of the instance.)
-    /// - Note: Piece types with static IDs are: `.Visible`, `.Bucket`, `.InvisibleBucket`.
+    /// - Note: Piece types with static IDs are: `.Visible`, `.Bucket`, `.InvisibleBucket`, and `BucketExterior`.
     /// - Warning: **If a piece type is passed that does not have a static ID, a fatal error is generated.**
     /// - Parameter For: The Piece type whose ID will be returned.
     /// - Returns: ID for the piece type. This ID will not change for the instance of the program.
@@ -134,10 +134,10 @@ class PieceIDMap
     /// Map between piece types and IDs for static IDs.
     private let StaticIDs: [PieceTypes: UUID] =
         [
-            .Visible: UUID(),
-            .Bucket: UUID(),
-            .InvisibleBucket: UUID(),
-            .BucketExterior: UUID(),
+            .Visible: UUID(uuidString: "c9daf885-8dc5-4821-b9cb-99633a5255fa")!,
+            .Bucket: UUID(uuidString: "df861705-32c5-45bb-8be2-29d8227c5a6b")!,
+            .InvisibleBucket: UUID(uuidString: "0ab1f981-8377-4c80-b546-edce7c6fb65b")!,
+            .BucketExterior: UUID(uuidString: "9d9988b8-4d2a-4401-a73b-914aaf1e0937")!,
     ]
     
     /// Returns a set of unique IDs found in the board.
