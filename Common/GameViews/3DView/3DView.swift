@@ -968,8 +968,8 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter Finalized: The piece that was finalized.
     public func MergePieceIntoBucket(_ Finalized: Piece)
     {
-        let Pretty = MapType.PrettyPrint(Map: CurrentBoard!.Map!)
-        print("Merged map:\n\(Pretty)")
+        //let Pretty = MapType.PrettyPrint(Map: CurrentBoard!.Map!)
+        //print("Merged map:\n\(Pretty)")
         RetiredPieceIDs.append(Finalized.ID)
         let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape!)!
         var XOffset: CGFloat = 0.0
@@ -981,8 +981,14 @@ class View3D: SCNView,                          //Our main super class.
         let BlockMap = CurrentBoard!.Map!.MergedBlockMap()
         let MergedMap = CurrentBoard!.Map!.MergeMap(Excluding: nil)
         
+        for VBlock in MovingPieceBlocks
+        {
+            print("VBlock = \(VBlock.X),\(VBlock.Y)")
+        }
+        
         for Block in Finalized.Locations
         {
+            print("Block = \(Block.X),\(Block.Y)")
             let ItemID = MergedMap[Block.Y][Block.X]
             let BlockID = BlockMap[Block.Y][Block.X]
             let PieceTypeID = CurrentBoard!.Map!.RetiredPieceShapes[ItemID]!
