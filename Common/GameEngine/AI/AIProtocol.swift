@@ -51,16 +51,16 @@ protocol AIProtocol: class
 }
 
 /// AI types for various games.
-enum AITypes: Int, CaseIterable
+enum AITypes: String, CaseIterable
 {
     /// Standard game - assumes no bottomless columns.
-    case Standard = 0
+    case Standard = "Standard"
     /// Rotating game - assumes there may be bottomless columns.
-    case Rotating = 1
+    case Rotating = "Rotating"
     /// Semi-rotating game in which the pieces rotate but the bucket does not.
-    case SemiRotating = 2
+    case SemiRotating = "SemiRotating"
     /// Three-dimensional games.
-    case Cubic = 3
+    case Cubic = "Cubic"
 }
 
 /// Describes how to move a block to its best fit calculated location. Used internally to the AI classes.
