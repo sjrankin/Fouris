@@ -86,7 +86,8 @@ extension MainViewController: MultiPeerDelegate, StateProtocol, MessageHandlerDe
     /// - Parameter ConnectedDevices: List of connected devices.
     /// - Parameter Changed: The ID of the changed device.
     /// - Parameter Newstate: The new state of the changed device.
-    public func ConnectedDeviceChanged(Manager: MultiPeerManager, ConnectedDevices: [MCPeerID], Changed: MCPeerID, NewState: MCSessionState)
+    public func ConnectedDeviceChanged(Manager: MultiPeerManager, ConnectedDevices: [MCPeerID],
+                                       Changed: MCPeerID, NewState: MCSessionState)
     {
         let ChangedPeerName = Changed.displayName
         var NewStateName = ""
