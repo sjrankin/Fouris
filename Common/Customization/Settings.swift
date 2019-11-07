@@ -12,12 +12,35 @@ import UIKit
 /// Manages settings for Fouris. Allows for consumers to subscribe to settings to be notified of changes.
 class Settings
 {
+    // MARK: Initialization
+    
     private static let _Settings = UserDefaults.standard
     private static let _InitializationValue = "ed7dfe6e-d6a4-4eec-965f-82aae0094856"
     private static var _WasInitialized = false
     private static var Subscribers: [(String, SettingsChangedProtocol?)]? = nil
     
     /// Initialize the settings. If not called before use, a fatal error will be generated.
+    /// - Note: The following default values are set (refer to individual function documentation
+    ///         for the context of the default settings):
+    ///   - **Initialized**: Set to "Initialized".
+    ///   - **ShowInitialVersionBox**: Set to **true**.
+    ///   - **ShowFPSInUI**: Set to **false**.
+    ///   - **ShowInstanceSecondsInstead**: Set to **false**.
+    ///   - **MaximumSamePiecesInARow**: Set to **3**.
+    ///   - **LastGameViewIndex**: Set to **0**.
+    ///   - **UseTDebug**: Set to **true**.
+    ///   - **ColorPickerColorSpace**: Set to **0** (for RGB).
+    ///   - **ShowAlphaInColorPicker**: Set to **false**.
+    ///   - **MostRecentlyUsedColorCapacity**: Set to **20**.
+    ///   - **MostRecentlyUsedColorList**: Set to empty string.
+    ///   - **ConfirmGameImageSave**: Set to **false**.
+    ///   - **ShowCameraControls**: Set to **true**.
+    ///   - **ShowMotionControls**: Set to **true**.
+    ///   - **ShowColorsInOriginalLanguage**: Set to **true**.
+    ///   - **InterfaceLanguage**: Set to **"US English"**.
+    ///   - **TDebugSessionTimeOut**: Set to **10**.
+    ///   - **CurrentTheme**: Set to **83c630ee-81d4-11e9-bc42-526af7764f64**.
+    ///   - **Current3DTheme**: Set to **3f0d9fee-0b77-465b-a0ac-f1663da23cc9**.
     public static func Initialize()
     {
         _WasInitialized = true
@@ -41,9 +64,12 @@ class Settings
         _Settings.set(true, forKey: "ShowMotionControls")
         _Settings.set(true, forKey: "ShowColorsInOriginalLanguage")
         _Settings.set("US English", forKey: "InterfaceLanguage")
+        _Settings.set(10, forKey: "TDebugSessionTimeOut")
         _Settings.set("83c630ee-81d4-11e9-bc42-526af7764f64", forKey: "CurrentTheme")
         _Settings.set("3f0d9fee-0b77-465b-a0ac-f1663da23cc9", forKey: "Current3DTheme")
     }
+    
+    // MARK: - Subscription and notification functions.
     
     /// Add a subscriber for settings change notifications.
     /// - Note: Not all settings send notifications.
@@ -80,6 +106,30 @@ class Settings
                 Subscriber.1?.SettingChanged(Field: From, NewValue: NewValue)
             }
         }
+    }
+    
+    // MARK: - Custom functions to access customization.
+    
+    /// Get the number of seconds to wait for session time-outs for TDebug.
+    /// - Returns: Number of seconds to wait for session time-outs.
+    public static func GetTDebugSessionTimeOut() -> Int
+    {
+        let Raw = _Settings.integer(forKey: "TDebugSessionTimeOut")
+        if Raw == 0
+        {
+            SetTDebugSessionTimeOut(NewValue: 10)
+            return 10
+        }
+        return Raw
+    }
+    
+    /// Set the number of seconds to wait for session time-outs for TDebug.
+    /// - Parameter NewValue: The number of seconds to wait for TDebug time-outs. If less than 1,
+    ///                       10 is written instead.
+    public static func SetTDebugSessionTimeOut(NewValue: Int)
+    {
+        let FinalValue = NewValue < 1 ? 10 : NewValue
+        _Settings.set(FinalValue, forKey: "TDebugSessionTimeOut")
     }
     
     /// Get the user-selected UI language. Default is US English.
@@ -350,6 +400,8 @@ class Settings
         _Settings.set(ToValue, forKey: "MaximumSamePiecesInARow")
     }
 }
+
+// MARK: - [Int] extenions.
 
 /// Extension of integer arrays.
 extension Array where Element == Int
