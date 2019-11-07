@@ -20,7 +20,8 @@ protocol MultiPeerDelegate
     ///                       advertising but not necessarily talking to us.
     ///   - Changed: The specific peer that changed.
     ///   - NewState: The new state of the peer that changed.
-    func ConnectedDeviceChanged(Manager: MultiPeerManager, ConnectedDevices: [MCPeerID], Changed: MCPeerID, NewState: MCSessionState)
+    func ConnectedDeviceChanged(Manager: MultiPeerManager, ConnectedDevices: [MCPeerID],
+                                Changed: MCPeerID, NewState: MCSessionState)
     
     /// Notifies the receiver that data has been received by a peer.
     ///
