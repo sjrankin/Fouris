@@ -129,9 +129,9 @@ class MainViewController: UIViewController,
         )
         #endif
         
-        #if false
+        #if true
         //Initialize the link with TDebug.
-        //Right now, iOS 13 has a but with multi-peer networking so we need to comment this out.
+        //Right now, iOS 13 has a bug with multi-peer networking so we need to comment this out.
         State.Initialize(WithDelegate: self)
         TDebugPrefix = UUID()
         MPMgr = MultiPeerManager()
