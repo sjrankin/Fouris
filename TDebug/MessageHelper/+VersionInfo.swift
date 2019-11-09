@@ -50,10 +50,10 @@ extension MessageHelper
                                    OS: Versioning.IntendedOS,
                                    Version: Versioning.MakeVersionString(IncludeVersionSuffix: true, IncludeVersionPrefix: false),
                                    Build: "\(Versioning.Build)",
-            BuildTimeStamp: Versioning.BuildDate + " " + Versioning.BuildTime,
-            Copyright: Versioning.CopyrightText(),
-            BuildID: Versioning.BuildID,
-            ProgramID: Versioning.ProgramIDAsUUID())
+                                   BuildTimeStamp: Versioning.BuildDate + " " + Versioning.BuildTime,
+                                   Copyright: Versioning.CopyrightText(),
+                                   BuildID: Versioning.BuildID,
+                                   ProgramID: Versioning.ProgramIDAsUUID())
     }
     
     // MARK: - Version command decoding.
@@ -78,32 +78,32 @@ extension MessageHelper
         {
             switch Key
             {
-            case "Name":
-                Name = Value
+                case "Name":
+                    Name = Value
                 
-            case "OS":
-                OS = Value
+                case "OS":
+                    OS = Value
                 
-            case "Version":
-                Version = Value
+                case "Version":
+                    Version = Value
                 
-            case "Build":
-                Build = Value
+                case "Build":
+                    Build = Value
                 
-            case "BuildTimeStamp":
-                BuildTimeStamp = Value
+                case "BuildTimeStamp":
+                    BuildTimeStamp = Value
                 
-            case "Copyright":
-                Copyright = Value
+                case "Copyright":
+                    Copyright = Value
                 
-            case "BuildID":
-                BuildID = Value
+                case "BuildID":
+                    BuildID = Value
                 
-            case "ProgramID":
-                ProgramID = Value
+                case "ProgramID":
+                    ProgramID = Value
                 
-            default:
-                print("Found unanticipated version key: \(Key)")
+                default:
+                    print("Found unanticipated version key: \(Key)")
             }
         }
         return (Name, OS, Version, Build, BuildTimeStamp, Copyright, BuildID, ProgramID)
