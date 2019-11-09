@@ -86,6 +86,7 @@ class MultiPeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
         }
     }
     
+    /// Holds the debug host flag.
     private var _IsDebugHost: Bool = false
     /// Get or set the debug host flag.
     public var IsDebugHost: Bool
@@ -266,7 +267,6 @@ class MultiPeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
             {
                 self.Delegate?.ConnectedDeviceChanged(Manager: self, ConnectedDevices: self.Session.connectedPeers,
                                                       Changed: peerID, NewState: state)
-                print("Afterwards!")
         }
     }
     
