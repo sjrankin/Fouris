@@ -413,6 +413,7 @@ class MessageHelper
     public static let MessageTypeIndicators: [MessageTypes: String] =
         [
             MessageTypes.TextMessage: MessageTypes.TextMessage.rawValue,
+            MessageTypes.TextBlock: MessageTypes.TextBlock.rawValue,
             MessageTypes.CommandMessage: MessageTypes.CommandMessage.rawValue,
             MessageTypes.ControlIdiotLight: MessageTypes.ControlIdiotLight.rawValue,
             MessageTypes.EchoMessage: MessageTypes.EchoMessage.rawValue,
@@ -535,6 +536,7 @@ enum HandShakeCommands: String, CaseIterable
 
 /// Types of messages that may be sent or received from other peers.
 /// - TextMessage: Send a text message.
+/// - TextBlock: Send a block of text.
 /// - CommandMessage: Send a command message.
 /// - ControlIdiotLight: Control an idiot light.
 /// - EchoMessage: Echo the passed message.
@@ -569,6 +571,7 @@ enum HandShakeCommands: String, CaseIterable
 enum MessageTypes: String, CaseIterable
 {
     case TextMessage = "a8d8c35e-f638-47fe-8819-bd04d59c6989"
+    case TextBlock = "f0a5fd6f-374e-4d30-8fbd-d71900305b0d"
     case CommandMessage = "a11cac68-6298-4d21-bb84-8746ee544a7b"
     case ControlIdiotLight = "76d9f217-d2b8-4b65-93b4-182e4b38eab2"
     case EchoMessage = "9a904bd0-117b-4548-b31f-da2b4c3807dd"
