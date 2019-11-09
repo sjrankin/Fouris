@@ -10,6 +10,7 @@ import Foundation
 import MultipeerConnectivity
 import UIKit
 
+/// Extension to the main view controller for handling TDebug data.
 extension MainViewController
 {
     /// Push version information from a peer. Version information is displayed in the debug console.
@@ -28,6 +29,7 @@ extension MainViewController
     public func HandleDebuggerHandshake(_ RawData: String, Peer: MCPeerID)
     {
         let Command = MessageHelper.DecodeHandShakeCommand(RawData)
+        print("HandShakeCommand=\(Command)")
         var PostConnect1 = ""
         OperationQueue.main.addOperation
             {
