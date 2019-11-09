@@ -159,6 +159,8 @@ extension MainViewController: MultiPeerDelegate, StateProtocol, MessageHandlerDe
     }
     
     /// Received data from a peer.
+    /// - Note: Since we use TDebug as a logging sink, we don't really care too much about every possible
+    ///         debug command which is why only a few are implemented here.
     /// - Parameter Manager: The MultiPeerManager instance.
     /// - Parameter Peer: The source of the message.
     /// - Parameter RawData: The raw message from the peer.
