@@ -10,7 +10,6 @@ import Foundation
 import MultipeerConnectivity
 import UIKit
 
-
 /// Class that handles messages from the MultiPeer manager.
 /// Programs that use this class must implement the functions in the `MessageHandlerDelegate`.
 class MessageHandler
