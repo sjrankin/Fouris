@@ -132,17 +132,20 @@ class MainViewController: UIViewController,
         #if true
         //Initialize the link with TDebug.
         //Right now, iOS 13 has a bug with multi-peer networking so we need to comment this out.
+        print("Starting initialization of TDebug link.")
         State.Initialize(WithDelegate: self)
         TDebugPrefix = UUID()
         MPMgr = MultiPeerManager()
         MPMgr.Delegate = self
-        let HostName = "iOS Tetris"
+        let HostName = "Fouris"
         DebugClient.Initialize(With: MPMgr, HostName: HostName)
         DebugClient.Delegate = self
         MsgHandler = MessageHandler(self)
         LocalCommands = ClientCommands()
         MessageHelper.Initialize(TDebugPrefix)
         DebugClient.SendPreformattedCommand(MessageHelper.MakeResetTDebugUICommand())
+        DebugClient.SendPreformattedCommand(MessageHelper.MakeSendVersionInfo())
+        print("TDebug initialization steps completed.")
         #endif
         
         Settings.Initialize()
