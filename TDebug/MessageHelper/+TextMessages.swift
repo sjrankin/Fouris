@@ -40,7 +40,23 @@ extension MessageHelper
         let P3 = "TimeStamp=\(MakeTimeStamp(FromDate: Date()))"
         let Final = GenerateCommand(Command: .TextMessage, Prefix: PrefixCode, Parts: [P1, P2, P3])
         return Final
-        
+    }
+    
+    /// Make a command to send a block of text.
+    /// - Note: The difference between a text block message and a normal message is that text block messages are displayed in a
+    ///         special view for large amounts of text.
+    /// - Parameter WithText: The block of text to send.
+    /// - Parameter UseMonoSpaceFont: Determines whether a monospaced font should be used to display the text.
+    /// - Parameter HostName: Name of the host that sent the message.
+    /// - Returns: Command to send.
+    public static func MakeTextBlock(_ WithText: String, _ UseMonoSpaceFont: Bool, _ HostName: String) -> String
+    {
+        let P1 = "Block=\(WithText)"
+        let P2 = "Monofont=\(UseMonoSpaceFont)"
+        let P3 = "HostName=\(HostName)"
+        let P4 = "TimeStamp=\(MakeTimeStamp(FromDate: Date()))"
+        let Final = GenerateCommand(Command: .TextBlock, Prefix: PrefixCode, Parts: [P1, P2, P3, P4])
+        return Final
     }
     
     // MARK: - Text message command decoding.
@@ -67,5 +83,37 @@ extension MessageHelper
             TimeStamp = TS
         }
         return(Message, HostName, TimeStamp)
+    }
+    
+    /// Decode a text block message.
+    /// - Parameter Raw: Raw data to decode.
+    /// - Returns: Tuple with: text block, monospace font flag, host name, and time stamp.
+    public static func DecodeTextBlockMessage(_ Raw: String) -> (String, Bool, String, String)
+    {
+        let Params = GetParameters(From: Raw, ["Block", "Monofont", "HostName", "TimeStamp"])
+        var Block = ""
+        if let Msg = Params["Block"]
+        {
+            Block = Msg
+        }
+        var HostName = ""
+        if let Host = Params["HostName"]
+        {
+            HostName = Host
+        }
+        var TimeStamp = ""
+        if let TS = Params["TimeStamp"]
+        {
+            TimeStamp = TS
+        }
+        var UseMonospace = true
+        if let Mono = Params["Monofont"]
+        {
+            if let MonoValue = Bool(Mono)
+            {
+                UseMonospace = MonoValue
+            }
+        }
+        return(Block, UseMonospace, HostName, TimeStamp)
     }
 }
