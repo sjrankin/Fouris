@@ -2105,8 +2105,13 @@ class MapType: CustomStringConvertible
             }
             for X in 0 ..< Map.Width
             {
-                let MapTypeID: UUID = Final![Y][X]
-                let MapTypePiece = Map.IDMap!.IDtoPiece(MapTypeID)!
+                guard let MapTypeID: UUID = Final?[Y][X],
+                      let MapTypePiece = Map.IDMap?.IDtoPiece(MapTypeID) else
+                {
+                    //Unknown IDs are shown as a question mark rather than crashing the debug print.
+                    PrettyMap = PrettyMap + "?"
+                    continue
+                }
                 #if true
                 var stemp = ""
                 switch MapTypePiece

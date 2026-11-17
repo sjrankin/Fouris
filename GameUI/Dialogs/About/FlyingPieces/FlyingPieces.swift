@@ -277,12 +277,14 @@ class FlyingPieces: SCNView, SCNSceneRendererDelegate, RPPreviewViewControllerDe
     /// - Parameter renderer: Not used.
     /// - Parameter didRenderScene: Not used.
     /// - Parameter atTime: Not used.
-    public func renderer(_ renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval)
+    nonisolated public func renderer(_ renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval)
     {
-        if CreatingVideo
-        {
-            let SceneImage = snapshot()
-            ImageArray.append(SceneImage)
+        Task { @MainActor in
+            if CreatingVideo
+            {
+                let SceneImage = snapshot()
+                ImageArray.append(SceneImage)
+            }
         }
     }
     
