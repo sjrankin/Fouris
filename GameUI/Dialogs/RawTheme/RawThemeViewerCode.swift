@@ -63,7 +63,7 @@ class RawThemeViewerCode: UIViewController,             //Main base class.
     }
     
     /// Deinitializer - unregisters from the `PHPhotoLibrary` shared instance.
-    deinit
+    isolated deinit
     {
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
     }

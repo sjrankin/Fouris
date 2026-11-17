@@ -11,17 +11,17 @@ import UIKit
 
 class AnimatedGradient: CAGradientLayer
 {
-    override init()
+    nonisolated override init()
     {
         super.init()
     }
     
-    override init(layer: Any)
+    nonisolated override init(layer: Any)
     {
         super.init(layer: layer)
     }
     
-    required init?(coder: NSCoder)
+    nonisolated required init?(coder: NSCoder)
     {
         super.init(coder: coder)
     }

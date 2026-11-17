@@ -25,9 +25,12 @@ import SceneKit
     }
     
     /// For use by the Interface Builder.
-    override func prepareForInterfaceBuilder()
+    nonisolated override func prepareForInterfaceBuilder()
     {
-        Start()
+        MainActor.assumeIsolated
+        {
+            Start()
+        }
     }
     
     /// Initialize the view.

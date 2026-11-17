@@ -31,8 +31,7 @@ extension MainViewController
         let Command = MessageHelper.DecodeHandShakeCommand(RawData)
         print("HandShakeCommand=\(Command)")
         var PostConnect1 = ""
-        OperationQueue.main.addOperation
-            {
+        Task { @MainActor in
                 let ReturnMe = State.TransitionTo(NewState: Command)
                 var ReturnState = ""
                 switch Command
@@ -137,7 +136,7 @@ extension MainViewController
         let (EchoMessage, _, Delay, _) = MessageHelper.DecodeEchoMessage(RawData)!
         let REchoMessage = String(EchoMessage.reversed())
         EchoBackTo = Peer
-        OperationQueue.main.addOperation {
+        Task { @MainActor in
             self.DoEcho(Delay: Delay, Message: REchoMessage)
         }
     }
@@ -172,8 +171,7 @@ extension MainViewController
     {
         if let ExecuteMe = MessageHelper.DecodeClientCommand(RawData)
         {
-            OperationQueue.main.addOperation
-                {
+            Task { @MainActor in
                     self.ExecuteCommandFromPeer(ExecuteMe, Peer: Peer)
             }
         }

@@ -34,9 +34,12 @@ import UIKit
     }
     
     /// Used to initialize the class when running in the Interface Builder.
-    override public func prepareForInterfaceBuilder()
+    nonisolated override public func prepareForInterfaceBuilder()
     {
-        Initialize()
+        MainActor.assumeIsolated
+        {
+            Initialize()
+        }
     }
     
     /// Initialize the instance.

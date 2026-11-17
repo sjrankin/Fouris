@@ -14,10 +14,13 @@ import UIKit
 class VisualBlocks3D: SCNNode
 {
     /// Default initializer.
-    override init()
+    nonisolated override init()
     {
         super.init()
-        CommonInitialization()
+        MainActor.assumeIsolated
+        {
+            CommonInitialization()
+        }
     }
     
     /// Initializer.
@@ -75,10 +78,13 @@ class VisualBlocks3D: SCNNode
     
     /// Required initializer.
     /// - Parameter coder: See Apple documentation.
-    required init?(coder: NSCoder)
+    nonisolated required init?(coder: NSCoder)
     {
         super.init(coder: coder)
-        CommonInitialization()
+        MainActor.assumeIsolated
+        {
+            CommonInitialization()
+        }
     }
     
     /// Holds the active visual state.

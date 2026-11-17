@@ -83,8 +83,7 @@ class MainViewController: UIViewController,
                 (granted, error) in
                 if granted
                 {
-                    OperationQueue.main.addOperation
-                        {
+                    Task { @MainActor in
                             App.registerForRemoteNotifications()
                             NotCen.setBadgeCount(BadgeCount)
                     }

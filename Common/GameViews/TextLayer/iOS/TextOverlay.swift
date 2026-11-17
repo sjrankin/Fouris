@@ -224,8 +224,7 @@ class TextOverlay: TextLayerDisplayProtocol
     private func ShowObject(_ SomeObject: UIView, ContainerType: ContainerTypes, Duration: Double,
                             CompletionHandler: (() -> ())? = nil)
     {
-        OperationQueue.main.addOperation
-            {
+        MainActor.assumeIsolated {
                 let Layer = self.GetContainerLayer(From: SomeObject, ContainerType: ContainerType)
                 if Layer == nil
                 {
@@ -271,8 +270,7 @@ class TextOverlay: TextLayerDisplayProtocol
     private func HideObject(_ SomeObject: UIView, Duration: Double, ContainerType: ContainerTypes,
                             CompletionHandler: (() -> ())? = nil)
     {
-        OperationQueue.main.addOperation
-            {
+        MainActor.assumeIsolated {
                 let Layer = self.GetContainerLayer(From: SomeObject, ContainerType: ContainerType)
                 if Layer == nil
                 {
@@ -310,8 +308,7 @@ class TextOverlay: TextLayerDisplayProtocol
     /// - Parameter AddShadow: If true, a shadow is added to the next piece. Defaults to true.
     public func ShowNextPiece(_ NextPiece: Piece, Duration: Double? = nil, AddShadow: Bool = true)
     {
-        OperationQueue.main.addOperation
-            {
+        MainActor.assumeIsolated {
                 self.PieceViewControl?.Clear()
                 self.PieceViewControl?.AddPiece(NextPiece)
                 self.PieceViewControl?.RotatePiece(OnX: false, OnY: false, OnZ: true)
@@ -332,8 +329,7 @@ class TextOverlay: TextLayerDisplayProtocol
     /// - Parameter Duration: The number of seconds to fade out the image of the next piece.
     public func HideNextPiece(Duration: Double? = nil)
     {
-        OperationQueue.main.addOperation
-            {
+        MainActor.assumeIsolated {
                 //let VisualPiece = self.GetContainerLayer(From: self.NextPieceContainer!, ContainerType: .NextPiece)
                 let FinalDuration = Duration == nil ? 0.3 : Duration!
                 UIView.animate(withDuration: FinalDuration, animations:
@@ -354,8 +350,7 @@ class TextOverlay: TextLayerDisplayProtocol
     /// - Parameter NewScore: Score to display.
     public func ShowCurrentScore(NewScore: Int)
     {
-        OperationQueue.main.addOperation
-            {
+        MainActor.assumeIsolated {
                 self.CurrentScoreContainer!.layer.sublayers?.removeAll()
                 let CurrentScoreLayer = CATextLayer2()
                 CurrentScoreLayer.name = "CurrentScore"
@@ -381,8 +376,7 @@ class TextOverlay: TextLayerDisplayProtocol
     /// Hide the current score value.
     public func HideCurrentScore()
     {
-        OperationQueue.main.addOperation
-            {
+        MainActor.assumeIsolated {
                 self.CurrentScoreContainer!.alpha = 0.0
         }
     }
@@ -397,8 +391,7 @@ class TextOverlay: TextLayerDisplayProtocol
     public func ShowHighScore(NewScore: Int, Highlight: Bool = false, HighlightColor: ColorNames = .Gold, HighlightDuration: Double = 1.0)
     {
         LastHighScore = NewScore
-        OperationQueue.main.addOperation
-            {
+        MainActor.assumeIsolated {
                 self.HighScoreContainer!.layer.sublayers?.removeAll()
                 let FontSize: CGFloat = self.Idiom == .pad ? 40.0 : 30.0
                 let Font = UIFont(name: "Avenir-Heavy", size: FontSize)
@@ -436,8 +429,7 @@ class TextOverlay: TextLayerDisplayProtocol
     /// Resets the high score color to the value in **HighScoreResetColor**.
     @objc public func ResetHighScoreColor()
     {
-        OperationQueue.main.addOperation
-            {
+        MainActor.assumeIsolated {
                 self.HighScoreContainer!.layer.sublayers?.removeAll()
                 let FontSize: CGFloat = self.Idiom == .pad ? 40.0 : 30.0
                 let Font = UIFont(name: "Avenir-Heavy", size: FontSize)
@@ -461,8 +453,7 @@ class TextOverlay: TextLayerDisplayProtocol
     /// Hide the high score.
     public func HideHighScore()
     {
-        OperationQueue.main.addOperation
-            {
+        MainActor.assumeIsolated {
                 self.HighScoreContainer!.alpha = 0.0
         }
     }
@@ -536,8 +527,7 @@ class TextOverlay: TextLayerDisplayProtocol
         if let PressPlayLayer = GetContainerLayer(From: PressPlayContainer!, ContainerType: .PressPlay)
         {
             let NewPosition = PressPlayLayer.frame.WithNewY(CGFloat(ToY))
-            OperationQueue.main.addOperation
-                {
+            MainActor.assumeIsolated {
                     CATransaction.begin()
                     CATransaction.setAnimationDuration(1.0)
                     PressPlayLayer.frame = NewPosition

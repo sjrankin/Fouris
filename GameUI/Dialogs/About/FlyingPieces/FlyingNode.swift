@@ -17,10 +17,13 @@ class FlyingNode: SCNNode
     weak var FlyingDelegate: FlyingProtocol? = nil
     
     /// Default initializer.
-    override init()
+    nonisolated override init()
     {
         super.init()
-        Initialize()
+        MainActor.assumeIsolated
+        {
+            Initialize()
+        }
     }
     
     /// Initializer.
@@ -49,10 +52,13 @@ class FlyingNode: SCNNode
     
     /// Initializer.
     /// - Parameter coder: See Apple documentation.
-    required init?(coder: NSCoder)
+    nonisolated required init?(coder: NSCoder)
     {
         super.init(coder: coder)
-        Initialize()
+        MainActor.assumeIsolated
+        {
+            Initialize()
+        }
     }
     
     /// Internal initialization. Not currently required.
@@ -191,8 +197,10 @@ class FlyingNode: SCNNode
         let FlyMove = SCNAction.move(to: To, duration: Duration)
         self.runAction(FlyMove, completionHandler:
             {
+                Task { @MainActor in
                 self.FadeOut()
         }
+            }
         )
     }
     
@@ -204,8 +212,10 @@ class FlyingNode: SCNNode
         let FadeOut = SCNAction.fadeIn(duration: 1.5)
         self.runAction(FadeOut, completionHandler:
             {
+                Task { @MainActor in
                 self.FlyingDelegate?.MotionCompleted(Node: self, Replace: Replace)
         }
+            }
         )
     }
 }
@@ -214,7 +224,7 @@ class FlyingNode: SCNNode
 /// - **X**: X axis.
 /// - **Y**: Y axis.
 /// - **Z**: Z axis.
-enum UDirs: CaseIterable
+nonisolated enum UDirs: CaseIterable
 {
     case X
     case Y

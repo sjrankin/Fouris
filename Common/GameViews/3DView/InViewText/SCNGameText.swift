@@ -12,7 +12,7 @@ import SceneKit
 
 /// Extends (slightly) the `SCNNode` class to wrap text to make displaying message in the game view more efficient.
 /// - Note: Not currently used as NSAttributedStrings do not display well in SCNText objects.
-class SCNGameText: SCNNode
+nonisolated class SCNGameText: SCNNode
 {
     /// Initializer.
     /// - Parameter SourceGeometry: Source geometry for the node. Assumed to be created from an `SCNText` object.
@@ -24,7 +24,7 @@ class SCNGameText: SCNNode
     
     /// Initializer.
     /// - Parameter coder: See Apple documentation.
-    required init?(coder: NSCoder)
+    nonisolated required init?(coder: NSCoder)
     {
         super.init(coder: coder)
     }

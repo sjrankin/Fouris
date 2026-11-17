@@ -240,7 +240,9 @@ class FlyingPieces: SCNView, SCNSceneRendererDelegate, RPPreviewViewControllerDe
             NewPiece.runAction(SCNAction.fadeIn(duration: 0.5),
                                completionHandler:
                 {
+                Task { @MainActor in
                     self.MotionCompleted(Node: NewPiece, Replace: true)
+            }
             })
         }
     }
@@ -255,8 +257,7 @@ class FlyingPieces: SCNView, SCNSceneRendererDelegate, RPPreviewViewControllerDe
     /// - Parameter Replace: If true, a new piece is created to keep steady state going.
     public func MotionCompleted(Node: SCNNode, Replace: Bool)
     {
-        OperationQueue.main.addOperation
-            {
+        Task { @MainActor in
                 let FadeOut = SCNAction.fadeOut(duration: 0.2)
                 let RemoveNode = SCNAction.removeFromParentNode()
                 let Sequence = SCNAction.sequence([FadeOut, RemoveNode])
@@ -264,8 +265,7 @@ class FlyingPieces: SCNView, SCNSceneRendererDelegate, RPPreviewViewControllerDe
                     {
                         if Replace
                         {
-                            OperationQueue.main.addOperation
-                                {
+                            Task { @MainActor in
                                     self.MakeOnePiece()
                             }
                         }

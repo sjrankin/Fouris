@@ -569,7 +569,7 @@ class Piece: CustomStringConvertible
     
     /// Deinitialize the piece. If **Terminate** has not been called prior to deleting/deallocating the instance and this is *not* an
     /// ephermal piece, a fatal error will be generated.
-    deinit
+    isolated deinit
     {
         if !WasTerminated && !IsEphemeral
         {
@@ -585,8 +585,7 @@ class Piece: CustomStringConvertible
     ///         if it is not called, deinit will generated a fatal error.
     func Terminate()
     {
-        OperationQueue.main.addOperation
-            {
+        MainActor.assumeIsolated {
                 //Terminate all timers first to make sure they do not refer to something that does not exist due to being
                 //deleted in this block.
                 if self.GravitationalTimer != nil
@@ -804,8 +803,7 @@ class Piece: CustomStringConvertible
     func SetFastGravity(_ Enable: Bool = false)
     {
         GravitationalInterval = Enable ? 0.001 : 0.33
-        OperationQueue.main.addOperation
-            {
+        MainActor.assumeIsolated {
                 self.GravitationalTimer?.invalidate()
                 self.GravitationalTimer = Timer.scheduledTimer(timeInterval: self.GravitationalInterval, target: self,
                                                                selector: #selector(self.HandleGravityTimer), userInfo: nil,
@@ -854,8 +852,7 @@ class Piece: CustomStringConvertible
         {
             GameBoard?.PieceMoved(self, Direction: .Down, Commanded: false)
         }
-        OperationQueue.main.addOperation
-            {
+        MainActor.assumeIsolated {
                 self.GravitationalTimer?.invalidate()
                 self.GravitationalTimer = Timer.scheduledTimer(timeInterval: self.GravitationalInterval, target: self,
                                                                selector: #selector(self.HandleGravityTimer), userInfo: nil,
@@ -901,7 +898,7 @@ class Piece: CustomStringConvertible
             print("Gravity isn't enabled.")
             return
         }
-        OperationQueue.main.addOperation {
+        MainActor.assumeIsolated {
             print("Single gravitational increment at \(self.GravitationalInterval)s")
             self.GravitationalTimer = Timer.scheduledTimer(timeInterval: self.GravitationalInterval, target: self,
                                                            selector: #selector(self.HandleGravityTimer), userInfo: nil,
@@ -943,7 +940,7 @@ class Piece: CustomStringConvertible
     /// Stop gravity. This may be called because the game is paused or the piece is freezing.
     func StopGravity()
     {
-        OperationQueue.main.addOperation {
+        MainActor.assumeIsolated {
             if self.GravitationalTimer != nil
             {
                 self.GravitationalTimer?.invalidate()
@@ -1261,8 +1258,7 @@ class Piece: CustomStringConvertible
                 FreezeTime = 0.5
             }
         }
-        OperationQueue.main.addOperation
-            {
+        MainActor.assumeIsolated {
                 self.RandomRotationTimer?.invalidate()
                 self.RandomRotationTimer = nil
                 self.RandomMotionTimer?.invalidate()
@@ -1271,8 +1267,7 @@ class Piece: CustomStringConvertible
         StopGravity()
         CurrentlyFreezing = true
         GameBoard?.StartedFreezing(ID)  
-        OperationQueue.main.addOperation
-            {
+        MainActor.assumeIsolated {
                 self.FreezeTimer = Timer.scheduledTimer(timeInterval: FreezeTime, target: self,
                                                         selector: #selector(self.Frozen), userInfo: nil,
                                                         repeats: false)
@@ -1291,7 +1286,7 @@ class Piece: CustomStringConvertible
             return
         }
         CurrentlyFreezing = false
-        OperationQueue.main.addOperation {
+        MainActor.assumeIsolated {
             self.GameBoard?.StoppedFreezing(self.ID)
             self.FreezeTimer?.invalidate()
             self.FreezeTimer = nil
@@ -1313,8 +1308,7 @@ class Piece: CustomStringConvertible
         if GameBoard == nil
         {
             //Nothing to do (or anything that we _can_ do.
-            OperationQueue.main.addOperation
-                {
+            MainActor.assumeIsolated {
                     self.FreezeTimer?.invalidate()
                     self.FreezeTimer = nil
             }
@@ -1334,15 +1328,13 @@ class Piece: CustomStringConvertible
             }
             return
         }
-        OperationQueue.main.addOperation
-            {
+        MainActor.assumeIsolated {
                 self.FreezeTimer?.invalidate()
                 self.FreezeTimer = nil
         }
         if PieceFullyInBounds()
         {
-            OperationQueue.main.addOperation
-                {
+            MainActor.assumeIsolated {
                     self.GameBoard?.PieceFroze(ID: self.ID)
             }
         }
@@ -1442,8 +1434,7 @@ class Piece: CustomStringConvertible
     {
         didSet
         {
-            OperationQueue.main.addOperation
-                {
+            MainActor.assumeIsolated {
                     if self._RandomRotationFrequency == .Never
                     {
                         if self.RandomRotationTimer != nil
@@ -1479,8 +1470,7 @@ class Piece: CustomStringConvertible
     {
         didSet
         {
-            OperationQueue.main.addOperation
-                {
+            MainActor.assumeIsolated {
                     if self._RandomMotionFrequency == .Never
                     {
                         if self.RandomMotionTimer != nil

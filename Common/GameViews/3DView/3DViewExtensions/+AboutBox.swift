@@ -45,7 +45,7 @@ extension View3D
                 let NewX = 0.0 + (CircleRadius * cos(Radian))
                 let NewY = 8.0 + (CircleRadius * sin(Radian))
                 let NewLocation = SCNVector3(NewX, NewY, 50.0)
-                self.AboutLightNode?.position = NewLocation
+                Node.position = NewLocation
         })
         let CircleForever = SCNAction.repeatForever(RoundMotion)
         AboutLightNode?.runAction(CircleForever)
@@ -88,9 +88,12 @@ extension View3D
         AboutBoxNode?.runAction(FadeIn,
         completionHandler:
             {
-                self.AboutBoxHideTimer = Timer.scheduledTimer(timeInterval: HideAfter, target: self,
-                                                         selector: #selector(self.AutoHideAboutBox),
-                                                         userInfo: nil, repeats: false)
+                Task { @MainActor in
+                    let HideTimer = Timer(timeInterval: HideAfter, target: self, selector: #selector(self.AutoHideAboutBox),
+                                          userInfo: nil, repeats: false)
+                    RunLoop.main.add(HideTimer, forMode: .common)
+                    self.AboutBoxHideTimer = HideTimer
+                }
         })
     }
     
@@ -119,11 +122,13 @@ extension View3D
         AboutBoxNode?.runAction(Sequence,
                                 completionHandler:
             {
+                Task { @MainActor in
                 self.AboutBoxNode = nil
                 self.AboutLightNode?.removeAllActions()
                 self.AboutLightNode?.removeFromParentNode()
                 self.AboutLightNode = nil
                 self.Main?.VersionBoxDisappeared()
-        })
+        }
+            })
     }
 }

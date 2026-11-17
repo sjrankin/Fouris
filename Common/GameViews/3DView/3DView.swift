@@ -101,10 +101,10 @@ class View3D: SCNView,                          //Our main super class.
             CameraObserver = self.observe(\.pointOfView?.position, options: [.new])
             {
                 (Node, Change) in
-                OperationQueue.current?.addOperation
-                    {
-                        let DPos = Convert.ConvertToString(Node.pointOfView!.position, AddLabels: true, AddParentheses: true)
-                        let DOri = Convert.ConvertToString(Node.pointOfView!.orientation, AddLabels: true, AddParentheses: true)
+                Task { @MainActor in
+                        guard let PointOfView = self.pointOfView else { return }
+                        let DPos = Convert.ConvertToString(PointOfView.position, AddLabels: true, AddParentheses: true)
+                        let DOri = Convert.ConvertToString(PointOfView.orientation, AddLabels: true, AddParentheses: true)
                         var KVPMsg = MessageHelper.MakeKVPMessage(ID: self.PositionKVP, Key: "Camera Position", Value: DPos)
                         DebugClient.SendPreformattedCommand(KVPMsg)
                         KVPMsg = MessageHelper.MakeKVPMessage(ID: self.OrientationKVP, Key: "Camera Orientation", Value: DOri)
@@ -310,8 +310,7 @@ class View3D: SCNView,                          //Our main super class.
             Hue = 1.0
         }
         WorkingColor = UIColor(hue: Hue, saturation: Saturation, brightness: Brightness, alpha: Alpha)
-        OperationQueue.main.addOperation
-            {
+        Task { @MainActor in
                 self.scene?.background.contents = self.WorkingColor
         }
     }
@@ -387,8 +386,7 @@ class View3D: SCNView,                          //Our main super class.
         let NewGradient = GradientManager.AssembleGradient(NewStops, IsVertical: ShiftVertical, Reverse: ShiftReversed)
         ShiftingStops = NewStops
         let BackgroundGradient = GradientManager.CreateGradientImage(From: NewGradient, WithFrame: self.frame)
-        OperationQueue.main.addOperation
-            {
+        Task { @MainActor in
                 self.scene?.background.contents = BackgroundGradient
         }
     }
@@ -1036,7 +1034,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter DeltaY: The relative number of grid points to move vertically.
     /// - Parameter TotalDuration: The amount of time to take to drop.
     /// - Parameter Completed: Completion block.
-    public func MovePieceRelative(WithPiece: Piece, DeltaX: Int, DeltaY: Int, TotalDuration Duration: Double, Completed: ((Piece)->())?)
+    public func MovePieceRelative(WithPiece: Piece, DeltaX: Int, DeltaY: Int, TotalDuration Duration: Double, Completed: (@MainActor (Piece)->())?)
     {
         print("At MovePieceRelative: DeltaX=\(DeltaX), DeltaY=\(DeltaY), TotalDuration=\(Duration)")
         MovingPieceNode?.enumerateChildNodes
@@ -1046,8 +1044,10 @@ class View3D: SCNView,                          //Our main super class.
                 let Move = SCNAction.move(to: NewLocation, duration: Duration)
                 Node.runAction(Move, completionHandler:
                     {
+                Task { @MainActor in
                         Completed?(WithPiece)
-                })
+                }
+            })
         }
     }
     
@@ -1292,8 +1292,7 @@ class View3D: SCNView,                          //Our main super class.
         BlockList.removeAll()
         //print("  Done removing all blocks from BlockList.")
         #else
-        OperationQueue.main.addOperation
-            {
+        Task { @MainActor in
                 //Sometimes this call seems to trigger an exception from within SceneKit.
                 self.BlockList.removeAll()
         }
@@ -1393,7 +1392,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter To: The new alpha/opacity level.
     /// - Parameter Duration: The duration of the opacity change.
     /// - Parameter Completed: Completion block.
-    public func SetBoardOpacity(To: Double, Duration: Double, Completed: (() -> ())? = nil)
+    public func SetBoardOpacity(To: Double, Duration: Double, Completed: (@MainActor () -> ())? = nil)
     {
         var FadeAction: SCNAction!
         if To == 1.0
@@ -1408,11 +1407,13 @@ class View3D: SCNView,                          //Our main super class.
         BucketGridNode?.runAction(FadeAction)
         MasterBlockNode?.runAction(FadeAction, completionHandler:
             {
+                Task { @MainActor in
                 if let CompletionHandler = Completed
                 {
                     CompletionHandler()
                 }
         }
+            }
         )
     }
     

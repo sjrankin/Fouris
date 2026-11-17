@@ -23,10 +23,13 @@ import SceneKit
     }
     
     /// Make sure things are initialized if we're running in the Interface Builder.
-    override func prepareForInterfaceBuilder()
+    nonisolated override func prepareForInterfaceBuilder()
     {
-        Initialize()
-        Start()
+        MainActor.assumeIsolated
+        {
+            Initialize()
+            Start()
+        }
     }
     
     /// Initialize the block view.

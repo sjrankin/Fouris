@@ -115,10 +115,9 @@ class MainViewController: UIViewController,
                 (granted, error) in
                 if granted
                 {
-                    OperationQueue.main.addOperation
-                        {
+                    Task { @MainActor in
                             App.registerForRemoteNotifications()
-                            NotCen.setBadgeCount(BadgeCount)
+                            UNUserNotificationCenter.current().setBadgeCount(BadgeCount)
                     }
                 }
                 else
@@ -2087,8 +2086,7 @@ class MainViewController: UIViewController,
     /// Update the heartbeat indicator to indicate both the UI and the game view threads are active.
     @objc public func HandleHeartbeat()
     {
-        OperationQueue.main.addOperation
-            {
+        Task { @MainActor in
                 if self.HeartbeatCount.isMultiple(of: 2)
                 {
                     self.GameView3D?.AnimateHeartbeat(IsHighlighted: true, Duration: 0.15,

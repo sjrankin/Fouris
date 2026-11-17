@@ -53,7 +53,7 @@ class MapType: CustomStringConvertible
     }
     
     /// Deinitializer.
-    deinit
+    isolated deinit
     {
         for var SomePiece in InPlay
         {

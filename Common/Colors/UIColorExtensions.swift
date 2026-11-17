@@ -291,7 +291,7 @@ extension UIColor
     }
     
     /// Returns the normalized red value.
-    var r: CGFloat
+    nonisolated var r: CGFloat
     {
         get
         {
@@ -305,7 +305,7 @@ extension UIColor
     }
     
     /// Returns the normalized green value.
-    var g: CGFloat
+    nonisolated var g: CGFloat
     {
         get
         {
@@ -319,7 +319,7 @@ extension UIColor
     }
     
     /// Returns the normalized blue value.
-    var b: CGFloat
+    nonisolated var b: CGFloat
     {
         get
         {

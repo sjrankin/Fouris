@@ -47,7 +47,7 @@ class MultiPeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
     }
     
     /// Deinitializer. Shutdown advertising and browsing.
-    deinit
+    isolated deinit
     {
         Shutdown()
     }
@@ -263,8 +263,7 @@ class MultiPeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
     public func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState)
     {
         print("Peer \(peerID.displayName) changed state to \(SessionStateDictionary[state.rawValue]!) [\(state.rawValue)]")
-        OperationQueue.main.addOperation
-            {
+        Task { @MainActor in
                 self.Delegate?.ConnectedDeviceChanged(Manager: self, ConnectedDevices: self.Session.connectedPeers,
                                                       Changed: peerID, NewState: state)
         }
@@ -293,8 +292,7 @@ class MultiPeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
         let Cmd = MessageHelper.GetMessageType(Message!)
         if Cmd == MessageTypes.IDEncapsulatedCommand
         {
-            OperationQueue.main.addOperation
-                {
+            Task { @MainActor in
                     if let (ID, EnMsg) = MessageHelper.DecodeEncapsulatedCommand(Message!)
                     {
                         self.Delegate?.ReceivedAsyncData(Manager: self, Peer: peerID, CommandID: ID, RawData: EnMsg)
