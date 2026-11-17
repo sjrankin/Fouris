@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol TextLayerDisplayProtocol: class
+protocol TextLayerDisplayProtocol: AnyObject
 {
     /// Sets the controls to use to display text. Text is an attributed string displayed in a CATextLayer, so each text object
     /// needs to reside in a view Those views are passed in this function.

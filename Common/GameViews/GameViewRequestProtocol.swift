@@ -9,7 +9,7 @@
 import Foundation
 
 /// Communication from a game view to the owning controller.
-protocol GameViewRequestProtocol: class
+protocol GameViewRequestProtocol: AnyObject
 {
     /// The game view requests a redraw.
     func NeedRedraw()

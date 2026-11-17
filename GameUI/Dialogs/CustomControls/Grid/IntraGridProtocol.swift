@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// Protocol for communications between instances of grid cells and their `Grid` instance parent.
-protocol IntraGridProtocol: class
+protocol IntraGridProtocol: AnyObject
 {
     // MARK: - User interactions.
     

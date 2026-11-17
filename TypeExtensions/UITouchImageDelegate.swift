@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// Protocol to receive messages of pressed motion buttons from **UITouchImage** buttons.
-protocol UITouchImageDelegate: class
+protocol UITouchImageDelegate: AnyObject
 {
     /// Sent when the user presses then releases a **UITouchImage** button.
     /// - Parameter sender: The **UITouchImage** button the was pressed.

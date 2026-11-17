@@ -9,7 +9,7 @@
 import Foundation
 
 /// Protocol for notification of settings changes.
-protocol SettingsChangedProtocol: class
+protocol SettingsChangedProtocol: AnyObject
 {
     /// Called when certain setting fields are changed.
     /// - Parameter Field: Enum indicating which field changed.

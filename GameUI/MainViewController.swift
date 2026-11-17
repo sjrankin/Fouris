@@ -118,7 +118,7 @@ class MainViewController: UIViewController,
                     OperationQueue.main.addOperation
                         {
                             App.registerForRemoteNotifications()
-                            App.applicationIconBadgeNumber = BadgeCount
+                            NotCen.setBadgeCount(BadgeCount)
                     }
                 }
                 else

@@ -184,16 +184,13 @@ extension MainViewController
     /// - Parameter Peer: The peer that sent the boardcast command.
     public func HandleBroadcastMessage(_ RawData: String, Peer: MCPeerID)
     {
-        var ItemSource = "TDebug"
-        var ItemMessage = ""
         if let (Source, Message) = MessageHelper.DecodeBroadcastCommand(RawData)
         {
-            ItemSource = Source
-            ItemMessage = "Broadcast[\(Source)]: \(Message)"
+            print("Broadcast[\(Source)]: \(Message)")
         }
         else
         {
-            ItemMessage = "Error decoding broadcast message from \(Peer.displayName)"
+            print("Error decoding broadcast message from \(Peer.displayName)")
         }
     }
 }

@@ -165,8 +165,6 @@ extension View3D
             
             case .FadeOut:
                 let FadeOut = SCNAction.fadeOut(duration: Duration)
-                let Remove = SCNAction.removeFromParentNode()
-                let Sequence = SCNAction.sequence([FadeOut, Remove])
                 BucketNode?.runAction(FadeOut,
                                       completionHandler:
                     {

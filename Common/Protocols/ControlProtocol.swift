@@ -10,7 +10,7 @@ import Foundation
 
 /// Control commands from the controller window.
 /// - Note: Just because a command is sent does not mean the command can be executed.
-protocol ControlProtocol: class
+protocol ControlProtocol: AnyObject
 {
     /// Move the block left by one.
     func MoveLeft()

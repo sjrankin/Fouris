@@ -291,7 +291,6 @@ class GeneralAI
     /// - Returns: The final, best score of the piece.
     public static func BestFit(_ GamePiece: Piece, CurrentScore: Int, GameBoard: Board) -> Double
     {
-        let BestFitStart = CACurrentMediaTime()
         MotionQueue = Queue()
         FoundBestFitFor = GamePiece
         var OriginIndex = -1
@@ -362,18 +361,7 @@ class GeneralAI
                 }
                 var Dropped = VirtualDrop(Points: XPoints, GameBoard: GameBoard)
                 
-                //See if any block in the dropped piece is above the rim of the bucket.
-                var StoppedAboveBucket = false
-                for Drop in Dropped
-                {
-                    if Int(Drop.y) < GameBoard.BucketTopInterior
-                    {
-                        StoppedAboveBucket = true
-                        break
-                    }
-                }
-                
-                var PieceScore = MakeScore(ForPoints: Dropped, CurrentPiece: GamePiece, GameBoard: GameBoard)
+                let PieceScore = MakeScore(ForPoints: Dropped, CurrentPiece: GamePiece, GameBoard: GameBoard)
                 if PieceScore > BestScore
                 {
                     BestScore = PieceScore
@@ -392,7 +380,6 @@ class GeneralAI
         //Add the motions necessary to put the piece into the place with the best score.
         let Motions = MotionCommandBlock2(InitialMoveDown: MoveDownFirst, AngleCount: BestAngle / 90, XOffset: BestXOffset)
         GenerateMotionCommands(Motions: Motions)
-        //print("GeneralAI.BestFit duration: \(CACurrentMediaTime() - BestFitStart)")
         return BestScore
     }
 }

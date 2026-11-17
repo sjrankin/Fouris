@@ -35,7 +35,9 @@ class GradientStopCell: UITableViewCell
     {
         super.init(style: Style, reuseIdentifier: ReuseIdentifier)
         
-        let CurrentWidth = UIScreen.main.bounds.width
+        //The cell has no window yet, so find the screen through the connected window scene.
+        let ActiveScene = UIApplication.shared.connectedScenes.compactMap{$0 as? UIWindowScene}.first
+        let CurrentWidth = ActiveScene?.screen.bounds.width ?? 390.0
         
         let ColorRect = CGRect(x: 15, y: 5, width: CurrentWidth * 0.4, height: GradientStopCell.CellHeight - 10.0)
         ColorSample = UIView(frame: ColorRect)

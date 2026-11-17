@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// Protocol for assigning default colors and returning new colors from the color picker.
-protocol ColorPickerProtocol: class
+protocol ColorPickerProtocol: AnyObject
 {
     /// Set the color to edit.
     /// - Parameter Color: The color to edit.

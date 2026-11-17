@@ -546,7 +546,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q41-xp-6ex">
                                 <rect key="frame" x="697" y="28" width="45" height="44"/>
-                                <state key="normal" image="number.circle" catalog="system">
+                                <state key="normal" image="number.sign.circle" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30" scale="large" weight="bold"/>
                                 </state>
                                 <connections>
@@ -924,7 +924,7 @@
     </scenes>
     <resources>
         <image name="SamplePieceTexture" width="64" height="64"/>
-        <image name="number.circle" catalog="system" width="64" height="60"/>
+        <image name="number.sign.circle" catalog="system" width="64" height="60"/>
         <image name="person.circle" catalog="system" width="64" height="60"/>
         <image name="xmark.circle.fill" catalog="system" width="64" height="60"/>
     </resources>

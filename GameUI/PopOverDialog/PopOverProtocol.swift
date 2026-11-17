@@ -9,7 +9,7 @@
 import Foundation
 
 /// Protocol for the communication between the pop-over menu and the main UI.
-protocol PopOverProtocol: class
+protocol PopOverProtocol: AnyObject
 {
     /// Requests the main UI to run the command selected by the user.
     /// - Parameter Command: The command to run.

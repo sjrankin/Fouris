@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol GameLogicProtocol: class
+protocol GameLogicProtocol: AnyObject
 {
     func PieceUpdated(ID: UUID)
     func DropFinalized(ID: UUID)

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol GameSelectorProtocol: class
+protocol GameSelectorProtocol: AnyObject
 {
     /// Called when the game selector dialog is closed.
     /// - Parameter DidChange: If true, the game shape changed. If false, the user closed the dialog with a the `Cancel` button.

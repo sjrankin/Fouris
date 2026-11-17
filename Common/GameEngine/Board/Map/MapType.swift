@@ -1576,7 +1576,7 @@ class MapType: CustomStringConvertible
     ///            randomly selecting an empty location).
     public func AddInRandomLocation(ItemIDToAdd: UUID, Pieces: [Piece?], TryCount: Int = 10) -> Bool
     {
-        var Merged = MergeMap()
+        let Merged = MergeMap()
         var Tried = 0
         while true
         {

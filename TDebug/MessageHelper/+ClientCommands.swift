@@ -116,12 +116,7 @@ extension MessageHelper
     public static func DecodeClientCommand(_ Raw: String) -> ClientCommand?
     {
         let Params = GetParameters(From: Raw, ["Command", "ParameterCount"])
-        var Count = 0
-        if let Ct = Params["ParameterCount"]
-        {
-            Count = Int(Ct)!
-        }
-        else
+        if Params["ParameterCount"] == nil
         {
             print("Unable to decode client command - no parameter count parameter specified.")
             return nil
@@ -170,7 +165,10 @@ extension MessageHelper
             print("Mal-formed returned command list encountered.")
             return nil
         }
-        let CmdCount = Int(CmdCountValue)!
+        guard Int(CmdCountValue) != nil else
+        {
+            return nil
+        }
         
         var LastPart = String(Parts[2])
         let LPDel = String(LastPart.first!)
@@ -195,7 +193,6 @@ extension MessageHelper
             var CmdIndex: Int!
             var CmdName: String!
             var CmdDescription: String!
-            var CmdPCount: Int!
             var CmdParameters = [String]()
             for (Name, Value) in FirstPass
             {
@@ -232,14 +229,8 @@ extension MessageHelper
                     CmdDescription = Value
                     
                 case "ParameterCount":
-                    if let CPC = Int(Value)
-                    {
-                        CmdPCount = CPC
-                    }
-                    else
-                    {
-                        CmdPCount = 0
-                    }
+                    //The parameter count is implied by the number of "Param" entries.
+                    break
                     
                 case "Param":
                     CmdParameters.append(Value)

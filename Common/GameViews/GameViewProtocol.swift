@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// Protocol to control game views.
-protocol GameViewProtocol: class
+protocol GameViewProtocol: AnyObject
 {
     /// Draw the background.
     func DrawBackground()

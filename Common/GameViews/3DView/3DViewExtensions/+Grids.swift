@@ -273,9 +273,6 @@ extension View3D
                     OutlineNode.addChildNode(RightLine)
                 }
                 BucketGridNode.opacity = InitialOpacity
-            
-            default:
-            break
         }
         
         return (Grid: BucketGridNode, Outline: OutlineNode)

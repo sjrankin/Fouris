@@ -39,7 +39,6 @@ extension View3D
     public func renderer(_ renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval)
     {
 //        print("renderer:didRenderScene started.")
-        let StartTime = CACurrentMediaTime()
         if NodeRemovalList.count > 0
         {
             print("  Removing named nodes [\(NodeRemovalList.count)].")
@@ -88,7 +87,6 @@ extension View3D
             }
             print("    Done removing GameViewObjects")
         }
-//        let Duration = CACurrentMediaTime() - StartTime
 //        print("  renderer:didRenderScene ended. Duration: \(Duration)")
     }
     

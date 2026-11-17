@@ -11,7 +11,7 @@ import UIKit
 import SceneKit
 
 /// Protocol for communicating from a flying piece to its parent scene.
-protocol FlyingProtocol: class
+protocol FlyingProtocol: AnyObject
 {
     /// A flying piece completed its motion (and any terminal effects).
     /// - Parameter Node: The node that completed its motion.

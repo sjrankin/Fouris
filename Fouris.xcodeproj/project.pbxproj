@@ -257,6 +257,7 @@
 		17ED240B22716273002B92E1 /* ColorServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ED240A22716273002B92E1 /* ColorServer.swift */; };
 		17ED240F22716610002B92E1 /* ColorTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ED240E22716610002B92E1 /* ColorTable.swift */; };
 		17F0B494225CBE730071514E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F0B493225CBE730071514E /* AppDelegate.swift */; };
+		5C3E00022B00000100A1B2C3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3E00012B00000100A1B2C3 /* SceneDelegate.swift */; };
 		17F0B49B225CBE740071514E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17F0B49A225CBE740071514E /* Assets.xcassets */; };
 		17F0B49E225CBE740071514E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17F0B49C225CBE740071514E /* LaunchScreen.storyboard */; };
 		17F0B4B1225CC22A0071514E /* Piece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F0B4B0225CC22A0071514E /* Piece.swift */; };
@@ -532,6 +533,7 @@
 		17ED240E22716610002B92E1 /* ColorTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTable.swift; sourceTree = "<group>"; };
 		17F0B490225CBE730071514E /* Fouris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fouris.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17F0B493225CBE730071514E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5C3E00012B00000100A1B2C3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		17F0B49A225CBE740071514E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		17F0B49D225CBE740071514E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		17F0B4B0225CC22A0071514E /* Piece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Piece.swift; sourceTree = "<group>"; };
@@ -1266,6 +1268,7 @@
 				176708F1233A025D000E2216 /* Languages */,
 				17AD5D77235AF835002D6125 /* PopOverDialog */,
 				17F0B493225CBE730071514E /* AppDelegate.swift */,
+				5C3E00012B00000100A1B2C3 /* SceneDelegate.swift */,
 				17724AF52352C3F3001A6825 /* Platform.swift */,
 				171D5D462313FC5200043856 /* MainStoryboard.storyboard */,
 				17AF231E2313981C00921E6C /* MainViewController.swift */,
@@ -1358,7 +1361,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 17F0B4A2225CBE740071514E /* Build configuration list for PBXNativeTarget "Fouris" */;
 			buildPhases = (
-				1790D4F5225DE9D7003E402D /* ShellScript */,
+				1790D4F5225DE9D7003E402D /* Update Version */,
 				17F0B48C225CBE730071514E /* Sources */,
 				17F0B48D225CBE730071514E /* Frameworks */,
 				17F0B48E225CBE730071514E /* Resources */,
@@ -1438,8 +1441,9 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1790D4F5225DE9D7003E402D /* ShellScript */ = {
+		1790D4F5225DE9D7003E402D /* Update Version */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -1447,13 +1451,14 @@
 			);
 			inputPaths = (
 			);
+			name = "Update Version";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/Users/Stuart/Documents/GitHub/Fouris/Fouris/VersionUpdater/VersionUpdater /Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Versioning.swift /Users/Stuart/Documents/GitHub/Fouris/Fouris/README.md\n";
+			shellScript = "\"${SRCROOT}/VersionUpdater/VersionUpdater\" \"${SRCROOT}/GameUI/Versioning.swift\" \"${SRCROOT}/README.md\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1692,6 +1697,7 @@
 				17E619A92348495B00C391CF /* +BoardRemoval.swift in Sources */,
 				179F0A74233074040051B148 /* ColorSwatch.swift in Sources */,
 				17F0B494225CBE730071514E /* AppDelegate.swift in Sources */,
+				5C3E00022B00000100A1B2C3 /* SceneDelegate.swift in Sources */,
 				174328F2233F0F7F00F98863 /* XMLDeserializeProtocol.swift in Sources */,
 				17CD4EB5231E370B0055E541 /* GradientEditorCode.swift in Sources */,
 				17616ACD23166DF700DFFEFE /* GameStyleTableViewCell.swift in Sources */,
@@ -1756,7 +1762,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1775,7 +1781,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1818,7 +1824,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1831,7 +1837,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1851,7 +1857,7 @@
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 4BB235M4GL;
 				INFOPLIST_FILE = Fouris/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1876,7 +1882,7 @@
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 4BB235M4GL;
 				INFOPLIST_FILE = Fouris/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

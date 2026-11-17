@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// Protocol for game AI classes.
-protocol AIProtocol: class
+protocol AIProtocol: AnyObject
 {
     /// Returns the type of AI the class implements.
     func GetAIType() -> AITypes

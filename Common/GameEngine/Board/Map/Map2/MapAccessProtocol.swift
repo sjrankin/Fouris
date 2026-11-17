@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol MapAccessProtocol: class
+protocol MapAccessProtocol: AnyObject
 {
     /// Simplification of the type of the bucket map.
     typealias MapContentType = [[MapNodes]]

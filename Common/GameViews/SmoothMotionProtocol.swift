@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// Protocol for classes that support smooth motion of pieces.
-protocol SmoothMotionProtocol: class
+protocol SmoothMotionProtocol: AnyObject
 {
     /// Move a piece smoothly.
     /// - Parameter GamePiece: The piece to move.

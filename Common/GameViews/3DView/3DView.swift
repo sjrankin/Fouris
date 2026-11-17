@@ -1484,9 +1484,10 @@ class View3D: SCNView,                          //Our main super class.
         {
             Block.geometry?.firstMaterial?.diffuse.contents = UIColor.yellow
         }
-        var RDelta = EndColor.r - StartColor.r
-        var GDelta = EndColor.g - StartColor.g
-        var BDelta = EndColor.b - StartColor.b
+        //Both actions use the same deltas (start minus end).
+        let RDelta = StartColor.r - EndColor.r
+        let GDelta = StartColor.g - EndColor.g
+        let BDelta = StartColor.b - EndColor.b
         let FinalDuration = 0.5
         let ColorToRed = SCNAction.customAction(duration: FinalDuration, action:
         {
@@ -1498,9 +1499,6 @@ class View3D: SCNView,                          //Our main super class.
             Node.geometry?.firstMaterial?.diffuse.contents = UIColor(red: Red, green: Green, blue: Blue, alpha: 1.0)
         }
         )
-        RDelta = StartColor.r - EndColor.r
-        GDelta = StartColor.g - EndColor.g
-        BDelta = StartColor.b - EndColor.b
         let ColorToYellow = SCNAction.customAction(duration: FinalDuration, action:
         {
             (Node, Time) in

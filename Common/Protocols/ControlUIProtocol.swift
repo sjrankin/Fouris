@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// Protocol to control some aspects of the UI of the controller window.
-protocol ControlUIProtocol: class
+protocol ControlUIProtocol: AnyObject
 {
     /// Handle game over events.
     /// - Parameters:

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// Protocol to communicate with the main class.
-protocol MainDelegate: class
+protocol MainDelegate: AnyObject
 {
     /// Returns AI test data.
     func GetAIData() -> AITestTable?

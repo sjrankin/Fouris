@@ -10,7 +10,7 @@ import Foundation
 import MultipeerConnectivity
 
 /// Protocol to communicate between the message handling class and the consumer of the messages.
-protocol MessageHandlerDelegate: class
+protocol MessageHandlerDelegate: AnyObject
 {
     /// Handle a received broadcast command.
     ///

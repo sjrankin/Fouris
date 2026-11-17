@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// Interface for handling debug set up and commands. Mainly used by the Debug Controller Window.
-protocol DebugDelegate: class
+protocol DebugDelegate: AnyObject
 {
     /// Set the current AI scoring method.
     /// - Parameter Method: The scoring method.

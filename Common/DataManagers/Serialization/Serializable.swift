@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// Protocol for the XML fragment serializer.
-protocol Serializable: class
+protocol Serializable: AnyObject
 {
     /// Called by the deserializer once for each property that it deserialized.
     ///

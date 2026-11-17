@@ -7,9 +7,7 @@
 //
 
 import Foundation
-import var CommonCrypto.CC_MD5_DIGEST_LENGTH
-import func CommonCrypto.CC_MD5
-import typealias CommonCrypto.CC_LONG
+import CryptoKit
 import UIKit
 
 /// Simple XML-fragment serializer/deserializer. Uses reflection to read classes that follow the `Serializable` protocol to
@@ -101,8 +99,6 @@ class Serializer
             _Tree = nil
             return false
         }
-        let MD5 = MD5Checksum(For: From)
-        //print("Checksum=\(MD5ChecksumToString(MD5))")
         _Tree = SerializerTree()
         let Parser = RawParser(ThenParse: From)
         let Results = Parser.GetParsedNodes()
@@ -243,26 +239,8 @@ class Serializer
     /// - Returns: MD5 checksum in the form of a `Data` class.
     public func MD5Checksum(For: String) -> Data
     {
-        let Length = Int(CC_MD5_DIGEST_LENGTH)
-        let MessageData = For.data(using: .utf8)!
-        var DigestData = Data(count: Length)
-        
-        _ = DigestData.withUnsafeMutableBytes
-            {
-                DigestBytes -> UInt8 in
-                MessageData.withUnsafeBytes
-                    {
-                        MessageBytes -> UInt8 in
-                          if let MessageBytesBaseAddress = MessageBytes.baseAddress,
-                            let DigestBytesBlindMemory = DigestBytes.bindMemory(to: UInt8.self).baseAddress
-                          {
-                            let MessageLength = CC_LONG(MessageData.count)
-                            CC_MD5(MessageBytesBaseAddress, MessageLength, DigestBytesBlindMemory)
-                        }
-                        return 0
-                }
-        }
-        return DigestData
+        //MD5 is only used here as a simple (non-security) checksum.
+        return Data(Insecure.MD5.hash(data: Data(For.utf8)))
     }
     
     /// Return a string value of the checksum data.
