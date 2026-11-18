@@ -267,7 +267,9 @@ extension View3D
         let Padding: CGFloat = 6.0
         let BarLeft = max(BarLeftTop.x, 0.0) + Padding
         let BarRight = min(BarRightBottom.x, bounds.width) - Padding
-        let BarHeight = BarRightBottom.y - BarLeftTop.y
+        //Only the visible part of the bar counts: the bar can extend past the top of the view.
+        let BarTop = max(BarLeftTop.y, 0.0)
+        let BarHeight = BarRightBottom.y - BarTop
         //Occupied spans of the buttons that live in the bar.
         var Occupied = [(Low: CGFloat, High: CGFloat)]()
         for Button in (scene?.rootNode.childNodes ?? []).compactMap({$0 as? SCNButtonNode}) where Button.position.y >= 10.0
@@ -305,7 +307,7 @@ extension View3D
             return nil
         }
         return CGRect(x: Best.Low + (Best.High - Best.Low - Size) / 2.0,
-                      y: BarLeftTop.y + (BarHeight - Size) / 2.0,
+                      y: BarTop + (BarHeight - Size) / 2.0,
                       width: Size, height: Size)
     }
 }

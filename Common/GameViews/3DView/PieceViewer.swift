@@ -164,6 +164,10 @@ import SceneKit
                 UnitSize = SmallestViewDimension / CGFloat(GreatestExtent) * 0.9
             }
         }
+        //Center the piece on the node's origin. The node is the center of rotation and the camera looks at the origin, so
+        //the piece rotates about (and is shown at) the center of the view.
+        let CenterX = BlockList.isEmpty ? 0.0 : CGFloat(BlockList.map({$0.0}).min()! + BlockList.map({$0.0}).max()!) / 2.0
+        let CenterY = BlockList.isEmpty ? 0.0 : CGFloat(BlockList.map({$0.1}).min()! + BlockList.map({$0.1}).max()!) / 2.0
         for (X, Y) in BlockList
         {
             let NodeShape = CreateGeometry(GeoShape: _Shape, Width: UnitSize, Height: UnitSize, Depth: UnitSize)
@@ -177,8 +181,8 @@ import SceneKit
                 NodeShape.materials.first?.specular.contents = _SpecularColor
             }
             let Node = SCNNode(geometry: NodeShape)
-            let XPos: CGFloat = CGFloat(X) * UnitSize
-            let YPos: CGFloat = CGFloat(Y) * UnitSize
+            let XPos: CGFloat = (CGFloat(X) - CenterX) * UnitSize
+            let YPos: CGFloat = (CGFloat(Y) - CenterY) * UnitSize
             Node.position = SCNVector3(XPos, YPos, 0.0)
             PieceNode?.addChildNode(Node)
         }
