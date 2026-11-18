@@ -153,6 +153,18 @@ class MainViewController: UIViewController,
         VersionBoxShowing = false
     }
     
+    /// Keep the "Press Play to Start" text centered across the full width of the view whenever the layout changes.
+    override public func viewDidLayoutSubviews()
+    {
+        super.viewDidLayoutSubviews()
+        if PressPlayLabelView != nil
+        {
+            PressPlayLabelView.frame = CGRect(x: 0.0, y: PressPlayLabelView.frame.minY,
+                                              width: view.bounds.width, height: PressPlayLabelView.frame.height)
+            GameTextOverlay?.UpdatePressPlayLayout()
+        }
+    }
+    
     /// Version box is showing flag.
     private var VersionBoxShowing = true
     
@@ -258,11 +270,6 @@ class MainViewController: UIViewController,
                                      userInfo: nil, repeats: false)
         
         InitializeGestures()
-        
-        if UserTheme!.ShowHeartbeat
-        {
-            StartHeartbeat()
-        }
         
         if Settings.GetShowCameraControls()
         {
@@ -2024,25 +2031,6 @@ class MainViewController: UIViewController,
     {
         switch Field
         {
-            case .HeartbeatInterval:
-                if UserTheme!.ShowHeartbeat
-                {
-                    HeartbeatTimer?.invalidate()
-                    HeartbeatTimer = nil
-                    StartHeartbeat()
-            }
-            
-            case .ShowHeartbeat:
-                let ShowHeartbeat = UserTheme!.ShowHeartbeat
-                if ShowHeartbeat
-                {
-                    StartHeartbeat()
-                }
-                else
-                {
-                    StopHeartbeat()
-            }
-            
             default:
                 print("Theme \(ThemeName) updated field \(Field)")
         }

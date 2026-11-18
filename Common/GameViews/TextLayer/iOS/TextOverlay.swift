@@ -504,10 +504,23 @@ class TextOverlay: TextLayerDisplayProtocol
         {
             if let FinalLayer = GetContainerLayer(From: PressPlayContainer!, ContainerType: .PressPlay)
             {
-                FinalLayer.frame = OriginalPressPlayFrame!
+                FinalLayer.frame = PressPlayContainer!.bounds
+                OriginalPressPlayFrame = PressPlayContainer!.bounds
             }
         }
         ShowObject(PressPlayContainer!, ContainerType: .PressPlay, Duration: FinalDuration)
+    }
+    
+    /// Resize the "Press Play to Start" text layer to fill its container so the (center aligned) text stays centered.
+    public func UpdatePressPlayLayout()
+    {
+        guard let Container = PressPlayContainer,
+              let FinalLayer = GetContainerLayer(From: Container, ContainerType: .PressPlay) else
+        {
+            return
+        }
+        FinalLayer.frame = Container.bounds
+        OriginalPressPlayFrame = Container.bounds
     }
     
     /// Flag that indicates the press play text layer was created.
