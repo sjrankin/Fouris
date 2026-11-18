@@ -163,6 +163,54 @@ class MainViewController: UIViewController,
                                               width: view.bounds.width, height: PressPlayLabelView.frame.height)
             GameTextOverlay?.UpdatePressPlayLayout()
         }
+        PlaceNextPieceInTopBar()
+    }
+    
+    /// Constraints that position the next piece view (and its backing frame) inside the top control bar.
+    private var NextPieceConstraints = [NSLayoutConstraint]()
+    
+    /// Move the next piece view into the free space of the top control bar of the 3D view.
+    /// - Note: The storyboard constraints that pinned the view below the bar are replaced the first time this runs.
+    private func PlaceNextPieceInTopBar()
+    {
+        guard let Square = GameView3D?.FreeControlBarSquare(), let Target = NextPieceViewControl,
+              let Backing = NextPieceView, let Container = TextLayerView else
+        {
+            return
+        }
+        let Local = Container.convert(Square, from: GameView3D)
+        if NextPieceConstraints.isEmpty
+        {
+            //Remove the storyboard constraints that tie the two views to the old location.
+            let Involved = Container.constraints.filter(
+            {
+                ($0.firstItem as? UIView) === Target || ($0.secondItem as? UIView) === Target ||
+                ($0.firstItem as? UIView) === Backing || ($0.secondItem as? UIView) === Backing
+            })
+            NSLayoutConstraint.deactivate(Involved)
+            NSLayoutConstraint.deactivate(Target.constraints)
+            NSLayoutConstraint.deactivate(Backing.constraints)
+            Target.translatesAutoresizingMaskIntoConstraints = false
+            Backing.translatesAutoresizingMaskIntoConstraints = false
+            for Item in [Target, Backing]
+            {
+                NextPieceConstraints.append(Item.leadingAnchor.constraint(equalTo: Container.leadingAnchor, constant: Local.minX))
+                NextPieceConstraints.append(Item.topAnchor.constraint(equalTo: Container.topAnchor, constant: Local.minY))
+                NextPieceConstraints.append(Item.widthAnchor.constraint(equalToConstant: Local.width))
+                NextPieceConstraints.append(Item.heightAnchor.constraint(equalToConstant: Local.height))
+            }
+            NSLayoutConstraint.activate(NextPieceConstraints)
+        }
+        else
+        {
+            for Index in [0, 4]
+            {
+                NextPieceConstraints[Index].constant = Local.minX
+                NextPieceConstraints[Index + 1].constant = Local.minY
+                NextPieceConstraints[Index + 2].constant = Local.width
+                NextPieceConstraints[Index + 3].constant = Local.height
+            }
+        }
     }
     
     /// Version box is showing flag.
@@ -220,6 +268,11 @@ class MainViewController: UIViewController,
         GameView3D?.Initialize(With: Game!.GameBoard!, Theme: Themes, BucketShape: UserTheme!.BucketShape) 
         GameView3D?.Owner = self
         GameView3D?.SmoothMotionDelegate = self
+        GameView3D?.ControlsWereFitted =
+        {
+            [weak self] in
+            self?.view.setNeedsLayout()
+        }
         Smooth3D = GameView3D
         
         //Initialize the game text layer.

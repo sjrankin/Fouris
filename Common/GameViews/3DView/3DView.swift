@@ -1815,6 +1815,9 @@ class View3D: SCNView,                          //Our main super class.
     private var LastButtonLayoutSize: CGSize = .zero
     
     /// Node holding the outlines of the retired shapes (a child of the master block node).
+    /// Called after the control buttons have been fitted to the view. Used to place UI in the free space of the top bar.
+    public var ControlsWereFitted: (@MainActor () -> Void)? = nil
+    
     var ShapeOutlineNode: SCNNode? = nil
     
     /// Node holding the outline of the moving piece.

@@ -207,6 +207,13 @@ extension View3D
             //Remember the shift so buttons that are recreated later (text changes) land in the fitted place without re-measuring.
             ButtonShifts[Entry.Button.ButtonType] = Shift
         }
+        if let Callback = ControlsWereFitted
+        {
+            //Deferred so the owner never changes its layout from inside this view's layout pass.
+            Task { @MainActor in
+                    Callback()
+            }
+        }
         return true
     }
     
@@ -222,5 +229,83 @@ extension View3D
             Position.x = Position.x + Shift
             Node.position = Position
         }
+    }
+    
+    // MARK: - Free space in the top control bar.
+    
+    /// Returns the largest square that fits in the top control bar without covering any of its buttons.
+    /// - Note: The bar and buttons are projected with the camera matrices, so this works for any aspect ratio or camera tilt.
+    /// - Returns: Square in this view's coordinate space, nil if the view, camera or bar is not ready or no free space of at
+    ///            least 36 points exists.
+    public func FreeControlBarSquare() -> CGRect?
+    {
+        guard bounds.width >= 1.0, bounds.height >= 1.0, let Camera = CameraNode?.camera, let CameraNodeRef = CameraNode,
+              let Bar = ControlBackground else
+        {
+            return nil
+        }
+        let Projection = simd_float4x4(Camera.projectionTransform(withViewportSize: bounds.size))
+        let ViewProjection = Projection * CameraNodeRef.simdWorldTransform.inverse
+        func ToScreen(_ X: Float, _ Y: Float, _ Z: Float) -> CGPoint?
+        {
+            let Clip = ViewProjection * SIMD4<Float>(X, Y, Z, 1.0)
+            if abs(Clip.w) < 0.00001
+            {
+                return nil
+            }
+            let NDCX = CGFloat(Clip.x / Clip.w)
+            let NDCY = CGFloat(Clip.y / Clip.w)
+            return CGPoint(x: (NDCX + 1.0) / 2.0 * bounds.width, y: (1.0 - NDCY) / 2.0 * bounds.height)
+        }
+        //Extent of the bar itself.
+        let BarCenter = Bar.position
+        guard let BarLeftTop = ToScreen(BarCenter.x - 15.0, BarCenter.y + 2.0, BarCenter.z),
+              let BarRightBottom = ToScreen(BarCenter.x + 15.0, BarCenter.y - 2.0, BarCenter.z) else
+        {
+            return nil
+        }
+        let Padding: CGFloat = 6.0
+        let BarLeft = max(BarLeftTop.x, 0.0) + Padding
+        let BarRight = min(BarRightBottom.x, bounds.width) - Padding
+        let BarHeight = BarRightBottom.y - BarLeftTop.y
+        //Occupied spans of the buttons that live in the bar.
+        var Occupied = [(Low: CGFloat, High: CGFloat)]()
+        for Button in (scene?.rootNode.childNodes ?? []).compactMap({$0 as? SCNButtonNode}) where Button.position.y >= 10.0
+        {
+            let Extent = ButtonExtent(Button)
+            if let Left = ToScreen(Button.position.x + Float(Extent.Left), Button.position.y, Button.position.z),
+               let Right = ToScreen(Button.position.x + Float(Extent.Right), Button.position.y, Button.position.z)
+            {
+                Occupied.append((Left.x - Padding, Right.x + Padding))
+            }
+        }
+        Occupied.sort(by: {$0.Low < $1.Low})
+        //Walk the bar left to right collecting the gaps between buttons.
+        var Gaps = [(Low: CGFloat, High: CGFloat)]()
+        var Cursor = BarLeft
+        for Span in Occupied
+        {
+            if Span.Low > Cursor
+            {
+                Gaps.append((Cursor, min(Span.Low, BarRight)))
+            }
+            Cursor = max(Cursor, Span.High)
+        }
+        if Cursor < BarRight
+        {
+            Gaps.append((Cursor, BarRight))
+        }
+        guard let Best = Gaps.max(by: {($0.High - $0.Low) < ($1.High - $1.Low)}) else
+        {
+            return nil
+        }
+        let Size = min(BarHeight - 2.0 * Padding, Best.High - Best.Low)
+        if Size < 36.0
+        {
+            return nil
+        }
+        return CGRect(x: Best.Low + (Best.High - Best.Low - Size) / 2.0,
+                      y: BarLeftTop.y + (BarHeight - Size) / 2.0,
+                      width: Size, height: Size)
     }
 }
