@@ -551,6 +551,149 @@ class GeneralAI
                PlacementWeights.BelowBucket * BelowBucket
     }
     
+    /// A place a piece can be driven to and the motions that get it there.
+    private struct ReachablePlacement
+    {
+        /// Horizontal distance from the starting column.
+        let DX: Int
+        /// Number of rows from the starting row to the final resting place.
+        let RestDY: Int
+        /// Motions (ending with a drop down) that put the piece there.
+        let Path: [Directions]
+    }
+    
+    /// A position of the piece relative to where it started.
+    private struct PiecePosition: Hashable
+    {
+        let DX: Int
+        let DY: Int
+    }
+    
+    /// Finds every resting place the piece can be driven to, including places that need the piece to slide sideways partway
+    /// down (under an overhang, around a barrier, onto a block in the middle of the board, etc.)
+    /// - Note:
+    ///   - Motions happen one per timer tick (`MotionInterval`) and gravity pulls the piece down one row every third of a second in
+    ///     between, so the search follows time: each step is a move (left, right or down) followed by whatever gravity does
+    ///     before the next move.
+    ///   - A sideways move is only used if the space is free in the piece's row and the row below, which leaves room for the
+    ///     timing being a tick or so off.
+    ///   - Sideways moves are never planned for a piece that is already resting. It would freeze before the move.
+    ///   - Reaching a place by the fewest motions is preferred.
+    /// - Parameter Points: The piece's blocks (already rotated) at the starting position.
+    /// - Parameter MotionsSoFar: Number of motions (the rotations) that happen before the search starts.
+    /// - Parameter MotionInterval: Seconds between motions.
+    /// - Parameter GameBoard: The board.
+    /// - Returns: Places the piece can reach.
+    private static func ReachablePlacements(Points: [CGPoint], MotionsSoFar: Int, MotionInterval: Double,
+                                            GameBoard: Board) -> [ReachablePlacement]
+    {
+        let GravityInterval = 0.33
+        let MaxMotions = 80
+        func Free(_ Position: PiecePosition) -> Bool
+        {
+            let Moved = Points.map({CGPoint(x: $0.x + CGFloat(Position.DX), y: $0.y + CGFloat(Position.DY))})
+            return CanOccupy(Moved, GameBoard: GameBoard)
+        }
+        func GravityTicks(Between First: Int, And Second: Int) -> Int
+        {
+            return Int((Double(Second) * MotionInterval / GravityInterval).rounded(.down)) -
+                   Int((Double(First) * MotionInterval / GravityInterval).rounded(.down))
+        }
+        func Settle(_ Position: PiecePosition, From First: Int, To Second: Int) -> PiecePosition
+        {
+            var Current = Position
+            for _ in 0 ..< GravityTicks(Between: First, And: Second)
+            {
+                let Lower = PiecePosition(DX: Current.DX, DY: Current.DY + 1)
+                if !Free(Lower)
+                {
+                    break
+                }
+                Current = Lower
+            }
+            return Current
+        }
+        
+        let Start = Settle(PiecePosition(DX: 0, DY: 0), From: 0, To: MotionsSoFar)
+        if !Free(Start)
+        {
+            return []
+        }
+        var Parents = [PiecePosition: (Parent: PiecePosition?, Move: Directions)]()
+        Parents[Start] = (nil, .NoDirection)
+        var Depth = [PiecePosition: Int]()
+        Depth[Start] = MotionsSoFar
+        var Frontier = [Start]
+        var Reached = [Start]
+        var Motion = MotionsSoFar
+        while !Frontier.isEmpty && Motion < MaxMotions
+        {
+            var Next = [PiecePosition]()
+            for Position in Frontier
+            {
+                let Below = PiecePosition(DX: Position.DX, DY: Position.DY + 1)
+                let CanFall = Free(Below)
+                var Moves = [(Directions, PiecePosition)]()
+                if CanFall
+                {
+                    Moves.append((.Down, Below))
+                    for (Direction, Step) in [(Directions.Left, -1), (Directions.Right, 1)]
+                    {
+                        let Side = PiecePosition(DX: Position.DX + Step, DY: Position.DY)
+                        let SideBelow = PiecePosition(DX: Position.DX + Step, DY: Position.DY + 1)
+                        if Free(Side) && Free(SideBelow)
+                        {
+                            Moves.append((Direction, Side))
+                        }
+                    }
+                }
+                for (Move, After) in Moves
+                {
+                    let Settled = Settle(After, From: Motion, To: Motion + 1)
+                    if Parents[Settled] != nil
+                    {
+                        continue
+                    }
+                    Parents[Settled] = (Position, Move)
+                    Depth[Settled] = Motion + 1
+                    Next.append(Settled)
+                    Reached.append(Settled)
+                }
+            }
+            Frontier = Next
+            Motion = Motion + 1
+        }
+        
+        //Every position that was reached can be turned into a resting place by dropping the piece from there.
+        var Best = [PiecePosition: [Directions]]()
+        for Position in Reached
+        {
+            var Rest = Position
+            while Free(PiecePosition(DX: Rest.DX, DY: Rest.DY + 1))
+            {
+                Rest = PiecePosition(DX: Rest.DX, DY: Rest.DY + 1)
+            }
+            var Path = [Directions]()
+            var Cursor: PiecePosition? = Position
+            while let Current = Cursor, let Step = Parents[Current]
+            {
+                if Step.Move != .NoDirection
+                {
+                    Path.append(Step.Move)
+                }
+                Cursor = Step.Parent
+            }
+            Path.reverse()
+            Path.append(.DropDown)
+            if let Existing = Best[Rest], Existing.count <= Path.count
+            {
+                continue
+            }
+            Best[Rest] = Path
+        }
+        return Best.map({ReachablePlacement(DX: $0.key.DX, RestDY: $0.key.DY, Path: $0.value)})
+    }
+    
     /// Returns a best fit score.
     /// - Note: Not currently implemented.
     static func BestFit(_ GamePiece: Piece, CurrentScore: Int, InBoard: Board) -> Double
@@ -611,89 +754,50 @@ class GeneralAI
             }
         }
         
+        //The motions are carried out one per timer tick while gravity keeps pulling the piece down. Planning follows that
+        //timing so paths that slide sideways in mid-fall stay valid.
+        let FastAI = GameBoard.Game?.FastAI ?? false
+        let MotionInterval = FastAI ? 0.01 : 0.1
+        
         var BestScore = -Double.greatestFiniteMagnitude
-        var BestRotation = 0
-        var BestShift = 0
+        var BestPath = [Directions]()
         var BestEffort = Int.max
         for (Count, Points) in Rotations
         {
-            //Find the horizontal shifts the piece can reach.
-            var Shifts = [0]
-            for Direction in [-1, 1]
+            var Prefix = [Directions]()
+            if Count == 3
             {
-                var Shift = Direction
-                while true
-                {
-                    var Clear = true
-                    for Fall in 0 ... 1
-                    {
-                        let Moved = Points.map({CGPoint(x: $0.x + CGFloat(Shift), y: $0.y + CGFloat(Fall))})
-                        if !CanOccupy(Moved, GameBoard: GameBoard)
-                        {
-                            Clear = false
-                            break
-                        }
-                    }
-                    if !Clear
-                    {
-                        break
-                    }
-                    Shifts.append(Shift)
-                    Shift = Shift + Direction
-                }
+                Prefix.append(.RotateLeft)
             }
-            
-            for Shift in Shifts
+            else
             {
-                var Dropped = Points.map({CGPoint(x: $0.x + CGFloat(Shift), y: $0.y)})
-                while true
-                {
-                    let Lower = Dropped.map({CGPoint(x: $0.x, y: $0.y + 1.0)})
-                    if !CanOccupy(Lower, GameBoard: GameBoard)
-                    {
-                        break
-                    }
-                    Dropped = Lower
-                }
+                Prefix.append(contentsOf: [Directions](repeating: .RotateRight, count: Count))
+            }
+            let Plans = ReachablePlacements(Points: Points, MotionsSoFar: Prefix.count, MotionInterval: MotionInterval,
+                                            GameBoard: GameBoard)
+            for Plan in Plans
+            {
+                let Dropped = Points.map({CGPoint(x: $0.x + CGFloat(Plan.DX), y: $0.y + CGFloat(Plan.RestDY))})
                 let Score = ScorePlacement(Points: Dropped, Grid: Grid, Floor: Floor, GameBoard: GameBoard)
-                let Effort = abs(Shift) + Count
+                let Effort = Prefix.count + Plan.Path.count
                 if Score > BestScore + 0.000001 || (abs(Score - BestScore) <= 0.000001 && Effort < BestEffort)
                 {
                     BestScore = Score
-                    BestRotation = Count
-                    BestShift = Shift
+                    BestPath = Prefix + Plan.Path
                     BestEffort = Effort
                 }
             }
         }
         
-        //Turn the winning placement into motions.
-        if BestRotation == 3
+        //Hand the winning path to the game. Every path ends with a drop down.
+        for Motion in BestPath
         {
-            MotionQueue.Enqueue(.RotateLeft)
+            MotionQueue.Enqueue(Motion)
         }
-        else
+        if BestPath.isEmpty
         {
-            for _ in 0 ..< BestRotation
-            {
-                MotionQueue.Enqueue(.RotateRight)
-            }
+            MotionQueue.Enqueue(.DropDown)
         }
-        if BestShift < 0
-        {
-            for _ in 0 ..< abs(BestShift)
-            {
-                MotionQueue.Enqueue(.Left)
-            }
-        }
-        else if BestShift > 0
-        {
-            for _ in 0 ..< BestShift
-            {
-                MotionQueue.Enqueue(.Right)
-            }
-        }
-        MotionQueue.Enqueue(.DropDown)
         return BestScore
     }
 }

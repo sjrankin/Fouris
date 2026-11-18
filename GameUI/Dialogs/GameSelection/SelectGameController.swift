@@ -89,6 +89,15 @@ class SelectGameController: UIViewController, UITableViewDelegate, UITableViewDa
         return GameStyleTableViewCell.CellHeight
     }
     
+    /// Returns the height of the section headers. The default height clips the title text on macOS.
+    /// - Parameter tableView: Not used.
+    /// - Parameter heightForHeaderInSection: Not used.
+    /// - Returns: Height for the section headers.
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
+    {
+        return 36.0
+    }
+    
     /// Returns the section title for various game types.
     /// - Parameter tableView: Not used.
     /// - Parameter titleForHeaderInSection: Determines the section title to return.

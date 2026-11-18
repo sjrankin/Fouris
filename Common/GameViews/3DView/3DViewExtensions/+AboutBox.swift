@@ -70,10 +70,12 @@ extension View3D
         let TitleNode = SCNNode(geometry: Title)
         TitleNode.scale = SCNVector3(0.1, 0.1, 0.1)
         TitleNode.categoryBitMask = View3D.AboutLight
-        TitleNode.position = SCNVector3(-2.0, -0.5, 1.0)
+        //Center the text horizontally in the box.
+        let TitleBounds = TitleNode.boundingBox
+        TitleNode.position = SCNVector3(-(TitleBounds.min.x + TitleBounds.max.x) / 2.0 * TitleNode.scale.x, -0.5, 1.0)
         AboutBoxNode?.addChildNode(TitleNode)
         
-        let Ver = SCNText(string: Versioning.MakeVersionString(), extrusionDepth: 1.0)
+        let Ver = SCNText(string: Versioning.MakeVersionString() + " (\(Versioning.Build))", extrusionDepth: 1.0)
         Ver.font = UIFont(name: "Futura", size: 10.0)
         Ver.flatness = 0.0
         Ver.firstMaterial?.diffuse.contents = UIColor.white
@@ -81,7 +83,8 @@ extension View3D
         let VerNode = SCNNode(geometry: Ver)
         VerNode.scale = SCNVector3(0.09, 0.09, 0.09)
         VerNode.categoryBitMask = View3D.AboutLight
-        VerNode.position = SCNVector3(-2.0, -1.5, 1.0)
+        let VerBounds = VerNode.boundingBox
+        VerNode.position = SCNVector3(-(VerBounds.min.x + VerBounds.max.x) / 2.0 * VerNode.scale.x, -1.5, 1.0)
         AboutBoxNode?.addChildNode(VerNode)
         
         let FadeIn = SCNAction.fadeIn(duration: FadeInDuration)

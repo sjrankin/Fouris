@@ -2134,6 +2134,76 @@ class MainViewController: UIViewController,
     /// The heartbeat timer.
     private var HeartbeatTimer: Timer? = nil
     
+    // MARK: - Dialog presentation.
+    
+    /// Window frame to restore after a dialog has been dismissed (macOS only).
+    private var SavedWindowFrame: CGRect? = nil
+    
+    /// Present a full-size dialog. The dialogs are laid out for a tall (about 1000 point) sheet. On macOS they are shown over the
+    /// whole window and the window is made tall enough for the layout while the dialog is up. Other platforms use the
+    /// default presentation.
+    /// - Parameter Controller: The dialog to present.
+    private func PresentDialog(_ Controller: UIViewController)
+    {
+        #if targetEnvironment(macCatalyst)
+        Controller.modalPresentationStyle = .fullScreen
+        GrowWindowForDialog()
+        #endif
+        self.present(Controller, animated: true, completion: nil)
+    }
+    
+    #if targetEnvironment(macCatalyst)
+    /// Make the window big enough for the dialogs (within the limits of the screen). The old size is remembered.
+    private func GrowWindowForDialog()
+    {
+        guard let Scene = view.window?.windowScene else
+        {
+            return
+        }
+        let Frame = Scene.effectiveGeometry.systemFrame
+        if SavedWindowFrame == nil
+        {
+            SavedWindowFrame = Frame
+        }
+        let Screen = Scene.screen.bounds
+        let NeededHeight = min(max(Frame.height, 1040.0), Screen.height - 80.0)
+        let NeededWidth = max(Frame.width, 800.0)
+        var Origin = Frame.origin
+        if Origin.y + NeededHeight > Screen.maxY - 20.0
+        {
+            Origin.y = max(Screen.minY + 30.0, Screen.maxY - NeededHeight - 20.0)
+        }
+        let NewFrame = CGRect(x: Origin.x, y: Origin.y, width: NeededWidth, height: NeededHeight)
+        Scene.requestGeometryUpdate(UIWindowScene.GeometryPreferences.Mac(systemFrame: NewFrame))
+        {
+            Error in
+            print("Could not resize the window for a dialog: \(Error.localizedDescription)")
+        }
+    }
+    
+    /// Put the window back to the size it had before a dialog grew it.
+    private func RestoreWindowAfterDialog()
+    {
+        guard let Saved = SavedWindowFrame, let Scene = view.window?.windowScene else
+        {
+            return
+        }
+        SavedWindowFrame = nil
+        Scene.requestGeometryUpdate(UIWindowScene.GeometryPreferences.Mac(systemFrame: Saved))
+        {
+            Error in
+            print("Could not restore the window size: \(Error.localizedDescription)")
+        }
+    }
+    
+    /// When a full-window dialog goes away this view appears again; restore the window size at that point.
+    override public func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        RestoreWindowAfterDialog()
+    }
+    #endif
+    
     // MARK: - Pop-over main menu.
     
     /// Shows the pop-over menu. This menu (a pop-over view controller in reality) is invoked by the user pressing the main button
@@ -2172,7 +2242,7 @@ class MainViewController: UIViewController,
                 if let AboutController = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "AboutDialog") as? AboutDialogController
                 {
                     ForcePause()
-                    self.present(AboutController, animated: true, completion: nil)
+                    PresentDialog(AboutController)
             }
             
             case .RunInAttractMode:
@@ -2193,7 +2263,7 @@ class MainViewController: UIViewController,
                 {
                     ForcePause()
                     SelectController.SelectorDelegate = self
-                    self.present(SelectController, animated: true, completion: nil)
+                    PresentDialog(SelectController)
             }
             
             case .RunSettings:
@@ -2202,7 +2272,7 @@ class MainViewController: UIViewController,
                 {
                     ForcePause()
                     Controller.EditTheme(Theme: Themes!.UserTheme!)
-                    self.present(Controller, animated: true, completion: nil)
+                    PresentDialog(Controller)
             }
             
             case .StartPlaying:
