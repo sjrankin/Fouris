@@ -94,6 +94,7 @@ class View3D: SCNView,                          //Our main super class.
         }
         self.antialiasingMode = AAMode
         self.scene?.rootNode.addChildNode(MakeCamera())
+        self.pointOfView = CameraNode
         
         #if true
         if self.allowsCameraControl
@@ -1797,6 +1798,24 @@ class View3D: SCNView,                          //Our main super class.
     
     /// Map of button types to button nodes.
     public var ButtonList: [NodeButtons: SCNButtonNode] = [NodeButtons: SCNButtonNode]()
+    
+    /// The view size the control buttons were last laid out for.
+    private var LastButtonLayoutSize: CGSize = .zero
+    
+    /// Re-fit the control buttons whenever the size of the view changes (rotation, split view, window resize).
+    override func layoutSubviews()
+    {
+        super.layoutSubviews()
+        if bounds.size != LastButtonLayoutSize
+        {
+            //Only remember the size once the buttons were successfully fitted. Early layout passes happen before the scene
+            //and camera exist, in which case the buttons are fitted on a later pass.
+            if RepositionControlButtons()
+            {
+                LastButtonLayoutSize = bounds.size
+            }
+        }
+    }
     
     /// Map of button node information.
     public var ButtonDictionary: [NodeButtons: (Location: SCNVector3, Scale: Double, Color: UIColor, Highlight: UIColor)] =

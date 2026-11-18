@@ -30,14 +30,9 @@ extension View3D
     /// - Parameter NodeText: If supplied the text to use for the node. If not supplied, default values are used.
     public func MakeButton(ForButton: NodeButtons, NodeText: String? = nil)
     {
-        if UIDevice.current.userInterfaceIdiom == .phone
-        {
-            ButtonDictionary = SmallButtonDictionary
-        }
-        else
-        {
-            ButtonDictionary = BigButtonDictionary
-        }
+        ButtonDictionary = CurrentButtonDictionary()
+        //Once the new button exists, make sure it (and the rest) fit the visible screen.
+        defer { RepositionControlButtons() }
         var ButtonFont = UIFont.systemFont(ofSize: 20.0, weight: UIFont.Weight.bold)
         if let Descriptor = ButtonFont.fontDescriptor.withDesign(.rounded)
         {

@@ -116,6 +116,7 @@
 		1762FC19229CCFF6000099F2 /* RawParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762FC18229CCFF6000099F2 /* RawParser.swift */; };
 		1763492D2312667A000BDF24 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1763492C2312667A000BDF24 /* Default-568h@2x.png */; };
 		17660BE822892B1E00082E23 /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17660BE722892B1E00082E23 /* UIButtonExtensions.swift */; };
+		1790D4F8225DE9D7003E402D /* +ButtonLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1790D4F9225DE9D7003E402D /* +ButtonLayout.swift */; };
 		1790D4F6225DE9D7003E402D /* TimerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1790D4F7225DE9D7003E402D /* TimerExtensions.swift */; };
 		17660BEC2289995E00082E23 /* GameViewRequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17660BEB2289995E00082E23 /* GameViewRequestProtocol.swift */; };
 		176708F02339EE5C000E2216 /* CustomStringConvertibleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176708EF2339EE5C000E2216 /* CustomStringConvertibleExtensions.swift */; };
@@ -392,6 +393,7 @@
 		1762FC18229CCFF6000099F2 /* RawParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawParser.swift; sourceTree = "<group>"; };
 		1763492C2312667A000BDF24 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		17660BE722892B1E00082E23 /* UIButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
+		1790D4F9225DE9D7003E402D /* +ButtonLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+ButtonLayout.swift"; sourceTree = "<group>"; };
 		1790D4F7225DE9D7003E402D /* TimerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerExtensions.swift; sourceTree = "<group>"; };
 		17660BEB2289995E00082E23 /* GameViewRequestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewRequestProtocol.swift; sourceTree = "<group>"; };
 		176708EF2339EE5C000E2216 /* CustomStringConvertibleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStringConvertibleExtensions.swift; sourceTree = "<group>"; };
@@ -1138,6 +1140,7 @@
 			children = (
 				171A3E662343498C00C92585 /* SCNButtonNode.swift */,
 				17E619AA2348569800C391CF /* +TextButtons.swift */,
+				1790D4F9225DE9D7003E402D /* +ButtonLayout.swift */,
 			);
 			path = InViewButtons;
 			sourceTree = "<group>";
@@ -1596,6 +1599,7 @@
 				17A9D8AF2359774800DAE024 /* +AboutBox.swift in Sources */,
 				17A48E422327BC6900510EE6 /* GameSelectorProtocol.swift in Sources */,
 				17E619AB2348569800C391CF /* +TextButtons.swift in Sources */,
+				1790D4F8225DE9D7003E402D /* +ButtonLayout.swift in Sources */,
 				176708F3233A0272000E2216 /* SupportedLanguages.swift in Sources */,
 				177F4FD9229C1A7600FE72CD /* SerializerExtension.swift in Sources */,
 				17C3AA5C2356F8120047DE79 /* ThemeUpdatedProtocol.swift in Sources */,
