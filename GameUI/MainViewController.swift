@@ -1436,6 +1436,9 @@ class MainViewController: UIViewController,
         #if false
         History?.Games![CurrentBaseGameType]!.IncrementGameCount()
         #endif
+        //The after-game-over show-off rotations must not run during play. The falling piece is not part of the rotating
+        //board, so pieces would freeze into the rotated plane instead of the barrier plane.
+        GameView3D?.StopShowingOff(Duration: 0.05)
         ForceResume()
         StopAccumulating = false
         RotateIndex = 0

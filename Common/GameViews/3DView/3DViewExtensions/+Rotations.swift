@@ -219,15 +219,21 @@ extension View3D
             BucketGridNode?.runAction(Reset)
             OutlineNode?.runAction(Reset)
         }
-        //Run the first execution prior to setting up the timer so that things do not appear to stall.
-        ExecutionRotation()
+        ShowOffTimer?.invalidate()
         ShowOffTimer = Timer.scheduledTimer(timeInterval: Delay, target: self, selector: #selector(ExecutionRotation),
                                             userInfo: nil, repeats: true)
+        //Run the first execution after setting up the timer (rotations are skipped when there is no timer).
+        ExecutionRotation()
     }
     
     /// Execution a rotation of the board game to show off after game over.
     @objc func ExecutionRotation()
     {
+        if ShowOffTimer == nil
+        {
+            //Showing off was stopped (eg, a new game started) so do not rotate the board.
+            return
+        }
         let Axis = Axes.allCases.randomElement()!
         let Angle: CGFloat = (Axis == .ZAxis ? 90.0 : 180.0) * CGFloat([1.0, -1.0].randomElement()!)
         let RotationalDuration: Double = Axis == .ZAxis ? 0.3 : 0.6
