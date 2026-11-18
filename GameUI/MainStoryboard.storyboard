@@ -439,7 +439,7 @@
                                 <rect key="frame" x="20" y="135" width="728" height="660"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="660" id="asU-UK-nIN"/>
+                                    <constraint firstAttribute="height" constant="660" priority="750" id="asU-UK-nIN"/>
                                 </constraints>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Changing the game style or sub-type will restart your game." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dFL-TQ-sXL">
@@ -471,6 +471,7 @@
                             <constraint firstItem="snd-oC-R5x" firstAttribute="centerX" secondItem="jlr-uf-ZGv" secondAttribute="centerX" id="joP-ng-iSr"/>
                             <constraint firstItem="snd-oC-R5x" firstAttribute="leading" secondItem="dFL-TQ-sXL" secondAttribute="leading" id="nLF-ht-QwI"/>
                             <constraint firstAttribute="bottom" secondItem="DTm-dV-Vlw" secondAttribute="bottom" id="plt-YF-50y"/>
+                            <constraint firstItem="DTm-dV-Vlw" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dFL-TQ-sXL" secondAttribute="bottom" constant="8" id="Q7x-Fit-Bar"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="TLt-Jh-odx"/>
                     </view>

@@ -19,6 +19,10 @@ class SelectGameController: UIViewController, UITableViewDelegate, UITableViewDa
     override public func viewDidLoad()
     {
         super.viewDidLoad()
+        #if targetEnvironment(macCatalyst)
+        // Give the sheet a definite size so the OK and Cancel buttons are never clipped.
+        preferredContentSize = CGSize(width: 600, height: 760)
+        #endif
         InitializeTables()
         GameStyleTableView.allowsMultipleSelection = false
         GameStyleTableView.allowsSelection = true
@@ -242,7 +246,9 @@ class SelectGameController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         else
         {
+            //Nothing was selected so there is nothing to change; still close the dialog.
             SelectorDelegate?.GameTypeChanged(DidChange: false, NewGameShape: nil)
+            self.dismiss(animated: true, completion: nil)
         }
     }
     
