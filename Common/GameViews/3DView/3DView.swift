@@ -1806,6 +1806,9 @@ class View3D: SCNView,                          //Our main super class.
     /// The view size the control buttons were last laid out for.
     private var LastButtonLayoutSize: CGSize = .zero
     
+    /// Horizontal shift applied to each control button by the last fit (see `RepositionControlButtons`).
+    var ButtonShifts: [NodeButtons: Float] = [:]
+    
     /// Guards against re-entrant layout while the control buttons are being fitted.
     private var IsFittingButtons = false
     

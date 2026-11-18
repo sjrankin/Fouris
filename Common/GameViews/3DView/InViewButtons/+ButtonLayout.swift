@@ -201,9 +201,26 @@ extension View3D
         for (Index, Entry) in Extents.enumerated()
         {
             var Position = Design[Entry.Button.ButtonType]!.Location
-            Position.x = Position.x + Float(Shifts[Index] ?? 0.0)
+            let Shift = Float(Shifts[Index] ?? 0.0)
+            Position.x = Position.x + Shift
             Entry.Button.position = Position
+            //Remember the shift so buttons that are recreated later (text changes) land in the fitted place without re-measuring.
+            ButtonShifts[Entry.Button.ButtonType] = Shift
         }
         return true
+    }
+    
+    /// Places a freshly created button at its fitted location using the shift computed by the last full fit.
+    /// - Note: This is cheap, so it is safe to call every time a button is recreated (for example, when its text changes).
+    /// - Parameter Button: The button type.
+    /// - Parameter Node: The newly created button node.
+    func ApplyFittedLocation(For Button: NodeButtons, Node: SCNNode)
+    {
+        if let Shift = ButtonShifts[Button], let Design = CurrentButtonDictionary()[Button]
+        {
+            var Position = Design.Location
+            Position.x = Position.x + Shift
+            Node.position = Position
+        }
     }
 }
