@@ -1655,11 +1655,11 @@ class Piece: CustomStringConvertible
         var Results = [CGPoint]()
         for Point in Points
         {
-            let NewPoint = Point.WithOffset(Int(-AboutOrigin.x), Int(-AboutOrigin.y))
-            var RotatedPoint: CGPoint!
+            var RotatedPoint: CGPoint = Point.WithOffset(Int(-AboutOrigin.x), Int(-AboutOrigin.y))
+            //Each rotation starts from the result of the previous one.
             for _ in 0 ..< Times
             {
-                RotatedPoint = RotateBy(Angle: 90.0, Point: NewPoint)
+                RotatedPoint = RotateBy(Angle: 90.0, Point: RotatedPoint)
             }
             RotatedPoint = RotatedPoint.WithOffset(AboutOrigin)
             Results.append(RotatedPoint)
@@ -1703,11 +1703,12 @@ class Piece: CustomStringConvertible
         var Results = [CGPoint]()
         for Point in Points
         {
-            let NewPoint = Point.WithOffset(Int(-AboutOrigin.x), Int(-AboutOrigin.y))
-            var RotatedPoint: CGPoint!
+            var RotatedPoint: CGPoint = Point.WithOffset(Int(-AboutOrigin.x), Int(-AboutOrigin.y))
+            //Each rotation must start from the result of the previous one. (Rotating the original point every time made
+            //any count above one come out as a single rotation.)
             for _ in 0 ..< Times
             {
-                RotatedPoint = RotateBy(Angle: -90.0, Point: NewPoint)
+                RotatedPoint = RotateBy(Angle: -90.0, Point: RotatedPoint)
             }
             RotatedPoint = RotatedPoint.WithOffset(AboutOrigin)
             Results.append(RotatedPoint)
