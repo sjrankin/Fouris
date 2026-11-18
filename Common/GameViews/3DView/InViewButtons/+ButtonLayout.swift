@@ -24,23 +24,38 @@ extension View3D
     private static let ButtonEdgeInset: CGFloat = 1.0
     
     /// Returns the horizontal range of the scene that is visible in the plane of the control buttons.
-    /// - Note: Screen edges are converted to rays and intersected with the button plane, so a tilted camera is handled. The
-    ///         range is measured at each of the supplied vertical levels and the narrowest range is returned.
+    /// - Note:
+    ///   - This uses the camera's matrices directly instead of `SCNView.projectPoint`/`unprojectPoint`. Those calls need the
+    ///     view's renderer, which may not exist yet while the view is still being laid out (and creating it from inside
+    ///     `layoutSubviews` can hang on a real device).
+    ///   - Screen edges are converted to rays and intersected with the button plane, so a tilted camera is handled. The range is
+    ///     measured at each of the supplied vertical levels and the narrowest range is returned.
     /// - Parameter Levels: Vertical scene coordinates (in the button plane) at which to measure.
     /// - Returns: Tuple of the left-most and right-most visible scene X coordinates. Nil if the view has no size or camera yet.
     private func VisibleButtonRange(AtLevels Levels: [CGFloat]) -> (Min: CGFloat, Max: CGFloat)?
     {
-        if bounds.width < 1.0 || bounds.height < 1.0 || scene == nil || pointOfView == nil || Levels.isEmpty
+        guard bounds.width >= 1.0, bounds.height >= 1.0, let Camera = CameraNode?.camera, let CameraNodeRef = CameraNode,
+              !Levels.isEmpty else
         {
             return nil
         }
-        var Lowest = -CGFloat.infinity
-        var Highest = CGFloat.infinity
+        let Projection = simd_float4x4(Camera.projectionTransform(withViewportSize: bounds.size))
+        let ViewMatrix = CameraNodeRef.simdWorldTransform.inverse
+        let ViewProjection = Projection * ViewMatrix
+        let Inverse = ViewProjection.inverse
+        var Lowest = -Float.infinity
+        var Highest = Float.infinity
         for Level in Levels
         {
-            let ScreenPoint = projectPoint(SCNVector3(0.0, Float(Level), View3D.ButtonPlaneZ))
-            guard let Left = PlaneIntersection(ScreenX: 0.0, ScreenY: CGFloat(ScreenPoint.y)),
-                  let Right = PlaneIntersection(ScreenX: bounds.width, ScreenY: CGFloat(ScreenPoint.y)) else
+            //Where the button plane's center line falls vertically in normalized device coordinates.
+            let Clip = ViewProjection * SIMD4<Float>(0.0, Float(Level), View3D.ButtonPlaneZ, 1.0)
+            if abs(Clip.w) < 0.00001
+            {
+                return nil
+            }
+            let NDCY = Clip.y / Clip.w
+            guard let Left = PlaneIntersection(NDCX: -1.0, NDCY: NDCY, Inverse: Inverse),
+                  let Right = PlaneIntersection(NDCX: 1.0, NDCY: NDCY, Inverse: Inverse) else
             {
                 return nil
             }
@@ -51,24 +66,36 @@ extension View3D
         {
             return nil
         }
-        return (Lowest, Highest)
+        return (CGFloat(Lowest), CGFloat(Highest))
     }
     
-    /// Intersects the ray through a screen point with the button plane.
-    /// - Parameter ScreenX: Horizontal screen coordinate in points.
-    /// - Parameter ScreenY: Vertical screen coordinate in points.
+    /// Intersects the ray through a point in normalized device coordinates with the button plane.
+    /// - Parameter NDCX: Horizontal normalized device coordinate (-1 left, 1 right).
+    /// - Parameter NDCY: Vertical normalized device coordinate (-1 bottom, 1 top).
+    /// - Parameter Inverse: Inverse of the view-projection matrix.
     /// - Returns: Scene X coordinate of the intersection, nil if the ray does not reach the plane.
-    private func PlaneIntersection(ScreenX: CGFloat, ScreenY: CGFloat) -> CGFloat?
+    private func PlaneIntersection(NDCX: Float, NDCY: Float, Inverse: simd_float4x4) -> Float?
     {
-        let Near = unprojectPoint(SCNVector3(Float(ScreenX), Float(ScreenY), 0.0))
-        let Far = unprojectPoint(SCNVector3(Float(ScreenX), Float(ScreenY), 1.0))
+        func Unproject(_ Depth: Float) -> SIMD3<Float>?
+        {
+            let Point = Inverse * SIMD4<Float>(NDCX, NDCY, Depth, 1.0)
+            if abs(Point.w) < 0.00001
+            {
+                return nil
+            }
+            return SIMD3<Float>(Point.x, Point.y, Point.z) / Point.w
+        }
+        guard let Near = Unproject(-1.0), let Far = Unproject(1.0) else
+        {
+            return nil
+        }
         let DeltaZ = Far.z - Near.z
         if abs(DeltaZ) < 0.00001
         {
             return nil
         }
         let T = (View3D.ButtonPlaneZ - Near.z) / DeltaZ
-        let X = CGFloat(Near.x + T * (Far.x - Near.x))
+        let X = Near.x + T * (Far.x - Near.x)
         return X.isFinite ? X : nil
     }
     
