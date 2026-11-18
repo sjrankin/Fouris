@@ -50,6 +50,7 @@ extension View3D
                 let NewBucket = self.CreateBucket(InitialOpacity: 1.0, Shape: self.CenterBlockShape!)
                 self.BucketNode = NewBucket
                 self.scene?.rootNode.addChildNode(self.BucketNode!)
+                self.ResetShapeOutlines()
                 self.MasterBlockNode = SCNNode()
                 self.scene?.rootNode.addChildNode(self.MasterBlockNode!)
                 

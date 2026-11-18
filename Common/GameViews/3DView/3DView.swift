@@ -831,7 +831,8 @@ class View3D: SCNView,                          //Our main super class.
         {
             //print("Removing nodes from the MasterBlockNode")
             MasterBlockNode?.childNodes.forEach({
-                if !($0 as! VisualBlocks3D).IsRetired
+                //Only moving (non-retired) blocks are removed - outline nodes and anything else stay.
+                if let Block = $0 as? VisualBlocks3D, !Block.IsRetired
                 {
                     $0.removeFromParentNode()
                 }
@@ -896,6 +897,7 @@ class View3D: SCNView,                          //Our main super class.
         {
             MovingPieceNode?.removeFromParentNode()
         }
+        RemoveMovingPieceOutline()
         
         //let YStaticAdjustment: CGFloat = IsOddlyShaped ? 0.0 : -0.5
         
@@ -956,6 +958,7 @@ class View3D: SCNView,                          //Our main super class.
             #endif
         }
         self.scene?.rootNode.addChildNode(MovingPieceNode!)
+        DrawMovingPieceOutline(MovingPieceBlocks)
     }
     
     /// Vertical offset applied to map rows so the center of the bucket interior (the playable area) sits at the origin of the
@@ -995,6 +998,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter Finalized: The piece that was finalized.
     public func MergePieceIntoBucket(_ Finalized: Piece)
     {
+        RecordBlockJoins(For: Finalized)
         let Pretty = MapType.PrettyPrint(Map: CurrentBoard!.Map!)
         print("Merged map:\n\(Pretty)")
         RetiredPieceIDs.append(Finalized.ID)
@@ -1062,6 +1066,8 @@ class View3D: SCNView,                          //Our main super class.
     public func MovePieceRelative(WithPiece: Piece, DeltaX: Int, DeltaY: Int, TotalDuration Duration: Double, Completed: (@MainActor (Piece)->())?)
     {
         print("At MovePieceRelative: DeltaX=\(DeltaX), DeltaY=\(DeltaY), TotalDuration=\(Duration)")
+        //Keep the outline with the blocks while they move.
+        MovingOutlineNode?.runAction(SCNAction.moveBy(x: CGFloat(DeltaX), y: CGFloat(DeltaY), z: 0.0, duration: Duration))
         MovingPieceNode?.enumerateChildNodes
             {
                 Node, _ in
@@ -1082,6 +1088,7 @@ class View3D: SCNView,                          //Our main super class.
     /// Remove the moving piece, if it exists.
     public func RemoveMovingPiece()
     {
+        RemoveMovingPieceOutline()
         let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape!)!
         if BoardClass == .Rotatable
         {
@@ -1252,6 +1259,8 @@ class View3D: SCNView,                          //Our main super class.
             }
         }
         BlockList = BlockList.filter{$0.Marked}
+        //Shapes may have been split or shortened by removed rows, so redraw their outlines.
+        RebuildShapeOutlines()
     }
     
     /// Sets the board to use by the view (and indirectly sets the map as well).
@@ -1292,6 +1301,8 @@ class View3D: SCNView,                          //Our main super class.
         objc_sync_enter(RotateLock)
         defer{objc_sync_exit(RotateLock)}
         CreateMasterBlockNode()
+        ResetShapeOutlines()
+        RemoveMovingPieceOutline()
         //print("Clearing the bucket.")
         for Node in BlockList
         {
@@ -1805,6 +1816,15 @@ class View3D: SCNView,                          //Our main super class.
     
     /// The view size the control buttons were last laid out for.
     private var LastButtonLayoutSize: CGSize = .zero
+    
+    /// Node holding the outlines of the retired shapes (a child of the master block node).
+    var ShapeOutlineNode: SCNNode? = nil
+    
+    /// Node holding the outline of the moving piece.
+    var MovingOutlineNode: SCNNode? = nil
+    
+    /// For each retired block, the blocks it was joined to when its piece landed. Used to outline shapes as a whole.
+    var BlockJoins: [UUID: Set<UUID>] = [:]
     
     /// Horizontal shift applied to each control button by the last fit (see `RepositionControlButtons`).
     var ButtonShifts: [NodeButtons: Float] = [:]

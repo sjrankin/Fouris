@@ -156,6 +156,8 @@ extension View3D
     /// - Parameter DelayStartBy: Number of seconds to wait before starting to clean the bucket. Defaults to 0.0.
     public func BucketCleaner(_ Method: DestructionMethods, MaxDuration: Double, DelayStartBy: Double = 0.0)
     {
+        //The blocks are about to be destroyed, so the outlines around them go as well.
+        ResetShapeOutlines()
         if DelayStartBy <= 0.0
         {
             CleanTheBucket(Method, MaxDuration: MaxDuration)
