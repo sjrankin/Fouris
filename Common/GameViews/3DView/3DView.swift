@@ -959,12 +959,17 @@ class View3D: SCNView,                          //Our main super class.
         self.scene?.rootNode.addChildNode(MovingPieceNode!)
     }
     
-    /// Vertical offset applied to the bucket so the playing field sits comfortably between the on-screen controls.
-    /// Every map-to-scene conversion goes through this value so the bucket, the grid-aligned blocks and the moving piece
-    /// always agree, regardless of device.
+    /// Vertical offset applied to map rows so the center of the bucket interior (the playable area) sits at the origin of the
+    /// scene, where the grid and camera expect it. Every map-to-scene conversion goes through this value so the bucket, the
+    /// retired blocks and the moving piece always agree, on every device.
     public var BucketVerticalOffset: CGFloat
     {
-        return UIDevice.current.userInterfaceIdiom == .phone ? 3.0 : 0.0
+        guard let Board = BoardManager.GetBoardFor(CenterBlockShape!) else
+        {
+            return 0.0
+        }
+        let InteriorCenterRow = CGFloat(Board.BucketInteriorY) + (CGFloat(Board.BucketInteriorHeight) - 1.0) / 2.0
+        return InteriorCenterRow - (CGFloat(Board.GameBoardHeight) - 1.0) / 2.0
     }
     
     /// Converts a map column to a horizontal scene coordinate. The map is centered on the scene origin.
