@@ -151,6 +151,9 @@ class MainViewController: UIViewController,
     public func VersionBoxDisappeared()
     {
         VersionBoxShowing = false
+        //The game starts in attract mode as soon as the splash (version) box is gone. Nothing happens if a game is already
+        //running, for example when the user pressed Play.
+        AutoStartInAttractMode()
     }
     
     /// Keep the "Press Play to Start" text centered across the full width of the view whenever the layout changes.
@@ -316,11 +319,6 @@ class MainViewController: UIViewController,
             VersionBoxShowing = true
             GameView3D?.ShowAboutBox(FadeInDuration: 0.02, HideAfter: 10.0)
         }
-        
-        let AutoStartDuration = UserTheme!.AutoStartDuration
-        let _ = Timer.scheduledTimer(timeInterval: AutoStartDuration, target: self,
-                                     selector: #selector(AutoStartInAttractMode),
-                                     userInfo: nil, repeats: false)
         
         InitializeGestures()
         

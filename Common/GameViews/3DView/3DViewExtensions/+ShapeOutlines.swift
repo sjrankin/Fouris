@@ -198,6 +198,33 @@ extension View3D
             Vertices.append(SCNVector3(Float(Left), Float(Top), View3D.OutlineDepth))
             Indices.append(contentsOf: [Base, Base + 1, Base + 2, Base, Base + 2, Base + 3])
         }
+        //Lines are drawn on the front and back faces and along the depth at the corners of the shape, so the outline is
+        //still visible when the board rotates and shows the sides of the blocks.
+        var PostKeys = Set<[Int]>()
+        var Posts = [(X: CGFloat, Y: CGFloat)]()
+        func AddPost(_ X: CGFloat, _ Y: CGFloat)
+        {
+            let PostKey = Key(X, Y)
+            if PostKeys.contains(PostKey)
+            {
+                return
+            }
+            PostKeys.insert(PostKey)
+            Posts.append((X, Y))
+        }
+        func AddBackLine(FromX X0: CGFloat, FromY Y0: CGFloat, ToX X1: CGFloat, ToY Y1: CGFloat)
+        {
+            let Left = min(X0, X1) - Half
+            let Right = max(X0, X1) + Half
+            let Bottom = min(Y0, Y1) - Half
+            let Top = max(Y0, Y1) + Half
+            let Base = UInt32(Vertices.count)
+            Vertices.append(SCNVector3(Float(Left), Float(Bottom), -View3D.OutlineDepth))
+            Vertices.append(SCNVector3(Float(Right), Float(Bottom), -View3D.OutlineDepth))
+            Vertices.append(SCNVector3(Float(Right), Float(Top), -View3D.OutlineDepth))
+            Vertices.append(SCNVector3(Float(Left), Float(Top), -View3D.OutlineDepth))
+            Indices.append(contentsOf: [Base, Base + 1, Base + 2, Base, Base + 2, Base + 3])
+        }
         for Cell in Cells
         {
             let Neighbors: [(DX: CGFloat, DY: CGFloat)] = [(-1.0, 0.0), (1.0, 0.0), (0.0, 1.0), (0.0, -1.0)]
@@ -213,13 +240,44 @@ extension View3D
                     //Vertical edge on the left or right side of the block.
                     let EdgeX = Cell.X + Neighbor.DX * 0.5
                     AddLine(FromX: EdgeX, FromY: Cell.Y - 0.5, ToX: EdgeX, ToY: Cell.Y + 0.5)
+                    AddBackLine(FromX: EdgeX, FromY: Cell.Y - 0.5, ToX: EdgeX, ToY: Cell.Y + 0.5)
+                    AddPost(EdgeX, Cell.Y - 0.5)
+                    AddPost(EdgeX, Cell.Y + 0.5)
                 }
                 else
                 {
                     //Horizontal edge on the top or bottom of the block.
                     let EdgeY = Cell.Y + Neighbor.DY * 0.5
                     AddLine(FromX: Cell.X - 0.5, FromY: EdgeY, ToX: Cell.X + 0.5, ToY: EdgeY)
+                    AddBackLine(FromX: Cell.X - 0.5, FromY: EdgeY, ToX: Cell.X + 0.5, ToY: EdgeY)
+                    AddPost(Cell.X - 0.5, EdgeY)
+                    AddPost(Cell.X + 0.5, EdgeY)
                 }
+            }
+        }
+        //Thin posts along the depth of the shape at every corner of its outline.
+        for Post in Posts
+        {
+            let MinX = Float(Post.X - Half)
+            let MaxX = Float(Post.X + Half)
+            let MinY = Float(Post.Y - Half)
+            let MaxY = Float(Post.Y + Half)
+            let MinZ = -Float(View3D.OutlineDepth)
+            let MaxZ = Float(View3D.OutlineDepth)
+            let Base = UInt32(Vertices.count)
+            for Z in [MinZ, MaxZ]
+            {
+                Vertices.append(SCNVector3(MinX, MinY, Z))
+                Vertices.append(SCNVector3(MaxX, MinY, Z))
+                Vertices.append(SCNVector3(MaxX, MaxY, Z))
+                Vertices.append(SCNVector3(MinX, MaxY, Z))
+            }
+            //Vertices 0-3 are the back square, 4-7 the front square.
+            let Faces: [[UInt32]] = [[0, 1, 2, 3], [4, 5, 6, 7], [0, 1, 5, 4], [1, 2, 6, 5], [2, 3, 7, 6], [3, 0, 4, 7]]
+            for Face in Faces
+            {
+                Indices.append(contentsOf: [Base + Face[0], Base + Face[1], Base + Face[2],
+                                            Base + Face[0], Base + Face[2], Base + Face[3]])
             }
         }
         if Vertices.isEmpty
