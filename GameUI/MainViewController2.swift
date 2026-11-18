@@ -74,27 +74,6 @@ class MainViewController: UIViewController,
         
         Versioning.PublishVersion(">")
         
-        #if true
-        let BadgeCount = Versioning.Build
-        let App = UIApplication.shared
-        let NotCen = UNUserNotificationCenter.current()
-        NotCen.requestAuthorization(options: [.badge, .alert, .sound], completionHandler:
-            {
-                (granted, error) in
-                if granted
-                {
-                    Task { @MainActor in
-                            App.registerForRemoteNotifications()
-                            NotCen.setBadgeCount(BadgeCount)
-                    }
-                }
-                else
-                {
-                    print("Not authorized to display badges.")
-                }
-        }
-        )
-        #endif
         
         #if false
         State.Initialize(WithDelegate: self)

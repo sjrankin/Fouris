@@ -106,27 +106,6 @@ class MainViewController: UIViewController,
         
         let _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(IncrementSeconds), userInfo: nil, repeats: true)
         
-        #if DEBUG
-        let BadgeCount = Versioning.Build
-        let App = UIApplication.shared
-        let NotCen = UNUserNotificationCenter.current()
-        NotCen.requestAuthorization(options: [.badge, .alert, .sound], completionHandler:
-            {
-                (granted, error) in
-                if granted
-                {
-                    Task { @MainActor in
-                            App.registerForRemoteNotifications()
-                            UNUserNotificationCenter.current().setBadgeCount(BadgeCount)
-                    }
-                }
-                else
-                {
-                    print("Not authorized to display badges. (\(error?.localizedDescription ?? "permission not granted"))")
-                }
-        }
-        )
-        #endif
         
         #if true
         //Initialize the link with TDebug.
