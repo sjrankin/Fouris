@@ -383,7 +383,10 @@ class GameLogic
                                     _CurrentGameScore = GameBoard!.Map!.Scorer!.Current
             }
                     UIDelegate?.PieceFinalized(ThePiece)
-            if SpawnNewPiece && BoardClass != .Rotatable
+            //For the 2D game classes the UI spawns the next piece once it has finished drawing the finalized piece (see
+            //MainViewController.PieceFinalized). Spawning here as well created two pieces per drop, which then overlapped,
+            //disappeared, and changed shape.
+            if SpawnNewPiece && BoardClass == .ThreeDimensional
             {
                 DoSpawnNewPiece()
             }

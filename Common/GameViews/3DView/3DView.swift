@@ -52,7 +52,6 @@ class View3D: SCNView,                          //Our main super class.
         self.isUserInteractionEnabled = true
         CenterBlockShape = BucketShape
         self.rendersContinuously = true
-        CreateMasterBlockNode()
         SetBoard(With)
         CurrentTheme = Theme.UserTheme
         Theme.SubscribeToChanges(Subscriber: "View3D", SubscribingObject: self)
@@ -75,6 +74,8 @@ class View3D: SCNView,                          //Our main super class.
         self.delegate = self
         self.isPlaying = true
         self.scene = GameScene
+        //The master block node holds all retired blocks. It must be created after the scene exists so it is attached to the scene's root.
+        CreateMasterBlockNode()
         self.autoenablesDefaultLighting = CurrentTheme!.UseDefaultLighting
         var AAMode: SCNAntialiasingMode = .multisampling2X
         switch CurrentTheme!.AntialiasingMode
@@ -896,10 +897,6 @@ class View3D: SCNView,                          //Our main super class.
             MovingPieceNode?.removeFromParentNode()
         }
         
-        let BoardDef = BoardManager.GetBoardFor(CenterBlockShape!)
-        let IsOddlyShaped = !BoardDef!.GameBoardWidth.IsEven
-        let XAdjustment: CGFloat = -(CGFloat(BoardDef!.GameBoardWidth) - 1.0) / 2.0 //Centers the map on the origin.
-        let YAdjustment: CGFloat = IsOddlyShaped ? -1.0 : -1.5
         //let YStaticAdjustment: CGFloat = IsOddlyShaped ? 0.0 : -0.5
         
         MovingPieceBlocks = [VisualBlocks3D]()
@@ -915,8 +912,8 @@ class View3D: SCNView,                          //Our main super class.
                 return
             }
             #if true
-            let YOffset = (30 - 10 - 1) + YAdjustment - CGFloat(Block.Y)
-            let XOffset = CGFloat(Block.X) + XAdjustment
+            let YOffset = SceneY(ForRow: Block.Y)
+            let XOffset = SceneX(ForColumn: Block.X)
             let VBlock = VisualBlocks3D(Block.ID, AtX: XOffset, AtY: YOffset, ActiveVisuals: PVisuals!.ActiveVisuals!,
                                         RetiredVisuals: PVisuals!.RetiredVisuals!, IsRetired: AsRetired)
             VBlock.categoryBitMask = View3D.GameLight
@@ -961,6 +958,33 @@ class View3D: SCNView,                          //Our main super class.
         self.scene?.rootNode.addChildNode(MovingPieceNode!)
     }
     
+    /// Vertical offset applied to the bucket so the playing field sits comfortably between the on-screen controls.
+    /// Every map-to-scene conversion goes through this value so the bucket, the grid-aligned blocks and the moving piece
+    /// always agree, regardless of device.
+    public var BucketVerticalOffset: CGFloat
+    {
+        return UIDevice.current.userInterfaceIdiom == .phone ? 3.0 : 0.0
+    }
+    
+    /// Converts a map column to a horizontal scene coordinate. The map is centered on the scene origin.
+    /// - Parameter Column: Column in the board map.
+    /// - Returns: Horizontal scene coordinate of the center of the column.
+    public func SceneX(ForColumn Column: Int) -> CGFloat
+    {
+        let Width = CGFloat(BoardManager.GetBoardFor(CenterBlockShape!)!.GameBoardWidth)
+        return CGFloat(Column) - (Width - 1.0) / 2.0
+    }
+    
+    /// Converts a map row to a vertical scene coordinate. The map is centered vertically on the scene origin (plus the
+    /// bucket offset). Map rows increase downward while scene coordinates increase upward.
+    /// - Parameter Row: Row in the board map.
+    /// - Returns: Vertical scene coordinate of the center of the row.
+    public func SceneY(ForRow Row: Int) -> CGFloat
+    {
+        let Height = CGFloat(BoardManager.GetBoardFor(CenterBlockShape!)!.GameBoardHeight)
+        return (Height - 1.0) / 2.0 - CGFloat(Row) + BucketVerticalOffset
+    }
+    
     /// The moving piece is in its final location. Add its ID to the list of retired IDs and remove the moving blocks.
     /// - Note: This class also adds the finalized piece into the master bucket node, drawn as retired piece.
     /// - Parameter Finalized: The piece that was finalized.
@@ -972,10 +996,6 @@ class View3D: SCNView,                          //Our main super class.
         let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape!)!
         var XOffset: CGFloat = 0.0
         var YOffset: CGFloat = 0.0
-        let BoardDef = BoardManager.GetBoardFor(CenterBlockShape!)
-        let IsOddlyShaped = !BoardDef!.GameBoardWidth.IsEven
-        let XAdjustment: CGFloat = -(CGFloat(BoardDef!.GameBoardWidth) - 1.0) / 2.0 //Centers the map on the origin.
-        let YAdjustment: CGFloat = IsOddlyShaped ? -1.0 : -1.5
         let BlockMap = CurrentBoard!.Map!.MergedBlockMap()
         let MergedMap = CurrentBoard!.Map!.MergeMap(Excluding: nil)
         
@@ -991,8 +1011,8 @@ class View3D: SCNView,                          //Our main super class.
             let BlockID = BlockMap[Block.Y][Block.X]
             let PieceTypeID = CurrentBoard!.Map!.RetiredPieceShapes[ItemID]!
             #if true
-            YOffset = (30 - 10 - 1) + YAdjustment - CGFloat(Block.Y)
-            XOffset = CGFloat(Block.X) + XAdjustment
+            YOffset = SceneY(ForRow: Block.Y)
+            XOffset = SceneX(ForColumn: Block.X)
             AddBlockNode_Rotating(ParentID: ItemID, BlockID: BlockID, X: XOffset, Y: YOffset,
                                   IsRetired: true, ShapeID: PieceTypeID)
             #else
@@ -1103,14 +1123,6 @@ class View3D: SCNView,                          //Our main super class.
         defer{ objc_sync_exit(RotateLock) }
         
         let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape!)!
-        let BoardDef = BoardManager.GetBoardFor(CenterBlockShape!)
-        let IsOddlyShaped = !BoardDef!.GameBoardWidth.IsEven
-        let XAdjustment: CGFloat = -(CGFloat(BoardDef!.GameBoardWidth) - 1.0) / 2.0 //Centers the map on the origin.
-        let YAdjustment: CGFloat = IsOddlyShaped ? 0.0 : -1.0
-        let ExistingBlockYOffset: CGFloat = IsOddlyShaped ? 0.0 : -0.5
-        let XFinalAdjustment: CGFloat = IsOddlyShaped ? 0.0 : 0.0
-        let YFinalAdjustment: CGFloat = IsOddlyShaped ? -1.0 : -0.5
-        
         BlockList.forEach({$0.Marked = false})
         
         let CurrentMap = FromBoard.Map!
@@ -1138,8 +1150,8 @@ class View3D: SCNView,                          //Our main super class.
                 var YOffset: CGFloat = 0
                 var XOffset: CGFloat = 0
                 #if true
-                YOffset = (30 - 10 - 1) + YAdjustment - CGFloat(Y)
-                XOffset = CGFloat(X) + XAdjustment
+                YOffset = SceneY(ForRow: Y)
+                XOffset = SceneX(ForColumn: X)
                 #else
                 switch BoardClass
                 {
@@ -1182,7 +1194,7 @@ class View3D: SCNView,                          //Our main super class.
                     if let VBlock = GetBlock(BlockID)
                     {
                         let NewX = CGFloat(XOffset)
-                        let NewY = CGFloat(YOffset) + ExistingBlockYOffset//- 0.5
+                        let NewY = CGFloat(YOffset)
                         if NewX == VBlock.X && NewY == VBlock.Y
                         {
                             //Nothing to do...
@@ -1200,11 +1212,6 @@ class View3D: SCNView,                          //Our main super class.
                 {
                     //Add blocks not in the block list to the list here.
                     let PieceTypeID = CurrentMap.RetiredPieceShapes[ItemID]!
-                    if BoardClass == .Rotatable
-                    {
-                        XOffset = XOffset + XFinalAdjustment
-                        YOffset = YOffset + YFinalAdjustment//- 0.5
-                    }
                     #if true
                     AddBlockNode_Rotating(ParentID: ItemID, BlockID: BlockID, X: XOffset, Y: YOffset,
                                           IsRetired: IsRetired, ShapeID: PieceTypeID)

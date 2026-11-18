@@ -116,6 +116,7 @@
 		1762FC19229CCFF6000099F2 /* RawParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762FC18229CCFF6000099F2 /* RawParser.swift */; };
 		1763492D2312667A000BDF24 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1763492C2312667A000BDF24 /* Default-568h@2x.png */; };
 		17660BE822892B1E00082E23 /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17660BE722892B1E00082E23 /* UIButtonExtensions.swift */; };
+		1790D4F6225DE9D7003E402D /* TimerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1790D4F7225DE9D7003E402D /* TimerExtensions.swift */; };
 		17660BEC2289995E00082E23 /* GameViewRequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17660BEB2289995E00082E23 /* GameViewRequestProtocol.swift */; };
 		176708F02339EE5C000E2216 /* CustomStringConvertibleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176708EF2339EE5C000E2216 /* CustomStringConvertibleExtensions.swift */; };
 		176708F3233A0272000E2216 /* SupportedLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176708F2233A0272000E2216 /* SupportedLanguages.swift */; };
@@ -391,6 +392,7 @@
 		1762FC18229CCFF6000099F2 /* RawParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawParser.swift; sourceTree = "<group>"; };
 		1763492C2312667A000BDF24 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		17660BE722892B1E00082E23 /* UIButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
+		1790D4F7225DE9D7003E402D /* TimerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerExtensions.swift; sourceTree = "<group>"; };
 		17660BEB2289995E00082E23 /* GameViewRequestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewRequestProtocol.swift; sourceTree = "<group>"; };
 		176708EF2339EE5C000E2216 /* CustomStringConvertibleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStringConvertibleExtensions.swift; sourceTree = "<group>"; };
 		176708F2233A0272000E2216 /* SupportedLanguages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportedLanguages.swift; sourceTree = "<group>"; };
@@ -864,6 +866,7 @@
 				17F9A30722A7BF2F00581594 /* NSImage+ResizeImage.swift */,
 				1705ADE8225D804400628268 /* Extensions.swift */,
 				17660BE722892B1E00082E23 /* UIButtonExtensions.swift */,
+				1790D4F7225DE9D7003E402D /* TimerExtensions.swift */,
 				1737624F2310E5F10075E1DD /* UITouchImage.swift */,
 				173762512310E7400075E1DD /* UITouchImageDelegate.swift */,
 				17C1E90C23190FBE004040B6 /* OtherExtensions.swift */,
@@ -1565,6 +1568,7 @@
 				1797524E22C38A4D00BF539A /* +IdiotLights.swift in Sources */,
 				17D015982349B0B80012FFE1 /* PieceVisuals2.swift in Sources */,
 				17660BE822892B1E00082E23 /* UIButtonExtensions.swift in Sources */,
+				1790D4F6225DE9D7003E402D /* TimerExtensions.swift in Sources */,
 				17189FFD233348AB00317BF1 /* GradientSwatch.swift in Sources */,
 				17CD4EB8231E492D0055E541 /* GradientPickerProtocol.swift in Sources */,
 				173AA390231A8EC600802289 /* PredefinedColorGroup.swift in Sources */,

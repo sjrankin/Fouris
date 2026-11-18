@@ -585,7 +585,7 @@ class Piece: CustomStringConvertible
     ///         if it is not called, deinit will generated a fatal error.
     func Terminate()
     {
-        MainActor.assumeIsolated {
+        Task { @MainActor in
                 //Terminate all timers first to make sure they do not refer to something that does not exist due to being
                 //deleted in this block.
                 if self.GravitationalTimer != nil
@@ -803,9 +803,9 @@ class Piece: CustomStringConvertible
     func SetFastGravity(_ Enable: Bool = false)
     {
         GravitationalInterval = Enable ? 0.001 : 0.33
-        MainActor.assumeIsolated {
+        Task { @MainActor in
                 self.GravitationalTimer?.invalidate()
-                self.GravitationalTimer = Timer.scheduledTimer(timeInterval: self.GravitationalInterval, target: self,
+                self.GravitationalTimer = Timer.scheduledOnMainRunLoop(timeInterval: self.GravitationalInterval, target: self,
                                                                selector: #selector(self.HandleGravityTimer), userInfo: nil,
                                                                repeats: false)
         }
@@ -852,9 +852,9 @@ class Piece: CustomStringConvertible
         {
             GameBoard?.PieceMoved(self, Direction: .Down, Commanded: false)
         }
-        MainActor.assumeIsolated {
+        Task { @MainActor in
                 self.GravitationalTimer?.invalidate()
-                self.GravitationalTimer = Timer.scheduledTimer(timeInterval: self.GravitationalInterval, target: self,
+                self.GravitationalTimer = Timer.scheduledOnMainRunLoop(timeInterval: self.GravitationalInterval, target: self,
                                                                selector: #selector(self.HandleGravityTimer), userInfo: nil,
                                                                repeats: false)
         }
@@ -898,9 +898,9 @@ class Piece: CustomStringConvertible
             print("Gravity isn't enabled.")
             return
         }
-        MainActor.assumeIsolated {
+        Task { @MainActor in
             print("Single gravitational increment at \(self.GravitationalInterval)s")
-            self.GravitationalTimer = Timer.scheduledTimer(timeInterval: self.GravitationalInterval, target: self,
+            self.GravitationalTimer = Timer.scheduledOnMainRunLoop(timeInterval: self.GravitationalInterval, target: self,
                                                            selector: #selector(self.HandleGravityTimer), userInfo: nil,
                                                            repeats: false)
         }
@@ -940,7 +940,7 @@ class Piece: CustomStringConvertible
     /// Stop gravity. This may be called because the game is paused or the piece is freezing.
     func StopGravity()
     {
-        MainActor.assumeIsolated {
+        Task { @MainActor in
             if self.GravitationalTimer != nil
             {
                 self.GravitationalTimer?.invalidate()
@@ -1258,7 +1258,7 @@ class Piece: CustomStringConvertible
                 FreezeTime = 0.5
             }
         }
-        MainActor.assumeIsolated {
+        Task { @MainActor in
                 self.RandomRotationTimer?.invalidate()
                 self.RandomRotationTimer = nil
                 self.RandomMotionTimer?.invalidate()
@@ -1267,8 +1267,8 @@ class Piece: CustomStringConvertible
         StopGravity()
         CurrentlyFreezing = true
         GameBoard?.StartedFreezing(ID)  
-        MainActor.assumeIsolated {
-                self.FreezeTimer = Timer.scheduledTimer(timeInterval: FreezeTime, target: self,
+        Task { @MainActor in
+                self.FreezeTimer = Timer.scheduledOnMainRunLoop(timeInterval: FreezeTime, target: self,
                                                         selector: #selector(self.Frozen), userInfo: nil,
                                                         repeats: false)
         }
@@ -1286,7 +1286,7 @@ class Piece: CustomStringConvertible
             return
         }
         CurrentlyFreezing = false
-        MainActor.assumeIsolated {
+        Task { @MainActor in
             self.GameBoard?.StoppedFreezing(self.ID)
             self.FreezeTimer?.invalidate()
             self.FreezeTimer = nil
@@ -1308,7 +1308,7 @@ class Piece: CustomStringConvertible
         if GameBoard == nil
         {
             //Nothing to do (or anything that we _can_ do.
-            MainActor.assumeIsolated {
+            Task { @MainActor in
                     self.FreezeTimer?.invalidate()
                     self.FreezeTimer = nil
             }
@@ -1328,13 +1328,13 @@ class Piece: CustomStringConvertible
             }
             return
         }
-        MainActor.assumeIsolated {
+        Task { @MainActor in
                 self.FreezeTimer?.invalidate()
                 self.FreezeTimer = nil
         }
         if PieceFullyInBounds()
         {
-            MainActor.assumeIsolated {
+            Task { @MainActor in
                     self.GameBoard?.PieceFroze(ID: self.ID)
             }
         }
@@ -1434,7 +1434,7 @@ class Piece: CustomStringConvertible
     {
         didSet
         {
-            MainActor.assumeIsolated {
+            Task { @MainActor in
                     if self._RandomRotationFrequency == .Never
                     {
                         if self.RandomRotationTimer != nil
@@ -1445,7 +1445,7 @@ class Piece: CustomStringConvertible
                         else
                         {
                             let Duration = self.RandomTimes[self._RandomRotationFrequency.rawValue]
-                            self.RandomRotationTimer = Timer.scheduledTimer(timeInterval: Duration, target: self,
+                            self.RandomRotationTimer = Timer.scheduledOnMainRunLoop(timeInterval: Duration, target: self,
                                                                             selector: #selector(self.HandleRandomRotation), userInfo: nil, repeats: true)
                         }
                     }
@@ -1470,7 +1470,7 @@ class Piece: CustomStringConvertible
     {
         didSet
         {
-            MainActor.assumeIsolated {
+            Task { @MainActor in
                     if self._RandomMotionFrequency == .Never
                     {
                         if self.RandomMotionTimer != nil
@@ -1481,7 +1481,7 @@ class Piece: CustomStringConvertible
                         else
                         {
                             let Duration = self.RandomTimes[self._RandomMotionFrequency.rawValue]
-                            self.RandomMotionTimer = Timer.scheduledTimer(timeInterval: Duration, target: self,
+                            self.RandomMotionTimer = Timer.scheduledOnMainRunLoop(timeInterval: Duration, target: self,
                                                                           selector: #selector(self.HandleRandomMotion), userInfo: nil, repeats: true)
                         }
                     }

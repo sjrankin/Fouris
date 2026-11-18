@@ -148,14 +148,16 @@ class MapType: CustomStringConvertible
                                       FillWith: UUID.Empty)
         
         #if true
+        //The bucket rectangle includes barriers (walls, floor); the interior is only the playable area. Row clearing and
+        //movement limits must use the interior, otherwise the floor looks like a full row and is "cleared" after every drop.
         _BucketBottom = RawBucket!.BucketHeight + RawBucket!.BucketY - 1
-        _BucketInteriorBottom = _BucketBottom
+        _BucketInteriorBottom = RawBucket!.BucketInteriorY + RawBucket!.BucketInteriorHeight - 1
         _BucketTop = RawBucket!.BucketY
-        _BucketInteriorTop = _BucketTop
-        _BucketInteriorLeft = RawBucket!.BucketX
-        _BucketInteriorRight = RawBucket!.BucketX + RawBucket!.BucketWidth - 1
-        _BucketInteriorWidth = RawBucket!.BucketWidth
-        _BucketInteriorHeight = RawBucket!.BucketHeight
+        _BucketInteriorTop = RawBucket!.BucketInteriorY
+        _BucketInteriorLeft = RawBucket!.BucketInteriorX
+        _BucketInteriorRight = RawBucket!.BucketInteriorX + RawBucket!.BucketInteriorWidth - 1
+        _BucketInteriorWidth = RawBucket!.BucketInteriorWidth
+        _BucketInteriorHeight = RawBucket!.BucketInteriorHeight
         #else
         switch BoardClass
         {
