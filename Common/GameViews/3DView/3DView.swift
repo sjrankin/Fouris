@@ -1086,20 +1086,17 @@ class View3D: SCNView,                          //Our main super class.
     public var MovingPieceBlocks = [VisualBlocks3D]()
     
     /// Remove the moving piece, if it exists.
+    /// - Note: This must happen for every board class. Static boards used to leave the moving (active colored) blocks in
+    ///         the scene until the next piece was drawn, so they showed through the newly frozen (retired) blocks.
     public func RemoveMovingPiece()
     {
         RemoveMovingPieceOutline()
-        let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape!)!
-        if BoardClass == .Rotatable
+        if MovingPieceNode != nil
         {
-            //print("Removing moving piece in rotating game.")
-            if MovingPieceNode != nil
-            {
-                MovingPieceNode!.removeFromParentNode()
-                MovingPieceNode = nil
-                UpdateMasterBlockNode()
-            }
-            //print("  Done removing piece from rotating game.")
+            MovingPieceNode!.removeFromParentNode()
+            MovingPieceNode = nil
+            MovingPieceBlocks = [VisualBlocks3D]()
+            UpdateMasterBlockNode()
         }
     }
     
