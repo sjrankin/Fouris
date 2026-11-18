@@ -66,7 +66,7 @@ import MetricKit
 extension AppDelegate: MXMetricManagerSubscriber
 {
     /// Handle received metrics payloads. Not currently implemented.
-    public func didReceive(_ payloads: [MXMetricPayload])
+    nonisolated public func didReceive(_ payloads: [MXMetricPayload])
     {
         #if false
         for Payload in payloads

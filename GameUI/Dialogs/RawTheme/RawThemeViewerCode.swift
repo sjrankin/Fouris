@@ -705,7 +705,7 @@ class RawThemeViewerCode: UIViewController,             //Main base class.
     // MARK: - Image button handling.
     
     /// Not used.
-    func photoLibraryDidChange(_ changeInstance: PHChange)
+    nonisolated func photoLibraryDidChange(_ changeInstance: PHChange)
     {
         //Not used.
     }
