@@ -22,7 +22,8 @@ struct OutlineCell
 
 /// Black outlines around whole shapes (not around individual blocks).
 ///
-/// An edge is drawn on the side of a block when the block next to it is not part of the same shape. Retired blocks remember
+/// An edge is drawn on the side of a block when the block next to it is not part of the same shape. For frozen blocks, touching
+/// blocks of the same color count as the same shape. Retired blocks remember
 /// which blocks they were joined to when their piece landed (`BlockJoins`). When rows are removed, blocks of a shape that were
 /// held together by a removed block are no longer joined, so each remaining part gets its own outline.
 extension View3D
@@ -69,13 +70,65 @@ extension View3D
         }).filter({LiveIDs.contains($0.key)})
         let Cells = Retired.map({OutlineCell(ID: $0.ID, X: $0.X, Y: $0.Y)})
         let Joins = BlockJoins
-        guard let Node = MakeOutlineNode(Cells: Cells, AreJoined: {Joins[$0.ID]?.contains($1.ID) ?? false}) else
+        //Once frozen, touching blocks of the same color are treated as one shape, even if they came from different pieces.
+        var Colors = [UUID: String]()
+        for Block in Retired
+        {
+            if let Key = ColorKey(For: Block)
+            {
+                Colors[Block.ID] = Key
+            }
+        }
+        let AreJoined: (OutlineCell, OutlineCell) -> Bool =
+        {
+            First, Second in
+            if Joins[First.ID]?.contains(Second.ID) ?? false
+            {
+                return true
+            }
+            if let FirstColor = Colors[First.ID], let SecondColor = Colors[Second.ID]
+            {
+                return FirstColor == SecondColor
+            }
+            return false
+        }
+        guard let Node = MakeOutlineNode(Cells: Cells, AreJoined: AreJoined) else
         {
             return
         }
         Node.name = "Shape Outlines"
         MasterBlockNode?.addChildNode(Node)
         ShapeOutlineNode = Node
+    }
+    
+    /// Returns a key that identifies the surface color of a block so like-colored blocks can be compared.
+    /// - Parameter Block: The block whose color is needed.
+    /// - Returns: Key for the block's diffuse color (or image). Nil if the color cannot be determined, in which case the block
+    ///            is never merged with a neighbor by color.
+    private func ColorKey(For Block: VisualBlocks3D) -> String?
+    {
+        guard let Contents = Block.geometry?.firstMaterial?.diffuse.contents else
+        {
+            return nil
+        }
+        if let Color = Contents as? UIColor
+        {
+            var Red: CGFloat = 0.0
+            var Green: CGFloat = 0.0
+            var Blue: CGFloat = 0.0
+            var Alpha: CGFloat = 0.0
+            if Color.getRed(&Red, green: &Green, blue: &Blue, alpha: &Alpha)
+            {
+                //Compare at 8 bits per channel so tiny floating point differences do not split a color.
+                return "\(Int((Red * 255.0).rounded())),\(Int((Green * 255.0).rounded())),\(Int((Blue * 255.0).rounded())),\(Int((Alpha * 255.0).rounded()))"
+            }
+            return nil
+        }
+        if let Image = Contents as? UIImage
+        {
+            return "image:\(ObjectIdentifier(Image).hashValue)"
+        }
+        return nil
     }
     
     /// Draws the outline of the moving piece.
