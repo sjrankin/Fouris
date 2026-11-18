@@ -29,11 +29,7 @@ extension View3D
             print("Did not find board for \(InShape)")
             return
         }
-        var YOffset: CGFloat = 0.0
-        if UIDevice.current.userInterfaceIdiom == .phone
-        {
-            YOffset = 3
-        }
+        let YOffset = BucketVerticalOffset
         let Locations = BoardDef?.BucketBlockList()
         let GWidth = BoardDef?.GameBoardWidth
         let GWidth2 = (CGFloat(GWidth!) / 2.0) - 0.5

@@ -9,7 +9,7 @@
 import Foundation
 
 /// Protocol that should be implemented by the main UI class to display stepper information.
-protocol StepperHelper: class
+protocol StepperHelper: AnyObject
 {
     /// Display information from a step. Control should not return until the user dismisses the UI element.
     /// - Parameter From: String describing where the step occurred.

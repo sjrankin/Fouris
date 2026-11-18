@@ -251,8 +251,7 @@ class Board: GameMapProtocol
     /// Pause the game.
     public func Pause()
     {
-        OperationQueue.main.addOperation
-            {
+        Task { @MainActor in
                 for SomePiece in self.Map!.InPlay
                 {
                     
@@ -264,8 +263,7 @@ class Board: GameMapProtocol
     /// Resume the game.
     public func Resume()
     {
-        OperationQueue.main.addOperation
-            {
+        Task { @MainActor in
                 for SomePiece in self.Map!.InPlay
                 {
                     SomePiece?.Resume()
@@ -277,8 +275,7 @@ class Board: GameMapProtocol
     /// - Parameter Enabled: The enable state for gravitation.
     public func SetGravitation(_ Enabled: Bool)
     {
-        OperationQueue.main.addOperation
-            {
+        Task { @MainActor in
                 for SomePiece in self.Map!.InPlay
                 {
                     if Enabled

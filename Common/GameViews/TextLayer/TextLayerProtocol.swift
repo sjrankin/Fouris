@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// Protocol for the text layer to communicate with other classes.
-protocol TextLayerProtocol: class
+protocol TextLayerProtocol: AnyObject
 {
     /// Called when the text layer detects a double click.
     /// - Parameter At: The point where the double-click was detected in the text layer.

@@ -28,8 +28,7 @@ extension View3D
         #if true
         var NotUsed: String? = nil
         ActivityLog.AddEntry(Title: "CleanUp", Source: "View3D", KVPs: [("Message","Resetting game board objects.")], LogFileName: &NotUsed)
-        OperationQueue.main.addOperation
-            {
+        Task { @MainActor in
                 //Remove any lingering actions.
                 self.MasterBlockNode?.removeAllActions()
                 self.BucketGridNode?.removeAllActions()
@@ -51,6 +50,7 @@ extension View3D
                 let NewBucket = self.CreateBucket(InitialOpacity: 1.0, Shape: self.CenterBlockShape!)
                 self.BucketNode = NewBucket
                 self.scene?.rootNode.addChildNode(self.BucketNode!)
+                self.ResetShapeOutlines()
                 self.MasterBlockNode = SCNNode()
                 self.scene?.rootNode.addChildNode(self.MasterBlockNode!)
                 
@@ -77,6 +77,7 @@ extension View3D
                 BucketNode?.runAction(GridSequence,
                                       completionHandler:
                     {
+                Task { @MainActor in
                         let (Grid, Outline) = self.DrawGridInBucket(ShowGrid: self.CurrentTheme!.ShowBucketGrid,
                                               DrawOutline: self.CurrentTheme!.ShowBucketGridOutline)
                         let GridFadeIn = SCNAction.fadeIn(duration: ShowDuration)
@@ -91,7 +92,8 @@ extension View3D
                                 print("Bucket/grid removal completed.")
                                 //objc_sync_exit(self.CanUseBucket)
                         })
-                })
+                }
+            })
             
             default:
             break
@@ -165,26 +167,30 @@ extension View3D
             
             case .FadeOut:
                 let FadeOut = SCNAction.fadeOut(duration: Duration)
-                let Remove = SCNAction.removeFromParentNode()
-                let Sequence = SCNAction.sequence([FadeOut, Remove])
                 BucketNode?.runAction(FadeOut,
                                       completionHandler:
                     {
+                Task { @MainActor in
                         self.BucketNode?.removeFromParentNode()
                         self.BucketNode = nil
-                })
+                }
+            })
                 BucketGridNode?.runAction(FadeOut,
                                           completionHandler:
                     {
+                Task { @MainActor in
                         self.BucketGridNode?.removeFromParentNode()
                         self.BucketGridNode = nil
-                })
+                }
+            })
                 OutlineNode?.runAction(FadeOut,
                                        completionHandler:
                     {
+                Task { @MainActor in
                         self.OutlineNode?.removeFromParentNode()
                         self.OutlineNode = nil
                 }
+            }
             )
             
             case .Grow:
@@ -194,21 +200,27 @@ extension View3D
                 BucketNode?.runAction(AnimationGroup,
                                       completionHandler:
                     {
+                Task { @MainActor in
                         self.BucketNode?.removeFromParentNode()
                         self.BucketNode = nil
-                })
+                }
+            })
                 BucketGridNode?.runAction(AnimationGroup,
                                           completionHandler:
                     {
+                Task { @MainActor in
                         self.BucketGridNode?.removeFromParentNode()
                         self.BucketGridNode = nil
-                })
+                }
+            })
                 OutlineNode?.runAction(AnimationGroup,
                                        completionHandler:
                     {
+                Task { @MainActor in
                         self.OutlineNode?.removeFromParentNode()
                         self.OutlineNode = nil
                 }
+            }
             )
             
             case .Shrink:
@@ -218,21 +230,27 @@ extension View3D
                 BucketNode?.runAction(AnimationGroup,
                                       completionHandler:
                     {
+                Task { @MainActor in
                         self.BucketNode?.removeFromParentNode()
                         self.BucketNode = nil
-                })
+                }
+            })
                 BucketGridNode?.runAction(AnimationGroup,
                                           completionHandler:
                     {
+                Task { @MainActor in
                         self.BucketGridNode?.removeFromParentNode()
                         self.BucketGridNode = nil
-                })
+                }
+            })
                 OutlineNode?.runAction(AnimationGroup,
                                        completionHandler:
                     {
+                Task { @MainActor in
                         self.OutlineNode?.removeFromParentNode()
                         self.OutlineNode = nil
                 }
+            }
             )
             
             case .SpinLarger:
@@ -244,21 +262,27 @@ extension View3D
                 BucketNode?.runAction(AnimationGroup,
                                       completionHandler:
                     {
+                Task { @MainActor in
                         self.BucketNode?.removeFromParentNode()
                         self.BucketNode = nil
-                })
+                }
+            })
                 BucketGridNode?.runAction(AnimationGroup,
                                           completionHandler:
                     {
+                Task { @MainActor in
                         self.BucketGridNode?.removeFromParentNode()
                         self.BucketGridNode = nil
-                })
+                }
+            })
                 OutlineNode?.runAction(AnimationGroup,
                                        completionHandler:
                     {
+                Task { @MainActor in
                         self.OutlineNode?.removeFromParentNode()
                         self.OutlineNode = nil
                 }
+            }
             )
             
             case .SpinSmaller:
@@ -270,21 +294,27 @@ extension View3D
                 BucketNode?.runAction(AnimationGroup,
                                       completionHandler:
                     {
+                Task { @MainActor in
                         self.BucketNode?.removeFromParentNode()
                         self.BucketNode = nil
-                })
+                }
+            })
                 BucketGridNode?.runAction(AnimationGroup,
                                           completionHandler:
                     {
+                Task { @MainActor in
                         self.BucketGridNode?.removeFromParentNode()
                         self.BucketGridNode = nil
-                })
+                }
+            })
                 OutlineNode?.runAction(AnimationGroup,
                                        completionHandler:
                     {
+                Task { @MainActor in
                         self.OutlineNode?.removeFromParentNode()
                         self.OutlineNode = nil
                 }
+            }
             )
         }
     }

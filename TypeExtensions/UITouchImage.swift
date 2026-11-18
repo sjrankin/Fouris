@@ -156,14 +156,12 @@ class UITouchImage: UIImageView
     ///                          is 0.0, **DeHighlight** is *not* called. This value has units of seconds. Default value is 0.0
     public func Highlight(ForDuration: Double = 0.0)
     {
-        OperationQueue.main.addOperation
-            {
+        Task { @MainActor in
                 super.isHighlighted = true
         }
         if ForDuration > 0.0
         {
-            OperationQueue.main.addOperation
-                {
+            Task { @MainActor in
                     UIView.animate(withDuration: ForDuration,
                                    animations: {}, completion:
                         {
@@ -187,7 +185,7 @@ class UITouchImage: UIImageView
         let _ = Timer.scheduledTimer(withTimeInterval: ForSeconds, repeats: false)
         {
             (TheTimer) in
-            self.image = UIImage(named: OriginalName)
+            MainActor.assumeIsolated { self.image = UIImage(named: OriginalName) }
         }
     }
     
@@ -195,8 +193,7 @@ class UITouchImage: UIImageView
     /// - Note: This function is supplied as a way to programmatically simulate a button release.
     public func DeHighlight()
     {
-        OperationQueue.main.addOperation
-            {
+        Task { @MainActor in
                 super.isHighlighted = false
                 self._IsPressed = false
         }

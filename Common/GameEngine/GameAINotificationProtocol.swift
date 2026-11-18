@@ -9,7 +9,7 @@
 import Foundation
 
 /// Protocol to handle AI events.
-protocol GameAINotificationProtocol: class
+protocol GameAINotificationProtocol: AnyObject
 {
     /// AI is moving a piece upwards.
     func AI_MoveUp()

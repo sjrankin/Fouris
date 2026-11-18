@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// Protocol to control game views.
-protocol GameViewProtocol: class
+protocol GameViewProtocol: AnyObject
 {
     /// Draw the background.
     func DrawBackground()
@@ -134,7 +134,7 @@ protocol GameViewProtocol: class
     /// - Parameter To: The new alpha/opacity level.
     /// - Parameter Duration: The duration of the opacity change.
     /// - Parameter Completed: Completion block.
-    func SetBoardOpacity(To: Double, Duration: Double, Completed: (() -> ())?)
+    func SetBoardOpacity(To: Double, Duration: Double, Completed: (@MainActor () -> ())?)
     
     /// Show controls in the game view.
     /// - Parameter Which: Array of buttons to show. If nil, all buttons are shown.
@@ -174,7 +174,7 @@ protocol GameViewProtocol: class
     /// - Parameter TotalDuration: The amount of time to take to drop.
     /// - Parameter Completed: Completion block.
     func MovePieceRelative(WithPiece: Piece, DeltaX: Int, DeltaY: Int, TotalDuration: Double,
-                           Completed: ((Piece)->())?)
+                           Completed: (@MainActor (Piece)->())?)
 }
 
 

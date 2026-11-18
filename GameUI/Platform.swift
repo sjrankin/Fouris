@@ -279,23 +279,19 @@ class Platform
     /// - Returns: Metal GPU description.
     public static func MetalGPU() -> String
     {
-        let MetalDevice = MTLCreateSystemDefaultDevice()
-        var SupportedGPU = ""
-        var GPUValue: UInt = 0
-        for (GPUFamily, _) in MetalFeatureTable
+        guard let MetalDevice = MTLCreateSystemDefaultDevice() else
         {
-            if (MetalDevice?.supportsFeatureSet(GPUFamily))!
+            return "Metal not available"
+        }
+        //The table is ordered from newest to oldest so the first supported family wins.
+        for (GPUFamily, Name) in MetalGPUFamilies
+        {
+            if MetalDevice.supportsFamily(GPUFamily)
             {
-                if GPUFamily.rawValue > GPUValue
-                {
-                    GPUValue = GPUFamily.rawValue
-                }
+                return Name
             }
         }
-        
-        let FinalGPU = MTLFeatureSet(rawValue: GPUValue)
-        SupportedGPU = MetalFeatureTable[FinalGPU!]!
-        return SupportedGPU.trimmingCharacters(in: .whitespacesAndNewlines)
+        return "Unknown GPU"
     }
     
     /// Return a string that describes the Metal device name.
@@ -316,32 +312,22 @@ class Platform
     }
     
 
-    #if targetEnvironment(macCatalyst)
-    /// Table of GPU families for Metal. Not supported on macCatalyst.
-    static let MetalFeatureTable: [MTLFeatureSet: String] = [MTLFeatureSet: String]()
-    #else
-    /// Table of GPU families for Metal.
-    static let MetalFeatureTable: [MTLFeatureSet: String] =
+    /// Metal GPU families, newest first. `MTLFeatureSet` was deprecated in favor of `MTLGPUFamily`.
+    static let MetalGPUFamilies: [(MTLGPUFamily, String)] =
         [
-            MTLFeatureSet.iOS_GPUFamily1_v1: "GPU 1, v1",
-            MTLFeatureSet.iOS_GPUFamily1_v2: "GPU 1, v2",
-            MTLFeatureSet.iOS_GPUFamily1_v3: "GPU 1, v3",
-            MTLFeatureSet.iOS_GPUFamily1_v4: "GPU 1, v4",
-            MTLFeatureSet.iOS_GPUFamily1_v5: "GPU 1, v5",
-            MTLFeatureSet.iOS_GPUFamily2_v1: "GPU 2, v1",
-            MTLFeatureSet.iOS_GPUFamily2_v2: "GPU 2, v2",
-            MTLFeatureSet.iOS_GPUFamily2_v3: "GPU 2, v2",
-            MTLFeatureSet.iOS_GPUFamily2_v4: "GPU 2, v4",
-            MTLFeatureSet.iOS_GPUFamily2_v5: "GPU 2, v5",
-            MTLFeatureSet.iOS_GPUFamily3_v1: "GPU 3, v1",
-            MTLFeatureSet.iOS_GPUFamily3_v2: "GPU 3, v2",
-            MTLFeatureSet.iOS_GPUFamily3_v3: "GPU 3, v2",
-            MTLFeatureSet.iOS_GPUFamily3_v4: "GPU 3, v4",
-            MTLFeatureSet.iOS_GPUFamily4_v1: "GPU 4, v1",
-            MTLFeatureSet.iOS_GPUFamily4_v2: "GPU 4, v2",
-            MTLFeatureSet.iOS_GPUFamily5_v1: "GPU 5, v1"
+            (.apple9, "Apple GPU family 9"),
+            (.apple8, "Apple GPU family 8"),
+            (.apple7, "Apple GPU family 7"),
+            (.apple6, "Apple GPU family 6"),
+            (.apple5, "Apple GPU family 5"),
+            (.apple4, "Apple GPU family 4"),
+            (.apple3, "Apple GPU family 3"),
+            (.apple2, "Apple GPU family 2"),
+            (.apple1, "Apple GPU family 1"),
+            (.common3, "Common GPU family 3"),
+            (.common2, "Common GPU family 2"),
+            (.common1, "Common GPU family 1")
     ]
-    #endif
     
     /// Table of devices to processor names and nominal frequencies.
     /// - Note: See [Device Specifications](https://www.devicespecifications.com/en/brand/cefa26)
@@ -460,7 +446,7 @@ public extension UIDevice
         {
             $0.withMemoryRebound(to: CChar.self, capacity: 1)
             {
-                ptr in String.init(validatingUTF8: ptr)
+                ptr in String(cString: ptr)
             }
         }
         let modelMap : [String : Model] =
@@ -542,7 +528,7 @@ public extension UIDevice
                 "iPad7,12"   : .iPad10_2_cell,
         ]
         
-        if let model = modelMap[String.init(validatingUTF8: modelCode!)!]
+        if let model = modelMap[modelCode]
         {
             return model
         }

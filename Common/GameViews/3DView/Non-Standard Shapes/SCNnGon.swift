@@ -15,13 +15,16 @@ import UIKit
 class SCNnGon: SCNNode
 {
     /// Default initializer. Sets the radius to 1.0, vertex count to 6, and depth to 0.5.
-    override init()
+    nonisolated override init()
     {
         super.init()
-        self.Radius = 1.0
-        self.VertexCount = 6
-        self.Depth = 0.5
-        CommonInitialization()
+        MainActor.assumeIsolated
+        {
+            self.Radius = 1.0
+            self.VertexCount = 6
+            self.Depth = 0.5
+            CommonInitialization()
+        }
     }
     
     /// Initializer.
@@ -60,10 +63,13 @@ class SCNnGon: SCNNode
     
     /// Initializer.
     /// - Parameter coder: See Apple documentation.
-    required init?(coder aDecoder: NSCoder)
+    nonisolated required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
-        CommonInitialization()
+        MainActor.assumeIsolated
+        {
+            CommonInitialization()
+        }
     }
     
     /// Returns the geometry necessary to create the n-gon.

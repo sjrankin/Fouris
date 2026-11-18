@@ -15,11 +15,14 @@ import UIKit
 class SCNDodecahedron: SCNNode
 {
     /// Initializer.
-    override init()
+    nonisolated override init()
     {
         super.init()
-        self.Radius = 1.0
-        CommonInitialization()
+        MainActor.assumeIsolated
+        {
+            self.Radius = 1.0
+            CommonInitialization()
+        }
     }
     
     /// Initializer.
@@ -33,10 +36,13 @@ class SCNDodecahedron: SCNNode
     
     /// Initializer.
     /// - Parameter coder: See Apple documentation.
-    required init?(coder aDecoder: NSCoder)
+    nonisolated required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
-        CommonInitialization()
+        MainActor.assumeIsolated
+        {
+            CommonInitialization()
+        }
     }
     
     /// Initialization common to all initializers.

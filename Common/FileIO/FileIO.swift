@@ -47,7 +47,7 @@ class FileIO
     {
         do
         {
-            return try String(contentsOfFile: From.path)
+            return try String(contentsOfFile: From.path, encoding: .utf8)
         }
         catch
         {
@@ -89,7 +89,7 @@ class FileIO
         let FileURL = Bundle.main.url(forResource: FileName, withExtension: WithExtension)
         do
         {
-            return try String(contentsOfFile: FileURL!.path)
+            return try String(contentsOfFile: FileURL!.path, encoding: .utf8)
         }
         catch
         {
@@ -223,7 +223,7 @@ class FileIO
         let FinalPath = InDirectory.appendingPathComponent(FromFile)
         do
         {
-            return try String(contentsOfFile: FinalPath.path)
+            return try String(contentsOfFile: FinalPath.path, encoding: .utf8)
         }
         catch
         {
@@ -765,8 +765,15 @@ class FileIO
         do
         {
             let RawData = try Data(contentsOf: FileURL!)
-            RawData.withUnsafeBytes{ (bytes: UnsafePointer<Int>) in
-                Result = Array(UnsafeBufferPointer(start: bytes, count: RawData.count / MemoryLayout<Int>.size))}
+            let ItemCount = RawData.count / MemoryLayout<Int>.size
+            Result = RawData.withUnsafeBytes
+            {
+                Bytes in
+                (0 ..< ItemCount).map
+                {
+                    Bytes.loadUnaligned(fromByteOffset: $0 * MemoryLayout<Int>.size, as: Int.self)
+                }
+            }
         }
         catch
         {

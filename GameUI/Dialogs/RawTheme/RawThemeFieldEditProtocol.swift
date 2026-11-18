@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// Protocol for communication between editor fields and the parent view controller.
-protocol RawThemeFieldEditProtocol: class
+protocol RawThemeFieldEditProtocol: AnyObject
 {
     /// Notification that the user edited a field.
     /// - Parameter ID: ID of the field that was edited.

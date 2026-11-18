@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// Protocol for communicating between the `Grid` class instantiation and its parent class.
-protocol GridProtocol: class
+protocol GridProtocol: AnyObject
 {
     /// Notification that a selection state of one of the grid cells changed.
     /// - Parameter Column: The column address of the changed cell.

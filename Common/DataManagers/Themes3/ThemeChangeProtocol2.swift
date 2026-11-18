@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// Protocol theme descriptors use to communicate changes to the theme manager.
-protocol ThemeChangeProtocol2: class
+protocol ThemeChangeProtocol2: AnyObject
 {
     /// Called when a theme is changed by setting a property.
     /// - Parameter Theme: The theme that changed.

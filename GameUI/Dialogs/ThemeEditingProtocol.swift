@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// Protocol for editing themes.
-protocol ThemeEditingProtocol: class
+protocol ThemeEditingProtocol: AnyObject
 {
     /// Used to send to an editor the ID of the theme to edit.
     /// - Parameter Theme: The theme to edit.

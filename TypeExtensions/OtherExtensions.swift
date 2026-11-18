@@ -63,7 +63,7 @@ extension UIImage
     public convenience init?(Color: UIColor, Size: CGSize = CGSize(width: 1, height: 1))
     {
         let Rect = CGRect(origin: .zero, size: Size)
-        UIGraphicsBeginImageContextWithOptions(Rect.size, false, UIScreen.main.scale)
+        UIGraphicsBeginImageContextWithOptions(Rect.size, false, 0) //0 means the device's native scale.
         Color.setFill()
         UIRectFill(Rect)
         let Image = UIGraphicsGetImageFromCurrentImageContext()

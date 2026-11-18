@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol StateProtocol: class
+protocol StateProtocol: AnyObject
 {
     func StateChanged(NewState: States, HandShake: HandShakeCommands)
 }

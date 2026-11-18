@@ -23,7 +23,7 @@ extension UIButton
         let _ = Timer.scheduledTimer(withTimeInterval: Duration, repeats: false)
         {
             (TheTimer) in
-            self.backgroundColor = OldColor
+            MainActor.assumeIsolated { self.backgroundColor = OldColor }
         }
     }
     
@@ -39,7 +39,7 @@ extension UIButton
         let _ = Timer.scheduledTimer(withTimeInterval: ForSeconds, repeats: false)
         {
             (TheTimer) in
-            self.setImage(UIImage(named: OriginalName), for: UIControl.State.normal)
+            MainActor.assumeIsolated { self.setImage(UIImage(named: OriginalName), for: UIControl.State.normal) }
         }
     }
     

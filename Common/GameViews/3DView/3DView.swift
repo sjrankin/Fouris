@@ -52,7 +52,6 @@ class View3D: SCNView,                          //Our main super class.
         self.isUserInteractionEnabled = true
         CenterBlockShape = BucketShape
         self.rendersContinuously = true
-        CreateMasterBlockNode()
         SetBoard(With)
         CurrentTheme = Theme.UserTheme
         Theme.SubscribeToChanges(Subscriber: "View3D", SubscribingObject: self)
@@ -75,6 +74,8 @@ class View3D: SCNView,                          //Our main super class.
         self.delegate = self
         self.isPlaying = true
         self.scene = GameScene
+        //The master block node holds all retired blocks. It must be created after the scene exists so it is attached to the scene's root.
+        CreateMasterBlockNode()
         self.autoenablesDefaultLighting = CurrentTheme!.UseDefaultLighting
         var AAMode: SCNAntialiasingMode = .multisampling2X
         switch CurrentTheme!.AntialiasingMode
@@ -101,10 +102,10 @@ class View3D: SCNView,                          //Our main super class.
             CameraObserver = self.observe(\.pointOfView?.position, options: [.new])
             {
                 (Node, Change) in
-                OperationQueue.current?.addOperation
-                    {
-                        let DPos = Convert.ConvertToString(Node.pointOfView!.position, AddLabels: true, AddParentheses: true)
-                        let DOri = Convert.ConvertToString(Node.pointOfView!.orientation, AddLabels: true, AddParentheses: true)
+                Task { @MainActor in
+                        guard let PointOfView = self.pointOfView else { return }
+                        let DPos = Convert.ConvertToString(PointOfView.position, AddLabels: true, AddParentheses: true)
+                        let DOri = Convert.ConvertToString(PointOfView.orientation, AddLabels: true, AddParentheses: true)
                         var KVPMsg = MessageHelper.MakeKVPMessage(ID: self.PositionKVP, Key: "Camera Position", Value: DPos)
                         DebugClient.SendPreformattedCommand(KVPMsg)
                         KVPMsg = MessageHelper.MakeKVPMessage(ID: self.OrientationKVP, Key: "Camera Orientation", Value: DOri)
@@ -310,8 +311,7 @@ class View3D: SCNView,                          //Our main super class.
             Hue = 1.0
         }
         WorkingColor = UIColor(hue: Hue, saturation: Saturation, brightness: Brightness, alpha: Alpha)
-        OperationQueue.main.addOperation
-            {
+        Task { @MainActor in
                 self.scene?.background.contents = self.WorkingColor
         }
     }
@@ -387,8 +387,7 @@ class View3D: SCNView,                          //Our main super class.
         let NewGradient = GradientManager.AssembleGradient(NewStops, IsVertical: ShiftVertical, Reverse: ShiftReversed)
         ShiftingStops = NewStops
         let BackgroundGradient = GradientManager.CreateGradientImage(From: NewGradient, WithFrame: self.frame)
-        OperationQueue.main.addOperation
-            {
+        Task { @MainActor in
                 self.scene?.background.contents = BackgroundGradient
         }
     }
@@ -832,7 +831,8 @@ class View3D: SCNView,                          //Our main super class.
         {
             //print("Removing nodes from the MasterBlockNode")
             MasterBlockNode?.childNodes.forEach({
-                if !($0 as! VisualBlocks3D).IsRetired
+                //Only moving (non-retired) blocks are removed - outline nodes and anything else stay.
+                if let Block = $0 as? VisualBlocks3D, !Block.IsRetired
                 {
                     $0.removeFromParentNode()
                 }
@@ -897,11 +897,8 @@ class View3D: SCNView,                          //Our main super class.
         {
             MovingPieceNode?.removeFromParentNode()
         }
+        RemoveMovingPieceOutline()
         
-        let BoardDef = BoardManager.GetBoardFor(CenterBlockShape!)
-        let IsOddlyShaped = !BoardDef!.GameBoardWidth.IsEven
-        let XAdjustment: CGFloat = IsOddlyShaped ? -18.0 : -17.5
-        let YAdjustment: CGFloat = IsOddlyShaped ? -1.0 : -1.5
         //let YStaticAdjustment: CGFloat = IsOddlyShaped ? 0.0 : -0.5
         
         MovingPieceBlocks = [VisualBlocks3D]()
@@ -917,8 +914,8 @@ class View3D: SCNView,                          //Our main super class.
                 return
             }
             #if true
-            let YOffset = (30 - 10 - 1) + YAdjustment - CGFloat(Block.Y)
-            let XOffset = CGFloat(Block.X) + XAdjustment
+            let YOffset = SceneY(ForRow: Block.Y)
+            let XOffset = SceneX(ForColumn: Block.X)
             let VBlock = VisualBlocks3D(Block.ID, AtX: XOffset, AtY: YOffset, ActiveVisuals: PVisuals!.ActiveVisuals!,
                                         RetiredVisuals: PVisuals!.RetiredVisuals!, IsRetired: AsRetired)
             VBlock.categoryBitMask = View3D.GameLight
@@ -961,6 +958,39 @@ class View3D: SCNView,                          //Our main super class.
             #endif
         }
         self.scene?.rootNode.addChildNode(MovingPieceNode!)
+        DrawMovingPieceOutline(MovingPieceBlocks)
+    }
+    
+    /// Vertical offset applied to map rows so the center of the bucket interior (the playable area) sits at the origin of the
+    /// scene, where the grid and camera expect it. Every map-to-scene conversion goes through this value so the bucket, the
+    /// retired blocks and the moving piece always agree, on every device.
+    public var BucketVerticalOffset: CGFloat
+    {
+        guard let Board = BoardManager.GetBoardFor(CenterBlockShape!) else
+        {
+            return 0.0
+        }
+        let InteriorCenterRow = CGFloat(Board.BucketInteriorY) + (CGFloat(Board.BucketInteriorHeight) - 1.0) / 2.0
+        return InteriorCenterRow - (CGFloat(Board.GameBoardHeight) - 1.0) / 2.0
+    }
+    
+    /// Converts a map column to a horizontal scene coordinate. The map is centered on the scene origin.
+    /// - Parameter Column: Column in the board map.
+    /// - Returns: Horizontal scene coordinate of the center of the column.
+    public func SceneX(ForColumn Column: Int) -> CGFloat
+    {
+        let Width = CGFloat(BoardManager.GetBoardFor(CenterBlockShape!)!.GameBoardWidth)
+        return CGFloat(Column) - (Width - 1.0) / 2.0
+    }
+    
+    /// Converts a map row to a vertical scene coordinate. The map is centered vertically on the scene origin (plus the
+    /// bucket offset). Map rows increase downward while scene coordinates increase upward.
+    /// - Parameter Row: Row in the board map.
+    /// - Returns: Vertical scene coordinate of the center of the row.
+    public func SceneY(ForRow Row: Int) -> CGFloat
+    {
+        let Height = CGFloat(BoardManager.GetBoardFor(CenterBlockShape!)!.GameBoardHeight)
+        return (Height - 1.0) / 2.0 - CGFloat(Row) + BucketVerticalOffset
     }
     
     /// The moving piece is in its final location. Add its ID to the list of retired IDs and remove the moving blocks.
@@ -968,16 +998,13 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter Finalized: The piece that was finalized.
     public func MergePieceIntoBucket(_ Finalized: Piece)
     {
+        RecordBlockJoins(For: Finalized)
         let Pretty = MapType.PrettyPrint(Map: CurrentBoard!.Map!)
         print("Merged map:\n\(Pretty)")
         RetiredPieceIDs.append(Finalized.ID)
         let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape!)!
         var XOffset: CGFloat = 0.0
         var YOffset: CGFloat = 0.0
-        let BoardDef = BoardManager.GetBoardFor(CenterBlockShape!)
-        let IsOddlyShaped = !BoardDef!.GameBoardWidth.IsEven
-        let XAdjustment: CGFloat = IsOddlyShaped ? -18.0 : -17.5
-        let YAdjustment: CGFloat = IsOddlyShaped ? -1.0 : -1.5
         let BlockMap = CurrentBoard!.Map!.MergedBlockMap()
         let MergedMap = CurrentBoard!.Map!.MergeMap(Excluding: nil)
         
@@ -993,8 +1020,8 @@ class View3D: SCNView,                          //Our main super class.
             let BlockID = BlockMap[Block.Y][Block.X]
             let PieceTypeID = CurrentBoard!.Map!.RetiredPieceShapes[ItemID]!
             #if true
-            YOffset = (30 - 10 - 1) + YAdjustment - CGFloat(Block.Y)
-            XOffset = CGFloat(Block.X) + XAdjustment
+            YOffset = SceneY(ForRow: Block.Y)
+            XOffset = SceneX(ForColumn: Block.X)
             AddBlockNode_Rotating(ParentID: ItemID, BlockID: BlockID, X: XOffset, Y: YOffset,
                                   IsRetired: true, ShapeID: PieceTypeID)
             #else
@@ -1036,9 +1063,11 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter DeltaY: The relative number of grid points to move vertically.
     /// - Parameter TotalDuration: The amount of time to take to drop.
     /// - Parameter Completed: Completion block.
-    public func MovePieceRelative(WithPiece: Piece, DeltaX: Int, DeltaY: Int, TotalDuration Duration: Double, Completed: ((Piece)->())?)
+    public func MovePieceRelative(WithPiece: Piece, DeltaX: Int, DeltaY: Int, TotalDuration Duration: Double, Completed: (@MainActor (Piece)->())?)
     {
         print("At MovePieceRelative: DeltaX=\(DeltaX), DeltaY=\(DeltaY), TotalDuration=\(Duration)")
+        //Keep the outline with the blocks while they move.
+        MovingOutlineNode?.runAction(SCNAction.moveBy(x: CGFloat(DeltaX), y: CGFloat(DeltaY), z: 0.0, duration: Duration))
         MovingPieceNode?.enumerateChildNodes
             {
                 Node, _ in
@@ -1046,8 +1075,10 @@ class View3D: SCNView,                          //Our main super class.
                 let Move = SCNAction.move(to: NewLocation, duration: Duration)
                 Node.runAction(Move, completionHandler:
                     {
+                Task { @MainActor in
                         Completed?(WithPiece)
-                })
+                }
+            })
         }
     }
     
@@ -1055,19 +1086,17 @@ class View3D: SCNView,                          //Our main super class.
     public var MovingPieceBlocks = [VisualBlocks3D]()
     
     /// Remove the moving piece, if it exists.
+    /// - Note: This must happen for every board class. Static boards used to leave the moving (active colored) blocks in
+    ///         the scene until the next piece was drawn, so they showed through the newly frozen (retired) blocks.
     public func RemoveMovingPiece()
     {
-        let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape!)!
-        if BoardClass == .Rotatable
+        RemoveMovingPieceOutline()
+        if MovingPieceNode != nil
         {
-            //print("Removing moving piece in rotating game.")
-            if MovingPieceNode != nil
-            {
-                MovingPieceNode!.removeFromParentNode()
-                MovingPieceNode = nil
-                UpdateMasterBlockNode()
-            }
-            //print("  Done removing piece from rotating game.")
+            MovingPieceNode!.removeFromParentNode()
+            MovingPieceNode = nil
+            MovingPieceBlocks = [VisualBlocks3D]()
+            UpdateMasterBlockNode()
         }
     }
     
@@ -1103,14 +1132,6 @@ class View3D: SCNView,                          //Our main super class.
         defer{ objc_sync_exit(RotateLock) }
         
         let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape!)!
-        let BoardDef = BoardManager.GetBoardFor(CenterBlockShape!)
-        let IsOddlyShaped = !BoardDef!.GameBoardWidth.IsEven
-        let XAdjustment: CGFloat = IsOddlyShaped ? -18.0 : -17.5
-        let YAdjustment: CGFloat = IsOddlyShaped ? 0.0 : -1.0
-        let ExistingBlockYOffset: CGFloat = IsOddlyShaped ? 0.0 : -0.5
-        let XFinalAdjustment: CGFloat = IsOddlyShaped ? 0.0 : 0.0
-        let YFinalAdjustment: CGFloat = IsOddlyShaped ? -1.0 : -0.5
-        
         BlockList.forEach({$0.Marked = false})
         
         let CurrentMap = FromBoard.Map!
@@ -1138,8 +1159,8 @@ class View3D: SCNView,                          //Our main super class.
                 var YOffset: CGFloat = 0
                 var XOffset: CGFloat = 0
                 #if true
-                YOffset = (30 - 10 - 1) + YAdjustment - CGFloat(Y)
-                XOffset = CGFloat(X) + XAdjustment
+                YOffset = SceneY(ForRow: Y)
+                XOffset = SceneX(ForColumn: X)
                 #else
                 switch BoardClass
                 {
@@ -1182,7 +1203,7 @@ class View3D: SCNView,                          //Our main super class.
                     if let VBlock = GetBlock(BlockID)
                     {
                         let NewX = CGFloat(XOffset)
-                        let NewY = CGFloat(YOffset) + ExistingBlockYOffset//- 0.5
+                        let NewY = CGFloat(YOffset)
                         if NewX == VBlock.X && NewY == VBlock.Y
                         {
                             //Nothing to do...
@@ -1200,11 +1221,6 @@ class View3D: SCNView,                          //Our main super class.
                 {
                     //Add blocks not in the block list to the list here.
                     let PieceTypeID = CurrentMap.RetiredPieceShapes[ItemID]!
-                    if BoardClass == .Rotatable
-                    {
-                        XOffset = XOffset + XFinalAdjustment
-                        YOffset = YOffset + YFinalAdjustment//- 0.5
-                    }
                     #if true
                     AddBlockNode_Rotating(ParentID: ItemID, BlockID: BlockID, X: XOffset, Y: YOffset,
                                           IsRetired: IsRetired, ShapeID: PieceTypeID)
@@ -1240,6 +1256,8 @@ class View3D: SCNView,                          //Our main super class.
             }
         }
         BlockList = BlockList.filter{$0.Marked}
+        //Shapes may have been split or shortened by removed rows, so redraw their outlines.
+        RebuildShapeOutlines()
     }
     
     /// Sets the board to use by the view (and indirectly sets the map as well).
@@ -1280,6 +1298,8 @@ class View3D: SCNView,                          //Our main super class.
         objc_sync_enter(RotateLock)
         defer{objc_sync_exit(RotateLock)}
         CreateMasterBlockNode()
+        ResetShapeOutlines()
+        RemoveMovingPieceOutline()
         //print("Clearing the bucket.")
         for Node in BlockList
         {
@@ -1292,8 +1312,7 @@ class View3D: SCNView,                          //Our main super class.
         BlockList.removeAll()
         //print("  Done removing all blocks from BlockList.")
         #else
-        OperationQueue.main.addOperation
-            {
+        Task { @MainActor in
                 //Sometimes this call seems to trigger an exception from within SceneKit.
                 self.BlockList.removeAll()
         }
@@ -1393,7 +1412,7 @@ class View3D: SCNView,                          //Our main super class.
     /// - Parameter To: The new alpha/opacity level.
     /// - Parameter Duration: The duration of the opacity change.
     /// - Parameter Completed: Completion block.
-    public func SetBoardOpacity(To: Double, Duration: Double, Completed: (() -> ())? = nil)
+    public func SetBoardOpacity(To: Double, Duration: Double, Completed: (@MainActor () -> ())? = nil)
     {
         var FadeAction: SCNAction!
         if To == 1.0
@@ -1408,11 +1427,13 @@ class View3D: SCNView,                          //Our main super class.
         BucketGridNode?.runAction(FadeAction)
         MasterBlockNode?.runAction(FadeAction, completionHandler:
             {
+                Task { @MainActor in
                 if let CompletionHandler = Completed
                 {
                     CompletionHandler()
                 }
         }
+            }
         )
     }
     
@@ -1484,9 +1505,10 @@ class View3D: SCNView,                          //Our main super class.
         {
             Block.geometry?.firstMaterial?.diffuse.contents = UIColor.yellow
         }
-        var RDelta = EndColor.r - StartColor.r
-        var GDelta = EndColor.g - StartColor.g
-        var BDelta = EndColor.b - StartColor.b
+        //Both actions use the same deltas (start minus end).
+        let RDelta = StartColor.r - EndColor.r
+        let GDelta = StartColor.g - EndColor.g
+        let BDelta = StartColor.b - EndColor.b
         let FinalDuration = 0.5
         let ColorToRed = SCNAction.customAction(duration: FinalDuration, action:
         {
@@ -1498,9 +1520,6 @@ class View3D: SCNView,                          //Our main super class.
             Node.geometry?.firstMaterial?.diffuse.contents = UIColor(red: Red, green: Green, blue: Blue, alpha: 1.0)
         }
         )
-        RDelta = StartColor.r - EndColor.r
-        GDelta = StartColor.g - EndColor.g
-        BDelta = StartColor.b - EndColor.b
         let ColorToYellow = SCNAction.customAction(duration: FinalDuration, action:
         {
             (Node, Time) in
@@ -1791,6 +1810,48 @@ class View3D: SCNView,                          //Our main super class.
     
     /// Map of button types to button nodes.
     public var ButtonList: [NodeButtons: SCNButtonNode] = [NodeButtons: SCNButtonNode]()
+    
+    /// The view size the control buttons were last laid out for.
+    private var LastButtonLayoutSize: CGSize = .zero
+    
+    /// Node holding the outlines of the retired shapes (a child of the master block node).
+    /// Called after the control buttons have been fitted to the view. Used to place UI in the free space of the top bar.
+    public var ControlsWereFitted: (@MainActor () -> Void)? = nil
+    
+    var ShapeOutlineNode: SCNNode? = nil
+    
+    /// Node holding the outline of the moving piece.
+    var MovingOutlineNode: SCNNode? = nil
+    
+    /// For each retired block, the blocks it was joined to when its piece landed. Used to outline shapes as a whole.
+    var BlockJoins: [UUID: Set<UUID>] = [:]
+    
+    /// Horizontal shift applied to each control button by the last fit (see `RepositionControlButtons`).
+    var ButtonShifts: [NodeButtons: Float] = [:]
+    
+    /// Guards against re-entrant layout while the control buttons are being fitted.
+    private var IsFittingButtons = false
+    
+    /// Re-fit the control buttons whenever the size of the view changes (rotation, split view, window resize).
+    override func layoutSubviews()
+    {
+        super.layoutSubviews()
+        if IsFittingButtons
+        {
+            return
+        }
+        IsFittingButtons = true
+        defer { IsFittingButtons = false }
+        if bounds.size != LastButtonLayoutSize
+        {
+            //Only remember the size once the buttons were successfully fitted. Early layout passes happen before the scene
+            //and camera exist, in which case the buttons are fitted on a later pass.
+            if RepositionControlButtons()
+            {
+                LastButtonLayoutSize = bounds.size
+            }
+        }
+    }
     
     /// Map of button node information.
     public var ButtonDictionary: [NodeButtons: (Location: SCNVector3, Scale: Double, Color: UIColor, Highlight: UIColor)] =

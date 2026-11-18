@@ -9,7 +9,7 @@
 import Foundation
 
 /// Protocol to observe changes in gradients.
-protocol GradientObserver: class
+protocol GradientObserver: AnyObject
 {
     /// Called when a gradient is changed.
     /// - Parameter NewGradient: The new gradient definition.

@@ -474,102 +474,19 @@ class RotatingGameAI: AIProtocol
         return By
     }
     
-    /// Calculate the best fit for the specified game piece.
-    /// - Note:
-    ///   - "Best fit" is defined as the location that generates the greatest increment
-    ///     in the game score.
-    ///   - This function intended for use for games that change boards between pieces.
-    /// - Parameter GamePiece: The game piece to find the best fit for.
-    /// - Parameter CurrentScore: The score before the AI starts.
-    /// - Parameter InBoard: The Board to use to find the best fit.
-    /// - Returns: Value indicating the best fit. This is *not* a game score.
+    /// Find the best fit for the piece. Every rotating, semi-rotating and rotatable layout uses the same placement search as
+    /// the standard games: it tries every rotation and horizontal position the piece can reach on the real board (center
+    /// blocks, barriers and open columns included) and scores the resting places.
+    /// - Parameter GamePiece: The piece to place.
+    /// - Parameter CurrentScore: The current score of the game.
+    /// - Parameter InBoard: The board in its current (possibly rotated) state.
+    /// - Returns: Score of the best placement.
     func BestFit(_ GamePiece: Piece, CurrentScore: Int, InBoard: Board) -> Double
     {
-        //print("\nStarting AI for piece \"\(GamePiece.Shape)\"")
         FoundBestFitFor = GamePiece
-        MotionQueue.Clear()
-        let LeftSideComplete = LeftSideIsComplete(InBoard)
-        let RightSideComplete = RightSideIsComplete(InBoard)
-        let FloorCompleted = LeftSideComplete && RightSideComplete
-        let EntryWindow = InBoard.Map?.TopRowEntry()
-        print("EntryWindow = \(EntryWindow!.Left) to \(EntryWindow!.Right)")
-        if FloorCompleted
-        {
-            //If the floor is completed (eg, no bottomless columns), use a offset matching algorithm.
-            let Final = GeneralAI.BestFit(GamePiece, CurrentScore: CurrentScore, GameBoard: InBoard)
-            MotionQueue = Queue(GeneralAI.MotionQueue)
-            return Final
-        }
-        else
-        {
-            var Points = GamePiece.LocationsAsPoints()
-            if !GamePiece.IsRotationallySymmetric
-            {
-                //Orient the piece such that it presents its widest aspect horizontally.
-                let Origin = GetPieceOrigin(GamePiece)
-                let WideCount = WidestRotation(ForPoints: Points, CenterPoint: Origin!)
-                if WideCount > 0
-                {
-                    Points = Piece.RightRotate(Points, AboutOrigin: Origin!, Times: WideCount)
-                }
-                for _ in 0 ..< WideCount
-                {
-                    MotionQueue.Enqueue(.RotateRight)
-                }
-            }
-            var XOffset: Int = 0
-            if !LeftSideComplete && !RightSideComplete
-            {
-                //Neither side is complete - build on the side with the greatest number of bottomless columns.
-                let (LeftCount, RightCount) = EmptyColumnCounts(InBoard)
-                if LeftCount >= RightCount
-                {
-                    if let FloorColumn = InBoard.Map?.LeftMostFloor
-                    {
-                        XOffset = GetLeftOverlapMotionCount(ToColumn: FloorColumn, Points: Points,
-                                                            LeftMostValid: InBoard.BucketInteriorLeft)
-                    }
-                }
-                else
-                {
-                    if let FloorColumn = InBoard.Map?.RightMostFloor
-                    {
-                        XOffset = GetRightOverlapMotionCount(ToColumn: FloorColumn, Points: Points,
-                                                             RightMostValid: InBoard.BucketInteriorRight)
-                    }
-                }
-            }
-            if LeftSideComplete
-            {
-                //Build on the right side.
-                let FloorColumn = NextRightSideFloorColumn(InBoard)
-                XOffset = GetRightOverlapMotionCount(ToColumn: FloorColumn, Points: Points,
-                                                     RightMostValid: InBoard.BucketInteriorRight)
-            }
-            if RightSideComplete
-            {
-                //Build on the left side.
-                let FloorColumn = NextLeftSideFloorColumn(InBoard)
-                XOffset = GetLeftOverlapMotionCount(ToColumn: FloorColumn, Points: Points,
-                                                    LeftMostValid: InBoard.BucketInteriorLeft)
-            }
-            if XOffset > 0
-            {
-                for _ in 0 ..< XOffset
-                {
-                    MotionQueue.Enqueue(.Left)
-                }
-            }
-            if XOffset < 0
-            {
-                for _ in 0 ..< abs(XOffset)
-                {
-                    MotionQueue.Enqueue(.Right)
-                }
-            }
-            MotionQueue.Enqueue(.DropDown)
-        }
-        return 0.0
+        let Final = GeneralAI.BestFit(GamePiece, CurrentScore: CurrentScore, GameBoard: InBoard)
+        MotionQueue = Queue(GeneralAI.MotionQueue)
+        return Final
     }
     
     /// The piece the best fit was found for.

@@ -63,7 +63,7 @@ class RawThemeViewerCode: UIViewController,             //Main base class.
     }
     
     /// Deinitializer - unregisters from the `PHPhotoLibrary` shared instance.
-    deinit
+    isolated deinit
     {
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
     }
@@ -705,7 +705,7 @@ class RawThemeViewerCode: UIViewController,             //Main base class.
     // MARK: - Image button handling.
     
     /// Not used.
-    func photoLibraryDidChange(_ changeInstance: PHChange)
+    nonisolated func photoLibraryDidChange(_ changeInstance: PHChange)
     {
         //Not used.
     }

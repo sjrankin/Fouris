@@ -106,28 +106,6 @@ class MainViewController: UIViewController,
         
         let _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(IncrementSeconds), userInfo: nil, repeats: true)
         
-        #if DEBUG
-        let BadgeCount = Versioning.Build
-        let App = UIApplication.shared
-        let NotCen = UNUserNotificationCenter.current()
-        NotCen.requestAuthorization(options: [.badge, .alert, .sound], completionHandler:
-            {
-                (granted, error) in
-                if granted
-                {
-                    OperationQueue.main.addOperation
-                        {
-                            App.registerForRemoteNotifications()
-                            App.applicationIconBadgeNumber = BadgeCount
-                    }
-                }
-                else
-                {
-                    print("Not authorized to display badges. (\((error?.localizedDescription)!))")
-                }
-        }
-        )
-        #endif
         
         #if true
         //Initialize the link with TDebug.
@@ -173,6 +151,69 @@ class MainViewController: UIViewController,
     public func VersionBoxDisappeared()
     {
         VersionBoxShowing = false
+        //The game starts in attract mode as soon as the splash (version) box is gone. Nothing happens if a game is already
+        //running, for example when the user pressed Play.
+        AutoStartInAttractMode()
+    }
+    
+    /// Keep the "Press Play to Start" text centered across the full width of the view whenever the layout changes.
+    override public func viewDidLayoutSubviews()
+    {
+        super.viewDidLayoutSubviews()
+        if PressPlayLabelView != nil
+        {
+            PressPlayLabelView.frame = CGRect(x: 0.0, y: PressPlayLabelView.frame.minY,
+                                              width: view.bounds.width, height: PressPlayLabelView.frame.height)
+            GameTextOverlay?.UpdatePressPlayLayout()
+        }
+        PlaceNextPieceInTopBar()
+    }
+    
+    /// Constraints that position the next piece view (and its backing frame) inside the top control bar.
+    private var NextPieceConstraints = [NSLayoutConstraint]()
+    
+    /// Move the next piece view into the free space of the top control bar of the 3D view.
+    /// - Note: The storyboard constraints that pinned the view below the bar are replaced the first time this runs.
+    private func PlaceNextPieceInTopBar()
+    {
+        guard let Square = GameView3D?.FreeControlBarSquare(), let Target = NextPieceViewControl,
+              let Backing = NextPieceView, let Container = TextLayerView else
+        {
+            return
+        }
+        let Local = Container.convert(Square, from: GameView3D)
+        if NextPieceConstraints.isEmpty
+        {
+            //Remove the storyboard constraints that tie the two views to the old location.
+            let Involved = Container.constraints.filter(
+            {
+                ($0.firstItem as? UIView) === Target || ($0.secondItem as? UIView) === Target ||
+                ($0.firstItem as? UIView) === Backing || ($0.secondItem as? UIView) === Backing
+            })
+            NSLayoutConstraint.deactivate(Involved)
+            NSLayoutConstraint.deactivate(Target.constraints)
+            NSLayoutConstraint.deactivate(Backing.constraints)
+            Target.translatesAutoresizingMaskIntoConstraints = false
+            Backing.translatesAutoresizingMaskIntoConstraints = false
+            for Item in [Target, Backing]
+            {
+                NextPieceConstraints.append(Item.leadingAnchor.constraint(equalTo: Container.leadingAnchor, constant: Local.minX))
+                NextPieceConstraints.append(Item.topAnchor.constraint(equalTo: Container.topAnchor, constant: Local.minY))
+                NextPieceConstraints.append(Item.widthAnchor.constraint(equalToConstant: Local.width))
+                NextPieceConstraints.append(Item.heightAnchor.constraint(equalToConstant: Local.height))
+            }
+            NSLayoutConstraint.activate(NextPieceConstraints)
+        }
+        else
+        {
+            for Index in [0, 4]
+            {
+                NextPieceConstraints[Index].constant = Local.minX
+                NextPieceConstraints[Index + 1].constant = Local.minY
+                NextPieceConstraints[Index + 2].constant = Local.width
+                NextPieceConstraints[Index + 3].constant = Local.height
+            }
+        }
     }
     
     /// Version box is showing flag.
@@ -230,6 +271,11 @@ class MainViewController: UIViewController,
         GameView3D?.Initialize(With: Game!.GameBoard!, Theme: Themes, BucketShape: UserTheme!.BucketShape) 
         GameView3D?.Owner = self
         GameView3D?.SmoothMotionDelegate = self
+        GameView3D?.ControlsWereFitted =
+        {
+            [weak self] in
+            self?.view.setNeedsLayout()
+        }
         Smooth3D = GameView3D
         
         //Initialize the game text layer.
@@ -274,17 +320,7 @@ class MainViewController: UIViewController,
             GameView3D?.ShowAboutBox(FadeInDuration: 0.02, HideAfter: 10.0)
         }
         
-        let AutoStartDuration = UserTheme!.AutoStartDuration
-        let _ = Timer.scheduledTimer(timeInterval: AutoStartDuration, target: self,
-                                     selector: #selector(AutoStartInAttractMode),
-                                     userInfo: nil, repeats: false)
-        
         InitializeGestures()
-        
-        if UserTheme!.ShowHeartbeat
-        {
-            StartHeartbeat()
-        }
         
         if Settings.GetShowCameraControls()
         {
@@ -1458,6 +1494,9 @@ class MainViewController: UIViewController,
         #if false
         History?.Games![CurrentBaseGameType]!.IncrementGameCount()
         #endif
+        //The after-game-over show-off rotations must not run during play. The falling piece is not part of the rotating
+        //board, so pieces would freeze into the rotated plane instead of the barrier plane.
+        GameView3D?.StopShowingOff(Duration: 0.05)
         ForceResume()
         StopAccumulating = false
         RotateIndex = 0
@@ -2043,25 +2082,6 @@ class MainViewController: UIViewController,
     {
         switch Field
         {
-            case .HeartbeatInterval:
-                if UserTheme!.ShowHeartbeat
-                {
-                    HeartbeatTimer?.invalidate()
-                    HeartbeatTimer = nil
-                    StartHeartbeat()
-            }
-            
-            case .ShowHeartbeat:
-                let ShowHeartbeat = UserTheme!.ShowHeartbeat
-                if ShowHeartbeat
-                {
-                    StartHeartbeat()
-                }
-                else
-                {
-                    StopHeartbeat()
-            }
-            
             default:
                 print("Theme \(ThemeName) updated field \(Field)")
         }
@@ -2087,8 +2107,7 @@ class MainViewController: UIViewController,
     /// Update the heartbeat indicator to indicate both the UI and the game view threads are active.
     @objc public func HandleHeartbeat()
     {
-        OperationQueue.main.addOperation
-            {
+        Task { @MainActor in
                 if self.HeartbeatCount.isMultiple(of: 2)
                 {
                     self.GameView3D?.AnimateHeartbeat(IsHighlighted: true, Duration: 0.15,
@@ -2114,6 +2133,76 @@ class MainViewController: UIViewController,
     
     /// The heartbeat timer.
     private var HeartbeatTimer: Timer? = nil
+    
+    // MARK: - Dialog presentation.
+    
+    /// Window frame to restore after a dialog has been dismissed (macOS only).
+    private var SavedWindowFrame: CGRect? = nil
+    
+    /// Present a full-size dialog. The dialogs are laid out for a tall (about 1000 point) sheet. On macOS they are shown over the
+    /// whole window and the window is made tall enough for the layout while the dialog is up. Other platforms use the
+    /// default presentation.
+    /// - Parameter Controller: The dialog to present.
+    private func PresentDialog(_ Controller: UIViewController)
+    {
+        #if targetEnvironment(macCatalyst)
+        Controller.modalPresentationStyle = .fullScreen
+        GrowWindowForDialog()
+        #endif
+        self.present(Controller, animated: true, completion: nil)
+    }
+    
+    #if targetEnvironment(macCatalyst)
+    /// Make the window big enough for the dialogs (within the limits of the screen). The old size is remembered.
+    private func GrowWindowForDialog()
+    {
+        guard let Scene = view.window?.windowScene else
+        {
+            return
+        }
+        let Frame = Scene.effectiveGeometry.systemFrame
+        if SavedWindowFrame == nil
+        {
+            SavedWindowFrame = Frame
+        }
+        let Screen = Scene.screen.bounds
+        let NeededHeight = min(max(Frame.height, 1040.0), Screen.height - 80.0)
+        let NeededWidth = max(Frame.width, 800.0)
+        var Origin = Frame.origin
+        if Origin.y + NeededHeight > Screen.maxY - 20.0
+        {
+            Origin.y = max(Screen.minY + 30.0, Screen.maxY - NeededHeight - 20.0)
+        }
+        let NewFrame = CGRect(x: Origin.x, y: Origin.y, width: NeededWidth, height: NeededHeight)
+        Scene.requestGeometryUpdate(UIWindowScene.GeometryPreferences.Mac(systemFrame: NewFrame))
+        {
+            Error in
+            print("Could not resize the window for a dialog: \(Error.localizedDescription)")
+        }
+    }
+    
+    /// Put the window back to the size it had before a dialog grew it.
+    private func RestoreWindowAfterDialog()
+    {
+        guard let Saved = SavedWindowFrame, let Scene = view.window?.windowScene else
+        {
+            return
+        }
+        SavedWindowFrame = nil
+        Scene.requestGeometryUpdate(UIWindowScene.GeometryPreferences.Mac(systemFrame: Saved))
+        {
+            Error in
+            print("Could not restore the window size: \(Error.localizedDescription)")
+        }
+    }
+    
+    /// When a full-window dialog goes away this view appears again; restore the window size at that point.
+    override public func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        RestoreWindowAfterDialog()
+    }
+    #endif
     
     // MARK: - Pop-over main menu.
     
@@ -2153,7 +2242,7 @@ class MainViewController: UIViewController,
                 if let AboutController = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "AboutDialog") as? AboutDialogController
                 {
                     ForcePause()
-                    self.present(AboutController, animated: true, completion: nil)
+                    PresentDialog(AboutController)
             }
             
             case .RunInAttractMode:
@@ -2174,7 +2263,7 @@ class MainViewController: UIViewController,
                 {
                     ForcePause()
                     SelectController.SelectorDelegate = self
-                    self.present(SelectController, animated: true, completion: nil)
+                    PresentDialog(SelectController)
             }
             
             case .RunSettings:
@@ -2183,7 +2272,7 @@ class MainViewController: UIViewController,
                 {
                     ForcePause()
                     Controller.EditTheme(Theme: Themes!.UserTheme!)
-                    self.present(Controller, animated: true, completion: nil)
+                    PresentDialog(Controller)
             }
             
             case .StartPlaying:

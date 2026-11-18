@@ -21,75 +21,77 @@ extension View3D
     ///         frame rate.
     /// - Parameter renderer: Not used.
     /// - Parameter time: The time interval between calls.
-    public func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval)
+    nonisolated public func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval)
     {
-        let DeltaTime = time - LastUpdateTime
-        let CurrentFPS = 1 / DeltaTime
-        LastUpdateTime = time
-        LastFrameRate = CurrentFPS
+        Task { @MainActor in
+            let DeltaTime = time - LastUpdateTime
+            let CurrentFPS = 1 / DeltaTime
+            LastUpdateTime = time
+            LastFrameRate = CurrentFPS
+        }
     }
     
     /// Called after animations are applied.
-    public func renderer(_ renderer: SCNSceneRenderer, didApplyAnimationsAtTime time: TimeInterval)
+    nonisolated public func renderer(_ renderer: SCNSceneRenderer, didApplyAnimationsAtTime time: TimeInterval)
     {
     }
     
     /// Called after the scene is rendered.
     /// - Note: Nodes that need to be deleted are deleted here.
-    public func renderer(_ renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval)
+    nonisolated public func renderer(_ renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval)
     {
-//        print("renderer:didRenderScene started.")
-        let StartTime = CACurrentMediaTime()
-        if NodeRemovalList.count > 0
-        {
-            print("  Removing named nodes [\(NodeRemovalList.count)].")
-            var KillList = [SCNNode]()
-            for NodeName in NodeRemovalList
+        Task { @MainActor in
+    //        print("renderer:didRenderScene started.")
+            if NodeRemovalList.count > 0
             {
-                self.scene?.rootNode.enumerateChildNodes
-                    {
-                        (Node, _) in
-                        if Node.name == NodeName
-                        {
-                            KillList.append(Node)
-                        }
-                }
-            }
-            for Node in KillList
-            {
-                Node.removeAllActions()
-                Node.removeFromParentNode()
-            }
-            for NodeName in NodeRemovalList
-            {
-                BlockList = BlockList.filter({$0.name != NodeName})
-            }
-            print("    Done removing named nodes.")
-        }
-        if ObjectRemovalList.count > 0
-        {
-            print("  Removing GameViewObjects [\(ObjectRemovalList.count)]")
-            for SomeObject in ObjectRemovalList
-            {
-                switch SomeObject
+                print("  Removing named nodes [\(NodeRemovalList.count)].")
+                var KillList = [SCNNode]()
+                for NodeName in NodeRemovalList
                 {
-                    case .Bucket:
-                        BucketNode?.removeFromParentNode()
-                        BucketNode = nil
-                    
-                    case .BucketGrid:
-                        BucketGridNode?.removeFromParentNode()
-                        BucketGridNode = nil
-                    
-                    case .BucketGridOutline:
-                        OutlineNode?.removeFromParentNode()
-                        OutlineNode = nil
+                    self.scene?.rootNode.enumerateChildNodes
+                        {
+                            (Node, _) in
+                            if Node.name == NodeName
+                            {
+                                KillList.append(Node)
+                            }
+                    }
                 }
+                for Node in KillList
+                {
+                    Node.removeAllActions()
+                    Node.removeFromParentNode()
+                }
+                for NodeName in NodeRemovalList
+                {
+                    BlockList = BlockList.filter({$0.name != NodeName})
+                }
+                print("    Done removing named nodes.")
             }
-            print("    Done removing GameViewObjects")
+            if ObjectRemovalList.count > 0
+            {
+                print("  Removing GameViewObjects [\(ObjectRemovalList.count)]")
+                for SomeObject in ObjectRemovalList
+                {
+                    switch SomeObject
+                    {
+                        case .Bucket:
+                            BucketNode?.removeFromParentNode()
+                            BucketNode = nil
+                    
+                        case .BucketGrid:
+                            BucketGridNode?.removeFromParentNode()
+                            BucketGridNode = nil
+                    
+                        case .BucketGridOutline:
+                            OutlineNode?.removeFromParentNode()
+                            OutlineNode = nil
+                    }
+                }
+                print("    Done removing GameViewObjects")
+            }
+    //        print("  renderer:didRenderScene ended. Duration: \(Duration)")
         }
-//        let Duration = CACurrentMediaTime() - StartTime
-//        print("  renderer:didRenderScene ended. Duration: \(Duration)")
     }
     
     // MARK: - Other functions.

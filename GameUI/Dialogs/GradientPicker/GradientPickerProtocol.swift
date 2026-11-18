@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 
 /// Protocol for handling gradients with respect to editing.
-protocol GradientPickerProtocol: class
+protocol GradientPickerProtocol: AnyObject
 {
     /// Called when a gradient has been edited.
     /// - Parameter Edited: The edited gradient. If nil, the edit operation was canceled.

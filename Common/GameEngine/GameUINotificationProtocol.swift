@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// Provides notifications of events from the abstract game engine to the concrete UI.
-protocol GameUINotificationProtocol: class
+protocol GameUINotificationProtocol: AnyObject
 {
     /// Called for game state changes.
     /// - Parameter NewState: New game state.

@@ -30,14 +30,7 @@ extension View3D
     /// - Parameter NodeText: If supplied the text to use for the node. If not supplied, default values are used.
     public func MakeButton(ForButton: NodeButtons, NodeText: String? = nil)
     {
-        if UIDevice.current.userInterfaceIdiom == .phone
-        {
-            ButtonDictionary = SmallButtonDictionary
-        }
-        else
-        {
-            ButtonDictionary = BigButtonDictionary
-        }
+        ButtonDictionary = CurrentButtonDictionary()
         var ButtonFont = UIFont.systemFont(ofSize: 20.0, weight: UIFont.Weight.bold)
         if let Descriptor = ButtonFont.fontDescriptor.withDesign(.rounded)
         {
@@ -88,6 +81,7 @@ extension View3D
                 #if false
                 FinalNode.castsShadow = true
                 #endif
+                ApplyFittedLocation(For: ForButton, Node: FinalNode)
                 self.scene?.rootNode.addChildNode(FinalNode)
                 return
             
@@ -222,6 +216,7 @@ extension View3D
         }
         
         ButtonList[ForButton] = FinalNode
+        ApplyFittedLocation(For: ForButton, Node: FinalNode)
         self.scene?.rootNode.addChildNode(FinalNode!)
     }
     
@@ -301,6 +296,8 @@ extension View3D
     ///                    remove all buttons.
     public func ShowControls(With: [NodeButtons]? = nil)
     {
+        //Once all the buttons exist, fit them to the visible screen (this also caches the shifts used when buttons are recreated).
+        defer { RepositionControlButtons() }
         //Add the background if necessary.
         var FoundBackground = false
         self.scene?.rootNode.enumerateChildNodes

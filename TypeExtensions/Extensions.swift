@@ -13,7 +13,7 @@ import UIKit
 extension UUID
 {
     /// Returns an empty UUID (all zero values for all fields).
-    public static var Empty: UUID
+    nonisolated public static var Empty: UUID
     {
         get
         {

@@ -333,7 +333,7 @@ class PieceFactory
         GenericLayer.isOpaque = false
         GenericLayer.backgroundColor = UIColor.clear.cgColor
         UIGraphicsBeginImageContextWithOptions(CGSize(width: GenericLayer.frame.width, height: GenericLayer.frame.height),
-                                               false, UIScreen.main.scale)
+                                               false, 0) //0 means the device's native scale.
         defer{UIGraphicsEndImageContext()}
         guard let Context = UIGraphicsGetCurrentContext() else
         {

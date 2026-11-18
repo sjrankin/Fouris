@@ -31,8 +31,7 @@ class MessageHandler
         let (Command, Address, Text, FGColor, BGColor) = MessageHelper.DecodeIdiotLightMessage(Raw)
         let FinalAddress = Address.uppercased()
         #if false
-        OperationQueue.main.addOperation
-            {
+        Task { @MainActor in
                 switch Command
                 {
                 case .Disable:

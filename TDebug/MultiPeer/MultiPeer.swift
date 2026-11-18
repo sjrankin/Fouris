@@ -47,7 +47,7 @@ class MultiPeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
     }
     
     /// Deinitializer. Shutdown advertising and browsing.
-    deinit
+    isolated deinit
     {
         Shutdown()
     }
@@ -200,7 +200,7 @@ class MultiPeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
     /// - Parameters:
     ///   - advertiser: The advertising server.
     ///   - error: The related error.
-    public func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error)
+    nonisolated public func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error)
     {
         print("Error starting advertising service: \(error.localizedDescription)")
     }
@@ -211,11 +211,17 @@ class MultiPeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
     ///   - peerID: The ID of the peer accepting the invitation.
     ///   - context: Not used.
     ///   - invitationHandler: Handles invitations.
-    public func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID,
-                           withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void)
+    nonisolated public func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID,
+                                       withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void)
     {
-        print("Received invitation from \(peerID.displayName)")
-        invitationHandler(true, Session)
+        //Multipeer Connectivity calls its delegates on its own queue, so these methods are not main-actor isolated. Work that
+        //touches this class hops to the main actor.
+        nonisolated(unsafe) let Handler = invitationHandler
+        let PeerName = peerID.displayName
+        Task { @MainActor in
+            print("Received invitation from \(PeerName)")
+            Handler(true, self.Session)
+        }
     }
     
     // MARK: - Browser delegate functions.
@@ -224,7 +230,7 @@ class MultiPeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
     /// - Parameters:
     ///   - browser: The nearby peer browser service.
     ///   - error: The related error.
-    public func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error)
+    nonisolated public func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error)
     {
         print("Error starting service browser: \(error.localizedDescription)")
     }
@@ -236,19 +242,23 @@ class MultiPeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
     ///   - browser: The nearby service browser.
     ///   - peerID: The ID of the peer that was found.
     ///   - info: Not used.
-    public func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID,
-                        withDiscoveryInfo info: [String : String]?)
+    nonisolated public func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID,
+                                    withDiscoveryInfo info: [String : String]?)
     {
-        let TimeOut: Double = Double(Settings.GetTDebugSessionTimeOut())
-        browser.invitePeer(peerID, to: Session, withContext: nil, timeout: TimeOut)
-        print("Peer \(peerID.displayName) invited to session - waiting for \(TimeOut) seconds.")
+        nonisolated(unsafe) let Browser = browser
+        nonisolated(unsafe) let Peer = peerID
+        Task { @MainActor in
+            let TimeOut: Double = Double(Settings.GetTDebugSessionTimeOut())
+            Browser.invitePeer(Peer, to: self.Session, withContext: nil, timeout: TimeOut)
+            print("Peer \(Peer.displayName) invited to session - waiting for \(TimeOut) seconds.")
+        }
     }
     
     /// Handle the lost a peer (probably because the app was shut down on the remote side) event.
     /// - Parameters:
     ///   - browser: The nearby peer browser service.
     ///   - peerID: The ID of the peer that was lost.
-    public func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID)
+    nonisolated public func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID)
     {
         print("Lost peer \(peerID.displayName)")
     }
@@ -260,13 +270,13 @@ class MultiPeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
     ///   - session: The session for the peer.
     ///   - peerID: The ID of the peer.
     ///   - state: The peer's new state.
-    public func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState)
+    nonisolated public func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState)
     {
-        print("Peer \(peerID.displayName) changed state to \(SessionStateDictionary[state.rawValue]!) [\(state.rawValue)]")
-        OperationQueue.main.addOperation
-            {
-                self.Delegate?.ConnectedDeviceChanged(Manager: self, ConnectedDevices: self.Session.connectedPeers,
-                                                      Changed: peerID, NewState: state)
+        nonisolated(unsafe) let Peer = peerID
+        Task { @MainActor in
+            print("Peer \(Peer.displayName) changed state to \(self.SessionStateDictionary[state.rawValue] ?? "Unknown") [\(state.rawValue)]")
+            self.Delegate?.ConnectedDeviceChanged(Manager: self, ConnectedDevices: self.Session.connectedPeers,
+                                                  Changed: Peer, NewState: state)
         }
     }
     
@@ -287,23 +297,24 @@ class MultiPeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
     ///   - session: The session for the peer.
     ///   - data: The data sent by the peer.
     ///   - peerID: The ID of the peer that sent the data.
-    public func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID)
+    nonisolated public func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID)
     {
-        let Message = String(data: data, encoding: .utf8)
-        let Cmd = MessageHelper.GetMessageType(Message!)
-        if Cmd == MessageTypes.IDEncapsulatedCommand
+        guard let Message = String(data: data, encoding: .utf8) else
         {
-            OperationQueue.main.addOperation
+            return
+        }
+        nonisolated(unsafe) let Peer = peerID
+        Task { @MainActor in
+            let Cmd = MessageHelper.GetMessageType(Message)
+            if Cmd == MessageTypes.IDEncapsulatedCommand
+            {
+                if let (ID, EnMsg) = MessageHelper.DecodeEncapsulatedCommand(Message)
                 {
-                    if let (ID, EnMsg) = MessageHelper.DecodeEncapsulatedCommand(Message!)
-                    {
-                        self.Delegate?.ReceivedAsyncData(Manager: self, Peer: peerID, CommandID: ID, RawData: EnMsg)
-                        return
-                    }
+                    self.Delegate?.ReceivedAsyncData(Manager: self, Peer: Peer, CommandID: ID, RawData: EnMsg)
+                }
+                self.Delegate?.ReceivedData(Manager: self, Peer: Peer, RawData: Message,
+                                            OverrideMessageType: nil, EncapsulatedID: nil)
             }
-            
-            self.Delegate?.ReceivedData(Manager: self, Peer: peerID, RawData: Message!,
-                                        OverrideMessageType: nil, EncapsulatedID: nil)
         }
     }
     
@@ -314,8 +325,8 @@ class MultiPeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
     ///   - stream: The input stream from the peer.
     ///   - streamName: The name of the stream.
     ///   - peerID: The ID of the peer that started the input stream.
-    public func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String,
-                        fromPeer peerID: MCPeerID)
+    nonisolated public func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String,
+                                    fromPeer peerID: MCPeerID)
     {
         print("Received stream data from \(peerID.displayName)")
     }
@@ -327,8 +338,8 @@ class MultiPeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
     ///   - resourceName: The name of the resource.
     ///   - peerID: The ID of the peer that sent the resource.
     ///   - progress: A progress object.
-    public func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String,
-                        fromPeer peerID: MCPeerID, with progress: Progress)
+    nonisolated public func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String,
+                                    fromPeer peerID: MCPeerID, with progress: Progress)
     {
         print("Started receiving resource from \(peerID.displayName)")
     }
@@ -341,8 +352,8 @@ class MultiPeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
     ///   - peerID: The ID of the peer that sent the resource.
     ///   - localURL: Local URL.
     ///   - error: Error information if relevant.
-    public func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String,
-                        fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?)
+    nonisolated public func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String,
+                                    fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?)
     {
         print("Finished receiving resource from \(peerID.displayName)")
     }
@@ -354,8 +365,8 @@ class MultiPeerManager: NSObject, MCNearbyServiceAdvertiserDelegate, MCNearbySer
     /// - certificateHandler: Handler to notifies multipeer connectivity the results of the examination of
     ///                       the certificate. In our case, we always send `true` which means the certificate,
     ///                       whether actual or nil, is accepted.
-    public func session(_ session: MCSession, didReceiveCertificate certificate: [Any]?, fromPeer peerID: MCPeerID,
-                        certificateHandler: @escaping (Bool) -> Void)
+    nonisolated public func session(_ session: MCSession, didReceiveCertificate certificate: [Any]?, fromPeer peerID: MCPeerID,
+                                    certificateHandler: @escaping (Bool) -> Void)
     {
         if certificate == nil
         {

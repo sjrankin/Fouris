@@ -15,15 +15,15 @@ Versioning for Fouris is maintained in the Versioning.swift file and is updated 
 
 Also, this versioning does not utilize Xcode's built-in versioning so I'll have to update that manually.
 
-Most recent build: **Version 1.0 Alpha, Build 3290, Build date: 8 November 2019, 14:42**
+Most recent build: **Version 1.0 Alpha, Build 1500, Build date: 18 November 2026, 08:45**
 
 > This documentation and the Jazzy-created documentation do not necessarily reflect the build shown above.
 ## Implementation and Requirements
-Fouris is written in Swift (5.2 as of time of writing) and intended for iOS/iPadOS 13 or higher. *Fouris explicitly requires iOS/iPadOS 13 or higher or it will not load/run.* Eventually Fouris may take advantage of a Metal program that uses a flood fill algolrithm for gap counting. This code, written in C, exists but is not debugged or used at this time.
+Fouris is written in Swift (language mode 5, built with the Swift 6.x compiler) and targets iOS/iPadOS 26 or higher. *Fouris explicitly requires iOS/iPadOS 26 or higher or it will not load/run.* The app uses the UIScene lifecycle (`SceneDelegate`). Eventually Fouris may take advantage of a Metal program that uses a flood fill algolrithm for gap counting. This code, written in C, exists but is not debugged or used at this time.
 
 Fouris is implemented mostly with SceneKit. SceneKit is used to draw the game view and most controls on the screen. The main menu (the rotating cube) and its child windows all use UIKit. Currently, Fouris uses a text overlay for some UI elements (see also [Planned](#Planned)).
 ### Toolchain
-Fouris was compiled with Xcode 11.2 Beta 2 (11B44). Fouris requires a minimum Xcode version of 11.
+Fouris was last built with Xcode 27.2. It requires an Xcode that ships the iOS 26 SDK or newer.
 ### Simulator
 With Xcode 11.2 and macOS 10.15, running Fouris in a simulator is faster than running on native hardware. Given the changes Apple made to how the simulator works, Fouris has access to desktop-class (assuming you are running on a desktop) processors and GPUs. It makes debugging graphics a *lot* easier...
 ### Testing

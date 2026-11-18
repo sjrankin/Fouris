@@ -31,8 +31,7 @@ extension MainViewController
         let Command = MessageHelper.DecodeHandShakeCommand(RawData)
         print("HandShakeCommand=\(Command)")
         var PostConnect1 = ""
-        OperationQueue.main.addOperation
-            {
+        Task { @MainActor in
                 let ReturnMe = State.TransitionTo(NewState: Command)
                 var ReturnState = ""
                 switch Command
@@ -137,7 +136,7 @@ extension MainViewController
         let (EchoMessage, _, Delay, _) = MessageHelper.DecodeEchoMessage(RawData)!
         let REchoMessage = String(EchoMessage.reversed())
         EchoBackTo = Peer
-        OperationQueue.main.addOperation {
+        Task { @MainActor in
             self.DoEcho(Delay: Delay, Message: REchoMessage)
         }
     }
@@ -172,8 +171,7 @@ extension MainViewController
     {
         if let ExecuteMe = MessageHelper.DecodeClientCommand(RawData)
         {
-            OperationQueue.main.addOperation
-                {
+            Task { @MainActor in
                     self.ExecuteCommandFromPeer(ExecuteMe, Peer: Peer)
             }
         }
@@ -184,16 +182,13 @@ extension MainViewController
     /// - Parameter Peer: The peer that sent the boardcast command.
     public func HandleBroadcastMessage(_ RawData: String, Peer: MCPeerID)
     {
-        var ItemSource = "TDebug"
-        var ItemMessage = ""
         if let (Source, Message) = MessageHelper.DecodeBroadcastCommand(RawData)
         {
-            ItemSource = Source
-            ItemMessage = "Broadcast[\(Source)]: \(Message)"
+            print("Broadcast[\(Source)]: \(Message)")
         }
         else
         {
-            ItemMessage = "Error decoding broadcast message from \(Peer.displayName)"
+            print("Error decoding broadcast message from \(Peer.displayName)")
         }
     }
 }

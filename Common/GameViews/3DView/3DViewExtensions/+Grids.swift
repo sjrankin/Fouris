@@ -273,9 +273,6 @@ extension View3D
                     OutlineNode.addChildNode(RightLine)
                 }
                 BucketGridNode.opacity = InitialOpacity
-            
-            default:
-            break
         }
         
         return (Grid: BucketGridNode, Outline: OutlineNode)
@@ -291,10 +288,12 @@ extension View3D
         //print("Removing bucket grid node in FadeBucketGrid")
         BucketGridNode?.runAction(FadeAction, completionHandler:
             {
+                Task { @MainActor in
                 self.BucketGridNode?.removeAllActions()
                 self.BucketGridNode?.removeFromParentNode()
                 self.BucketGridNode = nil
         }
+            }
         )
         //print("  Done removing bucket grid node in FadeBucketGrid")
     }

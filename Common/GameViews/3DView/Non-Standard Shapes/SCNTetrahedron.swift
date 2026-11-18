@@ -15,12 +15,15 @@ import UIKit
 class SCNTetrahedron: SCNNode
 {
     /// Initializer.
-    override init()
+    nonisolated override init()
     {
         super.init()
-        self.BaseLength = 1.0
-        self.Height = 1.0
-        CommonInitialization()
+        MainActor.assumeIsolated
+        {
+            self.BaseLength = 1.0
+            self.Height = 1.0
+            CommonInitialization()
+        }
     }
     
     /// Initializer.
@@ -37,10 +40,13 @@ class SCNTetrahedron: SCNNode
     
     /// Initializer.
     /// - Parameter coder: See Apple documentation.
-    required init?(coder aDecoder: NSCoder)
+    nonisolated required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
-        CommonInitialization()
+        MainActor.assumeIsolated
+        {
+            CommonInitialization()
+        }
     }
     
     /// Initialization common to all initializers.

@@ -10,7 +10,7 @@ import Foundation
 import SceneKit
 
 /// Protocol for debugging View3D objects.
-protocol ThreeDProtocol: class
+protocol ThreeDProtocol: AnyObject
 {
     /// Set camera data.
     /// - Parameter FOV: New field of view.

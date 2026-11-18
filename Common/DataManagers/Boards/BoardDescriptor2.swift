@@ -115,6 +115,38 @@ class BoardDescriptor2
         }
     }
     
+    /// Holds the left side of the bucket interior (the playable area, which excludes barriers such as the walls and floor).
+    private var _BucketInteriorX: Int = 5
+    /// Get the left side of the bucket interior.
+    public var BucketInteriorX: Int
+    {
+        return _BucketInteriorX
+    }
+    
+    /// Holds the top of the bucket interior.
+    private var _BucketInteriorY: Int = 5
+    /// Get the top of the bucket interior.
+    public var BucketInteriorY: Int
+    {
+        return _BucketInteriorY
+    }
+    
+    /// Holds the width of the bucket interior.
+    private var _BucketInteriorWidth: Int = 10
+    /// Get the width of the bucket interior (the playable area, excluding barriers).
+    public var BucketInteriorWidth: Int
+    {
+        return _BucketInteriorWidth
+    }
+    
+    /// Holds the height of the bucket interior.
+    private var _BucketInteriorHeight: Int = 20
+    /// Get the height of the bucket interior (the playable area, excluding barriers).
+    public var BucketInteriorHeight: Int
+    {
+        return _BucketInteriorHeight
+    }
+    
     /// Holds the height of the bucket.
     private var _BucketHeight: Int = 20
     /// Get the height of the bucket, including barriers.
@@ -603,6 +635,10 @@ class BoardDescriptor2
         var RightMostBucket = -1
         var TopMostBucket = Int.max
         var BottomMostBucket = -1
+        var InteriorLeft = Int.max
+        var InteriorRight = -1
+        var InteriorTop = Int.max
+        var InteriorBottom = -1
         for Line in _MapLines
         {
             var CharIndex = 0
@@ -611,6 +647,13 @@ class BoardDescriptor2
                 if !["_", ".", "#", "!"].contains(String(Char))
                 {
                     fatalError("Invalid character (\(String(Char))) found in map \(BucketShape) on line \(LineIndex).")
+                }
+                if String(Char) == "."
+                {
+                    InteriorLeft = min(InteriorLeft, CharIndex)
+                    InteriorRight = max(InteriorRight, CharIndex)
+                    InteriorTop = min(InteriorTop, LineIndex)
+                    InteriorBottom = max(InteriorBottom, LineIndex)
                 }
                 if [".", "#"].contains(String(Char))
                 {
@@ -639,6 +682,21 @@ class BoardDescriptor2
         _BucketY = TopMostBucket
         _BucketWidth = RightMostBucket - LeftMostBucket + 1
         _BucketHeight = BottomMostBucket - TopMostBucket + 1
+        if InteriorRight >= 0
+        {
+            _BucketInteriorX = InteriorLeft
+            _BucketInteriorY = InteriorTop
+            _BucketInteriorWidth = InteriorRight - InteriorLeft + 1
+            _BucketInteriorHeight = InteriorBottom - InteriorTop + 1
+        }
+        else
+        {
+            //No interior cells defined - fall back to the full bucket rectangle.
+            _BucketInteriorX = _BucketX
+            _BucketInteriorY = _BucketY
+            _BucketInteriorWidth = _BucketWidth
+            _BucketInteriorHeight = _BucketHeight
+        }
     }
     
     /// Holds a list of all bucket block locations in the map. Not populated until `BucketBlockList` is called.

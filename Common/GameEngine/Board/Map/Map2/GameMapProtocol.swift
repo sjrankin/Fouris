@@ -9,7 +9,7 @@
 import Foundation
 
 /// Protocol used to communicate from the game map and its consumers.
-protocol GameMapProtocol: class
+protocol GameMapProtocol: AnyObject
 {
     /// Called when a node in the bucket was changed.
     /// - Note: Only called when individual nodes are changed. Other functions are provided

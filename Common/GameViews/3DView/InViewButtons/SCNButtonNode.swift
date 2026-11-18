@@ -22,7 +22,7 @@ class SCNButtonNode: SCNNode
     }
     
     /// Default initializer.
-    override init()
+    nonisolated override init()
     {
         super.init()
     }
@@ -122,7 +122,7 @@ class SCNButtonNode: SCNNode
     
     /// Initializer.
     /// - Parameter coder: See Apple documentation.
-    required init?(coder: NSCoder)
+    nonisolated required init?(coder: NSCoder)
     {
         super.init(coder: coder)
     }
@@ -334,9 +334,10 @@ class SCNButtonNode: SCNNode
         self.geometry?.firstMaterial?.diffuse.contents = HighlightColor
         let Duration = CGFloat(ResetDuration)
         //https://stackoverflow.com/questions/40472524/how-to-add-animations-to-change-sncnodes-color-scenekit/40473393
-        let RDelta = HighlightColor.r - ButtonColor.r
-        let GDelta = HighlightColor.g - ButtonColor.g
-        let BDelta = HighlightColor.b - ButtonColor.b
+        let StartHighlight = HighlightColor
+        let RDelta = StartHighlight.r - ButtonColor.r
+        let GDelta = StartHighlight.g - ButtonColor.g
+        let BDelta = StartHighlight.b - ButtonColor.b
         //print("From=\(ColorServer.MakeHexString(From: HighlightColor)), To=\(ColorServer.MakeHexString(From: ButtonColor))")
         //print("Deltas: red=\(RDelta), green=\(GDelta), blue=\(BDelta)")
         let ColorChange = SCNAction.customAction(duration: ResetDuration,
@@ -344,17 +345,17 @@ class SCNButtonNode: SCNNode
             {
                 (XNode, Time) in
                 let Percent: CGFloat = Time / CGFloat(Duration)
-                var Red = self.HighlightColor.r + (RDelta * Percent)
+                var Red = StartHighlight.r + (RDelta * Percent)
                 if RDelta < 0.0
                 {
                     Red = abs(Red)
                 }
-                var Green = self.HighlightColor.g + (GDelta * Percent)
+                var Green = StartHighlight.g + (GDelta * Percent)
                 if GDelta < 0.0
                 {
                     Green = abs(Green)
                 }
-                var Blue = self.HighlightColor.b + (BDelta * Percent)
+                var Blue = StartHighlight.b + (BDelta * Percent)
                 if BDelta < 0.0
                 {
                     Blue = abs(Blue)

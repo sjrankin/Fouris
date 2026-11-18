@@ -12,11 +12,11 @@ import UIKit
 /// Version of CATextLayer that automatically vertically centers text in its bounds.
 /// - Note:
 ///  - See [Vertically Align Text in a CATextLayer](https://stackoverflow.com/questions/4765461/vertically-align-text-in-a-catextlayer)
-class CATextLayer2: CATextLayer
+nonisolated class CATextLayer2: CATextLayer
 {
     /// Draw the text. This override will center the text vertically in its bounds
     /// - Parameter in: The context in which to draw.
-    override open func draw(in ctx: CGContext)
+    nonisolated override open func draw(in ctx: CGContext)
     {
         var YDiff: CGFloat = 0.0
         var FontSize: CGFloat = 0.0
