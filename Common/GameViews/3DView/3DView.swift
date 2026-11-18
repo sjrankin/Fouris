@@ -898,7 +898,7 @@ class View3D: SCNView,                          //Our main super class.
         
         let BoardDef = BoardManager.GetBoardFor(CenterBlockShape!)
         let IsOddlyShaped = !BoardDef!.GameBoardWidth.IsEven
-        let XAdjustment: CGFloat = IsOddlyShaped ? -18.0 : -17.5
+        let XAdjustment: CGFloat = -(CGFloat(BoardDef!.GameBoardWidth) - 1.0) / 2.0 //Centers the map on the origin.
         let YAdjustment: CGFloat = IsOddlyShaped ? -1.0 : -1.5
         //let YStaticAdjustment: CGFloat = IsOddlyShaped ? 0.0 : -0.5
         
@@ -974,7 +974,7 @@ class View3D: SCNView,                          //Our main super class.
         var YOffset: CGFloat = 0.0
         let BoardDef = BoardManager.GetBoardFor(CenterBlockShape!)
         let IsOddlyShaped = !BoardDef!.GameBoardWidth.IsEven
-        let XAdjustment: CGFloat = IsOddlyShaped ? -18.0 : -17.5
+        let XAdjustment: CGFloat = -(CGFloat(BoardDef!.GameBoardWidth) - 1.0) / 2.0 //Centers the map on the origin.
         let YAdjustment: CGFloat = IsOddlyShaped ? -1.0 : -1.5
         let BlockMap = CurrentBoard!.Map!.MergedBlockMap()
         let MergedMap = CurrentBoard!.Map!.MergeMap(Excluding: nil)
@@ -1105,7 +1105,7 @@ class View3D: SCNView,                          //Our main super class.
         let BoardClass = BoardData.GetBoardClass(For: CenterBlockShape!)!
         let BoardDef = BoardManager.GetBoardFor(CenterBlockShape!)
         let IsOddlyShaped = !BoardDef!.GameBoardWidth.IsEven
-        let XAdjustment: CGFloat = IsOddlyShaped ? -18.0 : -17.5
+        let XAdjustment: CGFloat = -(CGFloat(BoardDef!.GameBoardWidth) - 1.0) / 2.0 //Centers the map on the origin.
         let YAdjustment: CGFloat = IsOddlyShaped ? 0.0 : -1.0
         let ExistingBlockYOffset: CGFloat = IsOddlyShaped ? 0.0 : -0.5
         let XFinalAdjustment: CGFloat = IsOddlyShaped ? 0.0 : 0.0
