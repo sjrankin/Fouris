@@ -1453,7 +1453,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/Users/Stuart/Documents/GitHub/Fouris/Fouris/VersionUpdater/VersionUpdater /Users/Stuart/Documents/GitHub/Fouris/Fouris/GameUI/Versioning.swift /Users/Stuart/Documents/GitHub/Fouris/Fouris/README.md\n";
+			shellScript = "/Users/Stuart/Documents/GitHub/Fouris/VersionUpdater/VersionUpdater /Users/Stuart/Documents/GitHub/Fouris/GameUI/Versioning.swift /Users/Stuart/Documents/GitHub/Fouris/README.md\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1851,7 +1851,7 @@
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 4BB235M4GL;
 				INFOPLIST_FILE = Fouris/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1876,7 +1876,7 @@
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 4BB235M4GL;
 				INFOPLIST_FILE = Fouris/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
